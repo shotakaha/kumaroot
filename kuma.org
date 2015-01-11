@@ -1,0 +1,31 @@
+#+title:KumaROOT
+#+author:しょーた
+
+* まえがき
+** ROOTのインストール
+** PyROOTのインストール
+
+* 参考サイト
+  - [[http://root.cern.ch/drupal/content/users-guide][ROOT公式ユーザーズガイド]] :: 困ったらとりあえず読む！
+  - [[http://root.cern.ch/drupal/content/reference-guide][ROOT公式リファレンスガイド]] :: クラス名やそのメソッド名、内容、使い方を知りたい場合に使うべし！
+  - [[http://root.cern.ch/root/html/tutorials/][ROOT公式チュートリアル]] :: 付属のサンプルコードを試すべし！
+  - [[http://root.cern.ch/drupal/content/c-coding-conventions][ROOT公式コーディングガイド]] :: ROOTのソースコードを読むときに役に立つかも
+  - [[http://hep.planet-koo.com/index.php?g=root][ROOT解体新書]] by 楠本さん :: gROOTとか、gStyleの設定など、他のページ／マニュアルでは見られない項目がすごく詳しい
+
+* 全体設定編
+** キャンバスを無地にしたい
+** 統計情報を表示したい
+** フィットの結果を表示したい
+** ヒストグラムの線の太さを一括で変更したい
+** デフォルトの色を変更したい
+** 横軸に時間を使いたい
+** キャンバスに補助線を描きたい
+** グラフの軸を一括してログ表示にする
+** 軸の目盛り間隔を変更したい
+* ヒストグラム編
+* TTree編
+* TChain編
+* TFile編
+* TCanvas編
+* TLegend編
+* TString編
