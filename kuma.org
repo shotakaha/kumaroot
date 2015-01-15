@@ -2,7 +2,25 @@
 #+author:しょーた
 
 * まえがき
+
 ** ROOTのインストール
+
+   MacPorts から簡単にインストールすることができます。
+   ROOT5 と ROOT6 があるので、自分の用途にあったものをインストールしてください。
+
+#+BEGIN_SRC bash
+$ sudo port install root5
+$ sudo port install root6
+#+END_SRC
+
+   MacPortsを使ってインストールした場合、port select で簡単に切り替えることができます。
+
+#+BEGIN_SRC bash
+$ port select --list root
+$ sudo port select --set root root6
+#+END_SRC
+
+
 ** PyROOTのインストール
 
 * 参考サイト
