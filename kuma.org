@@ -7,9 +7,15 @@
 
    MacPorts から簡単にインストールすることができます。
    ROOT5 と ROOT6 があるので、自分の用途にあったものをインストールしてください。
+   variants に関しては適宜調べて指定してください。
+   とりあえず使う場合は、特になくても良いと思います。
+
+   ROOT6の場合は本当に気にしなくて良いと思いますが、
+   ROOT5でPyROOTを使いたい場合は +python27 すると良いと思います。
+   （もちろん、自分の使っているPythonのバージョンにしてください）
 
 #+BEGIN_SRC bash
-$ sudo port install root5
+$ sudo port install root5 +python27
 $ sudo port install root6
 #+END_SRC
 
@@ -19,6 +25,13 @@ $ sudo port install root6
 $ port select --list root    # インストールされてるROOTを調べる
 $ sudo port select --set root root6
 #+END_SRC
+
+*** ROOT5 と ROOT6 の違いについて
+
+    CINTというROOTのインタプリタが変更されたみたいです。
+    ROOT6の方がエラーの内容が詳しく表示されるので親切です。
+    ただし、多くの実験ではROOT5を使っているケースが多いと思うので、
+    自分の所属する環境に合わせて選択したら良いと思います。
 
 
 ** PyROOTのインストール
