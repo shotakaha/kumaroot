@@ -16,7 +16,7 @@ $ sudo port install root6
    MacPortsを使ってインストールした場合、port select で簡単に切り替えることができます。
 
 #+BEGIN_SRC bash
-$ port select --list root
+$ port select --list root    # インストールされてるROOTを調べる
 $ sudo port select --set root root6
 #+END_SRC
 
