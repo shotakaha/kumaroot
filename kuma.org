@@ -1,40 +1,96 @@
 #+title:KumaROOT
 #+author:しょーた
 
-* まえがき
+* はじめに
 
-** ROOTのインストール
+  これまで古巣の研究室に設置したDokuWikiにROOTなどの情報を書きためてい
+  ましたが、そろそろ引っ越しをしなくてはいけない ＋ せっかく書きためた
+  ものを残しておきたいと思い、GitHubにて公開することにしました。
 
-   MacPorts から簡単にインストールすることができます。
-   ROOT5 と ROOT6 があるので、自分の用途にあったものをインストールしてください。
-   variants に関しては適宜調べて指定してください。
-   とりあえず使う場合は、特になくても良いと思います。
+  「くまROOT」と名づけたのは、私がROOTを使い始めたときに、最初に目を通
+  した「猿にも使えるROOT」（通称：さるROOT）の知名度にあやかりたかった
+  ためです。
 
-   ROOT6の場合は本当に気にしなくて良いと思いますが、
-   ROOT5でPyROOTを使いたい場合は +python27 すると良いと思います。
-   （もちろん、自分の使っているPythonのバージョンにしてください）
+  「さる」の次は「くま」を読んでもらえるように頑張りたいと思います。
 
-#+BEGIN_SRC bash
-$ sudo port install root5 +python27
+
+
+  また、GitHubで公開するということで、動作するサンプルコードも作成して
+  いこうと思います。
+
+
+
+  読者は、ちょっとだけROOTを使ったことがある
+  学生を対象にします。そして逆引き辞典として使えるようにしたいと思いま
+  す。
+
+
+* ROOTを使いたい
+
+  最近のROOTはとても簡単にインストールできるようになっています。Macを
+  使っている場合は、MacPortsというパッケージ管理ソフトからインストール
+  することができます。
+
+#+begin_src bash
+$ sudo port install root    ## 実際にはroot5 がインストールされる
+#+end_src
+
+** ROOT6を使いたい
+
+   2014年にROOT6がリリースされました。MacPortsを調べてみると、root6と
+   いうのがあるので、そちらをインストールします。
+
+#+begin_src bash
 $ sudo port install root6
-#+END_SRC
+#+end_src
 
-   MacPortsを使ってインストールした場合、port select で簡単に切り替えることができます。
+** ROOT5 と ROOT6 を試してみたい
+
+   MacPortsでROOTをインストールする利点は、ROOT5 と ROOT6 が簡単に切り
+   替えられることです。
 
 #+BEGIN_SRC bash
-$ port select --list root    # インストールされてるROOTを調べる
-$ sudo port select --set root root6
+$ sudo port select --set root root6   ## ROOT6にする
+$ sudo port select --set root root5   ## ROOT5にする
 #+END_SRC
+
+   実はこの「port select」はPythonのバージョン切り替えなどもできます。
+   どのパッケージが使えるかは以下のコマンドで確認できます
+
+#+begin_src bash
+$ port select --summary
+#+end_src
 
 *** ROOT5 と ROOT6 の違いについて
 
-    CINTというROOTのインタプリタが変更されたみたいです。
-    ROOT6の方がエラーの内容が詳しく表示されるので親切です。
-    ただし、多くの実験ではROOT5を使っているケースが多いと思うので、
-    自分の所属する環境に合わせて選択したら良いと思います。
+    ざっくりいうとROOTのインタプリタが変更されたみたいです（CINT ->
+    CINT++に変更）。文法のチェックが厳密になりました。
+
+    実はROOT5では文法的に間違っているマクロでも動いてくれました。その
+    ため、テストで作ったマクロで動作確認した後、より多くのデータ解析の
+    ためにコンパイルするとエラーが多出。そのデバッグに追われるというこ
+    とは日常茶飯事でした。
+
+    ROOT6では、マクロの文法チェックが厳しくなったみたいです。ひぇぇ。
+    でも心配しなくて大丈夫です。エラーの内容を詳しく教えてくれるように
+    なりました。よくある行末のセミコロンのつけ忘れなども指摘してくれま
+    す。場所の分からない segmentation fault に悩まされることも減るでしょ
+    う。
 
 
-** PyROOTのインストール
+** PyROOTを使いたい
+
+   CERNにはへび使いが多いようで、ROOTもPythonから使えるようになっています。
+   「PyROOT」というこのラッパーを使うには、pythonのオプション
+   （variants）を付けてインストールする必要があります。
+
+#+begin_src bash
+$ sudo port install root5 +python27   ## ROOT5の場合は variants が必要
+$ sudo port install root6             ## ROOT6の場合、実は variants 不要
+#+END_SRC
+
+
+
 
 * 参考サイト
   - [[http://root.cern.ch/drupal/content/users-guide][ROOT公式ユーザーズガイド]] :: 困ったらとりあえず読む！
