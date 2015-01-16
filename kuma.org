@@ -110,6 +110,37 @@ $ sudo port install root6             ## ROOT6の場合、実は variants 不要
 ** グラフの軸を一括してログ表示にする
 ** 軸の目盛り間隔を変更したい
 * ヒストグラム編
+
+** １次元ヒストグラムを作成したい
+
+#+begin_src c++
+TString hname, htitle;
+hname.Form("hname");    // <------------------------ ヒストグラムの名前
+htitle.Form("title;xtitle;ytitle;");    // <-------- タイトル、軸名
+Double_t xmin = 0, xmax = 10;    // <--------------- 左端、右端
+Int_t xbin = (Int_t)xmax - (Int_t)xmin;    // <----- ビン数
+
+TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
+#+end_src
+
+   - ヒストグラムに限らずROOTオブジェクトには「名前」をセットする必要がある
+   - タイトル部分を「;」で区切ることで、軸名を設定することができる（"タイトル;X軸名;Y軸名前"）
+   - TString::Form は printf の書式が使えるのでとても便利
+
+** タイトルを変更したい
+
+** 統計ボックスを表示したい
+
+** X軸名を設定したい
+
+** タイトルを中心にしたい
+
+** 平均値、RMSを知りたい
+
+** 値を詰めたい
+
+** 面積でノーマライズしたい
+
 * TTree編
 * TChain編
 * TFile編
