@@ -4,23 +4,21 @@
 * はじめに
 
   これまで古巣の研究室に設置したDokuWikiにROOTなどの情報を書きためてい
-  ましたが、そろそろ引っ越しをしなくてはいけない ＋ せっかく書きためた
-  ものを残しておきたいと思い、GitHubにて公開することにしました。
+  ましたが、そろそろ引っ越しをしなくてはいけないかもしれません。せっか
+  く書きためたのでどうにかして残しておきたいのですが、いまの職場のサー
+  バではPHPなどが一切動かないため、GitHubにて公開することにしました。
+
+  GitHubで公開するということで、動作するサンプルコードも作成して
+  いこうと思います。
 
   「くまROOT」と名づけたのは、私がROOTを使い始めたときに、最初に目を通
   した「猿にも使えるROOT」（通称：さるROOT）の知名度にあやかりたかった
-  ためです。
+  ためです。「さる」の次は「くま」を読んでもらえるように頑張りたいと思います。
 
-  「さる」の次は「くま」を読んでもらえるように頑張りたいと思います。
+  ということで、読者は、ちょっとだけROOTを使ったことがある学生／研究者
+  が対象になると思います。できるだけ「逆引き辞典」として使えるようにし
+  たいと思います。
 
-
-  また、GitHubで公開するということで、動作するサンプルコードも作成して
-  いこうと思います。
-
-
-  読者は、ちょっとだけROOTを使ったことがある
-  学生を対象にします。そして逆引き辞典として使えるようにしたいと思いま
-  す。
 
 ** ROOTについて
 
@@ -34,89 +32,140 @@
    あと、ROOTを使うにあたり注意事項は一つです。「決して深入りしないこ
    と」。どうにもならん部分は「仕様」と思って諦めましょう。
 
-* ROOTを使いたい
-
-  さて、まずはインストールしてみましょう。
-  従来の面倒な方法はググってください。山ほどでてくるはずです。
-  ここでは、まだあまり紹介されてない、簡単な方法を紹介します。
-
-  最近のROOTはとても簡単にインストールできるようになっています。Macを
-  使っている場合は、MacPortsというパッケージ管理ソフトからインストール
-  することができます。
-
-#+begin_src bash
-$ sudo port install root    ## 実際にはroot5 がインストールされる
-#+end_src
-
-** ROOT6を使いたい
-
-   2014年にROOT6がリリースされました。MacPortsを調べてみると、root6と
-   いうのがあるので、そちらをインストールします。
-
-#+begin_src bash
-$ sudo port install root6
-#+end_src
-
-** ROOT5 と ROOT6 を試してみたい
-
-   MacPortsでROOTをインストールする利点は、ROOT5 と ROOT6 が簡単に切り
-   替えられることです。
-
-#+BEGIN_SRC bash
-$ sudo port select --set root root6   ## ROOT6にする
-$ sudo port select --set root root5   ## ROOT5にする
-#+END_SRC
-
-   実はこの「port select」はPythonのバージョン切り替えなどもできます。
-   どのパッケージが使えるかは以下のコマンドで確認できます
-
-#+begin_src bash
-$ port select --summary
-#+end_src
-
-*** ROOT5 と ROOT6 の違いについて
-
-    ざっくりいうとROOTのインタプリタが変更されたみたいです（CINT ->
-    CINT++に変更）。文法のチェックが厳密になりました。
-
-    実はROOT5では文法的に間違っているマクロでも動いてくれました。その
-    ため、テストで作ったマクロで動作確認した後、より多くのデータ解析の
-    ためにコンパイルするとエラーが多出。そのデバッグに追われるというこ
-    とは日常茶飯事でした。
-
-    ROOT6では、マクロの文法チェックが厳しくなったみたいです。ひぇぇ。
-    でも心配しなくて大丈夫です。エラーの内容を詳しく教えてくれるように
-    なりました。よくある行末のセミコロンのつけ忘れなども指摘してくれま
-    す。場所の分からない segmentation fault に悩まされることも減るでしょ
-    う。
-
-** PyROOTを使いたい
-
-   CERNにはへび使いが多いようで、ROOTもPythonから使えるようになっています。
-   「PyROOT」というこのラッパーを使うには、pythonのオプション
-   （variants）を付けてインストールする必要があります。
-
-#+begin_src bash
-$ sudo port install root5 +python27   ## ROOT5の場合は variants が必要
-$ sudo port install root6             ## ROOT6の場合、実は variants 不要
-#+END_SRC
-
-
-
-** ROOT + Emacs
-
-   これもあまり知られていないと思うのですが、Emacs上でROOTのソースを編
-   集するのを簡単にするパッケージがあります。
 
 * 参考サイト
 
-  このKumaROOTにある情報は、下記のサイトにたいへんお世話になっています。
+  このKumaROOTに集めた情報は、下記のサイトにたいへんお世話になっています。
 
   - [[http://root.cern.ch/drupal/content/users-guide][ROOT公式ユーザーズガイド]] :: 困ったらとりあえず読む！
   - [[http://root.cern.ch/drupal/content/reference-guide][ROOT公式リファレンスガイド]] :: クラス名やそのメソッド名、内容、使い方を知りたい場合に使うべし！
   - [[http://root.cern.ch/root/html/tutorials/][ROOT公式チュートリアル]] :: 付属のサンプルコードを試すべし！
   - [[http://root.cern.ch/drupal/content/c-coding-conventions][ROOT公式コーディングガイド]] :: ROOTのソースコードを読むときに役に立つかも
   - [[http://hep.planet-koo.com/index.php?g=root][ROOT解体新書]] by 楠本さん :: gROOTとか、gStyleの設定など、他のページ／マニュアルでは見られない項目がすごく詳しい
+  - [[http://blog.livedoor.jp/oxon/][宇宙線実験の覚え書き（ライブドアブログ）]] by 奥村さん :: PyROOTのこ
+       とをググるとたいていこのページに辿り着くはず。いまは [[http://oxon.hatenablog.com][宇宙線実験
+       の覚え書き（はてブ）]] にお引っ越ししたみたいです [fn:04:実際はもっと
+       青い色の頁にお世話になってたはずなんだけど、うまく探せず]。
+
+
+* ROOTを使いたい
+
+#+begin_src bash
+$ sudo port install root    ## 実際にはroot5 がインストールされる
+#+end_src
+
+  さて、まずはインストールしないとはじまりません。
+  従来の面倒な方法はググってください。山ほどでてくるはずです。
+  ここでは、まだあまり紹介されてない、すごく簡単な方法を紹介します。
+
+  Macの場合はMacPortsからインストールできるようになっています。
+  （Homebrewは使っていないので分かりません。誰か情報をください。）
+
+  Linuxを使っている場合は、Gitを使うとよいでしょう。
+  方法は公式ページに載っています。
+
+  Windowsはよく分かりません。ごめんなさい。
+  （たぶん公式ページからバイナリを落としてくるのが一番簡単だと思います）
+
+** ROOT6を使いたい
+
+#+begin_src bash
+$ sudo port install root6
+#+end_src
+
+   2014年にROOT6がリリースされました。MacPortsの場合「root6」というパッ
+   ケージ名[fn:01:正確には「ポート名」かも。あまり気にしないでください。]でインストールすることができます。
+
+   ただし、現在遂行中の実験は得てしてROOT5系であることが多いです。
+   郷に入っては郷に従え、と言うように周りで使われている環境に合わせるのが無難です。
+
+
+** ROOT5 と ROOT6 を試してみたい
+
+#+BEGIN_SRC bash
+$ sudo port select --set root root6   ## ROOT6にする
+$ sudo port select --set root root5   ## ROOT5にする
+#+END_SRC
+
+   MacPortsでROOTをインストールする利点は、ROOT5 と ROOT6 が簡単に切り
+   替えられることです。
+
+   実はこの「port select」はROOTだけでなく、Pythonのバージョン切り替えなどもできます。
+   どのパッケージが使えるかは以下のコマンドで確認できます
+
+#+begin_src bash
+$ port select --summary
+#+end_src
+
+
+*** ROOT5 と ROOT6 の違いについて
+
+    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです[fn:02:CINT->CINT++に変更]。
+    細かい違いは全く分かりませんが、文法のチェックが厳密になったみたいです。
+
+    実はROOT5ではC言語／C++言語の文法的には間違っているマクロでも動い
+    てくれました[fn:03:広く知られていると思われるのは、構造体の変数と
+    クラスのメンバーの区別がなかったり。（i.e. クラスのメンバーに
+    .（ドット）でアクセスできたり、逆もまた然り）]。そのため、テストで
+    作ったマクロで動作確認した後、より多くのデータを解析するためにコンパイ
+    ルするとエラーが多出。そのデバッグに追われるということは日常茶飯事
+    でした。
+
+    ROOT6では、このマクロの文法チェックも厳しくなったみたいです。ひぇぇ。
+    でも心配しなくて大丈夫。エラーの内容を詳しく教えてくれるようになり
+    ました。よくある行末のセミコロンのつけ忘れなども指摘してくれます。
+    これで場所の分からない segmentation fault に悩まされることも減るで
+    しょう。
+
+** PyROOTを使いたい
+
+#+begin_src bash
+$ sudo port install root5 +python27   ## ROOT5の場合は variants が必要
+$ sudo port install root6             ## ROOT6の場合、実は variants 不要
+#+END_SRC
+
+   CERNには「へびつかい」が多いらしく、「PyROOT」というモジュールを使
+   えば、Python上でROOTが使えるようになっています。
+
+   その場合は、MacPortsでインストールする際に variants で指定する必要
+   があります。しかも、この variantsは自分の使っているPythonのバージョ
+   ンに合わせる必要があります。ミスマッチな場合は、動作しません（＝ク
+   ラッシュします）。
+
+   ROOT6の場合はpython27 がデフォルトでONになっています。
+
+** EmacsでROOTを編集したい
+
+#+begin_src bash
+$ locate root-help.el    # どこにあるかを探す
+#+end_src
+
+
+   これもあまり知られていないと思うのですが、Emacs上でROOTのソースを編
+   集するのを簡単にするElispパッケージが一緒にインストールされます。
+   locateコマンドでどこにあるか調べておきましょう。
+
+   ちなみに、僕の場合（＝MacPortsの場合）、以下にありました。
+
+#+begin_src bash
+/opt/local/libexec/root5/share/emacs/site-lisp/root-help.el
+/opt/local/libexec/root6/share/emacs/site-lisp/root-help.el
+#+end_src
+
+   これの使い方に関しては、あとできちんと調べて書くことにします。
+
+
+** ROOTのtutorialを使いたい
+
+#+begin_src basn
+/opt/local/libexec/root5/share/doc/root/tutorials/     ## ROOT5の場合
+/opt/local/libexec/root6/share/doc/root/tutorials/     ## ROOT6の場合
+#+end_src
+
+   実はROOTをインストールすると、たくさんのサンプルコードもついてきま
+   す。使い方をウェブで検索してもよく分からない場合は、このサンプルコー
+   ドを動かしてみるとよいでしょう。
+
 
 * 全体設定編
 ** 初期設定したい
@@ -139,18 +188,71 @@ $ cp $ROOTSYS/etc/system.rootrc ~/.rootrc
 
 ** キャンバスを無地にしたい
 
+#+begin_src c++
+gROOT->SetStyle("Plain");
+#+end_src
+
    ROOT v5.30 からキャンバスの色がデフォルトで無地になりました。
    なので、それ以降のバージョンを使っている場合、特に設定は必要ありません。
 
+   （いないと思いますが）昔のキャンバス（＝灰色っぽいやつ）を使いたい場
+   合は、"Classic"を指定します。
 
 ** 統計情報を表示したい
+
 
    ヒストグラムを描画すると、右上にそのヒストグラムの情報が表示されます。
    デフォルトだと３つしか表示されないので、少し増やしておきます。
 
+#+begin_src c++
+gStyle->SetOptStat(112211)
+#+end_src
+
+   引数はビットのようなものを表しています。
+   このビットは右から読まれます。最大で９くらいまでいける気がする。
+   0 or 書かなければ「非表示」、1は「表示」、2は「エラー表示」です。
+
+
 ** フィットの結果を表示したい
+
+#+begin_src c++
+gStyle->SetOptFit(1111111)
+#+end_src
+
+   ビットの使い方は、ひとつ前の「統計情報を表示したい」と同じです。
+
+
 ** ヒストグラムの線の太さを一括で変更したい
+
+   ヒストグラムの外枠線の太さは、一括で設定しておくことができます。デ
+   フォルトだと少し細い気がするので、太くしておくとよいと思います。た
+   だし、たくさんのヒストグラムを描く際は、見えにくくなってしまうので
+   細くします。その辺りは臨機応変にお願いします。
+
+#+begin_src
+gStyle->SetHistLineWidth(2)
+#+end_src
+
 ** デフォルトの色を変更したい
+
+#+begin_src c++
+gROOT->GetColor(3)->SetRGB(0., 0.7, 0.); // Green  (0, 1, 0)->(0, 0.7, 0)
+gROOT->GetColor(5)->SetRGB(1., 0.5, 0.); // Yellow (1, 1, 0)->(1, 0.5, 0)
+gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
+#+end_src
+
+   デフォルトは（1:黒, 2:赤, 3:黄, 4:青, 5:黄緑, 6:マゼンダ, 7:シアン）なのですが、
+   この中で、（3:黄, 5:黄緑, 7:シアン）は明るすぎてとても見えづらいので、
+   もう少し見やすい色に変更します。
+
+   上２つは奥村さんのページのコピペ、最後のはシアンを紫っぽい色に変更しました。
+
+   RGBの度合いは自分の好みで選んでください。
+   手順としては、RGBの値を検索（Wikipedia使用すると良い）→ その値を256（ほんとは255かも？）で割るだけです。
+
+   おまけとして、ROOT公式ブログの「[[http://root.cern.ch/drupal/content/rainbow-color-map][虹色カラーマップを使うこと]]」 の記事もリンクしておきます。
+
+
 ** 横軸に時間を使いたい
 ** キャンバスに補助線を描きたい
 ** グラフの軸を一括してログ表示にする
@@ -188,6 +290,101 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 ** 面積でノーマライズしたい
 
 * TTree編
+
+  ROOTを使うにあたって、TTree（もしくは次の章のTChain）は基礎中の基礎
+  です[fn:05:「さるROOT」や、他のウェブサイトでは「TNtuple」をサンプル
+  として取り上げていますが、これだけを使っている研究者はみたことがあり
+  ません。TTreeのベースにはTNtupleがあるのかもしれませんが、なんでこん
+  な使われていないものをサンプルにするのか疑問です]。
+  とりあえず、取得したデータはさっさとTTreeに変換してしまいましょう。
+
+
+** テキストファイルをTTreeに変換したい
+
+   取得したデータはテキストデータとして保存するのが、一番簡単な方法です。
+
+   仮に、100行４列のテキストファイルがあるとします。
+   このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
+
+#+begin_src text
+100    105    104   103
+101    106    103   100
+...
+#+end_src
+
+
+*** TTree::ReadFile() を使う方法
+
+    データがテキストファイルで保存されている場合、
+    それをTTreeに変換する最も簡単な方法です。
+
+#+begin_src c++
+void tree_using_readfile()
+{
+  TString ifn = "inputfilename";
+  TTree *tree = new TTree("tree", "tree using ReadFile()");
+  tree->ReadFile(ifn, "row1/I:row2/I:row3/I:row4/D:row5/I");
+
+  TString ofn = "out.root";
+  TFile *fout = new TFile(ofn, "recreate");
+  tree->Write();
+  fout->Close();
+
+  return;
+}
+#+end_src
+
+    TTree::ReadFile()の第2引数には、branchDescriptorの変数をコロン（:）で区切って記述すします。
+    「ブランチ名/I」、「ブランチ名/D」といった感じで、その変数名（＝ブランチ名）とその型を指定できます。
+    型を省略した場合は「ブランチ名/F」になるみたいです。
+
+*** TTree::Branch() を使う方法
+
+    一番ありがちな方法です。ググればいっぱい見つかります。
+
+#+begin_src c++
+void tree_using_branch()
+{
+    // データファイルを読み込む
+    TString ifn = "inputfilename"
+    ifstream fin;
+    fin.open(ifn);
+
+    // データを格納するための変数
+    int val1, val2, val3, val4;
+
+    // TTreeを作成する
+    // TTree::Branch(...)を使って、各変数のブランチを作成する
+    // 第一引数：ブランチ名；なんでも良い；用意した変数名と違っていても構わない
+    // 第二引数：変数のアドレス；変数が実体の場合は、&を先頭につけてアドレスを指定する；事前に変数を用意しておかないと怒られる
+    // 第三引数：変数の型；"変数／型"の形で記述する；int型はI, float型はF, double型はFなど
+    TTree *tree = new TTree("name", "title);
+    tree->Branch("val1", &val1, "val1/I");
+    tree->Branch("val2", &val2, "val2/I");
+    tree->Branch("val3", &val3, "val3/I");
+    tree->Branch("val4", &val4, "val4/I");
+
+    // C++でファイルを読み込むときの常套手段
+    while (fin >> val1 >> val2 >> val3 >> val4) {
+        tree->Fill();  // データのエントリの区切りで必ずTTree::Fill()する
+    }
+
+    // 作成したTTreeを保存するためのROOTファイルを準備する
+    TString ofn = "outputfilename";
+    TFile *fout = new TFile(ofn, "recreate");
+    tree->Write();  // TFileを開いた状態で、TTree::Write()すれば書き込みできる；違うファイルに書き込みたい場合は後述するかも
+    fout->Close();  // 最後にファイルを閉じる；プログラム（やマクロ）終了時に勝手に閉じてくれるらしいが一応
+    return;
+}
+#+end_src
+
+    前述したReadFile を使った方法と比べると、コードの行数がぐーんと多
+    いことが分かります。（ReadFileの場合、肝となる部分はたったの一行で
+    す）。
+
+    行数が増えた分、汎用性が高くなっています。
+    こちらの方法だと、ブランチに「配列」を設定することも可能です。
+
 * TChain編
 * TFile編
 * TCanvas編
