@@ -278,8 +278,74 @@ $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
 
   #+begin_src bash
 $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
-#+end_src
+  #+end_src
 
+** とりあえず起動
+
+   #+begin_src bash
+$ cd ~/TEST/root6/tutorials/
+$ root
+
+Welcome to the ROOT tutorials
+
+Type ".x demos.C" to get a toolbar from which to execute the demos
+
+Type ".x demoshelp.C" to see the help window
+
+==> Many tutorials use the file hsimple.root produced by hsimple.C
+==> It is recommended to execute hsimple.C before any other script
+
+root [0]
+   #+end_src
+
+   tutorials をコピーしたディレクトリでROOTを起動すると、上のメッセージが表示されます。
+   これは同じディレクトリに rootlogon.C というのがあるからです。
+
+   ROOTを起動すると、"system.rootrc"、"~/.rootrc"、"./rootlogon.C" の順番に設定が読み込まれます。
+   なので、個人的な全体設定は"~/.rootrc"へ、そのプログラムだけの設定は"./rootlogon.C"に書いておけばよいです。
+
+   さて、さっき立ち上げたROOTを終了（.q）してみましょう。
+   すると以下のメッセージが表示されます。
+   これは ./rootlogoff.C があるからです。
+
+   #+begin_src bash
+root [0] .q
+
+Taking a break from ROOT? Hope to see you back!
+   #+end_src
+
+
+** demos.Cを実行してみる
+
+   さて、ROOTを起動して表示されたメッセージにしたがって、demos.C を実行してみましょう。
+   ROOT内で実行する場合は、「.x ファイル名」と入力します。ファイル名の部分はTAB補完ができます。
+
+   #+begin_src bash
+$ root
+
+root [0] .x demos.C
+   #+end_src
+
+   これをbashで実行する場合は以下のようにします。
+
+   #+begin_src bash
+$ root demos.C
+   #+end_src
+
+   さてさて、実行すると次のようなツールバーが出てきます。
+
+   #+attr_latex: :height 10cm
+   #+caption: demos.Cを実行した時に出てくるツールバー的なもの
+   [[./fig/demos.png]]
+
+
+   そして、一番上にある、「Help Demos」をクリックすると、次のようなキャンバスが表示されます。
+
+   #+attr_latex: :height 10cm
+   #+caption: Help Demos を実行すると出てくるキャンバス
+   [[./fig/helpdemos.png]]
+
+   ほげげ
 
 
 * 全体設定編
