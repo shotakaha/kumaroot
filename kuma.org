@@ -50,22 +50,82 @@
 
 * ROOTを使いたい
 
+** オススメのインストール方法（for Mac ユーザ）
+
 #+begin_src bash
 $ sudo port install root    ## 実際にはroot5 がインストールされる
 #+end_src
 
-  さて、まずはインストールしないとはじまりません。
-  従来の面倒な方法はググってください。山ほどでてくるはずです。
-  ここでは、まだあまり紹介されてない、すごく簡単な方法を紹介します。
+  さて、まずはインストールしないとはじまりません。Macの場合はMacPorts
+  からインストールできるようになっています。すごく楽ちんなのでオススメ
+  です。環境変数（$ROOTSYS、$LD_LIBRARY_PATH、$DYLD_LIBRARY_PATHなど）
+  の設定も不要です。（Homebrewは使っていないので分かりません。誰か情報
+  をください。）
 
-  Macの場合はMacPortsからインストールできるようになっています。
-  （Homebrewは使っていないので分かりません。誰か情報をください。）
+*** Git を使ったインストール方法
 
-  Linuxを使っている場合は、Gitを使うとよいでしょう。
-  方法は公式ページに載っています。
+   Linuxを使っている場合は、Gitを使うとよいでしょう。
+   方法は「[[https://root.cern.ch/drupal/content/installing-root-source][installing-root-source | ROOT公式ページ]]」に載っている通りです。
 
-  Windowsはよく分かりません。ごめんなさい。
-  （たぶん公式ページからバイナリを落としてくるのが一番簡単だと思います）
+#+begin_src bash
+## STEP1 : clone先のディレクトリを作成する（ここはお好み）
+[any]  $ mkdir ~/repos/git
+[any]  $ cd ~/repos/git
+
+## STEP2 : ROOT本体をcloneする
+[git]  $ git clone http://root.cern.ch/git/root.git
+[git]  $ cd root
+
+## STEP3 : 目的のバージョンのタグを探す
+[root] $ git tag -l
+
+## STEP4 : 目的のバージョンのタグをチェックアウトする
+[root] $ git checkout -b v5-34-08 v5-34-08
+
+## STEP5 : PREFIXを指定しconfigure -> make -> make install する
+[root(v5-34-08)] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-34-08
+[root(v5-34-08)] $ make 2>&1 | tee make.log                   ## make時のログを残すようにする
+[root(v5-34-08)] $ make install 2>&1 | tee makeinstall.log    ## configureで設定したprefixにインストールされる
+#+end_src
+
+   まず、本体をどこかにcloneします（今回は、~/repos/git/ 以下）。次に
+   どんなタグがあるのかを調べます。目的のバージョンのタグ名が分かった
+   ら、そのタグをチェックアウトします。ブランチ名は好きにしてかまいま
+   せん（今回は、タグ名と同じ名前）。あとは、従来通りPREFIXを指定して
+   configureします。configure の内容は たしか config.status に書きださ
+   れます。make、make install の際、PREFIXで指定したディレクトリによっ
+   ては sudo が必要です。また、失敗した場合に備えてログを残しておくと
+   よいです。今回は、teeコマンドを使うことで、端末に表示しながらログファ
+   イルに保存しています。
+
+   あとは、~/.bashrc に環境変数の設定を書いておきます。
+
+*** 従来のインストール方法
+
+   ググればたくさん出てきますが、一応紹介しておきます。
+
+#+begin_src bash
+## STEP1 : ソース（tar.gz）を保存するディレクトリに移動し、wgetで取ってくる
+$ cd /usr/local/heplib/tarballs
+$ wget ftp://root.cern.ch/root/root_v5.30.06.source.tar.gz    ## URLはROOT公式WEBから探してくる
+
+## STEP2 : ソース（tar.gz）を展開する
+[ROOT] $ cd /usr/loca/heplib/ROOT
+[ROOT] $ tar zxvf ../tarballs/root_v5.30.06.source.tar.gz    ## 先ほどwgetしたファイルを展開
+
+## STEP3 : PREFIXを指定しconfigure -> make -> make install
+[ROOT] $ cd root
+[root] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-30-06
+[root] $ make 2>&1 | tee make.log
+[root] $ make install 2>&1 | tee makeinstall.log
+#+end_src
+
+*** インストール方法 for Windows ユーザ
+
+   Windowsはよく分かりません。ごめんなさい。たぶん
+  「[[https://root.cern.ch/drupal/content/downloading-root|downloading-root |
+  ROOT公式ページ]]」から目的のバージョンを選び、そこからバイナリを落とし
+  てくるのが一番簡単だと思います。
 
 ** ROOT6を使いたい
 
@@ -78,7 +138,6 @@ $ sudo port install root6
 
    ただし、現在遂行中の実験は得てしてROOT5系であることが多いです。
    郷に入っては郷に従え、と言うように周りで使われている環境に合わせるのが無難です。
-
 
 ** ROOT5 と ROOT6 を試してみたい
 
@@ -114,6 +173,36 @@ $ port select --summary
     ました。よくある行末のセミコロンのつけ忘れなども指摘してくれます。
     これで場所の分からない segmentation fault に悩まされることも減るで
     しょう。
+
+    試しに、ROOT5のチュートリアルをROOT6で実行してみてください。
+    「warning」や「error」がたくさん表示されます。
+
+#+begin_src
+## STEP1 : ROOT6を指定
+$ sudo port select root root6
+
+## STEP2 : ## ROOT5のtutorials/に移動
+$ cd /opt/local/libexec/root5/share/doc/root/tutorials/
+
+## STEP3 : ROOT（=ROOT6）を起動
+$ root
+
+## ===  warning の例 ===
+/opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:7:13:
+ warning: using the result of an assignment as a condition without
+ parentheses [-Wparentheses]
+      if (e = getenv("EDITOR"))
+          ~~^~~~~~~~~~~~~~~~~~
+## === error の例 ===
+
+/opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:39:12:
+ error: cannot initialize return object of type 'char *' with an rvalue of
+ type 'const char *'
+    return gSystem->WorkingDirectory();
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$ .q
+#+end_src
 
 ** PyROOTを使いたい
 
@@ -152,17 +241,45 @@ $ locate root-help.el    # どこにあるかを探す
 
    これの使い方に関しては、あとできちんと調べて書くことにします。
 
-
 ** ROOTのtutorialを使いたい
 
-#+begin_src basn
+#+begin_src bash
 /opt/local/libexec/root5/share/doc/root/tutorials/     ## ROOT5の場合
 /opt/local/libexec/root6/share/doc/root/tutorials/     ## ROOT6の場合
 #+end_src
 
    実はROOTをインストールすると、たくさんのサンプルコードもついてきま
    す。使い方をウェブで検索してもよく分からない場合は、このサンプルコー
-   ドを動かしてみるとよいでしょう。
+   ドを動かしながら中身をいじくってみるのが一番です。
+
+   とりあえず、いつでも使えるようにテスト用ディレクトリを作成しコピー
+   しておきましょう。以下に一例を示しましたが、自分の環境に合わせて適
+   宜変更してください。
+
+   cp コマンドを使う際には、-r オプションを付けることでサブディレクト
+   リもコピーできます。その際、コピー元（＝第１引数）の最後に「/」付け
+   てはいけません。コピー先（＝第２引数）の最後には「/」を付けてもよい
+   です（もしかしたらなくてもよいのかも）[fn::失敗したらコピー先を削除すればいいだけなので、失敗もしてみてください]。
+
+#+begin_src bash
+$ cp -r /opt/local/libexec/root5/share/doc/root/tutorials ~/TEST/root5/
+$ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
+#+end_src
+
+   以下では、ROOT6 の tutorial の使い方を簡単に紹介しようと思います。
+
+* ROOT tutorial 編
+
+  この章ではROOTに付属しているtutorialの使い方を簡単に紹介します。
+  前節の最後にも書きましたが、手元にコピーを作っておきましょう。
+
+  とりあえずROOT6のtutorialを使います。気が向いたらROOT5との比較もしよ
+  うかと思います。
+
+  #+begin_src bash
+$ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
+#+end_src
+
 
 
 * 全体設定編
@@ -388,3 +505,25 @@ void tree_using_branch()
 * TCanvas編
 * TLegend編
 * TString編
+
+* その他
+
+** KiNOKOのインストール
+
+   CAMACやVMEでデータ収集を行うためのドライバをインストールします。
+   詳細に関しては「[[http://www.awa.tohoku.ac.jp/~sanshiro/kinoko/index.html][KiNOKOプロジェクト]]」を参照してください。
+
+#+begin_src
+$ cd ~/Downloads/
+$ wget http://www.awa.tohoku.ac.jp/~sanshiro/kinoko-download/files/kinoko-2014-01-29.tar.gz
+$ tar zxvf kinoko-2014-01-29.tar.gz /usr/local/heplib/
+#+end_src
+
+   僕の場合、ダウンロードしたファイルはとりあえず ~/Downloads に保存することにしています。
+   また、高エネルギー物理関連のプログラムは /usr/local/heplib/ 以下にインストールすることにしています。
+
+*** CAMACドライバのインストール
+
+*** VMEドライバのインストール
+
+** Geant4のインストール
