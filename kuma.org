@@ -44,7 +44,7 @@
   - [[http://hep.planet-koo.com/index.php?g=root][ROOT解体新書]] by 楠本さん :: gROOTとか、gStyleの設定など、他のページ／マニュアルでは見られない項目がすごく詳しい
   - [[http://blog.livedoor.jp/oxon/][宇宙線実験の覚え書き（ライブドアブログ）]] by 奥村さん :: PyROOTのこ
        とをググるとたいていこのページに辿り着くはず。いまは [[http://oxon.hatenablog.com][宇宙線実験
-       の覚え書き（はてブ）]] にお引っ越ししたみたいです [fn:04:実際はもっと
+       の覚え書き（はてブ）]] にお引っ越ししたみたいです [fn::実際はもっと
        青い色の頁にお世話になってたはずなんだけど、うまく探せず]。
 
 
@@ -134,7 +134,7 @@ $ sudo port install root6
    #+end_src
 
    2014年にROOT6がリリースされました。MacPortsの場合「root6」というパッ
-   ケージ名[fn:01:正確には「ポート名」かも。あまり気にしないでください。]でインストールすることができます。
+   ケージ名[fn::正確には「ポート名」かも。あまり気にしないでください。]でインストールすることができます。
 
    ただし、現在遂行中の実験は得てしてROOT5系であることが多いです。
    郷に入っては郷に従え、と言うように周りで使われている環境に合わせるのが無難です。
@@ -159,11 +159,11 @@ $ port select --summary
 
 *** ROOT5 と ROOT6 の違いについて
 
-    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです[fn:02:CINT->CINT++に変更]。
+    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです[fn::CINT->CINT++に変更]。
     細かい違いは全く分かりませんが、文法のチェックが厳密になったみたいです。
 
     実はROOT5ではC言語／C++言語の文法的には間違っているマクロでも動い
-    てくれました[fn:03:よく知られていると思われるのは、a.b でも a->b
+    てくれました[fn::よく知られていると思われるのは、a.b でも a->b
     でも動いちゃうことでしょうか]。そのため、テストで作ったマクロで動
     作確認した後、より多くのデータを解析するためにコンパイルするとエラー
     が多出。そのデバッグに追われるということは日常茶飯事でした。
@@ -177,7 +177,7 @@ $ port select --summary
     試しに、ROOT5のチュートリアルをROOT6で実行してみてください。
     「warning」や「error」がたくさん表示されます。
 
-    #+begin_src
+    #+begin_src sh
 ## STEP1 : ROOT6を指定
 $ sudo port select root root6
 
@@ -207,8 +207,8 @@ $ .q
 ** PyROOTを使いたい
 
    #+begin_src sh
-$ sudo port install root5 +python27   ## ROOT5の場合は variants が必要
-$ sudo port install root6             ## ROOT6の場合、実は variants 不要
+$ sudo port install root5 +python27   ## ROOT5の場合、+pythonXX の variants が必要
+$ sudo port install root6             ## ROOT6の場合、variants 不要
    #+END_SRC
 
    CERNには「へびつかい」が多いらしく、「PyROOT」というモジュールを使
@@ -256,29 +256,28 @@ $ locate root-help.el    # どこにあるかを探す
    しておきましょう。以下に一例を示しましたが、自分の環境に合わせて適
    宜変更してください。
 
-   cp コマンドを使う際には、-r オプションを付けることでサブディレクト
-   リもコピーできます。その際、コピー元（＝第１引数）の最後に「/」付け
-   てはいけません。コピー先（＝第２引数）の最後には「/」を付けてもよい
-   です（もしかしたらなくてもよいのかも）[fn::失敗したらコピー先を削除すればいいだけなので、失敗もしてみてください]。
-
    #+begin_src sh
 $ cp -r /opt/local/libexec/root5/share/doc/root/tutorials ~/TEST/root5/
 $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
    #+end_src
 
-   以下では、ROOT6 の tutorial の使い方を簡単に紹介しようと思います。
+   cp コマンドを使う際には、-r オプションを付けることでサブディレクト
+   リもコピーできます。その際、コピー元（＝第１引数）の最後に「/」付け
+   てはいけません。コピー先（＝第２引数）の最後には「/」を付けてもよい
+   です（もしかしたらなくてもよいのかも）[fn::この辺はよく忘れます。失
+   敗したらコピー先を削除すればいいだけなので、失敗もしてみてください]。
 
 * ROOT tutorial 編
 
   この章ではROOTに付属しているtutorialの使い方を簡単に紹介します。
   前節の最後にも書きましたが、手元にコピーを作っておきましょう。
 
-  とりあえずROOT6のtutorialを使います。気が向いたらROOT5との比較もしよ
-  うかと思います。
-
   #+begin_src sh
 $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
   #+end_src
+
+  とりあえずROOT6のtutorialを使います。気が向いたらROOT5との比較もしよ
+  うかと思います。
 
 ** とりあえず起動
 
@@ -304,15 +303,25 @@ root [0]
    ROOTを起動すると、"system.rootrc"、"~/.rootrc"、"./rootlogon.C" の順番に設定が読み込まれます。
    なので、個人的な全体設定は"~/.rootrc"へ、そのプログラムだけの設定は"./rootlogon.C"に書いておけばよいです。
 
-   さて、さっき立ち上げたROOTを終了（.q）してみましょう。
-   すると以下のメッセージが表示されます。
-   これは ./rootlogoff.C があるからです。
+** とりあえず終了
 
    #+begin_src sh
 root [0] .q
 
 Taking a break from ROOT? Hope to see you back!
    #+end_src
+
+   さて、さきほどROOTセッションを終了してみましょう。ROOTセッション内
+   で「.q」を入力します[fn::自作マクロが途中で止まってしまい、.qでは抜
+   けれないことがあります。そんなときは .qqq のようにqをたくさん入力し
+   てみましょう。それでもダメな場合は、Ctrl-z で一時中断してプロセ
+   スをkillします（「$ ps aux | grep root」でPIDを調べ、「$ kill -9
+   PID」で強制終了）]。するとまたまたメッセージが表示されます。これは
+   ./rootlogoff.C があるからです。
+
+   このようにして、ROOT起動時および終了時の動作を細かく設定することができます。
+   個人的には、数ヶ月ぶりに触るプログラムなんてほとんど忘れてしまっているので、
+   rootlogon.C に手順を書いて残したりしています。
 
 
 ** demos.Cを実行してみる
@@ -536,7 +545,7 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 * TTree編
 
   ROOTを使うにあたって、TTree（もしくは次の章のTChain）は基礎中の基礎
-  です[fn:05:「さるROOT」や、他のウェブサイトでは「TNtuple」をサンプル
+  です[fn::「さるROOT」や、他のウェブサイトでは「TNtuple」をサンプル
   として取り上げていますが、これだけを使っている研究者はみたことがあり
   ません。TTreeのベースにはTNtupleがあるのかもしれませんが、なんでこん
   な使われていないものをサンプルにするのか疑問です]。
@@ -641,63 +650,66 @@ void tree_using_branch()
 
 ** Emacs
 
-   最初に断っておくと、特にEmacs信者というつもりはないのです。
-   修士でプログラミングを始めた時に、最初に使ったのがEmacsだったというだけの理由です。
-   Vimも基本操作はできるようにしといた方がよいです。
+   最初に断っておくと、特にEmacs信者というつもりはないのです。修士でプ
+   ログラミングを始めた時に、最初に使ったのがEmacsだったというだけの理
+   由[fn::MacのCocoaアプリもEmacsキーバインドで使えるのも大きな理由だっ
+   たかもです]です。Vimも基本操作はできるようにしといた方がよいです。
+
 
 *** ページ操作
 
-    | Emacs      | less   | vim     | 操作内容                   |
-    | C-n        | j, RET | j, RET  | 次の行                     |
-    | C-p        | k      | k       | 前の行                     |
-    | C-v        | SPC    | C-f     | １ページ進む               |
-    | M-v        | S-SPC  | C-b     | １ページ戻る               |
-    | M-<        | g      | gg      | ファイルの先頭             |
-    | M->        | G      | G       | ファイルの最後             |
-    | M-g g 数値 | :数値  | 数値 G  | 指定した数値の行へジャンプ |
-    |            | d      |         | 半ページ進む               |
-    |            | u      |         | 半ページ戻る               |
-    | C-x C-c    | q      | :q, :q! | ファイルを閉じる           |
+    #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
+    | Emacs      | vim     | less   | 操作内容                   |
+    | C-n        | j, RET  | j, RET | 次の行                     |
+    | C-p        | k       | k      | 前の行                     |
+    | C-v        | C-f     | SPC    | １ページ進む               |
+    | M-v        | C-b     | S-SPC  | １ページ戻る               |
+    | M-<        | gg      | g      | ファイルの先頭             |
+    | M->        | G       | G      | ファイルの最後             |
+    | M-g g 数値 | 数値 G  | :数値  | 指定した数値の行へジャンプ |
+    |            |         | d      | 半ページ進む               |
+    |            |         | u      | 半ページ戻る               |
+    | C-x C-c    | :q, :q! | q      | ファイルを閉じる           |
 
 *** エディタ共通
 
-    | Emacs   | vim            | 操作内容                                       |
-    |---------+----------------+------------------------------------------------|
-    | C-f     | l, SPC         | 次の文字                                       |
-    | C-b     | h              | 前の文字                                       |
-    | M-f     | w, e           | 次の単語                                       |
-    | M-b     | b              | 前の単語                                       |
-    | C-a     | 0              | 行頭                                           |
-    |         | ^              | 文頭（行頭にある文字）                         |
-    | C-e     | $              | 行末                                           |
-    | C-i     |                | タブ（インデント？）                           |
-    | C-l     |                | 画面の移動（上-中-下）                         |
-    | C-x C-s | :w             | ファイルを保存                                 |
-    | C-x C-w | :w ファイル名  | ファイル名を指定して保存                       |
-    | C-x C-i | :r ファイル名  | ファイル名の中身を挿入                         |
-    | C-d     | x              | カーソルの下の文字を削除（Delete）             |
-    | C-h     | Backspace      | カーソルの左の文字を削除（Backspace）          |
-    | C-k     | d$             | カーソルの位置から行末までを切り取り           |
-    | C-w     | d$, dd, dw     | 選択範囲を切り取り                             |
-    |         | dd             | 一行削除（切り取り）                           |
-    |         | dw             | １単語を切り取り                               |
-    |         | d$, d^, d0     | それぞれ切り取り                               |
-    | M-w     | y              | 選択範囲をコピー（yank）                       |
-    |         | yy             | 一行コピー（yank）                             |
-    |         | yw             | １単語をコピー（yank）                         |
-    |         | y$, y^, y0     | それぞれコピー（yank）                         |
-    | C-y     | p              | 貼り付け                                       |
-    | C-s     | /文字, n, C-i  | 前方検索                                       |
-    | C-r     | ?文字, N, C-o  | 後方検索                                       |
-    | C-@     | v              | マーカーのセット                               |
-    | M-%     | :s/old/new     | 現在行の最初の文字を置換（old -> new）         |
-    |         | :s/old/new/g   | 現在行のすべての文字を置換（old -> new）       |
-    |         | :%s/old/new/gc | ファイル全体のすべての文字を、確認しながら置換 |
+    #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
+    | Emacs                                       | vim            | 操作内容                                                                                                                                                                                |
+    | C-f                                         | l, SPC         | 次の文字                                                                                                                                                                                |
+    | C-b                                         | h              | 前の文字                                                                                                                                                                                |
+    | M-f                                         | w, e           | 次の単語[fn::Emacsの場合、[[https://github.com/zk-phi/jaword][jawordパッケージ]] を導入すると日本語の単語移動が賢くなります]                                                                                                  |
+    | M-b                                         | b              | 前の単語                                                                                                                                                                                |
+    | C-a                                         | 0              | 行頭                                                                                                                                                                                    |
+    |                                             | ^              | 文頭（行頭にある文字）                                                                                                                                                                  |
+    | C-e                                         | $              | 行末                                                                                                                                                                                    |
+    | C-i                                         |                | タブ（インデント？）                                                                                                                                                                    |
+    | C-l                                         |                | 画面の移動（上-中-下）                                                                                                                                                                  |
+    | C-x C-s                                     | :w             | ファイルを保存                                                                                                                                                                          |
+    | C-x C-w                                     | :w ファイル名  | ファイル名を指定して保存                                                                                                                                                                |
+    | C-x C-i                                     | :r ファイル名  | ファイル名の中身を挿入                                                                                                                                                                  |
+    | C-d                                         | x              | カーソルの下の文字を削除（Delete）                                                                                                                                                      |
+    | C-h[fn::元々はHelpですが、置き換えています] | Backspace      | カーソルの左の文字を削除（Backspace）                                                                                                                                                   |
+    | C-k                                         | d$             | カーソルの位置から行末までを切り取り                                                                                                                                                    |
+    | C-w                                         | d$, dd, dw     | 選択範囲を切り取り                                                                                                                                                                      |
+    |                                             | dd             | 一行削除（切り取り）                                                                                                                                                                    |
+    |                                             | dw             | １単語を切り取り                                                                                                                                                                        |
+    |                                             | d$, d^, d0     | それぞれ切り取り                                                                                                                                                                        |
+    | M-w                                         | y              | 選択範囲をコピー（yank）                                                                                                                                                                |
+    |                                             | yy             | 一行コピー（yank）                                                                                                                                                                      |
+    |                                             | yw             | １単語をコピー（yank）                                                                                                                                                                  |
+    |                                             | y$, y^, y0     | それぞれコピー（yank）                                                                                                                                                                  |
+    | C-y                                         | p              | 貼り付け                                                                                                                                                                                |
+    | C-s                                         | /文字, n, C-i  | 前方検索 [fn::Emacsの場合、[[https://github.com/koron/cmigemo][cmigemo]] と [[https://github.com/emacs-jp/migemo][migemoパッケージ]] を導入するとローマ字で日本語検索が可能になります。インストールと設定の詳細は [[http://rubikitch.com/2014/08/20/migemo/][るびきち「日刊Emacs」]] を参考にするとよいと思います] |
+    | C-r                                         | ?文字, N, C-o  | 後方検索                                                                                                                                                                                |
+    | C-@                                         | v              | マーカーのセット                                                                                                                                                                        |
+    | M-%                                         | :s/old/new     | 現在行の最初の文字を置換（old -> new）                                                                                                                                                  |
+    |                                             | :s/old/new/g   | 現在行のすべての文字を置換（old -> new）                                                                                                                                                |
+    |                                             | :%s/old/new/gc | ファイル全体のすべての文字を、確認しながら置換                                                                                                                                          |
 
 *** エディタ特有
 
+    #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
     | Emacs | vim       | 操作内容                                     |
-    |-------+-----------+----------------------------------------------|
     |       | ESC       | ノーマルモードへ切替                         |
     |       | i         | カーソルの位置に追加                         |
     |       | a         | カーソルの次の位置に追加                     |
@@ -778,11 +790,6 @@ void tree_using_branch()
     さて、前述のようにMacTeXをインストールしたとします。
     MacTeXにはTeXShop.appや他にもいろいろな便利なアプリがついてきます。
     しかし、ここではEmacs+YaTeXを使うことにします。
-
-    最初に断っておくと、特にEmacs信者というつもりはないのです。修士に
-    入って使い始めたのがVimではなくEmacsだったので、そのままという感じ
-    です。あ、MacOSXのソフト（Cocoa？）が同じキーバインドで操作できたっ
-    てのもあるかも。
 
     http://ichiro-maruta.blogspot.jp/2013/03/latex.html
     http://qiita.com/zr_tex8r/items/5413a29d5276acac3771
