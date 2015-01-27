@@ -35,17 +35,37 @@
 
 * 参考サイト
 
-  このKumaROOTに集めた情報は、下記のサイトにたいへんお世話になっています。
+  このKumaROOTに載っている情報は、下記のサイトから集め、自分で試してみたものです。
+  本当に詳しいことは下記の情報を自分で読んでみるのが一番かもしれません。
 
-  - [[http://root.cern.ch/drupal/content/users-guide][ROOT公式ユーザーズガイド]] :: 困ったらとりあえず読む！
-  - [[http://root.cern.ch/drupal/content/reference-guide][ROOT公式リファレンスガイド]] :: クラス名やそのメソッド名、内容、使い方を知りたい場合に使うべし！
-  - [[http://root.cern.ch/root/html/tutorials/][ROOT公式チュートリアル]] :: 付属のサンプルコードを試すべし！
-  - [[http://root.cern.ch/drupal/content/c-coding-conventions][ROOT公式コーディングガイド]] :: ROOTのソースコードを読むときに役に立つかも
-  - [[http://hep.planet-koo.com/index.php?g=root][ROOT解体新書]] by 楠本さん :: gROOTとか、gStyleの設定など、他のページ／マニュアルでは見られない項目がすごく詳しい
-  - [[http://blog.livedoor.jp/oxon/][宇宙線実験の覚え書き（ライブドアブログ）]] by 奥村さん :: PyROOTのこ
-       とをググるとたいていこのページに辿り着くはず。いまは [[http://oxon.hatenablog.com][宇宙線実験
-       の覚え書き（はてブ）]] にお引っ越ししたみたいです [fn::実際はもっと
-       青い色の頁にお世話になってたはずなんだけど、うまく探せず]。
+  - [[http://root.cern.ch/drupal/content/users-guide][ROOT公式ユーザーズガイド]] :: 困ったらとりあえず読みましょう！「ROOT
+       User's Guide」の項目から自分の読みたいドキュメントを選べばよい
+       です。とてーも長いので全部読もうとしてはいけません。必要な時に、
+       必要は箇所を、必要なだけ読むようにしましょう。あと、これを書い
+       ているときに気づいたのですが、初心者は「ROOT Primer」に目を通し
+       てみると良いかもしれません。
+  - [[http://root.cern.ch/drupal/content/reference-guide][ROOT公式リファレンスガイド]] :: クラス名やそのメソッド名、内容、使い
+       方を知りたい場合に使いましょう！といっても、このページから辿ら
+       なくても、「cern root ttree」[fn::検索の際「cern」と付けるのが
+       重要です。でないと、管理者の意味の「root」がたくさんヒットしま
+       す。]などとGoogle検索すればたいていヒットします。「クラスの説明
+       ＋メソッド一覧」という構成になっています。最初は読むのに苦労す
+       るかもしれませんが、使いこなせるように頑張りましょう。ROOT中級
+       者はみんな使っています。
+  - [[http://root.cern.ch/root/html/tutorials/][ROOT公式チュートリアル]] :: 付属のサンプルコードの説明です。ドキュメ
+       ントやレファレンスを読むより、実際にコードを動かし、ソースを読
+       むほうが早く身につきます。初めて使うクラスなどはとりあえずサン
+       プルを動かしてみましょう。
+  - [[http://root.cern.ch/drupal/content/c-coding-conventions][ROOT公式コーディングガイド]] :: ROOTのソースコードを読むときに役に立
+       つかも。なんとなく知っておくと良いです。覚える必要は全くありま
+       せん。
+  - [[http://hep.planet-koo.com/index.php?g=root][ROOT解体新書]] by 楠本さん[fn::ページのリンク切れを確認（[2015-01-27 Tue]）] :: gROOT
+       や、gStyleの設定など、他のページ／マニュアルでは見られない項
+       目がすごく詳しい。
+  - [[http://blog.livedoor.jp/oxon/][宇宙線実験の覚え書き（大学院生版）]] by 奥村さん :: PyROOTのことをグ
+       グっていてこのページに辿り着きました[fn::青い色のページにお世話
+       になってた気がするんだけど、気のせいかな]。いまは [[http://oxon.hatenablog.com][宇宙線実験の
+       覚え書き（社会人版）]] にお引っ越ししたみたいです。
 
 
 * ROOTを使いたい
@@ -57,10 +77,11 @@
    #+end_src
 
    さて、まずはインストールしないとはじまりません。Macの場合はMacPorts
-   からインストールできるようになっています。すごく楽ちんなのでオススメ
+   からインストールできるようになっています[fn::Homebrewは使っていない
+   ので分かりません。誰か情報をくださいな]。すごく楽ちんなのでオススメ
    です。環境変数（$ROOTSYS、$LD_LIBRARY_PATH、$DYLD_LIBRARY_PATHなど）
-   の設定も不要です。（Homebrewは使っていないので分かりません。誰か情報
-   をください。）
+   の設定も不要です。
+
 
 *** Git を使ったインストール方法
 
@@ -123,9 +144,8 @@ $ wget ftp://root.cern.ch/root/root_v5.30.06.source.tar.gz    ## URLはROOT公�
 *** インストール方法 for Windows ユーザ
 
     Windowsはよく分かりません。ごめんなさい。たぶん
-    「[[https://root.cern.ch/drupal/content/downloading-root|downloading-root |
-    ROOT公式ページ]]」から目的のバージョンを選び、そこからバイナリを落とし
-    てくるのが一番簡単だと思います。
+    「[[https://root.cern.ch/drupal/content/downloading-root][downloading-root | ROOT公式ページ]]」から目的のバージョンを選び、
+    そこからバイナリを落としてくるのが一番簡単だと思います。
 
 ** ROOT6を使いたい
 
@@ -134,10 +154,16 @@ $ sudo port install root6
    #+end_src
 
    2014年にROOT6がリリースされました。MacPortsの場合「root6」というパッ
-   ケージ名[fn::正確には「ポート名」かも。あまり気にしないでください。]でインストールすることができます。
+   ケージ名[fn::正確には「ポート名」かも。あまり気にしないでください。]で
+   インストールすることができます。
 
-   ただし、現在遂行中の実験は得てしてROOT5系であることが多いです。
-   郷に入っては郷に従え、と言うように周りで使われている環境に合わせるのが無難です。
+   ただし、現在遂行中の実験はROOT5系を使っていることが多いです[fn::LHC
+   実験の要求に応えるため（？）、最近はROOTの開発が非常に活発に行われ
+   ています。しかし、その他の実験では、安定性を求め古いバージョン使い
+   続けていることがあります。あとOSが古いと最新バージョンはうまくイン
+   ストールできないこともあります]。バージョンを変えてしまうとうまく動
+   作しないこともあるので、実験で推奨されているバージョンには従ってく
+   ださい。
 
 ** ROOT5 と ROOT6 を試してみたい
 
@@ -159,7 +185,7 @@ $ port select --summary
 
 *** ROOT5 と ROOT6 の違いについて
 
-    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです[fn::CINT->CINT++に変更]。
+    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです[fn::CINT \rightarrow CINT++に変更]。
     細かい違いは全く分かりませんが、文法のチェックが厳密になったみたいです。
 
     実はROOT5ではC言語／C++言語の文法的には間違っているマクロでも動い
@@ -211,8 +237,11 @@ $ sudo port install root5 +python27   ## ROOT5の場合、+pythonXX の variants
 $ sudo port install root6             ## ROOT6の場合、variants 不要
    #+END_SRC
 
-   CERNには「へびつかい」が多いらしく、「PyROOT」というモジュールを使
-   えば、Python上でROOTが使えるようになっています。
+   CERNには「へびつかい」が多いらしく、「PyROOT[fn::実は [[http://www.rootpy.org][rootpy]] という
+   のもあります。こっちのほうがPython nativeな感じです。前に試そうとし
+   てたのですがインストールでコケてしまいました。動かせたら項目を作る
+   かも]」というモジュールを使えば、Python上でROOTが使えるようになって
+   います。
 
    その場合は、MacPortsでインストールする際に variants で指定する必要
    があります。しかも、この variantsは自分の使っているPythonのバージョ
@@ -498,16 +527,17 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
 
    #+begin_src C++
    gStyle->SetNdivisions(TTSSPP)
-   // PP --- 軸を何分割するか
-   // SS --- PP分割された目盛り１つ分を何分割するか
-   // TT --- SS分割された目盛り１つ分を何分割するか
    #+end_src
 
-   デフォルトは510になっている。
-   PP=10、SS=05、TT=00なので、軸を10分割してその１目盛りを5分割、ということで全体で50目盛りになる。
+   - PP :: 軸全体の分割数
+   - SS :: PP分割された目盛り１つ分の分割数
+   - TT :: SS分割された目盛り１つ分の分割数
 
-   全体を100目盛りにするには、20510にすればよい。
-   （10分割、その１目盛りを5分割、さらにその1目盛りを2分割 ＝100目盛り）
+   デフォルトは510になっている。PP=10、SS=05、TT=00なので、軸を10分割
+   してその１目盛りを5分割、ということで全体で50目盛りになる。
+
+   全体を100目盛りにするには、20510にすればよい。（10分割、その１目盛
+   りを5分割、さらにその1目盛りを2分割 ＝100目盛り）
 
 
 * ヒストグラム編
@@ -559,11 +589,11 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
    仮に、100行４列のテキストファイルがあるとします。
    このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
 
-#+begin_src text
+   #+begin_src text
 100    105    104   103
 101    106    103   100
 ...
-#+end_src
+   #+end_src
 
 
 *** TTree::ReadFile() を使う方法
@@ -571,65 +601,86 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
     データがテキストファイルで保存されている場合、
     それをTTreeに変換する最も簡単な方法です。
 
-#+begin_src c++
-void tree_using_readfile()
+    #+begin_src c++
 {
+  // STEP1: 入力ファイル名を指定する
   TString ifn = "inputfilename";
-  TTree *tree = new TTree("tree", "tree using ReadFile()");
-  tree->ReadFile(ifn, "row1/I:row2/I:row3/I:row4/D:row5/I");
 
+  // STEP2: TTreeを作成する
+  TTree *tree = new TTree("tree", "tree using ReadFile()");
+
+  // STEP3: TTree::ReadFile(...) でデータを読み込む
+  tree->ReadFile(ifn.Data(), "row1/I:row2/I:row3/I:row4/D:row5/I");
+
+  // STEP4: 作成したTTreeを保存するためのTFileを作成する
   TString ofn = "out.root";
   TFile *fout = new TFile(ofn, "recreate");
+
+  // STEP5: TFileにTTreeを書き込む
   tree->Write();
+
+  // STEP6: TFileを閉じる
   fout->Close();
 
   return;
 }
-#+end_src
+    #+end_src
 
-    TTree::ReadFile()の第2引数には、branchDescriptorの変数をコロン（:）で区切って記述すします。
-    「ブランチ名/I」、「ブランチ名/D」といった感じで、その変数名（＝ブランチ名）とその型を指定できます。
-    型を省略した場合は「ブランチ名/F」になるみたいです。
+    [[https://root.cern.ch/root/html/TTree.html#TTree:ReadFile][TTree::ReadFile]] の第１引数には入力ファイル名（ifn）、第2引数には、
+    branch descriptorを指定します。
+
+    「branch descriptor」は、TTreeのブランチ変数になります。複数のブラ
+    ンチ変数を指定する場合は、コロン（:）で区切って記述します。Int_t型
+    の場合は「ブランチ名/I」、Double_t型の場合は「ブランチ名/D」といっ
+    た感じで、その変数名（＝ブランチ名）とその型を指定できます。型を省
+    略した場合はFloat_t型の「ブランチ名/F」になるみたいです。
 
 *** TTree::Branch() を使う方法
 
-    一番ありがちな方法です。ググればいっぱい見つかります。
+    よくある方法です。ググればいっぱい見つかります。
 
-#+begin_src c++
-void tree_using_branch()
+    #+begin_src c++
 {
-    // データファイルを読み込む
+    // STEP1: データファイルを読み込む
     TString ifn = "inputfilename"
     ifstream fin;
     fin.open(ifn);
 
-    // データを格納するための変数
+    // STEP2: データを格納するための変数を定義する
     int val1, val2, val3, val4;
 
-    // TTreeを作成する
-    // TTree::Branch(...)を使って、各変数のブランチを作成する
+    // STEP3: TTreeを作成する
+    TTree *tree = new TTree("name", "title);
+
+    // STEP4: TTree::Branch(...)を使って、各変数のブランチを作成する
     // 第一引数：ブランチ名；なんでも良い；用意した変数名と違っていても構わない
     // 第二引数：変数のアドレス；変数が実体の場合は、&を先頭につけてアドレスを指定する；事前に変数を用意しておかないと怒られる
     // 第三引数：変数の型；"変数／型"の形で記述する；int型はI, float型はF, double型はFなど
-    TTree *tree = new TTree("name", "title);
     tree->Branch("val1", &val1, "val1/I");
     tree->Branch("val2", &val2, "val2/I");
     tree->Branch("val3", &val3, "val3/I");
     tree->Branch("val4", &val4, "val4/I");
 
-    // C++でファイルを読み込むときの常套手段
+    // STEP5: C++でファイルを読み込むときの常套手段
     while (fin >> val1 >> val2 >> val3 >> val4) {
-        tree->Fill();  // データのエントリの区切りで必ずTTree::Fill()する
+        // STEP6: データのエントリの区切りで必ずTTree::Fill()する
+        tree->Fill();
     }
 
-    // 作成したTTreeを保存するためのROOTファイルを準備する
+    // STEP7: 作成したTTreeを保存するためのTFileを作成する
     TString ofn = "outputfilename";
     TFile *fout = new TFile(ofn, "recreate");
-    tree->Write();  // TFileを開いた状態で、TTree::Write()すれば書き込みできる；違うファイルに書き込みたい場合は後述するかも
-    fout->Close();  // 最後にファイルを閉じる；プログラム（やマクロ）終了時に勝手に閉じてくれるらしいが一応
+
+    // STEP8: TFileにTTreeを書き込む
+    tree->Write();  //
+
+    // STEP9: TFileを閉じる
+    // プログラム（やマクロ）終了時に勝手に閉じてくれるらしいが一応
+    fout->Close();
+
     return;
 }
-#+end_src
+    #+end_src
 
     前述したReadFile を使った方法と比べると、コードの行数がぐーんと多
     いことが分かります。（ReadFileの場合、肝となる部分はたったの一行で
