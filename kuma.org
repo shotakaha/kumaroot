@@ -1,6 +1,20 @@
 #+title:KumaROOT
 #+author:しょーた
 
+#+latex_header: \hypersetup{setpagesize=false}
+#+latex_header: \hypersetup{colorlinks=true}
+#+latex_header: \hypersetup{linkcolor=blue}
+#+latex_header: \lstset{language=[LaTeX]TeX}
+#+latex_header: \lstset{basicstyle=\small}
+#+latex_header: \lstset{stringstyle=\ttfamily}
+#+latex_header: \lstset{commentstyle=\ttfamily}
+#+latex_header: \lstset{showstringspaces=false}
+#+latex_header: \lstset{frame=shadowbox}
+#+latex_header: \lstset{rulesepcolor=\color{black}}
+#+latex_header: \lstset{fancyvrb=true}
+#+latex_header: \fvset{gobble}
+
+
 * はじめに
 
   これまで古巣の研究室に設置したDokuWikiにROOTなどの情報を書きためてい
@@ -442,7 +456,7 @@ gStyle->SetOptFit(1111111)
    だし、たくさんのヒストグラムを描く際は、見えにくくなってしまうので
    細くします。その辺りは臨機応変にお願いします。
 
-#+begin_src
+#+begin_src c++
 gStyle->SetHistLineWidth(2)
 #+end_src
 
@@ -483,7 +497,7 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
 
     簡単な計算なので確かめてみる
 
-    #+begin_src text
+    #+begin_src sh
     25[年] * 365[日/年] * 24[時間/日] * 60[分/時間] * 60[秒/分]
     + 6[日] * 24[時間/日] * 60[分/時間] * 60[秒/分]    // この25年間に閏年は6回
     = 788918400[秒]
@@ -589,7 +603,7 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
    仮に、100行４列のテキストファイルがあるとします。
    このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
 
-   #+begin_src text
+   #+begin_src sh
 100    105    104   103
 101    106    103   100
 ...
@@ -694,6 +708,38 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 * TCanvas編
 * TLegend編
 * TString編
+
+  C/C++では文字とか文字列の扱いは面倒くさいのですが、
+  ROOTにはTStringという便利なクラスがあります。
+  使わない手はないでしょう、ということで紹介しておきます。
+
+** フォーマット文字列を作りたい
+
+   #+begin_src c++
+TString str;
+str.Form("Hist%d", i);
+   #+end_src
+
+** 文字列を取り出す
+
+   #+begin_src c++
+str.Data();
+   #+end_src
+
+** 使い方の一例v
+
+   複数のヒストグラムをループで生成したいときなどによく使います。
+
+   #+begin_src c++
+   const Int_t nhist = 10;
+   TString hname, htitle;
+   for (Int_t i = 0; i < nhist; i++) {
+       hname.Form("h%02d", i);
+       htitle.Form("%s;%s;%s", hname.Data(), "x", "y");
+       h[i] = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
+   }
+   #+end_src
+
 
 * その他
 
@@ -850,7 +896,7 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
    CAMACやVMEでデータ収集を行うためのドライバをインストールします。
    詳細に関しては「[[http://www.awa.tohoku.ac.jp/~sanshiro/kinoko/index.html][KiNOKOプロジェクト]]」を参照してください。
 
-#+begin_src
+#+begin_src sh
 $ cd ~/Downloads/
 $ wget http://www.awa.tohoku.ac.jp/~sanshiro/kinoko-download/files/kinoko-2014-01-29.tar.gz
 $ tar zxvf kinoko-2014-01-29.tar.gz /usr/local/heplib/
