@@ -1,10 +1,11 @@
 #+title:KumaROOT
 #+author:しょーた
+#+email:  shotakah@post.kek.jp
+#+options: H:4
 
-#+latex_header: \hypersetup{setpagesize=false}
-#+latex_header: \hypersetup{colorlinks=true}
-#+latex_header: \hypersetup{linkcolor=blue}
-#+latex_header: \lstset{language=[LaTeX]TeX}
+#+latex_class: jsreport
+# #+latex_class_options: [dvipdfmx, 15pt, report]
+#+latex_header: \lstset{language=C++}
 #+latex_header: \lstset{basicstyle=\small}
 #+latex_header: \lstset{stringstyle=\ttfamily}
 #+latex_header: \lstset{commentstyle=\ttfamily}
@@ -17,31 +18,37 @@
 
 * はじめに
 
-  これまで古巣の研究室に設置したDokuWikiにROOTなどの情報を書きためてい
-  ましたが、そろそろ引っ越しをしなくてはいけないかもしれません。せっか
-  く書きためたのでどうにかして残しておきたいのですが、いまの職場のサー
-  バではPHPなどが一切動かないため、GitHubにて公開することにしました。
+  これまで古巣の研究室に設置した
+  DokuWiki[fn::http://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php]
+  にROOTなどの情報を書きためていましたが、そろそろ引っ越しをしなくては
+  いけないかもしれません。せっかく書きためたのでどうにかして残しておき
+  たいのですが、いまの職場のサーバではPHPなどが一切動かないため、
+  GitHubにて公開することにしました。ついでに、動作するサンプルコードも作成して
+  いこうと思っています。
 
-  GitHubで公開するということで、動作するサンプルコードも作成して
-  いこうと思います。
+** 「くまROOT」の由来
 
-  「くまROOT」と名づけたのは、私がROOTを使い始めたときに、最初に目を通
-  した「猿にも使えるROOT」（通称：さるROOT）の知名度にあやかりたかった
-  ためです。「さる」の次は「くま」を読んでもらえるように頑張りたいと思います。
+   「くまROOT」と名づけたのは、私がROOTを使い始めたときに、最初に目を通
+   した「猿にも使えるROOT」（通称：さるROOT）の知名度にあやかりたかった
+   ためです。「さる」の次は「くま」を読んでもらえるように頑張りたいと思います。
 
-  ということで、読者は、ちょっとだけROOTを使ったことがある学生／研究者
-  が対象になると思います。できるだけ「逆引き辞典」として使えるようにし
-  たいと思います。
+   ということで、読者は、ちょっとだけROOTを使ったことがある学生／研究者
+   が対象になると思います。できるだけ「逆引き辞典」として使えるようにし
+   たいと思います。
 
 
 ** ROOTについて
 
    「ROOT」とは高エネルギー物理学業界で広く使われている解析フレームワー
-   クです。CERNが中心になって開発されています。
+   クです。CERNが中心となって開発を行っています。もっとちゃんとした説
+   明はそこら辺のウェブに落ちているので、ここでは僕の所感を述べること
+   にします。
 
-   「解析」フレームワークと聞くとたいそうに聞こえますが、お絵かき（＝
-   グラフ作成をそれなりにきれいに出力）ソフトと思えば気構えずに使える
-   と思います。（当たり前ですが「解析」するのは自分ですしね）
+   「解析フレームワーク」と聞くとたいそうに聞こえますが、「お絵かきソ
+   フト」と捉えて気軽に使えば良いと思います。[fn::もちろん、お絵かきと
+   いっても、ヒストグラムやグラフが中心になります]。例えば、これまでエ
+   クセルで作成していたグラフを、ROOTで作ってみるとか。
+   ROOTマクロをひとつ作っておけば、再利用できる範囲はエクセル以上だと思います。
 
    あと、ROOTを使うにあたり注意事項は一つです。「決して深入りしないこ
    と」。どうにもならん部分は「仕様」と思って諦めましょう。
@@ -87,51 +94,71 @@
 ** オススメのインストール方法（for Mac ユーザ）
 
    #+begin_src sh
-   $ sudo port install root    ## 実際にはroot5 がインストールされる
+$ sudo port install root5    ## for ROOT5 user
+$ sudo port install root6    ## for ROOT6 user
    #+end_src
 
    さて、まずはインストールしないとはじまりません。Macの場合はMacPorts
-   からインストールできるようになっています[fn::Homebrewは使っていない
-   ので分かりません。誰か情報をくださいな]。すごく楽ちんなのでオススメ
-   です。環境変数（$ROOTSYS、$LD_LIBRARY_PATH、$DYLD_LIBRARY_PATHなど）
-   の設定も不要です。
+   からインストールできるようになっています[fn::Homebrewやfinkなど、そ
+   の他のパッケージ管理ツールは使ったことがないので分かりません。誰か
+   情報をくださいな]。すごく楽ちんなのでオススメです。環境変数
+   （$ROOTSYS、$LD_LIBRARY_PATH、$DYLD_LIBRARY_PATHなど）の設定も不要
+   です。
 
+   ROOT6は2014年にリリースされました。MacPortsの場合「root6」というパッ
+   ケージ名[fn::正確には「ポート名」かも。あまり気にしないでください。]で
+   インストールすることができます。ROOT5と一緒にインストールしてお
+   いても大丈夫ですが、一緒には使えません。後述する方法で簡単に切り替
+   えることが出来ます。
+
+   現在はROOT5からROOT6へ移行する過渡期です。そのため、進行中の実験は
+   ROOT5系を使っていることが多いです[fn::LHC実験の要求に応えるため
+   （？）、３年位前からROOTの開発が非常に活発に行われています。しかし、
+   その他の実験では、安定性を求め古いバージョン使い続けていることがあ
+   ります。あとOSが古いと最新バージョンはうまくインストールできないこ
+   ともあります]。むやみに最新版を使うと、実験固有のソフトウェア群が動
+   作しないこともあります。その場合は、素直に実験で推奨されているバー
+   ジョンには従ってください。
 
 *** Git を使ったインストール方法
+
 
     Linuxを使っている場合は、Gitを使うとよいでしょう。
     方法は「[[https://root.cern.ch/drupal/content/installing-root-source][installing-root-source | ROOT公式ページ]]」に載っている通りです。
 
     #+begin_src sh
-    ## STEP1 : clone先のディレクトリを作成する（ここはお好み）
+    ## STEP1 : make a directory for cloning
     [any]  $ mkdir ~/repos/git
     [any]  $ cd ~/repos/git
 
-    ## STEP2 : ROOT本体をcloneする
+    ## STEP2 : clone ROOT repository from CERN
     [git]  $ git clone http://root.cern.ch/git/root.git
     [git]  $ cd root
 
-    ## STEP3 : 目的のバージョンのタグを探す
+    ## STEP3 : look for a version
     [root] $ git tag -l
 
-    ## STEP4 : 目的のバージョンのタグをチェックアウトする
+    ## STEP4 : checkout the tag version you want
     [root] $ git checkout -b v5-34-08 v5-34-08
 
-    ## STEP5 : PREFIXを指定しconfigure -> make -> make install する
+    ## STEP5 : set PREFIX and configure, then make, then make install
+    ##       : use tee command for logging output file when building and installing
     [root(v5-34-08)] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-34-08
-    [root(v5-34-08)] $ make 2>&1 | tee make.log                   ## make時のログを残すようにする
-    [root(v5-34-08)] $ make install 2>&1 | tee makeinstall.log    ## configureで設定したprefixにインストールされる
+    [root(v5-34-08)] $ make 2>&1 | tee make.log                   ## buiding ROOT
+    [root(v5-34-08)] $ make install 2>&1 | tee makeinstall.log    ## installed under $PREFIX
     #+end_src
 
-    まず、本体をどこかにcloneします（今回は、~/repos/git/ 以下）。次に
-    どんなタグがあるのかを調べます。目的のバージョンのタグ名が分かった
-    ら、そのタグをチェックアウトします。ブランチ名は好きにしてかまいま
-    せん（今回は、タグ名と同じ名前）。あとは、従来通りPREFIXを指定して
-    configureします。configure の内容は たしか config.status に書きださ
-    れます。make、make install の際、PREFIXで指定したディレクトリによっ
-    ては sudo が必要です。また、失敗した場合に備えてログを残しておくと
-    よいです。今回は、teeコマンドを使うことで、端末に表示しながらログファ
-    イルに保存しています。
+    1. 本体をどこかにcloneする（今回は、~/repos/git/ 以下）
+    2. どんなタグがあるのかを調べる
+    3. 目的のバージョンのタグ名が分かったら、そのタグをチェックアウト
+       します。ブランチ名は好きにしてかまいません（今回は、タグ名と同
+       じ名前）。
+    4. あとは、従来通りPREFIXを指定してconfigureします。configure の内
+       容は たしか config.status に書きだされます。make、make install
+       の際、PREFIXで指定したディレクトリによっては sudo が必要です。
+       また、失敗した場合に備えてログを残しておくとよいです。今回は、
+       teeコマンドを使うことで、端末に表示しながらログファイルに保存し
+       ています。
 
     あとは、~/.bashrc に環境変数の設定を書いておきます。
 
@@ -140,15 +167,15 @@
     ググればたくさん出てきますが、一応紹介しておきます。
 
     #+begin_src sh
-## STEP1 : ソース（tar.gz）を保存するディレクトリに移動し、wgetで取ってくる
+## STEP1 : make directory for tar.gz file and wget it
 $ cd /usr/local/heplib/tarballs
-$ wget ftp://root.cern.ch/root/root_v5.30.06.source.tar.gz    ## URLはROOT公式WEBから探してくる
+$ wget ftp://root.cern.ch/root/root_v5.30.06.source.tar.gz    ## check URL at ROOT website
 
-## STEP2 : ソース（tar.gz）を展開する
+## STEP2 : expand tar.gz
 [ROOT] $ cd /usr/loca/heplib/ROOT
-[ROOT] $ tar zxvf ../tarballs/root_v5.30.06.source.tar.gz    ## 先ほどwgetしたファイルを展開
+[ROOT] $ tar zxvf ../tarballs/root_v5.30.06.source.tar.gz
 
-## STEP3 : PREFIXを指定しconfigure -> make -> make install
+## STEP3 : set PREFIX then configure -> make -> make install
 [ROOT] $ cd root
 [root] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-30-06
 [root] $ make 2>&1 | tee make.log
@@ -161,32 +188,15 @@ $ wget ftp://root.cern.ch/root/root_v5.30.06.source.tar.gz    ## URLはROOT公�
     「[[https://root.cern.ch/drupal/content/downloading-root][downloading-root | ROOT公式ページ]]」から目的のバージョンを選び、
     そこからバイナリを落としてくるのが一番簡単だと思います。
 
-** ROOT6を使いたい
-
-   #+begin_src sh
-$ sudo port install root6
-   #+end_src
-
-   2014年にROOT6がリリースされました。MacPortsの場合「root6」というパッ
-   ケージ名[fn::正確には「ポート名」かも。あまり気にしないでください。]で
-   インストールすることができます。
-
-   ただし、現在遂行中の実験はROOT5系を使っていることが多いです[fn::LHC
-   実験の要求に応えるため（？）、最近はROOTの開発が非常に活発に行われ
-   ています。しかし、その他の実験では、安定性を求め古いバージョン使い
-   続けていることがあります。あとOSが古いと最新バージョンはうまくイン
-   ストールできないこともあります]。バージョンを変えてしまうとうまく動
-   作しないこともあるので、実験で推奨されているバージョンには従ってく
-   ださい。
 
 ** ROOT5 と ROOT6 を試してみたい
 
    #+BEGIN_SRC sh
-$ sudo port select --set root root6   ## ROOT6にする
-$ sudo port select --set root root5   ## ROOT5にする
+$ sudo port select root root6   ## use ROOT6
+$ sudo port select root root5   ## use ROOT5
    #+END_SRC
 
-   MacPortsでROOTをインストールする利点は、ROOT5 と ROOT6 が簡単に切り
+   MacPortsでROOTをインストールする利点のひとつは、ROOT5 と ROOT6 が簡単に切り
    替えられることです。
 
    実はこの「port select」はROOTだけでなく、Pythonのバージョン切り替えなどもできます。
@@ -199,14 +209,15 @@ $ port select --summary
 
 *** ROOT5 と ROOT6 の違いについて
 
-    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです[fn::CINT \rightarrow CINT++に変更]。
-    細かい違いは全く分かりませんが、文法のチェックが厳密になったみたいです。
+    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです
+    [fn::CINT \rightarrow CINT++に変更]。細かい違いは全く分かりません
+    が、文法のチェックが厳密になったみたいです。
 
     実はROOT5ではC言語／C++言語の文法的には間違っているマクロでも動い
-    てくれました[fn::よく知られていると思われるのは、a.b でも a->b
-    でも動いちゃうことでしょうか]。そのため、テストで作ったマクロで動
-    作確認した後、より多くのデータを解析するためにコンパイルするとエラー
-    が多出。そのデバッグに追われるということは日常茶飯事でした。
+    てくれました[fn::よく知られていると思われるのは、a.b でも a->bでも
+    動いちゃうことでしょうか]。そのため、テストで作ったマクロで動作確
+    認した後、より多くのデータを解析するためにコンパイルするとエラーが
+    多出。そのデバッグに追われるということは日常茶飯事でした。
 
     ROOT6では、このマクロの文法チェックも厳しくなったみたいです。ひぇぇ。
     でも心配しなくて大丈夫。エラーの内容を詳しく教えてくれるようになり
@@ -218,22 +229,22 @@ $ port select --summary
     「warning」や「error」がたくさん表示されます。
 
     #+begin_src sh
-## STEP1 : ROOT6を指定
+## STEP1 : set to ROOT6
 $ sudo port select root root6
 
-## STEP2 : ## ROOT5のtutorials/に移動
+## STEP2 : move to tutorials/ directory of ROOT5
 $ cd /opt/local/libexec/root5/share/doc/root/tutorials/
 
-## STEP3 : ROOT（=ROOT6）を起動
+## STEP3 : start ROOT（=ROOT6）
 $ root
 
-## ===  warning の例 ===
+## ===  an example of warning ===
 /opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:7:13:
  warning: using the result of an assignment as a condition without
  parentheses [-Wparentheses]
       if (e = getenv("EDITOR"))
           ~~^~~~~~~~~~~~~~~~~~
-## === error の例 ===
+## === an example of error ===
 
 /opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:39:12:
  error: cannot initialize return object of type 'char *' with an rvalue of
@@ -247,8 +258,8 @@ $ .q
 ** PyROOTを使いたい
 
    #+begin_src sh
-$ sudo port install root5 +python27   ## ROOT5の場合、+pythonXX の variants が必要
-$ sudo port install root6             ## ROOT6の場合、variants 不要
+$ sudo port install root5 +python27   ## when ROOT5, you need to specify +pythonXX variants
+$ sudo port install root6             ## when ROOT6, no need to specify variants
    #+END_SRC
 
    CERNには「へびつかい」が多いらしく、「PyROOT[fn::実は [[http://www.rootpy.org][rootpy]] という
@@ -267,7 +278,7 @@ $ sudo port install root6             ## ROOT6の場合、variants 不要
 ** EmacsでROOTを編集したい
 
    #+begin_src sh
-$ locate root-help.el    # どこにあるかを探す
+$ locate root-help.el    # check path
    #+end_src
 
 
@@ -287,8 +298,8 @@ $ locate root-help.el    # どこにあるかを探す
 ** ROOTのtutorialを使いたい
 
    #+begin_src sh
-/opt/local/libexec/root5/share/doc/root/tutorials/     ## ROOT5の場合
-/opt/local/libexec/root6/share/doc/root/tutorials/     ## ROOT6の場合
+/opt/local/libexec/root5/share/doc/root/tutorials/     ## ROOT5
+/opt/local/libexec/root6/share/doc/root/tutorials/     ## ROOT6
    #+end_src
 
    実はROOTをインストールすると、たくさんのサンプルコードもついてきま
@@ -312,7 +323,7 @@ $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
 
 * ROOT tutorial 編
 
-  この章ではROOTに付属しているtutorialの使い方を簡単に紹介します。
+  この章では、主にROOTに付属しているtutorialを使用して、使い方を簡単に紹介します。
   前節の最後にも書きましたが、手元にコピーを作っておきましょう。
 
   #+begin_src sh
@@ -328,6 +339,27 @@ $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
 $ cd ~/TEST/root6/tutorials/
 $ root
 
+root[0]
+   #+end_src
+
+   コマンドラインで「root」と入力すると、ROOTが起動します。
+   この状態だと、対話的にROOTを操作することができます。
+
+** とりあえず終了
+
+   #+begin_src sh
+root [0] .q
+   #+end_src
+
+   ROOTセッション内で「.q」を入力すると、ROOTが終了します。
+   それで終了しない場合は、「.qqq・・・」の様にqをたくさんにします。
+
+*** rootlogon.Cとrootlogoff.C
+
+    さて、tutorials をコピーしたディレクトリでROOTを起動／終了すると、
+    以下の様なメッセージが表示されたはずです。
+
+   #+begin_src bash
 Welcome to the ROOT tutorials
 
 Type ".x demos.C" to get a toolbar from which to execute the demos
@@ -340,11 +372,25 @@ Type ".x demoshelp.C" to see the help window
 root [0]
    #+end_src
 
-   tutorials をコピーしたディレクトリでROOTを起動すると、上のメッセージが表示されます。
-   これは同じディレクトリに rootlogon.C というのがあるからです。
+    #+begin_src bash
+Taking a break from ROOT? Hope to see you back!
+   #+end_src
 
-   ROOTを起動すると、"system.rootrc"、"~/.rootrc"、"./rootlogon.C" の順番に設定が読み込まれます。
-   なので、個人的な全体設定は"~/.rootrc"へ、そのプログラムだけの設定は"./rootlogon.C"に書いておけばよいです。
+    これは、同じディレクトリに、「rooglogon.C」と「rootlogoff.C」があるからです。
+    この２つのファイルを用意しておくことで、ROOT起動時および終了時の動作を設定することができます。
+
+    個人的には、数ヶ月ぶりに触るプログラムなんてほとんど忘れてしまっているので、
+    rootlogon.C に手順を書いて残したりしています。
+
+*** ROOT起動時に読み込まれるファイルの順番
+
+    ROOT起動時に以下の順番でファイルが読み込まれます。
+
+   1. system.rootrc
+   2. ~/.rootrc
+   3. ./rootlogon.C
+
+   個人的な全体設定は「~/.rootrc」へ、そのプログラムだけの設定は「./rootlogon.C」に書いておけばよいです。
 
 ** とりあえず終了
 
@@ -385,13 +431,14 @@ $ root demos.C
    [[./fig/demos.png]]
 
 
-   そして、一番上にある、「Help Demos」をクリックすると、図[[fig:helpdemos]]のようなキャンバスが表示されます。
+   一番上にある、「Help Demos」をクリックすると、図[[fig:helpdemos]]のようなキャンバスが表示されます。
 
    #+attr_latex: :height 10cm :mode hoge
    #+name: fig:helpdemos
    #+caption: Help Demos を実行すると出てくるキャンバス
    [[./fig/helpdemos.png]]
 
+** hsimple
 
 
 * 全体設定編
@@ -483,10 +530,10 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
 ** 横軸に時間を使いたい
 
    #+begin_src C++
-   gStyle->SetTimeOffset(-788918400);    // Unix時間とROOT時間のepochの差
+   gStyle->SetTimeOffset(-788918400);    // set diff. btw Unix and ROOT epoch
    graph->GetXaxis()->SetTimeDisplay(1);
    graph->GetXaxis()->SetTimeFormat("%Y\/%m\/%d");
-   graph->GetXaxis()->SetTimeOffset(0, "gmt");    // GMT+0に設定
+   graph->GetXaxis()->SetTimeOffset(0, "gmt");    // set GMT+0
    #+end_src
 
    Unixのepoch time は1970年01月01日00時00分00秒から始まるのに対し、
@@ -498,9 +545,9 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
     簡単な計算なので確かめてみる
 
     #+begin_src sh
-    25[年] * 365[日/年] * 24[時間/日] * 60[分/時間] * 60[秒/分]
-    + 6[日] * 24[時間/日] * 60[分/時間] * 60[秒/分]    // この25年間に閏年は6回
-    = 788918400[秒]
+    25[years] * 365[days/year * 24[hours/day] * 60[minutes/hour] * 60[seconds/minute]
+    + 6[days] * 24[hours/day] * 60[minutes/hour] * 60[seconds/minutes]    // 6 leap year in 25 years
+    = 788918400[seconds]
     #+end_src
 
 *** GMT+0に設定する
@@ -524,16 +571,16 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
 ** キャンバスに補助線を描きたい
 
    #+begin_src C++
-   gStyle->SetPadGridX(1)    // X軸のグリッド
-   gStyle->SetPadGridY(1)    // Y軸のグリッド
+   gStyle->SetPadGridX(1)    // X-axis grid
+   gStyle->SetPadGridY(1)    // Y-axis grid
    #+end_src
 
 
 ** グラフの軸を一括してログ表示にする
 
    #+begin_src C++
-   gStyle->SetOptLogx(1)    // X軸の目盛をログ表示
-   gStyle->SetOptLogy(1)    // Y軸の目盛をログ表示
+   gStyle->SetOptLogx(1)    // X-axis
+   gStyle->SetOptLogy(1)    // Y-axis
    #+end_src
 
 
@@ -560,10 +607,10 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
 
 #+begin_src c++
 TString hname, htitle;
-hname.Form("hname");    // <------------------------ ヒストグラムの名前
-htitle.Form("title;xtitle;ytitle;");    // <-------- タイトル、軸名
-Double_t xmin = 0, xmax = 10;    // <--------------- 左端、右端
-Int_t xbin = (Int_t)xmax - (Int_t)xmin;    // <----- ビン数
+hname.Form("hname");    // <------------------------ object name of histogram
+htitle.Form("title;xtitle;ytitle;");    // <-------- title and axis name
+Double_t xmin = 0, xmax = 10;    // <--------------- left edge and right edge
+Int_t xbin = (Int_t)xmax - (Int_t)xmin;    // <----- number of bins
 
 TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 #+end_src
@@ -598,10 +645,32 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 
 ** テキストファイルをTTreeに変換したい
 
-   取得したデータはテキストデータとして保存するのが、一番簡単な方法です。
+   取得したデータはとりあえずテキストデータとして保存するのが一番簡単
+   な方法です。そして、ROOTで解析するときはTTreeになっていると楽ちんで
+   す。なので、手間を掛けずにさっさと変換してしまいましょう。
 
-   仮に、100行４列のテキストファイルがあるとします。
-   このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
+*** TTree::ReadFile を使う方法
+
+    データがテキストファイルで保存されている場合、
+    それをTTreeに変換する最も簡単な方法です。
+
+    #+begin_src c++
+  tree->ReadFile(ifn.Data(), "row1/I:row2/I:row3/I:row4/D:row5/I");
+    #+end_src
+
+    - 第１引数 :: 入力ファイル名
+    - 第２引数 :: branch descriptor。TTreeのブランチ変数になります。複
+                  数のブランチ変数を指定する場合は、コロン（:）で区切っ
+                  て記述します。Int_t型の場合は「ブランチ名/I」、
+                  Double_t型の場合は「ブランチ名/D」といった感じで、そ
+                  の変数名（＝ブランチ名）とその型を指定できます。型を
+                  省略した場合はFloat_t型の「ブランチ名/F」になるみた
+                  いです。
+
+**** サンプルコード
+
+     仮に、100行４列のテキストファイルがあるとします。
+     このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
 
    #+begin_src sh
 100    105    104   103
@@ -610,46 +679,47 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
    #+end_src
 
 
-*** TTree::ReadFile() を使う方法
-
-    データがテキストファイルで保存されている場合、
-    それをTTreeに変換する最も簡単な方法です。
-
     #+begin_src c++
 {
-  // STEP1: 入力ファイル名を指定する
+  // STEP1: Set input filename
   TString ifn = "inputfilename";
 
-  // STEP2: TTreeを作成する
+  // STEP2: Create TTree
   TTree *tree = new TTree("tree", "tree using ReadFile()");
 
-  // STEP3: TTree::ReadFile(...) でデータを読み込む
+  // STEP3: Read data using TTree::ReadFile(...) method
   tree->ReadFile(ifn.Data(), "row1/I:row2/I:row3/I:row4/D:row5/I");
 
-  // STEP4: 作成したTTreeを保存するためのTFileを作成する
+  // STEP4: Create TFile to save TTree
   TString ofn = "out.root";
   TFile *fout = new TFile(ofn, "recreate");
 
-  // STEP5: TFileにTTreeを書き込む
+  // STEP5: Write TTree to TFile
   tree->Write();
 
-  // STEP6: TFileを閉じる
+  // STEP6: Close TFile
   fout->Close();
 
   return;
 }
     #+end_src
 
-    [[https://root.cern.ch/root/html/TTree.html#TTree:ReadFile][TTree::ReadFile]] の第１引数には入力ファイル名（ifn）、第2引数には、
-    branch descriptorを指定します。
-
-    「branch descriptor」は、TTreeのブランチ変数になります。複数のブラ
-    ンチ変数を指定する場合は、コロン（:）で区切って記述します。Int_t型
-    の場合は「ブランチ名/I」、Double_t型の場合は「ブランチ名/D」といっ
-    た感じで、その変数名（＝ブランチ名）とその型を指定できます。型を省
-    略した場合はFloat_t型の「ブランチ名/F」になるみたいです。
 
 *** TTree::Branch() を使う方法
+
+    #+begin_src c++
+tree->Branch("run", &run, "run/I")
+    #+end_src
+
+    - 第１引数 :: ブランチ名；なんでも良い。用意した変数名と違っていても構わない
+    - 第２引数 :: 変数のアドレス；変数が実体の場合は、&を先頭につけて
+                  アドレスを指定する。配列の場合はそのまま（array） or
+                  最初の配列のアドレス（&array[0]）を指定する。事前に
+                  変数を用意しておかないと怒られる
+    - 第３引数 :: 変数の型；“変数／型”の形で記述する。int型はI, float
+                  型はF, double型はFなど
+
+**** サンプルコード
 
     よくある方法です。ググればいっぱい見つかります。
 
@@ -667,9 +737,6 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
     TTree *tree = new TTree("name", "title);
 
     // STEP4: TTree::Branch(...)を使って、各変数のブランチを作成する
-    // 第一引数：ブランチ名；なんでも良い；用意した変数名と違っていても構わない
-    // 第二引数：変数のアドレス；変数が実体の場合は、&を先頭につけてアドレスを指定する；事前に変数を用意しておかないと怒られる
-    // 第三引数：変数の型；"変数／型"の形で記述する；int型はI, float型はF, double型はFなど
     tree->Branch("val1", &val1, "val1/I");
     tree->Branch("val2", &val2, "val2/I");
     tree->Branch("val3", &val3, "val3/I");
@@ -703,10 +770,224 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
     行数が増えた分、汎用性が高くなっています。
     こちらの方法だと、ブランチに「配列」を設定することも可能です。
 
+
+** ブランチに配列を使いたい
+
+   TTree::Branch を理解していれば簡単です。
+
+   #+begin_src c++
+int val1[100];
+TTree *tree = new TTree("tree", "tree using array");
+tree->Branch("val1", val1, "val1[100]/I");
+   #+end_src
+
+   第２引数には「変数のアドレス」を指定します。
+   val1 は 配列の先頭アドレスを指しているので、＆をつける必要はありません。
+   第３引数には、配列の長さをベタ書きします。
+
+
+*** ブランチに文字列を使いたい
+
+    配列を使うことができるので、文字列のブランチを作ることもできます。
+
+   #+begin_src c++
+char hoge[32];
+tree->Branch("moji", hoge", "moji[32]/C")
+sprintf(hoge, "hogehogefugafuga")
+tree->Fill();
+   #+end_src
+
+
+** ブランチに可変長配列を使いたい
+
+   少し手間を加えると可変長配列も扱えます。
+
+   1. 配列の大きさ fN を定義する
+   2. 配列 val を定義する
+   3. fN のブランチを作る
+   4. val のブランチを作る
+
+    #+begin_src c++
+Int_t fN;                                 // (1) 設定したい配列の大きさ
+Int_t val[max];                           // (2) val[max]: maxはfNよりも大きな数
+tree->Branch("nch", &fN, "nch/I");        // (3) まずfNをブランチにセットする；fNだと何の変数か分かりづらいので、nch（全チャンネル数の意）に変更した点に注意
+tree->Branch("val", val, "val[nch]/I");   // (4) 次にval[fN]をセットする；maxでも、fNでもなくなく、nchにする点に注意
+
+// (4)を以下のようにすると、"Illegal leaf ..." と怒られる
+tree->Branch("val", val, "val[fN]/I");    // fNには、ブランチ名を入れる必要があるらしい（
+    #+end_src
+
+*** ブランチに可変長文字列を使いたい
+
+    #+begin_src c++
+#include <string.h>    // strlen()を使うために必要
+
+const Int_t NMAX_MOJI = 100;
+char hoge[NMAX_MOJI];
+Int_t nmoji;
+tree->Branch("nmoji", &nmoji, "nmoji/I");
+tree->Branch("moji", hoge, "hoge[nmoji]/C");
+
+sprintf(hoge, "hoge-hoge-fuga-ga");
+nmoji = strlen(hoge)
+tree->Fill()
+    #+end_src
+
+
+*** ブランチにstd::vector を使いたい
+
+    #+begin_src c++
+#include <vector>
+
+std::vector<Double_t> vec;
+TTree *tree = new TTree("tree", "tree using vector");
+tree->Branch("vec", &vec);
+    #+end_src
+
+    <vector>をincludeする :: namespaceを定義しない場合は、”std::vector<型
+    > 変数名”と宣言すること。当たり前のことだけど、結構忘れてしまう。
+    ROOT(CINT)を起動させると、“vector<型> 変数名”で使えてしまうため、
+    よく忘れる…orz vector型の変数は実体であるため、第２引数は先頭に
+    “&“が必要arrayと同じようにすると怒られるROOTが空気を読んでくれるた
+    め、第３引数はなくてよいみたいまぁでも一番最後のブランチにするのが
+    無難かも
+
+
 * TChain編
+
+  TChainを使うと同じ構造のTTreeを複数連結（＝chain）して、ひとつの
+  TTreeとして扱うことができます。TTreeを継承したクラスなので、連結した
+  後はTTreeと同じように使えばOKです。
+
+** 複数のTTreeを読み込みたい
+
+
+   #+begin_src c++
+TChain *chain=new TChain("tree", "tree title");
+   #+end_src
+
+   - 第１引数 :: 読み込むTTreeの名前; 読み込むTTreeの名前と一致してないと怒られる
+   - 第２引数 :: タイトル; 説明みたいなもの。なくても大丈夫
+
+   #+begin_src c++
+chain->Add("../anadata/CALIB_RUN10.root");
+chain->Add("../anadata/CALIB_RUN11.root");
+chain->Add("../anadata/CALIB_RUN12.root");
+   #+end_src
+
+   - 第１引数 :: ファイル名; ワイルドカード指定もできる
+
+*** サンプルコード : ループで読み込む
+
+    #+begin_src c++
+TChain *chain=new TChain("chain", "chainname");
+const Int_t fNFile=11;
+Int_t iFile;
+for (iFile=0; iFile<fNFile; ++iFile) {
+    chain->Add(Form("../anadata/CALIB_RUN%d.root", iFile+10));
+}
+    #+end_src
+
+*** サンプルコード : ワイルドカード指定
+
+    #+begin_src c++
+TChain *ch = new TChain("upk");
+ch->Add("upk_run*.root")
+    #+end_src
+
+** 読み込んだTTreeの数を知りたい
+
+   #+begin_src c++
+chain->GetNtrees()
+   #+end_src
+
+** 読み込んだTTreeのリストを取得したい
+
+   #+begin_src c++
+TObjArray *fileElements = fBsd->GetListOfFiles();
+TIter next(fileElements);
+TChainElement *chEl = 0;
+while (( chEl=(TChainElement*)next() )) {
+    fprintf(stdout, "[%s]\tListOfFiles\t'%s'\n", __FUNCTION__, chEl->GetTitle() );
+}
+   #+end_src
+
+   ROOTマニュアルに載ってた
+
 * TFile編
 * TCanvas編
-* TLegend編
+
+** 色見本を見たい
+
+   ROOTのプロンプト内で下のように入力すると、簡単に確認できる。
+
+   #+begin_src c++
+root> TCanvas c
+root> c.DrawColorTable()
+   #+end_src
+
+
+** グラフの軸をログ表示にしたい
+
+   #+begin_src c++
+TCanvas *c1;
+c1->SetLogy();
+   #+end_src
+
+*** キャンバスを分割している場合
+
+    まず、分割したいキャンバスに移動する
+
+    #+begin_src c++
+c1->cd(2)->SetLogy();
+h1->Draw();
+    #+end_src
+
+    gPadは current canvas へのポインタなので、下のようにも書くことができる。
+
+    #+begin_src c++
+c1->cd(2);
+gPad->SetLogy();
+    #+end_src
+
+** 複数のキャンバスをPDFに保存したい
+
+   PDF形式で保存する場合のみ、複数のキャンバスを1つのPDFに書き出すことができる。
+   やったことないけれどPostScriptでもできるらしい。PNGはできない。
+
+   ROOT公式ユーザーズガイド “9. Graphics and the Graphical Userinterface : The Postscript Interface” (p139)参照
+
+   #+begin_src c++
+TString name;
+name.Form("canv.pdf");
+TCanvas *c1 = new TCanvas(name.Data(), name.Data(), 1000, 500);
+
+c1->Print(name + "[", "pdf");    // ここで"canv.pdf"を開く感じ
+
+for (Int_t ihist = 0; ihist < Nhists; ihist++) {
+    hist[ihist]->Draw();
+    c1->Print(name, "pdf")       // ここで、キャンバスを保存する
+}
+c1->Print(name + "]", "pdf");    // ここで"canv.pdf"を閉じる感じ
+   #+end_src
+
+   最後の一文を以下のように変更すれば、別のTCanvasオブジェクトを追加し
+   て保存することができる。
+
+   #+begin_src c++
+c2->Print(name, "pdf")
+c2->Print(name + "]", "pdf")
+  #+end_src
+
+*** “[“と”(“の違いについて
+
+    - [ :: この時点ではページを出力しない
+    - ( :: この時点でページを出力する（空白のページができる？）
+
+
+
+* TLegend／TText編
+
 * TString編
 
   C/C++では文字とか文字列の扱いは面倒くさいのですが、
@@ -726,7 +1007,7 @@ str.Form("Hist%d", i);
 str.Data();
    #+end_src
 
-** 使い方の一例v
+** 使い方の一例
 
    複数のヒストグラムをループで生成したいときなどによく使います。
 
@@ -747,13 +1028,47 @@ str.Data();
 
 ** Emacs
 
-   最初に断っておくと、特にEmacs信者というつもりはないのです。修士でプ
-   ログラミングを始めた時に、最初に使ったのがEmacsだったというだけの理
-   由[fn::MacのCocoaアプリもEmacsキーバインドで使えるのも大きな理由だっ
-   たかもです]です。Vimも基本操作はできるようにしといた方がよいです。
+   最初に断っておくと、特に「Emacs信者」というわけではないです。Emacs
+   しか使えない、ただのポンコツ[fn::Vimも基本操作はできるようにし
+   といた方がよいと思っています]です。
+   ただし、プログラミングを快適に行うにあたって「自分に合ったエディタ」
+   を選択するというのは重要なことだと思います。思った以上に長いお付き
+   合いになるので、愛着を持てるエディタを選びましょう。
+
+   僕の場合は修士でプログラミングを始めた時に、最初に触ったのがEmacsだっ
+   たというのが主な理由[fn::MacのCocoaアプリもEmacsキーバインドで使え
+   るのも大きな理由だったかも]ですけどね。最初はこれまで使っていたテキ
+   ストエディタ[fn::Wordやメモ帳]と同じように矢印キーなどで操作してい
+   ました。ウェブなどでキーバインドを確認しながら、だんだんと操作方法
+   を覚えていった気がします。
+
+   最近では[[https://github.com/bbatsov/guru-mode][ guru-mode]] なるパッケージもあるので、これを入れて練習したら
+   いいと思います。マニュアルにある通りにインストールして、(setq
+   guru-warn-only t)にして使うとよいです。矢印キーなどを押すとミニバッ
+   ファに適切なキーバインドが表示されるので、使いながら覚えるのにピッ
+   タリです。後述するPreludeにはデフォルトで入っています（というか同じ
+   作者）。
 
 
-*** ページ操作
+*** Emacsの学習コスト
+
+   快適に操作をするためにある程度キーバインドを覚えないといけなかった
+   り、カスタマイズしようと思うとElispの知識が必要だったり、と学習コス
+   トは高め[fn::決して安くはない]です。
+
+   プログラミングの統合開発環境には「Eclipse」や「Xcode」、文書作成に
+   は「Word」だったり、TeXの統合環境には「EasyTeX」や「TeXShop」などが
+   あります。これらは用途に特化していおり、便利になるように設計されて
+   いるのですが、結局、各ソフト毎の操作を覚えなくてはいけないため、実
+   は学習コストは同じくらいなんじゃないかなとも思います。
+
+
+*** 基本操作
+
+    操作方法を羅列するのは無意味なので、よく使う操作についてEmacs、vim、
+    そしてlessを比較してみました。
+
+**** ページ操作
 
     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
     | Emacs      | vim     | less   | 操作内容                   |
@@ -768,7 +1083,7 @@ str.Data();
     |            |         | u      | 半ページ戻る               |
     | C-x C-c    | :q, :q! | q      | ファイルを閉じる           |
 
-*** エディタ共通
+**** エディタ共通
 
     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
     | Emacs                                       | vim            | 操作内容                                                                                                                                                                                |
@@ -803,7 +1118,7 @@ str.Data();
     |                                             | :s/old/new/g   | 現在行のすべての文字を置換（old -> new）                                                                                                                                                |
     |                                             | :%s/old/new/gc | ファイル全体のすべての文字を、確認しながら置換                                                                                                                                          |
 
-*** エディタ特有
+**** エディタ特有
 
     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
     | Emacs | vim       | 操作内容                                     |
@@ -832,13 +1147,111 @@ str.Data();
     |       | !コマンド | 外部コマンドを実行                           |
 
 
+*** キーボード設定
 
+    Emacsを快適に操作するためには、少しだけキーボード設定をした方が良
+    いと思います。あんまり変えすぎちゃうと、他のPCを使うときやPCを買い
+    替えた時の再設定がめんどくさくなるので、ほどほどに。
+
+    私の場合は以下の３点を変更しています。
+
+    |                          | 変更前                   | 変更後                   |
+    |--------------------------+--------------------------+--------------------------|
+    | Controlキーの追加        | CapsLock                 | Control                  |
+    | Spotlight検索            | Control + Space          | Option + Command + Space |
+    | Select next input source | Option + Command + Space | OFF                      |
+
+
+    #+attr_latex:  :width 0.7\textwidth
+    #+caption: CapsLock \rightarrow Controlに変更
+    [[./fig/mac-keyboard04.png]]
+
+    #+attr_latex:  :width 0.7\textwidth
+    #+caption: スポットライト検索のショートカットキーを変更する前。デフォルトは「Control + Space」
+    [[./fig/mac-keyboard01.png]]
+
+    #+attr_latex:  :width 0.7\textwidth
+    #+caption: スポットライト検索のショートカットキーを「Option + Command + Space」に変更。重複するキーがあるため黄色い警告がでている
+    [[./fig/mac-keyboard02.png]]
+
+    #+attr_latex:  :width 0.7\textwidth
+    #+caption: 「Select next source in input menu」なんてショートカットキーはこれまで使ったことない。なので無効にしても問題ない
+    [[./fig/mac-keyboard03.png]]
 
 *** Emacs + Org
 
-    Emacsのアウトラインモードです。
-    最近のEmacsには標準添付です。
-    とても多機能なので、詳しくは「M-x org-info」でドキュメントを参照するとよいです。
+    Emacs標準の「アウトラインモード」ですが、それ以上のことがたくさん
+    できます。このKumaROOTもOrg-modeで作成しています[fn::Org-modeから
+    LaTeXにエクスポート \rightarrow YaTeX環境でコンパイルしています。
+    すべての作業がEmacs内でできるので大変便利です]。とても多機能なので、
+    詳しくは「M-x org-info」でドキュメントを参照してください。
+
+    ここでは、このKumaROOTを作成する際に必要だったことをメモする感じにします。
+
+**** LaTeXエクスポートの設定
+
+     pLaTeX（pTeX系）とpdfLaTeX（pdfTeX系）を使う場合を紹介しておきま
+     す。日本語を使う場合、現在はpLaTeX（+dvipdfmx）を使う設定が簡単だ
+     と思います。でも、調べてみると世の中はpdfLaTeXに向かっている気も
+     するので、合わせて紹介しておきます。
+
+     この辺は調べだすとキリがないので、軽い気持ちで選んだらいいと思い
+     ます。
+
+***** pLaTeXを使う場合
+
+***** pdfLaTeXを使う場合
+
+**** LaTeXエクスポートコマンド
+     `C-c C-e l l     (`org-latex-export-to-latex')'
+     `C-c C-e l p     (`org-latex-export-to-pdf')'
+
+**** 使うクラスの指定
+
+     org-latex-classes の中にあるクラスを使うことができる。
+     新しいクラスを使いたい場合は、この alist に追加する必要がある。
+
+     org-latex-default-classでデフォルトで使うクラスを指定できる。
+     デフォルトは article。
+
+     #+begin_src sh
+#+latex_class: jsarticle
+#+latex_class_options: [12pt]
+#+latex_header: \usepackage{hoge}
+     #+end_src
+
+**** 脚注の挿入
+**** 画像の挿入
+
+     説明なしのリンクは画像として挿入される。
+     挿入のときのオプションは「#+ATTR_LATEX:」で指定できる。
+     画像の大きさは「:width 5cm」、「:height 10cm」のようにキーワード指定できる。
+     他は「:options angle=90」のように :option キーワードで指定できる。
+     キャプションは「#+caption:」で指定できる。
+
+     まぁ、くどくど説明するより、以下のOrg文書での入力内容
+     （[[src:image-input-in-org]]）と、それをLaTeXエクスポートしたときの出力内容
+     （[[src:image-output-in-latex]]）を見てもらった方が早いと思います。
+
+     #+caption: Org文書での入力内容
+     #+name: src:image-input-in-org
+     #+begin_src sh
+#+attr_latex:  :width 0.7\textwidth
+#+caption: CapsLock \rightarrow Controlに変更
+[[./fig/mac-keyboard04.png]]
+    #+end_src
+
+     #+caption: LaTeXエクスポートしたときの出力内容
+     #+name: src:image-output-in-latex
+     #+begin_src latex
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.7\textwidth]{./fig/mac-keyboard04.png}
+\caption{CapsLock $\rightarrow$ Controlに変更}
+\end{figure}
+     #+end_src
+
+**** 表の挿入
 
 *** Emacs + Prelude
 
@@ -854,25 +1267,15 @@ str.Data();
 
 ** LaTeX
 
-   ほとんどの人は修論の時にLaTeXをがしがし使うことになると思います。
-   その時に「インストールできないー」などと焦るのはしょうもないので、簡単にまとめておきます。
+   ほとんどの人は修論の時にLaTeXをがしがし使うことになると思います。そ
+   の時に「インストールできないー」などと焦っていては時既に時間切れ
+   [fn::ピンと来ない人は「ブロント語」でググってください]なので、簡単
+   にまとめておきます。
 
 *** MacTeXを使おう
 
-    日本語はマルチバイトコードであるため、LaTeXでコンパイルするのが難しかったみたいです。
-    それに対処する歴史的な紆余曲折から日本語版LaTeXにはさまざまな派生品が存在します。
-    この歴史の詳細に関しては、三重大学の奥村さんのウェブサイトをはじめ、ググってみるとよいでしょう。
-
-    つい最近までは「Mac LaTeX インストール」などでググると、なんだかまとまりのない情報が溢れていました。
-    しかし、現在はそれらを取りまとめようということで開発が進んでいるようで、これからはTeXLive一択で良いみたいです。
-
-    TeXLiveはMacPortsからインストールすることもできますが、うまく設定
-    できた試しがありません。なので、[[https://tug.org/mactex/][MacTeX公式ページ]] に置いてある
-    MacTeXパッケージをダウンロード[fn::フルパッケージは2GBちょいあるの
-    で、ダウンロードに少し時間がかかります。細い回線で行うのはオススメ
-    しません]するのが一番簡単で良いと思います。
-
-    MacTeXパッケージを使う利点としては、TeXの統合環境である
+    MacOSXでLaTeXを使う場合は、これで決まりです。
+    TeX環境の本体であるTeXLiveと一緒に、TeX編集の統合環境である
     TeXShop[fn::修論の頃はお世話になりました。現在はYaTeXに移行したの
     で全く使っていません]やTeXworks、TeX関連のパッケージ管理ツールであ
     るTeX Live Utility[fn::コマンドラインからtlmgrとして使えます。パッ
@@ -881,15 +1284,51 @@ str.Data();
     スペルチェックのExcalibur、そして、Keynoteに数式を貼り付けるのに必
     要なLaTeXiT[fn::これが一番重宝してます]もついてきます。
 
+**** 日本語とLaTeX
+
+     日本語はマルチバイトコードであるため、LaTeXでコンパイルするのが難
+     しかったみたいです。それに対処する歴史的な紆余曲折から日本語版
+     LaTeXにはさまざまな派生品が存在します。この歴史の詳細に関しては、
+     三重大学の奥村さんのウェブサイトをはじめ、ググってみるとよいでしょ
+     う。
+
+     つい最近までは「Mac LaTeX インストール」などでググると、なんだか
+     まとまりのない情報で溢れていました。しかし、現在はそれらを取りま
+     とめようということで開発が進んでいるようで、これからはTeXLive一択
+     で良いみたいです。
+
+     TeXLiveはMacPortsからインストールすることもできますが、うまく設定
+     できた試しがありません。なので、[[https://tug.org/mactex/][MacTeX公式ページ]] に置いてある
+     MacTeXパッケージをダウンロード[fn::フルパッケージは2GBちょいあるの
+     で、ダウンロードに少し時間がかかります。細い回線で行うのはオススメ
+     しません]するのが一番簡単で良いと思います。
+
+
+*** ptex2pdf を使おう
+
+    日本語のLaTeX文書をコンパイルするにはpLaTeXコマンドを使います。コ
+    ンパイルが成功するとdviファイルが作成されるので、dvipdfmxコマンド
+    を使ってPDFファイルに変換します。
+
+    これをまとめてやってくれるのがptex2pdfコマンドで、（おそらく）
+    MacTeXをインストールすると勝手についてきます。ただのシェルスクリプ
+    トなので、気になる人は中を見てみるとよいでしょう。
+
 
 *** YaTeXを使おう
 
-    さて、前述のようにMacTeXをインストールしたとします。
-    MacTeXにはTeXShop.appや他にもいろいろな便利なアプリがついてきます。
-    しかし、ここではEmacs+YaTeXを使うことにします。
+    MacTeXをインストールするとTeXShop.appがついてきます。
+    すぐに使えるので、時間に余裕がないときはこちらを使うと良いでしょう。
+
+    設定に時間を割けるようであれば、Emacs+YaTeXをおすすめします。YaTeX
+    の設定や操作コマンドを覚えるための時間は必要ですが、ある程度慣れて
+    しまえば編集作業が格段に捗るはずです。
 
     http://ichiro-maruta.blogspot.jp/2013/03/latex.html
     http://qiita.com/zr_tex8r/items/5413a29d5276acac3771
+
+
+*** pdfLaTeX
 
 ** KiNOKO
 
