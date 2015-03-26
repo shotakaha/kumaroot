@@ -633,7 +633,7 @@ TFile *hsimple(Int_t get=0)
 
 
 * 全体設定編
-** 初期設定したい
+** 初期設定したい（rootrc, rootlogon.C）
 
 *** rootrc
 
@@ -651,7 +651,7 @@ $ cp $ROOTSYS/etc/system.rootrc ~/.rootrc
 *** rootlogon.C
 
 
-** キャンバスを無地にしたい
+** キャンバスを無地にしたい（gROOT $\rightarrow$ SetStyle）
 
 #+begin_src c++
 gROOT->SetStyle("Plain");
@@ -663,7 +663,7 @@ gROOT->SetStyle("Plain");
    （いないと思いますが）昔のキャンバス（＝灰色っぽいやつ）を使いたい場
    合は、"Classic"を指定します。
 
-** 統計情報を表示したい
+** 統計情報を表示したい（gStyle->SetOptStat）
 
 
    ヒストグラムを描画すると、右上にそのヒストグラムの情報が表示されます。
@@ -678,7 +678,7 @@ gStyle->SetOptStat(112211)
    0 or 書かなければ「非表示」、1は「表示」、2は「エラー表示」です。
 
 
-** フィットの結果を表示したい
+** フィットの結果を表示したい（gStyle->SetOptFit）
 
 #+begin_src c++
 gStyle->SetOptFit(1111111)
@@ -687,7 +687,7 @@ gStyle->SetOptFit(1111111)
    ビットの使い方は、ひとつ前の「統計情報を表示したい」と同じです。
 
 
-** ヒストグラムの線の太さを一括で変更したい
+** ヒストグラムの線の太さを一括で変更したい（gStyle->SetHistLineWidth）
 
    ヒストグラムの外枠線の太さは、一括で設定しておくことができます。デ
    フォルトだと少し細い気がするので、太くしておくとよいと思います。た
@@ -698,7 +698,7 @@ gStyle->SetOptFit(1111111)
 gStyle->SetHistLineWidth(2)
 #+end_src
 
-** デフォルトの色を変更したい
+** デフォルトの色を変更したい（gROOT->GetColor->SetRGB）
 
 #+begin_src c++
 gROOT->GetColor(3)->SetRGB(0., 0.7, 0.); // Green  (0, 1, 0)->(0, 0.7, 0)
@@ -718,7 +718,7 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
    おまけとして、ROOT公式ブログの「[[http://root.cern.ch/drupal/content/rainbow-color-map][虹色カラーマップを使うこと]]」 の記事もリンクしておきます。
 
 
-** 横軸に時間を使いたい
+** 横軸に時間を使いたい（SetTimeFormat, SetTimeDisplay）
 
    #+begin_src C++
    gStyle->SetTimeOffset(-788918400);    // set diff. btw Unix and ROOT epoch
@@ -759,7 +759,7 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
     時間に対する安定性を示したい場合などに使える。
 
 
-** キャンバスに補助線を描きたい
+** キャンバスに補助線を描きたい（gStyle->SetPadGridX）
 
    #+begin_src C++
    gStyle->SetPadGridX(1)    // X-axis grid
@@ -767,7 +767,7 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
    #+end_src
 
 
-** グラフの軸を一括してログ表示にする
+** グラフの軸を一括してログ表示にする（gStyle->SetOptLogx）
 
    #+begin_src C++
    gStyle->SetOptLogx(1)    // X-axis
@@ -775,7 +775,7 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
    #+end_src
 
 
-** 軸の目盛り間隔を変更したい
+** 軸の目盛り間隔を変更したい（gStyle->SetNdivisions）
 
    #+begin_src C++
    gStyle->SetNdivisions(TTSSPP)
@@ -1599,6 +1599,37 @@ str.Data();
 
 
 *** pdfLaTeX
+
+*** hyperrefパッケージの使い方
+
+    LaTeX文書内にハイパーリンクを置く場合には、hyperrefパッケージを使うとよい。
+    しかし、日本語のドキュメントクラスを使うとページから文章がはみ出たり、目次のしおりが文字化けしたりするので、以下のように対処する必要がある。
+
+**** PXjahyperパッケージも読み込む
+
+     #+begin_src latex
+\usepackage{pxjahyper}
+     #+end_src
+
+     PXjahyperパッケージを読み込んでおけば、万事解決するみたい。
+     それでも解決しない場合は、以下のように個別に対処する。
+
+**** ページサイズ対策
+
+     #+begin_src latex
+\hypersetup{setpagesize=false}
+     #+end_src
+
+**** しおりの文字化け対策
+
+     #+begin_src latex
+\usepackage{atbegshi}
+\AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
+\AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
+     #+end_src
+
+     何をしてくのか全く分かっていないけれど、両方書いておけばいい。
+     それでだめな場合は片方にする。
 
 ** KiNOKO
 
