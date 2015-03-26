@@ -797,17 +797,28 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
 
 ** １次元ヒストグラムを作成したい : TH1D
 
-   #+begin_src c++
+   ヒストグラムは以下の手順で作成・描画します。
+   1. ヒストグラムのオブジェクトの作成
+   2. ヒストグラムに値を詰める
+   3. ヒストグラムをキャンバスに描画する
+
+   それらに必要なROOTのクラス・メソッドは以下通りです。
+
+#+begin_src c++
 TH1D TH1D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Double_t xup)
 Int_t Fill(Double_t x)
 void Draw(Option_t* option = "")
 #+end_src
 
-   - name :: オブジェクト名
-   - title :: ヒストグラム全体のタイトル
-   - nbinsx :: X方向のビンの数
-   - xlow :: X軸の最小値
-   - xup :: X軸の最大値
+
+   - TH1D :: １次元ヒストグラム（Double型）のコンストラクタ。
+     - name :: オブジェクト名。他のオブジェクト（ヒストグラムだったり、キャンバスだったり）と重複しないようにする。
+     - title :: ヒストグラム全体のタイトル。X軸、Y軸のタイトルも同時に設定することができる。
+     - nbinsx :: X軸のビンの数。X軸を何分割するか決める。
+     - xlow :: X軸の最小値
+     - xup :: X軸の最大値
+   - Fill :: ヒストグラムに値を詰めるメソッド
+   - Draw :: ヒストグラムを描くメソッド。描画のオプションを設定できる。
 
 #+begin_src c++
 TString hname, htitle;
@@ -827,6 +838,8 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 
    #+begin_src c++
 TH2D TH2D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, Double_t ylow, Double_t yup)
+Int_t Fill(Double_t x, Double_t y)
+void Draw(Option_t* option = "")
    #+end_src
 
 
@@ -834,7 +847,6 @@ TH2D TH2D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Doub
 
    #+begin_src c++
 void SetTitle(const char* title = "") 	// *MENU*
-void SetTitle(const char* title) 	// *MENU*
    #+end_src
 
 ** 統計ボックスを表示したい : SetStats
@@ -846,7 +858,12 @@ void SetStats(Bool_t stats = kTRUE) 	// *MENU*
 
 ** X軸名を設定したい : SetXTitle
 
+   #+begin_src c++
+void SetXTitle(const char* title)
+   #+end_src
+
 ** タイトルを中心にしたい
+
 
 ** 平均値、RMSを知りたい : GetMean, GetRMS
 
@@ -855,7 +872,7 @@ Double_t GetMean(Int_t axis = 1) const
 Double_t GetRMS(Int_t axis = 1) const
    #+end_src
 
-** 値を詰めたい
+** 値を詰めたい : Fill
 
 ** 面積でノーマライズしたい
 
