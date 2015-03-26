@@ -6,12 +6,19 @@
 #+latex_class: jsreport
 # #+latex_class_options: [dvipdfmx, 15pt, report]
 #+latex_header: \lstset{language=C++}
-#+latex_header: \lstset{basicstyle=\small}
+# #+latex_header: \lstset{basicstyle=\small}
+#+latex_header: \lstset{basicstyle=\scriptsize}
 #+latex_header: \lstset{stringstyle=\ttfamily}
 #+latex_header: \lstset{commentstyle=\ttfamily}
 #+latex_header: \lstset{showstringspaces=false}
 #+latex_header: \lstset{frame=shadowbox}
 #+latex_header: \lstset{rulesepcolor=\color{black}}
+#+latex_header: \lstset{breaklines=true}
+#+latex_header: \lstset{tabsize=2}
+#+latex_header: \lstset{numbers=left}
+#+latex_header: \lstset{numberstyle=\scriptsize}
+#+latex_header: \lstset{stepnumber=1}
+#+latex_header: \lstset{numbersep=1zw}
 #+latex_header: \lstset{fancyvrb=true}
 #+latex_header: \fvset{gobble}
 
@@ -440,6 +447,8 @@ $ root hsimple.C
     とりあえず無視してOKです。コンパイルする場合は必要ですが、マクロで
     動かす場合は書かなくてもよいです。
 
+# #+include: "./root6/tutorials/hsimple.C" src c++ :lines "1-12"
+
 #+begin_src c++
 #include <TFile.h>
 #include <TNtuple.h>
@@ -786,7 +795,19 @@ gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
 * ヒストグラム編
 
 
-** １次元ヒストグラムを作成したい
+** １次元ヒストグラムを作成したい : TH1D
+
+   #+begin_src c++
+TH1D TH1D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Double_t xup)
+Int_t Fill(Double_t x)
+void Draw(Option_t* option = "")
+#+end_src
+
+   - name :: オブジェクト名
+   - title :: ヒストグラム全体のタイトル
+   - nbinsx :: X方向のビンの数
+   - xlow :: X軸の最小値
+   - xup :: X軸の最大値
 
 #+begin_src c++
 TString hname, htitle;
@@ -802,15 +823,37 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
    - タイトル部分を「;」で区切ることで、軸名を設定することができる（"タイトル;X軸名;Y軸名前"）
    - TString::Form は printf の書式が使えるのでとても便利
 
-** タイトルを変更したい
+** ２次元ヒストグラムを作成したい : TH2D
 
-** 統計ボックスを表示したい
+   #+begin_src c++
+TH2D TH2D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, Double_t ylow, Double_t yup)
+   #+end_src
 
-** X軸名を設定したい
+
+** タイトルを変更したい : SetTitle
+
+   #+begin_src c++
+void SetTitle(const char* title = "") 	// *MENU*
+void SetTitle(const char* title) 	// *MENU*
+   #+end_src
+
+** 統計ボックスを表示したい : SetStats
+
+   #+begin_src c++
+void SetStats(Bool_t stats = kTRUE) 	// *MENU*
+   #+end_src
+
+
+** X軸名を設定したい : SetXTitle
 
 ** タイトルを中心にしたい
 
-** 平均値、RMSを知りたい
+** 平均値、RMSを知りたい : GetMean, GetRMS
+
+   #+begin_src c++
+Double_t GetMean(Int_t axis = 1) const
+Double_t GetRMS(Int_t axis = 1) const
+   #+end_src
 
 ** 値を詰めたい
 
@@ -859,11 +902,18 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
      仮に、100行４列のテキストファイルがあるとします。
      このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
 
-   #+begin_src sh
+     #+attr_latex: centering
+   #+begin_example
 100    105    104   103
 101    106    103   100
 ...
-   #+end_src
+   #+end_example
+
+#    #+begin_src bash
+# 100    105    104   103
+# 101    106    103   100
+# ...
+#    #+end_src
 
 
     #+begin_src c++
