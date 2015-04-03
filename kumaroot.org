@@ -4,6 +4,12 @@
 #+options: H:4
 
 #+latex_class: jsreport
+#+latex_header: \hypersetup{bookmarksnumbered=true}
+#+latex_header: \hypersetup{bookmarksopen=true}
+#+latex_header: \hypersetup{bookmarksopenlevel=2}
+#+latex_header: \hypersetup{pdfpagemode=UseOutlines}
+
+
 # #+latex_class_options: [dvipdfmx, 15pt, report]
 #+latex_header: \lstset{language=C++}
 # #+latex_header: \lstset{basicstyle=\small}
@@ -1600,7 +1606,26 @@ str.Data();
 
 *** pdfLaTeX
 
-*** hyperrefパッケージの使い方
+*** jsarticleドキュメントクラス
+
+     #+begin_src latex
+\documentclass[dvipdfmx,12pt]{jsarticle}
+     #+end_src
+
+    日本語のLaTeX文書にはjsarticleドキュメントクラスを使います。
+    ドライバはdvipdfmxを使います。
+
+*** graphicxパッケージ
+
+     #+begin_src latex
+\usepackage[hiresbb]{graphicx}
+     #+end_src
+
+    画像を扱う場合はgraphicxパッケージを使います。
+    ドライバはdvipdfmxを使います。ドキュメントクラス指定時に宣言していてれば、ここで指定する必要はありません。
+    画像のバウンディングボックスに「HiResBoundingBox」を使う場合は、hiresbbオプションを付けておきます。
+
+*** hyperrefパッケージ
 
     LaTeX文書内にハイパーリンクを置く場合には、hyperrefパッケージを使うとよい。
     しかし、日本語のドキュメントクラスを使うとページから文章がはみ出たり、目次のしおりが文字化けしたりするので、以下のように対処する必要がある。
