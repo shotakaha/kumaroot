@@ -28,6 +28,9 @@
 #+latex_header: \lstset{fancyvrb=true}
 #+latex_header: \fvset{gobble}
 
+#+latex_header: \renewcommand{\familydefault}{\sfdefault}
+#+latex_header: \renewcommand{\kanjifamilydefault}{\gtdefault}
+
 
 * はじめに
 
@@ -896,20 +899,38 @@ Double_t GetRMS(Int_t axis = 1) const
   とりあえず、取得したデータはさっさとTTreeに変換してしまいましょう。
 
 
-** テキストファイルをTTreeに変換したい
+** TTreeを作成したい : TTree
 
-   取得したデータはとりあえずテキストデータとして保存するのが一番簡単
-   な方法です。そして、ROOTで解析するときはTTreeになっていると楽ちんで
-   す。なので、手間を掛けずにさっさと変換してしまいましょう。
+   #+begin_src c++
+TTree TTree(const char* name, const char* title, Int_t splitlevel = 99)
+   #+end_src
 
-*** TTree::ReadFile を使う方法
+   - name :: TTreeオブジェクトの名前。他のオブジェクトと重複しないようにする
+   - title :: TTreeの説明。TFileに保存したときに表示される
+   - splitlevel :: 使ったことがない
 
-    データがテキストファイルで保存されている場合、
-    それをTTreeに変換する最も簡単な方法です。
+   「name」はオブジェクトの名前です。他のオブジェクトと重複しないよう
+   にしましょう。「title」はTFileを覗いた時に表示されるTTreeの説明です。
+   １行くらいの簡単な説明をきちんと付けておくとあとで自分自身を救うこ
+   とになると思います。「splitlevel」は指定したことがありません。デフォ
+   ルト値で大丈夫です。
 
-    #+begin_src c++
-  tree->ReadFile(ifn.Data(), "row1/I:row2/I:row3/I:row4/D:row5/I");
-    #+end_src
+** テキストファイルをTTreeに変換したい（１）: ReadFile
+
+   #+begin_src c+++
+Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char delimiter = ' ')
+   #+end_src
+
+   - filename :: 入力ファイル名
+   - branchDescriptor :: 入力ファイルの構造指定。「:」で区切る
+   - delimiter :: こんなのあったんだ
+
+   学生実験や小さなテストベンチで行う実験の場合、取得したデータはとり
+   あえずテキストファイルで出力することになると思います。ROOTで解析す
+   るときはTTreeになっていると楽ちんなので、手間を掛けずにさっさと変換
+   してしまいましょう。
+
+   入力ファイルの構造は「branchDescriptor」で、TTreeに教えてあげます。
 
     - 第１引数 :: 入力ファイル名
     - 第２引数 :: branch descriptor。TTreeのブランチ変数になります。複
@@ -965,6 +986,7 @@ Double_t GetRMS(Int_t axis = 1) const
     #+end_src
 
 
+** テキストファイルをTTreeに変換したい（１）: Branch
 *** TTree::Branch() を使う方法
 
     #+begin_src c++
