@@ -32,7 +32,6 @@
     ただし、本家の更新も取り込みたいので、
     いつでも参照できるように専用のブランチを作ります。
 
-
 #+begin_src bash
 $ cd ~/repos/github/
 $ git clone https://github.com/shotakaha/prelude
@@ -43,10 +42,6 @@ $ export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https:
 *** init.elの内容
 
 *** core の内容
-
-** Emacs + Org
-*** org-agenda
-*** org-latex
 
 
 ** Emacs vs Vim
@@ -226,84 +221,3 @@ $ export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https:
 
      - =Select next source in input menu= なんてショートカットキーはこれまで使ったことない。なので無効にしても問題ないはず
      [[./fig/mac-keyboard03.png]]
-
-*** Emacs + Org
-
-
-
-**** LaTeXエクスポートの設定
-
-     pLaTeX（pTeX系）とpdfLaTeX（pdfTeX系）を使う場合を紹介しておきま
-     す。日本語を使う場合、現在はpLaTeX（+dvipdfmx）を使う設定が簡単だ
-     と思います。でも、調べてみると世の中はpdfLaTeXに向かっている気も
-     するので、合わせて紹介しておきます。
-
-     この辺は調べだすとキリがないので、軽い気持ちで選んだらいいと思い
-     ます。
-
-***** pLaTeXを使う場合
-
-***** pdfLaTeXを使う場合
-
-**** LaTeXエクスポートコマンド
-     `C-c C-e l l     (`org-latex-export-to-latex')'
-     `C-c C-e l p     (`org-latex-export-to-pdf')'
-
-**** 使うクラスの指定
-
-     org-latex-classes の中にあるクラスを使うことができる。
-     新しいクラスを使いたい場合は、この alist に追加する必要がある。
-
-     org-latex-default-classでデフォルトで使うクラスを指定できる。
-     デフォルトは article。
-
-     #+begin_src sh
-#+latex_class: jsarticle
-#+latex_class_options: [12pt]
-#+latex_header: \usepackage{hoge}
-     #+end_src
-
-**** 脚注の挿入
-**** 画像の挿入
-
-     説明なしのリンクは画像として挿入される。
-     挿入のときのオプションは「#+ATTR_LATEX:」で指定できる。
-     画像の大きさは「:width 5cm」、「:height 10cm」のようにキーワード指定できる。
-     他は「:options angle=90」のように :option キーワードで指定できる。
-     キャプションは「#+caption:」で指定できる。
-
-     まぁ、くどくど説明するより、以下のOrg文書での入力内容
-     （[[src:image-input-in-org]]）と、それをLaTeXエクスポートしたときの出力内容
-     （[[src:image-output-in-latex]]）を見てもらった方が早いと思います。
-
-     #+caption: Org文書での入力内容
-     #+name: src:image-input-in-org
-     #+begin_src sh
-#+attr_latex:  :width 0.7\textwidth
-#+caption: CapsLock \rightarrow Controlに変更
-[[./fig/mac-keyboard04.png]]
-    #+end_src
-
-     #+caption: LaTeXエクスポートしたときの出力内容
-     #+name: src:image-output-in-latex
-     #+begin_src latex
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.7\textwidth]{./fig/mac-keyboard04.png}
-\caption{CapsLock $\rightarrow$ Controlに変更}
-\end{figure}
-     #+end_src
-
-**** 表の挿入
-
-*** Emacs + Prelude
-
-    Emacsの設定を一からするのってめんどくさいですよね。
-    そんな場合はとりあえずググってみましょう。いろんな人が、いろんな形で公開しています。
-
-    Preludeもその１つで、GitHubで公開されています。いろいろあって違い
-    がよく分からなかったので、名前がかっこいいなーと思ってこれに決めま
-    した。ほんとそれだけです。
-
-    複数のマシンで同じEmacs設定を使いたい場合は、Preludeを自分のGitHub
-    にForkして、Cloneするとよいと思います。

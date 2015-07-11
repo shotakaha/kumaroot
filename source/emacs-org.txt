@@ -1,5 +1,16 @@
 ** Emacs + Org
 
+*** org-agenda
+*** org-latex
+
+       Emacs標準の「アウトラインモード」ですが、それ以上のことがたくさん
+    できます。このKumaROOTもOrg-modeで作成しています[fn::Org-modeから
+    LaTeXにエクスポート \rightarrow YaTeX環境でコンパイルしています。
+    すべての作業がEmacs内でできるので大変便利です]。とても多機能なので、
+    詳しくは「M-x org-info」でドキュメントを参照してください。
+
+    ここでは、このKumaROOTを作成する際に必要だったことをメモする感じにします。
+
 *** OrgのLaTeXエクスポート
 
   メインである「KumaROOT」のために、OrgのLaTeXエクスポートについて調べ
@@ -148,6 +159,73 @@ Its value is
    日本語だとpdflatexがうまく動かないので、一度LaTeXファイルにエクスポー
    トして、pTeXを使ってコンパイルしていたが、これをきちんと設定すれば、
    楽になるのかも。
+
+
+**** LaTeXエクスポートの設定
+
+     pLaTeX（pTeX系）とpdfLaTeX（pdfTeX系）を使う場合を紹介しておきま
+     す。日本語を使う場合、現在はpLaTeX（+dvipdfmx）を使う設定が簡単だ
+     と思います。でも、調べてみると世の中はpdfLaTeXに向かっている気も
+     するので、合わせて紹介しておきます。
+
+     この辺は調べだすとキリがないので、軽い気持ちで選んだらいいと思い
+     ます。
+
+***** pLaTeXを使う場合
+
+***** pdfLaTeXを使う場合
+
+**** LaTeXエクスポートコマンド
+     `C-c C-e l l     (`org-latex-export-to-latex')'
+     `C-c C-e l p     (`org-latex-export-to-pdf')'
+
+**** 使うクラスの指定
+
+     org-latex-classes の中にあるクラスを使うことができる。
+     新しいクラスを使いたい場合は、この alist に追加する必要がある。
+
+     org-latex-default-classでデフォルトで使うクラスを指定できる。
+     デフォルトは article。
+
+     #+begin_src sh
+#+latex_class: jsarticle
+#+latex_class_options: [12pt]
+#+latex_header: \usepackage{hoge}
+     #+end_src
+
+**** 脚注の挿入
+**** 画像の挿入
+
+     説明なしのリンクは画像として挿入される。
+     挿入のときのオプションは「#+ATTR_LATEX:」で指定できる。
+     画像の大きさは「:width 5cm」、「:height 10cm」のようにキーワード指定できる。
+     他は「:options angle=90」のように :option キーワードで指定できる。
+     キャプションは「#+caption:」で指定できる。
+
+     まぁ、くどくど説明するより、以下のOrg文書での入力内容
+     （[[src:image-input-in-org]]）と、それをLaTeXエクスポートしたときの出力内容
+     （[[src:image-output-in-latex]]）を見てもらった方が早いと思います。
+
+     #+caption: Org文書での入力内容
+     #+name: src:image-input-in-org
+     #+begin_src sh
+#+attr_latex:  :width 0.7\textwidth
+#+caption: CapsLock \rightarrow Controlに変更
+[[./fig/mac-keyboard04.png]]
+    #+end_src
+
+     #+caption: LaTeXエクスポートしたときの出力内容
+     #+name: src:image-output-in-latex
+     #+begin_src latex
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.7\textwidth]{./fig/mac-keyboard04.png}
+\caption{CapsLock $\rightarrow$ Controlに変更}
+\end{figure}
+     #+end_src
+
+**** 表の挿入
+
 
 
 ** org-latex-packages-alistの詳細
