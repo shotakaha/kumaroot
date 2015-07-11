@@ -19,6 +19,9 @@ Contents:
    tcanvas
    tstring
 
+   kumaemacs
+   kumaorglatex
+
 
 Indices and tables
 ==================
