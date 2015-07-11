@@ -36,7 +36,7 @@ $ sudo port install root6    ## for ROOT6 user
    Linuxを使っている場合は、Gitを使うとよいでしょう。
    方法は「[[https://root.cern.ch/drupal/content/installing-root-source][installing-root-source | ROOT公式ページ]]」に載っている通りです。
 
-   - STEP1 :: リポジトリをクローンする
+   - STEP1 :: ROOTのリポジトリをクローンします
 
 #+begin_src bash
 [any]  $ mkdir ~/repos/git
@@ -45,8 +45,9 @@ $ sudo port install root6    ## for ROOT6 user
 [git]  $ cd root
 #+end_src
 
-   - STEP2 :: どんなタグがあるのかを調べて、チェックアウトする。
-              ブランチ名は好きにして大丈夫（今回は、タグ名と同じ名前）
+   - STEP2 :: どんなタグがあるのかを調べて、チェックアウトします。
+              ブランチ名は好きにして大丈夫です
+              （今回は、タグ名と同じ名前にしています）
 
 #+begin_src bash
 [root] $ git tag -l
@@ -55,7 +56,7 @@ $ sudo port install root6    ## for ROOT6 user
 
 
    - STEP5 :: 従来通りPREFIXを指定してconfigureします。
-              失敗した場合に備えてログを残しておく。
+              失敗した場合に備えてログを残しておきます
 
 #+begin_src bash
 [root(v5-34-08)] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-34-08
@@ -106,44 +107,38 @@ $ sudo port select --set root root5   ## use ROOT5
    MacPortsでROOTをインストールする利点のひとつは、
    =ROOT5=  と =ROOT6= が簡単に切り替えられることです。
 
-   実はこの「port select」はROOTだけでなく、Pythonのバージョン切り替えなどもできます。
+   実はこの =port select= はROOTだけでなく、Pythonのバージョン切り替えなどもできます。
    どのパッケージが使えるかは以下のコマンドで確認できます
 
-   #+begin_src sh
+#+begin_src bash
 $ port select --summary
-   #+end_src
+#+end_src
 
 
 *** ROOT5 と ROOT6 の違いについて
 
-    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです
-    [fn::CINT \rightarrow CINT++に変更]。細かい違いは全く分かりません
-    が、文法のチェックが厳密になったみたいです。
+    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです[fn::CINT \rightarrow CINT++に変更]。
+    細かい違いは全く分かりませんが、文法のチェックが厳密になったみたいです。
 
-    実はROOT5ではC言語／C++言語の文法的には間違っているマクロでも動い
+    実は =ROOT5= ではC言語／C++言語の文法的には間違っているマクロでも動い
     てくれました[fn::よく知られていると思われるのは、a.b でも a->bでも
     動いちゃうことでしょうか]。そのため、テストで作ったマクロで動作確
     認した後、より多くのデータを解析するためにコンパイルするとエラーが
     多出。そのデバッグに追われるということは日常茶飯事でした。
 
-    ROOT6では、このマクロの文法チェックも厳しくなったみたいです。ひぇぇ。
+    =ROOT6= では、このマクロの文法チェックも厳しくなったみたいです。ひぇぇ。
     でも心配しなくて大丈夫。エラーの内容を詳しく教えてくれるようになり
     ました。よくある行末のセミコロンのつけ忘れなども指摘してくれます。
-    これで場所の分からない segmentation fault に悩まされることも減るで
+    これで場所の分からない =segmentation fault= に悩まされることも減るで
     しょう。
 
-    試しに、ROOT5のチュートリアルをROOT6で実行してみてください。
-    「warning」や「error」がたくさん表示されます。
+    試しに =ROOT5= のチュートリアルを =ROOT6= で実行してみてください。
+    =warning= や =error= がたくさん表示されます。
 
-    #+begin_src sh
-## STEP1 : set to ROOT6
-$ sudo port select root root6
-
-## STEP2 : move to tutorials/ directory of ROOT5
-$ cd /opt/local/libexec/root5/share/doc/root/tutorials/
-
-## STEP3 : start ROOT（=ROOT6）
-$ root
+#+begin_src bash
+$ sudo port select root root6    # ROOT6に切り替える
+$ cd /opt/local/libexec/root5/share/doc/root/tutorials/    # ROOT5のチュートリアルに移動
+$ root    # ROOT6を起動
 
 ## ===  an example of warning ===
 /opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:7:13:
@@ -152,62 +147,61 @@ $ root
       if (e = getenv("EDITOR"))
           ~~^~~~~~~~~~~~~~~~~~
 ## === an example of error ===
-
 /opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:39:12:
  error: cannot initialize return object of type 'char *' with an rvalue of
  type 'const char *'
     return gSystem->WorkingDirectory();
            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-$ .q
-    #+end_src
+$ .q    # ROOTを終了
+#+end_src
 
 ** PyROOTを使いたい
 
-   #+begin_src sh
+#+begin_src bash
 $ sudo port install root5 +python27   ## when ROOT5, you need to specify +pythonXX variants
 $ sudo port install root6             ## when ROOT6, no need to specify variants
-   #+END_SRC
+#+end_src
 
-   CERNには「へびつかい」が多いらしく、「PyROOT[fn::実は [[http://www.rootpy.org][rootpy]] という
-   のもあります。こっちのほうがPython nativeな感じです。前に試そうとし
-   てたのですがインストールでコケてしまいました。動かせたら項目を作る
-   かも]」というモジュールを使えば、Python上でROOTが使えるようになって
-   います。
+   CERNには「へびつかい」が多いそうです。
+   =PyROOT= というモジュールを使えば、Python上でROOTが使えます。
+   その場合は、MacPortsでインストールする際に =variants= で
+   =+pythonXX= を指定する必要があります。
+   しかも、この =variants= は自分の使っているPythonの
+   バージョンに合わせる必要があります。
+   ミスマッチな場合は、動作せず、＝クラッシュします。
 
-   その場合は、MacPortsでインストールする際に variants で指定する必要
-   があります。しかも、この variantsは自分の使っているPythonのバージョ
-   ンに合わせる必要があります。ミスマッチな場合は、動作しません（＝ク
-   ラッシュします）。
+   ROOT6の場合は =python27= がデフォルトでONになっています。
 
-   ROOT6の場合はpython27 がデフォルトでONになっています。
+   他にも [[http://www.rootpy.org][rootpy]] というのもあります。
+   こっちのほうがPython nativeな感じです。
+   前に試そうとしてたのですがインストールでコケてしまいました。
+   動かせたら項目を作るかも。
+
 
 ** EmacsでROOTを編集したい
 
-   #+begin_src sh
+#+begin_src bash
 $ locate root-help.el    # check path
-   #+end_src
+#+end_src
 
-
-   これもあまり知られていないと思うのですが、Emacs上でROOTのソースを編
+   あまり知られていないと思うのですが、Emacs上でROOTのソースを編
    集するのを簡単にするElispパッケージが一緒にインストールされます。
-   locateコマンドでどこにあるか調べておきましょう。
-
+   =locate= コマンドでどこにあるか調べておきましょう。
    ちなみに、僕の場合（＝MacPortsの場合）、以下にありました。
 
-   #+begin_src sh
+#+begin_src sh
 /opt/local/libexec/root5/share/emacs/site-lisp/root-help.el
 /opt/local/libexec/root6/share/emacs/site-lisp/root-help.el
-   #+end_src
+#+end_src
 
    これの使い方に関しては、あとできちんと調べて書くことにします。
 
 ** ROOTのtutorialを使いたい
 
-   #+begin_src sh
+#+begin_src sh
 /opt/local/libexec/root5/share/doc/root/tutorials/     ## ROOT5
 /opt/local/libexec/root6/share/doc/root/tutorials/     ## ROOT6
-   #+end_src
+#+end_src
 
    実はROOTをインストールすると、たくさんのサンプルコードもついてきま
    す。使い方をウェブで検索してもよく分からない場合は、このサンプルコー
@@ -217,10 +211,10 @@ $ locate root-help.el    # check path
    しておきましょう。以下に一例を示しましたが、自分の環境に合わせて適
    宜変更してください。
 
-   #+begin_src sh
+#+begin_src sh
 $ cp -r /opt/local/libexec/root5/share/doc/root/tutorials ~/TEST/root5/
 $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
-   #+end_src
+#+end_src
 
    cp コマンドを使う際には、-r オプションを付けることでサブディレクト
    リもコピーできます。その際、コピー元（＝第１引数）の最後に「/」付け
