@@ -1,22 +1,33 @@
 * TTree編
 
-  ROOTを使うにあたって、TTree（もしくは次の章のTChain）は基礎中の基礎
-  です[fn::「さるROOT」や、他のウェブサイトでは「TNtuple」をサンプル
-  として取り上げていますが、これだけを使っている研究者はみたことがあり
-  ません。TTreeのベースにはTNtupleがあるのかもしれませんが、なんでこん
-  な使われていないものをサンプルにするのか疑問です]。
-  とりあえず、取得したデータはさっさとTTreeに変換してしまいましょう。
+  ROOTを使うにあたって、TTree（もしくは次の章のTChain）は基本中の基本です。
+  取得したデータはさっさとTTreeに変換しましょう。
+
+  余談ですが、「さるROOT」や、
+  他のウェブサイトでは「TNtuple」をサンプルとして取り上げていますが、
+  現在これだけを使っている研究者はみたことがありません。
+  TTreeのベースにはTNtupleがあるのだと思いますが、
+  なんでこんな使われていないものをサンプルにするのか疑問です。
+
+** TTreeを作成したい（ =TTree::Tree= ）
+
+#+begin_src c++
+TTree *t = new TTree("t1", "TTree example");
+#+end_src
 
 
-** TTreeを作成したい : TTree
-
-   #+begin_src c++
+#+begin_src c++
 TTree TTree(const char* name, const char* title, Int_t splitlevel = 99)
-   #+end_src
+#+end_src
 
-   - name :: TTreeオブジェクトの名前。他のオブジェクトと重複しないようにする
-   - title :: TTreeの説明。TFileに保存したときに表示される
-   - splitlevel :: 使ったことがない
+   | 第１引数 | name | TTreeオブジェクトの名前 |
+   | 第２引数 | title | TTreeの説明 |
+   | 第３引数 | splitlevel | 使ったことがない |
+
+   第１引数（ =name= ）はTTreeオブジェクトの名前
+- name :: TTreeオブジェクトの名前。他のオブジェクトと重複しないようにする
+- title :: TTreeの説明。TFileに保存したときに表示される
+- splitlevel :: 使ったことがない
 
    「name」はオブジェクトの名前です。他のオブジェクトと重複しないよう
    にしましょう。「title」はTFileを覗いた時に表示されるTTreeの説明です。
@@ -24,11 +35,11 @@ TTree TTree(const char* name, const char* title, Int_t splitlevel = 99)
    とになると思います。「splitlevel」は指定したことがありません。デフォ
    ルト値で大丈夫です。
 
-** テキストファイルをTTreeに変換したい（１）: ReadFile
+** テキストファイルをTTreeに変換したい（１）（ =TTree::ReadFile= ）
 
-   #+begin_src c+++
+#+begin_src c+++
 Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char delimiter = ' ')
-   #+end_src
+#+end_src
 
    - filename :: 入力ファイル名
    - branchDescriptor :: 入力ファイルの構造指定。「:」で区切る
@@ -95,12 +106,12 @@ Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char 
     #+end_src
 
 
-** テキストファイルをTTreeに変換したい（１）: Branch
+** テキストファイルをTTreeに変換したい（１）: （ =TTree::Branch= ）
 *** TTree::Branch() を使う方法
 
-    #+begin_src c++
+#+begin_src c++
 tree->Branch("run", &run, "run/I")
-    #+end_src
+#+end_src
 
     - 第１引数 :: ブランチ名；なんでも良い。用意した変数名と違っていても構わない
     - 第２引数 :: 変数のアドレス；変数が実体の場合は、&を先頭につけて
@@ -114,7 +125,7 @@ tree->Branch("run", &run, "run/I")
 
     よくある方法です。ググればいっぱい見つかります。
 
-    #+begin_src c++
+#+begin_src c++
 {
     // STEP1: データファイルを読み込む
     TString ifn = "inputfilename"
@@ -152,7 +163,7 @@ tree->Branch("run", &run, "run/I")
 
     return;
 }
-    #+end_src
+#+end_src
 
     前述したReadFile を使った方法と比べると、コードの行数がぐーんと多
     いことが分かります。（ReadFileの場合、肝となる部分はたったの一行で
@@ -166,11 +177,11 @@ tree->Branch("run", &run, "run/I")
 
    TTree::Branch を理解していれば簡単です。
 
-   #+begin_src c++
+#+begin_src c++
 int val1[100];
 TTree *tree = new TTree("tree", "tree using array");
 tree->Branch("val1", val1, "val1[100]/I");
-   #+end_src
+#+end_src
 
    第２引数には「変数のアドレス」を指定します。
    val1 は 配列の先頭アドレスを指しているので、＆をつける必要はありません。
@@ -181,12 +192,12 @@ tree->Branch("val1", val1, "val1[100]/I");
 
     配列を使うことができるので、文字列のブランチを作ることもできます。
 
-   #+begin_src c++
+#+begin_src c++
 char hoge[32];
 tree->Branch("moji", hoge", "moji[32]/C")
 sprintf(hoge, "hogehogefugafuga")
 tree->Fill();
-   #+end_src
+#+end_src
 
 
 ** ブランチに可変長配列を使いたい
@@ -198,7 +209,7 @@ tree->Fill();
    3. fN のブランチを作る
    4. val のブランチを作る
 
-    #+begin_src c++
+#+begin_src c++
 Int_t fN;                                 // (1) 設定したい配列の大きさ
 Int_t val[max];                           // (2) val[max]: maxはfNよりも大きな数
 tree->Branch("nch", &fN, "nch/I");        // (3) まずfNをブランチにセットする；fNだと何の変数か分かりづらいので、nch（全チャンネル数の意）に変更した点に注意
@@ -206,11 +217,11 @@ tree->Branch("val", val, "val[nch]/I");   // (4) 次にval[fN]をセットする
 
 // (4)を以下のようにすると、"Illegal leaf ..." と怒られる
 tree->Branch("val", val, "val[fN]/I");    // fNには、ブランチ名を入れる必要があるらしい（
-    #+end_src
+#+end_src
 
 *** ブランチに可変長文字列を使いたい
 
-    #+begin_src c++
+#+begin_src c++
 #include <string.h>    // strlen()を使うために必要
 
 const Int_t NMAX_MOJI = 100;
@@ -222,18 +233,18 @@ tree->Branch("moji", hoge, "hoge[nmoji]/C");
 sprintf(hoge, "hoge-hoge-fuga-ga");
 nmoji = strlen(hoge)
 tree->Fill()
-    #+end_src
+#+end_src
 
 
 *** ブランチにstd::vector を使いたい
 
-    #+begin_src c++
+#+begin_src c++
 #include <vector>
 
 std::vector<Double_t> vec;
 TTree *tree = new TTree("tree", "tree using vector");
 tree->Branch("vec", &vec);
-    #+end_src
+#+end_src
 
     <vector>をincludeする :: namespaceを定義しない場合は、”std::vector<型
     > 変数名”と宣言すること。当たり前のことだけど、結構忘れてしまう。
