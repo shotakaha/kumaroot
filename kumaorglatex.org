@@ -1,6 +1,10 @@
 #+title:Kumaにも使えるOrgのLaTeXエクスポート
 #+author:しょーた
 
+#+BEGIN_SRC emacs-lisp :exports results :results silent
+(setq org-latex-listings 't)
+#+END_SRC
+
 #+latex_header: \lstset{language=[LaTeX]TeX}
 #+latex_header: \lstset{basicstyle=\small}
 #+latex_header: \lstset{stringstyle=\ttfamily}
@@ -10,13 +14,6 @@
 #+latex_header: \lstset{rulesepcolor=\color{black}}
 #+latex_header: \lstset{fancyvrb=true}
 #+latex_header: \fvset{gobble}
-
-# #+BEGIN_SRC emacs-lisp :exports results :results silent
-# (setq org-latex-listings t)
-# (add-to-list 'org-latex-packages-alist '("" "listings"))
-# (add-to-list 'org-latex-packages-alist '("" "color"))
-# (add-to-list 'org-latex-packages-alist '("" "fancyvrb"))
-# #+END_SRC
 
 * はじめに
 
@@ -209,10 +206,13 @@ A cell is of the format:
     #+end_src
 
     ・・・なんと、よくわからない順番にソートされる。
-    これについては後で調べる。
 
-    「add-to-list」の他に、「add-to-order-list」というのがあるみたいなので使ってみる。
-    また、すでにあるリストから削除する関数がないかも探してみる。
+    これは、add-to-list の第３引数を t にすることで解決できた。
+    t にしておくとalist の最後に足されるため。
+
+    これで思い通りの順番に並べることができる。また、
+    「add-to-list」の他に、「add-to-order-list」というのがあるみたいな
+    のでそちらも調べてみる。
 
 
 *** 設定するときの注意点
@@ -334,9 +334,9 @@ Value:
 \usepackage{amssymb}
 \usepackage{hyperref}
 \tolerance=1000
-\author{しょーた}
+\author{Shota}
 \date{\today}
-\title{\LaTeX{}エクスポートのテスト用}
+\title{\LaTeX{} Export Test}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -460,7 +460,7 @@ Value:
     #+begin_src latex
 \usepackage{hyperref}
 \hypersetup{
-  setpagesize=false,    %% <-- この１行がものすごく大事
+  setpagesize=false,    %% <-- This line is very important
   pdfkeywords={},
   pdfsubject={},
   pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
@@ -508,9 +508,9 @@ Value:
 \hypersetup{linkcolor=blue}       %% latex_header:
 \hypersetup{colorlinks=true}      %% latex_header_extra:
 \tolerance=1000
-\author{しょーた}
+\author{Shota}
 \date{\today}
-\title{\LaTeX{}エクスポートのテスト用}
+\title{\LaTeX{} Export Test}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -585,12 +585,56 @@ Value:
   #+begin_src latex
 \usepackage{hyperref}
 \tolerance=1000
-\usepackage{color}    %% <-- ここに追加されている
-\usepackage{listings} %%
+\usepackage{color}    %% <-- Added here
+\usepackage{listings} %% <-- Added here
 \hypersetup{setpagesize=false}
 \hypersetup{linkcolor=blue}
 \hypersetup{colorlinks=true}
-\author{しょーた}
+\author{Shota}
 #+end_src
 
   思った通りの動きが確認できたのち、emacs設定ファイルに移動させればOKです。
+
+* PDFLaTeXの設定
+
+  ソースコードのハイライトに minted.sty を使うためにはpdflatexを使わな
+  ければいけません。そのための設定をここにメモします。
+
+** 日本語 + PDFLaTeX
+
+   BXjsclsというクラスファイルを使います。これまで何回やっても失敗して
+   たのは、TeXLive2014について来たバージョン（v0.3）が古かったためで
+   した。GitHubから最新版（v0.9）を取ってきたら解決しました。
+
+   #+begin_src sh
+   $ cd ~/repos/github/
+   $ git clone git clone https://github.com/zr-tex8r/BXjscls.git
+   $ cd BXjscls
+   $ sudo mkdir /usr/local/texlive/texmf-local/tex/latex/bxjscls
+   $ sudo cp *.cls *.def /usr/local/texlive/texmf-local/tex/latex/bxjscls/
+   $ sudo mktexlsr
+   #+end_src
+
+   最後にmktexlsrすることで、
+   「
+   /usr/local/texlive/2014/texmf-dist/tex/latex/bxjscls/bxjsarticle.cls
+   」から
+   「/usr/local/texlive/texmf-local/tex/latex/bxjscls/bxjsarticle.cls」
+   へと参照先が代わります。
+
+   これで奥村さんのページのサンプルがコンパイルできるようになりました。
+
+** PDFLaTeX + minted.sty
+
+   minted.sty は外部プログラムのPygmentsを呼ぶため、コンパイル時
+   に-shell-escape オプションを付ける必要があります。
+
+   #+begin_src sh
+$ pdflatex -shell-escape sample.tex
+   #+end_src
+
+** Org-LaTeXエクスポート + minted.sty
+
+   さて、ようやく本来の目的にたどり着きました。少し使ってみたところ、
+   minted環境の中では日本語が使えないみたいなので、それを修正してから
+   いろいろ試した方が良さそうです。
