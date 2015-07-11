@@ -1,21 +1,36 @@
-#+title:Kumaにも使えるEmacs
-#+author:しょーた
+* Emacsの使い方
 
-* はじめに
-* Emacsのインストール
-* Emacs + Prelude
+  エディタはプログラミングを楽にするための道具です。
+  自分に合ったものを選ぶのが一番です。
+  その参考になるように、Emacsの簡単な使い方と、
+  便利なパッケージなどを紹介しておきます。
 
-** Preludeのインストール
-** init.elの内容
-** core の内容
+** インストール
 
+   MacOS Xにインストールする場合、[[http://emacsformacosx.com][Emacs For MacOS X]]から
+   既にビルドされたものを取ってくるのが一番です。
 
-* Emacs + Org
-** org-agenda
-** org-latex
-* Emacs + YaTeX
+** Emacs + Prelude
 
-** YaTeXのインストール
+   Prelude というのはEmacs初期設定集のひとつです。
+
+   Emacsは設定をきちんとしないと便利になりません。
+   それを一から設定するのも面白いのですが、
+   それがめんどくさいと思う人はこういうのを使えばよいです。
+
+   Preludeの他にも、いろいろあります。
+   名前がオシャレだなと思ったので、これに決めました。
+
+*** Preludeのインストール
+*** init.elの内容
+*** core の内容
+
+** Emacs + Org
+*** org-agenda
+*** org-latex
+** Emacs + YaTeX
+
+*** YaTeXのインストール
 
    #+begin_src sh
 STEP1: Mercurialのインストール
@@ -72,4 +87,4 @@ INFODIR = ${PREFIX}/info
     - EMACSDIR :: ${PREFIX}
     - LISPDIR :: ${EMACSDIR}/site-lisp/yatex
 
-** YaTeXの設定
+*** YaTeXの設定
