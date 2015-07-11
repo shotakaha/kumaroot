@@ -216,24 +216,38 @@ htmlhelp_basename = 'KumaROOTdoc'
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
 #'papersize': 'letterpaper',
+    'papersize' : 'a4paper',
 
 # The font size ('10pt', '11pt' or '12pt').
 #'pointsize': '10pt',
+    'pointsize': '12pt',
 
 # Additional stuff for the LaTeX preamble.
-#'preamble': '',
+    'preamble': '',
 
 # Latex figure (float) alignment
-#'figure_align': 'htbp',
+    'figure_align': 'htbp',
+
+#    'fontpkg': '\\usepackage{times}',
+
 }
+
+latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
+latex_elements['preamble'] += '\\usepackage{graphics}\n'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
+# latex_documents = [
+#   (master_doc, 'KumaROOT.tex', u'KumaROOT Documentation',
+#    u'Shota TAKAHASHI', 'manual'),
+# ]
 latex_documents = [
   (master_doc, 'KumaROOT.tex', u'KumaROOT Documentation',
    u'Shota TAKAHASHI', 'manual'),
 ]
+
+latex_docclass = {'manual' : 'jsbook'}
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
