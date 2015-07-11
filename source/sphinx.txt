@@ -10,14 +10,23 @@
 
 ** pandocコマンドの使い方
 
-   OrgのreSTエクスポート（ox-rst）が、うまくいかないので、pandocを使って変換している
+   OrgのreSTエクスポート（ox-rst）が、うまくいかないので、pandocを使って変換している。
 
 #+begin_src bash
 $ cd $KUMAROOT
 $ pandoc -f org -t rst source/FILENAME.txt -o source/FILENAME.rst
 #+end_src
 
+   おためしワンライナー。これをMakefileに書いておけばいいのかもしれない。
+
+#+begin_src bash
+$ for f in source/*.txt; do pandoc -f org -t rst $f -o "source/`basename $f .txt`.rst"; done
+#+end_src
+
+
 ** PDF変換
+
+   PDFの変換には、pdflatex／dvipdfmxを使う。
 
 #+begin_src bash
 $ cd $KUMAROOT
@@ -31,4 +40,47 @@ $ open build/latex/KumaROOT.pdf
 $ cd $KUMAROOT
 $ make html
 $ open build/html/index.html
+#+end_src
+
+
+** conf.pyの設定
+
+   HTMLやPDF変換に必要な設定をしておく。
+
+*** LaTeXドキュメントの設定（ =latex_elements= ）
+
+#+begin_src python
+latex_elements = {
+    'papersize' = 'a4paper',
+    'pointsize' = '12pt',
+    'preamble': '',    # あとで追加するので定義だけしておく
+    'figure_align': 'htbp',
+#   'fontpkg': '\\usepackage{times}',
+}
+#+end_src
+
+*** プリアンブルの追加（ =latex_elements['preamble']= ）
+
+    上の latex_elements の中で複数のパッケージを書くと見た目がカッコ悪いので、以下のように追加することにした。
+
+#+begin_src python
+latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
+latex_elements['preamble'] += '\\usepackage{graphics}\n'
+#+end_src
+
+
+*** LaTeXのドキュメントクラスの設定（ =latex_docclass= ）
+
+#+begin_src python
+latex_docclass = {'manual' : 'jsbook'}
+#+end_src
+
+    latex_documents はデフォルトのままにしておき
+
+*** LaTeXの表紙の設定（ =latex_logo= ）
+
+#+begin_src python
+# The name of an image file (relative to this directory) to place at the top of
+# the title page.
+latex_logo = './images/toumin_kuma.png'
 #+end_src
