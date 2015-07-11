@@ -1,0 +1,229 @@
+* ROOTのインストール
+
+  ROOTのインストールする方法と
+  ROOTのチュートリアルの存在について紹介しておきます。
+
+
+** オススメのインストール方法（for Mac ユーザ）
+
+#+begin_src bash
+$ sudo port install root5    ## for ROOT5 user
+$ sudo port install root6    ## for ROOT6 user
+#+end_src
+
+   Macユーザは =MacPorts= からインストールできます。すごく楽ちんなのでオススメです。
+   環境変数（ =$ROOTSYS= 、 =$LD_LIBRARY_PATH= 、 =$DYLD_LIBRARY_PATH= など）の設定も不要です。
+   =Homebrew= や =fink= など、その他のパッケージ管理ツールは使ったことがないので分かりません。
+   誰か情報をくださいな。
+
+   =ROOT6= は2014年にリリースされました。
+   MacPortsの場合「 =root6= 」というパッケージ名 [fn:1] でインストールすることができます。
+   =ROOT5= と一緒にインストールしておいても大丈夫ですが、一緒には使えません。
+   後述する方法で簡単に切り替えることが出来ます。
+
+   現在は =ROOT5= から =ROOT6= へ移行する過渡期です。
+   そのため、進行中の実験は =ROOT5= 系を使っていることが多いです[fn:2]
+   むやみに最新版を使うと、実験固有のソフトウェア群が動作しないこともあります。
+   その場合は、素直に実験で推奨されているバージョンには従ってください。
+
+   [fn:1]正確には「ポート名」かも。あまり気にしないでください
+   [fn:2] LHC実験の要求に応えるため（？）、３年位前からROOTの開発が非常に活発に行われています。
+   しかし、その他の実験では、安定性を求め古いバージョン使い続けていることがあります。
+   あとOSが古いと最新バージョンはうまくインストールできないこともあります。
+
+** Git を使ったインストール方法
+
+   Linuxを使っている場合は、Gitを使うとよいでしょう。
+   方法は「[[https://root.cern.ch/drupal/content/installing-root-source][installing-root-source | ROOT公式ページ]]」に載っている通りです。
+
+   - STEP1 :: リポジトリをクローンする
+
+#+begin_src bash
+[any]  $ mkdir ~/repos/git
+[any]  $ cd ~/repos/git
+[git]  $ git clone http://root.cern.ch/git/root.git
+[git]  $ cd root
+#+end_src
+
+   - STEP2 :: どんなタグがあるのかを調べて、チェックアウトする。
+              ブランチ名は好きにして大丈夫（今回は、タグ名と同じ名前）
+
+#+begin_src bash
+[root] $ git tag -l
+[root] $ git checkout -b v5-34-08 v5-34-08
+#+end_src
+
+
+   - STEP5 :: 従来通りPREFIXを指定してconfigureします。
+              失敗した場合に備えてログを残しておく。
+
+#+begin_src bash
+[root(v5-34-08)] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-34-08
+[root(v5-34-08)] $ make 2>&1 | tee make.log                   ## buiding ROOT
+[root(v5-34-08)] $ make install 2>&1 | tee makeinstall.log    ## installed under $PREFIX
+#+end_src
+
+
+   * =configure= の内容は（たしか） =config.status= に書きだされたはずです。
+   * =make= 、 =make install= の際、 =PREFIX= で指定したディレクトリによっては =sudo= が必要になります。
+   * ログを取る場合は、 =tee= コマンドを使うと端末に表示しながらログファイルに保存できます。
+   * =~/.bashrc= に環境変数の設定を書いておきます。
+
+*** 従来のインストール方法
+
+    ググればたくさん出てきますが、一応紹介しておきます。
+
+#+begin_src bash
+## STEP1 : make directory for tar.gz file and wget it
+$ cd /usr/local/heplib/tarballs
+$ wget ftp://root.cern.ch/root/root_v5.30.06.source.tar.gz    ## check URL at ROOT website
+
+## STEP2 : expand tar.gz
+[ROOT] $ cd /usr/loca/heplib/ROOT
+[ROOT] $ tar zxvf ../tarballs/root_v5.30.06.source.tar.gz
+
+## STEP3 : set PREFIX then configure -> make -> make install
+[ROOT] $ cd root
+[root] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-30-06
+[root] $ make 2>&1 | tee make.log
+[root] $ make install 2>&1 | tee makeinstall.log
+#+end_src
+
+*** インストール方法 for Windows ユーザ
+
+    Windowsはよく分かりません。ごめんなさい。たぶん
+    「[[https://root.cern.ch/drupal/content/downloading-root][downloading-root | ROOT公式ページ]]」から目的のバージョンを選び、
+    そこからバイナリを落としてくるのが一番簡単だと思います。
+
+
+** ROOT5 と ROOT6 を試してみたい
+
+#+begin_src bash
+$ sudo port select --set root root6   ## use ROOT6
+$ sudo port select --set root root5   ## use ROOT5
+#+end_src
+
+   MacPortsでROOTをインストールする利点のひとつは、
+   =ROOT5=  と =ROOT6= が簡単に切り替えられることです。
+
+   実はこの「port select」はROOTだけでなく、Pythonのバージョン切り替えなどもできます。
+   どのパッケージが使えるかは以下のコマンドで確認できます
+
+   #+begin_src sh
+$ port select --summary
+   #+end_src
+
+
+*** ROOT5 と ROOT6 の違いについて
+
+    ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです
+    [fn::CINT \rightarrow CINT++に変更]。細かい違いは全く分かりません
+    が、文法のチェックが厳密になったみたいです。
+
+    実はROOT5ではC言語／C++言語の文法的には間違っているマクロでも動い
+    てくれました[fn::よく知られていると思われるのは、a.b でも a->bでも
+    動いちゃうことでしょうか]。そのため、テストで作ったマクロで動作確
+    認した後、より多くのデータを解析するためにコンパイルするとエラーが
+    多出。そのデバッグに追われるということは日常茶飯事でした。
+
+    ROOT6では、このマクロの文法チェックも厳しくなったみたいです。ひぇぇ。
+    でも心配しなくて大丈夫。エラーの内容を詳しく教えてくれるようになり
+    ました。よくある行末のセミコロンのつけ忘れなども指摘してくれます。
+    これで場所の分からない segmentation fault に悩まされることも減るで
+    しょう。
+
+    試しに、ROOT5のチュートリアルをROOT6で実行してみてください。
+    「warning」や「error」がたくさん表示されます。
+
+    #+begin_src sh
+## STEP1 : set to ROOT6
+$ sudo port select root root6
+
+## STEP2 : move to tutorials/ directory of ROOT5
+$ cd /opt/local/libexec/root5/share/doc/root/tutorials/
+
+## STEP3 : start ROOT（=ROOT6）
+$ root
+
+## ===  an example of warning ===
+/opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:7:13:
+ warning: using the result of an assignment as a condition without
+ parentheses [-Wparentheses]
+      if (e = getenv("EDITOR"))
+          ~~^~~~~~~~~~~~~~~~~~
+## === an example of error ===
+
+/opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:39:12:
+ error: cannot initialize return object of type 'char *' with an rvalue of
+ type 'const char *'
+    return gSystem->WorkingDirectory();
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$ .q
+    #+end_src
+
+** PyROOTを使いたい
+
+   #+begin_src sh
+$ sudo port install root5 +python27   ## when ROOT5, you need to specify +pythonXX variants
+$ sudo port install root6             ## when ROOT6, no need to specify variants
+   #+END_SRC
+
+   CERNには「へびつかい」が多いらしく、「PyROOT[fn::実は [[http://www.rootpy.org][rootpy]] という
+   のもあります。こっちのほうがPython nativeな感じです。前に試そうとし
+   てたのですがインストールでコケてしまいました。動かせたら項目を作る
+   かも]」というモジュールを使えば、Python上でROOTが使えるようになって
+   います。
+
+   その場合は、MacPortsでインストールする際に variants で指定する必要
+   があります。しかも、この variantsは自分の使っているPythonのバージョ
+   ンに合わせる必要があります。ミスマッチな場合は、動作しません（＝ク
+   ラッシュします）。
+
+   ROOT6の場合はpython27 がデフォルトでONになっています。
+
+** EmacsでROOTを編集したい
+
+   #+begin_src sh
+$ locate root-help.el    # check path
+   #+end_src
+
+
+   これもあまり知られていないと思うのですが、Emacs上でROOTのソースを編
+   集するのを簡単にするElispパッケージが一緒にインストールされます。
+   locateコマンドでどこにあるか調べておきましょう。
+
+   ちなみに、僕の場合（＝MacPortsの場合）、以下にありました。
+
+   #+begin_src sh
+/opt/local/libexec/root5/share/emacs/site-lisp/root-help.el
+/opt/local/libexec/root6/share/emacs/site-lisp/root-help.el
+   #+end_src
+
+   これの使い方に関しては、あとできちんと調べて書くことにします。
+
+** ROOTのtutorialを使いたい
+
+   #+begin_src sh
+/opt/local/libexec/root5/share/doc/root/tutorials/     ## ROOT5
+/opt/local/libexec/root6/share/doc/root/tutorials/     ## ROOT6
+   #+end_src
+
+   実はROOTをインストールすると、たくさんのサンプルコードもついてきま
+   す。使い方をウェブで検索してもよく分からない場合は、このサンプルコー
+   ドを動かしながら中身をいじくってみるのが一番です。
+
+   とりあえず、いつでも使えるようにテスト用ディレクトリを作成しコピー
+   しておきましょう。以下に一例を示しましたが、自分の環境に合わせて適
+   宜変更してください。
+
+   #+begin_src sh
+$ cp -r /opt/local/libexec/root5/share/doc/root/tutorials ~/TEST/root5/
+$ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
+   #+end_src
+
+   cp コマンドを使う際には、-r オプションを付けることでサブディレクト
+   リもコピーできます。その際、コピー元（＝第１引数）の最後に「/」付け
+   てはいけません。コピー先（＝第２引数）の最後には「/」を付けてもよい
+   です（もしかしたらなくてもよいのかも）[fn::この辺はよく忘れます。失
+   敗したらコピー先を削除すればいいだけなので、失敗もしてみてください]。
