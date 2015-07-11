@@ -11,6 +11,13 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   preface
+   histogram
+   ttree
+   tchain
+   tfile
+   tcanvas
+   tstring
 
 
 Indices and tables
@@ -19,4 +26,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
