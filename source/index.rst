@@ -11,7 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   kumaroot
+   preface
    histogram
    ttree
    tchain
