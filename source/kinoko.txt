@@ -1,0 +1,17 @@
+** KiNOKO
+
+   CAMACやVMEでデータ収集を行うためのドライバをインストールします。
+   詳細に関しては「[[http://www.awa.tohoku.ac.jp/~sanshiro/kinoko/index.html][KiNOKOプロジェクト]]」を参照してください。
+
+#+begin_src sh
+$ cd ~/Downloads/
+$ wget http://www.awa.tohoku.ac.jp/~sanshiro/kinoko-download/files/kinoko-2014-01-29.tar.gz
+$ tar zxvf kinoko-2014-01-29.tar.gz /usr/local/heplib/
+#+end_src
+
+   僕の場合、ダウンロードしたファイルはとりあえず ~/Downloads に保存することにしています。
+   また、高エネルギー物理関連のプログラムは /usr/local/heplib/ 以下にインストールすることにしています。
+
+*** CAMACドライバのインストール
+
+*** VMEドライバのインストール
