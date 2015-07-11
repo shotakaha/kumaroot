@@ -20,7 +20,7 @@ Contents:
    tstring
 
    sphinx
-   kumaemacs
+   emacs
    kumaorglatex
 
 
