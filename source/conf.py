@@ -234,6 +234,12 @@ latex_elements = {
 
 latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
 latex_elements['preamble'] += '\\usepackage{graphics}\n'
+latex_elements['preamble'] += '\\hypersetup{bookmarksopen=true}\n'
+latex_elements['preamble'] += '\\hypersetup{bookmarksopenlevel=2}\n'
+latex_elements['preamble'] += '\\hypersetup{colorlinks=true}\n'
+
+
+
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
