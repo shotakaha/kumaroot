@@ -1,26 +1,9 @@
-#+title:Kumaにも使えるOrgのLaTeXエクスポート
-#+author:しょーた
-
-#+BEGIN_SRC emacs-lisp :exports results :results silent
-(setq org-latex-listings 't)
-#+END_SRC
-
-#+latex_header: \lstset{language=[LaTeX]TeX}
-#+latex_header: \lstset{basicstyle=\small}
-#+latex_header: \lstset{stringstyle=\ttfamily}
-#+latex_header: \lstset{commentstyle=\ttfamily}
-#+latex_header: \lstset{showstringspaces=false}
-#+latex_header: \lstset{frame=shadowbox}
-#+latex_header: \lstset{rulesepcolor=\color{black}}
-#+latex_header: \lstset{fancyvrb=true}
-#+latex_header: \fvset{gobble}
-
-* はじめに
+** OrgのLaTeXエクスポート
 
   メインである「KumaROOT」のために、OrgのLaTeXエクスポートについて調べ
   ていたら、いい感じの長さになってしまいました。
 
-* LaTeXエクスポートの手順
+** LaTeXエクスポートの手順
 
   文章は、だいたい Org（のLaTeXエクスポート） + YaTeX で書くことにしています。
   具体的な手順は以下の通りです。YaTeXでのコンパイルにはpTeX（=ptex2pdf）を使っています
@@ -31,7 +14,7 @@
   - YaTeXコマンドでコンパイル :: C-c C-t j
   - YaTeXコマンドでプレビュー :: C-c C-t p
 
-* LaTeXエクスポートの基本設定
+** LaTeXエクスポートの基本設定
 
   過去に設定した内容を見直し＆テストしながら、基本的であろう項目を拾っ
   てみました。
@@ -307,7 +290,7 @@ Value:
 \\setlength{\\topmargin}{1.5cm}\n
 \\addtolength{\\topmargin}{-2.54cm}"
     #+end_src
-* LaTeXエクスポートの再設定
+** LaTeXエクスポートの再設定
 
   基本設定の項目が分かったので、もう一度設定を見直してみます。
 
@@ -562,7 +545,7 @@ Value:
 
 
 
-* 簡単なテスト方法
+** 簡単なテスト方法
 
   LaTeXエクスポートの設定のテスト[fn::Orgの機能なのでLaTeXエクスポート
   以外でも使えます]のために、必要なemacs設定ファイルを編集してー、ロー
@@ -595,7 +578,7 @@ Value:
 
   思った通りの動きが確認できたのち、emacs設定ファイルに移動させればOKです。
 
-* PDFLaTeXの設定
+** PDFLaTeXの設定
 
   ソースコードのハイライトに minted.sty を使うためにはpdflatexを使わな
   ければいけません。そのための設定をここにメモします。
