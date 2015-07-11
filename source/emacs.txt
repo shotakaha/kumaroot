@@ -78,7 +78,6 @@
 
 **** ページ移動
 
-     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
      | Emacs      | vim     | less   | 操作内容                   |
      | C-n        | j, RET  | j, RET | 次の行                     |
      | C-p        | k       | k      | 前の行                     |
@@ -93,7 +92,6 @@
 
 **** カーソル移動
 
-     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
      | Emacs | vim    | 操作内容                                                                               |
      | C-f   | l, SPC | 次の文字                                                                               |
      | C-b   | h      | 前の文字                                                                               |
@@ -107,7 +105,6 @@
 
 **** 切り貼り
 
-     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
      | Emacs | vim        | 操作内容                             |
      | C-k   | d$         | カーソルの位置から行末までを切り取り |
      | C-w   | d$, dd, dw | 選択範囲を切り取り                   |
@@ -119,9 +116,9 @@
      |       | yw         | １単語をコピー（yank）               |
      |       | y$, y^, y0 | それぞれコピー（yank）               |
      | C-y   | p          | 貼り付け                             |
+
 **** 検索
 
-     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
      | Emacs | vim            | 操作内容                                                                                                                                                                                |
      | C-s   | /文字, n, C-i  | 前方検索 [fn::Emacsの場合、[[https://github.com/koron/cmigemo][cmigemo]] と [[https://github.com/emacs-jp/migemo][migemoパッケージ]] を導入するとローマ字で日本語検索が可能になります。インストールと設定の詳細は [[http://rubikitch.com/2014/08/20/migemo/][るびきち「日刊Emacs」]] を参考にするとよいと思います] |
      | C-r   | ?文字, N, C-o  | 後方検索                                                                                                                                                                                |
@@ -132,7 +129,6 @@
 
 **** ファイル操作
 
-     #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
      | Emacs                                       | vim           | 操作内容                              |
      | C-x C-s                                     | :w            | ファイルを保存                        |
      | C-x C-w                                     | :w ファイル名 | ファイル名を指定して保存              |
@@ -144,7 +140,6 @@
 
 **** エディタ特有
 
-    #+ATTR_LATEX: :environment longtable :align |l|l|l|l|
     | Emacs | vim       | 操作内容                                     |
     |       | ESC       | ノーマルモードへ切替                         |
     |       | i         | カーソルの位置に追加                         |
