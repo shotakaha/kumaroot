@@ -223,11 +223,17 @@ latex_elements = {
     'pointsize': '12pt',
 
 # Additional stuff for the LaTeX preamble.
-#'preamble': '',
+    'preamble': '',
 
 # Latex figure (float) alignment
     'figure_align': 'htbp',
+
+#    'fontpkg': '\\usepackage{times}',
+
 }
+
+latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
+latex_elements['preamble'] += '\\usepackage{graphics}\n'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
