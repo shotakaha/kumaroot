@@ -12,16 +12,21 @@ Contents:
    :maxdepth: 2
 
    preface
-   histograms
-   ttree
-   tchain
-   tfile
-   tcanvas
-   tstring
+   useful-links
+   root-install
+   ..
+      histograms
+   ..
+      ttree
+      tchain
+      tfile
+      tcanvas
+      tstring
+
 
    sphinx
    emacs
-   kumaorglatex
+   emacs-yatex
 
 
 Indices and tables
