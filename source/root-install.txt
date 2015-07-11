@@ -195,29 +195,3 @@ $ locate root-help.el    # check path
 #+end_src
 
    これの使い方に関しては、あとできちんと調べて書くことにします。
-
-** ROOTのtutorialを使いたい
-
-#+begin_src sh
-/opt/local/libexec/root5/share/doc/root/tutorials/     ## ROOT5
-/opt/local/libexec/root6/share/doc/root/tutorials/     ## ROOT6
-#+end_src
-
-   実はROOTをインストールすると、たくさんのサンプルコードもついてきま
-   す。使い方をウェブで検索してもよく分からない場合は、このサンプルコー
-   ドを動かしながら中身をいじくってみるのが一番です。
-
-   とりあえず、いつでも使えるようにテスト用ディレクトリを作成しコピー
-   しておきましょう。以下に一例を示しましたが、自分の環境に合わせて適
-   宜変更してください。
-
-#+begin_src sh
-$ cp -r /opt/local/libexec/root5/share/doc/root/tutorials ~/TEST/root5/
-$ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
-#+end_src
-
-   cp コマンドを使う際には、-r オプションを付けることでサブディレクト
-   リもコピーできます。その際、コピー元（＝第１引数）の最後に「/」付け
-   てはいけません。コピー先（＝第２引数）の最後には「/」を付けてもよい
-   です（もしかしたらなくてもよいのかも）[fn::この辺はよく忘れます。失
-   敗したらコピー先を削除すればいいだけなので、失敗もしてみてください]。
