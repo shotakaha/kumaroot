@@ -3,17 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to KumaROOT's documentation!
+.. Welcome to KumaROOT's documentation!
+くまるーとくまー
 ====================================
-
-Contents:
 
 .. toctree::
    :maxdepth: 2
 
    preface
    useful-links
+
+ROOTの使い方
+------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
    root-install
+   root-tutorial
    ..
       histograms
    ..
@@ -23,9 +30,13 @@ Contents:
       tcanvas
       tstring
 
+その他
+------------------------------
+.. toctree::
+   :maxdepth: 2
 
    sphinx
-   emacs
+..   emacs
    emacs-yatex
 
 
