@@ -47,3 +47,5 @@
    #+begin_src bash
    $ pandoc -f org -t rst FILENAME.txt -o FILENAME.rst
    #+end_src
+
+   表紙の絵は「[[http://www.irasutoya.com/2015/03/blog-post_557.html][いらすとや]]」さんから拝借しました。ありがとうございます。
