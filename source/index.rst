@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
 
    preface
-   histogram
+   histograms
    ttree
    tchain
    tfile
