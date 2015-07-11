@@ -3,25 +3,41 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to KumaROOT's documentation!
+.. Welcome to KumaROOT's documentation!
+くまるーとくまー
 ====================================
-
-Contents:
 
 .. toctree::
    :maxdepth: 2
 
    preface
-   histograms
-   ttree
-   tchain
-   tfile
-   tcanvas
-   tstring
+   useful-links
+
+ROOTの使い方
+------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   root-install
+   root-tutorial
+   ..
+      histograms
+   ..
+      ttree
+      tchain
+      tfile
+      tcanvas
+      tstring
+
+その他
+------------------------------
+.. toctree::
+   :maxdepth: 2
 
    sphinx
-   emacs
-   kumaorglatex
+..   emacs
+   emacs-yatex
 
 
 Indices and tables

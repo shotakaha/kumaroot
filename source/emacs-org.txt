@@ -1,9 +1,11 @@
-** OrgのLaTeXエクスポート
+** Emacs + Org
+
+*** OrgのLaTeXエクスポート
 
   メインである「KumaROOT」のために、OrgのLaTeXエクスポートについて調べ
   ていたら、いい感じの長さになってしまいました。
 
-** LaTeXエクスポートの手順
+*** LaTeXエクスポートの手順
 
   文章は、だいたい Org（のLaTeXエクスポート） + YaTeX で書くことにしています。
   具体的な手順は以下の通りです。YaTeXでのコンパイルにはpTeX（=ptex2pdf）を使っています
@@ -14,7 +16,7 @@
   - YaTeXコマンドでコンパイル :: C-c C-t j
   - YaTeXコマンドでプレビュー :: C-c C-t p
 
-** LaTeXエクスポートの基本設定
+*** LaTeXエクスポートの基本設定
 
   過去に設定した内容を見直し＆テストしながら、基本的であろう項目を拾っ
   てみました。
@@ -46,7 +48,7 @@
        入されるパッケージ群。org-latex-default-packages-alist の後に追
        記される。詳細は後述。
 
-** org-latex-classesの詳細
+*** org-latex-classesの詳細
    #+name: org-latex-classes
 
        #+begin_src emacs-lisp
@@ -125,7 +127,7 @@
 
      #+end_src
 
-** org-latex-pdf-processの詳細
+*** org-latex-pdf-processの詳細
    #+name: org-latex-pdf-process
 
    #+begin_src emacs-lisp
@@ -146,6 +148,7 @@ Its value is
    日本語だとpdflatexがうまく動かないので、一度LaTeXファイルにエクスポー
    トして、pTeXを使ってコンパイルしていたが、これをきちんと設定すれば、
    楽になるのかも。
+
 
 ** org-latex-packages-alistの詳細
 
@@ -290,7 +293,7 @@ Value:
 \\setlength{\\topmargin}{1.5cm}\n
 \\addtolength{\\topmargin}{-2.54cm}"
     #+end_src
-** LaTeXエクスポートの再設定
+**** LaTeXエクスポートの再設定
 
   基本設定の項目が分かったので、もう一度設定を見直してみます。
 
@@ -545,7 +548,7 @@ Value:
 
 
 
-** 簡単なテスト方法
+**** 簡単なテスト方法
 
   LaTeXエクスポートの設定のテスト[fn::Orgの機能なのでLaTeXエクスポート
   以外でも使えます]のために、必要なemacs設定ファイルを編集してー、ロー
@@ -578,7 +581,7 @@ Value:
 
   思った通りの動きが確認できたのち、emacs設定ファイルに移動させればOKです。
 
-** PDFLaTeXの設定
+**** PDFLaTeXの設定
 
   ソースコードのハイライトに minted.sty を使うためにはpdflatexを使わな
   ければいけません。そのための設定をここにメモします。
