@@ -19,6 +19,7 @@ Contents:
    tcanvas
    tstring
 
+   sphinx
    kumaemacs
    kumaorglatex
 

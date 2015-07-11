@@ -1,0 +1,34 @@
+* Sphinxの使い方
+
+  このドキュメントを生成しているSphinxの使い方についてのメモです。
+
+** ワークフロー
+
+   1. Orgモードで文章を作成（ただし、QuickLookできるように.txt形式で保存）
+   2. pandocを使って、reST形式に変換
+   3. Sphinxを使って、HTML と PDFに変換
+
+** pandocコマンドの使い方
+
+   OrgのreSTエクスポート（ox-rst）が、うまくいかないので、pandocを使って変換している
+
+#+begin_src bash
+$ cd $KUMAROOT
+$ pandoc -f org -t rst source/FILENAME.txt -o source/FILENAME.rst
+#+end_src
+
+** PDF変換
+
+#+begin_src bash
+$ cd $KUMAROOT
+$ make latexpdfja
+$ open build/latex/KumaROOT.pdf
+#+end_src
+
+** HTML変換
+
+#+begin_src bash
+$ cd $KUMAROOT
+$ make html
+$ open build/html/index.html
+#+end_src
