@@ -12,16 +12,39 @@
 
 ** Emacs + Prelude
 
-   Prelude というのはEmacs初期設定集のひとつです。
-
    Emacsは設定をきちんとしないと便利になりません。
    それを一から設定するのも面白いのですが、
-   それがめんどくさいと思う人はこういうのを使えばよいです。
+   それはなかなかめんどくさいです。
 
-   Preludeの他にも、いろいろあります。
-   名前がオシャレだなと思ったので、これに決めました。
+   めんどくさがり屋さんのために（？）、
+   GitHubで公開されているEmacs初期設定集があります。
+
+   [[https://github.com/bbatsov/prelude][Prelude]] はそのひとつです。
+   他にも、[[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]] や [[https://github.com/eschulte/emacs24-starter-kit][emacs24-starter-kit]] など探せばいろいろありますが、
+   名前がオシャレだなと思ったので、Prelude に決めました。
 
 *** Preludeのインストール
+
+    PreludeはGitHubから取ってくることができます。
+    しかし、本家リポジトリを直接cloneしてしまうと、
+    自分の変更をpushしたときに大変なことになるので、
+    自分のGitHubにforkしたリポジトリをcloneすることにします。
+
+    ただし、本家の更新も取り込みたいので、
+    いつでも参照できるように専用のブランチを作ります。
+
+
+#+begin_src bash
+$ cd ~/repos/github/
+$ git clone https://github.com/shotakaha/prelude
+$ export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+#+end_src
+
+
+
+
+
+
 *** init.elの内容
 *** core の内容
 
