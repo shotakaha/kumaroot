@@ -1,0 +1,75 @@
+#+title:Kumaにも使えるEmacs
+#+author:しょーた
+
+* はじめに
+* Emacsのインストール
+* Emacs + Prelude
+
+** Preludeのインストール
+** init.elの内容
+** core の内容
+
+
+* Emacs + Org
+** org-agenda
+** org-latex
+* Emacs + YaTeX
+
+** YaTeXのインストール
+
+   #+begin_src sh
+STEP1: Mercurialのインストール
+$ sudo port install mercurial +bash_completion +zsh_completion
+
+STEP2: YaTeXのリポジトリをチェックアウト
+$ cd ~/.emacs.d/
+$ hg clone http://www.yatex.org/hgrepos/yatex yatex
+
+STEP3: YaTeXリポジトリの更新
+$ cd ~/.emacs.d/yatex
+$ hg pull -u
+
+STEP4: YaTeXのインストール
+$ cd ~/.emacs.d/yatex
+$ make
+Edit this makefile first.
+Type "make install" to install YaTeX.
+Type "make install-yahtml" to install yahtml.
+If you cling to elc files. type "make elc" before make install
+
+STEP5: YaTeXのインストール
+$ make install
+$ make install-info
+$ make install-yahtml
+   #+end_src
+
+*** YaTeXのmakefileの編集
+
+    #+begin_src sh
+## ---------- < editing makefile > ----------
+...
+# Edit these variables to be suitable for your site
+#PREFIX  = /usr/local     ## comment out or modify
+PREFIX  = ${HOME}/.emacs.d  ## set your .emacs.d directory
+
+...
+## CarbonEmacs on Darwin (Sample)
+EMACS  = /Applications/Emacs.app/Contents/MacOS/Emacs   ## uncomment
+# PREFIX = /Applications/Emacs.app/Contents/Resources
+EMACSDIR = ${PREFIX}                                    ## uncomment
+
+LISPDIR = ${EMACSDIR}/site-lisp/yatex
+# LISPDIR   = ${EMACSDIR}/site-packages/lisp/yatex
+DOCDIR  = ${LISPDIR}/docs
+HELPDIR = ${EMACSDIR}/site-lisp
+INFODIR = ${PREFIX}/info
+...
+## ---------- < save changes > ----------
+    #+end_src
+
+    - PREFIX :: /usr/local から ${HOME}/.emacs.d に変更
+    - EMACS :: /Applications/Emacs.app/Contents/MacOs/Emacs
+    - EMACSDIR :: ${PREFIX}
+    - LISPDIR :: ${EMACSDIR}/site-lisp/yatex
+
+** YaTeXの設定
