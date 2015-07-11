@@ -35,3 +35,15 @@
 
    あと、ROOTを使うにあたり注意事項は一つです。「決して深入りしないこ
    と」。どうにもならん部分は「仕様」と思って諦めましょう。
+
+
+
+** このドキュメントについて
+
+   ここはほとんど自分のためのメモ書きです。
+   このドキュメントはEmacsのOrgモードを使って書かれています。
+   それをpandocを用いれreST形式に書き出し、Sphinxを使ってHTMLおよびPDF化しています。
+
+   #+begin_src bash
+   $ pandoc -f org -t rst FILENAME.txt -o FILENAME.rst
+   #+end_src
