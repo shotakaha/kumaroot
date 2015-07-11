@@ -1,0 +1,114 @@
+** LaTeX
+
+   ほとんどの人は修論の時にLaTeXをがしがし使うことになると思います。そ
+   の時に「インストールできないー」などと焦っていては時既に時間切れ
+   [fn::ピンと来ない人は「ブロント語」でググってください]なので、簡単
+   にまとめておきます。
+
+*** MacTeXを使おう
+
+    MacOSXでLaTeXを使う場合は、これで決まりです。
+    TeX環境の本体であるTeXLiveと一緒に、TeX編集の統合環境である
+    TeXShop[fn::修論の頃はお世話になりました。現在はYaTeXに移行したの
+    で全く使っていません]やTeXworks、TeX関連のパッケージ管理ツールであ
+    るTeX Live Utility[fn::コマンドラインからtlmgrとして使えます。パッ
+    ケージのインストールがとても楽ちん。ただし、TeXLiveのバージョンが上
+    がるたびに動かなくなるのでちょっとめんどくさい]、文献管理のBibDesk、
+    スペルチェックのExcalibur、そして、Keynoteに数式を貼り付けるのに必
+    要なLaTeXiT[fn::これが一番重宝してます]もついてきます。
+
+**** 日本語とLaTeX
+
+     日本語はマルチバイトコードであるため、LaTeXでコンパイルするのが難
+     しかったみたいです。それに対処する歴史的な紆余曲折から日本語版
+     LaTeXにはさまざまな派生品が存在します。この歴史の詳細に関しては、
+     三重大学の奥村さんのウェブサイトをはじめ、ググってみるとよいでしょ
+     う。
+
+     つい最近までは「Mac LaTeX インストール」などでググると、なんだか
+     まとまりのない情報で溢れていました。しかし、現在はそれらを取りま
+     とめようということで開発が進んでいるようで、これからはTeXLive一択
+     で良いみたいです。
+
+     TeXLiveはMacPortsからインストールすることもできますが、うまく設定
+     できた試しがありません。なので、[[https://tug.org/mactex/][MacTeX公式ページ]] に置いてある
+     MacTeXパッケージをダウンロード[fn::フルパッケージは2GBちょいあるの
+     で、ダウンロードに少し時間がかかります。細い回線で行うのはオススメ
+     しません]するのが一番簡単で良いと思います。
+
+
+*** ptex2pdf を使おう
+
+    日本語のLaTeX文書をコンパイルするにはpLaTeXコマンドを使います。コ
+    ンパイルが成功するとdviファイルが作成されるので、dvipdfmxコマンド
+    を使ってPDFファイルに変換します。
+
+    これをまとめてやってくれるのがptex2pdfコマンドで、（おそらく）
+    MacTeXをインストールすると勝手についてきます。ただのシェルスクリプ
+    トなので、気になる人は中を見てみるとよいでしょう。
+
+
+*** YaTeXを使おう
+
+    MacTeXをインストールするとTeXShop.appがついてきます。
+    すぐに使えるので、時間に余裕がないときはこちらを使うと良いでしょう。
+
+    設定に時間を割けるようであれば、Emacs+YaTeXをおすすめします。YaTeX
+    の設定や操作コマンドを覚えるための時間は必要ですが、ある程度慣れて
+    しまえば編集作業が格段に捗るはずです。
+
+    http://ichiro-maruta.blogspot.jp/2013/03/latex.html
+    http://qiita.com/zr_tex8r/items/5413a29d5276acac3771
+
+
+*** pdfLaTeX
+
+*** jsarticleドキュメントクラス
+
+     #+begin_src latex
+\documentclass[dvipdfmx,12pt]{jsarticle}
+     #+end_src
+
+    日本語のLaTeX文書にはjsarticleドキュメントクラスを使います。
+    ドライバはdvipdfmxを使います。
+
+*** graphicxパッケージ
+
+     #+begin_src latex
+\usepackage[hiresbb]{graphicx}
+     #+end_src
+
+    画像を扱う場合はgraphicxパッケージを使います。
+    ドライバはdvipdfmxを使います。ドキュメントクラス指定時に宣言していてれば、ここで指定する必要はありません。
+    画像のバウンディングボックスに「HiResBoundingBox」を使う場合は、hiresbbオプションを付けておきます。
+
+*** hyperrefパッケージ
+
+    LaTeX文書内にハイパーリンクを置く場合には、hyperrefパッケージを使うとよい。
+    しかし、日本語のドキュメントクラスを使うとページから文章がはみ出たり、目次のしおりが文字化けしたりするので、以下のように対処する必要がある。
+
+**** PXjahyperパッケージも読み込む
+
+     #+begin_src latex
+\usepackage{pxjahyper}
+     #+end_src
+
+     PXjahyperパッケージを読み込んでおけば、万事解決するみたい。
+     それでも解決しない場合は、以下のように個別に対処する。
+
+**** ページサイズ対策
+
+     #+begin_src latex
+\hypersetup{setpagesize=false}
+     #+end_src
+
+**** しおりの文字化け対策
+
+     #+begin_src latex
+\usepackage{atbegshi}
+\AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
+\AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
+     #+end_src
+
+     何をしてくのか全く分かっていないけれど、両方書いておけばいい。
+     それでだめな場合は片方にする。
