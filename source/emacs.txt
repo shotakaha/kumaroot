@@ -13,11 +13,10 @@
 ** Emacs + Prelude
 
    Emacsは設定をきちんとしないと便利になりません。
-   それを一から設定するのも面白いのですが、
-   それはなかなかめんどくさいです。
-
-   めんどくさがり屋さんのために（？）、
+   それを一から設定するのも面白いのですが、それはなかなかめんどくさいです。
+   そんなめんどくさがり屋さんのために（？）、
    GitHubで公開されているEmacs初期設定集があります。
+   （ありがたや、ありがたや）
 
    [[https://github.com/bbatsov/prelude][Prelude]] はそのひとつです。
    他にも、[[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]] や [[https://github.com/eschulte/emacs24-starter-kit][emacs24-starter-kit]] など探せばいろいろありますが、
