@@ -22,11 +22,12 @@ ROOTの使い方
 
    root-install
    root-tutorial
+   root-canvas
+
 ..   histograms
      ttree
      tchain
      tfile
-     tcanvas
      tstring
 
 その他

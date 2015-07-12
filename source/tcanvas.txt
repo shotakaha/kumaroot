@@ -4,34 +4,34 @@
 
    ROOTのプロンプト内で下のように入力すると、簡単に確認できる。
 
-   #+begin_src c++
+#+begin_src cpp
 root> TCanvas c
 root> c.DrawColorTable()
-   #+end_src
+#+end_src
 
 
 ** グラフの軸をログ表示にしたい
 
-   #+begin_src c++
+#+begin_src cpp
 TCanvas *c1;
 c1->SetLogy();
-   #+end_src
+#+end_src
 
 *** キャンバスを分割している場合
 
     まず、分割したいキャンバスに移動する
 
-    #+begin_src c++
+#+begin_src cpp
 c1->cd(2)->SetLogy();
 h1->Draw();
-    #+end_src
+#+end_src
 
     gPadは current canvas へのポインタなので、下のようにも書くことができる。
 
-    #+begin_src c++
+#+begin_src cpp
 c1->cd(2);
 gPad->SetLogy();
-    #+end_src
+#+end_src
 
 ** 複数のキャンバスをPDFに保存したい
 
@@ -40,7 +40,7 @@ gPad->SetLogy();
 
    ROOT公式ユーザーズガイド “9. Graphics and the Graphical Userinterface : The Postscript Interface” (p139)参照
 
-   #+begin_src c++
+#+begin_src cpp
 TString name;
 name.Form("canv.pdf");
 TCanvas *c1 = new TCanvas(name.Data(), name.Data(), 1000, 500);
@@ -52,15 +52,15 @@ for (Int_t ihist = 0; ihist < Nhists; ihist++) {
     c1->Print(name, "pdf")       // ここで、キャンバスを保存する
 }
 c1->Print(name + "]", "pdf");    // ここで"canv.pdf"を閉じる感じ
-   #+end_src
+#+end_src
 
    最後の一文を以下のように変更すれば、別のTCanvasオブジェクトを追加し
    て保存することができる。
 
-   #+begin_src c++
+#+begin_src cpp
 c2->Print(name, "pdf")
 c2->Print(name + "]", "pdf")
-  #+end_src
+#+end_src
 
 *** “[“と”(“の違いについて
 
