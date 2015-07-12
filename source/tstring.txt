@@ -6,22 +6,22 @@
 
 ** フォーマット文字列を作りたい
 
-   #+begin_src c++
+#+begin_src cpp
 TString str;
 str.Form("Hist%d", i);
-   #+end_src
+#+end_src
 
 ** 文字列を取り出す
 
-   #+begin_src c++
+#+begin_src cpp
 str.Data();
-   #+end_src
+#+end_src
 
 ** 使い方の一例
 
    複数のヒストグラムをループで生成したいときなどによく使います。
 
-   #+begin_src c++
+#+begin_src cpp
    const Int_t nhist = 10;
    TString hname, htitle;
    for (Int_t i = 0; i < nhist; i++) {
@@ -29,4 +29,4 @@ str.Data();
        htitle.Form("%s;%s;%s", hname.Data(), "x", "y");
        h[i] = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
    }
-   #+end_src
+#+end_src
