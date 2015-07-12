@@ -26,11 +26,10 @@ ROOTの使い方
    root-hist
    root-tree
    root-chain
+   root-file
+   root-string
    root-canvas
 
-..   tchain
-     tfile
-     tstring
 
 その他
 ------------------------------
