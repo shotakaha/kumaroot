@@ -22,7 +22,7 @@ OrgのreSTエクスポート（ ``ox-rst`` ）が、うまくいかないので 
     $ cd $KUMAROOT
     $ pandoc -f org -t rst source/FILENAME.txt -o source/FILENAME.rst
 
-おためしワンライナー。これをMakefileに書いておけばいいのかもしれない。
+おためしワンライナー。これを ``Makefile`` に書いておけばいいのかもしれない。
 
 .. code-block:: bash
 
@@ -33,7 +33,7 @@ OrgのreSTエクスポート（ ``ox-rst`` ）が、うまくいかないので 
 PDF変換
 -------
 
-PDFの変換には、pdflatex／dvipdfmxを使う。
+PDFの変換には ``pdflatex`` ／ ``dvipdfmx`` を使う。
 
 .. code-block:: bash
 
@@ -79,9 +79,8 @@ LaTeXドキュメントの設定（ ``latex_elements`` ）
 プリアンブルの追加（ ``latex_elements['preamble']`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-上の ``latex_elements``
-の中で複数のパッケージを書くと見た目がカッコ悪いので、 以下のように
-``latex_elements['preamble']`` に直接追加することにした。
+上の ``latex_elements`` の中で複数のパッケージを書くと見た目がカッコ悪いので、
+以下のように ``latex_elements['preamble']`` に直接追加することにした。
 
 .. code-block:: python
 
@@ -93,8 +92,8 @@ LaTeXドキュメントの設定（ ``latex_elements`` ）
 LaTeXのドキュメントクラスの設定（ ``latex_docclass`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``latex_documents`` はデフォルトのままにしておき、 ``latex_docclass``
-を変更する。
+``latex_documents`` はデフォルトのままにしておき、
+``latex_docclass`` を変更する。
 
 .. code-block:: python
 
@@ -105,8 +104,8 @@ LaTeXのドキュメントクラスの設定（ ``latex_docclass`` ）
 LaTeXの表紙の設定（ ``latex_logo`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-表紙に挿入する絵の設定。 必要ないなら ``None``
-（デフォルト値）にしておけばよい。
+表紙に挿入する絵の設定。
+必要ないなら ``None`` （デフォルト値）にしておけばよい。
 
 .. code-block:: python
 
@@ -120,19 +119,19 @@ HTMLテーマの設定
 ~~~~~~~~~~~~~~~~
 
 まず、 ``pip`` を使って ``sphinx_bootstrap_theme`` をインストールする。
-登録されているパッケージ名は ``sphinx-bootstrap-theme``
-（ハイフンでつないである）という、
-ちょっとしたトラップがある（そのうち直るのかな？）
+登録されているパッケージ名は
+``sphinx-bootstrap-theme`` （ハイフンでつないである）という、
+ちょっとしたトラップがある。
 
-インストール時にエラーが出たので、エラーメッセージに従って、 ``sudo -H``
-を使って実行した。
+インストール時にエラーが出たので、
+エラーメッセージに従って、 ``sudo -H`` を使って実行した。
 
 .. code-block:: python
 
     $ sudo -H pip install sphinx-bootstrap-theme
 
 `Installation <https://ryan-roemer.github.io/sphinx-bootstrap-theme/README.html#installation>`__
-の通りに、 ``html_theme`` 、 ``html_theme_path`` を設定する。
+の通りに ``html_theme`` と ``html_theme_path`` を設定する。
 
 .. code-block:: python
 
@@ -140,8 +139,8 @@ HTMLテーマの設定
     html_theme = 'bootstrap'
     html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
-``html_theme_options`` は `Theme
-options <https://ryan-roemer.github.io/sphinx-bootstrap-theme/README.html#theme-options>`__
+``html_theme_options`` は
+`Theme options <https://ryan-roemer.github.io/sphinx-bootstrap-theme/README.html#theme-options>`__
 をとりあえずコピペして、 いろいろテストしてみる。
 
 .. code-block:: python
