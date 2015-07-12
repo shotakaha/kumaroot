@@ -22,12 +22,14 @@ ROOTの使い方
 
    root-install
    root-tutorial
-..   histograms
-     ttree
-     tchain
-     tfile
-     tcanvas
-     tstring
+   root-root
+   root-hist
+   root-tree
+   root-chain
+   root-file
+   root-string
+   root-canvas
+
 
 その他
 ------------------------------
@@ -37,7 +39,7 @@ ROOTの使い方
    sphinx
    emacs
    emacs-org
-..     emacs-yatex
+   emacs-yatex
 
 
 
