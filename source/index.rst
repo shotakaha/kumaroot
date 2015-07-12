@@ -4,6 +4,7 @@
    contain the root `toctree` directive.
 
 .. Welcome to KumaROOT's documentation!
+
 くまるーとくまー
 ====================================
 
@@ -21,14 +22,12 @@ ROOTの使い方
 
    root-install
    root-tutorial
-   ..
-      histograms
-   ..
-      ttree
-      tchain
-      tfile
-      tcanvas
-      tstring
+..   histograms
+     ttree
+     tchain
+     tfile
+     tcanvas
+     tstring
 
 その他
 ------------------------------
@@ -36,8 +35,10 @@ ROOTの使い方
    :maxdepth: 2
 
    sphinx
-..   emacs
-   emacs-yatex
+   emacs
+   emacs-org
+..     emacs-yatex
+
 
 
 Indices and tables
