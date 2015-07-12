@@ -23,11 +23,11 @@ ROOTの使い方
    root-install
    root-tutorial
    root-hist
+   root-tree
+   root-chain
    root-canvas
 
-..   histograms
-     ttree
-     tchain
+..   tchain
      tfile
      tstring
 
