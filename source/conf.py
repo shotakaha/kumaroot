@@ -183,7 +183,7 @@ html_theme_options = {
     #
     # Options are nothing (default) or the name of a valid theme
     # such as "amelia" or "cosmo".
-    # 'bootswatch_theme': "united",
+    'bootswatch_theme': "united",
     # 'bootswatch_theme': "cosmo",
 
     # Choose Bootstrap version.
