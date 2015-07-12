@@ -4,7 +4,7 @@ ROOT tutorial 編
 この章では、主にROOTに付属しているtutorialを使用して、使い方を簡単に紹介します。
 前節の最後にも書きましたが、手元にコピーを作っておきましょう。
 
-.. code:: bash
+.. code-block:: bash
 
     $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
 
@@ -14,7 +14,7 @@ ROOT tutorial 編
 とりあえず起動
 --------------
 
-.. code:: bash
+.. code-block:: bash
 
     $ cd ~/TEST/root6/tutorials/
     $ root
@@ -27,7 +27,7 @@ ROOT tutorial 編
 とりあえず終了
 --------------
 
-.. code:: bash
+.. code-block:: bash
 
     root [0] .q
 
@@ -40,7 +40,7 @@ rootlogon.Cとrootlogoff.C
 さて、tutorials をコピーしたディレクトリでROOTを起動／終了すると、
 以下の様なメッセージが表示されたはずです。
 
-.. code:: bash
+.. code-block:: bash
 
     Welcome to the ROOT tutorials
 
@@ -53,7 +53,7 @@ rootlogon.Cとrootlogoff.C
 
     root [0]
 
-.. code:: bash
+.. code-block:: bash
 
     Taking a break from ROOT? Hope to see you back!
 
@@ -86,7 +86,7 @@ ROOT内で実行する場合は、 ``.x ファイル名`` と入力します。
 ファイル名の部分は ``TAB補完`` ができます。
 これをbashで実行する場合は以下のようにします。
 
-.. code:: bash
+.. code-block:: bash
 
     $ root demos.C
 
