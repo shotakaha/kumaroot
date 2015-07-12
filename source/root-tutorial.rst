@@ -109,37 +109,41 @@ ROOT内で実行する場合は、 ``.x ファイル名`` と入力します。
 hsimple.Cを実行してみる
 -----------------------
 
-#+begin\ :sub:`src` sh $ root hsimple.C
+.. code-block:: bash
 
-#+end\ :sub:`src`
+   $ root hsimple.C
 
-前節のようにボタンを押して実行するか、上の行の様にコマンドラインか
-ら「hsimple.C」を走らせると、キャンバスが表示され、ヒストグラムが成
-長していきます。それと同時に、「hsimple.root」というROOTファイルが
-作成されます。
 
-「hsimple.C」を開いて、上から順番に何をしているのかを確認してみましょ
-う。
+前節のようにボタンを押して実行するか、
+上の行の様にコマンドラインから ``hsimple.C`` を走らせると、
+キャンバスが表示され、ヒストグラムが成長していきます。
+それと同時に、 ``hsimple.root`` というROOTファイルが作成されます。
+
+``hsimple.C`` を開いて、上から順番に何をしているのかを確認してみましょう。
+
 
 インクルードファイル
 ~~~~~~~~~~~~~~~~~~~~
 
-とりあえず無視してOKです。コンパイルする場合は必要ですが、マクロで
-動かす場合は書かなくてもよいです。
+``#include`` で始まるのはインクルードファイルです。
+コンパイルする場合は必須ですが、マクロで動かす場合は書かなくてもよいです。
+なので今は無視します。
 
-::
+.. code-block:: cpp
 
-    #include <TFile.h>
-    #include <TNtuple.h>
-    #include <TH2.h>
-    #include <TProfile.h>
-    #include <TCanvas.h>
-    #include <TFrame.h>
-    #include <TROOT.h>
-    #include <TSystem.h>
-    #include <TRandom3.h>
-    #include <TBenchmark.h>
-    #include <TInterpreter.h>
+   #include <TFile.h>
+   #include <TNtuple.h>
+   #include <TH2.h>
+   #include <TProfile.h>
+   #include <TCanvas.h>
+   #include <TFrame.h>
+   #include <TROOT.h>
+   #include <TSystem.h>
+   #include <TRandom3.h>
+   #include <TBenchmark.h>
+   #include <TInterpreter.h>
+
+
 
 関数の定義
 ~~~~~~~~~~
@@ -147,29 +151,32 @@ hsimple.Cを実行してみる
 マクロの場合ファイル名と関数名は一緒にします。
 戻り型はなんでもOKです。引数を指定することもできます。
 
-::
+.. code-block:: cpp
 
-    TFile *hsimple(Int_t get=0)
+   TFile *hsimple(Int_t get=0)
+
 
 コメントの挿入
 ~~~~~~~~~~~~~~
 
 コメントはC++の作法で挿入できます
 
-::
+.. code-block:: cpp
 
-    {
-    //  This program creates :
-    //    - a one dimensional histogram
-    //    - a two dimensional histogram
-    //    - a profile histogram
-    //    - a memory-resident ntuple
-    //
-    //  These objects are filled with some random numbers and saved on a file.
-    //  If get=1 the macro returns a pointer to the TFile of "hsimple.root"
-    //          if this file exists, otherwise it is created.
-    //  The file "hsimple.root" is created in $ROOTSYS/tutorials if the caller has
-    //  write access to this directory, otherwise the file is created in $PWD
+   {
+   //  This program creates :
+   //    - a one dimensional histogram
+   //    - a two dimensional histogram
+   //    - a profile histogram
+   //    - a memory-resident ntuple
+   //
+   //  These objects are filled with some random numbers and saved on a file.
+   //  If get=1 the macro returns a pointer to the TFile of "hsimple.root"
+   //          if this file exists, otherwise it is created.
+   //  The file "hsimple.root" is created in $ROOTSYS/tutorials if the caller has
+   //  write access to this directory, otherwise the file is created in $PWD
+
+
 
 ファイル名の宣言
 ~~~~~~~~~~~~~~~~
@@ -177,66 +184,73 @@ hsimple.Cを実行してみる
 TStringクラスという文字列クラスを使っています。
 普通のC/C++の関数を使うよりはるかに楽なので、積極的に使うと良いと思います。
 
-::
+.. code-block:: cpp
 
-       TString filename = "hsimple.root";
-       TString dir = gSystem->UnixPathName(__FILE__);
-       dir.ReplaceAll("hsimple.C","");
-       dir.ReplaceAll("/./","/");
-       TFile *hfile = 0;
-       if (get) {
-          // if the argument get =1 return the file "hsimple.root"
-          // if the file does not exist, it is created
-          TString fullPath = dir+"hsimple.root";
-          if (!gSystem->AccessPathName(fullPath,kFileExists)) {
-             hfile = TFile::Open(fullPath); //in $ROOTSYS/tutorials
-             if (hfile) return hfile;
-          }
-          //otherwise try $PWD/hsimple.root
-          if (!gSystem->AccessPathName("hsimple.root",kFileExists)) {
-             hfile = TFile::Open("hsimple.root"); //in current dir
-             if (hfile) return hfile;
-          }
+   TString filename = "hsimple.root";
+   TString dir = gSystem->UnixPathName(__FILE__);
+   dir.ReplaceAll("hsimple.C","");
+   dir.ReplaceAll("/./","/");
+   TFile *hfile = 0;
+   if (get) {
+       // if the argument get =1 return the file "hsimple.root"
+       // if the file does not exist, it is created
+       TString fullPath = dir+"hsimple.root";
+       if (!gSystem->AccessPathName(fullPath,kFileExists)) {
+           hfile = TFile::Open(fullPath); //in $ROOTSYS/tutorials
+           if (hfile) return hfile;
        }
-       //no hsimple.root file found. Must generate it !
-       //generate hsimple.root in current directory if we have write access
-       if (gSystem->AccessPathName(".",kWritePermission)) {
-          printf("you must run the script in a directory with write access\n");
-          return 0;
+       //otherwise try $PWD/hsimple.root
+       if (!gSystem->AccessPathName("hsimple.root",kFileExists)) {
+           hfile = TFile::Open("hsimple.root"); //in current dir
+           if (hfile) return hfile;
        }
+   }
+   //no hsimple.root file found. Must generate it !
+   //generate hsimple.root in current directory if we have write access
+   if (gSystem->AccessPathName(".",kWritePermission)) {
+       printf("you must run the script in a directory with write access\n");
+       return 0;
+   }
+
+
+
 
 ROOTファイルを開く
 ~~~~~~~~~~~~~~~~~~
 
-TFileクラスを使います。直前のif文の中ではファイルの存在を確認して
-います。ファイルがある場合は、TFile::Openメソッドでファイルを開い
-ています。ない場合は、TFile::TFileコンストラクタで新しいTFileオブ
-ジェクトを作成しています。
+``TFile`` クラスを使います。
+直前の ``if`` 文の中ではファイルの存在を確認しています。
+ファイルがある場合は、 ``TFile::Open`` メソッドでファイルを開いています。
+ない場合は、 ``TFile::TFile`` コンストラクタで新しい ``TFileオブジェクト`` を作成しています。
 
-::
+.. code-block:: cpp
 
-       TFile *hfile = 0;
+   TFile *hfile = 0;
 
-       hfile = TFile::Open(fullPath); //in $ROOTSYS/tutorials
-       hfile = TFile::Open("hsimple.root"); //in current dir
+   hfile = TFile::Open(fullPath); //in $ROOTSYS/tutorials
+   hfile = TFile::Open("hsimple.root"); //in current dir
 
-       hfile = (TFile*)gROOT->FindObject(filename); if (hfile) hfile->Close();
-       hfile = new TFile(filename,"RECREATE","Demo ROOT file with histograms");
+   hfile = (TFile*)gROOT->FindObject(filename); if (hfile) hfile->Close();
+   hfile = new TFile(filename,"RECREATE","Demo ROOT file with histograms");
+
+
 
 ヒストグラムを作成する
 ~~~~~~~~~~~~~~~~~~~~~~
 
-TH1クラス、TH2クラスなどを使います。
-ここでは、TProfileクラスやTNtupleクラスも使われています。
+``TH1`` クラス、 ``TH2`` クラスなどを使います。
+ここでは ``TProfile`` クラスや ``TNtuple`` クラスも使われています。
 
-::
+.. code-block:: cpp
 
-       // Create some histograms, a profile histogram and an ntuple
-       TH1F *hpx = new TH1F("hpx","This is the px distribution",100,-4,4);
-       hpx->SetFillColor(48);
-       TH2F *hpxpy = new TH2F("hpxpy","py vs px",40,-4,4,40,-4,4);
-       TProfile *hprof = new TProfile("hprof","Profile of pz versus px",100,-4,4,0,20);
-       TNtuple *ntuple = new TNtuple("ntuple","Demo ntuple","px:py:pz:random:i");
+   // Create some histograms, a profile histogram and an ntuple
+   TH1F *hpx = new TH1F("hpx","This is the px distribution",100,-4,4);
+   hpx->SetFillColor(48);
+   TH2F *hpxpy = new TH2F("hpxpy","py vs px",40,-4,4,40,-4,4);
+   TProfile *hprof = new TProfile("hprof","Profile of pz versus px",100,-4,4,0,20);
+   TNtuple *ntuple = new TNtuple("ntuple","Demo ntuple","px:py:pz:random:i");
+
+
 
 プロセス時間の測定開始
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -244,71 +258,81 @@ TH1クラス、TH2クラスなどを使います。
 このマクロを実行すると、ターミナル上にプロセス時間が表示されます。
 この部分から測定を開始しています。
 
-::
+.. code-block:: cpp
 
-       gBenchmark->Start("hsimple");
+   gBenchmark->Start("hsimple");
+
+
 
 キャンバスの作成
 ~~~~~~~~~~~~~~~~
 
-グラフを描く領域をキャンバスと呼びます。TCanvasクラスを使います。
+グラフを描く領域をキャンバスと呼びます。
+``TCanvas`` クラスを使います。
 
-::
+.. code-block:: cpp
 
-       // Create a new canvas.
-       TCanvas *c1 = new TCanvas("c1","Dynamic Filling Example",200,10,700,500);
-       c1->SetFillColor(42);
-       c1->GetFrame()->SetFillColor(21);
-       c1->GetFrame()->SetBorderSize(6);
-       c1->GetFrame()->SetBorderMode(-1);
+   // Create a new canvas.
+   TCanvas *c1 = new TCanvas("c1","Dynamic Filling Example",200,10,700,500);
+   c1->SetFillColor(42);
+   c1->GetFrame()->SetFillColor(21);
+   c1->GetFrame()->SetBorderSize(6);
+   c1->GetFrame()->SetBorderMode(-1);
+
+
 
 ヒストグラムに値を詰める
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 このマクロでは、ヒストグラムにランダムな値を詰め込んでいます。
 
-::
+.. code-block:: cpp
 
-       // Fill histograms randomly
-       TRandom3 random;
-       Float_t px, py, pz;
-       const Int_t kUPDATE = 1000;
-       for (Int_t i = 0; i < 25000; i++) {
-          random.Rannor(px,py);
-          pz = px*px + py*py;
-          Float_t rnd = random.Rndm(1);
-          hpx->Fill(px);
-          hpxpy->Fill(px,py);
-          hprof->Fill(px,pz);
-          ntuple->Fill(px,py,pz,rnd,i);
+   // Fill histograms randomly
+   TRandom3 random;
+   Float_t px, py, pz;
+   const Int_t kUPDATE = 1000;
+   for (Int_t i = 0; i < 25000; i++) {
+       random.Rannor(px,py);
+       pz = px*px + py*py;
+       Float_t rnd = random.Rndm(1);
+       hpx->Fill(px);
+       hpxpy->Fill(px,py);
+       hprof->Fill(px,pz);
+       ntuple->Fill(px,py,pz,rnd,i);
+
 
 キャンバスに描画する
 ~~~~~~~~~~~~~~~~~~~~
 
 TH1::Draw()メソッドで描画します。
 
-::
+.. code-block:: cpp
 
-          if (i && (i%kUPDATE) == 0) {
-             if (i == kUPDATE) hpx->Draw();
-             c1->Modified();
-             c1->Update();
-             if (gSystem->ProcessEvents())
-                break;
-          }
+       if (i && (i%kUPDATE) == 0) {
+           if (i == kUPDATE) hpx->Draw();
+           c1->Modified();
+           c1->Update();
+           if (gSystem->ProcessEvents())
+               break;
+           }
        }
+
+
 
 プロセス時間の表示
 ~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: cpp
 
-       gBenchmark->Show("hsimple");
+   gBenchmark->Show("hsimple");
+
+
 
 ROOTファイルに保存する
 ~~~~~~~~~~~~~~~~~~~~~~
 
-::
+.. code-block:: cpp
 
        // Save all objects in this file
        hpx->SetFillColor(0);
@@ -317,6 +341,6 @@ ROOTファイルに保存する
        c1->Modified();
        return hfile;
 
-    // Note that the file is automatically close when application terminates
-    // or when the file destructor is called.
+       // Note that the file is automatically close when application terminates
+       // or when the file destructor is called.
     }
