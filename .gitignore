@@ -109,4 +109,4 @@ sympy-plots-for-*.tex/
 *.xdy
 
 # reST
-*.rst
+# *.rst
