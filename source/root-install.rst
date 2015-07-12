@@ -7,7 +7,7 @@ ROOTのチュートリアルの存在について紹介しておきます。
 オススメのインストール方法（for Mac ユーザ）
 --------------------------------------------
 
-.. code:: bash
+.. code-block:: bash
 
     $ sudo port install root5    ## for ROOT5 user
     $ sudo port install root6    ## for ROOT6 user
@@ -45,7 +45,7 @@ Linuxを使っている場合は、Gitを使うとよいでしょう。
 STEP1
     ROOTのリポジトリをクローンします
 
-.. code:: bash
+.. code-block:: bash
 
     [any]  $ mkdir ~/repos/git
     [any]  $ cd ~/repos/git
@@ -57,7 +57,7 @@ STEP2
     ブランチ名は好きにして大丈夫です
     （今回は、タグ名と同じ名前にしています）
 
-.. code:: bash
+.. code-block:: bash
 
     [root] $ git tag -l
     [root] $ git checkout -b v5-34-08 v5-34-08
@@ -66,7 +66,7 @@ STEP5
     従来通りPREFIXを指定してconfigureします。
     失敗した場合に備えてログを残しておきます
 
-.. code:: bash
+.. code-block:: bash
 
     [root(v5-34-08)] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-34-08
     [root(v5-34-08)] $ make 2>&1 | tee make.log                   ## buiding ROOT
@@ -83,7 +83,7 @@ STEP5
 
 ググればたくさん出てきますが、一応紹介しておきます。
 
-.. code:: bash
+.. code-block:: bash
 
     ## STEP1 : make directory for tar.gz file and wget it
     $ cd /usr/local/heplib/tarballs
@@ -111,7 +111,7 @@ Windowsはよく分かりません。ごめんなさい。たぶん
 ROOT5 と ROOT6 を試してみたい
 -----------------------------
 
-.. code:: bash
+.. code-block:: bash
 
     $ sudo port select root root6   ## use ROOT6
     $ sudo port select root root5   ## use ROOT5
@@ -123,7 +123,7 @@ MacPortsでROOTをインストールする利点のひとつは、
 Pythonのバージョン切り替えなどもできます。
 どのパッケージが使えるかは以下のコマンドで確認できます
 
-.. code:: bash
+.. code-block:: bash
 
     $ port select --summary
 
@@ -148,7 +148,7 @@ ROOTマクロなどを実行する際に使うインタプリタが変更され�
 ``ROOT5`` のチュートリアルを ``ROOT6`` で実行してみましょう。
 ``warning`` や ``error`` がたくさん表示されます。
 
-.. code:: bash
+.. code-block:: bash
 
     $ sudo port select root root6    # ROOT6に切り替える
     $ cd /opt/local/libexec/root5/share/doc/root/tutorials/    # ROOT5のチュートリアルに移動
@@ -178,7 +178,7 @@ ROOTマクロなどを実行する際に使うインタプリタが変更され�
 PyROOTを使いたい
 ----------------
 
-.. code:: bash
+.. code-block:: bash
 
     $ sudo port install root5 +python27   ## when ROOT5, you need to specify +pythonXX variants
     $ sudo port install root6             ## when ROOT6, no need to specify variants
@@ -202,7 +202,7 @@ CERNには「へびつかい」が多いそうです。
 EmacsでROOTを編集したい
 -----------------------
 
-.. code:: bash
+.. code-block:: bash
 
     $ locate root-help.el    # check path
 
@@ -213,7 +213,7 @@ Elispパッケージが一緒にインストールされます。
 locateコマンドでどこにあるか調べておきましょう。
 ちなみに、僕の場合（＝MacPortsの場合）、以下にありました。
 
-.. code:: bash
+.. code-block:: bash
 
    ## ROOT5
    /opt/local/libexec/root5/share/emacs/site-lisp/root-help.el
@@ -225,7 +225,7 @@ locateコマンドでどこにあるか調べておきましょう。
 ROOTのtutorialを使いたい
 ------------------------
 
-.. code:: bash
+.. code-block:: bash
 
    ## ROOT5
    /opt/local/libexec/root5/share/doc/root/tutorials/
@@ -240,7 +240,7 @@ ROOTのtutorialを使いたい
 しておきましょう。以下に一例を示しましたが、自分の環境に合わせて適
 宜変更してください。
 
-.. code:: bash
+.. code-block:: bash
 
     $ cp -r /opt/local/libexec/root5/share/doc/root/tutorials ~/TEST/root5/
     $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
