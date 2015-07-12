@@ -9,7 +9,7 @@
 
    それらに必要なROOTのクラス・メソッドは以下通りです。
 
-#+begin_src c++
+#+begin_src cpp
 TH1D TH1D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Double_t xup)
 Int_t Fill(Double_t x)
 void Draw(Option_t* option = "")
@@ -26,7 +26,7 @@ void Draw(Option_t* option = "")
    - Fill :: ヒストグラムに値を詰めるメソッド
    - Draw :: ヒストグラムを描くメソッド。描画のオプションを設定できる。
 
-#+begin_src c++
+#+begin_src cpp
 TString hname, htitle;
 hname.Form("hname");    // <------------------------ object name of histogram
 htitle.Form("title;xtitle;ytitle;");    // <-------- title and axis name
@@ -42,7 +42,7 @@ TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 
 ** ２次元ヒストグラムを作成したい : TH2D
 
-#+begin_src c++
+#+begin_src cpp
 TH2D TH2D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, Double_t ylow, Double_t yup)
 Int_t Fill(Double_t x, Double_t y)
 void Draw(Option_t* option = "")
@@ -51,20 +51,20 @@ void Draw(Option_t* option = "")
 
 ** タイトルを変更したい : SetTitle
 
-#+begin_src c++
+#+begin_src cpp
 void SetTitle(const char* title = "") 	// *MENU*
 #+end_src
 
 ** 統計ボックスを表示したい : SetStats
 
-#+begin_src c++
+#+begin_src cpp
 void SetStats(Bool_t stats = kTRUE) 	// *MENU*
 #+end_src
 
 
 ** X軸名を設定したい : SetXTitle
 
-#+begin_src c++
+#+begin_src cpp
 void SetXTitle(const char* title)
 #+end_src
 
@@ -73,7 +73,7 @@ void SetXTitle(const char* title)
 
 ** 平均値、RMSを知りたい : GetMean, GetRMS
 
-#+begin_src c++
+#+begin_src cpp
 Double_t GetMean(Int_t axis = 1) const
 Double_t GetRMS(Int_t axis = 1) const
 #+end_src
