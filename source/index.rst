@@ -39,7 +39,7 @@ ROOTの使い方
    sphinx
    emacs
    emacs-org
-..     emacs-yatex
+   emacs-yatex
 
 
 
