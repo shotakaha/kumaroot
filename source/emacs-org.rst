@@ -15,6 +15,8 @@ org-latex
 
 ``Org-mode`` で作成した文書を LaTeX 文書に変換する方法です。
 
+
+
 ワークフロー
 ~~~~~~~~~~~~
 
@@ -24,114 +26,119 @@ org-latex
 #. YaTeXコマンドでコンパイル（ ``C-c C-t j`` ）
 #. YaTeXコマンドでプレビュー（ ``C-c C-t p`` ）
 
+
+
 必要なパッケージ（ ``ox-latex`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-LaTeXエクスポートは ``ox-latex.el`` が担っている。 ``package.el``
-でインストールした場合は ``autoload`` されるはずなので、
+LaTeXエクスポートは ``ox-latex.el`` が担っている。
+最近（2014年）``org-latex`` から ``ox-latex`` に変更されたみたい。
+``package.el`` でインストールした場合は ``autoload`` されるはずなので、
 ``(require 'ox-latex)`` は特に要らないはず。
 
-最近（2014年）、 ``org-latex`` から ``ox-latex`` に変更されたみたい。 （
-``ox-`` は ``org-export`` の略だと思う）
+
 
 ドキュメントクラスの設定（ ``org-latex-default-class`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-LaTeXエクスポート時に使うドキュメントクラスを指定する。デフォルトは
-``article`` 。 日本語を使う場合は、 ``jsarticle`` にすると良い。
+LaTeXエクスポート時に使うドキュメントクラスを指定する。
+デフォルトは ``article`` 。
+日本語を使う場合は、 ``jsarticle`` にすると良い。
 ただし、まずは ``org-latex-classes`` （後述）に追加する必要がある。
-Orgファイル中の ``#+LATEX_CLASS:``
-（大文字／小文字の区別なし）で指定できる
+Orgファイル中の ``#+LATEX_CLASS:`` （大文字／小文字の区別なし）で指定できる
 （ない場合はデフォルト値が使われる）。
 
-.. code:: common-lisp
+.. code-block:: emacs-lisp
 
-        Original value was
-    (("article"    ;; <-- the name of the class
-      ;; HEADER-STRING : documentclass (+ default-packages)
-      "\\documentclass[11pt]{article}"
-      ;; SECTIONING : matching for Org headings and LaTeX sectioning
-      ("\\section{%s}" . "\\section*{%s}")
-      ("\\subsection{%s}" . "\\subsection*{%s}")
-      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-      ("\\paragraph{%s}" . "\\paragraph*{%s}")
-      ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+   Original value was
+   (("article"    ;; <-- the name of the class
+        ;; HEADER-STRING : documentclass (+ default-packages)
+        "\\documentclass[11pt]{article}"
+        ;; SECTIONING : matching for Org headings and LaTeX sectioning
+        ("\\section{%s}" . "\\section*{%s}")
+        ("\\subsection{%s}" . "\\subsection*{%s}")
+        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+        ("\\paragraph{%s}" . "\\paragraph*{%s}")
+        ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
 
-     ("report"
-      "\\documentclass[11pt]{report}"
-      ("\\part{%s}" . "\\part*{%s}")
-      ("\\chapter{%s}" . "\\chapter*{%s}")
-      ("\\section{%s}" . "\\section*{%s}")
-      ("\\subsection{%s}" . "\\subsection*{%s}")
-      ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+    ("report"
+        "\\documentclass[11pt]{report}"
+        ("\\part{%s}" . "\\part*{%s}")
+        ("\\chapter{%s}" . "\\chapter*{%s}")
+        ("\\section{%s}" . "\\section*{%s}")
+        ("\\subsection{%s}" . "\\subsection*{%s}")
+        ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
 
-     ("book"
-      "\\documentclass[11pt]{book}"
-      ("\\part{%s}" . "\\part*{%s}")
-      ("\\chapter{%s}" . "\\chapter*{%s}")
-      ("\\section{%s}" . "\\section*{%s}")
-      ("\\subsection{%s}" . "\\subsection*{%s}")
-      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+    ("book"
+        "\\documentclass[11pt]{book}"
+        ("\\part{%s}" . "\\part*{%s}")
+        ("\\chapter{%s}" . "\\chapter*{%s}")
+        ("\\section{%s}" . "\\section*{%s}")
+        ("\\subsection{%s}" . "\\subsection*{%s}")
+        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
+
 
 ドキュメントクラスの追加（ ``org-latex-classes`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``alist`` になっているので、 ``add-to-list``
-を使って自分の設定を追加できる。 ``jsarticle``
-など、日本語ドキュメントクラスを追加しておくと良い。
+``alist`` になっているので、 ``add-to-list`` を使って自分の設定を追加できる。
+``jsarticle`` など、日本語ドキュメントクラスを追加しておくと良い。
 
-.. code:: commonlisp
+.. code-block:: emacs-lisp
 
-    (add-to-list 'org-latex-classes
-                 '("jsarticle"
-                   "\\documentclass[dvipdfmx,12pt]{jsarticle}"
-                   ("\\section{%s}" . "\\section*{%s}")
-                   ("\\subsection{%s}" . "\\subsection*{%s}")
-                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-                   )
-                 )
-    (add-to-list 'org-latex-classes
-                 '("jsreport"
+   (add-to-list 'org-latex-classes
+                '("jsarticle"
+                  "\\documentclass[dvipdfmx,12pt]{jsarticle}"
+                  ("\\section{%s}" . "\\section*{%s}")
+                  ("\\subsection{%s}" . "\\subsection*{%s}")
+                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                )
+   )
+   (add-to-list 'org-latex-classes
+                '("jsreport"
                   "\\documentclass[dvipdfmx,12pt,report]{jsbook}"
                   ("\\chapter{%s}" . "\\chapter*{%s}")
                   ("\\section{%s}" . "\\section*{%s}")
                   ("\\subsection{%s}" . "\\subsection*{%s}")
                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                  )
                 )
-    (add-to-list 'org-latex-classes
-                 '("jsbook"
-                   "\\documentclass[dvipdfmx,12pt]{jsbook}"
-                   ("\\part{%s}" . "\\part*{%s}")
-                   ("\\chapter{%s}" . "\\chapter*{%s}")
-                   ("\\section{%s}" . "\\section*{%s}")
-                   ("\\subsection{%s}" . "\\subsection*{%s}")
-                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                   )
-                 )
-    (add-to-list 'org-latex-classes
-                 '("bxjsarticle"
-                   "\\documentclass[pdflatex,jadriver=standard,12pt]{bxjsarticle}"
-                   ("\\section{%s}" . "\\section*{%s}")
-                   ("\\subsection{%s}" . "\\subsection*{%s}")
-                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-                   )
-                 )
-    (add-to-list 'org-latex-classes
-                 '("beamer"
-                   "\\documentclass[dvipdfmx,12pt]{beamer}"
-                   ("\\section{%s}" . "\\section*{%s}")
-                   ("\\subsection{%s}" . "\\subsection*{%s}")
-                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-                   )
-                 )
+   )
+   (add-to-list 'org-latex-classes
+                '("jsbook"
+                  "\\documentclass[dvipdfmx,12pt]{jsbook}"
+                  ("\\part{%s}" . "\\part*{%s}")
+                  ("\\chapter{%s}" . "\\chapter*{%s}")
+                  ("\\section{%s}" . "\\section*{%s}")
+                  ("\\subsection{%s}" . "\\subsection*{%s}")
+                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                )
+   )
+   (add-to-list 'org-latex-classes
+                '("bxjsarticle"
+                  "\\documentclass[pdflatex,jadriver=standard,12pt]{bxjsarticle}"
+                  ("\\section{%s}" . "\\section*{%s}")
+                  ("\\subsection{%s}" . "\\subsection*{%s}")
+                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                )
+   )
+   (add-to-list 'org-latex-classes
+                '("beamer"
+                  "\\documentclass[dvipdfmx,12pt]{beamer}"
+                  ("\\section{%s}" . "\\section*{%s}")
+                  ("\\subsection{%s}" . "\\subsection*{%s}")
+                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                )
+   )
+
+
 
 パッケージの追加（ ``org-latex-packages-alist`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -139,63 +146,65 @@ Orgファイル中の ``#+LATEX_CLASS:``
 LaTeXエクスポートした時に、ヘッダに挿入されるパッケージ群。
 ``org-latex-default-packages-alist`` の後に追記される。
 
-これも、 ``alist`` になっているので、 ``add-to-list``
-を使って自分の設定を追加できる。 しおりの文字化け対策として
-``pxjahyper`` パッケージや、 ``hyperref`` の設定（ ``hypersetup``
-）を追加するとよい。
+これも、 ``alist`` になっているので、
+``add-to-list`` を使って自分の設定を追加できる。
+しおりの文字化け対策として ``pxjahyper`` パッケージや
+``hyperref`` の設定（ ``hypersetup`` ）を追加するとよい。
 
 ``add-to-list`` の第２引数にパッケージかコマンドを指定する。
 ``hypersetup`` などの先頭につけるバックスラッシュはエスケープする。
-第３引数を ``t``
-にすることで、書いた順番通りにLaTeXプリアンブルに出力される。
+第３引数を ``t`` にすることで、書いた順番通りにLaTeXプリアンブルに出力される。
 
 使うパッケージは、すべてのファイルに共通なパッケージにする。
 その際、すでに設定されている ``org-format-latex-header`` や
-``org-latex-default-packages-alist``
-のパッケージとコンフリクトしないこと。 ``hyperref``
-はすでにインクルードされてるので ``hypersetup`` で指定する必要がある。
+``org-latex-default-packages-alist`` のパッケージとコンフリクトしないこと。
+``hyperref`` はすでにインクルードされてるので ``hypersetup`` で指定する必要がある。
 また、ファイル内の ``#+LATEX_HEADER:`` で個々の設定もできる。
 
-.. code:: commonlisp
+.. code-block:: emacs-lisp
 
-    ;; usepackage型
-    (add-to-list 'org-latex-packages-alist '("オプション" "パッケージ名") t)
+   ;; usepackage型
+   (add-to-list 'org-latex-packages-alist '("オプション" "パッケージ名") t)
 
-    ;; maketitle型
-    (add-to-list 'org-latex-packages-alist "\\コマンド名{オプション}" t)
+   ;; maketitle型
+   (add-to-list 'org-latex-packages-alist "\\コマンド名{オプション}" t)
+
+
 
 サンプルコード
 ^^^^^^^^^^^^^^
 
-.. code:: commonlisp
+.. code-block:: emacs-lisp
 
-    ;; しおりの文字化け対策
-    (add-to-list 'org-latex-packages-alist '("" "pxjahyper") t)
-    ;; (add-to-list 'org-latex-packages-alist '("" "atbegshi") t)
-    ;; (add-to-list 'org-latex-packages-alist "\\AtBeginShipoutFirst{\\special{pdf:tounicode EUC-UCS2}}" t)
+   ;; しおりの文字化け対策
+   (add-to-list 'org-latex-packages-alist '("" "pxjahyper") t)
+   ;; (add-to-list 'org-latex-packages-alist '("" "atbegshi") t)
+   ;; (add-to-list 'org-latex-packages-alist "\\AtBeginShipoutFirst{\\special{pdf:tounicode EUC-UCS2}}" t)
 
-    ;; hyperrefの設定
-    (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
-    (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
-    (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
+   ;; hyperrefの設定
+   (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
+   (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
+   (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
 
-    ;; その他のパッケージの追加
-    (add-to-list 'org-latex-packages-alist '("" "listings") t)
-    (add-to-list 'org-latex-packages-alist '("" "color") t)
-    (add-to-list 'org-latex-packages-alist '("" "fancyvrb") t)
+   ;; その他のパッケージの追加
+   (add-to-list 'org-latex-packages-alist '("" "listings") t)
+   (add-to-list 'org-latex-packages-alist '("" "color") t)
+   (add-to-list 'org-latex-packages-alist '("" "fancyvrb") t)
 
-    ;; 文字ハイライトに minted を使う（pdflatexじゃないと動かない）
-    ;;(add-to-list 'org-latex-packages-alist '("" "minted"))
-    (setq org-latex-listings t)
+   ;; 文字ハイライトに minted を使う（pdflatexじゃないと動かない）
+   ;;(add-to-list 'org-latex-packages-alist '("" "minted"))
+   (setq org-latex-listings t)
+
+
 
 デフォルトで使われるパッケージ（ ``org-latex-default-packages-alist`` ）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-このリストにあるパッケージは ``Org-mode``
-を動かすために必要な最低限のパッケージなので、
-基本的には変更しないこと。
-ただし、あるパッケージを使いたいときに、ここにあるパッケージと
-コンフリクトするようなら修正するようにする。
+このリストにあるパッケージは ``Org-mode`` を動かすために必要な
+最低限のパッケージなので基本的には変更しないこと。
+ただし、あるパッケージを使いたいときに、
+ここにあるパッケージとコンフリクトするようなら修正する。
+
 
 リストにあるパッケージ一覧
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -223,75 +232,88 @@ LaTeXエクスポートした時に、ヘッダに挿入されるパッケージ
 ``hyperref``
     for cross-references
 
+
+
+
+
 デフォルト設定
 ^^^^^^^^^^^^^^
 
-Emacs24.1 で多少変更されたらしい。
+``Emacs24.1`` で多少変更されたらしい。
 
-.. code:: commonlisp
+.. code-block:: emacs-lisp
 
-    Value:
-    (("AUTO" "inputenc" t)
-     ("T1" "fontenc" t)
-     ("" "fixltx2e" nil)
-     ("" "graphicx" t)
-     ("" "longtable" nil)
-     ("" "float" nil)
-     ("" "wrapfig" nil)
-     ("" "rotating" nil)
-     ("normalem" "ulem" t)
-     ("" "amsmath" t)
-     ("" "textcomp" t)
-     ("" "marvosym" t)
-     ("" "wasysym" t)
-     ("" "amssymb" t)
-     ("" "hyperref" nil)
-     "\\tolerance=1000")
+   Value:
+   (("AUTO" "inputenc" t)
+    ("T1" "fontenc" t)
+    ("" "fixltx2e" nil)
+    ("" "graphicx" t)
+    ("" "longtable" nil)
+    ("" "float" nil)
+    ("" "wrapfig" nil)
+    ("" "rotating" nil)
+    ("normalem" "ulem" t)
+    ("" "amsmath" t)
+    ("" "textcomp" t)
+    ("" "marvosym" t)
+    ("" "wasysym" t)
+    ("" "amssymb" t)
+    ("" "hyperref" nil)
+    "\\tolerance=1000")
+
+
 
 上文字、下文字の自動変換をオフにする
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: commonlisp
+.. code-block:: emacs-lisp
 
-    (setq org-use-sub-superscripts nil)
-    (setq org-export-with-sub-superscripts nil)
+   (setq org-use-sub-superscripts nil)
+   (setq org-export-with-sub-superscripts nil)
 
-Orgファイル中の ``^（ハット）`` ``_（アンダースコア）`` 以降の数文字は、
-自動的に上文字、下文字に変換されてしまいます。
-便利なのかもしれませんが、意図しない箇所も変換されてしまうのは
-やっぱり不便なのでオフにします。
+
+Orgファイル中の ``^（ハット）`` ``_（アンダースコア）`` 以降の
+英数字は自動的に上文字、下文字に変換されてしまいます。
+便利なのかもしれませんが、意図しない箇所も変換されてしまうのはやっぱり不便なのでオフにします。
 エクスポートするときも同じ理由でオフにしておきます。
 
-上付き・下付きにしたい場合は、 ``文字^{上付き}`` 、 ``文字_{下付き}`` 、
-のように中括弧（ ``{}`` ）で囲みます。 Orgファイル中で ``C-c C-x \``
-すればプレビューできます。
+上付き・下付きにしたい場合は、
+``文字^{上付き}`` 、 ``文字_{下付き}`` のように ``中括弧 {}`` で囲みます。
+Orgファイル中で ``C-c C-x \`` すればプレビューできます。
+
+
 
 hyperref の設定
 ~~~~~~~~~~~~~~~
 
-.. code:: latex
+.. code-block:: latex
 
-    \usepackage{hyperref}
-    \hypersetup{
-      setpagesize=false,    %% <-- This line is very important
-      pdfkeywords={},
-      pdfsubject={},
-      pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+   \usepackage{hyperref}
+   \hypersetup{
+       setpagesize=false,    %% <-- This line is very important
+       pdfkeywords={},
+       pdfsubject={},
+       pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
 
-``hyperref`` パッケージと ``jsarticle`` は仲が良くなくて、
-そのままコンパイルするとページの幅がおかしくなってしまう。 これは
-``setpagesize=false`` とすることで解決する。 ``hyperref``
-パッケージの設定は、=hypersetup= の中で行うことができる。
 
-しかし、デフォルトの ``hyperref`` のオプションは、 ``ox-latex.el``
-にハードコーディングされていて追加／変更できないので、
-以下のように、=hypersetup= を複数回呼び出すことにする。
 
-#+begin\ :sub:`src` latex \\usepackage{hyperref} \\hypersetup{
-pdfkeywords={}, pdfsubject={}, pdfcreator={Emacs 24.4.1 (Org mode
-8.2.10)}} \\hypersetup{ setpagesize=false }
+``hyperref`` パッケージと ``jsarticle`` は仲が良くないので、
+そのままコンパイルするとページの幅がおかしくなってしまう。
+これは オプションで ``setpagesize=false`` とすることで解決する。
 
-#+end\ :sub:`src`
+しかし、デフォルトの ``hyperref`` オプションは、
+``ox-latex.el`` にハードコーディングされていて追加／変更できないので ``org-latex-packages-alist`` や ``#+latex_headers:`` ／ ``#+latex_header_extra:``  などを複数回使って、１つずつ呼び出すことにする。
+
+
+
+.. code-block:: latex
+
+   \\usepackage{hyperref}
+   \\hypersetup{pdfkeywords={},
+                pdfsubject={},
+                pdfcreator={Emacs 24.4.1 (Org mode8.2.10)}}
+   \\hypersetup{ setpagesize=false }
+
 
 とりあえずテストしたい場合は、編集しているOrgファイルの先頭に
 ``#+latex_header:`` もしくは ``#+latex_header_extra:`` を
@@ -300,17 +322,18 @@ pdfkeywords={}, pdfsubject={}, pdfcreator={Emacs 24.4.1 (Org mode
 ``latex_header`` と ``latex_header_extra`` の違いを調べるために、
 以下の順番で ``hypersetup`` を定義してみた。
 
-.. code:: latex
+.. code-block:: latex
 
     #+latex_header: \hyperref{setpagesize=false}
     #+latex_header_extra: \hyperref{colorlinks=true}
     #+latex_header: \hyperref{linkcolor=blue}
 
+
 すると、 ``latex_header`` > ``latex_header_extra``
 の順に書かれることが分かった。
 いまいちどういう時に順番を考えたらいいのか思いつかないけれど。
 
-.. code:: latex
+.. code-block:: latex
 
     \usepackage{hyperref}
     \hypersetup{setpagesize=false}    %% latex_header:
@@ -320,10 +343,10 @@ pdfkeywords={}, pdfsubject={}, pdfcreator={Emacs 24.4.1 (Org mode
     \author{Shota}
     \date{\today}
     \title{\LaTeX{} Export Test}
-    \hypersetup{
-      pdfkeywords={},
-      pdfsubject={},
-      pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+    \hypersetup{pdfkeywords={},
+                pdfsubject={},
+                pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+
 
 出力場所は、デフォルト出力の ``hypersetup`` の上になるが、
 コンパイルには影響しないのでこれで良しとする。
@@ -379,15 +402,15 @@ HEADER-STRINGの制御
 org-latex-pdf-processの詳細
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: commonlisp
+.. code-block:: emacs-lisp
 
     Its value is
       ("pdflatex -interaction nonstopmode -output-directory %o %f"
        "pdflatex -interaction nonstopmode -output-directory %o %f"
        "pdflatex -interaction nonstopmode -output-directory %o %f")
 
-Orgファイルから直接PDFを生成することもできる（ ``C-c C-e l p`` /
-``C-c C-e l o`` ）。
+Orgファイルから直接PDFを生成することもできる
+（ ``C-c C-e l p`` / ``C-c C-e l o`` ）。
 これはそのための設定。デフォルトの設定だと、pdflatex を使っている。
 ３回も回しているとは知らなんだ。
 
@@ -402,10 +425,10 @@ pTeXを使ってコンパイルしていたが、これをきちんと設定す�
 org-latex-packages-alistの詳細
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#+begin\ :sub:`src` emacs-lisp A cell is of the format: ("options"
-"package" SNIPPET-FLAG)
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   A cell is of the format: ("options" "package" SNIPPET-FLAG)
+
 
 第１引数
     パッケージのオプション
@@ -413,6 +436,8 @@ org-latex-packages-alistの詳細
     パッケージ名
 第３引数
     よくわからん
+
+
 
 org-format-latex-headerの詳細
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -437,25 +462,28 @@ be appended.
 デフォルト値
 ^^^^^^^^^^^^
 
-#+begin\ :sub:`src` emacs-lisp "\\\\documentclass{article}\\n
-\\\\usepackage[usenames]{color}\\n [PACKAGES]\\n [DEFAULT-PACKAGES]\\n
-\\\\pagestyle{empty} % do not remove\\n
 
-% The settings below are copied from fullpage.sty\\n
-\\\\setlength{\\\\textwidth}{\\\\paperwidth}\\n
-\\\\addtolength{\\\\textwidth}{-3cm}\\n
-\\\\setlength{\\\\oddsidemargin}{1.5cm}\\n
-\\\\addtolength{\\\\oddsidemargin}{-2.54cm}\\n
-\\\\setlength{\\\\evensidemargin}{\\\\oddsidemargin}\\n
-\\\\setlength{\\\\textheight}{\\\\paperheight}\\n
-\\\\addtolength{\\\\textheight}{-\\\\headheight}\\n
-\\\\addtolength{\\\\textheight}{-\\\\headsep}\\n
-\\\\addtolength{\\\\textheight}{-\\\\footskip}\\n
-\\\\addtolength{\\\\textheight}{-3cm}\\n
-\\\\setlength{\\\\topmargin}{1.5cm}\\n
-\\\\addtolength{\\\\topmargin}{-2.54cm}"
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   "\\\\documentclass{article}\\n
+   \\\\usepackage[usenames]{color}\\n [PACKAGES]\\n [DEFAULT-PACKAGES]\\n
+   \\\\pagestyle{empty} % do not remove\\n
+
+   % The settings below are copied from fullpage.sty\\n
+   \\\\setlength{\\\\textwidth}{\\\\paperwidth}\\n
+   \\\\addtolength{\\\\textwidth}{-3cm}\\n
+   \\\\setlength{\\\\oddsidemargin}{1.5cm}\\n
+   \\\\addtolength{\\\\oddsidemargin}{-2.54cm}\\n
+   \\\\setlength{\\\\evensidemargin}{\\\\oddsidemargin}\\n
+   \\\\setlength{\\\\textheight}{\\\\paperheight}\\n
+   \\\\addtolength{\\\\textheight}{-\\\\headheight}\\n
+   \\\\addtolength{\\\\textheight}{-\\\\headsep}\\n
+   \\\\addtolength{\\\\textheight}{-\\\\footskip}\\n
+   \\\\addtolength{\\\\textheight}{-3cm}\\n
+   \\\\setlength{\\\\topmargin}{1.5cm}\\n
+   \\\\addtolength{\\\\topmargin}{-2.54cm}"
+
+
 
 LaTeXエクスポートの再設定
 '''''''''''''''''''''''''
@@ -468,135 +496,181 @@ LaTeXエクスポートの再設定
 org-latexの設定をすべてコメントアウトして、エクスポートしてみたとき
 LaTeXファイルのヘッダは以下のようになっている。
 
-#+begin\ :sub:`src` latex \\documentclass[11pt]{article}
-\\usepackage[utf8]{inputenc} \\usepackage[T1]{fontenc}
-\\usepackage{fixltx2e} \\usepackage{graphicx} \\usepackage{longtable}
-\\usepackage{float} \\usepackage{wrapfig} \\usepackage{rotating}
-\\usepackage[normalem]{ulem} \\usepackage{amsmath}
-\\usepackage{textcomp} \\usepackage{marvosym} \\usepackage{wasysym}
-\\usepackage{amssymb} \\usepackage{hyperref} \\tolerance=1000
-\\author{Shota} \\date{\\today} \\title{\\LaTeX{} Export Test}
-\\hypersetup{ pdfkeywords={}, pdfsubject={}, pdfcreator={Emacs 24.4.1
-(Org mode 8.2.10)}}
 
-\\begin{document}
+.. code-block:: latex
 
-\\maketitle \\tableofcontents
+   \\documentclass[11pt]{article}
+   \\usepackage[utf8]{inputenc}
+   \\usepackage[T1]{fontenc}
+   \\usepackage{fixltx2e}
+   \\usepackage{graphicx}
+   \\usepackage{longtable}
+   \\usepackage{float}
+   \\usepackage{wrapfig}
+   \\usepackage{rotating}
+   \\usepackage[normalem]{ulem}
+   \\usepackage{amsmath}
+   \\usepackage{textcomp}
+   \\usepackage{marvosym}
+   \\usepackage{wasysym}
+   \\usepackage{amssymb}
+   \\usepackage{hyperref}
+   \\tolerance=1000
+   \\author{Shota}
+   \\date{\\today}
+   \\title{\\LaTeX{} Export Test}
+   \\hypersetup{pdfkeywords={},
+                pdfsubject={},
+                pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
 
-#+end\ :sub:`src`
+   \\begin{document}
 
-このまま、YaTeX環境でのコンパイル（＝pTeX）は可能だが、
-「dvipdfmx:warning:（error messages）」という警告がたくさんでる。
+   \\maketitle
+   \\tableofcontents
+
+
+
+このまま、YaTeX環境でのコンパイル（＝ ``pTeX`` ）は可能だが、
+``dvipdfmx:warning:（error messages）`` という警告がたくさんでる。
 LaTeXファイルを開き、ドキュメントクラスのオプションでドライバを
-dvipdfmxに指定するとこのエラーはでなくなる。
+``dvipdfmx`` に指定するとこのエラーはでなくなる。
 
-#+begin\ :sub:`src` latex \\documentclass[11pt, dvipdfmx]{article}
+.. code-block:: latex
 
-#+end\ :sub:`src`
+   \\documentclass[11pt, dvipdfmx]{article}
 
-直接出力（＝pdflatex）も試してみたが、「org-latex-compile: PDF file
-./testing.pdf wasn't produced: [package error]」というログが
-Messagesバッファに残り、うまくいってない。
+
+
+直接出力（＝ ``pdflatex`` ）も試してみたが、
+``org-latex-compile: PDF file ./testing.pdf wasn't produced: [package error]``
+というログが Messagesバッファに残り、うまくいってない。
+
+
 
 org-latex-pdf-process を pTeXに変更する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#+begin\ :sub:`src` emacs-lisp (use-package ox-latex :config (setq
-org-latex-pdf-process ("ptex2pdf -l -ot -synctex=1 -file-line-error"
-"ptex2pdf -l -ot -synctex=1 -file-line-error" "ptex2pdf -l -ot
--synctex=1 -file-line-error" ) )
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   (use-package ox-latex
+   :config
+       (setq org-latex-pdf-process
+           ("ptex2pdf -l -ot -synctex=1 -file-line-error"
+            "ptex2pdf -l -ot -synctex=1 -file-line-error"
+            "ptex2pdf -l -ot -synctex=1 -file-line-error")
+            )
 
-「Warning: \`"ptex2pdf -l -ot -synctex=1 -file-line-error"' is a
-malformed function」とう警告が表示され、そもそもの設定がうまくでき
-ない。setq ではできんのか？後で調べる。
+
+
+``Warning: \`"ptex2pdf -l -ot -synctex=1 -file-line-error"' is a malformed function``
+という警告が表示され、そもそもの設定がうまくできない。
+``setq`` ではできんのか？後で調べる。
+
+
 
 ドキュメントクラスにjsarticleを追加する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#+begin\ :sub:`src` latex \\documentclass[12pt, dvipdfmx]{jsarticle}
+.. code-block:: latex
 
-#+end\ :sub:`src`
+   \\documentclass[12pt, dvipdfmx]{jsarticle}
 
-文字サイズは少し大きく（＝12pt）して、ドライバには dvipdfmx を指定する。
+
+
+文字サイズは少し大きく（＝ ``12pt`` ）して、ドライバには ``dvipdfmx`` を指定する。
 sectioning については、article のデフォルトを使う。
 
-#+begin\ :sub:`src` emacs-lisp (add-to-list 'org-latex-classes
-'("jsarticle" "\\\\documentclass[dvipdfmx,12pt]{jsarticle}"
-("\\\\section{%s}" . "\\\\section\*{%s}") ("\\\\subsection{%s}" .
-"\\\\subsection\*{%s}") ("\\\\subsubsection{%s}" .
-"\\\\subsubsection\*{%s}") ("\\\\paragraph{%s}" . "\\\\paragraph\*{%s}")
-("\\\\subparagraph{%s}" . "\\\\subparagraph\*{%s}") ))
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   (add-to-list 'org-latex-classes
+                '("jsarticle"
+                  "\\\\documentclass[dvipdfmx,12pt]{jsarticle}"
+                  ("\\\\section{%s}" . "\\\\section\*{%s}")
+                  ("\\\\subsection{%s}" . "\\\\subsection\*{%s}")
+                  ("\\\\subsubsection{%s}" . "\\\\subsubsection\*{%s}")
+                  ("\\\\paragraph{%s}" . "\\\\paragraph\*{%s}")
+                  ("\\\\subparagraph{%s}" . "\\\\subparagraph\*{%s}") ))
+
+
+
 
 ドキュメントクラスにjsbookを追加する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#+begin\ :sub:`src` latex \\documentclass[12pt, dvipdfmx]{jsbook}
 
-#+end\ :sub:`src`
+.. code-block:: latex
+
+   \\documentclass[12pt, dvipdfmx]{jsbook}
+
 
 文字サイズは少し大きく（＝12pt）して、ドライバには dvipdfmx を指定する。
 sectioning については、book のデフォルトを使う。
 
-#+begin\ :sub:`src` emacs-lisp (add-to-list 'org-latex-classes
-'("jsbook" "\\\\documentclass[dvipdfmx,12pt]{jsbook}" ("\\\\part{%s}" .
-"\\\\part\*{%s}") ("\\\\chapter{%s}" . "\\\\chapter\*{%s}")
-("\\\\section{%s}" . "\\\\section\*{%s}") ("\\\\subsection{%s}" .
-"\\\\subsection\*{%s}") ("\\\\subsubsection{%s}" .
-"\\\\subsubsection\*{%s}") ) )
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   (add-to-list 'org-latex-classes
+                '("jsbook"
+                  "\\\\documentclass[dvipdfmx,12pt]{jsbook}"
+                  ("\\\\part{%s}" . "\\\\part\*{%s}")
+                  ("\\\\chapter{%s}" . "\\\\chapter\*{%s}")
+                  ("\\\\section{%s}" . "\\\\section\*{%s}") ("\\\\subsection{%s}" .
+                  "\\\\subsection\*{%s}") ("\\\\subsubsection{%s}" .
+                  "\\\\subsubsection\*{%s}") ) )
+
 
 ドキュメントクラスにjsreportを追加する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#+begin\ :sub:`src` latex \\documentclass[12pt, dvipdfmx,
-report]{jsbook}
+.. code-block:: latex
 
-#+end\ :sub:`src`
+   \\documentclass[12pt, dvipdfmx, report]{jsbook}
+
 
 文字サイズは少し大きく（＝12pt）して、ドライバには dvipdfmx を指定する。
 「jsreport」というクラスファイルはないが、jsbook に report
 オプションをつければいいらしい。 sectioning については、article
 のデフォルトを部分に chapter を付け加えた。
 
-#+begin\ :sub:`src` latex (add-to-list 'org-latex-classes '("jsreport"
-"\\\\documentclass[dvipdfmx,12pt,report]{jsbook}" ("\\\\chapter{%s}" .
-"\\\\chapter\*{%s}") ("\\\\section{%s}" . "\\\\section\*{%s}")
-("\\\\subsection{%s}" . "\\\\subsection\*{%s}") ("\\\\subsubsection{%s}"
-. "\\\\subsubsection\*{%s}") ("\\\\paragraph{%s}" .
-"\\\\paragraph\*{%s}") ) )
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   (add-to-list 'org-latex-classes
+                '("jsreport"
+                  "\\\\documentclass[dvipdfmx,12pt,report]{jsbook}"
+                  ("\\\\chapter{%s}" . "\\\\chapter\*{%s}")
+                  ("\\\\section{%s}" . "\\\\section\*{%s}")
+                  ("\\\\subsection{%s}" . "\\\\subsection\*{%s}")
+                  ("\\\\subsubsection{%s}" . "\\\\subsubsection\*{%s}")
+                  ("\\\\paragraph{%s}" . "\\\\paragraph\*{%s}") ) )
+
+
 
 デフォルトのドキュメントクラスを jsarticle に変更する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-すべてのOrgファイルに「#+latex\ :sub:`class`:
-jsarticle」を付けるのはめんどくさいので、 デフォルトに設定する。
+すべてのOrgファイルに
+``#+latex_class: jsarticle`` を付けるのはめんどくさいので デフォルトに設定する。
 
-#+begin\ :sub:`src` emacs-lisp (setq org-latex-default-class
-"jsarticle")
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   (setq org-latex-default-class "jsarticle")
+
+
 
 listingsを使ってコードブロックの装飾する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#+begin\ :sub:`src` emacs-lisp (setq org-latex-listings t) (add-to-list
-'org-latex-packages-alist '("" "listings")) (add-to-list
-'org-latex-packages-alist '("" "color")) (add-to-list
-'org-latex-packages-alist '("" "fancyvrb"))
+.. code-block:: emacs-lisp
 
-#+end\ :sub:`src`
+   (setq org-latex-listings t)
+   (add-to-list 'org-latex-packages-alist '("" "listings"))
+   (add-to-list 'org-latex-packages-alist '("" "color"))
+   (add-to-list 'org-latex-packages-alist '("" "fancyvrb"))
+
 
 listlingsパッケージの初期設定はlstsetを使う。hypersetupのときと同じ
 ように、Orgファイルの先頭に書いておく。
 
-.. code:: commonlisp
+.. code-block:: emacs-lisp
 
     #+latex_header: \lstset{language=[LaTeX]TeX}
     #+latex_header: \lstset{basicstyle=\small}
@@ -606,6 +680,8 @@ listlingsパッケージの初期設定はlstsetを使う。hypersetupのとき�
     #+latex_header: \lstset{frame=shadowbox}
     #+latex_header: \lstset{rulesepcolor=\color{black}}
     #+latex_header: \lstset{fancyvrb=true}
+
+
 
 簡単なテスト方法
 ^^^^^^^^^^^^^^^^
