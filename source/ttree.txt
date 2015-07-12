@@ -11,12 +11,12 @@
 
 ** TTreeを作成したい（ =TTree::Tree= ）
 
-#+begin_src c++
+#+begin_src cpp
 TTree *t = new TTree("t1", "TTree example");
 #+end_src
 
 
-#+begin_src c++
+#+begin_src cpp
 TTree TTree(const char* name, const char* title, Int_t splitlevel = 99)
 #+end_src
 
@@ -37,7 +37,7 @@ TTree TTree(const char* name, const char* title, Int_t splitlevel = 99)
 
 ** テキストファイルをTTreeに変換したい（１）（ =TTree::ReadFile= ）
 
-#+begin_src c+++
+#+begin_src cpp+
 Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char delimiter = ' ')
 #+end_src
 
@@ -66,12 +66,11 @@ Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char 
      仮に、100行４列のテキストファイルがあるとします。
      このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
 
-     #+attr_latex: centering
-   #+begin_example
+#+begin_example
 100    105    104   103
 101    106    103   100
 ...
-   #+end_example
+#+end_example
 
 #    #+begin_src bash
 # 100    105    104   103
@@ -80,7 +79,7 @@ Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char 
 #    #+end_src
 
 
-    #+begin_src c++
+#+begin_src cpp
 {
   // STEP1: Set input filename
   TString ifn = "inputfilename";
@@ -103,13 +102,13 @@ Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char 
 
   return;
 }
-    #+end_src
+#+end_src
 
 
 ** テキストファイルをTTreeに変換したい（１）: （ =TTree::Branch= ）
 *** TTree::Branch() を使う方法
 
-#+begin_src c++
+#+begin_src cpp
 tree->Branch("run", &run, "run/I")
 #+end_src
 
@@ -125,7 +124,7 @@ tree->Branch("run", &run, "run/I")
 
     よくある方法です。ググればいっぱい見つかります。
 
-#+begin_src c++
+#+begin_src cpp
 {
     // STEP1: データファイルを読み込む
     TString ifn = "inputfilename"
@@ -144,7 +143,7 @@ tree->Branch("run", &run, "run/I")
     tree->Branch("val3", &val3, "val3/I");
     tree->Branch("val4", &val4, "val4/I");
 
-    // STEP5: C++でファイルを読み込むときの常套手段
+    // STEP5: cppでファイルを読み込むときの常套手段
     while (fin >> val1 >> val2 >> val3 >> val4) {
         // STEP6: データのエントリの区切りで必ずTTree::Fill()する
         tree->Fill();
@@ -177,7 +176,7 @@ tree->Branch("run", &run, "run/I")
 
    TTree::Branch を理解していれば簡単です。
 
-#+begin_src c++
+#+begin_src cpp
 int val1[100];
 TTree *tree = new TTree("tree", "tree using array");
 tree->Branch("val1", val1, "val1[100]/I");
@@ -192,7 +191,7 @@ tree->Branch("val1", val1, "val1[100]/I");
 
     配列を使うことができるので、文字列のブランチを作ることもできます。
 
-#+begin_src c++
+#+begin_src cpp
 char hoge[32];
 tree->Branch("moji", hoge", "moji[32]/C")
 sprintf(hoge, "hogehogefugafuga")
@@ -209,7 +208,7 @@ tree->Fill();
    3. fN のブランチを作る
    4. val のブランチを作る
 
-#+begin_src c++
+#+begin_src cpp
 Int_t fN;                                 // (1) 設定したい配列の大きさ
 Int_t val[max];                           // (2) val[max]: maxはfNよりも大きな数
 tree->Branch("nch", &fN, "nch/I");        // (3) まずfNをブランチにセットする；fNだと何の変数か分かりづらいので、nch（全チャンネル数の意）に変更した点に注意
@@ -221,7 +220,7 @@ tree->Branch("val", val, "val[fN]/I");    // fNには、ブランチ名を入れ
 
 *** ブランチに可変長文字列を使いたい
 
-#+begin_src c++
+#+begin_src cpp
 #include <string.h>    // strlen()を使うために必要
 
 const Int_t NMAX_MOJI = 100;
@@ -238,7 +237,7 @@ tree->Fill()
 
 *** ブランチにstd::vector を使いたい
 
-#+begin_src c++
+#+begin_src cpp
 #include <vector>
 
 std::vector<Double_t> vec;
