@@ -22,6 +22,7 @@ ROOTの使い方
 
    root-install
    root-tutorial
+   root-hist
    root-canvas
 
 ..   histograms
