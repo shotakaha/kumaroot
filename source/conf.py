@@ -326,6 +326,7 @@ latex_documents = [
    u'Shota TAKAHASHI', 'manual'),
 ]
 latex_docclass = {'manual' : 'jsbook'}
+#latex_docclass = {'manual' : 'bxjsreport'}
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
