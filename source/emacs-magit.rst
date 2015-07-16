@@ -10,15 +10,15 @@ Magitの起動（ ``M-x magit-status`` ）
 --------------------------------------------------
 
 Emacsの中で ``M-x magit-status`` と打ち込んで
-``magit-bufer`` を起動します（ `図 #fig-emacs-magit-001` ）
+``magit-bufer`` を起動します（ `図 #fig-magit-status` ）
 
 Magitはこのバッファを通じて操作をすることになるので、
 キーバインド設定をしておきましょう。
 マニュアルを読むと ``C-x g`` になってるのでそうしましょう。
 
-.. _fig-emacs-magit-001:
+.. _fig-magit-status:
 
-.. figure:: ./emacs-magit/emacs-magit-001.png
+.. figure:: ./emacs-magit/magit-status.png
 
    Magit-buffer
 
@@ -26,7 +26,7 @@ Magitはこのバッファを通じて操作をすることになるので、
 Magitのヘルプ
 --------------------------------------------------
 
-Magit-buffer で ``?`` を押すと使い方がポップアップします（ :num:`図 #fig-emacs-magit-002` ）。
+Magit-buffer で ``?`` を押すと使い方がポップアップします（ :num:`図 #magit-popup` ）。
 ``M-x magit-dispatch-popup`` でも同様です。
 これもマニュアルに ``C-x M-g`` にセットするとよいと書いてあるので、そうしましょう。
 
@@ -35,6 +35,24 @@ Magit-buffer で ``?`` を押すと使い方がポップアップします（ :n
 コマンドを覚えていなくても使うことができます。
 また、Magitを使っているうちにGitも使えるようになる。
 
-.. _fig-emacs-magit-002:
+.. _fig-magit-popup:
 
-.. figure:: ./emacs-magit/emacs-magit-002.png
+.. figure:: ./emacs-magit/magit-popup.png
+
+
+ステージ
+--------------------------------------------------
+
+``Untracked files`` の ``source/emacs-magit.rst`` に
+カーソルを当て ``s`` を押してファイルをステージします（ :num:`図 #fig-magit-stage` ）
+
+.. _fig-magit-stage
+
+.. figure:: ./emacs-magit/magit-commit-001.png
+
+ステージされたファイルは ``Staged changes`` に移動します。
+
+
+
+コミット
+--------------------------------------------------
