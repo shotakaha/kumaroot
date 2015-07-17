@@ -10,7 +10,7 @@ Magitの起動（ ``M-x magit-status`` ）
 --------------------------------------------------
 
 Emacsの中で ``M-x magit-status`` と打ち込んで
-``magit-bufer`` を起動します（ :num:`図 #fig-magit-status` ）。
+Magit用バッファ（ ``magit-bufer`` ）を起動します（ :numref:`fig-magit-status` ）。
 
 Magitはこのバッファを通じて操作をすることになるので、
 キーバインド設定をしておきましょう。
@@ -20,13 +20,13 @@ Magitはこのバッファを通じて操作をすることになるので、
 
 .. figure:: ./emacs-magit/magit-status.png
 
-   Magit-buffer
+   Magit用バッファ（ ``M-x magit-status`` ）
 
 
 Magitのヘルプ
 --------------------------------------------------
 
-Magit-buffer で ``?`` を押すと使い方がポップアップします（ :num:`図 #magit-popup` ）。
+Magit-buffer で ``?`` を押すと使い方がポップアップします（ :numref:`fig-magit-dispatch-popup` ）。
 ``M-x magit-dispatch-popup`` でも同様です。
 これもマニュアルに ``C-x M-g`` にセットするとよいと書いてあるので、そうしましょう。
 
@@ -35,28 +35,35 @@ Magit-buffer で ``?`` を押すと使い方がポップアップします（ :n
 コマンドを覚えていなくても使うことができます。
 また、Magitを使っているうちにGitも使えるようになる。
 
-.. _fig-magit-popup:
+.. _fig-magit-dispatch-popup:
 
-.. figure:: ./emacs-magit/magit-popup.png
+.. figure:: ./emacs-magit/magit-dispatch-popup.png
+
+   Magit用ヘルプ（ ``M-x magit-dispatch-popup`` ）
 
 
-ステージ
+ステージ／アンステージ
 --------------------------------------------------
 
 ``Untracked files`` の ``source/emacs-magit.rst`` に
-カーソルを当て ``s`` を押してファイルをステージします（ :num:`図 #fig-magit-stage` ）。
+カーソルを当て ``s`` を押してファイルをステージします（ :numref:`fig-magit-stage` ）。
 ステージされたファイルは ``Staged changes`` に移動します。
+
+ファイルを間違えてステージしてしまったなど
+アンステージしたい場合は、そのファイルの先頭で ``u`` を押します。
 
 .. _fig-magit-stage:
 
 .. figure:: ./emacs-magit/magit-stage.png
+
+   ファイルのステージ
 
 
 コミット（ ``C-x g c c``）
 --------------------------------------------------
 
 ``Staged changes`` にあるファイルはコミットすることができます。
-``c`` を押すとコミット用バッファ（ ``magit-commit-popup`` ）がポップアップします（ :num:`図 #fig_magit-commit-popup` ）。
+``c`` を押すとコミット用バッファ（ ``magit-commit-popup`` ）がポップアップします（ :numref:`fig_magit-commit-popup` ）。
 ポップアップ内にある ``Swithes`` 、 ``Options`` 、 ``Actions`` から操作を選択し、頭に付いている記号を入力します。
 通常のコミットの場合は ``c`` を押します。
 
@@ -64,9 +71,11 @@ Magit-buffer で ``?`` を押すと使い方がポップアップします（ :n
 
 .. figure:: ./emacs-magit/magit-commit-popup.png
 
+   コミット用バッファ
+
 
 すると、画面が上下２分割されて ``magit-diff`` バッファ（画面上）と
-``.git/COMMIT_EDITMSG`` （画面下）が表示されます（ :num:`図 #fig-magit-commit-edit` ）。
+``.git/COMMIT_EDITMSG`` （画面下）が表示されます（ :numref:`fig-magit-commit-edit` ）。
 ``magit-diff`` には変更した箇所が表示されているので、それを確認しながら、
 ``.git/COMMIT_EDITMSG`` にコミットメッセージを書きます。
 コミットメッセージの編集が終わったら ``C-c C-c`` で保存します。
@@ -76,9 +85,18 @@ Magit-buffer で ``?`` を押すと使い方がポップアップします（ :n
 
 .. figure:: ./emacs-magit/magit-commit-edit.png
 
+   コミットメッセージの編集
 
-コミットが終わると ``Unpushed commits`` にコミットメッセージが表示されます（ :num:`図 #fig-magit-commit-done` ）。
+
+コミットが終わると ``Unpushed commits`` に
+コミットメッセージが表示されます（ :numref:`fig-magit-commit-done` ）。
 
 .. _fig-magit-commit-done:
 
 .. figure:: ./emacs-magit/magit-commit-done.png
+
+   magit-commit-done
+
+
+コミットを取り消したい場合は Magit から操作することはできません。
+その時はシェルを起動して ``git reset HEAD^`` しましょう。
