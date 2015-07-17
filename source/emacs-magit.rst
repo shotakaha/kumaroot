@@ -133,3 +133,21 @@ Magit-buffer で ``?`` を押すと使い方がポップアップします（ :n
 .. figure:: ./emacs-magit/magit-process.png
 
    Gitプロセスの表示
+
+
+残りの操作
+--------------------------------------------------
+
+.. todo:: branch
+
+.. todo:: log
+
+.. todo:: fetch / pull
+
+.. todo:: rebase / merge
+
+.. todo:: show refs
+
+.. todo:: stash
+
+.. todo:: tag
