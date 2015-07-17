@@ -40,6 +40,7 @@ ROOTの使い方
    emacs
    emacs-org
    emacs-yatex
+   emacs-magit
 
 
 
