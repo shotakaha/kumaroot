@@ -114,6 +114,32 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
+# Trueの場合、キャプションのある図、表、コードブロックに自動的に番号付けされます。
+# このオプションはいまのところHTMLビルダーでのみ動作します。
+# デフォルトは False です。(バージョン 1.3 で追加)
+numfig = True
+
+# 'figure', 'table', 'code-block' に対して
+# それぞれ図表番号表示のためのフォーマット文字列を
+# 指定する辞書です。(バージョン 1.3 で追加)
+numfig_format = {
+    'figure' : u'Fig. %s',
+    'table' : u'Table %s',
+    'code-block' : u'Listing %s'
+}
+numfig_format['figure'] = u'図 %s'
+numfig_format['table'] = u'表 %s'
+numfig_format['code-block'] = u'リスト %s'
+
+# 図表番号のスコープです。
+# スコープ指定によって、numfig機能が番号付けする範囲を決めます。
+# 0 は全てのドキュメントで通し番号を使います。
+# 1 はセクション毎の番号付けで、x.1, x.2, x.3, ...のように付与します。
+# 2 はサブセクション毎の番号付けで、x.x.1, x.x.2, x.x.3, ...のように付与します。
+# デフォルトは 1 です。
+numfig_secnum_depth = 1
+
+
 
 # -- Options for HTML output ----------------------------------------------
 
