@@ -40,6 +40,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
+    'sphinxjp.themes.basicstrap',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -147,74 +148,81 @@ numfig_secnum_depth = 1
 # a list of builtin themes.
 # html_theme = 'alabaster'
 # html_theme = 'sphinx_rtd_theme'
-html_theme = 'bootstrap'
+# html_theme = 'bootstrap'
+html_theme = 'basicstrap'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    # Navigation bar title. (Default: ``project`` value)
-    # 'navbar_title': "Demo",
 
-    # Tab name for entire site. (Default: "Site")
-    # 'navbar_site_name': "Site",
+    # Set the lang attribute of the html tag. Defaults to 'en'
+    'lang': 'ja',
+    # Disable showing the sidebar. Defaults to 'false'
+    'nosidebar': False,
+    # Show header searchbox. Defaults to false. works only "nosidber=True",
+    'header_searchbox': False,
 
-    # A list of tuples containing pages or urls to link to.
-    # Valid tuples should be in the following forms:
-    #    (name, page)                 # a link to a page
-    #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
-    #    (name, "http://example.com", True) # arbitrary absolute url
-    # Note the "1" or "True" value above as the third argument to indicate
-    # an arbitrary url.
-    # 'navbar_links': [
-    #     ("Examples", "examples"),
-    #     ("Link", "http://example.com", True),
-    # ],
+    # Put the sidebar on the right side. Defaults to false.
+    'rightsidebar': False,
+    # Set the width of the sidebar. Defaults to 3
+    'sidebar_span': 3,
 
-    # Render the next and previous page links in navbar. (Default: true)
-    'navbar_sidebarrel': True,
+    # Fix navbar to top of screen. Defaults to true
+    'nav_fixed_top': True,
+    # Fix the width of the sidebar. Defaults to false
+    'nav_fixed': False,
+    # Set the width of the sidebar. Defaults to '900px'
+    'nav_width': '900px',
 
-    # Render the current pages TOC in the navbar. (Default: true)
-    'navbar_pagenav': True,
+    # Fix the width of the content area. Defaults to false
+    'content_fixed': False,
+    # Set the width of the content area. Defaults to '900px'
+    'content_width': '900px',
+    # Fix the width of the row. Defaults to false
+    'row_fixed': False,
 
-    # Tab name for the current pages TOC. (Default: "Page")
-    'navbar_pagenav_name': "Page",
+    # Disable the responsive design. Defaults to false
+    'noresponsive': False,
+    # Disable the responsive footer relbar. Defaults to false
+    'noresponsiverelbar': False,
+    # Disable flat design. Defaults to false.
+    # Works only "bootstrap_version = 3"
+    'noflatdesign': False,
 
-    # Global TOC depth for "site" navbar tab. (Default: 1)
-    # Switching to -1 shows all levels.
-    'globaltoc_depth': 2,
+    # Enable Google Web Font. Defaults to false
+    'googlewebfont': False,
+    # Set the URL of Google Web Font's CSS.
+    # Defaults to 'http://fonts.googleapis.com/css?family=Text+Me+One'
+    'googlewebfont_url': 'http://fonts.googleapis.com/css?family=Lily+Script+One',  # NOQA
+    # Set the Style of Google Web Font's CSS.
+    # Defaults to "font-family: 'Text Me One', sans-serif;"
+    'googlewebfont_style': u"font-family: 'Lily Script One' cursive;",
 
-    # Include hidden TOCs in Site navbar?
-    #
-    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
-    # non-hidden ``toctree`` directives in the same page, or else the build
-    # will break.
-    #
-    # Values: "true" (default) or "false"
-    'globaltoc_includehidden': "true",
+    # Set 'navbar-inverse' attribute to header navbar. Defaults to false.
+    'header_inverse': True,
+    # Set 'navbar-inverse' attribute to relbar navbar. Defaults to false.
+    'relbar_inverse': True,
 
-    # HTML navbar class (Default: "navbar") to attach to <div> element.
-    # For black navbar, do "navbar navbar-inverse"
-    'navbar_class': "navbar navbar-inverse",
+    # Enable inner theme by Bootswatch. Defaults to false
+    'inner_theme': False,
+    # Set the name of innner theme. Defaults to 'bootswatch-simplex'
+    'inner_theme_name': 'bootswatch-simplex',
 
-    # Fix navigation bar to top of page?
-    # Values: "true" (default) or "false"
-    'navbar_fixed_top': "true",
+    # Select Twitter bootstrap version 2 or 3. Defaults to '3'
+    'bootstrap_version': '3',
 
-    # Location of link to source.
-    # Options are "nav" (default), "footer" or anything else to exclude.
-    'source_link_position': "nav",
+    # Show "theme preview" button in header navbar. Defaults to false.
+    'theme_preview': True,
 
-    # Bootswatch (http://bootswatch.com/) theme.
-    #
-    # Options are nothing (default) or the name of a valid theme
-    # such as "amelia" or "cosmo".
-    'bootswatch_theme': "united",
-    # 'bootswatch_theme': "cosmo",
+    # Set the Size of Heading text. Defaults to None
+    # 'h1_size': '3.0em',
+    # 'h2_size': '2.6em',
+    # 'h3_size': '2.2em',
+    # 'h4_size': '1.8em',
+    # 'h5_size': '1.4em',
+    # 'h6_size': '1.1em',
 
-    # Choose Bootstrap version.
-    # Values: "3" (default) or "2" (in quotes)
-    'bootstrap_version': "3",
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
