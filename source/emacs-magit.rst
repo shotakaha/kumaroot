@@ -63,7 +63,7 @@ Magit-buffer で ``?`` を押すと使い方がポップアップします（ :n
 --------------------------------------------------
 
 ``Staged changes`` にあるファイルはコミットすることができます。
-``c`` を押すとコミット用バッファ（ ``magit-commit-popup`` ）がポップアップします（ :numref:`fig_magit-commit-popup` ）。
+``c`` を押すとコミット用バッファ（ ``magit-commit-popup`` ）がポップアップします（ :numref:`fig-magit-commit-popup` ）。
 ポップアップ内にある ``Swithes`` 、 ``Options`` 、 ``Actions`` から操作を選択し、頭に付いている記号を入力します。
 通常のコミットの場合は ``c`` を押します。
 
