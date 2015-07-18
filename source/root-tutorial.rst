@@ -35,6 +35,7 @@ ROOT tutorial 編
 ROOTセッション内で ``.q`` を入力すると、ROOTが終了します。
 それで終了しない場合は、``.qqq・・・`` の様に ``q`` をたくさんにします。
 
+
 ``rootlogon.C`` と ``rootlogoff.C``
 --------------------------------------------------
 
@@ -137,7 +138,7 @@ hsimple.Cを実行する
 コンパイルする場合は必須ですが、マクロで動かす場合は書かなくてもよいです。
 なので今は無視します。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 1-11
    :lineno-start: 1
@@ -149,7 +150,7 @@ hsimple.Cを実行する
 マクロの場合ファイル名と関数名は一緒にします。
 戻り型はなんでもOKです。引数を指定することもできます。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 13
    :lineno-start: 13
@@ -160,7 +161,7 @@ hsimple.Cを実行する
 
 コメントはC++の作法で挿入できます。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 14-25
    :lineno-start: 14
@@ -172,7 +173,7 @@ hsimple.Cを実行する
 TStringクラスという文字列クラスを使っています。
 普通のC/C++の関数を使うよりはるかに楽なので、積極的に使うと良いと思います。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 27-51
    :lineno-start: 27
@@ -187,7 +188,7 @@ ROOTファイルを開く（ ``TFile`` ）
 ない場合は、 ``TFile::TFile`` コンストラクタで
 新しい ``TFileオブジェクト`` を作成しています。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 31,37,42,52-53
 
@@ -200,7 +201,7 @@ ROOTファイルを開く（ ``TFile`` ）
 ここでは ``TProfile`` クラスや ``TNtuple`` クラスも使われています。
 
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 55-60
    :lineno-start: 55
@@ -212,7 +213,7 @@ ROOTファイルを開く（ ``TFile`` ）
 このマクロを実行すると、ターミナル上にプロセス時間が表示されます。
 この部分から測定を開始しています。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 62,92
 
@@ -223,7 +224,7 @@ ROOTファイルを開く（ ``TFile`` ）
 グラフを描く領域をキャンバスと呼びます。
 ``TCanvas`` クラスを使います。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 64-69
    :lineno-start: 64
@@ -235,7 +236,7 @@ ROOTファイルを開く（ ``TFile`` ）
 
 このマクロでは、ヒストグラムにランダムな値を詰め込んでいます。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 72-83
    :lineno-start: 72
@@ -246,7 +247,7 @@ ROOTファイルを開く（ ``TFile`` ）
 
 TH1::Draw()メソッドで描画します。
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 84-91
    :lineno-start: 84
@@ -256,7 +257,7 @@ TH1::Draw()メソッドで描画します。
 ROOTファイルに保存する（ ``Write`` ）
 --------------------------------------------------
 
-.. literalinclude:: ../root6/tutorials/hsimple.C
+.. literalinclude:: ./tutorials/root6/hsimple.C
    :language: cpp
    :lines: 94-103
    :lineno-start: 94
