@@ -1,16 +1,26 @@
 ==================================================
-ROOT tutorial 編
+ROOTチュートリアル編
 ==================================================
 
-この章では、主にROOTに付属しているチュートリアルの使い方を簡単に紹介します。
-前節の最後にも書きましたが、手元にコピーを作っておきましょう。
+ここではROOTに付属しているチュートリアルの使い方を簡単に紹介します。
+
+
+チュートリアルのコピー
+--------------------------------------------------
+
+前節の最後にも書きましたが、まずは手元にコピーを作りましょう。
 
 .. code-block:: bash
 
     $ cp -r /opt/local/libexec/root6/share/doc/root/tutorials ~/TEST/root6/
 
-とりあえずROOT6のチュートリアルを使います。
-気が向いたらROOT5との比較もしようかと思います。
+今回はとりあえずROOT6のチュートリアルを使います [#]_ 。
+以降、このディレクトリを ``$TUTORIALS`` とします。
+
+.. [#]
+   気が向いたらROOT5と比較しようかと思います。
+
+
 
 とりあえず起動（ ``$ root`` ）
 --------------------------------------------------
@@ -23,7 +33,9 @@ ROOT tutorial 編
     root[0]    ## ROOTセッション（CINT）内
 
 コマンドラインで ``root`` と入力するとROOTセッション（CINT）が起動します。
-この状態だと、対話的にROOTを操作することができます。
+この状態だと対話的にROOTを操作することができます。
+電卓代わりにも使えます。
+
 
 とりあえず終了（ ``.q`` ）
 --------------------------------------------------
@@ -39,27 +51,29 @@ ROOTセッション内で ``.q`` を入力すると、ROOTが終了します。
 ``rootlogon.C`` と ``rootlogoff.C``
 --------------------------------------------------
 
-さて ``tutorials`` をコピーしたディレクトリでROOTを起動／終了すると、
-以下の様なメッセージが表示されるとはずです。
+さて ``tutorials`` をコピーしたディレクトリ（ ``$TUTORIALS`` ）で
+ROOTを起動／終了すると、以下の様なメッセージが表示されるはずです。
 
 .. code-block:: bash
 
-    Welcome to the ROOT tutorials
+   $ cd $TUTORIAL
+   $ root    ## 起動
 
-    Type ".x demos.C" to get a toolbar from which to execute the demos
+   Welcome to the ROOT tutorials
 
-    Type ".x demoshelp.C" to see the help window
+   Type ".x demos.C" to get a toolbar from which to execute the demos
 
-    ==> Many tutorials use the file hsimple.root produced by hsimple.C
-    ==> It is recommended to execute hsimple.C before any other script
+   Type ".x demoshelp.C" to see the help window
 
-    root [0]
+   ==> Many tutorials use the file hsimple.root produced by hsimple.C
+   ==> It is recommended to execute hsimple.C before any other script
 
-.. code-block:: bash
+   root [0] .q    ## 終了
 
-    Taking a break from ROOT? Hope to see you back!
+   Taking a break from ROOT? Hope to see you back!
 
-これは、同じディレクトリに、 ``rooglogon.C`` と ``rootlogoff.C`` があるからです。
+
+これは、同じディレクトリに ``rooglogon.C`` と ``rootlogoff.C`` があるからです。
 この２つのファイルを用意しておくことで、ROOT起動時および終了時の動作を設定することができます。
 気になる人は覗いてみましょう（ ``printf`` してるだけですが）。
 
@@ -76,12 +90,13 @@ ROOT起動時には以下の順番で設定ファイルが読み込まれます�
 #. ``~/.rootrc``
 #. ``./rootlogon.C``
 
-個人的な全体設定は ``~/.rootrc`` へ、
-そのプログラムだけの設定は ``./rootlogon.C`` に書いておけばよいです。
+``system.rootrc`` の場所は ``locate`` して確認してください。
+これを ``~/.rootrc`` にコピーして編集すれば自分用の全体設定の完了です。
+プロジェクト毎の設定は ``./rootlogon.C`` に書いておけばよいです。
 
 
 
-demos.Cを実行してみる
+demos.Cを実行してみる（ ``$ root demos.C`` ）
 --------------------------------------------------
 
 さて、ROOTを起動して表示されたメッセージにしたがって、 ``demos.C`` を実行してみましょう。
@@ -112,10 +127,10 @@ ROOT内で実行する場合は、 ``.x ファイル名`` と入力します。
 
 とりあえずこの通りに ``hsimple`` ボタンを押してみましょう。
 
-hsimple.Cを実行する
+hsimple.Cを実行してみる（ ``$ root hsimple.C`` ）
 --------------------------------------------------
 
-前節のようにボタンを押して実行するか、
+前項のようにボタンを押して実行するか、
 コマンドラインで ``$ root hsimple.C`` を実行します。
 すると、キャンバスが表示され、ヒストグラムが成長していきます（ :numref:`fig-hsimple` ）。
 それと同時に、 ``hsimple.root`` というROOTファイルが作成されます。
