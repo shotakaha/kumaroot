@@ -41,6 +41,7 @@ ROOTの使い方
    emacs-org
    emacs-yatex
    emacs-magit
+   emacs-twitter
 
 
 
