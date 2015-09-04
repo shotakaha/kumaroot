@@ -1,3 +1,5 @@
+.. toctree::
+
 ==================================================
 Sphinxの使い方
 ==================================================
@@ -13,7 +15,7 @@ Sphinxの使い方
 どんなものか、気軽に試したい方は、このリポジトリをクローンするとよいでしょう。
 
 
-KumaROOTを生成してみる
+KumaROOTの生成（ビルド）
 ==================================================
 
 .. code-block:: bash
@@ -23,26 +25,14 @@ KumaROOTを生成してみる
    make html        ## HTMLの生成
    make latexpdfja  ## PDFの生成
 
-たぶんこのままじゃ動かないので Sphinx など必要なものを追加でインストールします。
+たぶんこのままじゃビルドできないので、必要なものを追加でインストールします。
 
 
-Sphinxのインストール
+必要なものとインストール方法
 --------------------------------------------------
 
-
-ワークフロー
-------------
-
-#. Orgモードで文章を作成（ただし ``QuickLook`` できるように ``.txt形式`` で保存）
-#. ``pandoc`` を使って ``reST形式`` に変換
-#. ``Sphinx`` を使って HTML と PDFに変換
-
-
-使うための準備
---------------------
-
-Sphinxを使うために以下のものをインストールします。
-インストールには ``MacPorts`` を使用しました。
+Sphinxを使うために以下のものが必要です。
+ここでのインストールには ``MacPorts`` を使用します。
 MacPortsにポートがない場合は ``pip`` を使います。
 
 #. ``python`` （MacPorts）
@@ -51,10 +41,8 @@ MacPortsにポートがない場合は ``pip`` を使います。
 #. ``sphinx-bootstrap-theme`` （pip）
 #. ``pandoc`` （MacPorts、オプショナル）
 
-``python`` のバージョンに合わせて
-``Sphinx`` と ``pip`` のバージョンを決めます。
-``port select`` で簡単に切り替えることができるので、
-両方インストールしても大丈夫です。
+``python`` のバージョンに合わせて ``Sphinx`` と ``pip`` のバージョンを決めます。
+``port select`` で簡単に切り替えることができるので、両方インストールしても大丈夫です。
 
 ``pandoc`` は文書フォーマット変換コマンドです。
 Sphinxとは直接関係がありませんが、
@@ -62,7 +50,7 @@ Sphinxとは直接関係がありませんが、
 reSTに変換したいときにあると便利です。
 
 
-MacPortsを使ったインストールとバージョンの切り替え
+MacPortsを使ったインストール
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``sphinx-bootstrap-theme`` 以外は ``MacPorts`` でインストールします。
@@ -75,6 +63,8 @@ MacPortsを使ったインストールとバージョンの切り替え
    $ sudo port install py27-pip     ## or py34-pip
    $ sudo port install pandoc
 
+MacPortsを使ったバージョンの切り替え
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 それぞれのパッケージのバージョン切り替えは ``port select`` を使って行います。
 切り替えることができるパッケージ名、バージョンは ``port select --summary`` で確認できます。
@@ -95,7 +85,7 @@ MacPortsを使ったインストールとバージョンの切り替え
 
 
 pipを使ったインストール
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 上記のように使用する ``pip`` をセットしてから ``pip install`` します。
 ``/opt/local/Library/Frameworks/Python.framework/Versions/バージョン/lib/pythonバージョン/site-packages/``
@@ -108,51 +98,22 @@ pipを使ったインストール
    ## sudo -H pip install sphinx-bootstrap-theme
 
 
-pandocコマンドの使い方
-----------------------
+HTML文書のビルド
+--------------------------------------------------
 
-``Org`` と ``HTML`` からから ``reST`` に変換する例を挙げておきます。
-残念ながらWordファイル（ ``doc`` or ``docx`` ）を ``reST`` に直接変換することはできません [2]_ 。
-しかし、Word から HTML に書き出せば ``reST`` に変換することができます。
-
-
-Org から reST への変換
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-OrgのreSTエクスポート（ ``ox-rst`` ）がうまく動かないので ``pandoc`` を使って変換します。
-今回の場合、Org文書の拡張子が ``.txt`` なので
-``-f org`` を使って ``pandoc`` に入力フォーマットを教えています。
-出力ファイルが reST形式（ ``-o FILENAME.rst`` ）なので、
-出力フォーマットを指定する必要はありません。
+HTML変換には ``make html`` を実行します。
+変換ファイルは ``build/html/`` 以下に作成されます。
 
 .. code-block:: bash
 
     $ cd $KUMAROOT
-    $ pandoc -f org source/FILENAME.txt -o source/FILENAME.rst
-
-毎回、手動で変換するのが面倒くさいのでワンライナーを書いてみました。
-これを ``Makefile`` に書いておけばいいのかもしれない。
-
-.. code-block:: bash
-
-    $ for f in source/*.txt; do pandoc -f org -t rst $f -o "source/`basename $f .txt`.rst"; done
+    $ make html
+    $ open build/html/index.html
 
 
-HTML から reST への変換
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Org から reST形式への変換ができれば簡単にできます。
-この場合は、入力フォーマットも出力フォーマットも、ファイル形式を見れば分かるので、
-オプションは必要ありません。
-
-.. code-block:: bash
-
-    $ cd $KUMAROOT
-    $ pandoc source/FILENAME.html -o source/FILENAME.rst
-
-
-PDF変換
--------
+PDF文書のビルド
+--------------------------------------------------
 
 日本語を含む文書のPDF変換には ``make latexpdfja`` を実行します。
 これは裏で ``platex`` / ``dvipdfmx`` を実行しているため、
@@ -166,28 +127,37 @@ PDF変換
     $ open build/latex/KumaROOT.pdf
 
 
-HTML変換
---------
-
-HTML変換には ``make html`` を実行します。
-変換ファイルは ``build/html/`` 以下に作成されます。
-
-.. code-block:: bash
-
-    $ cd $KUMAROOT
-    $ make html
-    $ open build/html/index.html
-
-
-
 conf.pyの設定
--------------
+==================================================
 
-HTMLやPDF変換に必要な設定をしておきます。
+ドキュメントの全体設定は ``conf.py`` で行います。
+ここでは、HTML文書とPDF文書に必要な設定をしておきます。
+
+PDF文書の設定
+--------------------------------------------------
+
+PDF文書の生成にはLaTeXを使います。
+そのため、使いたいLaTeXパッケージなどの設定が主になります。
+
+LaTeXのドキュメントクラスの設定（ ``latex_docclass`` ）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``latex_documents`` はデフォルトのままにしておき、
+``latex_docclass`` を変更します。
+
+.. code-block:: python
+
+    latex_docclass = {'manual' : 'jsbook'}
 
 
-LaTeXドキュメントの設定（ ``latex_elements`` ）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ドキュメントクラスオプションの設定（ ``latex_elements`` ）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ドキュメントクラス（ ``\documentclass`` ）のオプションを設定する部分です。
+プリアンブルの設定は、ここで書くと長くなって読みにくくなるため、
+ここでは変数の定義だけして、中身はあとで書くことにします。
+
 
 .. code-block:: python
 
@@ -200,9 +170,16 @@ LaTeXドキュメントの設定（ ``latex_elements`` ）
     }
 
 
+``LaTeX`` 文書の出力は以下のようになります。
+
+.. code-block:: latex
+
+   \documentclass[a4paper, 12pt, dvipdfmx]{sphinxmanual}
+
+
 
 プリアンブルの追加（ ``latex_elements['preamble']`` ）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 上の ``latex_elements`` の中で複数のパッケージを書くと見た目がカッコ悪いので、
 以下のように ``latex_elements['preamble']`` に直接追加することにしました。
@@ -211,26 +188,29 @@ LaTeXドキュメントの設定（ ``latex_elements`` ）
 
     latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
     latex_elements['preamble'] += '\\usepackage{graphics}\n'
+    latex_elements['preamble'] += '\\hypersetup{bookmarksnumbered=true}\n'
+    latex_elements['preamble'] += '\\hypersetup{bookmarksopen=true}\n'
+    latex_elements['preamble'] += '\\hypersetup{bookmarksopenlevel=2}\n'
+    latex_elements['preamble'] += '\\hypersetup{colorlinks=true}\n'
+    latex_elements['preamble'] += '\\hypersetup{pdfpagemode=UseOutlines}\n'
+
+``LaTeX`` 文書の出力は以下のようになります。
+
+.. code-block:: latex
+
+   \usepackage{pxjahyper}
+   \usepackage{graphics}
+   \hypersetup{bookmarksopen=true}
+   \hypersetup{bookmarksopenlevel=2}
+   \hypersetup{colorlinks=true}
+   \hypersetup{pdfpagemode=UseOutlines}
 
 
+表紙の設定（ ``latex_logo`` ）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-LaTeXのドキュメントクラスの設定（ ``latex_docclass`` ）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-``latex_documents`` はデフォルトのままにしておき、
-``latex_docclass`` を変更する。
-
-.. code-block:: python
-
-    latex_docclass = {'manual' : 'jsbook'}
-
-
-
-LaTeXの表紙の設定（ ``latex_logo`` ）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-表紙に挿入する絵の設定。
-必要ないなら ``None`` （デフォルト値）にしておけばよい。
+表紙が寂しい場合、ロゴを挿入することもできます。
+必要ないなら ``None`` （デフォルト値）にしておけばよいです。
 
 .. code-block:: python
 
@@ -240,8 +220,11 @@ LaTeXの表紙の設定（ ``latex_logo`` ）
 
 
 
-HTMLテーマの設定
-~~~~~~~~~~~~~~~~
+HTML文書の設定
+--------------------------------------------------
+
+テーマの設定
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 まず、 ``pip`` を使って ``sphinx_bootstrap_theme`` をインストールする。
 登録されているパッケージ名は
@@ -334,6 +317,61 @@ HTMLテーマの設定
         # Values: "3" (default) or "2" (in quotes)
         'bootstrap_version': "3",
     }
+
+
+
+
+
+pandocコマンドの使い方
+==================================================
+
+``Org`` や ``Markdown`` をすでに使っている場合、
+新しく ``reST`` の書式を覚えるのは少しめんどくさいです。
+そのような場合、``pandoc`` コマンドがあれば、以下のようなワークフローを考えることができます。
+
+#. Orgモードで文章を作成（ただし ``QuickLook`` できるように ``.txt形式`` で保存）
+#. ``pandoc`` を使って ``reST形式`` に変換
+#. ``Sphinx`` を使って HTML と PDFに変換
+
+以下では ``Org`` と ``HTML`` から ``reST`` に変換する例を挙げておきます。
+残念ながらWordファイル（ ``doc`` or ``docx`` ）を ``reST`` に直接変換することはできませんが [2]_ 、
+Word から HTML に書き出せば ``reST`` に変換することができます。
+
+
+Org から reST への変換
+--------------------------------------------------
+
+``Org`` には ``reST`` エクスポート（ ``ox-rst`` ）があるのですが、
+なぜかうまく働かないので ``pandoc`` を使って変換します。
+今回の場合、Org文書の拡張子が ``.txt`` なので
+``-f org`` を使って ``pandoc`` に入力フォーマットを教えています。
+出力ファイルは拡張子で reST形式（ ``-o FILENAME.rst`` ）と分かるので、
+出力フォーマットを指定する必要はありません。
+
+.. code-block:: bash
+
+    $ cd $KUMAROOT
+    $ pandoc -f org source/FILENAME.txt -o source/FILENAME.rst
+
+毎回、手動で変換するのが面倒くさいのでワンライナーを書いてみました。
+これを ``Makefile`` に書いておけばいいのかもしれないです。
+
+.. code-block:: bash
+
+    $ for f in source/*.txt; do pandoc -f org -t rst $f -o "source/`basename $f .txt`.rst"; done
+
+
+HTML から reST への変換
+--------------------------------------------------
+
+Org から reST形式への変換ができれば簡単にできます。
+この場合は、入力フォーマットも出力フォーマットも、ファイル形式を見れば分かるので、
+オプションは必要ありません。
+
+.. code-block:: bash
+
+    $ cd $KUMAROOT
+    $ pandoc source/FILENAME.html -o source/FILENAME.rst
 
 
 .. [1]
