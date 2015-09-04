@@ -38,11 +38,6 @@ ROOTの使い方
 
    sphinx
    emacs
-   emacs-org
-   emacs-yatex
-   emacs-magit
-   emacs-twitter
-
 
 
 Indices and tables
