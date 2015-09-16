@@ -1,11 +1,13 @@
-ROOTのインストール
-==================
+==================================================
+インストール
+==================================================
 
-ROOTのインストールする方法と
+はじめにROOTをインストールする方法と
 ROOTのチュートリアルの存在について紹介しておきます。
 
+
 オススメのインストール方法（for Mac ユーザ）
---------------------------------------------
+==================================================
 
 .. code-block:: bash
 
@@ -24,92 +26,18 @@ MacPortsの場合 ``root6`` というポート名（パッケージ名）でイ�
 簡単に切り替える方法は後述します。
 
 現在は ``ROOT5`` から ``ROOT6`` へ移行する過渡期です。
-そのため、進行中の実験は ``ROOT5`` 系を使っていることが多いです [1]_
+そのため、進行中の実験は ``ROOT5`` 系を使っていることが多いです [#]_
 むやみに最新版を使うと、実験固有のソフトウェア群が動作しないこともあります。
 その場合は、素直に実験で推奨されているバージョンには従ってください。
 
 
-.. [1] LHC実験の要求に応えるため（？）、３年位前から ``ROOT`` の開発が非常に活発に行われています。
+.. [#] LHC実験が開始してから ``ROOT`` の開発が非常に活発に行われています。
        しかし、その他の実験では、安定性を求め古いバージョン使い続けていることがあります。
        あとOSが古いと最新バージョンはうまくインストールできないこともあります。
 
 
-Git を使ったインストール方法
-----------------------------
-
-Linuxを使っている場合は、Gitを使うとよいでしょう。
-方法は
-「 `installing-root-source | ROOT公式ページ <https://root.cern.ch/drupal/content/installing-root-source>`__ 」
-に載っている通りです。
-
-STEP1
-    ROOTのリポジトリをクローンします
-
-.. code-block:: bash
-
-    [any]  $ mkdir ~/repos/git
-    [any]  $ cd ~/repos/git
-    [git]  $ git clone http://root.cern.ch/git/root.git
-    [git]  $ cd root
-
-STEP2
-    どんなタグがあるのかを調べて、チェックアウトします。
-    ブランチ名は好きにして大丈夫です
-    （今回は、タグ名と同じ名前にしています）
-
-.. code-block:: bash
-
-    [root] $ git tag -l
-    [root] $ git checkout -b v5-34-08 v5-34-08
-
-STEP5
-    従来通りPREFIXを指定してconfigureします。
-    失敗した場合に備えてログを残しておきます
-
-.. code-block:: bash
-
-    [root(v5-34-08)] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-34-08
-    [root(v5-34-08)] $ make 2>&1 | tee make.log                   ## buiding ROOT
-    [root(v5-34-08)] $ make install 2>&1 | tee makeinstall.log    ## installed under $PREFIX
-
--  ``configure`` の内容は ``config.status`` に書き出されます。
--  ``make`` 、 ``make install`` の際、 ``PREFIX`` で指定したディレクトリによっては ``sudo`` が必要になります。
--  ログを取る場合は、 ``tee`` コマンドを使うと端末に表示しながらログファイルに保存できます。
--  ``~/.bashrc`` に環境変数の設定を書いておきます。
-
-
-従来のインストール方法
-~~~~~~~~~~~~~~~~~~~~~~
-
-ググればたくさん出てきますが、一応紹介しておきます。
-
-.. code-block:: bash
-
-    ## STEP1 : make directory for tar.gz file and wget it
-    $ cd /usr/local/heplib/tarballs
-    $ wget ftp://root.cern.ch/root/root_v5.30.06.source.tar.gz    ## check URL at ROOT website
-
-    ## STEP2 : expand tar.gz
-    [ROOT] $ cd /usr/loca/heplib/ROOT
-    [ROOT] $ tar zxvf ../tarballs/root_v5.30.06.source.tar.gz
-
-    ## STEP3 : set PREFIX then configure -> make -> make install
-    [ROOT] $ cd root
-    [root] $ ./configure --prefix=/usr/local/heplib/ROOT/v5-30-06
-    [root] $ make 2>&1 | tee make.log
-    [root] $ make install 2>&1 | tee makeinstall.log
-
-
-インストール方法 for Windows ユーザ
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Windowsはよく分かりません。ごめんなさい。たぶん
-「 `downloading-root | ROOT公式ページ <https://root.cern.ch/drupal/content/downloading-root>`__ 」
-から目的のバージョンを選び、バイナリを落としてくるのが一番簡単だと思います。
-
-
 ROOT5 と ROOT6 を試してみたい
------------------------------
+==================================================
 
 .. code-block:: bash
 
@@ -119,7 +47,7 @@ ROOT5 と ROOT6 を試してみたい
 MacPortsでROOTをインストールする利点のひとつは、
 ``ROOT5`` と ``ROOT6`` が簡単に切り替えられることです。
 
-実はこの ``port select`` はROOTだけでなく、
+実はこの :command:`port select` はROOTだけでなく、
 Pythonのバージョン切り替えなどもできます。
 どのパッケージが使えるかは以下のコマンドで確認できます
 
@@ -129,64 +57,39 @@ Pythonのバージョン切り替えなどもできます。
 
 
 ROOT5 と ROOT6 の違いについて
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================================
 
-ROOTマクロなどを実行する際に使うインタプリタが変更されたみたいです [2]_ 。
+ROOTマクロなどを実行する際に使うインタプリタが ``CINT`` から ``CINT++`` に変更されました。
 細かい違いは全く分かりませんが、文法のチェックが厳密になったみたいです。
 
-実は ``ROOT5`` ではC言語／C++言語の文法的には間違っているマクロでも動いてくれました [3]_ 。
+実は ``ROOT5`` ではC言語／C++言語の文法的には間違っているマクロでも動いてくれました [#]_ 。
 そのため、テストで作ったマクロで動作確認した後、
 より多くのデータを解析するためにコンパイルするとエラーが多出。
-そのデバッグに追われるということは日常茶飯事でした。
+そのデバッグに追われるということが多々ありました。
 
-``ROOT6`` では、このマクロの文法チェックも厳しくなったみたいです。ひぇぇ。
-でも心配しなくて大丈夫。エラーの内容を詳しく教えてくれるようになりました。
-よくある行末のセミコロンのつけ忘れなども指摘してくれます。
-これで場所の分からない ``segmentation fault`` に悩まされることも減るでしょう。
-
-どんな風に厳しくなったかを実感するために、試しに
-``ROOT5`` のチュートリアルを ``ROOT6`` で実行してみましょう。
+``ROOT6`` では、このマクロの文法チェックも厳しくなったようです。
+その証拠に、試しに ``ROOT5`` のチュートリアルを ``ROOT6`` で実行してみると、
 ``warning`` や ``error`` がたくさん表示されます。
 
-.. code-block:: bash
+また、エラーの内容を詳しく教えてくれるようになっています。
+やってしまいがちな行末のセミコロンのつけ忘れなども指摘してくれるので、
+これで場所の分からない ``segmentation fault`` に悩まされることも減るかもしれません。
 
-    $ sudo port select root root6    # ROOT6に切り替える
-    $ cd /opt/local/libexec/root5/share/doc/root/tutorials/    # ROOT5のチュートリアルに移動
-    $ root    # ROOT6を起動
-
-    ## ===  an example of warning ===
-    /opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:7:13:
-     warning: using the result of an assignment as a condition without
-     parentheses [-Wparentheses]
-          if (e = getenv("EDITOR"))
-              ~~^~~~~~~~~~~~~~~~~~
-    ## === an example of error ===
-    /opt/local/libexec/root5/share/doc/root/tutorials/rootalias.C:39:12:
-     error: cannot initialize return object of type 'char *' with an rvalue of
-     type 'const char *'
-        return gSystem->WorkingDirectory();
-               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-    $ .q    # ROOTを終了
-
-
-.. [2] CINT \\rightarrow CINT++に変更
-
-.. [3] よく知られていると思われるのは、a.b でも a->bでも動いちゃうことでしょうか
-
+.. [#] よく知られていると思われるのは、a.b でも a->bでも動いちゃうことでしょうか
 
 
 PyROOTを使いたい
-----------------
+==================================================
 
 .. code-block:: bash
 
     $ sudo port install root5 +python27   ## when ROOT5, you need to specify +pythonXX variants
     $ sudo port install root6             ## when ROOT6, no need to specify variants
 
-CERNには「へびつかい」が多いそうです。
+
 ``PyROOT`` というモジュールを使えば、Python上でROOTが使えます。
 その場合は、MacPortsでインストールする際に ``variants`` で
-``+pythonXX``を指定する必要があります。
+``+pythonXX`` を指定する必要があります。
 しかも、この ``variants`` は自分の使っているPythonの
 バージョンに合わせる必要があります。
 ミスマッチな場合は、動作せず、クラッシュします。
@@ -200,7 +103,7 @@ CERNには「へびつかい」が多いそうです。
 
 
 EmacsでROOTを編集したい
------------------------
+==================================================
 
 .. code-block:: bash
 
@@ -222,8 +125,9 @@ locateコマンドでどこにあるか調べておきましょう。
 
 これの使い方に関しては、あとできちんと調べて書くことにします。
 
+
 ROOTのtutorialを使いたい
-------------------------
+==================================================
 
 .. code-block:: bash
 
