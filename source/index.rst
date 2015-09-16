@@ -22,7 +22,7 @@ ROOTの使い方
 
    root-install
    root-tutorial
-   root-root
+   root-global
    root-hist
    root-tree
    root-chain
