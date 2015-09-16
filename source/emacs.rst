@@ -336,7 +336,7 @@ Emacsを快適に操作するためには、少しだけキーボード設定を
 
 
 キーボード設定変更時のスクリーンショット
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------------
 
 .. figure:: ./fig/mac-key01.png
    :align: center
@@ -357,21 +357,9 @@ Emacsを快適に操作するためには、少しだけキーボード設定を
 
 
 
-パッケージ管理
---------------------------------------------------
-
-Emacs24からパッケージ管理システムがデフォルトで使えるようになりました。
-その設定だけは必ずしておくと良いと思うので、以下に書いておきます。デフォルトのELPAリポジトリはパッケージの登録数が少ないらしいので、MELPAリポジトリを追加しておきます。さらにはMarmaladeリポジトリというのもあります。
 
 
-.. code-block:: elisp
-
-   (require 'package)
-   (add-to-list 'package-archives
-                '("melpa" . "http://melpa.org/packages/") t)
-   (package-initialize)
-
-
+.. include:: emacs-package.rst
 .. include:: emacs-prelude.rst
 .. include:: emacs-org.rst
 .. include:: emacs-yatex.rst
