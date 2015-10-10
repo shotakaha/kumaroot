@@ -13,55 +13,6 @@
    root-global-sethistlinewidth
    root-global-setrgb
    root-global-settimedisplay
-
-
-
-
-
-
-
-キャンバスに補助線を描きたい（ ``gStyle->SetPadGridX`` ）
-================================================================================
-
-.. code:: cpp
-
-       gStyle->SetPadGridX(1)    // X-axis grid
-       gStyle->SetPadGridY(1)    // Y-axis grid
-
-
-グラフの軸を一括してログ表示にする（ ``gStyle->SetOptLogx`` ）
-================================================================================
-
-.. code:: cpp
-
-       gStyle->SetOptLogx(1)    // X-axis
-       gStyle->SetOptLogy(1)    // Y-axis
-
-
-
-軸の目盛り間隔を変更したい（ ``gStyle->SetNdivisions`` ）
-================================================================================
-
-.. code:: cpp
-
-       gStyle->SetNdivisions(TTSSPP)
-
-
-.. list-table::
-   :widths: 1 9
-   :header-rows: 0
-
-   * - PP
-     - 軸全体の分割数
-   * - SS
-     - PP分割された目盛り１つ分の分割数
-   * - TT
-     - SS分割された目盛り１つ分の分割数
-
-
-デフォルトは510になっている。
-PP=10、SS=05、TT=00なので、軸を10分割してその１目盛りを5分割、
-ということで全体で50目盛りになる。
-
-全体を100目盛りにするには、20510にすればよい。
-（10分割、その１目盛りを5分割、さらにその1目盛りを2分割 ＝100目盛り）
+   root-global-setpadgrid
+   root-global-setoptlog
+   root-global-setndivisions
