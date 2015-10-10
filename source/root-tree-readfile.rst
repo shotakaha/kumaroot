@@ -4,40 +4,45 @@
 
 .. code-block:: cpp
 
-    Long64_t ReadFile(const char* filename, const char* branchDescriptor = "", char delimiter = ' ')
+    Long64_t ReadFile(const char* filename,
+                      const char* branchDescriptor = "",
+                      char delimiter = ' ')
 
-filename
-    入力ファイル名
-branchDescriptor
-    入力ファイルの構造指定。「:」で区切る
-delimiter
-    こんなのあったんだ
+.. list-table::
+   :header-rows: 1
+
+   * - 変数
+     - 説明
+   * - ``filename``
+     - 入力ファイル名
+   * - ``branchDescriptor``
+     - 入力ファイルの書式指定
+   * - ``delimiter``
+     - こんなのあったんだ
+
+``filename`` には読み込むファイル名を指定します。
+連番ファイルを読む場合は、後述する TString を使うと楽になったりします。
+ファイルの中身の書式は次の ``branchDescriptor`` で指定します。
+
+``branchDescriptor`` はTTreeのブランチ変数になります。
+複数のブランチ変数を指定する場合は、コロン（:）で区切って記述します。
+``Int_t型`` の場合は ``ブランチ名/I`` 、 ``Double_t型`` の場合は ``ブランチ名/D`` といった感じで、
+その変数名（＝ブランチ名）とその型を指定します。
+型を省略した場合は ``Float_t型`` の ``ブランチ名/F`` になるらしいです。
 
 学生実験や小さなテストベンチで行う実験の場合、取得したデータはとり
 あえずテキストファイルで出力することになると思います。ROOTで解析す
 るときはTTreeになっていると楽ちんなので、手間を掛けずにさっさと変換
 してしまいましょう。
 
-入力ファイルの構造は「branchDescriptor」で、TTreeに教えてあげます。
-
-第１引数
-    入力ファイル名
-第２引数
-    branch descriptor。TTreeのブランチ変数になります。複
-    数のブランチ変数を指定する場合は、コロン（:）で区切っ
-    て記述します。Int\ :sub:`t型の場合は`\ 「ブランチ名/I」、
-    Double\ :sub:`t型の場合は`\ 「ブランチ名/D」といった感じで、そ
-    の変数名（＝ブランチ名）とその型を指定できます。型を
-    省略した場合はFloat\ :sub:`t型の`\ 「ブランチ名/F」になるみた
-    いです。
 
 サンプルコード
-^^^^^^^^^^^^^^
+==================================================
 
 仮に、100行４列のテキストファイルがあるとします。
 このファイルの「行数」はイベント数に相当し、「列数」は取得したデータの項目に相当します。
 
-.. code:: example
+.. code:: text
 
     100    105    104   103
     101    106    103   100
