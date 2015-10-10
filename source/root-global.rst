@@ -4,6 +4,7 @@
 
 
 .. toctree::
+   :maxdepth: 1
 
    root-global-rootrc
    root-global-setstyle
