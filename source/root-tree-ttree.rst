@@ -8,7 +8,9 @@ TTreeを作成したい（ ``TTree::Tree`` ）
 
 .. code:: cpp
 
-    TTree TTree(const char* name, const char* title, Int_t splitlevel = 99)
+    TTree TTree(const char* name,
+                const char* title,
+                Int_t splitlevel = 99)
 
 
 .. list-table::
@@ -16,24 +18,19 @@ TTreeを作成したい（ ``TTree::Tree`` ）
 
    * - 変数
      - 説明
-   * - name
+   * - ``name``
      - TTreeオブジェクトの名前
-   * - title
+   * - ``title``
      - TTreeの説明
-   * - splitlevel
+   * - ``splitlevel``
      - 使ったことがない
 
-第１引数（ ``name`` ）はTTreeオブジェクトの名前
 
-name
-    TTreeオブジェクトの名前。他のオブジェクトと重複しないようにする
-title
-    TTreeの説明。TFileに保存したときに表示される
-splitlevel
-    使ったことがない
+``name`` はオブジェクトの名前です。
+他のオブジェクトと重複しないようにします。
 
-    「name」はオブジェクトの名前です。他のオブジェクトと重複しないよう
-    にしましょう。「title」はTFileを覗いた時に表示されるTTreeの説明です。
-    １行くらいの簡単な説明をきちんと付けておくとあとで自分自身を救うこ
-    とになると思います。「splitlevel」は指定したことがありません。デフォ
-    ルト値で大丈夫です。
+``title`` はTFileを覗いた時に表示されるTTreeの説明です。
+１行くらいの簡単な説明をきちんと付けておくと、あとで自分自身を救うことになると思います。
+
+``splitlevel`` は指定したことがありません。
+なのでデフォルト値で大丈夫です。
