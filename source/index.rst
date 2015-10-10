@@ -59,6 +59,8 @@ Emacsの使い方
 
    emacs-editor
    emacs-install
+   emacs-keyboard
+   emacs-keybind
    emacs-prelude
    emacs-package
    emacs-use-package

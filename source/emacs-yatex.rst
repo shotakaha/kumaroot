@@ -127,3 +127,26 @@ YaTeX（野鳥）はEmacsでLaTeX文書を作成するためのパッケージ�
        (setq YaTeX-simple-messages t)
        ;; (setq YaTeX-template-file "...")
        )
+
+拡張子が.texのファイルをyatex-modeで開く
+--------------------------------------------------
+
+.. code-block:: elisp
+
+   :mode (("\\.tex$" . yatex-mode))
+
+
+ローカル辞書は要らない
+--------------------------------------------------
+
+.. code-block:: elisp
+
+   (setq YaTeX-nervous nil)
+
+
+LaTeXコンパイラの設定
+--------------------------------------------------
+
+.. code-block:: elisp
+
+   (setq tex-command "ptex2pdf -l -ot -synctex=1 -file-line-error")
