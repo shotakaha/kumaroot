@@ -1,6 +1,6 @@
-================================================================================
+==================================================
 ヒストグラム編（ ``TH1``, ``TH2`` ）
-================================================================================
+==================================================
 
 ROOT解析の基本であるヒストグラム（＝度数分布表）は以下の手順で作成・描画します。
 
@@ -19,85 +19,28 @@ ROOT解析の基本であるヒストグラム（＝度数分布表）は以下�
 また、線の色を変更したり、塗りつぶしたりと装飾することができます。
 
 
-１次元ヒストグラムを作成したい（ ``TH1D`` ）
-================================================================================
+.. toctree::
+   :maxdepth: 1
 
-.. code:: cpp
-
-   TString hname, htitle;
-   hname.Form("hname");
-   htitle.Form("title;xtitle;ytitle;");
-   Double_t xmin = 0, xmax = 100;
-   Int_t xbin = (Int_t)xmax - (Int_t)xmin;
-
-   TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
+   root-hist-new
+   root-hist-title
+   root-hist-xtitle
+   root-hist-stats
+   root-hist-mean
 
 
-ヒストグラムには **（オブジェクトの）名前** が必要です。
-これは **他のどのオブジェクトとも重ならないように** します。
-
-タイトルの文字列を **"全体のタイトル;X軸名;Y軸名"** と ";" で区切ることでX軸、Y軸を同時に設定することができます。
 
 
-Fill
-    ヒストグラムに値を詰めるメソッド
-Draw
-    ヒストグラムを描くメソッド。描画のオプションを設定できる。
 
-.. code:: cpp
 
-    TString hname, htitle;
-    hname.Form("hname");    // <------------------------ object name of histogram
-    htitle.Form("title;xtitle;ytitle;");    // <-------- title and axis name
-    Double_t xmin = 0, xmax = 10;    // <--------------- left edge and right edge
-    Int_t xbin = (Int_t)xmax - (Int_t)xmin;    // <----- number of bins
 
-    TH1D *h1 = new TH1D(hname.Data(), htitle.Data(), xbin, xmin, xmax);
 
--  ヒストグラムに限らずROOTオブジェクトには「名前」をセットする必要がある
--  タイトル部分を「;」で区切ることで、軸名を設定することができる（"タイトル;X軸名;Y軸名前"）
--  TString::Form は printf の書式が使えるのでとても便利
 
-２次元ヒストグラムを作成したい（ ``TH2D`` ）
-================================================================================
-
-.. code:: cpp
-
-    TH2D TH2D(const char* name, const char* title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, Double_t ylow, Double_t yup)
-    Int_t Fill(Double_t x, Double_t y)
-    void Draw(Option_t* option = "")
-
-タイトルを変更したい（ ``SetTitle`` ）
-================================================================================
-
-.. code:: cpp
-
-    void SetTitle(const char* title = "")   // *MENU*
-
-統計ボックスを表示したい（ ``SetStats`` ）
-================================================================================
-
-.. code:: cpp
-
-    void SetStats(Bool_t stats = kTRUE)     // *MENU*
-
-X軸名を設定したい（ ``SetXTitle`` ）
-================================================================================
-
-.. code:: cpp
-
-    void SetXTitle(const char* title)
 
 タイトルを中心にしたい
 ================================================================================
 
-平均値、RMSを知りたい（ ``GetMean`` , ``GetRMS`` ）
-================================================================================
 
-.. code:: cpp
-
-    Double_t GetMean(Int_t axis = 1) const
-    Double_t GetRMS(Int_t axis = 1) const
 
 値を詰めたい（ ``Fill`` ）
 ================================================================================
