@@ -2,48 +2,40 @@
 YaTeXの使い方
 ==================================================
 
-YaTeX（野鳥）はEmacsでLaTeX文書を作成するための環境のこと。
-少し前までは、 ``Mercurial`` を使ってインストールするしかなかったが、
-いまは ``MELPA`` からインストールすることができる。
+YaTeX（野鳥）はEmacsでLaTeX文書を作成するためのパッケージです。
+ちょっと前までは ``Mercurial`` を使って手動でインストールするしかなかったのですが、最近は ``MELPA`` からインストールすることができます。
 
-YaTeXのインストール
--------------------
-
-MELPAを使ったインストール方法
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+インストール（MELPA）
+==================================================
 
 .. code:: emacs
 
     M-x package-install RET yatex RET
 
-Mercurialを使ったインストール方法
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+インストール（Mercurial）
+==================================================
 
-STEP1
-    Mercurialのインストール
+:STEP1: Mercurialのインストール
 
 .. code:: bash
 
     $ sudo port install mercurial +bash_completion +zsh_completion
 
-STEP2
-    YaTeXのリポジトリをチェックアウト
+:STEP2: YaTeXのリポジトリをチェックアウト
 
 .. code:: bash
 
     $ cd ~/.emacs.d/
     $ hg clone http://www.yatex.org/hgrepos/yatex yatex
 
-STEP3
-    YaTeXリポジトリの更新
+:STEP3: YaTeXリポジトリの更新
 
 .. code:: bash
 
     $ cd ~/.emacs.d/yatex
     $ hg pull -u
 
-STEP4
-    Makefileの編集
+:STEP4: Makefileの編集
 
 .. code:: bash
 
@@ -76,22 +68,62 @@ STEP4
     ...
     ## ---------- < save changes > ----------
 
-+------------+----------------------------------------------------+
-| PREFIX     | ``/usr/local`` から ``${HOME}/.emacs.d`` に変更    |
-+------------+----------------------------------------------------+
-| EMACS      | ``/Applications/Emacs.app/Contents/MacOs/Emacs``   |
-+------------+----------------------------------------------------+
-| EMACSDIR   | ``${PREFIX}``                                      |
-+------------+----------------------------------------------------+
-| LISPDIR    | ``${EMACSDIR}/site-lisp/yatex``                    |
-+------------+----------------------------------------------------+
+.. list-table::
+   :header-rows: 1
 
-STEP5
-    YaTeXのインストール
+   * - 変数
+     - 変更点
+   * - PREFIX
+     - :file:`/usr/local` から :file:`${HOME}/.emacs.d` に変更
+   * - EMACS
+     - :file:`/Applications/Emacs.app/Contents/MacOs/Emacs`
+   * - EMACSDIR
+     - :file:`${PREFIX}`
+   * - LISPDIR
+     - :file:`${EMACSDIR}/site-lisp/yatex`
+
+
+:STEP5: YaTeXのインストール
 
 .. code:: bash
 
-    STEP5
     $ make install
     $ make install-info
     $ make install-yahtml
+
+
+
+設定
+==================================================
+
+
+.. code-block:: elisp
+
+   (use-package yatex
+       :ensure t
+       :mode (("\\.tex$" . yatex-mode))
+       :bind (("C-c C-t" . YaTeX-typeset-menu))
+       :config
+       ;; automatically selected according to current language
+       ;; (setq YaTeX-japan t)
+
+       ;; change default kanji-code from 2:JIS to 4:UTF-8
+       ;; (setq latex-message-kanji-code 4)
+       ;; (setq YaTeX-kanji-code 4)
+       ;; (setq YaTeX-coding-system 4)
+
+       ;; declared in yatexlib.el
+       (setq YaTeX-inhibit-prefix-letter t)
+       ;; local dictionary is NOT needed
+       (setq YaTeX-nervous nil)
+
+       ;; declared in yatex.el
+       (setq tex-command "ptex2pdf -l -ot -synctex=1 -file-line-error")
+       (setq bibtex-command "pbibtex")
+       (setq dvi2-command "open -a Preview")    ;; use Preview.app
+       (setq tex-pdfview-command "open -a Preview")
+       (setq dviprint-command-format "dvipdfmx %s")
+       (setq YaTeX-skip-default-reader t)
+       (setq YaTeX-simple-messages t)
+       ;; (setq YaTeX-template-file "...")
+       )

@@ -61,6 +61,7 @@ Emacsの使い方
    emacs-install
    emacs-prelude
    emacs-package
+   emacs-use-package
    emacs-org
    emacs-yatex
    emacs-magit
