@@ -110,3 +110,8 @@ sympy-plots-for-*.tex/
 
 # reST
 # *.rst
+
+
+# --- Add by Shota T. --- #
+source/tutorials/
+build/
