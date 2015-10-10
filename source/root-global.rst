@@ -11,39 +11,10 @@
    root-global-setoptstat
    root-global-setoptfit
    root-global-sethistlinewidth
+   root-global-setrgb
 
 
 
-
-
-
-
-
-
-デフォルトの色を変更したい（ ``gROOT->GetColor->SetRGB`` ）
-================================================================================
-
-.. code:: cpp
-
-    gROOT->GetColor(3)->SetRGB(0., 0.7, 0.); // Green  (0, 1, 0)->(0, 0.7, 0)
-    gROOT->GetColor(5)->SetRGB(1., 0.5, 0.); // Yellow (1, 1, 0)->(1, 0.5, 0)
-    gROOT->GetColor(7)->SetRGB(0.6, 0.3, 0.6); // Cyan (0, 1, 1)->(0.6, 0.3, 0.6)
-
-デフォルトは
-（1:黒, 2:赤, 3:黄, 4:青, 5:黄緑, 6:マゼンダ, 7:シアン）なのですが、
-この中で、
-（3:黄, 5:黄緑, 7:シアン）は明るすぎてとても見えづらいので、
-もう少し見やすい色に変更します。
-
-上２つは奥村さんのページのコピペ、最後のはシアンを紫っぽい色に変更しました。
-
-RGBの度合いは自分の好みで選んでください。
-手順としては、RGBの値を検索（Wikipedia使用すると良い）->
-その値を256（ほんとは255かも？）で割るだけです。
-
-おまけとして、ROOT公式ブログの
-「 `虹色カラーマップを使うこと <http://root.cern.ch/drupal/content/rainbow-color-map>`__ 」
-の記事もリンクしておきます。
 
 
 横軸に時間を使いたい（ ``SetTimeFormat`` , ``SetTimeDisplay`` ）
