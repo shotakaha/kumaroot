@@ -21,31 +21,15 @@
    気が向いたらROOT5と比較しようかと思います。
 
 
+.. toctree::
 
-とりあえず起動（ :command:`$ root` ）
-==================================================
-
-.. code-block:: bash
-
-    $ cd ~/TEST/root6/tutorials/
-    $ root
-
-    root[0]    ## ROOTセッション（CINT）内
-
-コマンドラインで :command:`root` と入力するとROOTセッション（CINT）が起動します。
-この状態だと対話的にROOTを操作することができます。
-電卓代わりにも使えます。
+   root-tutorial-start
+   root-tutorial-quit
+   root-tutorial-logon
 
 
-とりあえず終了（ :command:`.q` ）
-==================================================
 
-.. code-block:: bash
 
-    root [0] .q
-
-ROOTセッション内で ``.q`` を入力すると、ROOTが終了します。
-それで終了しない場合は、``.qqq・・・`` の様に ``q`` をたくさんにします。
 
 
 :file:`rootlogon.C` と :file:`rootlogoff.C`
