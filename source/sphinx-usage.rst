@@ -2,16 +2,16 @@
 Sphinxの使い方
 ==================================================
 
-``Sphinx`` とは、
-テキスト文書をreST形式で作成しておけば、
-良きように噛み砕いてくれ、PDFやHTMLやその他のフォーマットへと出力してくれるツールです。
+``Sphinx`` は、reST形式で作成されたテキスト文書を、PDFやHTML、その他のフォーマットへと変換してくれる ``ドキュメンテーションビルダー`` というツールです。
 
-元々、Pythonのドキュメント生成のために開発されたので、中身はPythonで書かれています。
+元々、Pythonのドキュメント生成のために開発されたそうで、中身はPythonで書かれています。
 そのため、Pythonを知っていればある程度カスタマイズすることができます。
 
-実はこのドキュメントも ``Sphinx`` を使って生成しています。
-どんなものか、気軽に試したい方は、このリポジトリをクローンするとよいでしょう。
+``KumaROOT`` も ``Sphinx`` を使って生成していて、 リポジトリを `GitHub <github_>`_ で管理、 HTMLを `Read the Docs <rtd_>`_ で公開しています。
+どんなものか気になる方は、``KumaROOT`` のGitHubリポジトリをクローンしてみるといいかもしれません。
 
+.. _github: https://github.com/shotakaha/kumaroot
+.. _rtd: http://kumaroot.readthedocs.org/ja/latest/
 
 .. toctree::
    :maxdepth: 1
