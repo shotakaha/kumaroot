@@ -21,7 +21,7 @@ KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
 
 .. list-table::
 
-   * - KEK
+   * - KEKの個人スペース
      - `HTML <kekweb_>`_
      - PDF（準備中）
    * - Read the Docs
