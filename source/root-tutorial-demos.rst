@@ -11,7 +11,7 @@ CINTで実行する場合は :command:`.x demos.C` と入力します。
 シェルから実行する場合は :command:`root demos.C` のようにファイルを引数に指定します。
 どちらの場合もファイル名の部分は ``TAB補完`` ができます。
 
-すると :numref:`fig-root-demos` の右端のように ``Demos ツールバー`` が出てきます。
+実行すると :numref:`fig-root-demos` の左端のように ``Demos ツールバー`` が出てきます。
 
 .. _fig-root-demos:
 .. figure:: ./root-tutorial/root-demos.png
@@ -38,3 +38,12 @@ CINTで実行する場合は :command:`.x demos.C` と入力します。
 
 ``Demos ツールバー`` の上から５番目の ``hsimple`` ボタンをクリックするか、CINTに :command:`.x hsimple.C` と入力します。
 シェルに :command:`root hsimple.C` と入力してもOKです。
+
+実行すると :numref:`fig-root-demos-hsimple` のようなヒストグラムが描かれた画面が出てきます。
+
+.. _fig-root-demos-hsimple:
+.. figure:: ./root-tutorial/root-demos-hsimple.png
+   :align: center
+
+
+   ``hsimple`` を実行したときの画面
