@@ -19,14 +19,14 @@ hsimpleを実行（ :command:`.x hsimple.C` ）
 
 .. toctree::
 
-   root-tutorials-hsimple-include
-   root-tutorials-hsimple-macroname
-   root-tutorials-hsimple-comment
-   root-tutorials-hsimple-string
-   root-tutorials-hsimple-openfile
-   root-tutorials-hsimple-histogram
-   root-tutorials-hsimple-benchmark
-   root-tutorials-hsimple-canvas
-   root-tutorials-hsimple-fill
-   root-tutorials-hsimple-draw
-   root-tutorials-hsimple-write
+   root-tutorial-hsimple-include
+   root-tutorial-hsimple-macroname
+   root-tutorial-hsimple-comment
+   root-tutorial-hsimple-string
+   root-tutorial-hsimple-openfile
+   root-tutorial-hsimple-histogram
+   root-tutorial-hsimple-benchmark
+   root-tutorial-hsimple-canvas
+   root-tutorial-hsimple-fill
+   root-tutorial-hsimple-draw
+   root-tutorial-hsimple-write
