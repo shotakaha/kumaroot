@@ -1,22 +1,22 @@
 ==================================================
-PyROOTを使いたい
+Python + ROOT
 ==================================================
 
-``PyROOT`` というモジュールを使えば、Python上でROOTが使えます。
-その場合は、MacPortsでインストールする際に ``variants`` で ``+pythonXX`` を指定すればよいです。
+PythonからROOTを使うために ``PyROOT`` モジュールがあります。
+``MacPorts`` でインストールする際に Pythonの :command:`variants` を指定すればOKです。
+``ROOT6`` では ``+python27`` がデフォルトで **ON** になっていますが、 ``ROOT5`` では忘れずに指定する必要があります。
 
-.. code-block:: bash
+また、このとき ``variants`` に指定するバージョンは、自分が使うPythonのバージョンに合わせる必要があります。
+ミスマッチだと、動作せず、クラッシュします。
 
-    $ sudo port install root5 +python27   ## when ROOT5, you need to specify +pythonXX variants
-    $ sudo port install root6             ## when ROOT6, no need to specify variants
+.. note::
 
+   この文書では ``root6 +pyhon34`` を使います
 
-ただし、この ``variants`` は自分の使っているPythonのバージョンに合わせる必要があります。
-ミスマッチな場合は、動作せず、クラッシュします。
-
-``ROOT6`` の場合は ``python27`` がデフォルトでONになっています。
-
-他にも `rootpy <http://www.rootpy.org>`__ というのもあります。
+他にも `rootpy <rootpy_>`_ というモジュールもあります。
 こっちのほうがPython nativeな感じです。
 前に試そうとしてたのですがインストールでコケてしまいました。
 動かせたら項目を作るかも。
+
+
+.. _rootpy: http://www.rootpy.org
