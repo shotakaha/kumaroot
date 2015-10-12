@@ -22,10 +22,10 @@ KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
 .. list-table::
 
    * - KEKの個人スペース
-     - `HTML <kekweb_>`_
+     - `HTML <kekweb_>`__
      - PDF（準備中）
    * - Read the Docs
-     - `HTML <rtdweb_>`_
+     - `HTML <rtdweb_>`__
      - PDF（準備中）
 
 .. _kekweb: http://research.kek.jp/people/shotakah/kumaroot/docs/build/html/
