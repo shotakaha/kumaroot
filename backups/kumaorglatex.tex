@@ -1,0 +1,751 @@
+% Created 2015-01-29 Thu 17:42
+\documentclass[dvipdfmx,12pt]{jsarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\usepackage{atbegshi}
+\AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
+\hypersetup{setpagesize=false}
+\hypersetup{colorlinks=true}
+\hypersetup{linkcolor=blue}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{fancyvrb}
+\lstset{language=[LaTeX]TeX}
+\lstset{basicstyle=\small}
+\lstset{stringstyle=\ttfamily}
+\lstset{commentstyle=\ttfamily}
+\lstset{showstringspaces=false}
+\lstset{frame=shadowbox}
+\lstset{rulesepcolor=\color{black}}
+\lstset{fancyvrb=true}
+\fvset{gobble}
+\author{しょーた}
+\date{\today}
+\title{Kumaにも使えるOrgの\LaTeX{}エクスポート}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{はじめに}
+\label{sec-1}
+
+メインである「KumaROOT」のために、Orgの\LaTeX{}エクスポートについて調べ
+ていたら、いい感じの長さになってしまいました。
+
+\section{\LaTeX{}エクスポートの手順}
+\label{sec-2}
+
+文章は、だいたい Org（の\LaTeX{}エクスポート） + YaTeX で書くことにしています。
+具体的な手順は以下の通りです。YaTeXでのコンパイルにはpTeX（=ptex2pdf）を使っています
+
+\begin{description}
+\item[{Orgファイルの編集}] emacs kumaroot.org
+\item[{\LaTeX{}エクスポート}] C-c C-e l l
+\item[{\LaTeX{}ファイルのバッファを開く}] C-x b kumaroot.tex
+\item[{YaTeXコマンドでコンパイル}] C-c C-t j
+\item[{YaTeXコマンドでプレビュー}] C-c C-t p
+\end{description}
+
+\section{\LaTeX{}エクスポートの基本設定}
+\label{sec-3}
+
+過去に設定した内容を見直し＆テストしながら、基本的であろう項目を拾っ
+てみました。
+
+\begin{description}
+\item[{ox-latex}] \LaTeX{}エクスポートを担っているパッケージ\footnote{最近
+                org-latex $\rightarrow$ ox-latex に変更されたみたい。
+                (require 'org-latex) しているサイトは内容が古いので、
+                更新日を確認してみましょう。そしてより新しい情報を探し
+                ましょう}
+\item[{org-export-latex-coding-system}] No document
+\item[{org-export-latex-date-format}] No document
+\item[{org-latex-default-class}] \LaTeX{}で使うクラスの設定。デフォルトは
+「article」。日本語を使う場合は「jsarticle」にする。ただし、後
+述する「org-latex-classes」に追加する必要がある。
+\item[{org-file-apps}] ファイルを開く外部プログラムを設定できる。何も設
+定しないとシステムデフォルトのプログラムを使うよ
+うになっている。ox-latexというより、orgの機能。
+PDFをPreview.appで開くように設定する（もしかして
+不要なのかな？）。デフォルトの設定を見ながら検討
+する。
+
+\item[{org-latex-classes}] \LaTeX{}クラスのalist。Orgファイル中の
+「\#+LATEX\_CLASS:\footnote{大文字・小文字の区別はない。以下のサンプル
+       コードでも適当に使ってるだけなので気にしないでください}」で指定
+できる。ない場合はデフォルト値が使われる。詳細は後述。
+\item[{org-latex-pdf-process}] Orgの\LaTeX{}エクスポート（C-c C-e l p）で
+PDFを作るための設定。内部ではpdflatexが走ることになる。詳細は後述。
+\item[{org-latex-packages-alist}] \LaTeX{}エクスポートした時に、ヘッダに挿
+入されるパッケージ群。org-latex-default-packages-alist の後に追
+記される。詳細は後述。
+\end{description}
+
+\subsection{org-latex-classesの詳細}
+\label{sec-3-1}
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(class-name
+  header-string
+  (numberd-section . unnumberd-section)
+  (...)
+\end{lstlisting}
+
+\subsubsection{第１引数 : HEADER-STRING}
+\label{sec-3-1-1}
+\LaTeX{}ファイルの挿入される文字列。documentclass や usepackage を書
+くことができる。「org-latex-default-packages-alist」や
+「org-latex-packages-alist」に入っているパッケージを呼び出すことができ
+る。Orgファイル内の「\#+LATEX\_HEADER:」、「\#+LATEX\_HEADER\_EXTRA:」
+キーワードの行で指定することもできる。
+
+\begin{enumerate}
+\item HEADER-STRINGの制御
+\label{sec-3-1-1-1}
+\begin{itemize}
+\item 「DEFAULT-PACKAGES」/「NO-DEFAULT-PACKAGES」（＝org-latex-default-packages-alist）
+\item 「PACKAGES」/「NO-PACKAGES」（＝org-latex-packages-alist）
+\item 「EXTRA」/「NO-EXTRA」
+\end{itemize}
+
+\item その他の関連する変数
+\label{sec-3-1-1-2}
+\begin{itemize}
+\item buffer-file-coding-system
+\item org-latex-inputenc-alist
+\item org-export-default-language
+\end{itemize}
+\end{enumerate}
+
+\subsubsection{第２引数 : sectioning structure}
+\label{sec-3-1-2}
+
+説明するより、ソースを読んだ方が早いと思う。
+以下にorg-latex-classesデフォルト値を掲載。
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+    Original value was
+(("article"    ;; <-- the name of the class
+  ;; HEADER-STRING : documentclass (+ default-packages)
+  "\\documentclass[11pt]{article}"
+  ;; SECTIONING : matching for Org headings and LaTeX sectioning
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+
+ ("report"
+  "\\documentclass[11pt]{report}"
+  ("\\part{%s}" . "\\part*{%s}")
+  ("\\chapter{%s}" . "\\chapter*{%s}")
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+
+ ("book"
+  "\\documentclass[11pt]{book}"
+  ("\\part{%s}" . "\\part*{%s}")
+  ("\\chapter{%s}" . "\\chapter*{%s}")
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+\end{lstlisting}
+
+\begin{enumerate}
+\item jsarticleの場合
+\label{sec-3-1-2-1}
+
+基本的には、「article」部分をコピペして、必要な部分を変更する。
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+("jsarticle"    ;; <-- set to "jsarticle" (any name is OK)
+ ;; HEADER-STRING : change documentclass to jsarticle
+ ;;               : also set dvipdfmx driver
+ "\\documentclass[12pt, dvipdfmx]{jsarticle}"
+ ;; SECTIONING : leave them as it is
+ ("\\section{%s}" . "\\section*{%s}")
+ ("\\subsection{%s}" . "\\subsection*{%s}")
+ ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+ ("\\paragraph{%s}" . "\\paragraph*{%s}")
+ ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{org-latex-pdf-processの詳細}
+\label{sec-3-2}
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+Its value is
+  ("pdflatex -interaction nonstopmode -output-directory %o %f"
+   "pdflatex -interaction nonstopmode -output-directory %o %f"
+   "pdflatex -interaction nonstopmode -output-directory %o %f")
+\end{lstlisting}
+
+Orgファイルから直接PDFを生成することもできる（C-c C-e l p ／ C-c
+C-e l o）。これはそのための設定。デフォルトの設定だと、pdflatex を
+使っている。３回も回しているとは知らなんだ。
+
+リストになっているのは、途中でbibtexを入れたりできるように。Org自身
+に適当なコンパイル方法を検知する仕組みが無いので、ユーザが好きにい
+じれるようにしてるみたい。
+
+日本語だとpdflatexがうまく動かないので、一度\LaTeX{}ファイルにエクスポー
+トして、pTeXを使ってコンパイルしていたが、これをきちんと設定すれば、
+楽になるのかも。
+
+\subsection{org-latex-packages-alistの詳細}
+\label{sec-3-3}
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+A cell is of the format:
+   ("options" "package" SNIPPET-FLAG)
+\end{lstlisting}
+
+\begin{description}
+\item[{第１引数}] パッケージのオプション
+\item[{第２引数}] パッケージ名
+\item[{第３引数}] よくわからん
+\end{description}
+
+\subsubsection{パッケージの追加方法}
+\label{sec-3-3-1}
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(add-to-list 'org-latex-packages-alist '("" "atbegshi"))
+(add-to-list 'org-latex-packages-alist "\\AtBeginShipoutFirst{\\special{pdf:tounicode EUC-UCS2}}")
+
+(add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}")
+(add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}")
+(add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}")
+
+(add-to-list 'org-latex-packages-alist '("" "listings"))
+(add-to-list 'org-latex-packages-alist '("" "color"))
+(add-to-list 'org-latex-packages-alist '("" "fancyvrb"))
+\end{lstlisting}
+
+このように「add-to-list」を使って、追加する。
+「hypersetup」などの先頭につけるバックスラッシュはエスケープする。
+すると以下のように\LaTeX{}ファイルのヘッダに追加される。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\hypersetup{linkcolor=blue}
+\hypersetup{colorlinks=true}
+\hypersetup{setpagesize=false}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{listings}
+\AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
+\usepackage{atbegshi}
+\end{lstlisting}
+
+・・・なんと、よくわからない順番にソートされる。
+
+これは、add-to-list の第３引数を t にすることで解決できた。
+t にしておくとalist の最後に足されるため。
+
+これで思い通りの順番に並べることができる。また、
+「add-to-list」の他に、「add-to-order-list」というのがあるみたいな
+のでそちらも調べてみる。
+
+
+\subsubsection{設定するときの注意点}
+\label{sec-3-3-2}
+\begin{itemize}
+\item すべてのファイルに使いたいパッケージであること
+\item 「org-format-latex-header」の設定とコンフリクトしないこと
+\item 「org-latex-default-packages-alist」のパッケージとコンフリクトしないこと
+\end{itemize}
+`
+
+\subsection{org-latex-default-packages-alistの詳細}
+\label{sec-3-4}
+
+このリストにあるパッケージはOrg-modeを動かすために必要な最低限のパッ
+ケージなので、基本的には変更しないこと。ただし、あるパッケージを使
+いたいときに、ここにあるパッケージとコンフリクトするようなら修正す
+るようにする。
+
+\subsubsection{リストにあるパッケージ一覧}
+\label{sec-3-4-1}
+\begin{description}
+\item[{inputenc, fontenc}] for basic font and character selection
+\item[{fixltx2e}] Important patches of \LaTeX{} itself
+\item[{graphicx}] for including images
+\item[{longtable}] For multipage tables
+\item[{float, wrapfig}] for figure placement
+\item[{rotating}] for sideways figures and tables
+\item[{ulem}] for underline and strike-through
+\item[{amsmath}] for subscript and superscript and math environments
+\item[{textcomp, marvosymb, wasysym, amssymb}] for various symbols used
+for interpreting the entities in `org-entities'.  You can skip
+some of these packages if you don't use any of their symbols.
+\item[{hyperref}] for cross references
+\end{description}
+
+\subsubsection{デフォルト設定}
+\label{sec-3-4-2}
+
+Emacs24.1 で多少変更されたらしい。
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+Value:
+(("AUTO" "inputenc" t)
+ ("T1" "fontenc" t)
+ ("" "fixltx2e" nil)
+ ("" "graphicx" t)
+ ("" "longtable" nil)
+ ("" "float" nil)
+ ("" "wrapfig" nil)
+ ("" "rotating" nil)
+ ("normalem" "ulem" t)
+ ("" "amsmath" t)
+ ("" "textcomp" t)
+ ("" "marvosym" t)
+ ("" "wasysym" t)
+ ("" "amssymb" t)
+ ("" "hyperref" nil)
+ "\\tolerance=1000")
+\end{lstlisting}
+
+
+\subsection{org-format-latex-headerの詳細}
+\label{sec-3-5}
+
+あとでちゃんと読もうかな。
+
+\subsubsection{Documentation:}
+\label{sec-3-5-1}
+The document header used for processing \LaTeX{} fragments.  It is
+imperative that this header make sure that no page number appears
+on the page.  The package defined in the variables
+`org-latex-default-packages-alist' and `org-latex-packages-alist'
+will either replace the placeholder "[PACKAGES]" in this header,
+or they will be appended.Documentation: The document header used
+for processing \LaTeX{} fragments.  It is imperative that this header
+make sure that no page number appears on the page.  The package
+defined in the variables `org-latex-default-packages-alist' and
+`org-latex-packages-alist' will either replace the placeholder
+"[PACKAGES]" in this header, or they will be appended.
+
+\subsubsection{デフォルト値}
+\label{sec-3-5-2}
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+"\\documentclass{article}\n
+\\usepackage[usenames]{color}\n
+[PACKAGES]\n
+[DEFAULT-PACKAGES]\n
+\\pagestyle{empty}    % do not remove\n
+
+% The settings below are copied from fullpage.sty\n
+\\setlength{\\textwidth}{\\paperwidth}\n
+\\addtolength{\\textwidth}{-3cm}\n
+\\setlength{\\oddsidemargin}{1.5cm}\n
+\\addtolength{\\oddsidemargin}{-2.54cm}\n
+\\setlength{\\evensidemargin}{\\oddsidemargin}\n
+\\setlength{\\textheight}{\\paperheight}\n
+\\addtolength{\\textheight}{-\\headheight}\n
+\\addtolength{\\textheight}{-\\headsep}\n
+\\addtolength{\\textheight}{-\\footskip}\n
+\\addtolength{\\textheight}{-3cm}\n
+\\setlength{\\topmargin}{1.5cm}\n
+\\addtolength{\\topmargin}{-2.54cm}"
+\end{lstlisting}
+\section{\LaTeX{}エクスポートの再設定}
+\label{sec-4}
+
+基本設定の項目が分かったので、もう一度設定を見直してみます。
+
+\subsection{デフォルトの設定を確認する}
+\label{sec-4-1}
+
+org-latexの設定をすべてコメントアウトして、エクスポートしてみたとき
+\LaTeX{}ファイルのヘッダは以下のようになっている。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Shota}
+\date{\today}
+\title{\LaTeX{} Export Test}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\end{lstlisting}
+
+このまま、YaTeX環境でのコンパイル（＝pTeX）は可能だが、
+「dvipdfmx:warning:（error messages）」という警告がたくさんでる。
+\LaTeX{}ファイルを開き、ドキュメントクラスのオプションでドライバを
+dvipdfmxに指定するとこのエラーはでなくなる。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\documentclass[11pt, dvipdfmx]{article}
+\end{lstlisting}
+
+直接出力（＝pdflatex）も試してみたが、「org-latex-compile: PDF file
+./testing.pdf wasn't produced: [package error]」というログが
+Messagesバッファに残り、うまくいってない。
+
+
+\subsection{org-latex-pdf-process を pTeXに変更する}
+\label{sec-4-2}
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(use-package ox-latex
+  :config
+  (setq org-latex-pdf-process
+      ("ptex2pdf -l -ot -synctex=1 -file-line-error"
+       "ptex2pdf -l -ot -synctex=1 -file-line-error"
+       "ptex2pdf -l -ot -synctex=1 -file-line-error"
+  )
+)
+\end{lstlisting}
+
+「Warning: `"ptex2pdf -l -ot -synctex=1 -file-line-error"' is a
+malformed function」とう警告が表示され、そもそもの設定がうまくでき
+ない。setq ではできんのか？後で調べる。
+
+
+\subsection{ドキュメントクラスにjsarticleを追加する}
+\label{sec-4-3}
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\documentclass[12pt, dvipdfmx]{jsarticle}
+\end{lstlisting}
+
+文字サイズは少し大きく（＝12pt）して、ドライバには dvipdfmx を指定する。
+sectioning については、article のデフォルトを使う。
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(add-to-list 'org-latex-classes
+               '("jsarticle"
+                 "\\documentclass[dvipdfmx,12pt]{jsarticle}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                 ))
+\end{lstlisting}
+
+\subsection{ドキュメントクラスにjsbookを追加する}
+\label{sec-4-4}
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\documentclass[12pt, dvipdfmx]{jsbook}
+\end{lstlisting}
+
+文字サイズは少し大きく（＝12pt）して、ドライバには dvipdfmx を指定する。
+sectioning については、book のデフォルトを使う。
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(add-to-list 'org-latex-classes
+               '("jsbook"
+                 "\\documentclass[dvipdfmx,12pt]{jsbook}"
+                 ("\\part{%s}" . "\\part*{%s}")
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 )
+               )
+\end{lstlisting}
+
+\subsection{ドキュメントクラスにjsreportを追加する}
+\label{sec-4-5}
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\documentclass[12pt, dvipdfmx, report]{jsbook}
+\end{lstlisting}
+
+文字サイズは少し大きく（＝12pt）して、ドライバには dvipdfmx を指定する。
+「jsreport」というクラスファイルはないが、jsbook に report オプションをつければいいらしい。
+sectioning については、article のデフォルトを部分に chapter を付け加えた。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(add-to-list 'org-latex-classes
+               '("jsreport"
+                 "\\documentclass[dvipdfmx,12pt,report]{jsbook}"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 )
+               )
+\end{lstlisting}
+
+
+\subsection{デフォルトのドキュメントクラスを jsarticle に変更する}
+\label{sec-4-6}
+
+すべてのOrgファイルに「\#+latex\_class: jsarticle」を付けるのはめんどくさいので、
+デフォルトに設定する。
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(setq org-latex-default-class "jsarticle")
+\end{lstlisting}
+
+\subsection{hyperref の設定}
+\label{sec-4-7}
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\usepackage{hyperref}
+\hypersetup{
+  setpagesize=false,    %% <-- This line is very important
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+\end{lstlisting}
+
+hyperref パッケージと jsarticle は仲が良くなくて、そのままコンパイ
+ルするとページの幅がおかしくなってしまう。これは setpagesize=false
+とすることで解決する。hyperrefパッケージの設定は、hypersetupの中で
+行うことができる。
+
+しかし、デフォルトのhyperrefの中身は、ox-latex.elにハードコーディ
+ングされていて追加／変更できないので、以下のように、hypersetupを２
+回呼び出すことにする。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\usepackage{hyperref}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+\hypersetup{
+  setpagesize=false
+}
+\end{lstlisting}
+
+とりあえずテストしたい場合は、編集しているOrgファイルの先頭に
+「\#+latex\_header:」もしくは「\#+latex\_header\_extra:」を使って定義す
+るとよい。
+
+latex\_header と latex\_header\_extra の違いを調べるために、以下の順
+番でhypersetupを定義してみた。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+#+latex_header: \hyperref{setpagesize=false}
+#+latex_header_extra: \hyperref{colorlinks=true}
+#+latex_header: \hyperref{linkcolor=blue}
+\end{lstlisting}
+
+すると、latex\_header > latex\_header\_extra の順に書かれることが分かっ
+た。いまいちどういう時に順番を考えたらいいのか思いつかないけれど。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\usepackage{hyperref}
+\hypersetup{setpagesize=false}    %% latex_header:
+\hypersetup{linkcolor=blue}       %% latex_header:
+\hypersetup{colorlinks=true}      %% latex_header_extra:
+\tolerance=1000
+\author{Shota}
+\date{\today}
+\title{\LaTeX{} Export Test}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.10)}}
+\end{lstlisting}
+
+出力場所は、デフォルト出力のhypersetupの上になるが、コンパイルには
+影響しないのでこれで良しとする。
+
+\subsection{上文字、下文字の自動変換をオフにする}
+\label{sec-4-8}
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(setq org-use-sub-superscripts nil)
+(setq org-export-with-sub-superscripts nil)
+\end{lstlisting}
+
+Orgファイル中の「\^{}（ハット）」「\_（アンダースコア）」以降の数文字は、
+自動的に上文字、下文字に変換されてしまいます。便利なのかもしれませ
+んが、意図しない箇所も変換されてしまうのはやっぱり不便なのでオフに
+します。エクスポートするときも同じ理由でオフにしておきます。
+
+上付き・下付きにしたい場合は、文字\^{}\{上付き\}、文字\_\{下付き\}、のよう
+に中括弧（\{\}）で囲みます。Orgファイル中で「C-c C-x $\backslash$」すればプレビュー
+できます。
+
+\subsection{listingsを使ってコードブロックの装飾する}
+\label{sec-4-9}
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(setq org-latex-listings t)
+(add-to-list 'org-latex-packages-alist '("" "listings"))
+(add-to-list 'org-latex-packages-alist '("" "color"))
+(add-to-list 'org-latex-packages-alist '("" "fancyvrb"))
+\end{lstlisting}
+
+listlingsパッケージの初期設定はlstsetを使う。hypersetupのときと同じ
+ように、Orgファイルの先頭に書いておく。
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+#+latex_header: \lstset{language=[LaTeX]TeX}
+#+latex_header: \lstset{basicstyle=\small}
+#+latex_header: \lstset{stringstyle=\ttfamily}
+#+latex_header: \lstset{commentstyle=\ttfamily}
+#+latex_header: \lstset{showstringspaces=false}
+#+latex_header: \lstset{frame=shadowbox}
+#+latex_header: \lstset{rulesepcolor=\color{black}}
+#+latex_header: \lstset{fancyvrb=true}
+\end{lstlisting}
+
+
+
+
+\section{簡単なテスト方法}
+\label{sec-5}
+
+\LaTeX{}エクスポートの設定のテスト\footnote{Orgの機能なので\LaTeX{}エクスポート
+  以外でも使えます}のために、必要なemacs設定ファイルを編集してー、ロー
+ドしてー、確認してー、とやっていると結構疲れます。
+
+Org文書中に記述できるソースコードのブロックは、なんと内容を実行する
+機能がついています。なので、テストの際はそれを使うと格段に捗ります。あるので、それを使うと
+
+\lstset{language=Lisp,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+/#+BEGIN_SRC emacs-lisp :exports results :results silent
+(setq org-latex-listings t)
+(add-to-list 'org-latex-packages-alist '("" "listings"))
+(add-to-list 'org-latex-packages-alist '("" "color"))
+/#+END_SRC
+\end{lstlisting}
+
+上のコードをOrg文書の最初の方に書いておきます。エクスポートした\LaTeX{}
+文書のヘッダには、「listings」「color」パッケージが追加されています。
+
+\lstset{language=[LaTeX]TeX,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}    %% <-- Added here
+\usepackage{listings} %% <-- Added here
+\hypersetup{setpagesize=false}
+\hypersetup{linkcolor=blue}
+\hypersetup{colorlinks=true}
+\author{Shota}
+\end{lstlisting}
+
+思った通りの動きが確認できたのち、emacs設定ファイルに移動させればOKです。
+
+\section{PDFLaTeXの設定}
+\label{sec-6}
+
+ソースコードのハイライトに minted.sty を使うためにはpdflatexを使わな
+ければいけません。そのための設定をここにメモします。
+
+\subsection{日本語 + PDFLaTeX}
+\label{sec-6-1}
+
+BXjsclsというクラスファイルを使います。これまで何回やっても失敗して
+たのは、TeXLive2014について来たバージョン（v0.3）が古かったためで
+した。GitHubから最新版（v0.9）を取ってきたら解決しました。
+
+\lstset{language=sh,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+$ cd ~/repos/github/
+$ git clone git clone https://github.com/zr-tex8r/BXjscls.git
+$ cd BXjscls
+$ sudo mkdir /usr/local/texlive/texmf-local/tex/latex/bxjscls
+$ sudo cp *.cls *.def /usr/local/texlive/texmf-local/tex/latex/bxjscls/
+$ sudo mktexlsr
+\end{lstlisting}
+
+最後にmktexlsrすることで、
+「
+/usr/local/texlive/2014/texmf-dist/tex/latex/bxjscls/bxjsarticle.cls
+」から
+「/usr/local/texlive/texmf-local/tex/latex/bxjscls/bxjsarticle.cls」
+へと参照先が代わります。
+
+これで奥村さんのページのサンプルがコンパイルできるようになりました。
+
+\subsection{PDFLaTeX + minted.sty}
+\label{sec-6-2}
+
+minted.sty は外部プログラムのPygmentsを呼ぶため、コンパイル時
+に-shell-escape オプションを付ける必要があります。
+
+\lstset{language=sh,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+$ pdflatex -shell-escape sample.tex
+\end{lstlisting}
+
+\subsection{Org-\LaTeX{}エクスポート + minted.sty}
+\label{sec-6-3}
+
+さて、ようやく本来の目的にたどり着きました。少し使ってみたところ、
+minted環境の中では日本語が使えないみたいなので、それを修正してから
+いろいろ試した方が良さそうです。
+% Emacs 24.4.1 (Org mode 8.2.10)
+\end{document}
