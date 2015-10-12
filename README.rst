@@ -2,9 +2,8 @@
 KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
 ============================================================
 
-これまで古巣の研究室に設置した `ShotakahaDokuWiki <dokuwiki_>`_ に書きためていたROOTなどの情報を引っ越し中です。
+これまで古巣の研究室に設置した `ShotakahaDokuWiki <http://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php>`_ に書きためていたROOTなどの情報を引っ越し中です。
 
-.. _dokuwiki: http://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php
 
 「くまROOT」？
 ==================================================
@@ -34,16 +33,13 @@ KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
 ==================================================
 
 このドキュメントは
-`Sphinx <sphinx_>`_ というドキュメト作成ソフトを使っています。
+`Sphinx <http://sphinx-users.jp>`_ というドキュメト作成ソフトを使っています。
 文書本体には、reStructuredText（reST）という軽量マークアップ言語を使っています。
 
-.. _sphinx: http://sphinx-users.jp
 
 共著者募集中
 ==================================================
 
-`GitHub <ghweb_>`_ においたので、みんなで作っていけたらなと思います。
+`GitHub <https://github.com/shotakaha/kumaroot>`_ においたので、みんなで作っていけたらなと思います。
 が、使い方よく分からないので、最初は顔見知りに限定したいと思います。
 手伝っていただける方は直接連絡ください。
-
-.. _ghweb: https://github.com/shotakaha/kumaroot
