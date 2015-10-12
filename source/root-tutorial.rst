@@ -15,6 +15,6 @@
    root-tutorial-start
    root-tutorial-quit
    root-tutorial-calculator
-   root-tutorial-logon-logoff
+   root-tutorial-rootrc
    root-tutorial-demos
    root-tutorial-hsimple
