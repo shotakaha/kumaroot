@@ -1,18 +1,16 @@
 ==================================================
-EmacsでROOTを編集したい
+Emacs + ROOT
 ==================================================
 
-あまり知られていないのかもしれませんが、EmacsでROOTマクロのコーディングを補助するパッケージ :file:`root-help.el` が一緒にインストールされています。
+あまり知られていないのかもしれませんが、EmacsでROOTマクロのコーディングを補助する :file:`root-help.el` というパッケージがあります。
+ROOTと一緒にインストールされるので、とりあえず :command:`locate` コマンドでどこにあるか調べておきましょう。
+ちなみに、僕の場合（＝MacPortsの場合）、以下にありました。
 
-とりあえず :command:`locate` コマンドでどこにあるか調べておきましょう。
-  ちなみに、僕の場合（＝MacPortsの場合）、以下にありました。
+.. code-block:: bash
 
-
-  .. code-block:: bash
-
-     $ locate root-help.el    # check path
-     ## ROOT5 => /opt/local/libexec/root5/share/emacs/site-lisp/root-help.el
-     ## ROOT6 => /opt/local/libexec/root6/share/emacs/site-lisp/root-help.el
+   $ locate root-help.el    # check path
+   ## ROOT5 => /opt/local/libexec/root5/share/emacs/site-lisp/root-help.el
+   ## ROOT6 => /opt/local/libexec/root6/share/emacs/site-lisp/root-help.el
 
 .. note::
 
