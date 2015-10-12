@@ -115,3 +115,4 @@ sympy-plots-for-*.tex/
 # --- Add by Shota T. --- #
 source/tutorials/
 build/
+tutorials/
