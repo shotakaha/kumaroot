@@ -1,38 +1,5 @@
 ==================================================
-:file:`rootlogon.C` と :file:`rootlogoff.C`
-==================================================
-
-さて ``tutorials`` をコピーしたディレクトリ（ ``$TUTORIALS`` ）で
-ROOTを起動／終了すると、以下の様なメッセージが表示されるはずです。
-
-.. code-block:: bash
-
-   $ cd $TUTORIAL
-   $ root    ## 起動
-
-   Welcome to the ROOT tutorials
-
-   Type ".x demos.C" to get a toolbar from which to execute the demos
-
-   Type ".x demoshelp.C" to see the help window
-
-   ==> Many tutorials use the file hsimple.root produced by hsimple.C
-   ==> It is recommended to execute hsimple.C before any other script
-
-   root [0] .q    ## 終了
-
-   Taking a break from ROOT? Hope to see you back!
-
-
-これは、同じディレクトリに :file:`rooglogon.C` と :file:`rootlogoff.C` があるからです。
-この２つのファイルを用意しておくことで、ROOT起動時および終了時の動作を設定することができます。
-気になる人は覗いてみましょう（ :func:`printf` してるだけですが）。
-
-僕の場合、数ヶ月ぶりに触るプログラムなんてほとんど忘れてしまっています。
-なので :file:`rootlogon.C` に手順を書いて残したりしています。
-
-
-ROOT起動時に読み込まれるファイルの順番
+起動時に読み込まれるファイル
 ==================================================
 
 ROOT起動時には以下の順番で設定ファイルが読み込まれます。
@@ -41,6 +8,19 @@ ROOT起動時には以下の順番で設定ファイルが読み込まれます�
 #. :file:`~/.rootrc`
 #. :file:`./rootlogon.C`
 
-:file:`system.rootrc` の場所は :command:`locate` して確認してください。
-これを :file:`~/.rootrc` にコピーして編集すれば自分用の全体設定の完了です。
+:file:`system.rootrc` の場所は :command:`locate` コマンドで確認できます（ :numref:`fig-rootrc` ）。
+:file:`/opt/local/...` にあるのは ``MacPorts`` で、 :file:`/private/etc/...` にあるのはGitを使ってインストールしたときに生成されたファイルです。
+
+
+.. _fig-rootrc:
+.. figure:: ./root-tutorial/root-rootrc.png
+   :align: center
+
+   :file:`system.rootrc` を :command:`locate` した結果
+
+
+この :file:`system.rootrc` のどれか一つを :file:`~/.rootrc` にコピーして編集すれば自分用の全体設定の完了です。
+変数の説明はファイルの中にきちんと書かれているので、それを参照してください。
+
 プロジェクト毎の設定は :file:`./rootlogon.C` に書いておけばよいです。
+設定内容はこの :file:`~/.rootrc` から抜き出すか、後述する全体設定のためのグローバル変数を使います。
