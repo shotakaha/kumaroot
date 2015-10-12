@@ -28,7 +28,7 @@ KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
      - `HTML <rtdweb_>`_
      - PDF（準備中）
 
-.. _kekweb: http://research-up.kek.jp/people/shotakah/kumaroot/docs/build/html/
+.. _kekweb: http://research.kek.jp/people/shotakah/kumaroot/docs/build/html/
 .. _rtdweb: http://kumaroot.readthedocs.org
 
 このドキュメントについて
