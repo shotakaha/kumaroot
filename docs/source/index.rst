@@ -15,6 +15,7 @@ KumaROOT
    root-usage
    emacs-usage
    sphinx-usage
+   latex-usage
 
 
 Indices and tables
