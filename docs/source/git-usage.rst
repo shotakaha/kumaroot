@@ -14,3 +14,5 @@ Gitの使い方
    :maxdepth: 1
 
    git-install
+   git-config
+   git-command
