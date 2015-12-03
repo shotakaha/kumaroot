@@ -16,6 +16,7 @@ Sphinxの使い方
 .. toctree::
    :maxdepth: 1
 
+   sphinx-install
    sphinx-build
    sphinx-conf
    sphinx-readthedocs

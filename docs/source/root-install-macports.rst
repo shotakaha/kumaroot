@@ -59,4 +59,5 @@ ROOT5
    誰か情報をくださいな。
 
 .. todo::
-   MacPortsでバージョンを固定する方法があれば書き足す
+   - MacPortsでバージョンを固定する方法があれば書き足す
+   - http://trac.macports.org/wiki/howto/InstallingOlderPort
