@@ -26,6 +26,9 @@ ROOT5の文法がROOT6と異なることを確かめてみましょう。
 #. ROOT6が **active** になっていることを確認（ :command:`port select --list root` ）
 #. ``ROOT5のチュートリアル`` を置いたディレクトリへ移動（ :command:`cd ...source/tutorials/root5/` ）
 #. ``root (=root6)`` を起動（ :command:`root` ）
-
+#. ``Warning`` という文字が出るのを確認 [#]_
 
 .. figure:: ./root-tutorial/root5-root6-diff.png
+
+
+.. [#] 出力を全部確認すると ``Error`` の文字も見つかります
