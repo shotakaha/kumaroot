@@ -2,6 +2,21 @@
 初期設定
 ==================================================
 
+`サルでも分かるGit入門 - Git設定 <http://www.backlog.jp/git-guide/reference/config.html#sec1>`__
+を読んだほうがよい。書いてあることが分からない場合はヘルプを見て確認する。
+
+.. code-block:: bash
+
+   $ git config -h
+
+
+設定した項目は確認できる。
+
+.. code-block:: bash
+
+   $ git config -l
+
+
 
 ユーザ名やメールアドレス、使用するエディタなどを設定することができます。
 

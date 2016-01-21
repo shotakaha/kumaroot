@@ -28,6 +28,7 @@ GitHubなどのアカウント取得の方法が書いてあったりします�
    :maxdepth: 1
 
    git-install
+   git-help
    git-config
    git-command
    git-single
