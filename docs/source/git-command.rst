@@ -14,26 +14,3 @@ Gitコマンドの使い方
 
 基本コマンド
 ==================================================
-
-.. toctree::
-   :maxdepth:2
-
-   git-init
-   git-status
-   git-log
-   git-branch
-   git-checkout
-   git-add
-   git-commit
-   git-merge
-
-応用コマンド
-==================================================
-
-.. toctree::
-   :maxdepth:2
-
-    git-fetch
-    git-pull
-    git-push
-    git-clone
