@@ -8,9 +8,8 @@
 .. toctree::
 
    root-install-macports
-   ..
-      root-install-git
-      root-install-old
+.. root-install-git
+.. root-install-old
 
 .. todo::
 

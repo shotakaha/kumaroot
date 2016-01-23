@@ -2,31 +2,76 @@
 インストール
 ==================================================
 
-Sphinxを使うために以下のものが必要です。
-基本的に ``MacPorts`` を使ってインストールします。
-MacPortsにポートがない場合は ``pip`` を使います。
-
-
-必要なプログラム
-==================================================
+Sphinxには以下のプログラムが必要です。
 
 #. ``python`` （MacPorts）
 #. ``Sphinx`` （MacPorts）
 #. ``pip`` （MacPorts)
-#. ``sphinx-bootstrap-theme`` （pip）
+#. ``sphinx_rtd_theme`` （MacPorts）
 #. ``pandoc`` （MacPorts、オプショナル）
 
-``python`` のバージョンに合わせて ``Sphinx`` と ``pip`` のバージョンを決めます。
-``port select`` で簡単に切り替えることができるので、両方インストールしても大丈夫です。
+
+``sphinx`` 本体をはじめ、いくつかのパッケージは MacPorts と pip の両方にあります。
+しかし両方インストールしようとすると、どっちかでエラーがでます。
+なので、基本的に ``MacPorts`` からインストールし、
+そこにない場合は ``pip`` を使うことにします。
+
+
+また ``Sphinx`` と ``pip`` のバージョンは ``python`` のバージョンに合わせます。
+ここでは ``python34`` と ``python27`` の両方をインストールし、
+``port select`` を使って ``python34`` にしています。
+
+
+
+Python
+==================================================
+
+.. code-block:: bash
+
+   $ sudo port install python27
+   $ sudo port install python34
+   $ sudo port select python python34
+
+
+
+
+Sphinx
+==================================================
+
+.. code-block:: bash
+
+   $ sudo port install py27-sphinx
+   $ sudo port install py34-sphinx
+   $ sudo port select sphinx py34-sphinx
+
+pip
+==================================================
+
+.. code-block:: bash
+
+   $ sudo port install py27-pip
+   $ sudo port install py34-pip
+   $ sudo port select pip py34-pip
+
+
+sphinx_rtd_theme
+==================================================
+
+.. code-block:: bash
+
+   $ sudo port install py27-sphinx_rtd_theme
+   $ sudo port install py34-sphinx_rtd_theme
+
+
+
+pandoc
+==================================================
 
 ``pandoc`` は文書フォーマット変換コマンドです。
-Sphinxとは直接関係がありませんが、
-既存の文書（HTMLだったり、Orgだったり）を
+Sphinxとは直接関係がありませんが、既存の文書（HTMLだったり、Orgだったり）を
 reSTに変換したいときにあると便利です。
 
 
-.. toctree::
-   :maxdepth: 1
+.. code-block:: bash
 
-   sphinx-install-macports
-   sphinx-install-pip
+   $ sudo port install pandoc
