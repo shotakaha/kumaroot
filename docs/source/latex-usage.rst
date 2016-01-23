@@ -16,3 +16,10 @@ LaTeXの使い方
    latex-packages
 
 .. [#] ヒント：ブロント語
+
+
+関連ドキュメント
+==================================================
+
+* `日本語TeX Wiki <https://texwiki.texjp.org>`__
+* `MacTeX <https://tug.org/mactex/>`__

@@ -5,8 +5,7 @@
 
 つい最近までは「Mac LaTeX インストール」などでググると、なんだかまとまりのない情報で溢れていました。
 しかし、現在はそれらを取りまとめようということで開発が進んでいるようで、これからはTeXLive一択で良いみたいです。
-
-TeXLiveは年１回更新です。
+TeXLiveは年１回更新されます。
 
 
 MacTeX
@@ -28,6 +27,6 @@ TeXLive (MacPorts)
 TeXLiveはMacPortsからインストールすることもできます。
 特に理由がなければ ``texlive +full`` をインストールすればいいと思います。
 
-.. code-block::
+.. code-block:: bash
 
    $ sudo port install texlive +full

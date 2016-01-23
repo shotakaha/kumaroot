@@ -6,16 +6,23 @@
 それに対処する歴史的な紆余曲折から日本語版LaTeXにはさまざまな派生品が存在します。
 この歴史の詳細に関しては、三重大学の奥村さんのウェブサイトをはじめ、ググってみるとよいでしょう。
 
-日本語のLaTeX文書をコンパイルするにはpLaTeXコマンドを使います。
-コンパイルが成功するとdviファイルが作成されるので、dvipdfmxコマンドを使ってPDFファイルに変換します。
+日本語のLaTeX文書の作成には ``pLaTeX`` と ``dvipdfmx`` を使えばよいです。
+:command:`platex` コマンドでLaTeX文書をコンパイルしDVIファイルを作成、
+:command:`dvipdfmx` コマンドでDVIファイルをPDFファイルに変換します。
 
-これをまとめてやってくれるのがptex2pdfコマンドで、（おそらく）MacTeXをインストールすると勝手についてきます。
-ただのシェルスクリプトなので、気になる人は中を見てみるとよいでしょう。
+.. code-block:: bash
 
+   $ platex hoge.tex
+   $ dvipdfmx hoge.dvi
 
-pLaTeX
-==================================================
+これをまとめてやってくれるのが :command:`ptex2pdf` コマンドで、
+（おそらく）MacTeXをインストールすると勝手についてきます。
+ただのシェルスクリプト（Luaで書かれてるみたい）なので、
+気になる人は中を見てみるとよいでしょう。
 
+.. code-block:: bash
 
-pdfLaTeX
-==================================================
+   $ where ptex2pdf
+   /Library/TeX/texbin/ptex2pdf
+
+   $ less /Library/TeX/texbin/ptex2pdf
