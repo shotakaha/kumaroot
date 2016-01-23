@@ -16,10 +16,3 @@ MacPortsを使って最新版をインストールしておきます。
 .. code:: bash
 
    $ sudo port install git-flow
-
-``git flow`` は
-`Vincent Driessenのブランチモデル <http://nvie.com/posts/a-successful-git-branching-model/>`__
-のような目的を持ったブランチを用意し、そのブランチ間の切り替えを容易にしてくれる
-Git拡張（＝Gitコマンドを何種類かまとめたスクリプト）。
-
-プロジェクトのブランチ管理がとても楽になるので、おすすめです。

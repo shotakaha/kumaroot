@@ -30,8 +30,8 @@ GitHubなどのアカウント取得の方法が書いてあったりします�
    git-install
    git-help
    git-config
-   git-command
    git-single
+   git-flow
 
 
 関連ドキュメント
