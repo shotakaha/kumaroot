@@ -55,37 +55,11 @@ pygments_style = 'sphinx'
 ##################################################
 language = 'ja'
 
-
-# documents.
-#default_role = None
-
-# If true, '()' will be appended to :func: etc. cross-reference text.
-#add_function_parentheses = True
-
-# If true, the current module name will be prepended to all description
-# unit titles (such as .. function::).
-#add_module_names = True
-
-# If true, sectionauthor and moduleauthor directives will be shown in the
-# output. They are ignored by default.
-#show_authors = False
-
-# The name of the Pygments (syntax highlighting) style to use.
-
-
-# A list of ignored prefixes for module index sorting.
-#modindex_common_prefix = []
-
-# If true, keep warnings as "system message" paragraphs in the built documents.
-#keep_warnings = False
-
-# If true, `todo` and `todoList` produce output, else they produce nothing.
+#################################################
+## Options for sphinx.ext.todo
+##################################################
 todo_include_todos = True
 
-# Trueの場合、キャプションのある図、表、コードブロックに自動的に番号付けされます。
-# このオプションはいまのところHTMLビルダーでのみ動作します。
-# デフォルトは False です。(バージョン 1.3 で追加)
-numfig = True
 
 # 'figure', 'table', 'code-block' に対して
 # それぞれ図表番号表示のためのフォーマット文字列を
@@ -107,177 +81,36 @@ numfig_format['code-block'] = u'リスト %s'
 # デフォルトは 1 です。
 numfig_secnum_depth = 1
 
+##################################################
+## Options for HTML
+##################################################
 
-
-# -- Options for HTML output ----------------------------------------------
-
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-# html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
-# html_theme = 'bootstrap'
-# html_theme = 'basicstrap'
-
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-# html_theme_options = {
-
-#     # Set the lang attribute of the html tag. Defaults to 'en'
-#     'lang': 'ja',
-#     # Disable showing the sidebar. Defaults to 'false'
-#     'nosidebar': False,
-#     # Show header searchbox. Defaults to false. works only "nosidber=True",
-#     'header_searchbox': False,
-
-#     # Put the sidebar on the right side. Defaults to false.
-#     'rightsidebar': False,
-#     # Set the width of the sidebar. Defaults to 3
-#     'sidebar_span': 3,
-
-#     # Fix navbar to top of screen. Defaults to true
-#     'nav_fixed_top': True,
-#     # Fix the width of the sidebar. Defaults to false
-#     'nav_fixed': False,
-#     # Set the width of the sidebar. Defaults to '900px'
-#     'nav_width': '900px',
-
-#     # Fix the width of the content area. Defaults to false
-#     'content_fixed': False,
-#     # Set the width of the content area. Defaults to '900px'
-#     'content_width': '900px',
-#     # Fix the width of the row. Defaults to false
-#     'row_fixed': False,
-
-#     # Disable the responsive design. Defaults to false
-#     'noresponsive': False,
-#     # Disable the responsive footer relbar. Defaults to false
-#     'noresponsiverelbar': False,
-#     # Disable flat design. Defaults to false.
-#     # Works only "bootstrap_version = 3"
-#     'noflatdesign': False,
-
-#     # Enable Google Web Font. Defaults to false
-#     'googlewebfont': False,
-#     # Set the URL of Google Web Font's CSS.
-#     # Defaults to 'http://fonts.googleapis.com/css?family=Text+Me+One'
-#     'googlewebfont_url': 'http://fonts.googleapis.com/css?family=Lily+Script+One',  # NOQA
-#     # Set the Style of Google Web Font's CSS.
-#     # Defaults to "font-family: 'Text Me One', sans-serif;"
-#     'googlewebfont_style': u"font-family: 'Lily Script One' cursive;",
-
-#     # Set 'navbar-inverse' attribute to header navbar. Defaults to false.
-#     'header_inverse': True,
-#     # Set 'navbar-inverse' attribute to relbar navbar. Defaults to false.
-#     'relbar_inverse': True,
-
-#     # Enable inner theme by Bootswatch. Defaults to false
-#     'inner_theme': False,
-#     # Set the name of innner theme. Defaults to 'bootswatch-simplex'
-#     'inner_theme_name': 'bootswatch-simplex',
-
-#     # Select Twitter bootstrap version 2 or 3. Defaults to '3'
-#     'bootstrap_version': '3',
-
-#     # Show "theme preview" button in header navbar. Defaults to false.
-#     'theme_preview': True,
-
-#     # Set the Size of Heading text. Defaults to None
-#     # 'h1_size': '3.0em',
-#     # 'h2_size': '2.6em',
-#     # 'h3_size': '2.2em',
-#     # 'h4_size': '1.8em',
-#     # 'h5_size': '1.4em',
-#     # 'h6_size': '1.1em',
-
-# }
-
-# Add any paths that contain custom themes here, relative to this directory.
+html_theme_options = {
+    'navigation_depth': 4,
+}
 #html_theme_path = []
-# html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
-
-# The name for this set of Sphinx documents.  If None, it defaults to
-# "<project> v<release> documentation".
 #html_title = None
-
-# A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
-
-# The name of an image file (relative to this directory) to place at the top
-# of the sidebar.
 #html_logo = None
-
-# The name of an image file (within the static path) to use as favicon of the
-# docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
-# pixels large.
 #html_favicon = None
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
-# Add any extra paths that contain custom files (such as robots.txt or
-# .htaccess) here, relative to this directory. These files are copied
-# directly to the root of the documentation.
 #html_extra_path = []
-
-# If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
-# using the given strftime format.
 #html_last_updated_fmt = '%b %d, %Y'
-
-# If true, SmartyPants will be used to convert quotes and dashes to
-# typographically correct entities.
 #html_use_smartypants = True
-
-# Custom sidebar templates, maps document names to template names.
 #html_sidebars = {}
-
-# Additional templates that should be rendered to pages, maps page names to
-# template names.
 #html_additional_pages = {}
-
-# If false, no module index is generated.
 #html_domain_indices = True
-
-# If false, no index is generated.
 #html_use_index = True
-
-# If true, the index is split into individual pages for each letter.
 #html_split_index = False
-
-# If true, links to the reST sources are added to the pages.
 #html_show_sourcelink = True
-
-# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
 #html_show_sphinx = True
-
-# If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
 #html_show_copyright = True
-
-# If true, an OpenSearch description file will be output, and all pages will
-# contain a <link> tag referring to it.  The value of this option must be the
-# base URL from which the finished HTML is served.
 #html_use_opensearch = ''
-
-# This is the file name suffix for HTML files (e.g. ".xhtml").
 #html_file_suffix = None
-
-# Language to be used for generating the HTML full-text search index.
-# Sphinx supports the following languages:
-#   'da', 'de', 'en', 'es', 'fi', 'fr', 'hu', 'it', 'ja'
-#   'nl', 'no', 'pt', 'ro', 'ru', 'sv', 'tr'
-#html_search_language = 'en'
-
-# A dictionary with options for the search language support, empty by default.
-# Now only 'ja' uses this config value
+html_search_language = 'ja'
 #html_search_options = {'type': 'default'}
-
-# The name of a javascript file (relative to the configuration directory) that
-# implements a search results scorer. If empty, the default will be used.
 #html_search_scorer = 'scorer.js'
-
-# Output file base name for HTML help builder.
 htmlhelp_basename = 'KumaROOTdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
