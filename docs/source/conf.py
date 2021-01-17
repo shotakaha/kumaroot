@@ -113,25 +113,25 @@ html_search_language = 'ja'
 #html_search_scorer = 'scorer.js'
 htmlhelp_basename = 'KumaROOTdoc'
 
-# -- Options for LaTeX output ---------------------------------------------
+##################################################
+## Options for LaTeX output
+##################################################
+
+#latex_engine = 'uplatex'
+latex_documents = [(
+    master_doc,
+    'KumaROOT.tex',
+    'KumaROOT Documentation',
+    'Shota TAKAHASHI',
+    'manual'),
+]
+latex_docclass = {'manual' : 'jsbook'}
 
 latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-#'papersize': 'letterpaper',
     'papersize' : 'a4paper',
-
-# The font size ('10pt', '11pt' or '12pt').
-#'pointsize': '10pt',
     'pointsize': '12pt',
-
-# Additional stuff for the LaTeX preamble.
     'preamble': '',
-
-# Latex figure (float) alignment
     'figure_align': 'htbp',
-
-#    'fontpkg': '\\usepackage{times}',
-
 }
 
 latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
@@ -144,56 +144,15 @@ latex_elements['preamble'] += '\\hypersetup{pdfpagemode=UseOutlines}\n'
 
 # latex_elements['preamble'] += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
 # latex_elements['preamble'] += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
-
-
-
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-# latex_documents = [
-#   (master_doc, 'KumaROOT.tex', u'KumaROOT Documentation',
-#    u'Shota TAKAHASHI', 'manual'),
-# ]
-latex_documents = [
-  (master_doc, 'KumaROOT.tex', u'KumaROOT Documentation',
-   u'Shota TAKAHASHI', 'manual'),
-]
-latex_docclass = {'manual' : 'jsbook'}
-#latex_docclass = {'manual' : 'bxjsreport'}
-
-# The name of an image file (relative to this directory) to place at the top of
-# the title page.
 latex_logo = './images/toumin_kuma.png'
-
-# For "manual" documents, if this is true, then toplevel headings are parts,
-# not chapters.
 #latex_use_parts = False
-
-# If true, show page references after internal links.
 #latex_show_pagerefs = False
-
-# If true, show URL addresses after external links.
 #latex_show_urls = False
-
-# Documents to append as an appendix to all manuals.
 #latex_appendices = []
-
-# If false, no module index is generated.
 #latex_domain_indices = True
 
 
-# -- Options for manual page output ---------------------------------------
 
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'kumaroot', u'KumaROOT Documentation',
-     [author], 1)
-]
-
-# If true, show URL addresses after external links.
-#man_show_urls = False
 
 
 # -- Options for Texinfo output -------------------------------------------
