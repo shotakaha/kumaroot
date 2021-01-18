@@ -25,7 +25,7 @@ KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
      - PDF（準備中）
    * - Read the Docs
      - `HTML <http://kumaroot.readthedocs.org>`_
-     - PDF（準備中）
+     - `PDF <https://kumaroot.readthedocs.io/_/downloads/ja/latest/pdf/>`_
 
 
 
