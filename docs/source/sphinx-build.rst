@@ -3,22 +3,22 @@
 ==================================================
 
 例として、この文書（ ``KumaROOT`` ）をGitHubからクローンして、ビルドする方法です。
+開発環境のセットアップに ``poetry`` を使っているので、予めインストールしておきます。
+
+.. code-block:: bash
+
+   $ pip3 install poetry
+
 
 .. code-block:: bash
 
    $ git clone https://github.com/shotakaha/kumaroot.git
    $ cd kumaroot
+   $ poetry install  ## 開発環境のセットアップ
+   $ poetry shell    ## 開発環境の立ち上げ
+   $ cd docs/
    $ make html        ## HTMLの生成
    $ make latexpdfja  ## PDFの生成
-
-ただし、このままではビルドできないので、以下の必要なプログラムを追加でインストールします。
-
-
-
-
-
-
-
 
 
 HTML文書のビルド
