@@ -19,10 +19,22 @@ TeX関連のパッケージ管理ツールであるTeX Live Utilityがついて�
 他にも、文献管理のBibDesk、スペルチェックのExcalibur、そして、
 Keynoteに数式を貼り付けるのに必要なLaTeXiTがついてきます。
 
+MacTeX (Homebrew)
+==================================================
+
+TeXLiveはHomebrewを使ってインストールできます。
+
+.. code-block:: bash
+
+   $ brew install --cask mactex
+
 
 
 TeXLive (MacPorts)
 ==================================================
+
+.. deprecated:: 2021-01-18
+   だいぶ前にHomebrewを使う方法に変更しました
 
 TeXLiveはMacPortsからインストールすることもできます。
 特に理由がなければ ``texlive +full`` をインストールすればいいと思います。
