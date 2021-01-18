@@ -23,3 +23,4 @@ LaTeXの使い方
 
 * `日本語TeX Wiki <https://texwiki.texjp.org>`__
 * `MacTeX <https://tug.org/mactex/>`__
+* [改定第8版]LaTeX2e美文書作成入門
