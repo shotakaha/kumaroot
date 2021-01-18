@@ -21,4 +21,10 @@
 
 .. todo::
 
-   Read the Docs上でPDF版も公開できるようにしたい
+   内容が古くなってきたので更新する
+
+   #. 現在は ``MacPorts`` ではなく ``Homebrew`` （:command:`brew` コマンド）で管理している
+   #. ``ROOT`` は最近使ってない（ ``ROOT6`` のことは分からないので、この部分は更新できない）
+   #. ``Emacs`` から ``Visual Studio Code`` に乗り換えた
+   #. ``Sphinx`` の使い方も見直したい（ ``Python2`` 系の記述は古いので、全部 ``Python3`` 系に読み替えてください）
+   #. 日本語ドキュメントは ``LuaLaTeX`` への移行を検討中
