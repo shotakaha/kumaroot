@@ -2,12 +2,12 @@
 
 ### Fix
 
-- **latex**: ドキュメントのキホンを修正
 - **preface**: add TODOs
+- **latex**: ドキュメントのキホンを修正
 - **latex**: 目次にハイパーリンクをつけるためのパッケージの説明を追加
 - **latex**: lualatexコマンドを追加
-- **sphinx**: Sphinx環境の構築方法を更新
 - **latex**: LaTeXに関する情報少しだけ更新
+- **sphinx**: Sphinx環境の構築方法を更新
 - **conf.py**: LaTeXドキュメントのタイトルを修正
 - **conf.py**: Epub設定を整理
 - **conf.py**: Texinfo設定を削除
