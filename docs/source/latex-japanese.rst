@@ -10,12 +10,16 @@
 2020年ころの話
 ==================================================
 
-日本語のLaTeX文書の作成には ``(u)pLaTeX + dvipdfmx`` もしくは ``LuaLaTeX`` を使うのがよいです。
+日本語のLaTeX文書の作成には ``upLaTeX + dvipdfmx`` もしくは ``LuaLaTeX`` を使うのがよいです。
 特に ``LuaLaTeX`` はDVIファイルを作成せずに、PDFファイルを作ってくれます。おすすめです。
 
 .. code-block:: bash
 
-   $ lualatex hoge.tex
+   $ ptex2pdf -h          ## ヘルプを表示
+   $ ptex2pdf -l -u hoge  ## uplatex + dvipdfmx の場合
+
+   $ lualatex --help  ## ヘルプを表示
+   $ lualatex hoge    ## LuaLaTeXの場合
 
 
 2015年ころの話
@@ -37,6 +41,13 @@
 
 これをまとめてやってくれるのが :command:`ptex2pdf` コマンドで、
 （おそらく）MacTeXをインストールすると勝手についてきます。
+
+.. code-block:: bash
+
+   $ ptex2pdf -l hoge     ## platex + dvipdfmx の場合
+   $ ptex2pdf -h          ## ヘルプを表示
+
+
 ただのシェルスクリプト（Luaで書かれてるみたい）なので、
 気になる人は中を見てみるとよいでしょう。
 
