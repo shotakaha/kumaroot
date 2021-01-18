@@ -121,7 +121,7 @@ htmlhelp_basename = 'KumaROOTdoc'
 latex_documents = [(
     master_doc,
     'KumaROOT.tex',
-    'KumaROOT Documentation',
+    'KumaROOT',
     'Shota TAKAHASHI',
     'manual'),
 ]
