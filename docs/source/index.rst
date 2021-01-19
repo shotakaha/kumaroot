@@ -14,6 +14,7 @@ KumaROOT
    preface
    root/root-usage
    emacs/emacs-usage
+   python/python-usage
    sphinx/sphinx-usage
    latex/latex-usage
    git-usage
