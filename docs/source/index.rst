@@ -12,8 +12,8 @@ KumaROOT
    :maxdepth: 1
 
    preface
-   root-usage
-   emacs-usage
+   root/root-usage
+   emacs/emacs-usage
    sphinx/sphinx-usage
    latex-usage
    git-usage
