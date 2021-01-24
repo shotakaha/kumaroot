@@ -15,6 +15,7 @@ KumaROOT
    root/root-usage
    emacs/emacs-usage
    python/python-usage
+   altair/altair-usage
    sphinx/sphinx-usage
    latex/latex-usage
    git-usage
