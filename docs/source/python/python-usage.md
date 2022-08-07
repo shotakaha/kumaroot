@@ -1,26 +1,17 @@
 # Pythonの使い方
 
-
-``Homebrew``を使って``Python``をインストールします。
-また、プロジェクトごとの環境構築には``poetry``を使います。
-
-.. brew: https://brew.sh/
-.. poetry: https://python-poetry.org/
+[Homebrew](https://brew.sh)を使って``Python``をインストールします。
+そして、プロジェクトごとの環境構築には[poetry](https://python-poetry.org/)を使います。
 
 
-black
-==================================================
+## Pythonのインストール
 
-black
+```bash
+$ brew install python3
+```
 
+## Poetryのインストール
 
-flake8
-==================================================
-
-flake8
-
-
-pytest
-==================================================
-
-pytest
+```bash
+$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+```
