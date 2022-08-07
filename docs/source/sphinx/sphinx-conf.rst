@@ -10,3 +10,4 @@ Sphinxドキュメントの全体設定は ``source/conf.py`` で行います。
 
    sphinx-conf-pdf
    sphinx-conf-html
+   sphinx-conf-markdown
