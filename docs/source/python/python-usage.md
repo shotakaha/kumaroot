@@ -15,3 +15,10 @@ $ brew install python3
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
+
+- RTD設定に必要な``requirements.txt``を作成する
+
+
+```bash
+$ poetry export -f requirements.txt --output requirements.txt
+```
