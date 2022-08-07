@@ -12,8 +12,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys
 import os
+import sys
+
 import sphinx_rtd_theme
 
 ##################################################
@@ -40,6 +41,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx_rtd_theme',
+    'myst_parser',
 ]
 
 source_suffix = {'.rst': 'restructuredtext'}
