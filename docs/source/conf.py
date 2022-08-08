@@ -53,14 +53,34 @@ numfig = True
 pygments_style = 'sphinx'
 
 ##################################################
-## Options for i18n
+# Options for i18n
 ##################################################
 language = 'ja'
 
 #################################################
-## Options for sphinx.ext.todo
+# Options for sphinx.ext.todo
 ##################################################
 todo_include_todos = True
+
+##################################################
+# Options for myst_parser
+##################################################
+
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    # "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+]
 
 
 # 'figure', 'table', 'code-block' に対して
