@@ -13,6 +13,8 @@ LaTeXの使い方
    latex-japanese
    latex-yatex
    latex-document
+   latex-latexmk
+   latex-lualatex
    latex-packages
 
 .. [#] ヒント：ブロント語
