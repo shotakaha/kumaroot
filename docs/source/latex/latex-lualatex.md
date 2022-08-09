@@ -34,3 +34,15 @@ $ lualatex --version
 This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)
 ...(省略)...
 ```
+
+## PDFを作成したい
+
+```bash
+$ lualatex main.tex
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)
+...(省略)...
+Output written on main.pdf (2 pages, 72580 bytes).
+Transcript written on main.log.
+```
+
+- {command}`lualatex`コマンド1発でPDFを作成できます
