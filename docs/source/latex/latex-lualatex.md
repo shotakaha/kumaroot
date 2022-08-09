@@ -18,3 +18,11 @@
 
 \end{document}
 ```
+
+## バージョンを確認したい
+
+```bash
+$ lualatex --version
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)
+...(省略)...
+```
