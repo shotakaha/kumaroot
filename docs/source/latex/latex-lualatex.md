@@ -19,6 +19,14 @@
 \end{document}
 ```
 
+## ヘルプを確認したい
+
+```bash
+$ lualatex --help
+```
+
+- ``lualatex -h``は使えないので注意が必要です
+
 ## バージョンを確認したい
 
 ```bash
