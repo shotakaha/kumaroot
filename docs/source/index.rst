@@ -19,6 +19,8 @@ KumaROOT
    sphinx/sphinx-usage
    latex/latex-usage
    git-usage
+   vscode/vscode-usage
+   command/command-usage
 
 
 Indices and tables
