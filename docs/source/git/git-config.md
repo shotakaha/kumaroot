@@ -1,4 +1,4 @@
-# 初期設定
+# 基本設定（``git config``）
 
 [サルでも分かるGit入門 - Git設定](http://www.backlog.jp/git-guide/reference/config.html#sec1)を
 一度は読むことをオススメします。
