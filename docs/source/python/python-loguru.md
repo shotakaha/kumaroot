@@ -1,4 +1,4 @@
-# Loguru - Python logging made (stupidly) simple
+# Loguru
 
 ```shell
 pip3 install loguru

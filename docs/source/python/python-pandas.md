@@ -1,4 +1,4 @@
-# Pandas - Powerful data structures for data analysis, time series, and statistics
+# Pandas
 
 ```shell
 pip3 install pandas
