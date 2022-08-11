@@ -22,3 +22,13 @@ $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-po
 ```bash
 $ poetry export -f requirements.txt --output requirements.txt
 ```
+
+## 便利なパッケージ
+
+
+```{toctree}
+python-altair
+python-loguru
+python-pandas
+python-plotly
+```
