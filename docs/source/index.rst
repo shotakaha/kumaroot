@@ -18,7 +18,7 @@ KumaROOT
    altair/altair-usage
    sphinx/sphinx-usage
    latex/latex-usage
-   git-usage
+   git/git-usage
    vscode/vscode-usage
    command/command-usage
 
