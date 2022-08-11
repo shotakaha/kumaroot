@@ -3,4 +3,5 @@
 
 ```{toctree}
 command-find
+command-texdoc
 ```
