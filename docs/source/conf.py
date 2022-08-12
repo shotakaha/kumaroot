@@ -24,8 +24,8 @@ import sphinx_rtd_theme
 project = 'KumaROOT'
 author = 'Shota TAKAHASHI'
 copyright = '2015 - 2022, Shota TAKAHASHI'
-version = '0.4.0'
-release = '0.4.0'
+version = '0.5.0'
+release = '0.5.0'
 
 ##################################################
 ## General configuration
