@@ -15,6 +15,8 @@ LaTeXの使い方
    latex-document
    latex-latexmk
    latex-lualatex
+   latex-jlreq
+   latex-physics
    latex-packages
 
 .. [#] ヒント：ブロント語
