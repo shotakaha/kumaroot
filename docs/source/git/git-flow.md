@@ -1,5 +1,12 @@
 # Git Flow の使い方
 
+```{note}
+（2022/08/12追記）
+ここ数年、``git-flow``はまったく使っていません。
+結局ひとりで開発する場合は、複雑なブランチ開発はせずに、
+ひたすらメインブランチにコミットしていくのが、楽ちんだと感じています。
+```
+
 ``git flow`` は
 [Vincent Driessenのブランチモデル](https://nvie.com/posts/a-successful-git-branching-model/)
 に基づいたGit拡張です。
