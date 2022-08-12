@@ -1,48 +1,47 @@
-==================================================
-ひとりGitのすゝめ
-==================================================
+# ひとりGitのすゝめ
 
 
-基礎編
-==================================================
+## 基礎編
 
-**ひとりGit** に必要な操作は以下の５つです。
-新規リポジトリの作成は最初の１回だけなので実際は４つです。
+**ひとりGit** に必要な操作は以下の5つです。
+新規リポジトリの作成は最初の1回だけなので実際は4つです。
 
-.. toctree::
-   :maxdepth: 1
+```{toctree}
+---
+maxdepth: 1
+---
+git-init
+git-status
+git-add
+git-commit
+git-log
+```
 
-   git-init
-   git-status
-   git-add
-   git-commit
-   git-log
-
-
-応用編
-==================================================
+## 応用編
 
 **ブランチ** 操作を覚えると **ひとりGit** がさらに捗ります。
 
-.. toctree::
-   :maxdepth: 2
+```{toctree}
+---
+maxdepth: 2
+---
+git-branch
+git-checkout
+git-merge
+```
 
-   git-branch
-   git-checkout
-   git-merge
-
-
-発展編
-==================================================
+## 発展編
 
 ホスティングサービスなどにある **リモートリポジトリ** と
 手元の **ローカルリポジトリ** をやりとりする方法です。
 
-.. toctree::
-   :maxdepth: 2
-
-   git-remote
-   git-fetch
-   git-pull
-   git-push
-   git-clone
+```{toctree}
+---
+maxdepth: 2
+---
+git-remote
+git-fetch
+git-pull
+git-push
+git-clone
+```
