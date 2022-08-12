@@ -1,12 +1,8 @@
-============================================================
-KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
-============================================================
+# KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
 
-これまで古巣の研究室に設置した `ShotakahaDokuWiki <http://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php>`_ に書きためていたROOTなどの情報を引っ越し中です。
+古巣の研究室に設置した[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)に書きためていたROOTなどの情報を引っ越ししています。
 
-
-「くまROOT」？
-==================================================
+## 「くまROOT」？
 
 僕がROOTを使い始めたときに、先輩から最初に渡されたのが「猿にも使えるROOT」（通称：さるROOT）でした。
 そんな感じのものを目指して「くま」にしました。
@@ -15,31 +11,21 @@ KumaROOT - クマのためのROOT入門 ／ ROOT for Bearginner
 読者は、ちょっとだけROOTを使ったことがある学生／研究者を対象にしようと思います。
 できるだけ「逆引き辞典」として使えるようにしたいと思います。
 
-公開版
-==================================================
+## 公開版
 
-.. list-table::
+- KEKの個人ページ : [HTML](https://research.kek.jp/people/shotakah/kumaroot/html/) / PDF（準備中）
+- Read the Docs : [HTML](https://kumaroot.readthedocs.org) / [PDF](https://kumaroot.readthedocs.io/_/downloads/ja/latest/pdf/)
 
-   * - KEKの個人スペース
-     - `HTML <http://research.kek.jp/people/shotakah/kumaroot/docs/build/html/>`_
-     - PDF（準備中）
-   * - Read the Docs
-     - `HTML <http://kumaroot.readthedocs.org>`_
-     - `PDF <https://kumaroot.readthedocs.io/_/downloads/ja/latest/pdf/>`_
-
-
-
-このドキュメントについて
-==================================================
+## このドキュメントについて
 
 このドキュメントは
-`Sphinx <http://sphinx-users.jp>`_ というドキュメト作成ソフトを使っています。
-文書本体には、reStructuredText（reST）という軽量マークアップ言語を使っています。
+[Sphinx](https://sphinx-users.jp)というドキュメト作成ソフトを使っています。
+文書本体には``reStructuredText（reST）``と``Markdown（md）``という軽量マークアップ言語を使っています。
 
+## バージョン管理
 
-共著者募集中
-==================================================
+なんとなく[セマンティックバージョニング](https://semver.org/lang/ja/)を使おうとしています。
 
-`GitHub <https://github.com/shotakaha/kumaroot>`_ においたので、みんなで作っていけたらなと思います。
-が、使い方よく分からないので、最初は顔見知りに限定したいと思います。
-手伝っていただける方は直接連絡ください。
+- ``Major (feat)`` : 新しい章を追加した場合
+- ``Minor (feat)`` : 新しい節を追加した場合
+- ``Patch (fix)`` : 文章を修正した場合
