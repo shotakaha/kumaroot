@@ -24,6 +24,7 @@ git-help
 git-config
 git-single
 git-flow
+git-semver
 ```
 
 
