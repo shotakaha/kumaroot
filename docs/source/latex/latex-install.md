@@ -7,10 +7,10 @@ TeXLiveは年1回更新されます。
 ## MacTeX
 
 macOSでLaTeXを使う場合は、これで決まりです。
-`MacTeX <https://tug.org/mactex/>`__ からダウンロードできます。
+[MacTeX](https://tug.org/mactex/)からダウンロードできます。
 
-TeX環境の本体であるTeXLiveと一緒に、TeX編集の統合環境であるTeXShopやTeXworks、
-TeX関連のパッケージ管理ツールであるTeX Live Utilityがついてきます。
+LaTeX環境の本体であるTeXLiveと一緒に、LaTeX編集の統合環境であるTeXShopやTeXworks、
+LaTeX関連のパッケージ管理ツールであるTeX Live Utilityがついてきます。
 他にも、文献管理のBibDesk、スペルチェックのExcalibur、そして、
 Keynoteに数式を貼り付けるのに必要なLaTeXiTがついてきます。
 
@@ -35,7 +35,6 @@ TeXLiveはMacPortsからインストールすることもできます。
 ```bash
 $ sudo port install texlive +full
 ```
-
 
 ## オンラインツール
 
