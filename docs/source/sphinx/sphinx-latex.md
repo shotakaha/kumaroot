@@ -6,6 +6,16 @@ PDFを生成するためには、あらかじめ``LaTeX``環境を整えてお�
 $ make latexpdf
 ```
 
+## LuaLaTeXを使いたい
+
+```{note}
+（2022/08/12追記）
+これから整理します
+```
+
+## upLaTeXを使いたい
+
+
 ```{toctree}
 sphinx-latex-docclass
 sphinx-latex-options
