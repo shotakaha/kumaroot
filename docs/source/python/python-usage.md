@@ -27,6 +27,7 @@ $ poetry export -f requirements.txt --output requirements.txt
 
 
 ```{toctree}
+python-pathlib
 python-altair
 python-loguru
 python-pandas
