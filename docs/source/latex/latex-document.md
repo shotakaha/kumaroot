@@ -1,37 +1,33 @@
-==================================================
-ドキュメントのキホン（``upLaTeX``）
-==================================================
+# LaTeX文書の基本構造
 
-
-LaTeX文書の詳細な作成方法に関してはググッた方がよいでしょう。
+LaTeX文書の基本的な構造は以下の通りです
 基本的な形は以下の通りです。
 
-.. code-block:: latex
+```latex
+%% ドキュメントクラスの指定
+\documentclass[uplatex, dvipdfmx,12pt]{jsarticle}
 
-   %% ドキュメントクラスの指定
-   \documentclass[uplatex, dvipdfmx,12pt]{jsarticle}
+%% プリアンブル
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+...
 
-   %% プリアンブル
-   \usepackage[utf8]{inputenc}
-   \usepackage[T1]{fontenc}
-   \usepackage{fixltx2e}
-   \usepackage{graphicx}
-   ...
+%% ハイパーリンクのカスタマイズ
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{setpagesize=false}
+\hypersetup{colorlinks=true}
+\hypersetup{linkcolor=blue}
 
-   %% ハイパーリンクのカスタマイズ
-   \usepackage{hyperref}
-   \usepackage{pxjahyper}
-   \hypersetup{setpagesize=false}
-   \hypersetup{colorlinks=true}
-   \hypersetup{linkcolor=blue}
+%% 書籍情報の設定
+\author{Shota TAKAHASHI}
+\date{2016-01-14 Monday}
+\title{第一回打ち合わせ}
 
-   %% 書籍情報の設定
-   \author{Shota TAKAHASHI}
-   \date{2016-01-14 Monday}
-   \title{第一回打ち合わせ}
-
-   %% 本文
-   \begin{document}
+%% 本文
+\begin{document}
 
    \maketitle
    \tableofcontents
@@ -57,79 +53,57 @@ LaTeX文書の詳細な作成方法に関してはググッた方がよいでし
            \item 杉 12. 一般相対性理論の検証
        \end{itemize}
 
-   \end{document}
+\end{document}
+```
 
-構成要素
-==================================================
+## 構成要素
 
-:ドキュメントクラス: 文書のスタイルを指定します。日本語の場合 ``jsarticle`` 系 を使っておけばよいです。``upLaTeX`` を使う場合は ``[uplatex]`` オプションが必要です。
-:プリアンブル: パッケージの追加や設定を行う部分です。自前マクロもここに書きます。要するに **本文以外** の部分。
-:本文: 文章を書く部分です。セクションや図といった文書構造をLaTeX語（ **環境** というのかな）でマークアップします。
+ドキュメントクラス
+: 文書のスタイルを指定します。日本語の文書の場合、``jlreq``を指定しておけばよいです。ちょっと前だと``jsarticle``系を使っている場合が多いです。``upLaTeX`` を使う場合は ``[uplatex]`` オプションが必要です。
 
+プリアンブル
+: パッケージの追加や設定を行う部分です。自前のマクロもここに書けばOKです。**本文以外** の部分を書く場所だと考えておけばよいと思います。
 
-ドキュメントクラスの指定
-==================================================
-
-.. code-block:: latex
-
-   \documentclass[dvipdfmx,12pt]{jsarticle}
-
-* 日本語には ``jsarticle`` クラスを指定。他には ``jsreport`` 、``jsbook`` がある
-* ドライバは ``dvipdfmx`` にする
-* フォントサイズはお好みに指定
-
-プリアンブルの設定
-==================================================
-
-* ``\documentclass`` から ``\begin{document}`` までのエリアを ``プリアンブル`` と呼ぶ
-* パッケージ追加などのドキュメントの設定はここに追記する
+本文
+: 文章を書く部分です。セクションや図といった文書構造をLaTeX**環境**を使ってマークアップします。
 
 
+## ドキュメントクラスの指定
 
-パッケージの追加
-==================================================
+```latex
+\documentclass[dvipdfmx,12pt]{jsarticle}
+```
 
-.. code-block:: latex
+- 日本語には ``jsarticle`` クラスを指定。他には ``jsreport`` 、``jsbook`` がある
+- ドライバは ``dvipdfmx`` にする
+- フォントサイズはお好みに指定
 
-   \usepackage[utf8]{inputenc}    %% inputencパッケージ
-   \usepackage[T1]{fontenc}       %% fontenc パッケージ
+## プリアンブルの設定
 
-* パッケージ毎にさまざまなオプションがある
-* オプションの詳細は各パッケージを調べる
+- ``\documentclass`` から ``\begin{document}`` までのエリアを ``プリアンブル`` と呼ぶ
+- パッケージ追加などのドキュメントの設定はここに追記する
 
-.. code-block:: bash
+## パッケージの追加
 
-   $ texdoc hyperref
+```latex
+\usepackage[utf8]{inputenc}    %% inputencパッケージ
+\usepackage[T1]{fontenc}       %% fontenc パッケージ
+```
 
+- パッケージ毎にさまざまなオプションがある
+- オプションの詳細は各パッケージを調べる
 
-目次の設定
-==================================================
+```bash
+$ texdoc hyperref
+```
 
-* ビルドされたPDFの目次にハイパーリンクを設定できる
-* 目次が文字化けしないように ``hyperref`` と ``pxjahyper`` の2つのパッケージを読み込む必要がある
+## 目次の設定
 
-
-.. code-block:: latex
-
-   \usepackage{hyperref}
-   \usepackage{pxjahyper}
-
-
-タイトル、著者などの設定
-==================================================
-
-.. code-block:: latex
-
-   \author{Shota TAKAHASHI}
-   \date{2016-01-14 Monday}
-   \title{第一回打ち合わせ}
-
-   \begin{document}
-
-   \maketitle
-
-   \end{document}
+- ビルドされたPDFの目次にハイパーリンクを設定できる
+- 目次が文字化けしないように ``hyperref`` と ``pxjahyper`` の2つのパッケージを読み込む必要がある
 
 
-* プリアンブルの中に記述したあと、本文内で ``\maketitle`` する
-* ``\date{\today}`` とすれば、コンパイルした日付になる。
+```latex
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+```

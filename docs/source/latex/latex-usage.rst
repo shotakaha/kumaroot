@@ -16,6 +16,7 @@ LaTeXの使い方
    latex-latexmk
    latex-lualatex
    latex-jlreq
+   latex-maketitle
    latex-physics
    latex-packages
 
