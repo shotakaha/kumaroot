@@ -24,6 +24,8 @@ HTMLは `Read the Docs <rtd_>`_ で公開しています。
    sphinx-build
    sphinx-conf
    sphinx-myst
+   sphinx-html
+   sphinx-pdf
    sphinx-toctree
    sphinx-code-block
    sphinx-hyperlink
