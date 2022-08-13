@@ -29,9 +29,9 @@ latex_docclass = {"howto": "jreport", "manual": "jsbook"}  # 日本語文書の�
 latex_docclass = {"manual": "jlreq"}
 ```
 
-```{TODO}
-- LuaLaTeXを使いたい（sphinx-latex-lualatex.md）
-- upLaTeXの設定（sphinx-latex-ptex2pdf.md）
+```{toctree}
+sphinx-latex-lualatex
+sphinx-latex-uplatex
 ```
 
 ## ドキュメントクラスオプションの設定（ ``latex_elements`` ）
