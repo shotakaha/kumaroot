@@ -20,6 +20,7 @@ LaTeXの使い方
    latex-maketitle
    latex-physics
    latex-packages
+   latex-ref
 
 .. [#] ヒント：ブロント語
 

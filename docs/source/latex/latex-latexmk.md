@@ -1,4 +1,4 @@
-# latexmkを使いたい
+# latexmkしたい
 
 LaTeX文書をコンパイルするプロセスを自動化するためのコマンドです。
 LaTeX用のMakefileだと考えればよいと思います。
