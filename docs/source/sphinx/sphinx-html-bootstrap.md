@@ -1,95 +1,83 @@
-==================================================
-テーマの設定
-==================================================
+# Sphinx Boostrap Themeの設定
 
-まず、 ``pip`` を使って ``sphinx_bootstrap_theme`` をインストールする。
-登録されているパッケージ名は
-``sphinx-bootstrap-theme`` （ハイフンでつないである）という、
-ちょっとしたトラップがある。
+```bash
+pip3 install sphinx_bootstrap_theme
+```
 
-インストール時にエラーが出たので、
-エラーメッセージに従って、 ``sudo -H`` を使って実行した。
+## テーマを読み込む
 
-.. code-block:: python
+```python
+import sphinx_bootstrap_theme
 
-    $ sudo -H pip install sphinx-bootstrap-theme
+html_theme = "bootstrap"
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+```
 
-`Installation <https://ryan-roemer.github.io/sphinx-bootstrap-theme/README.html#installation>`__
-の通りに ``html_theme`` と ``html_theme_path`` を設定する。
+## テーマのオプションを設定する
 
-.. code-block:: python
+```python
+html_theme_options = {
+    # Navigation bar title. (Default: ``project`` value)
+    # 'navbar_title': "Demo",
 
-    import sphinx_bootstrap_theme
-    html_theme = 'bootstrap'
-    html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+    # Tab name for entire site. (Default: "Site")
+    # 'navbar_site_name': "Site",
 
-``html_theme_options`` は
-`Theme options <https://ryan-roemer.github.io/sphinx-bootstrap-theme/README.html#theme-options>`__
-をとりあえずコピペして、 いろいろテストしてみる。
+    # A list of tuples containing pages or urls to link to.
+    # Valid tuples should be in the following forms:
+    #    (name, page)                 # a link to a page
+    #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
+    #    (name, "http://example.com", True) # arbitrary absolute url
+    # Note the "1" or "True" value above as the third argument to indicate
+    # an arbitrary url.
+    # 'navbar_links': [
+    #     ("Examples", "examples"),
+    #     ("Link", "http://example.com", True),
+    # ],
 
-.. code-block:: python
+    # Render the next and previous page links in navbar. (Default: true)
+    'navbar_sidebarrel': True,
 
-    html_theme_options = {
-        # Navigation bar title. (Default: ``project`` value)
-        # 'navbar_title': "Demo",
+    # Render the current pages TOC in the navbar. (Default: true)
+    'navbar_pagenav': True,
 
-        # Tab name for entire site. (Default: "Site")
-        # 'navbar_site_name': "Site",
+    # Tab name for the current pages TOC. (Default: "Page")
+    'navbar_pagenav_name': "Page",
 
-        # A list of tuples containing pages or urls to link to.
-        # Valid tuples should be in the following forms:
-        #    (name, page)                 # a link to a page
-        #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
-        #    (name, "http://example.com", True) # arbitrary absolute url
-        # Note the "1" or "True" value above as the third argument to indicate
-        # an arbitrary url.
-        # 'navbar_links': [
-        #     ("Examples", "examples"),
-        #     ("Link", "http://example.com", True),
-        # ],
+    # Global TOC depth for "site" navbar tab. (Default: 1)
+    # Switching to -1 shows all levels.
+    'globaltoc_depth': 2,
 
-        # Render the next and previous page links in navbar. (Default: true)
-        'navbar_sidebarrel': True,
+    # Include hidden TOCs in Site navbar?
+    #
+    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
+    # non-hidden ``toctree`` directives in the same page, or else the build
+    # will break.
+    #
+    # Values: "true" (default) or "false"
+    'globaltoc_includehidden': "true",
 
-        # Render the current pages TOC in the navbar. (Default: true)
-        'navbar_pagenav': True,
+    # HTML navbar class (Default: "navbar") to attach to <div> element.
+    # For black navbar, do "navbar navbar-inverse"
+    'navbar_class': "navbar navbar-inverse",
 
-        # Tab name for the current pages TOC. (Default: "Page")
-        'navbar_pagenav_name': "Page",
+    # Fix navigation bar to top of page?
+    # Values: "true" (default) or "false"
+    'navbar_fixed_top': "true",
 
-        # Global TOC depth for "site" navbar tab. (Default: 1)
-        # Switching to -1 shows all levels.
-        'globaltoc_depth': 2,
+    # Location of link to source.
+    # Options are "nav" (default), "footer" or anything else to exclude.
+    'source_link_position': "nav",
 
-        # Include hidden TOCs in Site navbar?
-        #
-        # Note: If this is "false", you cannot have mixed ``:hidden:`` and
-        # non-hidden ``toctree`` directives in the same page, or else the build
-        # will break.
-        #
-        # Values: "true" (default) or "false"
-        'globaltoc_includehidden': "true",
+    # Bootswatch (http://bootswatch.com/) theme.
+    #
+    # Options are nothing (default) or the name of a valid theme
+    # such as "amelia" or "cosmo".
+    # 'bootswatch_theme': "united",
+    # 'bootswatch_theme': "cosmo",
 
-        # HTML navbar class (Default: "navbar") to attach to <div> element.
-        # For black navbar, do "navbar navbar-inverse"
-        'navbar_class': "navbar navbar-inverse",
-
-        # Fix navigation bar to top of page?
-        # Values: "true" (default) or "false"
-        'navbar_fixed_top': "true",
-
-        # Location of link to source.
-        # Options are "nav" (default), "footer" or anything else to exclude.
-        'source_link_position': "nav",
-
-        # Bootswatch (http://bootswatch.com/) theme.
-        #
-        # Options are nothing (default) or the name of a valid theme
-        # such as "amelia" or "cosmo".
-        # 'bootswatch_theme': "united",
-        # 'bootswatch_theme': "cosmo",
-
-        # Choose Bootstrap version.
-        # Values: "3" (default) or "2" (in quotes)
-        'bootstrap_version': "3",
-    }
+    # Choose Bootstrap version.
+    # Values: "3" (default) or "2" (in quotes)
+    'bootstrap_version': "3",
+}
+```
