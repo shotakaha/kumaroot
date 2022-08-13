@@ -2,6 +2,7 @@
 
 
 ```{toctree}
+command-bash
 command-find
 command-grep
 command-rsync
