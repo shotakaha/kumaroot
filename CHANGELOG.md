@@ -1,3 +1,59 @@
+## v0.6.0 (2022-08-14)
+
+### Feat
+
+- **latex/latex-ref.md**: LaTeXで相互参照を追加した
+- **command/command-bash.md**: bashを追加した
+- **command/command-sed.md**: sedを追加した
+- **root/root-tlegend.md**: TLegend編を追加した
+- **root/root-tgraph.md**: TGraph編を追加した
+- **root/root-tfile.md**: TFile編を追加した
+- **command/command-xargs.md**: xargsを追加した
+- **docs/deploy.sh**: デプロイ用のスクリプトを作成した
+- **command/command-rsync.md**: rsyncを追加した
+- **git/git-semver.md**: semverを追加した
+- **latex/latex-plautopatch.md**: plautopachを追加した
+
+### Fix
+
+- **sphinx/sphinx-myst-syntax.md**: MyST記法を修正した
+- **root/root-install.md**: ROOTのインストール方法を整理した
+- **root/root-global.md**: gROOT設定を修正した
+- **root/root-usage.md**: 修正した
+- **root/root-tstring.md**: TString編を修正した
+- **command**: コマンドを修正した
+- **latex/latex-lualatex.md**: ltjsarticleを追加した
+- **emacs/emacs-vim.md**: 内容が古めだったので削除した
+- **sphinx**: Sphinxをまとめなおした
+- **sphinx/sphinx-html**: sphinx-htmlを整理している
+- **sphinx-latex-lualatex.md**: sphinx-latexを整理している
+- **sphinx/sphinx-latex.md**: まとめなおした
+- **sphinx/sphinx-latex.md**: まとめなおした
+- **sphinx/sphinx-latex.md**: SphinxのLaTeX設定を整理している
+- **emacs/emacs-keyboard.md**: Emacsのキーボード設定を修正した
+- **toctree**: toctree周りのwarningを修正した
+- **git/git-config.md**: git configを修正した
+- **command/command-find.md**: findを修正した
+- **git/git-semver.md**: semverを修正した
+
+### Refactor
+
+- **root/root-global.md**: .mdに変換した
+- **root/root-install-macports.md**: .mdに変換した
+- **root/root-install.md**: .mdに変換した
+- **root/root-usage.md**: .mdに変換した
+- **root/root-tstring.md**: .mdに変換した
+- **root/root-tfile.md**: .mdに変換した
+- **emacs/emacs-vim.md**: .mdに変換した
+- **sphinx-latex**: .mdに変換した
+- **sphinx**: .mdに変換した
+- **sphinx**: .mdに変換した
+- **sphinx**: .mdに変換した
+- **sphinx/sphinx-install.md**: .mdに変換した
+- **emacs/emacs-keyboard.md**: .mdに変換した
+- **emacs/fig/**: Emacs関係の図の置き場を変更した
+- **README.md**: renamed README.rst -> README.md
+
 ## v0.5.0 (2022-08-12)
 
 ### Fix
