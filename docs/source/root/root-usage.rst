@@ -14,6 +14,6 @@ ROOTの使い方
    root-hist
    root-tree
    root-chain
-   root-file
+   root-tfile
    root-string
    root-canvas
