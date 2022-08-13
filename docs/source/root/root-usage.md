@@ -17,4 +17,5 @@ root-tfile
 root-string
 root-canvas
 root-tgraph
+root-tlegend
 ```
