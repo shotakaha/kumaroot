@@ -25,7 +25,6 @@ Emacsの簡単な使い方と便利なパッケージなどを紹介します。
    emacs-yatex
    emacs-magit
    emacs-twitter
-   emacs-vim
 
 
 関連ドキュメント
