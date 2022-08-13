@@ -3,6 +3,7 @@
 
 ```{toctree}
 command-find
+command-grep
 command-rsync
 command-texdoc
 ```

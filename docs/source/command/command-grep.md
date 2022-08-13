@@ -1,4 +1,4 @@
-# grep -- file pattern searcher
+# grep
 
 ```bash
 grep [オプション] [検索パターン] [検索するファイル ...]
