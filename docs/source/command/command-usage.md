@@ -5,6 +5,7 @@
 command-find
 command-grep
 command-rsync
+command-sed
 command-texdoc
 command-xargs
 ```
