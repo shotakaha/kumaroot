@@ -73,14 +73,72 @@ version_files = [
 ]
 ```
 
-## 変更をコミットする（``cz``）
+## 変更をコミットする（``cz c``）
 
-``git commit``の代わりに``cz``を使います。
+``git commit``の代わりに``cz c``を使います。
 
 ```bash
 $ git add ステージするファイル名
-$ cz
+$ cz c
 ```
+
+### コミットの種類を選択する
+
+```
+? Select the type of change you are committing (Use arrow keys)
+ » fix: A bug fix. Correlates with PATCH in SemVer
+   feat: A new feature. Correlates with MINOR in SemVer
+   docs: Documentation only changes
+   style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+   refactor: A code change that neither fixes a bug nor adds a feature
+   perf: A code change that improves performance
+   test: Adding missing or correcting existing tests
+   build: Changes that affect the build system or external dependencies (example scopes: pip, docker, npm)
+   ci: Changes to our CI configuration files and scripts (example scopes: GitLabCI)
+```
+
+### 変更のスコープを入力する
+
+```bash
+? What is the scope of this change? (class or file name): (press [enter] to skip)
+```
+
+### 変更内容を簡単に説明する
+
+```bash
+? Write a short and imperative summary of the code changes: (lower case and no period)
+```
+
+### 追加の説明があれば入力する
+
+```bash
+? Provide additional contextual information about the code changes: (press [enter] to skip)
+```
+
+### 後方互換性のあり／なし
+
+```bash
+? Is this a BREAKING CHANGE? Correlates with MAJOR in SemVer (y/N)
+```
+
+### 補足情報があれば入力する
+
+```bash
+? Footer. Information about Breaking Changes and reference issues that this commit closes: (press [enter] to skip)
+```
+
+### コミットメッセージの形式を確認
+
+```
+feat(git/git-semver.md): semverを追加した
+
+[main 1ecb61d] feat(git/git-semver.md): semverを追加した
+ 2 files changed, 101 insertions(+)
+ create mode 100644 docs/source/git/git-semver.md
+
+Commit successful!
+```
+
 
 ## バージョンアップする（``cz bump``）
 
