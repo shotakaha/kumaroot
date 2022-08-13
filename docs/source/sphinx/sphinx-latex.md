@@ -56,8 +56,6 @@ latex_elements = {
 \documentclass[a4paper, 12pt, dvipdfmx]{sphinxmanual}
 ```
 
-
-
 ## プリアンブルの追加（ ``latex_elements['preamble']`` ）
 
 ``latex_elements`` の``preamble``に複数のパッケージを書くと可読性が下がるため、
@@ -86,12 +84,10 @@ latex_elements['preamble'] += '\\hypersetup{pdfpagemode=UseOutlines}\n'
 \hypersetup{pdfpagemode=UseOutlines}
 ```
 
-## トップレベルのセクション名を設定する
+## トップレベルのセクション名を設定する（``latex_toplevel_sectioning``）
 
 ドキュメントのトップレベルを「部（part）」「章（chapter）」「節（section）」から選択する。
 デフォルトは``None``になっている。
-
-
 
 ```python
 latex_toplevel_sectioning = None
@@ -100,7 +96,13 @@ latex_toplevel_sectioning = "chapter"
 latex_toplevel_sectioning = "section"
 ```
 
-```{toctree}
-sphinx-latex-preambles
-sphinx-latex-logo
+## 表紙の設定（ ``latex_logo`` ）
+
+表紙にロゴを挿入することもできます。
+必要ないなら ``None`` （デフォルト値）のままで問題ありません。
+
+```python
+# The name of an image file (relative to this directory)
+# to place at the top of the title page.
+latex_logo = './images/toumin_kuma.png'
 ```
