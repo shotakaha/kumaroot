@@ -17,3 +17,4 @@ ROOTの使い方
    root-tfile
    root-string
    root-canvas
+   root-tgraph
