@@ -1,59 +1,47 @@
-==================================================
-インストール
-==================================================
+# Sphinxのインストール
 
 Sphinxには以下のプログラムとパッケージが必要です。
 
-#. ``python`` （Homebrew）
-#. ``pip`` （pythonについてくる)
-#. ``sphinx`` （pip）
-#. ``sphinx_rtd_theme`` （pip）
-#. ``pandoc`` （Homebrew、オプショナル）
-
+1. ``python`` （Homebrew）
+1. ``pip`` （pythonについてくる)
+1. ``sphinx`` （pip）
+1. ``sphinx_rtd_theme`` （pip、オプショナル）
+1. ``pandoc`` （Homebrew、オプショナル）
 
 ``Sphinx`` 本体をはじめ、いくつかのパッケージは ``Homebrew`` と ``pip`` にあります。
 しかし両方インストールしようとすると、どっちかでエラーがでます。
-基本的に :command:`pip` コマンドでインストールすることにします。
+基本的に{command}`pip`コマンドでインストールすることにします。
 
+## Python
 
-Python
-==================================================
+```bash
+$ brew install python@3.9
+```
 
-.. code-block:: bash
+## pip
 
-   $ brew install python@3.9
+```bash
+$ pip3 install -U pip
+```
 
-pip
-==================================================
+## Sphinx
 
-.. code-block:: bash
+```bash
+$ pip3 install sphinx
+```
 
-   $ pip3 install -U pip
+## sphinx_rtd_theme
 
+```bash
+$ pip3 install sphinx_rtd_theme
+```
 
-Sphinx
-==================================================
-
-.. code-block:: bash
-
-   $ pip3 install sphinx
-
-
-sphinx_rtd_theme
-==================================================
-
-.. code-block:: bash
-
-   $ pip3 install sphinx_rtd_theme
-
-
-pandoc
-==================================================
+## pandoc
 
 :command:`pandoc` は文書フォーマット変換コマンドです。
 Sphinxとは直接関係がないですが、既存の文書（HTMLだったり、Orgだったり）を ``reST`` に変換したいときにあると便利です。
 
 
-.. code-block:: bash
-
-   $ brew install pandoc
+```bash
+$ brew install pandoc
+```

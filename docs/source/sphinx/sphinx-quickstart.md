@@ -1,16 +1,14 @@
-==================================================
-ドキュメントの新規作成
-==================================================
+# ドキュメントの新規作成（``sphinx-quickstart``）
 
-ドキュメントの新規作成には :command:`sphinx-quickstart` を使います。
+ドキュメントを新規作成するには{command}`sphinx-quickstart`を実行します。
 既存のプロジェクト内にドキュメントを新規作成する場合、
-:file:`MyPROJECT/docs/` という Sphinxドキュメント用ディレクトリを
-作成するのがよいと思います。
+{file}`MyPROJECT/docs/`のようなSphinxドキュメント用ディレクトリを作成して、
+その中で実行するとよいです。
 
 
-.. code-block:: bash
-
-   $ cd MyPROJECT
-   $ mkdir docs
-   $ cd docs
-   $ sphinx-quickstart
+```bash
+$ cd MyPROJECT
+$ mkdir docs
+$ cd docs
+$ sphinx-quickstart
+```
