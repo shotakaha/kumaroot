@@ -4,13 +4,13 @@
 一度は読むことをオススメします。
 書いてあることが分からない場合はヘルプを見て確認するとよいです。
 
-```shell
+```bash
 $ git config -h
 ```
 
 ## 設定済みの内容を確認したい
 
-```shell
+```bash
 $ git config -l
 ```
 
@@ -18,7 +18,7 @@ $ git config -l
 
 ユーザー名やメールアドレス、使用するエディターなどは、あらかじめ設定しておきましょう。
 
-```shell
+```bash
 $ git config --global user.name "Shota Takahashi"
 $ git config --global user.email "shotakaha@gmail.com"
 $ git config --global core.editor emacslient
@@ -38,7 +38,7 @@ $ git config --global core.editor emacslient
 最初の4つはよくある設定で、 ``hist`` 以下の部分はどこかのサイトからのコピペです。
 後述する ``Magit`` （EmacsのGitクライアント）を使い始めてから、コマンド操作することは減りました。
 
-```config
+```unixconfig
 [alias]
     co = checkout
     ci = commit
