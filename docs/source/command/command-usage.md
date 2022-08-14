@@ -12,5 +12,6 @@ command-rsync
 command-sed
 command-texdoc
 command-tldr
+command-uname
 command-xargs
 ```
