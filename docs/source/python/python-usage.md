@@ -32,4 +32,5 @@ python-altair
 python-loguru
 python-pandas
 python-plotly
+python-poetry
 ```
