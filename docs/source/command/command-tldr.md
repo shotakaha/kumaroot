@@ -37,6 +37,15 @@ tldr コマンド名
 tldr tldr
 ```
 
+## キャッシュを更新したい
+
+キャッシュが古くなっている場合は、更新を促す警告（warning）が表示されます。
+
+```bash
+tldr -u
+tldr --update
+```
+
 ## リポジトリ
 
 - https://github.com/dbrgn/tealdeer
