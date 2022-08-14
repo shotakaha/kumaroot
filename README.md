@@ -1,9 +1,11 @@
-# KumaROOT - くまのためのROOT入門 ／ ROOT for Bearginner
+# KumaROOT
 
-ROOTなどの高エネルギー物理学分野で使っているツールのつい書い方をまとめているドキュメントです。
+**くまのためのROOT入門 ／ ROOT for Bearginner**
+
+ROOTなどの高エネルギー物理学分野で使っているツールの使い方をまとめているドキュメントです。
 
 もともとは古巣の研究室に設置した[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)でまとめていた内容です。
-現在は、[KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開&更新しています。
+現在は[KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開&更新しています。
 
 ## 「くまROOT」：プロジェクト名の由来？
 
