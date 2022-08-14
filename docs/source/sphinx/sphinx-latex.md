@@ -31,6 +31,7 @@ latex_docclass = {"manual": "jlreq"}
 
 ```{toctree}
 sphinx-latex-engine
+sphinx-latex-elements
 ```
 
 ## 表紙の設定（ ``latex_logo`` ）
