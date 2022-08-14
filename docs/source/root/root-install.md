@@ -7,12 +7,9 @@ Macユーザーの場合、``Homebrew``を使ってインストールできま�
 $ brew install root
 ```
 
-
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-install-macports
-.. root-install-git
-.. root-install-old
 ```
