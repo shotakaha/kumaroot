@@ -13,9 +13,7 @@
    :maxdepth: 1
 
    preface-kuma
-   preface-root
    preface-sphinx
-   useful-links
 
 .. _hepsrv: http://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php
 
