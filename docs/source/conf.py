@@ -121,15 +121,11 @@ todo_include_todos = True
 ##################################################
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-latex-output
 
-# latex_engine = 'lualatex'
-# latex_documents = [(
-#     root_doc,
-#     'KumaROOT.tex',
-#     'KumaROOT',
-#     'Shota TAKAHASHI',
-#     'manual'),
-# ]
-# latex_docclass = {'manual' : 'jlreq'}
+latex_engine = "lualatex"
+latex_docclass = {
+    "howto": "jlreq",
+    "manual": "jlreq",
+}
 # latex_toplevel_sectioning = "chapter"
 
 # latex_elements = {
