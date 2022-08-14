@@ -128,12 +128,13 @@ latex_docclass = {
 }
 # latex_toplevel_sectioning = "chapter"
 
-# latex_elements = {
-#     'papersize' : 'a4paper',
+latex_elements = {
+    "papersize" : "a4paper",
 #     'pointsize': '12pt',
 #     'preamble': '',
 #     'figure_align': 'htbp',
-# }
+    "polyglossia": "",
+}
 
 # latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
 # latex_elements['preamble'] += '\\usepackage{graphics}\n'
