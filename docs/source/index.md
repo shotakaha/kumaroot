@@ -11,6 +11,7 @@ maxdepth: 1
 ---
 preface
 root/root-usage
+geant4/geant4-usage
 command/command-usage
 git/git-usage
 latex/latex-usage
