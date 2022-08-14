@@ -14,6 +14,8 @@
 
    preface-kuma
    preface-sphinx
+   disclaimer
+
 
 .. _hepsrv: http://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php
 
