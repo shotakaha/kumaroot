@@ -26,3 +26,11 @@ sphinx-hyperlink
 sphinx-readthedocs
 sphinx-pandoc
 ```
+
+# リファレンス
+
+- [Sphinx 日本語ドキュメント](https://www.sphinx-doc.org/ja/master/index.html)
+- [reStructuredText入門](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/basics.html)
+- [CommonMark](https://commonmark.org/)
+- [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest)
+- [Read the Docs](https://readthedocs.org/)
