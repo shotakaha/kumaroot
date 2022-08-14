@@ -161,32 +161,5 @@ todo_include_todos = True
 #latex_appendices = []
 #latex_domain_indices = True
 
-#################################################
-## Options for Epub output
-##################################################
-
-epub_title = project
-epub_author = author
-epub_publisher = author
-epub_copyright = copyright
-#epub_basename = project
-#epub_theme = 'epub'
-#epub_language = ''
-#epub_scheme = ''
-#epub_identifier = ''
-#epub_uid = ''
-#epub_cover = ()
-#epub_guide = ()
-#epub_pre_files = []
-#epub_post_files = []
-epub_exclude_files = ['search.html']
-#epub_tocdepth = 3
-#epub_tocdup = True
-#epub_tocscope = 'default'
-#epub_fix_images = False
-#epub_max_image_width = 0
-#epub_show_urls = 'inline'
-#epub_use_index = True
-
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
