@@ -1,13 +1,24 @@
 # ROOTの使い方
 
+``ROOT``と高エネルギー物理学分野で広く使われている解析フレームワークです。
+スイスにあるCERNを中心に開発されています。
+
+**解析フレームワーク**と聞くと敷居が高そうに感じますが
+「お絵かきソフトだ」と気軽に捉えて使えばよいと思っています。
+もちろん、自由に絵を描くソフトとは異なり、
+**自分が測定したデータ**を使って**ヒストグラムやグラフを描くことが中心**になります。
+
+```{warning}
+このドキュメントの大部分は``ROOT5``のときの使い方で書かれたものです。
+少しずつ``ROOT6``に合った使い方に書き換えていこうと考えていますが、時間がかかりそうです。
+うまく動かない箇所は、各自で``ROOT6``の使い方を調べてください。
+```
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-install
-root5-root6
-root-pyroot
-root-help
 root-tutorial
 root-global
 root-hist
@@ -18,6 +29,9 @@ root-string
 root-canvas
 root-tgraph
 root-tlegend
+root5-root6
+root-pyroot
+root-emacs
 ```
 
 ## リファレンス
