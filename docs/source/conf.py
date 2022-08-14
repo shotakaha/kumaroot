@@ -37,7 +37,7 @@ language = 'ja'
 #     '.md': 'markdown',
 #     }
 # source_encoding = 'utf-8-sig'
-root_doc = "index"
+# root_doc = "index"
 numfig = True
 
 # 図表番号表示のカスタム設定
@@ -126,23 +126,23 @@ todo_include_todos = True
 ##################################################
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-latex-output
 
-latex_engine = 'lualatex'
-latex_documents = [(
-    root_doc,
-    'KumaROOT.tex',
-    'KumaROOT',
-    'Shota TAKAHASHI',
-    'manual'),
-]
-latex_docclass = {'manual' : 'jlreq'}
-latex_toplevel_sectioning = "chapter"
+# latex_engine = 'lualatex'
+# latex_documents = [(
+#     root_doc,
+#     'KumaROOT.tex',
+#     'KumaROOT',
+#     'Shota TAKAHASHI',
+#     'manual'),
+# ]
+# latex_docclass = {'manual' : 'jlreq'}
+# latex_toplevel_sectioning = "chapter"
 
-latex_elements = {
-    'papersize' : 'a4paper',
-    'pointsize': '12pt',
-    'preamble': '',
-    'figure_align': 'htbp',
-}
+# latex_elements = {
+#     'papersize' : 'a4paper',
+#     'pointsize': '12pt',
+#     'preamble': '',
+#     'figure_align': 'htbp',
+# }
 
 # latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
 # latex_elements['preamble'] += '\\usepackage{graphics}\n'
