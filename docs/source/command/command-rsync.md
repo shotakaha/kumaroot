@@ -11,16 +11,16 @@ rsync [OPTION]... SRC [SRC]... [USER@]HOST:DEST
 rsync -auvz ファイル名1 [ファイル名2]... [ユーザー名@]ホスト名:ディレクトリ名/
 ```
 
-{option}`-a`, {option}`--archive`
-: アーカイブモード；{option}`-rlptgoD`に相当
+``-a``, ``--archive``
+: アーカイブモード；``-rlptgoD``に相当
 
-{option}`-u`, {option}`--update`
+``-u``, ``--update``
 : 差分同期（相手先のファイルの方が新しければスキップする）
 
-{option}`-v`, {option}`--verbose`
+``-v``, ``--verbose``
 : メッセージ出力を増やす
 
-{option}`-z`, {option}`--compress`
+``-z``, ``--compress``
 : 転送時にデータを圧縮する
 
 ## ディレクトリごとをアップロードしたい
@@ -39,42 +39,39 @@ rsync -auvz ディレクトリ名/ [ユーザー名@]ホスト名:ディレク�
 rsync -auvzn ディレクトリ名/ [ユーザー名@]ホスト名:ディレクトリ名/
 ```
 
-{option}`-n`, {option}`--dry-run`
+``-n``, ``--dry-run``
 : 転送される内容を確認する
-
 
 ## 完全に同期したい（``--delete``）
 
-差分同期（{option}`--update`）でサーバーにアップロードした場合、
+差分同期（``--update``）でサーバーにアップロードした場合、
 手元のコンテンツを削除しても、サーバーにデータが残ったままになってしまいます。
-手元のコンテンツとサーバーのコンテンツを完全に同期させたい場合は{option}`--delete`オプションを使います。
+手元のコンテンツとサーバーのコンテンツを完全に同期させたい場合は``--delete``オプションを使います。
 
 ```bash
 rsync -auvz --delete ディレクトリ名/ [ユーザー名@]ホスト名:ディレクトリ名/
 ```
 
-{option}`--delete`
+``--delete``
 : delete extraneous files from destination dirs
 
-デフォルトだと、データは転送前に削除（{option}`--delete-before`）されます。
-必要であれば転送中に削除（{option}`--delete-during`）、転送後に削除（{option}`--delete-after`）のオプションを使ってください。
-
+デフォルトだと、データは転送前に削除（``--delete-before``）されます。
+必要であれば転送中に削除（``--delete-during``）、転送後に削除（``--delete-after``）のオプションを使ってください。
 
 ## 特定のファイルを除外したい（``--exclude``）
 
-``.DS_Store``など、サーバーにアップロードする必要がない／したくないファイルがある場合は{option}`--exclude`もしくは{option}`--exclude-from`オプションを使います。
+``.DS_Store``など、サーバーにアップロードする必要がないファイルを除外したい場合は``--exclude``もしくは``--exclude-from``オプションを使います。
 
 ```bash
 rsync -auvz --exclude ".DS_Store" ディレクトリ名/ [ユーザー名@]ホスト名:ディレクトリ名/
 rsync -auvz --exclude=".DS_Store" ディレクトリ名/ [ユーザー名@]ホスト名:ディレクトリ名/
-rsync -auvz --exclude-from="除外するファイル一覧" ディレクトリ名/ [ユーザー名@]ホスト名:ディレクトリ名/
+rsync -auvz --exclude-from="除外パターンをまとめたファイル名" ディレクトリ名/ [ユーザー名@]ホスト名:ディレクトリ名/
 ```
 
+``--exclude=PATTERN``
+: PATTERNにマッチしたファイルを除外する
 
-{option}`--exclude=PATTERN`
-: exclude files matching PATTERN
+``--exclude-from=FILE``
+: FILEから除外パターンを読み込む
 
-{option}`--exclude-from=FILE`
-: read exclude patterns from FILE
-
-除外したいファイルの数が少ない場合は{option}`--exclude`オプションで十分ですが、多い場合は除外するファイル名を一覧にしたファイルを用意するとよいです。
+除外したいファイルの数が少ない場合は``--exclude``オプションで十分ですが、多い場合は除外パターンをまとめたファイルを用意して``--exclude-from``で読み込ませるのがよいです。
