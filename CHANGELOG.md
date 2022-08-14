@@ -4,26 +4,19 @@
 
 - **index.md**: コンテンツの順番を変更した
 - **disclaimer.md**: 免責事項を追加した
-- **command/command-ssh-keygen.md**: ssh-keygenを追加した
 - **conf.py**: LuaLaTeXとjlreqに設定した
-- **python/python-poetry.md**: poetryを追加した
-- **command/command-uname.md**: unameを追加した
+- **command/command-ssh-keygen.md**: ssh-keygenを追加した
 - **command/command-tldr.md**: tldrを追加した
+- **command/command-uname.md**: unameを追加した
+- **python/python-poetry.md**: poetryを追加した
 
 ### Fix
 
-- **pandas/pandas-usage.md**: リファレンスを追加した
+- **latex/latex-usage.md**: リファレンスを整理した
+- **pandas/pandas-usage.md**: リファレンスを整理した
 - **python/python-usage.md**: リファレンスを整理した
-- **root/root-install.md**: root-installを修正した
-- **root/root-usage.md**: 前書きを整理した
 - **root/root-usage.md**: リファレンスを整理した
-- **latex/latex-jlreq.md**: jlreqを修正した
-- 微修正
-- **sphinx/sphinx-myst-syntax.md**: 脚注を追加した
-- **sphinx/sphinx-usage.md**: リファレンスを追加した
-- **latex/latex-usage.md**: 前書きを修正した
-- **command/command-rsync.md**: rsyncを修正した
-- **command/command-tldr.md**: キャッシュの更新を追加した
+- **sphinx/sphinx-usage.md**: リファレンスを整理した
 
 ## v0.6.0 (2022-08-14)
 
