@@ -33,6 +33,7 @@ latex_docclass = {"manual": "jlreq"}
 sphinx-latex-engine
 sphinx-latex-docclass
 sphinx-latex-elements
+sphinx-latex-preamble
 ```
 
 ## 表紙の設定（ ``latex_logo`` ）
