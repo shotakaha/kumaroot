@@ -10,6 +10,7 @@ command-find
 command-grep
 command-rsync
 command-sed
+command-ssh-keygen
 command-texdoc
 command-tldr
 command-uname
