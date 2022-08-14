@@ -27,7 +27,7 @@ sphinx-readthedocs
 sphinx-pandoc
 ```
 
-# リファレンス
+## リファレンス
 
 - [Sphinx 日本語ドキュメント](https://www.sphinx-doc.org/ja/master/index.html)
 - [reStructuredText入門](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/basics.html)
