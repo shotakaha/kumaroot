@@ -31,6 +31,7 @@ latex_docclass = {"manual": "jlreq"}
 
 ```{toctree}
 sphinx-latex-engine
+sphinx-latex-docclass
 sphinx-latex-elements
 ```
 
