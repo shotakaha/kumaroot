@@ -6,51 +6,46 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'KumaROOT'
-author = 'Shota TAKAHASHI'
-copyright = '2015 - 2022, Shota TAKAHASHI'
-version = '0.6.0'
-release = '0.6.0'
+project = "KumaROOT"
+author = "Shota TAKAHASHI"
+copyright = "2015 - 2022, Shota TAKAHASHI"
+version = "0.6.0"
+release = "0.6.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',
-    'myst_parser',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.coverage",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.viewcode",
+    "sphinx_rtd_theme",
+    "myst_parser",
 ]
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
-language = 'ja'
+language = "ja"
 
 # source_suffix = {
 #     '.rst': 'restructuredtext',
 #     '.md': 'markdown',
 #     }
 # source_encoding = 'utf-8-sig'
-# root_doc = "index"
 numfig = True
 
 # 図表番号表示のカスタム設定
 # フォーマット文字列を辞書型で指定
 # デフォルトの設定を書いた後、カスタム設定で上書き
-numfig_format = {
-    'figure' : 'Fig. %s',
-    'table' : 'Table %s',
-    'code-block' : 'Listing %s'
-}
-numfig_format['figure'] = '図 %s'
-numfig_format['table'] = '表 %s'
-numfig_format['code-block'] = 'コードサンプル %s'
+numfig_format = {"figure": "Fig. %s", "table": "Table %s", "code-block": "Listing %s"}
+numfig_format["figure"] = "図 %s"
+numfig_format["table"] = "表 %s"
+numfig_format["code-block"] = "コードサンプル %s"
 
 # 図表番号のスコープ
 # 0: 全てのドキュメントで通し番号
@@ -89,23 +84,23 @@ myst_enable_extensions = [
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+html_theme = "sphinx_rtd_theme"
+html_static_path = ["_static"]
 html_theme_options = {
-    'analytics_id': 'G-F2T33GE7N3',  #  Provided by Google in your dashboard
-    'analytics_anonymize_ip': False,
-    'logo_only': False,
-    'display_version': True,
-    'prev_next_buttons_location': 'bottom',
-    'style_external_links': True,
-    'vcs_pageview_mode': '',
+    "analytics_id": "G-F2T33GE7N3",  #  Provided by Google in your dashboard
+    "analytics_anonymize_ip": False,
+    "logo_only": False,
+    "display_version": True,
+    "prev_next_buttons_location": "bottom",
+    "style_external_links": True,
+    "vcs_pageview_mode": "",
     # 'style_nav_header_background': 'white',
     # Toc options
-    'collapse_navigation': True,
-    'sticky_navigation': True,
-    'navigation_depth': 4,
-    'includehidden': True,
-    'titles_only': False
+    "collapse_navigation": True,
+    "sticky_navigation": True,
+    "navigation_depth": 4,
+    "includehidden": True,
+    "titles_only": False,
 }
 
 # -*- coding: utf-8 -*-
@@ -155,11 +150,11 @@ todo_include_todos = True
 # latex_elements['preamble'] += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
 # latex_elements['preamble'] += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
 # latex_logo = './images/toumin_kuma.png'
-#latex_use_parts = False
-#latex_show_pagerefs = False
-#latex_show_urls = False
-#latex_appendices = []
-#latex_domain_indices = True
+# latex_use_parts = False
+# latex_show_pagerefs = False
+# latex_show_urls = False
+# latex_appendices = []
+# latex_domain_indices = True
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {"https://docs.python.org/": None}
