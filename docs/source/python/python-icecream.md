@@ -8,8 +8,8 @@ pip3 install icecream
 from icecream ic
 ```
 
-デバッグ時に使う``print``の代替パッケージです。
-
+``print``を使ったデバッグに疲弊している方は、
+[icecream](https://github.com/gruns/icecream)パッケージを使いましょう。
 
 ## どこまで実行できたのかを確認したい
 
