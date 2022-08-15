@@ -1,23 +1,37 @@
 # ドキュメントクラスを設定する（``documentclass``）
 
-日本語用のドキュメントクラスには次の3種類があります。
+日本語用のドキュメントクラスには次のパッケージがあります。
 これから新しく作成する場合は``jlreq``を使うのがよさそうです。
 
-- ``js``系
-- ``ltjs``系
-- ``jlreq``
-
-```latex
-\documentclass[uplatex, a4paper, 12pt, papersize, dvipdfmx]{jsarticle}
-\documentclass[uplatex, a4paper, 12pt, papersize, dvipdfmx]{jsreport}
-\documentclass[uplatex, a4paper, 12pt, papersize, dvipdfmx]{jsbook}
+```{toctree}
+latex-jsclasses
+latex-jlreq
 ```
 
-``pLaTeX/upLaTeX``の場合、``jsarticle``系のドキュメントクラスを使用する場合が多いです。
-ドキュメントクラスのオプションには用紙サイズ（``[a4paper, papersize]``）、欧文フォントサイズ（``[12pt]``）、ドライバ（``[dvipdfmx]``）などを指定します。
+## スタイルの使い分け
 
-```latex
-\documentclass{jlreq}
-\documentclass[report]{jlreq}
-\documentclass[book]{jlreq}
-```
+ ``article``
+ : 論文やレポート；節（section）；片面印刷
+
+ ``report``
+ : 長めのレポート；章（chapter）；片面印刷
+
+ ``book``
+ : 書籍；章（chapter）；両面印刷
+
+## 用紙サイズ
+
+A4判（和文デフォルト）
+: 210mm $\times$ 297mm
+
+A5判
+: 148mm $\times$ 210mm
+
+B4判
+: 257mm $\times$ 364mm
+
+B5判
+: 182mm $\times$ 257mm
+
+レター判（欧文デフォルト）
+: 8.5in. $\times$ 11in.
