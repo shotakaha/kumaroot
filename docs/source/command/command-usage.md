@@ -7,6 +7,7 @@ maxdepth: 1
 command-bash
 command-find
 command-grep
+command-nkf
 command-rsync
 command-sed
 command-ssh-keygen
