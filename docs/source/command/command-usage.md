@@ -12,6 +12,7 @@ command-sed
 command-ssh-keygen
 command-texdoc
 command-tldr
+command-tlmgr
 command-uname
 command-xargs
 ```
