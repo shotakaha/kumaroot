@@ -2,4 +2,5 @@
 
 ```{toctree}
 vscode-install
+vscode-extensions
 ```
