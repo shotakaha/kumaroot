@@ -25,7 +25,7 @@ root-hist
 root-tree
 root-chain
 root-tfile
-root-string
+root-tstring
 root-canvas
 root-tgraph
 root-tlegend

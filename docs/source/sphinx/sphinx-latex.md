@@ -10,7 +10,7 @@ sphinx-latex-engine
 sphinx-latex-docclass
 sphinx-latex-elements
 sphinx-latex-preamble
-sphinx-latex-sectioning
+sphinx-latex-section
 ```
 
 ## 表紙の設定（ ``latex_logo`` ）

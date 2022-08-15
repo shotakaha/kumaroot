@@ -20,12 +20,11 @@ latex_elements = {
 \documentclass[a4paper, 12pt, dvipdfmx]{sphinxmanual}
 ```
 
-### Polyglossiaパッケージを無効にしたい
+## Polyglossiaパッケージを無効にしたい
 
 LaTeXエンジンに``lualatex``を指定すると、自動で``Polyglossia``パッケージが読み込まれるようになっています。
 このままビルドすると、多数の``Package polyglossia Warning: Asking to add empty feature to latin font(Script="CJK" to scripttag "")``が表示されます。
 多言語対応したドキュメントであれば、無効にしてしまいましょう。
-
 
 ```python
 latex_elements = {
