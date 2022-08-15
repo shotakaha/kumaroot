@@ -1,11 +1,16 @@
-# texdoc - find & view documentation in TeX Live
+# texdoc
 
-```shell
-texdoc LaTeXコマンド名
-texdoc LaTeXパッケージ名
+LaTeXのコマンドやパッケージのドキュメントを検索するコマンドです
+
+## ドキュメントを開く
+
+```bash
+texdoc パッケージ名
 ```
 
-```shell
-texdoc latexmk
-texdoc lualatex
+## 検索結果を表示する
+
+```bash
+texdoc -l パッケージ名
+texdoc --list パッケージ名
 ```
