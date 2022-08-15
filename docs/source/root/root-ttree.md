@@ -5,8 +5,14 @@ ROOTを使った解析において``TTree``（もしくは次の章の``TChain``
 
 取得したデータはさっさと``TTree``に変換してしまって、データ解析を楽しみましょう。
 
-```cpp
-TTree *tree = new TTree("t1", "TTree example");
+```{code-block} cpp
+---
+linenos: true
+emphasize-lines: 1
+---
+TTree *tree = new TTree("t1", "test measurement");
+tree->ReadFile("入力ファイル名", "列1/I:列2/I:列3/D", ",");  // CSVを読み込んだ想定
+tree->Draw("列1");  // 列1のヒストグラムを作成
 ```
 
 ```cpp
@@ -32,7 +38,7 @@ TTree TTree(const char* name,
 ---
 maxdepth: 1
 ---
-root-tree-readfile
+root-ttree-readfile
 root-tree-branch
 ```
 
