@@ -1,3 +1,39 @@
+## v1.1.0 (2022-08-15)
+
+### Fix
+
+- **emacs/emacs-yatex.md**: 修正した
+- **emacs/emacs-install.md**: 修正した
+- **emacs/emacs-usage.md**: 修正した 	modified:   docs/source/emacs/emacs-usage.md
+- 修正した
+- optionロールを修正した
+- **emacs/emacs-org-latex.md**: 追加した
+- literal-includeを削除した
+- **command/command-texdoc.md**: 修正した
+- **python/python-icecream.md**: 修正した
+- **latex/latex-jlreq.md**: 整理した
+- **latex/latex-document.md**: 整理した
+- **latex/latex-maketitle.md**: 修正した
+- **sphinx/sphinx-latex.md**: 整理した
+- **conf.py**: LaTeX設定:Polyglossiaパッケージを無効にした
+
+### Feat
+
+- **emacs/emacs-magit.md**: 大きく整理した
+- **command/command-tlmgr.md**: 追加した
+- **python/python-icecream.md**: 追加した
+- **python/python-requests.md**: 追加した
+- **python/python-random.md**: 追加した
+- **latex/latex-jsclasses.md**: 追加した
+- **latex/latex-usepackage.md**: 追加した
+- **latex/latex-documentclass.md**: 追加した
+- **geant4/geant4-usage.md**: 追加した
+- **sphinx/sphinx-latex-section.md**: 追加した
+- **sphinx/sphinx-latex-preamble.md**: 追加した
+- **sphinx/sphinx-latex-engine.md**: 追加した
+- **sphinx/sphinx-latex-elements.md**: 追加した
+- **sphinx/sphinx-latex-docclass.md**: 追加した
+
 ## v1.0.0 (2022-08-15)
 
 ### Feat

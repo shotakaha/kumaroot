@@ -7,6 +7,11 @@ Emacsを使ってGitするひとはぜひ使いましょう！
 ## インストール
 
 ```lisp
+M-x package-install RET magit RET
+```
+
+## 設定
+```lisp
 (use-package magit
     :ensure t
     :bind (("C-x g" . magit-status)
@@ -14,6 +19,8 @@ Emacsを使ってGitするひとはぜひ使いましょう！
             )
     )
 ```
+
+## 使い方
 
 ```{toctree}
 emacs-magit-status
