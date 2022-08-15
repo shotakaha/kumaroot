@@ -1,8 +1,8 @@
 # リポジトリの作成（``git init``）
 
 ```bash
-$ cd MyPROJECT
-$ git init
+cd MyPROJECT
+git init
 ```
 
 リポジトリをはじめて作成するときに一度だけ使うコマンドです。
@@ -19,6 +19,6 @@ Git管理をしたいプロジェクトのディレクトリに移動してか�
 {command}`-f` オプションを付けて{command}`rm`を実行ています。
 
 ```bash
-$ cd MyPROJECT
-$ rm -rf .git
+cd MyPROJECT
+rm -rf .git
 ```

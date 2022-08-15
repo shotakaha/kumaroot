@@ -25,7 +25,7 @@ JavaScriptで書かれたnpmパッケージの``commitizen``もありますが�
 グローバルにインストールするとよいと思います。
 
 ```bash
-$ pip3 install commitizen
+pip3 install commitizen
 ```
 
 ## 設定ファイルを作成する（``cz init``）
@@ -37,8 +37,8 @@ Pythonパッケージを開発している場合は{file}`pyproject.toml`を設�
 その他の場合は、自分の好みの形式を選択すればよいと思います。僕は{file}`.cz.toml`を選択する場合が多いです。
 
 ```bash
-$ cd リポジトリ
-$ cz init
+cd リポジトリ
+cz init
 ```
 
 生成された設定ファイルは次のようになっているはずです。
@@ -78,8 +78,8 @@ version_files = [
 {command}`git commit`の代わりに{command}`cz c`を使います。
 
 ```bash
-$ git add ステージするファイル名
-$ cz c
+git add ステージするファイル名
+cz c
 ```
 
 ### コミットの種類を選択する
@@ -129,7 +129,7 @@ $ cz c
 
 ### コミットメッセージの形式を確認
 
-```
+```bash
 feat(git/git-semver.md): semverを追加した
 
 [main 1ecb61d] feat(git/git-semver.md): semverを追加した
@@ -139,7 +139,6 @@ feat(git/git-semver.md): semverを追加した
 Commit successful!
 ```
 
-
 ## バージョンアップする（``cz bump``）
 
 コミットの内容をもとにした``semver``でバージョン番号を更新すると同時に、
@@ -147,8 +146,8 @@ Commit successful!
 {command}`-ch`をつけると{file}`CHANGELOG.md`も更新できます。
 
 ```bash
-$ cz bump
-$ cz bump -ch
+cz bump
+cz bump -ch
 ```
 
 ```{note}

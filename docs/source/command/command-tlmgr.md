@@ -26,7 +26,6 @@ tlmgr install パッケージ名
 tlmgr remove パッケージ名
 ```
 
-
 ## 関連コマンド
 
 - [](command-texdoc.md)

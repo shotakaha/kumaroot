@@ -4,6 +4,7 @@ YaTeX（野鳥）はEmacsでLaTeX文書を作成するためのパッケージ�
 ``MELPA`` からインストールできます。
 
 ## インストール
+
 ```emacs
 M-x package-install RET yatex RET
 ```

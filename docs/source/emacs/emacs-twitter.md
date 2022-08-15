@@ -6,7 +6,6 @@
 EmacsをTwitterクライアントにしてしまって、
 操作方法とか覚えてしまおうということです。
 
-
 ## インストール
 
 ```lisp
@@ -14,7 +13,6 @@ M-x package-install RET twittering-mode RET
 ```
 
 ## 設定
-
 
 ## 使い方
 
