@@ -15,6 +15,7 @@ python-pandas
 python-plotly
 python-poetry
 python-random
+python-requests
 ```
 
 ## リファレンス
