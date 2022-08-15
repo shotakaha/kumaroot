@@ -39,7 +39,7 @@ TTree TTree(const char* name,
 maxdepth: 1
 ---
 root-ttree-readfile
-root-tree-branch
+root-ttree-branch
 ```
 
 ```{note}
