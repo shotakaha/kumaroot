@@ -19,6 +19,7 @@ sphinx/sphinx-usage
 python/python-usage
 pandas/pandas-usage
 altair/altair-usage
+gas/gas-usage
 vscode/vscode-usage
 emacs/emacs-usage
 ```
