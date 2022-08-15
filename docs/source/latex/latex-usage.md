@@ -21,6 +21,7 @@ latex-yatex
 latex-document
 latex-documentclass
 latex-usepackage
+latex-fonts
 latex-latexmk
 latex-lualatex
 latex-jlreq
