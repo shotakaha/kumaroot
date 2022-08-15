@@ -21,8 +21,8 @@ maxdepth: 1
 root-install
 root-tutorial
 root-global
+root-ttree
 root-hist
-root-tree
 root-chain
 root-tfile
 root-tstring
