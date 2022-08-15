@@ -10,6 +10,28 @@
    data = pd.read_csv("example.csv)
 ```
 
+`````{admonition} MyST記法
+````md
+```{code-block} python
+---
+linenos: true
+emphasize-lines: 1, 3
+caption: コードサンプルのキャプション
+name: ラベル名
+---
+import pandas as pd
+data = pd.read_csv("example.csv)
+```
+````
+`````
+
+```{note}
+通常のMarkdownでコードブロックを挿入することもできます。
+表示オプションを使いたい場合はディレクティブに沿った
+MyST記法にする必要があります。
+```
+
+
 ## 行番号を表示したい（``:linenos:``）
 
 ```rst
