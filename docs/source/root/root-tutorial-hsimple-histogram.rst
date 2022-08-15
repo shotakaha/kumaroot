@@ -4,9 +4,3 @@
 
 ``TH1`` クラス、 ``TH2`` クラスなどを使います。
 ここでは ``TProfile`` クラスや ``TNtuple`` クラスも使われています。
-
-
-.. literalinclude:: ./tutorials/root6/hsimple.C
-   :language: cpp
-   :lines: 55-60
-   :lineno-start: 55

@@ -3,8 +3,3 @@
 ==================================================
 
 コメントはC++の作法で挿入できます。
-
-.. literalinclude:: ./tutorials/root6/hsimple.C
-   :language: cpp
-   :lines: 14-25
-   :lineno-start: 14

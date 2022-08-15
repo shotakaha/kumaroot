@@ -7,7 +7,3 @@ ROOTファイルを開く（ ``TFile`` ）
 ファイルがある場合は、 ``TFile::Open`` メソッドでファイルを開いています。
 ない場合は、 ``TFile::TFile`` コンストラクタで
 新しい ``TFileオブジェクト`` を作成しています。
-
-.. literalinclude:: ./tutorials/root6/hsimple.C
-   :language: cpp
-   :lines: 31,37,42,52-53

@@ -4,8 +4,3 @@
 
 マクロの場合ファイル名と関数名は一緒にします。
 戻り型はなんでもOKです。引数を指定することもできます。
-
-.. literalinclude:: ./tutorials/root6/hsimple.C
-   :language: cpp
-   :lines: 13
-   :lineno-start: 13

@@ -5,8 +5,3 @@
 最初の11行の ``#include`` で始まるのはインクルードファイルです。
 コンパイルする場合は必須ですが、マクロで動かす場合は書かなくてもよいです。
 なので今は無視して構いません。
-
-.. literalinclude:: ../../tutorials/root6/hsimple.C
-   :language: cpp
-   :lines: 1-11
-   :lineno-start: 1

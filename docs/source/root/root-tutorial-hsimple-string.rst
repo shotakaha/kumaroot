@@ -4,8 +4,3 @@
 
 TStringクラスという文字列クラスを使っています。
 普通のC/C++の関数を使うよりはるかに楽なので、積極的に使うと良いと思います。
-
-.. literalinclude:: ./tutorials/root6/hsimple.C
-   :language: cpp
-   :lines: 27-51
-   :lineno-start: 27

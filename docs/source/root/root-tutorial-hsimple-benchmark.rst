@@ -4,7 +4,3 @@
 
 このマクロを実行すると、ターミナル上にプロセス時間が表示されます。
 この部分から測定を開始しています。
-
-.. literalinclude:: ./tutorials/root6/hsimple.C
-   :language: cpp
-   :lines: 62,92
