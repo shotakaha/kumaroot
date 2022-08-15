@@ -37,3 +37,4 @@ latex-ref
 - [日本語TeX Wiki](https://texwiki.texjp.org)
 - [CTAN - Comprehensive TeX Archive Network](https://ctan.org/)
 - [MacTeX - TeX Users Group](https://tug.org/mactex/)
+- [A first set of LaTeX packages](https://tug.org/TUGboat/tb41-2/tb128heff-packages.pdf)
