@@ -1,59 +1,64 @@
 # フォントの設定
 
-LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第13章（和文フォント）を再読し、フォント設定に対する理解を深めたいと思います。
+LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第13章（和文フォント）を読んで、
+自分なりに理解した要素をまとめてみました。
 
-レガシーLaTeX
+膨大なフォントサンプル集（欧文基本14書体、欧文基本35書体、TeX Gyreフォント集などなど）も
+紹介されているので、この2つの章は何度も参照するとよいです。
+
+## フォントの5要素
+
+1. エンコーディング
+1. ファミリー
+1. ウェイト
+1. シェープ
+1. サイズ
+
+## エンコーディングを切り替えたい
+
+エンコーディングはTeX内部の**文字マッピング**のことです[^encoding]。
+古いLaTeXは``OT1``（7bit）、モダンなLaTeXは``TU``（32bit）がデフォルトです。
+(u)pLaTeXを使う場合は[fontenc](latex-fontenc.md)パッケージを使って``T1``（8bit）に変更したほうがよいそうです。
+
+[^encoding]: UTF-8やシフトJISのようなファイルのエンコーディングとはまったく別物だそうです。
 
 ```latex
 % プリアンブル
 % \usepackage[utf8]{inputenc}    % 2018年4月以前は必要だった
-\usepackage[T1]{f ntenc}
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[deluxe, uplatex, jis2004]{otf}
 ```
 
-モダンLaTeX
-
-```latex
-% プリアンブル
-\usepackage{fontspec}
-\setmainfont{Source Serif Pro}
-\setsansfont{Source Sans Pro}
-\setmonofont{Source Code Pro}
-
-\usepackage{microtype}
-```
-
-
-## フォントの5要素
-
-エンコーディング
-:   TeX内部の文字へのマッピング。
-    ``OT1``（7ビット）→``T1``（8ビット）→``TU``（32ビット）という歴史がある。
-    モダンLaTeXは``TU``エンコーディングがデフォルトになっている。
-    レガシーLaTeXは``T1``エンコーディングを指定するのが妥当。
-
-ファミリ
-:   セリフ体、サンセリフ体、モノスペース体（タイプライタ体）のように関連するフォントの集まり。
-    ``OT1``では``Computer Modern Roman (cmr)``、``Computer Modern Sans Serif (cmss)``、``Computer Modern Typewriter Type (cmtt)``がデフォルト。
-    ``TU``では``Latin Modern Roman (lmr)``、``Latin Modern Sans Serif (lmss)``、``Latin Modern Typewriter Type (lmtt)`` がデフォルト。
-    フォントはLatin Medernに変えるのを推奨。
-    美文書作成入門は``Latin Modern Roman``、``Souce Sans Pro``、``Source Code Pro``を使っている。
-
+欧文フォントは、``OT1``エンコーディングはComputer Modern系、
+``TU``エンコーディングはLatin Modern系のフォントがデフォルトになっています。
+和文フォントは2019年まではIPAexフォント、2020年からは原ノ味フォントがデフォルトになっています。
 
 ## ファミリーを切り替えたい
 
+欧文フォントは **セリフ体（rm）** / **サンセリフ体（ss）** / **タイプライタ体（tt）** の3種類、
+和文フォントは **明朝体（mc）** / **ゴシック体（gt）** / **丸ゴシック体（mg）** の3種類があります。
+
+
+
+本文中で局所的にファミリー（書体）を切り替えることができます。
+
 ```latex
+% 欧文フォント
 {\rmfamily ...} または \textrm{...}    % セリフ体（デフォルト）
 {\sffamily ...} または \textsf{...}    % サンセリフ体
 {\ttfamily ...} または \texttt{...}    % タイプライタ体
+% 和文フォント
+{\mcfamily ...} または \textmc{...}    % 明朝体
+{\gtfamily ...} または \textgt{...}    % ゴシック体
+{\mgfamily ...} または \textmg{...}    % 丸ゴシック体
 ```
 
-``\{rm ...}``、``\{sf ...}``、``\{tt ...}``という書き方は非推奨。
+## ウェイトを切り替えたい
 
-## シリーズを切り替えたい
-
-シリーズ（＝ウェイト）はフォントによってあったりなかったり。
+フォントによっては複数のウェイト（太さ）を持っているものがあります。
+本文中で局所的にウェイト（太さ）を切り替えることができます。
+LaTeX内ではウェイトを**シリーズ**と呼ぶみたいです。
 
 ```latex
 {\mdseries ...} または \textmd{...}    % Medium（デフォルト）
@@ -63,6 +68,8 @@ LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第
 
 ## シェープを切り替えたい
 
+本文中で局所的にシェープを切り替えることができます。
+
 ```latex
 {\upseries ...} または \textup{...}    % Upright（デフォルト）
 {\itseries ...} または \textit{...}    % Italic
@@ -70,7 +77,9 @@ LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第
 {\scseries ...} または \textsc{...}    % Small Caps
 ```
 
-## サイズを切り替えたい
+## 文字サイズを切り替えたい
+
+本文中で局所的に文字サイズを切り替えることができます。
 
 ```latex
 \tiny
