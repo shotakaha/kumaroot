@@ -30,11 +30,11 @@ $ pip3 install commitizen
 
 ## 設定ファイルを作成する（``cz init``）
 
-プロジェクトルートで初期化（``cz init``）して、設定ファイルを作成します。
-ターミナルに表示されるダイアログにしたがって矢印キーを使って選択します。
+プロジェクトルートで初期化（{command}`cz init`）して、設定ファイルを作成します。
+ターミナルに表示されるダイアログにしたがって矢印キーで選択します。
 
-Pythonパッケージを開発している場合は``pyproject.toml``を設定ファイルにするとよいです。
-その他の場合は、自分の好みの形式を選択すればよいと思います。僕は``.cz.toml``を選択する場合が多いです。
+Pythonパッケージを開発している場合は{file}`pyproject.toml`を設定ファイルにするとよいです。
+その他の場合は、自分の好みの形式を選択すればよいと思います。僕は{file}`.cz.toml`を選択する場合が多いです。
 
 ```bash
 $ cd リポジトリ
@@ -75,7 +75,7 @@ version_files = [
 
 ## 変更をコミットする（``cz c``）
 
-``git commit``の代わりに``cz c``を使います。
+{command}`git commit`の代わりに{command}`cz c`を使います。
 
 ```bash
 $ git add ステージするファイル名
@@ -84,7 +84,7 @@ $ cz c
 
 ### コミットの種類を選択する
 
-```
+```bash
 ? Select the type of change you are committing (Use arrow keys)
  » fix: A bug fix. Correlates with PATCH in SemVer
    feat: A new feature. Correlates with MINOR in SemVer
@@ -144,7 +144,7 @@ Commit successful!
 
 コミットの内容をもとにした``semver``でバージョン番号を更新すると同時に、
 タグを作成してくれます。
-{option}`-ch`をつけると{file}`CHANGELOG.md`も更新できます。
+{command}`-ch`をつけると{file}`CHANGELOG.md`も更新できます。
 
 ```bash
 $ cz bump
