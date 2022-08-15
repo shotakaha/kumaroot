@@ -14,6 +14,7 @@ python-loguru
 python-pandas
 python-plotly
 python-poetry
+python-random
 ```
 
 ## リファレンス
