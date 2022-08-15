@@ -129,10 +129,10 @@ latex_docclass = {
 # latex_toplevel_sectioning = "chapter"
 
 latex_elements = {
-    "papersize" : "a4paper",
-#     'pointsize': '12pt',
-#     'preamble': '',
-#     'figure_align': 'htbp',
+    "papersize": "a4paper",
+    #     'pointsize': '12pt',
+    #     'preamble': '',
+    #     'figure_align': 'htbp',
     "polyglossia": "",
 }
 
