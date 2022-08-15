@@ -19,6 +19,8 @@ latex-install
 latex-japanese
 latex-yatex
 latex-document
+latex-documentclass
+latex-usepackage
 latex-latexmk
 latex-lualatex
 latex-jlreq
