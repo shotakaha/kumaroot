@@ -11,6 +11,9 @@ GASに関する情報を探していると、新しい書き方と古い書き�
 中心に整理しようと思います。
 
 ```{toctree}
+---
+maxdepth: 1
+---
 gas-variables.md
 gas-class.md
 ```
