@@ -1,4 +1,4 @@
-# パッケージを設定する（``usepackage``）
+# パッケージを読み込む（``usepackage``）
 
 ```latex
 % プリアンブル
@@ -20,4 +20,23 @@
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{pxjahyper}
+```
+
+## パッケージの使い方
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-jlreq
+latex-plautopatch
+latex-microtype
+latex-fontspec
+latex-fontenc
+latex-lmodern
+latex-otf
+latex-luatexja-preset
+latex-physics
+latex-geometry
+latex-graphicx
 ```

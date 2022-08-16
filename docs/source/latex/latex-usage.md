@@ -6,10 +6,15 @@
 
 [^bronto]: ヒント：ブロント語
 
-LaTeXの基本的な事項については「LaTeX2e美文書作成入門（技術評論社）」を手に取ることをオススメします。
+LaTeXの基本的な事項については「LaTeX2e美文書作成入門（技術評論社）」を
+手に取ることをオススメします。
+ここにまとめていることも、そのソースのほとんどは美文書作成入門です。
+
 数年に一度改訂されていて、現在の最新版は第8版（2020年11月14日発売）です。
 もしかしたら研究室の本棚に古い版が置かれているかもしれませんが、
-いろいろと変わっている方法もあるので、ぜひ最新版を購入しましょう。
+いろいろと変わっている方法もあるので、ぜひ最新版[^update]を購入しましょう。
+
+[^update]: 第7版→第8版では``(u)pLaTeX``→``LuaLaTeX``へと移り変わっていく様子が分かります
 
 ```{toctree}
 ---
@@ -20,14 +25,11 @@ latex-japanese
 latex-yatex
 latex-document
 latex-documentclass
-latex-usepackage
 latex-fonts
+latex-usepackage
 latex-latexmk
 latex-lualatex
-latex-jlreq
-latex-plautopatch
 latex-maketitle
-latex-physics
 latex-packages
 latex-ref
 ```
