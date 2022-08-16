@@ -37,6 +37,7 @@ latex-lmodern
 latex-otf
 latex-luatexja-preset
 latex-physics
+latex-layout
 latex-geometry
 latex-graphicx
 ```
