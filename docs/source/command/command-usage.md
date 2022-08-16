@@ -8,6 +8,7 @@ command-bash
 command-find
 command-grep
 command-nkf
+command-pandoc
 command-rsync
 command-sed
 command-ssh-keygen

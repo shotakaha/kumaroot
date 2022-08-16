@@ -24,7 +24,6 @@ sphinx-toctree
 sphinx-code-block
 sphinx-hyperlink
 sphinx-readthedocs
-sphinx-pandoc
 ```
 
 ## リファレンス
