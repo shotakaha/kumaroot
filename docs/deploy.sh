@@ -1,3 +1,6 @@
 #! /usr/bin/env bash
 
-rsync -auvz build/html/ mypage:~/www/kumaroot/
+make latexpdf
+mv build/latex/kumaroot.pdf source/_static/
+make html
+# rsync --delete -auvzn build/html/ mypage:~/www/kumaroot/
