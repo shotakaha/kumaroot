@@ -40,4 +40,6 @@ latex-physics
 latex-layout
 latex-geometry
 latex-graphicx
+latex-hyperref
+latex-inputenc
 ```
