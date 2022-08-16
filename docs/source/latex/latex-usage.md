@@ -27,8 +27,7 @@ latex-document
 latex-documentclass
 latex-fonts
 latex-usepackage
-latex-latexmk
-latex-lualatex
+latex-build
 latex-maketitle
 latex-packages
 latex-ref
