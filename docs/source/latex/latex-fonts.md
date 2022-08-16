@@ -1,4 +1,4 @@
-# フォントの設定
+# フォントを設定する
 
 LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第13章（和文フォント）を読んで、
 自分なりに理解した要素をまとめてみました。
@@ -38,8 +38,6 @@ LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第
 
 欧文フォントは **セリフ体（rm）** / **サンセリフ体（ss）** / **タイプライタ体（tt）** の3種類、
 和文フォントは **明朝体（mc）** / **ゴシック体（gt）** / **丸ゴシック体（mg）** の3種類があります。
-
-
 
 本文中で局所的にファミリー（書体）を切り替えることができます。
 
@@ -94,88 +92,70 @@ LaTeX内ではウェイトを**シリーズ**と呼ぶみたいです。
 \Huge
 ```
 
-## 和文フォントのプリセットを切り替える
-
-```latex
-\usepackage[haranoaji]{luatexja-preset}    % TeXLive 2020のデフォルト
-\usepackage[ipaex]{luatexja-preset}
-\usepackage[sourcehan]{luatexja-preset}
-\usepackage[hiragino-pro, hiragino-pron]{luatexja-preset}
-
-```
-
-## フォントのサンプル
-
-- Computer Modern（cmr / cmss/ cmtt）
-- Latin Modern（lmr / lmss / lmtt）
-- 欧文基本14書体
-  - Times（ptm）
-  - Helvetica（phv）
-  - Courier（pcr）
-  - pifont（psy / pzd）
-- 欧文基本35書体
-  - Helvetica Narrow（phv）
-  - New Century Schoolbook（pnc）
-  - Avant Garde（pag）
-  - Palatino（pplx）
-  - Bookman
-  - Zapf Chancery
-- TeX Gyreフォント集
-  - Adventor
-  - Bonum
-  - Chorus
-  - Cursor
-  - Heros
-  - Pagella
-  - Schola
-  - Termes
-- その他のフォント
-  - Garamond
-  - Charter
-  - Bera
-  - Cabin
-  - Optima (Classico)
-  - Inconsolata
-  - Crimson, Cochineal
-  - Noto
-  - Open Sans
-  - Comic Neue
-  - Source Serif Pro, Source Sans Pro, Source Code Pro
-- レガシーな数式用フォント
-  - mathptmx : Times系
-  - mathpazo : Palatino
-  - newtxtext, newtxmath
-  - newpxtext, newpxmath
-  - STIX2フォント
-
-## 和文フォント
-
-明朝体＝セリフ体
-ゴシック体＝サンセリフ体
-
-- ヒラギノ角ゴシック（W0-W9）
-- IPA/IPAex明朝・ゴシック
-- Adobe源ノ明朝・源ノ角ゴシック
-- 原ノ味フォント
-
-TeXLive 2019までIPAexフォント
-TeXLive 2020から原ノ味フォント
 
 ## 日本語の文字と文字コード
 
-- 1716　康熙時点（約47000文字）
-- 1946　当用漢字（1850文字）
-- 1949　当用漢字字体表
-- 1951　人名用漢字別表（92文字）
-- 1978　JIS C6226（情報交換用漢字符号系）（78JIS）（6802文字）
-- 1981　当用漢字→常用漢字（1945文字）、人名用漢字
-- 1983　JIS C 6226改訂（83JIS）（6877文字）
-- 1987　JIS X 0208と改称
-- 1990　JIS X 0208改訂（情報交換用漢字符号）（6879文字）
-- 1997　JIS X 0208改訂（7ビット及び8ビットの2バイト情報交換用符号化漢字集合）
-  - JIS (ISO-2022-JP)
-  - Shift JIS (CP932)
-  - EUC-JP
-- 2000　JIS X 0213（JIS2000）（11223文字）
-- 2004　JIS X 0213改訂（JIS2004）
--
+1716年　康熙字典
+:   約47000文字。
+    漢字の字体は康熙字典を正字とするのが伝統的な考え方だそう。
+    でも、この字典にも不統一・不適切なところはあり、
+    世間でもさまざまな俗字・略字が使われていた。
+
+1946年　当用漢字
+:   1850文字。
+
+1949年　当用漢字字体表
+:   1850文字。
+
+1951年　人名用漢字別表
+:   92文字を追加。
+
+1978年　情報交換用漢字符号系（JIS C6226）
+:   6802文字。
+    78JIS
+
+1981年　当用漢字に代わって常用漢字を制定
+:   1945文字。
+    人名用漢字も追加され、新字体がさらに増加。
+
+1983年　JIS C 6226改訂
+:   6877文字。
+    83JIS。
+    多くの字の構成要素が新字体風に変更された。
+    78JISか83ISかによって字体が違うことになった。
+
+1987年　JIS X 0208と改称
+:   （文字数変わらず？）
+
+1990年　JIS X 0208「情報交換用漢字符号」に改称
+:   6879文字。
+
+1997年　JIS X 0208「7ビット及び8ビットの2バイト情報交換用符号化漢字集合」に改称
+:   （文字数変わらず？）
+    JISコード (ISO-2022-JP)、シフトJIS (CP932)、EUC-JPが生まれた
+
+2000年　JIS X 0213「7ビット及び8ビットの2バイト情報交換用符号化**拡張**漢字集合」
+:   11223文字。
+    JIS X 0208を大幅に拡張した。
+    JIS2000。
+    表外漢字字体表の改訂。
+
+2004年　JIS X 0213改訂
+:   （文字数増えた？）
+    JIS2004。
+
+2010年　常用漢字表の改訂
+:   常用漢字だがシフトJISやEUC-JPで表現できない漢字が生まれてしまう。
+    Unicodeの利用に拍車がかかる。
+
+
+## OpenTypeフォント
+
+OpenTypeフォントは従来の**PostScript Type 1 形式**と
+**TrueType**形式を包含する新しいフォント形式です。
+
+フォント名に
+スタンダード（``Std``）はAdobe-Japan1-3（9354グリフ）対応を含み、
+プロ（``Pro``）はAdobe-Japan1-3（15444グリフ）対応や
+Adobe-Japan1-5（20316グリフ）対応したものです。
+プロ6（``Pr6N``）はAdobe-Japan1-6（23058グリフ）に対応です。
