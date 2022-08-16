@@ -20,6 +20,7 @@ python/python-usage
 pandas/pandas-usage
 altair/altair-usage
 gas/gas-usage
+webdev/webdev-usage
 vscode/vscode-usage
 emacs/emacs-usage
 ```
