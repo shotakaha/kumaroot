@@ -42,4 +42,5 @@ latex-geometry
 latex-graphicx
 latex-hyperref
 latex-inputenc
+latex-fancyhdr
 ```
