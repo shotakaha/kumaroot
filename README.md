@@ -36,6 +36,10 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 - ``make html``してウェブページを作成する
 - リモートサーバーに``rsync --delete -auvz``でアップロードする
 
+```bash
+poetry run bash deploy.sh
+```
+
 ## このドキュメントについて
 
 このドキュメントは
