@@ -22,6 +22,20 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 - Read the Docs : [HTML](https://kumaroot.readthedocs.org) / [PDF](https://kumaroot.readthedocs.io/_/downloads/ja/latest/pdf/)
 - KEKの個人ページ : [HTML](https://research.kek.jp/people/shotakah/kumaroot/html/) / PDF（準備中）
 
+### Read the Docsで公開する方法
+
+- Read the Docsににログインして[dashboard](https://readthedocs.org/dashboard/)を開く
+- プロジェクトの``KumaROOT``を選択
+- ``ビルド``タブを開く
+- ``ビルドバージョン:``をクリックする
+
+### 個人ページで公開する方法
+
+- ``make latexpdf``してPDFを作成する
+- 作成したPDFを``source/_static/``にコピーする
+- ``make html``してウェブページを作成する
+- リモートサーバーに``rsync --delete -auvz``でアップロードする
+
 ## このドキュメントについて
 
 このドキュメントは
