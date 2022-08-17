@@ -14,13 +14,13 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 
 想定している読者は、ちょっとだけROOTを使ったことがある学生／研究者です。
 パッケージやクラスの網羅的な説明は公式ドキュメントに任せ、
-ここでは「〇〇したい」という目的ベースで整理することで、
+こでは「〇〇したい」という目的ベースで整理することで、
 「逆引き辞典」として使えるものを目指したいと思います。
 
 ## 公開版
 
-- Read the Docs : [HTML](https://kumaroot.readthedocs.org) / [PDF](https://kumaroot.readthedocs.io/_/downloads/ja/latest/pdf/)
-- KEKの個人ページ : [HTML](https://research.kek.jp/people/shotakah/kumaroot/html/) / PDF（準備中）
+- Read the Docs : [HTML](https://kumaroot.readthedocs.org) / [PDF](https://readthedocs.org/projects/kumaroot/downloads/)
+- KEKの個人ページ : [HTML](https://research.kek.jp/people/shotakah/kumaroot/) / [PDF](https://research.kek.jp/people/shotakah/kumaroot/_static/kumaroot.pdf)
 
 ### Read the Docsで公開する方法
 
