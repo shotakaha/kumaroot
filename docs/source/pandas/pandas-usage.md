@@ -4,6 +4,7 @@
 pandas-install
 pandas-read_csv
 pandas-duplicated
+pandas-drop
 ```
 
 ## リファレンス
