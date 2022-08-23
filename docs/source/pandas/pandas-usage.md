@@ -7,6 +7,7 @@ pandas-duplicated
 pandas-drop
 pandas-renamei
 pandas-sort_values
+pandas-isna
 ```
 
 ## リファレンス
