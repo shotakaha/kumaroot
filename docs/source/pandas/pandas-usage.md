@@ -5,6 +5,8 @@ pandas-install
 pandas-read_csv
 pandas-duplicated
 pandas-drop
+pandas-renamei
+pandas-sort_values
 ```
 
 ## リファレンス
