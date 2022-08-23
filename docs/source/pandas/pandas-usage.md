@@ -8,11 +8,12 @@ pandas-install
 pandas-read_csv
 pandas-duplicated
 pandas-drop
-pandas-renamei
+pandas-rename
 pandas-sort_values
 pandas-isna
 pandas-to_datetime
 pandas-query
+pandas-unique
 ```
 
 ## リファレンス
