@@ -59,3 +59,7 @@ poetry config pypi-token.testpypi "TestPyPIのAPIトークン"
 ```
 
 ``PyPI``と``TestPyPI``に公開するには、あらかじめAPIトークンを発行し、設定しておく必要があります。
+
+## リファレンス
+
+- [poetryを使ってpythonパッケージを作成する - Zennのスクラップ](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)
