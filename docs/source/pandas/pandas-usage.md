@@ -8,6 +8,7 @@ pandas-drop
 pandas-renamei
 pandas-sort_values
 pandas-isna
+pandas-to_datetime
 ```
 
 ## リファレンス
