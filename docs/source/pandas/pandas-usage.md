@@ -2,6 +2,7 @@
 
 ```{toctree}
 pandas-install
+pandas-read_csv
 ```
 
 ## リファレンス
