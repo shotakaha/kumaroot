@@ -1,6 +1,9 @@
 # Pandasの使い方
 
 ```{toctree}
+---
+maxdepth: 1
+---
 pandas-install
 pandas-read_csv
 pandas-duplicated
