@@ -14,6 +14,7 @@ pandas-isna
 pandas-to_datetime
 pandas-query
 pandas-unique
+pandas-concat
 ```
 
 ## リファレンス
