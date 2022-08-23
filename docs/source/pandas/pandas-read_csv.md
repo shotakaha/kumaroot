@@ -20,9 +20,12 @@ pd.read_csv("ファイル名", encoding="shift_jis")  # シフトJIS
 pd.read_csv("ファイル名", encoding="utf-16")     # UTF-16
 ```
 
-エンコーディングを指定して読み込むことができます。
-WindowsのExcelで作成されたCSVの場合、シフトJISになっていることが多く、そのままでは文字化けしてしまいます。
-``utf_8``でも``utf-8``のどちらも使えます。
+読み込んだデータが文字化けしている場合はエンコーディングを指定する必要があります。
+``encoding``を使って[Pythonの標準的なエンコーディング名](https://docs.python.org/3/library/codecs.html#standard-encodings))を指定できます。
+``utf-8``と``utf_8``のように``-（ハイフン）``と``_（アンダースコア）``はエイリアスになっていて、どちらでも使えます。
+
+WindowsのExcelで作成されたCSVの場合、そのままでは文字化けすることが多いです。
+だいたいシフトJIS（``shift_jis``）sを指定すると解決します。
 
 ## 日付に変換したい
 
@@ -40,6 +43,16 @@ data = pd.read_csv("ファイル名")
 data["公開日"] = pd.to_datetime(data["公開日"])
 data["更新日"] = pd.to_datetime(data["更新日"])
 ```
+
+## コメント行をスキップしたい
+
+```python
+pd.read_csv("ファイル名", comment="1文字")  # コメント記号は1文字で指定
+pd.read_csv("ファイル名", comment="#")      # '#'がコメント記号
+```
+
+データの先頭にコメントが書かれていることがあります。
+コメント記号があれば、その記号を指定することでスキップできます。
 
 ## リファレンス
 
