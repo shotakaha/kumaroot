@@ -13,6 +13,7 @@ command-rsync
 command-sed
 command-ssh-keygen
 command-texdoc
+command-tig
 command-tldr
 command-tlmgr
 command-uname
