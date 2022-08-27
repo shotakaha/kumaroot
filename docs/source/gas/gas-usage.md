@@ -16,6 +16,8 @@ maxdepth: 1
 ---
 gas-variables.md
 gas-class.md
+gas-gsheet-usage.md
+gas-gmail-usage.md
 ```
 
 ## リファレンス
