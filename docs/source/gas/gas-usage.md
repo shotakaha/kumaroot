@@ -16,6 +16,7 @@ maxdepth: 1
 ---
 gas-variables.md
 gas-class.md
+gas-date.md
 gas-gsheet-usage.md
 gas-gmail-usage.md
 ```
