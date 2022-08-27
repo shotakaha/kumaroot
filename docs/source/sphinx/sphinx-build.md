@@ -44,17 +44,12 @@ $ open build/latex/KumaROOT.pdf
 
 ```{note}
 PDFを生成する場合、ビルドするパソコンでLaTeX環境を整えておく必要があります。
-詳しくは[](../latex/latex-usage.md)に整理することにします。
+詳しくは[](../latex/latex-usage.md)を参照してください。
 ```
 
 ## 例：KumaROOTをビルドする
 
 例として、この``KumaROOT``のドキュメントをビルドする方法を書いておきます。
-開発環境のセットアップに ``poetry`` を使っているので、あらかじめインストールが必要です。
-
-```bash
-$ pip3 install poetry
-```
 
 ```bash
 $ git clone https://github.com/shotakaha/kumaroot.git
@@ -64,4 +59,10 @@ $ poetry shell    # 開発環境の立ち上げ
 $ cd docs/
 $ make html       # HTMLの生成
 $ make latexpdf   # PDFの生成
+```
+
+```{note}
+開発環境のセットアップに ``poetry`` を使っています。
+あらかじめインストールが必要です。
+詳しくは[](../python/python-poetry.md)を参照してください。
 ```
