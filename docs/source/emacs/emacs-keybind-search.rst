@@ -34,5 +34,5 @@
    `migemoパッケージ <https://github.com/emacs-jp/migemo>`__
    を導入するとローマ字で日本語検索が可能になります。
 -  インストールと設定の詳細は
-   `るびきち「日刊Emacs」 <http://rubikitch.com/2014/08/20/migemo/>`__
+   `るびきち「日刊Emacs」 <http://emacs.rubikitch.com/migemo/>`__
    を参考にするとよいと思います。

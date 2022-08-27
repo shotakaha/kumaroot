@@ -62,4 +62,4 @@ RGBの度合いは自分の好みで選んでください。
 
 .. note::
 
-   `虹色カラーマップを使うこと - ROOT公式ブログ <http://root.cern.ch/drupal/content/rainbow-color-map>`__
+   `虹色カラーマップを使うこと - ROOT公式ブログ <https://root.cern/blog/rainbow-color-map/>`__

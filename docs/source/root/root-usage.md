@@ -40,7 +40,7 @@ root-emacs
 だいたい自分で試してみて使い方を理解したもの載せています。
 本当に詳しいことは下記の情報を自分で読んでみるのが一番だと思います。
 
-[ROOT公式マニュアル](http://root.cern.ch/drupal/content/users-guide)
+[ROOT公式マニュアル](https://root.cern/manual/)
 :   困ったらとりあえず読みましょう！
     [Basics](https://root.cern/manual/basics/) or [Functional parts](https://root.cern/manual/functional_parts/)から自分の目的に合ったドキュメントを探しましょう。
     とてーも長いので全部読もうとしてはいけません。
