@@ -7,17 +7,27 @@ $ cd docs
 $ make             # ヘルプを表示
 $ make html        # HTMLを生成
 $ make latexpdf    # PDFを生成
+$ make linkcheck   # リンクを確認
 ```
 
 ## ウェブページを生成する
 
 ウェブページを生成するときは``make html``を実行します。
 生成したファイルは ``build/html/`` 以下に出力されます。
+URLはいわゆる``UglyURL``の形式で生成されます。
 
 ```bash
 $ cd $KUMAROOT
 $ make html
 $ open build/html/index.html
+```
+
+``PrettyURL``にした場合は``dirhtml``ビルダーを使います。
+
+```bash
+$ cd $KUMAROOT
+$ make dirhtml
+$ open build/dirhtml/index.html
 ```
 
 ## PDFを生成する
