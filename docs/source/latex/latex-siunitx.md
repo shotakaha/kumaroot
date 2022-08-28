@@ -1,4 +1,4 @@
-# siunitx
+# 単位や物理量を表示したい（``siunitx``）
 
 ```latex
 \usepackage{siunitx}
