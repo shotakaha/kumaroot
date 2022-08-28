@@ -21,6 +21,7 @@ pandas/pandas-usage
 altair/altair-usage
 gas/gas-usage
 webdev/webdev-usage
+hugo/hugo-usage
 vscode/vscode-usage
 emacs/emacs-usage
 ```
