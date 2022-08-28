@@ -29,6 +29,7 @@ latex-fonts
 latex-usepackage
 latex-build
 latex-maketitle
+latex-linebreak
 latex-packages
 latex-ref
 ```
