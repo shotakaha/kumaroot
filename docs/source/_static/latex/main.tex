@@ -2,20 +2,22 @@
 \title{LualLaTeX + jlreq}
 \author{Shota}
 
-\usepackage{amsmath}
+\usepackage{hyperref}
 \usepackage{physics}
 \usepackage{siunitx}
 \AtBeginDocument{\RenewCommandCopy\qty\SI}
-
 \usepackage{hepnames}
 
 \begin{document}
+
+\tableofcontents
 
 \section{ドキュメントクラス}
 
 この文書はドキュメントクラスに\texttt{jlreq}を指定し、
 \texttt{LuaLaTeX}を使ってビルドしています。
 
+\include{packages/hyperref}
 \include{packages/siunitx}
 \include{packages/physics}
 \include{packages/hepnames}
