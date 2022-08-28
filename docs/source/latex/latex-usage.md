@@ -50,6 +50,7 @@ latex-linebreak
 latex-include
 latex-packages
 latex-ref
+latex-toc
 ```
 
 ## リファレンス
