@@ -4,8 +4,8 @@
 ---
 maxdepth: 1
 ---
-pandas-dataframe
 pandas-install
+pandas-dataframe
 pandas-read_csv
 pandas-duplicated
 pandas-drop
