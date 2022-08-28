@@ -48,10 +48,10 @@ latex-build
 latex-maketitle
 latex-linebreak
 latex-include
-latex-packages
 latex-ref
 latex-toc
 latex-index
+latex-packages
 ```
 
 ## リファレンス

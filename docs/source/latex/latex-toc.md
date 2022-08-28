@@ -1,4 +1,4 @@
-# 目次を作成したい
+# 目次を作成したい（``\tableofcontents``）
 
 ```latex
 \tableofcontents  % 目次（章・節など）
