@@ -1,31 +1,38 @@
-# 初心者にオススメのパッケージ？
+# A first set of LaTeX packages
 
-この前、[ZRさんのツイート](https://twitter.com/zr_tex8r/status/1557559175453872128)が流れてきたので、
-そこにリンクされていた
-[A first set of LaTeX packages](https://tug.org/TUGboat/tb41-2/tb128heff-packages.pdf)を斜め読みしてみました。
+[ZRさんのツイート](https://twitter.com/zr_tex8r/status/1557559175453872128)が流れてきたので、そこにリンクされていた[A first set of LaTeX packages](https://tug.org/TUGboat/tb41-2/tb128heff-packages.pdf)を斜め読みしてみました。
+
+## Abstract
+
+- 初心者がやりたいと考えていることのほとんどをカバーするパッケージの厳選リスト
+- それぞれの領域において有能で信頼できるパッケージの名前を挙げようとしています
 
 ## Overview
 
-- SNSを使って初心者が必要としているパッケージを調査した
-- TUG2019で報告した
+- TUG2019で報告した内容
+- SNSを使って初心者が必要としているパッケージを調査
+- 初心者が欲しいのは網羅的なリストではないと考え、2ページに収まるようにまとめた
+- 標準的なディストリビューションに入っているパッケージから選択している
 
 ## Every document
 
-- ページのサイズや余白、向きなどの設定は[geometry](https://ctan.org/pkg/geometry)
-- 数式をたくさん使う場合は**amsmath**と**amssymb**。定理環境を使う場合は**amsthm**も追加する。**amssymb**は**amsfonts**を読みこでくれる。**amsmath**のあとに**amsthm**を読み込む必要がある。**mathtools**を読み込んでもよい。
-- **microtype**パッケージで、見た目がちょっとよくなる。ほとんど見分けがつかないらしい。
+1. **geometry** : ページのサイズや余白、向きなどの設定
+1. **amsmath** / **amssymb** / **amsthm** / **mathtools** : 数式を多用する場合に必要
+1. **microtype** : 組版を微修正して見た目が（見分けがつかないレベル）よくなる
 
 ## Inside a document
 
-- リストをいじるために**enumitem**
-- キャプションには**caption**
-- ハイパーリンクには**hyperref**。相互参照をスマートにするには**cleveref**を追加する。
-- コードブロックには**listings** もしくは **minted**
-- スクリプトの実行結果を表示したい場合は、**pythontex**（Python）や**sagetex**（Sage）がある。他にもR、Haskell、Schemeに同様のパッケージがある。
-- テーブルレイアウトは**array**
-- 単位は**siunitx**
-- 色付きのボックス**mdframed**
-- テキストの自動生成は**lipsum**
+1. **enumitem** : リストをカスタマイズ
+2. **caption** : キャプションをカスタマイズ
+3. **float** : float環境をカスタマイズ
+4. **hyperref** : 参照をハイパーリンクにする
+5. **cleveref** : 相互参照をスマートにする（hyperrefの後に読み込む）
+6. **listings** / **minted** : コードブロックをきれいに表示
+7. **pythontex** / **sagetex** : スクリプトの実行結果を表示
+8. **array** : テーブルをカスタマイズ
+9. **siunitx** : 単位
+10. **mdframed** : 色付き／枠付きのボックス
+11. **lipsum** : サンプル文で埋めたいとき
 
 ## Graphics and color
 

@@ -51,7 +51,7 @@ latex-include
 latex-ref
 latex-toc
 latex-index
-latex-packages
+latex-primer
 ```
 
 ## リファレンス
