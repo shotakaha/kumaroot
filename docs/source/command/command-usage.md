@@ -4,6 +4,7 @@
 ---
 maxdepth: 1
 ---
+command-arp
 command-bash
 command-find
 command-grep
