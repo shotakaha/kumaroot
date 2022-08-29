@@ -32,16 +32,13 @@
 
 ```latex
 \hypersetup{colorlinks=true}
-\hypersetup{linkcolor=red}      % 内部リンクの色
-\hypersetup{citecolor=green}    % Color for bibliographical citations
-\hypersetup{filecolor=cyan}     % Color for URLs which open local files
-\hypersetup{menucolor=red}      % Color for Acrobat menu items
-\hypersetup{urlcolor=magenta}   % Color for linked URLs
-\hypersetup{allcolors=magenta}  % Set all color options
-\hypersetup{hidelinks=false}    % Hide links (removing color and border)
+\hypersetup{allcolors=blue}    % Set all color options
+\hypersetup{hidelinks=false}   % Hide links (removing color and border)
 ```
 
 デフォルトだとリンクは枠（``pdfborder``）で囲まれています。
+リンクの種類によって色も異なっています。
+``allcolors``を使ってすべて青色にしています。
 
 ## PDFのしおり（ブックマーク）を作成したい
 
