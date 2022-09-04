@@ -6,6 +6,7 @@ maxdepth: 1
 ---
 command-arp
 command-bash
+command-brew
 command-find
 command-grep
 command-nkf
