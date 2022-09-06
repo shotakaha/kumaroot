@@ -1,6 +1,6 @@
 # 基本設定（``git config``）
 
-[サルでも分かるGit入門 - Git設定](http://www.backlog.jp/git-guide/reference/config.html#sec1)を
+[サルでも分かるGit入門 - Git設定](https://backlog.com/ja/git-tutorial/reference/config/)を
 一度は読むことをオススメします。
 書いてあることが分からない場合はヘルプを見て確認するとよいです。
 

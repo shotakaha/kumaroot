@@ -31,7 +31,7 @@ git-semver
 ## 関連ドキュメント
 
 * [Git本家](https://git-scm.com)
-* [サルでもわかるGit入門](http://www.backlog.jp/git-guide/)
+* [サルでもわかるGit入門](https://backlog.com/ja/git-tutorial/)
 * [gitflow](https://github.com/nvie/gitflow)
-* [Vincent Driessen's Succesful Git Branching Model](http://nvie.com/posts/a-successful-git-branching-model/)
-* [Git Flow Cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/index.ja_JP.html)
+* [Vincent Driessen's Succesful Git Branching Model](https://nvie.com/posts/a-successful-git-branching-model/)
+* [Git Flow Cheatsheet](https://danielkummer.github.io/git-flow-cheatsheet/index.ja_JP.html)

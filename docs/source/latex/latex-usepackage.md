@@ -1,4 +1,4 @@
-# パッケージを読み込む（``usepackage``）
+# パッケージを読み込む（``\usepackage``）
 
 ```latex
 % プリアンブル
@@ -43,4 +43,5 @@ latex-graphicx
 latex-hyperref
 latex-inputenc
 latex-fancyhdr
+latex-siunitx
 ```

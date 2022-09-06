@@ -6,6 +6,23 @@
 
 [^bronto]: ヒント：ブロント語
 
+日本語でLaTeXするときのエンジンとドキュメントクラスのメインの組み合わせは以下の3通りがあります。
+個人的な感想を一緒に書いておきました。
+
+``LuaLaTeX + jlreq``
+:   新しくLaTeXに入門する場合は、ここからはじめればOKだと思います。
+    これから作成する文書はこれ一択でいいと思います。
+
+``LuaLaTeX + ltjsarticle``
+:   LaTeX経験者で、これまでの知識を活かしながらLuaLaTeXを使い方は、
+    この組み合わせがよいと思います。
+    過去のファイルを書き換えることはオススメしません。
+
+``upLaTeX + jsarticle``
+:   これまでに作成したLaTeX文書を再コンパイルする際に必要な組み合わせです。
+    また、ウェブの情報を読み解くときに知っておいたほう情報です。
+    ``fontenc``や``otf``など追加必須のパッケージが多数あります。
+
 LaTeXの基本的な事項については「LaTeX2e美文書作成入門（技術評論社）」を
 手に取ることをオススメします。
 ここにまとめていることも、そのソースのほとんどは美文書作成入門です。
@@ -29,8 +46,13 @@ latex-fonts
 latex-usepackage
 latex-build
 latex-maketitle
-latex-packages
+latex-linebreak
+latex-include
 latex-ref
+latex-toc
+latex-index
+latex-primer
+latex-packages
 ```
 
 ## リファレンス

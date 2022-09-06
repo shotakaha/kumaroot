@@ -4,7 +4,9 @@
 ---
 maxdepth: 1
 ---
+command-arp
 command-bash
+command-brew
 command-find
 command-grep
 command-nkf
@@ -13,6 +15,7 @@ command-rsync
 command-sed
 command-ssh-keygen
 command-texdoc
+command-tig
 command-tldr
 command-tlmgr
 command-uname

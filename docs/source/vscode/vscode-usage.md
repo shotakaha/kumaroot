@@ -3,4 +3,5 @@
 ```{toctree}
 vscode-install
 vscode-extensions
+vscode-terminal
 ```

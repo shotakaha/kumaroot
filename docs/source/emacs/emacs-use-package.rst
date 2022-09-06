@@ -23,5 +23,5 @@ use-packageの設定
 - `use-package - るびきち日刊Emacs <rubikitch_>`_
 
 .. _github: https://github.com/jwiegley/use-package
-.. _qiita: http://qiita.com/kai2nenobu/items/5dfae3767514584f5220
-.. _rubikitch: http://rubikitch.com/2014/09/09/use-package/
+.. _qiita: https://qiita.com/kai2nenobu/items/5dfae3767514584f5220
+.. _rubikitch: http://emacs.rubikitch.com/use-package-2/
