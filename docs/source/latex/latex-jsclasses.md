@@ -1,35 +1,51 @@
 # ``jsclasses``パッケージ
 
 ```latex
-\documentclass[dvipdfmx]{jsarticle}             % pLaTeX
-\documentclass[uplatex, dvipdfmx]{jsarticle}    % upLaTeX
 \documentclass{ltjsarticle}                     % LuaLaTeX
+\documentclass[uplatex, dvipdfmx]{jsarticle}    % upLaTeX
+\documentclass[dvipdfmx]{jsarticle}             % pLaTeX
 ```
 
 使用するLaTeXの種類によって、書き方を少し変える必要があります。
 
-``pLaTeX/upLaTeX``の場合は、これまでどおり``jsarticle``系（``jsclasses``）の
-ドキュメントクラスを利用すればよいです。
-LuaLaTeXの場合は、``jsarticle``と互換性の高い``ltjsarticle``という
-ドキュメントクラスが利用できます。
+``(u)pLaTeX``の場合は、これまでどおり``jsarticle``系（``jsclasses``）のドキュメントクラスを利用します。
+
+ドキュメントクラスのオプションには用紙サイズ（``[a4paper, papersize]``）、欧文フォントサイズ（``[12pt]``）、ドライバー（``[dvipdfmx]``）などを指定します。
+
+LuaLaTeXの場合は、``jsarticle``と互換性の高い``ltjsarticle``クラスが利用できます。
+``ltjsarticle``系ではドライバーの指定が不要です。
+
+## 用紙サイズを変更したい
 
 ```latex
-\documentclass[uplatex, a4paper, 12pt, papersize, dvipdfmx]{jsarticle}
-\documentclass[uplatex, a4paper, 12pt, papersize, dvipdfmx]{jsreport}
-\documentclass[uplatex, a4paper, 12pt, papersize, dvipdfmx]{jsbook}
+\documentclass[a4paper]{ltjsarticle}  % A4サイズ
+\documentclass[a5paper]{ltjsarticle}  % A5サイズ
+\documentclass[uplatex, b4paper, papersize]{jsarticle}  % B4サイズ
+\documentclass[uplatex, b5paper, papersize]{jsarticle}  % B5サイズ
 ```
 
-ドキュメントクラスのオプションには用紙サイズ（``[a4paper, papersize]``）、欧文フォントサイズ（``[12pt]``）、ドライバ（``[dvipdfmx]``）などを指定します。
+和文デフォルトは``a4paper``です。
+``jsarticle``系は、``papersize``オプションも一緒に指定して、ドライバー（``dvipdfmx``）にPDFのページサイズを教えてあげる必要があります。
 
-
-## バリエーション
+## フォントサイズを変更したい
 
 ```latex
-\documentclass{ltjsarticle}   % 論文・レポート用
-\documentclass{ltjsreport}    % レポート用
-\documentclass{ltjsbook}      % 書籍用
-\documentclass{ltjspf}        % 某学会誌用
-\documentclass{ltjskiyou}     % 某紀要用
+\documentclass[10pt]{ltjsarticle}  % 10pt（デフォルト）
+\documentclass[uplatex, 12pt]{jsarticle}  % 12pt
+```
+
+## 段組みしたい
+
+```latex
+\documentclass[twocolumn]{ltjsarticle}
+\documentclass[uplatex, twocolumn]{jsarticle}
+```
+
+## トンボを表示したい
+
+```latex
+\documentclass[tombow]{ltjsarticle}
+\documentclass[tombo]{ltjsarticle}
 ```
 
 ## リファレンス
