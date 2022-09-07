@@ -123,16 +123,15 @@ todo_include_todos = True
 
 latex_engine = "lualatex"
 latex_docclass = {
-    "howto": "jlreq",
-    "manual": "jlreq",
+    "howto": "ltjsarticle",
+    "manual": "ltjsreport",
 }
 # latex_toplevel_sectioning = "chapter"
 
 latex_elements = {
     "papersize": "a4paper",
-    #     'pointsize': '12pt',
-    #     'preamble': '',
-    #     'figure_align': 'htbp',
+    "pointsize": "12pt",
+    "extraclassoptions": "tombow",
     "polyglossia": "",
 }
 
