@@ -1,3 +1,128 @@
+## v1.2.0 (2022-09-07)
+
+### Fix
+
+- **python/**: 使い方を追加した
+- **latex/latex-jsclasses.md**: 修正した
+- **latex/latex-japanese.md**: 修正した
+- **latex/latex-japanese.md**: mdに変換した
+- **latex/latex-jsclasses.md**: 使い方を追加した
+- **latex/latex-jlreq.md**: 追加した
+- **python/python-pathlib.md**: 使い方を追加した
+- **python/python-pathlib.md**: 使い方を追加した
+- **hugo/hugo-install.md**: npm版Hugoを追記した
+- **latex/latex-hyperref.md**: 色の設定を修正した
+- **latex/latex-hyperref.md**: 設定を追加した
+- **latex/latex-siunitx.md**: タイトルを修正した
+- **latex/latex-primer.md**: 修正した
+- **latex/latex-usage.md**: タイトルを修正した
+- **pandas/pandas-usage.md**: 使い方の順番を変更した
+- **command/command-arp.md**: arpを修正した
+- **latex/latex-usage.md**: 組み合わせを追記した
+- **latex/latex-fonts.md**: フォント設定を修正した
+- **gas/gas-date.md**: Dateを追加した
+- **gas/gas-date.md**: 日付を追加した
+- **sphinx/sphinx-build.md**: 注釈を修正した
+- **linkcheck**: 本文中のリンクのリダイレクトを修正した
+- **sphinx/sphinx-build.md**: dirhtmlを追記した
+- **pandas/pandas-dataframe.md**: 修正した
+- **pandas/pandas-usage.md**: toctreeのmaxdepthを設定した
+- **python/python-poetry.md**: リファレンスを追記した
+- **python/python-poetry.md**: 追記した
+- **pandas/pandas-read_csv.md**: コメントのスキップを追加した
+- **pandas/pandas-read_csv.md**: 日付オブジェクトを追加した
+- **docs/deploy.sh**: PDFに変更があったときにコピーする
+- **latex/latex-yatex.md**: fixed typo
+- **latex/latex-yatex.md**: .mdに変換した
+- **index.md**: 整理した
+- **latex/latex-jsclasses.md**: 整理した
+- **command/command-usage.md**: 整理した
+- **command/command-pandoc.md**: 整理した
+- **command/command-texdoc.md**: 検索結果のサンプルを追加した
+- **docs/deploy.sh**: 修正した
+- **latex/latex-usepackage.md**: 整理した
+- **latex/latex-latexmk.md**: 整理した
+- **latex/latex-lualatex.md**: 整理した
+- **latex/latex-jlreq.md**: 修正した
+- **latex/latex-jlreq.md**: オプションを追加した
+- **latex/latex-physics.md**: 修正した
+- **latex/latex-fonts.md**: 整理した
+- **latex/latex-fonts.md**: 整理した
+- **latex/latex-usepackage.md**: 修正した
+- **latex/latex-jlreq.md**: 修正した
+- **latex/latex-plautopatch.md**: 説明を追加した
+- **vscode/vscode-extensions.md**: 修正した
+- **root/root-ttree-branch.md**: .mdに変換した
+- **root/root-ttree-readfile.md**: .mdに変換した
+- **root-ttree.md**: 整理した
+- **root/root-ttree.md**: .mdに変換した
+- **sphinx/sphinx-conf.md**: 整理した
+- **sphinx/sphinx-myst.md**: 整理した
+- **sphinx/sphinx-toctree.md**: MyST記法のサンプルを追加した
+- **sphinx/sphinx-hyperlink.md**: MyST記法のサンプルを追加した
+- **sphinx/sphinx-code-block.md**: MyST記法のサンプルを追加した
+- **sphinx/sphinx-toctree.md**: 追記した
+- **glossary.md**: .mdに変換した
+- **glossary.rst**: 項目を追加した
+
+### Feat
+
+- **conf.py**: ドキュメントクラスをltjsreportに変更した
+- **python/python-dataclass.md**: 追加した
+- **command/command-brew.md**: 追加した
+- **docs/source/_static/latex/main.tex**: hyperrefのサンプルを追加した
+- **docs/source/_static/latex/main.tex**: LaTeX文書のサンプルを追加した
+- **gas/gas-gsheet-open.md**: 追加した
+- **vscode/vscode-terminal.md**: 追加した
+- **latex/latex-hepparticles.md**: hepparticlesを追加した
+- **latex/latex-siunitx.md**: siunitxを追加した
+- **latex/latex-index.md**: 索引の使い方を追加した
+- **latex/latex-toc.md**: 目次の使い方を追加した
+- **hugo/hugo-usage.md**: Hugoの使い方を追加した
+- **command/command-arp.md**: arpを追加した
+- **latex/latex-include.md**: 分割ファイルを読み込む方法を追加した
+- **latex/latex-linebreak.md**: 改行・改ページを追加した
+- **gas/gas-usage.md**: Gmailとスプレッドシートの使い方を追加する
+- **command/command-tig.md**: 追加した
+- **pandas/pandas-dataframe.md**: 追加した
+- **pandas/pandas-concat.md**: 追加した
+- **pandas/pandas-unique.md**: 追加した
+- **docs/source/pandas/pandas-query.md**: 追加した
+- **pandas/pandas-to_datetime.md**: 追加した
+- **pandas/pandas-isna.md**: 追加した
+- **pandas/pandas-sort_values.md**: 追加した
+- **pandas/pandas-rename.md**: 追加した
+- **pandas/pandas-drop.md**: 追加した
+- **pandas/pandas-duplicated.md**: 追加した
+- **docs/source/pandas/pandas-read_csv.md**: pandas.read_csvを追加した
+- **webdev/webdev-usage.md**: 追加した
+- **latex/latex-fancyhdr.md**: 追加した
+- **latex/latex-build.md**: 追加した
+- **latex/latex-uplatex.md**: 追加した
+- **latex/latex-inputenc.md**: 追加した
+- **latex/latex-hyperref.md**: 追加した
+- **latex-graphicx.md**: 追加した
+- **latex/latex-geometry.md**: 追加した
+- **latex/latex-layout.md**: 追加した
+- **latex/latex-usepackage.md**: 再編した
+- **latex/latex-luatexja-preset.md**: 追加した
+- **latex/latex-otf.md**: 追加した
+- **latex/latex-lmodern.md**: 追加した
+- **latex/latex-fontenc.md**: 追加した
+- **latex/latex-fontspec.md**: 追加した
+- **latex/latex-microtype.md**: 追加した
+- **latex/latex-fonts.md**: 追加した
+- **command/command-nkf.md**: 追加した
+- **gas/gas-variables.md**: 追加した
+- **gas/gas-class.md**: 追加した
+- **gas/gas-usage.md**: 追加した
+- **latex/latex-packages.md**: 追加した
+- **vscode/vscode-extensions.md**: 追加した
+
+### Refactor
+
+- renamed to docs/fig/ -> docs/backups/
+
 ## v1.1.0 (2022-08-15)
 
 ### Fix

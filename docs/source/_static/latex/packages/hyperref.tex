@@ -1,5 +1,22 @@
 \section{hyperrefパッケージ}
 
-目次などにハイパーリンクを挿入するパッケージです。
-\texttt{(u)pLaTeX}を使っている場合、\texttt{pxjahyper}パッケージも追加します。
-\texttt{LuaLaTeX}を使っている場合は不要です（むしろ、怒られます）。
+目次などにハイパーリンクを挿入するパッケージ。
+読み込むパッケージの中で一番最後に記述する。
+
+\texttt{(u)pLaTeX}を使っている場合、\texttt{pxjahyper}パッケージも追加する必要がある。
+\texttt{LuaLaTeX}を使っている場合、\texttt{pxjahyper}パッケージは不要。
+
+\subsection{しおりを作成}
+
+目次のしおり（ブックマーク）は自動で作成されるようになっている。
+LuaLaTeXを使っていると、しおりのタイトルは文字化けしない。
+デフォルトだと赤枠で囲われるようになっているので、落ち着いた色に変更する。
+
+\subsection{PDF作成者の情報}
+
+PDF作成者の情報を追加できる。
+\texttt{Preview}は\texttt{Tools -> Show Inspector}、
+\texttt{Adobe Acrobat}は\texttt{File -> Properties}で確認できる。
+
+デフォルトだと\texttt{Title}や\texttt{Author}などが空欄になっている。
+それぞれ\texttt{pdftitle}と\texttt{pdfauthor}で設定できる。
