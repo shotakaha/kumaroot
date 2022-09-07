@@ -1,16 +1,16 @@
-# jlreq
+# ``jlreq``クラス
+
+```latex
+\documentclass{jlreq}  % articleに相当
+\documentclass[report]{jlreq}  % reportに相当
+\documentclass[book]{jlreq}  % bookに相当
+```
 
 ``jlreq``はLuaLaTeX、(u)pLaTeXに対応しているドキュメントクラスです。
 これから新しく文書を作成する場合は、迷わず使うとよいと思います。
 
 JLReqはW3Cワーキンググループで議論されている「[日本語組版処理の要件](https://www.w3.org/TR/jlreq/)」です。
 ``jlreq``パッケージはこの要件の実装を試みたクラスファイルです。
-
-```latex
-\documentclass{jlreq}  % articleに相当
-\documentclass[report]{jlreq}  % reportに相当
-\documentclass[book]{jlreq}  % bookに相当
- ```
 
 ## 用紙のサイズを指定したい
 
