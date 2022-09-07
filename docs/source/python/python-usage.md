@@ -9,6 +9,7 @@ maxdepth: 1
 ---
 python-install
 python-pathlib
+python-dataclass
 python-altair
 python-loguru
 python-pandas
