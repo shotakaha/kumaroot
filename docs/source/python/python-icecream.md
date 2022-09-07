@@ -4,6 +4,8 @@
 pip3 install icecream
 ```
 
+## 使い方
+
 ```python
 from icecream ic
 ```

@@ -8,5 +8,13 @@ pip3 install altair
 brew install chromedriver
 ```
 
-- https://pypi.org/project/altair/
-- https://altair-viz.github.io/
+## 使い方
+
+```python
+import altair as alt
+```
+
+## リファレンス
+
+- [Altair - PyPI](https://pypi.org/project/altair/)
+- [Altair](https://altair-viz.github.io/)
