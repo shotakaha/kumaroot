@@ -59,3 +59,16 @@ $ which ptex2pdf
 
 $ less /Library/TeX/texbin/ptex2pdf
 ```
+
+## TeXのディストリビューション
+
+- (1978) TeX
+- (1984) LaTeX
+- (1990) pTeX -> pLaTeX
+- (1993) LaTeX2e
+- (1997) pdfTeX
+- (2004) XeTeX
+- (2007) LuaTeX
+- (2007) upTeX -> TeX Live 2012
+- (2008) e-pTeX -> TeX Live 2011
+- (2011) ConTeXt
