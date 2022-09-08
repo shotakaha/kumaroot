@@ -1,0 +1,34 @@
+\section{minted}
+
+文書内にコードサンプルを表示したいときの環境です。
+コンパイルする際には\texttt{-shell-escape}オプションが必要です。
+（\mintinline{shell}{$ latexmk -pvc -shell-escape}）
+
+\subsection{Pythonのサンプル}
+
+\begin{minted}[linenos=true,showspaces]{python}
+from dataclasses import dataclass
+from pathlib import Path
+
+@dataclass
+class Config:
+    path
+
+    def __post_init__(self):
+        self.path = Path(self.path)
+
+if __name__ == "__main__":
+    c = Config("config.toml")
+
+\end{minted}
+
+
+\subsection{LaTeXのサンプル}
+
+\begin{minted}{latex}
+\documentclass{jlreq}
+\usepackage{minted}
+\begin{document}
+
+\end{document}
+\end{minted}
