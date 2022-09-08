@@ -57,26 +57,43 @@ Latexmk, John Collins, 17 Mar. 2022. Version 4.77
 latexmk -outdir="out"
 ```
 
-## 中間ファイルを別ディレクトリに作成したい
-
-```bash
-latexmk -auxdir="aux"
-```
-
-- ``latexmk -c``するときには``-auxdir="aux"``が必要です
-- もちろん{command}`rm -r aux/`でも削除できます
-
-
 ## 中間ファイルを削除したい
 
 ```bash
 $ latexmk -c
-$ latexmk -C
+$ latexmk -C  # 中間ファイルをすべて削除する
 ```
 
-- 中間ファイルには``.aux`` / ``.fdb_latexmk`` / ``.fls`` / ``.log`` / ``.out``などの拡張子があります。
-- {command}`-c`オプションで``dvi`` / ``ps`` / ``pdf`` 以外の中間ファイルが削除できます
-- {command}`-C`オプションですべての中間ファイルが削除できます
+コンパイルすると``.aux`` / ``.fdb_latexmk`` / ``.fls`` / ``.log`` / ``.out``などの拡張子の中間ファイルが作成されます。
+{command}`-c`オプションで``dvi`` / ``ps`` / ``pdf`` 以外の中間ファイルを削除できます。
+{command}`-C`オプションですべての中間ファイルを削除できます。
+
+## 中間ファイルを別ディレクトリに作成したい
+
+```bash
+$ latexmk -auxdir="aux"
+$ latexmk -c -auxdir="aux"  # 中間ファイルを削除する
+```
+
+中間ファイルは、別のディレクトリに作成できます。
+中間ファイルを削除する場合も、{command}`-auxdir="aux"`が必要です。
+もちろん{command}`rm -r aux/`で直接削除できます。
+
+
+
+## 設定ファイルを変更したい
+
+```bash
+$ latexmk -r latexmkjarc
+```
+
+設定ファイルの名前を{file}`latexmkrc`から変更できます。
+
+## エラーを無視したい
+
+```bash
+$ latexmk -f -interaction=nonstopmode
+```
 
 ## リファレンス
 
