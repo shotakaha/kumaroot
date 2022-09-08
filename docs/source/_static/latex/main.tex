@@ -1,7 +1,4 @@
 \documentclass{jlreq}
-\title{LualLaTeX + jlreq}
-\author{Shota}
-
 
 \usepackage{physics}
 \usepackage{siunitx}
@@ -15,15 +12,20 @@
 \hypersetup{pdftitle=日本語でLuaLaTeX}
 \hypersetup{pdfauthor=Kuma Noteの ノート}
 
+\title{LuaLaTeX + jlreq}
+\author{Quma}
+\date{\today}
+
 \begin{document}
 
-\tableofcontents
+\maketitle
 
-\section{ドキュメントクラス}
-
+\begin{abstract}
 この文書はドキュメントクラスに\texttt{jlreq}を指定し、
 \texttt{LuaLaTeX}を使ってビルドしています。
+\end{abstract}
 
+\tableofcontents
 
 
 \include{packages/latexmk}

@@ -1,12 +1,33 @@
 \section{physicsパッケージ}
 
 物理や数学で使用する記号のを簡単に入力できるパッケージです。
-微分記号dは自動で\texttt{mathrm}してくれます。
-また偏微分記号や行列も読む通りに入力することができます。
+微分記号の\texttt{d}を自動で\texttt{mathrm}したり、
+偏微分記号や行列も（だいたい）読む通りに入力できます。
+
+\subsection{微分}
 
 \begin{align}
     \mathrm{d}x, \mathrm{d}^{2}x, \mathrm{d}^{3}x, \cdots, \mathrm{d}^{n}x\\
     \dd{x}, \dd[2]{x}, \dd[3]{x}, \cdots, \dd[n]{x}
 \end{align}
 
-\subsection{行列}
+\subsection{ベクトル}
+
+ベクトルの書き方もいろいろありますが、簡単なコマンドが用意されています。
+$\vb{a}$のように太字で書いたり、
+$\va{a}$のように矢印で書いたり、
+$\vu{\theta}$のように単位ベクトルで書いたりできます。
+
+内積（dot product）$\vb{a} \dotproduct \vb{b}$や
+外積（cross product）$\vb{a} \crossproduct \vb{b}$もあります。
+
+グラディエント$\grad$、
+発散（ダイバージェンス）$\div$、
+回転（ローテーション）$\curl$のコマンドもあります。
+
+\begin{align}
+    \div \vb{B}(t,\vb{x}) & = 0\\
+    \curl \vb{E}(t,\vb{x}) & = - \pdv{\vb{B}(t,\vb{x})}{t}\\
+    \div \vb{D} & = \rho(t,\vb{x})\\
+    \curl \vb{H}(t,\vb{x}) & = \vb{j}(t,\vb{x}) + \pdv{\vb{D}(t,\vb{x})}{t}
+\end{align}
