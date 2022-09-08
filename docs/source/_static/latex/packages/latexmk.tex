@@ -1,0 +1,40 @@
+\section{latexmkrc}
+
+\texttt{latexmk}はLaTeX版Makefileです。
+\texttt{latexmkrc}に設定を記述しておけば、LaTeXエンジンによらず``latexmk``でコンパイルできます。
+
+今回は\texttt{LuaLaTeX}を使いたいので
+\texttt{latexmkrc}に\texttt{\$pdf\_mode = 4;}と記述しておきます。
+
+\subsection{コンパイルするファイルを指定したい}
+
+\texttt{latexmk ファイル名}でファイル名を指定できる。
+拡張子（\texttt{.tex}）はつけても、つけなくてもよい。
+ファイル名を指定しない場合は、ディレクトリ内にあるTeXファイルが対象となる。
+
+\texttt{latexmkrc}の\texttt{@default\_files}でファイルを指定することができる。
+
+\subsection{ライブプレビューしたい}
+
+文書に変更を加えたときに、自動でコンパイルするには
+\texttt{-pvc (preview continuously)}オプションを使います。
+
+\subsection{オプションを有効／無効にしたい}
+
+\texttt{latexmk}のオプションには有効／無効がセットになっているものがあります。
+たいていの場合\texttt{-オプション名}で有効、
+\texttt{-オプション名-}で無効にできます。
+
+たとえば\texttt{-pdf}はPDFを生成し、\texttt{-pdf-}でPDF生成をOFFにできます。
+
+\subsection{Read the Docsのコンパイルオプション}
+
+\begin{description}
+    \item[\texttt{-r latexmkjarc}] 設定ファイルに\texttt{latexmkjarc}を設定
+    \item[\texttt{-pdfdvi}] DVIファイルからPDFを生成する
+    \item[\texttt{-f}] エラーが出ても続行する
+    \item[\texttt{-dvi-}] DVIを生成しない
+    \item[\texttt{-ps-}] PostScriptを生成しない
+    \item[\texttt{-jobname=kumaroot}] 出力ファイルのベースネームを設定
+    \item[\texttt{-interaction=nonstopmode}] ユーザー入力をスキップ
+\end{description}
