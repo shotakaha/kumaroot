@@ -1,4 +1,4 @@
-# otf
+# フォントを設定したい（``otf``）
 
 ```latex
 \usepackage{otf}

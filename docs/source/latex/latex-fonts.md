@@ -1,4 +1,29 @@
-# フォントを設定する
+# フォントを設定したい（``fontspec``）
+
+LuaLaTeXやXeLaTeXなどのモダンLaTeXでは、フォントを自由に変更できるようになりました。
+逆に(u)pLaTeXで変更するのはなかなか大変なので、考えないことをオススメします。
+
+## LuaLaTeXの場合
+
+```latex
+\usepackage{latexja-fontspec}
+
+% 欧文フォントの設定
+\setmainfont{ReggaeOne-Regular}
+\setsansfont{ReggaeOne-Regular}
+\setmonofont{PixelMPlus10-Regular}
+
+% 和文フォントの設定
+\setmainjfont{ReggaeOne-Regular}
+\setsansjfont{ReggaeOne-Regular}
+\setmonojfont{PixelMPlus10-Regular}
+```
+
+```{toctree}
+latex-fontspec
+```
+
+## (u)pLaTeXの場合
 
 ```latex
 % プリアンブル
@@ -8,8 +33,18 @@
 \usepackage[deluxe, uplatex, jis2004]{otf}
 ```
 
-ドキュメントクラスに``jsarticle``系や``beamer``を使う場合は、フォントのエンコーディング（文字マッピング）を``T1``に再設定します。
+ドキュメントクラスに``jsarticle``系や``beamer``を使う場合は、
+フォントのエンコーディング（文字マッピング）を``T1``に再設定しておきます。
 ``jlreq``を使う場合、この設定は必要ありません。
+
+また、(u)pLaTeXの場合、フォント一式を変更するのはめんどくさいです。
+TeX Live 2020以降は和文デフォルトが原ノ味フォントになっているため、
+わざわざ変更する必要はありません。
+
+```{toctree}
+latex-fontenc
+latex-otf
+```
 
 以下では、LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第13章（和文フォント）を読んで、
 自分なりに理解した要素をまとめてみました。

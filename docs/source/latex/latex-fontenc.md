@@ -1,4 +1,4 @@
-# fontenc
+# フォントを設定したい（``fontenc``）
 
 ```latex
 % プリアンブル
