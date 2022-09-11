@@ -14,6 +14,7 @@ command-grep
 command-ls
 command-nkf
 command-pandoc
+command-ps
 command-pwd
 command-rsync
 command-sed
