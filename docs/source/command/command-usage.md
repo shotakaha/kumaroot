@@ -9,6 +9,7 @@ command-bash
 command-brew
 command-find
 command-grep
+command-ls
 command-nkf
 command-pandoc
 command-rsync
