@@ -7,6 +7,7 @@ maxdepth: 1
 command-arp
 command-bash
 command-brew
+command-cd
 command-find
 command-grep
 command-ls
