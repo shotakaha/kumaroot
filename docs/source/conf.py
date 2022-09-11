@@ -123,8 +123,8 @@ todo_include_todos = True
 
 latex_engine = "lualatex"
 latex_docclass = {
-    "howto": "ltjsarticle",
-    "manual": "ltjsreport",
+    "howto": "ltjsreport",
+    "manual": "ltjsbook",
 }
 # latex_toplevel_sectioning = "chapter"
 
