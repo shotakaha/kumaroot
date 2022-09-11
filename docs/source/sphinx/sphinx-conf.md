@@ -27,35 +27,7 @@ version = '0.5.0'
 release = '0.5.0'
 ```
 
-## 拡張機能の設定
 
-```python
-# -- General configuration ---------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-
-extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',
-    'myst_parser',
-]
-
-templates_path = ['_templates']
-exclude_patterns = []
-language = 'ja'
-root_doc = "index"
-```
-
-（テーマを含む）拡張機能の設定は、それぞれのドキュメントを参照して、必要な設定を追加します。
-
-- [sphinx_rtd_themeの設定](https://sphinx-rtd-theme.readthedocs.io/en/stable/installing.html)
-- [myst_parserの設定](https://myst-parser.readthedocs.io/en/latest/intro.html)
 
 ## 図表番号の表示設定
 

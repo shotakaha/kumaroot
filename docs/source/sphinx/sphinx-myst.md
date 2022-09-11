@@ -1,4 +1,4 @@
-# Markdownを使いたい
+# Markdownを使いたい（``myst_parser``）
 
 [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest/intro.html)の拡張パッケージを追加すると、
 ``Markdown``記法でドキュメントを書き進めることができます。

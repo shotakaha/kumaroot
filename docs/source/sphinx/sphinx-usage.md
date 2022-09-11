@@ -18,8 +18,8 @@ sphinx-install
 sphinx-quickstart
 sphinx-build
 sphinx-conf
+sphinx-extensions
 sphinx-theme
-sphinx-myst
 sphinx-toctree
 sphinx-code-block
 sphinx-hyperlink
