@@ -49,13 +49,13 @@ latex-include
 latex-ref
 latex-toc
 latex-index
+latex-amsmath
 latex-fancyhdr
 latex-microtype
 latex-physics
 latex-siunitx
 latex-hepparticles
 latex-primer
-latex-packages
 latex-japanese
 latex-ide
 ```
