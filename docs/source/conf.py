@@ -131,7 +131,7 @@ latex_docclass = {
 latex_elements = {
     "papersize": "a4paper",
     "pointsize": "12pt",
-    "extraclassoptions": "tombow",
+    # "extraclassoptions": "tombow",
     "polyglossia": "",
 }
 
