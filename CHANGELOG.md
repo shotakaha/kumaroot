@@ -1,3 +1,38 @@
+## v1.3.0 (2022-09-11)
+
+### Feat
+
+- **command/command-ps.md**: psを追記した
+- **command/command-which.md**: whichを追加した
+- **command/command-chmod.md**: chmodを追加した
+- **command/command-pwd.md**: pwdを追加した
+- **command/command-cd.md**: cdを追加した
+- **command/command-ls.md**: lsを追加した
+
+### Fix
+
+- **command/command-grep.md**: grepを追記した
+- **root5-root6.md**: mdに変換した
+- **sphinx/sphinx-make.md**: linkcheckを追加した
+- **docs/source/conf.py**: footskipの高さを調節した
+- **latex/latex-usage.md**: 修正した
+- **sphinx/sphinx-latex-lualatex.md**: 設定を追加した
+- **latex/latex-ide.md**: 整理した
+- **sphinx/sphinx-latex-docclass.md**: いろいろ修正した
+- **sphinx/sphinx-latex.md**: LaTeXの設定を整理した
+- **sphinx/sphinx-extensions.md**: 拡張機能の設定を移動した
+- **sphinx/sphinx-quickstart.md**: いろいろ書き換えた
+- **sphinx/sphinx-html.md**: 削除した
+- **sphinx/sphinx-theme.md**: タイトルを変更した
+- **python/python-loguru.md**: 修正した
+- **python/python-loguru.md**: 追記した
+- **docs/source/_static/latex/packages/minted.tex**: mintedを追加した
+- **docs/source/_static/latex/main.tex**: パッケージを追加した
+- **docs/source/_static/latex/packages/physics.tex**: サンプルを追加した
+- **_static/latex/packages/latexmk.tex**: latexmkのサンプルを追加した
+- **latex/latex-japanese.md**: TeXディストリビューションを追加した
+- **latex/latex-latexmk.md**: 追加した
+
 ## v1.2.0 (2022-09-07)
 
 ### Fix
