@@ -2,7 +2,14 @@
 
 ```latex
 \usepackage{amsmath, amssymb}
+\usepackage{mathtools, amssymb}
 ```
+
+数式を表示する場合は``amsmath``パッケージを使います。
+``mathtools``パッケージは``amsmath``の不具合を修正した拡張したパッケージです。
+ヘビーに使わないのであれば、どちらを使ってもよいと思います。
+
+``amssymb``は数式用フォント（AMSFonts）を読み込むために必要です。
 
 ## 数式を本文中で使いたい（``$...$``）
 
