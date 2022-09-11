@@ -15,11 +15,14 @@ $ make dirhtml
 $ make singlehtml
 ```
 
+HTMLを生成するには、テーマの設定が必要です。
+デフォルトは``alabaster``に設定されています。
+僕は``sphinx_rtd_theme``をよく使っています。
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
-sphinx-html
 sphinx-html-rtd
 sphinx-html-bootstrap
 ```
