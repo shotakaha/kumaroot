@@ -1,15 +1,16 @@
 ## v1.3.0 (2022-09-11)
 
-### Feat
+### Added
 
-- **command/command-ps.md**: psを追記した
-- **command/command-which.md**: whichを追加した
-- **command/command-chmod.md**: chmodを追加した
-- **command/command-pwd.md**: pwdを追加した
-- **command/command-cd.md**: cdを追加した
-- **command/command-ls.md**: lsを追加した
+- **command/**: よく使うコマンドを追加した
+  - cd
+  - chmod
+  - ls
+  - ps
+  - pwd
+  - which
 
-### Fix
+### Fixed
 
 - **command/command-grep.md**: grepを追記した
 - **root5-root6.md**: mdに変換した
