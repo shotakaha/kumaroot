@@ -1,0 +1,32 @@
+\section{fancyhdrパッケージ}
+
+\pagestyle{fancy}
+\lhead{ヘッダー・左（チャプター名）}
+\chead{ヘッダー・中央}
+\rhead{ヘッダー・右（タイトル）}
+\lfoot{フッター・左}
+\cfoot{-\, \thepage \, -}
+\rfoot{フッター・右}
+
+文書のヘッダー／フッターをいい感じにデコレーションするパッケージです。
+読み込む順番に気をつける必要があるみたいです。
+
+すべてのページに適用する場合は、プリアンブルで
+\mintinline{latex}{\pagestyle{fancy}}し,
+現在のページ（\mintinline{latex}{\newpage}でリセット）のみに適用する場合は、
+\mintinline{latex}{\thispagestyle(fancy)}
+します。
+
+ページのスタイルとして、全部で6ヶ所のヘッダー／フッターを設定できます。
+
+\begin{minted}{latex}
+    \thispagestyle{fancy}
+    \lhead{ヘッダー・左}
+    \chead{ヘッダー・中央}
+    \rhead{ヘッダー・右}
+    \lfoot{フッター・左}
+    \cfoot{フッター・中央}
+    \rfoot{フッター・右}
+\end{minted}
+
+ほげ
