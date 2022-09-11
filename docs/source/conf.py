@@ -124,7 +124,7 @@ todo_include_todos = True
 latex_engine = "lualatex"
 latex_docclass = {
     "howto": "ltjsreport",
-    "manual": "ltjsbook",
+    "manual": "ltjsreport",
 }
 # latex_toplevel_sectioning = "chapter"
 
@@ -132,9 +132,11 @@ latex_elements = {
     "papersize": "a4paper",
     "pointsize": "12pt",
     # "extraclassoptions": "tombow",
+    "preamble": "",
     "polyglossia": "",
 }
 
+latex_elements["preamble"] += "\\setlength{\\footskip}{3\\zw}"
 # latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
 # latex_elements['preamble'] += '\\usepackage{graphics}\n'
 # latex_elements['preamble'] += '\\hypersetup{bookmarksnumbered=true}\n'
