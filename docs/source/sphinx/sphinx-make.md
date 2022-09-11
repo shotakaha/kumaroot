@@ -3,7 +3,7 @@
 ドキュメントの生成には{command}`make`コマンドを使います。
 
 ```bash
-$ cd docs
+$ cd $MyPROJECT/docs/
 $ make             # ヘルプを表示
 $ make html        # HTMLを生成
 $ make latexpdf    # PDFを生成
@@ -17,7 +17,7 @@ $ make linkcheck   # リンクを確認
 URLはいわゆる``UglyURL``の形式で生成されます。
 
 ```bash
-$ cd $KUMAROOT
+$ cd $MyPROJECT/docs/
 $ make html
 $ open build/html/index.html
 ```
@@ -25,7 +25,7 @@ $ open build/html/index.html
 ``PrettyURL``にした場合は{command}``make dirhtml``を使います。
 
 ```bash
-$ cd $KUMAROOT
+$ cd $MyPROJECT/docs/
 $ make dirhtml
 $ open build/dirhtml/index.html
 ```
@@ -46,6 +46,17 @@ $ open build/latex/KumaROOT.pdf
 PDFを生成する場合、ビルドするパソコンでLaTeX環境を整えておく必要があります。
 詳しくは[](../latex/latex-usage.md)を参照してください。
 ```
+
+## リンクを確認したい（``make linkcheck``）
+
+```bash
+$ cd $MyPROJECT/docs/
+$ make linkcheck
+```
+
+ドキュメント内にある外部リンクが有効かどうかを確認できます。
+リンクにアクセスできない場合は、``broken``と表示され、エラーコード（``404``や``500``が表示されます。
+またリダイレクトされている場合はリダイレクト先のURLが表示されます。
 
 ## 例：KumaROOTをビルドする
 

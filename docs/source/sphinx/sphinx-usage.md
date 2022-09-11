@@ -16,7 +16,7 @@ maxdepth: 1
 ---
 sphinx-install
 sphinx-quickstart
-sphinx-build
+sphinx-make
 sphinx-conf
 sphinx-extensions
 sphinx-theme
