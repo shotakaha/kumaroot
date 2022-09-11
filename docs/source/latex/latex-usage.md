@@ -42,8 +42,8 @@ latex-japanese
 latex-ide
 latex-document
 latex-documentclass
-latex-fonts
 latex-usepackage
+latex-fonts
 latex-build
 latex-maketitle
 latex-linebreak
