@@ -13,6 +13,7 @@ command-grep
 command-ls
 command-nkf
 command-pandoc
+command-pwd
 command-rsync
 command-sed
 command-ssh-keygen
