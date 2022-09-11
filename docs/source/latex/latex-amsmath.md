@@ -38,4 +38,12 @@ z_{2} & = cx + dy
 
 ## ベクトルや行列を表示したい
 
-[physicsパッケージ](./latex-physics.md)を使うべきです。
+```latex
+\Hat{A}
+\Bar{A}
+\Vec{A}
+\dot{x}
+\ddot{x}
+```
+
+[physicsパッケージ](./latex-physics.md)も参照すべきです。
