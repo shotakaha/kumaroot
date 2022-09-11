@@ -1,6 +1,6 @@
 ## v1.3.1 (2022-09-11)
 
-### Fix
+### Fixed
 
 - **latex/latex-amsmath.md**: 数式記号を追加した
 - **latex/latex-amsmath.md**: mathtoolsを追記した
