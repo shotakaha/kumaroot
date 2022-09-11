@@ -23,5 +23,6 @@ command-tig
 command-tldr
 command-tlmgr
 command-uname
+command-which
 command-xargs
 ```
