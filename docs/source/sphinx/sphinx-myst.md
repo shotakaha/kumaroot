@@ -1,9 +1,9 @@
 # Markdownを使いたい（``myst_parser``）
 
 [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest/intro.html)の拡張パッケージを追加すると、
-``Markdown``記法でドキュメントを書き進めることができます。
+``Markdown``記法でドキュメントを記述できます。
 
-すでに``Markdown``記法に慣れている場合は、迷わずこの拡張を追加しておきましょう。
+すでに``Markdown``記法に慣れている場合は、迷わずこの拡張を追加しましょう。
 
 ## インストール
 
@@ -46,7 +46,7 @@ myst_enable_extensions = [
 ```
 
 ```{note}
-``linkfy``は別途モジュールが必要そうなエラーがでたため、
+``linkfy``は別途モジュールが必要なエラーがでたため、
 とりあえずコメントアウトしました
 ```
 
