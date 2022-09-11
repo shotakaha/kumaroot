@@ -1,4 +1,4 @@
-# ``jsclasses``パッケージ
+# ``jsclasses``クラス
 
 ```latex
 \documentclass{ltjsarticle}                     % LuaLaTeX

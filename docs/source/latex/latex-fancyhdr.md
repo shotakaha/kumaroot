@@ -1,4 +1,4 @@
-# fancyhdr
+# ヘッダー／フッターを設定したい（``fancyhdr``）
 
 ```latex
 \usepackage[オプション]{fancyhdr}
