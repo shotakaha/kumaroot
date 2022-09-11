@@ -1,4 +1,4 @@
-# 各種ビルダーを設定する
+# 各種ビルダーを設定したい
 
 ```bash
 $ make help
@@ -47,6 +47,18 @@ $ make latexpdfja
 maxdepth: 1
 ---
 sphinx-latex
+sphinx-latex-engine
+sphinx-latex-docclass
+sphinx-latex-elements
+sphinx-latex-preamble
+sphinx-latex-section
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 設定例
+---
 sphinx-latex-lualatex
 sphinx-latex-uplatex
 ```
