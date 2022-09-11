@@ -1,4 +1,4 @@
-# microtype
+# マイクロタイポグラフィしたい（``microtype``）
 
 ```latex
 % プリアンブル

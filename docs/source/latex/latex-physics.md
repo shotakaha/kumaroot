@@ -1,4 +1,4 @@
-# physics
+# 物理の計算をまとめたい（``physics``）
 
 ```latex
 \usepackage{physics}

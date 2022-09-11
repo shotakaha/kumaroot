@@ -28,9 +28,6 @@
 ---
 maxdepth: 1
 ---
-latex-jlreq
-latex-jsclasses
-latex-fancyhdr
 latex-fontenc
 latex-fontspec
 latex-geometry
@@ -38,11 +35,5 @@ latex-graphicx
 latex-hyperref
 latex-inputenc
 latex-layout
-latex-lmodern
-latex-luatexja-preset
-latex-microtype
-latex-otf
-latex-physics
 latex-plautopatch
-latex-siunitx
 ```

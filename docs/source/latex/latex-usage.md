@@ -38,21 +38,26 @@ LaTeXの基本的な事項については「LaTeX2e美文書作成入門（技�
 maxdepth: 1
 ---
 latex-install
-latex-japanese
-latex-ide
 latex-document
 latex-documentclass
+latex-build
 latex-usepackage
 latex-fonts
-latex-build
 latex-maketitle
 latex-linebreak
 latex-include
 latex-ref
 latex-toc
 latex-index
+latex-fancyhdr
+latex-microtype
+latex-physics
+latex-siunitx
+latex-hepparticles
 latex-primer
 latex-packages
+latex-japanese
+latex-ide
 ```
 
 ## リファレンス

@@ -20,7 +20,11 @@ LuaLaTeXやXeLaTeXなどのモダンLaTeXでは、フォントを自由に変更
 ```
 
 ```{toctree}
+---
+maxdepth: 1
+---
 latex-fontspec
+latex-luatexja-preset
 ```
 
 ## (u)pLaTeXの場合
@@ -42,7 +46,11 @@ TeX Live 2020以降は和文デフォルトが原ノ味フォントになって�
 わざわざ変更する必要はありません。
 
 ```{toctree}
+---
+maxdepth: 1
+---
 latex-fontenc
+latex-lmodern
 latex-otf
 ```
 

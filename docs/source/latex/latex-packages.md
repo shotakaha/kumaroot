@@ -4,6 +4,5 @@
 ---
 maxdepth: 1
 ---
-latex-siunitx
-latex-hepparticles
+
 ```
