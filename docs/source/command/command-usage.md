@@ -8,6 +8,7 @@ command-arp
 command-bash
 command-brew
 command-cd
+command-chmod
 command-find
 command-grep
 command-ls
