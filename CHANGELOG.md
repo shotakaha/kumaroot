@@ -1,3 +1,16 @@
+## v1.3.1 (2022-09-11)
+
+### Fix
+
+- **latex/latex-amsmath.md**: 数式記号を追加した
+- **latex/latex-amsmath.md**: mathtoolsを追記した
+- **latex/latex-amsmath.md**: 数式パッケージを追加した
+- **latex/latex-usage.md**: 目次を整理した
+- **_static/latex/main.tex**: フォント設定を変更した
+- **latex/latex-fancyhdr.md**: タイトルを修正した
+- **latex/latex-fonts.md**: フォント設定を整理した
+- **latex/latex-usage.md**: 目次の順序を変更した
+
 ## v1.3.0 (2022-09-11)
 
 ### Added
