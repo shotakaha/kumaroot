@@ -1,6 +1,6 @@
-# ドキュメントの生成（``make BUILDER``）
+# ドキュメントを生成したい（``make BUILDER``）
 
-ドキュメントを生成するには{command}`make`コマンドを使います。
+ドキュメントの生成には{command}`make`コマンドを使います。
 
 ```bash
 $ cd docs
@@ -10,10 +10,10 @@ $ make latexpdf    # PDFを生成
 $ make linkcheck   # リンクを確認
 ```
 
-## ウェブページを生成する
+## ウェブページを生成したい（``make html``）
 
-ウェブページを生成するときは``make html``を実行します。
-生成したファイルは ``build/html/`` 以下に出力されます。
+ウェブページを生成するときは{command}`make html`を実行します。
+生成したファイルは{file}`build/html/`以下に出力されます。
 URLはいわゆる``UglyURL``の形式で生成されます。
 
 ```bash
@@ -22,7 +22,7 @@ $ make html
 $ open build/html/index.html
 ```
 
-``PrettyURL``にした場合は``dirhtml``ビルダーを使います。
+``PrettyURL``にした場合は{command}``make dirhtml``を使います。
 
 ```bash
 $ cd $KUMAROOT
@@ -30,15 +30,15 @@ $ make dirhtml
 $ open build/dirhtml/index.html
 ```
 
-## PDFを生成する
+## PDFを生成したい（``make latexpdf``）
 
 
-PDFを生成するときは``make latexpdf``を実行します。
-生成したファイルは``build/latex/``以下に出力されます。
+PDFを生成するときは{command}`make latexpdf`を実行します。
+生成したファイルは{file}`build/latex/`以下に出力されます。
 
 ```
 $ cd $KUMAROOT
-$ make latexpdfja
+$ make latexpdf
 $ open build/latex/KumaROOT.pdf
 ```
 
