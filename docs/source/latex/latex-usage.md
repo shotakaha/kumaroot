@@ -39,7 +39,7 @@ maxdepth: 1
 ---
 latex-install
 latex-japanese
-latex-yatex
+latex-ide
 latex-document
 latex-documentclass
 latex-fonts
