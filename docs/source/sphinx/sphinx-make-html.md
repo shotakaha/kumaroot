@@ -40,5 +40,4 @@ Sphinxのテーマなので、Sphinxドキュメントで生成されていま�
 maxdepth: 1
 ---
 sphinx-html-rtd
-sphinx-html-bootstrap
 ```

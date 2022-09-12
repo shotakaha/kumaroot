@@ -16,15 +16,6 @@ $ make latexpdf    # PDFを生成
 $ make linkcheck   # リンクを確認
 ```
 
-```{toctree}
----
-maxdepth: 1
----
-sphinx-make-html
-sphinx-make-latexpdf
-sphinx-make-linkcheck
-```
-
 ## 例：KumaROOTをビルドする
 
 例として、この``KumaROOT``のドキュメントをビルドする方法を書いておきます。
