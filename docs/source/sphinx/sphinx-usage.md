@@ -19,7 +19,6 @@ sphinx-quickstart
 sphinx-make
 sphinx-conf
 sphinx-extensions
-sphinx-theme
 sphinx-toctree
 sphinx-code-block
 sphinx-hyperlink
