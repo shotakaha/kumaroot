@@ -1,4 +1,13 @@
-# poetry
+# パッケージ管理したい（``poetry``）
+
+パッケージ管理ツールのひとつです。
+Pythonのパッケージ管理ツールはいろいろ存在していて、
+複雑な歴史的な経緯もあり（？）まったく統一されておらず、
+すべてを把握＆理解するのは不可能だと思います。
+僕は、たまたま使い始めてみたのですが、使い勝手いいなと感じていて、
+いまから使いはじめるなら``poetry``はオススメです。
+
+## インストール
 
 ```bash
 $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
