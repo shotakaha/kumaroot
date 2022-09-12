@@ -16,22 +16,8 @@ Keynoteに数式を貼り付けるのに必要なLaTeXiTがついてきます。
 
 ## MacTeX (Homebrew)
 
-TeXLiveはHomebrew（{command}`brew`コマンド）を使ってインストールできます。
-
 ```bash
 $ brew install --cask mactex
 ```
 
-## TeXLive (MacPorts)
-
-:::{note}
-（2021-01-18に追記）
-僕はだいぶ前にMacPortsをやめてHomebrewを使う方法に変更しました
-:::
-
-TeXLiveはMacPortsからインストールすることもできます。
-とくに理由がなければ ``texlive +full`` をインストールすればいいと思います。
-
-```bash
-$ sudo port install texlive +full
-```
+TeXLiveはHomebrew（{command}`brew`コマンド）を使ってインストールできます。
