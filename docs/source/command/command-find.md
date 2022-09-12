@@ -32,9 +32,8 @@ $ find 検索パス -type d  # ディレクトリを探す
 
 ```bash
 $ find 検索パス -name "*.html"    # HTMLファイルを探す
-$ find 検索パス ! -name "*.html"  # HTML以外のファイルを探す
 $ find 検索パス -name "*.zip"     # ZIPファイルを探す
-$ find 検索パス -iname "*.zip"    # case insensitive
+$ find 検索パス ! -name "*.html"  # HTML以外のファイルを探す
 ```
 
 ## 修正した時刻で探したい（``-mtime``）
