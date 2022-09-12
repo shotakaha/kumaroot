@@ -9,6 +9,7 @@ command-bash
 command-brew
 command-cd
 command-chmod
+command-fd
 command-find
 command-grep
 command-ls

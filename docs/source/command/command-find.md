@@ -67,3 +67,7 @@ find ディレクトリ -d 4 -name "*.html"      # 4階層目まで探す
 find ディレクトリ -type f -nouser -name "*.html"   # 所有者不明
 find ディレクトリ -type f -nogroup -name "*.html"  # グループ不明
 ```
+
+## 関連コマンド
+
+- [](./command-fd.md)
