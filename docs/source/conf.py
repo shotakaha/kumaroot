@@ -90,7 +90,9 @@ html_theme_options = {
     "analytics_id": "G-F2T33GE7N3",  #  Provided by Google in your dashboard
     "prev_next_buttons_location": "both",
     "style_external_links": True,
+    "style_nav_header_background": "darkorange",
 }
+html_logo = "./_static/quma.jpeg"
 
 # -*- coding: utf-8 -*-
 #
@@ -136,7 +138,7 @@ latex_elements["preamble"] += "\\setlength{\\footskip}{3\\zw}"
 
 # latex_elements['preamble'] += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
 # latex_elements['preamble'] += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
-# latex_logo = './images/toumin_kuma.png'
+# latex_logo = "./_static/quma.jpeg"
 # latex_use_parts = False
 # latex_show_pagerefs = False
 # latex_show_urls = False
