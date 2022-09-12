@@ -23,18 +23,35 @@ find -ctime 数        # 数時間以内に変更されたファイルを検索
 find -ls              # 検索結果を ls -l に書きだす
 ```
 
-## ファイルの種類を指定したい（``-type``）
+## ファイルの種類で探したい（``-type``）
 
 ```bash
 find ディレクトリ -type f  # ファイルを探す
 find ディレクトリ -type d  # ディレクトリを探す
 ```
 
-## 拡張子を指定したい（``-name``）
+## 拡張子で探したい（``-name``）
 
 ```bash
-find ディレクトリ -name "*.html"  # HTMLファイルを探す
-find ディレクトリ -name "*.zip"   # ZIPファイルを探す
+find ディレクトリ -name "*.html"    # HTMLファイルを探す
+find ディレクトリ ! -name "*.html"  # HTML以外のファイルを探す
+find ディレクトリ -name "*.zip"     # ZIPファイルを探す
+find ディレクトリ -iname "*.zip"    # case insensitive
+```
+
+## 修正した時刻で探したい（``-mtime``）
+
+```bash
+find ディレクトリ -mtime 5
+find ディレクトリ -mmin +10 -mmin -60  # 10分以上、60分以内に変更したファイル
+```
+
+## サイズで探したい（``-size``）
+
+```bash
+find ディレクトリ -size +100k  # 100kB以上のファイル
+find ディレクトリ -size +10M   # 10MB以上のファイル
+find ディレクトリ -size +10M -size -50M  # 10MB - 50MBのファイル
 ```
 
 ## 深さを指定したい（``-depth``）
@@ -47,5 +64,6 @@ find ディレクトリ -d 4 -name "*.html"      # 4階層目まで探す
 ## 所有者不明のファイルを探したい（``-nouser``）
 
 ```bash
-find ディレクトリ -type f -nouser -name "*.html"
+find ディレクトリ -type f -nouser -name "*.html"   # 所有者不明
+find ディレクトリ -type f -nogroup -name "*.html"  # グループ不明
 ```
