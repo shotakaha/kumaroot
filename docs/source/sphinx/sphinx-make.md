@@ -1,6 +1,12 @@
 # ドキュメントを生成したい（``make BUILDER``）
 
+```bash
+$ make help
+```
+
 ドキュメントの生成には{command}`make`コマンドを使います。
+{command}`make help`コマンドで、利用可能なビルダーを確認できます。
+それぞれのビルダーの基本設定はすべて{file}`conf.py`にまとめて記述します。
 
 ```bash
 $ cd $MyPROJECT/docs/
@@ -10,53 +16,14 @@ $ make latexpdf    # PDFを生成
 $ make linkcheck   # リンクを確認
 ```
 
-## ウェブページを生成したい（``make html``）
-
-ウェブページを生成するときは{command}`make html`を実行します。
-生成したファイルは{file}`build/html/`以下に出力されます。
-URLはいわゆる``UglyURL``の形式で生成されます。
-
-```bash
-$ cd $MyPROJECT/docs/
-$ make html
-$ open build/html/index.html
+```{toctree}
+---
+maxdepth: 1
+---
+sphinx-make-html
+sphinx-make-latexpdf
+sphinx-make-linkcheck
 ```
-
-``PrettyURL``にした場合は{command}``make dirhtml``を使います。
-
-```bash
-$ cd $MyPROJECT/docs/
-$ make dirhtml
-$ open build/dirhtml/index.html
-```
-
-## PDFを生成したい（``make latexpdf``）
-
-
-PDFを生成するときは{command}`make latexpdf`を実行します。
-生成したファイルは{file}`build/latex/`以下に出力されます。
-
-```
-$ cd $KUMAROOT
-$ make latexpdf
-$ open build/latex/KumaROOT.pdf
-```
-
-```{note}
-PDFを生成する場合、ビルドするパソコンでLaTeX環境を整えておく必要があります。
-詳しくは[](../latex/latex-usage.md)を参照してください。
-```
-
-## リンクを確認したい（``make linkcheck``）
-
-```bash
-$ cd $MyPROJECT/docs/
-$ make linkcheck
-```
-
-ドキュメント内にある外部リンクが有効かどうかを確認できます。
-リンクにアクセスできない場合は、``broken``と表示され、エラーコード（``404``や``500``が表示されます。
-またリダイレクトされている場合はリダイレクト先のURLが表示されます。
 
 ## 例：KumaROOTをビルドする
 
