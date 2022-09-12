@@ -1,14 +1,12 @@
 # find
 
-ファイルやディレクトリを探すコマンドです。
-ファイルの内容は検索できません。
-
-
 ```bash
-find ディレクトリ 検索文字列
+$ find 検索したいパス 検索したいパターン
 ```
 
-- ディレクトリ名の末尾の``/ (trailing-slash)``はつけなくてOK
+ファイルやディレクトリを探すコマンドです。
+検索パス名の末尾の``/ (trailing-slash)``はつけなくて大丈夫です。
+ファイルの内容は検索できません。
 
 ## オプション
 
@@ -26,46 +24,46 @@ find -ls              # 検索結果を ls -l に書きだす
 ## ファイルの種類で探したい（``-type``）
 
 ```bash
-find ディレクトリ -type f  # ファイルを探す
-find ディレクトリ -type d  # ディレクトリを探す
+$ find 検索パス -type f  # ファイルを探す
+$ find 検索パス -type d  # ディレクトリを探す
 ```
 
 ## 拡張子で探したい（``-name``）
 
 ```bash
-find ディレクトリ -name "*.html"    # HTMLファイルを探す
-find ディレクトリ ! -name "*.html"  # HTML以外のファイルを探す
-find ディレクトリ -name "*.zip"     # ZIPファイルを探す
-find ディレクトリ -iname "*.zip"    # case insensitive
+$ find 検索パス -name "*.html"    # HTMLファイルを探す
+$ find 検索パス ! -name "*.html"  # HTML以外のファイルを探す
+$ find 検索パス -name "*.zip"     # ZIPファイルを探す
+$ find 検索パス -iname "*.zip"    # case insensitive
 ```
 
 ## 修正した時刻で探したい（``-mtime``）
 
 ```bash
-find ディレクトリ -mtime 5
-find ディレクトリ -mmin +10 -mmin -60  # 10分以上、60分以内に変更したファイル
+$ find 検索パス -mtime 5
+$ find 検索パス -mmin +10 -mmin -60  # 10分以上、60分以内に変更したファイル
 ```
 
 ## サイズで探したい（``-size``）
 
 ```bash
-find ディレクトリ -size +100k  # 100kB以上のファイル
-find ディレクトリ -size +10M   # 10MB以上のファイル
-find ディレクトリ -size +10M -size -50M  # 10MB - 50MBのファイル
+$ find 検索パス -size +100k  # 100kB以上のファイル
+$ find 検索パス -size +10M   # 10MB以上のファイル
+$ find 検索パス -size +10M -size -50M  # 10MB - 50MBのファイル
 ```
 
 ## 深さを指定したい（``-depth``）
 
 ```bash
-find ディレクトリ -depth 2 -name "*.html"  # 2階層目まで探す
-find ディレクトリ -d 4 -name "*.html"      # 4階層目まで探す
+$ find 検索パス -depth 2 -name "*.html"  # 2階層目まで探す
+$ find 検索パス -d 4 -name "*.html"      # 4階層目まで探す
 ```
 
 ## 所有者不明のファイルを探したい（``-nouser``）
 
 ```bash
-find ディレクトリ -type f -nouser -name "*.html"   # 所有者不明
-find ディレクトリ -type f -nogroup -name "*.html"  # グループ不明
+$ find 検索パス -type f -nouser -name "*.html"   # 所有者不明
+$ find 検索パス -type f -nogroup -name "*.html"  # グループ不明
 ```
 
 ## 関連コマンド
