@@ -1,3 +1,20 @@
+## v1.3.2 (2022-09-12)
+
+### Fix
+
+- **sphinx/sphinx-usage.md**: 目次を整理した
+- **sphinx/sphinx-html-bootstrap.md**: 最近使っていないので削除した
+- **sphinx/sphinx-theme.md**: 目次から削除した
+- **sphinx/sphinx-make.md**: makeコマンドを整理した
+- **sphinx/sphinx-html-rtd.md**: RTDテーマの設定を追記した
+- **webdev/webdev-ogp.md**: OGPの書き方を追記した
+- **python/python-pathlib.md**: pathlibの使い方を追記した
+- **python/python-poetry.md**: Poetryの概要を追加した
+- **python/python-poetry.md**: Poetryの使い方を追記した
+- **latex/latex-usage.md**: イントロが長すぎたので整理した
+- **latex/latex-install.md**: MacPortsのインストールを削除した
+- **latex/latex-online.md**: オンラインツールの使い方を移動した
+
 ## v1.3.1 (2022-09-11)
 
 ### Fixed
