@@ -54,6 +54,15 @@ poetry run bash deploy.sh
 - ``Minor (feat)`` : 新しい節を追加した場合
 - ``Patch (fix)`` : 文章を修正した場合
 
+## 依存パッケージの管理
+
+```bash
+$ poetry export -f requirements.txt --output requirements.txt
+```
+
+- パッケージを更新した時、Read the Docs に教えるために``requirements.txt``も更新する必要があります。
+- ``poetry export``を使って生成し、Gitにコミットします
+
 ## ファイルの命名規則
 
 次のような命名規則でコンテンツを管理しています
