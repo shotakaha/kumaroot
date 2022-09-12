@@ -1,0 +1,11 @@
+操作内容,Emacs,Vim,less
+{guilabel}`次の行へ移動`,{kbd}`C-n`,{kbd}`j`,{kbd}`j`
+{guilabel}`前の行へ移動`,{kbd}`C-p`,{kbd}`k`,{kbd}`k`
+{guilabel}`1ページ進む`,{kbd}`C-v`,{kbd}`C-f`,{kbd}`SPC`
+{guilabel}`1ページ戻る`,{kbd}`M-v`,{kbd}`C-f`,{kbd}`S-SPC`
+{guilabel}`ファイルの先頭へ移動`,{kbd}`M-<`,{kbd}`gg`,{kbd}`g`
+{guilabel}`ファイルの末尾に移動`,{kbd}`M->`,{kbd}`G`,{kbd}`G`
+{guilabel}`指定した行へジャンプ`,{kbd}`M-g g 数値`,{kbd}`数値 G`,{kbd}`:数値`
+{guilabel}`半ページ進む`,,,{kbd}`d`
+{guilabel}`半ページ戻る`,,,{kbd}`u`
+{guilabel}`ファイルを閉じる`,{kbd}`C-x C-c`,{kbd}`:q`,{kbd}`q`
