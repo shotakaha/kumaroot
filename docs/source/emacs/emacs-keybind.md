@@ -10,3 +10,21 @@ emacs-keybind-search
 emacs-keybind-file
 emacs-keybind-editor
 ```
+
+## ページ内移動
+
+```{csv-table}
+---
+file: csv/pager.csv
+header-rows: 1
+---
+```
+
+## カーソル移動
+
+```{csv-table}
+---
+file: csv/cursor.csv
+header-rows: 1
+---
+```
