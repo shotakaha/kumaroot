@@ -19,6 +19,9 @@ GitHubなどのアカウント取得の方法が書いてあったりします�
 修論や博論を執筆中の方は、いますぐ使いはじめることをオススメします！！
 
 ```{toctree}
+---
+maxdepth: 1
+---
 git-install
 git-help
 git-config
