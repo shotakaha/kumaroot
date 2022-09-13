@@ -28,6 +28,7 @@ git-config
 git-single
 git-flow
 git-semver
+git-gitlab
 ```
 
 
