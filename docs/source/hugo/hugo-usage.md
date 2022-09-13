@@ -3,7 +3,11 @@
 ``Hugo``はGo言語製の静的サイトジェネレーターです。
 
 ```{toctree}
+---
+maxdepth: 1
+---
 hugo-install.md
+hugo-data.md
 ```
 
 ## リファレンス
