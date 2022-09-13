@@ -50,6 +50,21 @@ myst_enable_extensions = [
 とりあえずコメントアウトしました
 ```
 
-```{toctree}
-sphinx-myst-syntax
+## ロール
+
+```md
+{ロール}`キーワード`
 ```
+
+## ディレクティブ
+
+````md
+```{ディレクティブ}
+---
+オプション
+---
+内容
+```
+````
+
+> {sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read

@@ -22,9 +22,10 @@ sphinx-make
 sphinx-make-html
 sphinx-make-latexpdf
 sphinx-make-linkcheck
+sphinx-hyperlink
 sphinx-toctree
 sphinx-code-block
-sphinx-hyperlink
+sphinx-footnote
 sphinx-readthedocs
 ```
 
