@@ -24,6 +24,3 @@
    * - カーソルの左の文字を削除（Backspace）
      - :kbd:`C-h`
      - :kbd:`Backspace`
-
--  デフォルトだと :kbd:`C-h` はヘルプですが、
-   :kbd:`Backspace` に置き換えています。

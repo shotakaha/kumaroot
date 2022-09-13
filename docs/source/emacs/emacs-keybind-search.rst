@@ -27,12 +27,3 @@
    * - ファイル全体のすべての文字を、確認しながら置換
      -
      - :kbd:`:%s/old/new/gc`
-
-
--  Emacsの場合、
-   `cmigemo <https://github.com/koron/cmigemo>`__ と
-   `migemoパッケージ <https://github.com/emacs-jp/migemo>`__
-   を導入するとローマ字で日本語検索が可能になります。
--  インストールと設定の詳細は
-   `るびきち「日刊Emacs」 <http://emacs.rubikitch.com/migemo/>`__
-   を参考にするとよいと思います。

@@ -1,0 +1,7 @@
+操作内容,Emacs,Vim
+{guilabel}`マークをセット`,{kbd}`C-SPC`,
+{guilabel}`取り消し（undo）`,{kbd}`C-/`,{kbd}`u`
+{guilabel}`カーソルの位置から行末までを切り取り`,{kbd}`C-k`,{kbd}`d$`
+{guilabel}`選択範囲を切り取り`,{kbd}`C-w`,"{kbd}`dd`, {kbd}`d$`, {kbd}`dw`, {kbd}`d^`, {kbd}`d0`"
+{guilabel}`選択範囲をコピー（yank）`,{kbd}`M-w`,"{kbd}`y`, {kbd}`yy`, {kbd}`yw`, {kbd}`y$`, {kbd}`y^`, {kbd}`y0`"
+{guilabel}`貼り付け`,{kbd}`C-y`,{kbd}`p`
