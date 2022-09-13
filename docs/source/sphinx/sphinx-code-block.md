@@ -10,10 +10,6 @@
    data = pd.read_csv("example.csv)
 ```
 
-
-
-
-
 ## 行番号を表示したい（``:linenos:``）
 
 ```rst
