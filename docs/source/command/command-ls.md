@@ -18,12 +18,20 @@ $ ls -ltra
 
 ``-l``や``-a``は状況によって使い分けます。
 
+## ファイルを1行ごとに表示したい
+
+```bash
+$ ls -1
+```
+
+{command}`xargs`にファイル名を渡したい場合など、{command}`ls -l`で表示される詳細情報が必要ない場合に使います。
+
 ## 代替コマンド
 
 最近はRust製の代替コマンドが流行りの兆しがあります。
 ``lsd``や``exa``というコマンドがあります。
 
-## リファレンス
+## 関連コマンド
 
-- [lsd - LSDeluxe](https://github.com/Peltoche/lsd)
-- [exa - A modern replacement for ls](https://the.exa.website/)
+- [exa](./command-exa.md)
+- [lsd](./command-lsd.md)

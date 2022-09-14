@@ -9,10 +9,12 @@ command-bash
 command-brew
 command-cd
 command-chmod
+command-exa
 command-fd
 command-find
 command-grep
 command-ls
+command-lsd
 command-nkf
 command-pandoc
 command-ps
