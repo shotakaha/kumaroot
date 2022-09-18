@@ -17,6 +17,7 @@ python-plotly
 python-poetry
 python-random
 python-requests
+python-string
 python-icecream
 ```
 
