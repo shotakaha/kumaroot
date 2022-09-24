@@ -13,6 +13,7 @@ python-dataclass
 python-altair
 python-loguru
 python-pandas
+python-pipx
 python-plotly
 python-poetry
 python-random
