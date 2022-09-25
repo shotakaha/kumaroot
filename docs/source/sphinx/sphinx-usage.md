@@ -25,6 +25,7 @@ sphinx-make-linkcheck
 sphinx-hyperlink
 sphinx-toctree
 sphinx-code-block
+sphinx-meta
 sphinx-footnote
 sphinx-readthedocs
 ```
