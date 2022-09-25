@@ -34,6 +34,7 @@ latex-include
 latex-ref
 latex-toc
 latex-index
+latex-bibliography
 latex-amsmath
 latex-fancyhdr
 latex-microtype
