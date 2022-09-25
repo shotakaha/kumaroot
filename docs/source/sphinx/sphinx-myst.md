@@ -50,13 +50,13 @@ myst_enable_extensions = [
 とりあえずコメントアウトしました
 ```
 
-## ロール
+## ロールを使いたい
 
 ```md
 {ロール}`キーワード`
 ```
 
-## ディレクティブ
+## ディレクティブを使いたい
 
 ````md
 ```{ディレクティブ}
@@ -68,3 +68,36 @@ myst_enable_extensions = [
 ````
 
 > {sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read
+
+## メタデータを設定したい
+
+```python
+language = "ja"
+myst_html_meta = {
+    "description lang=ja": "サイトの説明",
+    "keywords": "Sphinx, KumaROOT",
+    "property=og:locale":  "ja_JP"
+}
+```
+
+サイト全体のメタデータは{file}`conf.py`の``myst_html_meta``で設定できます。
+
+```yaml
+---
+myst:
+  html_meta:
+    "description lang=ja": "記事の説明"
+    "keywords": "Sphinx, 記事のキーワード"
+    "property=og:locale": "ja_JP"
+---
+```
+
+記事ごとのメタデータはフロントマターで設定できます。
+
+## コメントアウトしたい
+
+```md
+% コメントの内容
+```
+
+コメントやコメントアウトしたい場合は、行頭に`%`をつけます。
