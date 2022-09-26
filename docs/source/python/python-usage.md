@@ -20,6 +20,8 @@ python-random
 python-requests
 python-string
 python-icecream
+python-bs4
+python-pendulum
 ```
 
 ## リファレンス
