@@ -1,7 +1,7 @@
 # BeautifulSoup
 
-```python
-from bs4 import BeautifulSoup
+```bash
+$ pip3 install beautifulsoup4
 ```
 
 ## ウェブページをスクレイプしたい
@@ -36,3 +36,7 @@ tags = soup.find_all("タグ名")
 import bs4
 bs4.__version__
 ```
+
+## リファレンス
+
+- [BeautifulSoup4 Documentation](https://www.crummy.com/software/BeautifulSoup/)
