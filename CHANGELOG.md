@@ -1,3 +1,39 @@
+## v1.4.0 (2022-09-26)
+
+### Feat
+
+- **python/python-string.md**: stringを追加した
+- **command/command-fd.md**: fdコマンドを追加した
+
+### Fix
+
+- **python/python-pendulum.md**: 時刻モジュールの使い方の下書きを追加した
+- **python/python-bs4.md**: タイトルを拾う方法を追記した
+- **python/python-bs4.md**: URLの拾い方を追記した
+- **python/python-bs4.md**: インストール方法を追記した
+- **python/python-bs4.md**: BeatifulSoup4の下書きを追加した
+- **sphinx/sphinx-myst.md**: シンタックスを追加した
+- **latex/latex-bibliography.md**: 参考文献リストを追加した
+- **python/python-pipx.md**: pipxを追加（仮）した
+- **webdev/webdev-rss.md**: RSSの要素を追加した
+- **command/command-usage.md**: lsdとexaを追加した
+- **emacs/emacs-keybind.md**: 内容を整理した
+- **emacs/emacs-keybind.md**: 内容を整理した
+- **git/git-gitlab.md**: GitLabの使い方を追加した
+- **git/git-usage.md**: maxdepthを追加した
+- **sphinx/sphinx-myst-syntax.md**: 別のファイルに転記した
+- **sphinx/sphinx-toctree.md**: 内容を整理した
+- **hugo/hugo-data.md**: データテンプレートの使い方を追加した
+- **emacs/csv/cursor.csv**: csv-tableを作成した
+- **emacs/emacs-keybind-pager.md**: csv-tableに変更した
+- **emacs/emacs-keybind.md**: mdに変換した
+- **emacs/emacs-keyboard.md**: キーボード設定を修正した
+- **command/command-fd.md**: fdの使い方を追加した
+- **command/command-find.md**: findの使い方を整理した
+- **command/command-find.md**: findの使い方を追記した
+- **_static/quma.jpeg**: ロゴのような画像を追加した
+- **preface.md**: はじめにを整理した
+
 ## v1.3.2 (2022-09-12)
 
 ### Fix
