@@ -30,6 +30,14 @@ tags = soup.find_all("タグ名")
 すべてのタグを拾いたい場合は``soup.find_all("タグ名")``を使います。
 返り値は``bs4.element.ResultSet``型のオブジェクトですが、リストのように扱うことができます。
 
+## タイトルを取得したい
+
+```python
+soup.title       # "<title>記事のタイトル</title>"
+soup.title.text  # "記事のタイトル"
+soup.title.name  # "title" = タグ名
+```
+
 ## リンクのURLを取得したい
 
 ```python
