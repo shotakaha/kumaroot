@@ -18,17 +18,34 @@ soup = BeautifulSoup(html.content, "html.parser")
 ウェブページの取得は[requests](python-requests.md)を使います。
 その内容をパース（＝スクレイプ）するために``BeautifulSoup``を使います。
 
-## タグを取得したい
+## タグで検索したい
 
 ```python
 tag = soup.タグ名
 tag = soup.find("タグ名")
+tag = soup.select_one("タグ名")
 tags = soup.find_all("タグ名")
+tags = soup.select("タグ名")
 ```
 
 ``soup.タグ名``や``soup.find("タグ名")``だと、最初のタグを拾うことができます。
 すべてのタグを拾いたい場合は``soup.find_all("タグ名")``を使います。
 返り値は``bs4.element.ResultSet``型のオブジェクトですが、リストのように扱うことができます。
+
+## 属性で検索したい
+
+```python
+tag = soup.find("タグ名", "属性と値")
+tags = soup.select("タグ名[属性と値]")
+tag = soup.find("a", href="検索したいURL")
+```
+
+## クラス名で検索したい
+
+```python
+tag = soup.find("タグ名", class_="クラス名")
+tags = soup.select("CSSセレクタ")
+```
 
 ## タイトルを取得したい
 
