@@ -1,19 +1,24 @@
 # launchctl
 
-定期的にスクリプトを実行するためのコマンドです。
+```bash
+$ launchctl load ~/Library/LaunchAgents/ラベル.plist
+$ launchctl unload ~/Library/LaunchAgents/ラベル.plist
+```
+
+定期的に実行したいスクリプトを``launchd``に登録するコマンドです。
+設定は``plist``（property list）というXML形式で作成します。
 ``macOS``では、``contab``より``launchd``が推奨されています。
-設定は``plist``（property list）というXML形式で記述します。
 
-## ファイル置き場
+## ロードされているプロセスを確認したい
 
-1. {file}``~/Library/LaunchAgents/ラベル.plist``
-1. {file}``/Library/LaunchAgents/ラベル.plist``
-1. {file}``/Library/LaunchDaemons/ラベル.plist``
+```bash
+$ launchctl list | rg ラベル名
+```
 
-``plist``ファイルは上記のいずれかに作成します。
-それぞれ実行者が異なりますが、一般ユーザーならば最初のパスでOKです。
+ロードされているプロセスの``PID``、``Status``、``Label``がずらーっと表示されます。
+``grep``や``rg``などの検索コマンドにパイプして使うことが多いです。
 
-## plistの書き方
+## カスタムのplistを作成したい
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -30,6 +35,16 @@
 内容は、基本的にはキーと値のペアで記述します。
 値には``<array>``や``<dict>``などを使うことができます。
 詳しくはドキュメントを参照することをオススメします。
+
+### ファイル置き場
+
+1. {file}``~/Library/LaunchAgents/ラベル.plist``（ユーザーごと）
+1. {file}``/Library/LaunchAgents/ラベル.plist``（ユーザーごと；sudoが必要）
+1. {file}``/Library/LaunchDaemons/ラベル.plist``（システム全体；sudoが必要）
+
+``plist``ファイルは上記のいずれかに作成します。
+``LaunchDaemons``はシステム全体、``LaunchAgents``はユーザーに紐づいています。
+基本的には、最初のパスに作成すればOKです。
 
 ## ラベルを作りたい（``Label``）
 
@@ -57,6 +72,13 @@
 コマンドラインに打ち込む内容を、オプションや引数を含めて``array``の形式で並べて記述します。
 複雑な内容を書くのは大変なので、別途シェルスクリプトなどにまとめておくのがよいと思います。
 
+## ``KeepAlive``
+
+```xml
+<key>KeepAlive</key>
+<true/>
+```
+
 ## 定期実行したい（``StartCalendarInterval``）
 
 ```xml
@@ -82,7 +104,8 @@
 ```
 
 定期実行した結果はファイルに保存できます。
-ログは永遠に残っていなくてもよいと考え、僕は``/tmp/``に保存しています。
+``StandardOutPath``は標準出力、``StandardErrorPath``は標準エラー出力を保存するファイル名を指定します。
+ログはずっと残っていなくてもよいと考えて、僕は``/tmp/``に保存しています。
 
 ## リファレンス
 
