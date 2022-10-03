@@ -13,6 +13,7 @@ command-exa
 command-fd
 command-find
 command-grep
+command-launchctl
 command-ls
 command-lsd
 command-nkf
@@ -29,4 +30,5 @@ command-tlmgr
 command-uname
 command-which
 command-xargs
+
 ```
