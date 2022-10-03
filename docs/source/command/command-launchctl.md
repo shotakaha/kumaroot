@@ -67,8 +67,10 @@
     <key>Hour</key>
     <integer>13</integer>
 </dict>
-
 ```
+
+日時を指定して定期実行したい場合は``StartCalendarInterval``を使って設定します。
+実行した時刻を起点に定期実行する場合は``StartInterval``を使います。
 
 ## 実行ログを残したい（``StandardOutPath`` / ``StandardErrorPath``）
 
