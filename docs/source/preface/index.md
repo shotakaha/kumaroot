@@ -15,7 +15,7 @@
 ---
 maxdepth: 1
 ---
-preface-kuma
+kuma
 disclaimer
 ```
 
