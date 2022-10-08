@@ -7,6 +7,7 @@
 maxdepth: 1
 ---
 hugo-install.md
+hugo-demo.md
 hugo-data.md
 ```
 
