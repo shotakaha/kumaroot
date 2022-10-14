@@ -9,7 +9,7 @@
 ---
 maxdepth: 1
 ---
-preface
+preface/index
 root/root-usage
 geant4/geant4-usage
 command/command-usage

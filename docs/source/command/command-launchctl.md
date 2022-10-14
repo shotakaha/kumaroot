@@ -88,11 +88,23 @@ $ launchctl list | rg ラベル名
     <integer>20</integer>
     <key>Hour</key>
     <integer>13</integer>
+    <key>Day</key>
+    <integer>3</integer>
 </dict>
 ```
 
 日時を指定して定期実行したい場合は``StartCalendarInterval``を使って設定します。
 実行した時刻を起点に定期実行する場合は``StartInterval``を使います。
+
+## 環境変数を設定したい（``EnvironmentVariables``）
+
+```xml
+<key>EnvironmentVariables</key>
+<dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+</dict>
+```
 
 ## 実行ログを残したい（``StandardOutPath`` / ``StandardErrorPath``）
 
