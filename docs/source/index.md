@@ -24,6 +24,7 @@ webdev/webdev-usage
 hugo/hugo-usage
 vscode/vscode-usage
 emacs/emacs-usage
+rust/rust-usage
 ```
 
 # Indices and tables
