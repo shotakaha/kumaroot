@@ -1,4 +1,4 @@
-# デモサイトの構築（``exampleSite``）
+# デモサイトを確認したい（``exampleSite``）
 
 ```bash
 $ cd ~/repos/sandbox/ # テスト用のディレクトリ

@@ -1,3 +1,30 @@
+## v1.5.0 (2022-10-24)
+
+### Feat
+
+- **python/python-re.md**: 正規表現を使ってみたい
+- **rust/rust-usage.md**: Rustの使い方を追加した
+- **hugo/hugo-demo.md**: Hugoでデモサイトを構築する方法を追加した
+
+### Fix
+
+- **python/python-re.md**: Apacheログを取得する正規表現を追加した
+- **python/python-pendulum.md**: リファレンスのタイトルを修正した
+- **python/python-pendulum.md**: 文章を修正した
+- **build**: pendlumを追加した
+- **python/python-pendulum.md**: 日付をパースする方法を追加した
+- **rust/rust-println.md**: 変数・配列の表示方法を追記した
+- **rust/rust-println.md**: 配列を表示する方法を追記した
+- **rust/rust-println.md**: 変数を表示する例を追加した
+- **command/command-awk.md**: awkコマンドを追加した
+- **preface/index.md**: prefaceのディレクトリを整理した
+- **command/command-launchctl.md**: 環境変数の設定を追記した
+- **command/command-launchctl.md**: 内容を整理した
+- **command/command-launchctl.md**: 定期実行する方法を追記した
+- **command/command-launchctl.md**: launchdの説明を追加した
+- **python/python-bs4.md**: セレクタの使い方を追記した
+- **sphinx/sphinx-meta.md**: メタデータの設定方法を追加した
+
 ## v1.4.0 (2022-09-26)
 
 ### Feat

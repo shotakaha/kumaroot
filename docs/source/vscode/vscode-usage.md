@@ -1,5 +1,14 @@
 # VS Codeの使い方
 
+## 画面構成
+
+- メニューバー
+- アクティビティーバー
+- サイドバー
+- エディター
+- パネル
+- ステータスバー
+
 ```{toctree}
 vscode-install
 vscode-extensions
