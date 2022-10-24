@@ -61,5 +61,5 @@ dt.to_iso8601_string()
 ## リファレンス
 
 - [Pendulum](https://pendulum.eustace.io/)
-- [Tokens - Pendlum](https://pendulum.eustace.io/docs/#tokens)
-- [Common Formats](https://pendulum.eustace.io/docs/#common-formats)
+- [Pendulum - Tokens](https://pendulum.eustace.io/docs/#tokens)
+- [Pendulum - Common Formats](https://pendulum.eustace.io/docs/#common-formats)
