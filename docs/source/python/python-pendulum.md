@@ -55,7 +55,7 @@ dt.to_iso8601_string()
 ```
 
 ``parse``または``from_format``で読み込んだ日付を、ISO標準形式で出力したい場合は多いです。
-``to_isoformat()``も``to_iso8601_string``も同じ出力結果になります。
+``to_isoformat()``も``to_iso8601_string``も出力結果は同じです。
 その他の出力可能な形式は[Pendulumのドキュメント](https://pendulum.eustace.io/docs/#common-formats)を参照してください。
 
 ## リファレンス
