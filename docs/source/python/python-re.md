@@ -1,4 +1,4 @@
-# 正規表現を使いたい
+# 正規表現したい（``re``）
 
 ```python
 import re
@@ -7,16 +7,8 @@ re.search("正規表現パターン", "対象文字列")
 ```
 
 ``match``は文字列の先頭でのみマッチを確認し、
-``search``は文字列のどこでもマッチを確認する基本的な感数です。
+``search``は文字列のどこでもマッチを確認する基本的な関数です。
 それぞれの動作の違いの詳細は[search vs. match](https://docs.python.org/ja/3/library/re.html#search-vs-match)を参照してください。
-
-同じ正規表現パターンを繰り返して利用する場合は、``re.compile``して正規表現オブジェクトを作成するとよいみたいです。
-
-```python
-p = re.compile("正規表現パターン")
-p.match("対象文字列")
-p.search("対象文字列")
-```
 
 ## IPアドレスを検索したい
 
@@ -97,7 +89,18 @@ matched.group("ua")
 \"%{User-agent}i\" : (\"[\S\s]+?\")
 ```
 
+## 繰り返し検索したい
+
+```python
+p = re.compile("正規表現パターン")
+p.match("対象文字列")
+p.search("対象文字列")
+```
+
+同じ正規表現パターンを繰り返して利用する場合は、``re.compile``して正規表現オブジェクトを作成するとよいみたいです。
+
 ## リファレンス
 
 - [re - 正規表現操作](https://docs.python.org/ja/3/library/re.html)
 - [re - search() vs. match()](https://docs.python.org/ja/3/library/re.html#search-vs-match)
+- [正規表現 HOWTO](https://docs.python.org/ja/3/howto/regex.html)
