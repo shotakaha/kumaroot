@@ -23,6 +23,7 @@ python-icecream
 python-bs4
 python-pendulum
 python-re
+python-black
 ```
 
 ## リファレンス
