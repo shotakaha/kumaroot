@@ -10,6 +10,8 @@ pip3 install pandas
 import pandas as pd
 ```
 
+具体的な使い方は別のセクション（[](../pandas/pandas-usage.md)）にまとめています。
+
 ## リファレンス
 
 - [pandas - PyPI](https://pypi.org/project/pandas/)
