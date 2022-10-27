@@ -39,3 +39,13 @@ $ cargo check
 
 実行ファイルを作成せずに、ビルド可能かを確認できます。
 ``cargo build``より高速に動作するので、コードを書きながらチェックするのにもってこいです。
+
+## 外部クレートを更新したい
+
+```bash
+$ cargo update
+$ cargo update --dry-run
+```
+
+依存している外部クレートを更新する場合は``cargo update``します。
+最新版がインストールされ、{file}`Cargo.lock`が更新されます。
