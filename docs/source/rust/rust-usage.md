@@ -20,5 +20,6 @@ rustup-init 1.25.1 (2022-07-12)
 ---
 maxdepth: 1
 ---
+rust-cargo
 rust-println
 ```
