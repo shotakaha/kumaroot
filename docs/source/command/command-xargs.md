@@ -9,8 +9,10 @@ find | xargs grep 検索文字列
 
 ## ファイルのパーミッションを一括変更したい
 
-HTMLファイルのパーミッションだけを一括して変更したい場合を考える
-
 ```bash
-find . -type f -name "*.html" | xargs chmod 664
+$ find . -type f | xargs chmod 664
+$ find . -type d | xargs chmod 775
 ```
+
+``find``コマンドと``chmod``コマンドを組み合わせて、ファイルのパーミッションを一括して変更できる。
+``find . -type f -name "*.html"``とすれば、HTMLファイルだけに限定することもできる。
