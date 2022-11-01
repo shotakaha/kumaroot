@@ -1,18 +1,21 @@
 # xargs
 
-あるコマンドの実行結果に対して、さらにコマンド操作をしたい場合に使うコマンドです。
-ただのパイプとちょっと違うのですが、これ以上、説明できません。
+あるコマンドの実行結果を引数にして、さらにコマンド操作をしたい場合に使います。
+パイプとはちょっと違いますが、うまく説明できません。
+僕は``find``コマンドとの組み合わせでよく使います。
 
 ```bash
-find | xargs grep 検索文字列
+$ find . -type f | xargs grep 検索文字列
 ```
 
 ## ファイルのパーミッションを一括変更したい
 
 ```bash
-$ find . -type f | xargs chmod 664
-$ find . -type d | xargs chmod 775
+$ find . -type f | xargs -d "\n" chmod 664
+$ find . -type d | xargs --delimiter="\n" chmod 775
 ```
 
 ``find``コマンドと``chmod``コマンドを組み合わせて、ファイルのパーミッションを一括して変更できる。
-``find . -type f -name "*.html"``とすれば、HTMLファイルだけに限定することもできる。
+デフォルトだと空白文字で改行されるため、``--delimiter="\n"``をつけて、ファイル名／ディレクトリ名に空白が含まれていても大丈夫にしてあります。
+
+HTMLファイルに限定したい場合は、``find . -type f -name "*.html"``とすればOKです。
