@@ -25,6 +25,7 @@ hugo/hugo-usage
 vscode/vscode-usage
 emacs/emacs-usage
 rust/rust-usage
+docker/docker-usage
 ```
 
 # Indices and tables
