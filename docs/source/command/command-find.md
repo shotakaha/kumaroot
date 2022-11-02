@@ -58,6 +58,12 @@ $ find 検索パス -depth 2 -name "*.html"  # 2階層目まで探す
 $ find 検索パス -d 4 -name "*.html"      # 4階層目まで探す
 ```
 
+## グループ名で探したい（``-group``）
+
+```bash
+$ find 検索パス -group グループ名
+```
+
 ## 所有者不明のファイルを探したい（``-nouser``）
 
 ```bash
