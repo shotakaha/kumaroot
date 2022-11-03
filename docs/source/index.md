@@ -26,6 +26,7 @@ vscode/vscode-usage
 emacs/emacs-usage
 rust/rust-usage
 docker/docker-usage
+streaming/streaming-usage
 ```
 
 # Indices and tables
