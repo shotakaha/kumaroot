@@ -46,6 +46,20 @@ poetry run bash deploy.sh
 [Sphinx](https://sphinx-users.jp)というドキュメト作成ソフトを使っています。
 文書本体には``reStructuredText（reST）``と``Markdown（md）``という軽量マークアップ言語を使っています。
 
+## ドキュメントの編集
+
+```bash
+$ poetry shell
+$ cd docs
+$ code ..
+$ make html
+$ open build/html/index.html
+```
+
+- ``poetry``の仮想環境を立ち上げる
+- VS Codeを使って編集する
+- 編集したら``make html``と``open``でできたものを確認する
+
 ## バージョン管理
 
 なんとなく[セマンティックバージョニング](https://semver.org/lang/ja/)を使おうとしています。
