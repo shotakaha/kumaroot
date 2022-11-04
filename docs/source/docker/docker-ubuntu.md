@@ -33,6 +33,15 @@ $ docker exec -it my-ubuntu /bin/bash
 root@119477a8562d:/# ls
 ```
 
+## コンテナーを削除したい
+
+```bash
+$ docker ps
+$ docker stop コンテナーID
+$ docker rm コンテナーID
+```
+
+``docker ps``でコンテナーIDを確認したあと、コンテナーを停止（``stop``）してから削除（``rm``）します。
 
 ## リファレンス
 
