@@ -13,6 +13,13 @@ Homebrewを使って``Docker Desktop``をインストールします。
 また、``docker``コマンドを使う場合には``Docker Desktop``を軌道しておく必要があります
 （Dockerデーモン（``/var/run/docker.sock``）と通信できる状態）。
 
+```bash
+$ docker --version
+Docker version 20.10.20, build 9fdeb9c
+$ docker compose version
+Docker Compose version v2.12.1
+```
+
 ```{toctree}
 docker-ubuntu
 ```
