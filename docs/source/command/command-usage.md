@@ -23,6 +23,7 @@ command-ps
 command-pwd
 command-rsync
 command-sed
+command-ssh
 command-ssh-keygen
 command-texdoc
 command-tig
