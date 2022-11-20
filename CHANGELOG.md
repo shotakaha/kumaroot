@@ -1,3 +1,43 @@
+## v1.6.0 (2022-11-20)
+
+### Feat
+
+- **command/command-docker.md**: Dockerコマンドを追加した
+- **command/command-ssh.md**: sshの設定を追加した
+- **streaming/streaming-usage.md**: ライブ配信の方法を追加した
+- **docker/docker-usage.md**: Dockerの使い方を追加した
+- **rust/rust-cargo.md**: cargoコマンドの使い方を追加した
+- **python/python-black.md**: フォーマッタしたい
+
+### Fix
+
+- **webdev/webdev-browser.md**: ユーザーエージェントの確認方法を追加した
+- **docker/docker-install.md**: インストール方法を別立てにした
+- **docker/docker-usage.md**: Dockerのバージョンを確認して追記した
+- **docker/docker-ubuntu.md**: コンテナーを削除する方法を追記した
+- **preface/env.md**: 開発環境を追記した
+- **streaming/streaming-format.md**: 開催形式について整理している
+- **python/python-import.md**: importの順番を追加した
+- **python/python-import.md**: パッケージを読み込む方法を追加した
+- **streaming/streaming-storyboard.md**: 進行台本の必要性を追記した
+- **streaming/streaming-atem.md**: ATEM Miniの概要を追記した
+- **docker/docker-ubuntu.md**: DockerでUbuntuする方法を追加した
+- **docker/docker-usage.md**: Docker Desktopのインストール方法を追記した
+- **command/command-find.md**: グループによるファイル検索を追加した
+- **command/command-rsync.md**: rsyncの使い方を追記した
+- **command/command-xargs.md**: delimiterオプションを追加した
+- **command/command-xargs.md**: xargsの使い方を追記した
+- **rust/rust-cargo.md**: cargoのディレクトリ構成を追記した
+- **rust/rust-println.md**: マクロであることを追加した
+- **rust/rust-cargo.md**: ドキュメント作成を追加した
+- **rust/rust-cargo.md**: cargo updateを追加した
+- **rust/rust-usage.md**: rustコマンドのバージョンを追記した
+- **python/python-black.md**: フォーマット対象から除外する方法を追加した
+- **rust/rust-usage.md**: rustのインストールを追加した
+- **command/command-nkf.md**: nkfの使い方を追記した
+- **python/python-pandas.md**: Pandasの使い方へのリンクを追加した
+- **python/python-re.md**: 正規表現の使い方を整理した
+
 ## v1.5.0 (2022-10-24)
 
 ### Feat
