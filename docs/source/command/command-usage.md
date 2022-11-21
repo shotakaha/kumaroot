@@ -10,6 +10,7 @@ command-bash
 command-brew
 command-cd
 command-chmod
+command-curl
 command-docker
 command-exa
 command-fd
