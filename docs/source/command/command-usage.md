@@ -31,7 +31,7 @@ command-tig
 command-tldr
 command-tlmgr
 command-uname
+command-wget
 command-which
 command-xargs
-
 ```
