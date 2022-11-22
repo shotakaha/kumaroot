@@ -55,10 +55,11 @@ maxdepth: 1
 caption: フォント
 ---
 latex-fontenc
+latex-lmodern
 latex-kanji-config-udpmap-sys
 latex-luatexja
 latex-luatexja-preset
-latex-lmodern
+latex-luatexja-fontspec
 ```
 
 ## リファレンス
