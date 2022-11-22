@@ -54,8 +54,11 @@ latex-ide
 maxdepth: 1
 caption: フォント
 ---
-latex-kanji-config-updmap-sys
+latex-fontenc
+latex-kanji-config-udpmap-sys
 latex-luatexja
+latex-luatexja-preset
+latex-lmodern
 ```
 
 ## リファレンス

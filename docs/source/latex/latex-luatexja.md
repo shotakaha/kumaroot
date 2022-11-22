@@ -1,6 +1,6 @@
 # 和文フォントを設定したい（``luatexja``）
 
-```bash
+```latex
 \usepackage{luatexja}
 ```
 
