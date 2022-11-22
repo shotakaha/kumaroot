@@ -95,6 +95,24 @@ $ latexmk -r latexmkjarc
 $ latexmk -f -interaction=nonstopmode
 ```
 
+## ``-shell-escape``したい
+
+```bash
+$ latexmk -shell-escape
+```
+
+外部スクリプトを利用するパッケージを使う場合、``-shell-escape``オプションが必要な場合があります。
+例えばコードのシンタックスハイライトする``minted``パッケージでは必要です。
+
+## ライブプレビューしたい
+
+```bash
+$ latexmk -pvc
+```
+
+文書を編集しているとき、ライブプレビューできると編集作業が捗ります。
+そんなときは``-pvc``オプションを使いましょう。
+
 ## リファレンス
 
 - {command}`texdoc latexmk`
