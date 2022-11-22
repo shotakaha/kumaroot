@@ -1,10 +1,18 @@
 \section{fontspecパッケージ}
 
 LuaLaTexではフォントを自由にカスタマイスできます。
+英文・和文の両方で
+\textrm{セリフ体をReggaeOne}、
+\textsf{サンセリフ体をTrainOne}、
+\texttt{タイプライタ体をPixelMplus10}
+にしてみた。
 
 \begin{minted}{latex}
-    \usepackage{fontspec}
+    \usepackage{luatexja-fontspec}
     \setmainfont{ReggaeOne-Regular}
-    \setsansfont{PixelMplus10-Regular}
-    \setmonofont{PixelMplus10-Regular}
+    \setmainjfont{ReggaeOne-Regular}
+    \setsansfont{TrainOne-Regular}
+    \setsansjfont{TrainOne-Regular}
+    \setmonofont{PixelMplus12-Regular}
+    \setmonojfont{PixelMplus12-Regular}
 \end{minted}
