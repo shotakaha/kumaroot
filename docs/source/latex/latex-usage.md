@@ -34,6 +34,7 @@ latex-include
 latex-ref
 latex-toc
 latex-graphicx
+latex-xcolor
 latex-figure
 latex-index
 latex-bibliography
