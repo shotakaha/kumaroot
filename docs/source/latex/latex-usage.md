@@ -49,6 +49,14 @@ latex-japanese
 latex-ide
 ```
 
+```{toctree}
+---
+maxdepth: 1
+caption: フォント
+---
+latex-kanji-config-updmap-sys
+```
+
 ## リファレンス
 
 - [改定第8版・LaTeX2e美文書作成入門（技術評論社）](https://gihyo.jp/book/2020/978-4-297-11712-2)
