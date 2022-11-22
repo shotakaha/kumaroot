@@ -33,6 +33,8 @@ latex-linebreak
 latex-include
 latex-ref
 latex-toc
+latex-graphicx
+latex-figure
 latex-index
 latex-bibliography
 latex-amsmath
