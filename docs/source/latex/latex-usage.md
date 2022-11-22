@@ -55,6 +55,7 @@ maxdepth: 1
 caption: フォント
 ---
 latex-kanji-config-updmap-sys
+latex-luatexja
 ```
 
 ## リファレンス
