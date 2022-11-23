@@ -28,8 +28,6 @@
 ---
 maxdepth: 1
 ---
-latex-fontenc
-latex-fontspec
 latex-geometry
 latex-graphicx
 latex-hyperref
