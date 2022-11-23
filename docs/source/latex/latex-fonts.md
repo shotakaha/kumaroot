@@ -36,7 +36,7 @@ latex-font-size
 ## フォントを変更したい
 
 毎回、それぞれの要素を指定するのは大変です。
-そんな場合は、文書で使うデフォルトのフォントを設置し直すとよいです。
+そんな場合は、文書で使うデフォルトのフォントを変更してしまいましょう。
 レガシーLaTeXとモダンLaTeXのどちらを使っているかに応じて、フォントに関連するパッケージをうまく使い分けるのがよさそうです。
 
 ### レガシーLaTeX
@@ -48,9 +48,9 @@ latex-font-size
 maxdepth: 1
 ---
 latex-fontenc
-latex-kanji-config-udpmap-sys
 latex-lmodern
 latex-otf
+latex-kanji-config-udpmap-sys
 ```
 
 ### モダンLaTeXのフォント設定
