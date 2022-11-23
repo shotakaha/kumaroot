@@ -1,72 +1,17 @@
-# フォントを設定したい（``fontspec``）
+# フォントを設定したい
 
-LuaLaTeXやXeLaTeXなどのモダンLaTeXでは、フォントを自由に変更できるようになりました。
-逆に(u)pLaTeXで変更するのはなかなか大変なので、考えないことをオススメします。
+ここでは、LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第13章（和文フォント）を読んで、自分なりに理解した要素を整理しています。
 
-## LuaLaTeXの場合
-
-```latex
-\usepackage{latexja-fontspec}
-
-% 欧文フォントの設定
-\setmainfont{ReggaeOne-Regular}
-\setsansfont{ReggaeOne-Regular}
-\setmonofont{PixelMPlus10-Regular}
-
-% 和文フォントの設定
-\setmainjfont{ReggaeOne-Regular}
-\setsansjfont{ReggaeOne-Regular}
-\setmonojfont{PixelMPlus10-Regular}
-```
-
-```{toctree}
----
-maxdepth: 1
----
-latex-fontspec
-latex-luatexja-preset
-```
-
-## (u)pLaTeXの場合
-
-```latex
-% プリアンブル
-% \usepackage[utf8]{inputenc}    % 2018年4月以前は必要だった
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[deluxe, uplatex, jis2004]{otf}
-```
-
-ドキュメントクラスに``jsarticle``系や``beamer``を使う場合は、
-フォントのエンコーディング（文字マッピング）を``T1``に再設定しておきます。
-``jlreq``を使う場合、この設定は必要ありません。
-
-また、(u)pLaTeXの場合、フォント一式を変更するのはめんどくさいです。
-TeX Live 2020以降は和文デフォルトが原ノ味フォントになっているため、
-わざわざ変更する必要はありません。
-
-```{toctree}
----
-maxdepth: 1
----
-latex-fontenc
-latex-lmodern
-latex-otf
-```
-
-以下では、LaTeX美文書作成入門（第8版）の第12章（欧文フォント）と第13章（和文フォント）を読んで、
-自分なりに理解した要素をまとめてみました。
-
-膨大なフォントサンプル集（欧文基本14書体、欧文基本35書体、TeX Gyreフォント集などなど）も
-紹介されているので、この2つの章は何度も参照するとよさそうです。
+LaTeXのフォント設定はとても難しいなと改めて感じました。
+このページを読むのではなく、奥村本をきちんと読むべきだと思います。
 
 ## フォントの5要素
 
-LaTeXのフォントは次の5つの要素で、表示方法が決まっています。
+LaTeXのフォントには次の5つの要素があります。
 
 1. エンコーディング
-1. ファミリー
-1. ウェイト
+1. ファミリー（＝書体）
+1. シリーズ（＝ウェイト）
 1. シェープ
 1. サイズ
 
@@ -75,84 +20,59 @@ LaTeXのフォントは次の5つの要素で、表示方法が決まってい�
 UTF-8やシフトJISのようなファイルのエンコーディングとはまったく別物だそうです。
 ```
 
-## エンコーディングを切り替えたい
+欧文／和文フォントともに、上の要素を指定することで表示できます。
+以下のコマンドを使って、局所的に変更できます。
 
-```latex
-\usepackage[T1]{fontenc}
+```{toctree}
+---
+maxdepth: 1
+---
+latex-font-family
+latex-font-series
+latex-font-shape
+latex-font-size
 ```
 
-古いLaTeXは``OT1``（7bit）、モダンなLaTeXは``TU``（32bit）がデフォルトです。
-(u)pLaTeXを使う場合、[fontenc](latex-fontenc.md)パッケージを使って``T1``（8bit）に変更することが推奨されています。
+## フォントを変更したい
 
-## ファミリーを切り替えたい
+毎回、それぞれの要素を指定するのは大変です。
+そんな場合は、文書で使うデフォルトのフォントを設置し直すとよいです。
+レガシーLaTeXとモダンLaTeXのどちらを使っているかに応じて、フォントに関連するパッケージをうまく使い分けるのがよさそうです。
 
-```latex
-\usepackage{lmodern}
+### レガシーLaTeX
+
+(u)pLaTeXを使う場合、下記のパッケージを使うとよいです。
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-fontenc
+latex-kanji-config-udpmap-sys
+latex-lmodern
+latex-otf
 ```
 
-欧文フォントは **セリフ体（rm）** / **サンセリフ体（ss）** / **タイプライタ体（tt）** の3種類、
-和文フォントは **明朝体（mc）** / **ゴシック体（gt）** / **丸ゴシック体（mg）** の3種類があります。
+## モダンLaTeXのフォント設定
 
-欧文フォントは、``OT1``エンコーディングはComputer Modern系、
-``TU``エンコーディングはLatin Modern系のフォントがデフォルトになっています。
-和文フォントは2019年まではIPAexフォント、2020年からは原ノ味フォントがデフォルトになっています。
+LuaLaTeXを使う場合、下記のパッケージを使うとよいです。
 
-本文中で局所的にファミリー（書体）を切り替えることができます。
-
-```latex
-% 欧文フォント
-{\rmfamily ...} または \textrm{...}    % セリフ体（デフォルト）
-{\sffamily ...} または \textsf{...}    % サンセリフ体
-{\ttfamily ...} または \texttt{...}    % タイプライタ体
-% 和文フォント
-{\mcfamily ...} または \textmc{...}    % 明朝体
-{\gtfamily ...} または \textgt{...}    % ゴシック体
-{\mgfamily ...} または \textmg{...}    % 丸ゴシック体
+```{toctree}
+---
+maxdepth: 1
+---
+latex-fontspec
+latex-luatexja
+latex-luatexja-preset
+latex-luatexja-fontspec
 ```
 
-## ウェイトを切り替えたい
+また、(u)pLaTeXの場合、フォント一式を変更するのはめんどくさいです。
+TeX Live 2020以降は和文デフォルトが原ノ味フォントになっているため、
+わざわざ変更する必要はありません。
 
-フォントによっては複数のウェイト（太さ）を持っているものがあります。
-本文中で局所的にウェイト（太さ）を切り替えることができます。
-LaTeX内ではウェイトを**シリーズ**と呼ぶみたいです。
-
-```latex
-{\mdseries ...} または \textmd{...}    % Medium（デフォルト）
-{\bfseries ...} または \textbf{...}    % Boldface
-{\bxseries ...} または \textbx{...}    % Bold Extended
-```
-
-## シェープを切り替えたい
-
-本文中で局所的にシェープを切り替えることができます。
-
-欧文の場合、強調する場合にイタリック体を使うことがあります。
-和文の場合、使うところはあんまりないかなと個人的に思っています。
-
-```latex
-{\upseries ...} または \textup{...}    % Upright（デフォルト）
-{\itseries ...} または \textit{...}    % Italic
-{\slseries ...} または \textsl{...}    % Slanted
-{\scseries ...} または \textsc{...}    % Small Caps
-```
-
-## 文字サイズを切り替えたい
-
-本文中で局所的に文字サイズを切り替えることができます。
-
-```latex
-\tiny
-\scriptsize
-\footnotesize
-\small
-\normalsize
-\large
-\Large
-\LARGE
-\huge
-\Huge
-```
-
+膨大なフォントサンプル集（欧文基本14書体、欧文基本35書体、TeX Gyreフォント集などなど）も
+紹介されているので、この2つの章は何度も参照するとよさそうです。
 
 ## 日本語の文字と文字コード
 
