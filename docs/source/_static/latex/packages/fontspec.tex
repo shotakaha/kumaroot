@@ -1,18 +1,23 @@
 \section{fontspecパッケージ}
 
-LuaLaTexではフォントを自由にカスタマイスできます。
-英文・和文の両方で
-\textrm{セリフ体をReggaeOne}、
-\textsf{サンセリフ体をTrainOne}、
-\texttt{タイプライタ体をPixelMplus10}
-にしてみた。
-
 \begin{minted}{latex}
     \usepackage{luatexja-fontspec}
-    \setmainfont{ReggaeOne-Regular}
-    \setmainjfont{ReggaeOne-Regular}
-    \setsansfont{TrainOne-Regular}
-    \setsansjfont{TrainOne-Regular}
-    \setmonofont{PixelMplus12-Regular}
-    \setmonojfont{PixelMplus12-Regular}
+    % 欧文フォント
+    \setmainfont{KiwiMaru-Regular}
+    \setsansfont{ReggaeOne-Regular}
+    \setmonofont{HackGen35Console-Regular}
+    % 和文フォント
+    \setmainjfont{KiwiMaru-Regular}
+    \setsansjfont{ReggaeOne-Regular}
+    \setmonojfont{HackGen35Console-Regular}
 \end{minted}
+
+LuaLaTexではフォントを自由にカスタマイスできます。
+欧文／和文フォントの両方で
+\textrm{セリフ体をKiwiMaru}、
+\textsf{サンセリフ体をReggaeOne}、
+\texttt{モノスペース体をHackGen35Console}
+にしてみました。
+
+\texttt{luatexja-fontspec}を読み込むと、\texttt{fontspec}も同時に読み込まれます。
+特に理由がない場合は、和文と欧文をそれぞれ同じに設定しておくとよいと思います。

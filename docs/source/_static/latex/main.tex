@@ -1,16 +1,20 @@
 \documentclass{jlreq}
 
 \usepackage{luatexja-fontspec}
-\setmainfont{ReggaeOne-Regular}
-\setmainjfont{ReggaeOne-Regular}
-\setsansfont{TrainOne-Regular}
-\setsansjfont{TrainOne-Regular}
-\setmonofont{PixelMplus12-Regular}
-\setmonojfont{PixelMplus12-Regular}
+% 欧文フォント
+\setmainfont{KiwiMaru-Regular}
+\setsansfont{ReggaeOne-Regular}
+\setmonofont{HackGen35Console-Regular}
+% 和文フォント
+\setmainjfont{KiwiMaru-Regular}
+\setsansjfont{ReggaeOne-Regular}
+\setmonojfont{HackGen35Console-Regular}
 
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
 \usepackage{minted}
+\usemintedstyle{github-dark}
+
 \usepackage{physics}
 \usepackage{siunitx}
 \AtBeginDocument{\RenewCommandCopy\qty\SI}
@@ -41,11 +45,11 @@
 
 \include{packages/latexmk}
 \include{packages/fontspec}
-% \include{packages/fancyhdr}
+\include{packages/fancyhdr}
 \include{packages/hyperref}
 \include{packages/siunitx}
 \include{packages/physics}
 \include{packages/hepnames}
-% \include{packages/minted}
+\include{packages/minted}
 
 \end{document}
