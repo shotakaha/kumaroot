@@ -47,6 +47,7 @@ latex-hepparticles
 latex-primer
 latex-japanese
 latex-ide
+latex-minted
 ```
 
 
