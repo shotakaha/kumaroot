@@ -19,8 +19,8 @@
 ```latex
 \documentclass[a4paper]{ltjsarticle}  % A4サイズ
 \documentclass[a5paper]{ltjsarticle}  % A5サイズ
-\documentclass[uplatex, b4paper, papersize]{jsarticle}  % B4サイズ
-\documentclass[uplatex, b5paper, papersize]{jsarticle}  % B5サイズ
+\documentclass[uplatex, dvipdfmx, b4paper, papersize]{jsarticle}  % B4サイズ
+\documentclass[uplatex, dvipdfmx, b5paper, papersize]{jsarticle}  % B5サイズ
 ```
 
 和文デフォルトは``a4paper``です。
@@ -30,21 +30,21 @@
 
 ```latex
 \documentclass[10pt]{ltjsarticle}  % 10pt（デフォルト）
-\documentclass[uplatex, 12pt]{jsarticle}  % 12pt
+\documentclass[uplatex, dvipdfmx, 12pt]{jsarticle}  % 12pt
 ```
 
 ## 段組みしたい
 
 ```latex
 \documentclass[twocolumn]{ltjsarticle}
-\documentclass[uplatex, twocolumn]{jsarticle}
+\documentclass[uplatex, dvipdfmx, twocolumn]{jsarticle}
 ```
 
 ## トンボを表示したい
 
 ```latex
 \documentclass[tombow]{ltjsarticle}
-\documentclass[tombo]{ltjsarticle}
+\documentclass[uplatex, dvipdfmx, tombo]{jsarticle}
 ```
 
 ## リファレンス
