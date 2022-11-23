@@ -18,12 +18,16 @@
 \usepackage{latexja-fontspec}
 
 % 欧文フォントの設定
-\setmainfont{ReggaeOne-Regular}
+\setmainfont{KiwiMaru-Regular}
 \setsansfont{ReggaeOne-Regular}
-\setmonofont{PixelMPlus10-Regular}
+\setmonofont{HackGen35Console-Regular}
 
 % 和文フォントの設定
-\setmainjfont{ReggaeOne-Regular}
+\setmainjfont{KiwiMaru-Regular}
 \setsansjfont{ReggaeOne-Regular}
-\setmonojfont{PixelMPlus10-Regular}
+\setmonojfont{HackGen35Console-Regular}
 ```
+
+上記の例は、変更が分かりやすいようにすべて別のフォントを設定しています。
+
+実用的なことを考えると、本文用フォントと見出し用フォントは同じファミリーの異なったウェイトを設定すると、簡単に統一感を出せてよいと思います。
