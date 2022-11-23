@@ -5,8 +5,7 @@
 コンパイルする際には\texttt{-shell-escape}オプションが必要です。
 （\mintinline{shell}{$ latexmk -pvc -shell-escape}）
 
-\subsection{Pythonのサンプル}
-
+\begin{listing}[H]
 \begin{minted}[linenos=true,showspaces]{python}
 from dataclasses import dataclass
 from pathlib import Path
@@ -22,10 +21,10 @@ if __name__ == "__main__":
     c = Config("config.toml")
 
 \end{minted}
+\caption{Pythonのサンプル}
+\end{listing}
 
-
-\subsection{LaTeXのサンプル}
-
+\begin{listing}[H]
 \begin{minted}{latex}
 \documentclass{jlreq}
 \usepackage{minted}
@@ -33,3 +32,5 @@ if __name__ == "__main__":
 
 \end{document}
 \end{minted}
+\caption{LaTeXのサンプル}
+\end{listing}
