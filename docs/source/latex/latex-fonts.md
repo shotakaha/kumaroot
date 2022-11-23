@@ -53,7 +53,7 @@ latex-lmodern
 latex-otf
 ```
 
-## モダンLaTeXのフォント設定
+### モダンLaTeXのフォント設定
 
 LuaLaTeXを使う場合、下記のパッケージを使うとよいです。
 
