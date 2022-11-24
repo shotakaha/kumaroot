@@ -5,26 +5,23 @@
 
 ```latex
 \documentclass{jlreq}
-\documentclass[uplatex]{jsarticle}
+\documentclass[dvipdfmx]{jsarticle}    % pLaTeX
+\documentclass[uplatex, dvipdfmx]{jsarticle}     % upLaTeX
 ```
 
 ## PDFを作成したい
 
 ```bash
-$ ptex2pdf -u -l main.tex
+$ ptex2pdf -l main.tex    % pLaTeX
+$ ptex2pdf -u -l main.tex    % upLaTeX
 ```
 
-``-u``
-:   use uptex class of programs
-
-``-l``
-:   use latex based formats
+upLaTeXを使う場合は``-u -l``オプションを使います。
 
 ## ヘルプを確認したい
 
-
 ```bash
-ptex2pdf -h
+$ ptex2pdf -h
 ```
 
 ## バージョンを確認したい
