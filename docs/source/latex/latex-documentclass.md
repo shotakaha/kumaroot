@@ -97,6 +97,7 @@ latex-documentclass-fontsize
 latex-documentclass-twocolumn
 latex-documentclass-landscape
 latex-documentclass-hanging
+latex-documentclass-tate
 latex-jsclasses
 latex-jlreq
 ```
