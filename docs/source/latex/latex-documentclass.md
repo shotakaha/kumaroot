@@ -96,6 +96,7 @@ latex-documentclass-paper
 latex-documentclass-fontsize
 latex-documentclass-twocolumn
 latex-documentclass-landscape
+latex-documentclass-hanging
 latex-jsclasses
 latex-jlreq
 ```
