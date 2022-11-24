@@ -30,14 +30,14 @@ latex-usepackage
 latex-fonts
 latex-fonts-more
 latex-maketitle
-latex-linebreak
-latex-include
-latex-ref
 latex-toc
+latex-linebreak
+latex-ref
+latex-index
+latex-include
 latex-graphicx
 latex-xcolor
 latex-figure
-latex-index
 latex-bibliography
 latex-amsmath
 latex-fancyhdr
@@ -45,15 +45,13 @@ latex-microtype
 latex-physics
 latex-siunitx
 latex-hepparticles
-latex-primer
-latex-japanese
-latex-ide
 latex-minted
 latex-luatexja-ruby
 latex-newcommand
+latex-primer
+latex-japanese
+latex-ide
 ```
-
-
 
 ## リファレンス
 
