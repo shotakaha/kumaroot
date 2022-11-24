@@ -70,4 +70,5 @@ latex-fontspec
 latex-luatexja
 latex-luatexja-preset
 latex-luatexja-fontspec
+latex-luatexja-otf
 ```
