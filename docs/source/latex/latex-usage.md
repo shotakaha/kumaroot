@@ -50,6 +50,7 @@ latex-japanese
 latex-ide
 latex-minted
 latex-luatexja-ruby
+latex-newcommand
 ```
 
 
