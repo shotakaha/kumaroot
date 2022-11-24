@@ -12,29 +12,6 @@
 JLReqはW3Cワーキンググループで議論されている「[日本語組版処理の要件](https://www.w3.org/TR/jlreq/)」です。
 ``jlreq``パッケージはこの要件の実装を試みたクラスファイルです。
 
-
-
-## フォントサイズを変更したい
-
-```latex
-\documentclass[fontsize=10pt]{jlreq}    % 欧文フォント
-\documentclass[jafontsize=10pt]{jlreq}  % 和文フォント
-\documentclass[jafontscale=1]           % 和文/欧文のフォントサイズ比
-
-\documentclass[jafontsize=12Q, jafontscale=0.92]{jlreq}     % LaTeX美文書作成入門（改訂第8版）
-```
-
-欧文フォントと和文フォントのサイズをそれぞれ、
-もしくはサイズ比を指定できます。
-``fontsize``と``jafontsize``の両方が指定されている場合、
-``jafontscale``は無視されます。
-フォントサイズに小数点を使うことができます。
-
-```{note}
-LaTeXで使う``pt``はDTPソフトのポイントサイズと異なります。
-DTPポイントで指定する場合は``bp``（big point）を使います。
-```
-
 ## 1行あたりの文字数を指定したい
 
 ```latex

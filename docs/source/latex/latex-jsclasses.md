@@ -18,12 +18,7 @@
 
 
 
-## フォントサイズを変更したい
 
-```latex
-\documentclass[10pt]{ltjsarticle}  % 10pt（デフォルト）
-\documentclass[uplatex, dvipdfmx, 12pt]{jsarticle}  % 12pt
-```
 
 ## 段組みしたい
 
