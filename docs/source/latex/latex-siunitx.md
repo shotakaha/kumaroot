@@ -24,17 +24,32 @@ $1.6 \times 2.3 \times 3.4$   % 数式モード
 \numproduct{1.6 x 2.3 x 3.4}  % siunitx
 ```
 
-数式モードの場合、掛け算の記号を表示するために``\times``と書く必要がありますが、``siunitx``の場合は``x``でOKです。
+数式モードの場合、掛け算の記号を表示するために``\times``と書く必要がありますが、``siunitx``の場合は``x（エックス）``でOKです。
 
 ## 単位を表示したい
 
 ```latex
-\unit{m}, \unit{\meter}, \unit{\metre}  % メートル
-\unit{kg}, \unit{\kilogram}, \unit{\kilo\gram}  % キログラム
-\unit{s}, \unit{\second}  % 秒
-\unit{A}, \unit{\ampere}  % アンペア
+% メートル
+\unit{m}
+\unit{\meter}
+\unit{\metre}
 
-\unit{N}, \unit{\newton}  % ニュートン
+% キログラム
+\unit{kg}
+\unit{\kilogram}
+\unit{\kilo\gram}
+
+% 秒
+\unit{s}
+\unit{\second}
+
+% アンペア
+\unit{A}
+\unit{\ampere}
+
+% ニュートン
+\unit{N}
+\unit{\newton}
 \unit{kg.m.s^{-1}}
 \unit{\kilogram\meter\per\second}
 \unit[per-mode=symbol]{\kilogram\meter\per\second}
