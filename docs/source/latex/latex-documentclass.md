@@ -95,6 +95,7 @@ maxdepth: 1
 latex-documentclass-paper
 latex-documentclass-fontsize
 latex-documentclass-twocolumn
+latex-documentclass-landscape
 latex-jsclasses
 latex-jlreq
 ```
