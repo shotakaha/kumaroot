@@ -28,6 +28,7 @@ latex-documentclass
 latex-build
 latex-usepackage
 latex-fonts
+latex-fonts-more
 latex-maketitle
 latex-linebreak
 latex-include
