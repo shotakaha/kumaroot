@@ -100,12 +100,12 @@ $ latexmk -r latexmkjarc
 
 ## 設定ファイル（``latexmkrc``）
 
-```rc
+```text
 @default_files = ("00_sample", "01_sample", "02_sample");
 $pdf_mode = 4;
 $out_dir = "outd";
 $aux_dir = "auxd";
-# ライブsプレビューに関する設定
+# ライブプレビューに関する設定
 $preview_continuous_mode = 1;
 $pvc_timeout = 1;
 $pvc_timeout_mins = 10;  # 30min; default
