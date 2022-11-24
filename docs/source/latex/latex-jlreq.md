@@ -40,11 +40,7 @@
 
 
 
-## ぶら下げ組にしたい
 
-```latex
-\documentclass[hanging_puctuation]{jlreq}
-```
 
 ## リファレンス
 

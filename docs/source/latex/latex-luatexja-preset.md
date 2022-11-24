@@ -13,4 +13,5 @@
 
 ## リファレンス
 
-- {command}`luatexja`
+- {command}`texdoc luatexja-preset`
+- {command}`texdoc luatexja`

@@ -2,9 +2,10 @@
 
 ```latex
 % 欧文フォント
-{\rmfamily ...} または \textrm{...}    % セリフ体（和文デフォルト）
+{\rmfamily ...} または \textrm{...}    % セリフ体・ローマン体（欧文デフォルト）
 {\sffamily ...} または \textsf{...}    % サンセリフ体
 {\ttfamily ...} または \texttt{...}    % タイプライタ体
+
 % 和文フォント
 {\mcfamily ...} または \textmc{...}    % 明朝体（和文デフォルト）
 {\gtfamily ...} または \textgt{...}    % ゴシック体
