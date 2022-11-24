@@ -6,12 +6,6 @@
 \documentclass[book]{jlreq}  % bookに相当
 ```
 
-``jlreq``はLuaLaTeX、(u)pLaTeXに対応しているドキュメントクラスです。
-これから新しく文書を作成する場合は、迷わず使うとよいと思います。
-
-JLReqはW3Cワーキンググループで議論されている「[日本語組版処理の要件](https://www.w3.org/TR/jlreq/)」です。
-``jlreq``パッケージはこの要件の実装を試みたクラスファイルです。
-
 ## 1行あたりの文字数を指定したい
 
 ```latex
@@ -25,24 +19,6 @@ JLReqはW3Cワーキンググループで議論されている「[日本語組�
 \documentclass[number_of_lines=30]{jlreq}  % 30行（デフォルト）
 \documentclass[number_of_lines=27]{jlreq}  % 27行
 ```
-
-## レポートを作成したい
-
-```latex
-\documentclass[report]{jlreq}
-```
-
-トップレベルが章（``\chapter``）の文書ができます。
-**片面印刷を想定**して、左右ページのデザインは同じです。
-
-## 書籍を作成したい
-
-```latex
-\documentclass[book]{jlreq}
-```
-
-トップレベルが章（``\chapter``）の文書ができます。
-**両面印刷を想定**して、左右ページのデザインが異なっています。
 
 ## 余白を調整したい
 
@@ -62,13 +38,7 @@ JLReqはW3Cワーキンググループで議論されている「[日本語組�
 **柱**
 :   各ページの上か下に出力する章や節の名前です。
 
-## 二段組にしたい
 
-```latex
-\documentclass[twocolumn, column_gap=2zw]{jlreq}  % 二段組
-```
-
-二段組したときの段間（``column_gap``）を指定できます。
 
 ## ぶら下げ組にしたい
 
