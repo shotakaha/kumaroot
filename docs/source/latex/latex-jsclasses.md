@@ -16,15 +16,7 @@
 
 ## 用紙サイズを変更したい
 
-```latex
-\documentclass[a4paper]{ltjsarticle}  % A4サイズ
-\documentclass[a5paper]{ltjsarticle}  % A5サイズ
-\documentclass[uplatex, dvipdfmx, b4paper, papersize]{jsarticle}  % B4サイズ
-\documentclass[uplatex, dvipdfmx, b5paper, papersize]{jsarticle}  % B5サイズ
-```
 
-和文デフォルトは``a4paper``です。
-``jsarticle``系は、``papersize``オプションも一緒に指定して、ドライバー（``dvipdfmx``）にPDFのページサイズを教えてあげる必要があります。
 
 ## フォントサイズを変更したい
 

@@ -9,13 +9,21 @@ maxdepth: 1
 ---
 latex-jsclasses
 latex-jlreq
+latex-documentclass-paper
+latex-documentclass-fontsize
 ```
 
 ## エンジンとドキュメントクラスの組み合わせ
 
-日本語でLaTeXするときのエンジンとドキュメントクラスの組み合わせは以下の3通りがあります。
+```latex
+\documentclass{jlreq}  % LuaLaTeX + jlreq
+\documentclass{ltjsarticle}  % LuaLaTeX + ltjsarticle
+\documentclass[uplatex, dvipdfmx]{jsarticle}  % upLaTeX + jsarticle
+```
+
+日本語でLaTeXするときのエンジンとドキュメントクラスの組み合わせは上記の3通りから選ぶとよいと思います。
+参考までに、僕の感想を下記に添えてみました。
 用途にあった組み合わせを選んでください。
-参考となるように僕の感想を添えておきました。
 
 ``LuaLaTeX + jlreq``
 :   新しくLaTeXに入門する場合は、この組み合わせでOKだと思います。
@@ -44,24 +52,3 @@ latex-jlreq
 
  ``book``
  : 書籍；章（chapter）；両面印刷
-
-## 用紙サイズ
-
-よく使う用紙サイズもメモしておきます。
-A判はISO規格とJIS規格でサイズが同じですが、B判は異なります（JIS規格のほうが大きい）。
-レター判は使ったことがありませんが、欧文ドキュメントのデフォルトなので載せておきます。
-
-A4判（和文デフォルト）
-: 210mm $\times$ 297mm
-
-A5判
-: 148mm $\times$ 210mm
-
-B4判
-: 257mm $\times$ 364mm
-
-B5判
-: 182mm $\times$ 257mm
-
-レター判（欧文デフォルト）
-: 8.5in. $\times$ 11in.

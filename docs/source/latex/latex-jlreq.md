@@ -12,19 +12,7 @@
 JLReqはW3Cワーキンググループで議論されている「[日本語組版処理の要件](https://www.w3.org/TR/jlreq/)」です。
 ``jlreq``パッケージはこの要件の実装を試みたクラスファイルです。
 
-## 用紙サイズを変更したい
 
-```latex
-\documentclass[paper=a4]{jlreq}  % A4サイズ（デフォルト）
-\documentclass[paper=a5]{jlreq}  % A5サイズ
-\documentclass[paper=b4]{jlreq}  % B4サイズ
-\documentclass[paper=b5]{jlreq}  % B5サイズ
-```
-
-- Aサイズ（JIS/ISO）は``a0 - a10``から選択できます
-- Bサイズ（JIS）は``b0 - b10``から選択できます
-- Cサイズ（ISO）は``c2 - c8``から選択できます
-- ``paper={横mm, 縦mm}``で直接指定することもできます
 
 ## フォントサイズを変更したい
 
