@@ -50,6 +50,7 @@ latex-luatexja-ruby
 latex-newcommand
 latex-hyperref
 latex-pxjahyper
+latex-inputenc
 latex-primer
 latex-japanese
 latex-ide
