@@ -14,3 +14,5 @@
 ```
 
 本文中で局所的に文字サイズを切り替えることができます。
+欧文フォントで``cm``（Computer Modern）を使っている場合、``\fontsize``コマンドでは任意のサイズに指定できません。
+``fix-cm``パッケージを読み込むか、[lmodernパッケージ](latex-lmodern.md)を読み込んで``lm``（Latin Modern）に変更するとよいです。
