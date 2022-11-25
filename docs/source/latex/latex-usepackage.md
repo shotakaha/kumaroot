@@ -30,7 +30,6 @@ maxdepth: 1
 ---
 latex-geometry
 latex-graphicx
-latex-hyperref
 latex-inputenc
 latex-layout
 latex-plautopatch

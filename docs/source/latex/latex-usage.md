@@ -48,6 +48,7 @@ latex-hepparticles
 latex-minted
 latex-luatexja-ruby
 latex-newcommand
+latex-hyperref
 latex-pxjahyper
 latex-primer
 latex-japanese
