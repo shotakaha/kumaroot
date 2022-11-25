@@ -51,6 +51,7 @@ latex-newcommand
 latex-hyperref
 latex-pxjahyper
 latex-inputenc
+latex-booktabs
 latex-primer
 latex-japanese
 latex-ide
