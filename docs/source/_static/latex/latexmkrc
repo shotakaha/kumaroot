@@ -3,5 +3,5 @@ $preview_continuous_mode = 1;
 $pvc_timeout = 1;
 $pvc_timeout_mins = 10;  # 30min; default
 $sleep_time = 60;  # 60s
-$out_dir = "outd";
-$aux_dir = "auxd";
+# $out_dir = "outd";
+# $aux_dir = "auxd";

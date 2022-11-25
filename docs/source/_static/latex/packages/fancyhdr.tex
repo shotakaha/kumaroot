@@ -1,6 +1,6 @@
 \section{fancyhdrパッケージ}
 
-\pagestyle{fancy}
+\thispagestyle{fancy}
 \lhead{ヘッダー・左（チャプター名）}
 \chead{ヘッダー・中央}
 \rhead{ヘッダー・右（タイトル）}
@@ -11,22 +11,23 @@
 文書のヘッダー／フッターをいい感じにデコレーションするパッケージです。
 読み込む順番に気をつける必要があるみたいです。
 
-すべてのページに適用する場合は、プリアンブルで
-\mintinline{latex}{\pagestyle{fancy}}し,
-現在のページ（\mintinline{latex}{\newpage}でリセット）のみに適用する場合は、
-\mintinline{latex}{\thispagestyle(fancy)}
-します。
+現在のページにだけ適用したい場合は、\mintinline{latex}{\thispagestyle{fancy}}します。
+改ページ（\mintinline{latex}{\newpage}）でリセットされます。
+
+\mintinline{latex}{\pagestyle{fancy}}を宣言すると、そのページ以降に適用されます。
+すべてのページに適用する場合は、プリアンブルで宣言すればOKです。
 
 ページのスタイルとして、全部で6ヶ所のヘッダー／フッターを設定できます。
 
 \begin{minted}{latex}
     \thispagestyle{fancy}
-    \lhead{ヘッダー・左}
+    \lhead{ヘッダー・左（チャプター名）}
     \chead{ヘッダー・中央}
-    \rhead{ヘッダー・右}
+    \rhead{ヘッダー・右（タイトル）}
     \lfoot{フッター・左}
-    \cfoot{フッター・中央}
+    \cfoot{フッター・-\, \thepage \, -}
     \rfoot{フッター・右}
 \end{minted}
 
-ほげ
+
+ここでは\mintinline{latex}{\thispagestyle{fancy}}しているので、このセクションの柱にだけヘッダー／フッターが表示されているはずです。
