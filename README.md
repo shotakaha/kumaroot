@@ -46,7 +46,7 @@ poetry run bash deploy.sh
 [Sphinx](https://sphinx-users.jp)というドキュメト作成ソフトを使っています。
 文書本体には``reStructuredText（reST）``と``Markdown（md）``という軽量マークアップ言語を使っています。
 
-## ドキュメントの編集
+## 編集の手順
 
 ```bash
 $ poetry shell
@@ -68,8 +68,8 @@ $ open build/html/index.html
 - ``Minor (feat)`` : 新しい節を追加した場合
 - ``Patch (fix)`` : 文章を修正した場合
 
-バージョンアップするタイミングは気まぐれ。
-とりあえず月1回くらいかな。
+バージョンアップするタイミングは気まぐれです。
+とりあえず月1回くらいにしようかな。
 
 ## 依存パッケージの管理
 
@@ -77,18 +77,22 @@ $ open build/html/index.html
 $ poetry export -f requirements.txt --output requirements.txt
 ```
 
-- パッケージを更新した時、Read the Docs に教えるために``requirements.txt``も更新する必要があります。
-- ``poetry export``を使って生成し、Gitにコミットします
+Read the Docsでビルドする際に、``requirements.txt``を使って必要なパッケージを取得しています。
+なので、パッケージを更新したら``requirements.txt``も更新する必要があります。
+``poetry export``のサブコマンドで生成し、Gitにコミットします。
 
 ## ファイルの命名規則
 
-次のような命名規則でコンテンツを管理しています
+コンテンツのファイル名は、次のような命名規則で管理することにしています。
 
-### ツールのインデックス
+```text
+docs/source/ツール名/ツール名-内容.md
+```
 
-- ``ツール名/ツール名-usage.md``にする
+### 例：ツールのインデックス
 
-例
+ツールのインデックスは``ツール名/ツール名-usage.md``にします。
+このファイルに``toctree``を記載しています。
 
 ```md
 root/root-usage.md
@@ -97,11 +101,9 @@ python/pyhton-usage.md
 pandas/pandas-usage.md
 ```
 
-### ツールのインストール方法
+### 例：ツールのインストール方法
 
-- ``ツール名/ツール名-install.md``にする
-
-例
+ツールのインストール方法は``ツール名/ツール名-install.md``としています。
 
 ```md
 root/root-install.md
@@ -110,12 +112,10 @@ python/python-install.md
 pandas/pandas-install.md
 ```
 
-### ツールの詳細
+### 例：ツールの使い方
 
-- ``ツール名/ツール名-[章タイトル].md``にする
-- ``[章タイトル]``はパッケージ名やメソッド名、クラス名などを想定している
-
-例
+ツールの使い方は「やりたいこと」を軸にファイルを分けることにします。
+とりあえず作成してみて、あとで分割／統合して整理しなおすこともあります。
 
 ```md
 sphinx/sphinx-theme.md
@@ -123,10 +123,10 @@ python/python-pathlib.md
 command/command-find.md
 ```
 
-### ツールの説明画像
+### 例：ツールの説明画像
 
-- ``ツール名/fig/ツール名-[章タイトル]-[連番].png``にする
-- ツールの説明に必要なスクリーンショットは、ツールごとに作成した``fig``ディレクトリの中で管理する
+ごくまれにツールの使い方を説明した画像やスクリーンショットを使っています。
+ツールの中に``fig``とう画像用のディレクトリを作成し、その中で管理するようにしています。
 
 ```md
 emacs/fig/mac-key01.png
