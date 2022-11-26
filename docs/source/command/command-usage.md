@@ -5,6 +5,7 @@
 maxdepth: 1
 ---
 command-arp
+command-asdf
 command-awk
 command-bash
 command-brew
