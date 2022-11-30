@@ -34,6 +34,7 @@ latex-toc
 latex-linebreak
 latex-ref
 latex-index
+latex-thesection
 latex-include
 latex-graphicx
 latex-xcolor
