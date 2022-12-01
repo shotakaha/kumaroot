@@ -94,6 +94,9 @@ $ launchctl list | rg ラベル名
 ```
 
 日時を指定して定期実行したい場合は``StartCalendarInterval``を使って設定します。
+頻度のキーとして``Minute``、``Hour``、``Day``、``Weekday``、``Month``があります。
+毎週実行したい場合は、``Weekday``に0から7の値を指定します（0と7は日曜日に相当）。
+
 実行した時刻を起点に定期実行する場合は``StartInterval``を使います。
 
 ## 環境変数を設定したい（``EnvironmentVariables``）
