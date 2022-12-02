@@ -53,6 +53,7 @@ latex-hyperref
 latex-pxjahyper
 latex-inputenc
 latex-booktabs
+latex-bxjalipsum
 latex-primer
 latex-japanese
 latex-ide
