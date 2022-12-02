@@ -10,6 +10,7 @@ hugo-install.md
 hugo-demo.md
 hugo-ogp.md
 hugo-data.md
+hugo-config.md
 ```
 
 ## リファレンス
