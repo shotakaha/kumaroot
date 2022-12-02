@@ -21,3 +21,15 @@ $ brew install --cask mactex
 ```
 
 TeXLiveはHomebrew（{command}`brew`コマンド）を使ってインストールできます。
+
+## TeXのディレクトリ構造
+
+```text
+/usr/local/texlive/2022/texmf-config
+/usr/local/texlive/2022/texmf-var
+/usr/local/texlive/2022/texmf-dist
+/usr/local/texlive/texmf-local    # ユーザー設定
+```
+
+TeXLiveのバージョンごとの設定は、バージョンアップすると上書きされます。
+自分用にカスタマイズした設定は{file}`/usr/local/texlive/texmf-local`に保存できます。
