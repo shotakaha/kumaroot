@@ -6,11 +6,11 @@
 ```
 
 文書にハイパーリンクを作成するためのパッケージです。
-ドキュメントを読むと、パッケージを読み込む順番は一番最後にしたほうがよいようです。
+パッケージを読み込む順番は一番最後にしたほうがよいようです。
 
-``hyperref``パッケージは、日本語のドキュメントクラスを使った場合に、文章がページからはみ出したり、目次のしおりが文字化けしたりするので、``PXjahyper``パッケージも一緒に読み込んでおきます。
+日本語のドキュメントクラスで``hyperref``を使った場合、文章がページからはみ出したり、目次のしおりが文字化けしたりするため、``pxjahyper``パッケージも一緒に読み込んでおくとよいです。
 
-## hyperrefを設定したい
+## オプションを設定したい
 
 ```latex
 % パッケージオプション
@@ -24,25 +24,29 @@
 ```
 
 ``hyperref``を設定する方法は3種類あります。
-（1）パッケージオプションに書く方法、
-（2）``\hypersetup``コマンドを使う方法、そして
-（3）``hyperref.cfg``に書く方法です。
 
-僕は、設定が読みやすいのと、ソース管理していると変更が分かりやすいので（2）の方法を好んで使っています。
+1. パッケージオプションを使う方法
+1. ``\hypersetup``コマンドを使う方法
+1. ``hyperref.cfg``を使う方法
+
+僕は、設定が読みやすいのと、ソース管理していると変更が分かりやすいので``\hypersetup``コマンドを使う方法を好んで使っています。
 
 ## リンクに色をつけたい
 
 ```latex
-\hypersetup{colorlinks=true}
-\hypersetup{allcolors=blue}    % Set all color options
-\hypersetup{hidelinks=false}   % Hide links (removing color and border)
+\hypersetup{colorlinks=true}   % リンクの文字に色を追加する
+\hypersetup{allcolors=blue}    % すべてのリンクの色を設定する
+% \hypersetup{linkcolor=red}     % 内部リンクの色設定
+% \hypersetup{citecolor=green}   % 参照文献のリンクの色設定
+% \hypersetup{filecolor=cyan}    % 参照文献のリンクの色設定
+% \hypersetup{urlcolor=magenta}  % URLのリンクの色設定
+\hypersetup{hidelinks=false}   % リンクに色をつけない
 ```
 
-デフォルトだとリンクは枠（``pdfborder``）で囲まれています。
-リンクの種類によって色も異なっています。
-``allcolors``を使ってすべて青色にしています。
+デフォルトだとリンクは枠（``pdfborder``）で囲まれて表示されます。
+リンクの対象ごとに文字色を設定できますが、``allcolors``を使って一括設定するのが楽ちんです。
 
-## PDFのしおり（ブックマーク）を作成したい
+## PDFのしおりを作成したい
 
 ```latex
 \hypersetup{bookmarks=true}  % デフォルト
@@ -52,19 +56,34 @@
 PDFのしおり（ブックマーク）は自動で生成されるようになっています。
 長い文書の場合は、章番号も表示するとよいです。
 
+## しおりの文字化け対策
+
+```latex
+\usepackage{pxjahyper}
+\pxjahypersetup{キー=値, ...}
+```
+
+(u)pLaTeXで``hyperref``を使うとPDFのしおりが文字化けします。
+その場合には``pxjahyper``パッケージを読み込んで対応します。
+
 ## ページサイズ対策
 
 ```latex
 \hypersetup{setpagesize=false}
 ```
 
-## しおりの文字化け対策
+## PDFのメタ情報を設定したい
 
 ```latex
-\usepackage{atbegshi}
-\AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
-\AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
+\hypersetup(pdftitle="PDFのタイトル")
+\hypersetup(pdfauthor="PDFの著者")
+\hypersetup(pdfsubject="")
+\hypersetup(pdfcreator="")
+\hypersetup(pdfkeywords="キーワード1,キーワード2,...")
+\hypersetup(pdfduplex="Simplex|DuplexFlipShortEdge|DuplexFlipLongEdge"")  % 両面印刷の設定
 ```
 
-何をしているのかまったく理解していないが、とりあえず両方書いておけばよいです。
-それでうまくいかない場合は片方する試してみてください。
+## リファレンス
+
+- {command}`texdoc hyperref`
+- {command}`texdoc pxjahyper`
