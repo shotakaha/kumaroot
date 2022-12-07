@@ -31,3 +31,8 @@ const mailBody = "本文"
 const draft = GmailApp.createDraft(mailTo, mailTitle, mailBody, {name: "名前"});
 draft.send()
 ```
+
+## リファレンス
+
+- [MailApp](https://developers.google.com/apps-script/reference/mail/mail-app)
+- [GmailApp](https://developers.google.com/apps-script/reference/gmail/gmail-app)
