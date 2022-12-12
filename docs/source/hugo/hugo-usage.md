@@ -11,6 +11,7 @@ hugo-demo.md
 hugo-ogp.md
 hugo-data.md
 hugo-config.md
+hugo-config-menu.md
 hugo-templates-base
 hugo-templates-homepage
 ```
