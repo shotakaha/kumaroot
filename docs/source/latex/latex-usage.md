@@ -54,6 +54,7 @@ latex-pxjahyper
 latex-inputenc
 latex-booktabs
 latex-bxjalipsum
+latex-flushright
 latex-primer
 latex-japanese
 latex-ide
