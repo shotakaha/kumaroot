@@ -50,7 +50,6 @@ latex-minted
 latex-luatexja-ruby
 latex-newcommand
 latex-hyperref
-latex-pxjahyper
 latex-inputenc
 latex-booktabs
 latex-bxjalipsum
