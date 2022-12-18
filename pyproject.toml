@@ -10,6 +10,7 @@ python = "^3.9"
 Sphinx = "^5.1.1"
 sphinx-rtd-theme = "^1.0.0"
 myst-parser = "^0.18.0"
+sphinxext-opengraph = "^0.7.3"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.16.0"

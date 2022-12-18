@@ -26,6 +26,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx_rtd_theme",
     "myst_parser",
+    "sphinxext.opengraph",
 ]
 
 templates_path = ["_templates"]
