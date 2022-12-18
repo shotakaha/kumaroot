@@ -1,25 +1,35 @@
 \documentclass{jlreq}
 
-\newcommand{\請求日}[1]{\flushright{請求日　#1}}
-\newcommand{\請求書}{\center{{\Huge 請求書}}}
+\newcommand{\請求日}[1]{\begin{flushright}請求日　#1\end{flushright}}
+\newcommand{\請求書}{\begin{center}{\Huge 請求書}\end{center}}
+\newcommand{\御中}[1]{#1　御中}
+\newcommand{\振込先}[3]{
+    \begin{description}
+        \item[銀行名] #1
+        \item[口座番号] #2
+        \item[口座名義] #3
+    \end{description}
+}
 
 \begin{document}
+
+\noindent
 
 \請求日{\today}
 
 \請求書
 
+\御中{〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇}
 
-〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇御中
 
-
-\flushright{
+\begin{flushright}
 〇〇〇〇\\
 住所：〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇\\
 電話：xxx-xxxx-xxxx\\
-}
+\end{flushright}
 
-\flushleft{下記の通りご請求申し上げます。}
+
+下記の通りご請求申し上げます。
 
 件名：〇〇
 
@@ -31,8 +41,7 @@
 
 下記銀行口座までお振込みくださいますようお願い申し上げます。
 
-銀行名：
-口座番号：
-口座名義：
+\振込先{〇〇〇〇銀行〇〇〇〇支店}{口座番号}{名前}
+
 
 \end{document}
