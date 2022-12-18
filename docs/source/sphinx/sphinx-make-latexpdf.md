@@ -30,6 +30,7 @@ sphinx-latex-elements
 sphinx-latex-preamble
 sphinx-latex-logo
 sphinx-latex-section
+sphinx-latex-thesection
 ```
 
 ```{toctree}
