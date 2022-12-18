@@ -1,8 +1,36 @@
 \documentclass{jlreq}
 
-\newcommand{\請求日}[1]{\begin{flushright}請求日　#1\end{flushright}}
+%% 請求書に必要な項目
+% 1. 題目
+% 2. 発行者
+% 3. 請求先
+% 4. 取引内容
+% 5. 請求金額
+% 6. 発行年月日（請求日）
+% 7. 振込先
+
 \newcommand{\請求書}{\begin{center}{\Huge 請求書}\end{center}}
+
+\newcommand{\請求日}[1]{
+    \begin{flushright}
+        \begin{description}
+            \item[請求日] #1
+        \end{description}
+    \end{flushright}
+    }
+
 \newcommand{\御中}[1]{#1　御中}
+
+\newcommand{\発行者}[3]{
+    \begin{flushright}
+        \begin{description}
+            \item[発行者] #1
+            \item[住所] #2
+            \item[電話番号] #3
+        \end{description}
+    \end{flushright}
+}
+
 \newcommand{\振込先}[3]{
     \begin{description}
         \item[銀行名] #1
@@ -15,19 +43,14 @@
 
 \noindent
 
-\請求日{\today}
-
 \請求書
+
+\請求日{\today}
+\発行者{名前}{〇〇県〇〇市〇〇}{xxx-xxxx-xxxx}
 
 \御中{〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇}
 
-
-\begin{flushright}
-〇〇〇〇\\
-住所：〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇\\
-電話：xxx-xxxx-xxxx\\
-\end{flushright}
-
+\hrulefill
 
 下記の通りご請求申し上げます。
 
@@ -38,6 +61,8 @@
 源泉徴収税額：〇〇円（）
 
 振込金額：〇〇円
+
+\hrulefill
 
 下記銀行口座までお振込みくださいますようお願い申し上げます。
 
