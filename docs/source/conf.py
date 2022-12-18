@@ -95,6 +95,9 @@ html_theme_options = {
 }
 html_logo = "./_static/quma.jpeg"
 
+# -- Options for OGP --------------------------------------------------
+
+
 # -*- coding: utf-8 -*-
 #
 # KumaROOT documentation build configuration file, created by

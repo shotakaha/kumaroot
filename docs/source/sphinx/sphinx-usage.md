@@ -28,6 +28,7 @@ sphinx-code-block
 sphinx-meta
 sphinx-footnote
 sphinx-readthedocs
+sphinx-html-ogp
 ```
 
 ## リファレンス
