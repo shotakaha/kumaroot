@@ -6,14 +6,17 @@
 ---
 maxdepth: 1
 ---
-hugo-install.md
-hugo-demo.md
-hugo-ogp.md
-hugo-data.md
-hugo-config.md
-hugo-config-menu.md
-hugo-templates-base
+hugo-install
+hugo-demo
+hugo-ogp
+hugo-data
+hugo-config
+hugo-config-menu
+hugo-templates-baseof
 hugo-templates-homepage
+hugo-bundles
+hugo-content
+hugo-static
 ```
 
 ## リファレンス
