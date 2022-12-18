@@ -1,5 +1,7 @@
 \documentclass{jlreq}
 
+\usepackage{booktabs}
+
 %% 請求書に必要な項目
 % 1. 題目
 % 2. 発行者
@@ -9,29 +11,40 @@
 % 6. 発行年月日（請求日）
 % 7. 振込先
 
-\newcommand{\請求書}{\begin{center}{\Huge 請求書}\end{center}}
+\newcommand{\請求書}{
+    \begin{center}
+        \vspace{1\zw}
+        {\Huge 請求書}
+        \vspace{1\zw}
+    \end{center}
+}
 
-\newcommand{\請求日}[1]{
-    \begin{flushright}
-        \begin{description}
-            \item[請求日] #1
-        \end{description}
-    \end{flushright}
-    }
+\newcommand{\御中}[1]{
+    \vspace{1\zw}
+    #1　御中
+    \vspace{1\zw}
+}
 
-\newcommand{\御中}[1]{#1　御中}
+\newcommand{\発行者}[4]{
+    \begin{description}
+        \item[発行日] #1
+        \item[発行者] #2
+        \item[住所] #3
+        \item[電話番号] #4
+    \end{description}
 
-\newcommand{\発行者}[3]{
-    \begin{flushright}
-        \begin{description}
-            \item[発行者] #1
-            \item[住所] #2
-            \item[電話番号] #3
-        \end{description}
-    \end{flushright}
+    \vspace{1\zw}
+    \hrulefill
+    \vspace{1\zw}
 }
 
 \newcommand{\振込先}[3]{
+    \vspace{1\zw}
+    \hrulefill
+    \vspace{1\zw}
+
+    下記銀行口座までお振込みくださいますようお願い申し上げます。
+    \vspace{1\zw}
     \begin{description}
         \item[銀行名] #1
         \item[口座番号] #2
@@ -41,30 +54,33 @@
 
 \begin{document}
 
-\noindent
-
 \請求書
 
-\請求日{\today}
-\発行者{名前}{〇〇県〇〇市〇〇}{xxx-xxxx-xxxx}
+\発行者{発行日}{名前}{〇〇県〇〇市〇〇}{xxx-xxxx-xxxx}
 
 \御中{〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇〇}
 
-\hrulefill
-
 下記の通りご請求申し上げます。
 
-件名：〇〇
+\begin{description}
+    \item[件名] 〇〇
+    \item[ご請求金額] 〇〇円
+    \item[源泉徴収税額] 〇〇円（）
+    \item[振込金額] 〇〇円
+\end{description}
 
-ご請求金額：〇〇円
-
-源泉徴収税額：〇〇円（）
-
-振込金額：〇〇円
-
-\hrulefill
-
-下記銀行口座までお振込みくださいますようお願い申し上げます。
+\begin{table}
+    \centering
+    \begin{tabular}{lrrr}
+        \toprule
+        品名 & 単価 & 数量 & 金額 \\\midrule
+        あれしました & 〇〇円 & 一式 & 〇〇円\\
+        これしました & 〇〇円 & 一式 & 〇〇円\\
+        交通費（〇〇 - 〇〇往復） & 〇〇円 & 一式 & 〇〇円\\ \midrule
+        合計 & & & 〇〇〇円\\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \振込先{〇〇〇〇銀行〇〇〇〇支店}{口座番号}{名前}
 
