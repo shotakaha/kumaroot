@@ -57,6 +57,7 @@ latex-flushright
 latex-primer
 latex-japanese
 latex-ide
+latex-masterthesis
 ```
 
 ## リファレンス
