@@ -60,4 +60,43 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{ニュートリノ振動}
 
+ニュートリノ振動は、フレーバーの固有状態（$\nu_{e}, \nu_{\mu}, \nu_{\tau}$）と
+質量の固有状態（$\nu_{1}, \nu_{2}, \nu_{3}$）が一致せず、
+さらに3つの質量固有状態が縮退していない場合に起こる。
+この場合、混合状態は3つの混合角（$\theta_{12}, \theta_{13}, \theta_{23}$）と
+つのCP複素位相$\delta$を使って次のように記述できる。
+
+\begin{align}
+    \pmqty{ \nu_{e} \\ \nu_{\mu} \\ \nu_{\tau} }
+    =
+    \pmqty{
+        U_{e 1} & U_{e 2} & U_{e 3} \\
+        U_{\mu 1} & U_{\mu 2} & U_{\mu 3} \\
+        U_{\tau 1} & U_{\tau 2} & U_{\tau 3}
+    }
+    \pmqty{ \nu_{1} \\ \nu_{2} \\ \nu_{3} }
+\end{align}
+
+この$3 \times 3$行列は世代間の混合を表すユニタリ行列で、MNS（Maki-Nakagawa-Sakata）行列と呼ばれる。
+
+\begin{align}
+U_{\alpha i} =
+\pmqty{
+    1 & 0 & 0\\
+    0 & \cos \theta_{23} & \sin \theta_{23}\\
+    0 & - \sin \theta_{23} & \cos \theta_{23}
+}
+\pmqty{
+    \cos \theta_{13} & 0 & \sin \theta_{13} e^{-i \delta}\\
+    0 & 1 & 0\\
+    - \sin \theta_{13} e^{i \delta} & 0 & \cos \theta_{13}
+}
+\pmqty{
+    \cos \theta_{12} & \sin \theta_{12} & 0\\
+    - \sin \theta_{12} & \cos \theta_{12} & 0\\
+    0 & 0 & 1
+}
+\end{align}
+
+ここで、$\alpha = (e, \mu, \tau)$、$i = (1, 2, 3)$である
 \end{document}
