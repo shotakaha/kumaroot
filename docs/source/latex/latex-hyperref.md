@@ -75,13 +75,18 @@ PDFのしおり（ブックマーク）は自動で生成されるようにな�
 ## PDFのメタ情報を設定したい
 
 ```latex
-\hypersetup(pdftitle="PDFのタイトル")
-\hypersetup(pdfauthor="PDFの著者")
-\hypersetup(pdfsubject="")
-\hypersetup(pdfcreator="")
-\hypersetup(pdfkeywords="キーワード1,キーワード2,...")
-\hypersetup(pdfduplex="Simplex|DuplexFlipShortEdge|DuplexFlipLongEdge"")  % 両面印刷の設定
+\hypersetup{pdftitle=PDFのタイトル}
+\hypersetup{pdfauthor=PDFの著者}
+\hypersetup{pdfsubject=PDFのサブジェクト}
+% \hypersetup{pdfcreator=LaTeX with hyperref}
+\hypersetup{pdfkeywords="キーワード1,キーワード2,..."}
+\hypersetup{pdfduplex="Simplex|DuplexFlipShortEdge|DuplexFlipLongEdge"}  % 両面印刷の設定
 ```
+
+PDFのメタ情報を設定できます。
+``Preview.app``の場合、``[Tools] → [Show inspector]``（{kbd}`⌘ + i`）で確認できます。
+ひとの目に入る情報ではないので設定しなくても構いません。
+設定する文字列は``"..."``で囲む必要はありません。
 
 ## リファレンス
 
