@@ -27,6 +27,7 @@ emacs/emacs-usage
 rust/rust-usage
 docker/docker-usage
 streaming/streaming-usage
+gadget/gadget-usage
 ```
 
 ## 公開先
