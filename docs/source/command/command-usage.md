@@ -22,6 +22,7 @@ command-ls
 command-lsd
 command-nkf
 command-pandoc
+command-pbcopy
 command-ps
 command-pwd
 command-rsync
