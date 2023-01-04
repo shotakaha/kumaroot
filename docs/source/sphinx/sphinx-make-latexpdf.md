@@ -15,6 +15,17 @@ $ make latexpdf
 $ open build/latex/kumaroot.pdf
 ```
 
+新しくパッケージを追加したあとに、PDF生成がうまくいかない場合は、LaTeX文書を直接確認したほうが原因が早く見つかる場合があります。
+{command}`make latex`でコンパイルせずにLaTeX文書を作成できます。
+
+```bash
+$ cd $KUMAROOT
+$ make latex
+$ less build/latex/kumaroot.tex
+```
+
+
+
 ```{note}
 PDFを生成する場合、ビルドするパソコンでLaTeX環境を整えておく必要があります。
 詳しくは[](../latex/latex-usage.md)を参照してください。
