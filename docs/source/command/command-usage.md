@@ -23,6 +23,7 @@ command-lsd
 command-nkf
 command-pandoc
 command-pbcopy
+command-ping
 command-ps
 command-pwd
 command-rsync
