@@ -30,6 +30,7 @@ command-rsync
 command-sed
 command-ssh
 command-ssh-keygen
+command-tcpdump
 command-texdoc
 command-tig
 command-tldr
