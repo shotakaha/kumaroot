@@ -129,6 +129,7 @@ latex_elements = {
     # "extraclassoptions": "tombow",
     "preamble": "",
     "polyglossia": "",
+    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
 }
 
 latex_elements["preamble"] += "\\setlength{\\footskip}{3\\zw}"
