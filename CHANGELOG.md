@@ -1,3 +1,113 @@
+## v1.7.0 (2023-01-04)
+
+### Feat
+
+- **command/command-ping.md**: pingの使い方を追加した
+- **gadget/gadget-tourboxelite.md**: TourBox Eliteのキー設定を追加した
+- **command/command-pbcopy.md**: pbcopyを追加した
+- **gadget/gadget-tourboxelite.md**: TourBox Eliteの使い方を追加した
+- **latex/latex-masterthesis.md**: 修論の書きかたを追加してみた
+- **docs/source/_static/latex/mthesis/main.tex**: 修士論文のテンプレートを作成しはじめた
+- **sphinx/sphinx-html-ogp.md**: SphinxにOGPを設定する方法を追記した
+- **latex/latex-flushright.md**: 右寄せする方法を追加した
+- **docs/source/_static/latex/invoice/main.tex**: 請求書のテンプレートを作成した
+- **hugo/hugo-config-menu.md**: メニューの設定方法を追加した
+- **hugo/hugo-ogp.md**: OGPを追加した
+- **hugo/hugo-templates-base.md**: ベーステンプレートを追加した
+- **gas/gas-mailapp-sendemail.md**: GASを使ってメールを送る方法を追加した
+- **latex/latex-bxjalipsum.md**: bxjalipsumを追加した
+- **latex/latex-thesection.md**: 章見出しの変更方法を追加した
+- **command/command-asdf.md**: asdfを追加した
+- **latex/latex-booktabs.md**: booktabsを追加した
+- **latex/latex-pxjahyper.md**: pxjahyperを追加した
+- **latex/latex-luatexja-otf.md**: lualatex-otfを追加した
+- **_static/latex/packages/luatexja-ruby.tex**: ルビのサンプルを追加した
+- **latex/latex-newcommand.md**: newcommandを追加した
+- **latex/latex-luatexja-ruby.md**: ルビ用パッケージを追加した
+- **latex/latex-documentclass-tate.md**: 縦組みを追加した
+- **latex/latex-documentclass-hanging.md**: ぶら下げを追加した
+- **latex/latex-documentclass-landscape.md**: 用紙を横向きに設定する方法を追加した
+- **latex/latex-documentclass-twocolumn.md**: 二段組を別ページにした
+- **latex/latex-documentclass-fontsize.md**: フォントサイズの設定を別ページにした
+- **latex/latex-documentclass-paper.md**: 用紙サイズの設定を別ページにした
+- **latex/latex-minted.md**: mintedを追加した
+- **latex/latex-luatexja-fontspec.md**: luatexja-fontspecを追加した
+- **latex/latex-luatexja.md**: luatexjaを追加した
+- **latex/latex-kanji-config-udpmap-sys.md**: kanji-config-udpmapを追加した
+- **latex/latex-xcolor.md**: xcolorパッケージを追加した
+- **latex/latex-figure.md**: figure環境を追加した
+- **command/command-curl.md**: curlを追加した
+- **command/command-wget.md**: wgetを追加した
+
+### Fix
+
+- **gadget/Default.tb**: Default.tb を更新した
+- **latex/latex-masterthesis.md**: 修論おすすめパッケージを追記した
+- **docs/source/_static/latex/mthesis/main.tex**: ニュートリノ振動のサンプル文を追加した
+- **latex/latex-masterthesis.md**: 修論tipsを追加した
+- **docs/source/_static/latex/mthesis/main.tex**: 修論テンプレートを更新した
+- **latex/latex-hyperref.md**: hypersetup の説明を追加した
+- **docs/source/_static/latex/invoice/main.tex**: 請求書のテンプレートを作成した
+- **sphinx/sphinx-latex-thesection.md**: 章見出しの変更がうまくいかない
+- **sphinx/sphinx-html-ogp.md**: OGPの説明を設定する方法が分からない
+- **latex/latex-usage.md**: pxjahyperは削除した
+- **latex/latex-inputenc.md**: 現在は不要なパッケージなので、その注意書きを冒頭に移動した
+- **latex/latex-flushright.md**: 右揃えについての所感を追記した
+- **docs/source/_static/latex/invoice/main.tex**: 発行者コマンドを追加した
+- **docs/source/_static/latex/invoice/main.tex**: 振込先のコマンドを追加した
+- **docs/source/_static/latex/invoice/main.tex**: 請求書コマンドを作成した
+- **docs/source/_static/latex/invoice/main.tex**: 請求日コマンドを追加した
+- **hugo/hugo-usage.md**: Hugoの使い方を整理した
+- **gas/gas-mailapp-sendemail.md**: リファレンスを追加した
+- **latex/latex-hyperref.md**: hyperrefを整理した
+- **latex/latex-install.md**: TDSを追記した
+- **_static/latex/packages/bxjalipsum.tex**: bxjalipsumのサンプルを追加した
+- **command/command-launchctl.md**: StartCalendarIntervalのキーを追記した
+- **hugo/hugo-config.md**: 設定ファイルの書き方を追加した
+- **latex/latex-bibliography.md**: タイトルを修正した
+- **latex/latex-thesection.md**: 章見出しの変更方法を追記した
+- **docs/source/index.md**: 公開先のURLを追加した
+- **latex/latex-inputenc.md**: タイトルを変更した
+- **latex/latex-usage.md**: 目次を整理した
+- **_static/latex/packages/fancyhdr.tex**: 修正した
+- **latex/latex-font-size.md**: 欧文フォントサイズについて補足した
+- **latex/latex-fancyhdr.md**: fancyhdrを追記した
+- **latex/latex-usage.md**: 順番を整理した
+- **latex/latex-xcolor.md**: コマンド名をシンプルにした
+- **latex/latex-uplatex.md**: upLaTeXのオプションの説明を追記した
+- **latex/latex-documentclass-twocolumn.md**: 段間の設定方法を追記した
+- **latex/latex-font-series.md**: ウェイトを追加した
+- **latex/latex-luatexja-preset.md**: プリセット書体を追記した
+- **latex/latex-font-family.md**: 内容を整理した
+- **latex/latex-siunitx.md**: 内容を修正した
+- **latex/latex-documentclass.md**: 内容を整理した
+- **latex/latex-latexmk.md**: latexmkを整理した
+- **latex/latex-fonts-more.md**: フォント設定を整理した
+- **docs/source/_static/latex/main.tex**: mintedの設定を変更した
+- **.gitignore**: LaTeX文書ででてくるものを除外した
+- **latex/latex-jlreq.md**: タイトルを修正した
+- **latex/latex-latexmk.md**: ページの構造を整理した
+- **docs/source/_static/latex/latexmkrc**: latexmkrcを更新した
+- **latex/latex-documentclass.md**: ドキュメントクラスの説明を修正した
+- **latex/latex-document.md**: LaTeXの説明を修正した
+- **latex/packages/minted.tex**: mintedのサンプルを追加した
+- **latex/latex-luatexja-fontspec.md**: 和文フォントを設定した
+- **latex/latex-kanji-config-udpmap-sys.md**: フォントを設定するコマンドを追加した
+- **latex/latex-fonts.md**: 誤字を修正した
+- **latex/latex-fonts.md**: 見出しのレベルを修正した
+- **latex/latex-usepackage.md**: リンクしている項目を修正した
+- **latex/latex-fontspec.md**: 説明を修正した
+- **latex/latex-fontenc.md**: エンコーディングの説明を修正した
+- **latex/latex-fonts.md**: 既存の項目を別ファイルに分割した
+- **latex/latex-usage.md**: 目次を修正した
+- **latex/latex-luatexja-preset.md**: タイトルを修正した
+- **latex/latex-lmodern.md**: タイトルを修正した
+- **latex/latex-fontenc.md**: タイトルを修正した
+- **latex/latex-graphicx.md**: 色空間の変換を追記した
+- **latex/latex-latexmk.md**: ライブプレビューを追加した
+- **_static/latex/packages/fontspec.tex**: fontspecのサンプルを更新した
+- **docker/docker-usage.md**: Dockerの全体イメージを追記した
+
 ## v1.6.0 (2022-11-20)
 
 ### Feat
