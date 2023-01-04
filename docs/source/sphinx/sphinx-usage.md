@@ -34,6 +34,7 @@ sphinx-html-ogp
 ## リファレンス
 
 - [Sphinx 日本語ドキュメント](https://www.sphinx-doc.org/ja/master/index.html)
+- [Sphinx-Users.jp - 逆引き辞典](https://sphinx-users.jp/reverse-dict/index.html)
 - [reStructuredText入門](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/basics.html)
 - [CommonMark](https://commonmark.org/)
 - [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest)
