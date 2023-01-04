@@ -3,7 +3,6 @@
 ### Fix
 
 - **command/command-tcpdump.md**: tcpdumpを追加した
-- **command/command-tcpdump.md**: tcpdumpを追加した
 
 ## v1.7.0 (2023-01-04)
 
