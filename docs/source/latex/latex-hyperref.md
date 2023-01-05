@@ -51,6 +51,7 @@
 ```latex
 \hypersetup{bookmarks=true}  % デフォルト
 \hypersetup{bookmarksnumbered=true}    %  しおりのタイトルに章番号を表示する
+\hypersetup{bookmarksopen=true}  % しおりの第1階層を開いた状態で表示する
 ```
 
 PDFのしおり（ブックマーク）は自動で生成されるようになっています。

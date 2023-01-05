@@ -127,6 +127,7 @@ latex_elements = {
     "papersize": "a4paper",
     "pointsize": "12pt",
     # "extraclassoptions": "tombow",
+    "fontpkg": "",
     "extrapackages": "",
     "preamble": "",
     "polyglossia": "",
@@ -139,15 +140,16 @@ latex_elements["extrapackages"] = r"""
 """
 
 # Loaded after hyperref
-latex_elements["preamble"] += r"""
+latex_elements["preamble"] = r"""
 \setlength{\footskip}{3\zw}
 \hypersetup{bookmarksnumbered=true}
+\hypersetup{bookmarksopen=true}
 """
+# \hypersetup{colorlinks=true}
 
 # latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
-# latex_elements['preamble'] += '\\hypersetup{bookmarksopen=true}\n'
 # latex_elements['preamble'] += '\\hypersetup{bookmarksopenlevel=2}\n'
-# latex_elements['preamble'] += '\\hypersetup{colorlinks=true}\n'
+
 # latex_elements['preamble'] += '\\hypersetup{pdfpagemode=UseOutlines}\n'
 
 # latex_elements['preamble'] += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
