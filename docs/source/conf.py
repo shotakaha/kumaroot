@@ -127,15 +127,24 @@ latex_elements = {
     "papersize": "a4paper",
     "pointsize": "12pt",
     # "extraclassoptions": "tombow",
+    "extrapackages": "",
     "preamble": "",
     "polyglossia": "",
     "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
 }
 
-latex_elements["preamble"] += "\\setlength{\\footskip}{3\\zw}"
+# Loaded before hyperref
+latex_elements["extrapackages"] = r"""
+\usepackage{physics}
+"""
+
+# Loaded after hyperref
+latex_elements["preamble"] += r"""
+\setlength{\footskip}{3\zw}
+\hypersetup{bookmarksnumbered=true}
+"""
+
 # latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
-# latex_elements['preamble'] += '\\usepackage{graphics}\n'
-# latex_elements['preamble'] += '\\hypersetup{bookmarksnumbered=true}\n'
 # latex_elements['preamble'] += '\\hypersetup{bookmarksopen=true}\n'
 # latex_elements['preamble'] += '\\hypersetup{bookmarksopenlevel=2}\n'
 # latex_elements['preamble'] += '\\hypersetup{colorlinks=true}\n'
