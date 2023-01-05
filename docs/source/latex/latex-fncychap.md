@@ -14,6 +14,8 @@
 オプションにテーマ名を指定します。
 テーマは``Sonny`` / ``Lenny`` / ``Glenn`` / ``Conny`` / ``Rejne`` / ``Bjarne`` / ``Bjornstrup``があります。
 
+日本語の文書の場合は``Bjornstrup``を選択するとよいと思います。
+
 ## リファレンス
 
 - {command}``texdoc fncychap``
