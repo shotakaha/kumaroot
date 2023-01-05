@@ -89,5 +89,5 @@ latex_elements = {
 }
 ```
 
-Sphinxのデフォルトでは``Bjarne``が選択されますが、``Bjornstrup``に変更するのがよいと思います。
+Sphinxのデフォルトは``Bjarne``ですが、``Bjornstrup``に変更するとよいと思います。
 選択できるテーマは[fncychapパッケージ](../latex/latex-fncychap.md)を参照してください。
