@@ -15,7 +15,7 @@
 ``setmainjfont`` / ``setsansjfont`` / ``setmonofont`` で明朝体（主に本文）、サンセリフ体（主に見出し）、モノスペース体（主にコードブロックなど）をそれぞれ自由に設定できます。
 
 ```latex
-\usepackage{latexja-fontspec}
+\usepackage{luatexja-fontspec}
 
 % 欧文フォントの設定
 \setmainfont{KiwiMaru-Regular}
