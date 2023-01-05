@@ -21,11 +21,11 @@ sphinx-make
 sphinx-make-html
 sphinx-make-latexpdf
 sphinx-make-linkcheck
-sphinx-hyperlink
-sphinx-toctree
-sphinx-code-block
-sphinx-meta
-sphinx-footnote
+sphinx-syntax-hyperlink
+sphinx-syntax-toctree
+sphinx-syntax-code-block
+sphinx-syntax-meta
+sphinx-syntax-footnote
 sphinx-extensions
 sphinx-extensions-myst
 sphinx-extensions-opengraph
