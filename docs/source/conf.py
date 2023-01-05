@@ -121,7 +121,8 @@ latex_docclass = {
     "howto": "ltjsreport",
     "manual": "ltjsreport",
 }
-# latex_toplevel_sectioning = "chapter"
+
+# latex_toplevel_sectioning = "part"
 
 latex_elements = {
     "papersize": "a4paper",
