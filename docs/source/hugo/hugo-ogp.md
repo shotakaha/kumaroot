@@ -60,7 +60,7 @@ series = "series"
 
 ## ``og:image``したい
 
-```html:opengraph.html
+```html
 {{- with $.Params.images -}}
 {{- range first 6 . }}<meta property="og:image" content="{{ . | absURL }}" />{{ end -}}
 {{- else -}}
