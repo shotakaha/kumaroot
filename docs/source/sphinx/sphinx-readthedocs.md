@@ -1,7 +1,8 @@
-# Read the Docsを設定したい
+# Read the Docsしたい
 
-このドキュメントをホストしている[Read the Docs](https://readthedocs.org/)の設定は
-{file}`.readthedocs.yml`（もしくは{file}`.readthedocs.yaml`）に書くことができます。
+このドキュメントは[Read the Docs](https://readthedocs.org/)でホストしています。
+その設定を{file}`.readthedocs.yml`（もしくは{file}`.readthedocs.yaml`）に書くことができます。
+
 ## 設定ファイル
 
 ```{code-block} yaml

@@ -26,10 +26,10 @@ sphinx-toctree
 sphinx-code-block
 sphinx-meta
 sphinx-footnote
-sphinx-readthedocs
 sphinx-extensions
 sphinx-extensions-myst
 sphinx-extensions-opengraph
+sphinx-readthedocs
 ```
 
 ## リファレンス
