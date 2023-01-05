@@ -22,6 +22,45 @@ latex_elements = {
 \documentclass[a4paper, 12pt, dvipdfmx]{sphinxmanual}
 ```
 
+## パッケージを追加したい
+
+LaTeXのパッケージはプリアンブルに追加しますが、その順序が重要なときがあります。
+とくに``hyperref``パッケージは最後に読み込むのがよいとされています。
+Sphinxはこれに対応していて、``hyperref``パッケージの前に読み込む場合は``latex_elements["extrapackages"]``、後に読み込む場合は``latex_elements["preamble"]``を使います。
+
+``latex_elements``の``extrapackages``や``preamble``に複数のパッケージを追加すると読みにくくなります。
+なので、僕は次のように``latex_elements``の中でキーだけ確保しておき、後からパッケージを追加するように書いています。
+LaTeXの変数には``\``を使うものが多いため、raw文字列を使っています。
+
+```python
+latex_elements = {
+    ...,
+    "extrapackages": "",
+    "preamble": "",
+}
+
+latex_elements["extrapackages"] = r"""
+\usepackage{physics}
+\hypersetup{bookmarksnumbered=true}
+\hypersetup{bookmarksopen=true}
+\hypersetup{bookmarksopenlevel=2}
+\hypersetup{colorlinks=true}
+\hypersetup{pdfpagemode=UseOutlines}
+"""
+
+``LaTeX`` 文書の出力は以下のようになります。
+
+```latex
+\usepackage{pxjahyper}
+\usepackage{graphics}
+\hypersetup{bookmarksopen=true}
+\hypersetup{bookmarksopenlevel=2}
+\hypersetup{colorlinks=true}
+\hypersetup{pdfpagemode=UseOutlines}
+```
+
+
+
 ## Polyglossiaパッケージを無効にしたい
 
 ```python
