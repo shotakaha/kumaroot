@@ -3,18 +3,14 @@
 ### Feat
 
 - **sphinx/sphinx-usage.md**: Sphinxのファイル名を変更した
-- **sphinx/sphinx-usage.md**: Sphinxのファイル名を変更した
 
 ### Fix
 
-- **sphinx/sphinx-readthedocs.md**: Sphinxの目次を整理した
-- **sphinx/sphinx-usage.md**: Sphinxの目次を整理した
 - **sphinx/sphinx-usage.md**: Sphinxの目次を整理した
 - **latex/latex-usage.md**: 章見出しを装飾するパッケージを追加した
 - **conf.py**: fncychapのテーマをBjornstrupに変更した
 - **conf.py**: copyrightを更新した
 - **sphinx/sphinx-usage.md**: Sphinx-Users.jpの逆引き辞典をリファレンスに追記した
-- **sphinx/sphinx-make-latexpdf.md**: make latexを追記した
 
 ## v1.7.1 (2023-01-04)
 
