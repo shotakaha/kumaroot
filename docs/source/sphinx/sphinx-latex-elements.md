@@ -11,6 +11,8 @@ latex_elements = {
     'preamble': '',    # あとで追加するので定義だけしておく
     'figure_align': 'htbp',
 #   'fontpkg': '\\usepackage{times}',
+    'polyglossia': '',
+    'fncychap': r'\usepackage[Bjornstrup]{fncychap}'
 }
 ```
 
