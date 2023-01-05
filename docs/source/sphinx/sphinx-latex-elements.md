@@ -6,13 +6,13 @@
 
 ```python
 latex_elements = {
-    'papersize' = 'a4paper',
-    'pointsize' = '12pt',
-    'preamble': '',    # あとで追加するので定義だけしておく
-    'figure_align': 'htbp',
-#   'fontpkg': '\\usepackage{times}',
-    'polyglossia': '',
-    'fncychap': r'\usepackage[Bjornstrup]{fncychap}'
+    "papersize" = "a4paper",
+    "pointsize" = "12pt",
+    "preamble": "",    # あとで追加するので定義だけしておく
+    "figure_align": "htbp",
+#   "fontpkg": "\\usepackage{times}",
+    "polyglossia": "",
+    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
 }
 ```
 
