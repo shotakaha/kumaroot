@@ -41,25 +41,29 @@ latex_elements = {
 
 latex_elements["extrapackages"] = r"""
 \usepackage{physics}
-\hypersetup{bookmarksnumbered=true}
-\hypersetup{bookmarksopen=true}
-\hypersetup{bookmarksopenlevel=2}
-\hypersetup{colorlinks=true}
-\hypersetup{pdfpagemode=UseOutlines}
 """
+
+latex_elements["preamble"] = r"""
+\hypersetup{bookmarksnumbered=true}
+"""
+```
 
 ``LaTeX`` 文書の出力は以下のようになります。
 
 ```latex
-\usepackage{pxjahyper}
-\usepackage{graphics}
-\hypersetup{bookmarksopen=true}
-\hypersetup{bookmarksopenlevel=2}
-\hypersetup{colorlinks=true}
-\hypersetup{pdfpagemode=UseOutlines}
+\usepackage{physics}
+
+% Include hyperref last.
+\usepackage{hyperref}
+% Fix anchor placement for figures with captions.
+\usepackage{hypcap}% it must be loaded after hyperref.
+% Set up styles of URL: it should be placed after hyperref.
+\urlstyle{same}
+\usepackage{sphinxmessages}
+\setcounter{tocdepth}{0}
+
+\hypersetup{bookmarksnumbered=true}
 ```
-
-
 
 ## Polyglossiaパッケージを無効にしたい
 
