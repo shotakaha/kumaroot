@@ -52,3 +52,8 @@ caption: 設定例
 sphinx-latex-lualatex
 sphinx-latex-uplatex
 ```
+
+## リファレンス
+
+- [LaTeX出力のオプション](https://www.sphinx-doc.org/ja/master/usage/configuration.html#options-for-latex-output)
+- [LaTeXのカスタマイズ](https://www.sphinx-doc.org/ja/master/latex.html)
