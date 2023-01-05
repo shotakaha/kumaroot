@@ -35,6 +35,7 @@ latex-linebreak
 latex-ref
 latex-index
 latex-thesection
+latex-fncychap
 latex-include
 latex-graphicx
 latex-xcolor
