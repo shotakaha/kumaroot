@@ -36,9 +36,9 @@ Otherwise pipx is ready to go! ✨ 🌟 ✨
 ```
 
 ```bash
-pipx completions
+$ pipx completions
 
-Add the appropriate command to your shell's config file
+Add the appropriate command to your shells config file
 so that it is run on startup. You will likely have to restart
 or re-login for the autocompletion to start working.
 
