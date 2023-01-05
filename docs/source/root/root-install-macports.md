@@ -21,11 +21,12 @@ Macユーザの場合``MacPorts``を使ってインストールする方法が�
 $ sudo port install root6
 $ port installed root6
 The following ports are currently installed:
-root6 @6.04.02.99_0+cocoa+gcc48+graphviz+gsl+http+minuit2+opengl+python27+roofit+soversion+ssl+tmva+xml
+root6 @6.04.02.99_0+cocoa+gcc48+graphviz+gsl
+        +http+minuit2+opengl+python27+roofit
+        +soversion+ssl+tmva+xml
 ```
 
-## ROOT6 +python34
-==================================================
+## ROOT6 + python34
 
 {command}`variants` に ``python34`` を指定した場合です。
 最近インストールしてみたので ``gcc5`` がデフォルトになってます。
@@ -34,8 +35,12 @@ root6 @6.04.02.99_0+cocoa+gcc48+graphviz+gsl+http+minuit2+opengl+python27+roofit
 $ sudo port install root6 +python34
 $ port installed root6
 The following ports are currently installed:
-root6 @6.04.02.99_0+cocoa+gcc48+graphviz+gsl+http+minuit2+opengl+python27+roofit+soversion+ssl+tmva+xml
-root6 @6.04.02.99_0+cocoa+gcc5+graphviz+gsl+http+minuit2+opengl+python34+roofit+soversion+ssl+tmva+xml (active)
+root6 @6.04.02.99_0+cocoa+gcc48+graphviz+gsl
+        +http+minuit2+opengl+python27+roofit
+        +soversion+ssl+tmva+xml
+root6 @6.04.02.99_0+cocoa+gcc5+graphviz+gsl
+        +http+minuit2+opengl+python34+roofit
+        +soversion+ssl+tmva+xml (active)
 ```
 
 ## ROOT5
@@ -48,5 +53,7 @@ root6 @6.04.02.99_0+cocoa+gcc5+graphviz+gsl+http+minuit2+opengl+python34+roofit+
 $ sudo port install root5
 $ port installed root5
 The following ports are currently installed:
-root5 @5.34.34_0+cocoa+gcc48+graphviz+gsl+http+minuit2+opengl+roofit+soversion+ssl+tmva+xml (active)
+root5 @5.34.34_0+cocoa+gcc48+graphviz+gsl
+        +http+minuit2+opengl+roofit
+        +soversion+ssl+tmva+xml (active)
 ```
