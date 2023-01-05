@@ -21,8 +21,8 @@ sphinx-builder
 sphinx-builder-html
 sphinx-builder-latexpdf
 sphinx-builder-linkcheck
-sphinx-syntax-hyperlink
 sphinx-syntax-toctree
+sphinx-syntax-hyperlink
 sphinx-syntax-code-block
 sphinx-syntax-meta
 sphinx-syntax-footnote
