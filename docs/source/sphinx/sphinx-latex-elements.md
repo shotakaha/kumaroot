@@ -24,10 +24,6 @@ latex_elements = {
 
 ## Polyglossiaパッケージを無効にしたい
 
-LaTeXエンジンに``lualatex``を指定すると、自動で``Polyglossia``パッケージが読み込まれるようになっています。
-このままビルドすると、多数の``Package polyglossia Warning: Asking to add empty feature to latin font(Script="CJK" to scripttag "")``が表示されます。
-多言語対応したドキュメントであれば、無効にしてしまいましょう。
-
 ```python
 latex_elements = {
     ...,
@@ -35,3 +31,21 @@ latex_elements = {
     ...,
 }
 ```
+
+LaTeXエンジンに``lualatex``を指定すると、自動で``Polyglossia``パッケージが読み込まれるようになっています。
+このままビルドすると、多数の``Package polyglossia Warning: Asking to add empty feature to latin font(Script="CJK" to scripttag "")``が表示されます。
+多言語対応したドキュメントであれば、無効にしてしまいましょう。
+
+## fncychapパッケージのテーマを変更したい
+
+```python
+latex_elements = {
+    ...,
+    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
+    ...,
+}
+```
+
+選択できるテーマは[fncychapパッケージ](../latex/latex-fncychap.md)を参照してください。
+デフォルトでは``Bjarne``が選択されますが、これは章番号が「第ONE」「第TWO」のように英語で表記されるため、日本語向きではないと思います。
+``Bjornstrup``に変更するのがよいと思います。
