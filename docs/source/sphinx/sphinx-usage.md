@@ -28,8 +28,8 @@ sphinx-meta
 sphinx-footnote
 sphinx-readthedocs
 sphinx-extensions
-sphinx-myst.md
-sphinx-html-ogp
+sphinx-extensions-myst
+sphinx-extensions-opengraph
 ```
 
 ## リファレンス
