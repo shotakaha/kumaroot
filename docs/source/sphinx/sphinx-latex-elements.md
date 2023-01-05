@@ -46,6 +46,5 @@ latex_elements = {
 }
 ```
 
+Sphinxのデフォルトでは``Bjarne``が選択されますが、``Bjornstrup``に変更するのがよいと思います。
 選択できるテーマは[fncychapパッケージ](../latex/latex-fncychap.md)を参照してください。
-デフォルトでは``Bjarne``が選択されますが、これは章番号が「第ONE」「第TWO」のように英語で表記されるため、日本語向きではないと思います。
-``Bjornstrup``に変更するのがよいと思います。
