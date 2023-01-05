@@ -152,7 +152,7 @@ latex_elements["preamble"] += r"""
 
 # latex_elements['preamble'] += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
 # latex_elements['preamble'] += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
-# latex_logo = "./_static/quma.jpeg"
+latex_logo = "./_static/quma.jpeg"
 # latex_use_parts = True
 # latex_show_pagerefs = False
 latex_show_urls = "footnote"
