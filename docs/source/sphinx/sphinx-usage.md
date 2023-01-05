@@ -17,7 +17,6 @@ maxdepth: 1
 sphinx-install
 sphinx-quickstart
 sphinx-conf
-sphinx-extensions
 sphinx-make
 sphinx-make-html
 sphinx-make-latexpdf
@@ -28,6 +27,8 @@ sphinx-code-block
 sphinx-meta
 sphinx-footnote
 sphinx-readthedocs
+sphinx-extensions
+sphinx-myst.md
 sphinx-html-ogp
 ```
 

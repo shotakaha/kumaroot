@@ -15,15 +15,9 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx_rtd_theme',
     'myst_parser',
+    'sphinxext.opengraph',
 ]
 ```
 
 拡張機能の設定は``extensions``に記述します。
 設定方法や設定オプションは、それぞれの拡張機能のドキュメントを参照してください。
-
-```{toctree}
----
-maxdepth: 1
----
-sphinx-myst.md
-```
