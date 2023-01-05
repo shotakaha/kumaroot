@@ -17,10 +17,10 @@ maxdepth: 1
 sphinx-install
 sphinx-quickstart
 sphinx-conf
-sphinx-make
-sphinx-make-html
-sphinx-make-latexpdf
-sphinx-make-linkcheck
+sphinx-builder
+sphinx-builder-html
+sphinx-builder-latexpdf
+sphinx-builder-linkcheck
 sphinx-syntax-hyperlink
 sphinx-syntax-toctree
 sphinx-syntax-code-block
