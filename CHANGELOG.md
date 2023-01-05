@@ -2,26 +2,20 @@
 
 ### Fix
 
-- **preface/disclaimer.md**: 微修正
-- **root/root-install-macports.md**: 長くて折り返せないコードブロックを改行した
 - **conf.py**: hypersetupを追加した
-- **latex/latex-luatexja-fontspec.md**: タイポを修正した
 - **conf.py**: latex_logoを追加した
-- **latex/latex-documentclass.md**: タイポを修正した
 - **conf.py**: latex_show_urlsを有効にした
-- **sphinx/sphinx-builder-latexpdf.md**: toctreeを整理した
-- **hugo/hugo-ogp.md**: 微修正
-- **python/python-pipx.md**: 微修正
-- **sphinx/sphinx-latex-elements.md**: 微修正
-- **sphinx/sphinx-latex-elements.md**: パッケージ追加のサンプルコードを整理した
-- **sphinx/sphinx-builder-latexpdf.md**: LaTeXに関する公式ドキュメントへのリンクを追加した
 - **conf.py**: LaTeXのパッケージを追加した
-- **sphinx/sphinx-latex-elements.md**: LaTeXのパッケージを追加する方法を追記した
 - **latex/latex-fncychap.md**: テーマの説明を追記した
-- **sphinx/sphinx-latex-elements.md**: fncychapのテーマを変更する方法を追記した
-- **sphinx/sphinx-latex-elements.md**: fncychapの設定を追記した
-- **sphinx/sphinx-usage.md**: Sphinxの目次を整理した
 - **latex/latex-fncychap.md**: 日本語文書でオススメの設定を追記した
+- **python/python-pipx.md**: 微修正
+- **root/root-install-macports.md**: 長くて折り返せないコードブロックを改行した
+- **sphinx/sphinx-builder-latexpdf.md**: LaTeXに関する公式ドキュメントへのリンクを追加した
+- **sphinx/sphinx-builder-latexpdf.md**: toctreeを整理した
+- **sphinx/sphinx-latex-elements.md**: fncychapの設定を追記した
+- **sphinx/sphinx-latex-elements.md**: LaTeXのパッケージを追加する方法を追記した
+- **sphinx/sphinx-latex-elements.md**: パッケージ追加のサンプルコードを整理した
+- **sphinx/sphinx-usage.md**: Sphinxの目次を整理した
 
 ## v1.8.0 (2023-01-05)
 
