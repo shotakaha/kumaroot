@@ -1,3 +1,9 @@
 {
-    "makefile.makeDirectory": "docs/"
+    "makefile.makeDirectory": "docs/",
+    "makefile.configurations": [
+        {
+            "name": "sphinx",
+            "makeArgs": ["html"]
+        },
+    ]
 }
