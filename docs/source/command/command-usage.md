@@ -21,6 +21,7 @@ command-launchctl
 command-ls
 command-lsd
 command-nkf
+command-1password
 command-pandoc
 command-pbcopy
 command-ping
