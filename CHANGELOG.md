@@ -1,3 +1,10 @@
+## v1.8.2 (2023-01-08)
+
+### Fix
+
+- **command/command-1password.md**: 1password-cliを追加した
+- **conf.py**: 微修正
+
 ## v1.8.1 (2023-01-05)
 
 ### Fix
