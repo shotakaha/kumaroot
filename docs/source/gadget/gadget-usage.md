@@ -2,4 +2,5 @@
 
 ```{toctree}
 gadget-tourboxelite
+gadget-roland-aerocaster
 ```
