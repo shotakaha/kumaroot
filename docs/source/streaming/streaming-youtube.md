@@ -1,6 +1,11 @@
 # YouTubeを使いたい
 
+動画のアップロードやライブ配信のスケジュール、再生リストの新規作成など、コンテンツ管理に関することは[YouTube Studio](https://studio.youtube.com)を使います。
+
 ## アカウントを切り替えたい
+
+ひとつのアカウントで、複数のブランドアカウントを管理できます。
+必ず正しいアカウントに切り替えてから操作しましょう。
 
 1. [YouTube](https://youtube.com)もしくは[YouTube Studio](https://studio.youtube.com)を開きます
 2. 右上の自分のアイコンをクリックします
