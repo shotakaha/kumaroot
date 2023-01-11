@@ -1,3 +1,14 @@
+## v1.8.3 (2023-01-11)
+
+### Fix
+
+- **streaming/streaming-youtube.md**: YouTube Studioの概要を追記した
+- **streaming/streaming-youtube.md**: アカウントを切り替える手順を追加した
+- **streaming/streaming-youtube.md**: ライブ配信をスケジュールする手順を追記した
+- **streaming/streaming-youtube.md**: 管理者追加の手順を追記した
+- **streaming/streaming-youtube.md**: YouTubeの使い方を追加した
+- **gadget/gadget-roland-aerocaster.md**: Roland AeroCasterを追加した
+
 ## v1.8.2 (2023-01-08)
 
 ### Fix
