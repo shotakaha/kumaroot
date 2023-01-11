@@ -6,6 +6,7 @@
 streaming-format
 streaming-storyboard
 streaming-wiring
+streaming-youtube
 ```
 
 ```{toctree}
