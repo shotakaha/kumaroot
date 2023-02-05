@@ -22,15 +22,20 @@
 ```latex
 \includegraphics[width=3cm]{図のファイル名}
 \includegraphics[height=3cm]{図のファイル名}
-\includegraphics[width=3cm,height=3cm,keepaspectratio]{図のファイル名}
-\includegraphics[0.5\linewidth]{図のファイル名}
+\includegraphics[width=0.8\linewidth]{図のファイル名}
 ```
 
 画像のサイズは``width``や``height``オプションを指定して拡大・縮小できます。
-``width``と``height``の両方を指定すると縦横比が変わってしまうため、``keepaspectratio``をつけておくとよいです。
+個人的には行幅（``\linewidth``）を基準にした相対値で指定します。
 
-個人的には``\linewidth``のN倍という指定をよく使います。
+## 画像のアスペクト比を維持したい
 
+```latex
+\includegraphics[width=3cm,height=3cm,keepaspectratio]{図のファイル名}
+```
+
+``width``と``height``の両方を指定すると縦横比が変わってしまいます。
+アスペクト比を維持したい場合は``keepaspectratio``を追加します。
 
 ## ドライバーを指定したい
 
