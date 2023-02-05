@@ -2,19 +2,13 @@
 
 ### Fix
 
-- **latex/latex-usage.md**: タイトルを変更した
-- **latex/latex-enumitem.md**: enumitemを修正した
-- **latex/latex-graphicx.md**: 画像サイズを追記した
-- **docs/source/_static/latex/examples/main.tex**: 文書のアウトラインを整理した
+- **docs/source/_static/latex/examples/main.tex**: LaTeX文書のサンプルを更新した
+- **git/git-push.md**: git push origin --tags を追加した
+- **latex/latex-build.md**: タイプセットの説明を追加した
 - **latex/latex-enumitem.md**: enumitemを追加した
-- **docs/source/_static/latex/main.tex**: LaTeXのサンプルを更新した
+- **latex/latex-graphicx.md**: 画像サイズを追記した
 - **latex/latex-usage.md**: 目次を整理した
 - **latex/latex-usepackage.md**: タイトルを修正した
-- **latex/latex-usage.md**: 目次を整理した
-- **latex/latex-document.md**: タイプセットが必要なことも追記した
-- **latex/latex-build.md**: タイプセットの説明を追加した
-- **latex/latex-usage.md**: パッケージ名の順番にソートした
-- **git/git-push.md**: git push origin --tags を追加した
 
 ## v1.8.3 (2023-01-11)
 
