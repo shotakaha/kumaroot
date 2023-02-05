@@ -17,7 +17,7 @@
 % \usemintedstyle{dracula}
 \usepackage{bxjalipsum}
 \usepackage{enumitem}
-
+\usepackage{abstract}
 
 % \renewcommand{\thesection}{第\arabic{section}章}
 % \renewcommand{\thesubsection}{第\arabic{section}.\arabic{subsection}節}
@@ -45,36 +45,25 @@
 \begin{abstract}
 この文書はドキュメントクラスに\texttt{jlreq}を指定し、
 \texttt{LuaLaTeX}を使ってビルドしています。
+\jalipsum{jugemu}
 \end{abstract}
 
 \tableofcontents
 
 \include{packages/maketitle}
 \include{packages/latexmk}
-
-\section{箇条書き}
-
-\begin{itemize}
-    \item itemize環境
-    \item enumerate環境
-    \item description環境
-    \item enumitemパッケージ
-\end{itemize}
 \include{packages/itemize}
 \include{packages/enumerate}
 \include{packages/description}
 \include{packages/enumitem}
-
-\include{packages/fontspec}
-\include{packages/fancyhdr}
+\include{packages/minted}
 \include{packages/hyperref}
+\include{packages/fancyhdr}
+\include{packages/fontspec}
+\include{packages/luatexja-ruby}
 \include{packages/siunitx}
 \include{packages/physics}
 \include{packages/hepnames}
-\include{packages/minted}
-\include{packages/luatexja-ruby}
 \include{packages/bxjalipsum}
-
-
 
 \end{document}

@@ -1,7 +1,14 @@
 
-\section{minted}
+\section{コードブロック（minted）}
 
-文書内にコードサンプルを表示したいときの環境です。
+\begin{minted}{latex}
+\usepackage{minted}
+\end{minted}
+
+文書にコードブロックを表示する時に便利なパッケージです。
+\texttt{minted}環境や\texttt{mint}コマンド、\texttt{mintinline}コマンドが使えるようになります。
+また\texttt{listing}環境も改良されます。
+
 コンパイルする際には\texttt{-shell-escape}オプションが必要です。
 （\mintinline{shell}{$ latexmk -pvc -shell-escape}）
 
