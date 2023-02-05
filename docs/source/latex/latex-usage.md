@@ -25,16 +25,20 @@ latex-install
 latex-online
 latex-document
 latex-build
-latex-fonts
-latex-fonts-more
 latex-documentclass
 latex-usepackage
 latex-maketitle
 latex-tableofcontents
+latex-flushright
+latex-section
+latex-graphicx
+latex-figure
+
+latex-fonts
+latex-fonts-more
 latex-amsmath
 latex-bibliography
-latex-figure
-latex-flushright
+
 latex-ide
 latex-include
 latex-index
@@ -45,7 +49,7 @@ latex-masterthesis
 latex-newcommand
 latex-primer
 latex-ref
-latex-thesection
+
 ```
 
 ## 追加パッケージ
@@ -59,7 +63,7 @@ latex-bxjalipsum
 latex-enumitem
 latex-fancyhdr
 latex-fncychap
-latex-graphicx
+
 latex-hepparticles
 latex-hyperref
 latex-inputenc
