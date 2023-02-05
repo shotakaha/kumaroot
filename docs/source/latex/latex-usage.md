@@ -22,6 +22,7 @@ LaTeXの基本的な事項については「LaTeX2e美文書作成入門（技�
 maxdepth: 1
 ---
 latex-install
+latex-ide
 latex-online
 latex-document
 latex-build
@@ -31,25 +32,17 @@ latex-maketitle
 latex-tableofcontents
 latex-flushright
 latex-section
+latex-linebreak
+latex-enumitem
 latex-graphicx
 latex-figure
-
-latex-fonts
-latex-fonts-more
+latex-booktabs
 latex-amsmath
-latex-bibliography
-
-latex-ide
-latex-include
 latex-index
-latex-japanese
-latex-linebreak
-latex-luatexja-ruby
-latex-masterthesis
-latex-newcommand
-latex-primer
+latex-bibliography
 latex-ref
-
+latex-hyperref
+latex-include
 ```
 
 ## 追加パッケージ
@@ -58,14 +51,18 @@ latex-ref
 ---
 maxdepth: 1
 ---
-latex-booktabs
+latex-fonts
+latex-fonts-more
+
+latex-japanese
+latex-luatexja-ruby
+latex-masterthesis
+latex-newcommand
+latex-primer
 latex-bxjalipsum
-latex-enumitem
 latex-fancyhdr
 latex-fncychap
-
 latex-hepparticles
-latex-hyperref
 latex-inputenc
 latex-microtype
 latex-minted

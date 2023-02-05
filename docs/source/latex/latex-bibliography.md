@@ -1,4 +1,4 @@
-# 参考文献をリストしたい（``\thebibliography``）
+# 参考文献したい（``thebibliography``）
 
 ```latex
 \begin{thebibliography}{文献番号の最大値}

@@ -1,4 +1,4 @@
-# 数式を使いたい（``amsmath``）
+# 数式したい（``amsmath``）
 
 ```latex
 \usepackage{amsmath, amssymb}
