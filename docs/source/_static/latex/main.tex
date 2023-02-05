@@ -16,6 +16,9 @@
 \usepackage{minted}
 % \usemintedstyle{dracula}
 \usepackage{bxjalipsum}
+\usepackage{enumitem}
+
+
 \renewcommand{\thesection}{第\arabic{section}章}
 \renewcommand{\thesubsection}{第\arabic{section}.\arabic{subsection}節}
 
@@ -46,8 +49,22 @@
 
 \tableofcontents
 
-
+\include{packages/maketitle}
 \include{packages/latexmk}
+
+\section{箇条書き}
+
+\begin{itemize}
+    \item itemize環境
+    \item enumerate環境
+    \item description環境
+    \item enumitemパッケージ
+\end{itemize}
+\include{packages/itemize}
+\include{packages/enumerate}
+\include{packages/description}
+\include{packages/enumitem}
+
 \include{packages/fontspec}
 \include{packages/fancyhdr}
 \include{packages/hyperref}
@@ -57,5 +74,7 @@
 \include{packages/minted}
 \include{packages/luatexja-ruby}
 \include{packages/bxjalipsum}
+
+
 
 \end{document}
