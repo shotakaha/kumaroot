@@ -9,8 +9,8 @@
 project = "KumaROOT"
 author = "Shota TAKAHASHI"
 copyright = "2015 - 2023, Shota TAKAHASHI"
-version = "1.8.3"
-release = "1.8.3"
+version = "1.8.4"
+release = "1.8.4"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
