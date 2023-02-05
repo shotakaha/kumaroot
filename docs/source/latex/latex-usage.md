@@ -25,12 +25,12 @@ latex-install
 latex-online
 latex-document
 latex-build
-latex-documentclass
-latex-usepackage
 latex-fonts
 latex-fonts-more
+latex-documentclass
+latex-usepackage
 latex-maketitle
-latex-toc
+latex-tableofcontents
 latex-amsmath
 latex-bibliography
 latex-figure
