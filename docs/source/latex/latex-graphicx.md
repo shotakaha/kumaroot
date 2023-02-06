@@ -54,6 +54,16 @@ LuaLaTeXの場合は自動判断してくれるため、逆に、何も指定し
 これを印刷物にする場合、色空間を``CMYK``に変換する必要があります。
 変換はAdobe PhotoshopやAdobe Illustratorなどを使うとよいです。
 
+## 画像ディレクトリを指定したい
+
+```latex
+\graphicspath{{images/}}
+\graphicspath{{images/} {figures/}}
+```
+
+LaTeXで文書を作成していると、画像ファイルをひとつのディレクトリにまとめて管理することが多いと思います。
+``\graphicspath``で画像ディレクトリのパスを指定しおくと、``\includgraphics``するときにちょっとだけ楽になります。
+
 ## リファレンス
 
 - {command}`texdoc graphicx`
