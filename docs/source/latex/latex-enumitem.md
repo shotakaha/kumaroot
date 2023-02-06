@@ -66,19 +66,19 @@
 ## 順序リストの記号をまとめて変更したい（``\labelenumi``）
 
 ```latex
-\renewcommand{\labelenumi}{（\arabic{\theenumi}）}      % レベル1: 1. -> （1）
-\renewcommand{\labelenumi}{（\roman{\theenumii}）}     % レベル2: (a) -> （i）
-\renewcommand{\labelenumiii}{（\roman{\theenumiii}）}  % レベル3: i. -> （i）
-\renewcommand{\labelenumiv}{（\roman{\theenumiv}）}    % レベル4: A. -> （i）
+\renewcommand{\labelenumi}{\arabic{enumi}.}    % レベル1: 1. -> 1.
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}     % レベル2: (a) -> 1.1.
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}  % レベル3: i. -> 1.1.1.
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}.}    % レベル4: A. -> 1.1.1.1.
 ```
 
 順序リストの見出しは``\labelenumi``を再定義することでまとめて変更できます。
-順序の数値は``\theenumi``に入っています。
+順序の数字のカウンターは``enumi``に入っています。
 レベルごとに記号を設定でき、
-レベル1は``\labelenumi``と``\theenumi``、
-レベル2は``\labelenumii``と``\theenumii``、
-レベル3は``\labelenumiii``と``\theenumiii``、
-レベル4は``\labelenumiv``と``\theenumiv``、
+レベル1は``\labelenumi``と``enumi``、
+レベル2は``\labelenumii``と``enumii``、
+レベル3は``\labelenumiii``と``enumiii``、
+レベル4は``\labelenumiv``と``enumiv``、
 を使って変更できます。
 
 ## 説明書きしたい（``description``）
