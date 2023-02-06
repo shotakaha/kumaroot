@@ -10,9 +10,7 @@ $ ptex2pdf -l ファイル名     # pLaTeX
 ``pLaTeX``のタイプセットは``-l``オプションをつけて実行します。
 
 
-
-``(u)pLaTeX``を使う場合は、ドキュメントクラスに``jlreq``を使います。
-昔からある``jsarticle``系や``ltjsarticle``系も使えます。
+## ドキュメントクラス
 
 ```latex
 \documentclass{jlreq}
@@ -20,24 +18,5 @@ $ ptex2pdf -l ファイル名     # pLaTeX
 \documentclass[uplatex, dvipdfmx]{jsarticle}     % upLaTeX
 ```
 
-## PDFを作成したい
-
-```bash
-$ ptex2pdf -l main.tex    % pLaTeX
-$ ptex2pdf -u -l main.tex    % upLaTeX
-```
-
-upLaTeXを使う場合は``-u -l``オプションを使います。
-
-## ヘルプを確認したい
-
-```bash
-$ ptex2pdf -h
-```
-
-## バージョンを確認したい
-
-```bash
-ptex2pdf -v
-This is ptex2pdf[.lua] version 20200520.0.
-```
+``(u)pLaTeX``を使う場合も、ドキュメントクラスに``jlreq``が使えます。
+昔からある``jsarticle``系も使えます。

@@ -18,26 +18,6 @@ latex-lualatex
 latex-uplatex
 ```
 
-
-## ヘルプを確認したい
-
-```bash
-$ latexmk -h
-$ latexmk --help
-$ texdoc latexmk
-```
-
-シェルでの実行オプションを確認したい場合は`-h / --help` で十分です。
-もっと詳細を確認したい場合は``texdoc``してPDFを確認するのが一番です。
-
-## バージョンを確認したい
-
-```bash
-$ latexmk -v
-$ latexmk --version
-Latexmk, John Collins, 17 Mar. 2022. Version 4.77
-```
-
 ## エンジンを指定したい
 
 ```bash
@@ -50,8 +30,7 @@ $ latexmk -lualatex ファイル名
 $ latexmk -shell-escape
 ```
 
-外部スクリプトを利用するパッケージを使う場合、``-shell-escape``オプションが必要な場合があります。
-例えばコードのシンタックスハイライトする``minted``パッケージでは必要です。
+コードをシンタックスハイライトする``minted``パッケージなど、外部スクリプトを呼び出すパッケージを使う場合、``-shell-escape``オプションが必要です。
 
 ## ライブプレビューしたい
 
@@ -59,7 +38,7 @@ $ latexmk -shell-escape
 $ latexmk -pvc
 ```
 
-文書を編集しているとき、ライブプレビューできると編集作業が捗ります。
+PDF出力をライブプレビューできると編集作業が捗ります。
 そんなときは``-pvc``オプションを使いましょう。
 
 ## 出力ファイルを別ディレクトリに作成したい
@@ -107,18 +86,24 @@ $ latexmk -r latexmkjarc
 
 設定ファイルのデフォルトは{file}`latexmkrc`もしくは{file}`.latexmkrc`ですが、``-r``オプションで変更できます。
 
-## 設定ファイル（``latexmkrc``）
 
-```text
-@default_files = ("00_sample", "01_sample", "02_sample");
-$pdf_mode = 4;
-$out_dir = "outd";
-$aux_dir = "auxd";
-# ライブプレビューに関する設定
-$preview_continuous_mode = 1;
-$pvc_timeout = 1;
-$pvc_timeout_mins = 10;  # 30min; default
-$sleep_time = 60;  # 60s
+## ヘルプを確認したい
+
+```bash
+$ latexmk -h
+$ latexmk --help
+$ texdoc latexmk
+```
+
+シェルでの実行オプションを確認したい場合は`-h / --help` で十分です。
+もっと詳細を確認したい場合は``texdoc``してPDFを確認するのが一番です。
+
+## バージョンを確認したい
+
+```bash
+$ latexmk -v
+$ latexmk --version
+Latexmk, John Collins, 17 Mar. 2022. Version 4.77
 ```
 
 ## リファレンス

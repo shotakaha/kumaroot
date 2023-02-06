@@ -28,7 +28,6 @@ latex-install
 latex-ide
 latex-online
 latex-document
-latex-build
 latex-latexmk
 latex-documentclass
 latex-usepackage

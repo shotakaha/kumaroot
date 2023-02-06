@@ -18,27 +18,16 @@ $ latexmk -lualatex ファイル名
 ``LuaLaTeX``を使う場合は、ドキュメントクラスに``jlreq``を使います。
 昔からある``jsarticle``に相当するものを使いたい場合は``ltjsarticle``が使えます。
 
-## ヘルプを確認したい
-
-```bash
-$ lualatex --help
-```
-
-- ``lualatex -h``は使えないので注意が必要です
-
-## バージョンを確認したい
-
-```bash
-$ lualatex --version
-This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)
-...(省略)...
-```
-
 ## latexmkしたい
 
-```bash
-# ./latexmkrc
+```text
 $pdf_mode = 4;
+@default_files = ("ファイル1", "ファイル2");
+# ライブプレビューに関する設定
+$preview_continuous_mode = 1;
+$pvc_timeout = 1;
+$pvc_timeout_mins = 10;  # 30min; default
+$sleep_time = 60;  # 60s
+# $out_dir = "outd";
+# $aux_dir = "auxd";
 ```
-
-{file}`latexmkrc`は``$pdf_mode = 4;``に設定します。
