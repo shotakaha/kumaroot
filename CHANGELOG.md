@@ -1,3 +1,12 @@
+## v1.8.5 (2023-02-06)
+
+### Fix
+
+- **latex/latex-enumitem.md**: enumerateの番号変更の例を変更した
+- **latex/latex-latexmk.md**: latexmkを整理した
+- **latex/latex-latexmk.md**: タイプセットの説明を整理した
+- **latex/latex-usage.md**: overleafのドキュメントを追加した
+
 ## v1.8.4 (2023-02-05)
 
 ### Fix
