@@ -1,4 +1,15 @@
-# (u)pLaTeXを使いたい
+# (u)pLaTeXしたい
+
+```bash
+$ ptex2pdf -l -u ファイル名  # upLaTeX
+$ ptex2pdf -l ファイル名     # pLaTeX
+```
+
+``(u)pLaTeX``を使ってPDFを作成する場合は``ptex2pdf``コマンドを使います。
+``upLaTeX``のタイプセットは``-l -u``オプション、
+``pLaTeX``のタイプセットは``-l``オプションをつけて実行します。
+
+
 
 ``(u)pLaTeX``を使う場合は、ドキュメントクラスに``jlreq``を使います。
 昔からある``jsarticle``系や``ltjsarticle``系も使えます。
