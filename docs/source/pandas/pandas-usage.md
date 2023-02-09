@@ -16,6 +16,7 @@ pandas-to_datetime
 pandas-query
 pandas-unique
 pandas-concat
+pandas-astype
 ```
 
 ## リファレンス
