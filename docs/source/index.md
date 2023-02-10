@@ -18,6 +18,7 @@ latex/latex-usage
 sphinx/sphinx-usage
 python/python-usage
 pandas/pandas-usage
+polars/polars-usage
 altair/altair-usage
 gas/gas-usage
 webdev/webdev-usage
