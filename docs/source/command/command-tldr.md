@@ -1,13 +1,12 @@
 # tldr
 
-``man``ページやコマンドのヘルプをさっと確認するためのコマンドです。
-``TL;DR``（Too Long; Don't Read）という英語圏のミームをもじったコマンド名です。
+`man`ページやコマンドのヘルプをさっと確認するためのコマンドです。
+`TL;DR`（Too Long; Don't Read）という英語圏のミームをもじったコマンド名です。
 
 ほぼすべてのコマンドの使い方は{command}`man`コマンドで確認できますが、
 詳細に書かれているため、目的にあった使い方をさっと調べるのはなかなかコツが必要です。
-``tldr``は、そこから用例を抜粋して教えてくれます。
+`tldr`は、そこから用例を抜粋して教えてくれます。
 すぐに使い方を知りたい場合にとても重宝しています。
-
 
 ```{note}
 ``TL;DR``は
@@ -18,11 +17,11 @@
 
 ## インストール
 
-{command}`brew`を使ってインストールします。
-
 ```bash
 brew install tealdeer
 ```
+
+{command}`brew`を使ってインストールします。
 
 ## 使い方
 
@@ -30,8 +29,7 @@ brew install tealdeer
 tldr コマンド名
 ```
 
-``tldr``自身の使い方も{command}`tldr`コマンドで確認できます。
-
+`tldr`自身の使い方も{command}`tldr`コマンドで確認できます。
 
 ```bash
 tldr tldr
@@ -39,13 +37,22 @@ tldr tldr
 
 ## キャッシュを更新したい
 
-キャッシュが古くなっている場合は、更新を促す警告（warning）が表示されます。
+```bash
+tldr --update
+tldr -u
+```
+
+初回とキャッシュが古くなっている場合は、更新を促す警告（warning）が表示されます。
+
+## 設定ファイルを作成したい
 
 ```bash
-tldr -u
-tldr --update
+$ tldr --seed-config
+Successfully created seed config file here: ~/Library/Application Support/tealdeer/config.toml
 ```
+
+設定ファイルでキャッシュの更新を自動化できます。
 
 ## リポジトリ
 
-- https://github.com/dbrgn/tealdeer
+-   https://github.com/dbrgn/tealdeer
