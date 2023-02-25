@@ -13,6 +13,7 @@ command-cd
 command-chmod
 command-curl
 command-docker
+command-echo
 command-exa
 command-fd
 command-find
