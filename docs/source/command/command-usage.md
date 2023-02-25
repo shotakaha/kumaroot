@@ -16,6 +16,7 @@ command-docker
 command-exa
 command-fd
 command-find
+command-fish
 command-grep
 command-launchctl
 command-ls
