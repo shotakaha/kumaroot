@@ -1,4 +1,4 @@
-# brew
+# パッケージ管理したい（`brew`）
 
 ```bash
 brew install フォーミュラ名
