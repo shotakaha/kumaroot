@@ -1,3 +1,21 @@
+## v1.8.6 (2023-02-26)
+
+### Fix
+
+- **command/command-fish.md**: setを追記した
+- **command/command-fish.md**: fishを追加した
+- **command/command-ssh.md**: SSHの設定を追記した
+- **command/command-tldr.md**: tldrの使い方を追記した
+- **command/command-brew.md**: brewのタイトルを変更した
+- **command/command-brew.md**: brewのパス設定を追記した
+- **command/command-fish.md**: fishの設定を追加した
+- **polars/polars-usage.md**: Polarsの使い方を追加した
+- **pyproject.toml**: パッケージを更新した
+- **pandas/pandas-astype.md**: dtypesのリンクを追記した
+- **pandas/pandas-astype.md**: 型変換を追加した
+- **python/python-pathlib.md**: パス連結を追記した
+- **latex/latex-graphicx.md**: graphicspathを追記した
+
 ## v1.8.5 (2023-02-06)
 
 ### Fix

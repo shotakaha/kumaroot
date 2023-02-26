@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kumaroot"
-version = "1.8.5"
+version = "1.8.6"
 description = "KumaROOT"
 authors = ["Shota Takahashi (KEK) <shotakah@post.kek.jp>"]
 license = "MIT"
@@ -22,7 +22,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.8.5"
+version = "1.8.6"
 tag_format = "v$version"
 version_files = [
     "pyproject.toml:version",
