@@ -21,6 +21,7 @@ $ git config -l
 ```bash
 $ git config --global user.name "Shota Takahashi"
 $ git config --global user.email "shotakaha@gmail.com"
+$ git config --global pull.rebase false
 $ git config --global core.editor emacslient
 ```
 
