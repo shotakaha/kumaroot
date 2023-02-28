@@ -34,6 +34,7 @@ command-sed
 command-ssh
 command-ssh-keygen
 command-tcpdump
+command-tee
 command-texdoc
 command-tig
 command-tldr
