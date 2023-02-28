@@ -70,3 +70,13 @@ set -q 変数名    # 変数名が定義されているかを確認
 
 ``set -q``で変数が定義されているか確認できます。
 ``if``文と組み合わせて条件分岐に使えます。
+
+
+## リダイレクトしたい
+
+```
+$ pbcopy < ~/.gitconfig
+$ echo "hello" > stdout.md
+$ echo "hello" 2> stderr.md
+$ echo "hello" 2>&1 stdout_and_stderr.md
+```
