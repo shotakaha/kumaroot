@@ -12,6 +12,7 @@ command-brew
 command-cd
 command-chmod
 command-curl
+command-date
 command-docker
 command-echo
 command-exa
