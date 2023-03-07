@@ -34,6 +34,7 @@ command-rsync
 command-sed
 command-ssh
 command-ssh-keygen
+command-stdout
 command-tcpdump
 command-tee
 command-texdoc
