@@ -25,6 +25,7 @@ command-ls
 command-lsd
 command-nkf
 command-1password
+command-open
 command-pandoc
 command-pbcopy
 command-ping
