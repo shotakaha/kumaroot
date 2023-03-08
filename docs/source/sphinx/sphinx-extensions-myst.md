@@ -22,9 +22,6 @@ extensions = [...,
 
 ## オプションを有効にする
 
-さらに次のオプションを有効にします。
-``conf.py`` の任意の場所に追記します。
-
 ```python
 myst_enable_extensions = [
     "amsmath,
@@ -42,6 +39,10 @@ myst_enable_extensions = [
     "tasklist",
 ]
 ```
+
+``conf.py`` の任意の場所に``myst_enable_extensions``を定義して、MyST Parserのオプションを有効にします。
+
+
 
 ```{note}
 ``linkfy``は別途モジュールが必要なエラーがでたため、
