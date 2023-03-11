@@ -12,6 +12,9 @@ Dockerはコンテナ型仮想化技術を使ったプラットフォームで�
 コンテナ管理／イメージ管理／ボリューム管理に関する情報やその操作はデスクトップアプリのGUIも頼るとよいと思います。
 
 ```{toctree}
+---
+maxdepth: 1
+---
 docker-install
 docker-tutorial
 docker-build
