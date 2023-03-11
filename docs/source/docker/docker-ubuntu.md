@@ -1,4 +1,4 @@
-# Ubutuを使いたい
+# Ubuntuを使いたい
 
 ```bash
 $ docker pull ubuntu
@@ -37,11 +37,11 @@ root@119477a8562d:/# ls
 
 ```bash
 $ docker ps
-$ docker stop コンテナーID
-$ docker rm コンテナーID
+$ docker stop my-ubuntu
+$ docker rm my-ubuntu
 ```
 
-``docker ps``でコンテナーIDを確認したあと、コンテナーを停止（``stop``）してから削除（``rm``）します。
+起動時に指定したコンテナ名を使って、コンテナーを停止（``stop``）してから削除（``rm``）します。
 
 ## リファレンス
 
