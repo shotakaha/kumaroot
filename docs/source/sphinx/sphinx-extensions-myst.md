@@ -1,8 +1,6 @@
 # Markdownを使いたい（``myst_parser``）
 
-[MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest/intro.html)の拡張パッケージを追加すると、
-``Markdown``記法でドキュメントを記述できます。
-
+[MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest/intro.html)の拡張パッケージを追加すると、``Markdown``記法でドキュメントを記述できます。
 すでに``Markdown``記法に慣れている場合は、迷わずこの拡張を追加しましょう。
 
 ## インストール
@@ -24,9 +22,6 @@ extensions = [...,
 
 ## オプションを有効にする
 
-さらに次のオプションを有効にします。
-``conf.py`` の任意の場所に追記します。
-
 ```python
 myst_enable_extensions = [
     "amsmath,
@@ -44,6 +39,10 @@ myst_enable_extensions = [
     "tasklist",
 ]
 ```
+
+``conf.py`` の任意の場所に``myst_enable_extensions``を定義して、MyST Parserのオプションを有効にします。
+
+
 
 ```{note}
 ``linkfy``は別途モジュールが必要なエラーがでたため、
@@ -101,3 +100,7 @@ myst:
 ```
 
 コメントやコメントアウトしたい場合は、行頭に`%`をつけます。
+
+## リファレンス
+
+- [MyST Parser Document](https://myst-parser.readthedocs.io/en/latest/index.html)

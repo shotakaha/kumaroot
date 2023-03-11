@@ -39,4 +39,6 @@ sphinx-readthedocs
 - [reStructuredText入門](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/basics.html)
 - [CommonMark](https://commonmark.org/)
 - [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest)
+- [Sphinx Design](https://sphinx-design.readthedocs.io/en/latest/)
+- [Sphinx Extensions](https://sphinx-extensions.readthedocs.io/en/latest/)
 - [Read the Docs](https://readthedocs.org/)
