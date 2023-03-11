@@ -11,5 +11,6 @@ Dockerはコンテナー型仮想化技術を使ったプラットフォーム�
 
 ```{toctree}
 docker-install
+docker-tutorial
 docker-ubuntu
 ```
