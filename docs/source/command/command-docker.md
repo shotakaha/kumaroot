@@ -29,8 +29,12 @@ $ docker stop コンテナ名
 ## リポジトリにあるイメージを使いたい
 
 ```bash
-$ docker pull イメージ
+$ docker search キーワード
+$ docker pull イメージ名
 ```
+
+``docker search``コマンドでDocker Hubにあるイメージを検索できます。
+使いたいイメージ名が判明したら``docker pull``コマンドを実行します。
 
 ## ダウンロード済みのイメージを確認したい
 
