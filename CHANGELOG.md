@@ -2,39 +2,25 @@
 
 ### Fix
 
-- **command/command-brew.md**: フォント用のタップを追記した
-- **command/command-docker.md**: searchコマンドを追記した
-- **command/command-docker.md**: 微修正した
-- **docker/docker-run.md**: 微修正した
-- **docker/docker-run.md**: コンテナ名をつける方法を追記した
-- **docker/docker-ubuntu.md**: Ubuntuの使い方を追記した
-- **docker/docker-run.md**: コンテナ内のターミナルに入るオプションを追加した
-- **docker/docker-usage.md**: 目次にmaxdepthを追加した
-- **docker/docker-run.md**: オプションの説明を整理した
-- **docker/docker-run.md**: ポート番号の形式を修正した
-- **docker/docker-volume.md**: データを保存する方法を追記した
-- **docker/docker-usage.md**: デスクトップアプリに言及した
-- **docker/docker-build.md**: イメージを更新する手順を追加した
-- **docker/docker-run.md**: コンテナを停止する方法を追記した
-- **docker/docker-build.md**: イメージ作成時の説明を追記した
-- **docker/docker-build.md**: イメージ作成のコマンドを修正した
-- **docker/docker-run.md**: ポート指定の説明を追記した
+- **command/command-brew.md**: フォント用のタップの使い方を追記した
+- **command/command-date.md**: dateコマンドを追加した
+- **command/command-docker.md**: docker searchコマンドを追記した
+- **command/command-fish.md**: リダイレクトする方法を追加した
+- **command/command-open.md**: openコマンドを追加した
+- **command/command-rsync.md**: rsyncコマンドの使い方を修正した
+- **command/command-stdout.md**: 標準出力のリダイレクトを追記した
+- **command/command-tee.md**: teeコマンドの使い方を追記した
 - **docker/docker-build.md**: コンテナイメージを作成する方法を追記した
+- **docker/docker-install.md**: Docker Desktopをインストールした後に確認したことを追記した
 - **docker/docker-run.md**: コンテナを起動する方法を追記した
 - **docker/docker-tutorial.md**: チュートリアルを実行したメモ
-- **docker/docker-install.md**: Docker Desktopをインストールした後に確認したことを追記した
-- **command/command-open.md**: openコマンドを追加した
-- **sphinx/sphinx-usage.md**: 役に立つリファレンスを追加した
-- **sphinx/sphinx-extensions-myst.md**: MySTの説明を修正した
-- **sphinx/sphinx-extensions-myst.md**: MyST公式のリンクを追加した
-- **command/command-stdout.md**: リダイレクトの説明を修正した
-- **webdev/webdev-css-gutenberg.md**: Gutenbergを追加した
-- **command/command-stdout.md**: 標準出力のリダイレクトを追記した
-- **command/command-date.md**: dateコマンドを追加した
-- **command/command-fish.md**: リダイレクトする方法を追加した
-- **command/command-rsync.md**: rsyncの使い方を修正した
+- **docker/docker-ubuntu.md**: Ubuntuの使い方を追記した
+- **docker/docker-usage.md**: デスクトップアプリに言及した
+- **docker/docker-volume.md**: データを保存する方法を追記した
 - **git/git-config.md**: pull.rebase falseを追加した
-- **command/command-tee.md**: teeの使い方を追記した
+- **sphinx/sphinx-extensions-myst.md**: MyST公式のリンクを追加した
+- **sphinx/sphinx-usage.md**: 役に立つリファレンスを追加した
+- **webdev/webdev-css-gutenberg.md**: Gutenbergを追加した
 
 ## v1.8.6 (2023-02-26)
 
