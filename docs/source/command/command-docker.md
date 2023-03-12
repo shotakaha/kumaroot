@@ -6,8 +6,6 @@ $ docker run イメージ
 
 詳しいことは[](../docker/docker-usage.md)に整理しています。
 
-
-
 ## 起動しているコンテナを確認したい
 
 ```bash
@@ -21,7 +19,7 @@ $ docker ps --all # 停止しているコンテナも確認
 $ docker run --name コンテナ名 イメージ
 ```
 
-## コンテナを起動したい
+## 既存のコンテナを起動／停止したい
 
 ```bash
 $ docker start コンテナ名
@@ -44,6 +42,7 @@ $ docker images
 
 ```bash
 $ docker exec -it コンテナ名 sh
+$ docker exec -it コンテナ名 bash
 ```
 
 ## コンテナを削除したい
@@ -56,7 +55,7 @@ $ docker rm コンテナ名
 ## コンテナのログを確認したい
 
 ```bash
-$ docker logs -f container_name
+$ docker logs -f コンテナ名
 ```
 
 ## カスタマイズしたイメージを作りたい
