@@ -44,3 +44,12 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
 ```bash
 $ xcode-select --install
 ```
+
+## フォントを追加したい
+
+```bash
+$ brew tap homebrew/cask-fonts
+```
+
+Google FontsにあるフォントはHomebrewを使ってインストールできます。
+そのために、フォント用のtap（``homebrew/cask-fonts``）を使えるようにしておきます。
