@@ -11,14 +11,15 @@ $ find 検索したいパス 検索したいパターン
 ## オプション
 
 ```bash
-find -name パターン   # ファイル名で検索
-find -regex 正規表現  # 完全な正規表現を使うことができる
-find -print           # 一致した完全パス名を書きだす
-find -size 数         # ファイル容量で検索
-find -type タイプ     # ファイルの種類で検索
-find -cmin 数         # 数分以内に変更されたファイルを検索
-find -ctime 数        # 数時間以内に変更されたファイルを検索
-find -ls              # 検索結果を ls -l に書きだす
+$ find -name パターン   # ファイル名で検索（大文字/小文字を区別する）
+$ find -iname パターン   # ファイル名で検索（大文字/小文字を区別しない）
+$ find -regex 正規表現  # 完全な正規表現を使うことができる
+$ find -print           # 一致した完全パス名を書きだす
+$ find -size 数         # ファイル容量で検索
+$ find -type タイプ     # ファイルの種類で検索
+$ find -cmin 数         # 数分以内に変更されたファイルを検索
+$ find -ctime 数        # 数時間以内に変更されたファイルを検索
+$ find -ls              # 検索結果を ls -l に書きだす
 ```
 
 ## ファイルの種類で探したい（``-type``）
@@ -26,6 +27,7 @@ find -ls              # 検索結果を ls -l に書きだす
 ```bash
 $ find 検索パス -type f  # ファイルを探す
 $ find 検索パス -type d  # ディレクトリを探す
+$ find 検索パス -type d -empty  # 空のディレクトリを探す
 ```
 
 ## 拡張子で探したい（``-name``）
@@ -71,7 +73,7 @@ $ find 検索パス -type f -nouser -name "*.html"   # 所有者不明
 $ find 検索パス -type f -nogroup -name "*.html"  # グループ不明
 ```
 
-## 空のディレクトリを探したい（``-empty -delete``）
+## 空のディレクトリを削除したい（``-empty -delete``）
 
 ```bash
 $ find 検索パス -type d -empty -delete
