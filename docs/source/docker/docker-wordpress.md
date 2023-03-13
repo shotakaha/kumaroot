@@ -50,6 +50,22 @@ volumes:
     db:
 ```
 
+### 設定の概要
+
+``version``:
+    Docker Composeのフォーマットを指定します。最新のフォーマットのバージョン（``3系``）を指定します。
+
+``services``:
+    利用するコンテナの設定を定義します。WordPress用の設定と、データベース（MySQL）用の設定を定義します。
+
+``volumes``:
+    データの保存先を指定します。ここではそれぞれ``named volume``で定義していますが、``bind volume``にもできます。というか、たぶん``bind volume``にしておいたほうがよい。
+
+## DockerHubの
+
+- [wordpress](https://hub.docker.com/_/wordpress/)- h[bitnami/wordpress](ttps://hub.docker.com/r/bitnami/wordpress)
+
+
 ## WordPressの設定
 
 WordPressの設定は``wp-config.php``に記述します。
