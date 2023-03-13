@@ -21,4 +21,5 @@ docker-build
 docker-run
 docker-volume
 docker-ubuntu
+docker-wordpress
 ```

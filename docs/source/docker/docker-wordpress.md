@@ -1,0 +1,6 @@
+# WordPressを使いたい
+
+WordPressを構築する場合も、Dockerを使うと簡単らしいので試してみます。
+WordPressの動作環境には、PHPとMySQL（もしくはMariaDB）が必要です。
+MySQLはApple Silicon上で動かないという情報をみたので、MariaDBを使うことにします。
+そのほかに、ゲストOSをどうするか、ウェブサーバーをApacheにするかNginxにするかを決めます。
