@@ -1,4 +1,4 @@
-# find
+# ファイルを探したい（``find``）
 
 ```bash
 $ find 検索したいパス 検索したいパターン
@@ -70,6 +70,15 @@ $ find 検索パス -group グループ名
 $ find 検索パス -type f -nouser -name "*.html"   # 所有者不明
 $ find 検索パス -type f -nogroup -name "*.html"  # グループ不明
 ```
+
+## 空のディレクトリを探したい（``-empty -delete``）
+
+```bash
+$ find 検索パス -type d -empty -delete
+```
+
+``-empty``オプションを使って、空のディレクトリが検索できます。
+``-delete``オプションを追加して、一括削除できます。
 
 ## 関連コマンド
 
