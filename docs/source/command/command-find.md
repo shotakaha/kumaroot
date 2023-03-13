@@ -1,7 +1,7 @@
 # ファイルを探したい（``find``）
 
 ```bash
-$ find 検索したいパス 検索したいパターン
+$ find 検索パス 検索パターン
 ```
 
 ファイルやディレクトリを探すコマンドです。
@@ -25,39 +25,59 @@ $ find -ls              # 検索結果を ls -l に書きだす
 ## ファイルの種類で探したい（``-type``）
 
 ```bash
-$ find 検索パス -type f  # ファイルを探す
-$ find 検索パス -type d  # ディレクトリを探す
+# ファイルを探したい
+$ find 検索パス -type f
+
+# ディレクトリを探したい
+$ find 検索パス -type d
+
+# 空のディレクトリを探したい
 $ find 検索パス -type d -empty  # 空のディレクトリを探す
 ```
 
 ## 拡張子で探したい（``-name``）
 
 ```bash
-$ find 検索パス -name "*.html"    # HTMLファイルを探す
-$ find 検索パス -name "*.zip"     # ZIPファイルを探す
-$ find 検索パス ! -name "*.html"  # HTML以外のファイルを探す
+# HTMLファイルを探したい
+$ find 検索パス -name "*.html"
+
+# ZIPファイルを探したい
+$ find 検索パス -name "*.zip"
+
+# HTML以外のファイルを探したい
+$ find 検索パス ! -name "*.html"
 ```
 
 ## 修正した時刻で探したい（``-mtime``）
 
 ```bash
 $ find 検索パス -mtime 5
-$ find 検索パス -mmin +10 -mmin -60  # 10分以上、60分以内に変更したファイル
+
+# 10分以上前 - 60分以内に変更したファイルを探したい
+$ find 検索パス -mmin +10 -mmin -60
 ```
 
 ## サイズで探したい（``-size``）
 
 ```bash
-$ find 検索パス -size +100k  # 100kB以上のファイル
-$ find 検索パス -size +10M   # 10MB以上のファイル
-$ find 検索パス -size +10M -size -50M  # 10MB - 50MBのファイル
+# 100kB以上のファイルを探したい
+$ find 検索パス -size +100k
+
+# 10MB以上のファイルを探したい
+$ find 検索パス -size +10M
+
+# 10MB - 50MBのファイルを探したい
+$ find 検索パス -size +10M -size -50M
 ```
 
 ## 深さを指定したい（``-depth``）
 
 ```bash
-$ find 検索パス -depth 2 -name "*.html"  # 2階層目まで探す
-$ find 検索パス -d 4 -name "*.html"      # 4階層目まで探す
+# 2階層目まで探したい
+$ find 検索パス -depth 2 -name "*.html"
+
+# 4階層目まで探したい
+$ find 検索パス -d 4 -name "*.html"
 ```
 
 ## グループ名で探したい（``-group``）
@@ -69,8 +89,11 @@ $ find 検索パス -group グループ名
 ## 所有者不明のファイルを探したい（``-nouser``）
 
 ```bash
-$ find 検索パス -type f -nouser -name "*.html"   # 所有者不明
-$ find 検索パス -type f -nogroup -name "*.html"  # グループ不明
+# 所有者不明のHTMLファイルを探したい
+$ find 検索パス -type f -nouser -name "*.html"
+
+# グループ不明のHTMLファイルを探したい
+$ find 検索パス -type f -nogroup -name "*.html"
 ```
 
 ## 空のディレクトリを削除したい（``-empty -delete``）
