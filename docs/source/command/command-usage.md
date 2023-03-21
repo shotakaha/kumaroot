@@ -23,6 +23,7 @@ command-grep
 command-launchctl
 command-ls
 command-lsd
+command-mkcert
 command-nkf
 command-1password
 command-open
