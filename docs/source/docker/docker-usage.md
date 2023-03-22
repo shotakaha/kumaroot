@@ -22,5 +22,6 @@ docker-run
 docker-volume
 docker-compose
 docker-ubuntu
+docker-nginx
 docker-wordpress
 ```
