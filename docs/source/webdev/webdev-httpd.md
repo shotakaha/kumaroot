@@ -109,6 +109,13 @@ Include conf/extra/httpd-userdir.conf
 ユーザーごとの公開コンテンツ領域は``UserDir``で設定できます。
 デフォルトは``public_html``になっているので、``~/public_html/``以下に配置したコンテンツを公開できます。
 
+## パスワードをかけたい
+
+特定のディレクトリに``.htaccess``を配置し、パスワードを使ったアクセス制限を設定できます。
+パスワード認証には``BASIC認証``と``Digest認証``の2種類があります。
+調べてみると、現在はHTTPS通信ができる場合はBASIC認証でOK、できない場合はDigest認証にするとよいみたいです。
+
+
 ## リファレンス
 
 - [Apache2.4 ドキュメント](https://httpd.apache.org/docs/2.4/)
