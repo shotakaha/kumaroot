@@ -8,4 +8,6 @@ webdev-rss
 webdev-ogp
 webdev-browser
 webdev-css-gutenberg
+webdev-httpd
+webdev-nginx
 ```
