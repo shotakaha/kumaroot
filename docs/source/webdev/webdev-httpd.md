@@ -1,18 +1,24 @@
 # ウェブサーバーしたい（``httpd``）
 
+ウェブサーバーとして一般的な``Apache``の設定方法を確認してみます。
+ここではDockerを使って起動したApacheサーバーのコンテナを使っています。
+()[../docker/docker-httpd]
+
 ## 設定ファイルを確認したい（``httpd.conf``）
 
 ```bash
 $ find . -name "httpd.conf"
 ```
 
-## ドキュメントルートを確認したい（``DocumentRoot``）
+## 公開用ディレクトリを確認したい（``DocumentRoot``）
 
 ```apache
+# DocumentRoot 絶対パス
 DocumentRoot /usr/local/apache2/htdocs
 ```
 
-公開するコンテンツを配置するディレクトリは``DocumentRoot``ディレクティブで設定します。
+外部に公開するコンテンツをディレクトリは``DocumentRoot``で設定します。
+ドキュメントルートは絶対パスで指定します。
 
 ## ポート番号を確認したい（``Listen``）
 
@@ -22,13 +28,16 @@ Listen 80
 Listen 443
 ```
 
-外部からアクセスするときのポート番号は``Listen``ディレクティブで設定できます。
+外部からアクセスするときのポート番号は``Listen``で設定できます。
 ``Listen ポート番号``を追加することで複数のポートを設定できます。
 HTTPは80番、HTTPSは443番がデフォルトのポート番号です。
 
 ## ディレクトリのアクセス権を確認したい（``Directory`` / ``File``）
 
 ```apache
+# <Directory パス>...</Directory>
+# <File パス>...</Directory>
+
 # 全体（/）のアクセス権の設定
 # システム全体は外部からアクセスできないように設定
 <Directory />
@@ -45,31 +54,57 @@ HTTPは80番、HTTPSは443番がデフォルトのポート番号です。
 </Directory>
 
 # .htではじまるファイルのアクセス権の設定
+# ワイルドカード（*）を使ってパスを指定できる
 # .htaccessや.htpasswordは外部からアクセスできないように設定
 <File ".ht*">
     Require all denied
 </File>
 ```
 
-外部からのアクセス権限は``Directory``ディレクティブと``File``ディレクティブで制御できます。
-ファイルシステム全体や``.htaccess``のようなファイルは外部からアクセスNGにしつつ、
-公開コンテンツ領域（ドキュメントルート以下）は外部アクセスOKにできます。
+外部からのアクセス権限は``Directory``や``File``で設定できます。
+ファイルシステム全体や``.htaccess``のようなファイルは外部からのアクセスNGにしつつ、
+公開用コンテンツ（＝ドキュメントルート以下）は外部アクセスOKにできます。
 
 ## ログフォーマットを確認したい（``LogFormat`` / ``CustomLog``）
 
 ```apache
 <IfModule log_config_module>
+    # LogFormat "フォーマット文字列" ログ形式の名前
     LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
     LogFormat "%h %l %u %t \"%r\" %>s %b" common
+
+    # CustomLog "保存先" ログ形式の名前
     CustomLog "logs/access_log" combined
 </IfModule>
 ```
 
-ログ形式は``LogFormat``ディレクティブで設定できます。
-アクセスログの保存先とフォーマットは``CustomLog``ディレクティブで設定できます。
+ログ形式は``LogFormat``で設定できます。
+``httpd.conf``には``common``形式と``combined``形式はプリセットとして定義されていました。
+アクセスログの保存先とフォーマットは``CustomLog``で設定できます。
+保存先を相対パスで指定した場合、``ServerRoot``からの相対パスになります。
 
+## HTTPS使いたい
 
+```apache
+LoadModule ssl_module modules/mod_ssl.so
+Include conf/extra/httpd-ssl.conf
 
-## SSLを有効化したい
+<IfModule ssl_module>
+    # SSL証明書の設定
+</IfModule>
+```
 
-## ユーザーごとのディレクトリを有効にしたい
+HTTPSを使いたい場合は、``mod_ssl``モジュールを有効にします。
+
+## ユーザーごとのディレクトリを使いたい
+
+```apache
+LoadModule userdir_module modules/mod_userdir.so
+Include conf/extra/httpd-userdir.conf
+```
+
+ユーザーごとのディレクトリを使いたい場合は、``mod_userdir``モジュールを有効にします。
+``LoadModule``でモジュールを有効にし、``Include``で設定ファイルを読み込みます。
+
+ユーザーごとの公開コンテンツ領域は``UserDir``で設定できます。
+デフォルトは``public_html``になっているので、``~/public_html/``以下に配置したコンテンツを公開できます。
