@@ -108,3 +108,9 @@ Include conf/extra/httpd-userdir.conf
 
 ユーザーごとの公開コンテンツ領域は``UserDir``で設定できます。
 デフォルトは``public_html``になっているので、``~/public_html/``以下に配置したコンテンツを公開できます。
+
+## リファレンス
+
+- [Apache2.4 ドキュメント](https://httpd.apache.org/docs/2.4/)
+- [Apache2.4 ディレクティブクイックリファレンス](https://httpd.apache.org/docs/2.4/ja/mod/quickreference.html)
+- [Apache2.4 モジュール一覧](https://httpd.apache.org/docs/2.4/ja/mod/)
