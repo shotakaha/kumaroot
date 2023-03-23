@@ -1,9 +1,10 @@
-# apacheしたい（``httpd``）
+# ウェブサーバーしたい（``httpd``）
 
 ```bash
 $ docker run -d -it -p 8080:80 --name my-httpd httpd
 ```
 
+ウェブサーバーとして代表的なApacheで遊んでみようと思います。
 Apacheコンテナのイメージ名は``httpd``です。
 ポート番号を8080番（``-p 8080:80``）し、コンテナ名を``my-httpd``（``--name httpd``）として起動しています。
 
@@ -54,7 +55,6 @@ DocumentRoot "/usr/local/apache2/htdocs"
 
 なので、トップページは``htdocs/index.html``を編集すればOKです。
 他にもApacheコンテナで公開したいファイルは、このドキュメントルートの下に配置すればOKです。
-
 
 ## リファレンス
 
