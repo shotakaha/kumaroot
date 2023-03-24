@@ -3,12 +3,14 @@
 ```bash
 $ docker run -d -p 8082:80 --name my-nginx nginx
 $ docker excec -it my-nginx
+(my-nginx) $ nginx
+nginx version: nginx/1.23.3
 (my-nginx) $ pwd
 /
 ```
 
 最近シェアが増えてきているという``Nginx``の設定方法を確認します。
-Apacheと同じように、Dockerで起動したNginxサーバーのコンテナを使っています。
+ここではApacheと同じように、Dockerで起動したNginxサーバーのコンテナを使って、設定内容を調べています。
 
 ## 設定ファイルを確認したい（``nginx.conf``）
 
@@ -18,11 +20,25 @@ $ find . -name *.conf | grep nginx
 ./etc/nginx/conf.d/default.conf
 ```
 
-設定ファイルの拡張子は``*.conf``で、``nginx``の文字列を含むパスを検索しています。
+設定ファイルの名前は``nginx.conf``です。
+上のコマンドでは拡張子が``*.conf``で、``nginx``の文字列を含むパスを検索しています。
+メインの設定ファイル（``/etc/nginx/nginx.conf``）と、追加のファイル（``/etc/nginx/conf.d/*.conf``）が見つかりました。
 
-設定ファイルに「ディレクティブ」を記述し、モジュールを制御します。
-ディレクティブには``simple directive``と``block directive``の主に2種類の書き方があります。
-そしてディレクティブの中にディレクティブを持つ場合は``context``と呼びます。
+設定ファイルには各種の「ディレクティブ」がすでに書き込まれていて、サーバー設定の確認がができます。
+また、このディレクティブを書き換えることで設定を変更できます。
+
+Nginxのディレクティブには``simple directive``と``block directive``の主に2種類の書き方があります。
+そしてディレクティブの中にディレクティブを持つ構造を``context``と呼びます。
+
+## 設定ファイルのシンタックス確認（``nginx -t``）
+
+```bash
+$ nginx -t
+$ nginx -T
+```
+
+設定ファイルのシンタックス（＝書き方）が正しいかチェックできます。
+設定を書き換えた場合、サーバーを再起動する前には必ずチェックするとよいです。
 
 ## ポート番号を確認したい（``listen``）
 
@@ -62,7 +78,6 @@ Apacheの``combined``ログ形式と同じフォーマットです。
 ## SSLを有効化したい
 
 ## ユーザーごとのディレクトリを有効にしたい
-
 
 ## リファレンス
 

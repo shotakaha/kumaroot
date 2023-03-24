@@ -3,12 +3,15 @@
 ```bash
 $ docker run -d -p 8081:80 --name my-httpd httpd
 $ docker exec -it my-httpd bash
+(my-httpd) $ httpd -v
+Server version: Apache/2.4.56 (Unix)
+Server built:   Mar  7 2023 20:23:05
 (my-httpd) $ pwd
 /usr/local/apache2
 ```
 
 ウェブサーバーとして一般的な``Apache``の設定方法を確認してます。
-ここではDockerで起動したApacheサーバーのコンテナを使っています。
+ここではDockerで起動したApacheサーバーのコンテナを使って、設定内容を調べています。
 ()[../docker/docker-httpd]
 
 ## 設定ファイルを確認したい（``httpd.conf``）
@@ -21,12 +24,24 @@ $ find . -name *.conf | grep httpd
 ./conf/original/extra/httpd-*.conf
 ```
 
-設定ファイルの拡張子は``*.conf``で、``httpd``の文字列を含むパスを検索しています。
-``./conf/httpd.conf``がメインの設定ファイルです。
-``./conf/extra/``に入っているファイルは``httpd.conf``で読み込んだモジュールの設定ファイルです。
+設定ファイルは``httpd.conf``です。
+上のコマンドでは、拡張子が``*.conf``で、``httpd``の文字列を含むパスを検索しています。
+メインの設定ファイル（``./conf/httpd.conf``）とモジュール用の設定ファイル（``./conf/extra/httpd-*.conf``）が見つかりました。
 
-``./conf/original/``は、（たぶん）デフォルトの設定ファイルです。
+また、``./conf/original/``以下のファイルは（たぶん）オリジナルの設定ファイルです。
 設定ミスした場合などは、このファイルとの差分を調べたり、このファイルで上書きしてリセットすればよさそうです。
+
+設定ファイルには各種の「ディレクティブ」がすでに書き込まれていて、サーバー設定の確認がができます。
+また、このディレクティブを書き換えることで設定を変更できます。
+
+## 設定ファイルのシンタックス確認（``nginx -t``）
+
+```bash
+$ httpd -t
+```
+
+設定ファイルのシンタックス（＝書き方）が正しいかチェックできます。
+設定を書き換えた場合、サーバーを再起動する前には必ずチェックするとよいです。
 
 ## 公開用ディレクトリを確認したい（``DocumentRoot``）
 
