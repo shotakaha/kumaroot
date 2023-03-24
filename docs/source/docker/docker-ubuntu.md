@@ -1,47 +1,28 @@
 # Ubuntuを使いたい
 
 ```bash
-$ docker pull ubuntu
-Using default tag: latest
-latest: Pulling from library/ubuntu
-301a8b74f71f: Pull complete
-Digest: sha256:7cfe75438fc77c9d7235ae502bf229b15ca86647ac01c844b272b56326d56184
-Status: Downloaded newer image for
-
-$ docker images
-REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
-ubuntu                  latest    cdb68b455a14   8 days ago      77.8MB
+$ docker run -d --name my-ubuntu ubuntu
+$ docker exec -it my-ubuntu bash
 ```
 
-タグを指定しないと``latest``なイメージを取得できます。
+Ubuntuコンテナをバックグラウンドで起動（``-d``）します。
+コンテナ名は``my-ubuntu``（``--name my-ubuntu``）としています。
+起動したコンテナに接続（``docker exec -it``）し``bash``に切り替えます。
 
-## コンテナーを起動したい
+## コンテナを削除したい
 
 ```bash
-$ docker run -it -d --name my-ubuntu -p 3389:3389 ubuntu:latest
-119477a8562d4ab35a92c9f3773419a627d63db78023b55612805321bfe842cf
-
+# コンテナ名を確認する
 $ docker ps
-CONTAINER ID   IMAGE           COMMAND   CREATED         STATUS         PORTS                    NAMES
-119477a8562d   ubuntu:latest   "bash"    5 seconds ago   Up 4 seconds   0.0.0.0:3389->3389/tcp   my-ubuntu
-```
 
-## コンテナーにログインしたい
-
-```bash
-$ docker exec -it my-ubuntu /bin/bash
-root@119477a8562d:/# ls
-```
-
-## コンテナーを削除したい
-
-```bash
-$ docker ps
+# コンテナを停止する
 $ docker stop my-ubuntu
+
+# コンテナを削除する
 $ docker rm my-ubuntu
 ```
 
-起動時に指定したコンテナ名を使って、コンテナーを停止（``stop``）してから削除（``rm``）します。
+起動時に指定したコンテナ名を使って、コンテナを停止（``stop``）してから削除（``rm``）します。
 
 ## リファレンス
 
