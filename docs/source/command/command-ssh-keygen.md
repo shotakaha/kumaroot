@@ -1,9 +1,10 @@
-# ssh-keygen
+# SSH鍵したい（``ssh-keygen``）
 
 SSH鍵（公開鍵と秘密鍵のペア）を生成するコマンドです。
 
 ```bash
-ssh-keygen -t ed25519 -C "コメントを入力する"
+$ ssh-keygen -t ed25519 -C "コメント"
+$ ssh-keygen -t ed25519 -C "メールアドレス (パソコンの名前)"
 ```
 
 SSH鍵のペアは``~/.ssh/``に生成されます。
@@ -15,21 +16,44 @@ SSH鍵のペアは``~/.ssh/``に生成されます。
 
 ## 暗号化アルゴリズムを指定したい（``-t``）
 
+```bash
+# RSA鍵
+$ ssh-keygen
+# id_rsa | id_rsa.pub
+
+# DSA（1024ビット推奨）
+$ ssh-keygen -t dsa
+# id_dsa | id_dsa.pub
+
+# ECDSA（256ビット推奨）
+ssh-keygen -t ecdsa
+# id_ecdsa | id_ecdsa.pub
+
+# EdCSA（256ビット推奨）
+$ ssh-keygen -t ed25519
+# id_ed25519 | id_ed25519.pub
+```
+
 暗号化アルゴリズムは``rsa`` / ``dsa`` / ``ecdsa`` / ``ed25519`` の4種類から選択できます。
 デフォルトは``rsa``となっています。
 サービスが``EdDSA``に対応しているなら``ed25519``を選択するのがよいと思います。
-
-```bash
-ssh-keygen               # ~/.ssh/id_rsa | id_rsa.pub
-ssh-keygen -t dsa        # ~/.ssh/id_dsa | id_dsa.pub
-ssh-keygen -t ecdsa      # ~/.ssh/id_ecdsa | id_ecdsa.pub
-ssh-keygen -t ed25519    # ~/.ssh/id_ed25519 | id_ed25519.pub
-```
-
 指定した暗号化アルゴリズム別にSSH鍵が{file}`~/.ssh/`に生成されます。
 
 ## 鍵の長さを指定したい（``-b``）
 
 ```bash
-ssh-keygen -b 4096
+# RSA鍵（2048ビット以上推奨）
+$ ssh-keygen -b 4096
+
+# DSA鍵（1024ビット推奨）
+$ ssh-keygen -t dsa -b 1024
+
+# ECDSA鍵（256ビット推奨）
+$ ssh-keygen -t ecdsa -b 256
+
+# EdCSA鍵（256ビット推奨）
+$ ssh-keygen -t ed25519 -b 256
 ```
+
+``-b``オプションを使って暗号鍵の長さ（＝ビット数）を指定できます。
+それぞれの暗号化アルゴリズムの長さの推奨値を載せておきます。
