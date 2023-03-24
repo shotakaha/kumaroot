@@ -17,6 +17,7 @@ maxdepth: 1
 ---
 docker-install
 docker-tutorial
+docker-ls
 docker-build
 docker-run
 docker-volume
