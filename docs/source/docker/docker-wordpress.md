@@ -63,7 +63,8 @@ volumes:
 
 ## DockerHubの
 
-- [wordpress](https://hub.docker.com/_/wordpress/)- h[bitnami/wordpress](ttps://hub.docker.com/r/bitnami/wordpress)
+- [wordpress](https://hub.docker.com/_/wordpress/)
+- [bitnami/wordpress](https://hub.docker.com/r/bitnami/wordpress)
 
 
 ## WordPressの設定
