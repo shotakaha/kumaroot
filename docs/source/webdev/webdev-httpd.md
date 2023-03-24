@@ -7,8 +7,19 @@
 ## 設定ファイルを確認したい（``httpd.conf``）
 
 ```bash
-$ find . -name "httpd.conf"
+$ find . -name *.conf | grep httpd
+./conf/httpd.conf
+./conf/extra/httpd-*.conf  # 省略
+./conf/original/httpd.conf
+./conf/original/extra/httpd-*.conf
 ```
+
+設定ファイルの拡張子は``*.conf``で、``httpd``の文字列を含むパスを検索しています。
+``./conf/httpd.conf``がメインの設定ファイルです。
+``./conf/extra/``に入っているファイルは``httpd.conf``で読み込んだモジュールの設定ファイルです。
+
+``./conf/original/``は、（たぶん）デフォルトの設定ファイルです。
+設定ミスした場合などは、このファイルとの差分を調べたり、このファイルで上書きしてリセットすればよさそうです。
 
 ## 公開用ディレクトリを確認したい（``DocumentRoot``）
 
