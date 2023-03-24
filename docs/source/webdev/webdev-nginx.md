@@ -20,10 +20,32 @@ $ find . -name *.conf | grep nginx
 
 設定ファイルの拡張子は``*.conf``で、``nginx``の文字列を含むパスを検索しています。
 
-## ドキュメントルートを確認したい
+設定ファイルに「ディレクティブ」を記述し、モジュールを制御します。
+ディレクティブには``simple directive``と``block directive``の主に2種類の書き方があります。
+そしてディレクティブの中にディレクティブを持つ場合は``context``と呼びます。
 
-## ログフォーマットを確認したい
+
+## 公開用ディレクトリを確認したい
+
+## ログフォーマットを確認したい（``log_format``）
+
+```nginx
+http {
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log /var/log/nginx/access.log main;
+}
+```
+
+Apacheの``combined``ログ形式と同じフォーマットです。
 
 ## SSLを有効化したい
 
 ## ユーザーごとのディレクトリを有効にしたい
+
+
+## リファレンス
+
+- [Nginx ドキュメント](https://nginx.org/en/docs/)
