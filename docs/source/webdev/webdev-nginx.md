@@ -10,7 +10,7 @@ $ docker excec -it my-nginx
 最近シェアが増えてきているという``Nginx``の設定方法を確認します。
 Apacheと同じように、Dockerで起動したNginxサーバーのコンテナを使っています。
 
-## 設定ファイルを確認したい
+## 設定ファイルを確認したい（``nginx.conf``）
 
 ```bash
 $ find . -name *.conf | grep nginx
@@ -24,8 +24,26 @@ $ find . -name *.conf | grep nginx
 ディレクティブには``simple directive``と``block directive``の主に2種類の書き方があります。
 そしてディレクティブの中にディレクティブを持つ場合は``context``と呼びます。
 
+## ポート番号を確認したい（``listen``）
 
-## 公開用ディレクトリを確認したい
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+    server_name localhost;
+}
+```
+
+## 公開用ディレクトリを確認したい（``location``）
+
+```nginx
+server {
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+}
+```
 
 ## ログフォーマットを確認したい（``log_format``）
 
