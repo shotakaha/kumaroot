@@ -1,7 +1,14 @@
 # ウェブサーバーしたい（``httpd``）
 
-ウェブサーバーとして一般的な``Apache``の設定方法を確認してみます。
-ここではDockerを使って起動したApacheサーバーのコンテナを使っています。
+```bash
+$ docker run -d -p 8081:80 --name my-httpd httpd
+$ docker exec -it my-httpd bash
+(my-httpd) $ pwd
+/usr/local/apache2
+```
+
+ウェブサーバーとして一般的な``Apache``の設定方法を確認してます。
+ここではDockerで起動したApacheサーバーのコンテナを使っています。
 ()[../docker/docker-httpd]
 
 ## 設定ファイルを確認したい（``httpd.conf``）
