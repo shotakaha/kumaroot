@@ -4,6 +4,7 @@
 ---
 maxdepth: 1
 ---
+command-apt
 command-arp
 command-asdf
 command-awk
