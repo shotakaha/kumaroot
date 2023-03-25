@@ -20,7 +20,7 @@ docker-tutorial
 docker-ls
 docker-build
 docker-image
-docker-run
+docker-container
 docker-volume
 docker-compose
 ```

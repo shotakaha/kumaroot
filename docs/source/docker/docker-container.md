@@ -1,20 +1,20 @@
-# コンテナを起動したい（``run``）
+# コンテナを起動したい（``docker container run``）
 
 ```bash
 # イメージ名を指定してコンテナを起動する
-$ docker run イメージ名:タグ コマンド
+$ docker container run イメージ名:タグ コマンド
 
 # 起動中のコンテナ情報を確認する
-$ docker ps
+$ docker container ps
 
 # 起動中のコンテナに接続する
-$ docker exec コンテナ名 コマンド
+$ docker container exec コンテナ名 コマンド
 
 # コンテナを停止する
-$ docker stop コンテナ名 [コンテナ名...]
+$ docker container stop コンテナ名 [コンテナ名...]
 
 # コンテナを削除する
-$ docker rm コンテナ名 [コンテナ名...]
+$ docker container rm コンテナ名 [コンテナ名...]
 ```
 
 ``イメージ名:タグ``を指定して、コンテナを起動します。
@@ -27,7 +27,7 @@ $ docker rm コンテナ名 [コンテナ名...]
 ## コンテナに名前をつけたい（``--name``）
 
 ```bash
-$ docker run --name コンテナ名
+$ docker container run --name コンテナ名
 ```
 
 ``--name``オプションを使って、コンテナに名前をつけることができます。
@@ -40,7 +40,7 @@ $ docker run --name コンテナ名
 ## バックグラウンドで起動したい（``-d`` / ``--detach``）
 
 ```bash
-$ docker run -d イメージ名
+$ docker container run -d イメージ名
 ```
 
 ``-d``オプションを使って、コンテナをバックグラウンドで起動できます。
@@ -48,7 +48,7 @@ $ docker run -d イメージ名
 ## ポートを指定したい（``-p`` / ``--publish``）
 
 ```bash
-$ docker run -p ホスト側:コンテナ側
+$ docker container run -p ホスト側:コンテナ側
 ```
 
 ``-p``オプションを使って、ポート番号を指定できます。
@@ -58,7 +58,7 @@ $ docker run -p ホスト側:コンテナ側
 ## 作業ディレクトリを指定したい（``-w`` / ``--workdir``）
 
 ```bash
-$ docker run -w コンテナ内の作業ディレクトリ
+$ docker container run -w コンテナ内の作業ディレクトリ
 ```
 
 デフォルトの作業ディレクトリ``/（ルートディレクトリ）``になっています。
@@ -68,8 +68,8 @@ $ docker run -w コンテナ内の作業ディレクトリ
 ## ボリュームを指定したい（``-v`` / ``--volume``）
 
 ```bash
-$ docker run -v ホスト側（named volume）:コンテナ側
-$ docker run -v ホスト側（bind volume）:コンテナ側
+$ docker container run -v ホスト側（named volume）:コンテナ側
+$ docker container run -v ホスト側（bind volume）:コンテナ側
 ```
 
 ``-v``オプションを使って、データの保存先を指定できます。
@@ -79,15 +79,15 @@ $ docker run -v ホスト側（bind volume）:コンテナ側
 ## コンテナ内のターミナルを使いたい（``-it`` / ``--interactive --tty``）
 
 ```bash
-$ docker run -it イメージ名 [コマンド]
-$ docker exec -it コンテナ名 [コマンド]
+$ docker container run -it イメージ名 [コマンド]
+$ docker container exec -it コンテナ名 [コマンド]
 
 # Ubuntuコンテナのデフォルトシェル（sh）を起動したい
-$ docker run -it ubuntu:latest
+$ docker container run -it ubuntu:latest
 
 # 起動しているUbuntuコンテナ（my-ubuntu）のbashを起動したい
-$ docker exec -it my-ubuntu bash
+$ docker container exec -it my-ubuntu bash
 ```
 
 ``-it``オプションを使って、コンテナ内のターミナル（``sh``）に接続できます。
-すでに起動しているコンテナに接続する場合は``docker exec``します。
+すでに起動しているコンテナに接続する場合は``docker container exec``します。
