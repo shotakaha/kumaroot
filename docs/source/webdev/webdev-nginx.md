@@ -12,6 +12,15 @@ nginx version: nginx/1.23.3
 最近シェアが増えてきているという``Nginx``の設定方法を確認します。
 ここではApacheと同じように、Dockerで起動したNginxサーバーのコンテナを使って、設定内容を調べています。
 
+## サーバーを操作したい
+
+```bash
+$ nginx -s stop
+$ nginx -s quit
+$ nginx -s reload
+$ nginx -s reopen
+```
+
 ## 設定ファイルを確認したい（``nginx.conf``）
 
 ```bash

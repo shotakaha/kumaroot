@@ -14,6 +14,20 @@ Server built:   Mar  7 2023 20:23:05
 ここではDockerで起動したApacheサーバーのコンテナを使って、設定内容を調べています。
 ()[../docker/docker-httpd]
 
+## サーバーを操作したい
+
+```bash
+$ httpd -k start
+$ httpd -k stop
+$ httpd -k graceful-stop
+$ httpd -k restart
+```
+
+Apacheコンテナ内には``httpd``コマンドがありました。
+サーバーを停止（``httpd -k stop``）したらコンテナも停止しました。
+
+一般的なサーバの場合、``service``コマンドや``apachectl``コマンドで操作するような気がします。
+
 ## 設定ファイルを確認したい（``httpd.conf``）
 
 ```bash
