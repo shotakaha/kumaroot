@@ -19,6 +19,7 @@ docker-install
 docker-tutorial
 docker-ls
 docker-build
+docker-image
 docker-run
 docker-volume
 docker-compose
