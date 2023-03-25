@@ -20,7 +20,6 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 ## 公開版
 
 - Read the Docs : [HTML](https://kumaroot.readthedocs.org) / [PDF](https://readthedocs.org/projects/kumaroot/downloads/)
-- KEKの個人ページ : [HTML](https://research.kek.jp/people/shotakah/kumaroot/) / [PDF](https://research.kek.jp/people/shotakah/kumaroot/_static/kumaroot.pdf)
 
 ### Read the Docsで公開する方法
 

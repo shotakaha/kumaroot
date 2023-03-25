@@ -34,7 +34,6 @@ gadget/gadget-usage
 ## 公開先
 
 - [KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/)
-- [KumaROOT - KEK](https://research.kek.jp/people/shotakah/kumaroot/) - ミラー的なサイト
 
 # Indices and tables
 
