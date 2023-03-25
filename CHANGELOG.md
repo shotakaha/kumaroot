@@ -2,42 +2,25 @@
 
 ### Fix
 
-- **webdev/webdev-nginx.md**: サーバー操作を追加した
-- **webdev/webdev-usage.md**: タイポを修正
-- **webdev/webdev-usage.md**: 目次を整理した
-- **webdev/webdev-nginx.md**: 設定ファイルのシンタックスチェックを追加した
-- **webdev/webdev-nginx.md**: ポート番号を確認した
-- **webdev/webdev-nginx.md**: ログ形式を追記した
-- **webdev/webdev-nginx.md**: Dockerを使って起動することを追記した
-- **webdev/webdev-httpd.md**: 設定ファイルを検索してみた
 - **command/command-apt.md**: aptを追加した
-- **docker/docker-ls.md**: dockerの状態を確認するコマンドを追加した
+- **command/command-fd.md**: fd / find の違いがわかるように整理した
+- **command/command-find.md**: 空のディレクトリを削除する方法を追記した
+- **command/command-mkcert.md**: （まだお試し中）mkcertを追加した
 - **command/command-ssh-keygen.md**: SSH鍵生成の説明を追記した
+- **docker/docker-busybox.md**: BusyBoxコンテナの使い方を追加した
+- **docker/docker-compose.md**: docker composeの使い方を追加した
+- **docker/docker-httpd.md**: Apacheコンテナの使い方を追加した
+- **docker/docker-ls.md**: dockerの状態を確認する方法を追加した
+- **docker/docker-nginx.md**: Nginxコンテナの使い方を追記した
+- **docker/docker-run.md**: runの使い方を追記した
 - **docker/docker-ubuntu.md**: Ubuntuコンテナの使い方を整理した
 - **docker/docker-usage.md**: コンテナ遊びの例を追記した
-- **webdev/webdev-httpd.md**: パスワードのかけ方を追記した
-- **webdev/webdev-httpd.md**: リファレンスを追加した
-- **webdev/webdev-httpd.md**: モジュールの使い方を追記した
-- **webdev/webdev-httpd.md**: さまざまなディレクティブの使い方を追記した
-- **docker/docker-httpd.md**: いろいろ追記した
-- **webdev/webdev-usage.md**: サーバー設定をこれから追記する
-- **docker/docker-httpd.md**: トップページを変更する方法を追記した
-- **docker/docker-compose.md**: runとcomposeの説明を整理した
-- **docker/docker-run.md**: runの使い方を追記した
-- **docker/docker-httpd.md**: Apacheの設定を編集する方法を追記した
-- **docker/docker-httpd.md**: apacheを追加した
-- **docker/docker-busybox.md**: busyboxを追記した
-- **docker/docker-nginx.md**: Nginxの使い方を追記した
-- **command/command-mkcert.md**: （まだお試し中）mkcertを追加した
+- **docker/docker-wordpress.md**: WordPressコンテナの使い方を追記した
+- **git/git-install.md**: git-lfsを追記した
 - **latex/latex-section.md**: 見出しレベルを追記した
-- **docker/docker-compose.md**: docker composeを追加した
-- **docker/docker-wordpress.md**: docker-composeの説明を追加した
-- **command/command-fd.md**: fd / find の違いがわかるように整理した
-- **command/command-fd.md**: fdコマンドを追記した
-- **docker/docker-wordpress.md**: docker-compose.ymlをコピペした
-- **command/command-find.md**: 空のディレクトリを削除する方法を追記した
-- **docker/docker-wordpress.md**: WordPressの使い方を追記した
-- **git/git-install.md**: git-lfsも追加した
+- **webdev/webdev-httpd.md**: Apache2の使い方を追加した
+- **webdev/webdev-nginx.md**: Nginxの使い方を追加した
+- **webdev/webdev-usage.md**: 目次を整理した
 
 ## v1.8.7 (2023-03-13)
 
