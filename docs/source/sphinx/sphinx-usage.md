@@ -15,6 +15,9 @@ maxdepth: 1
 sphinx-install
 sphinx-quickstart
 sphinx-conf
+sphinx-extensions
+sphinx-extensions-myst
+sphinx-extensions-opengraph
 sphinx-builder
 sphinx-builder-html
 sphinx-builder-latexpdf
@@ -24,9 +27,6 @@ sphinx-syntax-hyperlink
 sphinx-syntax-code-block
 sphinx-syntax-meta
 sphinx-syntax-footnote
-sphinx-extensions
-sphinx-extensions-myst
-sphinx-extensions-opengraph
 sphinx-readthedocs
 ```
 
