@@ -1,14 +1,48 @@
 # WordPressを使いたい
 
-WordPressを構築する場合も、Dockerを使うと簡単らしいので試してみます。
+Dockerを使ってWordPressを構築してみます。
 
-WordPressの動作環境には、PHPとMySQL（もしくはMariaDB）が必要です。
-それぞれのコンテナが必要なので``docker-compose``でセットアップします。
+## 作りたいもの
 
-MySQLはApple Silicon上で動かないという情報をみたので、MariaDBを使うことにします。
-そのほかに、ゲストOSをどうするか、ウェブサーバーをApacheにするかNginxにするかを決めます。
+作りたいWordPress環境に必要そうなアイテムを書き出しておきます。
+少しずつ調べながら進めていきます。
 
-## DockerHub
+- WordPress / PHP / MySQL
+- wp-cli
+- マルチサイト環境
+- テーマのインストールと有効化
+- 記事の作成
+- 記事のインポート
+
+## コンテナを起動したい
+
+```bash
+$ docker container run -d -p 8080:80 --name my-wordpress wordpress
+```
+
+とりあえず詳細なオプションは考えずにコンテナを起動しました。
+``http://localhost:8080``でアクセスし、構築画面にアクセスできることを確認しました。
+ダイアログに沿って、データベース名（``wordpress``）、データベースのユーザー名（``wordpress``）、データベースのパスワード（``wordpress``）、データベースホスト（``localhost``）、テーブル接頭辞（``wp_``）を入力しました。
+
+結果、「データベース接続確立エラー」がでました。
+データベース系の設定を適当に入力したためか、そもそもデータベースが起動していないからかもしれません。
+``docker-compose.yml``を使って、環境変数を設定した構築を試してみます。
+
+## データベースの選定
+
+WordPressのデータベースとしてMySQLとMariaDBが利用できます。
+さらにMySQLのバージョンは5系と8系があります。
+整理すると、次の3種類です
+
+- MySQL 5
+- MySQL 8
+- MariaDB
+
+
+
+---
+
+
 
 - [wordpress](https://hub.docker.com/_/wordpress/)
 - [bitnami/wordpress](https://hub.docker.com/r/bitnami/wordpress)
