@@ -1,4 +1,4 @@
-# OGPを設定したい（``sphinxext-opengraph``）
+# OGPしたい（``sphinxext-opengraph``）
 
 ```python
 extensions = [
