@@ -1,15 +1,20 @@
 # はじめに
 
 こんにちは、くまです。
+現在、とある研究所で科学広報／科学コミュニケータをしています。
 
-高エネルギー物理学の実験で必要だったROOTなどのソフトの使い方に関するメモを[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)に書き貯めていたのですが、2014年に研究室を離れたのを機に、内容をちまちまと引っ越しています。
+学生時代には高エネルギー物理学実験を専攻していました。
+このドキュメントは、そんな大学院生のころに書き溜めはじめた自分用のDokuWikiをベースにしています。
 
-いまの職場のサーバではPHPなどが一切動かず、DokuWikiをそのまま引っ越しすることができなかったため、
-いろいろ検討した結果、
-[Sphinx](https://sphinx-users.jp)で文書を作成、
+当時のDokuWiki（[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)）は、もうアクセスができなくなっていますが、ROOTの使い方が目玉コンテンツでした！（たぶん）
+
+DokuWikiの引っ越し先をあれこれ検討した結果、
+[Sphinx](https://www.sphinx-doc.org/ja/master/)で文書を作成、
 [GitHub](https://github.com/shotakaha/kumaroot)でソースを管理、
 [Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開することにしました。
 
+現在もちまちまとコンテンツを増改築しており、ROOTに限らずいろいろと情報を整理しています。
+どれかひとつでも誰かの参考になるページがあれば幸いです。
 
 ```{toctree}
 ---
