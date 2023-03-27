@@ -8,6 +8,10 @@ Pythonのドキュメント生成のために開発されたものなので、�
 プロジェクト自体は[GitHub](https://github.com/shotakaha/kumaroot/)を使ってバージョン管理をしてあり、ウェブ版は[Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開しています。
 どういったものか気になる方はぜひ[KumaROOTのGitHubリポジトリ](https://github.com/shotakaha/kumaroot)をクローンしてみてください。
 
+## 設定したい
+
+ドキュメントのはじめかたや、拡張パッケージの設定方法などを整理しました。
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -18,10 +22,18 @@ sphinx-conf
 sphinx-extensions
 sphinx-extensions-myst
 sphinx-extensions-opengraph
-sphinx-builder
-sphinx-builder-html
-sphinx-builder-latexpdf
-sphinx-builder-linkcheck
+sphinx-readthedocs
+```
+
+## マークアップしたい
+
+ドキュメントをマークアップする方法を整理しました。
+シンタックスは``reST``ではなく``MyST``を前提にしています。
+
+```{toctree}
+---
+maxdepth: 1
+---
 sphinx-syntax-toctree
 sphinx-syntax-hyperlink
 sphinx-syntax-code-block
@@ -29,7 +41,20 @@ sphinx-syntax-admonition
 sphinx-syntax-image
 sphinx-syntax-meta
 sphinx-syntax-footnote
-sphinx-readthedocs
+```
+
+## ビルドしたい
+
+ドキュメントをビルドする方法を整理しました。
+
+```{toctree}
+---
+maxdepth: 1
+---
+sphinx-builder
+sphinx-builder-html
+sphinx-builder-latexpdf
+sphinx-builder-linkcheck
 ```
 
 ## リファレンス
