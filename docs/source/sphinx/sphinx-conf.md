@@ -1,7 +1,7 @@
-# 基本設定（``conf.py``）
+# 基本設定したい（``conf.py``）
 
 Sphinxドキュメントの全体設定は``conf.py``（または``source/conf.py``）で管理します。
-まずはすべての文書に共通した設定をしておきます。
+``sphinx-quickstart`` したあとは、まず、基本設定しておきます。
 
 ```{note}
 Sphinxは活発に開発されています。
@@ -27,11 +27,24 @@ version = '0.5.0'
 release = '0.5.0'
 ```
 
+## 拡張機能を使いたい
 
+```python
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+extensions = [
+    ...,
+]
+```
+
+Sphinxにはさまざまな拡張パッケージがあります。
+``pip``などを使ってインストールしたあと、この``extensions = []``の部分に追加して有効化します。
+詳しい使い方はそれぞれのパッケージのドキュメントを調べてください。
+
+このドキュメントで使っているパッケージについては[](./sphinx-extensions.md)に整理してあります。
 
 ## 図表番号の表示設定
 
-```
+```python
 numfig = True
 
 # 図表番号を表示するときのカスタム設定
@@ -56,6 +69,6 @@ numfig_secnum_depth = 1
 
 ## 日付の表示設定
 
-```
+```python
 today_fmt = "%Y-%m-%d"
 ```

@@ -1,6 +1,6 @@
-# Sphinxのインストール
+# インストールしたい
 
-Sphinxには以下のプログラムとパッケージが必要です。
+Sphinxを使うために、まず次のパッケージをインストールしてください。
 
 1. ``python`` （Homebrew）
 1. ``pip`` （pythonについてくる)
@@ -20,6 +20,9 @@ $ python3 --version
 Python 3.11.2
 ```
 
+Homebrewを使ってPythonをインストールします。
+とくに理由がなければ最新版（現時点で3.11）でよいと思います。
+
 ## pip
 
 ```bash
@@ -28,7 +31,14 @@ $ pip3 --version
 pip 23.0.1 from /opt/homebrew/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
-Python3系をインストールすると``pip3``という名前でも``pip``コマンドが使えるようになります。
+``pip``はPython標準のパッケージ管理ツールです。
+Pythonと一緒にインストールされるのですが、バージョンが古い場合があるので、``pip3 install -U pip``して更新しておきます。
+
+```{note}
+``pip``と``pip3``は同じコマンドです。
+Python2系から3系の移行期には、``pip``（＝2系）と``pip3``（＝3系）で使い分けられるようになっていました。
+いまは3系がメインなので``pip`` = ``pip3``となっていますが、僕は習慣で``pip3``を使っています。
+```
 
 ## Sphinx
 
@@ -36,15 +46,21 @@ Python3系をインストールすると``pip3``という名前でも``pip``コ�
 $ pip3 install sphinx
 ```
 
+Sphinx本体をインストールします。
+
 ## myst_parser
 
 ```bash
 $ pip3 install myst-parser
 ```
 
-``MyST（Markedly Structured Text）``はMarkdown拡張のひとつです。
+Markdownで文書作成ができるように拡張パッケージをインストールします。
 このパッケージをインストールすると、いままで``reST``で書いていたことが、ほぼ``Markdown``で書けるようになります。
 このドキュメントのサンプルは``MyST``で書いていくことにします。
+
+```{note}
+``MyST（Markedly Structured Text）``はMarkdown拡張のひとつです。
+```
 
 ## sphinx_rtd_theme
 
@@ -52,5 +68,6 @@ $ pip3 install myst-parser
 $ pip3 install sphinx_rtd_theme
 ```
 
-このドキュメントをホストしている[Read the Docs](https://readthedocs.org/)が開発しているテーマです。
+Sphinxドキュメントのテーマをインストールします。
+``sphinx_rtd_theme``は、[Read the Docs](https://readthedocs.org/)が開発しているテーマです。
 見やすく使いやすいので、まずはこのテーマからはじめるのがよいと思います。
