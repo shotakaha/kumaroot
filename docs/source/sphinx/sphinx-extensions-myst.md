@@ -32,6 +32,7 @@ extensions = [...,
 
 myst_enable_extensions = [
     "amsmath,
+    "attrs_block",
     "attrs_inline",
     "colon_fence",
     "deflist",
@@ -68,11 +69,28 @@ myst_enable_extensions = [
 ````md
 ```{ディレクティブ}
 ---
-オプション
+オプション1: 値1
+オプション2: 値2
 ---
-内容
+内容内容内容内容内容内容内容内容
+内容内容内容内容内容内容内容内容
+内容内容内容内容内容内容
 ```
 ````
+
+:::{seealso}
+```rst
+.. ディレクティブ::
+   :オプション1: 値1
+   :オプション2: 値2
+
+   内容内容内容内容内容内容内容内容
+   内容内容内容内容内容内容内容内容
+   内容内容内容内容内容内容
+```
+:::
+
+
 
 > {sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read
 
