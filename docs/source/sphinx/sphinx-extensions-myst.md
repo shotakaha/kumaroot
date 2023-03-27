@@ -53,21 +53,42 @@ myst_enable_extensions = [
 オプションは[Syntax Extensions](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html)を参照してください。
 基本的に全部有効にして大丈夫だと思いますが、自分の用途にあったものを選択してください。
 
-```{note}
-``linkfy``は別途モジュールが必要なエラーがでたため、
-とりあえずコメントアウトしました
+```{warning}
+``linkfy``は別途モジュールが必要なエラーがでたため、コメントアウトしています。
 ```
 
 ## ロールを使いたい
 
 ```md
-{ロール}`キーワード`
+{ロール}`ラベル名`
 ```
+
+ロール（role）は文章中で単語をマークアップするときに使います。
+HTMLタグのインライン要素に近いものだと思っています。
+``attrs_inline``を有効にすると、属性（``#id``や``.class``など）を追加できます。
+
+```md
+{ロール}`ラベル名`{.クラス名}
+```
+
+```html
+<span class="クラス名">ラベル名</span>
+```
+
+:::{seealso}
+
+reST形式で書くと次のようになります。
+
+```rst
+:ロール:`ラベル名`
+```
+
+:::
 
 ## ディレクティブを使いたい
 
 ````md
-```{ディレクティブ}
+```{ディレクティブ} 引数
 ---
 オプション1: 値1
 オプション2: 値2
@@ -78,9 +99,16 @@ myst_enable_extensions = [
 ```
 ````
 
+ディレクティブ（directive）は段落をマークアップするときに使います。
+HTMLタグのブロック要素に近いものだと思っています。
+``attrs_block``を有効にすると、属性（``#id``や``.class``など）を追加できます。
+
 :::{seealso}
+
+reST形式で書くと次のようになります。
+
 ```rst
-.. ディレクティブ::
+.. ディレクティブ:: 引数
    :オプション1: 値1
    :オプション2: 値2
 
@@ -88,11 +116,22 @@ myst_enable_extensions = [
    内容内容内容内容内容内容内容内容
    内容内容内容内容内容内容
 ```
+
 :::
 
+:::{hint}
+Sphinxドキュメントをマークアップするときに、この``ロール``と``ディレクティブ``の役割と使い分けを理解するのはとても大切だと思います。
+:::
 
+## 置換したい（``sub-ref``）
+
+```md
+> {sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read
+```
 
 > {sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read
+
+``sub-ref``ロールを使うと、あるキーワードを置換できます。
 
 ## メタデータを設定したい
 
@@ -124,3 +163,4 @@ myst:
 ## リファレンス
 
 - [MyST Parser Document](https://myst-parser.readthedocs.io/en/latest/index.html)
+- [Roles and Directives - MyST Parser](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html)
