@@ -19,8 +19,11 @@ extensions = [
 ]
 ```
 
-拡張機能の設定は``extensions``に記述します。
-設定方法や設定オプションは、それぞれの拡張機能のドキュメントを参照してください。
+Sphinxにはさまざまな拡張パッケージが存在し、より便利にできます。
+有効にしたい拡張機能は``conf.py``の``extensions = []``に追加します。
+詳しい設定は、それぞれの拡張機能のドキュメントを参照してください。
+
+基本的に全体設定は``conf.py``に記述しますが、パッケージによっては各ページのfrontmatterで個別に設定できるものもあります。
 
 - [sphinx.ext.autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
 - [sphinx.ext.doctest](https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html)
