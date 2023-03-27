@@ -1,27 +1,20 @@
-# Markdownを使いたい（``myst_parser``）
+# Markdownしたい（``myst_parser``）
 
-[MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest/intro.html)の拡張パッケージを追加すると、``Markdown``記法でドキュメントを記述できます。
+Sphinxの文書を``Markdown``形式で書けるようにする拡張パッケージです。
 すでに``Markdown``記法に慣れている場合は、迷わずこの拡張を追加しましょう。
 
 ```{note}
-2023年3月にv0.19がリリースされ、ドキュメントが大幅に書き直されました。
-また、その直後にv1.0がリリースされ、作者が"it does feel about time"とリリースノートに書いています。
-2023年3月に
-```{note}
-```nののvに.19nのがリリースされ、ドキュメントが大幅に書き直されました。
-また、その直後にv1.0がリリースされ、作者が"it does feel about time"とリリースノートに書いています。
-これからきちんと使っていってよいのかなと思っています。これからきちんと使っていってよいのかなと思っています。
+2023年3月にv0.19がリリースされ、ドキュメントが大幅に書き直され、その直後にv1.0がリリースされました。
+新しいドキュメントに従って使い方を書き直しています。
 ```
 
-## インストール
+## インストールする
 
 ```bash
 $ pip3 install myst-parser
 ```
 
-## 設定
-
-``conf.py``の``extentions``に次のように追記します。
+## 設定を有効にする
 
 ```python
 extensions = [...,
@@ -30,11 +23,16 @@ extensions = [...,
               ]
 ```
 
+``conf.py``の``extentions``に``myst_parser``を追加します。
+
 ## オプションを有効にする
 
 ```python
+# -- Options for MyST Parser -------------------------------------------------
+
 myst_enable_extensions = [
     "amsmath,
+    "attrs_inline",
     "colon_fence",
     "deflist",
     "dollarmath",
@@ -50,9 +48,9 @@ myst_enable_extensions = [
 ]
 ```
 
-``conf.py`` の任意の場所に``myst_enable_extensions``を定義して、MyST Parserのオプションを有効にします。
-
-
+``conf.py`` の適当な場所に``myst_enable_extensions = [...]``を定義して、MyST Parserのオプションを有効にします。
+オプションは[Syntax Extensions](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html)を参照してください。
+基本的に全部有効にして大丈夫だと思いますが、自分の用途にあったものを選択してください。
 
 ```{note}
 ``linkfy``は別途モジュールが必要なエラーがでたため、
