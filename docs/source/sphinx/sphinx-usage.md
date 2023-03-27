@@ -35,12 +35,14 @@ sphinx-readthedocs
 maxdepth: 1
 ---
 sphinx-syntax-toctree
+sphinx-syntax-comment
 sphinx-syntax-hyperlink
 sphinx-syntax-code-block
 sphinx-syntax-admonition
 sphinx-syntax-image
 sphinx-syntax-meta
 sphinx-syntax-footnote
+
 ```
 
 ## ビルドしたい
