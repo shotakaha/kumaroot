@@ -1,4 +1,4 @@
-# コードサンプルを表示したい（``code-block``）
+# コードサンプルしたい（``code-block``）
 
 ````md
 ```{code-block} python

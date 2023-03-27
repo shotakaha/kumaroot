@@ -1,4 +1,4 @@
-# 目次を表示したい（``toctree``）
+# 目次したい（``toctree``）
 
 ````md
 ```{toctree}
