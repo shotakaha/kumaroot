@@ -1,4 +1,4 @@
-# インストール
+# インストールしたい
 
 ```bash
 $ brew install hugo
