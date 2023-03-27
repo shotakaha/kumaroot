@@ -6,13 +6,23 @@
 
 ## デフォルトの設定ファイルを使いたい
 
-```text
+```bash
+# Hugo v0.110から
+/hugo.toml
+
+# Hugo v0.110まで
 /config.toml
 ```
 
-プロジェクトルートにある``config.toml``が自動で読み込まれます。
+プロジェクトルートにある``hugo.toml``が自動で読み込まれます。
 
-## 設定ファイルを切り替えたい
+:::{attention}
+v0.110からデフォルトの設定ファイル名が``hugo.toml``に変更されました。
+しばらくは``config.toml``も使えるようですが、``hugo.toml``に変更することが推奨されています。
+詳しくは[hugo.toml vs config.toml - Hugoドキュメント](https://gohugo.io/getting-started/configuration/#hugotoml-vs-configtoml)を参照してください。
+:::
+
+## 設定ファイルを切り替えたい（``--config``）
 
 ```bash
 $ hugo --config 設定ファイル
@@ -22,7 +32,7 @@ $ hugo --config 設定ファイル1,設定ファイル2,設定ファイル3
 ``hugo --config 設定ファイル``を使ってビルド時に設定ファイルの切り替えができる。
 設定ファイルは複数指定できる。
 
-## 設定ファイルを場合分けしたい
+## 設定ファイルを場合分けしたい（``--environment``）
 
 ```text
 /config/_default/config.toml  # デフォルト設定（デバッグ用？）
