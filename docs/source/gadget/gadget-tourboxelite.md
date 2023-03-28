@@ -29,3 +29,5 @@
 ## リファレンス
 
 - [TourBox Elite](https://www.tourboxtech.com/jp/TourBoxElite-show.html)
+- [TourBox Elite](https://www.tourboxtech.com/jp/index.html)
+- [ソフトウェアのダウンロード](https://www.tourboxtech.com/jp/downloads.html)
