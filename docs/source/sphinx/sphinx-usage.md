@@ -42,7 +42,7 @@ sphinx-syntax-admonition
 sphinx-syntax-image
 sphinx-syntax-meta
 sphinx-syntax-footnote
-
+sphinx-syntax-include
 ```
 
 ## ビルドしたい
