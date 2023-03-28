@@ -35,6 +35,15 @@ gadget/gadget-usage
 
 - [KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/)
 
+## 変更履歴
+
+```{toctree}
+---
+maxdepth: 1
+---
+changelog.md
+```
+
 # Indices and tables
 
 - {ref}`genindex`
