@@ -3,50 +3,37 @@
 
 ### Fix
 
-- **sphinx/sphinx-html-css.md**: カスタムCSSを追記した
-- **dvr/dvr-multicam.md**: マルチカム編集の手順を追記した
-- **streaming/streaming-usage.md**: 目次を整理した
-- **gadget/gadget-mackie-onyx.md**: 記事を移動した
-- **gadget/gadget-behringer-xenyx.md**: 記事を移動した
-- **dvr/dvr-usage.md**: DaVinci Resolveの使い方を追加した
-- **gadget/gadget-tourboxelite.md**: ダウンロードページのURLを追記した
-- **docs/source/conf.py**: メタデータを追加した
-- **sphinx/sphinx-syntax-meta.md**: メタデータの設定を整理した
-- **sphinx/sphinx-extensions-myst.md**: ディレクティブの説明を追加した
-- **sphinx/sphinx-syntax-include.md**: インクルードする方法を追加した
+- **docker/docker-build.md**: 微修正した
+- **docker/docker-image.md**: イメージを操作する方法を追加した
+- **docker/docker-wordpress.md**: WPを構築する手順を逐次まとめることにする
 - **docs/source/changelog.md**: 変更履歴を読み込むようにした
-- **sphinx/sphinx-extensions-myst.md**: ロールとディレクティブを追記した
-- **sphinx/sphinx-syntax-hyperlink.md**: ハイパーリンクする方法を追加した
-- **sphinx/sphinx-syntax-comment.md**: コメントする方法を追加した
-- **sphinx/sphinx-extensions-myst.md**: ディレクティブのサンプルを修正した
+- **docs/source/conf.py**: メタデータを追加した
+- **dvr/dvr-multicam.md**: マルチカム編集の手順を追記した
+- **dvr/dvr-usage.md**: DaVinci Resolveの使い方を追加した
+- **gadget/gadget-behringer-xenyx.md**: 記事を移動した
+- **gadget/gadget-mackie-onyx.md**: 記事を移動した
+- **gadget/gadget-tourboxelite.md**: ダウンロードページのURLを追記した
 - **hugo/hugo-config.md**: Hugoの設定ファイル名が変更されたことを追記した
 - **hugo/hugo-install.md**: タイトルを微修正した
-- **vscode/vscode-usage.md**: コマンドパレットを追加した
-- **sphinx/sphinx-syntax-admonition.md**: タイトル付きのadmonitionを追加した
 - **preface/index.md**: はじめにを修正した
-- **sphinx/sphinx-syntax-admonition.md**: 注釈の使い方を整理した
-- **sphinx/sphinx-readthedocs.md**: RTDの設定を修正した
-- **sphinx/sphinx-usage.md**: 目次を整理した
-- **sphinx/sphinx-syntax-image.md**: 画像を挿入する方法を追加した
-- **sphinx/sphinx-syntax-admonition.md**: admonitionシンタックスを追加した
-- **sphinx/sphinx-syntax-toctree.md**: タイトルを微修正したい
-- **sphinx/sphinx-extensions.md**: 微修正した
-- **sphinx/sphinx-extensions-opengraph.md**: タイトルを微修正した
-- **sphinx/sphinx-syntax-hyperlink.md**: リファレンスURLを追加した
-- **sphinx/sphinx-extensions-myst.md**: 微修正した
-- **sphinx/sphinx-install.md**: ちょっと修正した
-- **sphinx/sphinx-extensions-myst.md**: MyST Parserの現状を追加した
-- **sphinx/sphinx-syntax-code-block.md**: MyST形式をメインに書き直した
-- **sphinx/sphinx-extensions.md**: 拡張パッケージのリンクを追加した
-- **sphinx/sphinx-syntax-toctree.md**: toctreeをMyST形式に書き直した
-- **sphinx/sphinx-quickstart.md**: quickstartの説明を整理した
-- **sphinx/sphinx-install.md**: Sphinxに必要なパッケージを整理した
-- **sphinx/sphinx-usage.md**: Sphinxの使い方を整理した
-- **docker/docker-wordpress.md**: データベース選びを追加した
-- **docker/docker-wordpress.md**: WPを構築する手順を逐次まとめることにする
 - **README.md**: KEKのURLを公開先から削除した
-- **docker/docker-image.md**: イメージを操作する方法を追加した
-- **docker/docker-build.md**: 微修正した
+- **sphinx/sphinx-extensions-myst.md**: ロールとディレクティブを追記した
+- **sphinx/sphinx-extensions-opengraph.md**: タイトルを微修正した
+- **sphinx/sphinx-extensions.md**: 拡張パッケージのリンクを追加した
+- **sphinx/sphinx-html-css.md**: カスタムCSSを追記した
+- **sphinx/sphinx-quickstart.md**: quickstartの説明を整理した
+- **sphinx/sphinx-readthedocs.md**: RTDの設定を修正した
+- **sphinx/sphinx-syntax-admonition.md**: 注釈の使い方を整理した
+- **sphinx/sphinx-syntax-code-block.md**: MyST形式をメインに書き直した
+- **sphinx/sphinx-syntax-comment.md**: コメントする方法を追加した
+- **sphinx/sphinx-syntax-hyperlink.md**: ハイパーリンクする方法を追加した
+- **sphinx/sphinx-syntax-image.md**: 画像を挿入する方法を追加した
+- **sphinx/sphinx-syntax-include.md**: インクルードする方法を追加した
+- **sphinx/sphinx-syntax-meta.md**: メタデータの設定を整理した
+- **sphinx/sphinx-syntax-toctree.md**: toctreeをMyST形式に書き直した
+- **sphinx/sphinx-usage.md**: 目次を整理した
+- **streaming/streaming-usage.md**: 目次を整理した
+- **vscode/vscode-usage.md**: コマンドパレットを追加した
 
 ## v1.8.8 (2023-03-25)
 
