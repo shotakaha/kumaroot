@@ -9,13 +9,6 @@ streaming-wiring
 streaming-youtube
 ```
 
-```{toctree}
-streaming-atem
-streaming-xenyx
-streaming-onyx
-```
-
-
 ここで「ライブ配信」は完全オンライン開催とハイブリッド開催の両方の開催形式を指しています。
 どちらを指しているかは、その
 現地での対面開催と比較して、は、開催する負担が増えます。
