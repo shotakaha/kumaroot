@@ -29,6 +29,7 @@ rust/rust-usage
 docker/docker-usage
 streaming/streaming-usage
 gadget/gadget-usage
+dvr/dvr-usage
 ```
 
 ## 公開先

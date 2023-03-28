@@ -3,4 +3,5 @@
 ```{toctree}
 gadget-tourboxelite
 gadget-roland-aerocaster
+gadget-bmd-atemmini
 ```
