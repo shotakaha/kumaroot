@@ -4,4 +4,5 @@
 gadget-tourboxelite
 gadget-roland-aerocaster
 gadget-bmd-atemmini
+gadget-behringer-xenyx
 ```

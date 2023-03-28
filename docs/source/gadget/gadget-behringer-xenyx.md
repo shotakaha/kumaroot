@@ -1,0 +1,3 @@
+# XENYXシリーズ
+
+Behringer社のXENYXシリーズのミキサーです。
