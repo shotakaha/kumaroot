@@ -100,6 +100,9 @@ reST形式で書くと次のようになります。
 ````
 
 ディレクティブ（directive）は段落をマークアップするときに使います。
+ディレクティブには引数とオプションをとるものもあります。
+オプションは``---``で区切った範囲にYAML形式で``キー: 値``を指定します。
+
 HTMLタグのブロック要素に近いものだと思っています。
 ``attrs_block``を有効にすると、属性（``#id``や``.class``など）を追加できます。
 
@@ -164,3 +167,5 @@ myst:
 
 - [MyST Parser Document](https://myst-parser.readthedocs.io/en/latest/index.html)
 - [Roles and Directives - MyST Parser](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html)
+- [Directives - Sphinx Document](https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html)
+- [Roles](https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html)
