@@ -39,5 +39,13 @@ Sphinxのテーマなので、Sphinxドキュメントで生成されていま�
 ---
 maxdepth: 1
 ---
+sphinx-html-css
 sphinx-html-rtd
 ```
+
+% あとでsphinx-designのページを作る
+% sphinx-html-sd
+
+## リファレンス
+
+- [HTML出力のオプション - Sphinxドキュメント](https://www.sphinx-doc.org/ja/master/usage/configuration.html#options-for-html-output)

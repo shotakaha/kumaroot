@@ -1,7 +1,7 @@
 # Read the Docsしたい
 
 [Read the Docs](https://readthedocs.org/)はSphinxドキュメントを公開するためのホスティングサービスです。
-この[KumaROOT](kumaroot.readthedocs.io)もRTDを使って公開しています。
+この[KumaROOT](https://kumaroot.readthedocs.io)もRTDを使って公開しています。
 
 素のSphinxであれば、そのままRTDでビルドできます。
 パッケージを追加している場合は、ビルド時の設定をカスタマイズする必要があります。
