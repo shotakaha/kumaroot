@@ -75,6 +75,11 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
+myst_html_meta = {
+    "description lang=ja": "KumaROOTです。ちょっとだけROOTを使ったことがある学生や研究者が対象。「逆引き辞典」として使えるようにしたいと思います。",
+    "keywords": "ROOT, Python",
+}
+
 # -- Options for Math -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-math
 
