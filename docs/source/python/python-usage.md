@@ -27,6 +27,25 @@ python-re
 python-black
 ```
 
+```bash
+$ poetry new プロジェクト名
+$ cd プロジェクト名
+
+# Git管理したい
+$ git init
+$ touch .gitignore
+
+# Sphinxを使いたい
+$ poetry add --group=docs sphinx
+$ poetry add --group=docs sphinx_rtd_theme
+$ poetry add --group=docs myst_parser
+$ sphinx-quickstart docs
+
+# PyTestしたい
+$ poetry add --group=dev pytest
+$ poetry add --group=dev pysen
+```
+
 ## リファレンス
 
 - [Python3 ドキュメント](https://docs.python.org/ja/3/)
