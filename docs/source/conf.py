@@ -83,7 +83,9 @@ myst_html_meta = {
 myst_number_code_blocks = [
     "bash",
     "dockerfile",
+    "md",
     "python",
+    "rst",
     "toml",
 ]
 
