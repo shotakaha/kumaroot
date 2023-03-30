@@ -14,6 +14,7 @@ python-dataclass
 python-altair
 python-loguru
 python-pandas
+python-pip
 python-pipx
 python-plotly
 python-poetry
