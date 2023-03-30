@@ -20,34 +20,52 @@ $ brew install poetry
 公式ドキュメントを読むと``pip3``を使ったインストールは推奨していないみたいです。
 僕はHomebrewを使ってインストールしていますが、とくに問題なく使えています。
 
-## 既存のプロジェクトをセットアップしたい
+## 新しいプロジェクトをセットアップしたい（``poetry new``）
 
 ```bash
-$ cd MyPROJECT
+$ poetry new プロジェクト名
+$ cd プロジェクト名
+```
+
+新しくプロジェクトを作成する場合は、``poetry new``コマンドを使います。
+``プロジェクト名``のディレクトリが作成され、その下に、``pyproject.toml``、``プロジェクト名``（＝プロジェクト本体のソースコード置き場）、``tests``などの必要なファイルが自動で生成されます。
+
+## 既存のプロジェクトをセットアップしたい（``poetry init``）
+
+```bash
+$ cd プロジェクト名
 $ poetry init
 ```
 
-## パッケージを追加したい
+## パッケージを追加したい（``poetry add``）
 
 ```bash
 $ poetry add パッケージ名
-$ poetry add -D パッケージ名
+$ poetry add --group=dev パッケージ名
+$ poetry add --group=docs パッケージ名
 ```
 
-パッケージ名を{file}`pyproject.toml`の``[tool.poetry.dependencies]``に追加して、
-仮想環境の中にインストールします。
+必要なパッケージ名を{file}`pyproject.toml`に追記して、仮想環境（``.venv``）の中にインストールします。
+パッケージ名は``[tool.poetry.dependencies]``のセクションに追記され、ロックファイル（``poetry.lock``）が生成されます。
 
-## パッケージをインストールしたい
+（たしか）``v1.3``からパッケージをグループ化する機能が追加されました。デフォルトは``--group=main``です。
+これに伴い``add -D``オプションが非推奨になりました。
+これからは代わりに``add --group=dev``する必要があります。
+また、ドキュメント生成に必要なパッケージは``--group=docs``、テストに必要なパッケージは``--group=test``のように複数のグループを作って管理することができるようになりました。
+
+## パッケージをインストールしたい（``poetry install``）
 
 ```bash
 $ poetry install
 ```
 
-{file}`pyproject.toml`（or {file}`poetry.lock`）の内容にしたがって、必要なパッケージをインストールします。
-デフォルトだと``{cache-dir}/virtualenvs/``に設定されたパスの中に仮想環境が作成されます。
-``virtualenvs.in-project = true``に設定した場合は、プロジェクト内の``{project-dir}/.venv/``に仮想環境が作成されます。
+{file}`poetry.lock`にあるパッケージをインストールします。
+{file}`poetry.lock`がない場合は、{file}`pyproject.toml`にあるパッケージをインストールして、{file}`poetry.lock`を生成します。
 
-## パッケージを公開したい
+デフォルトでは``{cache-dir}/virtualenvs/``に設定されたパスの仮想環境を作成し、パッケージをインストールします。
+``virtualenvs.in-project = true``に設定した場合は、プロジェクト内の``{project-dir}/.venv/``に仮想環境を作成します。
+
+## パッケージを公開したい（``poetry publish``）
 
 ```bash
 $ poetry build
@@ -59,9 +77,7 @@ $ poetry publish              # PyPIに公開
 はじめて公開する場合は必ず``TestPyPI``でテストするのがよいです。
 公開する前にリポジトリとAPIトークンの設定が必要です。
 
-
-
-## 現在の設定を確認したい
+## 現在の設定を確認したい（``poetry config``）
 
 ```bash
 $ poetry config --list
