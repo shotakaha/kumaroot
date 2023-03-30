@@ -18,6 +18,7 @@ python-pip
 python-pipx
 python-plotly
 python-poetry
+python-pyproject
 python-random
 python-requests
 python-string
