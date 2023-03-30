@@ -80,6 +80,13 @@ myst_html_meta = {
     "keywords": "ROOT, Python",
 }
 
+myst_number_code_blocks = [
+    "bash",
+    "dockerfile",
+    "python",
+    "toml",
+]
+
 # -- Options for Math -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-math
 
