@@ -11,7 +11,7 @@ Markdown記法を使ってコードブロックを挿入できます。
 ハイライトには``Pygments``とうPythonモジュールが使われています。
 利用可能なプログラミング言語は[PygmentsのAvaileble lexers](https://pygments.org/docs/lexers/)で確認できます。
 
-## 行番号を表示したい（``linenos:``）
+## 行番号を表示したい（``linenos``）
 
 ```md
 :::{code-block} python
@@ -46,7 +46,7 @@ reST形式で書くと次のようになります。
 
 ```rst
 .. code-block: python
-   :linnoes:
+   :linenos:
 
    import pandas as pd
    data = pd.read_csv("example.csv")
@@ -54,7 +54,7 @@ reST形式で書くと次のようになります。
 
 :::
 
-## 特定の行をハイライトしたい（``:emphasize-lines:``）
+## 特定の行をハイライトしたい（``emphasize-lines``）
 
 ```md
 :::{code-block} python
@@ -70,7 +70,7 @@ data = pd.read_csv("example.csv)
 複数行を飛び飛びで指定する場合は``,（カンマ）``で区切ります。
 連続で指定する場合は``-（ハイフン）``で接続します。
 
-## キャプションをつけたい（``caption:``）
+## キャプションをつけたい（``caption``）
 
 ```md
 :::{code-block} python
@@ -82,7 +82,7 @@ data = pd.read_csv("example.csv)
 :::
 ```
 
-## コードを参照したい（``name:``）
+## コードを参照したい（``name``）
 
 ```md
 :::{code-block} python
