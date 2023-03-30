@@ -2,7 +2,7 @@
 name = "kumaroot"
 version = "1.8.9"
 description = "KumaROOT"
-authors = ["Shota Takahashi (KEK) <shotakah@post.kek.jp>"]
+authors = ["Shota Takahashi (KMI) <shotakaha@kmi.nagoya-u.ac.jp>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
