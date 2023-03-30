@@ -41,12 +41,14 @@ $ poetry init
 
 ```bash
 $ poetry add パッケージ名
+$ poetry add パッケージ名 -E パッケージ名
 $ poetry add --group=dev パッケージ名
 $ poetry add --group=docs パッケージ名
 ```
 
 必要なパッケージ名を{file}`pyproject.toml`に追記して、仮想環境（``.venv``）の中にインストールします。
-パッケージ名は``[tool.poetry.dependencies]``のセクションに追記され、ロックファイル（``poetry.lock``）が生成されます。
+``-E / --extra``オプションを使って、追加パッケージも指定できます。
+パッケージは``[tool.poetry.dependencies]``のセクションに追記され、ロックファイル（``poetry.lock``）が生成されます。
 
 （たしか）``v1.3``からパッケージをグループ化する機能が追加されました。デフォルトは``--group=main``です。
 これに伴い``add -D``オプションが非推奨になりました。
