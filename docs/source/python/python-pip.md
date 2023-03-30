@@ -6,6 +6,16 @@ $ pip3 install パッケージ名
 
 パッケージを追加するには``pip3``コマンドを使います。
 
+## 複数パッケージを一括で追加したい
+
+```bash
+$ pip3 install --requirements ファイル名
+$ pip3 install -r requirements.txt
+```
+
+パッケージ名を記載したファイルを使うと一括インストールできます。
+ファイルには``requirements.txt``という名前がよく使われます。
+
 ## パッケージを更新したい
 
 ```bash
