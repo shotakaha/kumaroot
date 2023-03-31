@@ -23,4 +23,5 @@ vscode-extensions
 vscode-terminal
 vscode-vspacecode
 vscode-magit
+vscode-sidebar
 ```
