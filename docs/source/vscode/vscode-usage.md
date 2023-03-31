@@ -22,4 +22,5 @@ vscode-install
 vscode-extensions
 vscode-terminal
 vscode-vspacecode
+vscode-magit
 ```
