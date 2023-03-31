@@ -21,4 +21,5 @@ VS Codeで唯一覚えるべきショートカットキーといっても過言�
 vscode-install
 vscode-extensions
 vscode-terminal
+vscode-vspacecode
 ```
