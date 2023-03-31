@@ -20,8 +20,8 @@ VS Codeで唯一覚えるべきショートカットキーといっても過言�
 ```{toctree}
 vscode-install
 vscode-extensions
-vscode-terminal
 vscode-vspacecode
+vscode-terminal
 vscode-magit
 vscode-sidebar
 ```
