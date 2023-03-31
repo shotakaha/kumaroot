@@ -1,19 +1,21 @@
-# Loguru
+# ログしたい（``Loguru``）
 
-```shell
-pip3 install loguru
+```bash
+$ pip3 install loguru
 ```
-
-## 使い方
 
 ```python
 from loguru import logger
 
-logger.debug("デバッグ情報")
-logger.error("エラー情報")
+logger.debug("Debug情報")
+logger.info("Info情報")
+logger.warning("Warning情報")
+logger.error("Error情報")
 ```
 
-標準の``logging``モジュールは使うときに設定が必要ですが、この``Loguru``モジュールはほぼ一行で使うことができます。
+ログするためのパッケージです。
+標準モジュールの``logging``はいろいろ設定が必要ですが、この``Loguru``モジュールはノー設定で使うことができます。
+デフォルトの出力先は``stderr``（標準エラー出力）です。
 
 ## ログレベルによって出力内容を変更したい
 
