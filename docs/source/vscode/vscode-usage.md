@@ -20,7 +20,7 @@ vscode-terminal
 vscode-magit
 vscode-sidebar
 vscode-open-file
-
 vscode-copy-paste
 vscode-region
+vscode-color
 ```
