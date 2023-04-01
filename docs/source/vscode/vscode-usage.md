@@ -1,12 +1,6 @@
 # VS Codeの使い方
 
-## コマンドパレット（``Shift + Command + P``）
 
-VS Codeにおけるコマンドランチャーです。
-Emacsの``smex``や``anything/helm``のような役割を担うものです。
-VS Codeで唯一覚えるべきショートカットキーといっても過言ではないでしょう。
-
-他のショートカットキーを忘れてしまったら、とりあえずコマンドパレットを起動して、キーワードを検索して探せばいいのですから。
 
 ## 画面構成
 
@@ -21,11 +15,12 @@ VS Codeで唯一覚えるべきショートカットキーといっても過言�
 vscode-install
 vscode-extensions
 vscode-vspacecode
+vscode-keyboard-shortcuts
 vscode-terminal
 vscode-magit
 vscode-sidebar
 vscode-open-file
-vscode-keyboard-shortcuts
+
 vscode-copy-paste
 vscode-region
 ```
