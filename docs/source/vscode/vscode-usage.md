@@ -26,4 +26,6 @@ vscode-magit
 vscode-sidebar
 vscode-open-file
 vscode-keyboard-shortcuts
+vscode-copy-paste
+vscode-region
 ```
