@@ -1,7 +1,5 @@
 # VS Codeの使い方
 
-
-
 ## 画面構成
 
 - メニューバー
@@ -15,7 +13,7 @@
 vscode-install
 vscode-extensions
 vscode-vspacecode
-vscode-keyboard-shortcuts
+vscode-keybind
 vscode-terminal
 vscode-magit
 vscode-sidebar
