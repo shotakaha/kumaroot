@@ -24,4 +24,6 @@ vscode-vspacecode
 vscode-terminal
 vscode-magit
 vscode-sidebar
+vscode-open-file
+vscode-keyboard-shortcuts
 ```
