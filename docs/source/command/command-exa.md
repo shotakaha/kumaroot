@@ -1,6 +1,18 @@
 # exa
 
-## 関連コマンド
+```bash
+$ brew install exa
+$ exa --version
+exa - list files on the command-line
+v0.10.1 [+git]
+https://the.exa.website/
+```
 
-- [ls](./command-ls.md)
-- [lsd](./command-lsd.md)
+[ls](./command-ls.md)のRust代替コマンドです。
+
+:::{seealso}
+
+- [](./command-exa.md)
+- [](./command-lsd.md)
+
+:::

@@ -1,7 +1,13 @@
 # lsd
 
-Rust製の[ls](./command-ls.md)の代替コマンドです。
-{command}`exa`と比べると、オプションが`ls`と同じなので使いやすいです。
+```bash
+$ brew install lsd
+$ lsd --version
+lsd 0.23.1
+```
+
+[ls](./command-ls.md)のRust代替コマンドです。
+オプションが`ls`と同じなので、[exa](./command-exa.md)と比べて使いやすいと思います。
 
 ## 最新ファイルを確認したい
 
@@ -10,7 +16,9 @@ $ lsd -ltr
 $ lsd -ltra
 ```
 
-## 関連コマンド
+:::{seealso}
 
-- [exa](./command-exa.md)
-- [ls](./command-ls.md)
+- [](./command-exa.md)
+- [](./command-ls.md)
+
+:::

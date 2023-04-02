@@ -24,14 +24,18 @@ $ ls -ltra
 $ ls -1
 ```
 
-{command}`xargs`にファイル名を渡したい場合など、{command}`ls -l`で表示される詳細情報が必要ない場合に使います。
+``xargs``にファイル名を渡したい場合など、``ls -l``で表示される詳細情報が必要ない場合に使います。
 
-## 代替コマンド
+:::{note}
 
 最近はRust製の代替コマンドが流行りの兆しがあります。
-``lsd``や``exa``というコマンドがあります。
+[lsd](./command-lsd.md)や[exa](./command-exa.md)というコマンドがあります。
 
-## 関連コマンド
+:::
 
-- [exa](./command-exa.md)
-- [lsd](./command-lsd.md)
+:::{seealso}
+
+- [](./command-exa.md)
+- [](./command-lsd.md)
+
+:::
