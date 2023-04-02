@@ -28,5 +28,7 @@ VS Codeで唯一覚えるべきショートカットキーといっても過言�
 }
 ```
 
-{kmd}`cmd + b`はデフォルトではサイドバー表示のON/OFFのトグルなのですが ``All in One Markdown`` プラグインによって、**太字**のトグルに上書きされていました。
-``.md``ファイルを編集するときに、不便だったので、削除しました。
+{file}`keybindings.json`を直接編集して、コマンドの先頭に``-``をつけることで、特定のキーバインドを削除できます。
+
+{kmd}`cmd + b`はデフォルトではサイドバー表示のON/OFFのトグル（``workbench.action.toggleSidebarVisibility``）なのですが ``Markdown All in One`` プラグインによって、**太字**のトグル（``markdown.extension.editing.toggleBold``）に上書きされていました。
+``.md``ファイルを編集するときに、不便だったので削除しました。
