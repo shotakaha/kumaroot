@@ -87,3 +87,9 @@ yzhang.markdown-all-in-one@3.5.1
 1. Markdown All in One
 1. テキスト校正くん
 1. markdownlint
+
+## テーマを変更したい
+
+VS Code全体のテーマ（＝色使い）も拡張パッケージを使って変更できます。
+僕は[Iceberg Light](https://github.com/cocopon/vscode-iceberg-theme)を使っています。
+もともとVim用テーマとして開発されたプラグインですが、VS Codeとターミナルでも使えるようになっています。
