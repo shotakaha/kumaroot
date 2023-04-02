@@ -13,6 +13,7 @@
 vscode-install
 vscode-extensions
 vscode-vspacecode
+vscode-iceberg
 vscode-keybind
 vscode-terminal
 vscode-magit

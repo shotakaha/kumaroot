@@ -14,4 +14,11 @@
 }
 ```
 
-画面のさまざまな部分の色をカスタマイズできます。
+``settings.json``に``workbench.colorCustomizations``を使って、画面内のさまざまなパーツの色をカスタマイズできます。
+色はRGB値（``#RGB`` / ``#RRGGBB``）とアルファチャンネル（``#RGBA`` / ``#RRGGBBAA``）の形式で指定できます。
+
+
+## リファレンス
+
+- [Theme Color - VS Code](https://code.visualstudio.com/api/references/theme-color)
+- [Status Bar colors - VS Code](https://code.visualstudio.com/api/references/theme-color#status-bar-colors)
