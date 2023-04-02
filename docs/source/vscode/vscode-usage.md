@@ -16,6 +16,7 @@ maxdepth: 1
 vscode-install
 vscode-extensions
 vscode-vspacecode
+vscode-settings
 vscode-keybind
 vscode-terminal
 vscode-magit
