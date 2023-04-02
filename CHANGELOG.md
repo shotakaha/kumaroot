@@ -3,41 +3,35 @@
 
 ### Feat
 
-- **vscode/vscode-color.md**: 色を変更する方法を追記した
-- **vscode/vscode-region.md**: 範囲選択する方法を追加した
-- **vscode/vscode-copy-paste.md**: コピペする方法を追加した
-- **vscode/vscode-keyboard-shortcuts.md**: キーボードショートカットを表示する方法を追加した
-- **vscode/vscode-open-file.md**: ファイルを開くショートカットを追加した
-- **vscode/vscode-sidebar.md**: サイドバーを追加した
-- **vscode/vscode-magit.md**: Magitを追加した
-- **vscode/vscode-vspacecode.md**: VSpaceCodeを追加した
 - **hugo/hugo-config-permalinks.md**: パーマリンク設定を追加した
-- **python/python-pyproject.md**: pyproject.tomlを追加した
 - **python/python-pip.md**: pipを追加した
+- **python/python-pyproject.md**: pyproject.tomlを追加した
+- **vscode/vscode-color.md**: 色を変更する方法を追記した
+- **vscode/vscode-copy-paste.md**: コピペする方法を追加した
+- **vscode/vscode-magit.md**: Magitを追加した
+- **vscode/vscode-open-file.md**: ファイルを開くショートカットを追加した
+- **vscode/vscode-region.md**: 範囲選択する方法を追加した
+- **vscode/vscode-sidebar.md**: サイドバーを追加した
+- **vscode/vscode-vspacecode.md**: VSpaceCodeを追加した
 
 ### Fix
 
-- **vscode/vscode-keybind.md**: キーバインド削除の詳細を追記した
-- **vscode-keybind.md**: キーバインドを削除する方法を追記した
-- **vscode/vscode-vspacecode.md**: モードごとに色を変更する設定を追記した
-- **vscode/vscode-install.md**: codeコマンドでバージョンを確認した
-- **vscode/vscode-open-file.md**: バッファを切り替える方法を追記した
-- **vscode/vscode-keyboard-shortcuts.md**: コマンドパレットを転記した
-- **vscode/vscode-vspacecode.md**: VSpaceCodeの設定を追記した
-- **vscode/vscode-extensions.md**: 拡張パッケージのリストを更新した
-- **rust/rust-install.md**: インストール手順を分割した
-- **python/python-loguru.md**: Loguruを追記した
-- **vscode/vscode-terminal.md**: ターミナルを追加するショートカットを調べた
-- **hugo/hugo-config-permalinks.md**: 参考URLを追記した
-- **docs/source/conf.py**: 行番号を表示する言語を追加した
-- **sphinx/sphinx-syntax-code-block.md**: 微修正
-- **sphinx/sphinx-syntax-code-block.md**: コードブロックのオプションを追記した
 - **docs/source/conf.py**: コードブロックに番号を振る設定にした
+- **hugo/hugo-config-permalinks.md**: 参考URLを追記した
 - **python/python-install.md**: Pythonのバージョン確認を追記した
+- **python/python-loguru.md**: Loguruを追記した
 - **python/python-pip.md**: --requirements を追記した
-- **python/python-poetry.md**: add --extraを追記した
-- **python/python-poetry.md**: add --groupを追記した
+- **python/python-poetry.md**: add --extra / --groupを追記した
 - **python/python-usage.md**: パッケージのはじめかたを追記した
+- **rust/rust-install.md**: インストール手順を分割した
+- **sphinx/sphinx-syntax-code-block.md**: コードブロックのオプションを追記した
+- **vscode-keybind.md**: キーバインドを削除する方法を追記した
+- **vscode/vscode-extensions.md**: 拡張パッケージのリストを更新した
+- **vscode/vscode-install.md**: codeコマンドでバージョンを確認した
+- **vscode/vscode-keybind.md**: キーバインド削除の詳細を追記した
+- **vscode/vscode-open-file.md**: バッファを切り替える方法を追記した
+- **vscode/vscode-terminal.md**: ターミナルを追加するショートカットを調べた
+- **vscode/vscode-vspacecode.md**: モードごとに色を変更する設定を追記した
 
 ## v1.8.9 (2023-03-29)
 
