@@ -34,6 +34,7 @@ command-ping
 command-ps
 command-pwd
 command-rsync
+command-sd
 command-sed
 command-ssh
 command-ssh-keygen
