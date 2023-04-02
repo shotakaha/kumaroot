@@ -1,16 +1,9 @@
 # サイドバーしたい
 
-- {kbd}`control` + {kbd}`option` + {kbd}`space` View: Toggle Primary Side Bar Visibility
-- View: Close Primary Side Bar
-- {kbd}`command` + {kbd}`0` View: Focus into Primary Side Bar
-- View: Next Primary Side Bar View
-- View: Previous Primary Side Bar View
-- View: Toggle Side Bar Position
-
-```{note}
-{kbd}`command` + {kbd}`0`でトグルできると便利かもしれないです。
-```
-
+View: Toggle Primary Side Bar Visibility
+: {kbd}`cmd` + {kbd}`b`
+: {kbd}`control` + {kbd}`option` + {kbd}`space`
+: {kbd}`SPC T b`
 
 ## 第二サイドバーしたい
 

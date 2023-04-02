@@ -1,10 +1,20 @@
 # ターミナルを開きたい
 
-- {kbd}`cmd` + {kbd}`j` View: Toggle Panel Visibility
-- {kbd}`control` + {kbd}`(backtick)` View: Toggle Terminal
-- {kbd}`shift` + {kbd}`cmd` + {kbd}`m` View: Toggle Problem
-- {kbd}`shift` + {kbd}`cmd` + {kbd}`u` View: Toggle Output
-- {kbd}`shift` + {kbd}`cmd` + {kbd}`y` View: Toggle Debug Console
+View: Toggle Panel Visibility
+: {kbd}`cmd` + {kbd}`j`
+: {kbd}`SPC T j`
+
+View: Toggle Terminal
+: {kbd}`control` + {kbd}`(backtick)`
+
+View: Toggle Problem
+: {kbd}`shift` + {kbd}`cmd` + {kbd}`m`
+
+View: Toggle Output
+: {kbd}`shift` + {kbd}`cmd` + {kbd}`u`
+
+View: Toggle Debug Console
+: {kbd}`shift` + {kbd}`cmd` + {kbd}`y`
 
 VS Codeを使いながら、ウィンドウの下部にターミナルを開くことができます。
 上記のショートカットはトグルできます。
