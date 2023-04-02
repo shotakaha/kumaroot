@@ -1,5 +1,37 @@
 # 拡張パッケージ（``Shift + Cmd + X``）
 
+
+
+1. Awosome Emacs Keymap
+1. VSpaceCode
+1. edamagit
+1. Markdown All in One
+1. テキスト校正くん
+1. markdownlint
+
+## テーマを変更したい
+
+VS Code全体のテーマ（＝色使い）も拡張パッケージを使って変更できます。
+僕は[Iceberg Theme](https://marketplace.visualstudio.com/items?itemName=cocopon.iceberg-theme)（のLight Theme）を使っています。
+もともとVim用テーマとして開発されたプラグインですが、VS Codeとターミナルでも使えるようになっています。
+
+## Emacsキーバインドしたい
+
+長年Emacsを使っていたため、Emacs操作なしでは生きていけいません。
+Emacsキーバインドの拡張パッケージは多数ありますが、僕は
+[Awesome Emacs Keymap](https://marketplace.visualstudio.com/items?itemName=tuttieee.emacs-mcx)を使っています。
+
+## テキスト校正したい
+
+文章を作成するときに、その場で校正してくれる拡張パッケージがあります。
+とくに和文校正に[テキスト校正くん](https://marketplace.visualstudio.com/items?itemName=ICS.japanese-proofreading)を使っています。
+テキスト校正くんのルールは[JTF日本語標準スタイルガイド](https://www.jtf.jp/tips/styleguide)をベースにしています（たぶん）。
+
+## インストール済みの拡張パッケージを確認したい
+
+``code --list-extensions``を使って、インストール済みの拡張パッケージを確認できます。
+``--show-version``をつけると、それぞれのバージョンを確認できます。
+
 ```bash
 $ code --list-extensions --show-version
 aaron-bond.better-comments@3.0.2
@@ -80,16 +112,3 @@ VSpaceCode.vspacecode@0.10.14
 VSpaceCode.whichkey@0.11.3
 yzhang.markdown-all-in-one@3.5.1
 ```
-
-1. Awosome Emacs Keymap
-1. VSpaceCode
-1. edamagit
-1. Markdown All in One
-1. テキスト校正くん
-1. markdownlint
-
-## テーマを変更したい
-
-VS Code全体のテーマ（＝色使い）も拡張パッケージを使って変更できます。
-僕は[Iceberg Light](https://github.com/cocopon/vscode-iceberg-theme)を使っています。
-もともとVim用テーマとして開発されたプラグインですが、VS Codeとターミナルでも使えるようになっています。
