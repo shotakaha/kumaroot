@@ -40,6 +40,7 @@ command-ssh
 command-ssh-keygen
 command-stdout
 command-tcpdump
+command-tar
 command-tee
 command-texdoc
 command-tig
