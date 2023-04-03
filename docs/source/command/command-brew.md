@@ -1,15 +1,48 @@
 # パッケージ管理したい（`brew`）
 
 ```bash
-brew install フォーミュラ名
-brew update
-brew outdated
-brew upgrade
+$ brew install フォーミュラ名
+$ brew update
+$ brew outdated
+$ brew upgrade
 ```
 
-## Homebrew をインストールしたい
+## パッケージを探したい（``brew search``）
 
-[Homebrew 公式ページ（日本語）](https://brew.sh/index_ja)にあるスクリプトをコピペして、ターミナルに貼り付けます。
+```bash
+$ brew search 検索パターン
+$ brew search brave
+$ brew search chrome
+```
+
+``search``コマンドを使って、パッケージ名（＝フォーミュラ）を検索できます。
+検索パターンは曖昧マッチに（おそらく）対応しているので、思いついたパターンをそのまま入力すればOKです。
+
+## パッケージの詳細を調べたい（``brew info``）
+
+```bash
+$ brew info フォームラ名
+$ brew info brave-browser
+```
+
+``search``コマンドでパッケージ名を探したら``info``コマンドを使って詳細を表示します。
+パッケージの配布先や依存パッケージ、競合パッケージなどを調べることができます。
+もしかしたら求めていたものと違うパッケージの場合もあるので、必ず調べるクセをつけておくとよいと思います。
+
+## フォントを追加したい
+
+```bash
+$ brew tap homebrew/cask-fonts
+```
+
+Homebrewを使って、Google Fontsにあるフォントをインストールできます。
+フォント用のタップ（``homebrew/cask-fonts``）を使えるようにしておきます。
+
+:::{note}
+
+遊び心が感じられる素敵なネーミングのサブコマンドだと思っています。
+
+:::
 
 ## zsh のパスを設定したい
 
@@ -18,7 +51,7 @@ brew upgrade
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-`~/.zprofile`を編集して追記します。
+{file}`~/.zprofile`を編集して追記します。
 Homebrew をインストールした末尾に表示されるスクリプトを実行しても OK です。
 
 ## fish のパスを設定したい
@@ -31,12 +64,12 @@ if status is-interactive
 end
 ```
 
-`~/.config/fish/config.fish`を編集して追記します。
+{file}`~/.config/fish/config.fish`を編集して追記します。
 zsh 用の設定と微妙に異なる（`$`や`"`がいらない）ので注意が必要です。
 
-## エラー
+## エラー：xcrun
 
-```
+```bash
 $ brew upgrade
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 ```
@@ -45,11 +78,5 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
 $ xcode-select --install
 ```
 
-## フォントを追加したい
-
-```bash
-$ brew tap homebrew/cask-fonts
-```
-
-Google FontsにあるフォントはHomebrewを使ってインストールできます。
-そのために、フォント用のtap（``homebrew/cask-fonts``）を使えるようにしておきます。
+新しく買ったパソコンだったり、Xcodeをアップグレードしたあとは、Homebrewが動かないときがあります。
+``xcrun``が見つからないエラーの場合、``xcode-select --install``すると解決します。
