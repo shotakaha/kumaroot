@@ -11,8 +11,7 @@ $ brew upgrade
 
 ```bash
 $ brew search 検索パターン
-$ brew search brave
-$ brew search chrome
+$ brew search browser
 ```
 
 ``search``コマンドを使って、パッケージ名（＝フォーミュラ）を検索できます。
@@ -23,11 +22,27 @@ $ brew search chrome
 ```bash
 $ brew info フォームラ名
 $ brew info brave-browser
+$ brew home brave-browser
 ```
 
 ``search``コマンドでパッケージ名を探したら``info``コマンドを使って詳細を表示します。
 パッケージの配布先や依存パッケージ、競合パッケージなどを調べることができます。
-もしかしたら求めていたものと違うパッケージの場合もあるので、必ず調べるクセをつけておくとよいと思います。
+さらに``home``コマンドで提供元のウェブサイトを確認できます。
+
+パッケージによっては名前だけで判別しにくいものもあります。
+もしかしたら求めていたものと違うパッケージの場合もあるので、はじめてインストールするパッケージの場合は、必ず調べるクセをつけておくとよいと思います。
+
+## パッケージを更新したい（``brew upgrade``）
+
+```bash
+$ brew update
+$ brew outdated
+$ brew upgrade
+```
+
+``update``コマンドでパッケージ一覧を更新します。
+``outdated``コマンドで更新があるパッケージ一覧を表示できます。
+``upgrade``コマンドで更新があるパッケージをダウンロードできます。
 
 ## フォントを追加したい
 
