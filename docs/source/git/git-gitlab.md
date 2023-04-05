@@ -12,3 +12,4 @@ GitHubと比べて、チーム開発に必要なツールが揃っていて、�
 
 - {file}``.gitlab-ci.yml``
 - https://docs.gitlab.com/ee/ci/jobs/job_control.html#common-if-clauses-for-rules
+- https://docs.gitlab.com/ee/ci/yaml/index.html
