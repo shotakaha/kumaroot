@@ -24,6 +24,14 @@ $ make dirhtml
 $ open build/dirhtml/index.html
 ```
 
+:::{hint}
+
+ローカル開発で``make dirhtml``したファイルを開くと、ディレクトリの中身が表示されます。
+これは、URLの末尾が``/``になっているときに``index.html``へリダイレクトされるのはサーバーの機能です。
+なので、ローカルでビルドする場合は``make html``がオススメです。
+
+:::
+
 HTMLを生成するには、テーマの設定が必要です。
 デフォルトは``alabaster``に設定されています。
 僕は``sphinx_rtd_theme``をよく使っています。
