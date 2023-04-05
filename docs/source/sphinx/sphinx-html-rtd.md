@@ -4,7 +4,23 @@
 pip3 install sphinx-rtd-theme
 ```
 
-## テーマを設定する
+## プロジェクトに追加したい
+
+```bash
+$ cd プロジェクト名
+$ poetry add --group=docs sphinx
+$ poetry add --group=docs sphinx_rtd_theme
+$ poetry add --group=docs myst_parser
+$ sphinx-quickstart docs
+$ code docs/conf.py
+```
+
+``sphinx_rtd_theme``はMySTと併用できます。
+必要はパッケージ（``sphinx`` / ``sphinx_rtd_theme`` / ``myst_parser``）を追加、
+``docs``にドキュメント用ディレクトリを作成、
+{file}`docs/conf.py`を開いて、以下の設定を追記します。
+
+## テーマを使いたい
 
 ```python
 import sphinx_rtd_theme
@@ -12,14 +28,15 @@ import sphinx_rtd_theme
 extensions = [
     ...
     "sphinx_rtd_theme",
+    "myst_parser",
     ...
 ]
 
 html_theme = "sphinx_rtd_theme"
 ```
 
-拡張（``extensions``）一覧にモジュール名を追加します。
-また、``html_theme``にもモジュール名の設定が必要です。
+拡張（``extensions``）一覧にパッケージ名を追加します。
+また、``html_theme``をパッケージ名に変更します。
 
 ## テーマのオプションを設定する
 
