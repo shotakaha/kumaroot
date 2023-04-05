@@ -89,10 +89,28 @@ $ poetry publish              # PyPIに公開
 
 ```bash
 $ poetry config --list
+cache-dir = "~/Library/Caches/pypoetry"
+experimental.new-installer = true
+experimental.system-git-client = false
+installer.max-workers = null
+installer.modern-installation = true
+installer.no-binary = null
+installer.parallel = true
+virtualenvs.create = true
+virtualenvs.in-project = null
+virtualenvs.options.always-copy = false
+virtualenvs.options.no-pip = false
+virtualenvs.options.no-setuptools = false
+virtualenvs.options.system-site-packages = false
+virtualenvs.path = "{cache-dir}/virtualenvs"  # ~/Library/Caches/pypoetry/virtualenvs
+virtualenvs.prefer-active-python = false
+virtualenvs.prompt = "{project_name}-py{python_version}"
 ```
 
+現在の設定は``poetry config --list``で確認できます。
+デフォルトの設定は上記のようになっていました。
 全体の設定は{file}`~/Library/Preferences/pypoetry/config.toml`に保存されます。
-{command}`--local`オプションをつけて設定した項目は、プロジェクト内の{file}`poetry.toml`に保存されます。
+`--local`オプションをつけて設定した項目は、プロジェクト内の{file}`poetry.toml`に保存されます。
 
 ### 設定を変更したい
 
@@ -101,7 +119,7 @@ $ poetry config キー名 値
 $ poetry config キー名 値 --local
 ```
 
-設定可能なキーについては[PoetryドキュメントのAvailable Settings](https://python-poetry.org/docs/configuration/#available-settings)を参照してください。
+変更可能な設定は[PoetryドキュメントのAvailable Settings](https://python-poetry.org/docs/configuration/#available-settings)を参照してください。
 Poetry v1.2.0になって設定できる項目が増えました。
 
 ### 設定を削除したい
@@ -111,11 +129,28 @@ $ poetry config キー名 --unset
 $ poetry config キー名 --unset --local
 ```
 
-## 仮想環境をプロジェクト内に変更したい
+追加した設定を削除する場合はキー名に対して``--unset``します。
+
+## プロジェクト内に仮想環境を作成したい
 
 ```bash
-$ poetry config virtualenvs.in-project true --local
+# 現在の設定値を確認する
+$ poetry config virtualenvs.in-project
+null
+
+# 設定を有効にする
+$ poetry config virtualenvs.in-project true
+
+# 変更後の設定値を確認する
+$ poetry config virtualenvs.in-project
+true
 ```
+
+仮想環境は``virtualenvs.path``で設定されたパスに作成されます。
+デフォルトでは{file}``{cache-dir}/virtualenvs``に設定されています。
+
+``virtualenvs.in-project``を有効にすると、そのパスを{file}``.venv``に変更できます。
+GitHub/GitLabなどを通じて複数のマシンで作業する場合は、この値を有効にしておくとよいです。
 
 ## リポジトリとAPIトークンを設定したい
 
