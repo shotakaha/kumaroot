@@ -149,8 +149,14 @@ true
 仮想環境は``virtualenvs.path``で設定されたパスに作成されます。
 デフォルトでは{file}``{cache-dir}/virtualenvs``に設定されています。
 
-``virtualenvs.in-project``を有効にすると、そのパスを{file}``.venv``に変更できます。
+``virtualenvs.in-project``を有効にすると、その設定を無視して{file}``.venv``に変更できます。
 GitHub/GitLabなどを通じて複数のマシンで作業する場合は、この値を有効にしておくとよいです。
+
+:::{caution}
+
+すでに{file}`{cache-dir}/virtualenvs/`に仮想環境がある場合は、一度削除（``rm -r``）してから作成しなおしてください。
+
+:::
 
 ## リポジトリとAPIトークンを設定したい
 
