@@ -48,6 +48,7 @@ Sphinxのテーマなので、Sphinxドキュメントで生成されていま�
 maxdepth: 1
 ---
 sphinx-html-title
+sphinx-html-logo
 sphinx-html-css
 sphinx-html-rtd
 sphinx-html-book
