@@ -27,6 +27,7 @@ python-bs4
 python-pendulum
 python-re
 python-black
+python-commitizen
 ```
 
 ```bash
