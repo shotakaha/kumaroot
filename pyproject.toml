@@ -4,6 +4,9 @@ version = "1.9.0"
 description = "KumaROOT"
 authors = ["Shota Takahashi (KMI) <shotakaha@kmi.nagoya-u.ac.jp>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://kumaroot.readthedocs.io/ja/latest/"
+repository = "https://github.com/shotakaha/kumaroot"
 
 [tool.poetry.dependencies]
 python = "^3.10"
