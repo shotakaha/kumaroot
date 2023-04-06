@@ -6,22 +6,37 @@
 ```
 ````
 
-Markdown記法を使ってコードブロックを挿入できます。
-プログラム言語ごとにシンタックスハイライトできます。
+コードブロックはMarkdown記法の`` ```言語 ``を使って挿入できます。
+言語ごとにシンタックスハイライトもできます。
 ハイライトには``Pygments``とうPythonモジュールが使われています。
 利用可能なプログラミング言語は[PygmentsのAvaileble lexers](https://pygments.org/docs/lexers/)で確認できます。
 
+:::{seealso}
+
+MySTを使っている場合コロンフェンス（``:::``）でディレクティブ宣言を代用できるオプションがあります。
+コードの中にコードを書く場合など、入れ子になったディレクティブを記述する場合にとても便利です。
+
+```python
+# conf.py
+myst_enable_extensions = [
+    "colon_fence",
+]
+
+```
+
+:::
+
 ## 行番号を表示したい（``linenos``）
 
-```md
-:::{code-block} python
+````md
+```{code-block} python
 ---
 linenos: true
 ---
 import pandas as pd
 data = pd.read_csv("example.csv)
-:::
 ```
+````
 
 ``linenos``オプションで、行番号を表示できます。
 オプションを有効にする場合は``code-block``ディレクティブを使います。
@@ -56,15 +71,15 @@ reST形式で書くと次のようになります。
 
 ## 特定の行をハイライトしたい（``emphasize-lines``）
 
-```md
-:::{code-block} python
+````md
+```{code-block} python
 ---
 emphasize-lines: 1,3,9-20
 ---
 import pandas as pd
 data = pd.read_csv("example.csv)
-:::
 ```
+````
 
 ``emphasize-lines``オプションで、特定の行をハイライトできます。
 複数行を飛び飛びで指定する場合は``,（カンマ）``で区切ります。
@@ -72,27 +87,27 @@ data = pd.read_csv("example.csv)
 
 ## キャプションをつけたい（``caption``）
 
-```md
-:::{code-block} python
+````md
+```{code-block} python
 ---
-:caption: コードサンプルのキャプション
+caption: コードサンプルのキャプション
 ---
 import pandas as pd
 data = pd.read_csv("example.csv)
-:::
 ```
+````
 
 ## コードを参照したい（``name``）
 
-```md
-:::{code-block} python
+````md
+```{code-block} python
 ---
 name: ラベル名
 ---
 import pandas as pd
 data = pd.read_csv("example.csv)
-:::
 ```
+````
 
 ## リファレンス
 
