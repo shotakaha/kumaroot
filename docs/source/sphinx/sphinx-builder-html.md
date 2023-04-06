@@ -50,6 +50,7 @@ maxdepth: 1
 sphinx-html-title
 sphinx-html-logo
 sphinx-html-htaccess
+sphinx-html-sidebars
 sphinx-html-css
 sphinx-html-rtd
 sphinx-html-book
