@@ -1,6 +1,6 @@
 # ドキュメントをはじめたい（``sphinx-quickstart``）
 
-ドキュメント作成をはじめる場合は、Sphinxに付属している``sphinx-quickstart``を使います。
+ドキュメント作成をはじめる場合は、Sphinxに付属している[sphinx-quickstart](https://www.sphinx-doc.org/ja/master/man/sphinx-quickstart.html)を使います。
 既存のプロジェクト内にドキュメント作成用として追加するケースが多いと思いますが、
 {file}`MyPROJECT/docs/`のようにドキュメント用ディレクトリを用意するとよいです。
 
