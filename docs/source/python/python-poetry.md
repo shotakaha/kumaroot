@@ -149,12 +149,28 @@ true
 仮想環境は``virtualenvs.path``で設定されたパスに作成されます。
 デフォルトでは{file}``{cache-dir}/virtualenvs``に設定されています。
 
-``virtualenvs.in-project``を有効にすると、その設定を無視して{file}``.venv``に変更できます。
+[virtualenvs.in-project](https://python-poetry.org/docs/configuration/#virtualenvsin-project)を``true``にすると、その設定をカレントディレクトリの{file}``.venv``に変更できます。
 GitHub/GitLabなどを通じて複数のマシンで作業する場合は、この値を有効にしておくとよいです。
 
 :::{caution}
 
 すでに{file}`{cache-dir}/virtualenvs/`に仮想環境がある場合は、一度削除（``rm -r``）してから作成しなおしてください。
+
+:::
+
+## システムのパッケージを使いたい
+
+```bash
+$ poetry config virtualenvs.option.system-site-packages true
+```
+
+[virtualenvs.option.system-site-packages](https://python-poetry.org/docs/configuration/#virtualenvsoptionssystem-site-packages)を``true``にすると、システムのPythonの{file}``site-packages``にインストールが仮想環境から使えるようになります。
+開発環境で使うパッケージ（``pytest`` / ``black`` / ``commitizen`` / ``pysen``）などを使うには、これを有効にしておいてもいいかもしれません。
+
+:::{note}
+
+複数のPythonプロジェクトを持っていると、それぞれのプロジェクトの{file}`.venv`にパッケージがインストールされます。
+開発環境にだけ必要なパッケージを共通化することで、少しだけでもディスク節約になるかもしれません。
 
 :::
 
@@ -183,5 +199,11 @@ $ poetry config pypi-token.testpypi "TestPyPIのAPIトークン"
 
 ## リファレンス
 
-- [Poetry](https://python-poetry.org/)
-- [poetryを使ってpythonパッケージを作成する - Zennのスクラップ](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)
+[Poetry](https://python-poetry.org/)
+: Poetry公式ドキュメントです。
+
+[Configuration - Poetry](https://python-poetry.org/docs/configuration/)
+: ``poetry config``するときに参照するページです。とくに[Available Settings](https://python-poetry.org/docs/configuration/#available-settings)のセクションはよく読んでいます。
+
+[poetryを使ってpythonパッケージを作成する - Zennのスクラップ](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)
+: 僕のZennスクラップです。Poetryを使ってパッケージを新規作成してPyPIで公開するまでの手順を整理しました。
