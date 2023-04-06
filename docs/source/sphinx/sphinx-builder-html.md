@@ -47,10 +47,12 @@ Sphinxのテーマなので、Sphinxドキュメントで生成されていま�
 ---
 maxdepth: 1
 ---
+sphinx-html-theme
 sphinx-html-title
 sphinx-html-logo
 sphinx-html-htaccess
 sphinx-html-sidebars
+
 sphinx-html-css
 sphinx-html-rtd
 sphinx-html-book
@@ -61,4 +63,5 @@ sphinx-html-book
 
 ## リファレンス
 
-- [HTML出力のオプション - Sphinxドキュメント](https://www.sphinx-doc.org/ja/master/usage/configuration.html#options-for-html-output)
+[HTML出力のオプション - Sphinxドキュメント](https://www.sphinx-doc.org/ja/master/usage/configuration.html#options-for-html-output)
+: ウェブページを生成するときのオプションを確認するときに参照します。頭から読んでもあまり参考にならず、「〇〇したいから設定ないかなぁ」と逆引きする使い方がよいと思います。
