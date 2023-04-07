@@ -3,9 +3,8 @@
 ```bash
 $ make help
 ```
-d
-ドキュメントの生成には[sphinx-build](https://www.sphinx-doc.org/ja/master/man/sphinx-build.html)を使いますが、
-{file}`Makefile`が用意されているので、``make``コマンドを使います。
+
+ドキュメントの生成には[sphinx-build](https://www.sphinx-doc.org/ja/master/man/sphinx-build.html)を使うのですが、{file}`Makefile`が用意されていて``make``コマンドを使えるようになっています。
 ``make help``コマンドで、利用可能なビルダーを確認できます。
 それぞれのビルダーの基本設定はすべて{file}`conf.py`にまとめて記述します。
 
