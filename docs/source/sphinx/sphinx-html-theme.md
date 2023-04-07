@@ -84,5 +84,60 @@ CSSファイルは``stylesheet = CSSファイル名,CSSファイル名,...``で�
 いまのところ、``sphinx_book_theme``が気に入っているので、お手軽に作成する場合はこのテーマを``inherit``すればよさそうです。
 もし、ゴリゴリ自作したい場合は、``basic``を``inherit``して作り始めればよさそうです。
 
-- [HTML theme development](https://www.sphinx-doc.org/ja/master/development/theming.html)
+## 自作テンプレートしたい
+
+テーマの引き継ぎとオプションの設定ができたら、次はテンプレートを追加する必要があります。
+Sphinxでは以下の優先度でテンプレートが適用されます。
+
+1. ユーザーテンプレート（＝{file}`conf.py`の``templates_path``ディレクトリのテンプレート）
+2. 選択したテーマのテンプレート
+3. 引き継いだテーマのテンプレート
+
+Sphinxのテンプレートエンジンは``Jinja2``であるため、読み込まれたファイルは``Jinja2``に食べられます。
+
+### ユーザーテンプレートしたい
+
+```python
+{% extends "!layout.html" %}
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<link href=".css">
+</head>
+    <div class="container">
+    <main></main>
+    <footer></footer>
+    </div>
+    <script></script>
+</html>
+```
+
+``layout.html``というテンプレートを作成し、その中のブロック要素をカスタマイズします。
+
+
+### doctypeしたい
+
+```python
+{% extends "!layout.html" %}
+{% block doctype %}
+<!doctype html>
+{% endblock %}
+
+{% block extrahead %}
+<meta charset="utf-8">
+{% endblock}
+
+{% block footer %}
+{% endblock %}
+```
+
+
+
+
+
+
+
+
+- [HTMLテーマ](https://www.sphinx-doc.org/ja/master/development/theming.html)
+- [HTMLテンプレート](https://www.sphinx-doc.org/ja/master/development/templating.html)
 - [Sphinx Extensions API](https://www.sphinx-doc.org/ja/master/extdev/index.html#dev-extensions)
