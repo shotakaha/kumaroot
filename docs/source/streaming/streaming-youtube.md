@@ -7,7 +7,7 @@
 ひとつのアカウントで、複数のブランドアカウントを管理できます。
 必ず正しいアカウントに切り替えてから操作しましょう。
 
-1. [YouTube](https://youtube.com)もしくは[YouTube Studio](https://studio.youtube.com)を開きます
+1. [YouTube](https://www.youtube.com)もしくは[YouTube Studio](https://studio.youtube.com)を開きます
 2. 右上の自分のアイコンをクリックします
 3. ``アカウントを切り替える``をクリックします
 4. 使用するアカウントを選択します
