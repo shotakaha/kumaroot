@@ -57,6 +57,7 @@ sphinx-build
 sphinx-build-html
 sphinx-build-latexpdf
 sphinx-build-linkcheck
+sphinx-build-gettext
 ```
 
 ## リファレンス
