@@ -53,10 +53,10 @@ sphinx-syntax-include
 ---
 maxdepth: 1
 ---
-sphinx-builder
-sphinx-builder-html
-sphinx-builder-latexpdf
-sphinx-builder-linkcheck
+sphinx-build
+sphinx-build-html
+sphinx-build-latexpdf
+sphinx-build-linkcheck
 ```
 
 ## リファレンス
