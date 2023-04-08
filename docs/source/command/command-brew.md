@@ -1,6 +1,6 @@
 # パッケージ管理したい（`brew`）
 
-```bash
+```console
 $ brew install フォーミュラ名
 $ brew update
 $ brew outdated
@@ -9,7 +9,7 @@ $ brew upgrade
 
 ## パッケージを探したい（``brew search``）
 
-```bash
+```console
 $ brew search 検索パターン
 $ brew search browser
 ```
@@ -19,7 +19,7 @@ $ brew search browser
 
 ## パッケージの詳細を調べたい（``brew info``）
 
-```bash
+```console
 $ brew info フォームラ名
 $ brew info brave-browser
 $ brew home brave-browser
@@ -34,7 +34,7 @@ $ brew home brave-browser
 
 ## パッケージを更新したい（``brew upgrade``）
 
-```bash
+```console
 $ brew update
 $ brew outdated
 $ brew upgrade
@@ -46,7 +46,7 @@ $ brew upgrade
 
 ## フォントを追加したい
 
-```bash
+```console
 $ brew tap homebrew/cask-fonts
 ```
 
@@ -61,7 +61,8 @@ Homebrewを使って、Google Fontsにあるフォントをインストールで
 
 ## zsh のパスを設定したい
 
-```bash
+```zsh
+# ~/.zprofile
 # ... 他に設定してある場合はそのままでOK
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
@@ -71,7 +72,8 @@ Homebrew をインストールした末尾に表示されるスクリプトを�
 
 ## fish のパスを設定したい
 
-```bash
+```fish
+# ~/.config/fish/config.fish
 if status is-interactive
     # Commands to run in interactive sessions can go here
     # ... 他に設定してある場合はそのままでOK
@@ -84,12 +86,12 @@ zsh 用の設定と微妙に異なる（`$`や`"`がいらない）ので注意�
 
 ## エラー：xcrun
 
-```bash
+```console
 $ brew upgrade
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 ```
 
-```bash
+```console
 $ xcode-select --install
 ```
 
