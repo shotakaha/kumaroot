@@ -6,10 +6,8 @@
 ```
 ````
 
-コードブロックはMarkdown記法の`` ```言語 ``を使って挿入できます。
-言語ごとにシンタックスハイライトもできます。
-ハイライトには``Pygments``とうPythonモジュールが使われています。
-利用可能なプログラミング言語は[PygmentsのAvaileble lexers](https://pygments.org/docs/lexers/)で確認できます。
+コードブロックはMarkdown記法の`` ```言語名 ``を使って挿入できます。
+
 
 :::{seealso}
 
@@ -25,6 +23,20 @@ myst_enable_extensions = [
 ```
 
 :::
+
+## シンタックスハイライトしたい
+
+```python
+# conf.py
+pygments_style = "sphinx"
+```
+
+シンタックスハイライトには``Pygments``というPythonモジュールが使われています。
+``pygments_style``を使って色使いを変更できます。
+デフォルトは``sphinx``になっています。
+
+指定可能なプログラミング言語は[PygmentsのAvaileble lexers](https://pygments.org/docs/lexers/)で確認できます。
+知らない言語もたくさん列挙されていて、眺めるだけでもおもしろいです。
 
 ## 行番号を表示したい（``linenos``）
 
