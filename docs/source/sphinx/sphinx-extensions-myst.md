@@ -51,44 +51,16 @@ myst_enable_extensions = [
 
 ``conf.py`` の適当な場所に``myst_enable_extensions = [...]``を定義して、MyST Parserのオプションを有効にします。
 オプションは[Syntax Extensions](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html)を参照してください。
-基本的に全部有効にして大丈夫だと思いますが、自分の用途にあったものを選択してください。
+コピペしてすべて有効にして使えばOKだと思いますが、自分の必要にあったオプションを選択してください。
 
-```{warning}
+:::{warning}
 ``linkfy``は別途モジュールが必要なエラーがでたため、コメントアウトしています。
-```
-
-## ロールを使いたい
-
-```md
-{ロール}`ラベル名`
-```
-
-ロール（role）は文章中で単語をマークアップするときに使います。
-HTMLタグのインライン要素に近いものだと思っています。
-``attrs_inline``を有効にすると、属性（``#id``や``.class``など）を追加できます。
-
-```md
-{ロール}`ラベル名`{.クラス名}
-```
-
-```html
-<span class="クラス名">ラベル名</span>
-```
-
-:::{seealso}
-
-reST形式で書くと次のようになります。
-
-```rst
-:ロール:`ラベル名`
-```
-
 :::
 
-## ディレクティブを使いたい
+## ディレクティブしたい
 
 ````md
-```{ディレクティブ} 引数
+```{ディレクティブ名} 引数
 ---
 オプション1: 値1
 オプション2: 値2
@@ -99,12 +71,17 @@ reST形式で書くと次のようになります。
 ```
 ````
 
-ディレクティブ（directive）は段落をマークアップするときに使います。
-ディレクティブには引数とオプションをとるものもあります。
+[ディレクティブ（directives）](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#directives-a-block-level-extension-point)は段落などのブロック要素をマークアップするときに使います。
+
+MyST記法の場合、コードブロック記法のように書きます。
+また、ディレクティブには引数とオプションをとるものもあります。
 オプションは``---``で区切った範囲にYAML形式で``キー: 値``を指定します。
 
-HTMLタグのブロック要素に近いものだと思っています。
-``attrs_block``を有効にすると、属性（``#id``や``.class``など）を追加できます。
+[colon_fence](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#code-fences-using-colons)を有効にすると`` ```{ディレクティブ名} ``の代わりに``:::{ディレクティブ名}``で書けるようになります。
+
+また、[attrs_block](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#block-attributes)を有効にすると、ブロック要素に対して属性（``#id``や``.class``など）を追加できます。
+Markdown記法はシンプルでよいのですが、SSG（＝静的サイトジェネレーター）するときはちょっと不便に感じていました。
+これは、それを解決するための拡張です。
 
 :::{seealso}
 
@@ -126,17 +103,53 @@ reST形式で書くと次のようになります。
 Sphinxドキュメントをマークアップするときに、この``ロール``と``ディレクティブ``の役割と使い分けを理解するのはとても大切だと思います。
 :::
 
+## ロールを使いたい
+
+```md
+{ロール}`ラベル名`
+```
+
+[ロール（roles）](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#roles-an-in-line-extension-point)は文章中の単語などのインライン要素をマークアップするときに使います。
+
+[attrs_inline](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#inline-attributes)を有効にすると、インライン要素に対して属性（``#id``や``.class``など）を追加できます。
+
+```md
+{ロール}`ラベル名`{.クラス名}
+```
+
+```html
+<span class="クラス名">ラベル名</span>
+```
+
+:::{seealso}
+
+reST形式で書くと次のようになります。
+
+```rst
+:ロール:`ラベル名`
+```
+
+:::
+
 ## 置換したい（``sub-ref``）
 
 ```md
-> {sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read
+{sub-ref}`today`
+{sub-ref}`wordcount-words`
+{sub-ref}`wordcount-minutes`
 ```
 
-> {sub-ref}`today` | {sub-ref}`wordcount-words` words | {sub-ref}`wordcount-minutes` min read
+:::{seealso}
 
-``sub-ref``ロールを使うと、あるキーワードを置換できます。
+- 更新日: {sub-ref}`today`
+- このページの単語数: {sub-ref}`wordcount-words` 単語
+- 読む時間の目安: {sub-ref}`wordcount-minutes` 分
 
-## メタデータを設定したい
+:::
+
+[sub-ref](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#insert-the-date-and-reading-time)ロールを使うと、キーワードを置換できます。
+
+## メタデータしたい
 
 ```python
 language = "ja"
@@ -147,7 +160,8 @@ myst_html_meta = {
 }
 ```
 
-サイト全体のメタデータは{file}`conf.py`の``myst_html_meta``で設定できます。
+メタデータは、サイト全体と記事ごとのそれぞれに設定できます。
+サイト全体のメタデータは{file}`conf.py`の``myst_html_meta``で設定します。
 
 ```yaml
 ---
@@ -159,13 +173,9 @@ myst:
 ---
 ```
 
-記事ごとのメタデータはフロントマターで設定できます。
-
-
+記事ごとのメタデータはフロントマターで設定します。
 
 ## リファレンス
 
 - [MyST Parser Document](https://myst-parser.readthedocs.io/en/latest/index.html)
 - [Roles and Directives - MyST Parser](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html)
-- [Directives - Sphinx Document](https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html)
-- [Roles](https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html)
