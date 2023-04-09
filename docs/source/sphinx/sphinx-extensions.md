@@ -5,17 +5,18 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',
-    'myst_parser',
-    'sphinxext.opengraph',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.coverage",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.viewcode",
+    "sphinx_rtd_theme",
+    "myst_parser",
+    "sphinxext.opengraph",
+    "sphinx_openbutton",
 ]
 ```
 
@@ -36,3 +37,4 @@ Sphinxにはさまざまな拡張パッケージが存在し、より便利に�
 - [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html)
 - [MyST Parser](https://myst-parser.readthedocs.io/en/latest/index.html)
 - [sphinxext-opengraph](https://sphinxext-opengraph.readthedocs.io/en/latest/)
+- [sphinx-copybutton](https://github.com/executablebooks/sphinx-copybutton)

@@ -11,6 +11,8 @@ $ brew upgrade
 
 ```console
 $ brew search 検索パターン
+
+# 例：ブラウザを検索
 $ brew search browser
 ```
 
@@ -20,7 +22,9 @@ $ brew search browser
 ## パッケージの詳細を調べたい（``brew info``）
 
 ```console
-$ brew info フォームラ名
+$ brew info フォーミュラ名
+
+# 例：Brave
 $ brew info brave-browser
 $ brew home brave-browser
 ```
@@ -35,8 +39,13 @@ $ brew home brave-browser
 ## パッケージを更新したい（``brew upgrade``）
 
 ```console
+# パッケージリストを更新する
 $ brew update
+
+# 更新が必要なパッケージを表示する
 $ brew outdated
+
+# パッケージを更新する
 $ brew upgrade
 ```
 
@@ -52,12 +61,6 @@ $ brew tap homebrew/cask-fonts
 
 Homebrewを使って、Google Fontsにあるフォントをインストールできます。
 フォント用のタップ（``homebrew/cask-fonts``）を使えるようにしておきます。
-
-:::{note}
-
-遊び心が感じられる素敵なネーミングのサブコマンドだと思っています。
-
-:::
 
 ## zsh のパスを設定したい
 

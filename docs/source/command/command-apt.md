@@ -1,6 +1,6 @@
 # apt
 
-```bash
+```console
 $ apt
 ```
 
@@ -9,7 +9,7 @@ Debian系のLinuxでパッケージ管理を行うためのコマンドライン
 
 ## パッケージを検索したい（``apt search``）
 
-```bash
+```console
 # apt-cache search パッケージ名
 $ apt search パッケージ名
 $ apt search ripgrep
@@ -17,7 +17,7 @@ $ apt search ripgrep
 
 ## パッケージをインストールしたい（``apt install``）
 
-```bash
+```console
 # apt-get install パッケージ名
 $ apt install パッケージ名
 $ apt install ripgrep
@@ -25,8 +25,7 @@ $ apt install ripgrep
 
 ## パッケージリストを更新したい（``apt update``）
 
-```bash
+```console
 # apt-get update
 $ apt update
-
 ```

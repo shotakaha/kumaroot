@@ -9,8 +9,8 @@
 project = "KumaROOT"
 author = "Shota TAKAHASHI"
 copyright = "2015 - 2023, Shota TAKAHASHI"
-version = "1.9.0"
-release = "1.9.0"
+version = "1.11.0"
+release = "1.11.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -27,6 +27,7 @@ extensions = [
     "sphinx_rtd_theme",
     "myst_parser",
     "sphinxext.opengraph",
+    "sphinx_copybutton",
 ]
 
 templates_path = ["_templates"]
@@ -38,6 +39,8 @@ language = "ja"
 #     '.md': 'markdown',
 #     }
 # source_encoding = 'utf-8-sig'
+nitpicky = True
+
 numfig = True
 
 # 図表番号表示のカスタム設定
@@ -46,7 +49,7 @@ numfig = True
 numfig_format = {"figure": "Fig. %s", "table": "Table %s", "code-block": "Listing %s"}
 numfig_format["figure"] = "図 %s"
 numfig_format["table"] = "表 %s"
-numfig_format["code-block"] = "コードサンプル %s"
+numfig_format["code-block"] = "コード %s"
 
 # 図表番号のスコープ
 # 0: 全てのドキュメントで通し番号
@@ -171,7 +174,7 @@ latex_elements["preamble"] = r"""
 # latex_elements['preamble'] += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
 latex_logo = "./_static/quma.jpeg"
 # latex_use_parts = True
-# latex_show_pagerefs = False
+latex_show_pagerefs = True
 latex_show_urls = "footnote"
 # latex_appendices = []
 # latex_domain_indices = True

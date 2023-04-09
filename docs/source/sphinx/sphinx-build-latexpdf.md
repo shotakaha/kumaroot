@@ -1,33 +1,25 @@
-# PDFを生成したい（``make latexpdf``）
+# PDFファイルを生成したい（``make latexpdf``）
 
-```bash
+```console
 $ make latex
 $ make latexpdf
-$ make latexpdfja
 ```
 
-PDFを生成するときは{command}`make latexpdf`を実行します。
-生成したファイルは{file}`build/latex/`以下に出力されます。
+PDFを生成するときは``make latexpdf``を実行します。
+生成したファイルは{file}`build/latex/`に出力されます。
 
-```bash
-$ cd $KUMAROOT
-$ make latexpdf
-$ open build/latex/kumaroot.pdf
-```
+## LaTeXファイルを生成したい（``make latex``）
 
-新しくパッケージを追加したあとに、PDF生成がうまくいかない場合は、LaTeX文書を直接確認したほうが原因が早く見つかる場合があります。
-{command}`make latex`でコンパイルせずにLaTeX文書を作成できます。
-
-```bash
-$ cd $KUMAROOT
+```console
 $ make latex
 $ less build/latex/kumaroot.tex
 ```
 
-
+``make latex``でコンパイルせずにLaTeXファイルだけを生成できます。
+新しいLaTeXパッケージを追加したあとなどに、PDFファイルの生成がうまくいかない場合は、まずLaTeXファイルを生成し、その内容を直接確認したほうが原因が早く見つかる場合があります。
 
 ```{note}
-PDFを生成する場合、ビルドするパソコンでLaTeX環境を整えておく必要があります。
+PDFファイルを生成する場合、ビルドするパソコンでLaTeX環境を整えておく必要があります。
 詳しくは[](../latex/latex-usage.md)を参照してください。
 ```
 
@@ -37,6 +29,7 @@ maxdepth: 1
 ---
 sphinx-latex-engine
 sphinx-latex-docclass
+sphinx-latex-documents
 sphinx-latex-elements
 sphinx-latex-logo
 sphinx-latex-section

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kumaroot"
-version = "1.9.0"
+version = "1.11.0"
 description = "KumaROOT"
 authors = ["Shota Takahashi (KMI) <shotakaha@kmi.nagoya-u.ac.jp>"]
 license = "MIT"
@@ -15,19 +15,21 @@ sphinx-rtd-theme = "^1.0.0"
 myst-parser = "^0.18.0"
 sphinxext-opengraph = "^0.7.3"
 commitizen = "^2.42.1"
+sphinx-copybutton = "^0.5.1"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.16.0"
 beautifulsoup4 = "^4.11.1"
 pendulum = "^2.1.2"
 fake-useragent = "^1.1.1"
+sphinx-autobuild = "^2021.3.14"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.9.0"
+version = "1.11.0"
 tag_format = "v$version"
 version_files = [
     "pyproject.toml:version",
