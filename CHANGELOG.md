@@ -1,22 +1,18 @@
 # CHANGELOG.md
 ## v1.11.0 (2023-04-09)
 
-### Feat
+### Added
 
+- **docs/Makefile**: sphinx-autobuildパッケージを追加した
 - **sphinx/sphinx-autobuild.md**: sphinx-autobuildを追加した
-- **docs/Makefile**: sphinx-autobuildを追加した
+- **sphinx/sphinx-extensions.md**: sphinx-copybuttonを追加した
 - **sphinx/sphinx-latex-documents.md**: LaTeXドキュメントの設定を追加した
 
-### Fix
+### Fixed
 
-- **sphinx/sphinx-extensions.md**: sphinx-copybuttonを追加した
 - **sphinx/sphinx-conf.md**: numfigを追記した
 - **sphinx/sphinx-latex-lualatex.md**: latex_show_pagerefsを追記した
-- **command/command-uname.md**: consoleに修正した
-- **command/command-brew.md**: 微修正した
-- **sphinx/sphinx-latex-lualatex.md**: このドキュメントの設定を参考にした
-- **sphinx/sphinx-latex-documents.md**: タイトルを変更した
-- **sphinx/sphinx-latex-docclass.md**: 微修正した
+
 
 ## v1.10.0 (2023-04-08)
 
