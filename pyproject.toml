@@ -22,6 +22,7 @@ ipykernel = "^6.16.0"
 beautifulsoup4 = "^4.11.1"
 pendulum = "^2.1.2"
 fake-useragent = "^1.1.1"
+sphinx-autobuild = "^2021.3.14"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
