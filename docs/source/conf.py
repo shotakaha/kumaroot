@@ -27,6 +27,7 @@ extensions = [
     "sphinx_rtd_theme",
     "myst_parser",
     "sphinxext.opengraph",
+    "sphinx_copybutton",
 ]
 
 templates_path = ["_templates"]
@@ -38,6 +39,8 @@ language = "ja"
 #     '.md': 'markdown',
 #     }
 # source_encoding = 'utf-8-sig'
+nitpicky = True
+
 numfig = True
 
 # 図表番号表示のカスタム設定
@@ -46,7 +49,7 @@ numfig = True
 numfig_format = {"figure": "Fig. %s", "table": "Table %s", "code-block": "Listing %s"}
 numfig_format["figure"] = "図 %s"
 numfig_format["table"] = "表 %s"
-numfig_format["code-block"] = "コードサンプル %s"
+numfig_format["code-block"] = "コード %s"
 
 # 図表番号のスコープ
 # 0: 全てのドキュメントで通し番号
