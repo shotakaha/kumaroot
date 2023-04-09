@@ -37,4 +37,4 @@ Sphinxにはさまざまな拡張パッケージが存在し、より便利に�
 - [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html)
 - [MyST Parser](https://myst-parser.readthedocs.io/en/latest/index.html)
 - [sphinxext-opengraph](https://sphinxext-opengraph.readthedocs.io/en/latest/)
-- [sphinx-copybutton](https://github.com/executablebooks/sphinx-copybutton)
+- [sphinx-copybutton](https://sphinx-copybutton.readthedocs.io/en/latest/index.html)
