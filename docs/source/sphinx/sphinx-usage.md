@@ -28,7 +28,19 @@ sphinx-readthedocs
 ## マークアップしたい
 
 ドキュメントをマークアップする方法を整理しました。
-シンタックスは``reST``ではなく``MyST``を前提にしています。
+Sphinxの基本は[ディレクティブ（directive）](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/directives.html)と[ロール（role）](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/roles.html)です。
+
+:::{hint}
+
+**ディレクティブ**／**ロール**は、
+HTMLだと**ブロック要素**／**インライン要素**、
+LaTeXだと**環境**／**コマンド**、
+に相当するイメージで、僕はドキュメントをマークアップしています。
+
+:::
+
+デフォルトの基本は``reST（reStructuredText）記法``なのですが、
+このドキュメントでは``MyST記法``を前提にコードのサンプルを例示します。
 
 ```{toctree}
 ---
@@ -66,7 +78,6 @@ sphinx-autobuild
 - [Sphinx 日本語ドキュメント](https://www.sphinx-doc.org/ja/master/index.html)
 - [Sphinx-Users.jp - 逆引き辞典](https://sphinx-users.jp/reverse-dict/index.html)
 - [reStructuredText入門](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/basics.html)
-- [CommonMark](https://commonmark.org/)
 - [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest)
 - [Sphinx Design](https://sphinx-design.readthedocs.io/en/latest/)
 - [Sphinx Extensions](https://sphinx-extensions.readthedocs.io/en/latest/)
