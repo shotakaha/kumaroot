@@ -53,6 +53,9 @@ latex_elements["preamble"] = r"""
 \hypersetup{bookmarksnumbered=true}
 \hypersetup{bookmarksopen=true}
 """
+
+latex_show_pagerefs = True
+latex_show_urls = "footnote"
 ```
 
 ```{note}
