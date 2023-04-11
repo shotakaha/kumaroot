@@ -1,5 +1,9 @@
 # OGPしたい（``sphinxext-opengraph``）
 
+```console
+$ pip3 install sphinxext-opengraph
+```
+
 ```python
 extensions = [
     ...,
