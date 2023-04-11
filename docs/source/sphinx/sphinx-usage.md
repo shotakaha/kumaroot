@@ -22,6 +22,7 @@ sphinx-conf
 sphinx-extensions
 sphinx-extensions-myst
 sphinx-extensions-opengraph
+sphinx-extensions-googleanalytics
 sphinx-readthedocs
 ```
 
