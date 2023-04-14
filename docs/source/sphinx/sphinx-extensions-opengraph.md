@@ -5,6 +5,7 @@ $ pip3 install sphinxext-opengraph
 ```
 
 ```python
+# conf.py
 extensions = [
     ...,
     "sphinxext.opengraph",
@@ -13,29 +14,67 @@ extensions = [
 ```
 
 SphinxJPハッカソンに参加して教えてもらった拡張パッケージです。
-設定ファイルに追記するだけで、HTML中に``og:title``、``og:type``、``og:url``、``og:site_name``、``og:description``が追記されます（他にもメタ要素が追加されているかも）。
+[sphinxext-opengraph](https://pypi.org/project/sphinxext-opengraph/)を使うと、ウェブサイトにOGP情報を追記できます。
+{file}`conf.py`で全体のOGPを設定でき、フロントマターでページごとのOGPを設定できます。
+{file}`conf.py`の``extensions``にパッケージ名を追記するだけで、HTML中に最低限のOGP情報が追加されるので、とりあえず使っておくとよいと思います。
 
-このサイトの場合、以下の情報が追記されました。
-``og:description``はきちんと設定したほうがよさそうなので、変更したいです。
+このページは以下のOGP情報が追加されました。
 
 ```html
-<meta property="og:title" content="KumaROOT" />
+<meta content="ROOT, Python" name="keywords" />
+<meta property="og:title" content="OGPしたい（sphinxext-opengraph）" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="index.html" />
+<meta property="og:url" content="sphinx/sphinx-extensions-opengraph.html" />
 <meta property="og:site_name" content="KumaROOT" />
-<meta property="og:description" content="はじめに, ROOTの使い方, Geant4の使い方, コマンドラインの使い方, Gitの使い方, LaTeXの使い方, Sphinxの使い方, Pythonの使い方, Pandasの使い方, Altairの使い方, Goole Apps Script の使い方, ウェブ開発, Hugoの使い方, VS Codeの使い方, Emacsの使い方, Rustの使い方, Docker の使い方, ..." />
-<meta name="description" content="はじめに, ROOTの使い方, Geant4の使い方, コマンドラインの使い方, Gitの使い方, LaTeXの使い方, Sphinxの使い方, Pythonの使い方, Pandasの使い方, Altairの使い方, Goole Apps Script の使い方, ウェブ開発, Hugoの使い方, VS Codeの使い方, Emacsの使い方, Rustの使い方, Docker の使い方, ..." />
+<meta property="og:description" content="SphinxJPハッカソンに参加して教えてもらった拡張パッケージです。 sphinxext-opengraph を使うと、ウェブサイトにOGP情報を追記できます。 conf.py で全体のOGPを設定でき、フロントマターでページごとのOGPを設定できます。 conf.py の extensions にパッケージ名を追記するだけで、HTML中に最低限のOGP情報が追加されるので、とりあえず使っ..." />
 ```
 
-## サイト設定を変更したい
+## サイト全体のOGPを設定したい
 
-``og:description``を変更したいけど、変更方法が分からないです。
-ページ単位であれば、ファイルの先頭に``:og:description: ページの説明``を追加すれば設定できるみたいです。
-トップページの場合、同様に``source/index.md``に追加しても設定が追記されませんでした。
-うーむ。
+```python
+# conf.py
+
+## Options for OGP (sphinxext-opengraph)
+
+ogp_site_url = "サイトの公開URL"
+ogp_description_length = 200
+ogp_site_name = "サイト名" # デフォルトは project で設定した文字列
+ogp_social_cards = # あとで調べる
+ogp_image = "サイトOGP画像のパス" # ogp_site_urlからの相対パス
+ogp_image_alt = "サイトOGP画像の代替テキスト" # デフォルトは ogp_site_name で設定した文字列
+ogp_use_first_image = True
+ogp_type = "website"
+ogp_custom_meta_tags = [
+    '<meta property="og:ignore_canonical" content="true" />',
+]
+ogp_enable_meta_description = True
+```
+
+デフォルトの設定でも十分ですが、サイト全体のOGP情報を設定できます。
+``ogp_use_first_image``と``ogp_enable_meta_description``は有効にするとよいでしょう。
+
+
+## ページごとのOGPを設定したい
+
+```yaml
+---
+ogp_description_length: 150
+og:description: "ページの説明"
+description : "ページの説明"
+og:title: "ページのタイトルを上書き"
+og:type: "article"
+og:image: "OGP画像の絶対パス"
+og:image:alt: "OGP画像の代替テキスト"
+---
+
+# タイトル
+
+本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文
+本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文
+```
 
 
 ## リファレンス
 
-- https://pypi.org/project/sphinxext-opengraph/
+-
 - https://sphinx-users.jp/cookbook/ogp/index.html

@@ -114,6 +114,8 @@ html_logo = "./_static/quma.jpeg"
 
 # -- Options for OGP --------------------------------------------------
 
+ogp_use_first_image = True
+ogp_enable_meta_description = True
 
 # -*- coding: utf-8 -*-
 #
