@@ -23,6 +23,7 @@ sphinx-extensions
 sphinx-extensions-myst
 sphinx-extensions-opengraph
 sphinx-extensions-googleanalytics
+sphinx-extensions-copybutton
 sphinx-readthedocs
 ```
 
