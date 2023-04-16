@@ -33,6 +33,7 @@ command-exa
 command-fd
 command-find
 command-fish
+command-ghq
 command-grep
 command-launchctl
 command-ls
