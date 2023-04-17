@@ -18,13 +18,11 @@ VS Codeで唯一覚えるべきショートカットキーといっても過言�
 
 ```json
 {
-    ...
     {
         "key": "cmd+b",
         "command": "-markdown.extension.editing.toggleBold",
         "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
     },
-    ...
 }
 ```
 

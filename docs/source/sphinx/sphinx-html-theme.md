@@ -97,7 +97,7 @@ Sphinxのテンプレートエンジンは``Jinja2``であるため、読み込�
 
 ### ユーザーテンプレートしたい
 
-```python
+```html
 {% extends "!layout.html" %}
 <!doctype html>
 <head>
@@ -114,10 +114,9 @@ Sphinxのテンプレートエンジンは``Jinja2``であるため、読み込�
 
 ``layout.html``というテンプレートを作成し、その中のブロック要素をカスタマイズします。
 
-
 ### doctypeしたい
 
-```python
+```html
 {% extends "!layout.html" %}
 {% block doctype %}
 <!doctype html>
@@ -130,13 +129,6 @@ Sphinxのテンプレートエンジンは``Jinja2``であるため、読み込�
 {% block footer %}
 {% endblock %}
 ```
-
-
-
-
-
-
-
 
 - [HTMLテーマ](https://www.sphinx-doc.org/ja/master/development/theming.html)
 - [HTMLテンプレート](https://www.sphinx-doc.org/ja/master/development/templating.html)

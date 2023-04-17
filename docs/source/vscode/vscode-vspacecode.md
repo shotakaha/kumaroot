@@ -37,9 +37,7 @@ VSpaceCodeでもそれをしたい・・・が、やりかたわからない。
 
 ```json
 {
-    ...
     "vim.statusBarColorControl": true,
-    ...
 }
 ```
 
@@ -51,7 +49,6 @@ VSpaceCodeでもそれをしたい・・・が、やりかたわからない。
 
 ```json
 {
-    ...
     "vim.statusBarColorControl": true,
     // "vim.statusBarColors.モード名": ["#背景色", "#文字色"]
     "vim.statusBarColors.normal": ["#e27878", "#161821"],
@@ -65,7 +62,6 @@ VSpaceCodeでもそれをしたい・・・が、やりかたわからない。
     // "vim.statusBarColors.easymotionmode": ["#818596", "#161821"],
     // "vim.statusBarColors.easymotioninputmode": ["#818596", "#161821"],
     // "vim.statusBarColors.surroundinputmode": ["#818596", "#161821"],
-    ...
 }
 ```
 
