@@ -23,3 +23,20 @@ sheet.getSheetByName("シート名").setName("変更後のシート名")
 ```js
 sheet.deleteSheet(sheet.getSheetByName("シート名"))
 ```
+
+## カスタムメニューしたい（``getUi``）
+
+```js
+function onOpen() {
+    var ui = SpreadsheetApp.getUi();
+    var menu = ui.createMenu("メニュー名");
+    menu.addItem("アイテム名1", "関数名1");
+    menu.addItem("アイテム名2", "関数名2");
+    menu.addSeparator();
+    menu.addItem("アイテム名3", "関数名3");
+    menu.addToUi();
+}
+```
+
+スプレッドシートにカスタムメニューを追加できます。
+シートを開いたときに、メニューに追加するため``onOpen``関数の中で定義します。
