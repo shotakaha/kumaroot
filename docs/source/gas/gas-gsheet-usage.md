@@ -3,26 +3,39 @@
 ## スプレッドシートを開きたい（``openById``）
 
 ```js
-const sheet = SpreadsheetApp.openById("シートID")
+const sheet = SpreadsheetApp.openById("シートID");
 ```
 
 ## シートを選択したい（``getSheetByName``）
 
 ```js
-sheet.getSheetByName("シート名")
+sheet.getActiveSheet();
+sheet.getSheetByName("シート名");
 ```
+
+現在選択しているシートは``getActiveSheet``で選択できます。
+``getSheetByName``を使うと、シート名で選択できます。
 
 ## シート名を変更したい（``setName``）
 
 ```js
-sheet.getSheetByName("シート名").setName("変更後のシート名")
+sheet.getSheetByName("シート名").setName("変更後のシート名");
 ```
 
 ## シートを削除したい（``deleteSheet``）
 
 ```js
-sheet.deleteSheet(sheet.getSheetByName("シート名"))
+sheet.deleteSheet(sheet.getSheetByName("シート名"));
 ```
+
+## データを選択したい（``getRange``）
+
+```js
+const data = sheet.getRange(1, 1, ss.getLastRow(), ss.getLastColumn()).getValues();
+```
+
+シートのすべてのデータを配列として取得できます。
+``getLastRow``と``getLastColumn``を使うことで、データが更新されて行数や列数に変更があっても対応できます。
 
 ## カスタムメニューしたい（``getUi``）
 
