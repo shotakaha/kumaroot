@@ -15,13 +15,26 @@ googleanalytics_id = "G-xxxxxxxx"
 ```
 
 [sphinxcontrib-googleanalytics](https://github.com/sphinx-contrib/googleanalytics)を使うとGoogle Analyticsを挿入できるようになります。
-テーマによってはオプションでGAに対応しているものもあります（例：sphinx_rtd_themeなど）。
-``sphinx_book_theme``にはないようなので、このパッケージを使って追加しました。
-ソースコードを見た感じだとGA4タグにも対応しているっぽいです。
+テーマによってはオプションでGAに対応しているものあるので、テーマのドキュメントを確認してみましょう。
 
-:::{note}
+## sphinx_rtd_themeでGAしたい
 
-``sphinx_book_theme``のベースになっている``pydata_sphinx_theme``にはGA設定用のオプションがあります。
-ただし、そのバージョンを含んだ``sphinx_book_theme``のバージョンがまだリリースされてないのが問題のようです。
+```python
+html_theme_options = {
+    "analytics_id": "G-xxxxxxxx",
+    "analytics_anonymize_ip": False,
+}
+```
 
-:::
+``Read the Docs``のドキュメントを参照すると、[Configuration](https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html)のページにオプションの設定方法が書かれていました。
+
+## sphinx_book_theme / pydata_sphinx_theme
+
+```python
+html_theme_options = {
+    "analytics": {"google_analytics_id": "G-xxxxxxxx"},
+}
+```
+
+``Sphinx Book Theme``は``PyData Theme``を継承しているので、``PyData Theme``ドキュメントを参照します。
+[Analytics and usage services](https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/analytics.html)のページにオプションの設定方法が書かれていました。
