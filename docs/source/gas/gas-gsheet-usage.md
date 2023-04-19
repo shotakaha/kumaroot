@@ -28,14 +28,17 @@ sheet.getSheetByName("シート名").setName("変更後のシート名");
 sheet.deleteSheet(sheet.getSheetByName("シート名"));
 ```
 
-## データを選択したい（``getRange``）
+## データを選択したい（``getRange`` / ``getDataRange``）
 
 ```js
+const data = sheet.getRange(1, 1, 行数, 列数).getValues();
 const data = sheet.getRange(1, 1, ss.getLastRow(), ss.getLastColumn()).getValues();
+const data = sheet.getDataRange().getValues().slice(1);
 ```
 
-シートのすべてのデータを配列として取得できます。
-``getLastRow``と``getLastColumn``を使うことで、データが更新されて行数や列数に変更があっても対応できます。
+``getRange``で範囲を指定してデータを配列として取得できます。
+シートのすべてのデータを取得したいときは、``getLastRow``と``getLastColumn``でデータ全体の行数と列数を指定するか、``getDataRange``で全範囲を指定します。
+データに見出しを含みたくない場合は``slice(1)``するとよいです。
 
 ## 組み込み関数したい（``setFormula``）
 
