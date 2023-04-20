@@ -1,20 +1,28 @@
-# SpreadsheetAppの使い方
-
-## スプレッドシートを開きたい（``openById``）
+# スプレッドシートしたい
 
 ```js
-const sheet = SpreadsheetApp.openById("シートID");
+const spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+const sheet = spreadsheet.getActiveSheet();
+const data = sheet.getDataRange().getValues().slice(1);
+console.log(data);
 ```
 
-## シートを選択したい（``getSheetByName``）
+GASでGoogleスプレッドシートを扱うには[SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスを使います。
+GASが紐づけてあるスプレッドシートの場合、``getActiveSpreadsheet``でスプレッドシートにアクセスできるようになります。
+スプレッドシートが複数のシートを持つ場合は、さらに``getActiveSheet``することで選択中のシートにアクセスできるようになります。
+
+上記のコードサンプルでは、取得したシートにある値を``getDataRange``ですべて選択し、``getValues``することで2次元配列のデータにしています。
+最後に中身を確認するために``console.log``しています。
+ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
+
+## シートを開きたい（``openById`` / ``getSheetByName``）
 
 ```js
-sheet.getActiveSheet();
-sheet.getSheetByName("シート名");
+const spreadsheet = SpreadsheetApp.openById("シートID");
+const sheet = spreadsheet.getSheetByName("シート名");
 ```
 
-現在選択しているシートは``getActiveSheet``で選択できます。
-``getSheetByName``を使うと、シート名で選択できます。
+スプレッドシートIDを指定し、シート名を指定して、シートを開くことができます。
 
 ## シート名を変更したい（``setName``）
 
