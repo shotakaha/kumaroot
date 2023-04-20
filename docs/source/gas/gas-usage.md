@@ -19,6 +19,7 @@ gas-class.md
 gas-date.md
 gas-gsheet-usage.md
 gas-gmail-usage.md
+gas-groups.md
 ```
 
 ## リファレンス
