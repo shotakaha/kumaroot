@@ -1,4 +1,4 @@
-# MailAppの使い方
+# メールしたい
 
 ```js
 MailApp.sendEmail("メッセージオブジェクト");
@@ -9,7 +9,8 @@ MailApp.sendEmail("宛先", "件名", "本文", "オプション");
 GASからメールするには[MailApp](https://developers.google.com/apps-script/reference/mail/mail-app)を使う方法
 [GmailApp](https://developers.google.com/apps-script/reference/gmail/gmail-app)を使う方法の2通りあります。
 
-``MailApp``の方がシンプルに使えて、ちょっと複雑なことをしたい場合は``GmailApp``を使います。
+メールを送るだけなら``MailApp``シンプルかつ十分です。
+メールボックス全体をあれこれしたい場合は``GmailApp``を使います。
 
 ## ドキュメントから本文を読み込んでメールしたい
 
@@ -23,7 +24,7 @@ function sendMail(mailTo, docId) {
     const mailBody = doc.getBody().getText();
     const mailOption = {
         name: "送信元の名前",
-        cc: "CCの宛先,
+        cc: "CCの宛先",
         bcc: "BCCの宛先",
         }
     MailApp.sendEmail(mailTo, mailTitle, mailBody, mailOption);
