@@ -1,105 +1,106 @@
 # CHANGELOG.md
+
 ## v1.11.0 (2023-04-21)
 
-### Feat
+### Added
 
-- **gas/gas-document.md**: DocumentAppを追加した
-- **gas/gas-groups.md**: GroupsAppを追加した
-- **gas/gas-gmail-usage.md**: MailAppの使い方を追加した
-- **docs/source/command/command-myst.md**: MySTを追加した
 - **command/command-ghq.md**: ghqコマンドを追加した
+- **docs/Makefile**: sphinx-autobuildを追加した
+- **docs/source/command/command-myst.md**: MySTを追加した
+- **gas/gas-document.md**: DocumentAppを追加した
+- **gas/gas-gmail-usage.md**: MailAppの使い方を追加した
+- **gas/gas-groups.md**: GroupsAppを追加した
+- **sphinx/sphinx-autobuild.md**: sphinx-autobuildを追加した
 - **sphinx/sphinx-extensions-copybutton.md**: sphinx-copybuttonを追加した
 - **sphinx/sphinx-extensions-googleanalytics.md**: GA4タグの設定方法を追加した
-- **sphinx/sphinx-autobuild.md**: sphinx-autobuildを追加した
-- **docs/Makefile**: sphinx-autobuildを追加した
 - **sphinx/sphinx-latex-documents.md**: LaTeXドキュメントの設定を追加した
 
-### Fix
+### Fixed
 
-- **gas/gas-gmail.md**: タイトルを微修正した
-- **gas/gas-spreadsheet.md**: タイトルを微修正した
-- **gas/gas-variables.md**: 関数を作成するときの注意点を追記した
-- **gas/gas-class.md**: 微修正した
-- **gas/gas-variables.md**: 変数について整理しなおした
-- **gas/gas-usage.md**: 概要を整理した
+- **code-block**: コードブロックのwarningを修正した
+- **command/command-brew.md**: 微修正した
+- **command/command-ghq.md**: ghqコマンドを追記した
+- **command/command-uname.md**: consoleに修正した
+- **docs/source/command/command-gem.md**: gemを追加した
 - **gas**: ファイル名を変更した
+- **gas/gas-class.md**: 微修正した
 - **gas/gas-date.md**: 日付の使い方を整理した
 - **gas/gas-gmail-usage.md**: 説明を微修正した
-- **gas/gas-mailapp-sendemail.md**: 削除した
-- **gas/gas-gsheet-usage.md**: タイトルを変更し、サンプルコードを追加した
+- **gas/gas-gmail.md**: タイトルを微修正した
 - **gas/gas-gsheet-usage.md**: getDataRangeを追記した
-- **sphinx/sphinx-extensions-googleanalytics.md**: 間違っていた説明を修正した
-- **gas/gas-gsheet-usage.md**: シートの操作方法を追記した
-- **gas/gas-gsheet-usage.md**: データを取得する方法を追記した
-- **gas/gas-gsheet-usage.md**: カスタムメニューを追加する方法を追記した
 - **gas/gas-gsheet-usage.md**: spreadsheetの使い方を追記した
-- **command/command-ghq.md**: ghqコマンドを追記した
-- **docs/source/command/command-gem.md**: gemを追加した
-- **code-block**: コードブロックのwarningを修正した
+- **gas/gas-gsheet-usage.md**: カスタムメニューを追加する方法を追記した
+- **gas/gas-gsheet-usage.md**: シートの操作方法を追記した
+- **gas/gas-gsheet-usage.md**: タイトルを変更し、サンプルコードを追加した
+- **gas/gas-gsheet-usage.md**: データを取得する方法を追記した
+- **gas/gas-mailapp-sendemail.md**: 削除した
+- **gas/gas-spreadsheet.md**: タイトルを微修正した
+- **gas/gas-usage.md**: 概要を整理した
+- **gas/gas-variables.md**: 変数について整理しなおした
+- **gas/gas-variables.md**: 関数を作成するときの注意点を追記した
+- **git/git-push.md**: 既存のリポジトリをプッシュする方法を追記した
+- **sphinx/sphinx-build.md**: Makefileの今後について追記した
+- **sphinx/sphinx-conf.md**: numfigを追記した
+- **sphinx/sphinx-extensions-googleanalytics.md**: 間違っていた説明を修正した
+- **sphinx/sphinx-extensions-myst.md**: MyST Parserを追記した
 - **sphinx/sphinx-extensions-opengraph.md**: OGPの設定を追記した
 - **sphinx/sphinx-extensions-opengraph.md**: インストール方法を追記した
-- **sphinx/sphinx-build.md**: Makefileの今後について追記した
 - **sphinx/sphinx-extensions.md**: sphinx_copybuttonのURLを修正した
-- **sphinx/sphinx-extensions-myst.md**: MyST Parserを追記した
-- **sphinx/sphinx-usage.md**: ディレクティブとロールの説明を追記した
 - **sphinx/sphinx-extensions.md**: sphinx-copybuttonを追加した
-- **sphinx/sphinx-conf.md**: numfigを追記した
-- **sphinx/sphinx-latex-lualatex.md**: latex_show_pagerefsを追記した
-- **command/command-uname.md**: consoleに修正した
-- **command/command-brew.md**: 微修正した
-- **sphinx/sphinx-latex-lualatex.md**: このドキュメントの設定を参考にした
-- **sphinx/sphinx-latex-documents.md**: タイトルを変更した
 - **sphinx/sphinx-latex-docclass.md**: 微修正した
-- **git/git-push.md**: 既存のリポジトリをプッシュする方法を追記した
+- **sphinx/sphinx-latex-documents.md**: タイトルを変更した
+- **sphinx/sphinx-latex-lualatex.md**: latex_show_pagerefsを追記した
+- **sphinx/sphinx-latex-lualatex.md**: このドキュメントの設定を参考にした
+- **sphinx/sphinx-usage.md**: ディレクティブとロールの説明を追記した
 
 ## v1.10.0 (2023-04-08)
 
 ### Feat
 
-- **sphinx/sphinx-build-gettext.md**: 多言語化する方法を追加した
-- **sphinx/sphinx-usage.md**: sphinx-builder -> sphinx-build にリネームした
-- **sphinx/sphinx-html-theme.md**: HTMLのテーマを設定する方法を追加した
+- **command/command-gzip.md**: gzipコマンドを追加した
+- **command/command-sd.md**: sdコマンドを追加した
+- **command/command-tar.md**: tarコマンドを追加した
 - **python/python-commitizen.md**: commitizenを追加した
-- **sphinx/sphinx-html-sidebars.md**: サイドバーする方法を追加した
+- **sphinx/sphinx-build-gettext.md**: 多言語化する方法を追加した
+- **sphinx/sphinx-html-book.md**: Sphinx Book Themeを追加した
 - **sphinx/sphinx-html-htaccess.md**: .htaccessする方法を追加した
 - **sphinx/sphinx-html-logo.md**: ロゴの設定を追加した
+- **sphinx/sphinx-html-sidebars.md**: サイドバーする方法を追加した
+- **sphinx/sphinx-html-theme.md**: HTMLのテーマを設定する方法を追加した
 - **sphinx/sphinx-html-title.md**: HTMLのタイトル設定を追加した
-- **sphinx/sphinx-html-book.md**: Sphinx Book Themeを追加した
-- **command/command-gzip.md**: gzipコマンドを追加した
-- **command/command-tar.md**: tarコマンドを追加した
-- **vscode/vscode-settings.md**: VSCodeの設定ファイルを追記した
-- **command/command-sd.md**: sdコマンドを追加した
+- **sphinx/sphinx-usage.md**: sphinx-builder -> sphinx-build にリネームした
 - **vscode/vscode-iceberg.md**: Icebergテーマを追加した
+- **vscode/vscode-settings.md**: VSCodeの設定ファイルを追記した
 
 ### Fix
 
-- **sphinx/sphinx-syntax-code-block.md**: シンタックスハイライトを追記した
-- **command/command-brew.md**: コードブロックをconsoleにした
-- **sphinx/sphinx-builder-linkcheck.md**: リンクチェックの説明を追記した
-- **sphinx/sphinx-html-theme.md**: 自作テンプレートを説明しはじめてみた
-- **sphinx/sphinx-html-theme.md**: テーマを自作する方法を追記した
-- **sphinx/sphinx-builder.md**: 説明を修正した
-- **sphinx/sphinx-builder.md**: sphinx-buildを修正した
-- **vscode/vscode-keybind.md**: タイポを修正した
-- **python/python-poetry.md**: system-site-packagesを追加した
-- **sphinx/sphinx-syntax-code-block.md**: サンプルは```に修正した
-- **sphinx/sphinx-conf.md**: 日付の表示形式を追記した
-- **sphinx/sphinx-html-rtd.md**: RTDをプロジェクトに追加する方法を追記した
-- **sphinx/sphinx-builder-html.md**: DirectoryIndexのことを追記した
-- **python/python-poetry.md**: 仮想環境がすでにある場合の対処法を追記した
-- **python/python-poetry.md**: virtualenvs.in-projectを有効にすることをオススメ
-- **python/python-poetry.md**: poetry initの説明を追記した
-- **git/git-gitlab.md**: GitLab CIのキーワード・リファレンスを追加した
-- **docker/docker-httpd.md**: httpd.confについて追記した
 - **command/command-brew.md**: homeコマンドを追記した
-- **command/command-uname.md**: unameを整理した
-- **command/command-usage.md**: コマンドのリード文を追記した
-- **command/command-sed.md**: sedの説明を整理した
+- **command/command-brew.md**: コードブロックをconsoleにした
 - **command/command-ls.md**: lsのRust代替コマンドを整理した
 - **command/command-sd.md**: 圧縮されたファイルを入力にした例を追記した
+- **command/command-sed.md**: sedの説明を整理した
+- **command/command-uname.md**: unameを整理した
+- **command/command-usage.md**: コマンドのリード文を追記した
+- **docker/docker-httpd.md**: httpd.confについて追記した
+- **git/git-gitlab.md**: GitLab CIのキーワード・リファレンスを追加した
+- **python/python-poetry.md**: poetry initの説明を追記した
+- **python/python-poetry.md**: system-site-packagesを追加した
+- **python/python-poetry.md**: virtualenvs.in-projectを有効にすることをオススメ
+- **python/python-poetry.md**: 仮想環境がすでにある場合の対処法を追記した
+- **sphinx/sphinx-builder-html.md**: DirectoryIndexのことを追記した
+- **sphinx/sphinx-builder-linkcheck.md**: リンクチェックの説明を追記した
+- **sphinx/sphinx-builder.md**: sphinx-buildを修正した
+- **sphinx/sphinx-builder.md**: 説明を修正した
+- **sphinx/sphinx-conf.md**: 日付の表示形式を追記した
+- **sphinx/sphinx-html-rtd.md**: RTDをプロジェクトに追加する方法を追記した
+- **sphinx/sphinx-html-theme.md**: テーマを自作する方法を追記した
+- **sphinx/sphinx-html-theme.md**: 自作テンプレートを説明しはじめてみた
+- **sphinx/sphinx-syntax-code-block.md**: サンプルは```に修正した
+- **sphinx/sphinx-syntax-code-block.md**: シンタックスハイライトを追記した
 - **vscode/vscode-extensions.md**: 追加した拡張パッケージの説明を追加した
-- **vscode/vscode-sidebar.md**: キーバインドを整理した
 - **vscode/vscode-iceberg.md**: Icebergの設定は拡張パッケージの項目に移動した
+- **vscode/vscode-keybind.md**: タイポを修正した
+- **vscode/vscode-sidebar.md**: キーバインドを整理した 
 
 ## v1.9.0 (2023-04-02)
 
