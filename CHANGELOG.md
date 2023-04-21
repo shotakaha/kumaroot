@@ -100,7 +100,7 @@
 - **vscode/vscode-extensions.md**: 追加した拡張パッケージの説明を追加した
 - **vscode/vscode-iceberg.md**: Icebergの設定は拡張パッケージの項目に移動した
 - **vscode/vscode-keybind.md**: タイポを修正した
-- **vscode/vscode-sidebar.md**: キーバインドを整理した 
+- **vscode/vscode-sidebar.md**: キーバインドを整理した
 
 ## v1.9.0 (2023-04-02)
 
