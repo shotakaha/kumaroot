@@ -1,4 +1,4 @@
-# スプレッドシートしたい
+# スプレッドシートしたい（``SpreadsheetApp``）
 
 ```js
 const spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
