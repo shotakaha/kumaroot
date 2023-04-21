@@ -1,4 +1,4 @@
-# メールしたい
+# メールしたい（``MailApp``）
 
 ```js
 MailApp.sendEmail("メッセージオブジェクト");
