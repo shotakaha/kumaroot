@@ -1,10 +1,9 @@
-# 日付を取得したい
+# 日付したい
 
 ```js
-const now = Utilities.formatDate(new Date(), "Asia/Tokyo", "yyyy/MM/dd");
+const date = Utilities.formatDate(日付, "タイムゾーン", "表示形式");
+const now = Utilities.formatDate(new Date(), "Asia/Tokyo", "yyyy-MM-dd HH:mm:DD");
+Logger.info(now);
 ```
 
-## リファレンス
-
-- [formatDate(date, timeZone, format)](https://developers.google.com/apps-script/reference/utilities/utilities#formatdatedate,-timezone,-format)
-- [Date - MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date)
+日付を取得する場合は[UtilitiesクラスのformatDate](https://developers.google.com/apps-script/reference/utilities/utilities#formatdatedate,-timezone,-format)を使います
