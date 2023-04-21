@@ -15,6 +15,7 @@ gas-class.md
 gas-date.md
 gas-spreadsheet.md
 gas-document.md
+gas-gform.md
 gas-gmail.md
 gas-groups.md
 ```
