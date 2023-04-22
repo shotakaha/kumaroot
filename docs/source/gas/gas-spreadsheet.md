@@ -8,19 +8,34 @@ console.log(data);
 ```
 
 GASでGoogleスプレッドシートを扱うには[SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスを使います。
-GASが紐づけてあるスプレッドシートの場合、``getActive``でアクセスできるようになります。
-スプレッドシートが複数のシートを持つ場合は、さらに``getActiveSheet``することで選択中のシートにアクセスできるようになります。
+さらに[スプレッドシート（Spredsheetクラス）](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet) > [シート（Sheetクラス）](https://developers.google.com/apps-script/reference/spreadsheet/sheet) > [セル（Rangeクラス）][https://developers.google.com/apps-script/reference/spreadsheet/range]というオブジェクトの階層構造をイメージしておくと、必要なAPIをドキュメントから探しやすくなると思います。
 
 上記のコードサンプルでは、取得したシートにある値を``getDataRange``ですべて選択し、``getValues``することで2次元配列のデータにしています。
 最後に中身を確認するために``console.log``しています。
 ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
+## スプレッドシートを開きたい（``openById``）
+
+```js
+const spreadsheet = SpreadsheetApp.getActive();
+const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+const spreadsheet = SpreadsheetApp.openById("スプレッドシートのID");
+const spreadsheet = SpreadsheetApp.openByUrl("スプレッドシートのURL");
+```
+
+スプレッドシートにバインドしたスクリプトの場合、``getActive...``でスプレッドシートを開くことができます。
+他の場所にあるスプレッドシートを開きたい場合は、``openBy...`を使います。
+
 ## シートを開きたい（``openById`` / ``getSheetByName``）
 
 ```js
-const spreadsheet = SpreadsheetApp.openById("シートID");
-const sheet = spreadsheet.getSheetByName("シート名");
+const sheet = SpreadsheetApp.getActiveSheet();
+const sheet = SpreadsheetApp.openById("スプレッドシートID").getSheetsByName("シート名");
+const sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+
 ```
+
+シートはスプレッドシートの中にあるので、``Spreadsheetクラス``のオブジェクトを通してアクセスします。
 
 スプレッドシートIDとシート名を使って、あるスプレッドシートを開くことができます。
 
