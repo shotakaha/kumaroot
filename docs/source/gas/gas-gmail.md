@@ -15,7 +15,7 @@ GASからメールするには[MailApp](https://developers.google.com/apps-scrip
 ## ドキュメントから本文を読み込んでメールしたい
 
 ```js
-function sendMail(mailTo, docId) {
+function send_mail(mailTo, docId) {
     // mailTo = 宛先アドレス
     // docId = GoogleドキュメントのID
 
@@ -40,7 +40,7 @@ Googleドキュメントと連携してメールを送信できます。
 ## スプレッドシートからデータを読み込んでメールしたい
 
 ```js
-function sendMail(mailTo, sheetId, sheetName) {
+function send_mail(mailTo, sheetId, sheetName) {
     // mailTo = 宛先のアドレス
     // sheetId = GoogleプレッドシートのID
     // sheetName = シートの名前
