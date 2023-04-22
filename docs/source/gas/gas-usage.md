@@ -18,6 +18,7 @@ gas-document.md
 gas-gform.md
 gas-gmail.md
 gas-groups.md
+gas-request.md
 ```
 
 ## リファレンス
