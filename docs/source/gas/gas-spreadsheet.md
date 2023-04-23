@@ -40,19 +40,30 @@ const sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
 スプレッドシートIDとシート名を使って、あるスプレッドシートを開くことができます。
 ``getSheets``（複数形）で複数のシートを配列として取ってくることもできます。
 
-### シートを操作したい
+## シート名を変更したい（``setName``）
 
 ```js
-// シート名を変更したい
 sheet.setName("変更後のシート名");
 ```
 
+同じ名前のシートは作れません。
+
+## シートを削除したい（``deleteSheet``）
+
 ```js
-// シートを削除したい
 spreadsheet.deleteSheet(spreadsheet.getSheetByName("シート名"););
 ```
 
 シートを削除する場合は、``Spreadsheet``オブジェクトに対して操作します。
+
+## シートを保護したい（``protect``）
+
+```js
+const protection = sheet.protect().setDescription("説明");
+const protection = cells.protect().setDescription("説明");
+```
+
+シートや選択したセルを保護できます。
 
 ## セルを選択したい（``getRange``）
 
