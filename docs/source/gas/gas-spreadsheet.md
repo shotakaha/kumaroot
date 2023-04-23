@@ -81,6 +81,25 @@ const data = sheet.getDataRange().slice(1);
 ``getDataRange``でデータが存在する範囲をすべて選択できます。
 データに見出しを含みたくない場合は``slice(1)``するとよいかもしれません。
 
+## データを追加したい（``setValues``）
+
+```js
+// データは二次元配列で作成する
+const data = [
+    ["A1", "B1", "C1"],
+    ["A2", "B2", "C2"],
+    ["A3", "B3", "C3"],
+    ["A4", "B4", "C4"],
+    ];
+
+// 配列のサイズを求める
+const nrows = data.length
+const ncols = data[0].length
+
+// 範囲を指定してデータをセットする
+const range = sheet.getRange(1, 1, nrows, ncols).setValues(data);
+```
+
 ### セル書式を変更したい
 
 ```js
