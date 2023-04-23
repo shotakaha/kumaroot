@@ -8,7 +8,8 @@ console.log(data);
 ```
 
 GASでGoogleスプレッドシートを扱うには[SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスを使います。
-さらに[スプレッドシート（Spredsheetクラス）](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet) > [シート（Sheetクラス）](https://developers.google.com/apps-script/reference/spreadsheet/sheet) > [セル（Rangeクラス）][https://developers.google.com/apps-script/reference/spreadsheet/range]というオブジェクトの階層構造をイメージしておくと、必要なAPIをドキュメントから探しやすくなると思います。
+スプレッドシートには``スプレッドシート`` > ``シート`` > ``セル``という構造がありますが、それぞれ
+[Spredsheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)、[Sheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/sheet)、[Rangeクラス][https://developers.google.com/apps-script/reference/spreadsheet/range]のオブジェクトが対応します。
 
 上記のコードサンプルでは、取得したシートにある値を``getDataRange``ですべて選択し、``getValues``することで2次元配列のデータにしています。
 最後に中身を確認するために``console.log``しています。
