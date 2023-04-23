@@ -27,7 +27,7 @@ const spreadsheet = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 スプレッドシートにバインドしたスクリプトの場合、``getActive...``でスプレッドシートを開くことができます。
 他の場所にあるスプレッドシートを開きたい場合は、``openBy...`を使います。
 
-## シートを開きたい（``openById`` / ``getSheetByName``）
+## シートを開きたい（``getSheetByName``）
 
 ```js
 const sheet = SpreadsheetApp.getActiveSheet();
@@ -36,47 +36,44 @@ const sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
 
 ```
 
-シートはスプレッドシートの中にあるので、``Spreadsheetクラス``のオブジェクトを通してアクセスします。
-
+シートはスプレッドシートの中にあるので、``Spreadsheetクラス``のオブジェクトを通してアクセスできます。
 スプレッドシートIDとシート名を使って、あるスプレッドシートを開くことができます。
+``getSheets``（複数形）で複数のシートを配列として取ってくることもできます。
 
-## シート名を変更したい（``setName``）
+### シートを操作したい
 
 ```js
-sheet.getSheetByName("シート名").setName("変更後のシート名");
+// シート名を変更したい
+sheet.setName("変更後のシート名");
 ```
 
-## シートを削除したい（``deleteSheet``）
-
 ```js
-sheet.deleteSheet(sheet.getSheetByName("シート名"));
+// シートを削除したい
+spreadsheet.deleteSheet(spreadsheet.getSheetByName("シート名"););
 ```
 
-## データを選択したい（``getRange`` / ``getDataRange``）
+シートを削除する場合は、``Spreadsheet``オブジェクトに対して操作します。
+
+## セルを選択したい（``getRange``）
 
 ```js
-const data = sheet.getRange(1, 1, 行数, 列数).getValues();
-const data = sheet.getRange(1, 1, ss.getLastRow(), ss.getLastColumn()).getValues();
-const data = sheet.getDataRange().getValues().slice(1);
+const cell = sheet.getRange("セル名");
+const cell = sheet.getRange("行番号", "列番号");
+const cells = sheet.getRange("セル名:セル名");
+const cells = sheet.getRange("行番号", "列番号", "行数");
+const cells = sheet.getRange("行番号", "列番号", "行数", "列数");
+const data = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumns());
+const data = sheet.getDataRange().slice(1);
 ```
 
-``getRange``で範囲を指定してデータを配列として取得できます。
-シートのすべてのデータを取得したいときは、``getLastRow``と``getLastColumn``でデータ全体の行数と列数を指定するか、``getDataRange``で全範囲を指定します。
-データに見出しを含みたくない場合は``slice(1)``するとよいです。
+セル名や番地（行番号と列番号）を使ってセルを選択できます。
+``getDataRange``でデータが存在する範囲をすべて選択できます。
+データに見出しを含みたくない場合は``slice(1)``するとよいかもしれません。
 
-## 組み込み関数したい（``setFormula``）
-
-```js
-var cell = sheet.getRange("セル名");
-cell.setFormula("=SUM(セル名:セル名)");
-```
-
-``setFormula``を使って、スプレッドシートの組み込み関数を利用できます。
-
-## セルの書式を変更したい
+### セル書式を変更したい
 
 ```js
-var cells = sheet.getRange(範囲); // 開始行, 開始列, 行数, 列数
+const cells = sheet.getRange(範囲); // 開始行, 開始列, 行数, 列数
 cells.setFontSize(整数);
 cells.setFontFamily("フォント名");
 cells.setFontWeight("ウェイト名"); // "normal", "bold"
@@ -85,6 +82,17 @@ cells.setFontLine("ライン名");    // "none", "underline", "line-through"
 cells.setFontColors("色");
 cells.setBackgrounds("色");
 ```
+
+選択したセルに対して、フォントやスタイル、文字色などを設定できます。
+
+## 組み込み関数したい（``setFormula``）
+
+```js
+const cell = sheet.getRange("セル名");
+cell.setFormula("=SUM(セル名:セル名)");
+```
+
+``setFormula``を使って、スプレッドシートの組み込み関数を利用できます。
 
 ## グラフしたい
 
