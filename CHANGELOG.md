@@ -4,26 +4,18 @@
 
 ### Feat
 
+- **gas/gas-gform.md**: FormAppの使い方を追加した
+- **gas/gas-request.md**: UrlFetchAppHTTPリクエストする方法を追加した
 - **myst/myst-usage.md**: MySTの使い方を追加した
-- **gas/gas-request.md**: HTTPリクエストする方法を追加した
-- **gas/gas-gform.md**: FormAppを追加した
 
 ### Fix
 
-- **gas/gas-spreadsheet.md**: setValuesを追記した
-- **gas/gas-spreadsheet.md**: シートの保護を追記した
-- **gas/gas-spreadsheet.md**: 内容を整理した
-- **gas/gas-spreadsheet.md**: スプレッドシートのクラスを追記した
+- **command/command-ssh-keygen.md**: ssh-addを追記した
+- **gas/gas-gform.md**: FormAppの使い方を整理した
 - **gas/gas-groups.md**: グループのメンバー一覧を追記した
 - **gas/gas-request.md**: Slackに通知するサンプルを追記した
-- **gas/gas-spreadsheet.md**: スプレッドシートの構造を追記した
-- **command/command-ssh-keygen.md**: ssh-addを追記した
-- **command/command-pbcopy.md**: 微修正した
-- **gas/gas-variables.md**: map関数を追記した
-- **gas/gas-gform.md**: ItemResponseを追記した
-- **gas/gas-gform.md**: FormAppを追記した
-- **gas/gas-variables.md**: 関数をsnake_caseで書くことにした
-- **gas/gas-spreadsheet.md**: 微修正した
+- **gas/gas-spreadsheet.md**: SpreadsheetAppの使い方を整理した
+- **gas/gas-variables.md**: 関数はsnake_caseで書くことにした
 
 ## v1.11.0 (2023-04-21)
 
