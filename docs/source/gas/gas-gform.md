@@ -37,13 +37,13 @@ function onFormSubmit(e) {
 フォームに入力があった場合のデータは``onFormSubmit関数``で取得＆操作できます。
 ``e.response``は[FormResponseクラス](https://developers.google.com/apps-script/reference/forms/form-response)で、この変数からから情報を取得できます。
 
-タイムスタンプは``getTimeStamp``で取得できます。
-そのままだと日付の表示形式が米国風なので、[Utilities.formatDate](https://developers.google.com/apps-script/reference/utilities/utilities#formatDate(Date,String,String))を使ってISO8601形式に変換するとよいです。
+入力時のタイムスタンプは``getTimeStamp``で取得できます。
+そのままだと日付の表示形式が米国風なので、[Utilities.formatDate](https://developers.google.com/apps-script/reference/utilities/utilities#formatDate(Date,String,String))を使ってISO8601形式に変換しています。
 ``MM``が月で、``mm``が分です（Pythonと逆なので紛らわしいです）
 
-ウェブを検索すると``e.values``で回答内容を取得できるという記事を見かけるのですが、もう廃止されているのか``Undefined``となってしまいました。
-その代わりに``getItemResponses``して、[ItemResponseクラス](https://developers.google.com/apps-script/reference/forms/item-response)の配列として取得しています。
-さらに、この配列から個別の質問項目の回答を``getResponse``して文字列を取得しています。
+回答内容は[getItemResponses](https://developers.google.com/apps-script/reference/forms/form-response#getItemResponses())で得られる[ItemResponseクラス](https://developers.google.com/apps-script/reference/forms/item-response)に入っています。
+ウェブを検索すると``e.values``で回答内容を取得できるという記事を見かけるのですが、``Undefined``が返ってきます。
+適切なドキュメントが見つけられないので、``itemResponses.map``して、回答内容を配列にしています。
 
 :::{seealso}
 
@@ -52,5 +52,26 @@ function onFormSubmit(e) {
 ```python
 responses = [itemResponse.getResponse() for itemResponse in itemResponses]
 ```
+
+:::
+
+## フォーム入力時にカスタムメールを送信したい
+
+```js
+function onFormSubmit(e) {
+    const message = response_to_text(e.response);
+    // test_send_to_group(message);
+    send_to_group(message);
+}
+```
+
+上述した``onFormSubmit関数``で取得した``e.response``を実際に活用する方法です。
+おそらく、フォームに入力があった場合には、メールやSlackなどで関係者に通知したいことが多いと思います。
+
+::: {seealso}
+
+Googleフォームの共同編集者にアサインしたアカウントであれば、標準機能を使って各人で通知設定の可否を設定できます。
+また、回答者に回答内容のコピーを自動で送信できます。
+今回のケースは「カスタム」したメッセージなどを送りたいケースを想定しています。
 
 :::
