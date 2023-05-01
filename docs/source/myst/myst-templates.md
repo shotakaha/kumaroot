@@ -83,3 +83,5 @@ link (string) - Link to the article online as a footnote on the first page
 
 ``--pdf``オプションを使って、PDFのテンプレート名を確認できます。
 テンプレート名を指定すると、設定可能なオプションや指定可能なブロック要素名を確認できます。
+[公式ドキュメントのScientific PDFs](https://myst-tools.org/docs/mystjs/creating-pdf-documents)を読むと400以上のテンプレートがあるみたいです。
+自作のテンプレートも指定できます。（その方法はまだ調べ中）
