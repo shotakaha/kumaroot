@@ -12,6 +12,7 @@ MySTは、そんなMarkdownにreSTのる``directive``（ディレクティブ）
 maxdepth: 1
 ---
 myst-install
+myst-quickstart
 ```
 
 ## リファレンス
