@@ -5,6 +5,7 @@ $ git clone https://github.com/executablebooks/mystjs-quickstart.git
 $ cd mystjs-quickstart
 $ myst init
 $ myst start
+$
 ```
 
 [MyST公式のチュートリアル](https://myst-tools.org/docs/mystjs/quickstart)に沿って、クイックスタートしてみます。
@@ -24,10 +25,11 @@ GitHubにチュートリアル用のディレクトリがあるので、それ�
 ## ブロック要素したい
 
 概要などは``part``ブロックとしてマークアップすることで、出力した文書で適切に表示できます。
+ブロックにできる要素名はテンプレートの詳細で確認できます。
 
 ## 引用したい
 
-他の論文を引用する場合にはDOIで指定します。
+他の論文を引用する場合にはDOIを指定します。
 こうすると、論文情報が自動で挿入され、さらにページ末尾に文献リストが自動で生成されます。
 
 ## 画像を挿入したい
@@ -41,4 +43,4 @@ GitHubにチュートリアル用のディレクトリがあるので、それ�
 相互参照先の内容は、ブラウザ上でホバーコンテンツとして表示でされます。
 また、数式や画像、表などいろいろな要素に対して相互参照できます。
 
-詳しい様子は[PhD thesis written in MyST](https://phd.row1.ca/phd)のデモを眺めてみるのがよいそうです。
+詳しい様子は[PhD thesis written in MyST](https://phd.row1.ca/phd)のデモを眺めてみるのがよさそうです。

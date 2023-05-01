@@ -12,3 +12,9 @@ $ which myst
 
 ``npm``を使って``myst-cli``をインストールします。
 とりあえずシステム全体にインストールしてOKです。
+
+## アップデートしたい
+
+```console
+$ npm update -g myst-cli
+```
