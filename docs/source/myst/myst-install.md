@@ -2,6 +2,12 @@
 
 ```console
 $ npm install -g myst-cli
+
+$ myst --version
+v0.1.24
+
+$ which myst
+/opt/homebrew/bin/myst
 ```
 
 ``npm``を使って``myst-cli``をインストールします。
