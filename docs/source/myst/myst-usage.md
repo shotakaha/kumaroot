@@ -7,6 +7,13 @@ MySTは、そんなMarkdownにreSTのる``directive``（ディレクティブ）
 
 基本のファイルを``.md``形式で作成するだけで、LaTeXやPDF、Word形式に書き出すことだできます。
 
+```{toctree}
+---
+maxdepth: 1
+---
+myst-install
+```
+
 ## リファレンス
 
 - [MyST Tools](https://myst-tools.org/)
