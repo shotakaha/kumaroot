@@ -28,6 +28,7 @@ python-pendulum
 python-re
 python-black
 python-commitizen
+python-typer
 ```
 
 ```bash
