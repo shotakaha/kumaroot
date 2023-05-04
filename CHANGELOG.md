@@ -1,5 +1,25 @@
 # CHANGELOG.md
 
+## v1.13.0 (2023-05-05)
+
+### Added
+
+- **myst/myst-install.md**: myst-cliをインストールした
+- **myst/myst-quickstart.md**: MySTをとりあえず使ってみた
+- **myst/myst-templates.md**: テンプレートの確認方法を追加した
+- **plotly/plotly-usage.md**: Plotlyの使い方を追加した
+- **python/python-typer.md**: typerを追加した
+
+### Fixed
+
+- **altair/altair-install.md**: Altairのインストール時の説明を修正した
+- **gas/gas-gform.md**: フォーム入力時にメールする方法を追記した
+- **myst-templates.md**: テンプレートについて追記した
+- **myst/myst-install.md**: mystのバージョンを追記した
+- **myst/myst-quickstart.md**: 微修正した
+- **myst/myst-usage.md**: MySTの概要を整理した
+- **plotly/plotly-install.md**: Plotlyのインストール方法を修正した
+
 ## v1.12.0 (2023-04-24)
 
 ### Feat
