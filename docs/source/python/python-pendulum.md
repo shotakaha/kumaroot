@@ -1,8 +1,12 @@
-# pendulum
+# 日付したい（``pendulum``）
 
 ```bash
 $ pip3 install pendulum
 ```
+
+[Pendulum](https://pendulum.eustace.io/)はデフォルトでタイムゾーンを考慮する日付管理パッケージです。
+Python標準には``datetime``、``date``、``time``などのモジュールがありますが、どれを使ったらよいかいつも悩みます。
+Pendulumはそんな悩みから解放してくれるのでオススメです。
 
 ## 現在時刻を取得したい
 
@@ -38,7 +42,7 @@ pendulum.from_format("26/Sep/2022:06:05:11 +0900", "DD/MMM/YYYY:HH:mm:ss ZZ")
 
 ここで使ったサンプルはApacheのログに記録されている日付フォーマットです。
 ``parse``ではエラーがでるので``from_format``で形式を指定する必要があります。
-利用できる日付トークンは[Pendulumのドキュメント](https://pendulum.eustace.io/docs/#tokens)を参照してください。
+利用できる日付トークンは[Tokens](https://pendulum.eustace.io/docs/#tokens)を参照してください。
 
 ## 日付フォーマットをISO標準に変換したい
 
@@ -56,10 +60,15 @@ dt.to_iso8601_string()
 
 ``parse``または``from_format``で読み込んだ日付を、ISO標準形式で出力したい場合は多いです。
 ``to_isoformat()``も``to_iso8601_string``も出力結果は同じです。
-その他の出力可能な形式は[Pendulumのドキュメント](https://pendulum.eustace.io/docs/#common-formats)を参照してください。
+その他の出力可能な形式は[Common Formats](https://pendulum.eustace.io/docs/#common-formats)を参照してください。
 
-## リファレンス
+## ひと月後の日付が欲しい
 
-- [Pendulum](https://pendulum.eustace.io/)
-- [Pendulum - Tokens](https://pendulum.eustace.io/docs/#tokens)
-- [Pendulum - Common Formats](https://pendulum.eustace.io/docs/#common-formats)
+```python
+dt = pendulum.date(2018, 12, 1)
+dt.add(months=1)
+# => Date(2019, 1, 1)
+```
+
+日付の足し算や引き算もできます。
+その際、年の繰り越しもきちんと扱ってくれます。
