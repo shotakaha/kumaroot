@@ -1,23 +1,17 @@
-==================================================
-ヒストグラムを作成したい
-==================================================
+# ヒストグラムしたい
 
-- 年齢（ ``age`` ）の度数分布（ヒストグラム）を作成する場合を想定
+```python
+chart = alt.Chart(data)
+    .mark_bar()
+    .encode(
+        x=alt.X("age:Q", bin=True),
+        y="count()"
+    )
+```
 
-.. code-block:: python
+イベント参加者の年代（``age``）の度数分布（ヒストグラム）を作成する場合を想定しています。
+プロットの種類に棒グラフ（``mark_bar()``を選択し、X軸に年代、Y軸は``altair``にビルトインの``count()``を使って、エントリー数を代入しています。
 
-    alt.Chart(data)
-        .mark_bar()
-        .encode(
-            x=alt.X('age:Q', bin=True)
-            y='count()'
-       )
-
-- 種類 : ``mark_bar()``
-- X軸 : ``x=alt.X(...)`` or ``alt.X(...)``
-- Y軸 : ``y="count()"``
-
-参考ドキュメント
-==================================================
+## リファレンス
 
 - https://altair-viz.github.io/gallery/simple_histogram.html
