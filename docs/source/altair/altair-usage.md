@@ -1,16 +1,13 @@
 # Altairの使い方
 
-``Pandas`` で作成したデータフレームを描画する方法は、
-Matplotlib、Seaborn、Plotlyなど色々ある。Altairもそのひとつ。
+``Pandas`` で作成したデータフレームを描画する方法は、Matplotlib、Seaborn、Plotlyなどいろいろあります。
+Altairもそのひとつです。
 
 ```{toctree}
 altair-install
 altair-histogram
+altair-heatmap
 ```
-
-
-
-
 ## データの加工
 
 データを加工する方法は2通りある。
