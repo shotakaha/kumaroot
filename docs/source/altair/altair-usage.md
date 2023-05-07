@@ -1,15 +1,14 @@
 # Altairの使い方
 
-``Pandas`` で作成したデータフレームを描画する方法は、Matplotlib、Seaborn、Plotlyなどいろいろあります。
-Altairもそのひとつです。
+[Altair](https://altair-viz.github.io/)は``Pandas`` で作成したデータフレームを描画するパッケージのひとつです。
+[Vega](https://vega.github.io/vega/)と[Vega-Lite](https://vega.github.io/vega-lite/)という（たぶん）JavaScriptベースの描画パッケージを、Pythonでも使えるようにしたものです。
+
+データフレームを読み込んだ``alt.Chart``オブジェクトに対して、``.mark_*``でプロットの種類、``.encode``でデータ点、``.properties``でプロットのタイトルなどを設定するという感じで作業が抽象化されています。
+
+Altairにもデータを集計する機能がありますが、基本は``Pandas``で前処理は完了させておくのがよいと思います。
 
 ```{toctree}
 altair-install
 altair-histogram
 altair-heatmap
 ```
-## データの加工
-
-データを加工する方法は2通りある。
-1つは ``pandas`` で加工する方法、もう1つは ``altair`` で描画する際に加工する方法である。
-基本は前者の ``pandas`` を使うことをおすすめする。
