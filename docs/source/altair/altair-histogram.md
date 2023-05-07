@@ -4,7 +4,7 @@
 chart = alt.Chart(data)
     .mark_bar()
     .encode(
-        x=alt.X("age:Q").bin(),
+        x=alt.X("age:Q", bin=True),
         y="count()"
     )
 ```

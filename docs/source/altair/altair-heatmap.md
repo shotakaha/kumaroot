@@ -4,9 +4,9 @@
 chart = alt.Chart(data)
     .mark_rect()
     .encode(
-        alt.X("hour:O").axis(labelAngle=0, format="%e").title("時間"),
-        alt.Y("weekday:O").title("曜日"),
-        alt.Color("pageview:Q").title("ページビュー"),
+        alt.X("hour:O", title="時間")
+        alt.Y("weekday:O", title="曜日")
+        alt.Color("pageview:Q", title="ページビュー数")
     )
 ```
 
