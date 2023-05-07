@@ -4,12 +4,13 @@
 chart = alt.Chart(data)
     .mark_rect()
     .encode(
-        x="時間",
-        y="曜日",
-        color="ページビュー"
+        alt.X("hour:O").axis(labelAngle=0, format="%e").title("時間"),
+        alt.Y("weekday:O").title("曜日"),
+        alt.Color("pageview:Q").title("ページビュー"),
     )
 ```
 
-アクセスログのヒートマップを作成する場合を想定しています。
-あらかじめデータフレームを整理して``時間``、``曜日``、``ページビュー``を計算しておきます。
-アクセス日時が分かっていれば、時間アクセサーを使って時間（``.dt.hour``）と曜日（``.dt.weekday`` / ``.dt.day_name``）を取得できます。
+ヒートマップは[.mark_rect](https://altair-viz.github.io/user_guide/marks/rect.html)を使って作成します。
+
+上記のサンプルは、アクセスログの日時からアクセス数のヒートマップを作成する場合を想定しました。
+あらかじめ``pandas``でデータフレームを整理して``時間``、``曜日``、``ページビュー``は計算してあります。
