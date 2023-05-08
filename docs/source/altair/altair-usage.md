@@ -11,4 +11,5 @@ Altairにもデータを集計する機能がありますが、基本は``Pandas
 altair-install
 altair-histogram
 altair-heatmap
+altair-datetime
 ```
