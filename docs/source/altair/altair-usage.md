@@ -12,4 +12,5 @@ altair-install
 altair-histogram
 altair-heatmap
 altair-datetime
+altair-encoding
 ```
