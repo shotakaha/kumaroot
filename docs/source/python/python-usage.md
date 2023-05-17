@@ -30,6 +30,7 @@ python-requests
 python-string
 python-typer
 python-typing
+python-subprocess
 ```
 
 ```bash
