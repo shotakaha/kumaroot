@@ -4,13 +4,13 @@
 一度は読むことをオススメします。
 書いてあることが分からない場合はヘルプを見て確認するとよいです。
 
-```bash
+```console
 $ git config -h
 ```
 
 ## 設定済みの内容を確認したい
 
-```bash
+```console
 $ git config -l
 ```
 
@@ -18,16 +18,35 @@ $ git config -l
 
 ユーザー名やメールアドレス、使用するエディターなどは、あらかじめ設定しておきましょう。
 
-```bash
+```console
 $ git config --global user.name "Shota Takahashi"
 $ git config --global user.email "shotakaha@gmail.com"
 $ git config --global pull.rebase false
-$ git config --global core.editor emacslient
 ```
 
 ``--global`` オプションをつけた場合は {file}`$HOME/.gitconfig` に書き込まれます。
 このファイルに直接書き込んでもOKです。
 
+## エディターを設定したい
+
+```console
+$ git config --global core.editor emacslient
+$ git config --global core.editor "code --wait"
+```
+
+``git commit``したときに起動するエディターを変更できます。
+（使っているOSによるかもしれませんが）デフォルトでは``vim``が起動します。
+
+Emacsヘビーユーザーだったころは``emacsclinent``に変更していました。
+VS Codeユーザーのいまは``code --wait``に変更しています。
+
+:::{note}
+
+Emacsをターミナル内で起動する場合は``emacs -nw``でもできます。
+しかし、（真の）Emacsユーザーは、基本的にEmacsを起動したままにしているはずです。
+その場合は``emacsclient``を使うのが最適解です。
+
+:::
 
 ## エイリアスを設定したい
 
