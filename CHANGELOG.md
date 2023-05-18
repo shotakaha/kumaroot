@@ -4,28 +4,28 @@
 
 ### Feat
 
-- **python/python-subprocess.md**: subprocessを追加した
 - **altair/altair-datetime.md**: 横軸が日時のグラフを追加した
 - **altair/altair-heatmap.md**: ヒートマップする方法を追加した
+- **python/python-subprocess.md**: subprocessを追加した
 - **python/python-typing.md**: typingを追加した
 
 ### Fix
 
-- **python/python-commitizen.md**: commitizenに追記した
-- **git/git-usage.md**: Gitの使い方を整理した
-- **git/git-config.md**: core.editorを追記した
-- **altair/altair-encoding.md**: データの種類について追加した
-- **command/command-bash.md**: 使い方を追記した
-- **command/command-bash.md**: bashスクリプトのサンプルを追記した
 - **altair/altair-datetime.md**: 時系列データを追記した
-- **python/python-typer.md**: 中断する方法を追記した
-- **altair/altair-install.md**: altair_saverのイシューを追加した
-- **altair/altair-heatmap.md**: 未確認の内容を書いてしまったので修正した
-- **altair/altair-histogram.md**: ヒストグラムを追記した
+- **altair/altair-encoding.md**: データの種類について追加した
 - **altair/altair-heatmap.md**: ヒートマップを追記した
-- **altair/altair-install.md**: インストール手順を追記した
+- **altair/altair-heatmap.md**: 未確認の内容を書いてしまったので修正した
 - **altair/altair-histogram.md**: ヒストグラムを作成する方法を整理した
+- **altair/altair-histogram.md**: ヒストグラムを追記した
+- **altair/altair-install.md**: altair_saverのイシューを追加した
+- **altair/altair-install.md**: インストール手順を追記した
+- **command/command-bash.md**: bashスクリプトのサンプルを追記した
+- **command/command-bash.md**: 使い方を追記した
+- **git/git-config.md**: core.editorを追記した
+- **git/git-usage.md**: Gitの使い方を整理した
+- **python/python-commitizen.md**: commitizenに追記した
 - **python/python-pendulum.md**: pendulumの説明を追記した
+- **python/python-typer.md**: 中断する方法を追記した
 
 ## v1.13.0 (2023-05-05)
 
