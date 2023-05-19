@@ -1,6 +1,6 @@
 # ファイルを探したい（``find``）
 
-```bash
+```console
 $ find 検索パス 検索パターン
 ```
 
@@ -8,11 +8,17 @@ $ find 検索パス 検索パターン
 検索パス名の末尾の``/ (trailing-slash)``はつけなくて大丈夫です。
 ファイルの内容は検索できません。
 
+:::{seealso}
+
+[fd](./command-fd.md)というRust製の代替コマンドがあります。
+
+:::
+
 ## オプション
 
-```bash
+```console
 $ find -name パターン   # ファイル名で検索（大文字/小文字を区別する）
-$ find -iname パターン   # ファイル名で検索（大文字/小文字を区別しない）
+$ find -iname パターン  # ファイル名で検索（大文字/小文字を区別しない）
 $ find -regex 正規表現  # 完全な正規表現を使うことができる
 $ find -print           # 一致した完全パス名を書きだす
 $ find -size 数         # ファイル容量で検索
@@ -24,7 +30,7 @@ $ find -ls              # 検索結果を ls -l に書きだす
 
 ## ファイルの種類で探したい（``-type``）
 
-```bash
+```console
 # ファイルを探したい
 $ find 検索パス -type f
 
@@ -37,7 +43,7 @@ $ find 検索パス -type d -empty  # 空のディレクトリを探す
 
 ## 拡張子で探したい（``-name``）
 
-```bash
+```console
 # HTMLファイルを探したい
 $ find 検索パス -name "*.html"
 
@@ -50,7 +56,7 @@ $ find 検索パス ! -name "*.html"
 
 ## 修正した時刻で探したい（``-mtime``）
 
-```bash
+```console
 $ find 検索パス -mtime 5
 
 # 10分以上前 - 60分以内に変更したファイルを探したい
@@ -59,7 +65,7 @@ $ find 検索パス -mmin +10 -mmin -60
 
 ## サイズで探したい（``-size``）
 
-```bash
+```console
 # 100kB以上のファイルを探したい
 $ find 検索パス -size +100k
 
@@ -72,7 +78,7 @@ $ find 検索パス -size +10M -size -50M
 
 ## 深さを指定したい（``-depth``）
 
-```bash
+```console
 # 2階層目まで探したい
 $ find 検索パス -depth 2 -name "*.html"
 
@@ -82,13 +88,13 @@ $ find 検索パス -d 4 -name "*.html"
 
 ## グループ名で探したい（``-group``）
 
-```bash
+```console
 $ find 検索パス -group グループ名
 ```
 
 ## 所有者不明のファイルを探したい（``-nouser``）
 
-```bash
+```console
 # 所有者不明のHTMLファイルを探したい
 $ find 検索パス -type f -nouser -name "*.html"
 
@@ -98,13 +104,9 @@ $ find 検索パス -type f -nogroup -name "*.html"
 
 ## 空のディレクトリを削除したい（``-empty -delete``）
 
-```bash
+```console
 $ find 検索パス -type d -empty -delete
 ```
 
 ``-empty``オプションを使って、空のディレクトリが検索できます。
 ``-delete``オプションを追加して、一括削除できます。
-
-## 関連コマンド
-
-- [](./command-fd.md)

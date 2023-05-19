@@ -1,21 +1,22 @@
 # ファイルを探したい（``fd``）
 
-```bash
+```console
 $ fd 検索パターン 検索パス
 ```
 
 [find](./command-find.md)の代替コマンドです。
+{file}`.gitignore`に書かれているファイルは無視してくれます。
 ``find``と引数の位置が入れ替わっているのはちょっと罠です。
 
 ## インストール
 
-```bash
+```console
 $ brew install fd
 ```
 
 ## ファイルの種類で探したい（``-t`` / ``--type``）
 
-```bash
+```console
 # ファイルを探したい; find 検索パス -type f
 $ fd -t f 検索パス
 
@@ -31,8 +32,8 @@ $ fd --type d --type empty 検索パス
 
 ## 拡張子で探したい（``-e`` / ``--extension``）
 
-```bash
-# HTMLファイルを探したい;
+```console
+# HTMLファイルを探したい
 $ fd -e "*.html" 検索パス
 
 # ZIPファイルを探したい
@@ -48,7 +49,7 @@ $ fd -E "*.html" 検索パス
 
 ## サイズで探したい（``-S`` / ``--size``）
 
-```bash
+```console
 # 100kB以上のファイルを探したい
 $ fd -S +100k 検索パス
 
@@ -60,7 +61,3 @@ $ fd --size +10M --size -50M 検索パス
 ```
 
 ## 深さを指定したい（``--d`` / ``--max-depth``）
-
-## 関連コマンド
-
-- [](./command-find.md)
