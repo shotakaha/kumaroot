@@ -14,8 +14,11 @@ extensions = [
 googleanalytics_id = "G-xxxxxxxx"
 ```
 
-[sphinxcontrib-googleanalytics](https://github.com/sphinx-contrib/googleanalytics)を使うとGoogle Analyticsを挿入できるようになります。
-テーマによってはオプションでGAに対応しているものあるので、テーマのドキュメントを確認してみましょう。
+[sphinxcontrib-googleanalytics](https://github.com/sphinx-contrib/googleanalytics)を使うと、どのテーマにもGoogle Analyticsを追加できます。
+
+テーマによってはオプションでGAに対応しているものがあります。
+以下に``sphinx_rtd_theme``と``sphinx_book_theme``の設定方法を載せておきます。
+その他のテーマについては、そのテーマのドキュメントを確認してください。
 
 ## sphinx_rtd_themeでGAしたい
 
