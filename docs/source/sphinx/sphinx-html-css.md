@@ -9,35 +9,41 @@ html_css_files = [
 ]
 ```
 
-カスタマイズしたCSSファイルは``conf.py``の``html_static_path``で指定したディレクトリに配置します。
-そして、``conf.py``の``html_css_files``にファイル名を追記します。
-ファイルは複数指定できます。
+カスタム用のCSSファイルを``docs/_static/custom.css``に配置します。
+``conf.py``の``html_static_path``には``_static``を、``html_css_files``にCSSファイル名を記述します。
+
+:::{hint}
+
+CSSファイルは複数指定できます。
+用途別にファイルを分割してもよいと思います。
+
+```python
+html_css_files = [
+    "css/heading.css", # 見出し用
+    "css/font.css",    # フォント用
+]
+```
+
+:::
 
 ## メディアクエリしたい
 
 ```python
 html_css_files = [
-    "custom.css",
     # ("ファイル名", {"media": "メディアクエリの種類"}),
     ("print.css", {"media": "print"}),
 ]
 ```
 
-``tuple``形式でメディアクエリを指定することもできます。
+``tuple``形式で[メディアクエリー](https://developer.mozilla.org/ja/docs/Learn/CSS/CSS_layout/Media_queries)を指定できます。
 メディアクエリの種類は``all``（すべて）、``print``（印刷）、``screen``（画面）、``speech``（音声合成）から選択します。
 
 :::{seealso}
 
-出力したい``<link>``タグは次のようになります。
+出力される[linkタグ（外部ソースへのリンク要素）](https://developer.mozilla.org/ja/docs/Web/HTML/Element/link)は次のようになります。
 
 ```html
-<link href="custom.css" rel="stylesheet">
 <link href="print.css" rel="stylesheet" media="print">
 ```
 
 :::
-
-## リファレンス
-
-- [メディアクエリーの初心者向けガイド - mdn web docs](https://developer.mozilla.org/ja/docs/Learn/CSS/CSS_layout/Media_queries)
-- [<link>：外部ソースへのリンク要素 - mdn web docs](https://developer.mozilla.org/ja/docs/Web/HTML/Element/link)
