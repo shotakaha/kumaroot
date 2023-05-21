@@ -22,7 +22,7 @@ polars/polars-usage
 altair/altair-usage
 plotly/plotly-usage
 gas/gas-usage
-webdev/webdev-usage
+html/webdev-usage
 hugo/hugo-usage
 vscode/vscode-usage
 emacs/emacs-usage
