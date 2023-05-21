@@ -1,0 +1,18 @@
+/* h1 */
+h1 {
+    border-top: 6px double #333;
+    border-bottom: 6px double #333;
+    padding: 1rem 2rem;
+}
+
+/* h2 */
+h2 {
+    border-bottom: 3px solid #333;
+    padding: 1rem 2rem;
+}
+
+/* h3 */
+h3 {
+    border-bottom: 3px dashed #333;
+    padding: 1rem 2rem;
+}
