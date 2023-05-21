@@ -22,6 +22,11 @@ css-margin
 - [MDB - Material Design for Bootstrap v5 & v4](https://mdbootstrap.com/)
 - [TailwindCSS](https://tailwindcss.com/)
 
+## SSGしたい
+
+- [](../sphinx/sphinx-usage.md)
+- [](../hugo/hugo-usage.md)
+- [](../myst/myst-usage.md)
 
 ## サーバーしたい
 
