@@ -1,5 +1,24 @@
 # CHANGELOG.md
 
+## v1.15.0 (2023-05-22)
+
+### Feat
+
+- **html/css-margin.md**: margin / padding を追加した
+- **command/command-pwgen.md**: pwgenを追加した
+
+### Fix
+
+- **html/html-usage.md**: コンテンツを整理した
+- **html/html-usage.md**: ファイル名を変更した
+- **html**: webdev -> html に名前を変更した
+- **_static/css/heading.css**: 見出しのカスタムCSSを追加した
+- **sphinx/sphinx-html-css.md**: カスタムCSSを追記した
+- **sphinx/sphinx-autobuild.md**: autobuildを追記した
+- **sphinx/sphinx-extensions-googleanalytics.md**: GAを追記した
+- **command/command-fd.md**: fdを追記した
+- **command/command-chmod.md**: chmodを追記した
+
 ## v1.14.0 (2023-05-18)
 
 ### Feat
