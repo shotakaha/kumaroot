@@ -10,28 +10,49 @@
 maxdepth: 1
 ---
 preface/index
-root/root-usage
-geant4/geant4-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: プログラミングしたい
+---
 command/command-usage
 git/git-usage
-latex/latex-usage
-sphinx/sphinx-usage
+root/root-usage
+geant4/geant4-usage
 python/python-usage
 pandas/pandas-usage
 polars/polars-usage
 altair/altair-usage
 plotly/plotly-usage
+rust/rust-usage
 gas/gas-usage
 html/html-usage
+docker/docker-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 文書作成したい
+---
+latex/latex-usage
+sphinx/sphinx-usage
 hugo/hugo-usage
+myst/myst-usage
 vscode/vscode-usage
 emacs/emacs-usage
-rust/rust-usage
-docker/docker-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 未分類
+---
 streaming/streaming-usage
 gadget/gadget-usage
 dvr/dvr-usage
-myst/myst-usage
 ```
 
 ## 公開先
