@@ -37,14 +37,6 @@ Homebrew/homebrew-core (git revision ceb6f460128; last commit 2023-02-20)
 
 macOS上のツール（ソフトウェアやフォント）は[Homebrew](https://brew.sh/)で管理しています。
 
-
-
-
-
-```console
-git
-```
-
 ## シェル環境
 
 ```console
