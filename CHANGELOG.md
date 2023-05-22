@@ -4,12 +4,12 @@
 
 ### Fix
 
-- **source/index.md**: 簡単なカテゴリに分類した
-- **preface/env.md**: タイポ
-- **preface/env.md**: ドキュメントの作成環境を整理した
-- **myst/myst-usage.md**: MySTの概要を追記した
-- **html/html-usage.md**: SSGへの内部リンクを追記した
 - **html/html-usage.md**: HTML/CSSの概要を追記した
+- **html/html-usage.md**: SSGへの内部リンクを追記した
+- **myst/myst-usage.md**: MySTの概要を追記した
+
+- **preface/env.md**: ドキュメントの作成環境を整理した
+- **source/index.md**: 簡単なカテゴリに分類した
 
 ## v1.15.0 (2023-05-22)
 
