@@ -11,12 +11,24 @@ maxdepth: 1
 git-install
 git-help
 git-config
+git-init
+git-status
+git-add
+git-commit
+git-log
+git-branch
+git-checkout
+git-merge
+git-remote
+git-fetch
+git-pull
+git-push
+git-clone
 git-single
 git-flow
 git-semver
 git-gitlab
 ```
-
 
 ## 関連ドキュメント
 
