@@ -13,12 +13,14 @@
 ## HTMLしたい
 
 ```{toctree}
+html-doctype
 html-p
 ```
 
 ## CSSしたい
 
 ```{toctree}
+css-display
 css-margin
 ```
 
