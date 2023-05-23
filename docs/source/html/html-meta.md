@@ -41,18 +41,21 @@
 ```html
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
 <title>ページのタイトル</title>
-<meta property="og:title" content="ページのタイトル" />
 <meta property="og:type" content="ページの種類（website / article）" />
 <meta property="og:url" content="ページのパーマリンク（絶対URL）" />
+<meta property="og:title" content="ページのタイトル" />
+<meta property="og:description" content="ページのディスクリプション" />
 <meta property="og:image" content="ページのサムネイル画像（絶対URL）" />
 <meta property="og:site_name" content="サイト名" />
-<meta property="og:description" content="ページのディスクリプション" />
 ```
 
-OGP（The Open Graph Protocol）を適切に設定しておくと、SNSなどでページをシェアしたときに、いい感じに表示できます。
-上記のサンプルは必要最低限の要素を抜粋してみましたが、[OGPの公式ページ](https://ogp.me/)を読むと、もっと広く表現できるようです。
+OGP（The Open Graph Protocol）はウェブサイトや記事が、SNSなどシェアされたときに利用されるメタデータです。
+適切に設定しておくと、シェアされたときにいい感じに表示されます。
+OGPが適切に設定できたかどうかは[OGP確認ツール](https://ogp.buta3.net/)などの外部ツールで確認できます。
 
-CMSなどを使う場合、自分で書く必要はほとんどなく、まず使い勝手のよさそうなプラグインを探してみるとよいです。
+CMSではプラグインが用意されている場合もあり、自分で書く必要はないかもしれませんが、その構成要素は理解しておくとよいと思います。
+また、上記のサンプルは必要最低限の要素を抜粋したものです。
+[OGPの公式ページ](https://ogp.me/)を読むと、もっと広く表現できるようです。
 
 ### Twitter Cardしたい
 
@@ -64,6 +67,19 @@ CMSなどを使う場合、自分で書く必要はほとんどなく、まず�
 
 Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)という専用のOGPがあります。
 これも追加で設定しておくとよいでしょう。
+
+## OGP画像したい
+
+```html
+<meta propery="og:image:url" content="og:imageと同じ">
+<meta propery="og:image:secure_url" content="HTTPSが要求されたときの画像URL">
+<meta propery="og:image:type" content="画像のMIMEタイプ">
+<meta propery="og:image:width" content="画像の幅（px）">
+<meta propery="og:image:height" content="画像の高さ（px）">
+<meta propery="og:image:alt" content="画像の代替テキスト">
+```
+
+画像の設定項目はオプションがあります。
 
 ## リダイレクトしたい
 
