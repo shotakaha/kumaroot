@@ -1,4 +1,4 @@
-# ブランチの作成（``git branch``）
+# ブランチしたい（``git branch``）
 
 ```bash
 $ git branch ブランチ名
