@@ -64,3 +64,12 @@ CMSなどを使う場合、自分で書く必要はほとんどなく、まず�
 
 Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)という専用のOGPがあります。
 これも追加で設定しておくとよいでしょう。
+
+## リダイレクトしたい
+
+```html
+<meta http-equiv="refresh" content="秒数;url=リダイレクト先のURL">
+```
+
+リダイレクトの設定も``meta``タグに書きます。
+リダイレクトするのに、そのページを読み込むのはもったいないので、この設定もはじめのほうに書いておくとよいです。
