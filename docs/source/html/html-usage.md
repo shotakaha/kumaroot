@@ -14,6 +14,7 @@
 
 ```{toctree}
 html-doctype
+html-meta
 html-p
 ```
 
