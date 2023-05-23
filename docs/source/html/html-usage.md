@@ -29,6 +29,10 @@ css-margin
 css-padding
 ```
 
+## ウェブフォントしたい
+
+
+
 ## フレームワークしたい
 
 - [MDB - Material Design for Bootstrap v5 & v4](https://mdbootstrap.com/)
@@ -57,7 +61,6 @@ webdev-nginx
 maxdepth: 1
 ---
 webdev-rss
-webdev-ogp
 webdev-browser
 webdev-css-gutenberg
 ```
