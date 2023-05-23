@@ -57,17 +57,6 @@ CMSではプラグインが用意されている場合もあり、自分で書�
 また、上記のサンプルは必要最低限の要素を抜粋したものです。
 [OGPの公式ページ](https://ogp.me/)を読むと、もっと広く表現できるようです。
 
-### Twitter Cardしたい
-
-```html
-<meta name="twitter:card" content="カードの種類（summary / summary_large_image / app / player）" />
-<meta name="twitter:site" content="@サイトのユーザー名" />
-<meta name="twitter:creator" content="@ページ作成者のユーザー名" />
-```
-
-Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)という専用のOGPがあります。
-これも追加で設定しておくとよいでしょう。
-
 ## OGP画像したい
 
 ```html
@@ -80,6 +69,17 @@ Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-c
 ```
 
 画像の設定項目はオプションがあります。
+
+## Twitter Cardしたい
+
+```html
+<meta name="twitter:card" content="カードの種類（summary / summary_large_image / app / player）" />
+<meta name="twitter:site" content="@サイトのユーザー名" />
+<meta name="twitter:creator" content="@ページ作成者のユーザー名" />
+```
+
+Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)という専用のOGPがあります。
+これも追加で設定しておくとよいでしょう。
 
 ## リダイレクトしたい
 

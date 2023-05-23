@@ -1,4 +1,4 @@
-# HTMLしたい
+# HTMLしたい（``doctype``）
 
 ```html
 <!DOCTYPE html>

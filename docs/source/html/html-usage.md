@@ -13,6 +13,9 @@
 ## HTMLしたい
 
 ```{toctree}
+---
+maxdepth: 1
+---
 html-doctype
 html-meta
 html-p
