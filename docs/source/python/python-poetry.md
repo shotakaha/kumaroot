@@ -1,6 +1,13 @@
 # パッケージ管理したい（``poetry``）
 
 ```console
+$ poetry add パッケージ名
+$ poetry update パッケージ名
+$ poetry remove パッケージ名
+```
+
+
+```console
 $ poetry new プロジェクト名
 $ cd プロジェクト名
 $ poetry add パッケージ名
