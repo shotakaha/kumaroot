@@ -5,24 +5,12 @@
 maxdepth: 1
 ---
 python-install
-python-altair
-python-black
-python-bs4
-python-commitizen
-python-dataclass
-python-icecream
-python-loguru
-python-pandas
 python-pathlib
 python-pendulum
-python-plotly
-python-pyproject
 python-random
 python-re
 python-requests
 python-string
-python-typer
-python-typing
 python-subprocess
 ```
 
@@ -32,9 +20,43 @@ maxdepth: 1
 caption: パッケージ管理したい
 ---
 python-import
+python-pyproject
 python-pip
 python-pipx
 python-poetry
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: プロジェクトを作成＆管理したい
+---
+python-pyproject
+python-commitizen
+python-typer
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: データを整理したい
+---
+python-typing
+python-dataclass
+python-bs4
+python-pandas
+python-plotly
+python-altair
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: テスト＆デバッグしたい
+---
+python-black
+python-icecream
+python-loguru
 ```
 
 ```bash
