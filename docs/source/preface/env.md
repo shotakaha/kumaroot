@@ -92,24 +92,38 @@ License: Python-2.0
 ```
 
 ```console
-$ brew info poetry
-==> poetry: stable 1.4.2 (bottled), HEAD
-Python package management tool
-https://python-poetry.org/
-/opt/homebrew/Cellar/poetry/1.4.2 (2,910 files, 32.5MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-04-03 at 11:46:13
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/poetry.rb
+$ brew info pipx
+==> pipx: stable 1.2.0 (bottled), HEAD
+Execute binaries from Python packages in isolated environments
+https://pypa.github.io/pipx
+/opt/homebrew/Cellar/pipx/1.2.0 (936 files, 11.7MB) *
+  Poured from bottle using the formulae.brew.sh API on 2023-05-27 at 09:53:30
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/pipx.rb
 License: MIT
 ```
 
 ```console
+$ which python3
+/opt/homebrew/bin/python3
+
 $ python3 --version
 Python 3.11.3
 ```
 
 ```console
+$ which pipx
+/opt/homebrew/bin/pipx
+
+$ pipx --version
+1.2.0
+```
+
+```console
+$ which poetry
+~/.local/bin/poetry
+
 $ poetry --version
-Poetry (version 1.4.2)
+Poetry (version 1.5.0)
 ```
 
 ```console
