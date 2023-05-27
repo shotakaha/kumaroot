@@ -11,7 +11,7 @@ Pythonのパッケージ管理ツールはいろいろ存在していて、
 複雑な歴史的な経緯もあり（？）まったく統一されておらず、
 すべてを把握＆理解するのは不可能だと思います。
 僕は、たまたま使い始めてみたのですが、使い勝手いいなと感じていて、
-いまから使いはじめるなら``poetry``はオススメです。
+いまから使いはじめるなら[Poetry](https://python-poetry.org/)はオススメです。
 
 ## インストール
 
@@ -49,22 +49,20 @@ Homebrewを使ったインストールでも、とくに問題なく使えまし
 $ poetry completions fish > ~/.config/fish/completions/poetry.fish
 ```
 
-``poetry``コマンドを補完するための設定をシェルに設定します。
-``bash``、``zsh``、``fish``の補完に対応しています。
+``poetry``コマンドのシェル補完が使えるようにしておくと便利です。
+``bash``、``zsh``、``fish``のシェルに対応しています。
 
-:::{note}
+:::{hint}
 
-``fish``の補完はシェル内で最初に実行したときにエラーが表示されます。
+``fish``のシェル補完を使うと、シェルセッションで最初に実行したときにエラーが表示されます。
 v1.2.0から存在しているバグ（[poetry#5929](https://github.com/python-poetry/poetry/issues/5929)）ですが、v1.5.0になっても修正されていません。
-
-エラーの原因は、``complete``コマンドの引数の文字列の囲み方に問題があるようです。
-``sd``コマンドを使って置換して対処できます。
+そのままでも使うことはできますが、以下のように``sd``コマンドを使って置換して対処できます。
 
 ```console
-$ poetry completions | sd "'([^']+)''" '"$1"\'' > ~/.config/fish/completions/poetry.fish
+$ poetry completions fish | sd "'([^']+)''" '"$1"\'' > ~/.config/fish/completions/poetry.fish
 ```
 
-以下のように``__fish_seen_subcommand_from``が使われている部分の引数が変更されます。
+エラーの原因は、以下のように``__fish_seen_subcommand_from``が使われている部分の引数の文字列の囲み方に問題があるようです。
 
 ```diff
 - < complete -c poetry -A -n '__fish_seen_subcommand_from 'cache clear'' -l all -d 'Clear all entries in the cache.'
@@ -76,22 +74,22 @@ $ poetry completions | sd "'([^']+)''" '"$1"\'' > ~/.config/fish/completions/poe
 
 ## 新規プロジェクトしたい（``poetry new``）
 
-```bash
+```console
 $ poetry new プロジェクト名
 $ cd プロジェクト名
 ```
 
-新しくプロジェクトを作成する場合は、``poetry new``コマンドを使います。
+新規プロジェクトを作成する場合は、``poetry new``コマンドを使います。
 ``プロジェクト名``のディレクトリが作成され、その下に、``pyproject.toml``、``プロジェクト名``（＝プロジェクト本体のソースコード置き場）、``tests``などの必要なファイルが自動で生成されます。
 
 ## 既存プロジェクトを使いたい（``poetry init``）
 
-```bash
+```console
 $ cd プロジェクト名
 $ poetry init
 ```
 
-``poetry init``を実行して、対話的にプロジェクトを初期化できます。
+既存のプロジェクトは``poetry init``を使って、対話的にプロジェクトを初期化できます。
 プロンプトの表示にしたがってプロジェクト情報（プロジェクト名、説明、作成者、バージョン番号、ライセンスなど）を入力します。
 続けて、必要なパッケージに関するプロンプトが表示されるので、パッケージ名やバージョン番号を入力して、パッケージを選択します。
 これらの設定はすべて{file}`pyproject.toml`の``[tool.poetry]``セクションに保存されます。
@@ -99,7 +97,7 @@ $ poetry init
 
 ## パッケージを追加したい（``poetry add``）
 
-```bash
+```console
 $ poetry add パッケージ名
 $ poetry add パッケージ名 -E パッケージ名
 $ poetry add --group=dev パッケージ名
@@ -110,14 +108,29 @@ $ poetry add --group=docs パッケージ名
 ``-E / --extra``オプションを使って、追加パッケージも指定できます。
 パッケージは``[tool.poetry.dependencies]``のセクションに追記され、ロックファイル（``poetry.lock``）が生成されます。
 
-（たしか）``v1.3``からパッケージをグループ化する機能が追加されました。デフォルトは``--group=main``です。
-これに伴い``add -D``オプションが非推奨になりました。
-これからは代わりに``add --group=dev``する必要があります。
-また、ドキュメント生成に必要なパッケージは``--group=docs``、テストに必要なパッケージは``--group=test``のように複数のグループを作って管理することができるようになりました。
+### 開発環境を追加したい（``--group=dev``）
+
+```console
+$ poetry add --group=dev pytests
+$ poetry add --group=dev commitizen
+$ poetry add --group=dev jupyterlab
+```
+
+開発に必要なパッケージは``--group=dev``に追加します。
+（たしか）``v1.3.0``からグループ化する機能追加され、``add -D``オプションが非推奨になりました。
+
+### ドキュメント環境を追加したい（``--group=docs``）
+
+```console
+$ poetry add --group=docs sphinx_book_theme
+$ poetry add --group=docs myst_parser
+```
+
+ドキュメント作成に必要なパッケージは``--groupd=docs``に追加します。
 
 ## パッケージをインストールしたい（``poetry install``）
 
-```bash
+```console
 $ poetry install
 ```
 
@@ -129,7 +142,7 @@ $ poetry install
 
 ## パッケージを公開したい（``poetry publish``）
 
-```bash
+```console
 $ poetry build
 $ poetry publish -r testpypi  # TestPyPIに公開
 $ poetry publish              # PyPIに公開
@@ -139,9 +152,15 @@ $ poetry publish              # PyPIに公開
 はじめて公開する場合は必ず``TestPyPI``でテストするのがよいです。
 公開する前にリポジトリとAPIトークンの設定が必要です。
 
+:::{seealso}
+
+僕のZennスクラップ「[poetryを使ってpythonパッケージを作成する](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)」に、Poetryを使ってパッケージを新規作成してPyPIで公開するまでの手順を整理しました。
+
+:::
+
 ## 現在の設定を確認したい（``poetry config``）
 
-```bash
+```console
 $ poetry config --list
 cache-dir = "~/Library/Caches/pypoetry"
 experimental.new-installer = true
@@ -175,7 +194,7 @@ virtualenvs.prompt = "{project_name}-py{python_version}"
 
 ### 設定を変更したい
 
-```bash
+```console
 $ poetry config キー名 値
 $ poetry config キー名 値 --local
 ```
@@ -185,7 +204,7 @@ Poetry v1.2.0になって設定できる項目が増えました。
 
 ### 設定を削除したい
 
-```bash
+```console
 $ poetry config キー名 --unset
 $ poetry config キー名 --unset --local
 ```
@@ -194,7 +213,7 @@ $ poetry config キー名 --unset --local
 
 ## プロジェクト内に仮想環境を作成したい
 
-```bash
+```console
 # 現在の設定値を確認する
 $ poetry config virtualenvs.in-project
 null
@@ -208,14 +227,14 @@ true
 ```
 
 仮想環境は``virtualenvs.path``で設定されたパスに作成されます。
-デフォルトでは{file}``{cache-dir}/virtualenvs``に設定されています。
+デフォルトでは{file}``\{cache-dir\}/virtualenvs``に設定されています。
 
 [virtualenvs.in-project](https://python-poetry.org/docs/configuration/#virtualenvsin-project)を``true``にすると、その設定をカレントディレクトリの{file}``.venv``に変更できます。
 GitHub/GitLabなどを通じて複数のマシンで作業する場合は、この値を有効にしておくとよいです。
 
 :::{caution}
 
-すでに{file}`{cache-dir}/virtualenvs/`に仮想環境がある場合は、一度削除（``rm -r``）してから作成しなおしてください。
+すでに{file}`\{cache-dir\}/virtualenvs/`に仮想環境がある場合は、一度削除（``rm -r``）してから作成しなおしてください。
 
 :::
 
@@ -228,7 +247,7 @@ $ poetry config virtualenvs.option.system-site-packages true
 [virtualenvs.option.system-site-packages](https://python-poetry.org/docs/configuration/#virtualenvsoptionssystem-site-packages)を``true``にすると、システムのPythonの{file}``site-packages``にインストールが仮想環境から使えるようになります。
 開発環境で使うパッケージ（``pytest`` / ``black`` / ``commitizen`` / ``pysen``）などを使うには、これを有効にしておいてもいいかもしれません。
 
-:::{note}
+:::{hint}
 
 複数のPythonプロジェクトを持っていると、それぞれのプロジェクトの{file}`.venv`にパッケージがインストールされます。
 開発環境にだけ必要なパッケージを共通化することで、少しだけでもディスク節約になるかもしれません。
@@ -237,7 +256,7 @@ $ poetry config virtualenvs.option.system-site-packages true
 
 ## リポジトリとAPIトークンを設定したい
 
-```bash
+```console
 $ poetry config repositories.名前 URL
 $ poetry config pypi-token.名前 "APIトークン"
 ```
@@ -257,14 +276,3 @@ $ poetry config pypi-token.testpypi "TestPyPIのAPIトークン"
 ``PyPI``はデフォルトの公開先になっているため、リポジトリの設定は必要ありません。
 ``TestPyPI``に公開する場合は、リポジトリのURLを設定する必要があります。
 公開先のAPIトークンをそれぞれ事前に発行しておく必要があります。
-
-## リファレンス
-
-[Poetry](https://python-poetry.org/)
-: Poetry公式ドキュメントです。
-
-[Configuration - Poetry](https://python-poetry.org/docs/configuration/)
-: ``poetry config``するときに参照するページです。とくに[Available Settings](https://python-poetry.org/docs/configuration/#available-settings)のセクションはよく読んでいます。
-
-[poetryを使ってpythonパッケージを作成する - Zennのスクラップ](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)
-: 僕のZennスクラップです。Poetryを使ってパッケージを新規作成してPyPIで公開するまでの手順を整理しました。
