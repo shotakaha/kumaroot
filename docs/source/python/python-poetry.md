@@ -54,9 +54,23 @@ $ poetry completions fish > ~/.config/fish/completions/poetry.fish
 
 :::{note}
 
-``fish``の補完は、セッション内で最初に実行したときにエラーがでます。
-v1.2.0から存在しているバグで、``cleo``パッケージに依存しているようです（[poetry#5929](https://github.com/python-poetry/poetry/issues/5929)）。
-v1.5.0になっても治っていません。
+``fish``の補完はシェル内で最初に実行したときにエラーが表示されます。
+v1.2.0から存在しているバグ（[poetry#5929](https://github.com/python-poetry/poetry/issues/5929)）ですが、v1.5.0になっても修正されていません。
+
+エラーの原因は、``complete``コマンドの引数の文字列の囲み方に問題があるようです。
+``sd``コマンドを使って置換して対処できます。
+
+```console
+$ poetry completions | sd "'([^']+)''" '"$1"\'' > ~/.config/fish/completions/poetry.fish
+```
+
+以下のように``__fish_seen_subcommand_from``が使われている部分の引数が変更されます。
+
+```diff
+- < complete -c poetry -A -n '__fish_seen_subcommand_from 'cache clear'' -l all -d 'Clear all entries in the cache.'
+---
++ > complete -c poetry -A -n '__fish_seen_subcommand_from "cache clear"' -l all -d 'Clear all entries in the cache.'
+```
 
 :::
 
