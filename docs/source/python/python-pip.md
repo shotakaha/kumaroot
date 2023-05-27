@@ -1,10 +1,9 @@
-# パッケージを追加したい（``pip``）
+# パッケージ管理したい（``pip``）
 
 ```console
 $ pip3 install パッケージ名
 $ pip3 install -U パッケージ名
 $ pip3 uninstall パッケージ名
-
 ```
 
 パッケージを追加するには``pip3``コマンドを使います。

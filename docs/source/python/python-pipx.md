@@ -6,6 +6,9 @@ $ pipx upgrade パッケージ名
 $ pipx uninstall パッケージ名
 ```
 
+仮想環境でパッケージを管理すう場合は``pipx``コマンドを使います。
+``pipx``は``Homebrew``を使ってインストールします。
+
 ```console
 $ brew install pipx
 $ brew link pipx

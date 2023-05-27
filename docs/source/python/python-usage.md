@@ -1,14 +1,10 @@
 # Pythonの使い方
 
-[Homebrew](https://brew.sh)を使って``Python``をインストールします。
-そして、プロジェクトごとの環境構築には[poetry](https://python-poetry.org/)を使います。
-
 ```{toctree}
 ---
 maxdepth: 1
 ---
 python-install
-python-import
 python-altair
 python-black
 python-bs4
@@ -19,10 +15,7 @@ python-loguru
 python-pandas
 python-pathlib
 python-pendulum
-python-pip
-python-pipx
 python-plotly
-python-poetry
 python-pyproject
 python-random
 python-re
@@ -31,6 +24,17 @@ python-string
 python-typer
 python-typing
 python-subprocess
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: パッケージ管理したい
+---
+python-import
+python-pip
+python-pipx
+python-poetry
 ```
 
 ```bash
