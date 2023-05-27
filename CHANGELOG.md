@@ -4,25 +4,21 @@
 
 ### Feat
 
-- **preface/env.md**: poetryのインストール手順を変更した
+- **preface/env.md**: poetryのインストール環境を変更した
 
 ### Fix
 
-- **python/python-poetry.md**: poetryをpipxでインストールした
+- **git/git-branch.md**: ブランチ操作を追記した
+- **git/git-usage.md**: Gitの使い方を整理した
+- **html/css-display.md**: displayプロパティを追記した
+- **html/css-padding.md**: marginとpaddingを分割した
+- **html/html-doctype.md**: HTMLの骨組みを追記した
+- **html/html-meta.md**: メタ情報を追記した
+- **html/html-p.md**: 段落の設定を追記した
+- **html/html-usage.md**: HTML/CSSの概要を追記した
 - **html/html-usage.md**: ウェブフォントを追記した
 - **html/html-usage.md**: 目次を整理した
-- **html/css-padding.md**: marginとpaddingを分割した
-- **html/html-usage.md**: 目次を整理した
-- **html/html-meta.md**: OGP画像を追記した
-- **html/html-meta.md**: リダイレクトを追記した
-- **html/html-meta.md**: OGPを追記した
-- **git/git-branch.md**: ブランチ操作を追記した
-- **html/css-display.md**: displayプロパティを追記した
-- **html/html-meta.md**: メタ情報を追記した
-- **html/html-doctype.md**: HTMLの骨組みを追記した
-- **html/html-p.md**: 段落の設定を追記した
-- **git/git-usage.md**: Gitの使い方を整理した
-- **html/html-usage.md**: HTML/CSSの概要を追記した
+- **python/python-poetry.md**: poetryをpipxでインストールした
 
 ## v1.15.1 (2023-05-22)
 
