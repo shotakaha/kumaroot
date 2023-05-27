@@ -1,5 +1,11 @@
 # パッケージ管理したい（``poetry``）
 
+```console
+$ poetry new プロジェクト名
+$ cd プロジェクト名
+$ poetry add パッケージ名
+```
+
 パッケージ管理ツールのひとつです。
 Pythonのパッケージ管理ツールはいろいろ存在していて、
 複雑な歴史的な経緯もあり（？）まったく統一されておらず、
@@ -9,18 +15,52 @@ Pythonのパッケージ管理ツールはいろいろ存在していて、
 
 ## インストール
 
-```bash
+```console
 $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
 
-```bash
-$ brew install poetry
+公式ドキュメントでは独自スクリプトを使った方法が推奨されています。
+
+```console
+$ pipx install poetry
+$ which poetry
+~/.local/bin/poetry
 ```
 
-公式ドキュメントを読むと``pip3``を使ったインストールは推奨していないみたいです。
-僕はHomebrewを使ってインストールしていますが、とくに問題なく使えています。
+``pip3``のインストールは推奨されてないみたいですが、``pipx``はフルサポートされています。
 
-## 新しいプロジェクトをセットアップしたい（``poetry new``）
+```console
+$ brew install poetry
+$ which poetry
+/opt/homebrew/bin/poetry
+```
+
+Homebrewを使ったインストールでも、とくに問題なく使えました。
+
+:::{caution}
+
+このいずれかひとつの方法でインストールしてください。
+
+:::
+
+## シェル補完したい（``poetry completions``）
+
+```console
+$ poetry completions fish > ~/.config/fish/completions/poetry.fish
+```
+
+``poetry``コマンドを補完するための設定をシェルに設定します。
+``bash``、``zsh``、``fish``の補完に対応しています。
+
+:::{note}
+
+``fish``の補完は、セッション内で最初に実行したときにエラーがでます。
+v1.2.0から存在しているバグで、``cleo``パッケージに依存しているようです（[poetry#5929](https://github.com/python-poetry/poetry/issues/5929)）。
+v1.5.0になっても治っていません。
+
+:::
+
+## 新規プロジェクトしたい（``poetry new``）
 
 ```bash
 $ poetry new プロジェクト名
@@ -30,7 +70,7 @@ $ cd プロジェクト名
 新しくプロジェクトを作成する場合は、``poetry new``コマンドを使います。
 ``プロジェクト名``のディレクトリが作成され、その下に、``pyproject.toml``、``プロジェクト名``（＝プロジェクト本体のソースコード置き場）、``tests``などの必要なファイルが自動で生成されます。
 
-## 既存のプロジェクトをセットアップしたい（``poetry init``）
+## 既存プロジェクトを使いたい（``poetry init``）
 
 ```bash
 $ cd プロジェクト名
@@ -109,8 +149,15 @@ virtualenvs.prompt = "{project_name}-py{python_version}"
 
 現在の設定は``poetry config --list``で確認できます。
 デフォルトの設定は上記のようになっていました。
-全体の設定は{file}`~/Library/Preferences/pypoetry/config.toml`に保存されます。
+全体の設定は{file}`~/Library/Application Support/pypoetry/config.toml`に保存されます。
 `--local`オプションをつけて設定した項目は、プロジェクト内の{file}`poetry.toml`に保存されます。
+
+:::{note}
+
+全体の設定は、以前は{file}`~/Library/Preferences/pypoetry/config.toml`に保存されていました。
+その状態でもまだ使えるようですが、将来的にはパスを変更したほうがよさそうです。
+
+:::
 
 ### 設定を変更したい
 
