@@ -24,6 +24,7 @@ sphinx-extensions-myst
 sphinx-extensions-opengraph
 sphinx-extensions-googleanalytics
 sphinx-extensions-copybutton
+sphinx-extensions-ablog
 sphinx-readthedocs
 ```
 
