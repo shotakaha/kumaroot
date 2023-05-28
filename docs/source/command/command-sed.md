@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    single: CLI; sed
+    single: Find & Replace; sed
+```
+
 # 置換したい（``sed``）
 
 ```bash

@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    single: CLI; sd
+    single: Find & Replace; sd
+```
+
 # 置換したい（``sd``）
 
 ```bash

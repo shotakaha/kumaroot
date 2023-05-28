@@ -1,6 +1,7 @@
 ```{eval-rst}
 .. index::
-    single: lsd
+    single: CLI; lsd
+    single: List directory contents; lsd
 ```
 
 # ファイル一覧したい（``lsd``）

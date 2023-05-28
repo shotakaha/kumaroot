@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: Emacs; usage
+```
+
 # Emacsの使い方
 
 世の中にはたくさんの種類のエディタがあります。

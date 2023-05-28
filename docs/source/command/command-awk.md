@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    single: CLI; awk
+    single: Find & Replace; awk
+```
+
 # awk
 
 

@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: Emacs; install
+```
+
 # インストール
 
 ``Homebre``でインストールします。

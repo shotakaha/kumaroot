@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    single: CLI; find
+    single: Find & Replace; find
+```
+
 # ファイルを探したい（``find``）
 
 ```console
