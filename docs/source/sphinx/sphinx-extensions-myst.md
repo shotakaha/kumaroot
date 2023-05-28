@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    single: Sphinx Extensions; MyST
+    single: Sphinx Extensions; MyST Parser
 ```
 
 # Markdownしたい（``myst_parser``）
