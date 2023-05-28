@@ -21,6 +21,6 @@ html_short_title = "ウェブサイトの省略タイトル（略称など）"
 :::{note}
 
 テーマによっては、サイドバー表示に反映されないかもしれません。
-とりあえず[sphinx_book_theme](./sphinx-html-book.md)では表示されなかったので、調べたいと思っています。
+とりあえず[sphinx_book_theme](./sphinx-html-theme-book.md)では表示されなかったので、調べたいと思っています。
 
 :::
