@@ -1,4 +1,4 @@
-# ウェブページを生成したい（``make html``）
+# HTMLしたい（``make html``）
 
 ```bash
 $ make html

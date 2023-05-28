@@ -1,4 +1,4 @@
-# PDFファイルを生成したい（``make latexpdf``）
+# PDFしたい（``make latexpdf``）
 
 ```console
 $ make latex
@@ -22,8 +22,6 @@ $ less build/latex/kumaroot.tex
 PDFファイルを生成する場合、ビルドするパソコンでLaTeX環境を整えておく必要があります。
 詳しくは[](../latex/latex-usage.md)を参照してください。
 ```
-
-
 
 ## リファレンス
 
