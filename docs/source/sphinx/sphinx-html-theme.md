@@ -70,11 +70,7 @@ CSSファイルは``stylesheet = CSSファイル名,CSSファイル名,...``で�
 
 いくつかのレポジトリを確認し、``theme.conf``がどうなっているかを眺めてみます。
 
-#### sphinx-book-themeを鑑賞したい
 
-最初に、いま一番気に入っている[sphinx_book_themeのtheme.conf](https://github.com/executablebooks/sphinx-book-theme/blob/master/src/sphinx_book_theme/theme/sphinx_book_theme/theme.conf)を眺めてみます。
-元のテーマが``pydata_sphinx_theme``となっていて、たくさんの``[options]``があることが分かりました。
-オプションのデフォルト値は``空白（=None）``でもよいことも分かりました。
 
 #### pydata-sphinx-themeを鑑賞したい
 
