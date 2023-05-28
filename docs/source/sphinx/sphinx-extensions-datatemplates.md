@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    single: Sphinx Extensions; Data Templates
+```
+
 # データテンプレートしたい（``sphinxcontrib.datatemplates``）
 
 ```console
