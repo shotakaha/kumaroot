@@ -30,6 +30,7 @@ sphinx-extensions-opengraph
 sphinx-extensions-googleanalytics
 sphinx-extensions-copybutton
 sphinx-extensions-ablog
+sphinx-extensions-datatemplates
 ```
 
 ## マークアップしたい
