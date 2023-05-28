@@ -128,5 +128,6 @@ sphinx-autobuild
 ---
 maxdepth: 1
 ---
+sphinx-deploy-gitlab
 sphinx-deploy-rtd
 ```

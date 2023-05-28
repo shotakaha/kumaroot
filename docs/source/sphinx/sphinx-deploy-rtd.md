@@ -1,14 +1,4 @@
-# Read the Docsしたい
-
-[Read the Docs](https://readthedocs.org/)はSphinxドキュメントを公開するためのホスティングサービスです。
-この[KumaROOT](https://kumaroot.readthedocs.io)もRTDを使って公開しています。
-
-素のSphinxであれば、そのままRTDでビルドできます。
-パッケージを追加している場合は、ビルド時の設定をカスタマイズする必要があります。
-
-## 設定ファイル（``.readthedocs.yml``）
-
-ビルド時の設定は`.readthedocs.yml`（もしくは`.readthedocs.yaml`）でカスタマイズできます。
+# Read the Docsしたい（``.readthedocs.yml``）
 
 ```{code-block} yaml
 
@@ -45,6 +35,15 @@ python:
 ```
 
 それぞれの設定項目については公式ドキュメント（[Configuration File V2](https://docs.readthedocs.io/en/stable/config-file/v2.html)）を参照してください。
+
+[Read the Docs](https://readthedocs.org/)はSphinxドキュメントを公開するためのホスティングサービスです。
+この[KumaROOT](https://kumaroot.readthedocs.io)もRTDを使って公開しています。
+
+素のSphinxであれば、そのままRTDでビルドできます。
+パッケージを追加している場合は、ビルド時の設定をカスタマイズする必要があります。
+
+
+ビルド時の設定は`.readthedocs.yml`（もしくは`.readthedocs.yaml`）でカスタマイズできます。
 
 ### Poetryしたい
 
