@@ -72,10 +72,7 @@ CSSファイルは``stylesheet = CSSファイル名,CSSファイル名,...``で�
 
 
 
-#### pydata-sphinx-themeを鑑賞したい
 
-ついでに[pydata_sphinx_themeのtheme.conf](https://github.com/pydata/pydata-sphinx-theme/blob/main/src/pydata_sphinx_theme/theme/pydata_sphinx_theme/theme.conf)も眺めてみましょう。
-元のテーマは``basic``となっていて、組み込みテーマから作成されたことが分かりました。
 
 #### sphinx-designを鑑賞したい
 
@@ -83,10 +80,7 @@ CSSファイルは``stylesheet = CSSファイル名,CSSファイル名,...``で�
 が、ここには``theme.conf``がなく、これはテーマではないようです。
 ただの拡張パッケージであることが分かりました。
 
-#### sphinx-rtd-themeを鑑賞したい
 
-最後に[sphinx_rtd_themeのtheme.conf](https://github.com/readthedocs/sphinx_rtd_theme/blob/master/sphinx_rtd_theme/theme.conf)を眺めてみます。
-これも元のテーマは``basic``となっていることが分かりました。
 
 #### まとめ
 
