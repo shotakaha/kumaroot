@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: MyST; usage
+```
+
 # MySTの使い方
 
 ``MyST（Markedly Structured Text）``（ミスト）はMarkdownの拡張のひとつで、科学技術文書の作成の効率化を目的にしています。
@@ -22,4 +27,10 @@ maxdepth: 1
 myst-install
 myst-quickstart
 myst-templates
+% myst-config
+% myst-theme
+% myst-html
+% myst-css
+% myst-pdf
+% myst-docx
 ```
