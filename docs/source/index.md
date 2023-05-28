@@ -55,10 +55,19 @@ gadget/gadget-usage
 dvr/dvr-usage
 ```
 
+```{toctree}
+---
+maxdepth: 1
+caption: 用語集
+---
+glossary
+```
+
 ## 公開先
 
 - [KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/)
 
+:::{only} html
 ## 変更履歴
 
 ```{toctree}
@@ -67,9 +76,10 @@ maxdepth: 1
 ---
 changelog.md
 ```
+:::
 
-# Indices and tables
+## 検索と索引
 
 - {ref}`genindex`
-- {ref}`modindex`
 - {ref}`search`
+% - {ref}`modindex`

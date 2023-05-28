@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    pair: Python; usage
+```
+
+
 # Pythonの使い方
 
 ```{toctree}

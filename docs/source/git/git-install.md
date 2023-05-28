@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: git; install
+    pair: Git; install
 ```
 
 # インストール

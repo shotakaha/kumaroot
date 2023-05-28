@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: sphinx; index
+    pair: Sphinx; index
 ```
 
 # 索引したい（``index``）

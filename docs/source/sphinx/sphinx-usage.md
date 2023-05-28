@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: sphinx; usage
+    pair: Sphinx; usage
 ```
 
 # Sphinxの使い方

@@ -1,4 +1,9 @@
-# ls
+```{eval-rst}
+.. index::
+    single: ls
+```
+
+# ファイル一覧したい（``ls``）
 
 ```bash
 $ ls

@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: sphinx; install
+    pair: Sphinx; install
 ```
 
 # インストールしたい

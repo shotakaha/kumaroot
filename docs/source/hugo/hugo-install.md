@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    pair: Hugo; install
+```
+
+
 # インストールしたい
 
 ```bash

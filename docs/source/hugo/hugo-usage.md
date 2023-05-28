@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: Hugo; usage
+```
+
 # Hugoの使い方
 
 ``Hugo``はGo言語製の静的サイトジェネレーターです。

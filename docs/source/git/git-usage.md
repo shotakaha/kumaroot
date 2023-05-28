@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: git; usage
+    pair: Git; usage
 ```
 
 # Gitの使い方

@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: Sphinx; toc
+```
+
 # 目次したい（``toctree``）
 
 ````md

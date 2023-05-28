@@ -1,4 +1,9 @@
-# exa
+```{eval-rst}
+.. index::
+    single: exa
+```
+
+# ファイル一覧したい（``exa``）
 
 ```bash
 $ brew install exa

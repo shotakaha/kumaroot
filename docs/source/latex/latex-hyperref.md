@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: LaTeX; hyperlink
+```
+
 # ハイパーリンクしたい（``hyperref``）
 
 ```latex

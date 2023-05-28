@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: LaTeX; toc
+```
+
 # 目次を作成したい（``\tableofcontents``）
 
 ```latex

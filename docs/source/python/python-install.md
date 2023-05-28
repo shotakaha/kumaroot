@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: python; install
+    pair: Python; install
 ```
 
 # インストール

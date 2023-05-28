@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: sphinx; cross-reference
+    pair: Sphinx; hyperlink
 ```
 
 # ハイパーリンクしたい

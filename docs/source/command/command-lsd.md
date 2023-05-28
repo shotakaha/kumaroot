@@ -1,4 +1,9 @@
-# lsd
+```{eval-rst}
+.. index::
+    single: lsd
+```
+
+# ファイル一覧したい（``lsd``）
 
 ```bash
 $ brew install lsd
