@@ -5,7 +5,7 @@
 
 # Sphinxの使い方
 
-Sphinxは``reStructredText（reST）`` 形式で作成されたテキスト文書を、PDFやHTML、その他のフォーマットへと変換してくれる**ドキュメンテーションビルダー**というツールです。
+[Sphinx](https://www.sphinx-doc.org/ja/master/)は[reStructredText（reST）](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/basics.html) 形式で作成された文書を、PDFやHTML、その他のフォーマットへと変換してくれる**ドキュメンテーションビルダー**というツールです。
 Pythonのドキュメント生成のために開発されたものなので、プロジェクトのドキュメント作成にはもってこいです。
 また、中身もPythonで書かれているので、へびつかいであれば、ある程度カスタマイズすることもできるはずです。
 
@@ -13,7 +13,7 @@ Pythonのドキュメント生成のために開発されたものなので、�
 プロジェクト自体は[GitHub](https://github.com/shotakaha/kumaroot/)を使ってバージョン管理をしてあり、ウェブ版は[Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開しています。
 どういったものか気になる方はぜひ[KumaROOTのGitHubリポジトリ](https://github.com/shotakaha/kumaroot)をクローンしてみてください。
 
-## 設定したい
+## はじめたい
 
 ドキュメントのはじめかたや、拡張パッケージの設定方法などを整理しました。
 
@@ -48,7 +48,7 @@ LaTeXだと**環境**／**コマンド**、
 :::
 
 デフォルトの基本は``reST（reStructuredText）記法``なのですが、
-このドキュメントでは``MyST記法``を前提にコードのサンプルを例示します。
+このドキュメントでは[MyST記法](https://myst-parser.readthedocs.io/en/latest)を前提にコードのサンプルを例示します。
 
 ```{toctree}
 ---
@@ -81,13 +81,3 @@ sphinx-build-linkcheck
 sphinx-build-gettext
 sphinx-autobuild
 ```
-
-## リファレンス
-
-- [Sphinx 日本語ドキュメント](https://www.sphinx-doc.org/ja/master/index.html)
-- [Sphinx-Users.jp - 逆引き辞典](https://sphinx-users.jp/reverse-dict/index.html)
-- [reStructuredText入門](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/basics.html)
-- [MyST (Markedly Structured Text)](https://myst-parser.readthedocs.io/en/latest)
-- [Sphinx Design](https://sphinx-design.readthedocs.io/en/latest/)
-- [Sphinx Extensions](https://sphinx-extensions.readthedocs.io/en/latest/)
-- [Read the Docs](https://readthedocs.org/)

@@ -17,10 +17,13 @@ $ pip3 install sphinx
 $ pip3 install テーマのパッケージ名
 ```
 
-SphinxのテーマもPythonパッケージとして公開されています。
-[Sphinx Theme Gallery](https://sphinx-themes.readthedocs.io/en/latest/)などから、自分の好みのテーマを検索し、インストールしてください。
+デフォルトのテーマは``alabaster``ですが、あまり日本語に向いていません（と感じます）。
 
-デフォルトのテーマは``alabaster``ですが、僕は``sphinx_rtd_theme``か``sphinx_book_theme``を使っています。
+SphinxのテーマもPythonパッケージとして公開されています。
+[Sphinx Theme Gallery](https://sphinx-themes.readthedocs.io/en/latest/)などから、自分の好みのテーマを探してインストールしてください。
+
+僕は``sphinx_rtd_theme``や``sphinx_book_theme``をよく使っています。
+このドキュメントも[Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html)を使っています。
 
 ```console
 $ pip3 install sphinx_rtd_theme
