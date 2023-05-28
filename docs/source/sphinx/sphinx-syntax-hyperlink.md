@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: sphinx; cross-reference
+```
+
 # ハイパーリンクしたい
 
 ```md

@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: sphinx; install
+```
+
 # インストールしたい
 
 Sphinxを使うために、まず次のパッケージをインストールします。

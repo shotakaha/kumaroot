@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: python; install
+```
+
 # インストール
 
 ```console

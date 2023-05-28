@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: git; install
+```
+
 # インストール
 
 ```console
