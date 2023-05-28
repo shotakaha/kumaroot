@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    single: Sphinx Theme; pydata_sphinx_theme
+```
+
 # PyDataしたい（``pydata_sphinx_theme``）
 
 ```console

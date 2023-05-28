@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    single: Sphinx Theme; sphinx_book_theme
+```
+
 # Bookしたい（``sphinx_book_theme``）
 
 ```console

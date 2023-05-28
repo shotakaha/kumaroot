@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    single: Sphinx Theme; sphinx_rtd_theme
+```
+
 # RTDしたい（``sphinx_rtd_theme``）
 
 ```console
