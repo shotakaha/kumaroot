@@ -30,7 +30,6 @@ sphinx-extensions-opengraph
 sphinx-extensions-googleanalytics
 sphinx-extensions-copybutton
 sphinx-extensions-ablog
-sphinx-readthedocs
 ```
 
 ## マークアップしたい
@@ -97,4 +96,13 @@ sphinx-build-latexpdf
 sphinx-build-linkcheck
 sphinx-build-gettext
 sphinx-autobuild
+```
+
+## デプロイしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+sphinx-deploy-rtd
 ```
