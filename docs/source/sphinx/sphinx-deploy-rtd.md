@@ -45,7 +45,7 @@ python:
 
 ビルド時の設定は`.readthedocs.yml`（もしくは`.readthedocs.yaml`）でカスタマイズできます。
 
-### Poetryしたい
+## Poetryしたい
 
 ```bash
 $ poetry export -f requirements.txt --output requirements.txt
