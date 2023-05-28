@@ -1,6 +1,6 @@
 # 記事したい（``ablog``）
 
-```conosole
+```console
 $ pip3 install ablog
 ```
 
