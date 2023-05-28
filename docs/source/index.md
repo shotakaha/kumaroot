@@ -67,19 +67,15 @@ glossary
 
 - [KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/)
 
-:::{only} html
-## 変更履歴
+```{eval-rst}
 
-```{toctree}
----
-maxdepth: 1
----
-changelog.md
+.. only:: html or dirhtml
+
+    ====================================
+    Indices and tables
+    ====================================
+
+    * :doc:`changelog`
+    * :ref:`genindex`
+    * :ref:`search`
 ```
-:::
-
-## 検索と索引
-
-- {ref}`genindex`
-- {ref}`search`
-% - {ref}`modindex`
