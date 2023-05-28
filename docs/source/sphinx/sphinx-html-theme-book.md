@@ -49,3 +49,14 @@ html_theme = "sphinx_book_theme"
 
 拡張（``extensions``）一覧にパッケージ名を追加します。
 また、``html_theme``をパッケージ名に変更します。
+
+## Google Analyticsしたい
+
+```python
+html_theme_options = {
+    "analytics": {"google_analytics_id": "G-xxxxxxxx"},
+}
+```
+
+``Sphinx Book Theme``は``PyData Theme``を継承しているので、``PyData Theme``ドキュメントを参照します。
+[Analytics and usage services](https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/analytics.html)のページにオプションの設定方法が書かれていました。

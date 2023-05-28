@@ -62,6 +62,13 @@ html_theme_options = {
 僕が必要だと思ったオプションを設定しました。
 設定可能なオプションとその説明は公式ドキュメントの[Configuration](https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html)を参照してください。
 
-## リファレンス
+## Google Analyticsしたい
 
-- [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/)
+```python
+html_theme_options = {
+    "analytics_id": "G-xxxxxxxx",
+    "analytics_anonymize_ip": False,
+}
+```
+
+``Read the Docs``のドキュメントを参照すると、[Configuration](https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html)のページにオプションの設定方法が書かれていました。
