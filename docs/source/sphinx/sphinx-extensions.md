@@ -34,7 +34,3 @@ Sphinxにはさまざまな拡張パッケージが存在し、より便利に�
 - [sphinx.ext.mathjax](https://www.sphinx-doc.org/en/master/usage/extensions/math.html#module-sphinx.ext.mathjax)
 - [sphinx.ext.ifconfig](https://www.sphinx-doc.org/en/master/usage/extensions/ifconfig.html)
 - [sphinx.ext.viewcode](https://www.sphinx-doc.org/en/master/usage/extensions/viewcode.html)
-- [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html)
-- [MyST Parser](https://myst-parser.readthedocs.io/en/latest/index.html)
-- [sphinxext-opengraph](https://sphinxext-opengraph.readthedocs.io/en/latest/)
-- [sphinx-copybutton](https://sphinx-copybutton.readthedocs.io/en/latest/index.html)
