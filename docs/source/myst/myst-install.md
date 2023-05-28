@@ -3,7 +3,6 @@
     pair: MyST; install
 ```
 
-
 # インストールしたい
 
 ```console

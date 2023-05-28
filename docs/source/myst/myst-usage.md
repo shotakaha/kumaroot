@@ -34,3 +34,14 @@ myst-templates
 % myst-pdf
 % myst-docx
 ```
+
+## ビルドしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+myst-build-html
+myst-build-pdf
+myst-build-docx
+```
