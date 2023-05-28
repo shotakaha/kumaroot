@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    pair: MyST; install
+```
+
+
 # インストールしたい
 
 ```console
