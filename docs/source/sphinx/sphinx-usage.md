@@ -66,6 +66,23 @@ sphinx-syntax-include
 sphinx-syntax-index
 ```
 
+## HTMLしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+sphinx-html-theme
+sphinx-html-title
+sphinx-html-logo
+sphinx-html-htaccess
+sphinx-html-sidebars
+sphinx-html-css
+```
+
+% あとでsphinx-designのページを作る
+% sphinx-html-sd
+
 ## ビルドしたい
 
 ドキュメントをビルドする方法を整理しました。
