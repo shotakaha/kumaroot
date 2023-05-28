@@ -71,11 +71,8 @@ glossary
 
 .. only:: html or dirhtml
 
-    ====================================
-    Indices and tables
-    ====================================
-
     * :doc:`changelog`
     * :ref:`genindex`
     * :ref:`search`
+
 ```
