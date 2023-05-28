@@ -24,7 +24,17 @@ maxdepth: 1
 sphinx-install
 sphinx-quickstart
 sphinx-conf
+sphinx-conf-numfig
+sphinx-conf-today-fmt
 sphinx-extensions
+```
+
+## 拡張機能したい
+
+```{toctree}
+---
+maxdepth: 1
+---
 sphinx-extensions-myst
 sphinx-extensions-opengraph
 sphinx-extensions-googleanalytics

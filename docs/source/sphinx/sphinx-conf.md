@@ -32,18 +32,3 @@ copyright = '2015 - 2022, Shota TAKAHASHI'
 version = '0.5.0'
 release = '0.5.0'
 ```
-
-## 拡張機能を使いたい
-
-```python
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-extensions = [
-    ...,
-]
-```
-
-Sphinxにはさまざまな拡張パッケージがあります。
-``pip``などを使ってインストールしたあと、この``extensions = []``の部分に追加して有効化します。
-詳しい使い方はそれぞれのパッケージのドキュメントを調べてください。
-
-このドキュメントで使っているパッケージについては[](./sphinx-extensions.md)に整理してあります。
