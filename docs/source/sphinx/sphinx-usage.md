@@ -31,6 +31,8 @@ sphinx-extensions
 
 ## 拡張機能したい
 
+僕がよく使う拡張機能を紹介します。
+
 ```{toctree}
 ---
 maxdepth: 1
