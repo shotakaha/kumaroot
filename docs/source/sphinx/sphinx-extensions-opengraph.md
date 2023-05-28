@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    single: Sphinx Extensions; OGP
+```
+
 # OGPしたい（``sphinxext-opengraph``）
 
 ```console
@@ -15,8 +20,9 @@ extensions = [
 
 SphinxJPハッカソンに参加して教えてもらった拡張パッケージです。
 [sphinxext-opengraph](https://pypi.org/project/sphinxext-opengraph/)を使うと、ウェブサイトにOGP情報を追記できます。
-{file}`conf.py`で全体のOGPを設定でき、フロントマターでページごとのOGPを設定できます。
 {file}`conf.py`の``extensions``にパッケージ名を追記するだけで、HTML中に最低限のOGP情報が追加されるので、とりあえず使っておくとよいと思います。
+
+OGPは{file}`conf.py`で全体、フロントマターでページごとに設定できます。
 
 このページは以下のOGP情報が追加されました。
 
@@ -53,7 +59,6 @@ ogp_enable_meta_description = True
 デフォルトの設定でも十分ですが、サイト全体のOGP情報を設定できます。
 ``ogp_use_first_image``と``ogp_enable_meta_description``は有効にするとよいでしょう。
 
-
 ## ページごとのOGPを設定したい
 
 ```yaml
@@ -72,9 +77,3 @@ og:image:alt: "OGP画像の代替テキスト"
 本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文
 本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文
 ```
-
-
-## リファレンス
-
--
-- https://sphinx-users.jp/cookbook/ogp/index.html

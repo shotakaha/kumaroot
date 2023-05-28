@@ -1,32 +1,19 @@
-# Markdownしたい（``myst_parser``）
-
-[MyST Parser](https://myst-parser.readthedocs.io/en/latest/)は、Sphinx文書を``Markdown``形式で書けるようにする拡張パッケージです。
-すでに``Markdown``記法に慣れている場合は、迷わずこの拡張を追加しましょう。
-
-```{note}
-このドキュメントのサンプルは``MyST``記法をメインに使用しています。
+```{eval-rst}
+.. index::
+    single: Sphinx Extensions; MyST
 ```
 
-## インストールする
+# Markdownしたい（``myst_parser``）
 
-```bash
+```console
 $ pip3 install myst-parser
 ```
 
-## 設定を有効にする
-
 ```python
-extensions = [...,
+extensions = [
               "myst_parser",
-              ...,
               ]
-```
 
-``conf.py``の``extentions``に``myst_parser``を追加します。
-
-## オプションを有効にする
-
-```python
 # -- Options for MyST Parser -------------------------------------------------
 
 myst_enable_extensions = [
@@ -48,6 +35,10 @@ myst_enable_extensions = [
 ]
 ```
 
+[MyST Parser](https://myst-parser.readthedocs.io/en/latest/)は、Sphinx文書を``Markdown``形式で書けるようにする拡張パッケージです。
+すでに``Markdown``記法に慣れている場合は、迷わずこの拡張を追加しましょう。
+
+``conf.py``の``extentions``に``myst_parser``を追加します。
 ``conf.py`` の適当な場所に``myst_enable_extensions = [...]``を定義して、MyST Parserのオプションを有効にします。
 オプションは[Syntax Extensions](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html)を参照してください。
 コピペしてすべて有効にして使えばOKだと思いますが、自分の必要にあったオプションを選択してください。
@@ -76,11 +67,22 @@ MyST記法の場合、コードブロック記法のように書きます。
 また、ディレクティブには引数とオプションをとるものもあります。
 オプションは``---``で区切った範囲にYAML形式で``キー: 値``を指定します。
 
-[colon_fence](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#code-fences-using-colons)を有効にすると`` ```{ディレクティブ名} ``の代わりに``:::{ディレクティブ名}``で書けるようになります。
+### コロンフェンスしたい（``colon_fence``）
 
-また、[attrs_block](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#block-attributes)を有効にすると、ブロック要素に対して属性（``#id``や``.class``など）を追加できます。
-Markdown記法はシンプルでよいのですが、SSG（＝静的サイトジェネレーター）するときはちょっと不便に感じていました。
-これは、それを解決するための拡張です。
+````md
+:::{ディレクティブ名} 引数
+---
+オプション1: 値1
+オプション2: 値2
+---
+内容内容内容内容内容内容内容内容
+内容内容内容内容内容内容内容内容
+内容内容内容内容内容内容
+:::
+````
+
+[colon_fence](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#code-fences-using-colons)オプションを有効にすると`` ```{ディレクティブ名} ``の代わりに``:::{ディレクティブ名}``で書けるようになります。
+
 
 :::{seealso}
 
@@ -102,23 +104,13 @@ reST形式で書くと次のようになります。
 Sphinxドキュメントをマークアップするときに、この``ロール``と``ディレクティブ``の役割と使い分けを理解するのはとても大切だと思います。
 :::
 
-## ロールを使いたい
+## ロールしたい
 
 ```md
 {ロール}`ラベル名`
 ```
 
 [ロール（roles）](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#roles-an-in-line-extension-point)は文章中の単語などのインライン要素をマークアップするときに使います。
-
-[attrs_inline](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#inline-attributes)を有効にすると、インライン要素に対して属性（``#id``や``.class``など）を追加できます。
-
-```md
-{ロール}`ラベル名`{.クラス名}
-```
-
-```html
-<span class="クラス名">ラベル名</span>
-```
 
 :::{seealso}
 
@@ -129,6 +121,35 @@ reST形式で書くと次のようになります。
 ```
 
 :::
+
+## 属性したい（``attrs_block``）
+
+```{code-block} md
+
+{#id名 .クラス名}
+## 記事の見出し
+
+記事の本文。記事の本文。記事の本文。記事の本文。記事の本文。
+記事の本文。記事の本文。記事の本文。記事の本文。記事の本文。
+記事の本文。記事の本文。記事の本文。記事の本文。記事の本文。
+
+```
+
+[attrs_block](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#block-attributes)を有効にすると、ブロック要素に属性（``#id``や``.class``など）を追加できます。
+Markdown記法はシンプルでよいのですが、SSG（＝静的サイトジェネレーター）するときはちょっと不便に感じていました。
+これは、それを解決するための拡張です。
+
+## 属性したい（``attrs_inline``）
+
+[attrs_inline](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#inline-attributes)を有効にすると、インライン要素に対して属性（``#id``や``.class``など）を追加できます。
+
+```md
+{ロール}`ラベル名`{.クラス名}
+```
+
+```html
+<span class="クラス名">ラベル名</span>
+```
 
 ## 置換したい（``sub-ref``）
 

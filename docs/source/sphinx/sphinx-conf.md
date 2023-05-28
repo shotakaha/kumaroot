@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    pair: Sphinx; configuration
+```
+
+
 # 基本設定したい（``conf.py``）
 
 Sphinxドキュメントの全体設定は``conf.py``（または``source/conf.py``）で管理します。
