@@ -82,6 +82,30 @@ sphinx-html-css
 % あとでsphinx-designのページを作る
 % sphinx-html-sd
 
+## LaTeX / PDFしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+sphinx-latex-engine
+sphinx-latex-docclass
+sphinx-latex-documents
+sphinx-latex-elements
+sphinx-latex-logo
+sphinx-latex-section
+sphinx-latex-thesection
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 設定例
+---
+sphinx-latex-lualatex
+sphinx-latex-uplatex
+```
+
 ## ビルドしたい
 
 ドキュメントをビルドする方法を整理しました。

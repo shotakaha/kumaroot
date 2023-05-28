@@ -23,27 +23,7 @@ PDFファイルを生成する場合、ビルドするパソコンでLaTeX環境
 詳しくは[](../latex/latex-usage.md)を参照してください。
 ```
 
-```{toctree}
----
-maxdepth: 1
----
-sphinx-latex-engine
-sphinx-latex-docclass
-sphinx-latex-documents
-sphinx-latex-elements
-sphinx-latex-logo
-sphinx-latex-section
-sphinx-latex-thesection
-```
 
-```{toctree}
----
-maxdepth: 1
-caption: 設定例
----
-sphinx-latex-lualatex
-sphinx-latex-uplatex
-```
 
 ## リファレンス
 
