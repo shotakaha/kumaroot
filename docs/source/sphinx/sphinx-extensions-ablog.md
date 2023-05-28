@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    single: Sphinx Extensions; Blog
+```
+
 # 記事したい（``ablog``）
 
 ```console
