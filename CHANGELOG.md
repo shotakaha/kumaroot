@@ -4,34 +4,23 @@
 
 ### Feat
 
-- **sphinx/sphinx-deploy-gitlab.md**: GitLab CIを追加した
-- **sphinx/sphinx-syntax-index.md**: 索引を追加した
+- **sphinx/sphinx-deploy-gitlab.md**: GitLab CIにデプロイする方法を追加した
+- **sphinx/sphinx-deploy-rtd.md**: Read the Docsにデプロイする方法を追加した
+- **sphinx/sphinx-syntax-index.md**: 索引の使い方を追加した
 
 ### Fix
 
-- **sphinx/sphinx-usage.md**: 目次を整理した
-- **sphinx/sphinx-deploy-rtd.md**: デプロイを追加した
-- **sphinx/sphinx-usage.md**: 目次を整理した
-- **sphinx/sphinx-usage.md**: 概要を整理した
-- **sphinx/sphinx-html-theme-book.md**: GA4する方法を移動した
+- **glossary.md**: 索引を追加した
+- **python/python-pip.md**: pipとpip3コマンドを追記した
+- **python/python-poetry.md**: poetryの補完を追記し
+- **python/python-usage.md**: 目次を整理した
+- **sphinx/sphinx-extensions-ablog.md**: ABlogを追加した
+- **sphinx/sphinx-extensions-myst.md**: MySTの概要を整理した
 - **sphinx/sphinx-extensions-opengraph.md**: 索引に追加した
-- **sphinx/sphinx-html-theme-rtd.md**: 索引に追加した
 - **sphinx/sphinx-html-theme.md**: テーマの使い方を整理した
+- **sphinx/sphinx-html-theme-book.md**: sphinx_book_themeの使い方を整理した
 - **sphinx/sphinx-html-theme-pydata.md**: pydata-sphinx-themeの使い方を整理した
 - **sphinx/sphinx-html-theme-rtd.md**: sphinx_rtd_themeの使い方を整理した
-- **sphinx/sphinx-html-theme-book.md**: sphinx_book_themeの使い方を整理した
-- **sphinx/sphinx-html-theme.md**: テーマの使い方を整理した
-- **python/python-pip.md**: pipとpip3コマンドを追記した
-- **latex/latex-index.md**: 索引に追加した
-- **sphinx/sphinx-extensions-myst.md**: MySTの概要を整理した
-- **glossary.md**: 索引を追加した
-- **sphinx/sphinx-install.md**: 一部のページにindexディレクティブを追記した
-- **sphinx/sphinx-extensions-ablog.md**: ABlogを追加した
-- **python/python-usage.md**: 目次を整理した
-- **python/python-usage.md**: パッケージ管理ツールを整理した
-- **python/python-pip**: パッケージ管理系のコマンドを整理した
-- **python/python-poetry.md**: poetryを整理した
-- **python/python-poetry.md**: poetryの補完を追記した
 
 ## v1.16.0 (2023-05-27)
 
