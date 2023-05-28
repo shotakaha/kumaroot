@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: LaTeX; index
+```
+
 # 索引したい（``\index``）
 
 ```latex
