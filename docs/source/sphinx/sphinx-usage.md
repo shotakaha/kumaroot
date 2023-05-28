@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: sphinx; usage
+```
+
 # Sphinxの使い方
 
 Sphinxは``reStructredText（reST）`` 形式で作成されたテキスト文書を、PDFやHTML、その他のフォーマットへと変換してくれる**ドキュメンテーションビルダー**というツールです。
@@ -58,6 +63,7 @@ sphinx-syntax-image
 sphinx-syntax-meta
 sphinx-syntax-footnote
 sphinx-syntax-include
+sphinx-syntax-index
 ```
 
 ## ビルドしたい
