@@ -6,37 +6,42 @@
 # 索引したい（``index``）
 
 ````md
-:::{index} キーワード
-:::
-````
-
-索引（インデックス）にページを登録したい場合は、[indexディレクティブ](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/directives.html#index-generating-markup)でマークアップします。
-結果は[索引ページ](genindex)で確認できます。
-
-## 複数の索引したい
-
-````md
 ```{eval-rst}
 .. index::
-    pair: キーワード1; キーワード2
+    single: 索引1
+    single: 索引2; 索引3
+    pair: 索引4; 索引5
+    triple: 索引6; 索引7; 索引8
 ```
 ````
 
-``pair``オプションを使って、1つのページを複数の索引に登録できます。
+[index](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/directives.html#index-generating-markup)を使って、ページを索引（インデックス）に登録できます。
+``;``で区切って複数の索引を設定できます。
+ドキュメント全体から集めた索引は{file}``getindex``に書き出され、[索引ページ](genindex)で確認できます。
 
 :::{hint}
 
-``MyST-Parser``では``pair``オプションをうまくパースできないみたいです。
-なので、``{eval-rst}``の中で使っています。
-
+ロールを使うと**単語単位**で索引に登録できます。
+このドキュメントでは、各ページの先頭でディレクティブを使って**ページ単位**で索引に登録することにしています。
 具体的な使い方は、このページの``.md``ソースも確認してください。
-ページの先頭で次のように記述しています。
+
+:::
+
+## 複数索引したい（``pair``）
 
 ````md
 ```{eval-rst}
 .. index::
-    pair: sphinx; index
+    single: 目的; ツール名
 ```
 ````
+
+``pair``オプションを使うと、1つのページを複数の索引に登録できます。
+
+:::{note}
+
+このページは``pair: Sphinx; index``としてあり、``Sphinx -> index``と``index -> Sphinx``で検索できるようにしてあります。
+索引は、1ページだけに設定しても（当たり前ですが）旨みはありません。
+複数ページに設定することで、より適切な登録の仕方が見えてきます。
 
 :::
