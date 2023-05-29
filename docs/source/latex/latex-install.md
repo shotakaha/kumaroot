@@ -47,4 +47,6 @@ $ sudo tlmgr update --all
 ```
 
 LaTeXパッケージを管理するコマンドです。
+パッケージは[CTAN（Comprehensive TeX Archive Network）](https://www.ctan.org/)のリポジトリで公開されています。
 詳しくは[tlmgrコマンドの使い方](../command/command-tlmgr.md)を参照してください。
+パッケージの詳細を確認する方法は[texdocの使い方](../command/command-texdoc.md)を参照してください。
