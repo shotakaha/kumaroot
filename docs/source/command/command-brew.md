@@ -59,8 +59,31 @@ $ brew upgrade
 $ brew tap homebrew/cask-fonts
 ```
 
-Homebrewを使って、Google Fontsにあるフォントをインストールできます。
 フォント用のタップ（``homebrew/cask-fonts``）を使えるようにしておきます。
+[Google Fonts](https://fonts.google.com/)にあるフォントもインストールできます。
+
+- ``brew install font-monomaniac-one`` [Monomaniac One](https://fonts.google.com/specimen/Monomaniac+One)
+- ``brew install font-cherry-bomb-one`` [Cherry Bomb One](https://fonts.google.com/specimen/Cherry+Bomb+One)
+- ``brew install font-darumadrop-one``
+- ``brew install font-dotgothic16``
+- ``brew install font-hachi-maru-pop``
+- ``brew install font-hackgen``
+- ``brew install font-hackgen-nerd``
+- ``brew install font-klee-one``
+- ``brew install font-merienda``
+- ``brew install font-merienda-one``
+- ``brew install font-noto-sans-cjk-jp``
+- ``brew install font-noto-serif-cjk-jp``
+- ``brew install font-rampart-one``
+- ``brew install font-rocknroll-one``
+- ``brew install font-source-han-code-jp``
+- ``brew install font-source-han-sans``
+- ``brew install font-source-han-serif``
+- ``brew install font-stick``
+- ``brew install font-yomogi``
+- ``brew install font-yusei-magic`` [Yusei Magic](https://fonts.google.com/specimen/Yusei+Magic)
+- ``brew install font-reggae-one`` [Reggae One](https://fonts.google.com/specimen/Reggae+One)
+- ``brew install font-chokokutai`` [Chokokutai](https://fonts.google.com/specimen/Chokokutai))
 
 ## zsh のパスを設定したい
 
