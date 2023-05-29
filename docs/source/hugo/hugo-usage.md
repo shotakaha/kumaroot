@@ -19,11 +19,12 @@ hugo-config
 hugo-config-menu
 hugo-config-permalinks
 hugo-templates-baseof
-hugo-templates-homepage
 hugo-bundles
 hugo-content
 hugo-static
 ```
+
+% hugo-templates-homepage
 
 ## リファレンス
 

@@ -27,13 +27,11 @@ maxdepth: 1
 myst-install
 myst-quickstart
 myst-templates
+```
+
 % myst-config
 % myst-theme
-% myst-html
 % myst-css
-% myst-pdf
-% myst-docx
-```
 
 ## ビルドしたい
 
