@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: LaTeX; install
+```
+
 # インストール
 
 つい最近までは「Mac LaTeX インストール」などでググると、なんだかまとまりのない情報で溢れていました。
@@ -16,7 +21,7 @@ Keynoteに数式を貼り付けるのに必要なLaTeXiTがついてきます。
 
 ## MacTeX (Homebrew)
 
-```bash
+```console
 $ brew install --cask mactex
 ```
 
@@ -33,3 +38,13 @@ TeXLiveはHomebrew（{command}`brew`コマンド）を使ってインストー�
 
 TeXLiveのバージョンごとの設定は、バージョンアップすると上書きされます。
 自分用にカスタマイズした設定は{file}`/usr/local/texlive/texmf-local`に保存できます。
+
+## パッケージを更新したい（``tlmgr``）
+
+```console
+$ tlmgr update --list
+$ sudo tlmgr update --all
+```
+
+LaTeXパッケージを管理するコマンドです。
+詳しくは[tlmgrコマンドの使い方](../command/command-tlmgr.md)を参照してください。
