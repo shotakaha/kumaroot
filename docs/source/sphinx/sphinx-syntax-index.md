@@ -15,7 +15,9 @@
 [index](https://www.sphinx-doc.org/ja/master/usage/restructuredtext/directives.html#index-generating-markup)を使って、ページを索引（インデックス）に登録できます。
 索引の登録方法にはさまざまな種類（``single`` / ``pair``/  ``triple`` / ``see`` / ``seealso``）があるので、適切なものを選択してください。
 また``;``で区切って複数の索引を設定できます。
-ドキュメント全体から集めた索引は{file}``getindex``に書き出され、[索引ページ](genindex)で確認できます。
+
+HTMLをビルドした場合、ドキュメント全体から集めた索引は{file}``getindex``に書き出され、[索引ページ](genindex)で確認できます。
+PDFをビルドした場合、文書の最後に「索引」の章が追加され、該当ページへの相互参照が表示されます。
 
 :::{hint}
 
