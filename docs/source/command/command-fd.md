@@ -2,6 +2,7 @@
 .. index::
     single: CLI; fd
     single: Find & Replace; fd
+    single: Rust Alternatives; fd
 ```
 
 # ファイルを探したい（``fd``）

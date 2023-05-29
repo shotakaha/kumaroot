@@ -2,6 +2,7 @@
 .. index::
     single: CLI; exa
     single: List directory contents; exa
+    single: Rust Alternatives; exa
 ```
 
 # ファイル一覧したい（``exa``）

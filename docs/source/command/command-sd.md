@@ -2,6 +2,7 @@
 .. index::
     single: CLI; sd
     single: Find & Replace; sd
+    single: Rust Alternatives; sd
 ```
 
 # 置換したい（``sd``）

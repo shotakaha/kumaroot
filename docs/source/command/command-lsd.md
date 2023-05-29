@@ -2,6 +2,7 @@
 .. index::
     single: CLI; lsd
     single: List directory contents; lsd
+    single: Rust Alternatives; lsd
 ```
 
 # ファイル一覧したい（``lsd``）
