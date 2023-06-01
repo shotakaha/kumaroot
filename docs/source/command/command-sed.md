@@ -1,7 +1,7 @@
 ```{eval-rst}
 .. index::
     single: CLI; sed
-    single: Find & Replace; sed
+    single: 検索＆置換したい; sed
 ```
 
 # 置換したい（``sed``）

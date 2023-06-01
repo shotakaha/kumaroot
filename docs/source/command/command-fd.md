@@ -1,7 +1,7 @@
 ```{eval-rst}
 .. index::
     single: CLI; fd
-    single: Find & Replace; fd
+    single: 検索＆置換したい; fd
     single: Rust Alternatives; fd
 ```
 

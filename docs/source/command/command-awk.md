@@ -1,7 +1,7 @@
 ```{eval-rst}
 .. index::
     single: CLI; awk
-    single: Find & Replace; awk
+    single: 検索＆置換したい; awk
 ```
 
 # awk

@@ -1,7 +1,7 @@
 ```{eval-rst}
 .. index::
     single: CLI; find
-    single: Find & Replace; find
+    single: 検索＆置換したい; find
 ```
 
 # ファイルを探したい（``find``）
