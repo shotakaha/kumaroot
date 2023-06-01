@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: LaTeX; index
+    pair: LaTeX; 索引したい
 ```
 
 # 索引したい（``\index``）
