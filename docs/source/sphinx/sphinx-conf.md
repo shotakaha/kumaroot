@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: Sphinx; configuration
+    pair: Sphinx; 設定したい
 ```
 
 
