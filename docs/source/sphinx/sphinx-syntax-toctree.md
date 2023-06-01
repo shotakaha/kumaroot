@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: Sphinx; toc
+    pair: Sphinx; 目次したい
 ```
 
 # 目次したい（``toctree``）

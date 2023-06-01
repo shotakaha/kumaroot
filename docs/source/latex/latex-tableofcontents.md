@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: LaTeX; toc
+    pair: LaTeX; 目次したい
 ```
 
 # 目次を作成したい（``\tableofcontents``）
