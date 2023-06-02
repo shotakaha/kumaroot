@@ -49,6 +49,17 @@ myst_enable_extensions = [
 
 ## ディレクティブしたい
 
+[ディレクティブ（directives）](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#directives-a-block-level-extension-point)は段落などのブロック要素をマークアップするときに使います。
+
+MyST記法の場合、コードブロック記法のように書きます。
+また、ディレクティブには引数とオプションをとるものもあります。
+オプションは``---``で区切った範囲にYAML形式で``キー: 値``を指定します。
+
+::::{tab-set}
+
+:::{tab-item} MyST
+:sync: myst
+
 ````md
 ```{ディレクティブ名} 引数
 ---
@@ -61,11 +72,24 @@ myst_enable_extensions = [
 ```
 ````
 
-[ディレクティブ（directives）](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#directives-a-block-level-extension-point)は段落などのブロック要素をマークアップするときに使います。
+:::
 
-MyST記法の場合、コードブロック記法のように書きます。
-また、ディレクティブには引数とオプションをとるものもあります。
-オプションは``---``で区切った範囲にYAML形式で``キー: 値``を指定します。
+:::{tab-item} reST
+:sync: rest
+
+```rst
+.. ディレクティブ:: 引数
+   :オプション1: 値1
+   :オプション2: 値2
+
+   内容内容内容内容内容内容内容内容
+   内容内容内容内容内容内容内容内容
+   内容内容内容内容内容内容
+```
+
+:::
+
+::::
 
 ### コロンフェンスしたい（``colon_fence``）
 
@@ -83,43 +107,34 @@ MyST記法の場合、コードブロック記法のように書きます。
 
 [colon_fence](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#code-fences-using-colons)オプションを有効にすると`` ```{ディレクティブ名} ``の代わりに``:::{ディレクティブ名}``で書けるようになります。
 
-
-:::{seealso}
-
-reST形式で書くと次のようになります。
-
-```rst
-.. ディレクティブ:: 引数
-   :オプション1: 値1
-   :オプション2: 値2
-
-   内容内容内容内容内容内容内容内容
-   内容内容内容内容内容内容内容内容
-   内容内容内容内容内容内容
-```
-
-:::
-
-:::{hint}
-Sphinxドキュメントをマークアップするときに、この``ロール``と``ディレクティブ``の役割と使い分けを理解するのはとても大切だと思います。
-:::
-
 ## ロールしたい
+
+::::{tab-set}
+
+:::{tab-item} MyST
+:sync: myst
 
 ```md
 {ロール}`ラベル名`
 ```
 
-[ロール（roles）](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#roles-an-in-line-extension-point)は文章中の単語などのインライン要素をマークアップするときに使います。
+:::
 
-:::{seealso}
-
-reST形式で書くと次のようになります。
+:::{tab-item} reST
+:sync: rest
 
 ```rst
 :ロール:`ラベル名`
 ```
 
+:::
+
+::::
+
+[ロール（roles）](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html#roles-an-in-line-extension-point)は文章中の単語などのインライン要素をマークアップするときに使います。
+
+:::{hint}
+Sphinxドキュメントをマークアップするときに、この``ロール``と``ディレクティブ``の役割と使い分けを理解するのはとても大切だと思います。
 :::
 
 ## 属性したい（``attrs_block``）
