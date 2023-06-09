@@ -8,7 +8,7 @@ $ latexmk -lualatex ファイル名
 ``LuaLaTeX``エンジンを使ってPDFを作成したい場合は、
 ``lualatex``コマンドもしくは``latexmk``コマンドに``-lualatex``オプションをつけて実行します。
 
-## オススメのドキュメントクラス
+## ドキュメントクラス
 
 ```latex
 \documentclass{jlreq}
@@ -18,7 +18,7 @@ $ latexmk -lualatex ファイル名
 ``LuaLaTeX``を使う場合は、ドキュメントクラスに``jlreq``を使います。
 昔からある``jsarticle``に相当するものを使いたい場合は``ltjsarticle``が使えます。
 
-## latexmkしたい
+## latexmkrc
 
 ```text
 $pdf_mode = 4;

@@ -29,6 +29,8 @@ latex-ide
 latex-online
 latex-document
 latex-latexmk
+latex-lualatex
+latex-uplatex
 latex-documentclass
 latex-usepackage
 latex-maketitle
