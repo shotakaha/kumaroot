@@ -20,14 +20,16 @@ $ latexmk -lualatex ファイル名
 
 ## latexmkrc
 
-```text
-$pdf_mode = 4;
-@default_files = ("ファイル1", "ファイル2");
-# ライブプレビューに関する設定
-$preview_continuous_mode = 1;
-$pvc_timeout = 1;
-$pvc_timeout_mins = 10;  # 30min; default
-$sleep_time = 60;  # 60s
-# $out_dir = "outd";
-# $aux_dir = "auxd";
-```
+:::{literalinclude} ../_static/latex/templates/lualatex-jlreq/latexmkrc
+---
+language: text
+---
+:::
+
+## main.tex
+
+:::{literalinclude} ../_static/latex/templates/lualatex-jlreq/main.tex
+---
+language: tex
+---
+:::

@@ -1,13 +1,51 @@
 \documentclass{jlreq}
 
+\usepackage{graphicx}
+
+\usepackage{geometry}
+\geometry{headheight=3cm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[R]{\includegraphics[height=2cm]{../../../quma.jpeg}}
+\fancyfoot[C]{©️ KumaROOT / Shota Takahashi}
+\fancyfoot[R]{\thepage}
+
+
 \usepackage{bxjalipsum}
 
 \title{LuaLaTeX + jlreq}
+\author{すごい著者 \thanks{所属とメールアドレス}}
 
 \begin{document}
 
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.6\textwidth]{../../../quma.jpeg} % ロゴを挿入する場合
+    \vspace{2cm} % 適宜、上下のスペースを調整
+    {\Huge\bfseries LuaLaTeX\par} % 大きなタイトル
+    \vspace{1.5cm} % 適宜、上下のスペースを調整
+    {\Large すごい著者\par} % 著者名
+    \vfill % 縦方向に余白を均等に分割
+    {\large \today\par} % 日付を表示する場合
+\end{titlepage}
+
 \maketitle
+\tableofcontents
+
+\begin{abstract}
+エンジンにLuaLaTeX、ドキュメントクラスにjlreqを使ったサンプルです。
+CTANで公開されているパッケージのみを使用し、独自パッケージなどは使わないつもりです。
+このソースをそのままLaTeXファイルに保存してコンパイルすればPDFができるはずです。
+
+\end{abstract}
+
+\section{寿限無}
 
 \jalipsum{jugemu}
+
+\section{草枕}
+
+\jalipsum{kusamakura}
 
 \end{document}
