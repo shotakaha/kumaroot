@@ -1,4 +1,4 @@
-# ``jlreq``クラスを使いたい
+# ``jlreq``したい
 
 ```latex
 \documentclass{jlreq}  % articleに相当

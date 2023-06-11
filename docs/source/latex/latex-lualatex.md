@@ -1,4 +1,4 @@
-# LuaLaTeXしたい
+# LuaLaTeXしたい（``lualatex``）
 
 ```bash
 $ lualatex ファイル名

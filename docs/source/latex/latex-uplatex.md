@@ -1,4 +1,5 @@
-# (u)pLaTeXしたい
+# (u)pLaTeXしたい（``ptex2pdf``）
+
 
 ```bash
 $ ptex2pdf -l -u ファイル名  # upLaTeX

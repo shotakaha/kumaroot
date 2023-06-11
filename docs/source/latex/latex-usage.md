@@ -32,7 +32,6 @@ latex-latexmk
 latex-lualatex
 latex-uplatex
 latex-documentclass
-latex-usepackage
 latex-maketitle
 latex-tableofcontents
 latex-flushright
@@ -56,23 +55,40 @@ latex-include
 ---
 maxdepth: 1
 ---
-latex-fonts
-latex-fonts-more
-latex-japanese
+latex-usepackage
 latex-luatexja-ruby
 latex-masterthesis
-latex-newcommand
 latex-primer
 latex-bxjalipsum
 latex-fancyhdr
 latex-fncychap
-latex-hepparticles
 latex-inputenc
 latex-microtype
 latex-minted
+latex-xcolor
+```
+
+## 物理したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-newcommand
+latex-hepparticles
 latex-physics
 latex-siunitx
-latex-xcolor
+```
+
+## フォントしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-fonts
+latex-fonts-more
+latex-japanese
 ```
 
 ## リファレンス
