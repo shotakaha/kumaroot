@@ -53,10 +53,14 @@
 ```latex
 \usepackage{graphincx}
 \usepackage{geometry}
-\geometry{headheight=3cm}
+\geometry{
+    headheight=4\zh,
+    headsep=1\zh,
+    includehead=true,
+}
 
 \pagestyle{fancy}
-\fancyhead[R]{\includegraphics[height=2cm]{ロゴ画像のパス}}
+\fancyhead[R]{\includegraphics[height=5\zh]{ロゴ画像のパス}}
 \addtolength{\headheight}{\baselineskip}
 ```
 
@@ -64,7 +68,7 @@
 画像の挿入なので``graphicx``パッケージを使っています。
 高さを指定して右ヘッダーに追加しています。
 
-画像の高さに応じて``\headheight``の調整が必要だったので、``geometry``パッケージを使って変更しています。
+画像の高さに合わせて、ヘッダーの高さも調整したほうがよいので``geometry``パッケージを使っていろいろ変更しています。
 s
 ## リファレンス
 
