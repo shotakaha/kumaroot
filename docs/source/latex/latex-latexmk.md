@@ -1,6 +1,6 @@
 # タイプセットしたい（``latexmk``）
 
-```bash
+```console
 $ latexmk
 $ latexmk [オプション] ファイル名  # .texはあってもなくてもよい
 ```
@@ -10,15 +10,31 @@ LaTeX文書のタイプセット（＝コンパイル）を自動化するコマ
 変更のあったファイルのみ差分コンパイルしたりできます。
 ファイル名を指定しない場合でも、よしなにやってくれます。
 
+## 設定ファイルしたい（``latexmkrc``）
+
+:::{literalinclude} ../_static/latex/templates/latexmkrc
+:::
+
+LaTeX文書を作成する場合は、繰り返しコンパイルすることが多いです。
+コマンドラインのオプションを毎回指定するのは面倒なので{file}``latexmkrc``を作成しておきましょう。
+
+:::{note}
+
+僕がよく使う設定をダウンロードしておきます。
+
+[{download}`ダウンロードする`](../_static/latex/templates/latexmkrc)
+
+:::
+
 ## エンジンを指定したい
 
-```bash
+```console
 $ latexmk -lualatex ファイル名
 ```
 
 ## シェルエスケープしたい
 
-```bash
+```console
 $ latexmk -shell-escape
 ```
 
@@ -26,12 +42,26 @@ $ latexmk -shell-escape
 
 ## ライブプレビューしたい
 
-```bash
+```console
 $ latexmk -pvc
 ```
 
-PDF出力をライブプレビューできると編集作業が捗ります。
-そんなときは``-pvc``オプションを使いましょう。
+``-pvc``オプションでPDF出力をライブプレビューできます。
+これで編集作業が捗ります。
+
+```text
+## latexmkrc
+$preview_continuous_mode = 1;
+$pvc_timeout = 1;
+$pvc_timeout_mins = 10;  # 30min; default
+$sleep_time = 60; # in sec
+```
+
+{file}`latexmkrc`で設定する場合は``$preview_continuous_mode = 1``に設定します。
+ライブプレビューをしたまま忘れてしまうことがあるので、一定時間更新がなかった場合に自動で終了するように``$pvc_timeout = 1``と``$pvc_timeout_mins = 分``も設定しておくとよいと思います。
+
+文書を大量に作成していて、頻繁に更新しているフェーズは``$sleep_time = 秒``を長めに設定しておくとよいです。
+こまめに保存している最中に、ムダにコンパイルされる回数を減らすことができます。
 
 ## 出力ファイルを別ディレクトリに作成したい
 
