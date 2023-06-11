@@ -18,18 +18,18 @@ LaTeX文書のタイプセット（＝コンパイル）を自動化するコマ
 LaTeX文書を作成する場合は、繰り返しコンパイルすることが多いです。
 コマンドラインのオプションを毎回指定するのは面倒なので{file}``latexmkrc``を作成しておきましょう。
 
-:::{note}
-
-僕がよく使う設定をダウンロードしておきます。
-
-[{download}`ダウンロードする`](../_static/latex/templates/latexmkrc)
-
-:::
-
 ## エンジンを指定したい
 
 ```console
 $ latexmk -lualatex ファイル名
+```
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-lualatex
+latex-uplatex
 ```
 
 ## シェルエスケープしたい
