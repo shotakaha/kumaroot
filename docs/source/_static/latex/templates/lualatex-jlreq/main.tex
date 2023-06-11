@@ -3,15 +3,21 @@
 \usepackage{graphicx}
 
 \usepackage{geometry}
-\geometry{headheight=3cm}
+\geometry{
+    headheight=6\zh,
+    headsep=5\zh,
+    includehead=true,
+}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhead[R]{\includegraphics[height=2cm]{../../../quma.jpeg}}
+\fancyhead[L]{テンプレート}
+\fancyhead[C]{作成日：2023/06/11}
+\fancyhead[R]{\includegraphics[height=5\zh]{../../../quma.jpeg}}
 \fancyfoot[C]{©️ KumaROOT / Shota Takahashi}
 \fancyfoot[R]{\thepage}
 
-
+\usepackage[japanese]{layout}
 \usepackage{bxjalipsum}
 
 \title{LuaLaTeX + jlreq}
@@ -19,19 +25,7 @@
 
 \begin{document}
 
-\begin{titlepage}
-    \centering
-    \includegraphics[width=0.6\textwidth]{../../../quma.jpeg} % ロゴを挿入する場合
-    \vspace{2cm} % 適宜、上下のスペースを調整
-    {\Huge\bfseries LuaLaTeX\par} % 大きなタイトル
-    \vspace{1.5cm} % 適宜、上下のスペースを調整
-    {\Large すごい著者\par} % 著者名
-    \vfill % 縦方向に余白を均等に分割
-    {\large \today\par} % 日付を表示する場合
-\end{titlepage}
-
 \maketitle
-\tableofcontents
 
 \begin{abstract}
 エンジンにLuaLaTeX、ドキュメントクラスにjlreqを使ったサンプルです。
@@ -47,5 +41,9 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \section{草枕}
 
 \jalipsum{kusamakura}
+
+\newpage
+
+\layout
 
 \end{document}
