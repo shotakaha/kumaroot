@@ -10,6 +10,19 @@
 また、``\micro``や``\nano``などのSI接頭辞、``\ohm``や``\hertz``など物理量なども定義されています。
 ここには書ききれないので``texdoc siunitx``してドキュメントを参照してください。
 
+:::{seealso}
+
+[physicsパッケージ](./latex-physics.md)と一緒に使う場合は、``\qty``コマンドが干渉します。
+physicsパッケージは``\pqty``コマンドで代用（というかこちらのほうが個人的に推奨）できるので、次のように``\qty``コマンドを``\SI``コマンドに寄せておくとよいです。
+
+```latex
+\usepackage{physics}
+\usepackage{siunitx}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+```
+
+:::
+
 ## 指数を表示したい
 
 ```latex
