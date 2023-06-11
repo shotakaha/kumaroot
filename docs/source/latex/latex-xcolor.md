@@ -26,3 +26,17 @@
 ```latex
 \textcolor[HTML]{35A16B}{文字列}
 ```
+
+## 色を定義したい（``definecolor``）
+
+```latex
+\definecolor{red}{HTML}{e5171f}
+\definecolor{orange}{HTML}{ee7b1a}
+\definecolor{yellow}{HTML}{d7c447}
+\definecolor{green}{HTML}{019a66}
+\definecolor{blue}{HTML}{0078ba}
+\definecolor{indigo}{HTML}{522886}
+\definecolor{purple}{HTML}{e44d93}
+```
+
+[メトロカラー](https://www.colordic.org/m)から選んでみました。
