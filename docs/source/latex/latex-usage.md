@@ -45,6 +45,7 @@ latex-bibliography
 latex-ref
 latex-hyperref
 latex-include
+latex-setlength
 ```
 
 ## 追加パッケージ
