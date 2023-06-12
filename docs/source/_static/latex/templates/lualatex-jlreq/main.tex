@@ -1,37 +1,44 @@
-\documentclass{jlreq}
+\documentclass[article, line_length=40zw, head_space=30mm, foot_space=30mm, gutter=30mm]{jlreq}
+
+%% 和文フォントの設定
+\usepackage[haranoaji]{luatexja-preset}
 
 \usepackage{graphicx}
 
+%% レイアウトの調整
 \usepackage{geometry}
 \geometry{
-    headheight=6\zh,
-    headsep=5\zh,
-    includehead=true,
+    headheight=5\zw,
 }
 
+%% ヘッダー／フッターの装飾
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead[L]{テンプレート}
 \fancyhead[C]{作成日：2023/06/11}
-\fancyhead[R]{\includegraphics[height=5\zh]{../../../quma.jpeg}}
+\fancyhead[R]{\includegraphics[height=5\zw]{../../../quma.jpeg}}
+\fancyfoot[L]{CC-BY-4.0}
 \fancyfoot[C]{©️ KumaROOT / Shota Takahashi}
 \fancyfoot[R]{\thepage}
 
+%% 本番では削除
 \usepackage[japanese]{layout}
 \usepackage{bxjalipsum}
 
+%% 表紙の設定
 \title{LuaLaTeX + jlreq}
-\author{すごい著者 \thanks{所属とメールアドレス}}
+\author{すごい著者 \thanks{所属とメールアドレス} \and すごい著者 \thanks{所属とメールアドレス}}
+
 
 \begin{document}
 
+%% 表紙を出力
 \maketitle
 
 \begin{abstract}
 エンジンにLuaLaTeX、ドキュメントクラスにjlreqを使ったサンプルです。
 CTANで公開されているパッケージのみを使用し、独自パッケージなどは使わないつもりです。
 このソースをそのままLaTeXファイルに保存してコンパイルすればPDFができるはずです。
-
 \end{abstract}
 
 \section{寿限無}
@@ -42,8 +49,8 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 
 \jalipsum{kusamakura}
 
+%% レイアウトを確認
 \newpage
-
 \layout
 
 \end{document}
