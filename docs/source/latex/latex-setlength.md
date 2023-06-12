@@ -44,7 +44,7 @@ LaTeXの長さの単位です。
 
 ```latex
 \setlength{\linewidth}{40\zw}     % 1行の長さ
-\setlength{\baselineskip}{1.5\zw} % 行間の高さ
+\setlength{\baselineskip}{1.5\zw} % 行送りの大きさ（＝行間の高さ）
 \setlength{\parindent}{1\zw}      % 段落のインデント
 \setlength{\parskip}{1\zw}        % 段落の間の高さ
 ```
@@ -61,7 +61,7 @@ LaTeXの長さの単位です。
 ```latex
 \setlength{\paperwidth}{210mm}   % 用紙の幅
 \setlength{\paperheight}{297mm}  % 用紙の高さ
-\setlength{\textheight}{40\baselineskip}  % テキストエリアの高さ
+\setlength{\textheight}{45\baselineskip}  % テキストエリアの高さ
 \setlength{\textwidth}{1.2\linewidth}     % テキストエリアの長さ
 ```
 
@@ -80,3 +80,13 @@ LaTeXの長さの単位です。
 ```
 
 画像を挿入するときの横幅は``\textwidth``を基準にするとよいです。
+
+:::{seealso}
+
+``jlreq``では、これらのほとんどがドキュメントクラスオプションで設定できます。
+
+```latex
+\documentclass[paper=a4paper, head_space=20mm, line_length=40zw, number_of_lines=45, gutter=20mm]{jlreq}
+```
+
+:::
