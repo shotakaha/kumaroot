@@ -27,7 +27,18 @@
 
 %% 表紙の設定
 \title{LuaLaTeX + jlreq}
-\author{すごい著者 \thanks{所属とメールアドレス} \and すごい著者 \thanks{所属とメールアドレス}}
+
+% \renewcommand{\thefootnote}{\arabic{footnote}}
+\makeatletter
+% \let\@fnsymbol\@arabic
+\renewcommand{\@fnsymbol}[1]{\@arabic{#1}}
+\makeatother
+
+\author{
+    すごい著者 \thanks{すごい大学} \\ \and
+    これまたすごい著者 \thanks{すごい研究所} \\ \and
+    これまたすごい著者 \thanks{すごい研究所}
+}
 
 
 \begin{document}
