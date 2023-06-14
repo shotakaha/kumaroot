@@ -55,9 +55,9 @@ $ poetry completions fish > ~/.config/fish/completions/poetry.fish
 v1.2.0から存在しているバグ（[poetry#5929](https://github.com/python-poetry/poetry/issues/5929)）ですが、v1.5.0になっても修正されていません。
 そのままでも使うことはできますが、以下のように``sd``コマンドを使って置換して対処できます。
 
-```console
+:::{code-block} console
 $ poetry completions fish | sd "'([^']+)''" '"$1"\'' > ~/.config/fish/completions/poetry.fish
-```
+:::
 
 エラーの原因は、以下のように``__fish_seen_subcommand_from``が使われている部分の引数の文字列の囲み方に問題があるようです。
 

@@ -27,7 +27,7 @@
 
 ### 書籍を参照したい（``@book``）
 
-```bib
+```bibtex
 @book{参照キー1,
     author = {},
     publisher = {},

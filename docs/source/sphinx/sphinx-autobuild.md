@@ -13,7 +13,7 @@ $ sphinx-autobuild source/ build/html/
 ``Makefile``の末尾に次のように追記します。
 
 ```make
-...（省略）...
+# ...（省略）...
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
