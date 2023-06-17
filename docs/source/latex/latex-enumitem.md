@@ -1,7 +1,11 @@
 # 箇条書きしたい（``enumitem``）
 
-箇条書きするために``itemize``、``enumerate``、``description``の3つの環境があります。
-それらを使いやすくする``enumitem``パッケージがあります。
+```latex
+\usepackage{enumitem}
+```
+
+箇条書きするためのデフォルト環境は``itemize``、``enumerate``、``description``の3つあります。
+それらをカスタマイズできる``enumitem``パッケージを使います。
 
 ## リストしたい（``itemize``）
 
@@ -18,7 +22,7 @@
 \end{itemize}
 ```
 
-順序のない箇条書きは``itemize``環境を使います。
+**順序のない**箇条書きは``itemize``環境を使います。
 ``itemize``環境はレベル4まで入れ子にできます。
 
 ## リストの見出し記号を変更したい
@@ -60,7 +64,7 @@
 \end{enumerate}
 ```
 
-順序がある箇条書きは``enumerate``環境を使います。
+**順序がある**箇条書きは``enumerate``環境を使います。
 ``enumerate``環境はレベル4まで入れ子にできます。
 
 ## 順序リストの記号をまとめて変更したい（``\labelenumi``）
@@ -89,10 +93,4 @@
     \item[ラベル2] 説明2
     \item[ラベル3] 説明3
 \end{enumerate}
-```
-
-## 箇条書きしたい（``enumitem``）
-
-```latex
-\usepackage{enumitem}
 ```
