@@ -17,5 +17,7 @@ maxdepth: 1
 ---
 typst-install
 typst-compile
-typst-text-font
+typst-text
+typst-lorem
+typst-styling
 ```
