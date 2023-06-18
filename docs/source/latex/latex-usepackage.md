@@ -21,16 +21,3 @@
 \usepackage{hyperref}
 \usepackage{pxjahyper}
 ```
-
-## パッケージの使い方
-
-```{toctree}
----
-maxdepth: 1
----
-latex-geometry
-latex-graphicx
-latex-inputenc
-latex-layout
-latex-plautopatch
-```

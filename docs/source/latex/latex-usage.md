@@ -54,10 +54,13 @@ latex-setlength
 ---
 maxdepth: 1
 ---
+latex-graphicx
 latex-usepackage
+latex-geometry
+latex-layout
+latex-inputenc
+latex-plautopatch
 latex-luatexja-ruby
-latex-masterthesis
-latex-primer
 latex-bxjalipsum
 latex-fancyhdr
 latex-fncychap
@@ -65,6 +68,8 @@ latex-inputenc
 latex-microtype
 latex-minted
 latex-xcolor
+latex-masterthesis
+latex-primer
 ```
 
 ## 物理したい

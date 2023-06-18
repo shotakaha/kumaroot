@@ -1,4 +1,4 @@
-# layout
+# レイアウトを確認したい（``layout``）
 
 ```latex
 \documentclass[オプション]{パッケージ}
