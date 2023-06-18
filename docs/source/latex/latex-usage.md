@@ -22,7 +22,7 @@ LaTeXの開発も進んでいて、以前とは変わっている方法もあり
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 latex-install
 latex-ide
@@ -52,7 +52,7 @@ latex-setlength
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 latex-graphicx
 latex-usepackage
@@ -76,7 +76,7 @@ latex-primer
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 latex-newcommand
 latex-hepparticles
@@ -88,7 +88,7 @@ latex-siunitx
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 latex-fonts
 latex-font-family
@@ -98,7 +98,6 @@ latex-font-size
 latex-fonts-more
 latex-fontenc
 latex-lmodern
-
 latex-kanji-config-udpmap-sys
 latex-fontspec
 latex-luatexja
