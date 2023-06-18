@@ -1,7 +1,14 @@
 # 箇条書きしたい（``enumitem``）
 
 ```latex
+%% プリアンブル
 \usepackage{enumitem}
+
+%% 本文
+\begin{itemize}[labelsep=1\zw]
+    \item 項目1
+    \item 項目2
+\end{itemize}
 ```
 
 箇条書きするためのデフォルト環境は``itemize``、``enumerate``、``description``の3つあります。
