@@ -2,6 +2,7 @@
 
 ```latex
 % プリアンブル
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 ```
 
