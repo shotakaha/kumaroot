@@ -1,11 +1,15 @@
-# 和文フォントしたい
+# 和文テキストしたい（``text``）
 
 ```rust
 #set text(
     font: (
-        "Noto Serif CJK JP",
+        "HackGen",
         "Noto Sans CJK JP",
-    )
+    ),
+    size: 12pt,
+    weight: "regular",
+    lang: "ja"
+
 )
 ```
 
