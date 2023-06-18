@@ -1,4 +1,4 @@
-# フォントのサイズを切り替えたい
+# フォントのサイズを切り替えたい（``\LARGE``）
 
 ```latex
 \tiny  % 5pt
@@ -16,3 +16,13 @@
 本文中で局所的に文字サイズを切り替えることができます。
 欧文フォントで``cm``（Computer Modern）を使っている場合、``\fontsize``コマンドでは任意のサイズに指定できません。
 ``fix-cm``パッケージを読み込むか、[lmodernパッケージ](latex-lmodern.md)を読み込んで``lm``（Latin Modern）に変更するとよいです。
+
+```latex
+\usepackage{fix-cm}
+
+\fontsize{サイズ}{ベースラインスキップ}\selectfont
+このフォントが変更されます。
+
+\normalsize
+デフォルトのフォントサイズ（10pt）に戻ります。
+```
