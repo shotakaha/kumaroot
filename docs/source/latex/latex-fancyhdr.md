@@ -1,4 +1,4 @@
-# ヘッダー／フッターを設定したい（``fancyhdr``）
+# ヘッダー／フッターしたい（``fancyhdr``）
 
 ```latex
 \usepackage[オプション]{fancyhdr}
@@ -26,12 +26,12 @@
 
 ```latex
 \thispagestyle{fancy}
-\lhead{ヘッダー・左}
-\chead{ヘッダー・中央}
-\rhead{ヘッダー・右}
-\lfoot{フッター・左}
-\cfoot{フッター・中央}
-\rfoot{フッター・右}
+\fancyhead[L]{ヘッダー・左}
+\fancyhead[C]{ヘッダー・中央}
+\fancyhead[R]{ヘッダー・右}
+\fancyfoot[L]{フッター・左}
+\fancyfoot[C]{フッター・中央}
+\fancyfoot[R]{フッター・右}
 ```
 
 現在のページに設定する場合は``\thispagestyle``コマンドを使います。
@@ -46,7 +46,7 @@
 ```
 
 デフォルトで、ページ中央に表示されるノンブル（＝ページ番号）を右下に変更する方法です。
-``\fancyfoot{}``でデフォルト設定を削除しています。
+``\fancyfoot{}``でデフォルト設定を一度削除した後に、右フッターのみ再設定しています。
 
 ## ロゴしたい
 
@@ -69,7 +69,25 @@
 高さを指定して右ヘッダーに追加しています。
 
 画像の高さに合わせて、ヘッダーの高さも調整したほうがよいので``geometry``パッケージを使っていろいろ変更しています。
-s
-## リファレンス
 
-- {command}`texdoc fancyhdr`
+## 線の幅を変更したい
+
+```latex
+\renewcommand{\headrulewidth}{1mm}
+\renewcommand{\footrulewidth}{1mm}
+```
+
+``\headrulewidth``と``\footrulewidth``を``\renewcommand``して、境界線の幅を変更できます。
+
+## 線の色を変更したい
+
+```latex
+\usepackage{xcolor}
+\definecolor{Green}{HTML}{006E4F}
+
+\renewcommand{\headrule}{\textcolor{Green}{\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+\renewcommand{\footrule}{\textcolor{Green}{\hrule width\headwidth height\footrulewidth \vskip\footrulewidth}}
+```
+
+``\headrule``と``\footrule``を``\renewcommand``して、ヘッダー／フッターの色を変更できます。
+色は[xcolorパッケージ](./latex-xcolor.md)を使ってカスタムカラーを定義し、``\textcolor``コマンドを使って変更します。
