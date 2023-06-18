@@ -14,8 +14,6 @@ LaTeX文書のタイプセット（＝コンパイル）を自動化するコマ
 maxdepth: 1
 ---
 latex-latexmkrc
-latex-lualatex
-latex-uplatex
 ```
 
 ## シェルエスケープしたい（``-shell-escape``）

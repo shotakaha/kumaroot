@@ -48,6 +48,32 @@ latex-include
 latex-setlength
 ```
 
+```{toctree}
+---
+caption: LuaLaTeXしたい
+---
+latex-lualatex
+latex-fontspec
+latex-luatexja
+latex-luatexja-preset
+latex-luatexja-fontspec
+latex-luatexja-otf
+```
+
+```{toctree}
+---
+caption: (u)pLaTeXしたい
+---
+latex-uplatex
+latex-plautopatch
+latex-inputenc
+latex-fontenc
+latex-lmodern
+latex-kanji-config-udpmap-sys
+latex-otf
+latex-microtype
+```
+
 ## 追加パッケージ
 
 ```{toctree}
@@ -58,14 +84,10 @@ latex-graphicx
 latex-usepackage
 latex-geometry
 latex-layout
-latex-inputenc
-latex-plautopatch
 latex-luatexja-ruby
 latex-bxjalipsum
 latex-fancyhdr
 latex-fncychap
-latex-inputenc
-latex-microtype
 latex-minted
 latex-xcolor
 latex-masterthesis
@@ -96,15 +118,6 @@ latex-font-series
 latex-font-shape
 latex-font-size
 latex-fonts-more
-latex-fontenc
-latex-lmodern
-latex-kanji-config-udpmap-sys
-latex-fontspec
-latex-luatexja
-latex-luatexja-preset
-latex-luatexja-fontspec
-latex-otf
-latex-luatexja-otf
 latex-japanese
 ```
 
