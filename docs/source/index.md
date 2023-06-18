@@ -41,6 +41,7 @@ latex/latex-usage
 sphinx/sphinx-usage
 hugo/hugo-usage
 myst/myst-usage
+typst/typst-usage
 vscode/vscode-usage
 emacs/emacs-usage
 ```
