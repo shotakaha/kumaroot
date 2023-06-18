@@ -1,15 +1,5 @@
 # フォントを変更したい
 
-```{toctree}
----
-maxdepth: 1
----
-latex-font-family
-latex-font-series
-latex-font-shape
-latex-font-size
-```
-
 上記のリンク先に整理した各種コマンドで書体（明朝体、サンセリフ体など）、シリーズ（＝ウェイト）、シェープ（斜体、イタリック体など）やフォントのサイズを変更できます。
 
 最近のTeXLiveでは、欧文フォントは**Latin Modern**、和文フォントは**原の味**がデフォルトになっています。

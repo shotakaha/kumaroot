@@ -1,4 +1,4 @@
-# 和文フォントを設定したい（``luatexja-preset``）
+# プリセットな和文フォントしたい（``luatexja-preset``）
 
 ```latex
 % プリアンブル

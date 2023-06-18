@@ -1,4 +1,4 @@
-# 和文フォントを設定したい（``luatexja-fontspec``）
+# 自由に和文フォントしたい（``luatexja-fontspec``）
 
 ```latex
 \documentclass{jlreq}

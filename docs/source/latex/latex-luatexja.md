@@ -1,4 +1,4 @@
-# 和文フォントを設定したい（``luatexja``）
+# 和文フォントしたい（``luatexja``）
 
 ```latex
 \usepackage{luatexja}

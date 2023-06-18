@@ -1,4 +1,4 @@
-# 和文フォントを設定したい（``kanji-config-udpmap-sys``）
+# 和文フォントしたい（``kanji-config-udpmap-sys``）
 
 ```bash
 $ kanji-config-udpmap-sys [オプション] フォント名

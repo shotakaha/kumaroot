@@ -1,4 +1,4 @@
-# 欧文フォントを設定したい（``fontspec``）
+# 自由に欧文フォントしたい（``fontspec``）
 
 ```latex
 \usepackage{fontspec}

@@ -39,36 +39,6 @@ UTF-8やシフトJISのようなファイルのエンコーディングとはま
 {\usekanji{JY3}{gt}{bx}{n} JY3 / ゴシック体 / 極太字 / upright} % LuaLaTeX
 ```
 
-
 ただし、毎度毎度、それぞれの要素を指定するのは大変です。
 そのような場合は、文書で使うデフォルトのフォントを変更してしまいましょう。
 使っているLaTeXの種類（レガシーLaTeXかモダンLaTeXか）に応じて、フォント関連のパッケージをうまく使い分けるのがよさそうです。
-
-## レガシーLaTeXのフォントを変更したい
-
-(u)pLaTeXを使う場合、下記のパッケージを使うとよいです。
-
-```{toctree}
----
-maxdepth: 1
----
-latex-fontenc
-latex-lmodern
-latex-otf
-latex-kanji-config-udpmap-sys
-```
-
-## モダンLaTeXのフォントを変更したい
-
-LuaLaTeXを使う場合、下記のパッケージを使うとよいです。
-
-```{toctree}
----
-maxdepth: 1
----
-latex-fontspec
-latex-luatexja
-latex-luatexja-preset
-latex-luatexja-fontspec
-latex-luatexja-otf
-```

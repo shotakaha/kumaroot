@@ -91,7 +91,21 @@ latex-siunitx
 maxdepth: 1
 ---
 latex-fonts
+latex-font-family
+latex-font-series
+latex-font-shape
+latex-font-size
 latex-fonts-more
+latex-fontenc
+latex-lmodern
+
+latex-kanji-config-udpmap-sys
+latex-fontspec
+latex-luatexja
+latex-luatexja-preset
+latex-luatexja-fontspec
+latex-otf
+latex-luatexja-otf
 latex-japanese
 ```
 
