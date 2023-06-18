@@ -30,22 +30,48 @@ latex-online
 latex-document
 latex-latexmk
 latex-documentclass
+```
+
+```{toctree}
+---
+caption: プリアンブルしたい
+---
+latex-geometry
+latex-layout
+latex-fancyhdr
+latex-fncychap
+latex-xcolor
+latex-bxjalipsum
+latex-minted
+```
+
+```{toctree}
+---
+caption: コマンドしたい
+---
 latex-maketitle
 latex-tableofcontents
-latex-flushright
 latex-section
+latex-setlength
+latex-include
+latex-index
+latex-ref
 latex-linebreak
+latex-newcommand
+```
+
+```{toctree}
+---
+caption: 環境したい
+---
+latex-usepackage
+latex-flushright
 latex-enumitem
 latex-graphicx
-latex-figure
 latex-booktabs
 latex-amsmath
-latex-index
 latex-bibliography
-latex-ref
 latex-hyperref
-latex-include
-latex-setlength
 ```
 
 ```{toctree}
@@ -58,6 +84,7 @@ latex-luatexja
 latex-luatexja-preset
 latex-luatexja-fontspec
 latex-luatexja-otf
+latex-luatexja-ruby
 ```
 
 ```{toctree}
@@ -80,16 +107,6 @@ latex-microtype
 ---
 maxdepth: 2
 ---
-latex-graphicx
-latex-usepackage
-latex-geometry
-latex-layout
-latex-luatexja-ruby
-latex-bxjalipsum
-latex-fancyhdr
-latex-fncychap
-latex-minted
-latex-xcolor
 latex-masterthesis
 latex-primer
 ```
@@ -100,7 +117,6 @@ latex-primer
 ---
 maxdepth: 2
 ---
-latex-newcommand
 latex-hepparticles
 latex-physics
 latex-siunitx
