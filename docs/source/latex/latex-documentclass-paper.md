@@ -1,4 +1,4 @@
-# 用紙サイズしたい
+# 用紙サイズしたい（``paper``）
 
 ```latex
 \documentclass[paper=a4]{jlreq}  % A4サイズ（デフォルト）
@@ -11,11 +11,16 @@
 A判（JIS/ISO）は``a0 - a10``、B判（JIS）は``b0 - b10``、C判（ISO）は``c2 - c8``から選択できます
 ``paper={横mm, 縦mm}``でサイズを直接指定することもできます
 
+## 用紙サイズしたい（``a4paper``）
+
 ```latex
-% LuaLaTeX
+%% LuaLaTeX + ltjsarticle
 \documentclass[a4paper]{ltjsarticle}  % A4サイズ
 \documentclass[a5paper]{ltjsarticle}  % A5サイズ
-% (u)pLaTeX
+```
+
+```latex
+%% (u)pLaTeX + jsarticle
 \documentclass[uplatex, dvipdfmx, b4paper, papersize]{jsarticle}  % B4サイズ
 \documentclass[uplatex, dvipdfmx, b5paper, papersize]{jsarticle}  % B5サイズ
 ```
@@ -23,7 +28,7 @@ A判（JIS/ISO）は``a0 - a10``、B判（JIS）は``b0 - b10``、C判（ISO）�
 ``jsclasses``系は``a4paper``や``b5paper``など用紙サイズのオプションを直接指定します。
 ``papersize``オプションを同時に指定して、ドライバー（``dvipdfmx``）にPDFのページサイズを伝える必要があります。
 
-## よく使う用紙サイズ
+## よく使う用紙サイズ（``210mm x 297mm``）
 
 よく使う用紙サイズもメモしておきます。
 A判はISO規格とJIS規格でサイズが同じですが、B判は異なります（JIS規格のほうが大きい）。
