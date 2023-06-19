@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: レイアウトしたい; LaTeX
+```
+
 # レイアウトしたい（``geometry``）
 
 ```latex

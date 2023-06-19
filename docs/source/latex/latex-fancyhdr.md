@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: ヘッダーしたい; LaTeX
+```
+
 # ヘッダー／フッターしたい（``fancyhdr``）
 
 ```latex

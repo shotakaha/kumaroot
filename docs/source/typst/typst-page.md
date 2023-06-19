@@ -1,4 +1,10 @@
-# ページ設定したい（``page``）
+```{eval-rst}
+.. index::
+    pair: レイアウトしたい; Typst
+    pair: ヘッダーしたい; Typst
+```
+
+# レイアウトしたい（``page``）
 
 ```rust
 #set page(
