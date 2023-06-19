@@ -15,6 +15,9 @@
 :::
 
 ```{toctree}
+---
+maxdepth: 1
+---
 latex-jlreq
 latex-documentclass-paper
 latex-documentclass-fontsize
