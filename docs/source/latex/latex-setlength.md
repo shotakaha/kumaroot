@@ -1,4 +1,4 @@
-# 長さしたい（``setlength``）
+# 長さしたい（``\setlength``）
 
 ```latex
 \setlength{\長さ名}{単位付きの数}
