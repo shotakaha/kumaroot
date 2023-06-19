@@ -31,67 +31,37 @@ latex-fonts
 latex-page
 latex-par
 latex-heading
-latex-document
-```
-
-```{toctree}
----
-maxdepth: 2
----
-latex-ide
-latex-online
-latex-document
-latex-documentclass
-```
-
-```{toctree}
----
-caption: プリアンブルしたい
----
-latex-xcolor
-latex-bxjalipsum
-latex-minted
-```
-
-```{toctree}
----
-caption: 環境したい
----
+latex-graphicx
 latex-amsmath
 latex-bibliography
 latex-hyperref
-```
-
-```{toctree}
----
-caption: (u)pLaTeXしたい
----
-latex-plautopatch
-latex-inputenc
-latex-fontenc
-latex-microtype
-```
-
-## 追加パッケージ
-
-```{toctree}
----
-maxdepth: 2
----
-latex-masterthesis
-latex-primer
 ```
 
 ## 物理したい
 
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 1
 ---
 latex-hepparticles
 latex-physics
 latex-siunitx
 ```
+
+## その他
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-masterthesis
+latex-primer
+latex-ide
+latex-online
+latex-document
+```
+
+
 
 ## リファレンス
 

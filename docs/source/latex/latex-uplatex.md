@@ -34,3 +34,13 @@ $ ptex2pdf -l ファイル名     # pLaTeX
 # $out_dir = "outd";
 # $aux_dir = "auxd";
 ```
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-plautopatch
+latex-inputenc
+latex-fontenc
+latex-microtype
+```

@@ -3,7 +3,9 @@
 ```{toctree}
 latex-linebreak
 latex-flushright
-latex-graphicx
 latex-enumitem
 latex-booktabs
+latex-xcolor
+latex-bxjalipsum
+latex-minted
 ```
