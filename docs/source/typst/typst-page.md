@@ -4,7 +4,7 @@
     pair: ヘッダーしたい; Typst
 ```
 
-# レイアウトしたい（``page``）
+# レイアウトしたい（``#page``）
 
 ```rust
 #set page(
