@@ -1,4 +1,4 @@
-# フォントサイズを設定したい
+# フォントサイズしたい（``fontsize`` / ``jafontsize``）
 
 ```latex
 \documentclass[fontsize=10pt]{jlreq}    % 欧文フォント
@@ -17,6 +17,8 @@
 LaTeXで使う``pt``はDTPソフトのポイントサイズと異なります。
 DTPポイントで指定する場合は``bp``（big point）を使います。
 ```
+
+## フォントサイズしたい（``10pt``）
 
 ```latex
 \documentclass[10pt]{ltjsarticle}  % 10pt（デフォルト）
