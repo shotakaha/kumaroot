@@ -1,9 +1,27 @@
 # フォントしたい
 
-上記のリンク先に整理した各種コマンドで書体（明朝体、サンセリフ体など）、シリーズ（＝ウェイト）、シェープ（斜体、イタリック体など）やフォントのサイズを変更できます。
+```latex
+\usepackage{luatexja-fontspec}
 
-最近のTeXLiveでは、欧文フォントは**Latin Modern**、和文フォントは**原の味**がデフォルトになっています。
-通常の文書作成であれば、上記のコマンドで事足りると思います。
+% 欧文フォントの設定
+\setmainfont{KiwiMaru-Regular}
+\setsansfont{ReggaeOne-Regular}
+\setmonofont{HackGen35Console-Regular}
+
+% 和文フォントの設定
+\setmainjfont{KiwiMaru-Regular}
+\setsansjfont{ReggaeOne-Regular}
+\setmonojfont{HackGen35Console-Regular}
+```
+
+LuaLaTeXでは、任意のフォントを簡単に埋め込むことができます。
+(u)pLaTeXは、地獄（だった？）のでオススメしません。
+
+:::{hint}
+
+最近のTeXLiveでは、欧文フォントは**Latin Modern**、和文フォントは**原の味**がデフォルトになっているため、わざわざフォントを変える必要はないと思います。
+
+:::
 
 ```{toctree}
 ---
