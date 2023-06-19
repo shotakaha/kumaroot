@@ -19,7 +19,6 @@ maxdepth: 1
 ---
 latex-linebreak
 latex-flushright
-latex-enumitem
 latex-booktabs
 latex-xcolor
 latex-bxjalipsum

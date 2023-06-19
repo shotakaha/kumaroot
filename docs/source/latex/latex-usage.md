@@ -32,6 +32,7 @@ latex-fonts
 latex-page
 latex-par
 latex-heading
+latex-enumitem
 latex-graphicx
 latex-amsmath
 latex-bibliography
