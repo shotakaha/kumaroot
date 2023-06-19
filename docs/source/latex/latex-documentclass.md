@@ -1,9 +1,23 @@
-# 日本語でLaTeXしたい（``\documentclass``）
+# ドキュメントクラスしたい（``\documentclass``）
 
 ```latex
 % LuaLaTeX + jlreq
 \documentclass{jlreq}
+```
 
+```{toctree}
+latex-jlreq
+latex-documentclass-paper
+latex-documentclass-fontsize
+latex-documentclass-twocolumn
+latex-documentclass-landscape
+latex-documentclass-hanging
+latex-documentclass-tate
+latex-jsclasses
+```
+
+
+```latex
 % LuaLaTeX + ltjsarticle
 \documentclass{ltjsarticle}
 
@@ -55,21 +69,3 @@ LaTeX経験者で、これまでの知識を活かしながらLuaLaTeXを使い�
 また、ウェブ検索した結果に多数ヒットするので、知っておくとよい情報です。
 オプションにエンジン（``uplatex``）とドライバー（``dvipdfmx``）は必須です。
 日本語の設定に[fontenc](./latex-fontenc.md)や[otf](./latex-otf.md)など追加必須のパッケージではオリジナルのドキュメントクラスが用意されていることもあります。
-
-## その他の設定
-
-ドキュメントクラスのオプションで設定できることを整理しておきます。
-
-```{toctree}
----
-maxdepth: 1
----
-latex-documentclass-paper
-latex-documentclass-fontsize
-latex-documentclass-twocolumn
-latex-documentclass-landscape
-latex-documentclass-hanging
-latex-documentclass-tate
-latex-jsclasses
-latex-jlreq
-```

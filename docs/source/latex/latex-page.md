@@ -1,7 +1,9 @@
 # レイアウトしたい
 
 ```{toctree}
-latex-documentclass
+---
+maxdepth: 2
+---
 latex-setlength
 latex-usepackage-geometry
 latex-usepackage-layout

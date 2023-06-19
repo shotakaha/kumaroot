@@ -26,6 +26,7 @@ maxdepth: 1
 ---
 latex-install
 latex-build
+latex-documentclass
 latex-usepackage
 latex-fonts
 latex-page
