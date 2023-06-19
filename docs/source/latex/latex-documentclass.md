@@ -5,6 +5,15 @@
 \documentclass{jlreq}
 ```
 
+和文LaTeXする場合、LaTeXエンジンは``LuaLaTeX``、ドキュメントクラスは``jlreq``を使うとよいです。
+このページでは``LuaLaTeX + jlreq``を前提として、サンプルコードをテストしています。
+
+:::{note}
+
+``(u)pLaTeX + jsclasses系``のサンプルも、わかる範囲で載せておきます。
+
+:::
+
 ```{toctree}
 latex-jlreq
 latex-documentclass-paper
@@ -16,6 +25,7 @@ latex-documentclass-tate
 latex-jsclasses
 ```
 
+もしくは``jsclasses``系を使います。
 
 ```latex
 % LuaLaTeX + ltjsarticle
