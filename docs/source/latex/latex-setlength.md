@@ -41,15 +41,6 @@ LaTeXの長さの単位です。
 
 :::
 
-## 段落したい
-
-```latex
-\setlength{\linewidth}{40\zw}     % 1行の長さ
-\setlength{\baselineskip}{1.5\zw} % 行送りの大きさ（＝行間の高さ）
-\setlength{\parindent}{1\zw}      % 段落のインデント
-\setlength{\parskip}{1\zw}        % 段落の間の高さ
-```
-
 ## 段組したい
 
 ```latex
