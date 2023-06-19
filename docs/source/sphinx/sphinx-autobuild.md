@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: プレビューしたい; Sphinx
+```
+
 # 自動ビルドしたい（``sphinx-autobuild``）
 
 ```console

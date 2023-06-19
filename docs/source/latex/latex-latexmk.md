@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: ビルドしたい; LaTeX
+```
+
 # タイプセットしたい（``latexmk``）
 
 ```console
@@ -30,8 +35,10 @@ $ latexmk -shell-escape
 $ latexmk -f -interaction=nonstopmode
 ```
 
-
-
+```{eval-rst}
+.. index::
+    pair: プレビューしたい; LaTeX
+```
 ## ライブプレビューしたい（``-pvc``）
 
 ```console

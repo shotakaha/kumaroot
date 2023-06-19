@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    single: ビルドしたい; Sphinx
+```
+
 # ドキュメントを生成したい（``sphinx-build``）
 
 ```bash
