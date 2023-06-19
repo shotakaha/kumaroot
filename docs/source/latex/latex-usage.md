@@ -22,13 +22,25 @@ LaTeXの開発も進んでいて、以前とは変わっている方法もあり
 
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 1
 ---
 latex-install
+latex-build
+latex-usepackage
+latex-fonts
+latex-page
+latex-par
+latex-heading
+latex-document
+```
+
+```{toctree}
+---
+maxdepth: 2
+---
 latex-ide
 latex-online
 latex-document
-latex-latexmk
 latex-documentclass
 ```
 
@@ -36,10 +48,6 @@ latex-documentclass
 ---
 caption: プリアンブルしたい
 ---
-latex-geometry
-latex-layout
-latex-fancyhdr
-latex-fncychap
 latex-xcolor
 latex-bxjalipsum
 latex-minted
@@ -47,28 +55,8 @@ latex-minted
 
 ```{toctree}
 ---
-caption: コマンドしたい
----
-latex-maketitle
-latex-tableofcontents
-latex-section
-latex-setlength
-latex-include
-latex-index
-latex-ref
-latex-linebreak
-latex-newcommand
-```
-
-```{toctree}
----
 caption: 環境したい
 ---
-latex-usepackage
-latex-flushright
-latex-enumitem
-latex-graphicx
-latex-booktabs
 latex-amsmath
 latex-bibliography
 latex-hyperref
@@ -76,28 +64,11 @@ latex-hyperref
 
 ```{toctree}
 ---
-caption: LuaLaTeXしたい
----
-latex-lualatex
-latex-fontspec
-latex-luatexja
-latex-luatexja-preset
-latex-luatexja-fontspec
-latex-luatexja-otf
-latex-luatexja-ruby
-```
-
-```{toctree}
----
 caption: (u)pLaTeXしたい
 ---
-latex-uplatex
 latex-plautopatch
 latex-inputenc
 latex-fontenc
-latex-lmodern
-latex-kanji-config-udpmap-sys
-latex-otf
 latex-microtype
 ```
 
@@ -120,21 +91,6 @@ maxdepth: 2
 latex-hepparticles
 latex-physics
 latex-siunitx
-```
-
-## フォントしたい
-
-```{toctree}
----
-maxdepth: 2
----
-latex-fonts
-latex-font-family
-latex-font-series
-latex-font-shape
-latex-font-size
-latex-fonts-more
-latex-japanese
 ```
 
 ## リファレンス
