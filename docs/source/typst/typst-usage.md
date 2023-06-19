@@ -16,7 +16,7 @@ LaTeXやWord、Googleドキュメントの代替を目指しています。
 maxdepth: 1
 ---
 typst-install
-typst-compile
+typst-build
 typst-text
 typst-lorem
 typst-styling
