@@ -14,6 +14,9 @@
 より詳しく知りたい場合は[Overleafのドキュメント](https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX)を参考にするとよいでしょう。
 
 ```{toctree}
+---
+maxdepth: 1
+---
 latex-linebreak
 latex-flushright
 latex-enumitem
