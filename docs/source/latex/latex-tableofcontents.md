@@ -3,7 +3,7 @@
     pair: LaTeX; 目次したい
 ```
 
-# 目次を作成したい（``\tableofcontents``）
+# 目次したい（``\tableofcontents``）
 
 ```latex
 \tableofcontents  % 目次（章・節など）
