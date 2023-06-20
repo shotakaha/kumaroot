@@ -16,6 +16,15 @@
 #heading(level: 4)[見出し4]  // 見出し4以降は見た目が同じ
 ```
 
+## 見出しを隠したい
+
+```text
+#heading(outlined: false)[隠したい見出し]
+```
+
+``outlined: false``にした見出しは目次（``#outline()``）から隠すことができます。
+LaTeXの``\section*``に相当します。
+
 ## 見出しをカスタマイズしたい
 
 ```rust
