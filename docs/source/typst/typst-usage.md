@@ -27,6 +27,7 @@ typst-text
 typst-page
 typst-par
 typst-heading
+typst-outline
 typst-document
 typst-lorem
 typst-styling
