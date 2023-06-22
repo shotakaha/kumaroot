@@ -34,6 +34,7 @@ latex-par
 latex-heading
 latex-tableofcontents
 latex-enumitem
+latex-emph
 latex-graphicx
 latex-amsmath
 latex-bibliography

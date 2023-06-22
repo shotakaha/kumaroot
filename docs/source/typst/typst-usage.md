@@ -34,6 +34,7 @@ typst-par
 typst-heading
 typst-outline
 typst-list
+typst-strong
 typst-document
 typst-lorem
 typst-styling
