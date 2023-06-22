@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: た|使い方; Typst
+```
+
 # Typstの使い方
 
 [Typst](https://typst.app/)は[2023年3月にベータ版が公開](https://typst.app/blog/2023/beta-oss-launch)されたばかりの新しい組版システムです。
@@ -28,6 +33,7 @@ typst-page
 typst-par
 typst-heading
 typst-outline
+typst-list
 typst-document
 typst-lorem
 typst-styling
