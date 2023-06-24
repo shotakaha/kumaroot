@@ -13,6 +13,6 @@
 :::{seealso}
 
 - [](../latex/latex-linebreak.md)
-- [](../latex/latex-geometry.md)
+- [](../latex/latex-usepackage-geometry.md)
 
 :::

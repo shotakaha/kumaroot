@@ -25,7 +25,7 @@
 
 :::{seealso}
 
-- [](../latex/latex-geometry.md)
-- [](../latex/latex-fancyhdr.md)
+- [](../latex/latex-usepackage-geometry.md)
+- [](../latex/latex-usepackage-fancyhdr.md)
 
 :::
