@@ -35,7 +35,7 @@ latex-heading
 latex-tableofcontents
 latex-enumitem
 latex-emph
-latex-graphicx
+latex-figure
 latex-amsmath
 latex-bibliography
 latex-hyperref
