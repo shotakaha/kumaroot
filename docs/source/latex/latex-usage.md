@@ -59,13 +59,12 @@ latex-siunitx
 maxdepth: 1
 ---
 latex-masterthesis
+latex-a0poster
 latex-primer
 latex-ide
 latex-online
 latex-document
 ```
-
-
 
 ## リファレンス
 
