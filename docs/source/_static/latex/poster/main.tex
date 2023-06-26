@@ -1,0 +1,128 @@
+\documentclass[article, paper=a0, jafontsize=30pt, twocolumn]{jlreq}
+
+%% 和文フォントの設定
+\usepackage[haranoaji]{luatexja-preset}
+
+%% レイアウトの調整
+\usepackage{geometry}
+\geometry{
+    left=50truemm,
+    right=50truemm,
+    top=50truemm,
+    bottom=50truemm,
+}
+
+%% ヘッダー／フッターの装飾
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{テンプレート}
+\fancyhead[C]{作成日：2023/06/11}
+\fancyhead[R]{\includegraphics[height=5\zw]{example-image.pdf}}
+\fancyfoot[L]{CC-BY-4.0}
+\fancyfoot[C]{©️ KumaROOT / Shota Takahashi}
+\fancyfoot[R]{\thepage}
+
+\usepackage{mwe}
+\usepackage{graphicx}
+\usepackage{caption}
+
+%% 本番では削除
+\usepackage[japanese]{layout}
+\usepackage{bxjalipsum}
+
+%% 表紙の設定
+\title{LuaLaTeX + jlreq}
+
+% \renewcommand{\thefootnote}{\arabic{footnote}}
+\makeatletter
+% \let\@fnsymbol\@arabic
+\renewcommand{\@fnsymbol}[1]{\@arabic{#1}}
+\makeatother
+
+\author{
+    すごい著者 \thanks{すごい大学} \\ \and
+    これまたすごい著者 \thanks{すごい研究所} \\ \and
+    これまたすごい著者 \thanks{すごい研究所}
+}
+
+\begin{abstract}
+LuaLaTeXとjlreqでA0ポスターを作ってみます。
+jlreqのクラスオプションでページサイズをA0（\texttt{paper=a0}）、
+フォントサイズを30pt（\texttt{jafontsize=30pt}）、
+二段組（\texttt{twocolumn}）にしています。
+概要は\texttt{abstract}環境を使ってプリアンブルに書いています。
+プリアンブルに書いておくと、\texttt{\\maketitle}したときに、二段組にならずに表示できます。
+余白は\texttt{geometry}パッケージで設定しています。
+最適な余白のサイズははっきりいってわかりません。
+ただし、用紙の端まで目一杯に文字を詰めるのがよくないことは確かです。
+\end{abstract}
+
+
+\begin{document}
+
+%% ヘッダー／フッターの設定
+\thispagestyle{fancy}
+\fancyfoot[L]{CC-BY-4.0}
+\fancyfoot[C]{©️ KumaROOT / Shota Takahashi}
+\fancyfoot[R]{\thepage}
+
+%% タイトル／著者／概要は二段組しない
+\maketitle
+
+\section{背景}
+
+研究の背景を簡潔に書いてください。
+この研究の分野全体における位置付けと、課題が説明できるとよいです。
+
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+
+\section{見出し}
+
+\blindtext
+\jalipsum{iroha}
+\jalipsum{iroha}
+
+\section{見出し}
+
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{example-image-16x9.pdf}
+    \caption{mweを使ってサンプル図を挿入しています。図のサイズは、行幅の80\%から90\%にすると見栄えがよいです。}
+\end{figure}
+
+\section{見出し}
+
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+
+\section{見出し}
+
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{example-image-16x9.pdf}
+    \caption{mweを使ってサンプル図を挿入しています。図のサイズは、行幅の80\%から90\%にすると見栄えがよいです。}
+\end{figure}
+
+
+\section{まとめ}
+
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+\jalipsum{iroha}
+
+
+\end{document}
