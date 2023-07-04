@@ -17,6 +17,7 @@ pandas-query
 pandas-unique
 pandas-concat
 pandas-astype
+pandas-groupby
 ```
 
 ## リファレンス
