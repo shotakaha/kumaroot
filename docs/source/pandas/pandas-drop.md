@@ -1,4 +1,4 @@
-# データを削除したい
+# データを削除したい（``drop``）
 
 ```python
 data.drop(columns="カラム名")
