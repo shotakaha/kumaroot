@@ -1,4 +1,4 @@
-# データをソートしたい
+# データをソートしたい（``sort_values``）
 
 ```python
 data.sort_values(by="カラム名")

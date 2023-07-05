@@ -1,4 +1,4 @@
-# データに重複があるかを調べたい
+# データに重複があるかを調べたい（``duplicated``）
 
 ```python
 data.duplicated(subset=None, keep="first")

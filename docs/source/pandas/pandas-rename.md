@@ -1,4 +1,4 @@
-# カラム名を変更したい
+# カラム名を変更したい（``rename``）
 
 ```python
 data.rename(columns={"前カラム", "後カラム"})
