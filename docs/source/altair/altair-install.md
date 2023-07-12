@@ -11,6 +11,33 @@ alt.Chart(data).mark_*().encode()
 
 公式ドキュメントを読むと``alt``という略称でインポートしています。
 
+:::{note}
+
+2023/05/10にAltair v5がリリースされ、新しい書式設定用のメソッドが追加されました。
+どれでもいいのでギャラリーにある[サンプル](https://altair-viz.github.io/gallery/histogram_heatmap.html)を確認すれば、どういう機能が追加されたのか一目瞭然です。
+
+:::
+
+## プロットを保存したい（``vl-convert-python``）
+
+```console
+$ pip3 install vl-convert-python
+```
+
+Altair v5では``vl-convert``だけでPNGとSVGが保存できるようになりました。
+ただし、[Saving Altair Charts: PNG, SVG and PDF format](https://altair-viz.github.io/user_guide/saving_charts.html#png-svg-and-pdf-format)を読むとPDFはNGのようです。
+
+変更点の詳細は[リリースノート](https://github.com/altair-viz/altair/releases/tag/v5.0.0)を参照してください。
+
+:::{note}
+
+これまでAltairを使った個人プロジェクトが多数あるのですが、移行するのに手間がかかりそうなので、もうしばらくはv4で様子見します。
+
+新しく作成するプロジェクトはv5を使いはじめてみました。
+依存パッケージが減り、導入が簡単になりよき✨
+
+:::
+
 ## プロットを保存したい（``altair_saver``）
 
 ```console
@@ -20,7 +47,7 @@ $ brew install --cask google-chrome
 $ brew install --cask chromedriver
 ```
 
-プロットを保存するために``altair``以外のツールも必要です。
+Altair v4では、プロットを保存するために``altair``以外の外部ツールが必要です。
 ``selenium``や``Chrome`` / ``chromedriver`` は生成した画像を自動で書き出すために追加しました。
 ``altair_saver``の[イシュー（altair_saver#104）](https://github.com/altair-viz/altair_saver/issues/104)があるので、``selenium``は4.2.0を指定する必要があります。
 
@@ -29,17 +56,6 @@ $ brew install --cask chromedriver
 
 :::{note}
 
-2023/05/10にAltair v5がリリースされました。
-[リリースノート](https://github.com/altair-viz/altair/releases/tag/v5.0.0)を確認すると、プロット保存周りも大きく変更されたようです。
-
-> `vl-convert` is now used as the default backend for saving Altair charts as svg and png files, which simplifies saving chart as it does not require external dependencies like `altair_saver` does (#2701).
-> Currently, `altair_saver` does not support Altair 5 and it is recommended to switch to `vl-convert`.
-> See PNG, SVG, and PDF format for more details.
-
-上記のとおり、v5ではプロットを保存するパッケージが`vl-convert`に変わったようです。
-`altair_saver`は（まだ）v5非対応なので`vl-convert`への移行が必要です。
-
-ただし、[Saving Altair Charts: PNG, SVG and PDF format](https://altair-viz.github.io/user_guide/saving_charts.html#png-svg-and-pdf-format)を読むと、`vl-convert`で保存できるのはPNGとSVGだけで、PDFはNGのようです。
-Altairを使った個人プロジェクトがあるのですが、移行するのに手間がかかりそうなので、もうしばらくはv4で様子を見ようと思っています。
+`altair_saver`は（まだ）v5非対応です。
 
 :::
