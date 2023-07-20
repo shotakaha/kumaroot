@@ -20,6 +20,19 @@ blob.sentiment.subjectivity
 感情分析は「極性（``polarity``）」と「主観性（``subjectivity``）」の軸があります。
 極性は``-1.0 - 1.0``、主観性は``0.0 - 1.0``の範囲のfloat値で返ってきます。
 
+:::{note}
+
+[Sentiment Analysers](https://textblob.readthedocs.io/en/dev/advanced_usage.html#sentiment-analyzers)を読むと、感情分析に使えるモデルは``PatternAnalyzer``と``NaiveBayesAnalyzer``があります。
+デフォルトは``PatternAnalyzer``です。
+
+``PatternAnalyzer``は、おそらく文章のパターンから感情を評価するモデルです。
+"文脈"みたいなものは考慮しないモデルなんだと思います。
+
+``NaiveBayesAnalyzer``はあとで調べます。
+返ってくる値が異なるようなので、まず両モデルの結果を確かめてみるところからはじめよかな。
+
+:::
+
 ## データフレームを一括で分析したい
 
 ```python
