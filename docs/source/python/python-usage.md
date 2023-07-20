@@ -53,6 +53,7 @@ python-bs4
 python-pandas
 python-plotly
 python-altair
+python-textblob
 ```
 
 ```{toctree}
