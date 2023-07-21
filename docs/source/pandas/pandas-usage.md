@@ -19,6 +19,7 @@ pandas-concat
 pandas-astype
 pandas-groupby
 pandas-categorical
+pandas-crosstab
 ```
 
 ## リファレンス
