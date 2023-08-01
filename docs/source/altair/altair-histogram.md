@@ -2,26 +2,22 @@
 
 ```python
 # Method Syntax (v5)
-chart = alt.Chart(data)
-    .mark_bar()
-    .encode(
-        alt.X("adc:Q").bin().title("X軸のタイトル"),
-        alt.Y("count()").title("Y軸のタイトル"),
-    ).properties(
-        title="グラフのタイトル",
-    )
+alt.Chart(data).mark_bar().encode(
+    alt.X("adc:Q").bin().title("X軸のタイトル"),
+    alt.Y("count()").title("Y軸のタイトル"),
+).properties(
+    title="グラフのタイトル",
+)
 ```
 
 ```python
 # Attribute Syntax (v4 & v5)
-chart = alt.Chart(data)
-    .mark_bar()
-    .encode(
-        alt.X("adc:Q", bin=True, axis=alt.Axis(title="X軸のタイトル")),
-        alt.Y("count()", axis=alt.Axis(title="Y軸のタイトル")),
-    ).properties(
-        title="グラフのタイトル",
-    )
+alt.Chart(data).mark_bar().encode(
+    alt.X("adc:Q", bin=True, axis=alt.Axis(title="X軸のタイトル")),
+    alt.Y("count()", axis=alt.Axis(title="Y軸のタイトル")),
+).properties(
+    title="グラフのタイトル",
+)
 ```
 
 ヒストグラムは[.mark_bar](https://altair-viz.github.io/user_guide/marks/bar.html)を使って作成します。
@@ -54,3 +50,52 @@ alt.Chart(grouped).mark_bar().encode(
 ```
 
 :::
+
+## 割合したい
+
+```python
+alt.Chart(data).mark_bar().encode(
+    alt.X("age:O").title("年代"),
+    alt.Y("count()").stack("normalize"),
+).properties(
+    title="グラフのタイトル",
+)
+```
+
+## よく使うやつ
+
+```python
+def hbar(data: pd.DataFrame, x: str, color: str, title: str, y: str="count()"):
+    color = f"{color}:N"
+    base = alt.Chart(data).encode(
+        alt.X(x),
+        alt.Y(y),
+    ).properties(
+        title=title,
+    )
+
+    opacity = 0.5
+    mark = base.mark_bar(tooltip=True, opacity=opacity).encode(
+        alt.Y(y),
+        alt.Color(color)
+    )
+
+    stack = base.mark_bar(tooltip=True, opacity=opacity).encode(
+        alt.Y(y).stack("normalize"),
+        alt.Color(color),
+    )
+
+    text = base.mark_text(dy=10).encode(
+        alt.Y(y).stack("normalize"),
+        alt.Text(y),
+        alt.Color(color)
+    )
+
+    return mark | stack + text
+```
+
+棒グラフとその割合の図を一度に作成する関数です。
+割合には``mark_text``を使って頻度（≠パーセンテージ）をオーバーレイしています。
+カテゴリカル変数の度数分布を確認する場合に便利です。
+
+``mark``と``stack + text``をそれぞれ返すようになっているので、受け取ってから保存する間にプロパティを調整できます。
