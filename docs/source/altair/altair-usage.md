@@ -12,8 +12,9 @@ Altairにもデータを集計する機能がありますが、基本は``Pandas
 maxdepth: 1
 ---
 altair-install
+altair-mark
+altair-encode
 altair-histogram
 altair-heatmap
 altair-datetime
-altair-encoding
 ```
