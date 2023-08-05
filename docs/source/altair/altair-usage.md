@@ -8,6 +8,9 @@
 Altairにもデータを集計する機能がありますが、基本は``Pandas``で前処理は完了させておくのがよいと思います。
 
 ```{toctree}
+---
+maxdepth: 1
+---
 altair-install
 altair-histogram
 altair-heatmap
