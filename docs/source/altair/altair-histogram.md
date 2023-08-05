@@ -51,16 +51,49 @@ alt.Chart(grouped).mark_bar().encode(
 
 :::
 
+## 面積でノーマライズしたい
+
+```python
+data_sum = data.groupby("age")["response"].sum().reset_index()
+data_merged = pd.merge(data, data_sum, on="age")
+data_merged["normalized"] = data_merged["response_x"] / data_merged["response_y"]
+data_merged
+```
+
+測定回数や回答数が異なる複数のヒストグラムを比較したい場合、
+その面積（＝ヒストグラムのエントリー数）でノーマライズして比べる必要があります。
+ただし、AltairではできないのでPandasでやります。
+
 ## 割合したい
 
 ```python
 alt.Chart(data).mark_bar().encode(
     alt.X("age:O").title("年代"),
     alt.Y("count()").stack("normalize"),
+    alt.Color("gender").title("性別"),
 ).properties(
     title="グラフのタイトル",
 )
 ```
+
+割合グラフにする場合は、該当する軸を``.stack("normalize")``します。
+
+## 積み上げたくない
+
+```python
+opacity = 0.5
+alt.Chart(data).mark_bar(opacity=opacity).encode(
+    alt.X("age:O").title("年代"),
+    alt.Y("count()").stack(None),
+    alt.Color("gender").title("性別"),
+).properties(
+    title="グラフのタイトル",
+)
+```
+
+グラフを積み上げたくない場合は、該当する軸を``.stack(None)``します。
+このときグラフの色の透過度（``opacity``）を設定するとよいです。
+
 
 ## よく使うやつ
 
