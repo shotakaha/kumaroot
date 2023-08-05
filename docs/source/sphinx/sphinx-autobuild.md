@@ -15,7 +15,8 @@ $ sphinx-autobuild source/ build/html/
 ```
 
 [sphinx-autobuild](https://github.com/executablebooks/sphinx-autobuild)を使うと、ライブリロードしながら編集できます。
-``Makefile``の末尾に次のように追記します。
+
+## さらに自動化したい
 
 ```make
 # ...（省略）...
@@ -23,12 +24,15 @@ $ sphinx-autobuild source/ build/html/
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 livehtml:
-	sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	sphinx-autobuild --open-browser "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 ```
 
-ターミナル上で``make livehtml``を走らせた状態で、ブラウザで``http://127.0.0.1:8000``を開くと準備完了です。
-``docs``以下のファイルを編集して保存するたびにSphinxが実行され、ブラウザが更新されます。
-うまく更新できない場合は、まずターミナル上の表示を確認してください。エラーの素が見つかるかもしれません。
+``Makefile``の末尾に上記のコマンドを追記しておくと便利です。
+ターミナル上で``make livehtml``を実行すると、ブラウザで``http://127.0.0.1:8000``が開くようになります。
+``docs``以下のファイルを編集して保存するたびにSphinxが実行され、ブラウザ表示も更新されます。
+
+ページがうまく更新できない場合は、ビルド時にエラーが発生している可能性があります。
+まずターミナル上の表示を確認してください。
 
 ```console
 $ cd docs
