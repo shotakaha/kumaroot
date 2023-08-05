@@ -2,13 +2,13 @@
 
 ## v1.20.0 (2023-08-05)
 
-### Feat
+### Added
 
 - **python/python-textblob.md**: 感情分析を追加した
-
-### Fix
-
 - **pandas/pandas-groupby.md**: グループ集計を追加した
+
+### Fixed
+
 - **pandas/pandas-read_csv.md**: 各ページのタイトルに関数名を追記した
 - **python/python-textblob.md**: 感情分析のアナライザを追記した
 - **sphinx/sphinx-autobuild.md**: 自動ビルドを追記した
