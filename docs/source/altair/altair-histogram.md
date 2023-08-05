@@ -1,4 +1,20 @@
-# ヒストグラムしたい
+# ヒストグラムしたい（``.mark_bar``）
+
+```python
+base = alt.Chart(data).encode(
+    alt.X("X軸").bin(),
+    alt.Y("count()"),
+)
+
+base.mark_bar()
+base.mark_area(interpolate="step")
+base.mark_line(interpolate="step")
+```
+
+ヒストグラムは[.mark_bar](https://altair-viz.github.io/user_guide/marks/bar.html)を使って作成します。
+また、同じような見た目の図は``.mark_area``や``.mark_line``で``interpolate="step"``のオプションを使って作成できます。
+
+## タイトルしたい
 
 ```python
 # Method Syntax (v5)
