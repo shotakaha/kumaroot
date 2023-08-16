@@ -13,12 +13,12 @@ Markdown記法は技術文書のデファクトです（と思っています）
 
 MySTは、そんなMarkdownにreSTの表現力（＝``directive``と``role``を使った構造化）を追加し、図表や数式などの書式設定にも対応できるようになっています。
 
-[MyST Tools](https://myst-tools.org/)はSphinxにインスパイアされて開発されていたMySTのエコシステムです。
+[MyST Tools](https://mystmd.org/)はSphinxにインスパイアされて開発されていたMySTのエコシステムです。
 ``.md``形式や``.ipynb``形式のファイルから、ウェブサイトと文書（LaTeXやPDF、Word形式）を生成できます。
 ウェブサイトは``React``がベースとなっています。
 PDF（やLaTeX）のテンプレートはさまざまなジャーナルに対応していて、デフォルトで400種類以上用意されています。
 もちろん自作することもできます。
-これらのことは[公式ドキュメント](https://myst-tools.org/docs/mystjs/background)に詳しく書かれています。
+これらのことは[公式ドキュメント](https://mystmd.org/guide/background)に詳しく書かれています。
 
 ```{toctree}
 ---
