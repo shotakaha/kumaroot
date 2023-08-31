@@ -32,6 +32,25 @@ if data["datetime"].dt.tz is None:
 
 :::
 
+## UNIX時間に変換したい
+
+```python
+pd.to_datetime(data["datetime"], format="ISO8601", unit="s", origin="unix")
+```
+
+UNIXのエポック時間（=1970-01-01）からの経過時間に変換できます。
+
+## エラーをスキップしたい
+
+```python
+data["datetime"] = pd.to_datetime(data["datetime"], format="%Y/%m/%d", errors="coerce")
+```
+
+日付に変換ができない文字列があった場合、デフォルトではエラーが表示されます（``errors="raise"``）。
+``errors="coerce"``オプションを使うと、変換できなかった値を``NaT（Not a Time）``に置き換えます。
+事後処理するときに便利です。
+
+
 ## リファレンス
 
 - [pandas.to_datetime](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html)
