@@ -21,6 +21,7 @@ pandas-groupby
 pandas-categorical
 pandas-crosstab
 pandas-mean
+pandas-plot
 ```
 
 ## リファレンス
