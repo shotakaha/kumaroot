@@ -52,6 +52,45 @@ $ code ~/.config/fish/functions/fish_prompt.fish
 上記の``fish_config``で選んだプロンプトを少しだけ修正したい場合は、``fish_prompt.fish``を直接編集してしまいましょう。
 僕は``Astronaut``の2段組のプロンプトを選んだのですが、作業中のディレクトリ名は省略形に変更したいです。
 
+## パスを設定したい（``fish_add_path``）
+
+```fish
+# Homebrew
+fish_add_path /usr/local/bin
+
+# pipx
+fish_add_path $HOME/.local/bin
+
+# Rust
+fish_add_path $HOME/.cargo/bin
+```
+
+``fish_add_path``を使ってパスを追加できます。
+
+:::{note}
+これまでは以下の方法``set -x``を使った方法でよかったのですが、v3.2から非推奨になりました。
+
+```console
+$ set -x PATH $PATH $HOME/.cargo/bin
+```
+
+:::
+
+### パスを確認したい（``fish_user_paths``）
+
+```console
+$ echo $fish_user_paths
+echo $fish_user_paths
+~/.cargo/bin ~/.local/bin /usr/local/bin
+
+$ printf '%s\n' $fish_user_paths
+~/.cargo/bin
+~/.local/bin
+/usr/local/bin
+```
+
+パスは``fish_user_paths``で確認できます。
+
 ## 変数を設定したい（``set``）
 
 ```bash
