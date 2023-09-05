@@ -50,6 +50,12 @@ p.mkdir()
 すでにディレクトリが存在している場合は``FileExistsError``となります。
 上書きを防止したい場合は、{command}`try ... except:`でこのエラーをキャッチすればOKです。
 
+```python
+p.mkdir(parents=True, exist_ok=True)
+```
+
+ディレクトリを必ず作成したい場合は、``parents``と``exist_ok``オプションを使うとよいです。
+
 ## パスを連結したい
 
 ```python
