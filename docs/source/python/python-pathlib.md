@@ -14,7 +14,7 @@ from pathlib import Path
 
 ```python
 p = Path("ファイル名")
-with p.open() as f:
+with p.open("r") as f:
     # ファイル操作
 ```
 
@@ -24,7 +24,7 @@ with p.open() as f:
 ```python
 # これまでの開き方
 p = Path("ファイル名")
-with open(p) as f:
+with open(p, "r") as f:
     # ファイル操作
 ```
 
@@ -35,30 +35,20 @@ p = Path("ディレクトリ名")
 fnames = sorted(p.glob("*.csv"))
 ```
 
-指定したディレクトリにあるデータファイルの一覧をリスト型で取得しています。
-`Path.glob(パターン)`だとジェネレーターが返ってきて、
-使いづらいので`sorted`して、ファイル名の順番に並べたリストにしています。
+ディレクトリ内にあるファイルの拡張子などを指定して、ファイル名のリストを取得できます。
+`Path.glob(パターン)`だとジェネレーターが返ってくるので、
+`sorted`して、ファイル名の順番に並べたリスト型に変換しています。
 
 ## ディレクトリを作成したい
 
 ```python
-p = Path(args.saved)
-try:
-    p.mkdir()
-    info = f"Created new directory : {p}"
-    ic(info)
-except FileExistsError as e:
-    warning = f"Directory already exists : {p}"
-    ic(warning)
-    if not args.append:
-        ic(e)
-        sys.exit()
-    warning = "Append data to existing files."
-    ic(warning)
+p = Path(write_to)
+p.mkdir()
 ```
 
-ディレクトリを作成するだけなら`mkdir()`でできます。
-しかし、たいていの場合、上書きするのを防止したいことが多いので{command}`try ... except:`を使っています。
+`mkdir`でディレクトリを作成できます。
+すでにディレクトリが存在している場合は``FileExistsError``となります。
+上書きを防止したい場合は、{command}`try ... except:`でこのエラーをキャッチすればOKです。
 
 ## パスを連結したい
 
@@ -72,6 +62,19 @@ fname = data_dir / "data.csv"
 複数の引数を指定すると、それらを連結した`Path`オブジェクトが生成できます。
 `Path`オブジェクトは`/`を使って連結できます。
 `Path`オブジェクトはファイルが存在しなくても作成できます。
+
+## パスを取得したい
+
+```python
+# ホームディレクトリ
+Path.home()
+
+# カレントディレクトリ
+Path.cwd()
+```
+
+ホームディレクトリとカレントディレクトリを取得する``Path``のクラスメソッドがあります。
+``Path.home()``と``Path.cwd()``でそれぞれのディレクトリ名を``Path``オブジェクトとして取得できます。
 
 ## リファレンス
 
