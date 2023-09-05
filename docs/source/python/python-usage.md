@@ -13,6 +13,7 @@ maxdepth: 1
 python-install
 python-pathlib
 python-pendulum
+python-platformdirs
 python-random
 python-re
 python-requests
