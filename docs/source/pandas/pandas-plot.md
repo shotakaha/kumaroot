@@ -1,11 +1,16 @@
 # グラフしたい（``plot``）
 
 ```python
-data.plot(data=データフレーム, x="x軸名", y="y軸名", kind="グラフの種類")
+data.plot(
+    data=データフレーム,
+    x="x軸名",
+    y="y軸名",
+    kind="グラフの種類"
+    )
 ```
 
 [pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)を使ってグラフを作成できます。
-グラフ描画に``matplotlib``が必要なので、追加でインストールしてください。
+このメソッドは``matplotlib``のラッパー的なものなので、``matplotlib``のインストールが必要です。
 グラフの種類は``kind``オプションで指定します。
 また、それぞれの種類に対応した簡易メソッドもあります。
 
