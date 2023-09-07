@@ -31,6 +31,7 @@ $ git config --global pull.rebase false
 ```console
 $ git config --global core.editor emacslient
 $ git config --global core.editor "code --wait"
+$ git config --global core.editor hx
 ```
 
 ``git commit``したときに起動するエディターを変更できます。
@@ -38,6 +39,7 @@ $ git config --global core.editor "code --wait"
 
 Emacsヘビーユーザーだったころは``emacsclinent``に変更していました。
 VS Codeユーザーのいまは``code --wait``に変更しています。
+``tig``をメインで使う場合、``hx``（Helix）もいいかなと思います。
 
 :::{note}
 
