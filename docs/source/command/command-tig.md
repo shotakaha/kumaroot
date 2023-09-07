@@ -31,6 +31,16 @@ tig ブランチ名
 tig ファイル1 ファイル2 ...
 ```
 
+## 設定したい
+
+```bash
+#bind generic C !npx git-cz
+bind generic C !git cz
+```
+
+{file}`~/.tigrc`でtigを設定できます。
+ビューに表示する内容や、キーバインドなどを設定できます。
+
 ## ショートカットキー
 
 | キー | Gitコマンド | 内容 |
