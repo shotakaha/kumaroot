@@ -10,8 +10,8 @@ maxdepth: 1
 rust-install
 rust-cargo
 rust-println
+rust-let
 rust-alternatives
 rust-rand
 rust-mdbook
-
 ```
