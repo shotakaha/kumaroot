@@ -11,4 +11,5 @@ rust-install
 rust-cargo
 rust-println
 rust-alternatives
+rust-mdbook
 ```
