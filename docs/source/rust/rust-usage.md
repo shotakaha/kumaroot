@@ -12,6 +12,7 @@ rust-cargo
 rust-println
 rust-let
 rust-fn
+rust-trinominal
 rust-alternatives
 rust-rand
 rust-mdbook
