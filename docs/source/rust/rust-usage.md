@@ -11,6 +11,7 @@ rust-install
 rust-cargo
 rust-println
 rust-let
+rust-fn
 rust-alternatives
 rust-rand
 rust-mdbook
