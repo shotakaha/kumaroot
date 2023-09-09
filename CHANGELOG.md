@@ -1,5 +1,55 @@
 # CHANGELOG.md
 
+## v1.21.0 (2023-09-10)
+
+### Feat
+
+- **docs/source/rust/rust-struct.md**: 構造体を追加した
+- **docs/source/rust/rust-trinominal.md**: 三項演算子を追加した
+- **docs/source/rust/rust-fn.md**: 関数定義を追加した
+- **docs/source/rust/rust-let.md**: 変数定義を追加した
+- **docs/source/python/python-platformdirs.md**: 定番ディレクトリを追加した
+- **docs/source/pandas/pandas-plot.md**: グラフする方法を追加した
+- **docs/source/rust/rust-alternatives.md**: Rust代替コマンドを追加した
+- **pandas/pandas-crosstab.md**: クロス集計を追加した
+- **pandas/pandas-categorical.md**: カテゴリー型への変換を追加した
+- **altair/altair-mark.md**: グラフの種類を追加した
+
+### Fix
+
+- **docs/source/sphinx/sphinx-deploy-gitlab.md**: GitLab CI設定を追加した
+- **docs/source/rust/rust-let.md**: 配列を追記した
+- **docs/source/rust/rust-rand.md**: randを追加した
+- **docs/source/rust/rust-cargo.md**: パッケージとクレートの構造を追加した
+- **docs/source/rust/rust-mdbook.md**: mdBookを追加した
+- **docs/source/rust/rust-install.md**: fishの設定を追記した
+- **docs/source/command/command-tig.md**: tigrcを追加した
+- **docs/source/git/git-config.md**: エディタの設定にhxを追加した
+- **docs/source/pandas/pandas-plot.md**: 概要を更新した
+- **docs/source/python/python-pathlib.md**: mkdirのオプションを追記した
+- **docs/source/python/python-pathlib.md**: パス取得を追記した
+- **docs/source/rust/rust-install.md**: Rustのインストールを整理した
+- **docs/source/command/command-fish.md**: パスの設定を追加した
+- **docs/source/rust/rust-alternatives.md**: Rust代替コマンドを更新した
+- **docs/source/rust/rust-cargo.md**: バイナリの追加方法を追記した
+- **docs/source/pandas/pandas-to_datetime.md**: UNIX時間への変換を追加した
+- **docs/source/pandas/pandas-mean.md**: 平均値を追加した
+- **docs/source/pandas/pandas-to_datetime.md**: タイムゾーンを追記した
+- **docs/source/pandas/pandas-to_datetime.md**: tz_localizeを追加した
+- **docs/source/command/command-tig.md**: コミットにしっぱいした
+- **docs/source/command/command-tig.md**: tigコマンドのショートカットキーを追記した
+- **docs/source/myst/myst-install.md**: mystmdにパッケージ名を変更した
+- **altair/altair-histogram.md**: ヒストグラムの作成方法を追加した
+- **altair/altair-histogram.md**: 面積でノーマライズする方法を追記した
+- **pandas/pandas-crosstab.md**: クロス集計を追記した
+- **altair/altair-histogram.md**: 使い勝手のよいhbar関数を追加した
+- **altair/altair-histogram.md**: ヒストグラムの作り方を追記した
+- **pandas/pandas-categorical.md**: カテゴリー型を追記した
+- **altair/altair-install.md**: Altairのバージョンの違いを簡潔に説明した
+- **renamed**: altair/altair-encode.md
+- **altair/altair-install.md**: v4とv5で必要な手順を整理した
+- **altair/altair-usage.md**: 目次の深さを変更した
+
 ## v1.20.0 (2023-08-05)
 
 ### Added
