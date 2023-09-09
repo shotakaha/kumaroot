@@ -25,3 +25,9 @@ cargo 1.72.0 (26bba4830 2023-08-26)
 HomebrewでRustをインストールできます。
 ``brew install rust``をすると関連コマンドがインストールされます。
 ``rustup``はしなくてもよさそうですが、``$HOME/.cargo/bin``へのPATH設定が必要です。
+
+```bash
+# $HOME/.config/fish/config.toml
+# Rust
+fish_add_path $HOME/.cargo/bin
+```
