@@ -13,6 +13,7 @@ rust-println
 rust-let
 rust-fn
 rust-trinominal
+rust-struct
 rust-alternatives
 rust-rand
 rust-mdbook
