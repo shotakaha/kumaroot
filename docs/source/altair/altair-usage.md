@@ -16,5 +16,6 @@ altair-mark
 altair-encode
 altair-histogram
 altair-heatmap
+altair-pie
 altair-datetime
 ```
