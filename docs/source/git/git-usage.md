@@ -20,6 +20,7 @@ git-init
 git-status
 git-add
 git-commit
+git-rm
 git-log
 git-branch
 git-checkout
