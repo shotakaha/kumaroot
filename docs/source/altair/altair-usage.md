@@ -18,4 +18,5 @@ altair-histogram
 altair-heatmap
 altair-pie
 altair-datetime
+altair-color
 ```
