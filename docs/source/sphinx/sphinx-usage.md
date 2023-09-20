@@ -103,8 +103,8 @@ maxdepth: 1
 ---
 sphinx-latex-engine
 sphinx-latex-docclass
-sphinx-latex-documents
 sphinx-latex-elements
+sphinx-latex-documents
 sphinx-latex-logo
 sphinx-latex-section
 sphinx-latex-thesection
