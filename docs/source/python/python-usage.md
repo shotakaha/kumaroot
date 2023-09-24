@@ -63,6 +63,7 @@ maxdepth: 1
 caption: テスト＆デバッグしたい
 ---
 python-black
+python-ruff
 python-icecream
 python-loguru
 ```
