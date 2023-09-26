@@ -40,6 +40,7 @@ caption: プロジェクトを作成＆管理したい
 ---
 python-pyproject
 python-commitizen
+python-pre-commit
 python-typer
 ```
 
