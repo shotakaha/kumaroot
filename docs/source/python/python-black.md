@@ -2,11 +2,14 @@
 
 ```bash
 $ pip3 install black
+$ pip3 install "black[jupyter]"
 ```
 
 PEP8に準拠したフォーマッタです。
 Pythonのフォーマッタにもいろいろありますが、``black``は**初期設定不要**なことが特徴です。
 インストールしてすぐに使うことができるので便利です。
+
+Jupyter Notebookもフォーマット対象にする場合は、``black[jupyter]``のオプションをつけてインストールします。
 
 ## フォーマットを確認したい
 
