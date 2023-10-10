@@ -18,6 +18,8 @@ altair-histogram
 altair-heatmap
 altair-pie
 altair-layer
+altair-hconcat
+altair-vconcat
 altair-datetime
 altair-color
 ```
