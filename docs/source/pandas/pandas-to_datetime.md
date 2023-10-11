@@ -4,7 +4,7 @@
 pd.to_datetime("2022/08/24", format="%Y/%m/%d")
 ```
 
-日付の文字列を``Timestamp``型などのオブジェクトに変換できます。
+[pandas.to_datetime](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html)を使って、日付の文字列を``Timestamp``型などのオブジェクトに変換できます。
 変換する文字列のフォーマットを``format``で指定できます。
 だいたいの文字列を変換できます。
 
@@ -49,8 +49,3 @@ data["datetime"] = pd.to_datetime(data["datetime"], format="%Y/%m/%d", errors="c
 日付に変換ができない文字列があった場合、デフォルトではエラーが表示されます（``errors="raise"``）。
 ``errors="coerce"``オプションを使うと、変換できなかった値を``NaT（Not a Time）``に置き換えます。
 事後処理するときに便利です。
-
-
-## リファレンス
-
-- [pandas.to_datetime](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html)

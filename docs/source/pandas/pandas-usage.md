@@ -22,7 +22,6 @@ pandas-drop
 pandas-rename
 pandas-sort_values
 
-pandas-astype
 ```
 
 ```{toctree}
@@ -31,6 +30,7 @@ maxdepth: 1
 caption: 集計したい
 ---
 pandas-query
+pandas-astype
 pandas-categorical
 pandas-unique
 pandas-groupby
