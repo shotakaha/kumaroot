@@ -14,13 +14,14 @@ maxdepth: 1
 caption: 前処理したい
 ---
 pandas-read_csv
+pandas-concat
 pandas-isna
 pandas-duplicated
 pandas-to_datetime
 pandas-drop
 pandas-rename
 pandas-sort_values
-pandas-concat
+
 pandas-astype
 ```
 
