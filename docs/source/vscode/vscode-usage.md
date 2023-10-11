@@ -15,6 +15,7 @@ maxdepth: 1
 ---
 vscode-install
 vscode-extensions
+vscode-disable-extensions
 vscode-vspacecode
 vscode-settings
 vscode-keybind
