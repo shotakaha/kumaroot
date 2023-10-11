@@ -15,9 +15,9 @@ caption: 前処理したい
 ---
 pandas-read_csv
 pandas-concat
+pandas-to_datetime
 pandas-isna
 pandas-duplicated
-pandas-to_datetime
 pandas-drop
 pandas-rename
 pandas-sort_values
@@ -29,9 +29,9 @@ pandas-to_csv
 maxdepth: 1
 caption: 集計したい
 ---
-pandas-query
 pandas-astype
 pandas-categorical
+pandas-query
 pandas-unique
 pandas-groupby
 pandas-crosstab
