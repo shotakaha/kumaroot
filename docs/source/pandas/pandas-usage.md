@@ -6,23 +6,45 @@ maxdepth: 1
 ---
 pandas-install
 pandas-dataframe
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 前処理したい
+---
 pandas-read_csv
+pandas-isna
 pandas-duplicated
+pandas-to_datetime
 pandas-drop
 pandas-rename
 pandas-sort_values
-pandas-isna
-pandas-to_datetime
-pandas-query
-pandas-unique
 pandas-concat
 pandas-astype
-pandas-groupby
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 集計したい
+---
+pandas-query
 pandas-categorical
+pandas-unique
+pandas-groupby
 pandas-crosstab
 pandas-mean
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 可視化したい
+---
 pandas-plot
 ```
+
 
 ## リファレンス
 

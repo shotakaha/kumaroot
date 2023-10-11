@@ -1,4 +1,4 @@
-# CSVデータを読み込みたい（``read_csv``）
+# CSVデータを読み込みたい（``pd.read_csv``）
 
 ```python
 pd.read_csv("ファイル名")
