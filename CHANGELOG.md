@@ -2,34 +2,31 @@
 
 ## v1.22.0 (2023-10-12)
 
-### Feat
+### Added
 
-- **pandas/pandas-to_csv.md**: CSVに書き出す方法を追加した
-- **vscode/vscode-disable-extensions.md**: 拡張機能を無効にしてインストールする手順を追加した
+- **altair/altair-color.md**: 配色を変更する方法を追加した
 - **altair/altair-hconcat.md**: hconcat / vconcat を追加した
+- **altair/altair-layer.md**: 重ね書きする方法を追加した
+- **altair/altair-pie.md**: 円グラフを追加した
 - **git/git-hooks.md**: Git Hooksを追加した
+- **git/git-rm.md**: ファイルを削除する方法を追加した
+- **pandas/pandas-to_csv.md**: CSVに書き出す方法を追加した
 - **python/python-pre-commit.md**: pre-commitを追加した
 - **python/python-ruff.md**: ruffを追加した
-- **altair/altair-layer.md**: alt.layerを追加した
-- **altair/altair-color.md**: Altairの配色を変更する方法を追加した
-- **git/git-rm.md**: ファイルを削除する方法を追加した
-- **altair/altair-pie.md**: 円グラフを追記した
+- **vscode/vscode-disable-extensions.md**: 拡張機能を無効にして起動する方法を追加した
 
-### Fix
+### Fixed
 
-- **pandas/pandas-usage.md**: 目次を整理した
-- **pandas/pandas-concat.md**: データを読み込むテンプレを追記した
-- **pandas/pandas-usage.md**: 目次を整理した
-- **altair/altair-encode.md**: データを集計する方法を追記した
-- **pandas/pandas-install.md**: 追加パッケージを追記した
-- **altair/altair-layer.md**: 2軸グラフの作り方を追記した
-- **python/python-black.md**: jupyterオプションを追記した
+- **altair/altair-encode.md**: 描画時にデータ集計する方法を追記した
+- **altair/altair-layer.md**: 2軸グラフを追記した
 - **git/git-commit.md**: コミットのオプションを追記した
-- **altair/altair-color.md**: 微修正した
-- **sphinx/sphinx-usage.md**: 目次を整理した
+- **pandas/pandas-concat.md**: データを連結する方法を追記した
+- **pandas/pandas-groupby.md**: 複数の集計方法を追記した
+- **pandas/pandas-install.md**: 科学計算パッケージを追記した
+- **pandas/pandas-usage.md**: 目次を整理した
+- **python/python-black.md**: jupyterオプションを追記した
 - **sphinx/sphinx-latex-docclass.md**: ltjs系のドキュメントクラスのサンプルを追記した
-- **pandas/pandas-groupby.md**: 複数の方法での集計を追記した
-- **pandas/pandas-groupby.md**: wグループを約を追記した
+- **sphinx/sphinx-usage.md**: 目次を整理した
 
 ## v1.21.0 (2023-09-10)
 
