@@ -17,6 +17,7 @@ pandas-read_csv
 pandas-concat
 pandas-to_datetime
 pandas-isna
+pandas-replace
 pandas-duplicated
 pandas-drop
 pandas-rename
