@@ -1,21 +1,32 @@
 # 欠損値を確認したい（``pd.DataFrame.isna``）
 
 ```python
-data.isna().sum()
+data.isna().sum()  # 欠損値の数を数える
 ```
 
-データフレームに含まれるカラムごとの欠損値の数が確認できます。
-[isnull](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.isnull.html)と
-[isna](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.isna.html)は同じです。
-``pd.DataFrame.isna``を使うことが推奨されています。
+データフレームに含まれるカラムごとの欠損値の数を判定できます。
+データに欠損値があるとうまく集計できない場合があるため、前処理の段階で除外するか、補完するかの処理が必要です。
 
-データに欠損値があるとうまく集計できない場合があります。
-前処理の段階で除外するか、補完するかの処理が必要です。
+:::{note}
+
+[isna](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.isna.html)と
+[isnull](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.isnull.html)はまったく同じものです（``isnull = isna``）。
+
+ただし、Ruffのルールの[PD003](https://docs.astral.sh/ruff/rules/pandas-use-of-dot-is-null/)では、
+メソッド名の汎用性の観点から``isnull``の代わりに``isna``を使うことが推奨されています。
+
+:::
+
+:::{seealso}
+
+``isna``と反対の[pandas.DataFrame.notna](https://pandas.pydata.org/docs/reference/api/pandas.notna.html)もあります。
+欠損値でない値（＝有効な値）を判定できます。
 
 ```python
-data.isna().any()    # 欠損値がある列にTrue
-data.notna().all()   # 欠損値がある列にFalse
+data.notna().sum()  # 有効値の数を数える
 ```
+
+:::
 
 ## 欠損値を削除したい（``pd.DataFrame.dropna``）
 
