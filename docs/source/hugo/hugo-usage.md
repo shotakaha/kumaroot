@@ -12,6 +12,7 @@
 maxdepth: 1
 ---
 hugo-install
+hugo-themes
 hugo-demo
 hugo-ogp
 hugo-data
