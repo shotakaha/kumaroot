@@ -32,9 +32,11 @@ $ git diff --cached
 
 ```console
 $ git diff HEAD^
+$ git  show
 ```
 
 ``HEAD^``を指定するとコミットした内容を確認できます。
+``git show``の方が簡単です。
 
 ## ``git pull``する前に確認したい
 
