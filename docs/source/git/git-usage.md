@@ -35,6 +35,8 @@ git-flow
 git-semver
 git-gitlab
 git-hooks
+git-diff
+git-submodule
 ```
 
 ## 関連ドキュメント
