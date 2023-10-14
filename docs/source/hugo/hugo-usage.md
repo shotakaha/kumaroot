@@ -27,6 +27,15 @@ hugo-static
 
 % hugo-templates-homepage
 
+## デプロイしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+hugo-gitlab
+```
+
 ## リファレンス
 
 - [Hugo](https://gohugo.io/)
