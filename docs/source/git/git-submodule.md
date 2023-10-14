@@ -7,6 +7,28 @@ $ git submodule add リポジトリURL ディレクトリ名
 ``git submodule``で外部リポジトリを、自分のリポジトリのサブディレクトリに配置できます。
 ウェブサイトのテーマなど、自分では手を加えないけれど、参照したい場合などに使います。
 
+## サブモジュールを更新したい
+
+```console
+$ git submodule update
+```
+
+## サブモジュールをクローンしたい
+
+```console
+$ git clone --recursive リポジトリURL
+```
+
+サブモジュールを含むリポジトリをクローンする場合は``--recursive``オプションを使います。
+``--recursive``オプションは以下のコマンド群と同等です。
+
+```console
+$ git clone リポジトリURL
+$ cd リポジトリ名
+$ git submodule init
+$ git submodule update
+```
+
 ```console
 $ git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
 $ git status
@@ -31,3 +53,5 @@ index 0000000..c086834
 @@ -0,0 +1 @@
 +Subproject commit c086834f0ebfa39b8b6b0cfed010588a6907a91c
 ```
+
+自分リポジトリからは、サブモジュールにしたリポジトリのコミットIDが見えるようになっています。
