@@ -38,16 +38,13 @@ $ git  show
 ``HEAD^``を指定するとコミットした内容を確認できます。
 ``git show``の方が簡単です。
 
-## ``git pull``する前に確認したい
+## ``git pull`` / ``git push``する前に確認したい
 
 ```console
-$ git diff HEAD..リモート名/ブランチ名
-$ git diff HEAD..origin/main
+$ git diff origin/main --name-status
+A       docs/source/git/git-diff.md
+M       docs/source/git/git-usage.md
 ```
 
-## ``git push``する前に確認したい
-
-```console
-$ git diff リモート名/ブランチ名..HEAD
-$ git diff origin/main..HEAD
-```
+``pull`` / ``push``先のリモートブランチとの差分を確認できます。
+``--name-status``オプションでファイル名とステータスを確認できます。
