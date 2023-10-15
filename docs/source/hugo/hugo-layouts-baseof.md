@@ -8,7 +8,11 @@
     </head>
     <body>
         <header>
-        <!-- メニューなど -->
+            <!-- ロゴ -->
+            <!-- ナビゲーション -->
+            <!-- 検索窓 -->
+            <!-- 言語切り替え -->
+            {{ partials "header . }}
         </header>
         <main>
             {{ block "main" . }}

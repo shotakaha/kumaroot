@@ -37,6 +37,7 @@ hugo-layouts-single
 hugo-layouts-list
 hugo-layouts-404
 hugo-partials-head
+hugo-partials-header
 ```
 
 ## デプロイしたい
