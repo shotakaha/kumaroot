@@ -19,13 +19,20 @@ hugo-data
 hugo-config
 hugo-config-menu
 hugo-config-permalinks
-hugo-templates-baseof
 hugo-bundles
 hugo-content
 hugo-static
 ```
 
 % hugo-templates-homepage
+## テンプレートしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+hugo-layouts-baseof
+```
 
 ## デプロイしたい
 
