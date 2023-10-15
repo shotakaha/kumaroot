@@ -3,9 +3,6 @@
 ```html
 {{- define "robots" -}}
     <meta name="robots" content="noindex,nofollow">
-{{- end -}}
-
-{{- define "googlebot" -}}
     <meta name="googlebot" content="noindex,nofollow">
 {{- end -}}
 
