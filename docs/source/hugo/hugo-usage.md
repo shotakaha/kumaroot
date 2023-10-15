@@ -32,6 +32,7 @@ hugo-static
 maxdepth: 1
 ---
 hugo-layouts-baseof
+hugo-layouts-single
 ```
 
 ## デプロイしたい
