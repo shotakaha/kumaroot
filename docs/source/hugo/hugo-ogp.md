@@ -1,12 +1,14 @@
-# OGPを設定したい
+# OGPを設定したい（``/layouts/partials/head.html``）
 
 ```go
 {{ template "_internal/opengraph.html" . }}
 ```
 
-OGPを設定する場合、Hugoの内部テンプレートを利用できます。
-必要な項目はサイト全体の``config.toml``もしくは
-各コンテンツのフロントマターで設定します。
+OGPはHugoの内部テンプレートを使って設定できます。
+``head``の部分テンプレート（{file}`/layouts/partials/head.html`）の中で呼び出しておけばOKです。
+
+必要な画像などの設定は、サイト全体の設定ファイル（{file}`config.toml`）
+もしくは各コンテンツのフロントマターで設定できます。
 
 ## サイト全体のOGP
 

@@ -5,7 +5,15 @@
 
 # Hugoの使い方
 
-``Hugo``はGo言語製の静的サイトジェネレーターです。
+``Hugo``はGo製の静的サイトジェネレーター（SSG）です。
+
+:::{note}
+
+[Site Generators - Jamstack](https://jamstack.org/generators/)で流行のSSGを確認できます。
+Next.jsやGatsbyと比べる、HugoはHTML/CSS/Markdownの知識だけでなんとかできるので、
+JavaScript/TypeScript（やJSX/MDX）はちょっとキャパオーバーという僕には向いてると思いました。
+
+:::
 
 ```{toctree}
 ---
@@ -14,7 +22,6 @@ maxdepth: 1
 hugo-install
 hugo-themes
 hugo-demo
-hugo-ogp
 hugo-data
 hugo-config
 hugo-config-menu
@@ -37,6 +44,7 @@ hugo-layouts-single
 hugo-layouts-list
 hugo-layouts-404
 hugo-partials-head
+hugo-ogp
 hugo-partials-header
 ```
 
