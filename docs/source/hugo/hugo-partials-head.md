@@ -1,4 +1,4 @@
-# ヘッドしたい（``/layouts/partials/head.html``）
+# メタデータしたい（``/layouts/partials/head.html``）
 
 ```html
 {{ $title := "" }}
@@ -40,4 +40,4 @@
 {{ template "_internal/google_analytics.html" . }}
 ```
 
-``<head>``タグで読み込む部分テンプレートです。
+[head](https://developer.mozilla.org/ja/docs/Web/HTML/Element/head)タグで読み込む部分テンプレートです。

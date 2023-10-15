@@ -1,12 +1,10 @@
 # 骨組みしたい（``/layouts/_default/baseof.html``）
 
 ```html
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="言語コード">
     <head>
-        <meta charset="utf-8">
-        <!-- メタ情報 -->
-        <!-- CSSを読み込む -->
+        {{ partials "head" .}}
     </head>
     <body>
         <header>
