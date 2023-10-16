@@ -23,13 +23,22 @@ hugo-install
 hugo-themes
 hugo-demo
 hugo-data
+
+hugo-bundles
+hugo-content
+hugo-static
+```
+
+## 全体設定したい
+
+```{toctree}
+---
+maxdepth: 1
+---
 hugo-config
 hugo-config-menu
 hugo-config-permalinks
 hugo-config-i18n
-hugo-bundles
-hugo-content
-hugo-static
 ```
 
 % hugo-templates-homepage
