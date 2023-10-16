@@ -28,6 +28,19 @@ content/
     |-- 記事1.en.md
 ```
 
+## セクション名を変更したい
+
+```toml
+[permalinks]
+  [permalinks.page]
+    post = "/articles/:year/:yearday"
+  [permalinks.section]
+    post = "/articles/"
+```
+
+``post``セクションのパーマリンクを``/articles/``に変更しています。
+ディレクトリ名を変更しなくても、ビルド先のディレクトリ名を変更できます。
+
 ## パーマリンク設計を考える
 
 パーマリンク設定はHugoだけでなく、どのCMSでも構築時に検討が必要な項目です。
