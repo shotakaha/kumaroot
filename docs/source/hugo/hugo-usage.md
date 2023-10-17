@@ -39,6 +39,7 @@ hugo-config
 hugo-config-menu
 hugo-config-permalinks
 hugo-config-i18n
+hugo-config-copyright
 ```
 
 % hugo-templates-homepage
