@@ -1,4 +1,4 @@
-# 多言語サイトしたい
+# 多言語サイトしたい（``.Site.Languages``）
 
 Hugoはデフォルトで[多言語サイト](https://gohugo.io/content-management/multilingual/)に対応できます。
 

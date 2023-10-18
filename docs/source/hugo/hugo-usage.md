@@ -27,6 +27,7 @@ hugo-data
 hugo-bundles
 hugo-content
 hugo-static
+hugo-i18n
 ```
 
 ## 全体設定したい
@@ -38,7 +39,7 @@ maxdepth: 1
 hugo-config
 hugo-config-menu
 hugo-config-permalinks
-hugo-config-i18n
+hugo-config-languages
 hugo-config-copyright
 hugo-config-format
 ```
