@@ -48,3 +48,38 @@ defaultContentLanguageInSubdir = true
     contentDir = "content/en"
     weight = 10
 ```
+
+## 言語ごとの切り替え
+
+```console
+/content/about.ja.md  # {BaseURL}/ja/about/
+/content/about.en.md  # {BaseURL}/en/about/
+```
+
+多言語コンテンツを作成する場合は、ファイル名を揃えるとよいです。
+これらは、自動で言語スイッチャーに登録されます。
+
+ファイル名が異なる場合でもfrontmatterで同じ``translationKey``に設定することで、言語間の関係を張ることができます。
+
+## 翻訳ページを表示したい
+
+```html
+{{ if .IsTranslated }}
+<h4>{{ i18n "translations" }}<h4>
+<ul>
+    {{ range .Translations }}
+    <li>
+        <a href="{{ .Permalink }}">{{ .Lang }}: {{ .Title }}{{ if .IsPage }}({{ i18n "wordCount" . }}){{ end }}</a>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}
+```
+
+上記サンプルは[公式ページからの写経](https://gohugo.io/content-management/multilingual/#reference-translated-content)です。
+``.IsTranslated``で翻訳コンテンツがあるかを確認して、順序なしリスト（``ul``）で表示します。
+
+翻訳コンテンツは``{{ .Translations }}``に格納されています。
+``{{ range .Translations }}...{{ end }}``で、関連する翻訳コンテンツ（のオブジェクト）をループし、
+それぞれのコンテンツのURL（``{{ .Permalink }}``）、言語名（``{{ .Lang }}``）、ページのタイトル（``{{ .Title }}``）を取り出して表示します。
+ページ型（``.IsPage``）の場合は、さらに本文の文字数（``{{ .wordCount }}``）も表示します。
