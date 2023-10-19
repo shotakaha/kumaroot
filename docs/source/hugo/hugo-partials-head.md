@@ -37,6 +37,7 @@
 <!-- CSSを読み込む（あとで追加する）-->
 <!-- JSを読み込む（あとで追加する）-->
 
+{{ template "_internal/opengraph.html" . }}
 {{ template "_internal/google_analytics.html" . }}
 ```
 

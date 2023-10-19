@@ -1,12 +1,15 @@
-# OGPを設定したい
+# OGPを設定したい（``/layouts/partials/head.html``）
 
 ```go
 {{ template "_internal/opengraph.html" . }}
 ```
 
-OGPを設定する場合、Hugoの内部テンプレートを利用できます。
-必要な項目はサイト全体の``config.toml``もしくは
-各コンテンツのフロントマターで設定します。
+Hgoの[内部テンプレート](https://gohugo.io/templates/internal/)を使ってOGPを設定できます。
+[_internal/opengraph.html](https://github.com/gohugoio/hugo/blob/aster/tpl/tplimpl/embedded/templates/opengraph.html)を``head``用の部分テンプレートに書いておけばOKです。
+
+OGP画像などの設定は、サイト全体の設定ファイル（{file}`config.toml`）
+もしくは各コンテンツのフロントマターで設定します。
+設定できる項目は、ドキュメントでは網羅されていないため、内部テンプレート（``opengraph.html``）のソースを直接確認したほうがよいです。
 
 ## サイト全体のOGP
 
@@ -21,7 +24,6 @@ series = "series"
 ```
 
 サイト全体のOGPは``config.toml``に整理します。
-設定できる項目は、ドキュメントでは網羅されていないので、内部テンプレート（``opengraph.html``）のソースを直接確認するとよいです。
 
 ## ``og:title``したい
 
@@ -86,6 +88,6 @@ series = "series"
 
 ## リファレンス
 
-- [Internal Templates](https://gohugo.io/templates/internal/)
-- [hugo/tpl/tplimpl/embedded/templates/opengraph.html](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/opengraph.html)
+
+
 - [The Open Graph Protocol](https://ogp.me/)
