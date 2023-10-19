@@ -35,8 +35,17 @@ css-padding
 
 ## フレームワークしたい
 
+CSSフレームワークを使うと、比較的簡単にウェブをデザイン／レイアウトできます。
+そこそこの見た目をさくっと作りたい場合に便利です。
+たいていの場合、CDNを経由して読み込ませるのでよいと思います。
+
+以下は、僕がこれまで使ったことがある順番に並べてみました。
+
+- [Materialize](https://materializecss.com/)
+- [Bootstrap](https://getbootstrap.jp/)
 - [MDB - Material Design for Bootstrap v5 & v4](https://mdbootstrap.com/)
 - [TailwindCSS](https://tailwindcss.com/)
+- [Tailwind Components](https://tailwindcomponents.com/)
 
 ## SSGしたい
 
