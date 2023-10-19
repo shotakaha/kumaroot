@@ -41,10 +41,19 @@ $ git  show
 ## ``git pull`` / ``git push``する前に確認したい
 
 ```console
-$ git diff origin/main --name-status
+$ git diff リモートブランチ名
+
+$ git diff --name-status origin/main
+D       docs/source/git/git-diff.md
+M       docs/source/git/git-usage.md
+
+# pull前
+$ git diff --name-status HEAD..origin/main
 A       docs/source/git/git-diff.md
 M       docs/source/git/git-usage.md
 ```
 
-``pull`` / ``push``先のリモートブランチとの差分を確認できます。
-``--name-status``オプションでファイル名とステータスを確認できます。
+リモートブランチとの差分を確認できます。
+``--name-status``オプションを使ってファイル名とステータスを確認するのがよいと思います。
+ブランチ名の指定の向きで状態が反転します。
+``pull``する前は``HEAD..origin/main``で確認できます。
