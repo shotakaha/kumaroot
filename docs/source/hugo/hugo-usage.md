@@ -23,11 +23,10 @@ hugo-install
 hugo-themes
 hugo-demo
 hugo-data
-
 hugo-bundles
 hugo-content
 hugo-static
-hugo-i18n
+hugo-page-variables
 ```
 
 ## 全体設定したい
@@ -39,7 +38,6 @@ maxdepth: 1
 hugo-config
 hugo-config-menu
 hugo-config-permalinks
-hugo-config-languages
 hugo-config-copyright
 hugo-config-format
 ```
@@ -58,6 +56,16 @@ hugo-layouts-404
 hugo-partials-head
 hugo-ogp
 hugo-partials-header
+```
+
+## 多言語したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+hugo-config-languages
+hugo-i18n
 ```
 
 ## デプロイしたい

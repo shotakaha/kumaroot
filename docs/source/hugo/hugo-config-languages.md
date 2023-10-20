@@ -1,7 +1,5 @@
 # 多言語サイトしたい（``.Site.Languages``）
 
-Hugoはデフォルトで[多言語サイト](https://gohugo.io/content-management/multilingual/)に対応できます。
-
 ```toml
 defaultContentLanguage = "ja"
 defaultContentLanguageInSubdir = true
@@ -19,17 +17,40 @@ defaultContentLanguageInSubdir = true
     weight = 10
 ```
 
-[RFC5646](https://datatracker.ietf.org/doc/html/rfc5646)で定義されている言語コードを設定できます。
-デフォルトは``en``（英語）です。
-日本語は``ja``で設定できます。
+Hugoはデフォルトで[多言語サイト](https://gohugo.io/content-management/multilingual/)に対応できます。
+
+全体設定でデフォルトの言語と言語別サブディレクトリの設定を定義します。
+デフォルトの言語は``en``（英語）です。
+
+サイトで使用する言語の設定は``[languages]``セクションで定義します。
+日本語は``[languages.ja]``、フランス語は``[languages.fr]``で設定できます。
+言語ごとの詳細設定は、それぞれの言語セクションの中で定義します。
+``languageCode``は[RFC5646](https://datatracker.ietf.org/doc/html/rfc5646)で定義されている言語コードをすべて小文字で設定します
 
 ## 多言語コンテンツを作成したい
 
-{file}`content/_index.ja.md`のように``{ファイル名}.{言語名}.md``で言語別のコンテンツを作成できます。
-言語名を省略した場合は、デフォルトの言語に設定されます。
+Hugoでは、ファイル名を基準にした方法と、サブディレクトリ名を基準にした方法で多言語に対応するコンテンツを管理できます。
+どちらを選択するかは、作成する用途に合わせて決めることになると思います。
+それぞれに一長一短あると思いますが、混ぜるのは危険です（たぶん）。
 
-言語ごとに``contentDir``を設定し、言語別にサブディレクトリを作成して運用することもできます。
-コンテンツ数が多くなる場合は、こちらの方法がよいかもしれません。
+
+
+### ファイル名で管理したい
+
+全体設定に追記することはとくにありません。
+コンテンツファイルの名前を以下のように``{ファイル名}.{言語名}.md``にします。
+``{言語名}``を省略した場合は、デフォルトの言語に設定されます。
+
+```console
+/content/about.ja.md  # {BaseURL}/ja/about/
+/content/about.en.md  # {BaseURL}/en/about/
+```
+
+とくに理由がなければ、多言語コンテンツのファイル名は揃えるとよいです。
+これらは、自動で言語スイッチャーに登録されます。
+ファイル名が異なる場合でも、frontmatterで同じ``translationKey``を設定することで、異なる言語間の関係を張ることができます。
+
+### サブディレクトリ名で管理したい（``contentDir``）
 
 ```toml
 [languages]
@@ -49,17 +70,8 @@ defaultContentLanguageInSubdir = true
     weight = 10
 ```
 
-## 言語ごとの切り替え
-
-```console
-/content/about.ja.md  # {BaseURL}/ja/about/
-/content/about.en.md  # {BaseURL}/en/about/
-```
-
-多言語コンテンツを作成する場合は、ファイル名を揃えるとよいです。
-これらは、自動で言語スイッチャーに登録されます。
-
-ファイル名が異なる場合でもfrontmatterで同じ``translationKey``に設定することで、言語間の関係を張ることができます。
+言語ごとの詳細設定で``contentDir``を指定します。
+コンテンツ数が多くなる場合は、こちらの方法がよいかもしれません。
 
 ## 翻訳ページを表示したい
 
