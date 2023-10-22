@@ -96,12 +96,29 @@ Hugoを使い始めたころ、この日付にフォーマット指定の意味�
 
 ```html
 コードサンプルを考え中
+<div>
+    <h1 class="title">{{ .Title }}</h1>
+    <span class="category">カテゴリ名</span>
+</div>
 ```
 
 記事やページのカテゴリーを表示します。
 
 ## タグを表示したい
 
+```html
+コードサンプルを考え中
+<div>
+    <h1 class="title">{{ .Title }}</h1>
+    <span class="tags">
+        <ul class="tags">
+            <li class="tag">タグ名</li>
+            <li class="tag">タグ名</li>
+            <li class="tag">タグ名</li>
+        </ul>
+    </span>
+</div>
+```
 
 :::{admonition} カテゴリーとタグ
 
