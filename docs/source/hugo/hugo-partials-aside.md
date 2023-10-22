@@ -27,3 +27,19 @@
 - ``/layouts/partials/post-aside.html``
 
 :::
+
+## 年別アーカイブ
+
+```html
+{{ range .Pages.GroupByDate "2006-01" }}
+<h3>{{ .Key }}</h3>
+<ul>
+    {{ range .Pages }}
+    <li>{{ .Title }}</li>
+    {{ end }}
+</ul>
+{{ end }}
+```
+
+
+[Group機能](https://gohugo.io/templates/lists/#group-content)を使うとできそうです。
