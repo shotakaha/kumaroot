@@ -56,6 +56,7 @@ hugo-layouts-404
 hugo-partials-head
 hugo-ogp
 hugo-partials-header
+hugo-partials-aside
 ```
 
 ## 多言語したい
