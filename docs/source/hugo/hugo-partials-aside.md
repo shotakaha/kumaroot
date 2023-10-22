@@ -20,3 +20,10 @@
 
 サイドバーは、サイト全体で共通しているほうがUXがよいと思いますが、
 記事用と固定ページ用で変更するのもアリだと思います。
+
+:::{todo}
+
+- ``/layouts/partials/page-aside.html``
+- ``/layouts/partials/post-aside.html``
+
+:::
