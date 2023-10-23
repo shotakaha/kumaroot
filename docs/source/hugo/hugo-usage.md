@@ -20,6 +20,7 @@ JavaScript/TypeScript（やJSX/MDX）はちょっとキャパオーバーとい�
 maxdepth: 1
 ---
 hugo-install
+hugo-new
 hugo-themes
 hugo-demo
 hugo-data
