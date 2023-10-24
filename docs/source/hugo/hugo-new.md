@@ -21,17 +21,17 @@ $ tree サイト名
 
 それぞれのファイル／ディレクトリの役割を以下に整理しました。
 
-| ディレクトリ名 | 役割 |
-|---|---|
-| ``hugo.toml`` | 全体設定ファイル。（``config/_default/hugo.toml``に移動する） |
-| ``archetypes`` | コンテンツを新規作成するときのスケルトンを配置 |
-| ``assets`` | （確認する） |
-| ``content`` | コンテンツファイルを配置 |
-| ``data`` | JSONやCSVなどのデータファイルを配置 |
-| ``i18n`` | 多言語サイト用。言語ごとの翻訳ファイルを配置 |
-| ``layouts`` | テンプレートファイルを配置 |
-| ``static`` | 画像やCSS/JSなどの静的ファイルを配置 |
-| ``themes`` | 外部テーマを配置 |
+| ディレクトリ名 | ファイル形式 | 役割 |
+|---|---|---|
+| ``hugo.toml`` | ``.toml`` / ``.yaml`` / ``.json`` | 全体設定ファイル。（``config/_default/hugo.toml``に移動する） |
+| ``archetypes`` | ``.md`` | コンテンツを新規作成するときのスケルトンを配置 |
+| ``assets`` | ``.scss``など | [Hugo Pipes](https://gohugo.io/hugo-pipes/introduction/)などを使って前処理が必要なファイルを配置 |
+| ``content`` | ``.md`` / ``.html`` | コンテンツファイルを配置 |
+| ``data`` | ``.csv`` / ``.json``など | データファイルを配置 |
+| ``i18n`` | ``.toml`` / ``.yaml`` / ``.json`` | 多言語サイト用。言語ごとの翻訳ファイルを配置 |
+| ``layouts`` | ``.html`` | テンプレートファイルを配置 |
+| ``static`` | ``.css`` / ``.js`` / ``.png`` / ``jpg``など | 画像やCSS/JSなどの静的ファイルを配置 |
+| ``themes`` | - | 外部テーマを配置 |
 
 全体を設定するファイルは``hugo.toml``です。
 これは``config/_default/hugo.toml``に移動させます。
