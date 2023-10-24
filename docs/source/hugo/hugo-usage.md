@@ -55,6 +55,7 @@ hugo-layouts-single
 hugo-layouts-list
 hugo-layouts-404
 hugo-partials-head
+hugo-partials-meta
 hugo-ogp
 hugo-partials-header
 hugo-partials-aside
