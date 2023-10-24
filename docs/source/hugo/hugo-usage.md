@@ -24,7 +24,7 @@ hugo-new
 hugo-themes
 hugo-demo
 hugo-data
-hugo-bundles
+hugo-page-bundles
 hugo-content
 hugo-static
 hugo-page-variables
