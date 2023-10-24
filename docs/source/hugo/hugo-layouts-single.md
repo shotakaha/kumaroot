@@ -17,7 +17,7 @@
             <!-- SNSボタン -->
         </div>
         <div>
-            <!-- 記事本文 -->
+            <!-- 本文 -->
         </div>
     </article>
 
@@ -129,3 +129,21 @@ Hugoのタクソノミー機能には「ひとつだけ」に制限する機能�
 タグは「タクソノミー」で実装するのがよいと思います。
 
 :::
+
+## 本文したい
+
+```html
+<article>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+</article>
+
+{{ range .Page.Resources }}
+<article>
+    <h2>{{ .Title }}</h2>
+    {{ .Content }}
+</article>
+{{ end }}
+```
+
+Leaf Bundle
