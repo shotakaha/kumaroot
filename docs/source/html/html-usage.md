@@ -46,6 +46,9 @@ CSSフレームワークを使うと、比較的簡単にウェブをデザイ�
 - [MDB - Material Design for Bootstrap v5 & v4](https://mdbootstrap.com/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Tailwind Components](https://tailwindcomponents.com/)
+- [PicoCSS](https://picocss.com/)
+- [Sakura](https://oxal.org/projects/sakura/)
+- [MVP.CSS](https://andybrewer.github.io/mvp/)
 
 ## SSGしたい
 
