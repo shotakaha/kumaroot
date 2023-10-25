@@ -59,6 +59,7 @@ hugo-partials-meta
 hugo-ogp
 hugo-partials-header
 hugo-partials-aside
+hugo-partials-breadcrumbs
 ```
 
 ## 多言語したい
