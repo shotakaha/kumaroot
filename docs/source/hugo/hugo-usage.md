@@ -41,6 +41,7 @@ hugo-config-menu
 hugo-config-permalinks
 hugo-config-copyright
 hugo-config-format
+hugo-config-paginate
 ```
 
 % hugo-templates-homepage
