@@ -15,6 +15,10 @@
             </nav>
         </header>
 
+        <nav class="breadcrumb">
+            <!-- パンくずナビ -->
+        </nav>
+
         <main>
             <article>
                 <header>
@@ -46,7 +50,7 @@
                 </footer>
             </article>
 
-            <aside>
+            <aside class="related_pages">
                 <h2>関連記事</h2>
                 <article>
                     <h3>関連記事のタイトル</h3>
@@ -62,10 +66,30 @@
                 </article>
             </aside>
 
+            <nav class="pagination">
+                <!-- 前のページ -->
+                <!-- 次のページ -->
+            </nav>
+
         </main>
 
-        <aside>
+        <aside class="sidebar">
             <!-- サイドバー -->
+
+            <section>
+                <h3>月別</h3>
+                <!-- 月別アーカイブ -->
+            </section>
+
+            <section>
+                <h3>カテゴリ</h3>
+                <!-- カテゴリ別アーカイブ -->
+            </section>
+
+            <section>
+                <h3>タグ</h3>
+                <!-- タグクラウド -->
+            </section>
         </aside>
 
         <footer>
