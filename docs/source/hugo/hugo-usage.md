@@ -61,6 +61,7 @@ hugo-ogp
 hugo-partials-header
 hugo-partials-aside
 hugo-partials-breadcrumbs
+hugo-pipes-tocss
 ```
 
 ## 多言語したい
