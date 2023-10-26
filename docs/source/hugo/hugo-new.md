@@ -16,8 +16,8 @@ $ tree サイト名
 └── themes
 ```
 
-``hugo new site``でプロジェクトを初期化できます。
-プロジェクト構造は上記のとおりです。
+``hugo new site``コマンドでHugoサイトのスケルトンを作成せきます。
+プロジェクトを初期化したときのディレクトリ構造は上記のとおりです。
 
 それぞれのファイル／ディレクトリの役割を以下に整理しました。
 
@@ -43,3 +43,65 @@ GitHubなどで公開されているテーマは、Gitサブモジュールで�
 ``layouts``にはテンプレートファイルを配置します。
 テンプレートはGoテンプレート言語を使って記述します。
 外部テーマを部分的に修正したいときは、ここに同じ名前のファイルを作成することで、レンダリング結果を上書きできます。
+
+## コンテンツしたい（``hugo new content``）
+
+```console
+$ cd サイト名
+$ hugo new content セクション/コンテンツ.md
+$ cat content/セクション/コンテンツ.md
+```
+
+``hugo new content``コマンドでコンテンツのスケルトンを作成できます。
+
+## テーマしたい（``hugo new theme``）
+
+```console
+$ cd サイト名
+$ hugo new theme テーマ名
+$ cd themes/テーマ名
+$ tree
+tree
+.
+├── LICENSE
+├── README.md
+├── archetypes
+│   └── default.md
+├── assets
+│   ├── css
+│   │   └── main.css
+│   └── js
+│       └── main.js
+├── content
+│   ├── _index.md
+│   └── posts
+│       ├── _index.md
+│       ├── post-1.md
+│       ├── post-2.md
+│       └── post-3
+│           ├── bryce-canyon.jpg
+│           └── index.md
+├── data
+├── hugo.toml
+├── i18n
+├── layouts
+│   ├── _default
+│   │   ├── baseof.html
+│   │   ├── home.html
+│   │   ├── list.html
+│   │   └── single.html
+│   └── partials
+│       ├── footer.html
+│       ├── head
+│       │   ├── css.html
+│       │   └── js.html
+│       ├── head.html
+│       ├── header.html
+│       ├── menu.html
+│       └── terms.html
+├── static
+│   └── favicon.ico
+└── theme.toml
+```
+
+``hugo new theme``コマンドでテーマのスケルトンを作成できます。
