@@ -28,6 +28,7 @@ hugo-page-bundles
 hugo-content
 hugo-static
 hugo-page-variables
+hugo-frontmatter
 ```
 
 ## 全体設定したい
