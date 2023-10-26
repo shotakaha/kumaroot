@@ -55,6 +55,7 @@ maxdepth: 1
 hugo-layouts-baseof
 hugo-layouts-single
 hugo-layouts-list
+hugo-layouts-home
 hugo-layouts-404
 hugo-partials-head
 hugo-partials-meta

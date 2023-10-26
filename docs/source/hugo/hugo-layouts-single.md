@@ -2,6 +2,19 @@
 
 ```html
 {{ define "main" }}
+  <h1>{{ .Title }}</h1>
+
+  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+  {{ $dateHuman := .Date | time.Format ":date_long" }}
+  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+
+  {{ .Content }}
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+{{ end }}
+```
+
+```html
+{{ define "main" }}
 <section>
     <article>
         <div>
@@ -15,6 +28,9 @@
         </div>
         <div>
             <!-- SNSボタン -->
+        </div>
+        <div>
+            <!--  カバー画像 -->
         </div>
         <div>
             <!-- 本文 -->
@@ -95,10 +111,13 @@ Hugoを使い始めたころ、この日付にフォーマット指定の意味�
 ## カテゴリーを表示したい
 
 ```html
-コードサンプルを考え中
+<!-- コードサンプルを考え中 -->
+```
+
+```html
 <div>
-    <h1 class="title">{{ .Title }}</h1>
-    <span class="category">カテゴリ名</span>
+    <h1 class="post-title">{{ .Title }}</h1>
+    <span class="category">🗂️ カテゴリ名</span>
 </div>
 ```
 
@@ -107,26 +126,32 @@ Hugoを使い始めたころ、この日付にフォーマット指定の意味�
 ## タグを表示したい
 
 ```html
-コードサンプルを考え中
+<!-- コードサンプルを考え中 -->
+```
+
+```html
 <div>
-    <h1 class="title">{{ .Title }}</h1>
+    <h1 class="post-title">{{ .Title }}</h1>
     <span class="tags">
         <ul class="tags">
-            <li class="tag">タグ名</li>
-            <li class="tag">タグ名</li>
-            <li class="tag">タグ名</li>
+            <li class="tag"><a href="#">🏷️ タグ名</a></li>
+            <li class="tag"><a href="#">🏷️ タグ名</a></li>
+            <li class="tag"><a href="#">🏷️ タグ名</a></li>
         </ul>
     </span>
 </div>
 ```
 
-:::{admonition} カテゴリーとタグ
+:::{hint}
 
-僕の個人的な考えがたぶんに入っていますが、
-ひとつの記事にたいして、カテゴリーはひとつだけ、タグは複数でもOK、と思っています。
-Hugoのタクソノミー機能には「ひとつだけ」に制限する機能はないので、
-カテゴリーは「セクション」、
-タグは「タクソノミー」で実装するのがよいと思います。
+「カテゴリー」と「タグ」の使い分けに関する、個人的な見解です。
+
+カテゴリーは🗂️フォルダ分けと同じなので、記事に対してひとつだけ、
+タグは🏷️ラベル付けと同じなので、記事に対して複数設定できる、というように使い分けています。
+
+Hugoのタクソノミー機能には「ひとつだけ」に制限する機能はないため、
+カテゴリーは「セクション」（＝ディレクトリ名）、
+タグは「タクソノミー」で設定するように設計するのがよいと考えています。
 
 :::
 

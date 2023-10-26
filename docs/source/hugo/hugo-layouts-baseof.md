@@ -1,44 +1,33 @@
 # 骨組みしたい（``/layouts/_default/baseof.html``）
 
 ```html
-<!doctype html>
-<html lang="言語コード">
-    <head>
-        {{ partials "head" .}}
-    </head>
-    <body>
-        <header>
-            <!-- ロゴ -->
-            <!-- ナビゲーション -->
-            <!-- 検索窓 -->
-            <!-- 言語切り替え -->
-            {{ partials "header . }}
-        </header>
-        <main>
-            {{ block "main" . }}
-            <!-- メインコンテンツ -->
-            {{ end }}
-        <aside>
-            {{ block "aside" }}
-            <!-- サイドバー -->
-            {{ end }}
-        </side>
-        </main>
-        <footer>
-            {{ block "footer" }}
-            <!-- フッター -->
-            {{ end }}
-        </footer>
-    </body>
-    <!-- JSを読み込む -->
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}"
+      dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <header>
+    {{ partial "header.html" . }}
+  </header>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer>
+    {{ partial "footer.html" . }}
+  </footer>
+</body>
 </html>
+
 ```
 
-{file}`/layouts/_default/baseof.html`ですべてのページの骨格を定義します。
+``hugo new theme``コマンドで作成されるスケルトンを使って、独自のテンプレートを設計できます。
+{file}`/layouts/_default/baseof.html`は、すべてのページに共通する骨格を定義するテンプレートです。
+なるべく**具体的に書かない**ことが大事です。
 HTMLタグのセマンティックに沿って並べるのがよいと思います。
-サイト内のすべてのページに共通するパーツなので、具体的に**書かない**ことが大事です。
 
-### 部分テンプレート
+## 部分テンプレートしたい
 
 すべてに共通するパーツは[部分テンプレート機能](https://gohugo.io/templates/partials/)を使うことで、テンプレート制作にかかる手間を削減できます。
 

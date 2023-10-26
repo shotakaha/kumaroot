@@ -2,6 +2,18 @@
 
 ```html
 {{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{ range .Pages }}
+    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    {{ .Summary }}
+  {{ end }}
+{{ end }}
+```
+
+
+```html
+{{ define "main" }}
 <section class="list>
     <!-- リストのタイトル -->
     <div>
