@@ -27,6 +27,12 @@
 なるべく**具体的に書かない**ことが大事です。
 HTMLタグのセマンティックに沿って並べるのがよいと思います。
 
+## 表示言語の設定（``lang属性``）
+
+[lang属性](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/lang)には、ウェブサイトに書かれている言語、もしくはユーザーが入力すべき言語を設定します。デフォルト値は``unknown``なので、適切な値を指定することが推奨されています。
+
+[多言語サイトの設定](./hugo-config-languages.md)に書いたように全体設定で``languageCode``を指定します。
+
 ## 部分テンプレートしたい
 
 すべてに共通するパーツは[部分テンプレート機能](https://gohugo.io/templates/partials/)を使うことで、テンプレート制作にかかる手間を削減できます。
