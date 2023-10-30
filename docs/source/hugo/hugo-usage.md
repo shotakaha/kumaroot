@@ -43,6 +43,7 @@ hugo-config-permalinks
 hugo-config-copyright
 hugo-config-format
 hugo-config-paginate
+hugo-config-markup
 ```
 
 % hugo-templates-homepage
