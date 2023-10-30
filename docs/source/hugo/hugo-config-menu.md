@@ -3,15 +3,24 @@
 ```toml
 [menu]
 [[menu.main]]
-identifier = "about"
+name = "Home"
+pageRef = "/"
+weight = 10
+
+[[menu.main]]
 name = "About"
-url = "about"
-pre = ""
-weight = 1
+pageRef = "/about"
+weight = 20
+
+[[menu.main]]
+name = "Related Page"
+url = "外部ページ"
+weight = 90
 ```
 
 ``[menu]``セクションで、サイトのメニューやナビゲーションを作成できます。
-メニューは階層化できます。
+内部ページは``pageRef``プロパティ、外部ページは``url``プロパティを使います。
+``identifier``と``parent``プロパティを使って、メニューを階層化できます。
 
 設定の概要は[Menusのドキュメント](https://gohugo.io/content-management/menus/)、設定可能な項目は[menu variables](https://gohugo.io/variables/menus/)を参照してください。
 
@@ -21,26 +30,35 @@ weight = 1
 [menu]
 [menu.main]
 identifier = "parent"
-name = "Parent"
-url = "parent"
+name = "親ページ"
+pageRef = "/parent"
 
 [menu.main]
 parent = "parent"
-identifier = "child"
-name = "Child"
-url = "child"
+name = "子ページ1"
+pageRef = "/parent/child1"
+
+[menu.main]
+parent = "parent"
+name = "子ページ2"
+pageRef = "/parent/child2"
 ```
 
-``parent``に親メニューの``identifier``を指定することで、メニューを階層化できます。
+``identifier``と``parent``プロパティを使って、メニューを階層化できます。
+まず、親ページの``identifier``プロパティを設定します。
+そして、子ページに``parent``プロパティを追加し、親ページの``identifier``名を設定します。
 
 ## 複数のメニューを設定したい
 
 ```toml
 menu = ["main", "footer", "docs"]
+title = "問い合わせ"
 ```
 
-メニューのカテゴリーを複数設定したい場合、``menu``変数に配列で定義します。
-上記では**メイン用**、**フッター用**、**ドキュメント用**のメニューを定義しています。
+用途別に複数のメニュー変数を作成できます。
+そして、どのメニュー用に表示するか、ページごとのfrontmatterで選択できます。
+
+上記サンプルでは「問い合わせ」ページを**メイン用**（``site.Menus.main``）、**フッター用**（``site.Menus.footer``）、**ドキュメント用**（``site.Menus.docs``）の3種類に設定しています。
 
 ## メニューのアイコンをつけたい
 
@@ -53,6 +71,6 @@ url = "/about/"
 pre = '<i class="fas fa-info-circle"></i>'
 ```
 
-メニューのアイコンはFontAwesomeなどのウェブフォントを利用するのがよいです。
-``pre``要素を使って、メニュー名の先頭にアイコンを追加できます。
+``pre``変数を、メニュー名の先頭にアイコンを追加できます。
+アイコンはFontAwesomeなどのウェブフォントを利用するのがよいです。
 メニュー名の末尾に追加する場合は``post``要素を使います。
