@@ -6,14 +6,18 @@
 # Hugoの使い方
 
 ``Hugo``はGo製の静的サイトジェネレーター（SSG）です。
+[Benefits of static site generator](https://gohugo.io/about/benefits/)や
+[Hugo Features](https://gohugo.io/about/features/)にHugoを使う利点が書かれています。
+[各種エディター用のプラグイン](https://gohugo.io/tools/editors/)もあります。
 
-:::{note}
+:::{hint}
 
 [Site Generators - Jamstack](https://jamstack.org/generators/)で流行のSSGを確認できます。
-Next.jsやGatsbyと比べる、HugoはHTML/CSS/Markdownの知識だけでなんとかできるので、
-JavaScript/TypeScript（やJSX/MDX）はちょっとキャパオーバーという僕には向いてると思いました。
+[Next.js](https://nextjs.org/)や[Gatsby](https://www.gatsbyjs.com/)といったJSベースのSSGが人気の上位を占めていますが、JavaScript/TypeScript（やJSX/MDX）といった知識も必要で、僕にはちょっとキャパオーバーでした。
+HugoはJSの知識がなくても（そしてGoの知識がなくても）、HTML/CSS/Markdownの知識だけでなんとかできるのがよいと思っています。
 
 :::
+
 
 ```{toctree}
 ---
