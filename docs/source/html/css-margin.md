@@ -1,15 +1,26 @@
 # 余白したい（``margin``）
 
 ```css
-margin-top: 上マージン;
-margin-bottom: 下マージン;
-margin-left: 左マージン;
-margin-right: 右マージン;
+margin: すべて;
+margin: 上下 左右;
+margin: 上 左右 下;
+margin: 上 右 下 左;
 ```
 
-``margin``を設定して、要素の**外側**に余白を作ることができます。
-マージン幅の単位は``px``や``%``などが使えます。
+[marginプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/margin)で、要素の**外側**の余白を設定できます。
+単位は``px``や``%``などが使えます。
 僕は``rem``をよく使います。
+
+``margin``は一括指定プロパティ（shorthand property）なので、上下左右のマージンを一括で指定できるのですが、
+引数の順番が覚えにくいです。
+以下のように個別に設定したほうが、分かりやすくてよいかもしれません。
+
+```css
+margin-top: 上;
+margin-bottom: 下;
+margin-left: 左;
+margin-right: 右;
+```
 
 ブロック要素同士の隙間が詰め詰めになっていると窮屈に感じることがあります。
 適切なマージンをつけると見やすくなると思います。
