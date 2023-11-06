@@ -27,6 +27,7 @@ html-semantic
 ```{toctree}
 css-selectors
 css-root
+css-font
 css-display
 css-margin
 css-padding
