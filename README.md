@@ -45,19 +45,30 @@ poetry run bash deploy.sh
 [Sphinx](https://sphinx-users.jp)というドキュメト作成ソフトを使っています。
 文書本体には``reStructuredText（reST）``と``Markdown（md）``という軽量マークアップ言語を使っています。
 
-## 編集の手順
+### セットアップ
 
-```bash
+```console
+$ git clone git@github.com:shotakaha/kumaroot.git
+$ cd kumaroot
+$ poetry install --no-root
 $ poetry shell
-$ cd docs
-$ code ..
-$ make html
-$ open build/html/index.html
 ```
 
-- ``poetry``の仮想環境を立ち上げる
-- VS Codeを使って編集する
-- 編集したら``make html``と``open``でできたものを確認する
+1. GitHubのリポジトリをクローンする
+2. ``poetry``を使って依存パッケージをインストールする
+
+### 編集の手順
+
+```console
+$ poetry shell
+(.venv) $ cd docs
+(.venv) $ code ..
+(.venv) $ make livehtml  # 自動でブラウザが開く
+```
+
+1. ``poetry shell``で仮想環境を立ち上げる
+2. VS Codeを使って編集する
+3. ``make livehtml``でライブリロードしながら編集内容を確認する
 
 ## バージョン管理
 
