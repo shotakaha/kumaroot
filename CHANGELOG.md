@@ -1,5 +1,72 @@
 # CHANGELOG.md
 
+## v1.23.0 (2023-11-07)
+
+### Added
+
+- **git/git-diff.md**: 差分を確認する方法を追加した
+- **git/git-submodule.md**: サブモジュールの使い方を追加した
+- **html/css-font.md**: フォント指定を追加した
+- **html/css-responsive.md**: レスポンシブの基本を追加した
+- **html/css-root.md**: グローバルなCSS変数を追加した
+- **html/html-semantic.md**: セマンティクスを追加した
+- **hugo-partials-header.md**: ヘッダーを追加した
+- **hugo/hugo-config-copyright.md**: 著作権表示を追加した
+- **hugo/hugo-config-format.md**: 日付フォーマットを追加した
+- **hugo/hugo-config-i18n.md**: 多言語サイトする方法を追加した
+- **hugo/hugo-config-markup.md**: マークアップの設定を追加した
+- **hugo/hugo-config-paginate.md**: ページ割りの設定を追加した
+- **hugo/hugo-frontmatter.md**: フロントマターを追加した
+- **hugo/hugo-gitlab.md**: GitLab CIを追加した
+- **hugo/hugo-i18n.md**: 翻訳ファイルの方法を追加した
+- **hugo/hugo-layouts-404.md**: カスタム404ページを追加した
+- **hugo/hugo-layouts-baseof.md**: ベーステンプレートを追加した
+- **hugo/hugo-layouts-list.md**: 一覧ページを追加した
+- **hugo/hugo-layouts-list.md**: 一覧ページを追加した
+- **hugo/hugo-layouts-single.md**: 単体テンプレートを追加した
+- **hugo/hugo-layouts-single.md**: 単体ページを追加した
+- **hugo/hugo-new.md**: サイトを新規作成する方法を追加した
+- **hugo/hugo-partials-breadcrumbs.md**: パンくずリストを追加した
+- **hugo/hugo-partials-head.md**: headの部分テンプレートを追加した
+- **hugo/hugo-partials-meta.md**: メタ情報の部分テンプレートを追加した
+- **hugo/hugo-pipes-tocss.md**: Sassする方法を追加した
+- **hugo/hugo-themes.md**: テーマを追加した
+- **pandas/pandas-replace.md**: データ値を置換する方法を追加した
+
+### Fixed
+
+- **git/git-diff.md**: リモートブランチを確認するときの向きを追記した
+- **git/git-submodule.md**: サブモジュールをクローンする方法を追記した
+- **html/css-display.md**: displayプロパティを整理した
+- **html/css-font.md**: font-sizeを追記した
+- **html/css-margin.md**: marginを追記した
+- **html/css-selectors.md**: CSSセレクターを追加した
+- **html/html-semantic.md**: サイドバー内のセクションを追加した
+- **html/html-usage.md**: CSSフレームワークを追記した
+- **hugo-layouts-single.md**: 単体ページのテンプレートを追加した
+- **hugo/hugo-config-format.md**: ISO8601形式を追記した
+- **hugo/hugo-config-languages.md**: 多言語ページを確認する方法を追加した
+- **hugo/hugo-config-menu.md**: メニュー設定を追記した
+- **hugo/hugo-config-permalinks.md**: パーマリンクを追記した
+- **hugo/hugo-i18n.md**: 多言語設定の詳細を追記した
+- **hugo/hugo-install.md**: インストールの説明を追記した
+- **hugo/hugo-layouts-404.md**: headの部分テンプレートに合わせて修正した
+- **hugo/hugo-layouts-baseof.md**: ブロックテンプレートを追記した
+- **hugo/hugo-layouts-baseof.md**: 部分テンプレートの使い方を追記した
+- **hugo/hugo-layouts-single.md**: カテゴリー／タグのサンプルを追加した
+- **hugo/hugo-new.md**: テーマのスケルトンを追加した
+- **hugo/hugo-ogp.md**: OGP設定を追記した
+- **hugo/hugo-page-bundles.md**: コンテンツ構造を整理した
+- **hugo/hugo-partials-aside.md**: サイドバーを追加した
+- **hugo/hugo-partials-aside.md**: 年別アーカイブを追加した
+- **hugo/hugo-partials-head.md**: メタ情報を追加した
+- **hugo/hugo-usage.md**: 導入部分を整理した
+- **pandas/pandas-drop.md**: 内容を整理した
+- **pandas/pandas-isna.md**: notnaを追記した
+- **pandas/pandas-usage.md**: 目次を整理した
+- **pyproject.toml**: テーマを整理した
+- **sphinx/sphinx-deploy-rtd.md**: 設定ファイルが必須になったことを追記した
+
 ## v1.22.0 (2023-10-12)
 
 ### Added
