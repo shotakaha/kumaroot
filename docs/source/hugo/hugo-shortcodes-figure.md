@@ -5,7 +5,7 @@
 ```
 
 本文中に画像を挿入する場合は、ビルトインされている[figure](https://gohugo.io/content-management/shortcodes/#figure)ショートコードを使います。
-上記サンプルのは、次のHTMLに変換されます。
+上記サンプルは、次のHTMLに変換されます。
 
 ```html
 <figure>
@@ -17,6 +17,37 @@
 
 ``figure``ショートコードは引数を取ることができます。
 詳細は[figure.html](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/shortcodes/figure.html)のソースを読むのが一番です。
+
+:::{note}
+
+画像のパスは相対パスで指定したほうがよいと思います。
+その際の相対パスは、ビルド後のディレクトリ構造を想定したパスにします。
+
+たとえば次のようなディレクトリ構造を持っている場合、
+
+```console
+|-- static/
+|    |-- images/members.png
+|-- content/
+     |-- about.ja.md
+     |-- about.en.md
+```
+
+日本語コンテンツ（``content/about.ja.md``）は次のように書き
+
+```go
+// $BaseURL/about/index.html から $BaseURL/images/members.png への相対パス
+{{< figure src="../images/members.png" >}}
+```
+
+英語コンテンツ（``content/about.en.md``）は次のように書く必要があります。
+
+```go
+// $BaseURL/en/about/index.html から $BaseURL/images/members.png への相対パス
+{{< figure src="../../images/members.png" >}}
+```
+
+:::
 
 ## サイズしたい
 
@@ -88,5 +119,23 @@
     <a href="外部URL" target="_blank" rel="noopener">
         <img src="画像の相対パス">
     </a>
+</figure>
+```
+
+## クラスしたい
+
+```go
+{{< figure
+    src="画像の相対パス"
+    class="クラス名"
+>}}
+```
+
+``class``を使ってクラス名を指定できます。
+カスタムCSSを適用できます。
+
+```html
+<figure class="クラス名">
+    <img src="画像の相対パス">
 </figure>
 ```
