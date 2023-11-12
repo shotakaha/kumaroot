@@ -33,6 +33,7 @@ hugo-content
 hugo-static
 hugo-page-variables
 hugo-frontmatter
+hugo-shortcodes-figure
 ```
 
 ## 全体設定したい
