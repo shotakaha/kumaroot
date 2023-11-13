@@ -19,6 +19,8 @@ maxdepth: 1
 html-doctype
 html-meta
 html-p
+html-img
+html-figure
 html-semantic
 ```
 
