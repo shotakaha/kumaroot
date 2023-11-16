@@ -60,15 +60,32 @@ $ poetry shell
 ### 編集の手順
 
 ```console
+$ cd kumaroot
 $ poetry shell
 (.venv) $ cd docs
-(.venv) $ code ..
 (.venv) $ make livehtml  # 自動でブラウザが開く
 ```
 
 1. ``poetry shell``で仮想環境を立ち上げる
-2. VS Codeを使って編集する
-3. ``make livehtml``でライブリロードしながら編集内容を確認する
+2. ``make livehtml``でライブリロードしながら編集内容を確認する
+
+### VS Codeを使った編集手順
+
+```console
+$ cd kumaroot
+$ code .
+```
+
+1. Poetry設定で ``virtualenvs.in-project = true`` が前提
+2. KumaROOTのリポジトリでVS Codeを起動する
+3. VS Code内でターミナルを開く（``command + j``）
+
+```console
+(.venv) $ cd docs
+(.venv) $ make livehtml
+```
+
+3. ``make livehtml``でライブリロードしながら編集する
 
 ## バージョン管理
 
