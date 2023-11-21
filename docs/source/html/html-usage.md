@@ -22,6 +22,7 @@ html-p
 html-img
 html-figure
 html-semantic
+html-jsonld
 ```
 
 ## CSSしたい
