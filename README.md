@@ -57,7 +57,30 @@ $ poetry shell
 1. GitHubのリポジトリをクローンする
 2. ``poetry``を使って依存パッケージをインストールする
 
-### 編集の手順
+### 新規にコンテンツを作成する場合
+
+```console
+$ cd kumaroot
+$ git br ブランチ名
+$ git co ブランチ名
+$ code .
+# docs/source/ツール名/ツール名-usage.mdを編集する
+# docs/source/ツール名/ツール名-コンテンツ名.mdを新規作成する
+$ git add 編集したファイル
+$ git commit
+$ git push
+# GitHub上：Pull Requestを作成する
+# GitHub上：テストをパスしたら即マージする
+```
+
+1. ``main``リポジトリからブランチを作成する
+2. ``ツール名/ツール名-usage.md``の``toctree``にファイル名を追加する
+3. ``ツール名/ツール名-コンテンツ名.md``を作成する
+4. 変更箇所を``git add`` & ``git commit``
+5. GitHubに``git push``し、プルリクエストを作成する
+6. 自動テストをパスしたら即マージする
+
+## ライブプレビューする場合
 
 ```console
 $ cd kumaroot
@@ -69,7 +92,7 @@ $ poetry shell
 1. ``poetry shell``で仮想環境を立ち上げる
 2. ``make livehtml``でライブリロードしながら編集内容を確認する
 
-### VS Codeを使った編集手順
+### VS Codeを使ってライブプレビューする場合
 
 ```console
 $ cd kumaroot
