@@ -2,24 +2,23 @@
 
 ## v1.24.0 (2023-11-25)
 
-### Feat
+### Added
 
-- **html/html-jsonld.md**: 構造化データを追加した
-- **pandas/pandas-to_json.md**: JSONで保存する方法を追記した
-- **html/html-img.md**: imgタグを追加した
-- **hugo/hugo-shortcodes-figure.md**: figureショートコードを追加した
-
-### Fix
-
-- **html/css-variables.md**: CSS変数に追記した
 - **html/css-variables.md**: CSS変数を追加した
-- **html/css-root.md**: ファイル名を変更した
-- **gas/gas-date.md**: タイポを修正。説明を追記した。
-- **myst/myst-install.md**: pipxを使ったインストールを追記した
-- **python/python-pipx.md**: upgrade-all、reinstall-allを追記した
+- **html/html-img.md**: imgタグを追加した
+- **html/html-jsonld.md**: 構造化データを追加した
+- **hugo/hugo-shortcodes-figure.md**: figureショートコードを追加した
+- **pandas/pandas-to_json.md**: JSONで保存する方法を追記した
+
+### Fixed
+
 - **command/command-tlmgr.md**: tlmgr optionを追記した
+- **gas/gas-date.md**: タイポを修正。説明を追記した
+- **html/css-root.md**: ファイルを削除した
 - **hugo/hugo-shortcodes-figure.md**: 相対パスの説明を追記した
 - **latex/latex-install.md**: 再インストールオプションを追記した
+- **myst/myst-install.md**: pipxを使ったインストールを追記した
+- **python/python-pipx.md**: upgrade-all、reinstall-allを追記した
 
 ## v1.23.0 (2023-11-07)
 
