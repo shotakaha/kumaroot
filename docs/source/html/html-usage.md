@@ -29,7 +29,7 @@ html-jsonld
 
 ```{toctree}
 css-selectors
-css-root
+css-variables
 css-font
 css-display
 css-margin
