@@ -29,6 +29,7 @@ emacs-org
 emacs-yatex
 emacs-magit
 emacs-twitter
+emacs-word
 ```
 
 ## リファレンス
