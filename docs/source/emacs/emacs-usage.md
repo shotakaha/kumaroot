@@ -12,7 +12,9 @@
 Emacsの簡単な使い方と便利なパッケージなどを紹介します。
 
 ```{note}
-最近はVS Codeを使っています。
+2020年くらいから[VS Code](../vscode/vscode-usage.md)をメインで使っています。
+キーバインドは[Awesome Emacs Keymap](https://marketplace.visualstudio.com/items?itemName=tuttieee.emacs-mcx)を使い、Git操作は[Edamagit](https://marketplace.visualstudio.com/items?itemName=kahole.magit)を使っています。
+また、全体の環境を[VSpaceCode](https://marketplace.visualstudio.com/items?itemName=VSpaceCode.vspacecode)にして、少しずつ``vim``バインドの習得も目指しています。
 ```
 
 ```{toctree}
