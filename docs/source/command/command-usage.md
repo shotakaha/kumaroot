@@ -51,6 +51,7 @@ command-ps
 command-pwd
 command-pwgen
 command-rsync
+command-rtx
 command-sd
 command-sed
 command-ssh
