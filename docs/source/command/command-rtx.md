@@ -32,6 +32,14 @@ $ rtx deactivate
 
 ``deactivate``コマンドで無効にできます。
 
+## プラグイン名を確認したい（``plugins ls-remote``）
+
+```console
+$ rtx plugins ls-remote
+```
+
+``plugins ls-remote``コマンドで、利用できるプラグイン名を一覧できます。
+
 ## プラグイン名のバージョンを一覧したい（``ls-remote``）
 
 ```console
