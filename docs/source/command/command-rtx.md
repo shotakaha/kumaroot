@@ -6,7 +6,9 @@ $ rtx version
 2023.12.1 macos-x64 (2023-12-01)
 ```
 
-Rust製の環境開発マネージャーです。
+環境開発を切り替えるツールです。
+同様のツールに[anyenv](https://anyenv.github.io/)や[asdf](https://asdf-vm.com/)などがありますが、
+最近は[rtx](https://github.com/jdx/rtx)を使うのがよさそうです。
 
 ## Pythonを使いたい
 
