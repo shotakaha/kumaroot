@@ -11,7 +11,7 @@ $ rtx --version
 同様のツールに[anyenv](https://anyenv.github.io/)や[asdf](https://asdf-vm.com/)などがありますが、
 最近は[rtx](https://github.com/jdx/rtx)を使うのがよさそうです。
 
-## ツールを有効／無効にしたい
+## 有効／無効にしたい
 
 ```console
 $ eval "$(rtx activate bash)"
@@ -31,6 +31,25 @@ $ rtx deactivate
 ```
 
 ``deactivate``コマンドで無効にできます。
+
+## プラグイン名のバージョンを一覧したい（``ls-remote``）
+
+```console
+$ rtx ls-remote プラグイン名
+$ rtx ls-remote python
+$ rtx ls-remote poetry
+$ rtx ls-remote pipx
+$ rtx ls-remote node
+```
+
+``ls-remote プラグイン名``コマンドで、インストールできるバージョンを一覧できます。
+プラグインによっては、下記のようなメッセージが表示されるので``y(es)`を入力します。
+
+```console
+$ rtx ls-remote pipx
+⚠️  pipx is a community-developed plugin: https://github.com/yozachar/asdf-pipx
+Would you like to install pipx? (y/n)
+```
 
 ## Pythonを使いたい
 
