@@ -18,7 +18,6 @@ $ eval "$(rtx activate bash)"
 $ eval "$(rtx activate zsh)"
 $ rtx activate fish | source
 $ execx($(rtx activate xonsh))
-
 ```
 
 ``activate``コマンドを使って、現在のセッションで``rtx``を有効にできます。
@@ -119,6 +118,6 @@ $ myst --version
 v1.1.32
 ```
 
-``rtx``のようなツールがあってよかった状況の紹介です。
-Homebrewを使ってインストールした``node``を``noode@21``に更新してしまい、``myst``が動かなくなってしまいました。
-カレントディレクトリだけ``node@20``に設定し、無事``MyST``を動かすことができました。
+``rtx``によるバージョン管理の具体例を紹介します。
+Homebrewを使ってインストールした``node``を``noode@21``に更新してしまい、``mystmd``が動かなくなってしまいました。
+カレントディレクトリだけ``node@20``に設定し、無事``mystmd``を動かすことができました。
