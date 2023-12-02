@@ -48,6 +48,8 @@ $ rtx ls-remote python
 $ rtx ls-remote poetry
 $ rtx ls-remote pipx
 $ rtx ls-remote node
+$ rtx ls-remote go
+$ rtx ls-remote hugo
 ```
 
 ``ls-remote プラグイン名``コマンドで、インストールできるバージョンを一覧できます。
