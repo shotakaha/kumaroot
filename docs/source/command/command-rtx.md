@@ -55,16 +55,44 @@ Would you like to install pipx? (y/n)
 
 ```console
 $ rtx install python@3.11
-$ rtx install pipx@1.2.1
-$ rtx install poetry@1.7.1
+```
 
+``install``コマンドで、使いたいプラグイン（とバージョン）を指定します。
+バージョンを省略すると``latest``になります。
+
+```console
 $ rtx use python@3.11
-$ rtx use --global pipx@1.2.1
-$ rtx use --global poetry@1.7.1
+$ rtx use python@3.12
 
 $ rtx ls
-pipx   1.2.1  ~/.rtx.toml                    1.2.1
-poetry 1.7.1  ~/.rtx.toml                    1.7.1
-python 3.11.6 ~/repos/github.com/shotakaha/kumaroot/.rtx.toml 3.11
+python 3.11.6
+python 3.12.0 ~/repos/sandbox/rtx-usage/.rtx.toml 3.12
+
+$ which python
+~/.local/share/rtx/installs/python/3.12.0/bin/python
+```
+
+``use``コマンドで、利用するプラグイン（とバージョン）の切り替えができます。
+設定ファイル``.rtx.toml``がカレントディレクトリに作成されます。
+プラグインが見当たらない場合は、インストール（``rtx install``）してくれます。
+
+```console
+$ rtx use python@3.11
+$ rtx use poetry@1.7.1
+$ rtx use pipx@1.2.1
+
+$ rtx ls
+pipx   1.2.1  ~/repos/sandbox/rtx-usage/.rtx.toml 1.2.1
+poetry 1.7.1  ~/repos/sandbox/rtx-usage/.rtx.toml 1.7
+python 3.11.6 ~/repos/sandbox/rtx-usage/.rtx.toml 3.11
 python 3.12.0
+
+$ which python3
+~/.local/share/rtx/installs/python/3.11.6/bin/python3
+
+$ which poetry
+~/.local/share/rtx/installs/poetry/1.7.1/bin/poetry
+
+$ which pipx
+~/.local/share/rtx/installs/pipx/1.2.1/bin/pipx
 ```
