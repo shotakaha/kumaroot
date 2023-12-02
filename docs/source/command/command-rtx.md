@@ -96,3 +96,19 @@ $ which poetry
 $ which pipx
 ~/.local/share/rtx/installs/pipx/1.2.1/bin/pipx
 ```
+
+## Nodeを使いたい
+
+```console
+$  myst --version  # ~/.local/bin/myst
+MyST requires node 16, 18, or 20; you are running node 21.
+
+$ rtx use node@20  # ~/.local/share/rtx/installs/node/20.10.0/bin/node
+
+$ myst --version
+v1.1.32
+```
+
+``rtx``のようなツールがあってよかった状況の紹介です。
+Homebrewを使ってインストールした``node``を``noode@21``に更新してしまい、``myst``が動かなくなってしまいました。
+カレントディレクトリだけ``node@20``に設定し、無事``MyST``を動かすことができました。
