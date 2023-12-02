@@ -4,15 +4,21 @@
 $ pip3 install ruff
 ```
 
-Rustで書かれたPython用のリンターです。
+Rustで書かれたPython用のリンター&フォーマッタです。
 
-## 確認したい
+## リンターしたい
 
 ```console
-$ ruff check .
+$ ruff check パス
 ```
 
 確認したいファイル／ディレクトリで``ruff check``を実行します。
 修正したほうがよい箇所がターミナルに出力されます。
 
 スキップしたいエラーなどは設定ファイル（``pyproject.toml``）で除外できます。
+
+## フォーマッタしたい
+
+```console
+$ ruff format パス
+```
