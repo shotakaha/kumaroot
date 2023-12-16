@@ -10,6 +10,8 @@
 [Hugo Features](https://gohugo.io/about/features/)にHugoを使う利点が書かれています。
 [各種エディター用のプラグイン](https://gohugo.io/tools/editors/)もあります。
 
+より具体的な使い方は[Blowfishテーマのドキュメント](https://blowfish.page/docs/)がとても参考になりました。
+
 :::{hint}
 
 [Site Generators - Jamstack](https://jamstack.org/generators/)で流行のSSGを確認できます。
