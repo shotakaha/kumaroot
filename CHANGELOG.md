@@ -2,33 +2,20 @@
 
 ## v1.25.0 (2023-12-16)
 
-### Feat
+### Added
 
-- **html/css-nest.md**: CSSネストを追加した
 - **command/command-rtx.md**: rtxを追加した
 - **emacs/emacs-word.md**: WordをEmacsライクにする理由を追加した
+- **html/css-nest.md**: CSSネストを追加した
 
-### Fix
+### Fixed
 
-- **python/python-ruff.md**: リンター＆フォーマッタの変遷を追記した
-- **python/python-ruff.md**: check --select を追記した
-- **python/python-ruff.md**: カテゴリ記号の一覧を追記した
-- **python/python-ruff.md**: リンターの使い方に追記した
-- **python/python-ruff.md**: フォーマッタであることを追記した
-- **hugo/hugo-usage.md**: Blowfishテーマのドキュメントへの参照を追記した
-- **command/command-usage.md**: command-rtxを目次に追加した
-- **command/command-rtx.md**: ちょっと修正
-- **command/command-rtx.md**: 実際に追加したプラグインを追記した
-- **command/command-rtx.md**: plugins ls-remoteを追記した
-- **command/command-rtx.md**: Nodeを切り替えた例を追記した
-- **command/command-rtx.md**: useを追記した
-- **command/command-rtx.md**: ls-remoteを追記した
-- **command/command-rtx.md**: rtx activateを追記した
-- **command/command-rtx.md**: anyenv、asdfのことを追記した
-- **emacs/emacs-word.md**: Wordバインドの変更箇所を追記した
-- **emacs/emacs-word.md**: 修正中
+- **command/command-rtx.md**: サブコマンドの使い方を追記した
+- **command/command-usage.md**: 目次に追加した
 - **emacs/emacs-usage.md**: 最近はVSCodeを使っていることを明記した
-- **emacs/emacs-word.md**: キーバインドを（仮）追加した
+- **emacs/emacs-word.md**: Wordバインドの変更箇所を追記した
+- **hugo/hugo-usage.md**: Blowfishテーマのドキュメントへの参照を追記した
+- **python/python-ruff.md**: リンター＆フォーマッタの変遷を追記した
 
 ## v1.24.0 (2023-11-25)
 
