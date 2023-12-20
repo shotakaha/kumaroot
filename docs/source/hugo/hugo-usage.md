@@ -20,7 +20,6 @@ HugoはJSの知識がなくても（そしてGoの知識がなくても）、HTM
 
 :::
 
-
 ```{toctree}
 ---
 maxdepth: 1
@@ -36,6 +35,7 @@ hugo-static
 hugo-page-variables
 hugo-frontmatter
 hugo-shortcodes-figure
+hugo-printf
 ```
 
 ## 全体設定したい
