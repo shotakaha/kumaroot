@@ -36,6 +36,7 @@ hugo-static
 hugo-page-variables
 hugo-frontmatter
 hugo-shortcodes-figure
+hugo-scratch
 ```
 
 ## 全体設定したい
