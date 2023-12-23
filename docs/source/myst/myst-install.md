@@ -44,6 +44,23 @@ MyST requires node 16, 18, or 20; you are running node 21.
 [v1.1.7のリリース](https://github.com/executablebooks/mystmd/releases/tag/myst-cli%401.1.7)からPyPIにデプロイされるようになりました。
 [pipx](../python/python-pipx.md)でもインストールできますが、Nodeのバージョンが合っていないと使えないみたいです。
 
+## インストールしたい（``poetry``）
+
+```console
+$ poetry add mystmd
+$ poetry add nodeenv
+```
+
+``poetry``でパッケージ管理している場合は、``nodeenv``を使ってNode環境を追加できます。
+GitLab CIなどのCI環境で構築する場合に便利です。
+
+:::{note}
+
+コンテナのベースにはPythonのイメージを指定し、``pip``や``poetry``を使って、必要なパッケージをインストールします。
+``apk``などを使って``node``をインストールする必要がなくなり、とても便利です。
+
+:::
+
 ## アップデートしたい
 
 ```console
