@@ -27,6 +27,7 @@ maxdepth: 1
 myst-install
 myst-quickstart
 myst-init
+myst-toc
 myst-templates
 ```
 
