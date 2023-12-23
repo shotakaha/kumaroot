@@ -26,6 +26,8 @@ maxdepth: 1
 ---
 myst-install
 myst-quickstart
+myst-init
+myst-toc
 myst-templates
 ```
 
@@ -42,4 +44,5 @@ maxdepth: 1
 myst-build-html
 myst-build-pdf
 myst-build-docx
+myst-build-typst
 ```
