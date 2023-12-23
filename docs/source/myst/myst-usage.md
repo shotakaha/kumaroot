@@ -44,4 +44,5 @@ maxdepth: 1
 myst-build-html
 myst-build-pdf
 myst-build-docx
+myst-build-typst
 ```
