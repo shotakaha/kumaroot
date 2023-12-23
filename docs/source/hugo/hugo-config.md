@@ -1,20 +1,8 @@
-# 設定ファイル（``/config/``）
+# 設定ファイル（``hugo.toml``）
 
-プロジェクトの設定をファイルに保存できる。
-設定に``TOML`` / ``YAML`` / ``JSON``が利用できる。
-僕は``TOML``で設定するのが好きです。
-
-## デフォルトの設定ファイルを使いたい
-
-```bash
-# Hugo v0.110から
-/hugo.toml
-
-# Hugo v0.110まで
-/config.toml
-```
-
-プロジェクトルートにある``hugo.toml``が自動で読み込まれます。
+サイトの設定は``hugo.toml``に記述します。
+設定の形式は``TOML`` / ``YAML`` / ``JSON``が利用できます。
+僕は``TOML``を好んで使っています。
 
 :::{attention}
 v0.110からデフォルトの設定ファイル名が``hugo.toml``に変更されました。
@@ -22,34 +10,64 @@ v0.110からデフォルトの設定ファイル名が``hugo.toml``に変更さ�
 詳しくは[hugo.toml vs config.toml - Hugoドキュメント](https://gohugo.io/getting-started/configuration/#hugotoml-vs-configtoml)を参照してください。
 :::
 
-## 設定ファイルを切り替えたい（``--config``）
+## 設定ファイルしたい（``--config``）
 
-```bash
+```console
 $ hugo --config 設定ファイル
 $ hugo --config 設定ファイル1,設定ファイル2,設定ファイル3
 ```
 
-``hugo --config 設定ファイル``を使ってビルド時に設定ファイルの切り替えができる。
+``--config``オプションで設定ファイルを指定できます。
 設定ファイルは複数指定できる。
 
-## 設定ファイルを場合分けしたい（``--environment``）
+## 設定ファイルを分割したい（``/config/``）
 
-```text
-/config/_default/config.toml  # デフォルト設定（デバッグ用？）
-/config/gitlab/config.toml    # GitLab Pagesに公開する設定
-/config/www2/config.toml      # www2に公開する設定
-/config/環境名/config.toml
+``/config/環境名/``ディレクトリ以下に設定ファイルを分割して配置できます。
+[Blowfishテーマの設定ファイル](https://blowfish.page/docs/configuration/)のセクションでは、次のように設定ファイルを分割しています。
+
+```console
+/config/_default/config.toml
+/config/_default/languages.ja.toml # 言語関係の設定
+/config/_default/menus.ja.toml     # ナビゲーションの設定
+/config/_default/params.toml       # テーマ独自の設定
 ```
 
-ローカルでの開発、GitLab Pagesへの公開、本番環境への公開など、それぞれの場合に応じて設定ファイルを作成できる。
-公開先によっては``baseURL``を変更する必要がある場合などに便利です。
-
-また、設定ファイルを切り替える
+## 用途別に設定したい（``--environment``）
 
 ```bash
 $ hugo -e 環境名
 $ hugo -e gitlab  # デフォルト + GitLab Pagesの設定
-$ hugo -e www2    # デフォルト + 公開設定
+$ hugo -e production   # デフォルト + 公開設定
+```
+
+``--environment``オプションで、用途別に設定を切り替えることができます。
+設定ファイルは``/config/環境名/``ディレクトリの以下に配置します。
+デフォルトは``/config/_default/``ディレクトリです。
+
+上記のサンプルでは、次のような設定ファイルの配置を仮定しています。
+
+```console
+/config/_default/hugo.toml    # デフォルト設定（ステージング用）
+/config/gitlab/hugo.toml      # GitLab Pagesに公開する設定
+/config/production/hugo.toml  # 本番環境に公開する設定
+```
+
+ローカルでの開発（やステージング環境）では``/config/_default/``、
+GitLab Pagesでの構築時は``/config/gitlab/``、
+本番環境に公開する場合は``/config/production/``の設定ファイルに切り替えて適用されるようにしています。
+
+### テーマごとに設定したい
+
+この機能を使うと、テーマごとの設定を共存させることができます。
+Hugoのテーマ作成はとても自由度が高く、テーマ間の互換性はほぼありません。
+
+お気に入りのテーマを探す過程で、設定ファイルを毎回書き換えるのは面倒です。
+次のように、テーマごとに設定ファイル環境を作成すると、その手間がぐっと抑えられます。
+
+```console
+/config/_default/hugo.toml    # 実行: hugo server
+/config/blowfish/[...].toml   # 実行: hugo -e blowfish server; Blowfishテーマ
+/config/ananke/[...].toml     # 実行: hugo -e ananke server; Anankeテーマ
 ```
 
 ## リファレンス
