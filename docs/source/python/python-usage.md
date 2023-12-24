@@ -31,6 +31,8 @@ python-pyproject
 python-pip
 python-pipx
 python-poetry
+python-virtualenv
+python-nodeenv
 ```
 
 ```{toctree}
