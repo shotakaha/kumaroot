@@ -16,7 +16,8 @@ PDF形式で出力したいページのフロントマターに``format: pdf``�
 $ myst build --pdf
 ```
 
-デフォルトではLaTeX環境を使ってPDFが生成されます。
+デフォルトではLaTeX環境を使ってPDFを作成します。
+ファイルは{file}`_build/exports/`に生成されます。
 
 :::{note}
 
