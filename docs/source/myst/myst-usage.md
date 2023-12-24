@@ -44,6 +44,9 @@ $ myst build --help
 ``--help``オプションでビルド形式を確認できます。
 PDF（``--pdf``）やTeX（``--tex``）、Typst（``--typst``）、Word（``--word, --docx``）、HTML（``--html``）など、多くの形式に対応しています。
 
+ビルドされたファイルは``_build``以下に作成されます。
+``_build``は``.gitignore``に追記しておくとよいです。
+
 ```{toctree}
 ---
 maxdepth: 1
