@@ -1,18 +1,27 @@
 # Typstしたい（``myst build --typst``）
 
 ```yaml
+---
 exports:
   - format: typst
+  - format: pdf
+  - format: docx
+---
 ```
 
 Typst形式で出力したいファイルのフロントマターに``format: typst``を追記します。
 
+:::{note}
+
+出力形式は複数指定できます。
+
+:::
+
 ```console
 $ myst build --typst
-# ==> _build/exports/ファイル名_typst/ファイル名.pdf
 ```
 
-``build --typst``オプションで、ページごとに``.typ``ファイルと``.pdf``ファイルが生成されます。
+ファイルは{file}`_build/exports/ページ名_typst/`に必要なファイルが生成されます。
 日本語フォントも利用できます。
 
 :::{note}
@@ -22,3 +31,11 @@ LaTeXを使ったPDF生成と比べて、日本語フォントもデフォルト
 （フォントを指定する方法はあとで調べます）
 
 :::
+
+## テンプレートを変更したい
+
+```console
+$ myst templates list --typst
+```
+
+利用できるテンプレート一覧を確認できます。
