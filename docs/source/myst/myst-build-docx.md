@@ -19,3 +19,12 @@ $ myst build --docx
 
 
 [Exporting to Word](https://myst-tools.org/docs/mystjs/creating-word-documents)
+
+## テンプレートを変更したい
+
+```console
+$ myst templates list --docx
+$ myst templates list --word
+```
+
+利用できるテンプレート一覧を確認できます。

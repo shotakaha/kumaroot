@@ -26,3 +26,12 @@ $ myst build --pdf
 :::
 
 [Exporting to PDF](https://myst-tools.org/docs/mystjs/creating-pdf-documents)
+
+## テンプレートを変更したい
+
+```console
+$ myst templates list --pdf
+$ myst templates list --tex
+```
+
+利用できるテンプレート一覧を確認できます。
