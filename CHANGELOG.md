@@ -1,5 +1,36 @@
 # CHANGELOG.md
 
+## v1.26.0 (2023-12-24)
+
+### Feat
+
+- **myst/myst-toc.md**: TOCを制御する方法を追加した
+- **myst/myst-build-typst.md**: Typstで出力する方法を追記した
+- **myst/myst-init.md**: 初期化する方法を追加した
+- **hugo/hugo-usage.md**: printfを追加した
+- **hugo/hugo-printf.md**: printfを追加した
+- **hugo/hugo-usage.md**: scratchを追加した
+
+### Fix
+
+- **docs/source/myst/myst-build-.md**: テンプレートを確認する方法を追記した
+- **myst/myst-build-typst.md**: Typstの出力先を追記した
+- **myst/myst-usage.md**: ビルド先のパスを追記した
+- **myst/myst-build-docx.md**: docxの出力先を追記した
+- **myst/myst-build-pdf.md**: PDFの生成先を追記した
+- **myst/myst-build-docx.md**: Word出力を追記した
+- **myst/myst-build-pdf.md**: PDF出力を追記した
+- **myst/myst-usage.md**: ビルド形式を追加した
+- **myst/myst-usage.md**: myst-build-typstを追記した
+- **myst/myst-usage.md**: myst-tocを追加した
+- **myst/myst-init.md**: トップページのファイル名候補を追記した
+- **myst/myst-usage.md**: 目次に追加した
+- **myst/myst-init.md**: mdファイルが必要なことを追記した
+- **myst/myst-install.md**: poetryを使ってインストールする方法を追記した
+- **hugo/hugo-printf.md**: フォーマット指定子を追加した
+- **hugo/hug-scrach.md**: scrach関数を追加した
+- **hugo/hugo-config.md**: Hugoの設定ファイルの使い方を整理した
+
 ## v1.25.0 (2023-12-16)
 
 ### Added
