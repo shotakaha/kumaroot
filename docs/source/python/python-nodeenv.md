@@ -10,3 +10,9 @@ $ source node_env/bin/activate
 Nodeの仮想環境を構築できます。
 [MyST](../myst/myst-usage.md)のようにNode依存があるパッケージも、Pythonパッケージと同じように環境構築できます。
 CI環境と組み合わせて使います。
+
+## 利用できるバージョンを確認したい
+
+```console
+$ nodeenv --list
+```
