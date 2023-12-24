@@ -35,7 +35,14 @@ myst-templates
 % myst-theme
 % myst-css
 
-## ビルドしたい
+## ビルドしたい（``myst build``）
+
+```console
+$ myst build --help
+```
+
+``--help``オプションでビルド形式を確認できます。
+PDF（``--pdf``）やTeX（``--tex``）、Typst（``--typst``）、Word（``--word, --docx``）、HTML（``--html``）など、多くの形式に対応しています。
 
 ```{toctree}
 ---
