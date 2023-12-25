@@ -9,6 +9,7 @@ $ git branch -a
   fix-git-branch
 * main
   remotes/origin/HEAD -> origin/main
+  remotes/origin/fix-git-branch
   remotes/origin/main
 ```
 
