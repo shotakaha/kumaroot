@@ -52,6 +52,7 @@ hugo-config-copyright
 hugo-config-format
 hugo-config-paginate
 hugo-config-markup
+hugo-config-services
 ```
 
 % hugo-templates-homepage
