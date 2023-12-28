@@ -22,7 +22,44 @@ $ hugo --config 設定ファイル1,設定ファイル2,設定ファイル3
 
 ## 設定ファイルを分割したい（``/config/``）
 
-``/config/環境名/``ディレクトリ以下に設定ファイルを分割して配置できます。
+``/config/環境名/``以下に設定ファイルを分割して配置できます。
+デフォルトの設定は``/config/_default/``に配置します。
+
+設定項目は[Configuration directory](https://gohugo.io/getting-started/configuration/#configuration-directory)にあるとおりです。
+
+以下に書き出してみましたが、Hugoのデフォルト（＝ビルトイン）の設定でよい場合は、
+ファイルを作成する必要はありません。
+
+```console
+/config/_default/
+hugo.toml
+build.toml
+cache.toml
+cascade.toml
+deployment.toml
+frontmatter.toml
+imaging.toml
+languages.toml
+markup.toml
+mediatypes.toml
+menus.toml
+minify.toml
+module.toml
+outputformats.toml
+outputs.toml
+params.toml
+permalinks.toml
+privacy.toml
+related.toml
+security.toml
+server.toml
+services.toml
+sitemap.toml
+taxonomies.toml
+```
+
+### Blowfishの場合
+
 [Blowfishテーマの設定ファイル](https://blowfish.page/docs/configuration/)のセクションでは、次のように設定ファイルを分割しています。
 
 ```console
@@ -31,6 +68,8 @@ $ hugo --config 設定ファイル1,設定ファイル2,設定ファイル3
 /config/_default/menus.ja.toml     # ナビゲーションの設定
 /config/_default/params.toml       # テーマ独自の設定
 ```
+
+多言語サイトにする場合、設定ファイル名も言語ごとに作成できます。
 
 ## 用途別に設定したい（``--environment``）
 
