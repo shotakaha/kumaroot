@@ -18,26 +18,43 @@ git-help
 git-config
 git-init
 git-status
-git-add
-git-commit
-git-rm
-git-log
 git-branch
 git-checkout
+git-add
+git-commit
 git-merge
-git-remote
+git-log
+git-diff
+git-rm
+```
+
+## リモートリポジトリしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+git-clone
 git-fetch
 git-pull
 git-push
-git-clone
-git-single
-git-flow
-git-semver
-git-gitlab
-git-hooks
-git-diff
 git-submodule
+git-remote
+git-hooks
 ```
+
+## もっとGitしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+git-single
+git-semver
+git-flow
+git-gitlab
+```
+
 
 ## 関連ドキュメント
 

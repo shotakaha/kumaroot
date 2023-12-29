@@ -1,4 +1,4 @@
-# ブランチの切り替え（``git checkout``）
+# ブランチを切り替えたい（``git checkout``）
 
 ```console
 $ git checkout ブランチ名

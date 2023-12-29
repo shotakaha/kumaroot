@@ -1,4 +1,4 @@
-# ブランチのマージ（``git merge``）
+# ブランチをマージしたい（``git merge``）
 
 ```bash
 $ git merge
