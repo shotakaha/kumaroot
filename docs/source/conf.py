@@ -186,4 +186,4 @@ latex_show_urls = "footnote"
 # latex_domain_indices = True
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {"https://docs.python.org/": None}
+intersphinx_mapping = {"python": ("https://docs.python.org/", None)}
