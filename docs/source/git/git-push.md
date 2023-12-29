@@ -1,4 +1,4 @@
-# ローカルの更新をリモートに反映（``git push``）
+# ローカルの更新をリモートに送りたい（``git push``）
 
 ```console
 $ git push

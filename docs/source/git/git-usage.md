@@ -34,13 +34,12 @@ git-rm
 ---
 maxdepth: 1
 ---
+git-remote
 git-clone
 git-fetch
 git-pull
 git-push
 git-submodule
-git-remote
-git-hooks
 ```
 
 ## もっとGitしたい
@@ -53,6 +52,7 @@ git-single
 git-semver
 git-flow
 git-gitlab
+git-hooks
 ```
 
 
