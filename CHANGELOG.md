@@ -1,5 +1,24 @@
 # CHANGELOG.md
 
+## v1.27.0 (2023-12-29)
+
+### Feat
+
+- **python/python-nodeenv.md**: nodeenvを追加した
+- **python/python-virtualenv.md**: virtualenvを追加した
+
+### Fix
+
+- **hugo/hugo-config.md**: 設定ファイルの分割を詳しく書いた
+- **hugo/hugo-usage.md**: 目次に追加した
+- **hugo/hugo-config-services.md**: テンプレートで呼び出す方法を追記した
+- **docs/source/hugo/hugo-config-services.md**: GA4の設定を追記した
+- **git/git-branch.md**: ブランチ作成を修正した
+- **git/git-branch.md**: リモートブランチを追加した
+- **git/git-branch.md**: branchの使い方を追記した
+- **python/python-usage.md**: 目次を更新した
+- **python/python-nodeenv.md**: 利用できるバージョンを確認する方法を追記した
+
 ## v1.26.0 (2023-12-24)
 
 ### Feat
