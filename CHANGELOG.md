@@ -1,5 +1,17 @@
 # CHANGELOG.md
 
+## v1.27.1 (2023-12-29)
+
+### Fix
+
+- **git/git-usage.md**: 目次を整理した
+- **git/git-usage.md**: 目次を整理した
+- **git/git-checkout.md**: チェックアウトを追記した
+- **git/git-push.md**: 既存リポジトリを追記した
+- **git/git-push.md**: アップストリームの設定を追加した
+- **git/git-push.md**: 基本コマンドを追加した
+- **docs/source/conf.py**: deprecation warningを修正した
+
 ## v1.27.0 (2023-12-29)
 
 ### Feat
