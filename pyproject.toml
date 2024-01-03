@@ -20,10 +20,16 @@ sphinx-rtd-theme = "^2.0.0"
 [tool.poetry.group.dev.dependencies]
 #ipykernel = "^6.16.0"
 #beautifulsoup4 = "^4.11.1"
-#pendulum = "^2.1.2"
 #fake-useragent = "^1.1.1"
 sphinx-autobuild = "^2021.3.14"
 commitizen = "^3.12.0"
+pandas = "^2.1.4"
+pendulum = "^3.0.0"
+
+
+[tool.poetry.group.mystmd.dependencies]
+mystmd = "^1.1.37"
+nodeenv = "^1.8.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

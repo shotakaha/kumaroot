@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy Sphinx Document to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -30,14 +30,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Check poetry
+        run: |
+          poetry --version
+          poetry config --list
+      - name: Install dependencies
+        run: poetry install
+      - name: Build Sphinx
+        run: |
+          cd docs
+          poetry run make dirhtml
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: '.'
+          path: './docs/_build/dirhtml/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
