@@ -26,6 +26,11 @@ commitizen = "^3.12.0"
 pandas = "^2.1.4"
 pendulum = "^3.0.0"
 
+
+[tool.poetry.group.mystmd.dependencies]
+mystmd = "^1.1.37"
+nodeenv = "^1.8.0"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
