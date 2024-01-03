@@ -1,19 +1,21 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  # title:
+  title: KumaROOT Sandbox
   # description:
-  keywords: []
-  authors: []
-  github: ssh://git@github.com/shotakaha/kumaroot
+  keywords: ["sandbox", "ROOT", "Python", "Hugo"]
+  authors: ["Shota Takahashi"]
+  github: https://github.com/shotakaha/kumaroot
   # bibliography: []
 site:
   template: book-theme
-  # title:
+  title: KumaROOT Sandbox
   # options:
   #   logo: site_logo.png
   nav: []
   actions:
-    - title: Learn More
-      url: https://mystmd.org/guide
+    - title: KumaROOT
+      url: https://kumaroot.readthedocs.io/
+    - title: Qumasan
+      url: https://qumasan.gitlab.io
   domains: []
