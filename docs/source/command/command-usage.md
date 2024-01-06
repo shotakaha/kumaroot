@@ -43,6 +43,7 @@ command-lsd
 command-mkcert
 command-myst
 command-nkf
+command-npm
 command-open
 command-pandoc
 command-pbcopy
