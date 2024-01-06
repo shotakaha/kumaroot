@@ -1,4 +1,4 @@
-# 開発環境を切り替えたい（``rtx``）
+# 開発環境を切り替えたい（``mise``）
 
 ```console
 $ brew install rtx
@@ -9,9 +9,20 @@ $ rtx --version
 
 環境開発を切り替えるツールです。
 同様のツールに[anyenv](https://anyenv.github.io/)や[asdf](https://asdf-vm.com/)などがありますが、
-最近は[rtx](https://github.com/jdx/rtx)を使うのがよさそうです。
+最近は[mise](https://github.com/jdx/mise)を使うのがよさそうです。
+
+:::{note}
+
+2024年1月に[コマンド名がrtxからmise](https://github.com/jdx/mise/releases/tag/v2024.1.0)されました。
+
+:::
 
 ## 有効／無効にしたい
+
+:::{note}
+2023年11月に[fishで自動的に有効](https://github.com/jdx/mise/releases/tag/v2023.11.9)にする機能が追加されました。
+なので、このコマンドはもう必要ありません。
+:::
 
 ```console
 $ eval "$(rtx activate bash)"
@@ -34,7 +45,7 @@ $ rtx deactivate
 ## プラグイン名を確認したい（``plugins ls-remote``）
 
 ```console
-$ rtx plugins ls-remote
+$ mise plugins ls-remote
 ```
 
 ``plugins ls-remote``コマンドで、利用できるプラグイン名を一覧できます。
@@ -42,20 +53,20 @@ $ rtx plugins ls-remote
 ## プラグイン名のバージョンを一覧したい（``ls-remote``）
 
 ```console
-$ rtx ls-remote プラグイン名
-$ rtx ls-remote python
-$ rtx ls-remote poetry
-$ rtx ls-remote pipx
-$ rtx ls-remote node
-$ rtx ls-remote go
-$ rtx ls-remote hugo
+$ mise ls-remote プラグイン名
+$ mise ls-remote python
+$ mise ls-remote poetry
+$ mise ls-remote pipx
+$ mise ls-remote node
+$ mise ls-remote go
+$ mise ls-remote hugo
 ```
 
 ``ls-remote プラグイン名``コマンドで、インストールできるバージョンを一覧できます。
 プラグインによっては、下記のようなメッセージが表示されるので``y(es)`を入力します。
 
 ```console
-$ rtx ls-remote pipx
+$ mise ls-remote pipx
 ⚠️  pipx is a community-developed plugin: https://github.com/yozachar/asdf-pipx
 Would you like to install pipx? (y/n)
 ```
@@ -63,17 +74,17 @@ Would you like to install pipx? (y/n)
 ## Pythonを使いたい
 
 ```console
-$ rtx install python@3.11
+$ mise install python@3.11
 ```
 
 ``install``コマンドで、使いたいプラグイン（とバージョン）を指定します。
 バージョンを省略すると``latest``になります。
 
 ```console
-$ rtx use python@3.11
-$ rtx use python@3.12
+$ mise use python@3.11
+$ mise use python@3.12
 
-$ rtx ls
+$ mise ls
 python 3.11.6
 python 3.12.0 ~/repos/sandbox/rtx-usage/.rtx.toml 3.12
 
@@ -86,11 +97,11 @@ $ which python
 プラグインが見当たらない場合は、インストール（``rtx install``）してくれます。
 
 ```console
-$ rtx use python@3.11
-$ rtx use poetry@1.7.1
-$ rtx use pipx@1.2.1
+$ mise use python@3.11
+$ mise use poetry@1.7.1
+$ mise use pipx@1.2.1
 
-$ rtx ls
+$ mise ls
 pipx   1.2.1  ~/repos/sandbox/rtx-usage/.rtx.toml 1.2.1
 poetry 1.7.1  ~/repos/sandbox/rtx-usage/.rtx.toml 1.7
 python 3.11.6 ~/repos/sandbox/rtx-usage/.rtx.toml 3.11
@@ -112,12 +123,12 @@ $ which pipx
 $  myst --version  # ~/.local/bin/myst
 MyST requires node 16, 18, or 20; you are running node 21.
 
-$ rtx use node@20  # ~/.local/share/rtx/installs/node/20.10.0/bin/node
+$ mise use node@20  # ~/.local/share/rtx/installs/node/20.10.0/bin/node
 
 $ myst --version
 v1.1.32
 ```
 
-``rtx``によるバージョン管理の具体例を紹介します。
-Homebrewを使ってインストールした``node``を``noode@21``に更新してしまい、``mystmd``が動かなくなってしまいました。
-カレントディレクトリだけ``node@20``に設定し、無事``mystmd``を動かすことができました。
+``mise``を使ったバージョン管理の具体例です。
+Homebrewを使ってインストールした``node``を``noode@21``に更新してしまたため、``mystmd``が動かなくなってしまいました。
+``mise``を使って当該プロジェクトだけ``node@20``に切り替えることで、無事``mystmd``を動かすことができました。

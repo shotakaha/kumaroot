@@ -40,6 +40,7 @@ command-gzip
 command-launchctl
 command-ls
 command-lsd
+command-mise
 command-mkcert
 command-myst
 command-nkf
@@ -51,7 +52,6 @@ command-ps
 command-pwd
 command-pwgen
 command-rsync
-command-rtx
 command-sd
 command-sed
 command-ssh
