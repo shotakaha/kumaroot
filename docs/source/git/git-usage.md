@@ -42,6 +42,20 @@ git-push
 git-submodule
 ```
 
+## CI/CDしたい
+
+Gitホスティングサービスを使う利点のひとつとして、
+継続的な開発サイクル（Continuous Integration / Continuous Delivery）の自動化があります。
+GitLabは[GitLab CI](https://docs.gitlab.com/ee/ci/)、GitHubは[GitHub Actions](https://docs.github.com/ja/actions)という名前で利用できます。
+
+```{toctree}
+---
+maxdepth: 1
+---
+git-gitlab-ci
+git-github-actions
+```
+
 ## もっとGitしたい
 
 ```{toctree}
@@ -54,6 +68,8 @@ git-flow
 git-gitlab
 git-hooks
 ```
+
+
 
 
 ## 関連ドキュメント
