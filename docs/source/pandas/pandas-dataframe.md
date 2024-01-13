@@ -26,31 +26,26 @@ data.tail()
 ```python
 data["カラム名"]
 data["カラム名"][開始:終了]
+```
+
+``[]``アクセサを使って、カラムを取り出せます。
+さらに``[開始:終了]``で行方向にスライスできます。
+
+## 行を取り出したい
+
+```python
+data.loc[開始:終了]
 data.loc[開始:終了, "カラム名"]
 ```
 
-[pandas.DataFrame.loc](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.loc.html)を使って、データフレームをスライスできます。
+[pandas.DataFrame.loc](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.loc.html)を使って、データフレームを行方向にスライスできます。
 
-たとえば、ある閾値を越えた測定値を取り出したい場合は、次のように使います。
+また``.loc``を使うと、取り出した行の値を変更できます。
+たとえば、ある閾値を越えた測定値を取り出したい場合、次のように書きます。
 
 ```python
-name = "新しいカラム名"
+name = "有効値"
 data[name] = 0
 isT = data["測定値"] > 閾値
 data.loc[isT, name] = data["測定値"]
 ```
-
-## 指定した場所のデータを確認したい
-
-```python
-data.at[インデックス名, カラム名]
-data.at[インデックス番号, カラム番号]
-data.loc[インデックス名].at[カラム名]
-```
-
-
-## リファレンス
-
-- [pandas.DataFrame](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html)
-- [pandas.Series](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html)
-- [pandas.Index](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Index.html)
