@@ -29,3 +29,20 @@ $ apt install ripgrep
 # apt-get update
 $ apt update
 ```
+
+## オススメのパッケージ
+
+```console
+$ apt install build-essential
+$ apt install gdb
+$ apt install vim
+$ apt install git
+$ apt install openssh-client
+$ apt install libssl-dev libpq-dev
+$ apt install docker.io
+$ apt install python3
+$ apt install python3-pip
+$ apt install nodejs
+$ apt install ruby
+$ apt install ripgrep
+```
