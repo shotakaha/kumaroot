@@ -54,6 +54,7 @@ caption: 未分類
 streaming/streaming-usage
 gadget/gadget-usage
 dvr/dvr-usage
+raspi/raspi-usage
 ```
 
 ```{toctree}
