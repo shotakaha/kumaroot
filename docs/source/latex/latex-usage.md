@@ -64,6 +64,7 @@ latex-primer
 latex-ide
 latex-online
 latex-document
+latex-history
 ```
 
 ## リファレンス
