@@ -1,6 +1,6 @@
-# ssh
+# SSH接続したい（``ssh``）
 
-```bash
+```console
 $ ssh ユーザー名@接続先ホスト名
 $ ssh 接続先ホスト名 -l ユーザー名
 ```
@@ -11,7 +11,7 @@ $ ssh 接続先ホスト名 -l ユーザー名
 
 ## SSH接続を管理したい
 
-```bash
+```console
 $ touch ~/.ssh/config
 ```
 
@@ -19,7 +19,7 @@ SSH接続をよく使う場合は、{file}`~/.ssh/config`を作成するとと�
 
 ## エイリアスを設定したい
 
-```
+```unixconfig
 Host エイリアス名
 Hostname ホスト名
 User ユーザー名
@@ -31,7 +31,7 @@ User ユーザー名
 
 ## 認証鍵を設定したい
 
-```
+```unixconfig
 Host *
     AddKeysToAgent yes
     UseKeychain yes
