@@ -4,6 +4,16 @@
 pd.read_csv("ファイル名")
 ```
 
+[pandas.read_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)でCSVファイルを読み込めます。
+デフォルトの区切り文字は``,``（カンマ）です。
+
+:::{seealso}
+
+- [](./pandas-to_csv.md)
+- [](./pandas-to_json.md)
+
+:::
+
 ## 区切り文字を指定したい（``sep``）
 
 ```python
@@ -11,7 +21,6 @@ pd.read_csv("ファイル名", sep="\t")  # タブ区切り
 pd.read_csv("ファイル名", sep=" ")   # スペース区切り
 ```
 
-デフォルトの区切り文字は``sep=","``（カンマ）です。
 ``sep``（または``delimiter``）オプションで区切り文字を指定して、任意の区切り文字のテキストファイルを読み込むことができます。
 
 ## エンコーディングを指定したい（``encoding``）
@@ -42,7 +51,7 @@ data["公開日"] = pd.to_datetime(data["公開日"])
 data["更新日"] = pd.to_datetime(data["更新日"])
 ```
 
-データを読み込んだあとでも``pandas.to_datetime``で変換できます。
+データを読み込んだあとに、[pandas.to_datetime](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html)で変換できます。
 日付カラムのフォーマットが独特な場合に、ISO8601などの一般的な形に文字列への変換が必要な場合に便利です。
 
 ```python
