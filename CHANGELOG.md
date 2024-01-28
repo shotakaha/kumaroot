@@ -1,5 +1,49 @@
 # CHANGELOG.md
 
+## v1.28.0 (2024-01-28)
+
+### Feat
+
+- **latex/latex-history.md**: TeXエンジンの変遷を追加した
+- **docs/source/index.md**: ラズパイの使い方を追加した
+- **raspi/raspi-install.md**: ラズパイのインストール手順を追加した
+- **command/command-usage.md**: npmコマンドを追加した
+- **command/command-npm.md**: npmコマンドを追加した
+
+### Fix
+
+- **command/command-ssh.md**: タイトルを修正した
+- **command/command-ssh-keygen.md**: ssh-copy-idを追加した
+- **latex/latex-siunitx.md**: 内容の順番を入れ替えた
+- **latex/latex-siunitx.md**: 電子ボルトを追加した
+- **poetry.lock**: パッケージを更新した
+- **latex/latex-siunitx.md**: qty / unit コマンド推奨を追記した
+- **latex/latex-history.md**: 微修正した
+- **latex/latex-usage.md**: latex-historyを追加した
+- **mystmd/pendulum.ipynb**: pendulum.parseを追加した
+- **mystmd/pendulum.ipynb**: 日付の変換を追記した
+- **mystmd/pendulum.ipynb**: datetimeモジュールも追加した
+- **raspi/raspi-install.md**: インストール時の画面キャプチャを追加した
+- **git/git-semver.md**: バージョンアップを追記した
+- **git/git-semver.md**: semverを整理した
+- **pandas/pandas-dataframe.md**: .locを追加した
+- **pandas/pandas-dataframe.md**: スライスする方法を追加した
+- **command/command-apt.md**: オススメのパッケージを追加した
+- **command/command-uname.md**: unameを追記した
+- **command/command-date.md**: 時刻を設定する方法を追記した
+- **command/command-npm.md**: オススメのパッケージを追加した
+- **docs/source/command/command-mise.md**: ファイル名を変更した
+- **command/command-rtx.md**: rtx -> miseに変更した
+- **mystmd/ipynb**: frontmatter を修正した
+- **pyproject.toml**: mystmd用のセクションを追加した
+- **mystmd/**: ディレクトリ名を変更した
+- **.github/workflows/static.yml**: CIを修正した
+- **notebooks/pendulum.ipynb**: pendulumの使い方を整理した
+- **notebooks/myst.yml**: mystmdの設定を追記した
+- **notebooks/index.md**: トップページを追加した
+- **notebooks/myst.yml**: mystmd用のディレクトリを作成した
+- **.gitignore**: _build を除外した
+
 ## v1.27.1 (2023-12-29)
 
 ### Fix
