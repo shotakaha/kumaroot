@@ -16,6 +16,13 @@ data.to_csv("ファイル名.json", orient="records")
 異なる言語／アプリでデータをやりとりする場合には、重宝します。
 ``orient="records"``オプションで書き出すのが、人間にも読みやすくてよいと思います。
 
+:::{seealso}
+
+- [](./pandas-read_csv.md)
+- [](./pandas-to_csv.md)
+
+:::
+
 ## JSONLしたい
 
 ```python
