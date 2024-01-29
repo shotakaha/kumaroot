@@ -6,4 +6,5 @@ maxdepth: 1
 ---
 raspi-install.md
 raspi-packages.md
+raspi-capslock.md
 ```

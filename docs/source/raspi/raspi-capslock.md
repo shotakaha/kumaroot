@@ -17,10 +17,8 @@ BACKSPACE="guess"
 ```
 
 {guilabel}`CapsLock`キーを{guilabel}`Control`キーに置き換えます。
-
 {file}`/etc/default/keyboard`を編集し、
 ``XKBOPTIONS=ctrl:nocaps``に変更して、リブートします。
-
 {file}`/etc/default/keyboard`の編集には管理者権限が必要です。
 
 ```console
@@ -38,7 +36,6 @@ $ sudo vi /etc/default/keyboard
 ```
 
 {guilabel}`CapsLock`キーと{guilabel}`Control`キーを入れ替えます。
-
 {file}`/etc/default/keyboard`を編集し、
 ``XKBOPTIONS=ctrl:swapcaps``に変更して、リブートします。
 
