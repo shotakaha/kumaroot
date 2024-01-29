@@ -30,5 +30,10 @@ $ sudo apt install lsd
 $ sudo apt install tealdeer
 $ sudo apt install fish
 $ sudo apt install python3-poetry
-
 ```
+
+よく使うパッケージを追加しました。
+``ripgrep``から``lsd``までは、Rust代替コマンドです。
+``tealdeer``はmanコマンドの簡単バージョンです。
+``fish``シェルをデフォルトシェルとして使います
+Pythonの仮想環境は``poetry``を使って整えます。
