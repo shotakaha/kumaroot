@@ -13,3 +13,15 @@ $ sudo apt upgrade
 ```
 
 定期的に更新する場合は``apt upgrade``します。
+
+## パッケージを探したい
+
+```console
+$ apt-cache search パッケージ名
+```
+
+## パッケージを追加したい
+
+```console
+$ sudo apt install fish
+```
