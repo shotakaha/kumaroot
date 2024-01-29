@@ -1,4 +1,4 @@
-# 更新したい（``apt update``）
+# パッケージ管理したい（``apt``）
 
 ```console
 $ sudo apt update
@@ -14,13 +14,13 @@ $ sudo apt upgrade
 
 定期的に更新する場合は``apt upgrade``します。
 
-## パッケージを探したい
+## パッケージを探したい（``apt-cache search``）
 
 ```console
 $ apt-cache search パッケージ名
 ```
 
-## パッケージを追加したい
+## パッケージを追加したい（``apt install``）
 
 ```console
 $ sudo apt install ripgrep
