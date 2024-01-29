@@ -23,5 +23,12 @@ $ apt-cache search パッケージ名
 ## パッケージを追加したい
 
 ```console
+$ sudo apt install ripgrep
+$ sudo apt install bat
+$ sudo apt install fd-find
+$ sudo apt install lsd
+$ sudo apt install tealdeer
 $ sudo apt install fish
+$ sudo apt install python3-poetry
+
 ```
