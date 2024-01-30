@@ -8,5 +8,6 @@ raspi-install
 raspi-packages
 raspi-capslock
 raspi-editor
+raspi-ssh
 raspi-vnc
 ```
