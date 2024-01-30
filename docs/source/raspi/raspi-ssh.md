@@ -22,3 +22,16 @@ $ ssh ユーザー名@ホスト名.local
 
 [ssh-keygenでSSH鍵を作成](../command/command-ssh-keygen.md)して、パスワードレスにできます。
 必要なコマンドは``ssh-keygen``、``ssh-copy-id``、``ssh-add``の3種類です。
+
+## デーモンしたい（``sshd``）
+
+```console
+$ sudo systemctl start ssh
+$ sudo systemctl stop ssh
+$ sudo systemctl restart ssh
+$ sudo systemctl reload ssh
+```
+
+Ubuntuを書き込んだらSSHが有効になっていませんでした。
+上記コマンドでsshdデーモンを起動／終了できます。
+設定ファイルは{file}`/lib/systemd/system/ssh.service`にあるそうです。
