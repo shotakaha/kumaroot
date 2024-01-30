@@ -4,7 +4,8 @@
 ---
 maxdepth: 1
 ---
-raspi-install.md
-raspi-packages.md
-raspi-capslock.md
+raspi-install
+raspi-packages
+raspi-capslock
+raspi-editor
 ```
