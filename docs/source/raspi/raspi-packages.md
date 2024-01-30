@@ -29,6 +29,8 @@ $ sudo apt install fd-find
 $ sudo apt install lsd
 $ sudo apt install tealdeer
 $ sudo apt install fish
+$ sudo apt install vim
+$ sudo apt install code
 $ sudo apt install python3-poetry
 ```
 
