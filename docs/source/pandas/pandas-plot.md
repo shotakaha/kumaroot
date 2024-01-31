@@ -46,4 +46,16 @@ data.plot.scatter(x="x軸名", y="y軸名", s="サイズ", c="色")
 [pandas.DataFrame.plot.scatter](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.scatter.html)で散布図を描画できます。
 オプションに[matplotlib.pyplot.scatter](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html)のオプションも利用できます。
 
+## その他のグラフ
 
+実際に使う時ができたら追記します。
+
+1. [pandas.DataFrame.plot.area](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.area.html): 面グラフ
+1. [pandas.DataFrame.plot.bar](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.bar.html): 棒グラフ。重みのついたヒストグラムとしても使えるはず。
+1. [pandas.DataFrame.plot.barh](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.barh.html): 棒グラフ（横）
+1. [pandas.DataFrame.plot.box](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.box.html): 箱ひげ図。
+1. [pandas.DataFrame.plot.hexbin](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hexbin.html): マス目が六角形の図。ヒートマップを作るとカッコ良さそう。六角形にするのに見た目以外の意味はあるのだろうか？
+1. [pandas.DataFrame.plot.density](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.density.html): ガウシアンを仮定したKDE分布関数
+1. [pandas.DataFrame.plot.kde](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.kde.html): 上とどう違うんだろう？
+1. [pandas.DataFrame.plot.line](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.line.html): 折れ線グラフ
+1. [pandas.DataFrame.plot.pie](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.pie.html): 円グラフ
