@@ -4,39 +4,30 @@
 
 ### Feat
 
-- **pandas/pandas-usage.md**: 目次の構成を変更した
-- **pandas/pandas-usage.md**: 目次を整理した
+- **git/git-usage.md**: GitLab CIとGitHub Actionsを追加した
 - **pandas/pandas-loc.md**: locメソッドを追加した
-- **raspi/raspi-ssh.md**: SSHを追加した
-- **raspi/raspi-vnc.md**: VNCを追加した
+- **pandas/pandas-usage.md**: 目次の構成を変更した
 - **raspi/raspi-editor.md**: エディターを変更する方法を追加した
+- **raspi/raspi-ssh.md**: SSHを追加した
 - **raspi/raspi-usage.md**: CapsLockを変更する方法を追加した
 - **raspi/raspi-usage.md**: パッケージ管理を追加した
-- **git/git-usage.md**: GitLab CIとGitHub Actionsを追加した
+- **raspi/raspi-vnc.md**: VNCを追加した
 
 ### Fix
 
+- **git/git-gitlab-ci.md**: GitLab CIを追記した
+- **pandas/pandas-drop.md**: カラムの削除とインデックスの削除は別セクションにした
+- **pandas/pandas-isna.md**: 欠損値の削除を別ページに移動した
 - **pandas/pandas-plot.md**: そのほかのグラフも追加した
 - **pandas/pandas-plot.md**: ヒストグラムを追加した
-- **pandas/pandas-isna.md**: 微修正
-- **pandas/pandas-isna.md**: 欠損値の削除を別ページに移動した
-- **pandas/pandas-drop.md**: カラムの削除とインデックスの削除は別セクションにした
 - **pandas/pandas-query.md**: queryを追記した
+- **pandas/pandas-to_csv.md**: CSVの保存の方法を追記した
+- **raspi/raspi-capslock.md**: CapsLockを置換する方法を追記した
+- **raspi/raspi-editor.md**: おすすめパッケージを追加した
 - **raspi/raspi-ssh.md**: sshdを追加した
-- **raspi/raspi-usage.md**: 目次に追加した
+- **raspi/raspi-update.md**: よく使うパッケージを追記した
 - **raspi/raspi-usage.md**: 目次を追加した
 - **raspi/raspi-vnc.md**: RealVNCを追加した
-- **raspi/raspi-usage.md**: 目次を追加した
-- **raspi/raspi-editor.md**: おすすめパッケージを追加した
-- **renamed**:    docs/source/raspi/raspi-update.md -> docs/source/raspi/raspi-packages.md
-- **raspi/raspi-update.md**: 追加したパッケージの説明を追記した
-- **raspi/raspi-update.md**: よく使うパッケージを追記した
-- **raspi-capslock.md**: CapsLockの入れ替えを追記した
-- **raspi/raspi-capslock.md**: CapsLockを置換する方法を追記した
-- **raspi/raspi-update.md**: パッケージの検索と追加を追記した
-- **raspi/raspi-update.md**: パッケージを更新する方法を追加した
-- **pandas/pandas-to_csv.md**: CSVの保存の方法を追記した
-- **git/git-gitlab-ci.md**: GitLab CIを追記した
 
 ## v1.28.0 (2024-01-28)
 
