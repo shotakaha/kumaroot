@@ -9,8 +9,8 @@
 project = "KumaROOT"
 author = "Shota TAKAHASHI"
 copyright = "2015 - 2023, Shota TAKAHASHI"
-version = "1.27.1"
-release = "1.27.1"
+version = "1.28.0"
+release = "1.28.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -29,6 +29,7 @@ extensions = [
     "sphinxext.opengraph",
     "sphinx_copybutton",
     "sphinx_design",
+    "sphinxcontrib.mermaid",
 ]
 
 templates_path = ["_templates"]

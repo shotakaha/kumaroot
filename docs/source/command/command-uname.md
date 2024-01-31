@@ -11,8 +11,17 @@ Darwin NODE 21.6.0 Darwin Kernel Version 21.6.0: Sat Jun 18 17:05:47 PDT 2022; r
 
 ```console
 $ uname -srv
-Darwin 21.6.0 Darwin Kernel Version 21.6.0: Mon Dec 19 20:44:01 PST 2022; root:xnu-8020.240.18~2/RELEASE_X86_64
+Darwin 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:10 PST 2023; root:xnu-10002.61.3~2/RELEASE_X86_64
+
+$ uname -v
+Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:10 PST 2023; root:xnu-10002.61.3~2/RELEASE_X86_64
+
+$ uname -sr
+Darwin 23.2.0
 ```
+
+``-v``、``-s``、``-r``オプションを使ってカーネル情報を確認できます。
+オプションは単独でも、組み合わせても使えます。
 
 ## ホスト名を確認したい
 
@@ -26,3 +35,15 @@ $ uname -n
 - neofetch
 
 :::
+
+## アーキテクチャを確認したい
+
+```console
+$ uname -m
+x86_64
+
+$ uname -p
+i386
+```
+
+``-m``オプションや``-p``オプションで、ハードウェア情報を確認できます。
