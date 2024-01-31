@@ -1,6 +1,7 @@
 # 欠損値を確認したい（``pd.DataFrame.isna``）
 
 ```python
+data.isna()        # 欠損値を含む行は True になる
 data.isna().sum()  # 欠損値の数を数える
 ```
 
@@ -27,8 +28,6 @@ data.notna().sum()  # 有効値の数を数える
 ```
 
 :::
-
-
 
 ## 欠損値を補完したい（``pd.DataFrame.fillna``）
 
