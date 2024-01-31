@@ -19,7 +19,6 @@ pandas-to_datetime
 pandas-isna
 pandas-replace
 pandas-duplicated
-pandas-drop
 pandas-rename
 pandas-sort_values
 pandas-to_csv
@@ -29,11 +28,20 @@ pandas-to_json
 ```{toctree}
 ---
 maxdepth: 1
+caption: 抽出したい
+---
+pandas-loc
+pandas-query
+pandas-drop
+```
+
+```{toctree}
+---
+maxdepth: 1
 caption: 集計したい
 ---
 pandas-astype
 pandas-categorical
-pandas-query
 pandas-unique
 pandas-groupby
 pandas-crosstab
