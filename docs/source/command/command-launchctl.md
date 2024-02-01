@@ -1,22 +1,38 @@
-# launchctl
+# サービス管理したい（``launchctl``）
 
-```bash
+```console
+$ launchctl list
+$ launchctl list | rg ラベル名
+```
+
+macOSのサービス関係を管理するコマンドです。
+
+``list``コマンドで、現在ロードされているプロセスの一覧（``PID``、``Status``、``Label``など）を確認できます。
+ずらーっと表示されるため、``grep``や``rg``などの検索コマンドにパイプして使うのがよいと思います。
+サービスの設定ファイルは``plist``（property list）というXML形式で作成します。
+
+定期的に実行したい自前のスクリプトも登録できます。
+macOSでは``contab``より``launchd``の利用が推奨されています。
+
+## サービスを起動／停止したい
+
+```console
+$ launchctl start スクリプト名
+$ launchctl stop スクリプト名
+```
+
+``start / stop``コマンドで、サービスを手動で起動／停止できます。
+
+## サービスを有効／無効にしたい
+
+```console
 $ launchctl load ~/Library/LaunchAgents/ラベル.plist
 $ launchctl unload ~/Library/LaunchAgents/ラベル.plist
 ```
 
-定期的に実行したいスクリプトを``launchd``に登録するコマンドです。
-設定は``plist``（property list）というXML形式で作成します。
-``macOS``では、``contab``より``launchd``が推奨されています。
-
-## ロードされているプロセスを確認したい
-
-```bash
-$ launchctl list | rg ラベル名
-```
-
-ロードされているプロセスの``PID``、``Status``、``Label``がずらーっと表示されます。
-``grep``や``rg``などの検索コマンドにパイプして使うことが多いです。
+``load``コマンドで、サービスの自動起動を有効にできます。
+自動起動が有効になっていると、ログインしたときや再起動後に自動でサービスが起動します。
+``unload``コマンドで無効にできます。
 
 ## カスタムのplistを作成したい
 
