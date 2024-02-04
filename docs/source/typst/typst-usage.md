@@ -53,3 +53,14 @@ typst-document
 typst-lorem
 typst-styling
 ```
+
+## 物理したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-physica
+typst-metro
+```
+
