@@ -1,19 +1,21 @@
 # フォントしたい（``#text(font: フォント名)``）
 
-```text
-- #text(font: "Noto Serif CJK JP")[Noto Serif CJK JP]
-- #text(font: "Noto Sans CJK JP")[Noto Sans CJK JP]
-- #text(font: "Futura")[Futura; フツラ]
-- #text(font: "Yusei Magic")[Yusei Magic; たぬき油性マジック]
-- #text(font: "HackGen")[HackGen; 白源]
-- #text(font: "HackGen Console")[HackGen Console; 白源コンソール]
-- #text(font: "HackGen35")[HackGen35; 白源35]
+```typst
+#text(font: "HackGen")[HackGen; 白源]
+#text(font: "HackGen Console")[HackGen Console; 白源コンソール]
+#text(font: "HackGen35")[HackGen35; 白源35]
+
+#text(font: "Noto Serif CJK JP")[Noto Serif CJK JP]
+#text(font: "Noto Sans CJK JP")[Noto Sans CJK JP]
+
+#text(font: "Futura")[Futura; フツラ]
+#text(font: "Yusei Magic")[Yusei Magic; たぬき油性マジック]
 ```
 
 [text要素のfontオプション](https://typst.app/docs/reference/text/text/#parameters-font)でフォントを変更できます。
 ``#text(font: フォント名)[本文]``で、部分的にフォントを変更できます。
 
-## 利用可能なフォントを確認したい（``typst fonts``）
+## 利用できるフォントを確認したい（``typst fonts``）
 
 ```console
 $ typst fonts
@@ -31,7 +33,7 @@ Hiragino Sans
 - Style: Normal, Weight: 900, Stretch: 100%
 ```
 
-ターミナルで``typst fonts``すると、利用できるフォントの一覧を表示できます。
+``typst fonts``コマンドで、利用できるフォントの一覧を確認できます。
 ``--variants``オプションでより詳細に表示できます。
 
 ```console
@@ -56,3 +58,10 @@ Train One
 ```
 
 フォント名を指定して表示する機能はないみたいなので、検索コマンド（ここでは``ripgrep``）と組み合わせて探しています。
+
+:::{note}
+
+僕はフォントを``Homebrew``でインストールしていますが、
+フォントパスを追加設定などを必要とせずに使うことができています。
+
+:::
