@@ -1,4 +1,4 @@
-# もっと和文フォントしたい（``#text(font: フォント名)``）
+# フォントしたい（``#text(font: フォント名)``）
 
 ```text
 - #text(font: "Noto Serif CJK JP")[Noto Serif CJK JP]
@@ -10,7 +10,8 @@
 - #text(font: "HackGen35")[HackGen35; 白源35]
 ```
 
-``#text(font: フォント名)[本文]``で、ある部分だけフォントを切り替えることもできます。
+[text要素のfontオプション](https://typst.app/docs/reference/text/text/#parameters-font)でフォントを変更できます。
+``#text(font: フォント名)[本文]``で、部分的にフォントを変更できます。
 
 ## 利用可能なフォントを確認したい（``typst fonts``）
 

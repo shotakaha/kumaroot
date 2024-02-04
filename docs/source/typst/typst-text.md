@@ -1,6 +1,6 @@
-# 和文テキストしたい（``#text``）
+# 和文したい（``#text``）
 
-```text
+```typst
 #set text(
     font: (
         "HackGen",
@@ -13,10 +13,9 @@
 )
 ```
 
-[text要素のfontオプション](https://typst.app/docs/reference/text/text/#parameters-font)でフォントを変更できます。
+日本語のドキュメント作成のときにコピペで使い回している設定です。
+ドキュメントのはじめに``#set text``することで一括設定しています。
 フォントは複数設定でき、利用可能なフォントが見つかるまで探してくれます。
-
-日本語で作成すると、よく分からないフォントが適用されるので、必ず全体の設定をしておきましょう。
 
 :::{note}
 
@@ -25,9 +24,9 @@
 
 :::
 
-## もっとテキストしたい
+:::{seealso}
 
-```{toctree}
-typst-text-font
-typst-text-color
-```
+- [](../latex/latex-luatexja.md)
+- [](../latex/latex-luatexja-preset.md)
+- [](../latex/latex-luatexja-fontspec.md)
+:::
