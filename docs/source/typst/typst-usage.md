@@ -41,6 +41,7 @@ maxdepth: 1
 ---
 typst-install
 typst-build
+typst-import
 typst-text
 typst-page
 typst-par
