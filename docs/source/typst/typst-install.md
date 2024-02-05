@@ -1,3 +1,8 @@
+```{eval-rst}
+.. index::
+    pair: Typst; install
+```
+
 # インストールしたい
 
 ```console

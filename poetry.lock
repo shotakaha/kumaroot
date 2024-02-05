@@ -970,6 +970,24 @@ sphinxcontrib-jquery = ">=4,<5"
 dev = ["bump2version", "sphinxcontrib-httpdomain", "transifex-client", "wheel"]
 
 [[package]]
+name = "sphinx-tags"
+version = "0.3.1"
+description = "Sphinx extension to create tags for documentation pages."
+optional = false
+python-versions = "*"
+files = [
+    {file = "sphinx_tags-0.3.1-py2.py3-none-any.whl", hash = "sha256:9384bf687b878ba17b0c52db29fd3fa5a09198c49c82d2654840b0950bf535e3"},
+    {file = "sphinx_tags-0.3.1.tar.gz", hash = "sha256:18b6eedba095665b49a19ca479fc0afde0b24644ffb35633d0f6bf982a37ab6e"},
+]
+
+[package.dependencies]
+sphinx = ">=5.1"
+
+[package.extras]
+dev = ["bs4", "pre-commit", "pytest (>=6.0)", "pytest-cov"]
+sphinx = ["myst-parser", "nbsphinx", "pydata-sphinx-theme", "sphinx-design"]
+
+[[package]]
 name = "sphinxcontrib-applehelp"
 version = "1.0.8"
 description = "sphinxcontrib-applehelp is a Sphinx extension which outputs Apple help books"
@@ -1204,4 +1222,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b331e966a99710e17892bbb3a5fbb99d444ac2ab2f87d37b7d3dd7615b319b54"
+content-hash = "7b77480d56691989da082be718560e730789ac06c3f14899d89b3e93d7c2a3b7"

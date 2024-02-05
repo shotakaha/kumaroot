@@ -8,7 +8,7 @@
 
 project = "KumaROOT"
 author = "Shota TAKAHASHI"
-copyright = "2015 - 2023, Shota TAKAHASHI"
+copyright = "2015 - 2024, Shota TAKAHASHI"
 version = "1.29.0"
 release = "1.29.0"
 
@@ -29,6 +29,7 @@ extensions = [
     "sphinxext.opengraph",
     "sphinx_copybutton",
     "sphinx_design",
+    "sphinx_tags",
     "sphinxcontrib.mermaid",
 ]
 
@@ -122,6 +123,19 @@ html_theme_options = {
 
 ogp_use_first_image = True
 ogp_enable_meta_description = True
+
+# -- Options for Sphinx Tags --------------------------------------------------
+
+tags_create_tags = True
+# tags_output_dir = "_tags"
+tags_extention = ["md"]
+# tags_overview_title = "Site tags"
+# tags_intro_text = "Tags"
+# tags_page_title = "My Tags"
+# tags_page_header = "With this tag"
+# tags_index_head = "Tags"
+tags_create_badges = True
+# tags_badge_colors = {}
 
 # -*- coding: utf-8 -*-
 #

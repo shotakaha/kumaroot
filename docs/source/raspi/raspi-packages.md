@@ -1,3 +1,6 @@
+```{tags} raspi, apt
+```
+
 # パッケージ管理したい（``apt``）
 
 ```console
