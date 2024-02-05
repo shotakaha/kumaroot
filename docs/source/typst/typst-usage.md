@@ -16,6 +16,8 @@ maxdepth: 1
 ---
 typst-install
 typst-build
+typst-page
+typst-par
 typst-import
 typst-heading
 typst-outline
@@ -46,8 +48,6 @@ maxdepth: 1
 ---
 typst-title
 typst-document
-typst-page
-typst-par
 ```
 
 :::{note}
