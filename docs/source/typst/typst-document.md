@@ -1,4 +1,19 @@
-# タイトルしたい（``document``）
+# メタデータしたい（``document``）
+
+```typst
+#set document(
+    title: "すごいタイトル",
+    author: ("すごい著者",
+    keywords: (),
+    date: auto,
+)
+```
+
+[document要素](https://typst.app/docs/reference/model/document/)で、文書のメタデータを設定できます。
+この情報は、PDFのメタデータなどに利用されます。
+ドキュメントには表示されません。
+
+
 
 ```typst
 #let title = "すごいタイトル"
@@ -22,17 +37,4 @@
 #authors
 ```
 
-## メタデータしたい
 
-```typst
-#set document(
-    title: "すごいタイトル",
-    author: ("すごい著者",
-    keywords: (),
-    date: auto,
-)
-```
-
-[document要素](https://typst.app/docs/reference/model/document/)で、文書のメタデータを設定できます。
-この情報は、PDFのメタデータなどに利用されます。
-ドキュメントには表示されません。

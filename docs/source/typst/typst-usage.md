@@ -7,8 +7,13 @@
 
 [Typst](https://typst.app/)は[2023年3月にベータ版が公開](https://typst.app/blog/2023/beta-oss-launch)されたばかりの新しい組版システムです。
 
-科学分野の組版システムといえばLaTeXですが、使いこなすのはなかなか大変です。
-Typstは、LaTeXのような科学技術文書作成を念頭に、より使いやすいシステムを目指しています。
+科学分野の組版システムといえばLaTeXが定番ですが、使いこなすのはなかなか大変です。
+Typstは、LaTeXのような科学技術文書作成を念頭に、より使いやすいシステムを目指したものです。
+
+文章のマークアップには完全独自の言語体系が使われています。
+LaTeXよりMarkdownに近い記法になっているのですが、
+Markdownより構造化した文章が書けるようになっています。
+また、[pandoc](../command/command-pandoc.md)で変換できるので、既存の文書も比較的簡単に転用できそうです。
 
 :::{note}
 
@@ -17,39 +22,26 @@ Typstは、LaTeXのような科学技術文書作成を念頭に、より使い�
 
 :::
 
-文章のマークアップは完全独自の言語体系が使われています。
-LaTeXよりMarkdownに近い記法になっているのですが、
-Markdownより構造化した文章が書けるようになっています。
-また、[pandoc](../command/command-pandoc.md)で変換できるので、既存の文書も比較的簡単に転用できます。
-
-LaTeXと比べて**一番の長所**だと感じたのは、プリアンブルの設定不要でタイプセットできる点です。
-ドキュメントクラスやエンジン、ドライバー、入力ファイルのエンコーディング、フォントマップの設定をしなくても、
-内容が書かれたテキストファイルさえあれば、和文PDFが生成できます。
-
-また、ページ設定や図・数式の挿入、ハイパーリンクの書式などが標準装備となっていて、外部パッケージを使う必要がありません。
-公式リファレンスには[LaTeX経験者向けのユーザーガイド](https://typst.app/docs/guides/guide-for-latex-users/)があり、
-ここにLaTeXパッケージとの対応が書かれています。
-これをきちんと読めば、やりたいことはすぐに表現できると思います。
-
-また、タイプセットそのものが爆速なのですが、差分コンパイルに対応しているため、ライブプレビューも快適です。
-まだ、日本語の情報が少なく、うまくいかないときに難儀するかもしれません。
-修論の執筆に使うにはちょっと勇気が必要ですが、長めのレポート作成に使ってみるのはアリだと思います。
-
 ```{toctree}
 ---
 maxdepth: 1
 ---
 typst-install
 typst-build
+typst-text-color
 typst-import
+```
 
-typst-heading
-typst-outline
-typst-list
-typst-strong
-typst-link
-typst-lorem
-typst-styling
+## 全体設定したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-page
+typst-par
+typst-text
+typst-document
 ```
 
 ## テキストしたい
@@ -58,22 +50,25 @@ typst-styling
 ---
 maxdepth: 1
 ---
-typst-text
-typst-text-font
-typst-text-color
+typst-outline
+typst-heading
 typst-raw
+typst-list
+typst-strong
+typst-title
+typst-lorem
+typst-link
 ```
 
-## ページ設定したい
+## カスタマイズしたい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
-typst-title
-typst-document
-typst-page
-typst-par
+typst-styling
+typst-set
+typst-show
 ```
 
 ## 物理したい
@@ -86,3 +81,19 @@ typst-physica
 typst-metro
 ```
 
+## TypstとLaTeXのちがい
+
+Typstの**一番の長所**だと感じたのは、LaTeXのプリアンブルような設定が不要でタイプセットできる点です。
+ドキュメントクラスやエンジン、ドライバー、入力ファイルのエンコーディング、フォントマップの設定をしなくても、
+和文ドキュメントからPDFが生成できます。
+
+タイプセットそのものも爆速です。
+差分コンパイルに対応しているため、ライブプレビューしながらの編集作業がとてもとても快適です。
+
+また、ページ設定や図・数式の挿入、ハイパーリンクの書式なども標準装備となっていて、外部パッケージを必要としません。
+公式ドキュメントには[LaTeX経験者向けのユーザーガイド](https://typst.app/docs/guides/guide-for-latex-users/)が
+用意されており、LaTeXパッケージとTypstコマンドの対応が書かれています。
+ここを参照すれば、やりたいことはすぐに表現できると思います。
+
+**短所**は、まだ、日本語の情報が少なく、うまくいかないときに難儀するかもしれない点です。
+修論の執筆に使うにはちょっと勇気が必要ですが、長めのレポート作成に使ってみるのはアリだと思います。

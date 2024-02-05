@@ -3,14 +3,15 @@
     pair: ビルドしたい; Typst
 ```
 
-# タイプセットしたい
+# タイプセットしたい（``typst compile``）
 
 ```console
 $ typst compile 入力ファイル名.typ
 $ typst compile 入力ファイル名.typ 出力ファイル名.pdf
 ```
 
-``compile``コマンドを使ってPDFファイルを生成できます。
+``typst compile``コマンドを使ってTypstファイル（``.type``）をPDFファイル（``*.pdf``）にコンパイルします。
+組版システムではコンパイルのことをタイプセットと呼びます。
 
 :::{seealso}
 
@@ -21,10 +22,10 @@ $ typst compile 入力ファイル名.typ 出力ファイル名.pdf
 
 ```{eval-rst}
 .. index::
-    pair: プレビューしたい; Typst
+    pair: Preview; Typst
 ```
 
-## ライブプレビューしたい
+## ライブプレビューしたい（``typst watch``）
 
 ```console
 $ typst watch 入力ファイル名.typ
