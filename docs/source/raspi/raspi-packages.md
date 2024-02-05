@@ -32,6 +32,7 @@ $ sudo apt install fish
 $ sudo apt install vim
 $ sudo apt install code
 $ sudo apt install python3-poetry
+$ sudo apt install openssh-server
 ```
 
 よく使うパッケージを追加しました。
