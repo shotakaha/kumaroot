@@ -93,6 +93,7 @@ myst_number_code_blocks = [
     "python",
     "rst",
     "toml",
+    "typst",
 ]
 
 # -- Options for Math -------------------------------------------------

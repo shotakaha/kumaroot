@@ -41,17 +41,37 @@ maxdepth: 1
 ---
 typst-install
 typst-build
-typst-text
-typst-page
-typst-par
+typst-import
+
 typst-heading
 typst-outline
 typst-list
 typst-strong
 typst-link
-typst-document
 typst-lorem
 typst-styling
+```
+
+## テキストしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-text
+typst-text-font
+typst-text-color
+```
+
+## ページ設定したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-document
+typst-page
+typst-par
 ```
 
 ## 物理したい
