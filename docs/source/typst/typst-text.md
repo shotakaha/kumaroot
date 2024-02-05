@@ -13,9 +13,10 @@
 )
 ```
 
-日本語のドキュメント作成のときにコピペで使い回している設定です。
-ドキュメントのはじめに``#set text``することで一括設定しています。
-フォントは複数設定でき、利用可能なフォントが見つかるまで探してくれます。
+[text要素](https://typst.app/docs/reference/text/text/)で、本文の設定を変更できます。
+ドキュメントのはじめに``#set text``することで一括設定できます。
+上記のサンプルは日本語のドキュメント作成のときにコピペで使い回している設定です。
+LaTeXに比べて和文フォントがとても簡単に設定できます。
 
 :::{seealso}
 
@@ -91,3 +92,58 @@ Train One
 フォントパスを追加設定などを必要とせずに使うことができています。
 
 :::
+
+## ウェイトしたい（``weight``）
+
+```typst
+#set text(weight: "thin")       // 100
+#set text(weight: "extralight") // 200
+#set text(weight: "light")      // 300
+#set text(weight: "regular")    // 400
+#set text(weight: "medium")     // 500
+#set text(weight: "semibold")   // 600
+#set text(weight: "bold")       // 700
+#set text(weight: "extrabold")  // 800
+#set text(weight: "black")      // 900
+```
+
+``weight``オプションで、フォントのウェイト（＝太さ）を変更できます。
+デフォルトは``"regular"``です。
+
+フォントの書体を選ぶときは、ウェイトがたくさんある書体がオススメです。
+見出しと本文でウェイトを変えるだけで、よみやすいドキュメントが作成できます。
+
+## フォントサイズしたい（``size``）
+
+```typst
+#set heading: set text(size: 1.5em)
+```
+
+``size``オプションで、フォントサイズを変更できます。
+デフォルトは``11pt``です。
+上記のサンプルでは見出しのフォントサイズを、本文の1.5倍にしています。
+
+## 文字色したい（``fill``）
+
+```typst
+#set text(fill: luma(80%))
+```
+
+``fill``オプションで、フォントの色を変更できます。
+デフォルトは``luma(0%)``です。
+
+Typstにはさまざまな[色の設定方法](https://typst.app/docs/reference/visualize/color/)があります。
+
+基本的には[RGB関数](https://typst.app/docs/reference/visualize/color/#definitions-rgb)でRGB値とA値を設定すればよいです。
+グレイスケールを使う場合は[luma関数](https://typst.app/docs/reference/visualize/color/#definitions-luma)があります。
+印刷物を作成する場合は[cymk関数](https://typst.app/docs/reference/visualize/color/#definitions-cmyk)を使うのがよいかもしれません。
+
+## 言語したい（``lang``）
+
+```typst
+#set text(lang: "ja")
+```
+
+``lang``オプションで、本文の言語を変更できます。
+言語コードは``ISO639-1/2/3``から選択します。
+デフォルトは``"en"``です。
