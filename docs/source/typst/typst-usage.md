@@ -61,6 +61,7 @@ maxdepth: 1
 typst-text
 typst-text-font
 typst-text-color
+typst-raw
 ```
 
 ## ページ設定したい
