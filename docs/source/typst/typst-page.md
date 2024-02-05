@@ -30,21 +30,33 @@
 
 :::
 
-## 用紙サイズしたい
+## 用紙サイズしたい（``paper``）
 
 ```typst
-#set page(paper: "a4")  // 210.0 mm x 297.0 mm
-#set page(paper: "a0")  // 841.0 mm x 1189.0 mm
-#set page(paper: "jis-b5")  // 182.0 mm x 257.0 mm
+#set page(paper: "a4")  // w210.0 mm x h297.0 mm
+#set page(paper: "a0")  // w841.0 mm x h1189.0 mm
+#set page(paper: "jis-b5")  // w182.0 mm x h257.0 mm
 
-#set page(paper: "presentation-16-9")  // 297.0 mm x 167.0625 mm
-#set page(paper: "presentation-4-3")  // 280.0 mm x 210.0 mm
+#set page(paper: "presentation-16-9")  // w297.0 mm x h167.0625 mm
+#set page(paper: "presentation-4-3")  // w280.0 mm x h210.0 mm
 
-#set page(paper: "jp-business-card")  // 91.0 mm x 55.0 mm
-#set page(paper: "jp-shiroku-ban-4")  // 264.0 mm x 379.0 mm
+#set page(paper: "jp-business-card")  // w91.0 mm x h55.0 mm
+#set page(paper: "jp-shiroku-ban-4")  // w264.0 mm x h379.0 mm
 ```
 
 [page要素のpaperオプション](https://typst.app/docs/reference/layout/page/#parameters-paper)で用紙サイズを変更できます。
 デフォルトは``"a4"``です。
 ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI規格（アメリカ）など多様な規格の用紙サイズが定義されています。それぞれの用紙サイズは[page.rs](https://github.com/typst/typst/blob/main/crates/typst/src/layout/page.rs)で確認できます。
 よく使いそうな設定や、こんな設定もあった、というのを上に書いてみました。
+
+## 縦置きしたい（``flipped``）
+
+```typst
+#set page(
+    paper: "jp-business-card",  // 91.0 mm x 55.0 mm
+    flipped: true
+)
+```
+
+[page要素のflippedオプション](https://typst.app/docs/reference/layout/page/#parameters-flipped)で、用紙の短辺と長辺のサイズを入れ替えできます。
+上のサンプルでは、名刺を縦置きする場合を想定してみました。
