@@ -16,16 +16,20 @@ maxdepth: 1
 ---
 typst-install
 typst-build
+typst-text-color
+typst-import
+```
+
+## 全体設定したい
+
+```{toctree}
+---
+maxdepth: 1
+---
 typst-page
 typst-par
-typst-import
-typst-heading
-typst-outline
-typst-list
-typst-strong
-typst-link
-typst-lorem
-typst-styling
+typst-text
+typst-document
 ```
 
 ## テキストしたい
@@ -34,21 +38,40 @@ typst-styling
 ---
 maxdepth: 1
 ---
-typst-text
-typst-text-font
-typst-text-color
+typst-outline
+typst-heading
 typst-raw
+typst-list
+typst-strong
+typst-title
+typst-lorem
+typst-link
 ```
 
-## ページ設定したい
+## カスタマイズしたい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
-typst-title
-typst-document
+typst-styling
+typst-set
+typst-show
 ```
+
+
+
+## 物理したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-physica
+typst-metro
+```
+
+
 
 :::{note}
 
@@ -74,16 +97,3 @@ LaTeXと比べて**一番の長所**だと感じたのは、プリアンブル�
 また、タイプセットそのものが爆速なのですが、差分コンパイルに対応しているため、ライブプレビューも快適です。
 まだ、日本語の情報が少なく、うまくいかないときに難儀するかもしれません。
 修論の執筆に使うにはちょっと勇気が必要ですが、長めのレポート作成に使ってみるのはアリだと思います。
-
-
-
-## 物理したい
-
-```{toctree}
----
-maxdepth: 1
----
-typst-physica
-typst-metro
-```
-

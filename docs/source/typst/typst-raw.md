@@ -1,4 +1,4 @@
-# コードブロックしたい（``raw``）
+# コードブロックしたい（``#raw``）
 
 ```typst
 #show raw: set block(fill: luma(235), inset: 2em, radius: 1em, width: 100%)
