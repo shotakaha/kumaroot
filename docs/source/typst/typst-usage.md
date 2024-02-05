@@ -1,6 +1,6 @@
 ```{eval-rst}
 .. index::
-    pair: た|使い方; Typst
+    pair: Typst; usage
 ```
 
 # Typstの使い方
