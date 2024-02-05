@@ -69,6 +69,7 @@ typst-text-color
 ---
 maxdepth: 1
 ---
+typst-title
 typst-document
 typst-page
 typst-par
