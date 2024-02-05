@@ -49,6 +49,29 @@
 ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI規格（アメリカ）など多様な規格の用紙サイズが定義されています。それぞれの用紙サイズは[page.rs](https://github.com/typst/typst/blob/main/crates/typst/src/layout/page.rs)で確認できます。
 よく使いそうな設定や、こんな設定もあった、というのを上に書いてみました。
 
+## 余白したい（``margin``）
+
+```typst
+#set page(margin: 30mm)  // 上下左右: 30 mm
+#set page(
+    margin: (x: 8pt, y: 4pt ),  // 左右: 8pt、上下: 4pt
+)
+```
+
+[page要素のmarginオプション](https://typst.app/docs/reference/layout/page/#parameters-margin)で余白サイズを変更できます。
+デフォルトは``auto（短辺の2.5/21倍）``です。
+A4の場合は``25 mm``です。
+
+## 段組したい（``columns``）
+
+```typst
+#set page(columns: 2)  // 2段組
+#set page(columns: 3)  // 3段組
+```
+
+[page要素のcolumnsオプション](https://typst.app/docs/reference/layout/page/#parameters-columns)で、段組を変更できます。
+デフォルトは``1``です。
+
 ## 縦置きしたい（``flipped``）
 
 ```typst
