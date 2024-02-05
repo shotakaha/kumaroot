@@ -49,6 +49,24 @@
 ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI規格（アメリカ）など多様な規格の用紙サイズが定義されています。それぞれの用紙サイズは[page.rs](https://github.com/typst/typst/blob/main/crates/typst/src/layout/page.rs)で確認できます。
 よく使いそうな設定や、こんな設定もあった、というのを上に書いてみました。
 
+## ノンブルしたい（``numbering``）
+
+```typst
+#set page(
+    numbering: "1 / 1"
+    number-align: center + bottom,
+    )
+
+#set page(
+    numbering: "1",
+    number-align: right,
+)
+```
+
+[page要素のnumberingオプション](https://typst.app/docs/reference/layout/page/#parameters-numbering)と
+[number-alignオプション](https://typst.app/docs/reference/layout/page/#parameters-number-align)を使って、
+ノンブル（ページ番号）の表示方法を変更できます。
+
 ## 段組したい（``columns``）
 
 ```typst
