@@ -4,7 +4,7 @@
     pair: ヘッダーしたい; Typst
 ```
 
-# レイアウトしたい（``#page``）
+# ページ設定したい（``#page``）
 
 ```typst
 #set page(
