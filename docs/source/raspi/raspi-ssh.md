@@ -26,12 +26,13 @@ $ ssh ユーザー名@ホスト名.local
 ## デーモンしたい（``sshd``）
 
 ```console
-$ sudo systemctl start ssh
-$ sudo systemctl stop ssh
-$ sudo systemctl restart ssh
-$ sudo systemctl reload ssh
+$ sudo systemctl status ssh
+Unit ssh.service not found  # SSHが見つからないことを確認
+$ sudo apt install openssh-server
+$ sudo systemctl status ssh
+ssh.service - loaded  # OpenSSHのインストールを確認
+$ sudo systemctl enable ssh
 ```
 
-Ubuntuを書き込んだらSSHが有効になっていませんでした。
-上記コマンドでsshdデーモンを起動／終了できます。
-設定ファイルは{file}`/lib/systemd/system/ssh.service`にあるそうです。
+OSにUbuntuを選択した場合、デフォルトではSSH接続が有効になっていません。
+``openssh-server``を追加でインストールしてからデーモンを有効にします。
