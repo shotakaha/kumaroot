@@ -94,28 +94,6 @@ data.plot(kind="scatter", x="xカラム", y="yカラム")
 指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
 散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
 
-## ヒストグラムしたい（``pd.DataFrame.plot.hist``）
-
-```python
-data.plot(kind="hist", bins=ビン数, title="ヒストグラム")
-data.plot(kind="hist", bins=ビン数, stacked=True, title="積み上げヒストグラム")
-data.plot.hist(by=["カラム名"], bins=ビン数)
-```
-
-[pandas.DataFrame.plot.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html)でヒストグラムを作成できます。
-``by``オプションにグループ化に使うカラム名を指定します。
-``bins``オプションでビン数を変更できます。デフォルトは``10``になっています。
-その他に[pandas.DataFrame.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.hist.html)と[matplotlib.pyplot.hist](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html#matplotlib.pyplot.hist)のオプションも利用できます。
-
-:::{note}
-
-測定したデータをヒストグラムにして分布を確認することは、実験解析の一歩目です。
-データがきちんと取得できたかを判断したり、
-解析の条件をいろいろと考えたりするときに、
-測定データの基本分布を理解しないまま進んではいけません。
-
-:::
-
 ## 散布図したい（``pd.DataFrame.plot.scatter``）
 
 ```python
