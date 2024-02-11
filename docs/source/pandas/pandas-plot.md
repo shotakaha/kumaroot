@@ -11,9 +11,15 @@ data.plot()
 [pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)を使って、データフレームからグラフを作成できます。
 デフォルトで、数値データのみのカラムがすべて折れ線グラフで表示されます。
 
-このメソッドは``matplotlib``のラッパー的なものなので、``matplotlib``のインストールが必要です。
-巷では``matplotlib``を使ってグラフを作成するサンプルが多いですが、
-さくっと確認したい場合は、このメソッドで十分だと思います。
+このメソッドは``matplotlib``のラッパー的なものなので、``matplotlib``のインポートが必要です。
+また、日本語を表示したい場合は``japanize_matplotlib``をインポートするとよいです。
+
+:::{note}
+
+検索すると``matplotlib``（``matplotlib.pyplot``）を使ってグラフを作成する記事が多くヒットします。
+せっかくPandasを使っているので、ここではできるだけPandasを使った方法を試してみようと思います。
+
+:::
 
 ## タイトルしたい
 
@@ -29,8 +35,53 @@ data.plot(
     )
 ```
 
-グラフのタイトルや軸タイトルは必ず設定しましょう。
+``title``、``xlabel``、``ylabel``オプションで、グラフのタイトルや軸タイトルを表示できます。
 ``japanize_matplotlib``をインポートするだけで、日本語フォントを扱えるようになります。
+
+:::{important}
+
+軸タイトルは単位も含めて設定しておくとよいです。
+
+:::
+
+## サブプロットしたい
+
+```python
+data.plot(subplots=True)
+```
+
+``subplots=True``オプションで、複数のカラムのデータをそれぞれのサブプロットに表示できます。
+サブプロットの詳細は[matplotlib.pyplot.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)も参照してください。
+
+## 目盛りしたい
+
+```python
+data.plot(grid=True)
+data.plot(grid=True, xticks=range(0, 1000, 50), yticks=range(-5, 15, 1))
+```
+
+``grid=True``オプションで、目盛り（補助目盛り）を表示できます。
+``xticks``、``yticks``オプションで目盛り幅を変更できます。
+目盛りの詳細は[matplotlib.pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)も参照してください。
+
+## 表示範囲したい
+
+```python
+data.plot(xlim=(x軸の下限値, x軸の上限値), ylim=(y軸の下限値, y軸の上限値))
+```
+
+``xlim``、``ylim``オプションで、X軸とY軸それぞれの下限値と上限値を変更できます。
+
+## 対数グラフしたい
+
+```python
+data.plot(logx=True)
+data.plot(logy=True)
+data.plot(loglog=True)
+```
+
+``logx=True``、``logy=true``、``loglog=True``オプションで片対数グラフや両対数グラフに変更できます。
+``loglog=True``は``logx=True, logy=True``と同等です。
 
 ## グラフの種類を変更したい
 
