@@ -1,4 +1,4 @@
-# クロス集計したい（``crosstab``）
+# クロス集計したい（``pandas.crosstab``）
 
 ```python
 pd.crosstab(data["カラムA"], data["カラムB"])

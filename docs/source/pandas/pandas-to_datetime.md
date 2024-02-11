@@ -1,4 +1,4 @@
-# 日付に変換したい（``to_datetime``）
+# 日付に変換したい（``pandas.to_datetime``）
 
 ```python
 pd.to_datetime("2022/08/24", format="%Y/%m/%d")

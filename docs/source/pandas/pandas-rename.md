@@ -1,4 +1,4 @@
-# カラム名を変更したい（``pd.DataFrame.rename``）
+# カラム名を変更したい（``pandas.DataFrame.rename``）
 
 ```python
 rename_columns = {

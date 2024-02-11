@@ -1,4 +1,4 @@
-# JSONを保存したい（``pd.DataFrame.to_json``）
+# JSONを保存したい（``pandas.DataFrame.to_json``）
 
 ```python
 data.to_csv("ファイル名.json", orient="records")

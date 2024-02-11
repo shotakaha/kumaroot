@@ -1,4 +1,4 @@
-# グラフしたい（``pd.DataFrame.plot``）
+# グラフしたい（``pandas.DataFrame.plot``）
 
 ```python
 data.plot(
