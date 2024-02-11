@@ -97,7 +97,8 @@ data.plot(kind="scatter", x="xカラム", y="yカラム")
 ## ヒストグラムしたい（``pd.DataFrame.plot.hist``）
 
 ```python
-data.plot(kind="hist", bins=ビン数)
+data.plot(kind="hist", bins=ビン数, title="ヒストグラム")
+data.plot(kind="hist", bins=ビン数, stacked=True, title="積み上げヒストグラム")
 data.plot.hist(by=["カラム名"], bins=ビン数)
 ```
 
