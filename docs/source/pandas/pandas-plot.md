@@ -48,9 +48,12 @@ data.plot(
 
 ```python
 data.plot(subplots=True)
+data.plot(subplots=True, figsize=(横サイズ, 縦サイズ), layout=(行数, 列数))
 ```
 
 ``subplots=True``オプションで、複数のカラムのデータをそれぞれのサブプロットに表示できます。
+``figsize``オプションで図の全体サイズを変更できます。横サイズ／縦サイズの単位は``inch``です（``dpi=72``）。
+``layout``オプションでサブプロットの行数と列数を変更できます。デフォルトは縦配置です。
 サブプロットの詳細は[matplotlib.pyplot.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)も参照してください。
 
 ## 目盛りしたい
@@ -94,15 +97,7 @@ data.plot(kind="scatter", x="xカラム", y="yカラム")
 指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
 散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
 
-## 散布図したい（``pd.DataFrame.plot.scatter``）
 
-```python
-data.plot(kind="scatter", x="X軸", y="Y軸", s="点の大きさ", c="点の色")
-data.plot.scatter(x="X軸", y="Y軸", s="点の大きさ", c="点の色")
-```
-
-[pandas.DataFrame.plot.scatter](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.scatter.html)で散布図を描画できます。
-オプションに[matplotlib.pyplot.scatter](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html)のオプションも利用できます。
 
 ## その他のグラフ
 
