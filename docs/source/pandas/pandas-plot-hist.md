@@ -24,3 +24,39 @@ data.plot.hist(by=["カラム名"], bins=ビン数)
 実験で測定したデータは、まずヒストグラムにしてその分布を確認しましょう。
 
 :::
+
+## 統計情報を自動計算したい
+
+```python
+def hbar(data, x, bins, xmin, xmax, **kwargs):
+
+    _data = data[[x]].copy()
+    entries = len(_data)
+
+    # Underflow
+    q = f"{x} < {xmin}"
+    uf = _data.query(q).count().iloc[0]
+
+    # Overflow
+    q = f"{x} > {xmax}"
+    of = _data.query(q).count().iloc[0]
+
+    # Valid
+    q = f"{xmin} <= {x} <= {xmax}"
+    v = _data.query(q)
+    n = len(v)
+    mean = v.mean().iloc[0]
+    rms = v.std().iloc[0]
+
+    stats = {
+        "entries": int(entries),
+        "underflow": int(uf),
+        "overflow": int(of),
+        "mean": mean,
+        "rms": rms
+        }
+    plot = v.plot.hist(bins=bins, **kwargs)
+    return plot, stats
+```
+
+ROOTの``TH1クラス``を真似してヒストグラムを作ってみました。
