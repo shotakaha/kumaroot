@@ -1,12 +1,11 @@
 # グラフしたい（``pandas.DataFrame.plot``）
 
 ```python
+import pandas
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
 data.plot()
-data.plot(
-    title="グラフのタイトル",
-    xlabel="X軸のタイトル",
-    ylabel="Y軸のタイトル"
-)
 ```
 
 [pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)を使って、データフレームからグラフを作成できます。
@@ -16,6 +15,23 @@ data.plot(
 巷では``matplotlib``を使ってグラフを作成するサンプルが多いですが、
 さくっと確認したい場合は、このメソッドで十分だと思います。
 
+## タイトルしたい
+
+```python
+import pandas
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+data.plot(
+    title="グラフのタイトル",
+    xlabel="X軸のタイトル",
+    ylabel="Y軸のタイトル"
+    )
+```
+
+グラフのタイトルや軸タイトルは必ず設定しましょう。
+``japanize_matplotlib``をインポートするだけで、日本語フォントを扱えるようになります。
+
 ## グラフの種類を変更したい
 
 ```python
@@ -24,7 +40,7 @@ data.plot(kind="scatter", x="xカラム", y="yカラム")
 ```
 
 ``kind``オプションでグラフの種類を変更できます。
-指定できるグラフの種類は``bar``、``hist``、``scatter``など全11種類あります。
+指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
 散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
 
 ## ヒストグラムしたい（``pd.DataFrame.plot.hist``）
