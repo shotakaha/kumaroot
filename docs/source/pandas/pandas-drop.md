@@ -17,7 +17,7 @@ data.drop(index="インデックス名")  # インデックス名を指定して
 
 ``index``オプションで行を削除できます。
 
-## 欠損値を削除したい（``pd.DataFrame.dropna``）
+## 欠損値を削除したい（``pandas.DataFrame.dropna``）
 
 ```python
 data.dropna()            # 欠損値を含む行を削除する

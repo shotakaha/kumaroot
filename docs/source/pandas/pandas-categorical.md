@@ -1,4 +1,4 @@
-# カテゴリー型したい
+# カテゴリー型したい（``pandas.CategoricalDtype``）
 
 ```python
 data["カラム名"].astype("category")

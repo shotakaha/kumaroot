@@ -1,29 +1,108 @@
-# グラフしたい（``pd.DataFrame.plot``）
+# グラフしたい（``pandas.DataFrame.plot``）
 
 ```python
-data.plot(
-    data=データフレーム,
-    x="x軸名",
-    y="y軸名",
-    kind="グラフの種類"
-    )
+import pandas
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+data.plot()
 ```
 
 [pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)を使って、データフレームからグラフを作成できます。
-``kind``オプションで指定できるグラフの種類は``bar``、``hist``、``scatter``など全11種類あります。
-それぞれの種類に対応した簡易メソッドもあります。
+デフォルトで、数値データのみのカラムがすべて折れ線グラフで表示されます。
 
-このメソッドは``matplotlib``のラッパー的なものなので、``matplotlib``のインストールが必要です。
-巷では``matplotlib``を使ってグラフを作成するサンプルが多いですが、
-さくっと確認したい場合は、このメソッドで十分だと思います。
+このメソッドは``matplotlib``のラッパー的なものなので、``matplotlib``のインポートが必要です。
+また、日本語を表示したい場合は``japanize_matplotlib``をインポートするとよいです。
+
+:::{note}
+
+検索すると``matplotlib``（``matplotlib.pyplot``）を使ってグラフを作成する記事が多くヒットします。
+せっかくPandasを使っているので、ここではできるだけPandasを使った方法を試してみようと思います。
+
+:::
+
+## タイトルしたい
+
+```python
+import pandas
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+data.plot(
+    title="グラフのタイトル",
+    xlabel="X軸のタイトル",
+    ylabel="Y軸のタイトル"
+    )
+```
+
+``title``、``xlabel``、``ylabel``オプションで、グラフのタイトルや軸タイトルを表示できます。
+``japanize_matplotlib``をインポートするだけで、日本語フォントを扱えるようになります。
+
+:::{important}
+
+軸タイトルは単位も含めて設定しておくとよいです。
+
+:::
+
+## サブプロットしたい
+
+```python
+data.plot(subplots=True)
+```
+
+``subplots=True``オプションで、複数のカラムのデータをそれぞれのサブプロットに表示できます。
+サブプロットの詳細は[matplotlib.pyplot.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)も参照してください。
+
+## 目盛りしたい
+
+```python
+data.plot(grid=True)
+data.plot(grid=True, xticks=range(0, 1000, 50), yticks=range(-5, 15, 1))
+```
+
+``grid=True``オプションで、目盛り（補助目盛り）を表示できます。
+``xticks``、``yticks``オプションで目盛り幅を変更できます。
+目盛りの詳細は[matplotlib.pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)も参照してください。
+
+## 表示範囲したい
+
+```python
+data.plot(xlim=(x軸の下限値, x軸の上限値), ylim=(y軸の下限値, y軸の上限値))
+```
+
+``xlim``、``ylim``オプションで、X軸とY軸それぞれの下限値と上限値を変更できます。
+
+## 対数グラフしたい
+
+```python
+data.plot(logx=True)
+data.plot(logy=True)
+data.plot(loglog=True)
+```
+
+``logx=True``、``logy=true``、``loglog=True``オプションで片対数グラフや両対数グラフに変更できます。
+``loglog=True``は``logx=True, logy=True``と同等です。
+
+## グラフの種類を変更したい
+
+```python
+data.plot(kind="hist")
+data.plot(kind="scatter", x="xカラム", y="yカラム")
+```
+
+``kind``オプションでグラフの種類を変更できます。
+指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
+散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
 
 ## ヒストグラムしたい（``pd.DataFrame.plot.hist``）
 
 ```python
+data.plot(kind="hist", bins=ビン数, title="ヒストグラム")
+data.plot(kind="hist", bins=ビン数, stacked=True, title="積み上げヒストグラム")
 data.plot.hist(by=["カラム名"], bins=ビン数)
 ```
 
-[pandas.DataFrame.plot.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html)でヒストグラムを描画できます。
+[pandas.DataFrame.plot.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html)でヒストグラムを作成できます。
 ``by``オプションにグループ化に使うカラム名を指定します。
 ``bins``オプションでビン数を変更できます。デフォルトは``10``になっています。
 その他に[pandas.DataFrame.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.hist.html)と[matplotlib.pyplot.hist](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html#matplotlib.pyplot.hist)のオプションも利用できます。
@@ -40,7 +119,8 @@ data.plot.hist(by=["カラム名"], bins=ビン数)
 ## 散布図したい（``pd.DataFrame.plot.scatter``）
 
 ```python
-data.plot.scatter(x="x軸名", y="y軸名", s="サイズ", c="色")
+data.plot(kind="scatter", x="X軸", y="Y軸", s="点の大きさ", c="点の色")
+data.plot.scatter(x="X軸", y="Y軸", s="点の大きさ", c="点の色")
 ```
 
 [pandas.DataFrame.plot.scatter](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.scatter.html)で散布図を描画できます。

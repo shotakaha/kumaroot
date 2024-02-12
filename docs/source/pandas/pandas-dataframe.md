@@ -1,4 +1,4 @@
-# データフレームしたい（``pd.DataFrame``）
+# データフレームしたい（``pandas.DataFrame``）
 
 ```python
 data = pd.DataFrame(リスト型オブジェクト)
@@ -13,6 +13,33 @@ data = pd.DataFrame(辞書型オブジェクト)
 スプレッドシートのような表構造を頭に思い浮かべて、
 行に対する操作なのか、列に対する操作なのか、
 を意識すると扱いやすいと思います。
+
+## リスト型からデータフレームしたい
+
+```python
+import random
+import pandas as pd
+
+samples = [[random.gauss(), random.randint(3, 10), random.uniform(5, 20)] for i in range(100)]
+data = pd.DataFrame(samples, columns=["x", "y", "z"])
+```
+
+リスト型オブジェクト（``list[list]型``）をデータフレームに変換できます。
+``columns``オプションを使ってカラム名を変更できます。
+
+## 辞書型からデータフレームしたい
+
+```python
+import random
+import pandas as pd
+
+samples = [{"x": random.gauss(), "y": random.randint(3, 10), "z": random.uniform(5, 20)} for i in range(100)]
+data = pd.DataFrame(samples)
+```
+
+辞書型オブジェクト（``list[dict]型``）をデータフレームに変換できます。
+辞書のキーがカラム名になります。
+
 
 ## データを確認したい
 

@@ -5,6 +5,7 @@
 maxdepth: 1
 ---
 pandas-install
+pandas-import
 ```
 
 ## ファイル操作したい

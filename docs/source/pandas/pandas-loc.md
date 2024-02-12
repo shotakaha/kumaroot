@@ -1,4 +1,4 @@
-# データを抽出したい（``pd.DataFrame.loc``）
+# データを抽出したい（``pandas.DataFrame.loc``）
 
 ```python
 data.loc["行ラベル", "列ラベル"]

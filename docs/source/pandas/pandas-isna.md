@@ -1,4 +1,4 @@
-# 欠損値を確認したい（``pd.DataFrame.isna``）
+# 欠損値を確認したい（``pandas.DataFrame.isna``）
 
 ```python
 data.isna()        # 欠損値を含む行は True になる

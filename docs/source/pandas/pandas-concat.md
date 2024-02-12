@@ -1,4 +1,4 @@
-# データを連結したい（``pd.concat``）
+# データを連結したい（``pandas.concat``）
 
 ```python3
 pd.concat([data1, data2], ignore_index=True)
