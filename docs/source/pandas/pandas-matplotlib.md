@@ -54,11 +54,12 @@ import matplotlib.pyplot as plt
 import japanize_matplotlob
 
 fig = plt.Figure()
-axes = fig.add_subplot(2,3,1)
-axes = fig.add_subplot(2,3,2)
-axes = fig.add_subplot(2,3,3)
-axes = fig.add_subplot(2,3,4)
-axes = fig.add_subplot(2,3,)```
+ax1 = fig.add_subplot(2,3,1)
+ax2 = fig.add_subplot(2,3,2)
+ax3 = fig.add_subplot(2,3,3)
+ax4 = fig.add_subplot(2,3,4)
+ax5 = fig.add_subplot(2,3,5)
+ax6 = fig.add_subplot(2,3,6)
 ```
 
 ## ImplicitからExplicitに変換したい
