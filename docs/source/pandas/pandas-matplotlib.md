@@ -1,0 +1,59 @@
+# 見た目したい（``import matplotlib.pyplot as plt``）
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+```
+
+グラフの見た目を整えたい場合、[matplotlib](https://matplotlib.org)についても簡単に知っておく必要があります。
+まず、公式ドキュメントの[The lifecycle of a plot](https://matplotlib.org/stable/tutorials/lifecycle.html)に目を通すのがよいと思います。
+とくに[A note on the explicit vs implicit interfaces](https://matplotlib.org/stable/tutorials/lifecycle.html#a-note-on-the-explicit-vs-implicit-interfaces)は、ウェブに転がっている他のコードを読むのに役立つ情報だと思います。
+
+## Explicit vs Implicit Interfaces
+
+``Explicit interface``はオブジェクト指向的な使い方で、``axes.Axes``オブジェクトに対して設定する方法です。
+``Implicit interface``はMATLAB的な使い方で、``pyplot``モジュールのグローバルなオブジェクト（？）に対して設定する方法です。
+
+:::{note}
+
+公式でも推奨しているように、MATLABユーザーでないかぎり、``explicit interface``を使うのがよいと思います。
+また、意図せずに混合して使うのは避けた方がよいと思います。
+
+:::
+
+## Axes and Figure
+
+``matplotlib``の用語として把握しておくべきなのは``Axes``と``Figure``です。
+``Axes``は独立した図オブジェクト単体を指します。
+``Figure``は最終的に保存する描画オブジェクトを指し、複数の``Axes``オブジェクトを含むことができます。
+
+:::{hint}
+
+``Figure``オブジェクトはROOTの``TCanvas``オブジェクト相当、
+``Axes``は``TCanvas::Divide``したエリア相当、
+と捉えればよいと思います。
+
+:::
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+fig, axes = plt.subplots(2, 3)
+```
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import japanize_matplotlob
+
+fig = plt.Figure()
+axes = fig.add_subplot(2,3,1)
+axes = fig.add_subplot(2,3,2)
+axes = fig.add_subplot(2,3,3)
+axes = fig.add_subplot(2,3,4)
+axes = fig.add_subplot(2,3,)```
+
+
