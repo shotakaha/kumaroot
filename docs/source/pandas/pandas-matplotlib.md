@@ -28,6 +28,9 @@ import japanize_matplotlib
 ``Axes``は独立した図オブジェクト単体を指します。
 ``Figure``は最終的に保存する描画オブジェクトを指し、複数の``Axes``オブジェクトを含むことができます。
 
+``Figure``オブジェクトの構成要素は
+[Parts of a Figure](https://matplotlib.org/stable/users/explain/quick_start.html#parts-of-a-figure)の図と説明を参照してください。
+
 :::{hint}
 
 ``Figure``オブジェクトはROOTの``TCanvas``オブジェクト相当、
