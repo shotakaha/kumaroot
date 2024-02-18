@@ -59,5 +59,16 @@ axes = fig.add_subplot(2,3,2)
 axes = fig.add_subplot(2,3,3)
 axes = fig.add_subplot(2,3,4)
 axes = fig.add_subplot(2,3,)```
+```
 
+## ImplicitからExplicitに変換したい
 
+```python
+# Current Figure を取得する
+fig = plt.gcf()
+
+# Current Axesを取得する
+ax = plt.gca()
+```
+
+``plt.gcf``や``plt.gca``で``implicit interface``で使われているグローバルオブジェクトを``explicit interface``として使えるようにできます。
