@@ -33,9 +33,10 @@ import japanize_matplotlib
 
 :::{hint}
 
-``Figure``オブジェクトはROOTの``TCanvas``オブジェクト相当、
-``Axes``は``TCanvas::Divide``したエリア相当、
-と捉えればよいと思います。
+ROOTを使ってるひとは、
+``Figure``オブジェクトは``TCanvas``オブジェクト相当、
+``Axes``オブジェクトは``TCanvas::Divide``したエリア相当、
+とイメージするとよいと思います。
 
 :::
 
