@@ -97,6 +97,36 @@ data.plot(kind="scatter", x="xカラム", y="yカラム")
 指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
 散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
 
+# 詳細設定したい（``ax``）
+
+```python
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+# データフレームを用意する（ここでは省略）
+# data: pd.DataFrame
+
+# matplotlib.pyplotで FigureとAxesオブジェクトを作成する
+fig, axs = plt.subplots()
+
+# pandasでプロットを作成する
+data.plot(
+    kind="scatter",
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
+    ax=axs  # 描画先のAxesオブジェクトを指定する
+    )
+```
+
+``ax``オプションで``matplotlib``の``Axes``オブジェクトを指定できます。
+グラフをより詳細に設定したい場合は、[matplotlib.pyplot.axes](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axes.html)に対して変更を加えます。
+
+:::{seealso}
+
+``matplotlib``の使い方は、まず、公式ドキュメントの[The lifecycle of a plot](https://matplotlib.org/stable/tutorials/lifecycle.html)に目を通すのがよいと思います。
+とくに[A note on the explicit vs implicit interfaces](https://matplotlib.org/stable/tutorials/lifecycle.html#a-note-on-the-explicit-vs-implicit-interfaces)は、ウェブに転がっている他のコードを読むのに役立つ情報だと思います。
+
+:::
 
 ## その他のグラフ
 
