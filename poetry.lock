@@ -2202,20 +2202,6 @@ standalone = ["Sphinx (>=5)"]
 test = ["pytest"]
 
 [[package]]
-name = "sphinxext-opengraph"
-version = "0.9.1"
-description = "Sphinx Extension to enable OGP support"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "sphinxext-opengraph-0.9.1.tar.gz", hash = "sha256:dd2868a1e7c9497977fbbf44cc0844a42af39ca65fe1bb0272518af225d06fc5"},
-    {file = "sphinxext_opengraph-0.9.1-py3-none-any.whl", hash = "sha256:b3b230cc6a5b5189139df937f0d9c7b23c7c204493b22646273687969dcb760e"},
-]
-
-[package.dependencies]
-sphinx = ">=4.0"
-
-[[package]]
 name = "stack-data"
 version = "0.6.3"
 description = "Extract data from python stack frames and tracebacks for informative displays"
@@ -2362,4 +2348,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "388ad422fda473a32eabe9d631983dbf67577eecd4949ccbeb4c47662898c16b"
+content-hash = "7c20a379bd30b728ea82b1ed7020df2de34c6e89c9861e123fef000393ccbb3f"

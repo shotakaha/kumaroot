@@ -26,7 +26,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx_rtd_theme",
     "myst_parser",
-    "sphinxext.opengraph",
+    # "sphinxext.opengraph",
     "sphinx_copybutton",
     "sphinx_design",
     "sphinx_tags",
@@ -121,8 +121,8 @@ html_theme_options = {
 
 # -- Options for OGP --------------------------------------------------
 
-ogp_use_first_image = True
-ogp_enable_meta_description = True
+# ogp_use_first_image = True
+# ogp_enable_meta_description = True
 
 # -- Options for Sphinx Tags --------------------------------------------------
 
