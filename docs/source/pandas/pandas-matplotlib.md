@@ -1,23 +1,38 @@
-# 見た目したい（``import matplotlib.pyplot as plt``）
+# 詳細設定したい（``import matplotlib.pyplot as plt``）
 
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
 import japanize_matplotlib
+
+# データフレームを用意する（ここでは省略）
+# data: pd.DataFrame
+
+# matplotlib.pyplotで FigureとAxesオブジェクトを作成する
+fig, axs = plt.subplots()
+
+# pandasでプロットを作成する
+data.plot(
+    kind="scatter",
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
+    ax=axs  # 描画先のAxesオブジェクトを指定する
+    )
 ```
 
-グラフの見た目を整えたい場合、[matplotlib](https://matplotlib.org)についても簡単に知っておく必要があります。
+``pandas.DataFrame.plot``のグラフを詳細設定したい場合は、[matplotlib](https://matplotlib.org)についても簡単に理解しておく必要があります。
+
 まず、公式ドキュメントの[The lifecycle of a plot](https://matplotlib.org/stable/tutorials/lifecycle.html)に目を通すのがよいと思います。
 とくに[A note on the explicit vs implicit interfaces](https://matplotlib.org/stable/tutorials/lifecycle.html#a-note-on-the-explicit-vs-implicit-interfaces)は、ウェブに転がっている他のコードを読むのに役立つ情報だと思います。
 
 ## Explicit vs Implicit Interfaces
 
-``Explicit interface``はオブジェクト指向的な使い方で、``axes.Axes``オブジェクトに対して設定する方法です。
-``Implicit interface``はMATLAB的な使い方で、``pyplot``モジュールのグローバルなオブジェクト（？）に対して設定する方法です。
+``Explicit interface``はオブジェクト指向的な使い方（``OO-style``）で、``axes.Axes``オブジェクトに対して設定する方法です。
+``Implicit interface``はMATLAB的な使い方（``pyplot-style``）で、``pyplot``モジュールのグローバルなオブジェクト（？）に対して設定する方法です。
 
 :::{note}
 
-公式でも推奨しているように、MATLABユーザーでないかぎり、``explicit interface``を使うのがよいと思います。
+公式で推奨しているように、MATLABユーザーでないかぎり、``OO-style``を使えばよいと思います。
 また、意図せずに混合して使うのは避けた方がよいと思います。
 
 :::
@@ -41,26 +56,57 @@ ROOTを使ってるひとは、
 :::
 
 ```python
-import pandas as pd
+# OO-styleの基本形
 import matplotlib.pyplot as plt
-import japanize_matplotlib
 
-fig, axes = plt.subplots(2, 3)
+# データオブジェクト（辞書型 or データフレーム）
+# sample_data: dict | pd.DataFrame
+
+fig, ax = plt.subplots()
+ax.scatter(
+    data=sample_data,
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
+    c="マーカーの色のカラム名",
+    marker="マーカーの種類")
+ax.set_title("散布図のタイトル")
+ax_set_xlabel("X軸のタイトル")
+ax_set_ylabel("Y軸のタイトル")
 ```
+
+OO-styleの基本的な形として、
+[matplotlib.pyplot.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)で描画オブジェクト（``Figure``オブジェクトと``Axes``オブジェクト）を作成し、
+[matplotlib.axes.Axes.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html)を使ってグラフを作成&詳細設定します。
+
+:::{hint}
+
+``pandas.DataFrame``などのデータフレームからグラフを作成する場合に、
+X軸とY軸の値を``numpy.array``などに変換しているサンプルを見かけますが、
+``data``オプションでデータフレームを指定し、
+X軸とY軸にカラム名を指定すればよいと思います。
+
+:::
+
+## キャンバスを分割したい
 
 ```python
-import pandas as pd
 import matplotlib.pyplot as plt
-import japanize_matplotlob
 
-fig = plt.Figure()
-ax1 = fig.add_subplot(2,3,1)
-ax2 = fig.add_subplot(2,3,2)
-ax3 = fig.add_subplot(2,3,3)
-ax4 = fig.add_subplot(2,3,4)
-ax5 = fig.add_subplot(2,3,5)
-ax6 = fig.add_subplot(2,3,6)
+# 2行3列に均等に分割
+fig, axs = plt.subplots(2, 3)
+
+# axsは2x3の二次元配列になっているので、
+# ravel()で1次元配列にすると使いやすいかも
+axs = axs.ravel()
 ```
+
+
+
+## キャンバスを不均等に分割したい
+
+```python
+```
+
 
 ## ImplicitからExplicitに変換したい
 
