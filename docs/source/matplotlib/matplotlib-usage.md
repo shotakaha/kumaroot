@@ -1,29 +1,15 @@
-# 詳細設定したい（``import matplotlib.pyplot as plt``）
+# Matplotlibの使い方
 
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-import japanize_matplotlib
-
-# データフレームを用意する（ここでは省略）
-# data: pd.DataFrame
-
-# matplotlib.pyplotで FigureとAxesオブジェクトを作成する
-fig, axs = plt.subplots()
-
-# pandasでプロットを作成する
-data.plot(
-    kind="scatter",
-    x="X軸のカラム名",
-    y="Y軸のカラム名",
-    ax=axs  # 描画先のAxesオブジェクトを指定する
-    )
+```{toctree}
+---
+maxdepth: 1
+---
+matplotlib-install
+matplotlib-import
+matplotlib-figure
+matplotlib-subplots
+matplotlib-subplot_mosaic
 ```
-
-``pandas.DataFrame.plot``のグラフを詳細設定したい場合は、[matplotlib](https://matplotlib.org)についても簡単に理解しておく必要があります。
-
-まず、公式ドキュメントの[The lifecycle of a plot](https://matplotlib.org/stable/tutorials/lifecycle.html)に目を通すのがよいと思います。
-とくに[A note on the explicit vs implicit interfaces](https://matplotlib.org/stable/tutorials/lifecycle.html#a-note-on-the-explicit-vs-implicit-interfaces)は、ウェブに転がっている他のコードを読むのに役立つ情報だと思います。
 
 ## Explicit vs Implicit Interfaces
 
@@ -86,56 +72,6 @@ X軸とY軸の値を``numpy.array``などに変換しているサンプルを見
 X軸とY軸にカラム名を指定すればよいと思います。
 
 :::
-
-## キャンバスを分割したい
-
-```python
-import matplotlib.pyplot as plt
-
-# 2行3列に均等に分割
-fig, axs = plt.subplots(2, 3)
-
-# axsは2x3の二次元配列になっているので、
-# ravel()で1次元配列にすると使いやすいかも
-axs = axs.ravel()
-```
-
-
-
-## キャンバスを複雑に分割したい
-
-```python
-import matplotlib.pyplot as plt
-
-# キャンバスの割付を設定する
-# 結合するキャンバスは同じ名前にする
-panels = [
-    ["A", "A", "E"],
-    ["C", ".", "E"]
-]
-fig, axs = plt.subplot_mosaic(mosaic=panels, layout="constrained")
-
-# axsは辞書型
-axs["A"].set_title("Panel A")
-axs["C"].set_title("Panel C")
-axs["E"].set_title("Edge")
-```
-
-[matplotlib.pyplot.subplot_mosaic](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot_mosaic.html)を使って、キャンバスを複雑に分割できます。
-``mosaic``は必須の引数で、キャンバスの割り付けを指定します。
-結合したい部分は同じ名前を指定します。
-また、ここで指定した名前を使って``Axes``オブジェクトを取り出すことができます。
-``layout="constrained"``オプションをつけると、いい感じの余白で整理できます。
-
-
-:::{note}
-
-``mosaic``はモザイク処理ではなく、タイルのことを指しているのだと思います。
-
-:::
-
-
-
 
 
 ## ImplicitからExplicitに変換したい

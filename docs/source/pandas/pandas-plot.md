@@ -21,7 +21,7 @@ data.plot()
 
 :::
 
-## タイトルしたい
+## タイトルしたい（``title`` / ``xlabel`` / ``ylabel``）
 
 ```python
 import pandas
@@ -44,7 +44,7 @@ data.plot(
 
 :::
 
-## サブプロットしたい
+## サブプロットしたい（``subplots``）
 
 ```python
 data.plot(subplots=True)
@@ -56,7 +56,7 @@ data.plot(subplots=True, figsize=(横サイズ, 縦サイズ), layout=(行数, �
 ``layout``オプションでサブプロットの行数と列数を変更できます。デフォルトは縦配置です。
 サブプロットの詳細は[matplotlib.pyplot.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)も参照してください。
 
-## 目盛りしたい
+## 目盛りしたい（``grid``）
 
 ```python
 data.plot(grid=True)
@@ -67,7 +67,7 @@ data.plot(grid=True, xticks=range(0, 1000, 50), yticks=range(-5, 15, 1))
 ``xticks``、``yticks``オプションで目盛り幅を変更できます。
 目盛りの詳細は[matplotlib.pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)も参照してください。
 
-## 表示範囲したい
+## 表示範囲したい（``xlim`` / ``ylim``）
 
 ```python
 data.plot(xlim=(x軸の下限値, x軸の上限値), ylim=(y軸の下限値, y軸の上限値))
@@ -75,7 +75,7 @@ data.plot(xlim=(x軸の下限値, x軸の上限値), ylim=(y軸の下限値, y�
 
 ``xlim``、``ylim``オプションで、X軸とY軸それぞれの下限値と上限値を変更できます。
 
-## 対数グラフしたい
+## 対数グラフしたい（``logx`` / ``logy`` / ``loglog``）
 
 ```python
 data.plot(logx=True)
@@ -86,7 +86,7 @@ data.plot(loglog=True)
 ``logx=True``、``logy=true``、``loglog=True``オプションで片対数グラフや両対数グラフに変更できます。
 ``loglog=True``は``logx=True, logy=True``と同等です。
 
-## グラフの種類を変更したい
+## グラフの種類を変更したい（``kind``）
 
 ```python
 data.plot(kind="hist")
@@ -97,7 +97,36 @@ data.plot(kind="scatter", x="xカラム", y="yカラム")
 指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
 散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
 
+# 詳細設定したい（``ax``）
 
+```python
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+# データフレームを用意する（ここでは省略）
+# data: pd.DataFrame
+
+# matplotlib.pyplotで FigureとAxesオブジェクトを作成する
+fig, axs = plt.subplots()
+
+# pandasでプロットを作成する
+data.plot(
+    kind="scatter",
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
+    ax=axs  # 描画先のAxesオブジェクトを指定する
+    )
+```
+
+``ax``オプションで``matplotlib``の``Axes``オブジェクトを指定できます。
+グラフをより詳細に設定したい場合は、[matplotlib.pyplot.axes](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axes.html)に対して変更を加えます。
+
+:::{seealso}
+
+``matplotlib``の使い方は、まず、公式ドキュメントの[The lifecycle of a plot](https://matplotlib.org/stable/tutorials/lifecycle.html)に目を通すのがよいと思います。
+とくに[A note on the explicit vs implicit interfaces](https://matplotlib.org/stable/tutorials/lifecycle.html#a-note-on-the-explicit-vs-implicit-interfaces)は、ウェブに転がっている他のコードを読むのに役立つ情報だと思います。
+
+:::
 
 ## その他のグラフ
 

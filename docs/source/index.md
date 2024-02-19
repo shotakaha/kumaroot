@@ -24,6 +24,7 @@ geant4/geant4-usage
 python/python-usage
 pandas/pandas-usage
 polars/polars-usage
+matplotlib/matplotlib-usage
 altair/altair-usage
 plotly/plotly-usage
 rust/rust-usage
