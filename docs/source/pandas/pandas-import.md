@@ -39,3 +39,14 @@ import altair as alt
 ```
 
 公式ドキュメントは``alt``というエイリアスで読み込んでいました。
+
+## 機械学習したい（``scikit-learn``）
+
+```python
+from sklearn import datasets
+data = datasets.load_iris()
+# data = datasets.load_iris(as_frame=True)
+```
+
+公式ドキュメントを読むと``sklearn``というパッケージ名で読みこむようです。
+機械学習のサンプルとして利用できるデータセットが含まれています。
