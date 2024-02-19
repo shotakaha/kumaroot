@@ -1,0 +1,151 @@
+# 詳細設定したい（``import matplotlib.pyplot as plt``）
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+
+# データフレームを用意する（ここでは省略）
+# data: pd.DataFrame
+
+# matplotlib.pyplotで FigureとAxesオブジェクトを作成する
+fig, axs = plt.subplots()
+
+# pandasでプロットを作成する
+data.plot(
+    kind="scatter",
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
+    ax=axs  # 描画先のAxesオブジェクトを指定する
+    )
+```
+
+``pandas.DataFrame.plot``のグラフを詳細設定したい場合は、[matplotlib](https://matplotlib.org)についても簡単に理解しておく必要があります。
+
+まず、公式ドキュメントの[The lifecycle of a plot](https://matplotlib.org/stable/tutorials/lifecycle.html)に目を通すのがよいと思います。
+とくに[A note on the explicit vs implicit interfaces](https://matplotlib.org/stable/tutorials/lifecycle.html#a-note-on-the-explicit-vs-implicit-interfaces)は、ウェブに転がっている他のコードを読むのに役立つ情報だと思います。
+
+## Explicit vs Implicit Interfaces
+
+``Explicit interface``はオブジェクト指向的な使い方（``OO-style``）で、``axes.Axes``オブジェクトに対して設定する方法です。
+``Implicit interface``はMATLAB的な使い方（``pyplot-style``）で、``pyplot``モジュールのグローバルなオブジェクト（？）に対して設定する方法です。
+
+:::{note}
+
+公式で推奨しているように、MATLABユーザーでないかぎり、``OO-style``を使えばよいと思います。
+また、意図せずに混合して使うのは避けた方がよいと思います。
+
+:::
+
+## Axes and Figure
+
+``matplotlib``の用語として把握しておくべきなのは``Axes``と``Figure``です。
+``Axes``は独立した図オブジェクト単体を指します。
+``Figure``は最終的に保存する描画オブジェクトを指し、複数の``Axes``オブジェクトを含むことができます。
+
+``Figure``オブジェクトの構成要素は
+[Parts of a Figure](https://matplotlib.org/stable/users/explain/quick_start.html#parts-of-a-figure)の図と説明を参照してください。
+
+:::{hint}
+
+ROOTを使ってるひとは、
+``Figure``オブジェクトは``TCanvas``オブジェクト相当、
+``Axes``オブジェクトは``TCanvas::Divide``したエリア相当、
+とイメージするとよいと思います。
+
+:::
+
+```python
+# OO-styleの基本形
+import matplotlib.pyplot as plt
+
+# データオブジェクト（辞書型 or データフレーム）
+# sample_data: dict | pd.DataFrame
+
+fig, ax = plt.subplots()
+ax.scatter(
+    data=sample_data,
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
+    c="マーカーの色のカラム名",
+    marker="マーカーの種類")
+ax.set_title("散布図のタイトル")
+ax_set_xlabel("X軸のタイトル")
+ax_set_ylabel("Y軸のタイトル")
+```
+
+OO-styleの基本的な形として、
+[matplotlib.pyplot.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)で描画オブジェクト（``Figure``オブジェクトと``Axes``オブジェクト）を作成し、
+[matplotlib.axes.Axes.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html)を使ってグラフを作成&詳細設定します。
+
+:::{hint}
+
+``pandas.DataFrame``などのデータフレームからグラフを作成する場合に、
+X軸とY軸の値を``numpy.array``などに変換しているサンプルを見かけますが、
+``data``オプションでデータフレームを指定し、
+X軸とY軸にカラム名を指定すればよいと思います。
+
+:::
+
+## キャンバスを分割したい
+
+```python
+import matplotlib.pyplot as plt
+
+# 2行3列に均等に分割
+fig, axs = plt.subplots(2, 3)
+
+# axsは2x3の二次元配列になっているので、
+# ravel()で1次元配列にすると使いやすいかも
+axs = axs.ravel()
+```
+
+
+
+## キャンバスを複雑に分割したい
+
+```python
+import matplotlib.pyplot as plt
+
+# キャンバスの割付を設定する
+# 結合するキャンバスは同じ名前にする
+panels = [
+    ["A", "A", "E"],
+    ["C", ".", "E"]
+]
+fig, axs = plt.subplot_mosaic(mosaic=panels, layout="constrained")
+
+# axsは辞書型
+axs["A"].set_title("Panel A")
+axs["C"].set_title("Panel C")
+axs["E"].set_title("Edge")
+```
+
+[matplotlib.pyplot.subplot_mosaic](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot_mosaic.html)を使って、キャンバスを複雑に分割できます。
+``mosaic``は必須の引数で、キャンバスの割り付けを指定します。
+結合したい部分は同じ名前を指定します。
+また、ここで指定した名前を使って``Axes``オブジェクトを取り出すことができます。
+``layout="constrained"``オプションをつけると、いい感じの余白で整理できます。
+
+
+:::{note}
+
+``mosaic``はモザイク処理ではなく、タイルのことを指しているのだと思います。
+
+:::
+
+
+
+
+
+## ImplicitからExplicitに変換したい
+
+```python
+# Current Figure を取得する
+fig = plt.gcf()
+
+# Current Axesを取得する
+ax = plt.gca()
+```
+
+``plt.gcf``や``plt.gca``で``implicit interface``で使われているグローバルオブジェクトを``explicit interface``として使えるようにできます。

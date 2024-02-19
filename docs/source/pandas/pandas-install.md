@@ -33,3 +33,11 @@ $ pip3 install altair
 作成した図をインタラクティブに操作したい場合は、
 JavaScriptをベースにした描画ツールがオススメです。
 僕は[Altair](https://altair-viz.github.io/)を好んで使っています。
+
+## 機械学習したい（``scikit-learn``）
+
+```console
+$ pip3 install scikit-learn
+```
+
+機械学習したいひとは、よく使われる[scikit-learn](https://scikit-learn.org/stable/)パッケージをインストールするとよいでしょう。

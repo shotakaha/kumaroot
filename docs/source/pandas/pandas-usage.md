@@ -67,6 +67,7 @@ pandas-mean
 maxdepth: 1
 ---
 pandas-plot
+pandas-matplotlib
 ```
 
 
