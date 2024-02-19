@@ -87,26 +87,6 @@ X軸とY軸にカラム名を指定すればよいと思います。
 
 :::
 
-## キャンバスを分割したい
-
-```python
-import matplotlib.pyplot as plt
-
-# 2行3列に均等に分割
-fig, axs = plt.subplots(2, 3)
-
-# axsは2x3の二次元配列になっているので、
-# ravel()で1次元配列にすると使いやすいかも
-axs = axs.ravel()
-```
-
-
-
-
-
-
-
-
 
 ## ImplicitからExplicitに変換したい
 
