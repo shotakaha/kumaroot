@@ -1,11 +1,14 @@
 # Matplotlibの使い方
 
 ```{toctree}
+---
+maxdepth: 1
+---
 matplotlib-install
 matplotlib-import
 matplotlib-figure
 matplotlib-subplots
-matplotlib_subplot_mosaic
+matplotlib-subplot_mosaic
 ```
 
 ## Explicit vs Implicit Interfaces

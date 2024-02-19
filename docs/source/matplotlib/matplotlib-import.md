@@ -1,4 +1,4 @@
-# インポートしたい（``matplotlib``）
+# インポートしたい（``matplotlib.pyplot``）
 
 ```python
 import matplotlib.pyplot as plt
