@@ -22,7 +22,7 @@ weight = 90
 内部ページは``pageRef``プロパティ、外部ページは``url``プロパティを使います。
 ``identifier``と``parent``プロパティを使って、メニューを階層化できます。
 
-設定の概要は[Menusのドキュメント](https://gohugo.io/content-management/menus/)、設定可能な項目は[menu variables](https://gohugo.io/variables/menus/)を参照してください。
+設定の概要は[Menusのドキュメント](https://gohugo.io/content-management/menus/)、設定可能な項目は[Menusメソッド](https://gohugo.io/methods/site/menus/)を参照してください。
 
 ## メニューを入れ子にしたい
 

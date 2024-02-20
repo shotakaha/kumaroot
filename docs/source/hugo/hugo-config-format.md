@@ -4,7 +4,7 @@
 {{ now.Format "2006" }}
 ```
 
-[.Format](https://gohugo.io/functions/format/)関数を使って日付フォーマットできます。
+[.Format](https://gohugo.io/methods/time/format/)関数を使って日付フォーマットできます。
 フォーマット文字列は設定ファイルで定義できます。
 
 ```html
