@@ -2,6 +2,13 @@
 
 Geant4も使えるようになりたい
 
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-install
+```
+
 ## リファレンス
 
 - [Geant4](https://geant4.org/)
