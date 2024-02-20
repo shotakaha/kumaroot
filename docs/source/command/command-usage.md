@@ -9,7 +9,7 @@
 パイプやリダイレクトと組み合わせて、いろいろなタスクをこなすことができます。
 
 このドキュメントでは``macOS``を前提として、``Homebrew``でインストールできるコマンドを中心に紹介します。
-[Homebrew 公式ページ（日本語）](https://brew.sh/ja/)にあるスクリプトをコピペして、ターミナルに貼り付け、
+[Homebrew 公式ページ（日本語）](https://brew.sh/ja)にあるスクリプトをコピペして、ターミナルに貼り付け、
 [brew](./command-brew.md)コマンドを使えるようにしましょう。
 
 ```{toctree}
@@ -27,6 +27,7 @@ command-cd
 command-chmod
 command-curl
 command-date
+command-dig
 command-docker
 command-echo
 command-exa
