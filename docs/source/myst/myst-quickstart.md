@@ -8,14 +8,14 @@ $ myst start
 $
 ```
 
-[MyST公式のチュートリアル](https://myst-tools.org/docs/mystjs/quickstart)に沿って、クイックスタートしてみます。
+[MyST公式のチュートリアル](https://mystmd.org/guide/quickstart)に沿って、クイックスタートしてみます。
 GitHubにチュートリアル用のディレクトリがあるので、それをクローンして作業しています。
 
 クローンしたディレクトリで``myst init``すると``myst.yml``が作成され、MySTプロジェクトとして使えるようになります。
 ``myst start``するとローカルサーバーが起動します。
 ブラウザで``http://localhost:3000``を開き、ライブビューしながら修正を確認できます。
 
-[Working with MyST Documents](https://myst-tools.org/docs/mystjs/quickstart-myst-documents)のセクションでは、PDFやLaTeXなどの文書を作成するために便利なMarkdown拡張の使い方（文書のメタ情報、ブロック要素の指定、引用と参照、画像の挿入、相互参照）を把握できます。
+[Working with MyST Documents](https://mystmd.org/guide/quickstart-myst-documents)のセクションでは、PDFやLaTeXなどの文書を作成するために便利なMarkdown拡張の使い方（文書のメタ情報、ブロック要素の指定、引用と参照、画像の挿入、相互参照）を把握できます。
 
 ## メタ情報したい
 

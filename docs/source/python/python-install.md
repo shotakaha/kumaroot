@@ -15,7 +15,7 @@ $ pipx ensurepath
 ```
 
 [Python](https://www.python.org/)は[Homebrew](https://brew.sh)を使ってインストールします。
-パッケージ管理ツールの``pip3``を最新版にし、また[pipx](https://pypa.github.io/pipx/)もインストールします。
+パッケージ管理ツールの``pip3``を最新版にし、また[pipx](https://pipx.pypa.io/stable/)もインストールします。
 
 ```console
 $ which python3

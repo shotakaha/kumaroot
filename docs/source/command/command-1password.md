@@ -17,7 +17,7 @@ $ op --version
 ## サインインしたい
 
 ``op``コマンドをはじめて使う場合、まずアカウントのサインインが必要です。
-設定は[公式ドキュメント](https://developer.1password.com/docs/cli/get-started/#sign-in)を参照してください。
+設定は[公式ドキュメント](https://developer.1password.com/docs/cli/get-started/)を参照してください。
 ここに書いてある通りに進めるとTouchIDを使って認証できるようになります。
 
 ## 保管庫を一覧したい

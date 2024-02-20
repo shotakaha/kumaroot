@@ -5,7 +5,7 @@
 #emph[本文]
 ```
 
-[#strong](https://typst.app/docs/reference/text/strong/)もしくは[#emph](https://typst.app/docs/reference/text/emph/)を使ってテキストを強調できます。
+[#strong](https://typst.app/docs/reference/model/strong/)もしくは[#emph](https://typst.app/docs/reference/model/emph/)を使ってテキストを強調できます。
 
 ## 文字色したい
 

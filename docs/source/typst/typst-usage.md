@@ -28,7 +28,6 @@ maxdepth: 1
 ---
 typst-install
 typst-build
-typst-text-color
 typst-import
 ```
 

@@ -10,4 +10,4 @@ $ npx serve _build/html
 
 ## リファレンス
 
-- [Creating Static HTML](https://myst-tools.org/docs/mystjs/deployment)
+- [Creating Static HTML](https://mystmd.org/guide/deployment)

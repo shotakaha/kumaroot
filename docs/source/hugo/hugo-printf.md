@@ -5,7 +5,7 @@
 {{ printf "円周率 = %.2f" 3.1416 }}
 ```
 
-[printf](https://neohugo.github.io/functions/printf/)関数を使って、文字列を出力できます。
+[fmt.Printf](https://gohugo.io/functions/fmt/printf/)関数を使って、文字列を出力できます。
 テンプレート内で定義したり、呼び出したりした変数を表示するために使います。
 表示する際に[safe.HTML](https://gohugo.io/functions/safe/html/)などの関数にパイプして渡すこともできます。
 

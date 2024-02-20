@@ -18,7 +18,7 @@ $ myst build --docx
 ファイルは{file}`_build/exports/`に生成されます。
 
 
-[Exporting to Word](https://myst-tools.org/docs/mystjs/creating-word-documents)
+[Exporting to Word](https://mystmd.org/guide/creating-word-documents)
 
 ## テンプレートを変更したい
 

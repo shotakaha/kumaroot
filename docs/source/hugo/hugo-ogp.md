@@ -5,7 +5,7 @@
 ```
 
 Hgoの[内部テンプレート](https://gohugo.io/templates/internal/)を使ってOGPを設定できます。
-[_internal/opengraph.html](https://github.com/gohugoio/hugo/blob/aster/tpl/tplimpl/embedded/templates/opengraph.html)を``head``用の部分テンプレートに書いておけばOKです。
+[_internal/opengraph.html](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/opengraph.html)を``head``用の部分テンプレートに書いておけばOKです。
 
 OGP画像などの設定は、サイト全体の設定ファイル（{file}`config.toml`）
 もしくは各コンテンツのフロントマターで設定します。

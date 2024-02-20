@@ -1,8 +1,12 @@
 # MySTしたい（``myst``）
 
 ```console
-$ npm install -g myst
+$ npm install -g mystmd
 ```
 
-[MyST Markdown tools](https://myst-tools.org/)でもドキュメントを作成できます。
-[公式のクイックスタートガイド](https://myst-tools.org/docs/mystjs/quickstart)を試してみます。
+```console
+$ pipx install mystmd
+```
+
+[MyST Markdown tools](https://mystmd.org/)でもドキュメントを作成できます。
+[公式のクイックスタートガイド](https://mystmd.org/guide/quickstart)を試してみます。
