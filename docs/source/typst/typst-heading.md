@@ -52,7 +52,7 @@ LaTeXの``\section*``に相当します。
 )
 ```
 
-[heading要素のnumberingオプション](https://typst.app/docs/reference/meta/heading/)で、見出しの番号表示をカスタマイズできます。
+[heading要素のnumberingオプション](https://typst.app/docs/reference/model/heading/)で、見出しの番号表示をカスタマイズできます。
 また、``#showルール``を使って、見出しのレベルに応じて表示を変更できます。
 
 :::{seealso}

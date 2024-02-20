@@ -4,7 +4,7 @@
 #link(URL)[表示名]
 ```
 
-[#link](https://typst.app/docs/reference/meta/link/)を使ってハイパーリンクを作成できます。
+[#link](https://typst.app/docs/reference/model/link/)を使ってハイパーリンクを作成できます。
 ``[表示名]``は省略できます。
 ``http://``や``https://``で始まる文字列は自動でリンクに変換されます。
 
