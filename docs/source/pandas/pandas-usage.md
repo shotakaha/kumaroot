@@ -67,6 +67,8 @@ pandas-mean
 maxdepth: 1
 ---
 pandas-plot
+pandas-plot-hist
+pandas-plot-scatter
 ```
 
 
