@@ -14,7 +14,7 @@ $ cd プロジェクト名/docs
 $ sphinx-autobuild source/ build/html/
 ```
 
-[sphinx-autobuild](https://github.com/executablebooks/sphinx-autobuild)を使うと、ライブリロードしながら編集できます。
+[sphinx-autobuild](https://github.com/sphinx-doc/sphinx-autobuild)を使うと、ライブリロードしながら編集できます。
 
 ## さらに自動化したい
 
