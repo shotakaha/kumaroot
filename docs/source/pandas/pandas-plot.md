@@ -5,7 +5,9 @@ import pandas
 import matplotlib.pyplot as plt
 import japanize_matplotlib
 
-data.plot()
+fig, axs = plt.subplots()
+data.plot(ax=axs)
+fig.savefig("ファイル名")
 ```
 
 [pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)を使って、データフレームからグラフを作成できます。
@@ -21,17 +23,25 @@ data.plot()
 
 :::
 
+## 種類を変更したい（``kind``）
+
+```python
+data.plot(kind="hist")
+data.plot(kind="scatter", x="x軸のカラム名", y="Y軸のカラム名")
+```
+
+``kind``オプションでグラフの種類を変更できます。
+指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
+
+散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
+
 ## タイトルしたい（``title`` / ``xlabel`` / ``ylabel``）
 
 ```python
-import pandas
-import matplotlib.pyplot as plt
-import japanize_matplotlib
-
 data.plot(
     title="グラフのタイトル",
     xlabel="X軸のタイトル",
-    ylabel="Y軸のタイトル"
+    ylabel="Y軸のタイトル",
     )
 ```
 
@@ -48,7 +58,12 @@ data.plot(
 
 ```python
 data.plot(subplots=True)
-data.plot(subplots=True, figsize=(横サイズ, 縦サイズ), layout=(行数, 列数))
+
+data.plot(
+    subplots=True,
+    figsize=(横サイズ, 縦サイズ),
+    layout=(行数, 列数),
+    )
 ```
 
 ``subplots=True``オプションで、複数のカラムのデータをそれぞれのサブプロットに表示できます。
@@ -60,17 +75,25 @@ data.plot(subplots=True, figsize=(横サイズ, 縦サイズ), layout=(行数, �
 
 ```python
 data.plot(grid=True)
-data.plot(grid=True, xticks=range(0, 1000, 50), yticks=range(-5, 15, 1))
+
+data.plot(
+    grid=True,
+    xticks=range(0, 1000, 50),
+    yticks=range(-5, 15, 1)
+    )
 ```
 
 ``grid=True``オプションで、目盛り（補助目盛り）を表示できます。
-``xticks``、``yticks``オプションで目盛り幅を変更できます。
+``xticks``、``yticks``オプションで目盛り間隔を変更できます。
 目盛りの詳細は[matplotlib.pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)も参照してください。
 
 ## 表示範囲したい（``xlim`` / ``ylim``）
 
 ```python
-data.plot(xlim=(x軸の下限値, x軸の上限値), ylim=(y軸の下限値, y軸の上限値))
+data.plot(
+    xlim=(x軸の下限値, x軸の上限値),
+    ylim=(y軸の下限値, y軸の上限値)
+    )
 ```
 
 ``xlim``、``ylim``オプションで、X軸とY軸それぞれの下限値と上限値を変更できます。
@@ -86,18 +109,7 @@ data.plot(loglog=True)
 ``logx=True``、``logy=true``、``loglog=True``オプションで片対数グラフや両対数グラフに変更できます。
 ``loglog=True``は``logx=True, logy=True``と同等です。
 
-## グラフの種類を変更したい（``kind``）
-
-```python
-data.plot(kind="hist")
-data.plot(kind="scatter", x="xカラム", y="yカラム")
-```
-
-``kind``オプションでグラフの種類を変更できます。
-指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
-散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
-
-# 詳細設定したい（``ax``）
+## 詳細設定したい（``ax``）
 
 ```python
 import matplotlib.pyplot as plt
