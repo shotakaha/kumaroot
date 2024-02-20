@@ -25,7 +25,7 @@ $ myst build --pdf
 
 :::
 
-[Exporting to PDF](https://myst-tools.org/docs/mystjs/creating-pdf-documents)
+[Exporting to PDF](https://mystmd.org/guide/creating-pdf-documents)
 
 ## テンプレートを変更したい
 
