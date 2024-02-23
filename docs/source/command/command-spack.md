@@ -7,8 +7,9 @@ $ spack install スペック名  # パッケージ名のこと
 
 [spack](https://spack.io/)は主にスパコンなどのHPCでパッケージ管理ができるコマンドです。
 コンパイラーを変えたり、オプションを変えたりしたパッケージを、それぞれ独立した環境に構築できます。
-LinuxとmacOSでも利用でき、Homebrewでインストールできます。
-（``gnupg``など他に必要なパッケージがあります。公式ドキュメントの[System Prerequisites](https://spack.readthedocs.io/en/latest/getting_started.html#system-prerequisites)を参照してください）
+
+クロスプラットフォーム対応で、LinuxやmacOSでも利用でき、Homebrewでインストールできます。
+``gnupg``など他に必要なパッケージがあるので、公式ドキュメントの[System Prerequisites](https://spack.readthedocs.io/en/latest/getting_started.html#system-prerequisites)を参照してください。
 
 今回は、Geant4をインストールするためだけに導入しました。
 以下はGeant4を例にコマンドの使い方を確認しています。
@@ -128,6 +129,7 @@ For fish:
 ## パッケージの詳細を確認したい（``spack info``）
 
 ```console
+$ spack info パッケージ名
 $ spack info geant4
 $ spack info --variants-by-name geant4
 ```
@@ -183,6 +185,10 @@ Variants:
 
 ```console
 $ spack list
+$ spack list | grep パッケージ名（の一部）
+```
+
+```console
 $ spack list | grep geant4
 geant4
 geant4-data
