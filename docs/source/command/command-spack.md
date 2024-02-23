@@ -40,6 +40,8 @@ $ spack install geant4 +opengl
 パッケージ名のあとに``オプション名=値``を追加します。
 オプションの値がブーリアン（``True | False``）の場合は``+オプション名``のように書くこともできます。
 
+他にも``@バージョン``でバージョン、``%コンパイラー``でコンパイラーを指定できます。
+
 :::{note}
 
 ```console
@@ -83,6 +85,19 @@ $ spack find -lv geant4
 pzvk6rx geant4@11.1.2~ipo~motif~opengl~qt~tbb+threads~vecgeom~vtk~x11 build_system=cmake build_type=Release cxxstd=17 generator=make patches=2979cb7
 t26aalv geant4@11.1.2~ipo~motif+opengl~qt~tbb+threads~vecgeom~vtk~x11 build_system=cmake build_type=Release cxxstd=17 generator=make patches=2979cb7
 ```
+
+## パッケージを読み込みたい（``spack load``）
+
+```console
+# Fish
+$ . spack/share/spack/setup-env.fish
+$ spack load パッケージ名/ハッシュ値
+$ spack load geant4
+```
+
+``load``コマンドで、パッケージを
+
+
 
 ## パッケージの詳細を確認したい（``spack info``）
 
@@ -183,6 +198,15 @@ Do you want to proceed? [y/N] y
 確認のプロンプトが表示されるので``y``を入力します。
 削除はあっという間です。
 
+## 一時パッケージをアンインストールしたい（``gc``）
+
+```console
+$ spack gc パッケージ名
+$ spack gc geant4
+```
+
+``gc``コマンドで、一時的にインストールされたパッケージをアンインストール（ガベージコレクト）できます。
+
 ## コンパイラーしたい（``spack compilers``）
 
 ```console
@@ -211,3 +235,5 @@ apple-clang@15.0.0:
 
 ``compiler info``でコンパイラーの詳細を確認できます。
 コンパイラーの詳細は``~/.spack/darwin/compilers.yaml``にも書いてありました。
+
+
