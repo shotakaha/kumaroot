@@ -1,0 +1,183 @@
+# パッケージ管理したい（``spack``）
+
+```console
+$ brew install spack
+$ spack install スペック名  # パッケージ名のこと
+```
+
+[spack](https://spack.io/)は主にスパコンなどのHPCでパッケージ管理ができるコマンドです。
+コンパイラーを変えたり、オプションを変えたりしたパッケージを、それぞれ独立した環境に構築できます。
+LinuxとmacOSでも利用できます。
+
+今回は、Geant4をインストールするためだけに導入しました。
+以下はGeant4を例にコマンドの使い方を確認しています。
+
+:::{note}
+
+コマンドの使い方やオプションは``spack help``もしくは``spack help コマンド名``で確認できるようになっています。
+わざわざ公式ドキュメントなどを確認する必要がなく、とても便利です。
+
+:::
+
+## インストールしたい（``spack install``）
+
+```console
+$ spack install geant4
+```
+
+``install``コマンドでパッケージをインストールできます。
+基本的にすべての関連パッケージでコンパイル作業が必要なので、時間がかかります。
+
+## ビルドオプションしたい
+
+```console
+$ spack install geant4 opengl=True
+$ spack install geant4 +opengl
+```
+
+``info``コマンドで確認した``Variants``名で、ビルドオプションを追加できます。
+パッケージ名のあとに``オプション名=値``を追加します。
+オプションの値がブーリアン（``True | False``）の場合は``+オプション名``のように書くこともできます。
+
+:::{note}
+
+```console
+$ spack spec geant4 opengl=True
+```
+
+``spec``コマンドでインストールされるパッケージ一覧を事前に確認できます。
+
+:::
+
+## ローカルのパッケージを確認したい（``spack find``）
+
+```console
+$ spack find -l geant4
+-- darwin-sonoma-skylake / apple-clang@15.0.0 -------------------
+pzvk6rx geant4@11.1.2  # spack install geant4
+t26aalv geant4@11.1.2  # spack install geant4 opengl=True
+==> 2 installed packages
+```
+
+``find``コマンドでインストール済みのパッケージ情報を確認できます。
+
+ビルドオプションごとにハッシュ値的なものが付与されます。
+Homebrewでインストールした``spack``を使った場合、それぞれ次のパスにインストールされていました。
+
+```console
+$ spack find -p geant4
+-- darwin-sonoma-skylake / apple-clang@15.0.0 -------------------
+geant4@11.1.2  /usr/local/Cellar/spack/0.21.1/opt/spack/darwin-sonoma-skylake/apple-clang-15.0.0/geant4-11.1.2-pzvk6rxocxpeauwnlfvwxk6wx3b67wrr
+geant4@11.1.2  /usr/local/Cellar/spack/0.21.1/opt/spack/darwin-sonoma-skylake/apple-clang-15.0.0/geant4-11.1.2-t26aalvrzmo2u5jyhj3nvv6gihtty7cv
+==> 2 installed packages
+```
+
+``-v``オプションでビルドオプションの詳細を確認できます。
+有効なオプションは``+オプション名``、
+無効なオプションは``~オプション名``で表示されます。
+
+```console
+$ spack find -lv geant4
+-- darwin-sonoma-skylake / apple-clang@15.0.0 -------------------
+pzvk6rx geant4@11.1.2~ipo~motif~opengl~qt~tbb+threads~vecgeom~vtk~x11 build_system=cmake build_type=Release cxxstd=17 generator=make patches=2979cb7
+t26aalv geant4@11.1.2~ipo~motif+opengl~qt~tbb+threads~vecgeom~vtk~x11 build_system=cmake build_type=Release cxxstd=17 generator=make patches=2979cb7
+```
+
+## パッケージの詳細を確認したい（``spack info``）
+
+```console
+$ spack info geant4
+$ spack info --variants-by-name geant4
+```
+
+``info``コマンドでパッケージ情報の詳細を確認できます。
+ウェブサイトのURL（``Homepage``）、
+利用可能なバージョン（``Preferred version``／``Safe versions``）、
+ビルド時のオプション（``Variants``）、
+依存パッケージ（``Build Dependencies``／``Link Dependencies``／``Run Dependencies``）
+など確認できます。
+
+ビルド時のオプションは、デフォルトで条件ごと（``when 条件``）で表示されます。
+``--variants-by-name``オプションをつけると、オプション名で表示されます。
+
+:::{note}
+
+具体的な表示の違いは以下のようになります。
+
+```console
+$ spack info geant4
+...
+Variants:
+    ...
+    when build_system=cmake
+      build_type [Release]      Debug, MinSizeRel, RelWithDebInfo, Release
+          CMake build type
+      generator [make]          none
+          the build system generator to use
+...
+```
+
+```console
+$ spack info --variants-by-name geant4
+...
+Variants:
+    ...
+     build_system [cmake]        cmake
+        Build systems supported by the package
+
+    build_type [Release]        Debug, MinSizeRel, RelWithDebInfo, Release
+      when build_system=cmake
+        CMake build type
+
+    generator [make]            none
+      when build_system=cmake
+        the build system generator to use
+...
+```
+
+:::
+
+## 利用可能なパッケージを確認したい（``spack list``）
+
+```console
+$ spack list
+$ spack list | grep geant4
+geant4
+geant4-data
+geant4-vmc
+```
+
+``list``コマンドで利用可能なパッケージ一覧を確認できます。
+数が多いので``grep``や``ripgrep``などの検索コマンドでパッケージ名を指定するとよいです。
+
+:::{note}
+
+ページ構成の都合で順番が後回しになってしまってますが、おそらく一番最初に使うコマンドはこれです。
+
+僕もまず、Geant4に関係したパッケージ名を確認するところからはじめました。
+関連しそうなパッケージとして``geant4``、``geant4-data``、``geant4-vmc``が見つかりました。
+それぞれのパッケージ詳細は``info``コマンドを使って確認ました。
+
+``geant4``パッケージが本体です。これをインストールします。
+
+``geant4-data``パッケージはGeant4本体の依存パッケージのひとつなので、直接インストールする必要はありません。
+
+``geant4-vmc``パッケージは今回は必要なさそうなのでスキップしました。
+今後、必要になったときにインストールします。
+
+:::
+
+## アンインストールしたい（``spack uninstall``）
+
+```console
+$ spack uninstall geant4
+$ spack uninstall geant4/pzvk6rx
+
+Do you want to proceed? [y/N] y
+==> Successfully uninstalled geant4@11.1.2%apple-clang@15.0.0~ipo~motif~opengl~qt~tbb+threads~vecgeom~vtk~x11 build_system=cmake build_type=Release cxxstd=17 generator=make patches=2979cb7 arch=darwin-sonoma-skylake/pzvk6rx
+```
+
+``uninstall``コマンドでパッケージをアンインストールできます。
+同じパッケージ名で複数インストールされている場合は、``パッケージ名/ハッシュ値``で指定します。
+確認のプロンプトが表示されるので``y``を入力します。
+削除はあっという間です。
