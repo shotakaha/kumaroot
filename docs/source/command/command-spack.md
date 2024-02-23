@@ -7,15 +7,16 @@ $ spack install スペック名  # パッケージ名のこと
 
 [spack](https://spack.io/)は主にスパコンなどのHPCでパッケージ管理ができるコマンドです。
 コンパイラーを変えたり、オプションを変えたりしたパッケージを、それぞれ独立した環境に構築できます。
-LinuxとmacOSでも利用できます。
+LinuxとmacOSでも利用でき、Homebrewでインストールできます。
+（``gnupg``など他に必要なパッケージがあります。公式ドキュメントの[System Prerequisites](https://spack.readthedocs.io/en/latest/getting_started.html#system-prerequisites)を参照してください）
 
 今回は、Geant4をインストールするためだけに導入しました。
 以下はGeant4を例にコマンドの使い方を確認しています。
 
 :::{note}
 
-コマンドの使い方やオプションは``spack help``もしくは``spack help コマンド名``で確認できるようになっています。
-わざわざ公式ドキュメントなどを確認する必要がなく、とても便利です。
+基本的なコマンドの使い方とオプションは``spack help``もしくは``spack help コマンド名``で確認できるようになっていました。
+より詳細は公式ドキュメントで確認できます。
 
 :::
 
@@ -181,3 +182,32 @@ Do you want to proceed? [y/N] y
 同じパッケージ名で複数インストールされている場合は、``パッケージ名/ハッシュ値``で指定します。
 確認のプロンプトが表示されるので``y``を入力します。
 削除はあっという間です。
+
+## コンパイラーしたい（``spack compilers``）
+
+```console
+$ spack compilers
+==> Available compilers
+-- apple-clang ventura-aarch64 ----------------------------------
+apple-clang@15.0.0
+
+-- gcc ventura-aarch64 ------------------------------------------
+gcc@13.2.0
+```
+
+``compilers``コマンドで利用可能なコンパイラーを確認できます。
+
+```console
+$ spack compiler info apple-clang
+apple-clang@15.0.0:
+	paths:
+		cc = /usr/bin/clang
+		cxx = /usr/bin/clang++
+		f77 = None
+		fc = None
+	modules  = []
+	operating system  = ventura
+```
+
+``compiler info``でコンパイラーの詳細を確認できます。
+コンパイラーの詳細は``~/.spack/darwin/compilers.yaml``にも書いてありました。
