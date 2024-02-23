@@ -7,10 +7,29 @@ $ spack install geant4
 
 公式ドキュメントの[Install Geant4 via a Package Manager](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/#install-geant4-via-a-package-manager)に書いてあるようにパッケージ管理ツールでインストールできるようになっています。
 
-``Homebrew``にはフォームラがないので、[Spack](https://spack.io/)というスパコン向けのパッケージ管理ツールを使います。
+以前はHomebrewにもフォーミュラがあったのですが、いまはなくなってしまいました。
+なので、[Spack](https://spack.io/)というスパコン向けのパッケージ管理ツールを使います。
 ``Spack``は``Homebrew``でインストールできます。
 
-``spack install geant4``すると、関連パッケージ／ツールすべてのコンパイルがはじまるので、それなりに時間がかかります。
+Geant4に必要な関連パッケージすべてのビルドが必要なため、それなりに時間がかかりました。
+
+## 環境変数したい
+
+```console
+$ source /usr/local/Cellar/spack/0.21.1/share/spack/setup-env.fish
+$ spack load geant4
+```
+
+シェルの環境変数を設定します。
+まず、``setup-env.fish``を読み込みSpackを設定します。
+次に``spack load geant4``を実行し、Geant4を設定します。
+
+:::{hint}
+
+``setup-env``はシェルごとに用意されています。
+未設定の場合、``spack load geant4``を実行すれば、どのパスを読み込めばよいか、エラーメッセージで教えてくれます。
+
+:::
 
 ## 依存パッケージ
 
