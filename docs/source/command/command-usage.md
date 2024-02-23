@@ -56,6 +56,7 @@ command-pwgen
 command-rsync
 command-sd
 command-sed
+command-spack
 command-ssh
 command-ssh-keygen
 command-stdout
