@@ -23,13 +23,26 @@ LinuxとmacOSでも利用でき、Homebrewでインストールできます。
 ## インストールしたい（``spack install``）
 
 ```console
+$ spack install パッケージ名
+$ spack install パッケージ名@バージョン
+$ spack install パッケージ名 %gcc@パージョン
+```
+
+```console
 $ spack install geant4
 ```
 
 ``install``コマンドでパッケージをインストールできます。
 基本的にすべての関連パッケージでコンパイル作業が必要なので、時間がかかります。
 
+他にも``@バージョン``でバージョン、``%コンパイラー``でコンパイラーを指定できます。
+
 ## ビルドオプションしたい
+
+```console
+$ spack install パッケージ名 オプション="値"
+$ spack install パッケージ名 +オプション
+```
 
 ```console
 $ spack install geant4 opengl=True
@@ -39,8 +52,6 @@ $ spack install geant4 +opengl
 ``info``コマンドで確認した``Variants``名で、ビルドオプションを追加できます。
 パッケージ名のあとに``オプション名=値``を追加します。
 オプションの値がブーリアン（``True | False``）の場合は``+オプション名``のように書くこともできます。
-
-他にも``@バージョン``でバージョン、``%コンパイラー``でコンパイラーを指定できます。
 
 :::{note}
 
@@ -86,18 +97,33 @@ pzvk6rx geant4@11.1.2~ipo~motif~opengl~qt~tbb+threads~vecgeom~vtk~x11 build_syst
 t26aalv geant4@11.1.2~ipo~motif+opengl~qt~tbb+threads~vecgeom~vtk~x11 build_system=cmake build_type=Release cxxstd=17 generator=make patches=2979cb7
 ```
 
-## パッケージを読み込みたい（``spack load``）
+## パッケージをロードしたい（``spack load``）
 
 ```console
 # Fish
-$ . spack/share/spack/setup-env.fish
+$ source /opt/homebrew/Cellar/spack/0.21.1/share/spack/setup-env.fish
 $ spack load パッケージ名/ハッシュ値
 $ spack load geant4
+
+$ spack unload geant4
 ```
 
-``load``コマンドで、パッケージを
+``load``コマンドで、パッケージをロードできます。
+その時は、シェルごどの設定を有効にする必要があります。
 
+:::{note}
 
+シェル設定をしていない状態で``spack load``すると、エラーが表示されたあと、シェルごとの対処方法を表示してくれます。
+
+```console
+$ spack load geant4
+==> Error: `spack load` requires Spack's shell support.
+
+For fish:
+    source /opt/homebrew/Cellar/spack/0.21.1/share/spack/setup-env.fish
+```
+
+:::
 
 ## パッケージの詳細を確認したい（``spack info``）
 
@@ -184,6 +210,11 @@ geant4-vmc
 :::
 
 ## アンインストールしたい（``spack uninstall``）
+
+```console
+$ spack uninstall パッケージ名
+$ spack uninstall パッケージ名/ハッシュ値
+```
 
 ```console
 $ spack uninstall geant4
