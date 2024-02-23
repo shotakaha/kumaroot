@@ -7,6 +7,8 @@ Geant4も使えるようになりたい
 maxdepth: 1
 ---
 geant4-install
+geant4-build
+geant4-examples
 ```
 
 ## リファレンス
