@@ -8,6 +8,11 @@ Geant4用のディレクトリを作成し、これを``$G4HOME``と呼ぶこと
 ディレクトリ名は任意です。
 僕は``~/repos/g4home/``を作成しました。
 
+
+```{toctree}
+geant4-install-make
+```
+
 ## インストール作業用のディレクトリを作成する
 
 ```console
@@ -111,18 +116,7 @@ $ cmake -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) ../geant4-v
 
 この状態で``ccmake ../geant4-v11.2.1/``すると、Qt5に関するパス設定が追加されていました。
 
-## ビルドする
 
-```console
-$ cd $G4HOME/g4install/build/
-$ make -j8    # プロセッサの数を指定する
-$ make install
-```
-
-``cmake``で``Makefile``を生成できたので、いよいよビルド（``make``）します。
-複数のプロセッサを持ったCPUであれば、``-j``オプションを使うとビルド時間を大幅に短縮できます。
-
-ビルドが終わったら``make install``して、``CMAKE_INSTALL_PREFIX``で指定したディレクトリにGeant4をコピーします。
 
 ## ディレクトリ構成を確認する
 
