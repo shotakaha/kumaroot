@@ -15,9 +15,12 @@ G4Material *Acrylic = nist->FindOrBuildMaterial("G4_PLEXIGLASS");
 
 :::
 
-## カスタムしたい
+## カスタマイズしたい
 
 ```cpp
+// 名称: ポリメタクリル酸メチル樹脂（polymethyl methacrylate)
+// 略称: PMMA
+// 化学式: C5H8O2
 G4NistManager *nist = G4NistManager::Instance();
 G4Element H = nist->FindOrBuildElement("G4_H");
 G4Element C = nist->FindOrBuildElement("G4_C");
@@ -29,6 +32,7 @@ Acrylic->AddElement(H, 8);
 Acrylic->AddElement(O, 2);
 ```
 
+プレキシガラスという呼び方を知らなかったので、自分で作ってみました。
 構成する元素の情報はNISTデータを参照しています。
 
 :::{note}
