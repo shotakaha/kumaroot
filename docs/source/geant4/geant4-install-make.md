@@ -29,9 +29,24 @@ $ ls -1 $G4HOME/g4install/build/
 ```
 
 ```console
-$ ls -1 $G4HOME/g4install/data/
+$ ls -1 $G4HOME/g4install/install/
+bin/
+include/
+lib/
+share/
 ```
 
 ```console
-$ ls -1 $G4HOME/g4install/install/
+$ ls -1 $G4HOME/g4install/data/
+G4ABLA3.3/
+G4EMLOW8.5/
+G4ENSDFSTATE2.3/
+G4INCL1.2/
+G4NDL4.7/
+G4PARTICLEXS4.0/
+G4PII1.3/
+G4SAIDDATA2.0/
+PhotonEvaporation5.7/
+RadioactiveDecay5.6/
+RealSurface2.2/
 ```
