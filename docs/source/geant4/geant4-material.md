@@ -47,4 +47,5 @@ geant4-water
 geant4-air
 geant4-acrylic
 geant4-glass
+geant4-vacuum
 ```
