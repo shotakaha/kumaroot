@@ -1,4 +1,4 @@
-# アクリルを作りたい
+# アクリルを作りたい（``G4_PLEXIGLASS``）
 
 ```cpp
 G4NistManager *nist = G4NistManager::Instance();
