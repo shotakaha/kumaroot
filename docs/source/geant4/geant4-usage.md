@@ -17,4 +17,5 @@ geant4-install
 geant4-build
 geant4-examples
 geant4-runmanager
+geant4-material
 ```

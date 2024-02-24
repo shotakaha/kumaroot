@@ -13,7 +13,7 @@ G4NistManagerを使って、NISTの材料データベースにある元素や化
 利用可能なマテリアル名は[Geant4 Material Database](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html)を参照してください。
 素粒子・原子核実験でよく利用するような材料（``G4_lXe``、``G4_PbWO4``、``G4_STAINLESS-STEEL``、``G4_Galactic``（＝真空））も定義されています。
 
-## 特殊なマテリアルしたい（``G4Material``）
+## カスタマイズしたい（``G4Material`` / ``G4Element``）
 
 ```cpp
 #include "G4Material.hh"
@@ -38,3 +38,13 @@ NISTのデータベースに``G4_Air``があります。
 通常はこちらを使うのがよいと思います。
 
 :::
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-water
+geant4-air
+geant4-acrylic
+geant4-glass
+```
