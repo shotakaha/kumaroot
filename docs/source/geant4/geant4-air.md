@@ -16,7 +16,7 @@ G4int nelements;
 
 G4Element *N = new G4Element("Nitrogen", "N", z=7, a=14.0067*g/mole);
 G4Element *O = new G4Element("Oxygen", "O", z=8, a=15.9994*g/mole);
-Air = new G4Material("Air", density=1.29*g/cm3, nelements=2);
+G4Material *Air = new G4Material("Air", density=1.29*g/cm3, nelements=2);
 Air->AddElement(N, 70.*perCent);
 Air->AddElement(O, 30.*perCent);
 ```

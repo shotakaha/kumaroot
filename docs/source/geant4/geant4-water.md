@@ -7,7 +7,7 @@ G4Material Water = nist->FindOrBuildMaterial("G4_WATER")
 
 ``G4_WATER``でNISTデータにある水を生成できます。
 
-## マテリアルしたい
+## カスタマイズしたい
 
 ```cpp
 G4double a, z, density;
@@ -15,7 +15,7 @@ G4int nelements;
 
 G4Element *H = new G4Element("Hydrogen", "H", z=1, a=1.00794*g/mole);
 G4Element *O = new G4Element("Oxygen", "O", z=8, a=15.9994*g/mole);
-Water = new G4Material("Water", density=1.0*g/cm3, nelements=2);
+G4Material *Water = new G4Material("Water", density=1.0*g/cm3, nelements=2);
 Water->AddElement(H, 2);
 Water->AddElement(O, 1);
 ```
