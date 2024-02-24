@@ -11,6 +11,7 @@ G4Element *O = nistManager->FindOrBuildElement("G4_O")
 G4NistManagerを使って、NISTの材料データベースにある元素や化合物などのマテリアルを作成できます。
 
 利用可能なマテリアル名は[Geant4 Material Database](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html)を参照してください。
+素粒子・原子核実験でよく利用するような材料（``G4_lXe``、``G4_PbWO4``、``G4_STAINLESS-STEEL``、``G4_Galactic``（＝真空））も定義されています。
 
 ## 特殊なマテリアルしたい（``G4Material``）
 
