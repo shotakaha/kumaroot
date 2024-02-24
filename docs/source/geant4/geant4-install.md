@@ -10,6 +10,7 @@ Geant4用のディレクトリを作成し、これを``$G4HOME``と呼ぶこと
 
 
 ```{toctree}
+geant4-install-qt
 geant4-install-make
 ```
 
@@ -96,25 +97,7 @@ Geant4.10からデフォルトのビルドツールが``cmake``になりまし�
 | ``GEANT4_USE_RAYTRACER_X11`` | ``ON`` | ``OFF`` |
 | ``GEANT4_USE_SYSTEM_EXPAT`` | ``ON`` | ``OFF``|
 
-### ``GEANT4_USE_QT``を有効にする
 
-```console
-$ brew install qt@5
-```
-
-可視化ツールはQt（キュート）を使うと便利です。
-Homebrewを使ってQt5をあらかじめインストールしておきます。
-（最新版はQt6なので``@5``を指定する必要があります）
-
-``ccmake``の段階で``GEANT4_USE_QT``の値を``ON``にすると、生成時（``[g] Generate``）にエラーとなりました。
-追加で設定可能になる``QT_DIR``を``/usr/local/opt/qt@5``に設定してもエラーが解消されませんでした。
-なので、ここは``cmake``をたたいて有効にしました。
-
-```console
-$ cmake -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) ../geant4-v11.2.1/
-```
-
-この状態で``ccmake ../geant4-v11.2.1/``すると、Qt5に関するパス設定が追加されていました。
 
 
 
