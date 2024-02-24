@@ -3,14 +3,15 @@
 ```cpp
 #include "G4Box.hh"
 #include "G4LogicalVolume.hh"
+#include "G4PhysicalVolume.hh"
 #include "G4NistManager"
 
 
 G4Material *Air = // G4_Airを取得
 
-G4Double pX = 10.*meter;
-G4Double pY = 10.*meter;
-G4Double pZ = 10.*meter;
+G4Double pX = 10.*m;
+G4Double pY = 10.*m;
+G4Double pZ = 10.*m;
 G4Box *world = new G4Box("World", pX, pY, pZ)
 
 G4LogicalVolume *hall = new G4LogicalVolume(world, Air, "World", 0, 0)
