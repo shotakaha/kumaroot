@@ -21,3 +21,17 @@ $ make install
 この場合は、管理者パスワードの入力が必要かもしれません。
 
 :::
+
+## ディレクトリ構成
+
+```console
+$ ls -1 $G4HOME/g4install/build/
+```
+
+```console
+$ ls -1 $G4HOME/g4install/data/
+```
+
+```console
+$ ls -1 $G4HOME/g4install/install/
+```

@@ -33,3 +33,17 @@ Geant4.10からデフォルトのビルドツールが``cmake``になりまし�
 そのしきたりにしたがい、ここでの作業はすべて、事前に作成した``build``ディレクトリの中で実行します。
 
 :::
+
+## ディレクトリ構成
+
+```console
+$ ls -1 $G4HOME/g4install/build/
+```
+
+```console
+$ ls -1 $G4HOME/g4install/data/
+```
+
+```console
+$ ls -1 $G4HOME/g4install/install/
+```

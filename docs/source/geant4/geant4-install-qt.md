@@ -30,3 +30,17 @@ $ cmake -DMAKE_INSTALL_PREFIX=$G4HOME/g4install/install -DGEANT4_INSTALL_DATA=ON
 ```
 
 :::
+
+## ディレクトリ構成
+
+```console
+$ ls -1 $G4HOME/g4install/build/
+```
+
+```console
+$ ls -1 $G4HOME/g4install/data/
+```
+
+```console
+$ ls -1 $G4HOME/g4install/install/
+```
