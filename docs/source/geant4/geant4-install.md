@@ -4,79 +4,40 @@
 $ mkdir ~/repos/g4home  # --> $G4HOME
 ```
 
-Geant4用のディレクトリを作成し、これを``$G4HOME``と呼ぶことにします。
-ディレクトリ名は任意です。
-僕は``~/repos/g4home/``を作成しました。
+Geant4は自分でコンパイルしてインストールする必要があります。
+講習会のインストール手順を参考にすると、作業用のディレクトリを作成したほうがよいそうです。
+その方式に倣って僕は``~/repos/g4home/``を作成しました。
+
+ディレクトリ名は任意なので、このページでは、このディレクトリを便宜上``$G4HOME``と呼ぶことにします
+（環境変数を設定したわけではありません）。
+各人がインストールする環境に合わせて、適宜置き換えて実行してください。
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
+geant4-install-mkdir
 geant4-install-download
 geant4-install-ccmake
 geant4-install-qt
 geant4-install-make
 ```
 
-## インストール作業用のディレクトリを作成する
-
-```console
-$ mkdir $G4HOME/g4install
-$ mkdir $G4HOME/g4install/install
-$ mkdir $G4HOME/g4install/build
-$ mkdir $G4HOME/g4install/data
-```
-
-インストール作業用のディレクトリを作成します。
-ここでは``$G4HOME/g4install``としました。
-さらにその中に``install``、``build``、``data``の3種類のディレクトリを作成します。
-
-ここでのディレクトリ構成は、次のようになっているはずです。
-
-```console
-$ ls -1 $G4HOME/g4install
-build/
-data/
-install/
-```
-
-
-
-## ディレクトリ構成を確認する
-
-```console
-$ ls -1 $G4HOME/g4install/install/
-bin/
-include/
-lib/
-share/
-
-$ ls -1 $G4HOME/g4install/data/
-G4ABLA3.3/
-G4EMLOW8.5/
-G4ENSDFSTATE2.3/
-G4INCL1.2/
-G4NDL4.7/
-G4PARTICLEXS4.0/
-G4PII1.3/
-G4SAIDDATA2.0/
-PhotonEvaporation5.7/
-RadioactiveDecay5.6/
-RealSurface2.2/
-```
-
-## シェル変数を設定する
+## 環境変数を設定する
 
 ```console
 $ source $G4HOME/g4install/install/geant4.sh
 ```
 
-Geant4のアプリケーションを作るには、Geant4に関する環境変数を適切に設定する必要があります。
-インストールしたディレクトリにあるシェルスクリプト（``bin/geant4.sh``）を読み込むと設定できます。
+Geant4のアプリケーションを作るには、Geant4に関する環境変数の設定が必要です。
+インストール先（``$G4HOME/g4install/install``）の中に、設定スクリプト（``bin/geant4.sh``）が用意されています。
+これを読み込んでからアプリケーションをコンパイルしてください。
+
+いつも使うような場合は、シェルの起動スクリプトに書いておくとよいです。
 
 :::{note}
 
-Bashを使っていることが前提のようです。
+BashとCsh用の設定スクリプトが用意されています。
 Fish用の設定スクリプトが欲しい。
 
 :::
