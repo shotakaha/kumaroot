@@ -10,6 +10,7 @@ Geant4用のディレクトリを作成し、これを``$G4HOME``と呼ぶこと
 
 
 ```{toctree}
+geant4-install-ccmake
 geant4-install-qt
 geant4-install-make
 ```
@@ -66,40 +67,6 @@ geant4-v11.2.1/       # 展開したソースコード
 geant4-v11.2.1.zip    # ダウンロードしたソースコード
 install/
 ```
-
-## ビルドの準備をする（1）
-
-```console
-$ cd $G4HOME/g4install/
-$ cd build/
-$ ccmake ../geant4-v11.2.1/
-```
-
-Geant4.10からデフォルトのビルドツールが``cmake``になりました。
-``cmake``には「out-of-source」というコンセプトがあるそうで、
-ソースコード本体とビルドしたファイルたちは別々のディレクトリで管理するのがしきたりのようです。
-
-そのしきたりにしたがい、事前に作成した``build``ディレクトリで作業をします。
-ビルド用ディレクトリから``CMakeLists.txt``があるソースコードに向けて``ccmake``します。
-
-``ccmake``は``cmake``のGUI版みたいなもので、実行するとターミナルにオプションの操作プロンプトが表示されます。
-必要なオプションを有効にして、設定ファイルを生成（``[g] Generate``）します。
-
-ここではひとまず以下の項目の設定しました。
-
-| オプション名 | 設定値 | デフォルト値 |
-|---|---|---|
-| ``CMAKE_INSTALL_PREFIX`` | ``$G4HOME/g4install/install`` | ``/usr/local/`` |
-| ``GEANT4_BUILD_MULTITHREADED`` | ``ON`` | ``ON`` |
-| ``GEANT4_INSTALL_DATA`` | ``ON`` | ``OFF`` |
-| ``GEANT4_INSTALL_DATADIR`` | ``$G4HOME/g4install/data`` | |
-| ``GEANT4_USE_OPENGL_X11``  | ``ON`` | ``OFF`` |
-| ``GEANT4_USE_RAYTRACER_X11`` | ``ON`` | ``OFF`` |
-| ``GEANT4_USE_SYSTEM_EXPAT`` | ``ON`` | ``OFF``|
-
-
-
-
 
 ## ディレクトリ構成を確認する
 

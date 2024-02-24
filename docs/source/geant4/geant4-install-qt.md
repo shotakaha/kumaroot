@@ -19,3 +19,14 @@ $ ccmake ../geant4-v11.2.1/
 この段階で、あらためて``ccmake ../geant4-v11.2.1/``で確認すると、
 Qt5に関するパス設定が追加されていました。
 （あとでスクショを掲載する）
+
+:::{note}
+
+ここまでの設定は``cmake``を使うと1回で実行できます。
+前ページのオプション設定とQtを有効にする場合は、次のように入力します
+
+```console
+$ cmake -DMAKE_INSTALL_PREFIX=$G4HOME/g4install/install -DGEANT4_INSTALL_DATA=ON -DGEANT4_INSTALL_DATADIR=$G4HOME/g4install/data -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_RAYTRACER_X11=ON -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) ../geant4-v11.2.1/
+```
+
+:::
