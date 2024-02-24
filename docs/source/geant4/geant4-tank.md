@@ -18,7 +18,7 @@ G4Tubs *STank = new G4Tubs(
 // ロジカルボリュームの作成
 G4LogicalVolume *LVTank = new G4LogicalVolume(
     STank,    // G4VSolid
-    Water,    // G4Material: 「水（Water）」はすでに作ってある
+    Water,    // G4Material: 「水（Water）」は先に作っておく
     "Tank",   // G4String
 )
 
