@@ -104,15 +104,15 @@ G4Material *Bone = nist->FindOrBuildMaterial("G4_BONE_COMPACT_ICRU");  // Shape2
 
 ```cpp
 // Size of the world
-G4double worldXY = 1.2*m;
-G4double worldZ = 1.2*m;
+G4double worldXY = 25*cm;
+G4double worldZ = 50*cm;
 
 // 形状
 auto SWorld = new G4Box(
     "World",        // its name
-    worldXY * 0.5,  // half x
-    worldXY * 0.5,  // half y
-    worldZ * 0.5,   // half z
+    0.5 * worldXY,  // half x
+    0.5 * worldXY,  // half y
+    0.5 * worldZ,   // half z
 )
 
 // ロジカルボリューム
@@ -124,9 +124,13 @@ auto LVWorld = new G4LogicalVolume(
 
 // 物理ボリューム
 G4boolean checkOverlaps = true
+
+G4Transform3D transform = G4Transform3D(
+    G4RotationMatrix(),    // no rotation
+    G4ThreeVector()        // at (0, 0, 0)
+);
 auto PVWorld = new G4PVPlacement(
-    nullptr,          // no rotation,
-    G4ThreeVector(),  // at (0, 0, 0)
+    transform,
     LVWorld,       // its logical volume
     "World",          // its name
     nullptr,          // its mother volume
@@ -134,8 +138,196 @@ auto PVWorld = new G4PVPlacement(
     0,                // copy number
     checkOverlaps     // check overlaps
 );
+
+return PVWorld;
 ```
 
 ``World``は実験室の部屋そのものみたいなものです。
 この中に実験装置などを子ボリューム（daughter volume）として配置します。
 すべてのボリュームの親に相当するため、親ボリューム（mother volume）は持ちません。
+
+まず、``G4Box``を使って実験室の大きさを指定します。
+長さ部分の引数には、実際の長さの半分の値を指定します。
+これは、``G4Box``の中心を原点としてオブジェクトが作成されるためです。
+
+次に``G4LogicalVolume``で実験室に空気を詰めます。
+そして``G4PVPlacement``で実験室を配置します。
+ここでは原点に配置しています。
+
+### Envelopeの定義
+
+```cpp
+
+G4double envelopeXY = 20*cm
+G4double envelopeZ = 30*cm
+
+auto SEnvelope = new G4Box(
+    "Envelope",
+    0.5 * envelopeXY,
+    0.5 * envelopeXY,
+    0.5 * envelopeZ,
+);
+
+auto LVEnvelope = new G4LogicalVolume(
+    SEnvelope,
+    Water,
+    "Envelope"
+);
+
+G4Transform3D transform = G4Transform3D(
+    G4RotationMatrix(),    // no rotation
+    G4ThreeVector()        // at (0, 0, 0)
+);
+
+new G4PVPlacement(
+    transform,
+    LVEnvelope,        // its logical volume
+    "Envelope",        // its name
+    LVWorld,           // its mother volume (logical volume)
+    false,             // no boolean operation
+    0,                 // copy number
+    checkOverlaps
+);
+```
+
+ビームを照射するエリアを定義します。
+実験室と同じように``G4Box``で直方体の容器（``Envelope``）を作成し、
+そこに水を満たし、実験室の原点に揃えて配置してあります。
+
+### Shape1の定義
+
+```cpp
+// 円錐状のオブジェクト
+auto SShape1 = G4Cons(
+    "Shape1",
+    ...
+)
+
+auto LVShape1 = new G4LogicalVolume(
+    SShape1,
+    Tissue,
+    "Shape1",
+);
+
+G4ThreeVector position = G4ThreeVector(0, 2*cm, -7*cm);
+G4RotationMatrix rotation = G4RotationMatrix();
+G4Transform3D transform = G4Transform3D(rotation, position)
+new G4PVPlacement(
+    transform,
+    LVShape1,
+    "Shape1",
+    LVEnvelope,
+    false,
+    0,
+    checkOverlaps
+);
+```
+
+``G4Cons``で作成された円錐状のオブジェクトが、水の入った容器に中に配置されています。
+
+### Shape2の定義
+
+```cpp
+// 台形柱のオブジェクト
+auto SShape2 = new G4Trd(
+    "Shape2",
+    ...
+);
+
+auto LVShape2 = new G4LogicalVolume(
+    SShape2,
+    Bone,
+    "Shape2",
+)
+
+G4RotationMatix rotation = G4RotationMatix();
+G4ThreeVector position = G4ThreeVector(0, -1*cm, 7*cm);
+G4Transform3D transform = G4Transform3D(rotation, position);
+new G4PVPlacement(
+    transform,
+    LVShape2,
+    "Shape2",
+    LVEnvelope,
+    false,
+    0,
+    checkOverlaps
+);
+```
+
+``G4Trd``で作成された台形柱状のオブジェクトが、水の入った容器の中に配置されています。
+
+## 物理モデル
+
+```cpp
+//////////////////////////////////////////////////
+// exampleB1.cc
+//////////////////////////////////////////////////
+#include "QBBC.hh"
+
+G4VModularPhysicsList *physicsList = new QBBC;
+runManager->SetUserInitialization(physicsList)
+```
+
+``QBBC``というpre-defined packageを使っています。
+
+## ユーザーアクション
+
+```cpp
+//////////////////////////////////////////////////
+// exampleB1.cc
+//////////////////////////////////////////////////
+#include "ActionInitialization.hh"
+
+runManager->SetUserInitialization(new ActionInitialization());
+```
+
+ランマネージャーにユーザーアクションを追加します。
+どのようなアクションが設定されるかは``ActionInitialization.hh/.cc``で確認します。
+
+```cpp
+//////////////////////////////////////////////////
+// include/ActionInitialization.hh
+//////////////////////////////////////////////////
+#ifndef B1ActionInitialization_h
+#define B1ActionInitialization_h 1
+
+#include "G4VUserActionInitialization.hh"
+
+namespace B1 {
+    class ActionInitialization : public G4VUserActionInitialization
+    {
+        public:
+    }
+}
+
+#endif
+```
+
+```cpp
+//////////////////////////////////////////////////
+// src/ActionInitialization.cc
+//////////////////////////////////////////////////
+
+#include "ActionInitialization.hh"
+#include "PrimaryGeneratorAction.hh"
+#include "RunAction.hh"
+#include "EventAction.hh"
+#include "SteppingAction.hh"
+
+void ActionInitialization::Build() const
+{
+    auto primaryGeneragorAction = new PrimaryGeneratorAction;
+    setUserAction(primaryGeneratorAction);
+
+    auto runAction = new RunAction;
+    setUserAction(runAction);
+
+    auto eventAction = new EventAction(runAction);
+    setUserAction(eventAction);
+
+    auto steppingAction = new SteppingAction(eventAction);
+    setUserAction(steppingAction);
+}
+```
+
+``ActionInitialization::Build``の中で、分割されたユーザー設定が順番に読み込まれていました。
