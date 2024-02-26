@@ -69,6 +69,11 @@ namespace B1
 // src/DetectorConstruction.cc
 //////////////////////////////////////////////////
 #include "DetectorConstruction.hh"
+
+#include "G4NistManager.hh"
+#include "G4Box.hh"
+#include "G4LogicalVolume.hh"
+#include "G4PVPlacement.hh"
 ```
 
 測定器の構成を確認しました。
@@ -76,19 +81,33 @@ namespace B1
 物理ボリュームが定義されていました。
 それぞれの内容を順番に確認してみます。
 
+オブジェクトの変数名は、分かりやすくなるように変更しました。
+
+### マテリアルの定義
+
+```cpp
+#include "G4NistManager.hh"
+G4NistManager *nist = G4NistManager::Instance();
+G4Material *Air = nist->FindOrBuildMaterial("G4_AIR");        // World
+G4Material *Water = nist->FindOrBuildMaterial("G4_WATER");    // Envelope
+G4Material *Tissue = nist->FindOrBuildMaterial("G4_A-150_TISSUE");     // Shape1
+G4Material *Bone = nist->FindOrBuildMaterial("G4_BONE_COMPACT_ICRU");  // Shape2
+```
+
+使用さされているテリアルを集めてみました。
+マテリアルの変数名は分かりやすい名前に変更しました。
+
+すべてのマテリアルが``G4NistManager``を使ってNIST材料データベースを参照していました。
+それぞれのマテリアルの詳細は公式ユーザーズガイドの[Geant4 Material Database](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html)で確認できます。
+
 ### Worldの定義
 
 ```cpp
-// Get NIST material manager
-G4NistManager *nist = G4NistManager::Instance()
-G4Material *Water = nist->FindOrBuildMaterial("G4_WATER")
-G4Material *Air = nist->FindOrBuildMaterial("G4_AIR")
-
 // Size of the world
 G4double worldXY = 1.2*m;
 G4double worldZ = 1.2*m;
 
-//
+// 形状
 auto SWorld = new G4Box(
     "World",        // its name
     worldXY * 0.5,  // half x
@@ -96,12 +115,14 @@ auto SWorld = new G4Box(
     worldZ * 0.5,   // half z
 )
 
+// ロジカルボリューム
 auto LVWorld = new G4LogicalVolume(
     SWorld, // its solid
     Air, // its material
     "World",   // its name
 );
 
+// 物理ボリューム
 G4boolean checkOverlaps = true
 auto PVWorld = new G4PVPlacement(
     nullptr,          // no rotation,
@@ -115,3 +136,6 @@ auto PVWorld = new G4PVPlacement(
 );
 ```
 
+``World``は実験室の部屋そのものみたいなものです。
+この中に実験装置などを子ボリューム（daughter volume）として配置します。
+すべてのボリュームの親に相当するため、親ボリューム（mother volume）は持ちません。
