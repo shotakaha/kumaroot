@@ -13,16 +13,26 @@ $ ./exampleB1 run2.mac
 ``examples/basic/B1/``の中にビルド用ディレクトリを（``build``）を作成します。
 ビルド用ディレクトリの中に移動して、``cmake``で実行ファイルをビルドします。
 
-## ランマネージャーの作成
+## マネージャーの定義
 
 ```cpp
 //////////////////////////////////////////////////
 // exampleB1.cc
 //////////////////////////////////////////////////
+#include "G4UIExecutive.hh"
 #include "G4RunManagerFactory.hh"
+#include "G4VisExecutive.hh"
+#include "G4UImanager.hh"
 
+G4UIExecutive *ui = new G4UIExecutive(argc, argv);
 auto *runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default)
+G4VisManager *visManager = new G4VisExecutive;
+G4UImanager *uiManager = G4UImanager::GetUIpointer();
 ```
+
+``exampleB1.cc``で使われているマネージャーたちを集めてみました。
+4種類のマネージャーがいますが、ランの管理人が``G4RunManagerFactory``クラスで、その他はビジュアライズ関係の管理人たちです。
+
 
 ## 測定器の作成
 
