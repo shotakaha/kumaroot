@@ -19,3 +19,20 @@ geant4-examples
 geant4-runmanager
 geant4-material
 ```
+
+## 測定器したい
+
+- ``G4VUserDetectorConstruction``
+
+## 相互作用したい
+
+- ``G4VUserPhysicsList``
+
+## 粒子したい
+
+- ``G4VUserPrimaryGeneratorAction``
+- ``G4UserRunAction``
+- ``G4UserEventAction``
+- ``G4UserTrackingAction``
+- ``G4UserSteppingAction``
+- ``G4UserStackingAction``
