@@ -1,4 +1,4 @@
-# パッケージ管理したい（`brew`）
+# パッケージ管理したい（``brew``）
 
 ```console
 $ brew install フォーミュラ名
@@ -6,6 +6,31 @@ $ brew update
 $ brew outdated
 $ brew upgrade
 ```
+
+## パスを知りたい（``brew --prefix``）
+
+```console
+$ brew --prefix フォーミュラ名
+$ brew --prefix fish
+$ brew --prefix qt@5
+```
+
+``--prefix``オプションで、フォーミュラがインストールされたパスを確認できます。
+
+macOS ARM（Apple Silicon）の場合は``/opt/homebrew/``の下、
+macOS Intelの場合は``/usr/local/``の下、
+Linuxの場合は``/home/linuxbrew/.linuxbrew/``に
+フォーミュラがインストールされています。
+
+```bash
+cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
+# ARMの場合: cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/qt@5
+# Intelの場合: cmake -DCMAKE_PREFIX_PATH=/usr/local/qt@5
+```
+
+単体で使うことはほぼないかもしれませんが、シェルスクリプトを組み合わせて使うと便利なときがあります。
+上のサンプルでは、``cmake``でビルドするときにリンクする``qt@5``のパスを追加しています。
+環境の違いを気にせずに同じコマンドを使いまわすことができます。
 
 ## パッケージを探したい（``brew search``）
 
