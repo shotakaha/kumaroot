@@ -1,4 +1,4 @@
-# インストールしたい（``geant4``）
+# インストールしたい（``spack install geant4``）
 
 ```console
 $ brew install spack
