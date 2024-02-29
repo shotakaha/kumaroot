@@ -1,9 +1,9 @@
 # 対話モードしたい（``G4UImanager``）
 
 ```cpp
-G4UIExecutive *ui = new G4UIExecutive;
-auto UImanager = G4UImanager::GetUIpointer();
-UImanager->ApplyCommand("/control/execute vis.mac");
-ui->SessionStart();
-delete ui;
+G4UImanager *ui = G4UImanager::GetUIpointer();
+ui->ApplyCommand("/control/execute vis.mac");
 ```
+
+``G4UImanager``は対話モードの管理者です。
+コマンド指示ができます。
