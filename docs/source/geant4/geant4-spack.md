@@ -5,13 +5,13 @@ $ brew install spack
 $ spack install geant4
 ```
 
-公式ドキュメントの[Install Geant4 via a Package Manager](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/#install-geant4-via-a-package-manager)に書いてあるようにパッケージ管理ツールでインストールできるようになっています。
+公式ドキュメントに[Install Geant4 via a Package Manager](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/#install-geant4-via-a-package-manager)と書いてあったので、試してみました。
 
-以前はHomebrewにもフォーミュラがあったのですが、いまはなくなってしまいました。
-なので、[Spack](https://spack.io/)というスパコン向けのパッケージ管理ツールを使います。
+Homebrewではなく[Spack](https://spack.io/)というスパコン向けのパッケージ管理ツールを使うようです。
 ``Spack``は``Homebrew``でインストールできます。
 
 Geant4に必要な関連パッケージすべてのビルドが必要なため、それなりに時間がかかりました。
+また、どう頑張っても可視化ツール（OpenGLやQt）の設定がうまくできませんでした。
 
 ## 環境変数したい
 

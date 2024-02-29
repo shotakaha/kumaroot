@@ -44,6 +44,7 @@ geant4-install-download
 geant4-install-ccmake
 geant4-install-cmake
 geant4-install-make
+geant4-spack
 ```
 
 ## 環境変数を設定する
