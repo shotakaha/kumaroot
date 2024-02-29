@@ -1,4 +1,4 @@
-# 対話モードしたい（``>Idle``）
+# 対話モードしたい（``G4UImanager``）
 
 ```cpp
 G4UIExecutive *ui = new G4UIExecutive;
