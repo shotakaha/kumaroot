@@ -1,88 +1,67 @@
 # インストールしたい（``geant4``）
 
 ```console
-$ brew install spack
-$ spack install geant4
+// 外部ツールを準備する
+$ brew install --cask cmake
+$ brew install --cask xquartz
+$ brew install qt@5
+
+// 作業ディレクトリを準備する
+$ mkdir ~/repos/g4home  # --> $G4HOME
+$ mkdir ~/repos/g4home/g4install/
+$ mkdir ~/repost/g4home/g4install/build/
+$ mkdir ~/repost/g4home/g4install/install/
+$ mkdir ~/repost/g4home/g4install/data/
+
+// ソースコードを準備する
+$ cd ~/repos/g4home/g4install/
+$ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
+$ unzip geant4-v11.2.1.zip
+
+// 作業用ディレクトリでビルド準備する
+$ cd ~/repost/g4home/g4install/build
+$ cmake -DMAKE_INSTALL_PREFIX=$G4HOME/g4install/install -DGEANT4_INSTALL_DATA=ON -DGEANT4_INSTALL_DATADIR=$G4HOME/g4install/data -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_RAYTRACER_X11=ON -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) ../geant4-v11.2.1/
+
+// ビルドする
+$ make -j8
+$ make install
+
+// ディレクトリ構成を確認
+$ tree ~/repos/g4home -L 3
 ```
 
-公式ドキュメントの[Install Geant4 via a Package Manager](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/#install-geant4-via-a-package-manager)に書いてあるようにパッケージ管理ツールでインストールできるようになっています。
+Geant4は自分でビルドしてインストールする必要があります。
+インストール手順にはいくつかステップがあるので、それぞれを分割して整理しました。
+各ステップを確認しながら順番に作業してください。
 
-以前はHomebrewにもフォーミュラがあったのですが、いまはなくなってしまいました。
-なので、[Spack](https://spack.io/)というスパコン向けのパッケージ管理ツールを使います。
-``Spack``は``Homebrew``でインストールできます。
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-install-brew
+geant4-install-mkdir
+geant4-install-download
+geant4-install-ccmake
+geant4-install-cmake
+geant4-install-make
+geant4-spack
+```
 
-Geant4に必要な関連パッケージすべてのビルドが必要なため、それなりに時間がかかりました。
-
-## 環境変数したい
+## 環境変数を設定する
 
 ```console
-$ source /usr/local/Cellar/spack/0.21.1/share/spack/setup-env.fish
-$ spack load geant4
+$ source $G4HOME/g4install/install/geant4.sh
 ```
 
-シェルの環境変数を設定します。
-まず、``setup-env.fish``を読み込みSpackを設定します。
-次に``spack load geant4``を実行し、Geant4を設定します。
+Geant4のアプリケーションを作るには、Geant4に関する環境変数の設定が必要です。
+インストール先（``$G4HOME/g4install/install``）の中に、設定スクリプト（``bin/geant4.sh``）が用意されています。
+これを読み込んでからアプリケーションをコンパイルしてください。
 
-:::{hint}
+いつも使うような場合は、シェルの起動スクリプトに書いておくとよいです。
 
-``setup-env``はシェルごとに用意されています。
-未設定の場合、``spack load geant4``を実行すれば、どのパスを読み込めばよいか、エラーメッセージで教えてくれます。
+:::{note}
+
+BashとCsh用の設定スクリプトが用意されています。
+Fish用の設定スクリプトが欲しい。
 
 :::
-
-## 依存パッケージ
-
-```console
-$ spack spec geant4
-Input spec
---------------------------------
- -   geant4
-
-Concretized
---------------------------------
- -   geant4@11.1.2
- -       ^clhep@2.4.6.4
- -       ^cmake@3.27.7
- -           ^curl@8.4.0
- -               ^nghttp2@1.57.0
- -               ^pkgconf@1.9.5
- -           ^ncurses@6.4
- -       ^expat@2.5.0
- -       ^geant4-data@11.1.0
- -           ^g4abla@3.1
- -           ^g4emlow@8.2
- -           ^g4ensdfstate@2.3
- -           ^g4incl@1.0
- -           ^g4ndl@4.7
- -           ^g4particlexs@4.0
- -           ^g4photonevaporation@5.7
- -           ^g4pii@1.3
- -           ^g4radioactivedecay@5.6
- -           ^g4realsurface@2.2
- -           ^g4saiddata@2.0
- -       ^gmake@4.4.1
- -       ^xerces-c@3.2.4
- -       ^zlib-ng@2.1.4
-```
-
-``spack info``コマンドで関係するパッケージや``variant``を確認できます。
-また、``spack spec``コマンドでインストールされるパッケージ一覧を確認できます（少し時間がかかりました）。
-
-``geant4-data``もインストールされることが確認できました。
-過去に手動インストールしたときは、数種類のデータファイルを、指定されたパスに配置してからコンパイルした覚えがあります。
-かなり簡素化されていることに感激しました。
-
-## 利用可能なバージョン
-
-```console
-$ spack versions geant4
-==> Safe versions (already checksummed):
-  11.1.2  11.1.0  11.0.3  11.0.1  10.7.4  10.7.2  10.7.0  10.6.2  10.6.0  10.4.3  10.3.3
-  11.1.1  11.0.4  11.0.2  11.0.0  10.7.3  10.7.1  10.6.3  10.6.1  10.5.1  10.4.0
-==> Remote versions (not yet checksummed):
-  11.2.1  11.2.0.beta  11.2.0  11.1.3  11.1.0.beta  11.0.0.beta
-```
-
-``spack versions``コマンドで利用できるバージョンを確認できます。
-チェックサムが確認済みの``Safe versions``と、まだ確認できてない``Remote versions``があります。
