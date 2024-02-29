@@ -1,16 +1,38 @@
 # インストールしたい（``geant4``）
 
 ```console
+// 外部ツールを準備する
+$ brew install --cask cmake
+$ brew install --cask xquartz
+$ brew install qt@5
+
+// 作業ディレクトリを準備する
 $ mkdir ~/repos/g4home  # --> $G4HOME
+$ mkdir ~/repos/g4home/g4install/
+$ mkdir ~/repost/g4home/g4install/build/
+$ mkdir ~/repost/g4home/g4install/install/
+$ mkdir ~/repost/g4home/g4install/data/
+
+// ソースコードを準備する
+$ cd ~/repos/g4home/g4install/
+$ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
+$ unzip geant4-v11.2.1.zip
+
+// 作業用ディレクトリでビルド準備する
+$ cd ~/repost/g4home/g4install/build
+$ cmake -DMAKE_INSTALL_PREFIX=$G4HOME/g4install/install -DGEANT4_INSTALL_DATA=ON -DGEANT4_INSTALL_DATADIR=$G4HOME/g4install/data -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_RAYTRACER_X11=ON -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) ../geant4-v11.2.1/
+
+// ビルドする
+$ make -j8
+$ make install
+
+// ディレクトリ構成を確認
+$ tree ~/repos/g4home -L 3
 ```
 
 Geant4は自分でコンパイルしてインストールする必要があります。
-講習会のインストール手順を参考にすると、作業用のディレクトリを作成したほうがよいそうです。
-その方式に倣って僕は``~/repos/g4home/``を作成しました。
 
-ディレクトリ名は任意なので、このページでは、このディレクトリを便宜上``$G4HOME``と呼ぶことにします
-（環境変数を設定したわけではありません）。
-各人がインストールする環境に合わせて、適宜置き換えて実行してください。
+
 
 インストール手順のステップがいくつかあるので、それぞれ分割して整理しました。
 各ステップを確認しながら順番に作業してください。
@@ -19,10 +41,11 @@ Geant4は自分でコンパイルしてインストールする必要があり�
 ---
 maxdepth: 1
 ---
+geant4-install-brew
 geant4-install-mkdir
 geant4-install-download
 geant4-install-ccmake
-geant4-install-qt
+geant4-install-cmake
 geant4-install-make
 ```
 
