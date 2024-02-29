@@ -17,7 +17,24 @@ geant4-install
 geant4-build
 geant4-examples
 geant4-runmanager
+
+```
+
+## 物質したい
+
+```{toctree}
+---
+maxdepth: 1
+---
 geant4-material
+geant4-element
+geant4-water
+geant4-air
+geant4-acrylic
+geant4-vacuum
+geant4-glass
+geant4-petroleum
+
 ```
 
 ## 測定器したい
