@@ -2,7 +2,7 @@
 
 ```cpp
 G4NistManager *nist = G4NistManager::Instance()
-G4Material Air = nist->FindOrBuildMaterial("G4_Galactic")
+G4Material *Vacuum = nist->FindOrBuildMaterial("G4_Galactic")
 ```
 
 ``G4_Galactic``で真空（らしき状態）を生成できます。
