@@ -9,20 +9,31 @@
 宇宙線測定のアウトリーチ活動を進めるにつれて、簡単でよいので測定器シミュレーションができたらもっと楽しいだろうなと思い、使い方の理解＆整理に再挑戦してみます。
 ここでは、Geant4日本グループが公開している[初心者講習会資料](https://wiki.kek.jp/display/geant4/Tutorial+Notes+for+Novice+Users)を参考にしています。
 
+## インストール
+
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 geant4-install
+geant4-spack
+```
+
+## サンプルを実行
+
+```{toctree}
 geant4-build
 geant4-examples
 ```
 
-## 実験したい
+## 実験の基本
 
 ```{toctree}
 geant4-runmanager
 geant4-uimanager
+geant4-detectorconstruction
+geant4-physicslist
+geant4-actioninitialization
 ```
 
 ## 物質したい
@@ -48,7 +59,6 @@ geant4-petroleum
 ---
 maxdepth: 1
 ---
-geant4-detectorconstruction
 geant4-volume
 geant4-world
 geant4-tank
@@ -57,18 +67,7 @@ geant4-pmt
 
 ## 相互作用したい
 
-```{toctree}
----
-maxdepth: 1
----
-geant4-physicslist
-```
-
 ## 粒子したい
-
-```{toctree}
-geant4-actioninitialization
-```
 
 - ``G4VUserPrimaryGeneratorAction``
 - ``G4UserRunAction``
