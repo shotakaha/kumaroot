@@ -2,10 +2,19 @@
 
 ```cpp
 G4NistManager *nist = G4NistManager::Instance()
-G4Material Water = nist->FindOrBuildMaterial("G4_WATER")
+G4Material *Water = nist->FindOrBuildMaterial("G4_WATER")
 ```
 
 ``G4_WATER``でNISTデータにある水を生成できます。
+
+## 水蒸気したい（``GA_WATER_VAPOR``）
+
+```cpp
+G4Material *WaterVapor = nist->FindOrBuildMaterial("G4_WATER")
+```
+
+``G4_WATER_VAPOR``で水蒸気を生成できます。
+密度が ``0.000756182*g/cm3``に設定された水です。
 
 ## カスタマイズしたい
 

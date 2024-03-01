@@ -14,12 +14,18 @@ G4Material Air = nist->FindOrBuildMaterial("G4_AIR")
 G4double a, z, density;
 G4int nelements;
 
-G4Element *N = new G4Element("Nitrogen", "N", z=7, a=14.0067*g/mole);
-G4Element *O = new G4Element("Oxygen", "O", z=8, a=15.9994*g/mole);
-G4Material *Air = new G4Material("Air", density=1.29*g/cm3, nelements=2);
+G4Element *N = new G4Element("Nitrogen", "N", z=7, a=14.01*g/mole);
+G4Element *O = new G4Element("Oxygen", "O", z=8, a=16.00*g/mole);
+G4Material *Air = new G4Material("Air", density=1.290*mg/cm3, nelements=2);
 Air->AddElement(N, 70.*perCent);
 Air->AddElement(O, 30.*perCent);
 ```
 
-``G4Element``と``G4Material``を使ってカスタマイズした空気を生成できます。
-窒素Nと酸素Oだけが含まれた空気を作ってみました。
+自分のプロジェクトで使っていた空気です。
+``G4Element``と``G4Material``を使って、窒素Nと酸素Oだけで作ってありました。
+
+:::{note}
+
+この空気の組成はユーザーガイドの[Define a Mixture by Fractional Mass](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/materialDef.html#define-a-mixture-by-fractional-mass)から取ってきたもののようです。
+
+:::
