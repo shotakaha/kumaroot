@@ -1,4 +1,4 @@
-# 構造体の作成手順
+# 構造体を作りたい
 
 ```cpp
 G4Material *fMaterial = new G4Material(...)
