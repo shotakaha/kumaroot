@@ -9,15 +9,40 @@
 宇宙線測定のアウトリーチ活動を進めるにつれて、簡単でよいので測定器シミュレーションができたらもっと楽しいだろうなと思い、使い方の理解＆整理に再挑戦してみます。
 ここでは、Geant4日本グループが公開している[初心者講習会資料](https://wiki.kek.jp/display/geant4/Tutorial+Notes+for+Novice+Users)を参考にしています。
 
+## インストール
+
+基本的に自分でビルドしてインストールする必要があります。
+``spack``というスパコン向けのパッケージ管理ツールでのインストールを試してみたので、おまけ程度に載せておきます。
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
 geant4-install
+geant4-spack
+```
+
+## 実験の基本
+
+Geant4はツールキットとして利用可能なように、``G4User*``（``G4VUser*``）という名前からはじまる仮想クラス（抽象クラス）が、あらかじめユーザーフック用に用意されています。
+アプリケーションを作成する場合は、これらのクラスを継承して自分用に書き加えていく作業をします。
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-runmanager
+geant4-uimanager
+geant4-detectorconstruction
+geant4-physicslist
+geant4-actioninitialization
+```
+
+## 例題したい
+
+```{toctree}
 geant4-build
 geant4-examples
-geant4-runmanager
-
 ```
 
 ## 物質したい
@@ -39,11 +64,17 @@ geant4-petroleum
 
 ## 測定器したい
 
-- ``G4VUserDetectorConstruction``
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-volume
+geant4-world
+geant4-tank
+geant4-pmt
+```
 
 ## 相互作用したい
-
-- ``G4VUserPhysicsList``
 
 ## 粒子したい
 

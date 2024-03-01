@@ -1,23 +1,19 @@
 # ビルドしたい（``cmake``）
 
 ```console
-$ brew install --cask cmake
-```
-
-Geant4アプリケーションのビルドには[CMake](https://cmake.org/)を使います。
-Homebreを使ってCaskをインストールしておきます。
-
-```console
 // プロジェクト内で作業
 $ cd $G4WORK/プロジェクト
-$ mkdir build && cd build
-$ cmake ..         # CMakeList.txtがあるディレクトリを指定する
-$ cmake --build .  # Makefileがあるディレクトリを指定する
+$ mkdir build
+$ cd build
+$ cmake ..    # CMakeList.txtがあるディレクトリを指定する
+$ make -j8    # cmake -j8 --build .  でもOK
+// 必要ならば make install する
 ```
 
-Geant4付属のサンプルのように適切な``CMakeLists.txt``が用意されたプロジェクトでは、上記の手順で``cmake``コマンドを使って実行ファイルをビルドできます。
+Geant4本体と同じようにアプリケーションのビルドにも[CMake](https://cmake.org/)を使います。
+自分で作るアプリケーションも、付属サンプルのように``CMakeLists.txt``を用意することが必要です。
 
-ポイントは``cmake``の作法（out-of-source）にしたがい、ビルド用のディレクトリを作成する点です。
+ここでも``cmake``の作法（out-of-source）にしたがい、ビルド用のディレクトリを作成して作業します。
 ディレクトリ名は任意ですが、分かりやすく``build``としました。
 ビルド作業はすべてこのディレクトリで行います。
 
@@ -25,14 +21,12 @@ Geant4付属のサンプルのように適切な``CMakeLists.txt``が用意さ�
 ビルド用ディレクトリに対して``CMakeLists.txt``は親ディレクトリにあるので``cmake ..``を実行しています。
 
 そして``Makefile``から実行ファイルを生成します。
-``Makefile``はビルド用ディレクトリの中にあるので``cmake --build .``を実行しています。
+``Makefile``はビルド用ディレクトリの中にあるので``make -j8``を実行しています。
+プロセッサ数のオプション（``-jN``）は指定した方がよいです。
 
-:::{hint}
-
-``Makefile``を使ったビルドなので、``make``でも代用できます。
-なんとなく``cmake``で揃えたかったので、このように整理しました。
-
-:::
+実行ファイルは現在のディレクトリ（``build``）に生成されます。
+プロジェクトの中でアプリケーションを実行するのがよいと思うので、ここで完了です。
+もし、システム全体で使いたい場合は``make install``します。
 
 ```console
 // アプリケーションを実行

@@ -1,24 +1,29 @@
-# ランマネージャーしたい（``G4RunManager``）
+# 実験したい（``G4RunManager``）
 
 ```cpp
 #include "G4RunManager.hh"
+
+#include "MYDetectorConstruction.hh"
+#include "MYPhysicsList.hh"
+#include "MYActionInitialization.hh"
 
 int main(int argc, char **argv)
 {
     // RunManagerを作成
     G4RunManager *runManager = new G4RunManager;
 
-    // 測定器を追加
-    runManager->SetUserInitialization(ジオメトリ);
+    // 必須ユーザークラスを設定
+    runManager->SetUserInitialization(new MYDetectorConstruction);
+    runManager->SetUserInitialization(new MYPhysicsList);
+    runManager->SetUserInitialization(new MYActionInitialization);
 
-    // 物理モデル（相互作用など）を追加
-    runManager->SetUserInitialization(物理モデル);
-
-    // ユーザー設定を追加
-    runManager->SetUserAction(一次粒子発生);
+    // Geant4のカーネルを初期化
+    runManager->Initialize()
 
     // ランを開始
-    runManager->BeamOn(イベント数);
+    G4int numberOfEvent = 10
+    runManager->BeamOn(numberOfEvent);
+
 
     // RunManagerを削除
     delete runManager;
@@ -27,6 +32,64 @@ int main(int argc, char **argv)
 }
 ```
 
-[G4RunManager](https://geant4.kek.jp/Reference/11.2.0/classG4RunManager.html)を使って、Geant4アプリケーション全体を管理／設定します。
-``main()``関数の中で作成した``G4RunManager``オブジェクトに対して、測定器のジオメトリ設定、素粒子反応の物理モデル設定、入射させる一次粒子の設定を追加する、というのが基本的な使い方です。
-このフローを理解しておけば、サンプルコードなどが読めるようになると思います。
+``main()``関数の中で[G4RunManager](https://geant4.kek.jp/Reference/11.2.0/classG4RunManager.html)を作成します。
+``G4RunManager``はいわば実験責任者のような存在で、Geant4アプリケーション全体を管理／設定します。
+
+:::{hint}
+
+他のプロジェクトのコードをみても、``main()``関数の中身はほとんど変わらないと思います。
+
+どういう測定器を使っているのかな？
+どういう相互作用を仮定しているのかな？
+どういうビームを使っているのかな？
+という気持ちでソースを読めば、
+どういうシミュレーションなのか、雰囲気はつかめると思います。
+
+:::
+
+## 必須ユーザークラス
+
+```cpp
+// 必須ユーザークラスを設定
+runManager->SetUserInitialization(new MYDetectorConstruction);
+runManager->SetUserInitialization(new MYPhysicsList);
+runManager->SetUserInitialization(new MYActionInitialization);
+```
+
+この3つの設定は、必ず設定が必要なユーザークラスです。
+これらは実際の実験と同じようなフローになっていて、それぞれ実験責任者が行う次の仕事とリンクしています。
+
+1. 測定器を作成する
+2. 相互作用を考える
+3. 粒子を入射する
+
+このことを理解しておけば、サンプルコードなども読めるようになると思います。
+
+:::{note}
+
+4.9.x系までは入射粒子は``SetUserAction``メソッドで設定していましたが、
+4.10.x系から``SetUserInitialization``メソッドでできるようになったそうです。
+
+実際に、過去の自分のプロジェクトは次のようになっていました。
+
+```cpp
+// ActionInitialization
+runManager->SetUserAction(一次粒子発生);
+```
+
+:::
+
+
+## マルチスレッドしたい（``G4MTRunManager``）
+
+```cpp
+#include "G4MTRunManager.hh"
+
+G4MTRunManager *runManager = new G4MTRunManager();
+runManager->SetUserInitialization(new MYDetectorConstruction);
+runManager->SetUserInitialization(new MYPhysicsList);
+runManager->SetUserInitialization(new MYActionInitialization);
+```
+
+``G4MTRunManager``クラスで、マルチスレッド処理できます。
+Geant4.11.0からマルチスレッドに対応しています。

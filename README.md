@@ -17,9 +17,10 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 こでは「〇〇したい」という目的ベースで整理することで、
 「逆引き辞典」として使えるものを目指したいと思います。
 
-## 公開版
+## 公開版（Read the Docs）
 
-- Read the Docs : [HTML](https://kumaroot.readthedocs.org) / [PDF](https://readthedocs.org/projects/kumaroot/downloads/)
+- [HTML](https://kumaroot.readthedocs.org)
+- [PDF](https://readthedocs.org/projects/kumaroot/downloads/)
 
 ### Read the Docsで公開する方法
 
@@ -35,8 +36,8 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 - ``make html``してウェブページを作成する
 - リモートサーバーに``rsync --delete -auvz``でアップロードする
 
-```bash
-poetry run bash deploy.sh
+```console
+$ poetry run bash deploy.sh
 ```
 
 ## このドキュメントについて
@@ -61,16 +62,16 @@ $ poetry shell
 
 ```console
 $ cd kumaroot
-$ git br ブランチ名
-$ git co ブランチ名
+$ git branch ブランチ名
+$ git switch ブランチ名
 $ code .
-# docs/source/ツール名/ツール名-usage.mdを編集する
-# docs/source/ツール名/ツール名-コンテンツ名.mdを新規作成する
+// docs/source/ツール名/ツール名-usage.mdを編集する
+// docs/source/ツール名/ツール名-コンテンツ名.mdを新規作成する
 $ git add 編集したファイル
 $ git commit
 $ git push
-# GitHub上：Pull Requestを作成する
-# GitHub上：テストをパスしたら即マージする
+// GitHub上：Pull Requestを作成する
+// GitHub上：テストをパスしたら即マージする
 ```
 
 1. ``main``リポジトリからブランチを作成する
