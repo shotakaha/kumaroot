@@ -1,4 +1,4 @@
-# パッケージ管理したい（`brew`）
+# パッケージ管理したい（``brew``）
 
 ```console
 $ brew install フォーミュラ名
@@ -7,24 +7,51 @@ $ brew outdated
 $ brew upgrade
 ```
 
+## パスを知りたい（``brew --prefix``）
+
+```console
+$ brew --prefix フォーミュラ名
+$ brew --prefix fish
+$ brew --prefix qt@5
+```
+
+``--prefix``オプションで、フォーミュラがインストールされたパスを確認できます。
+
+macOS ARM（Apple Silicon）の場合は``/opt/homebrew/``の下、
+macOS Intelの場合は``/usr/local/``の下、
+Linuxの場合は``/home/linuxbrew/.linuxbrew/``に
+フォーミュラがインストールされています。
+
+```bash
+cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
+# ARMの場合: cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/qt@5
+# Intelの場合: cmake -DCMAKE_PREFIX_PATH=/usr/local/qt@5
+```
+
+単体で使うことはほぼないかもしれませんが、シェルスクリプトを組み合わせて使うと便利なときがあります。
+上のサンプルでは、``cmake``でビルドするときにリンクする``qt@5``のパスを追加しています。
+環境の違いを気にせずに同じコマンドを使いまわすことができます。
+
 ## パッケージを探したい（``brew search``）
 
 ```console
 $ brew search 検索パターン
 
-# 例：ブラウザを検索
+// 例：ブラウザを検索
 $ brew search browser
 ```
 
 ``search``コマンドを使って、パッケージ名（＝フォーミュラ）を検索できます。
 検索パターンは曖昧マッチに（おそらく）対応しているので、思いついたパターンをそのまま入力すればOKです。
 
+ヒットした検索名が多すぎる場合は、検索コマンド（[grep](./command-grep.md)）などで絞り込むか、検索パターンを考え直すか、してください。
+
 ## パッケージの詳細を調べたい（``brew info``）
 
 ```console
 $ brew info フォーミュラ名
 
-# 例：Brave
+// 例：Brave Browser
 $ brew info brave-browser
 $ brew home brave-browser
 ```
@@ -39,13 +66,13 @@ $ brew home brave-browser
 ## パッケージを更新したい（``brew upgrade``）
 
 ```console
-# パッケージリストを更新する
+// パッケージリストを更新する
 $ brew update
 
-# 更新が必要なパッケージを表示する
+// 更新が必要なパッケージを表示する
 $ brew outdated
 
-# パッケージを更新する
+// パッケージを更新する
 $ brew upgrade
 ```
 
@@ -88,13 +115,15 @@ $ brew tap homebrew/cask-fonts
 ## zsh のパスを設定したい
 
 ```zsh
-# ~/.zprofile
+# ~/.zprofile を編集する
 # ... 他に設定してある場合はそのままでOK
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-{file}`~/.zprofile`を編集して追記します。
-Homebrew をインストールした末尾に表示されるスクリプトを実行しても OK です。
+``brew shellenv``を実行すると、シェルごとのHomebrew設定が出力されます。
+その中身をシェル起動時のスクリプトで``eval``しています。
+ZSHの場合は{file}`~/.zprofile`に追記します。
+Homebrewをインストールした末尾に表示されるスクリプトを実行してもOKです。
 
 ## fish のパスを設定したい
 
@@ -107,8 +136,8 @@ if status is-interactive
 end
 ```
 
-{file}`~/.config/fish/config.fish`を編集して追記します。
-zsh 用の設定と微妙に異なる（`$`や`"`がいらない）ので注意が必要です。
+Fishの場合は{file}`~/.config/fish/config.fish`に追記します。
+Zsh用の設定と微妙に異なる（`$`や`"`がいらない）ので注意が必要です。
 
 ## エラー：xcrun
 
