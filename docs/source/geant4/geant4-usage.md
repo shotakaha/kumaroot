@@ -25,8 +25,13 @@ geant4-spack
 ## 知っておきたかったこと
 
 ```{toctree}
+---
+maxdepth: 1
+---
 geant4-coding-guidelines
 geant4-mandatory-classes
+geant4-multithread
+geant4-volume
 ```
 
 
@@ -74,7 +79,6 @@ geant4-petroleum
 ---
 maxdepth: 1
 ---
-geant4-volume
 geant4-world
 geant4-tank
 geant4-pmt
