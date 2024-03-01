@@ -22,10 +22,16 @@ geant4-install
 geant4-spack
 ```
 
+## 知っておきたかったこと
+
+```{toctree}
+geant4-coding-guidelines
+geant4-mandatory-classes
+```
+
+
 ## 実験の基本
 
-Geant4はツールキットとして利用可能なように、``G4User*``（``G4VUser*``）という名前からはじまる仮想クラス（抽象クラス）が、あらかじめユーザーフック用に用意されています。
-アプリケーションを作成する場合は、これらのクラスを継承して自分用に書き加えていく作業をします。
 
 ```{toctree}
 ---

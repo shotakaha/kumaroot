@@ -80,16 +80,3 @@ runManager->SetUserAction(一次粒子発生);
 :::
 
 
-## マルチスレッドしたい（``G4MTRunManager``）
-
-```cpp
-#include "G4MTRunManager.hh"
-
-G4MTRunManager *runManager = new G4MTRunManager();
-runManager->SetUserInitialization(new MYDetectorConstruction);
-runManager->SetUserInitialization(new MYPhysicsList);
-runManager->SetUserInitialization(new MYActionInitialization);
-```
-
-``G4MTRunManager``クラスで、マルチスレッド処理できます。
-Geant4.11.0からマルチスレッドに対応しています。
