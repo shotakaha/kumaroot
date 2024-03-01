@@ -28,8 +28,9 @@ maxdepth: 1
 ---
 geant4-material
 geant4-element
-geant4-water
 geant4-air
+geant4-water
+geant4-ethanol
 geant4-acrylic
 geant4-vacuum
 geant4-glass
