@@ -11,29 +11,38 @@
 
 ## インストール
 
+基本的に自分でビルドしてインストールする必要があります。
+``spack``というスパコン向けのパッケージ管理ツールでのインストールを試してみたので、おまけ程度に載せておきます。
+
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 1
 ---
 geant4-install
 geant4-spack
 ```
 
-## サンプルを実行
-
-```{toctree}
-geant4-build
-geant4-examples
-```
-
 ## 実験の基本
 
+Geant4はツールキットとして利用可能なように、``G4User*``（``G4VUser*``）という名前からはじまる仮想クラス（抽象クラス）が、あらかじめユーザーフック用に用意されています。
+アプリケーションを作成する場合は、これらのクラスを継承して自分用に書き加えていく作業をします。
+
 ```{toctree}
+---
+maxdepth: 1
+---
 geant4-runmanager
 geant4-uimanager
 geant4-detectorconstruction
 geant4-physicslist
 geant4-actioninitialization
+```
+
+## 例題したい
+
+```{toctree}
+geant4-build
+geant4-examples
 ```
 
 ## 物質したい
