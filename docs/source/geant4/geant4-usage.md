@@ -32,6 +32,7 @@ geant4-coding-guidelines
 geant4-mandatory-classes
 geant4-multithread
 geant4-volume
+geant4-drivers
 ```
 
 
