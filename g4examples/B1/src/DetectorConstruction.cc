@@ -32,6 +32,7 @@
 #include "G4RunManager.hh"
 #include "G4NistManager.hh"
 #include "G4Box.hh"
+#include "G4Tubs.hh"
 #include "G4Cons.hh"
 #include "G4Orb.hh"
 #include "G4Sphere.hh"
@@ -52,7 +53,7 @@ namespace B1
 
         // Option to switch on/off checking of volumes overlaps
         //
-        G4bool checkOverlaps = true;
+        G4bool checkOverlaps = false;
 
         //
         // World
@@ -89,9 +90,44 @@ namespace B1
             false,           // no boolean operation
             0,               // copy number
             checkOverlaps);  // overlaps checking
-                                                            // Envelope parameters
+
         //
-        G4double env_sizeXY = 20 * cm, env_sizeZ = 30 * cm;
+        // Tank
+        //
+        G4double fTankDiameter = 39.3 * m;
+        G4double fTankHeight = 41.4 * m;
+        G4double rmin, rmax, z, sphi, dphi;
+        auto fTankS = new G4Tubs(
+            "TankS",
+            rmin = 0.,
+            rmax = 0.5 * fTankDiameter,
+            z = 0.5 * fTankHeight,
+            sphi = 0. * deg,
+            dphi = 360. *deg);
+
+        // Fill tank with water
+        G4Material *fWater = nist->FindOrBuildMaterial("G4_WATER");
+        auto fTankL = G4LogicalVolume(
+            fTankS,
+            fWater,
+            "TankL");
+
+        //rotation = G4RotationMatrix();
+        //direction = G4ThreeVector();
+        //location = G4Transform3D(rotation, direction);
+
+        // new G4PVPlacement(
+        //     location,
+        //     fTankL,         // its logical volume
+        //     "TankP",        // its name
+        //     fWorldL,         // its mother  volume
+        //     false,           // no boolean operation
+        //     0,               // copy number
+        //     checkOverlaps);  // overlaps checking
+
+        //
+        G4double env_sizeXY = 20 * cm,
+                 env_sizeZ = 30 * cm;
         G4Material *env_mat = nist->FindOrBuildMaterial("G4_WATER");
         //
         // Envelope
