@@ -1,4 +1,4 @@
-# Macro file for the visualization setting in the initialization phase 
+# Macro file for the visualization setting in the initialization phase
 # of the B1 example when running in interactive mode
 #
 
@@ -53,7 +53,7 @@
 # (if too many tracks cause core dump => /tracking/storeTrajectory 0)
 #
 # Draw hits at end of event:
-#/vis/scene/add/hits
+/vis/scene/add/hits
 #
 # To draw only gammas:
 #/vis/filtering/trajectories/create/particleFilter
@@ -90,7 +90,7 @@
 /vis/scene/add/eventID # Drawn at end of event
 /vis/scene/add/date    # Date stamp
 /vis/scene/add/logo2D  # Simple logo
-/vis/scene/add/logo    # 3D logo
+#/vis/scene/add/logo    # 3D logo
 #
 # Frame
 /vis/set/colour red
