@@ -1,0 +1,138 @@
+//
+// ********************************************************************
+// * License and Disclaimer                                           *
+// *                                                                  *
+// * The  Geant4 software  is  copyright of the Copyright Holders  of *
+// * the Geant4 Collaboration.  It is provided  under  the terms  and *
+// * conditions of the Geant4 Software License,  included in the file *
+// * LICENSE and available at  http://cern.ch/geant4/license .  These *
+// * include a list of copyright holders.                             *
+// *                                                                  *
+// * Neither the authors of this software system, nor their employing *
+// * institutes,nor the agencies providing financial support for this *
+// * work  make  any representation or  warranty, express or implied, *
+// * regarding  this  software system or assume any liability for its *
+// * use.  Please see the license in the file  LICENSE  and URL above *
+// * for the full disclaimer and the limitation of liability.         *
+// *                                                                  *
+// * This  code  implementation is the result of  the  scientific and *
+// * technical work of the GEANT4 collaboration.                      *
+// * By using,  copying,  modifying or  distributing the software (or *
+// * any work based  on the software)  you  agree  to acknowledge its *
+// * use  in  resulting  scientific  publications,  and indicate your *
+// * acceptance of all terms of the Geant4 Software license.          *
+// ********************************************************************
+//
+//
+/// \file B1/src/DetectorConstruction.cc
+/// \brief Implementation of the B1::DetectorConstruction class
+
+#include "DetectorConstruction.hh"
+
+#include "G4RunManager.hh"
+#include "G4NistManager.hh"
+#include "G4Box.hh"
+#include "G4Tubs.hh"
+#include "G4Cons.hh"
+#include "G4Orb.hh"
+#include "G4Sphere.hh"
+#include "G4Trd.hh"
+#include "G4LogicalVolume.hh"
+#include "G4PVPlacement.hh"
+#include "G4SystemOfUnits.hh"
+
+namespace B1
+{
+
+    //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+    G4VPhysicalVolume *DetectorConstruction::Construct()
+    {
+        // Get nist material manager
+        G4NistManager *nist = G4NistManager::Instance();
+
+        // Option to switch on/off checking of volumes overlaps
+        //
+        G4bool checkOverlaps = true;
+
+        //
+        // World
+        //
+        G4double world_x = 50 * m;
+        G4double world_y = 50 * m;
+        G4double world_z = 50 * m;
+        G4Material *fAir = nist->FindOrBuildMaterial("G4_AIR");
+
+        auto fWorldS = new G4Box(
+            "WorldS",
+            0.5 * world_x,
+            0.5 * world_y,
+            0.5 * world_z); // its size
+
+        auto fWorldL = new G4LogicalVolume(
+            fWorldS,   // its solid
+            fAir,      // its material
+            "WorldL"); // its name
+
+        G4RotationMatrix rotation;
+        G4ThreeVector direction;
+        G4Transform3D location;
+
+        rotation = G4RotationMatrix();
+        direction = G4ThreeVector();
+        location = G4Transform3D(rotation, direction);
+
+        auto fWorldP = new G4PVPlacement(
+            location,
+            fWorldL,         // its logical volume
+            "WorldP",        // its name
+            nullptr,         // its mother  volume
+            false,           // no boolean operation
+            0,               // copy number
+            checkOverlaps);  // overlaps checking
+
+        //
+        // Tank
+        //
+        G4double fTankDiameter = 39.3 * m;
+        G4double fTankHeight = 41.4 * m;
+        G4double rmin, rmax, z, sphi, dphi;
+        auto fTankS = new G4Tubs(
+            "TankS",
+            rmin = 0.,
+            rmax = 0.5 * fTankDiameter,
+            z = 0.5 * fTankHeight,
+            sphi = 0. * deg,
+            dphi = 360. *deg);
+
+        // Fill tank with water
+        G4Material *fWater = nist->FindOrBuildMaterial("G4_WATER");
+        auto fTankL = new G4LogicalVolume(
+            fTankS,
+            fWater,
+            "TankL");
+
+        rotation = G4RotationMatrix();
+        direction = G4ThreeVector();
+        location = G4Transform3D(rotation, direction);
+
+        new G4PVPlacement(
+            location,
+            fTankL,         // its logical volume
+            "TankP",        // its name
+            fWorldL,         // its mother  volume
+            false,           // no boolean operation
+            0,               // copy number
+            checkOverlaps);  // overlaps checking
+
+        fScoringVolume = fTankL;
+
+        //
+        // always return the physical World
+        //
+        return fWorldP;
+    }
+
+    //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+}
