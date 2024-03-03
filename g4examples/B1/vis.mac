@@ -100,9 +100,9 @@
 /vis/set/lineWidth     # Revert to default line width (1.)
 #
 # Attach text to one edge of Shape1, with a small, fixed offset
-/vis/scene/add/text 0 6 -4 cm 18 4 4 Shape1
+#/vis/scene/add/text 0 6 -4 cm 18 4 4 Shape1
 # Attach text to one corner of Shape2, with a small, fixed offset
-/vis/scene/add/text 6 7 10 cm 18 4 4 Shape2
+#/vis/scene/add/text 6 7 10 cm 18 4 4 Shape2
 #
 # To get nice view
 # Make the "World" box invisible
