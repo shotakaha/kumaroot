@@ -62,21 +62,26 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   // World
   //
-  G4double world_sizeXY = 1.2*env_sizeXY;
-  G4double world_sizeZ  = 1.2*env_sizeZ;
-  G4Material* world_mat = nist->FindOrBuildMaterial("G4_AIR");
+  G4double world_x = 1.2*env_sizeXY;
+  G4double world_y = 1.2*env_sizeXY;
+  G4double world_z  = 1.2*env_sizeZ;
+  G4Material *fAir = nist->FindOrBuildMaterial("G4_AIR");
 
-  auto solidWorld = new G4Box("World",                           // its name
-    0.5 * world_sizeXY, 0.5 * world_sizeXY, 0.5 * world_sizeZ);  // its size
+  auto fWorldS = new G4Box(
+    "WorldS",
+    0.5 * world_x,
+    0.5 * world_y,
+    0.5 * world_z);  // its size
 
-  auto logicWorld = new G4LogicalVolume(solidWorld,  // its solid
-    world_mat,                                       // its material
-    "World");                                        // its name
+  auto fWorldL = new G4LogicalVolume(
+    fWorldS,  // its solid
+    fAir,                                       // its material
+    "WorldL");                                        // its name
 
-  auto physWorld = new G4PVPlacement(nullptr,  // no rotation
+  auto fWorldP = new G4PVPlacement(nullptr,  // no rotation
     G4ThreeVector(),                           // at (0,0,0)
-    logicWorld,                                // its logical volume
-    "World",                                   // its name
+    fWorldL,                                // its logical volume
+    "WorldP",                                   // its name
     nullptr,                                   // its mother  volume
     false,                                     // no boolean operation
     0,                                         // copy number
@@ -96,7 +101,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4ThreeVector(),          // at (0,0,0)
     logicEnv,                 // its logical volume
     "Envelope",               // its name
-    logicWorld,               // its mother  volume
+    fWorldL,               // its mother  volume
     false,                    // no boolean operation
     0,                        // copy number
     checkOverlaps);           // overlaps checking
@@ -162,7 +167,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   //always return the physical World
   //
-  return physWorld;
+  return fWorldP;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
