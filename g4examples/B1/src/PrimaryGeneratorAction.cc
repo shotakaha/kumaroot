@@ -81,7 +81,7 @@ namespace B1
 
         if (!fEnvelopeBox)
         {
-            G4LogicalVolume *envLV = G4LogicalVolumeStore::GetInstance()->GetVolume("Envelope");
+            G4LogicalVolume *envLV = G4LogicalVolumeStore::GetInstance()->GetVolume("TankL");
             if (envLV)
                 fEnvelopeBox = dynamic_cast<G4Box *>(envLV->GetSolid());
         }
