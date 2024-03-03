@@ -62,9 +62,9 @@ namespace B1
         //
         // World
         //
-        G4double world_x = 1.2 * env_sizeXY;
-        G4double world_y = 1.2 * env_sizeXY;
-        G4double world_z = 1.2 * env_sizeZ;
+        G4double world_x = 50 * m;
+        G4double world_y = 50 * m;
+        G4double world_z = 50 * m;
         G4Material *fAir = nist->FindOrBuildMaterial("G4_AIR");
 
         auto fWorldS = new G4Box(
