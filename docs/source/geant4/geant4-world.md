@@ -1,60 +1,63 @@
-# 実験室を作りたい
+# 実験室を作りたい（``World``）
 
 ```cpp
 #include "G4Box.hh"
 #include "G4LogicalVolume.hh"
-#include "G4PhysicalVolume.hh"
-#include "G4NistManager"
+#include "G4VPhysicalVolume.hh"
+#include "G4NistManager.hh"
 
-G4Double pX = 50.*m;
-G4Double pY = 50.*m;
-G4Double pZ = 50.*m;
-G4Box *SWorld = new G4Box(
-    "World",
-    0.5*pX,
-    0.5*pY,
-    0.5*pZ)
+// 実験室の大きさ
+G4Double fWorldX = 50.*m;
+G4Double fWorldY = 50.*m;
+G4Double fWorldZ = 50.*m;
 
-G4LogicalVolume *LVWorld = new G4LogicalVolume(
-    SWorld,  // G4VSolid
-    Air,     // G4Material: 「空気（Air）」は先に作っておく
-    "World"  // G4String
+// 実験室の形を決める
+G4double width, length, height;
+G4Box *fWorldS = new G4Box(
+    "WorldS",
+    width=0.5*fWorldX,
+    length=0.5*fWorldY,
+    height=0.5*fWorldZ)
+
+// 実験室の材質を決める
+G4NistManager *fNist = new G4NistManager::Instance();
+G4Material *fAir = fNist->FindOrBuildMaterial("G4_AIR");
+G4LogicalVolume *fWorldL = new G4LogicalVolume(
+    fWorldS,  // G4VSolid    形状
+    fAir,     // G4Material  物質
+    "WorldL"  // G4String
 )
 
-G4bool checkOverlaps = true;
-
-G4RotationMatrix rotation = G4RotationMatrix()
-G4ThreeVector direction = G4ThreeVector(0., 0., 0.)
+// 実験室の置き場所を決める
+G4RotationMatrix rotation = G4RotationMatrix();  // no rotation
+G4ThreeVector direction = G4ThreeVector(0., 0., 0.);  // at (0, 0, 0)
 G4Transform3D location = G4Transform3D(rotation, direction)
 
-G4VPhysicalVolume *PVWorld = new G4PVPlacement(
+G4VPhysicalVolume *fWorldP = new G4PVPlacement(
     location,    // G4Transform3D
-    LVWorld,     // G4LogicalVolume
-    "World",     // G4String
+    fWorldL,     // G4LogicalVolume
+    "WorldP",    // G4String
     0,           // G4LogicalVolume: 親ボリュームはなし
     false,       // G4bool pMany（廃止）
     0,           // G4int pCopyNo
-    checkOverlaps,
+    True         // G4bool check overlaps
 )
 ```
 
 測定器シミュレーションを実行する実験室（通称：World）を作成しました。
+実験室は50m立方の箱型としました。
+どうしてこの大きさにしたかというと、この中にスーパーカミオカンデを配置してみたいからです。
 
-まず、実験室の形（ソリッド）を作成します。
-独自ルールとして、変数名に``S*``を付けることにしました。
-この実験室は``G4Box``を使って、50mx50mx50mのサイズで作ってあります。
-``G4Box``のサイズに関係する引数はすべて半分の長さで指定することになっているので0.5倍してあります。
-どうして巨大な実験室にしたかというと、この中にスーパーカミオカンデを配置してみたいからです。
+まず、実験室の形を決めます。
+箱型の実験室なので``G4Box``を使いました。
+``G4Box``のサイズに関係する引数はすべて**半分の長さ**で指定することになっているので0.5倍してあります。
 
-ソリッドの形状を決めたら、ロジカルボリュームを作成します。
-独自ルールとして、変数名に``LV*``を付けることにしました。
-地球にある実験室なので空気で満たしておきました。
+次に実験室の材質を決めます。
+地球にある実験室なので空気で満たしました。
 
-最後に、ロジカルボリュームを配置して物理ボリュームを作成します。
-独自ルールとして、変数名に``PV*``を付けることにしました。
-
-このあとは``PVWorld``オブジェクトを最上位の親ボリュームとして、
-測定器のロジカルボリュームをこの中に納まるように配置していくことになります。
+最後に、置き場所を決めます。
+これで、最上位の親ボリュームである実験室の完成です。
+あとは、測定装置をこの中に納まるように並べるだけです。
 
 :::{note}
 
