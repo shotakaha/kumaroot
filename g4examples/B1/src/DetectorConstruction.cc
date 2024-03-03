@@ -50,11 +50,6 @@ namespace B1
         // Get nist material manager
         G4NistManager *nist = G4NistManager::Instance();
 
-        // Envelope parameters
-        //
-        G4double env_sizeXY = 20 * cm, env_sizeZ = 30 * cm;
-        G4Material *env_mat = nist->FindOrBuildMaterial("G4_WATER");
-
         // Option to switch on/off checking of volumes overlaps
         //
         G4bool checkOverlaps = true;
@@ -78,15 +73,26 @@ namespace B1
             fAir,      // its material
             "WorldL"); // its name
 
-        auto fWorldP = new G4PVPlacement(nullptr,         // no rotation
-                                         G4ThreeVector(), // at (0,0,0)
-                                         fWorldL,         // its logical volume
-                                         "WorldP",        // its name
-                                         nullptr,         // its mother  volume
-                                         false,           // no boolean operation
-                                         0,               // copy number
-                                         checkOverlaps);  // overlaps checking
+        G4RotationMatrix rotation;
+        G4ThreeVector direction;
+        G4Transform3D location;
 
+        rotation = G4RotationMatrix();
+        direction = G4ThreeVector();
+        location = G4Transform3D(rotation, direction);
+
+        auto fWorldP = new G4PVPlacement(
+            location,
+            fWorldL,         // its logical volume
+            "WorldP",        // its name
+            nullptr,         // its mother  volume
+            false,           // no boolean operation
+            0,               // copy number
+            checkOverlaps);  // overlaps checking
+                                                            // Envelope parameters
+        //
+        G4double env_sizeXY = 20 * cm, env_sizeZ = 30 * cm;
+        G4Material *env_mat = nist->FindOrBuildMaterial("G4_WATER");
         //
         // Envelope
         //
