@@ -35,9 +35,25 @@ geant4-volume
 geant4-drivers
 ```
 
+## 例題したい
 
-## 実験の基本
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-build
+geant4-examples
+```
 
+## 実験したい
+
+```cpp
+G4RunManager *runManager = new G4RunManager;
+runManager->SetUserInitialization(new MYDetectorConstruction);
+runManager->SetUserInitialization(new MYPhysicsList);
+runManager->SetUserInitialization(new MYActionInitialization);
+runManager->Initialize()
+```
 
 ```{toctree}
 ---
@@ -46,18 +62,16 @@ maxdepth: 1
 geant4-runmanager
 geant4-uimanager
 geant4-detectorconstruction
-geant4-physicslist
 geant4-actioninitialization
 ```
 
-## 例題したい
-
-```{toctree}
-geant4-build
-geant4-examples
-```
-
 ## 物質したい
+
+```cpp
+G4NistManager *nistManager = new G4NistManager::Instance();
+G4Material *fAir = nistManager->FindOrBuildMaterial("G4_AIR");
+G4Material *fWater = nistManager->FindOrBuildMaterial("G4_WATER");
+```
 
 ```{toctree}
 ---
@@ -76,6 +90,10 @@ geant4-petroleum
 
 ## 測定器したい
 
+```cpp
+runManager->SetUserInitialization(new DetectorConstruction());
+```
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -87,7 +105,20 @@ geant4-pmt
 
 ## 相互作用したい
 
+```cpp
+G4VModularPhysicsList* physicsList = new FTFP_BERT;
+runManager->SetUserInitialization(physicsList);
+```
+
+```{toctree}
+geant4-physicslist
+```
+
 ## 粒子したい
+
+```cpp
+runManager->SetUserInitialization(new ActionInitialization());
+```
 
 - ``G4VUserPrimaryGeneratorAction``
 - ``G4UserRunAction``
@@ -95,6 +126,13 @@ geant4-pmt
 - ``G4UserTrackingAction``
 - ``G4UserSteppingAction``
 - ``G4UserStackingAction``
+
+## 可視化したい
+
+```cpp
+G4VisManager* visManager = new G4VisExecutive;
+visManager->Initialize();
+```
 
 ## リファレンス
 
