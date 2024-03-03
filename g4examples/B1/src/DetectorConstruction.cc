@@ -107,23 +107,23 @@ namespace B1
 
         // Fill tank with water
         G4Material *fWater = nist->FindOrBuildMaterial("G4_WATER");
-        auto fTankL = G4LogicalVolume(
+        auto fTankL = new G4LogicalVolume(
             fTankS,
             fWater,
             "TankL");
 
-        //rotation = G4RotationMatrix();
-        //direction = G4ThreeVector();
-        //location = G4Transform3D(rotation, direction);
+        rotation = G4RotationMatrix();
+        direction = G4ThreeVector();
+        location = G4Transform3D(rotation, direction);
 
-        // new G4PVPlacement(
-        //     location,
-        //     fTankL,         // its logical volume
-        //     "TankP",        // its name
-        //     fWorldL,         // its mother  volume
-        //     false,           // no boolean operation
-        //     0,               // copy number
-        //     checkOverlaps);  // overlaps checking
+        new G4PVPlacement(
+            location,
+            fTankL,         // its logical volume
+            "TankP",        // its name
+            fWorldL,         // its mother  volume
+            false,           // no boolean operation
+            0,               // copy number
+            checkOverlaps);  // overlaps checking
 
         //
         G4double env_sizeXY = 20 * cm,
