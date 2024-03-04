@@ -121,6 +121,11 @@ geant4-physicslist
 runManager->SetUserInitialization(new ActionInitialization());
 ```
 
+
+```{toctree}
+geant4-particles
+```
+
 - ``G4VUserPrimaryGeneratorAction``
 - ``G4UserRunAction``
 - ``G4UserEventAction``
