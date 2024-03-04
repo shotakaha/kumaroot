@@ -18,6 +18,7 @@
 ---
 maxdepth: 1
 ---
+geant4-versions
 geant4-install
 geant4-spack
 ```
@@ -29,7 +30,6 @@ geant4-spack
 maxdepth: 1
 ---
 geant4-coding-guidelines
-geant4-versions
 geant4-mandatory-classes
 geant4-multithread
 geant4-volume
