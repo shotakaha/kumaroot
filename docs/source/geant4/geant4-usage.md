@@ -135,13 +135,17 @@ G4VisManager* visManager = new G4VisExecutive;
 visManager->Initialize();
 ```
 
+```{toctree}
+geant4-vismanager
+```
+
 ## 未分類
 
 ```{toctree}
 geant4-constants
+geant4-units
 geant4-plastic-scintillator
 geant4-userclasses
-geant4-vismanager
 geant4-examples-b1
 ```
 
