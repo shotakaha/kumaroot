@@ -54,22 +54,31 @@ $ ./exampleB1 run2.mac
 ``examples/basic/B1/``の中にビルド用ディレクトリを（``build``）を作成します。
 その中で、``cmake ..``と``make``して実行ファイルを生成します。
 
-## マネージャーたち
+## メインンプログラム
 
 ```cpp
 //////////////////////////////////////////////////
 // exampleB1.cc
 //////////////////////////////////////////////////
-#include "G4UIExecutive.hh"
-#include "G4RunManagerFactory.hh"
-#include "G4VisExecutive.hh"
-#include "G4UImanager.hh"
-
 auto *runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default)
+// Detector construction
+runManager->SetUserInitialization(new DetectorConstruction());
+
+// Physics list
+G4VModularPhysicsList* physicsList = new QBBC;
+physicsList->SetVerboseLevel(1);
+runManager->SetUserInitialization(physicsList);
+
+// User action initialization
+runManager->SetUserInitialization(new ActionInitialization());
+
 G4UIExecutive *ui = new G4UIExecutive(argc, argv);
 G4VisManager *visManager = new G4VisExecutive;
 G4UImanager *uiManager = G4UImanager::GetUIpointer();
 ```
+
+メインプログラムは``exampleB1.cc``です。
+その中のマネージャーの仕事を集めてみました。
 
 ``exampleB1.cc``で使われているマネージャーたちを集めてみました。
 4種類のマネージャーがいました。ランの管理人が``G4RunManagerFactory``クラスで、その他はビジュアライズ関係の管理人たちです。
