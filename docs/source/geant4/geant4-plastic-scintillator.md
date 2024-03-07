@@ -33,3 +33,21 @@ OSECHIでは幅5cm、長さ10cm、厚み1cmのプラシンを3枚重ねて使っ
 もしかしたら、実験によっては別の材料を使っているかもしれません。
 
 :::
+
+## 見た目を追加したい
+
+```cpp
+auto visAttributes = new G4VisAttribute(G4Colour(0.8888, 0.0, 0.0));
+detectorLogical->SetVisAttributes(visAttributes);
+fVisAttributes.push_back(visAttributes);
+```
+
+## 有感領域を追加したい
+
+```cpp
+auto sdManager = G4SDManager::GetSDMpointer();
+G4String SDname;
+auto detector = new DetectorSD(SDname="/detector");
+fDetectorLogical->SetSensitiveDetector(detector);
+
+```
