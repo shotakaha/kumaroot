@@ -3,19 +3,26 @@
 ```cpp
 // include/MYDetectorConstruction.hh
 
-#ifndef MYDetectorConstruction_hh
-#define MYDetectorConstruction_hh 1
+#ifndef MYDetectorConstruction_h
+#define MYDetectorConstruction_h 1
 
 #include "G4VUserDetectorConstruction.hh"
+
+#include "G4VPhysicalVolume.hh"
 #include "G4LogicalVolume.hh"
 
 class MYDetectorConstruction : public G4VUserDetectorConstruction
 {
-    private:
-        G4LogicalVolume *fLVworld
-        G4LogicalVolume *fLVtank
-        G4LogicalVolume *fLVpmt
+    public:
+        DetectorConstruction() = default;
+        ~DetectorConstruction() override = default;
 
+        G4VPhysicalVolume* Construct() override;
+
+    private:
+        G4LogicalVolume *fWorldL
+        G4LogicalVolume *fTankL
+        G4LogicalVolume *fPmtL
 
 }
 #endif
@@ -26,20 +33,28 @@ class MYDetectorConstruction : public G4VUserDetectorConstruction
 
 #include "MYDetectorConstruction.hh"
 
-class MYDetectorConstruction : public G4VUserDetectorConstruction
+G4VPhysicalVolume* DetectorConstruction::Construct()
 {
+    // ワールド
+    G4Material *fAir = new G4Material(...);
+    G4Box *fWorldS = new G4Box("worldS", ...);
+    G4LogicalVolume *fWorldL = new G4LogicalVolume(fWorldS, fAir, "worldL");
+    G4Transform3D location = G4Transform3D(nullptr, nullptr);
+    G4VPhysicalVolume *fWorldP = new G4PVPlacement(location, fWorldL, "worldP", nullptr, ...);
 
+    // 測定器（例：水タンク）
+    G4LogicalVolume *fTankL = new G4LogicalVolume(...);
+    new G4PVPlacement(...);
+
+    // 検出器（例：光電子増倍管）
+    G4LogicalVolume *fPmtL = new G4LogicalVolume(...);
+    new G4PVPlacement(...);
+
+    // 必ずワールドをリターンする
+    return fWorldP
 }
 ```
 
 ``MYDetectorConstruction``クラスは、``G4VUserDetectorConstruction``を継承して作成します。
 
-
 ``G4VSolid``、``G4LogicalVolume``、``G4VPhysicalVolume``を使って、Geant4の中に構造物を配置できます。
-
-## 形状したい（``G4VSolid``）
-
-
-## 材質したい（``G4LogicalVolume``）
-
-## 配置したい（``G4VPhysicalVolume``）

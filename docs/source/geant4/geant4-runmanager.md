@@ -47,24 +47,6 @@ int main(int argc, char **argv)
 
 :::
 
-## 必須ユーザークラス
-
-```cpp
-// 必須ユーザークラスを設定
-runManager->SetUserInitialization(new MYDetectorConstruction);
-runManager->SetUserInitialization(new MYPhysicsList);
-runManager->SetUserInitialization(new MYActionInitialization);
-```
-
-この3つの設定は、必ず設定が必要なユーザークラスです。
-これらは実際の実験と同じようなフローになっていて、それぞれ実験責任者が行う次の仕事とリンクしています。
-
-1. 測定器を作成する
-2. 相互作用を考える
-3. 粒子を入射する
-
-このことを理解しておけば、サンプルコードなども読めるようになると思います。
-
 :::{note}
 
 4.9.x系までは入射粒子は``SetUserAction``メソッドで設定していましたが、
@@ -78,5 +60,4 @@ runManager->SetUserAction(一次粒子発生);
 ```
 
 :::
-
 
