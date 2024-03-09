@@ -42,12 +42,12 @@ B1のディレクトリ構造は上のようになっています。
 
 ```console
 $ cd B1
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
-$ ./exampleB1 run1.mac
-$ ./exampleB1 run2.mac
+(B1) $ mkdir build
+(B1) $ cd build
+(B1/build) $ cmake ..
+(B1/build) $ make
+(B1/build) $ ./exampleB1 run1.mac
+(B1/build) $ ./exampleB1 run2.mac
 ```
 
 ``exampleB1``アプリケーションもGeant4本体と同じように``cmake``でビルドします。
