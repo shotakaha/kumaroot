@@ -29,6 +29,9 @@ geant4-spack
 ---
 maxdepth: 1
 ---
+geant4-run
+geant4-class-category
+geant4-units
 geant4-coding-guidelines
 geant4-cpp
 geant4-mandatory-classes
@@ -61,6 +64,8 @@ runManager->Initialize()
 ---
 maxdepth: 1
 ---
+geant4-batch
+geant4-macro
 geant4-runmanager
 geant4-uimanager
 geant4-detectorconstruction
@@ -149,7 +154,6 @@ geant4-vismanager
 
 ```{toctree}
 geant4-constants
-geant4-units
 geant4-plastic-scintillator
 geant4-userclasses
 geant4-examples-b1
