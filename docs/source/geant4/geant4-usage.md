@@ -29,6 +29,7 @@ geant4-spack
 ---
 maxdepth: 1
 ---
+geant4-run
 geant4-class-category
 geant4-units
 geant4-coding-guidelines
@@ -63,6 +64,8 @@ runManager->Initialize()
 ---
 maxdepth: 1
 ---
+geant4-batch
+geant4-macro
 geant4-runmanager
 geant4-uimanager
 geant4-detectorconstruction
