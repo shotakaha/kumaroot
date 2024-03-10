@@ -56,3 +56,25 @@ int main(int argc, char** argv)
 対話モードでできることはすべて設定できます。
 
 拡張子はなんでもよいはずですが、``.mac``にするのが慣習のようです。
+
+## 表示レベル
+
+```macro
+/tracking/verbose 1
+
+*********************************************************************************************************
+G4WT1 > * G4Track Information:   Particle = e-,   Track ID = 5,   Parent ID = 1
+G4WT1 > *********************************************************************************************************
+G4WT1 >
+G4WT1 > Step#       X          Y          Z         KineE         dEStep    StepLeng   TrakLeng    Volume     Process
+G4WT1 >     0   28.21 um  -2.324 um  -2.441 m    7.017 MeV          0 eV       0 fm       0 fm     Target   initStep
+G4WT1 >     1  -148.1 um   40.48 um   -2.44 m    5.336 MeV      1.167 MeV  922.8 um   922.8 um     Target       eBrem
+G4WT1 >     2  -144.8 um   429.6 um   -2.44 m    4.719 MeV      486.3 keV  527.5 um    1.45 mm     Target       eBrem
+G4WT1 >     3     227 um   595.3 um  -2.441 m    2.172 MeV      2.402 MeV  1.947 mm   3.397 mm     Target       eBrem
+G4WT1 >     4   102.6 um   614.5 um  -2.441 m      617 keV      997.5 keV  907.5 um   4.304 mm     Target       eBrem
+G4WT1 >     5   106.7 um   597.4 um  -2.441 m        0 eV         617 keV  401.8 um   4.706 mm     Target       eIoni
+```
+
+``/tracking/verbose 1``にすると、トラック情報を出力してくれます。
+``/tracking/verbose 2``にすると、二次粒子のトラック情報も出力してくれます。
+
