@@ -15,3 +15,7 @@ $ cd examples/basic/B2/B2a
 (B2a/build) $ make -j8
 (B2a/build) $ ./exampleB2a
 ```
+
+``examples/basic/B2/``の中には``B2a``と``B2b``のディレクトリがあります。
+シミュレーションできることは同じなので、どちらをビルドしてもOKです。
+マクロファイルが用意されているので、適当に実行して遊んでみます。
