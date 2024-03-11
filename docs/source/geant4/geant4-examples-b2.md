@@ -63,4 +63,26 @@ $ cd examples/basic/B2/B2a
 /run/beamOn 3
 ```
 
+## 測定器はどうなってるの？
 
+```cfg
+# run1.mac
+/B2/det/setTargetMaterial G4_WATER
+/B2/det/setChamberMaterial G4_Ar
+```
+
+マクロで測定器の材質を変更しています。
+どうやってるんだろう？
+
+## 相互作用はどうなってるの？
+
+## 外部磁場はどうなってるの？
+
+```cfg
+# run1.mac
+/globalField/verbose 1
+/globalField/setValue 0.2 0 0 tesla
+```
+
+マクロで外部磁場の強さを変更しています。
+どうやってるんだろう？
