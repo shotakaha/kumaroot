@@ -48,6 +48,8 @@ maxdepth: 1
 ---
 geant4-build
 geant4-examples
+geant4-examples-b1
+geant4-examples-b2
 ```
 
 ## 実験したい
@@ -156,7 +158,6 @@ geant4-vismanager
 geant4-constants
 geant4-plastic-scintillator
 geant4-userclasses
-geant4-examples-b1
 ```
 
 ## リファレンス
