@@ -52,16 +52,24 @@ void ActionInitialization::BuildForMaster() const {;}
 ////////////////////////////////////////////////////////////////////////////////
 void ActionInitialization::Build() const
 {
+    // 必須の設定
     SetUserAction(new PrimaryGeneratorAction);
+    // 任意の設定
+    SetUserAction(new RunAction);
     SetUserAction(new EventAction);
     SetUserAction(new TrackingAction);
     SetUserAction(new SteppingAction);
+    SetUserAction(new StackingAction);
 }
 
 }
 ```
 
-ユーザーアクションは基本的にこのファイル（の``Build``）に追加すればよいはずです。
+ユーザーアクションは``Build``メソッドに追加すればよいです。
+それぞれ自作クラスで定義して``SetUserAction``を使って渡します。
+
+``PrimaryGeneratorAction``の設定は必須です。
+その他のアクション設定は任意です。
 
 ```cpp
 // プロジェクト名.cc
