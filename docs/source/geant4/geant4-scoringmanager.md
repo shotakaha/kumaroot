@@ -30,6 +30,26 @@ scoringManager->SetVerboseLevel(1);
 ``G4ScoringManager``を使って、物理量を測定できます。
 マクロで測定したい物理量を変更できます。
 
+## メッシュしたい（``/score/create/``）
+
+```cfg
+// 直方体メッシュ
+/score/create/boxMesh meshName
+/score/mesh/boxSize dX dY dZ unit
+/score/mesh/nBin dX dY dZ
+
+// 円柱メッシュ
+/score/create/cylinderMesh meshName
+/score/mesh/cylinderSize dR dZ unit
+/score/mesh/nBin dR dZ dPhi
+```
+
+``/score/create/メッシュ形状``でメッシュを作成できます。
+メッシュ形状は直方体と円柱があります。
+
+``/score/mesh/形状``でメッシュ全体の大きさを設定、
+``/score/mesh/nBin``でメッシュの分割数を設定できます。
+
 ## 物理量したい（``/score/quantity/``）
 
 ```cfg
