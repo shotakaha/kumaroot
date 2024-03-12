@@ -141,6 +141,12 @@ geant4-particles
 - ``G4UserSteppingAction``
 - ``G4UserStackingAction``
 
+## 測定したい
+
+```{toctree}
+geant4-scoringmanager
+```
+
 ## 可視化したい
 
 ```cpp
