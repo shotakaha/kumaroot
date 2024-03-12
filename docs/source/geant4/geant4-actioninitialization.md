@@ -60,3 +60,20 @@ void ActionInitialization::Build() const
 
 }
 ```
+
+ユーザーアクションは基本的にこのファイル（の``Build``）に追加すればよいはずです。
+
+```cpp
+// プロジェクト名.cc
+#include "G4RunManagerFactory.hh"
+
+#include "ActionInitialization.hh"  // <-- 自作クラス
+
+int main()
+{
+    auto *runManager = G4RunManagerFactory::CreateRunManager();
+    runManager->SetUserInitialization(new ActionInitialization);
+}
+```
+
+``main``関数の中でユーザーアクションは``SetUserInitialization``を使ってランマネージャーに登録します。
