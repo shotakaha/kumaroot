@@ -65,6 +65,31 @@ $ cd examples/basic/B2/B2a
 
 ## 測定器はどうなってるの？
 
+- world: 直方体（``G4Box``）、空気（``G4_AIR``）
+- target: 円柱（``G4Tubs``）、鉛（``G4_Pb``）
+- chamber: 円柱（``G4Tubs``）、Xeガス（``G4_Xe``）
+
+```cpp
+for (G4int copy_number=0; copy_number < fNumberOfChambers; copy_number++>){
+    G4double z = first_position + copy_number * chamber_spacing;
+    G4double rmax = rmax_first + copy_number * rmax_increment;
+    auto chamberSolid = new G4Tubs("ChamberSolid", 0, rmax, halfwidth, 0.*deg, 360.*deg);
+    fLogicalChamber[copy_number] = G4Tubs(chamberSolid, "Xe", "chamberLogical");
+    new G4PVPlacement(
+        nullptr,
+        G4ThreeVector(0, 0, z),
+        "ChamberLogical",
+        fLogicalTracker,
+        false,
+        copy_number,
+        fCheckOverlaps);
+}
+```
+
+``fNumberOfChambers``の数だけforループを回して、トラッカー（飛跡検出器）を設置しています。
+``copy_number``をインクリメントして、トラッカーごとに設定しています。
+
+
 ```cfg
 # run1.mac
 /B2/det/setTargetMaterial G4_WATER
