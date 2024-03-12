@@ -33,6 +33,13 @@ class ActionInitialization : public G4VUserActionInitialization
 
 ```cpp
 // src/ActionInitialization.cc
+#include "ActionInitialization.hh"   // <-- G4VUserActionInitializationを継承した自作クラス
+
+#include "PrimaryGeneratorAction.hh"  // <-- G4VUserPrimaryGeneratorActionを継承した自作クラス
+#include "EventAction.hh"             // <-- G4UserEventActionを継承した自作クラス
+#include "TrackingAction.hh"          // <-- G4UserTrackingActionを継承した自作クラス
+#include "SteppingAction.hh"          // <-- G4UserSteppingActionを継承した自作クラス
+
 namespace プロジェクト名
 {
 
