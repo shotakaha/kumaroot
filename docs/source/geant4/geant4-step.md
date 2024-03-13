@@ -6,6 +6,8 @@
 
 始点と終点は``G4StepPoint``クラスのオブジェクトなので[G4StepPoint Class Reference](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)を参照して、欲しい物理量を探します。
 
+ステップの情報は``G4UserSteppingAction``クラスをフックにしてカスタマイズするのに使います。
+
 ## 座標をしりたい（``GetPosition``）
 
 ```cpp
