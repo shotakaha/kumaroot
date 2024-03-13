@@ -28,7 +28,7 @@ G4double proper_time = aStep->GetPreStepPoint()->GetProperTime();
 ``GetGlobalTime``でトラックが含まれるイベントが生成されてからの経過時間、
 ``GetProperTime``で固有時間（トラックが生成されてからの経過時間の静止系の時刻）を取得できます。
 
-## 運動量をしりたい（``GetMomemtum``）
+## 運動量をしりたい（``GetMomentum``）
 
 ```cpp
 G4ThreeVector momentum = aStep->GetPreStepPoint()->GetMomentumDirection();
