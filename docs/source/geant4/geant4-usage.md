@@ -72,6 +72,7 @@ geant4-runmanager
 geant4-uimanager
 geant4-detectorconstruction
 geant4-actioninitialization
+geant4-steppingaction
 ```
 
 ## 物質したい

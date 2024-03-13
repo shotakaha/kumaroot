@@ -41,22 +41,17 @@ G4double total_energy = aStep->GetPreStepPoint()->GetTotalEnergy();
 G4double kinetic_energy = aStep->GetPreStepPoint()->GetKineticEnergy();
 ```
 
-ステップの現在情報は、ステップの始点（``aStep->GetPreStepPoint``）から取得します。始点（と終点）は``G4StepPoint``クラスのオブジェクトなので[G4StepPoint Class Reference](https://apc.u-paris.fr/~franco/g4doxy/html/classG4StepPoint.html)を参照すれば、欲しい物理量を確認できます。
+現在のステップの情報は、**ステップの始点**（``aStep->GetPreStepPoint``）から取得します。
+始点（と終点）は``G4StepPoint``クラスのオブジェクトなので[G4StepPoint Class Reference](https://apc.u-paris.fr/~franco/g4doxy/html/classG4StepPoint.html)を参照しながら、欲しい物理量を探します。
 
 ## ボリュームをしりたい
 
 ```cpp
-G4LogicalVolume *the_volume = aStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume()
+G4LogicalVolume *current_volume = aStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume()
 ```
 
-現在のステップの場所は、``aStep->GetPreStepPoint()``のボリュームで判断します。
+現在のステップの論理ボリュームを取得します。
 スコアリング対象のボリュームかどうかの条件に利用できます。
-
-## 時刻がほしい
-
-```cpp
-
-```
 
 ## エネルギー損失を知りたい（``GetTotalEnergyDeposit``）
 
@@ -67,6 +62,12 @@ G4double the_non_ionizing_energy_deposit = aStep->GetNonIonizingEnergyDeposit();
 
 現在のステップで発生したエネルギー損失を取得できます。
 この値を足し上げると、トラック全体のエネルギー損失が計算できます。
+
+:::{note}
+
+``aStep->GetPreStepPoint()->GetTotalEnergy()`` との関係がよく分かっていません。
+
+:::
 
 ## トラックが欲しい（``GetTrack``）
 
@@ -90,4 +91,3 @@ G4ThreeVector delta_position->GetDeltaPosition();
 ```
 
 ``GetDelta*``メソッドで、ステップの始点（``PreStepPoint``）と終点（``PostStepPoint``）の差を取得できます。
-
