@@ -29,10 +29,10 @@ geant4-spack
 ---
 maxdepth: 1
 ---
+geant4-class-reference
 geant4-run
 geant4-class-category
 geant4-units
-geant4-coding-guidelines
 geant4-cpp
 geant4-mandatory-classes
 geant4-multithread

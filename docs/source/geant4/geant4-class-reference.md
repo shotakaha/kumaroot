@@ -3,9 +3,17 @@
 Geant4のアプリケーションを開発するときにお世話になるのが[Class Reference Guide](https://geant4.kek.jp/Reference/)です。
 ここから自分が使っているバージョンを選択し、該当するクラス名やメソッドなどを探します。
 
-Geant4公式の[コーディング・ガイドライン](https://geant4-internal.web.cern.ch/collaboration/coding_guidelines)があったので、一度読んでおくとよいと思いますが、ユーザーのアプリケーションに対してコーディング規約を強制するスタンスはとっていません。
+あまり使い勝手はよくないと感じるのですが、頑張って探しています。
+探すべきキーワードがある程度分かってきたら、
+手元にあるソースコード本体を検索（[fd](../command/command-fd.md)など）して、
+直接読んだほうが速いかもしれません。
 
-## 基本はステップ（``G4Step``）
+## ステップ（``G4Step``）が基本
+
+```cpp
+// G4Step *aStep は事前に定義済み
+G4double energy_deposit = aStep->GetTotalEnergyDeposit();
+```
 
 トラッキングの基本単位はステップ（``G4Step``）です。
 [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)や
@@ -29,7 +37,7 @@ Geant4が提供するクラスの接頭辞は``G4*``が使われています。
 ## 関数名
 
 関数名は``PascalCase``が使われています。
-また、セッター（``Set*``）とゲッター（``Get*``）は
+セッターは``Set*``、ゲッターは``Get*``が接頭辞に使われています。
 
 ## 変数名
 
