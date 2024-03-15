@@ -31,6 +31,7 @@ maxdepth: 1
 ---
 geant4-class-reference
 geant4-run
+geant4-scoring
 geant4-class-category
 geant4-units
 geant4-cpp
