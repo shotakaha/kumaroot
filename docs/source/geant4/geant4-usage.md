@@ -31,13 +31,13 @@ maxdepth: 1
 ---
 geant4-class-reference
 geant4-run
+geant4-geometry
 geant4-scoring
 geant4-class-category
 geant4-units
 geant4-cpp
 geant4-mandatory-classes
 geant4-multithread
-geant4-volume
 geant4-drivers
 ```
 
