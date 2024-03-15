@@ -5,6 +5,33 @@ Geant4シミュレーションにはさまざまな管理者（manager）が登�
 
 詳細は[Basic concept of Run](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/run.html)を参照してください。
 
+## メイン関数
+
+```cpp
+int main(argc, *argv)
+{
+    auto runManager = G4RunManagerFactory::CreateRunManager();
+    runManager->SetUserInitialization(new DetectorConstruction);  // <-- G4VUserDetectorConstructionを継承した自作クラス（必須）
+    runManager->SetUserInitialization(new PhysicsList);    // <-- G4ModularPhysicsList もしくはG4VUserPhysicsListを継承した自作クラス（必須）
+    runManager->SetUserInitialization(new ActionInitialization);  // <-- ユーザーアクションの設定>
+
+    // ActionInitializationの内容
+    // SetUserAction(PrimaryGeneratorAction);  // <-- G4VUserPrimaryGeneratorAction>
+    // SetUserAction(RunAction);  // <-- G4UserRunActionを継承したクラス
+    // SetUserAction(EventAction);  // <-- G4UserEventActionを継承したクラス
+    // SetUserAction(TrackingAction);  // <-- G4UserTrackingActionを継承したクラス
+    // SetUserAction(SteppingAction);  // <-- G4UserSteppingActionを継承したクラス
+
+    runManager->Initialize();
+    G4int nEvents
+    runManager->BeamOn(nEvents);
+
+    delete runManager;
+}
+```
+
+
+
 ## 管理者の体制
 
 1. ``G4RunManager``: G4**Event**Managerにイベント処理ををお願いする。
