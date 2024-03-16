@@ -55,7 +55,7 @@ namespace B1
         G4String particle_name;
         G4ParticleDefinition *particle = particleTable->FindParticle(particle_name="mu-");
         fParticleGun->SetParticleDefinition(particle);
-        fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+        fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., -1., 0.));
         fParticleGun->SetParticleEnergy(500. * MeV);
     }
 
@@ -104,8 +104,8 @@ namespace B1
 
         G4double size = 0.8;
         G4double x0 = size * tank_rmax * (G4UniformRand() - 0.5);
-        G4double y0 = size * tank_rmax * (G4UniformRand() - 0.5);
-        G4double z0 = -0.5 * tank_z;
+        G4double z0 = size * tank_rmax * (G4UniformRand() - 0.5);
+        G4double y0 = 0.5 + tank_z;
 
         fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
 
