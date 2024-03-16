@@ -124,15 +124,15 @@ runManager->SetUserInitialization(physicsList);
 geant4-physicslist
 ```
 
-## 粒子したい
+## ユーザーアクションしたい
 
 ```cpp
 runManager->SetUserInitialization(new ActionInitialization());
 ```
 
-
 ```{toctree}
 geant4-particles
+geant4-eventaction
 ```
 
 - ``G4VUserPrimaryGeneratorAction``
