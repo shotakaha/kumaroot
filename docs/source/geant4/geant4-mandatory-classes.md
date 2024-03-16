@@ -1,4 +1,100 @@
-# 必須クラス
+# 自作が必要なクラスたち
+
+## 必須クラス
+
+### DetectorConstruction
+
+測定器のジオメトリを作成するクラスです。
+``G4VUserDetectorConstruction``を継承して作成します。
+純粋仮想関数である``Construct``を自分で実装します。
+``SensitiveDetector``などの設定フックとして``ConstructSDandField``が用意されています。
+
+:::{mermaid}
+classDiagram
+    G4VUserDetectorConstruction <|-- DetectorConstruction
+    class DetectorConstruction{
+      +DetectorConstruction() = default
+      +~DetectorConstruction() override = default
+      +G4VPhysicalVolume* Construct()
+      +G4VPhysicalVolume* ConstructSDandField()
+    }
+    class G4VUserDetectorConstruction{
+      +G4VUserDetectorConstruction()
+      +virtual ~G4VUserDetectorConstruction()
+      +virtual G4VPhysicalVolume* Construct() = 0
+      +virtual void ConstructSDandField()
+    }
+:::
+
+### PhysicsList
+
+物理の相互作用モデルを設定するクラスです。
+Geant4が用意している``G4VModularPhysicsList``の具象クラスがあるので、まずはそこから該当しそうなものを選びます。
+より詳細な相互作用モデルを実装したい場合は、``G4VPhysicsList``を継承して作成します。
+
+:::{mermaid}
+classDiagram
+    G4VUserPhysicsList <|-- G4VModularPhysicsList
+    G4VModularPhysicsList <|-- FTFP_BERT
+    G4VModularPhysicsList <|-- QBBC
+    G4VModularPhysicsList <|-- QGSP_BERT
+    G4VModularPhysicsList <|-- QGSP_BIC
+:::
+
+### ActionInitialization
+
+ユーザーアクションを設定するクラスです。
+``G4VUserActionInitialization``を継承して作成します。
+純粋仮想関数である``Build``を自分で実装します。
+マルチスレッド機能を有効にしているときは、ここの内容が``Worker``ノードで実行されます。
+マスターノードの実行内容を設定するためのフックとして``BuildForMaster``が用意されています。
+
+:::{mermaid}
+
+classDiagram
+    G4VUserActionInitialization <|-- ActionInitialization
+    class ActionInitialization{
+      +ActionInitialization() = default
+      +~ActionInitialization() override = default
+      +void BuidForMaster() const override
+      +void Build() const override
+    }
+    class G4VUserActionInitialization{
+      +G4VUserActionInitialization()
+      +virtual ~G4VUserActionInitialization()
+      +virtual void BuildForMaster() const
+      +virtual void Build() const = 0
+    }
+:::
+
+### PrimaryGeneratorAction
+
+入射粒子の初期条件を設定するクラスです。
+``G4VUserPrimaryGeneratorAction``を継承して作成します。
+純粋仮想関数である``GeneratePrimaries``を自分で実装します。
+
+:::{mermaid}
+
+classDiagram
+    G4VUserPrimaryGeneratorAction <|-- PrimaryGeneratorAction
+    class PrimaryGeneratorAction{
+      +PrimaryGeneratorAction() = default
+      +~PrimaryGeneratorAction() override = default
+      +void GeneratePrimaries(G4Event *aEvent)
+    }
+    class G4VUserPrimaryGeneratorAction{
+      +G4VUserPrimaryGeneratorAction()
+      +virtual ~G4VUserPrimaryGeneratorAction()
+      +virtual void GeneratePrimaries(G4Event *aEvent)=0
+    }
+:::
+
+## ユーザーフック用のクラス
+
+1. ``RunAction: public G4UserRunAction``
+1. ``EventAction: public G4UserEventAction``
+1. ``TrackingAction: public G4UserTrackingAction``
+1. ``SteppingAction: public G4UserSteppingAction``
 
 ```cpp
 // RunManagerを作成
