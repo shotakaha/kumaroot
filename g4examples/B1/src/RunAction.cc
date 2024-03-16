@@ -61,8 +61,8 @@ namespace B1
 
         // Register accumulable to the accumulable manager
         G4AccumulableManager *accumulableManager = G4AccumulableManager::Instance();
-        accumulableManager->RegisterAccumulable(fEdep);
-        accumulableManager->RegisterAccumulable(fEdep2);
+        accumulableManager->RegisterAccumulable(fEnergyDeposit);
+        accumulableManager->RegisterAccumulable(fEnergyDeposit2);
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -79,10 +79,10 @@ namespace B1
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-    void RunAction::EndOfRunAction(const G4Run *run)
+    void RunAction::EndOfRunAction(const G4Run *aRun)
     {
-        G4int nofEvents = run->GetNumberOfEvent();
-        if (nofEvents == 0)
+        G4int n_events = aRun->GetNumberOfEvent();
+        if (n_events == 0)
             return;
 
         // Merge accumulables
@@ -91,10 +91,10 @@ namespace B1
 
         // Compute dose = total energy deposit in a run and its variance
         //
-        G4double edep = fEdep.GetValue();
-        G4double edep2 = fEdep2.GetValue();
+        G4double deposit = fEnergyDeposit.GetValue();
+        G4double deposit2 = fEnergyDeposit2.GetValue();
 
-        G4double rms = edep2 - edep * edep / nofEvents;
+        G4double rms = deposit2 - deposit * deposit / n_events;
         if (rms > 0.)
             rms = std::sqrt(rms);
         else
@@ -103,7 +103,7 @@ namespace B1
         const auto detConstruction = static_cast<const DetectorConstruction *>(
             G4RunManager::GetRunManager()->GetUserDetectorConstruction());
         G4double mass = detConstruction->GetScoringVolume()->GetMass();
-        G4double dose = edep / mass;
+        G4double dose = deposit / mass;
         G4double rmsDose = rms / mass;
 
         // Run conditions
@@ -138,7 +138,7 @@ namespace B1
 
         G4cout
             << G4endl
-            << " The run consists of " << nofEvents << " " << runCondition
+            << " The run consists of " << n_events << " " << runCondition
             << G4endl
             << " Cumulated dose per run, in scoring volume : "
             << G4BestUnit(dose, "Dose") << " rms = " << G4BestUnit(rmsDose, "Dose")
@@ -150,10 +150,10 @@ namespace B1
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-    void RunAction::AddEdep(G4double edep)
+    void RunAction::AddEnergyDeposit(G4double aValue)
     {
-        fEdep += edep;
-        fEdep2 += edep * edep;
+        fEnergyDeposit += aValue;
+        fEnergyDeposit2 += aValue * aValue;
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -51,14 +51,14 @@ namespace B1
         RunAction();
         ~RunAction() override = default;
 
-        void BeginOfRunAction(const G4Run *) override;
-        void EndOfRunAction(const G4Run *) override;
+        void BeginOfRunAction(const G4Run *aRun) override;
+        void EndOfRunAction(const G4Run *aRun) override;
 
-        void AddEdep(G4double edep);
+        void AddEnergyDeposit(G4double aValue);
 
     private:
-        G4Accumulable<G4double> fEdep = 0.;
-        G4Accumulable<G4double> fEdep2 = 0.;
+        G4Accumulable<G4double> fEnergyDeposit = 0.;
+        G4Accumulable<G4double> fEnergyDeposit2 = 0.;
     };
 
 }

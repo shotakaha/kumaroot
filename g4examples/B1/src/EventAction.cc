@@ -54,7 +54,7 @@ void EventAction::BeginOfEventAction(const G4Event *aEvent)
 void EventAction::EndOfEventAction(const G4Event *aEvent)
 {
   // accumulate statistics in run action
-  fRunAction->AddEdep(fEnergyDeposit);
+  fRunAction->AddEnergyDeposit(fEnergyDeposit);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
