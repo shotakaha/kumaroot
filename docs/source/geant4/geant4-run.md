@@ -10,22 +10,38 @@ Geant4シミュレーションにはさまざまな管理者（manager）が登�
 ```cpp
 int main()
 {
+    // ランマネージャー
+    // マルチスレッド対応など、実行環境に応じて、よしなにやってくれる
     auto runManager = G4RunManagerFactory::CreateRunManager();
-    runManager->SetUserInitialization(new DetectorConstruction);  // <-- G4VUserDetectorConstructionを継承した自作クラス（必須）
-    runManager->SetUserInitialization(new PhysicsList);    // <-- G4ModularPhysicsList もしくはG4VUserPhysicsListを継承した自作クラス（必須）
-    runManager->SetUserInitialization(new ActionInitialization);  // <-- ユーザーアクションの設定>
 
-    // ActionInitializationの内容
-    // SetUserAction(PrimaryGeneratorAction);  // <-- G4VUserPrimaryGeneratorAction>
-    // SetUserAction(RunAction);  // <-- G4UserRunActionを継承したクラス
-    // SetUserAction(EventAction);  // <-- G4UserEventActionを継承したクラス
-    // SetUserAction(TrackingAction);  // <-- G4UserTrackingActionを継承したクラス
-    // SetUserAction(SteppingAction);  // <-- G4UserSteppingActionを継承したクラス
+    // ジオメトリの作成
+    // G4VUserDetectorConstructionを継承
+    // DetectorConstruction::Construct()を実行
+    runManager->SetUserInitialization(new DetectorConstruction);
 
+
+    // 相互作用モデル
+    // G4VModularPhysicsListの具象クラスを利用
+    runManager->SetUserInitialization(new PhysicsList);
+
+    // ユーザーアクションの設定
+    // G4VUserActionInitializationを継承
+    // ActionInitialization::Build()を実行
+    runManager->SetUserInitialization(new ActionInitialization);
+
+    // ActionInitialization::Build()の内容
+    // SetUserAction(PrimaryGeneratorAction);  // <-- G4VUserPrimaryGeneratorActionを継承
+    // SetUserAction(RunAction);  // <-- G4UserRunActionを継承
+    // SetUserAction(EventAction);  // <-- G4UserEventActionを継承
+    // SetUserAction(TrackingAction);  // <-- G4UserTrackingActionを継承
+    // SetUserAction(SteppingAction);  // <-- G4UserSteppingActionを継承
+
+    // ランマネージャーの初期化
     runManager->Initialize();
     G4int nEvents
     runManager->BeamOn(nEvents);
 
+    // ランマネージャーの解放
     delete runManager;
 }
 ```
