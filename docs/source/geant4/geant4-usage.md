@@ -103,6 +103,7 @@ runManager->SetUserInitialization(new DetectorConstruction());
 maxdepth: 1
 ---
 geant4-pvplacement
+geant4-pvreplica
 geant4-world
 geant4-tank
 geant4-pmt

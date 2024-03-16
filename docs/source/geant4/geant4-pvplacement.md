@@ -3,12 +3,12 @@
 ```cpp
 new G4PVPlacement(
     const G4Transrom3D &Transform3D,
-    G4LogicalVolume *pCurrentLogicalVolume,    // 論理ボリューム
-    const G4String &pName,    // 名前
-    G4LogicalVolume *pMotherLogicalVolume,    // 親ボリューム,
-    G4bool bMany,             // ブーリアン演算,
-    G4int aCopyID,       // コピー番号,
-    G4bool bCheckOverlaps    // 重なり確認
+    G4LogicalVolume *pLogicalVolume,  // 子ボリューム
+    const G4String &pName,            // 名前
+    G4LogicalVolume *pMotherVolume,   // 親ボリューム,
+    G4bool bMany,                     // ブーリアン演算,
+    G4int aCopyID,                    // コピー番号,
+    G4bool bCheckOverlaps             // 重なり確認
 )
 ```
 
