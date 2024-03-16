@@ -56,6 +56,10 @@ namespace B1
     {
         // accumulate statistics in run action
         fRunAction->AddEnergyDeposit(fEnergyDeposit);
+
+        // テスト
+        G4int event_id = aEvent->GetEventID();
+        G4cout << "Event ID: " << event_id << G4endl;
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -86,6 +86,10 @@ namespace B1
         G4cout << "Total Energy: " << total_energy << G4endl;
         G4cout << "Total Energy Deposit: " << energy_deposit << G4endl;
         G4cout << "Charge: " << charge << G4endl;
+
+        auto track = aStep->GetTrack();
+        auto track_id = track->GetTrackID();
+        G4cout << "Track ID: " << track_id << G4endl;
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
