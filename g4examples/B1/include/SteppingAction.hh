@@ -31,9 +31,8 @@
 #define B1SteppingAction_h 1
 
 #include "G4UserSteppingAction.hh"
+#include "G4LogicalVolume.hh"
 #include "globals.hh"
-
-class G4LogicalVolume;
 
 /// Stepping action class
 ///
