@@ -106,9 +106,9 @@
 #
 # To get nice view
 # Make the "World" box invisible
-/vis/geometry/set/visibility WorldL 0 false
+/vis/geometry/set/visibility WorldLogical 0 false
 # "Envelope" is transparent blue to represent water
-/vis/geometry/set/colour TankL 0 0 0 1 .5
+/vis/geometry/set/colour TankLogical 0 0 0 1 .5
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 /vis/viewer/set/viewpointThetaPhi 120 150
