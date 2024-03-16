@@ -54,22 +54,14 @@ geant4-examples-b2
 
 ## 実験したい
 
-```cpp
-G4RunManager *runManager = new G4RunManager;
-runManager->SetUserInitialization(new MYDetectorConstruction);
-runManager->SetUserInitialization(new MYPhysicsList);
-runManager->SetUserInitialization(new MYActionInitialization);
-runManager->Initialize()
-```
-
 ```{toctree}
 ---
 maxdepth: 1
 ---
-geant4-batch
 geant4-macro
-geant4-runmanager
+geant4-batch
 geant4-uimanager
+geant4-runmanager
 geant4-detectorconstruction
 geant4-actioninitialization
 geant4-steppingaction
