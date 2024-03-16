@@ -38,23 +38,23 @@ namespace B1
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-EventAction::EventAction(RunAction* runAction)
-: fRunAction(runAction)
+EventAction::EventAction(RunAction *aAction)
+: fRunAction(aAction)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::BeginOfEventAction(const G4Event*)
+void EventAction::BeginOfEventAction(const G4Event *aEvent)
 {
-  fEdep = 0.;
+  fEnergyDeposit = 0.;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::EndOfEventAction(const G4Event*)
+void EventAction::EndOfEventAction(const G4Event *aEvent)
 {
   // accumulate statistics in run action
-  fRunAction->AddEdep(fEdep);
+  fRunAction->AddEdep(fEnergyDeposit);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

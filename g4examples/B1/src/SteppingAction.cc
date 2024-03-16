@@ -66,7 +66,7 @@ namespace B1
 
         // collect energy deposited in this step
         G4double energy_deposit = aStep->GetTotalEnergyDeposit();
-        fEventAction->AddEdep(energy_deposit);
+        fEventAction->AddEnergyDeposit(energy_deposit);
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

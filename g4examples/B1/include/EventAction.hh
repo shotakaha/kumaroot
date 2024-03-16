@@ -44,17 +44,17 @@ class RunAction;
 class EventAction : public G4UserEventAction
 {
   public:
-    EventAction(RunAction* runAction);
+    EventAction(RunAction *aAction);
     ~EventAction() override = default;
 
-    void BeginOfEventAction(const G4Event* event) override;
-    void EndOfEventAction(const G4Event* event) override;
+    void BeginOfEventAction(const G4Event* aEvent) override;
+    void EndOfEventAction(const G4Event* aEvent) override;
 
-    void AddEdep(G4double edep) { fEdep += edep; }
+    void AddEnergyDeposit(G4double aValue) { fEnergyDeposit += aValue; }
 
   private:
     RunAction* fRunAction = nullptr;
-    G4double   fEdep = 0.;
+    G4double   fEnergyDeposit = 0.;
 };
 
 }
