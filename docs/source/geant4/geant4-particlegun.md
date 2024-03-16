@@ -27,7 +27,7 @@ aParticleGun->SetParticleEnergy(400*MeV);
 ``SetParticleEnergy``で入射粒子のエネルギーを変更できます。
 運動量をすでに設定していた場合は0に変更されるようです。
 
-## 運動量を変更したい
+## 運動量を変更したい（``SetParticleMomentum``）
 
 ```cpp
 aParticleGun->SetParticleMomentum(400*MeV);

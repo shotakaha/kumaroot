@@ -96,6 +96,7 @@ geant4-acrylic
 geant4-vacuum
 geant4-glass
 geant4-petroleum
+geant4-plastic-scintillator
 ```
 
 ## 測定器したい
@@ -111,13 +112,15 @@ maxdepth: 1
 geant4-world
 geant4-tank
 geant4-pmt
+geant4-calorimeter
+geant4-hodoscope
+geant4-qe
 ```
 
 ## 相互作用したい
 
 ```cpp
-G4VModularPhysicsList* physicsList = new FTFP_BERT;
-runManager->SetUserInitialization(physicsList);
+runManager->SetUserInitialization(new FTFP_BERT);
 ```
 
 ```{toctree}
@@ -132,7 +135,10 @@ runManager->SetUserInitialization(new ActionInitialization());
 
 ```{toctree}
 geant4-particles
+geant4-particlegun
 geant4-eventaction
+geant4-track
+geant4-run
 ```
 
 - ``G4VUserPrimaryGeneratorAction``
@@ -163,7 +169,6 @@ geant4-vismanager
 
 ```{toctree}
 geant4-constants
-geant4-plastic-scintillator
 geant4-userclasses
 ```
 
