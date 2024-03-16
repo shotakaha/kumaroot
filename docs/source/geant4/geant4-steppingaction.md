@@ -1,4 +1,4 @@
-# SteppingActionしたい（``G4UserSteppingAction``）
+# ステッピングアクションしたい（``G4UserSteppingAction``）
 
 ```cpp
 // SteppingAction.hh
@@ -30,6 +30,26 @@ class SteppingAction : public G4UserSteppingAction
 
 ステッピングアクションは``G4UserSteppingAction``を継承したクラスを自作します。
 仮想関数として定義されている``UserSteppingAction``を実装します。
+
+```cpp
+void SteppingAction::UserSteppingAction(const G4Step *aStep)
+{
+    // スコアリングボリュームを取得する
+    if (!fScoringVolume) {
+        const auto detector = static_cast<const DetectorConstruction*>(G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+        fScoringVolume = detector->GetScoringVolume();
+    }
+
+    // ステップがあるボリュームを取得する
+    G4LogicalVolume *pVolume = aStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
+
+    // スコアリングすべきか判断する
+    if (pVolume != fScoringVolume) return;
+
+    // このステップのエネルギー損失を取得する
+    G4double energy_deposit = aStep->GetTotalEnergyDeposit();
+}
+```
 
 ## ステップの現在情報が欲しい
 
