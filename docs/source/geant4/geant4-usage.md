@@ -119,6 +119,7 @@ runManager->SetUserInitialization(new FTFP_BERT);
 
 ```{toctree}
 geant4-physicslist
+geant4-ftfp_bert
 ```
 
 ## ユーザーアクションしたい
