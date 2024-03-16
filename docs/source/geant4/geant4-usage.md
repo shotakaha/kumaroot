@@ -30,7 +30,7 @@ geant4-spack
 maxdepth: 1
 ---
 geant4-class-reference
-geant4-run
+geant4-overview
 geant4-geometry
 geant4-drivers
 geant4-scoring
