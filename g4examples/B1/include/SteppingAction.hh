@@ -46,11 +46,11 @@ namespace B1
     class SteppingAction : public G4UserSteppingAction
     {
     public:
-        SteppingAction(EventAction *eventAction);
+        SteppingAction(EventAction *aAction);
         ~SteppingAction() override = default;
 
         // method from the base class
-        void UserSteppingAction(const G4Step *) override;
+        void UserSteppingAction(const G4Step *aStep) override;
 
     private:
         EventAction *fEventAction = nullptr;

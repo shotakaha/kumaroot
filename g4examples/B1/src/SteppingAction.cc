@@ -41,14 +41,14 @@ namespace B1
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-    SteppingAction::SteppingAction(EventAction *eventAction)
-        : fEventAction(eventAction)
+    SteppingAction::SteppingAction(EventAction *aAction)
+        : fEventAction(aAction)
     {
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-    void SteppingAction::UserSteppingAction(const G4Step *step)
+    void SteppingAction::UserSteppingAction(const G4Step *aStep)
     {
         if (!fScoringVolume)
         {
@@ -58,15 +58,15 @@ namespace B1
         }
 
         // get volume of the current step
-        G4LogicalVolume *volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
+        G4LogicalVolume *volume = aStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
 
         // check if we are in scoring volume
         if (volume != fScoringVolume)
             return;
 
         // collect energy deposited in this step
-        G4double edepStep = step->GetTotalEnergyDeposit();
-        fEventAction->AddEdep(edepStep);
+        G4double energy_deposit = aStep->GetTotalEnergyDeposit();
+        fEventAction->AddEdep(energy_deposit);
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
