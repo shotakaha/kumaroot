@@ -36,6 +36,7 @@ geant4-drivers
 geant4-scoring
 geant4-mandatory-classes
 geant4-units
+geant4-constants
 geant4-cpp
 ```
 
@@ -167,13 +168,6 @@ visManager->Initialize();
 
 ```{toctree}
 geant4-vismanager
-```
-
-## 未分類
-
-```{toctree}
-geant4-constants
-geant4-userclasses
 ```
 
 ## リファレンス
