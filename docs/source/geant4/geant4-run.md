@@ -8,7 +8,7 @@ Geant4シミュレーションにはさまざまな管理者（manager）が登�
 ## メイン関数
 
 ```cpp
-int main(argc, *argv)
+int main()
 {
     auto runManager = G4RunManagerFactory::CreateRunManager();
     runManager->SetUserInitialization(new DetectorConstruction);  // <-- G4VUserDetectorConstructionを継承した自作クラス（必須）
