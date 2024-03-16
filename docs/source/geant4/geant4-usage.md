@@ -37,7 +37,6 @@ geant4-class-category
 geant4-units
 geant4-cpp
 geant4-mandatory-classes
-geant4-multithread
 geant4-drivers
 ```
 
