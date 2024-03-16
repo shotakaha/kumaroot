@@ -58,21 +58,21 @@ namespace B1
         //
         // World
         //
-        G4double world_x = 50 * m;
-        G4double world_y = 50 * m;
-        G4double world_z = 50 * m;
+        G4double world_x = 1. * m;
+        G4double world_y = 1. * m;
+        G4double world_z = 1. * m;
         G4Material *fAir = nist->FindOrBuildMaterial("G4_AIR");
 
-        auto fWorldS = new G4Box(
-            "WorldS",
+        auto pWorldSolid = new G4Box(
+            "WorldSolid",
             0.5 * world_x,
             0.5 * world_y,
             0.5 * world_z); // its size
 
-        auto fWorldL = new G4LogicalVolume(
-            fWorldS,   // its solid
-            fAir,      // its material
-            "WorldL"); // its name
+        auto pWorldLogical = new G4LogicalVolume(
+            pWorldSolid,     // its solid
+            fAir,            // its material
+            "WorldLogical"); // its name
 
         G4RotationMatrix rotation;
         G4ThreeVector direction;
@@ -82,10 +82,10 @@ namespace B1
         direction = G4ThreeVector();
         location = G4Transform3D(rotation, direction);
 
-        auto fWorldP = new G4PVPlacement(
+        auto pWorldPhysical = new G4PVPlacement(
             location,
-            fWorldL,         // its logical volume
-            "WorldP",        // its name
+            pWorldLogical,         // its logical volume
+            "WorldPhysical",        // its name
             nullptr,         // its mother  volume
             false,           // no boolean operation
             0,               // copy number
@@ -94,23 +94,23 @@ namespace B1
         //
         // Tank
         //
-        G4double fTankDiameter = 39.3 * m;
-        G4double fTankHeight = 41.4 * m;
+        G4double diameter = 39.3 * cm;
+        G4double height = 41.4 * cm;
         G4double rmin, rmax, z, sphi, dphi;
-        auto fTankS = new G4Tubs(
-            "TankS",
+        auto pTankSolid = new G4Tubs(
+            "TankSolid",
             rmin = 0.,
-            rmax = 0.5 * fTankDiameter,
-            z = 0.5 * fTankHeight,
+            rmax = 0.5 * diameter,
+            z = 0.5 * height,
             sphi = 0. * deg,
             dphi = 360. *deg);
 
         // Fill tank with water
         G4Material *fWater = nist->FindOrBuildMaterial("G4_WATER");
-        auto fTankL = new G4LogicalVolume(
-            fTankS,
+        auto pTankLogical = new G4LogicalVolume(
+            pTankSolid,
             fWater,
-            "TankL");
+            "TankLogical");
 
         rotation = G4RotationMatrix();
         direction = G4ThreeVector();
@@ -118,19 +118,19 @@ namespace B1
 
         new G4PVPlacement(
             location,
-            fTankL,         // its logical volume
-            "TankP",        // its name
-            fWorldL,         // its mother  volume
+            pTankLogical,         // its logical volume
+            "TankPhysical",        // its name
+            pWorldLogical,         // its mother  volume
             false,           // no boolean operation
             0,               // copy number
             checkOverlaps);  // overlaps checking
 
-        fScoringVolume = fTankL;
+        fScoringVolume = pTankLogical;
 
         //
         // always return the physical World
         //
-        return fWorldP;
+        return pWorldPhysical;
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
