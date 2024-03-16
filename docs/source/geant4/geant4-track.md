@@ -1,9 +1,36 @@
 # トラックしたい（``G4Track``）
 
-トラック（``G4Track``）は、粒子の進む方向のオブジェクトです。
+[G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)は、トラック情報を管理するオブジェクトです。
+トラック粒子の進む方向のオブジェクトです。
 ステップと同等の情報を持っていますが、薄皮一枚くらい上位のオブジェクト（というイメージ）です。
 
 トラック情報は``G4UserTrackingAction``クラスをフックにしてカスタマイズするのに使います。
+
+## トラック番号をしりたい（``GetTrackID``）
+
+```cpp
+G4int track_id = aTrack->GetTrackID();
+```
+
+## ステップをしりたい（``GetStep``）
+
+```cpp
+G4Step step = aTrack->GetStep();
+```
+
+## ステップの長さをしりたい（``GetStepLength``）
+
+```cpp
+G4double step_length = aTrack->GetStepLength();
+```
+
+## 粒子をしりたい
+
+```cpp
+aTrack->GetDynamicParticle();
+aTrack->GetParticleDefinition();
+aTrack->GetDefinition();
+```
 
 ## 座標をしりたい（``GetPosition``）
 
@@ -29,8 +56,8 @@ G4double proper_time = aTrack->GetProperTime();
 ## 運動量をしりたい（``GetMomentum``）
 
 ```cpp
-G4ThreeVector momentum = aTrack->GetMomentumDirection();
-G4double total_momentum = aTrack->GetMomentum();
+G4double momentum = aTrack->GetMomentum();
+G4ThreeVector momentum_direction = aTrack->GetMomentumDirection();
 ```
 
 ``GetMomentumDirection``で運動量の単位ベクトル成分、
@@ -46,7 +73,7 @@ G4double kinetic_energy = aTrack->GetKineticEnergy();
 ``GetTotalEnergy``でエネルギーの合計、
 ``GetKineticEnergy``で運動エネルギーの合計を取得できます。
 
-## ボリュームをしりたい（``GetPhysicalVolume``）
+## ボリュームをしりたい（``GetVolume``）
 
 ```cpp
 G4VPhysicalVolume *physical_volume = aTrack->GetVolume();
@@ -69,10 +96,10 @@ G4LogicalVolume *logical_volume = aTrack->GetLogicalVolumeAtVertex();
 
 :::
 
-## 粒子をしりたい
+## 一次粒子をしりたい（``GetVertexPosition``）
 
 ```cpp
-aTrack->GetDynamicParticle();
-aTrack->GetParticleDefinition();
+G4ThreeVector vertex_position = aTrack->GetVertexPosition();
+G4ThreeVector vertex_momentum_direction = aTrack->GetVertexMomentumDirection();
+G4Double vertex_kinetic_energy = aTrack->GetVertexKineticEnergy();
 ```
-

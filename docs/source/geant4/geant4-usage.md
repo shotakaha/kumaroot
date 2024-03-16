@@ -138,8 +138,11 @@ geant4-particles
 geant4-particlegun
 geant4-primarygeneratoraction
 geant4-eventaction
+geant4-step
 geant4-track
+geant4-event
 geant4-run
+
 ```
 
 - ``G4VUserPrimaryGeneratorAction``
