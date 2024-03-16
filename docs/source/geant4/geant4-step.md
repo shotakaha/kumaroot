@@ -1,12 +1,18 @@
 # ステップ情報したい（``G4Step``）
 
-ステップ（``G4Step``）は、Geant4シミュレーションにおけるトラッキングの基本単位です。
-ステップは**始点**（``PreStepPoint``）と**終点**（``PostStepPoint``）で構成されており、
-それぞれの点での粒子の状態を取り出すことができます。
+```cpp
+aStep->GetTotalEnergyDeposit();
+```
 
-始点と終点は``G4StepPoint``クラスのオブジェクトなので[G4StepPoint Class Reference](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)を参照して、欲しい物理量を探します。
+[G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)はステップ情報を管理するクラスです。
+ユーザーアクション設定の[SteppingAction](./geant4-steppingaction.md)でステップ情報を取得したいときに使います。
 
-ステップの情報は``G4UserSteppingAction``クラスをフックにしてカスタマイズするのに使います。
+ステップはGeant4シミュレーションの基本単位で、
+**始点**（``PreStepPoint``）と
+**終点**（``PostStepPoint``）で構成されています。
+
+始点と終点は[G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)クラスのオブジェクトになっており、それぞれの点での粒子の状態を取り出すことができます。
+
 
 ## 座標をしりたい（``GetPosition``）
 
