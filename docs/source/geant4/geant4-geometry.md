@@ -1,4 +1,4 @@
-# ジオメトリの作り方
+# ジオメトリ作成の流れ
 
 ```cpp
 G4Material *pMaterial = new G4Material(...)
