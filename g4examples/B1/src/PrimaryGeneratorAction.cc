@@ -32,6 +32,7 @@
 #include "G4LogicalVolumeStore.hh"
 #include "G4LogicalVolume.hh"
 #include "G4Box.hh"
+#include "G4Tubs.hh"
 #include "G4RunManager.hh"
 #include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
@@ -51,11 +52,11 @@ namespace B1
 
         // default particle kinematic
         G4ParticleTable *particleTable = G4ParticleTable::GetParticleTable();
-        G4String particleName;
-        G4ParticleDefinition *particle = particleTable->FindParticle(particleName = "gamma");
+        G4String particle_name;
+        G4ParticleDefinition *particle = particleTable->FindParticle(particle_name="mu-");
         fParticleGun->SetParticleDefinition(particle);
         fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
-        fParticleGun->SetParticleEnergy(6. * MeV);
+        fParticleGun->SetParticleEnergy(500. * MeV);
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -67,7 +68,7 @@ namespace B1
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-    void PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
+    void PrimaryGeneratorAction::GeneratePrimaries(G4Event *aEvent)
     {
         // this function is called at the begining of ecah event
         //
@@ -76,20 +77,20 @@ namespace B1
         // on DetectorConstruction class we get Envelope volume
         // from G4LogicalVolumeStore.
 
-        G4double envSizeXY = 0;
-        G4double envSizeZ = 0;
+        G4double tank_rmax = 0;
+        G4double tank_z = 0;
 
-        if (!fEnvelopeBox)
+        if (!fTank)
         {
-            G4LogicalVolume *envLV = G4LogicalVolumeStore::GetInstance()->GetVolume("TankL");
-            if (envLV)
-                fEnvelopeBox = dynamic_cast<G4Box *>(envLV->GetSolid());
+            G4LogicalVolume *pTankLogical = G4LogicalVolumeStore::GetInstance()->GetVolume("TankLogical");
+            if (pTankLogical)
+                fTank = dynamic_cast<G4Tubs *>(pTankLogical->GetSolid());
         }
 
-        if (fEnvelopeBox)
+        if (fTank)
         {
-            envSizeXY = fEnvelopeBox->GetXHalfLength() * 2.;
-            envSizeZ = fEnvelopeBox->GetZHalfLength() * 2.;
+            tank_rmax = fTank->GetOuterRadius();
+            tank_z = fTank->GetZHalfLength() * 2;
         }
         else
         {
@@ -102,13 +103,13 @@ namespace B1
         }
 
         G4double size = 0.8;
-        G4double x0 = size * envSizeXY * (G4UniformRand() - 0.5);
-        G4double y0 = size * envSizeXY * (G4UniformRand() - 0.5);
-        G4double z0 = -0.5 * envSizeZ;
+        G4double x0 = size * tank_rmax * (G4UniformRand() - 0.5);
+        G4double y0 = size * tank_rmax * (G4UniformRand() - 0.5);
+        G4double z0 = -0.5 * tank_z;
 
         fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
 
-        fParticleGun->GeneratePrimaryVertex(anEvent);
+        fParticleGun->GeneratePrimaryVertex(aEvent);
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
