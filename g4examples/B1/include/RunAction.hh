@@ -30,11 +30,10 @@
 #ifndef B1RunAction_h
 #define B1RunAction_h 1
 
-#include "G4UserRunAction.hh"
 #include "G4Accumulable.hh"
+#include "G4Run.hh"
+#include "G4UserRunAction.hh"
 #include "globals.hh"
-
-class G4Run;
 
 /// Run action class
 ///
