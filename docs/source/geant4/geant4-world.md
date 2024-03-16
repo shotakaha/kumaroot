@@ -86,3 +86,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 Geant4では生成された粒子が「実験室の外側に飛び出す」か「運動量がゼロになる」まで、素粒子反応が繰り返されます。なので、ある程度の外枠を定義しておかないと、必要のない計算にまで時間をかけてしまうことになります。
 
 :::
+
+## 見えなくする
+
+```cpp
+pWorldLogical->SetVisAttributes(G4VisAttributes::GetInvisible());
+```
