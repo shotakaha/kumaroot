@@ -39,6 +39,7 @@
 #include "G4LogicalVolume.hh"
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4AnalysisManager.hh"
 
 namespace B1
 {
@@ -71,6 +72,9 @@ namespace B1
     {
         // inform the runManager to save random number seed
         G4RunManager::GetRunManager()->SetRandomNumberStore(false);
+
+        //
+        G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 
         // reset accumulables to their initial values
         G4AccumulableManager *accumulableManager = G4AccumulableManager::Instance();
