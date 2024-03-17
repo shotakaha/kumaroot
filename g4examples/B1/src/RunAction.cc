@@ -123,14 +123,11 @@ namespace B1
 
         // Print
         //
-        if (IsMaster())
-        {
+        if (IsMaster()){
             G4cout
                 << G4endl
                 << "--------------------End of Global Run-----------------------";
-        }
-        else
-        {
+        } else {
             G4cout
                 << G4endl
                 << "--------------------End of Local Run------------------------";
