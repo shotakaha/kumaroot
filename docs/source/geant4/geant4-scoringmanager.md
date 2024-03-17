@@ -1,9 +1,15 @@
 # スコアリングしたい（``G4ScoringManager``）
 
 ```cpp
-G4ScoringManager *scoringManager = G4ScoringManager::GetScoringManager();
-scoringManager->SetVerboseLevel(1);
+int main() {
+    auto *runManager = new G4RunManagerFactory::CreateRunManager();
+
+    G4ScoringManager *scoringManager = G4ScoringManager::GetScoringManager();
+    // scoringManager->SetVerboseLevel(1);
+}
 ```
+
+メイン関数で``G4ScoringManager``を用意します。
 
 ```cfg
 # メッシュを設定
@@ -27,8 +33,9 @@ scoringManager->SetVerboseLevel(1);
 /score/dumpAllQuantityToFile メッシュ名 ファイル名
 ```
 
-``G4ScoringManager``を使って、物理量を測定できます。
-マクロで測定したい物理量を変更できます。
+マクロを使って物理量を測定できます。
+メッシュ付きのボリュームは、パラレルワールドに作成されるようです。
+実際に作成した測定器の配置に合うように、位置／サイズを指定する必要があります。
 
 ## メッシュしたい（``/score/create/``）
 
