@@ -48,6 +48,7 @@ set(EXAMPLEB1_SCRIPTS
   run2.mac
   vis.mac
   tsg_offscreen.mac
+  gui.mac
   )
 
 foreach(_script ${EXAMPLEB1_SCRIPTS})
