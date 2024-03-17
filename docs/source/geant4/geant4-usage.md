@@ -109,6 +109,7 @@ geant4-pmt
 geant4-calorimeter
 geant4-hodoscope
 geant4-qe
+geant4-magneticfield
 ```
 
 ## 相互作用したい
