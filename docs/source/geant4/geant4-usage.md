@@ -132,11 +132,11 @@ maxdepth: 1
 geant4-particles
 geant4-particlegun
 geant4-primarygeneratoraction
-geant4-eventaction
 geant4-steppingaction
+geant4-eventaction
+geant4-runaction
 ```
 
-- ``G4UserRunAction``
 - ``G4UserTrackingAction``
 - ``G4UserStackingAction``
 
@@ -148,6 +148,8 @@ geant4-track
 geant4-event
 geant4-run
 geant4-scoringmanager
+geant4-sensitivedetector
+geant4-multifunctionaldetector
 ```
 
 ## 入射粒子したい
@@ -156,7 +158,6 @@ geant4-scoringmanager
 geant4-muon
 geant4-geantino
 ```
-
 
 ## リファレンス
 

@@ -1,5 +1,8 @@
 # イベントアクションしたい（``G4UserEventAction``）
 
+イベントごとのデータを収集したい場合は、
+``G4UserEventAction``クラスを継承したクラスを作成します。
+
 ```cpp
 
 #include "G4UserEventAction.hh"
@@ -19,6 +22,8 @@ class EventAction: public G4UserEventAction
 }
 ```
 
+## イベント開始したい（``BeginOfEventAction``）
+
 ```cpp
 void EventAction::BeginOfEventAction(const G4Event *aEvent)
 {
@@ -27,6 +32,11 @@ void EventAction::BeginOfEventAction(const G4Event *aEvent)
 }
 ```
 
+``BeginOfEventAction``はイベント開始に実行されるメソッドです。
+イベントごとのデータを代入するために用意した変数は、ここで初期化できます。
+
+## イベント終了したい（``EndOfEventAction``）
+
 ```cpp
 void EventAction::EndOfEventAction(const G4Event *aEvent)
 {
@@ -34,3 +44,6 @@ void EventAction::EndOfEventAction(const G4Event *aEvent)
 
 }
 ```
+
+``EndOfEventAction``はイベントの終わりに実行されるメソッドです。
+イベントごとデータを集計して、イベントサマリーを表示できます。
