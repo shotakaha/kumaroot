@@ -112,7 +112,8 @@ namespace B1
             fWater,
             "TankLogical");
 
-        rotation = G4RotationMatrix();
+        //rotation = G4RotationMatrix(0.*deg, 90.*deg, 0.*deg);
+        rotation = G4RotationMatrix(0.*deg, 90*deg, 0*deg);
         direction = G4ThreeVector();
         location = G4Transform3D(rotation, direction);
 

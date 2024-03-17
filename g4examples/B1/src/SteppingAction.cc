@@ -67,6 +67,29 @@ namespace B1
         // collect energy deposited in this step
         G4double energy_deposit = aStep->GetTotalEnergyDeposit();
         fEventAction->AddEnergyDeposit(energy_deposit);
+
+        // テスト
+        auto point = aStep->GetPreStepPoint();
+        auto position = point->GetPosition();
+        auto local_time = point->GetLocalTime();
+        auto global_time = point->GetGlobalTime();
+        auto proper_time = point->GetProperTime();
+        auto total_energy = point->GetTotalEnergy();
+        auto charge = point->GetCharge();
+        auto status = point->GetStepStatus();
+
+        G4cout << "StepStatus: " << status << G4endl;
+        G4cout << "Position: " << position << G4endl;
+        G4cout << "Local Time: " << local_time << G4endl;
+        G4cout << "Global Time: " << global_time << G4endl;
+        G4cout << "Proper Time: " << proper_time << G4endl;
+        G4cout << "Total Energy: " << total_energy << G4endl;
+        G4cout << "Total Energy Deposit: " << energy_deposit << G4endl;
+        G4cout << "Charge: " << charge << G4endl;
+
+        auto track = aStep->GetTrack();
+        auto track_id = track->GetTrackID();
+        G4cout << "Track ID: " << track_id << G4endl;
     }
 
     //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

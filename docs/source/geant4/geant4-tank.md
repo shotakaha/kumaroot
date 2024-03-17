@@ -25,7 +25,7 @@ G4LogicalVolume *pTankLogical = new G4LogicalVolume(
 )
 
 // 物理ボリュームの作成
-G4RotationMatrix rotation = G4RotationMatrix();
+G4RotationMatrix rotation = G4RotationMatrix(0., 90.*deg, 0.);   // タンクを縦置きにする
 G4ThreeVector direction = G4ThreeVector(0., 0., 0.);
 G4Transform3D location = G4Transform3D(rotation, direction);
 

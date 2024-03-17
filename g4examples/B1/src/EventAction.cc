@@ -36,27 +36,32 @@
 namespace B1
 {
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+    //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-EventAction::EventAction(RunAction *aAction)
-: fRunAction(aAction)
-{}
+    EventAction::EventAction(RunAction *aAction)
+        : fRunAction(aAction)
+    {
+    }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+    //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::BeginOfEventAction(const G4Event *aEvent)
-{
-  fEnergyDeposit = 0.;
-}
+    void EventAction::BeginOfEventAction(const G4Event *aEvent)
+    {
+        fEnergyDeposit = 0.;
+    }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+    //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::EndOfEventAction(const G4Event *aEvent)
-{
-  // accumulate statistics in run action
-  fRunAction->AddEnergyDeposit(fEnergyDeposit);
-}
+    void EventAction::EndOfEventAction(const G4Event *aEvent)
+    {
+        // accumulate statistics in run action
+        fRunAction->AddEnergyDeposit(fEnergyDeposit);
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+        // テスト
+        G4int event_id = aEvent->GetEventID();
+        G4cout << "Event ID: " << event_id << G4endl;
+    }
+
+    //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 }

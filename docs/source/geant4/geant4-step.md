@@ -13,7 +13,6 @@ aStep->GetTotalEnergyDeposit();
 
 始点と終点は[G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)クラスのオブジェクトになっており、それぞれの点での粒子の状態を取り出すことができます。
 
-
 ## 座標をしりたい（``GetPosition``）
 
 ```cpp

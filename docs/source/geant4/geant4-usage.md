@@ -64,8 +64,7 @@ geant4-uimanager
 geant4-runmanager
 geant4-detectorconstruction
 geant4-actioninitialization
-geant4-steppingaction
-geant4-step
+geant4-vismanager
 ```
 
 ## 物質したい
@@ -114,56 +113,42 @@ geant4-qe
 
 ## 相互作用したい
 
-```cpp
-runManager->SetUserInitialization(new FTFP_BERT);
-```
-
 ```{toctree}
+---
+maxdepth: 1
+---
 geant4-physicslist
 geant4-ftfp_bert
 ```
 
 ## ユーザーアクションしたい
 
-```cpp
-runManager->SetUserInitialization(new ActionInitialization());
-```
-
 ```{toctree}
+---
+maxdepth: 1
+---
 geant4-particles
 geant4-particlegun
 geant4-primarygeneratoraction
 geant4-eventaction
-geant4-step
-geant4-track
-geant4-event
-geant4-run
-
+geant4-steppingaction
 ```
 
-- ``G4VUserPrimaryGeneratorAction``
 - ``G4UserRunAction``
-- ``G4UserEventAction``
 - ``G4UserTrackingAction``
-- ``G4UserSteppingAction``
 - ``G4UserStackingAction``
 
 ## 測定したい
 
 ```{toctree}
+geant4-step
+geant4-track
+geant4-event
+geant4-run
 geant4-scoringmanager
 ```
 
-## 可視化したい
 
-```cpp
-G4VisManager* visManager = new G4VisExecutive;
-visManager->Initialize();
-```
-
-```{toctree}
-geant4-vismanager
-```
 
 ## リファレンス
 
