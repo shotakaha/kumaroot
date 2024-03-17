@@ -65,6 +65,7 @@ geant4-runmanager
 geant4-detectorconstruction
 geant4-actioninitialization
 geant4-vismanager
+geant4-visattributes
 ```
 
 ## 物質したい
