@@ -12,7 +12,7 @@ analysis_manager->OpenFile();
 analysis_manager->Write();
 
 // RunAction::EndOfRunActionで設定する
-analysis_manager->Close();
+analysis_manager->CloseFile();
 ```
 
 Geant4は独自のデータベース形式を持っていません。

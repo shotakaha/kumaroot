@@ -38,7 +38,6 @@ geant4-mandatory-classes
 geant4-units
 geant4-constants
 geant4-cpp
-geant4-analysismanager
 ```
 
 ## 例題したい
@@ -149,6 +148,8 @@ geant4-run
 geant4-scoringmanager
 geant4-sensitivedetector
 geant4-multifunctionaldetector
+geant4-analysismanager
+geant4-accumulable
 ```
 
 ## 入射粒子したい
