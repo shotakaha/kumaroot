@@ -31,6 +31,12 @@ class SteppingAction : public G4UserSteppingAction
 ステッピングアクションは``G4UserSteppingAction``を継承したクラスを自作します。
 仮想関数として定義されている``UserSteppingAction``を実装します。
 
+:::{note}
+
+ステップ処理をするときに、ステップが測定したいボリュームにあるかどうかの判断も必要になりますが、[G4VSensitiveDetector](./geant4-sensitivedetector.md)を使うとGeant4にお任せできます。
+
+:::
+
 ```cpp
 void SteppingAction::UserSteppingAction(const G4Step *aStep)
 {

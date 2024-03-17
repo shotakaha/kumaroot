@@ -35,6 +35,12 @@ void EventAction::BeginOfEventAction(const G4Event *aEvent)
 ``BeginOfEventAction``はイベント開始に実行されるメソッドです。
 イベントごとのデータを代入するために用意した変数は、ここで初期化できます。
 
+:::{note}
+
+ヒット情報（``G4THitMap``や``G4THitsCollection``）はここで初期化します。
+
+::
+
 ## イベント終了したい（``EndOfEventAction``）
 
 ```cpp
@@ -47,3 +53,9 @@ void EventAction::EndOfEventAction(const G4Event *aEvent)
 
 ``EndOfEventAction``はイベントの終わりに実行されるメソッドです。
 イベントごとデータを集計して、イベントサマリーを表示できます。
+
+:::{note}
+
+アナリシスマネージャー（``G4AnalysisManager``）に向けた出力は、ここで設定できます。
+
+:::
