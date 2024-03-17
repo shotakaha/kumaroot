@@ -5,7 +5,7 @@
 /gun/particle mu+
 ```
 
-ミューオンは正ミューオン（``mu+``）、負ミューオン（``mu-``）が用意されています。
+[ミューオン](https://pdg.lbl.gov/2020/listings/rpp2020-list-muon.pdf)は正ミューオン（``mu+``）、負ミューオン（``mu-``）が用意されています。
 
 ```cpp
 PrimaryGeneratorAction::PrimaryGeneratorAction()
