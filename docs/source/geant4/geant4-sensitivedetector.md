@@ -70,3 +70,27 @@ void SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHitory *aTouchable
 
 ``ProcessHitss``にスコアリングしたい内容を記述します。
 この関数はステップが発生するたびに自動的に呼び出されます。
+
+## 論理ボリュームに割り当てたい（``SetSensitiveDetector``）
+
+```cpp
+G4VPhysicalVolume* DetectorConstruction::Construct()
+{
+    // 自作のSDインスタンスを作成する
+    SensitiveDetector *pSD = new SensitiveDetector("/myDetector/検出器名");
+
+    // SD管理者に追加する
+    auto sdManager = G4SDManager::GetSDMpointer();
+    sdManager->AddNewDetector(pSD);
+
+    // 論理ボリュームに割り当てる
+    SetSensitiveDetector(pLogicalVolume, pSD);
+}
+```
+
+``DetectorConstruction::Construct``で、論理ボリュームにSensitiveDetectorを設定します。
+設定の手順は以下のとおりです。
+
+1. 自作SDのインスタンスを作成します
+2. SD Managerに追加します
+3. SDにしたい論理ボリュームに割り当てます
