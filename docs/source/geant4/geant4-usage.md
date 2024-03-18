@@ -59,6 +59,7 @@ geant4-examples-b2
 maxdepth: 1
 ---
 geant4-macro-setup
+geant4-macro-vis
 geant4-macro-gui
 ```
 
