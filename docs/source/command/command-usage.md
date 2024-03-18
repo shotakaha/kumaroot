@@ -74,6 +74,7 @@ maxdepth: 1
 command-arp
 command-curl
 command-dig
+command-goaccess
 command-ping
 command-rsync
 command-ssh
