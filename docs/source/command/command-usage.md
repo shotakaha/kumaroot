@@ -91,6 +91,7 @@ command-xargs
 maxdepth: 1
 ---
 command-1password
+command-clang-format
 command-exa
 command-fd
 command-find
