@@ -58,6 +58,8 @@ geant4-examples-b2
 ---
 maxdepth: 1
 ---
+geant4-macro-setup
+geant4-macro-gui
 ```
 
 ## 実験したい
@@ -173,7 +175,6 @@ geant4-geantino
 ```{toctree}
 geant4-vismanager
 geant4-visattributes
-geant4-gui
 ```
 
 ## リファレンス
