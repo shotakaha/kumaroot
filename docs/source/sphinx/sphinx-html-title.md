@@ -2,6 +2,7 @@
 
 ```python
 html_title = "ウェブサイトのタイトル"
+html_title = f"{project} v{version}"  # 「document」を削除
 ```
 
 HTMLドキュメントの``<title>``を設定できます。
