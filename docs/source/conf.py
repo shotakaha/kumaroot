@@ -108,6 +108,7 @@ myst_number_code_blocks = [
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
+html_title = f"{project} v{version}"
 html_logo = "./_static/quma.jpeg"
 html_static_path = ["_static"]
 html_css_files = ["css/heading.css"]
