@@ -52,6 +52,14 @@ geant4-examples-b1
 geant4-examples-b2
 ```
 
+## マクロしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+```
+
 ## 実験したい
 
 ```{toctree}
