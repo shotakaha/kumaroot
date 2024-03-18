@@ -12,63 +12,97 @@
 [Homebrew 公式ページ（日本語）](https://brew.sh/ja)にあるスクリプトをコピペして、ターミナルに貼り付け、
 [brew](./command-brew.md)コマンドを使えるようにしましょう。
 
+## 日常したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-cd
+command-date
+command-ls
+command-lsd
+command-open
+command-pbcopy
+command-pwgen
+command-pwd
+command-tldr
+```
+
+## 環境構築したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-apt
+command-asdf
+command-brew
+command-docker
+command-gem
+command-mise
+command-npm
+command-spack
+command-tlmgr
+command-ghq
+```
+
+## シェルしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-awk
+command-chmod
+command-bash
+command-echo
+command-fish
+command-nkf
+command-ps
+command-stdout
+command-tee
+command-which
+```
+
+## ネットワークしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-arp
+command-curl
+command-dig
+command-ping
+command-rsync
+command-ssh
+command-ssh-keygen
+command-tcpdump
+command-wget
+command-xargs
+```
+
+## 未分類
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
 command-1password
-command-apt
-command-arp
-command-asdf
-command-awk
-command-bash
-command-brew
-command-cd
-command-chmod
-command-curl
-command-date
-command-dig
-command-docker
-command-echo
 command-exa
 command-fd
 command-find
-command-fish
-command-gem
-command-ghq
 command-grep
 command-gzip
 command-launchctl
-command-ls
-command-lsd
-command-mise
 command-mkcert
 command-myst
-command-nkf
-command-npm
-command-open
 command-pandoc
-command-pbcopy
-command-ping
-command-ps
-command-pwd
-command-pwgen
-command-rsync
 command-sd
 command-sed
-command-spack
-command-ssh
-command-ssh-keygen
-command-stdout
 command-tar
-command-tcpdump
-command-tee
 command-texdoc
 command-tig
-command-tldr
-command-tlmgr
 command-uname
-command-wget
-command-which
-command-xargs
 ```
