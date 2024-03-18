@@ -9,56 +9,50 @@
 
 ### Fix
 
-- **g4examples/B1/.clang-format**: .clang-format（Googleスタイル）を追加した
-- **command/command-usage.md**: 目次を整理した
-- **geant4/geant4-opticalphoton.md**: optical photonを追加した
-- **g4examples/B1/src/RunAction.cc**: G4AnalysisManagerを追加した
-- **g4examples/B1/setup.mac**: 表示レベルをOFFにした
-- **g4examples/B1/setup.mac**: セットアップ用のマクロ名を変更した
-- **g4examples/B1/init_vis.mac**: マクロでGUI設定を読み込むことにした
-- **g4examples/B1/exampleB1.cc**: GUI設定を読み込むことにした
-- **g4examples/B1/gui.mac**: GUI用のマクロを追加した
 - **geant4/geant4-accumulable.md**: accumulableを追加した
-- **geant4/geant4-multifunctionaldetector.md**: フィルターなどを追加した
-- **geant4/geant4-gui.md**: メニューの作り方を追加した
-- **geant4/geant4-analysismanager.md**: コマンドラインを追記した
 - **geant4/geant4-analysismanager.md**: AnalysisManagerを追加した
-- **geant4/geant4-sensitivedetector.md**: SDを割り当てる手順を追加した
-- **geant4/geant4-sensitivedetector.md**: SDクラスの実装内容を追記した
-- **geant4/geant4-sensitivedetector.md**: SD、MFDを追加した
 - **geant4/geant4-class-reference.md**: クラスリファレンスの使い方を確認した
+- **geant4/geant4-event.md**: G4Eventを追加した
 - **geant4/geant4-eventaction.md**: イベントアクションなどでできることを整理した
+- **geant4/geant4-ftfp_bert.md**: FTFP_BERTを追加した
+- **geant4/geant4-geantino.md**: geantinoを追加した
+- **geant4/geant4-gui.md**: メニューの作り方を追加した
+- **geant4/geant4-magneticfield.md**: 磁場を追加した
+- **geant4/geant4-multifunctionaldetector.md**: フィルターなどを追加した
+- **geant4/geant4-muon.md**: ミューオンを追加した
+- **geant4/geant4-opticalphoton.md**: optical photonを追加した
+- **geant4/geant4-particlegun.md**: 宇宙線のように上から入射する
+- **geant4/geant4-primarygeneratoraction.md**: PrimaryGeneratorActionを追加した
+- **geant4/geant4-pvplacement.md**: 測定器の配置を追加した
+- **geant4/geant4-pvreplica.md**: G4PVReplicaを追加した
+- **geant4/geant4-run.md**: G4Runを追記した
 - **geant4/geant4-runaction.md**: ランアクションを追加した
 - **geant4/geant4-scoringmanager.md**: パラレルワールドで測定することを追記した
-- **geant4/geant4-visattributes.md**: G4VisAttributesを追加した
-- **geant4/geant4-magneticfield.md**: 磁場を追加した
-- **geant4/geant4-magneticfield.md**: 磁場を追加した
-- **geant4/geant4-muon.md**: ミューオンを追加した
-- **geant4/geant4-geantino.md**: geantinoを追加した
-- **g4examples/B1/vis.mac**: worldをワイヤフレームで表示した
-- **g4examples/B1/src/PrimaryGeneratorAction.cc**: 宇宙線を入射した
-- **g4examples/B1/src/DetectorConstruction.cc**: 水タンクを縦置きにした
-- **g4examples/B1/exampleB1.cc**: physics listの表示レベルをOFFにした
-- **geant4/geant4-particlegun.md**: 宇宙線のように上から入射する
+- **geant4/geant4-sensitivedetector.md**: SDを割り当てる手順を追加した
 - **geant4/geant4-tank.md**: 水タンクを縦置きにした
-- **g4examples/B1/src/SteppingAction.cc**: トラック情報を調べてみた
-- **g4examples/B1/include/SteppingAction.hh**: 前方宣言を削除した
-- **g4examples/B1/src/SteppingAction.cc**: ステップ情報を調べてみた
-- **g4examples/B1/include/RunAction.hh**: 前方宣言を削除した
-- **geant4/geant4-usage.md**: 目次を整理した
-- **geant4/geant4-uimanager.md**: 可視化オプションを追加した
-- **geant4/geant4-class-reference.md**: 検索窓が使いにくいことを追記した
-- **geant4/geant4-tank.md**: 論理ボリュームに色を追加した
-- **geant4/geant4-pvreplica.md**: G4PVReplicaを追加した
-- **geant4/geant4-ftfp_bert.md**: FTFP_BERTを追加した
 - **geant4/geant4-uimanager.md**: 対話モードを追加した
-- **geant4/geant4-world.md**: 実験室を作り直した
-- **geant4/geant4-pvplacement.md**: 測定器の配置を追加した
-- **geant4/geant4-userclasses.md**: 削除した
-- **geant4/geant4-event.md**: G4Eventを追加した
-- **geant4/geant4-primarygeneratoraction.md**: PrimaryGeneratorActionを追加した
-- **geant4/geant4-run.md**: G4Runを追記した
 - **geant4/geant4-usage.md**: 目次を整理した
+- **geant4/geant4-userclasses.md**: 削除した
+- **geant4/geant4-visattributes.md**: G4VisAttributesを追加した
+- **geant4/geant4-world.md**: 実験室を作り直した
+
+### Geant4 Examples
+
+- **g4examples/B1/.clang-format**: .clang-format（Googleスタイル）を追加した
+- **g4examples/B1/exampleB1.cc**: GUI設定を読み込むことにした
+- **g4examples/B1/exampleB1.cc**: physics listの表示レベルをOFFにした
+- **g4examples/B1/gui.mac**: GUI用のマクロを追加した
+- **g4examples/B1/include/RunAction.hh**: 前方宣言を削除した
+- **g4examples/B1/include/SteppingAction.hh**: 前方宣言を削除した
+- **g4examples/B1/init_vis.mac**: マクロでGUI設定を読み込むことにした
+- **g4examples/B1/setup.mac**: セットアップ用のマクロ名を変更した
+- **g4examples/B1/setup.mac**: 表示レベルをOFFにした
+- **g4examples/B1/src/DetectorConstruction.cc**: 水タンクを縦置きにした
+- **g4examples/B1/src/PrimaryGeneratorAction.cc**: 宇宙線を入射した
+- **g4examples/B1/src/RunAction.cc**: G4AnalysisManagerを追加した
+- **g4examples/B1/src/SteppingAction.cc**: ステップ情報を調べてみた
+- **g4examples/B1/src/SteppingAction.cc**: トラック情報を調べてみた
+- **g4examples/B1/vis.mac**: worldをワイヤフレームで表示した
 
 ## v1.30.0 (2024-03-16)
 
