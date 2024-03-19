@@ -38,8 +38,8 @@ maxdepth: 1
 command-code
 command-emacs
 command-helix
+command-vim
 command-zed
-
 ```
 
 
