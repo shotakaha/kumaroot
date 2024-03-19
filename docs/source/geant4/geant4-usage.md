@@ -29,6 +29,7 @@ geant4-spack
 ---
 maxdepth: 1
 ---
+geant4-document
 geant4-class-reference
 geant4-overview
 geant4-geometry
