@@ -1,4 +1,4 @@
-## サンプルしたい（``examples``）
+# 付属サンプルで遊べる（``examples``）
 
 ```console
 $ mkdir ~/repos/sandbox/g4work/  # 作業ディレクトリを作成

@@ -29,6 +29,8 @@ geant4-spack
 ---
 maxdepth: 1
 ---
+geant4-document
+geant4-examples
 geant4-class-reference
 geant4-overview
 geant4-geometry
@@ -47,7 +49,6 @@ geant4-cpp
 maxdepth: 1
 ---
 geant4-build
-geant4-examples
 geant4-examples-b1
 geant4-examples-b2
 ```
