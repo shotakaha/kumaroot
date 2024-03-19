@@ -37,6 +37,7 @@ maxdepth: 1
 ---
 command-code
 command-helix
+command-zed
 
 ```
 
