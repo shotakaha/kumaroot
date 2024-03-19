@@ -29,6 +29,17 @@ command-pwd
 command-tldr
 ```
 
+## エディターしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-code
+
+```
+
+
 ## 環境構築したい
 
 ```{toctree}
