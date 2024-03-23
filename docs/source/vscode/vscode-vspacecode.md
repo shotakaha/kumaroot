@@ -1,9 +1,20 @@
 # EmacsとVimしたい（``VSpaceCode``）
 
-VS CodeでSpacemacsを使えるようにするプラグインです。
-Spacemacsは``M-x``の代わりに{kbd}``SPC``でランチャーが起動できるようになり、``Evil``パッケージによってVimのキーバインドも使えるようになるEmacsパッケージです。
+[VSpaceCode](https://vspacecode.github.io/)は、VS CodeでSpacemacsを使えるようにするプラグインです。
+基本的にはEmacs操作したいけど、たまにVim操作するために慣れておきたいというひとにはもってこいだと思います。
 
-普段はEmacs操作したいけど、たまにVim操作するために慣れておきたいというひとにはもってこいだと思います。
+## よく使うキーバインド
+
+| キーバインド | 操作内容 |
+|---|---|
+| {kbd}`SPC SPC` | Command Palette |
+| {kbd}`Ctrl + g` / {kbd}`ESC` | Cancel |
+| {kbd}`SPC g s` | Magit status |
+| {kbd}`SPC f f` | Open file/folder |
+| {kbd}`SPC w /` | Split window right |
+| {kbd}`SPC w w` | Focus next window |
+| {kbd}`SPC b b` | Show all buffers |
+| {kbd}`SPC j l` | Jump to line (EASYMOTION) |
 
 ## モードを切り替えたい
 
