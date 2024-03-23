@@ -89,6 +89,7 @@ command-arp
 command-curl
 command-dig
 command-goaccess
+command-gping
 command-httpie
 command-ping
 command-rsync
