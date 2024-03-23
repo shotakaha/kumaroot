@@ -1,3 +1,9 @@
+```{eval-rst}
+.. index::
+    single: CLI; cd
+    single: 移動したい; cd
+```
+
 # ディレクトリ移動したい（``cd``）
 
 ```console

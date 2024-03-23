@@ -1,3 +1,10 @@
+```{eval-rst}
+.. index::
+    single: CLI; zoxide
+    single: 移動したい; zoxide
+    single: Rust Alternatives; zoxide
+```
+
 # ディレクトリ移動したい（``zoxide``）
 
 ```console

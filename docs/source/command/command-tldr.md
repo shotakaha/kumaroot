@@ -1,4 +1,11 @@
-# tldr
+```{eval-rst}
+.. index::
+    single: CLI; tldr
+    single: ヘルプしたい; fd
+    single: Rust Alternatives; tldr
+```
+
+# ヘルプしたい（``tldr``）
 
 `man`ページやコマンドのヘルプをさっと確認するためのコマンドです。
 `TL;DR`（Too Long; Don't Read）という英語圏のミームをもじったコマンド名です。
@@ -17,36 +24,36 @@
 
 ## インストール
 
-```bash
-brew install tealdeer
+```console
+$ brew install tealdeer
 ```
 
 {command}`brew`を使ってインストールします。
 
 ## 使い方
 
-```bash
-tldr コマンド名
+```console
+$ tldr コマンド名
 ```
 
 `tldr`自身の使い方も{command}`tldr`コマンドで確認できます。
 
-```bash
-tldr tldr
+```console
+$ tldr tldr
 ```
 
 ## キャッシュを更新したい
 
-```bash
-tldr --update
-tldr -u
+```console
+$ tldr --update
+$ tldr -u
 ```
 
 初回とキャッシュが古くなっている場合は、更新を促す警告（warning）が表示されます。
 
 ## 設定ファイルを作成したい
 
-```bash
+```console
 $ tldr --seed-config
 Successfully created seed config file here: ~/Library/Application Support/tealdeer/config.toml
 ```
