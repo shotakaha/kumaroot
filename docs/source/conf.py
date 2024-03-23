@@ -125,6 +125,10 @@ html_theme_options = {
 ogp_image = "./_static/quma.jpeg"
 ogp_use_first_image = True
 ogp_enable_meta_description = True
+ogp_social_cards = {
+    "enable": True,
+    "font": "Noto Sans CJK JP",
+}
 
 # -- Options for Sphinx Tags --------------------------------------------------
 
