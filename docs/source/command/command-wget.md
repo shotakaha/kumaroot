@@ -1,4 +1,4 @@
-# ファイルをダウンロードしたい（``wget``）
+# ダウンロードしたい（``wget``）
 
 ```console
 $ brew install wget
@@ -18,3 +18,9 @@ $ wget URL
 $ wget --output-document ファイル名 URL
 $ wget -O ファイル名 URL
 ```
+
+:::{seealso}
+
+- [](./command-curl.md)
+
+:::

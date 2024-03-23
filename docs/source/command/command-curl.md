@@ -1,6 +1,16 @@
-# curl
+# ダンロードしたい（``curl``）
 
-```bash
+```console
+$ brew install curl
+```
+
+```console
 $ curl https://example.com --output ファイル名
 $ curl https://example.com -o ファイル名
 ```
+
+:::{seealso}
+
+- [](./command-wget.md)
+
+:::
