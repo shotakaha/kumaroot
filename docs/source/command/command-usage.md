@@ -29,6 +29,20 @@ command-pwd
 command-tldr
 ```
 
+## エディターしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-code
+command-emacs
+command-helix
+command-vim
+command-zed
+```
+
+
 ## 環境構築したい
 
 ```{toctree}
