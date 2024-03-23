@@ -27,6 +27,7 @@ command-pbcopy
 command-pwgen
 command-pwd
 command-tldr
+command-zoxide
 ```
 
 ## エディターしたい
@@ -41,7 +42,6 @@ command-helix
 command-vim
 command-zed
 ```
-
 
 ## 環境構築したい
 
