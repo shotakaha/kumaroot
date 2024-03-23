@@ -22,10 +22,12 @@ command-cd
 command-date
 command-ls
 command-lsd
+command-mdfind
 command-open
 command-pbcopy
-command-pwgen
 command-pwd
+command-pwgen
+command-ripgrep
 command-tldr
 command-zoxide
 ```
