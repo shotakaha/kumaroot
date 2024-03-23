@@ -8,5 +8,6 @@ $ brew install --cask httpie
 
 - [](./command-curl.md)
 - [](./command-wget.md)
+- [](./command-xh.md)
 
 :::

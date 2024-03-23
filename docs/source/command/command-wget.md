@@ -22,5 +22,7 @@ $ wget -O ファイル名 URL
 :::{seealso}
 
 - [](./command-curl.md)
+- [](./command-httpie.md)
+- [](./command-xh.md)
 
 :::

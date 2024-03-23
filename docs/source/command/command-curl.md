@@ -11,6 +11,8 @@ $ curl https://example.com -o ファイル名
 
 :::{seealso}
 
+- [](./command-httpie.md)
 - [](./command-wget.md)
+- [](./command-xh.md)
 
 :::

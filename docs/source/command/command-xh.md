@@ -10,3 +10,11 @@ xh 0.21.0
 ```console
 $ xh [メソッド] URL [クエリ]
 ```
+
+:::{seealso}
+
+- [](./command-curl.md)
+- [](./command-httpie.md)
+- [](./command-wget.md)
+
+:::

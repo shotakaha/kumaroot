@@ -89,6 +89,7 @@ command-arp
 command-curl
 command-dig
 command-goaccess
+command-httpie
 command-ping
 command-rsync
 command-ssh
@@ -96,6 +97,7 @@ command-ssh-keygen
 command-tcpdump
 command-wget
 command-xargs
+command-xh
 ```
 
 ## 未分類
