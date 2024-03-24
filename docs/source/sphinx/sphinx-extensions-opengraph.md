@@ -35,14 +35,17 @@ OGPは{file}`conf.py`で全体、フロントマターでページごとに設�
 <meta property="og:description" content="SphinxJPハッカソンに参加して教えてもらった拡張パッケージです。 sphinxext-opengraph を使うと、ウェブサイトにOGP情報を追記できます。 conf.py で全体のOGPを設定でき、フロントマターでページごとのOGPを設定できます。 conf.py の extensions にパッケージ名を追記するだけで、HTML中に最低限のOGP情報が追加されるので、とりあえず使っ..." />
 ```
 
-## サイト全体のOGPを設定したい
+## サイト設定したい（``conf.py``）
 
 ```python
 # conf.py
 
 ## Options for OGP (sphinxext-opengraph)
 
-ogp_site_url = "サイトの公開URL"
+### Required
+ogp_site_url = "https://kumaroot.readthedocs.io/ja/latest/"  # サイトの公開URL
+
+### Optional
 ogp_description_length = 200
 ogp_site_name = "サイト名" # デフォルトは project で設定した文字列
 ogp_social_cards = # あとで調べる
@@ -56,10 +59,21 @@ ogp_custom_meta_tags = [
 ogp_enable_meta_description = True
 ```
 
-デフォルトの設定でも十分ですが、サイト全体のOGP情報を設定できます。
-``ogp_use_first_image``と``ogp_enable_meta_description``は有効にするとよいでしょう。
+``conf.py``にサイト全体のOGP情報を設定できます。
+``ogp_use_first_image``と``ogp_enable_meta_description``も有効にしました。
 
-## ページごとのOGPを設定したい
+:::{hint}
+
+次のようなサイトを使って、OGP表示を確認できます。
+
+- [OGP確認ツール](https://ogp.buta3.net/)
+- [OGP情報確認・シミュレーションツール](https://develop.tools/ogp-simulator/)
+
+「OGP確認ツール」で検索するとヒットします。
+
+:::
+
+## ページ設定したい
 
 ```yaml
 ---
@@ -78,10 +92,11 @@ og:image:alt: "OGP画像の代替テキスト"
 本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文
 ```
 
+ページ先頭の[field list](https://www.sphinx-doc.org/en/master/usage/restructuredtext/field-lists.html)を使って、ページごとにOGP設定を変更できます。
+
 ## リファレンス
 
 - [sphinxext-opengraph - Read the Docs](https://sphinxext-opengraph.readthedocs.io/en/latest/)
 - [sphinxext-opengraph - GitHub](https://github.com/wpilibsuite/sphinxext-opengraph)
 - [The Open Graph Protocol](https://ogp.me/)
-- [OGP確認ツール](https://ogp.buta3.net/)
 
