@@ -37,6 +37,7 @@ hugo-frontmatter
 hugo-shortcodes-figure
 hugo-scratch
 hugo-printf
+hugo-tableofcontents
 ```
 
 ## 全体設定したい
