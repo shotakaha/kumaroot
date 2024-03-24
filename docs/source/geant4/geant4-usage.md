@@ -168,6 +168,7 @@ geant4-accumulable
 ## 入射粒子したい
 
 ```{toctree}
+geant4-particletable
 geant4-muon
 geant4-geantino
 ```
