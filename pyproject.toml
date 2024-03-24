@@ -7,6 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://kumaroot.readthedocs.io/ja/latest/"
 repository = "https://github.com/shotakaha/kumaroot"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
