@@ -122,6 +122,7 @@ html_theme_options = {
 
 # -- Options for OGP --------------------------------------------------
 
+ogp_site_url = "https://kumaroot.readthedocs.io/ja/latest/"
 ogp_image = "./_static/quma.jpeg"
 ogp_use_first_image = True
 ogp_enable_meta_description = True
