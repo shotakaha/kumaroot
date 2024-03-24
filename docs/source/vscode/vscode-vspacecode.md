@@ -3,6 +3,17 @@
 [VSpaceCode](https://vspacecode.github.io/)は、VS CodeでSpacemacsを使えるようにするプラグインです。
 基本的にはEmacs操作したいけど、たまにVim操作するために慣れておきたいというひとにはもってこいだと思います。
 
+## 画面構成の名称
+
+| Emacs | VS Code |
+|---|---|
+| buffer | editor |
+| window | editor group |
+| frame | window |
+
+EmacsとVS Codeでは画面構成の名称が異なります。
+[Conventions](https://vspacecode.github.io/docs/conventions)に対応表が載っていました。
+
 ## よく使うキーバインド
 
 | キーバインド | 操作内容 |
