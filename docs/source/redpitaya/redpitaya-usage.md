@@ -11,6 +11,16 @@ Red Pitaya内のJupyter Labを使うときは、``import rp``でAPIを使うこ�
 C言語で書かれたAPIをPythonでも使えるようになっているのですが、そこの変換ががよく分かっていません。
 公式ドキュメントもあまり優しくないため、とりあえず使いながら整理します。
 
+```{toctree}
+---
+maxdepth: 1
+---
+redpitaya-init
+```
+
+
+## リファレンス
+
 - [Red Pitaya Documentation](https://redpitaya.readthedocs.io/en/latest/)
 - [2.3.3 Jupyter Lab](https://redpitaya.readthedocs.io/en/latest/appsFeatures/remoteControl/jupyter/Jupyter.html)
 - [2.3.5 List of supported SCPI & API commands](https://redpitaya.readthedocs.io/en/latest/appsFeatures/remoteControl/command_list.html)
