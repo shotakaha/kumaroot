@@ -40,7 +40,7 @@ def single_daq_readout():
     # pd.DataFrameに変換する
     waves = pd.DataFrame.from_dict(wv, orient="index")
     # or
-    # waves = pd.DataFrame(wv.values(), index=wv.keys()).T
+    # waves = pd.DataFrame(data=wv.values(), index=wv.keys()).T
 
     return waves
 ```
@@ -56,3 +56,8 @@ def single_daq_readout():
 ## リファレンス
 
 - [Triggering with a threshold on channel](https://redpitaya.readthedocs.io/en/latest/appsFeatures/examples/acquisition/acqRF-exm1.html)
+- [numpy.zeros - NumPy](https://numpy.org/doc/stable/reference/generated/numpy.zeros.html)
+- [pandas.DataFrame.from_dict - pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.from_dict.html)
+- [pandas.DataFrame - pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html)
+- [pandas.DataFrame.T - pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.T.html)
+- [pandas.DataFrame.transpose - pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.transpose.html)
