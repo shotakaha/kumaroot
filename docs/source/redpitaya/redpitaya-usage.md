@@ -16,8 +16,11 @@ C言語で書かれたAPIをPythonでも使えるようになっているので�
 maxdepth: 1
 ---
 redpitaya-init
+redpitaya-setup
+redpitaya-trigger
+redpitaya-readout
+redpitaya-sampling
 ```
-
 
 ## リファレンス
 
