@@ -4,15 +4,15 @@
 import matplotlib.pyplot as plt
 
 fig = plt.figure()
-fig = plt.figure()
-ax2 = fig.add_subplot(2, 3, 1)
+ax2 = fig.add_subplot(2, 3, 1)    # index=2
 ax4 = fig.add_subplot(nrows=2, ncols=3, index=4)
-ax6 = fig.add_subplot(pos=236)
+ax6 = fig.add_subplot(pos=236)    # index=6
 ```
 
-[matplotlib.pyplot.figure](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html)で``Figure``オブジェクトを作成し、
-[matplotlib.pyplot.add_subplot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot.html)で``Axes``オブジェクトを追加します。
-位置引数として``（行の数, 列の数, 場所）``の``tuple``を指定したり、それをまとめて``pos``で指定したりできます。
+[plot.figure](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html)で``Figure``オブジェクトを作成し、
+[plot.add_subplot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot.html)で分割キャンバス（``Axes``オブジェクト）を追加します。
+
+位置引数に``（行の数, 列の数, 場所）``の``tuple``を指定したり、それをまとめて``pos``で指定したりできます。
 
 :::{seealso}
 
@@ -22,3 +22,8 @@ ax6 = fig.add_subplot(pos=236)
 個人的には``figure``より``subplots``を使う方法がオススメです。
 
 :::
+
+## リファレンス
+
+- [matplotlib.pyplot.figure - matplotlib](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html)
+- [matplotlib.pyplot.add_subplot - matplotlib](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot.html)
