@@ -1,16 +1,24 @@
 # パッケージ管理したい（``poetry``）
 
 ```console
-$ poetry add パッケージ名
-$ poetry update パッケージ名
-$ poetry remove パッケージ名
+$ pipx install poetry
+$ which poetry
+/Users/shotakaha/.local/bin/poetry
+$ poetry --version
+Poetry (version 1.8.2)
+```
+
+```console
+$ poetry add pandas matplotlib
+$ poetry add --group=dev ipykernel pytests commitizen ruff
+$ poetry add --group=docs sphinx_book_theme myst_parser
 ```
 
 プロジェクトに依存するパッケージを管理したり、PyPIなどに公開するには[Poetry](https://python-poetry.org/)がオススメです。
 Pythonのパッケージ管理ツールはいろいろ存在していますが、（おそらく複雑な歴史的な経緯があり）まったく統一されておらず、すべてを把握＆理解するのは不可能だと思います。
 僕は、たまたま使い始めてみたのですが、使い勝手がよいなと感じています。
 
-## インストール
+## インストールしたい（``pipx install poetry``）
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
