@@ -14,3 +14,11 @@ self-python: cpython@3.12.2
 symlink support: true
 uv enabled: true
 ```
+
+## 使い方
+
+```console
+$ rye add pandas
+$ rye add --dev ipykernel
+$ rye add --dev sphinx
+```
