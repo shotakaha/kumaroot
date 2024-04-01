@@ -1,25 +1,30 @@
 # インストールしたい（``Red Pitaya OS``）
 
-Red Pitaya OSをSDカードに書き込みます。
+Red Pitaya OSをmicroSDカードに書き込みます。
 使いたいOSのイメージをダンロードして、[balenaEtcher](https://etcher.balena.io/)などのイメージ書き込みソフトを使って、SDカードに書き込みます。
 
-## タイムゾーンの設定
+イメージを書き込んだmicroSDカードをRed Pitayaに差しこんで、電源をONにしたらインストールは完了です。
+
+## タイムゾーンを設定する（``dpkg-reconfigure tzdata``）
 
 ```console
 $ ssh rp-xxxxxx -l root
 password: root
 root@rp-xxxxxx:~# dpkg-reconfigure tzdata
-```
 
-RedPitayaにSSHログインして、タイムゾーンを設定できます。
-ログイン直後の画面をよく読むと、設定方法が書いてあります。
-
-まず、地域を選択します。「6. Asia」を選択しました。
-
-```console
 Configuring tzdata
 ------------------
+// （1）地域の設定
+// （2）都市の設定
+```
 
+RedPitayaにSSHログインして、タイムゾーンを設定します。
+ログイン直後の画面をよく読むと、設定方法が書いてあります。
+
+### 地域を設定する
+
+```console
+// つづき
 Please select the geographic area in which you live. Subsequent configuration questions will narrow this down by presenting a list of cities, representing the
 time zones in which they are located.
 
@@ -27,10 +32,13 @@ time zones in which they are located.
 Geographic area: 6
 ```
 
-次に都市を選択します。「79. Tokyo」を選択しました。
-アルファベット順に並んでいるので、根気よく探してください。
+地域を選択します。
+「``6. Asia``」を選択しました。
+
+### 都市を設定する
 
 ```console
+// つづき
 Please select the city or region corresponding to your time zone.
 
   1. Aden      11. Baku        21. Damascus     31. Hong_Kong  41. Kashgar       51. Makassar      61. Pyongyang  71. Singapore      81. Ujung_Pandang
@@ -46,15 +54,22 @@ Please select the city or region corresponding to your time zone.
 Time zone: 79
 ```
 
-地域と都市の選択が終わると、デフォルトのタイゾーンが変更されます。
+次に都市を選択します。「79. Tokyo」を選択しました。
+アルファベット順に並んでいるので、根気よく探してください。
+
+### 設定内容を確認する
 
 ```console
+// つづき
 Current default time zone: 'Asia/Tokyo'
 Local time is now:      Mon Mar 25 11:29:23 JST 2024.
 Universal Time is now:  Mon Mar 25 02:29:23 UTC 2024.
 ```
 
-## ファイルサイズをリサイズしたい
+地域と都市の選択が終わると、設定内容が表示されます。
+デフォルトのタイゾーンが「``Asia/Tokyo``」に変更できたことを確認しました。
+
+## ファイルサイズをリサイズしたい（``resize.sh``）
 
 ```console
 $ ssh rp-xxxxxx -l root
@@ -65,7 +80,7 @@ root@rp-xxxxxx:~# /opt/redpitaya/sbin/resize.sh
 RedPitayaにSSHログインして、ファイルシステムをリサイズします。
 ``resize.sh``を実行すると、SDカードの容量をフルで使えるようになります。
 
-### 現在の容量を確認した（``df -h``）
+### 現在の容量を確認する（``df -h``）
 
 ```console
 redpitaya> $ df -h
@@ -78,14 +93,21 @@ none            5.0M   16K  5.0M   1% /var/log
 /dev/mmcblk0p1  484M  308M  177M  64% /boot
 ```
 
-サイズが6.6GBくらいしかありません。
-32GBのSDカードを使っているので、これはおかしい、と思いドキュメントを読んだら、リサイズコマンドが載っていました。
+全体の容量が6.6GBくらいしか認識されていません。
+32GBのmicroSDカードを使っているので、これはおかしい、と思いドキュメントを読んだら、リサイズコマンドが載っていました。
 
-### リサイズコマンドを実行したい（``resize.sh``）
+### リサイズコマンドを実行する
 
 ```console
-# /opt/redpitaya/sbin/resize.sh
+root@rp-xxxx:~# /opt/redpitaya/sbin/resize.sh
+```
 
+``/opt/redpitaya/sbin/resize.sh``を実行します。
+RedPitayaの中のどのパスからでも実行できます。
+
+以下は、実際に実行したときに表示された内容です。
+
+```console
 Welcome to fdisk (util-linux 2.37.2).
 Changes will remain in memory only, until you decide to write them.
 Be careful before using the write command.
@@ -134,33 +156,22 @@ Syncing disks.
 Root partition has been resized. The filesystem will be enlarged upon the next reboot
 ```
 
-``resize.sh``コマンドを実行すると、さまざまな情報が表示されます。
-とくにNoと答えるところはありません。
+とくにNoと答えるような選択肢はなく、勝手に進んでいきました。
+念のため、これまで測定したデータとDAQコードのバックアップは取得しておきましたが、そのまま残っていました。
 
-### コマンド実行後の容量を確認する
+### リサイズ後の容量を確認する
 
 ```console
-# df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/root       6.6G  5.2G  1.1G  84% /
-tmpfs           231M     0  231M   0% /dev/shm
-tmpfs            93M  4.0M   89M   5% /run
-tmpfs           5.0M     0  5.0M   0% /run/lock
-none            5.0M   16K  5.0M   1% /var/log
-/dev/mmcblk0p1  484M  308M  177M  64% /boot
+root@rp-xxxxxx:~# reboot
+root@rp-xxxxxx:~# Connection to rp-xxxxxx.local closed by remote host.
+
+$ Connection to rp-xxxxxx.local closed.
 ```
 
-この段階ではまだ容量が増えていないので、``rebooot``します。
+コマンドを実行しただけでは容量が増えないため再起動（``rebooot``）します。
 
 ```console
-(redpitaya) # reboot
-(redpitaya) # Connection to rp-xxxxxx.local closed by remote host.
-(laptop) $ Connection to rp-xxxxxx.local closed.
-
-(laptop $ ssh rp-xxxxxx.local -l root
-(redpitaya) #
-// ログイン情報の表示（省略）
-(redpitaya) # df -h
+root@rep-xxxxxx:~# df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/root        28G  5.3G   22G  20% /
 tmpfs           231M     0  231M   0% /dev/shm
@@ -169,6 +180,9 @@ tmpfs           5.0M     0  5.0M   0% /run/lock
 none            5.0M  8.0K  5.0M   1% /var/log
 /dev/mmcblk0p1  484M  308M  177M  64% /boot
 ```
+
+再度SSHログインして容量を確認します。
+容量が28GBに増えていることを確認しました。
 
 ## リファレンス
 
