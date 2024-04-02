@@ -30,20 +30,23 @@ data.plot.hist(by=["カラム名"], bins=ビン数)
 ```python
 def hbar(data, x, bins, xmin, xmax, **kwargs):
 
-    _data = data[[x]].copy()
-    entries = len(_data)
+    # x で指定したカラムのコピーを作成
+    copied = data[[x]].copy()
+
+    # Entries
+    entries = len(copied)
 
     # Underflow
     q = f"{x} < {xmin}"
-    uf = _data.query(q).count().iloc[0]
+    uf = copied.query(q).count().iloc[0]
 
     # Overflow
     q = f"{x} > {xmax}"
-    of = _data.query(q).count().iloc[0]
+    of = copied.query(q).count().iloc[0]
 
     # Valid
     q = f"{xmin} <= {x} <= {xmax}"
-    v = _data.query(q)
+    v = copied.query(q)
     n = len(v)
     mean = v.mean().iloc[0]
     rms = v.std().iloc[0]
