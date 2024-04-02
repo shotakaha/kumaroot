@@ -1,4 +1,4 @@
-# 相補誤差関数でフィットしたい
+# 相補誤差関数でフィットしたい（``scipy.special.erfc``）
 
 ```python
 from scipy.special import erfc
@@ -15,5 +15,5 @@ def erfc_function(x, amp, mu, sigma, intercept):
         f(array-like): 誤差補正関数
     """
     f = amp * erfc((x - mu) / sigma) + intercept
-    return
+    return f
 ```

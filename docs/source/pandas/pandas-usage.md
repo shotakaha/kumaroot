@@ -67,7 +67,7 @@ pandas-mean
 ```{toctree}
 ---
 pandas-fit-gaussian
-pandas-fit-erf
+pandas-fit-erfc
 ```
 
 ## 可視化したい
