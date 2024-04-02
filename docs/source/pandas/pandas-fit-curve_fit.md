@@ -16,7 +16,18 @@ perr = np.sqrt(np.diag(pcov))
 
 [scipy.optimize.curve_fit](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)で、任意の関数を使ってフィットできます。
 
-フィット関数のパラメーター数に応じた値が``popt``と``pcov``として返ってきます。
+``func``にはフィットに使う任意の関数を指定します。
+具体例は[](./pandas-fit-gaussian.md)など、別ページに整理しました。
+
+``x_data``、``y_data``は測定データの中でフィットに使う成分を指定します。
+データフレーム形式（``pd.DataFrame``）を使っている場合、``pd.Series``を指定すればOKです
+（NumPy配列（``nd.array``）に変換して渡しているサンプルもありますが必要ないはずです）。
+
+``p_init``はフィットの初期パラメーターを指定します。
+測定データの分布を確認し、近そうな値を指定します。
+初期パラメーターが離れすぎていると、うまくフィットできない場合があります。
+
+``curve_fit``した結果は、フィット関数のパラメーター数に応じた値が``popt``と``pcov``として返ってきます。
 ``pcov``の対角成分でフィットの誤差を計算できます。
 
 :::{note}
