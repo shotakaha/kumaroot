@@ -37,6 +37,11 @@ perr = np.sqrt(np.diag(pcov))
 
 :::
 
+## 具体例をしりたい
+
+- [](./pandas-fit-gaussian.md)
+- [](./pandas-fit-erfc.md)
+
 ## リファレンス
 
 - [scipy.optimize.curve_fit - SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)
