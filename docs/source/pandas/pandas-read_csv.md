@@ -6,6 +6,7 @@ pd.read_csv("ファイル名")
 
 [pandas.read_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)でCSVファイルを読み込めます。
 デフォルトの区切り文字は``,``（カンマ）です。
+複数のファイルを読み込んで、データフレームに変換する場合は[pandas.concat](./pandas-concat.md)を使います。
 
 :::{seealso}
 
