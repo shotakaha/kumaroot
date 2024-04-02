@@ -66,6 +66,9 @@ pandas-mean
 
 ```{toctree}
 ---
+maxdepth: 1
+---
+pandas-fit-curve_fit
 pandas-fit-gaussian
 pandas-fit-erfc
 ```
