@@ -60,6 +60,16 @@ pandas-crosstab
 pandas-mean
 ```
 
+## フィットしたい
+
+フィットには[SciPy](https://scipy.org/)や[NumPy](https://numpy.org/ja/)を使います。
+
+```{toctree}
+---
+pandas-fit-gaussian
+pandas-fit-erf
+```
+
 ## 可視化したい
 
 ```{toctree}
@@ -70,7 +80,6 @@ pandas-plot
 pandas-plot-hist
 pandas-plot-scatter
 ```
-
 
 ## リファレンス
 
