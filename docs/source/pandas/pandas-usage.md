@@ -58,6 +58,7 @@ pandas-unique
 pandas-groupby
 pandas-crosstab
 pandas-mean
+pandas-cut
 ```
 
 ## フィットしたい
