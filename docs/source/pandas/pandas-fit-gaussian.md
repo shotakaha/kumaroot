@@ -1,11 +1,15 @@
 # ガウス関数でフィットしたい
 
+:::{math}
+f = a \exp \left( - \frac{ (x-b)^{2} }{2 c^{2}} \right)
+:::
+
 ```python
 import pandas as pd
 import numpy as np
 from scipy.optimize from curve_fit
 
-def gaus_function(x, amp, mu, sigma):
+def gauss_function(x, amp, mu, sigma):
     """ガウス関数
     Args:
         x(array-like): データ

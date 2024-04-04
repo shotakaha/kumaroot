@@ -1,5 +1,14 @@
 # 相補誤差関数でフィットしたい（``scipy.special.erfc``）
 
+:::{math}
+
+\text{erf}(x) & = \frac{2}{\sqrt(\pi)} \int_{t=0}^{x} \exp(-t^{2}) \text{d}t
+
+
+\text{erfc}(x) & = 1 - \text{erf}(x)
+
+:::
+
 ```python
 import pandas as pd
 import numpy as np
@@ -58,3 +67,8 @@ def fit(data: pd.DataFrame, x: str, y: str):
 
     return popt, perr, x_fit, y_fit
 ```
+
+## リファレンス
+
+- [scipy.special.erfc](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.erfc.html)
+- [scipy.special.erf](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.erf.html#scipy.special.erf)
