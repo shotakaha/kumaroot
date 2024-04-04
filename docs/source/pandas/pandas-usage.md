@@ -72,6 +72,7 @@ maxdepth: 1
 pandas-fit-curve_fit
 pandas-fit-gaussian
 pandas-fit-erfc
+pandas-fit-poisson
 ```
 
 ## 可視化したい
