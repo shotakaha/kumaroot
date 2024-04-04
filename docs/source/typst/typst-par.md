@@ -1,6 +1,10 @@
 # 段落したい（``#par``）
 
 ```typst
+#par(オプション)[コンテキスト]
+```
+
+```typst
 #set par(
     leading: 0.65em,
     justify: false,

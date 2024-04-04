@@ -1,6 +1,10 @@
 # 本文したい（``#text``）
 
 ```typst
+#text(オプション)[コンテキスト]
+```
+
+```typst
 #set text(
     font: (
         "HackGen",
@@ -9,7 +13,6 @@
     size: 12pt,
     weight: "regular",
     lang: "ja"
-
 )
 ```
 

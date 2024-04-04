@@ -7,6 +7,10 @@
 # ページ設定したい（``#page``）
 
 ```typst
+#page(オプション)[コンテキスト]
+```
+
+```typst
 #set page(
     paper: "a4",
     margin: (x: 25mm, y: 25mm),

@@ -10,10 +10,9 @@
 ```
 
 [document要素](https://typst.app/docs/reference/model/document/)で、文書のメタデータを設定できます。
-この情報は、PDFのメタデータなどに利用されます。
-ドキュメントには表示されません。
+この要素は``#set document``の形で使用します。
 
-
+PDFのメタデータなどに利用され、ドキュメントには表示されません。
 
 ```typst
 #let title = "すごいタイトル"
