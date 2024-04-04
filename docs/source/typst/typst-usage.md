@@ -54,7 +54,6 @@ typst-heading
 typst-raw
 typst-list
 typst-strong
-typst-title
 typst-lorem
 typst-link
 ```
@@ -68,6 +67,8 @@ maxdepth: 1
 typst-styling
 typst-set
 typst-show
+typst-title
+typst-logo
 ```
 
 ## パッケージしたい
