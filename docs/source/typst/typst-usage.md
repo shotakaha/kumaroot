@@ -70,7 +70,20 @@ typst-set
 typst-show
 ```
 
+## パッケージしたい
+
+[Typst Universe](https://typst.app/universe)をさまよって、便利そうなパッケージだなと思ったものをリストしています。
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-gentle-clues
+```
+
 ## 物理したい
+
+パッケージの中で、物理学のレポートで使うと便利そうなものをリストしています。
 
 ```{toctree}
 ---
@@ -78,6 +91,7 @@ maxdepth: 1
 ---
 typst-physica
 typst-metro
+typst-unify
 ```
 
 ## TypstとLaTeXのちがい

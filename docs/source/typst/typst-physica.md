@@ -20,3 +20,8 @@ $va(a)$  // ベクトルを矢印で表現
 $vb(a)$  // ベクトルを太字で表現
 $vu(a)$  // 単位ベクトル（^）
 ```
+
+## リファレンス
+
+- [physica - Typst Universe](https://typst.app/universe/package/physica/)
+- [Leedehai/typst-physics - GitHub](https://github.com/Leedehai/typst-physics)

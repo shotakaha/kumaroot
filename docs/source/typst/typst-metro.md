@@ -1,4 +1,4 @@
-# 物理量したい（``metro``）
+# SI単位系したい（``metro``）
 
 ```typ
 #import "@preview/metro:0.1.0": *
@@ -68,3 +68,8 @@ LaTeXの``siunitx``パッケージと違い、接頭辞と単位名の間に``_�
 #num(6.02, e:23)
 #num(1.6, e:-19)
 ```
+
+## リファレンス
+
+- [metro - Typst Universe](https://typst.app/universe/package/metro)
+- [fenjalien/metro - GitHub](https://github.com/fenjalien/metro)
