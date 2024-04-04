@@ -42,6 +42,61 @@ perr = np.sqrt(np.diag(pcov))
 - [](./pandas-fit-gaussian.md)
 - [](./pandas-fit-erfc.md)
 
+## フィッティングと最小二乗法
+
+フィッティングの基本は最小二乗法です。
+以下に、フィッティングの概要を整理しました。
+
+1. パラメーター数がN個ある、任意の**フィット関数**を用意します。
+
+:::{math}
+
+y_{i}^{\text{fit}} = f(x_{i} ; p_{1}, p_{2}, \cdots p_{n})
+
+:::
+
+2. 測定した各点$i$で、測定データとの差（**残差**）を計算します。
+
+:::{math}
+
+r_{i} = y_{i}^{\text{data}} - y_{i}^{\text{fit}}
+
+:::
+
+3. これを2乗した値を**残差平方和（Residual Sum of Squares）** と呼びます。
+
+:::{math}
+
+\text{RSS} = \sum_{i=1}^{n} r^{2}
+
+:::
+
+4. 残差平方和が最小となるように、N個のパラメーターを計算します。
+
+:::{math}
+
+\min \text{RSS} = \min \left( \sum_{i=1}^{n} r^{2} \right)
+
+:::
+
+## Goodness of Fit
+
+適切にフィットできたかどうか$\chi^{2}$値（ピアソンのカイ二乗検定）で判断します。
+
+:::{math}
+
+\chi^{2} = \sum_{i=1}^{n} \frac{(y_{i}^{\text{data}} - y_{i}^{\text{fit}})^{2}}{y_{i}^{fit}}
+
+:::
+
+これをフィットパラメーターの自由度（``degrees of freedom``）で割った値を reduced chi-squared と呼び、この値が1に近いほど、適切にフィットできていると判断します。
+
+:::{math}
+
+\text{reduced} \chi^{2} = \frac{\chi^{2}}{\text{dof}}
+
+:::
+
 ## リファレンス
 
 - [scipy.optimize.curve_fit - SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)
