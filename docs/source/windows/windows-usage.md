@@ -4,6 +4,7 @@
 ---
 maxdepth: 1
 ---
+windows-user
 windows-wsl
 windows-winget
 ```
