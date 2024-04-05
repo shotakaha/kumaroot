@@ -57,6 +57,7 @@ gadget/gadget-usage
 dvr/dvr-usage
 raspi/raspi-usage
 redpitaya/redpitaya-usage
+windows/windows-usage
 ```
 
 ```{toctree}
