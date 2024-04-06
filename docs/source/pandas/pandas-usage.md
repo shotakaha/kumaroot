@@ -1,5 +1,10 @@
 # Pandasの使い方
 
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
 ```{toctree}
 ---
 maxdepth: 1
