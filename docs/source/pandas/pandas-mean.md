@@ -15,3 +15,16 @@ data["temperature"].rolling(7).mean()
 [pandas.DataFrame.rolling](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html)を使って、任意の期間における移動平均を計算できます。
 
 たとえば、日付ごとの気温データに対して、1週間の移動平均を求めたい場合は、``rolling(7).mean()``で計算できます。
+
+## 平均値
+
+:::{math}
+
+m = \frac{1}{n} \sum_{i=1}^{n} x_{i}
+:::
+
+## リファレンス
+
+- [pandas.DataFrame.mean](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html)
+- [pandas.DataFrame.mean](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.mean.html)
+- [pandas.DataFrame.rolling](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html)
