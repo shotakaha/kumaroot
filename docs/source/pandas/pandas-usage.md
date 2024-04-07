@@ -63,6 +63,10 @@ pandas-unique
 pandas-groupby
 pandas-crosstab
 pandas-mean
+pandas-var
+pandas-std
+pandas-skew
+pandas-kurt
 pandas-cut
 ```
 
