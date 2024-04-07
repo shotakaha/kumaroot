@@ -7,6 +7,14 @@ data.hvplot.scatter(x="Xの値", y="Yの値") * data.hvplot.errorbars(y="Yの値
 
 ベースとなる図にエラーバー付きの図を重ね書きします。
 
+:::{seealso}
+
+- [](../altair/altair-errorbars.md)
+- [](../pandas/pandas-plot-errorbars.md)
+- [](../plotly/plotly-errorbars.md)
+
+:::
+
 ## リファレンス
 
 - [hvplot.errorbars](https://hvplot.holoviz.org/reference/tabular/errorbars.html)

@@ -91,6 +91,7 @@ maxdepth: 1
 pandas-plot
 pandas-plot-hist
 pandas-plot-scatter
+pandas-plot-errorbars
 ```
 
 ``pandas.DataFrame``と連携できる可視化ツールもいろいろあります。
