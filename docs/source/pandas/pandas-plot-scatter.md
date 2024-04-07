@@ -10,3 +10,11 @@ data.plot.scatter(x="X軸", y="Y軸", s="点の大きさ", c="点の色")
 ``c``オプションで、点の色を変更できます。ヒートマップを作成したりできます。
 ``s``オプションで、点のサイズを変更できます。バブル図を作成できます。
 オプションに[matplotlib.pyplot.scatter](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html)のオプションも利用できます。
+
+:::{seealso}
+
+- [](../altair/altair-scatter.md)
+- [](../hvplot/hvplot-scatter.md)
+- [](../plotly/plotly-scatter.md)
+
+:::
