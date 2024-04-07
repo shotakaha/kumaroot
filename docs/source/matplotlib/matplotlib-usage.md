@@ -9,6 +9,7 @@ matplotlib-import
 matplotlib-figure
 matplotlib-subplots
 matplotlib-subplot_mosaic
+matplotlib-scatter
 matplotlib-errorbar
 ```
 
