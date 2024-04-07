@@ -82,6 +82,8 @@ pandas-fit-poisson
 
 ## 可視化したい
 
+データの可視化にはデフォルトで[matplotlib](https://matplotlib.org/)を使います。
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -90,6 +92,14 @@ pandas-plot
 pandas-plot-hist
 pandas-plot-scatter
 ```
+
+``pandas.DataFrame``と連携できる可視化ツールもいろいろあります。
+これまで使ったことがあるツールは、
+[](../matplotlib/matplotlib-usage.md)、
+[](../altair/altair-usage.md)、
+[](../plotly/plotly-usage.md)、
+[](../hvplot/hvplot-usage.md)
+にそれぞれ整理しました。
 
 ## リファレンス
 
