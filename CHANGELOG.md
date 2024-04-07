@@ -1,5 +1,124 @@
 # CHANGELOG.md
 
+## v1.32.0 (2024-04-07)
+
+### Feat
+
+- **matplotlib/matplotlib-errorbar.md**: errorbarを追加した
+- **hvplot/hvplot-usage.md**: hvplotを追加した
+- **windows/windows-user.md**: ローカルアカウントを追加した
+- **windows/windows-winget.md**: wingetしたい
+- **windows/windows-wsl.md**: WSLのインストールを追加した
+- **/redpitaya/redpitaya-trigger.md**: トリガー待ちを追加した
+- **redpitaya/redpitaya-setup.md**: DAQのセットアップ手順を抜粋した
+- **redpitaya/redpitaya-usage.md**: Red Pitayaを追加した
+- **redpitaya/redpitaya-usage.md**: Red Pitayaを追加した
+- **geant4/geant4-particletable.md**: G4ParticleTableを追加した
+
+### Fix
+
+- **pandas/pandas-mean.md**: 代表値の計算方法を追加した
+- **matplotlib/matplotlib-errorbar.md**: 参考ページを追加した
+- **pandas/pandas-plot-errorbars.md**: 各ツールでのエラーバーの作成方法を整理した
+- **pandas/pandas-plot-hist.md**: 各ツールでヒストグラムの作成方法をまとめた
+- **pandas/pandas-plot-scatter.md**: 各ツールでの散布図の作り方を整理した
+- **pandas/pandas-usage.md**: 目次を整理した
+- **matplotlib/matplotlib-figure.md**: figureのオプションを追記した
+- **hvplot/hvplot-errorbars.md**: エラーバーを追加した
+- **polars/polars-usage.md**: 目次を整理した
+- **polars/polars-install.md**: インストール方法を追加した
+- **polars/polars-usage.md**: 使い方を追加した
+- **pandas/pandas-usage.md**: 使い方を追加した
+- **command/command-rye.md**: 使い方を追加した
+- **pandas/pandas-fit-curve_fit.md**: フィッティングの説明を追加した
+- **windows/windows-winget.md**: wingetしたパッケージを追加した
+- **windows/windows-winget.md**: listを追加した
+- **typst/typst-logo.md**: ロゴを追加したい
+- **typst/typst-usage.md**: 目次を整理した
+- **typst/typst-document.md**: 基本的な使い方を確認した
+- **pandas/pandas-fit-poisson.md**: ポアソン分布を追加した
+- **pandas/pandas-fit-erfc.md**: 数式を追加した
+- **pandas/pandas-fit-curve_fit.md**: リファレンスを追加した
+- **pandas/pandas-fit-curve_fit.md**: フィッティングの概要を追記した
+- **mystmd/pandas-histogram.ipynb**: 内容を移行した
+- **pandas/pandas-cut.md**: pd.cutを追記した
+- **mystmd/pandas.ipynb**: 整理した
+- **pandas/pandas-cut.md**: ビニングを追加した
+- **pandas/pandas-plot-hist.md**: ビニングを追加した
+- **pandas/pandas-fit-curve_fit.md**: 具体例のリストを追加した
+- **pandas/pandas-fit-curve_fit.md**: フィットに使う引数の説明を追加した
+- **pandas/pandas-fit-erfc.md**: 相補誤差関数のフィット例を追加した
+- **pandas/pandas-fit-gaussian.md**: ガウス関数のフィット例を追加した
+- **pandas/pandas-fit-curve_fit.md**: curve_fitを追加した
+- **pandas/pandas-usage.md**: 目次を整理した
+- **pandas/pandas-fit-erfc.md**: 誤差補正関数を追加した
+- **pandas/pandas-fit-gaussian.md**: ガウス関数を追加した
+- **pandas/pandas-usage.md**: フィットする方法を追加した
+- **pandas/pandas-concat.md**: 複数ファイルを連結する手順を追加した
+- **pandas/pandas-plot-hist.md**: hbar関数を修正した
+- **redpitaya/redpitaya-install.md**: インストール方法を追加した
+- **redpitaya/redpitaya-install.md**: インストール手順を詳しくかいた
+- **command/command-poetry.md**: コマンド例を追加した
+- **command/command-rye.md**: ryeを追加した
+- **command/command-poetry.md**: poetryを追加した
+- **python/python-poetry.md**: poetryの具体例を追記した
+- **command/command-mise.md**: miseの使い方を整理した
+- **matplotlib/matplotlib-subplots.md**: 複数キャンバスを追記した
+- **matplotlib/matplotlib-figure.md**: 追記した
+- **pandas/pandas-dataframe.md**: pd.DataFrameの使い方を確認した
+- **redpitaya/redpitaya-readout.md**: リファレンスを追加した
+- **redpitaya/redpitaya-usage.md**: 目次を整理した
+- **redpitaya/redpitaya-readout.md**: データ読み出しを追加した
+- **redpitaya/redpitaya-sampling.md**: サンプリングレートを確認した
+- **sphinx/sphinx-extensions-opengraph.md**: ogp_site_urlを追加した
+- **docs/source/conf.py**: ogp_site_urlを追加した
+- **vscode/vscode-vspacecode.md**: conventionsを追記した
+- **geant4/geant4-muon.md**: ミューオンを作った
+- **hugo/hugo-tableofcontents.md**: tableOfContentsを追加した
+- **pyproject.toml**: package-mode = false にした
+- **vscode/vscode-vspacecode.md**: よく使うキーバインドを追加した
+- **command/command-usage.md**: 目次を整理した
+- **command/command-ripgrep.md**: ripgrepを追加した
+- **command/command-mdfind.md**: mdfindを追加した
+- **pyproject.toml**: matplotlibを追加し直した
+- **docs/source/conf.py**: ogp_social_cardsを追記した
+- **sphinx/sphinx-extensions-opengraph.md**: OGP確認ツールを追記した
+- **docs/source/conf.py**: ogp_imageを設定した
+- **sphinx/sphinx-extensions-opengraph.md**: リファレンスを追記した
+- **command/command-zoxide.md**: 索引を追加した
+- **command/command-zoxide.md**: zoxideを追記した
+- **command/command-zoxide.md**: zoxideを追加した
+- **docs/source/conf.py**: sphinxext-opengraphを有効にした
+- **pyproject.toml**: sphinxext-opengraphを追加した
+- **command/command-which.md**: whichを追記した
+- **command/command-usage.md**: 目次を整理した
+- **command/command-gping.md**: gpingを追加した
+- **command/command-usage.md**: 目次を整理した
+- **command/command-xh.md**: xhを追加した
+- **command/command-httpie.md**: httpieを追加した
+- **command/command-curl.md**: 追記した
+- **command/command-emacs.md**: Emacsのディストリビューションを追記した
+- **command/command-emacs.md**: Emacs回顧ポエムを追加した
+- **command/command-helix.md**: Helixを追記した
+- **command/command-vim.md**: Vimを追加した
+- **command/command-emacs.md**: Emacsを追加した
+- **command/command-zed.md**: Zedを追加した
+- **command/command-helix.md**: Helixを追加した
+- **command/command-code.md**: VS Codeを追加した
+- **command/command-wget.md**: wgetを追記した
+- **geant4/geant4-install.md**: Fishでビルドする方法を追加した
+- **command/command-gzip.md**: 圧縮／展開のコマンド詳細を追記した
+- **command/command-gzip.md**: 展開コマンドを追加した
+- **command/command-goaccess.md**: ファイルに出力する方法を追加した
+- **geant4/geant4-examples.md**: 見出しを変更した
+- **geant4/geant4-document.md**: ドキュメントが充実してることを追加した
+- **sphinx/sphinx-html-title.md**: html_titleのサンプルを追加した
+- **docs/source/conf.py**: html_titleを変更した
+- **geant4/geant4-macro-vis.md**: 可視化マクロを追加した
+- **geant4/geant4-macro-gui.md**: 見出しを修正した
+- **geant4/geant4-macro-gui.md**: リネームした
+- **geant4/geant4-macro-setup.md**: 起動マクロを追加した
+
 ## v1.31.0 (2024-03-18)
 
 ### Feat
