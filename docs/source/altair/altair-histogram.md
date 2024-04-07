@@ -14,6 +14,15 @@ base.mark_line(interpolate="step")
 ヒストグラムは[.mark_bar](https://altair-viz.github.io/user_guide/marks/bar.html)を使って作成します。
 また、同じような見た目の図は``.mark_area``や``.mark_line``で``interpolate="step"``のオプションを使って作成できます。
 
+:::{seealso}
+
+- [](../hvplot/hvplot-hist.md)
+- [](../pandas/pandas-plot-hist.md)
+- [](../plotly/plotly-histogram.md)
+
+:::
+
+
 ## タイトルしたい
 
 ```python

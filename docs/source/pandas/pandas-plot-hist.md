@@ -25,6 +25,14 @@ data.plot.hist(by=["カラム名"], bins=ビン数)
 
 :::
 
+:::{seealso}
+
+- [](../altair/altair-histogram.md)
+- [](../hvplot/hvplot-hist.md)
+- [](../plotly/plotly-histogram.md)
+
+:::
+
 ## ビニングしたい（``bins``）
 
 ```python
