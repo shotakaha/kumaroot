@@ -55,3 +55,7 @@ data = pd.DataFrame(asdict(q))
 
 ``asdict``で``@dataclass``クラスを辞書型に変換できます。
 [pandas.DataFrame](../pandas/pandas-dataframe.md)として読み込みたいときに便利です。
+
+## リファレンス
+
+- [dataclasses - Python3](https://docs.python.org/3/library/dataclasses.html)
