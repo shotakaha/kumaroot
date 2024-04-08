@@ -9,22 +9,23 @@ holiday: tuple[int, int, int, str] = (2023, 5, 5, "こどもの日")
 
 [typing](https://docs.python.org/ja/3/library/typing.html)で、関数の引数などに型ヒント（＝型情報）を追加できます。
 Python3.5で追加された標準モジュールです。
-型ヒントがあると、VS CodeなどのIDEで編集中に型チェックできるようになります。
+型ヒントがあると、VS CodeなどのIDEで編集中に型チェックしてくれるようになります。
 入力時に補完候補を表示してくれたり、値がマッチしていない部分をハイライトしてくれたりします。
 
-ビルトインされている型（``int``、``float``、``bool``、``str``、``bytes``、``list``、``set``、``dict``、``tuple``）や
-``typing``モジュールが提供している型があります。
-すべてを型ヒントを暗記する必要はなく、[mypyのチートシート](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)を参照すれば大丈夫です。
+:::{note}
 
-:::{seealso}
-
-最近（2020年ころ）は、TypeScriptやRustに代表される静的型付けな言語がトレンドです。
-その波はPythonにもやってきて、関数アノテーションを利用した型ヒントが導入されました。
-型がはっきりしていたほうが、人々は安心するようです。
+最近（2020年）は、TypeScriptやRustに代表される静的型付けな言語がトレンドです。
+その波がPythonにもやってきて、関数アノテーションを利用した型ヒントが導入されました。
 
 C/C++初心者のころ、型を宣言するのめんどくさいなと思っていたところでPythonに触れ、
-型とか気にしなくても書けるの超便利じゃん！と感動したことがあったので、
-1周回ってしまった感じが強いです。
+型とか気にしなくても書けるの超便利じゃん！と感動したことがあったので、1周回ってきた感があります。
+
+:::
+
+:::{note}
+
+デフォルトの型ヒントには強制力はありません。
+より厳しく型ヒント／型チェックしたい場合は[Pydantic](https://docs.pydantic.dev/latest/)などのパッケージを利用してください。
 
 :::
 
@@ -39,22 +40,66 @@ x: set[int] = {6, 7}
 x: dict[str, float] = {"field": 2.0}
 ```
 
+Python3.9以降であれば、ビルトインされている型で型ヒントできます。
+
+| 型 | 内容 |
+|---|---|
+| ``int`` | 整数値 |
+| ``float`` | 浮動小数点 |
+| ``bool`` | 真偽値 |
+| ``str`` | 文字列 |
+| ``bytes`` | 8ビット文字列 |
+| ``object`` | 任意のオブジェクト |
+| ``list[str]`` | （文字列の）リスト |
+| ``tuple[int, int]`` | 2要素のタプル |
+| ``tuple[int, ...]`` | 任意の要素数のタプル |
+| ``dict[str, int]`` | ``{文字列: 整数値}``の辞書 |
+
+## 追加の型を使いたい
+
+```python
+from typing import Any, Iterable, Sequence, Mapping
+```
+
+``typing``モジュールが提供している型もあります。
+
+| 型 | 内容 |
+|---|---|
+| ``Any`` | なんでも |
+| ``Iterable[int]`` | 整数値の``list-like``な集まり |
+| ``Sequence[int]`` | 読み込み専用の``list-like``な集まり |
+| ``Mapping[str, int]`` | ``dict-like``な集まり |
+
+[mypyのチートシート](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)がとても参考になります。
+
 ## 複数の型ヒントしたい
 
 ```python
-from typing import Union, Optional
-
+# Python3.9まで
+from typing import Union
 x: Union[int, str]
+
+# Python3.10以降
 x: int | str
 x: list[int|str] = [3, 5, "test"]
-
-y: Optional[str]
-y: str | None
 ```
 
-``typing.Union``を使って、複数の型ヒントを指定できます。
+``typing.Union``を使って、複数の型ヒントを組み合わせて指定できます。
+Python3.10以降ではOR記号（ ``|`` ） を使ってより簡単に表現できるようになりました。
+
+## ``None``したい
+
+```python
+# Python3.9まで
+typing import Optional
+x: Optional[str]
+
+# Python3.10以降
+x: str | None
+```
+
 ``None``を含む場合は``typing.Optional``を使います。
-Python3.10以降では ``|`` を使ってより簡潔に表現できるようになりました。
+Python3.10以降ではOR記号（ ``|`` ） を使って直感的に表現できるようになりました。
 
 ## Duck Typeしたい
 
@@ -80,3 +125,5 @@ def f(mapping: MutableMapping[int, str]) -> set[str]:
 ## リファレンス
 
 - [typing](https://docs.python.org/ja/3/library/typing.html)
+- [Type hints cheat sheet - mypy](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
+- [Built-in types - mypy](https://mypy.readthedocs.io/en/stable/builtin_types.html)
