@@ -1,4 +1,4 @@
-# HTML /CSSの使い方
+# HTML / CSSの使い方
 
 ウェブサイト作成の基本はHTMLとCSS（とJavaScript）です。
 [HTML（Hyper Text Markup Language）](https://developer.mozilla.org/ja/docs/Web/HTML)はサイトの骨組み、[CSS（Cascading Style Sheets）](https://developer.mozilla.org/ja/docs/Web/CSS)はサイトに服を着せる言語です。
@@ -21,6 +21,7 @@ html-meta
 html-p
 html-img
 html-figure
+html-a
 html-semantic
 html-jsonld
 ```
