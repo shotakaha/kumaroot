@@ -9,10 +9,13 @@ data.hvplot.scatter(x="X軸", y="Y軸", by="グループ名")
 ---
 maxdepth: 1
 ---
-hvplot-install.md
-hvplot-errorbars.md
+hvplot-install
+hvplot-extension
+hvplot-pandas
+hvplot-hist
+hvplot-scatter
+hvplot-errorbars
 ```
-
 
 ## リファレンス
 
