@@ -4,20 +4,17 @@
 
 ### Feat
 
+- **html/html-a.md**: aタグを追加した
 - **hvplot/hvplot-extension.md**: hvplot.extensionを追加した
 - **hvplot/hvplot-pandas.md**: hvplot.pandasを追加した
-- **html/html-a.md**: aタグを追加した
 - **python/python-pydantic.md**: pydanticを追加した
 
 ### Fix
 
-- **hvplot/hvplot-usage.md**: 目次を整理した
-- **python/python-typing.md**: 追記した
-- **python/python-typing.md**: typingを追加した
-- **matplotlib/matplotlib-errorbar.md**: エラーバーの使い方
+- **matplotlib/matplotlib-errorbar.md**: エラーバーを追加した
 - **matplotlib/matplotlib-scatter.md**: 散布図を追加した
-- **python/python-dataclass.md**: リファレンスを追加した
 - **python/python-dataclass.md**: asdictを追加した
+- **python/python-typing.md**: typingを追加した
 
 ## v1.32.0 (2024-04-07)
 
