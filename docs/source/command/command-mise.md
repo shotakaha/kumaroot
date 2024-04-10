@@ -51,13 +51,20 @@ python  3.12.2
 ## 更新したい（``up`` / ``upgrade``）
 
 ```console
+$ mise ls
+Plugin  Version            Config Source              Requested
+python  3.12.2 (outdated)  ~/.config/mise/config.toml 3.12
+
 $ mise up
-mise pipx@1.5.0 ✓ installed
-mise node@21.7.1 ✓ installed
-mise node@21.2.0 ✓ removing ~/.local/share/mise/installs/node/21.2.0
-mise pipx@1.4.3 ✓ removing ~/Library/Caches/mise/pipx/1.4.3
+mise python@3.12.3 ✓ installed
+mise python@3.12.2 ✓ removing ~/.local/share/mise/installs/python/3.12.2
+
+$ mise ls
+Plugin  Version  Config Source             Requested
+python  3.12.3  ~/.config/mise/config.toml 3.12
 ```
 
+``list``コマンドでプラグインの更新の有無を確認できます。
 ``upgrade``コマンドでプラグイン本体を一括で更新できます。
 
 ## プラグインを使いたい（``use``）
@@ -167,11 +174,6 @@ $ mise ls-remote pipx
 ⚠️  pipx is a community-developed plugin: https://github.com/yozachar/asdf-pipx
 Would you like to install pipx? (y/n)
 ```
-
-
-
-
-
 
 ## 有効／無効にしたい
 
