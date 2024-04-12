@@ -43,6 +43,7 @@ sphinx-extensions-googleanalytics
 sphinx-extensions-copybutton
 sphinx-extensions-ablog
 sphinx-extensions-datatemplates
+sphinx-extensions-napoleon
 ```
 
 ## マークアップしたい
