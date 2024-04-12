@@ -112,23 +112,23 @@ CONTAINER ID   IMAGE         COMMAND     CREATED         STATUS         PORTS   
 
 ```console
 $ docker container run -it python:3.12 bash
-root@92019f951c8b:/# ls
-bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
 root@92019f951c8b:/# pwd
 /
-root@92019f951c8b:/# cd
-root@92019f951c8b:~# pwd
+root@92019f951c8b:/# ls
+bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@92019f951c8b:~# echo $HOME
 /root
 ```
 
 インタープリターではなく、シェル（``bash``）を起動させてみました。
 ログイン直後のパスは``/``になっていました。
-ホームディレクトリは``/root``です。
+ホームディレクトリは``/root``でした。
 
 ```console
 $ docker container ls
 CONTAINER ID   IMAGE         COMMAND   CREATED          STATUS          PORTS     NAMES
-6848a3150200   python:3.12   "bash"    11 seconds ago   Up 11 seconds             flamboyant_bell
+92019f951c8b   python:3.12   "bash"    11 seconds ago   Up 11 seconds             flamboyant_bell
 ```
 
 もうひとつのシェルで``docker container ls``確認し、IDと名前が変わっていることを確認しました。
@@ -142,6 +142,42 @@ ERRO[0000] error waiting for container: context canceled
 ユーザー名を変更してログインを試みましたがダメでした。
 これは調べる必要があります。
 
+### OSを確認する
+
+```console
+root@92019f951c8b:/# cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+```
+
+OSのバージョンを確認しました。
+Debian 12 (bookworm) ベースでした。
+
+### 利用可能なシェルを確認する
+
+```console
+root@92019f951c8b:/# cat /etc/shells
+# /etc/shells: valid login shells
+/bin/sh
+/usr/bin/sh
+/bin/bash
+/usr/bin/bash
+/bin/rbash
+/usr/bin/rbash
+/bin/dash
+/usr/bin/dash
+```
+
+デフォルトで利用できるシェルを確認しました。
+``sh``、``bash``、``dash``が利用できます。
+
 ## VS Codeから操作する
 
 ```console
@@ -150,6 +186,69 @@ $ docker container run -it python:3.12
 
 コンテナが起動した状態（``docker container run``）であれば、VS Codeからコンテナを操作できました。
 MS公式の[Dockerプラグイン](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)を使いました。
+
+## 開発環境を整える
+
+```console
+root@b2a3ddb82a42:/# pip3 list
+Package    Version
+---------- -------
+pip        24.0
+setuptools 69.2.0
+wheel      0.43.0
+```
+
+公式イメージから起動したコンテナには、最低限のパッケージしかインストールされていません。
+いくつかのパッケージを追加して開発環境を整えていきます。
+
+```console
+root@b2a3ddb82a42:/# pip3 list -o
+Package    Version Latest Type
+---------- ------- ------ -----
+setuptools 69.2.0  69.4.0 wheel
+
+root@b2a3ddb82a42:/# pip3 install -U setuptools
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/site-packages (69.2.0)
+Downloading setuptools-69.4.0-py3-none-any.whl (823 kB)
+Successfully installed setuptools-69.4.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+```
+
+まず、``setuptools``を更新しました。
+``root``で実行したため、仮想環境を使うといいよという警告が表示されました。
+
+### 仮想環境を追加する
+
+```console
+root@b2a3ddb82a42:/# pip3 install virtualenv
+
+root@b2a3ddb82a42:/# virtualenv venv
+created virtual environment CPython3.12.3.final.0-64 in 326ms
+
+root@b2a3ddb82a42:/# source venv/bin/activate
+(venv) root@b2a3ddb82a42:/#
+```
+
+``virtualenv``で仮想環境を構築しました。
+
+### パッケージ管理ツールを追加する
+
+```console
+(venv) root@b2a3ddb82a42:/# pip3 install -U poetry
+(venv) root@b2a3ddb82a42:/# which poetry
+/venv/bin/poetry
+(venv) root@b2a3ddb82a42:/# poetry --version
+Poetry (version 1.8.2)
+```
+
+パッケージ管理ツールとして``poetry``を追加しました。
+Poetryの公式ドキュメントでは、``pip``を使ったインストールは推奨されていないようですが、一時的なコンテナ環境なのでよしとしました。
+
+## Dockerfileを作成する
+
+ここまで作成した環境は、一度シェルから抜けるとリセットされてしまいます。
+毎回、手動で設定するのは手間です。
+設定手順が決まっているなら``Dockerfile``に保存しておくことができます。
 
 ## リファレンス
 
