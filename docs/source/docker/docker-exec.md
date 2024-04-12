@@ -2,6 +2,7 @@
 
 ```console
 $ docker exec オプション コンテナ名 コマンド
+$ docker container exec オプション コンテナ名 コマンド    // Docker 17.06以降で導入
 $ docker exec -it コンテナ名 bash
 ```
 
@@ -10,6 +11,14 @@ $ docker exec -it コンテナ名 bash
 停止中（or 一時停止中）のコンテナに対して実行するとエラーになります。
 
 ``-it``オプションは``-i / --interactive``と``-t / --tty``のことで、コンテナ内のシェルを起動して操作したい場合に必須のオプションです。
+
+:::{note}
+
+``docker exec``と``docker container exec``は同じものです。
+``docker container exec``は、Dockerコマンドを整理するために17.06以降で導入されたコマンドです。
+最新のドキュメントでは``docker container exec``の利用が推奨されているそうです。
+
+:::
 
 ## バックグラウンドしたい（``-d`` / ``--detach``）
 
@@ -45,4 +54,6 @@ $ docker exec --user ユーザー名 コンテナ名 コマンド
 
 ## リファレンス
 
-- [docker exec](https://docs.docker.jp/engine/reference/commandline/exec.html)
+- [docker exec - docs.docker.jp](https://docs.docker.jp/engine/reference/commandline/exec.html)
+- [docker container exec - docs.docker.jp](https://docs.docker.jp/engine/reference/commandline/container_exec.html)
+- [docker container exec - docs.docker.com](https://docs.docker.com/reference/cli/docker/container/exec/)
