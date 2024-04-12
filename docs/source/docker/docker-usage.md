@@ -40,4 +40,5 @@ docker-busybox
 docker-httpd
 docker-nginx
 docker-wordpress
+docker-python3
 ```
