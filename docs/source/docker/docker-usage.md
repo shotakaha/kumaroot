@@ -21,6 +21,7 @@ docker-ls
 docker-build
 docker-image
 docker-container
+docker-run
 docker-exec
 docker-volume
 docker-compose
