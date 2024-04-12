@@ -6,11 +6,9 @@ $ docker container exec オプション コンテナ名 コマンド    // Docke
 $ docker exec -it コンテナ名 bash
 ```
 
-``docker exec``コマンドで、コンテナ内で新しいコマンドを実行できます。
+``docker container exec``コマンドで、コンテナ内で新しいコマンドを実行できます。
 コンテナなあらかじめ起動しておく必要があります。
 停止中（or 一時停止中）のコンテナに対して実行するとエラーになります。
-
-``-it``オプションは``-i / --interactive``と``-t / --tty``のことで、コンテナ内のシェルを起動して操作したい場合に必須のオプションです。
 
 :::{note}
 
@@ -19,6 +17,16 @@ $ docker exec -it コンテナ名 bash
 最新のドキュメントでは``docker container exec``の利用が推奨されているそうです。
 
 :::
+
+## シェルしたい（``-it``）
+
+```console
+$ docker container exec -it コンテナ名 bash
+$ docker container exec -it my-ubuntu bash
+```
+
+``-it``オプションは``-i / --interactive``と``-t / --tty``のことで、コンテナ内のシェルを起動して操作したい場合に必須のオプションです。
+起動していないコンテナに対しては[docker container run](./docker-run.md)を使います。
 
 ## バックグラウンドしたい（``-d`` / ``--detach``）
 
