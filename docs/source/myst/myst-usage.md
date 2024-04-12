@@ -55,4 +55,5 @@ myst-build-html
 myst-build-pdf
 myst-build-docx
 myst-build-typst
+myst-build-gitlab
 ```
