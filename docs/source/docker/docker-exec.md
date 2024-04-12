@@ -1,4 +1,4 @@
-# シェルしたい（``docker exec``）
+# コマンドしたい（``docker container exec``）
 
 ```console
 $ docker exec オプション コンテナ名 コマンド
