@@ -7,13 +7,16 @@ RUN コマンド
 ## パッケージを追加したい（Debian/Ubuntu）
 
 ```docker
-RUN apt-get update \\
-    && apt-get install -y --no-install-recommends 追加したいパッケージ名 \\
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    追加したいパッケージ名1 \
+    追加したいパッケージ名2 \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 ```
 
 Debian/Ubuntuベースのイメージを使っている場合に、パッケージを追加するコマンドです。
-おまじないのように書いてしまってよいと思います。
+おまじないのように書いておくとよいと思います。
 
 ## Poetryしたい（``virtualenv`` / ``poetry``）
 
