@@ -18,8 +18,8 @@ maxdepth: 1
 docker-install
 docker-tutorial
 docker-ls
-docker-build
 docker-image-pull
+docker-image-build
 docker-container
 docker-container-run
 docker-container-exec
