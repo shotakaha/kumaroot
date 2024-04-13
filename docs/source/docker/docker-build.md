@@ -1,13 +1,23 @@
-# コンテナイメージを作成したい（``build``)
+# コンテナイメージを作成したい（``docker image build``)
 
-```bash
-$ docker build パス -t イメージ名
-$ docker build . -t イメージ名
+```console
+$ docker image build パス
+$ docker image build .
 ```
 
 ``Dockerfile``からコンテナイメージを作成します。
 パスには``Dockerfile``があるディレクトリを指定する必要があります。
-また``-t イメージ名``オプションをつけて、後からイメージを参照できるようにしておきます。
+カレントディレクトリの場合は``.``を指定します。
+
+## イメージ名したい（``-t`` / ``--tag``）
+
+```console
+$ docker image build パス -t イメージ名:タグ
+$ docker image build . -t イメージ名:タグ
+```
+
+[-t イメージ名:タグ](https://docs.docker.com/reference/cli/docker/image/build/#tag)オプションで、イメージ名を設定できます。
+このイメージ名は、後からイメージを参照する際に利用できます。
 
 このようにして、DockerHubのレジストリにあるイメージをベースにして、自分用にイメージをカスタマイズできます。
 
@@ -40,3 +50,7 @@ FROM busybox
 ``Dockerfile``の先頭に、ベースとして使うイメージ名を指定します。
 タグを指定しない場合は``latest``になります。
 利用できるイメージ名は[Docker Hub](https://hub.docker.com/)などから探します。
+
+## リファレンス
+
+- [docker image build - docs.docker.com](https://docs.docker.com/reference/cli/docker/image/build/)
