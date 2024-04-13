@@ -19,10 +19,10 @@ docker-install
 docker-tutorial
 docker-ls
 docker-build
-docker-image
+docker-image-pull
 docker-container
-docker-run
-docker-exec
+docker-container-run
+docker-container-exec
 docker-volume
 docker-compose
 ```
