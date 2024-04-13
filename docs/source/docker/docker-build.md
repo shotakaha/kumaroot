@@ -40,17 +40,6 @@ $ docker run イメージ名
 イメージを更新して、コンテナを再起動する手順を整理しました。
 同じコンテナを複数起動するとエラーがでるので、一度停止してから再起動します。
 
-## ベースイメージを指定したい（``FROM``）
-
-```dockerfile
-# FROM イメージ名:タグ
-FROM busybox
-```
-
-``Dockerfile``の先頭に、ベースとして使うイメージ名を指定します。
-タグを指定しない場合は``latest``になります。
-利用できるイメージ名は[Docker Hub](https://hub.docker.com/)などから探します。
-
 ## リファレンス
 
 - [docker image build - docs.docker.com](https://docs.docker.com/reference/cli/docker/image/build/)
