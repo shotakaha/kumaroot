@@ -253,12 +253,14 @@ Poetryの公式ドキュメントでは、``pip``を使ったインストール�
 ```docker
 # Dockerfile
 FROM python:3.12
-RUN mkdir work
+
 WORKDIR /work
+
 RUN pip3 install -U virtualenv
 RUN virtualenv venv
 RUN . venv/bin/activate
 RUN pip3 install -U poetry
+
 CMD ["/bin/bash"]
 ```
 
@@ -332,9 +334,9 @@ Poetry (version 1.8.2)
 ```
 
 作成したイメージのID（今回は98a8e65e9ad7）を指定して、コンテナを起動しました。
-``CMD ["/bin/bash"]``を指定したので、コンテナ名の後にコマンドがなくても``bash``が起動することが確認できました。
-コンテナにログインした直後のディレクトリも``WORKDIR /work``になっていました。
-開発環境で``poetry``が使えることも確認できました。
+``CMD ["/bin/bash"]``を設定してあるので、コンテナ名の後にコマンドがなくても``bash``が起動します。
+また、コンテナにログインした直後のディレクトリも``WORKDIR``で設定したディレクトリ（``/work``）になっています。
+Pythonの仮想環境に``poetry``も追加できたことも確認できました。
 
 ```console
 $ docker images
