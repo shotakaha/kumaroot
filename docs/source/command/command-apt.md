@@ -46,3 +46,8 @@ $ apt install nodejs
 $ apt install ruby
 $ apt install ripgrep
 ```
+
+## リファレンス
+
+- [apt - manpages.ubuntu.com](https://manpages.ubuntu.com/manpages/noble/en/man8/apt.8.html)
+- [apt-get - manages.ubuntu.com](https://manpages.ubuntu.com/manpages/noble/en/man8/apt-get.8.html)
