@@ -7,7 +7,8 @@ $ docker image pull ubuntu:22.04
 ```
 
 DockerHubなどのレジストリからイメージをダウンロードするコマンドです。
-以前は``docker pull``（いまでも使えます）だったコマンドらしいです。
+``docker pull``は
+``docker image pull``と同じです。
 
 ## イメージの一覧を確認したい（``docker image ls``）
 
@@ -24,3 +25,7 @@ $ docker image rm イメージ名
 ```
 
 イメージ名を指定して削除します。
+
+## リファレンス
+
+- [docker image pull - docs.docker.com](https://docs.docker.com/reference/cli/docker/image/pull/)
