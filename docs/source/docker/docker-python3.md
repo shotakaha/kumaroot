@@ -250,6 +250,124 @@ Poetryの公式ドキュメントでは、``pip``を使ったインストール�
 毎回、手動で設定するのは手間です。
 設定手順が決まっているなら``Dockerfile``に保存しておくことができます。
 
+```docker
+# Dockerfile
+FROM python:3.12
+RUN mkdir work
+WORKDIR /work
+RUN pip3 install -U virtualenv
+RUN virtualenv venv
+RUN . venv/bin/activate
+RUN pip3 install -U poetry
+CMD ["/bin/bash"]
+```
+
+上記の内容の``Dockerfile``をホストPCに作成して、イメージをビルドしました。
+
+```console
+$ mkdir -p sandbox/docker-python3/
+$ cd sandbox/docker-python3/
+$ touch Dockerfile
+// 上記の内容を編集する
+
+$ docker build .
+[+] Building 12.1s (11/11) FINISHED docker:desktop-linux
+ => [internal] load build definition from Dockerfile 0.0s
+ => => transferring dockerfile: 207B 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12 0.0s
+ => [internal] load .dockerignore 0.0s
+ => => transferring context: 2B 0.0s
+ => [1/7] FROM docker.io/library/python:3.12 0.0s
+ => CACHED [2/7] RUN mkdir work 0.0s
+ => CACHED [3/7] WORKDIR /work 0.0s
+ => CACHED [4/7] RUN pip3 install -U virtualenv 0.0s
+ => CACHED [5/7] RUN virtualenv venv 0.0s
+ => CACHED [6/7] RUN . venv/bin/activate 0.0s
+ => [7/7] RUN pip3 install -U poetry 11.5s
+ => exporting to image 0.5s
+ => => exporting layers 0.5s
+ => => writing image sha256:98a8e65e9ad79fcb37cfd4917e151a099854ad2ebba07887ab1b89bf4d117f1b 0.0s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+```
+
+```console
+$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED              SIZE
+<none>       <none>    98a8e65e9ad7   8 seconds ago        1.12GB
+<none>       <none>    bd54a11ae615   About a minute ago   1.06GB
+<none>       <none>    1c7489ad3729   4 minutes ago        1.06GB
+python       3.12      099bf23b94d9   3 days ago           1.02GB
+```
+
+``1.12GB``のイメージができていました。
+``1.06GB``のイメージは、下記のエラーで失敗した残骸です。
+
+```console
+--------------------
+   5 |     RUN pip3 install -U virtualenv
+   6 |     RUN virtualenv venv
+   7 | >>> RUN source venv/bin/activate
+   8 |     RUN pip3 install -U poetry
+   9 |
+--------------------
+ERROR: failed to solve: process "/bin/sh -c source venv/bin/activate" did not complete successfully: exit code: 127
+```
+
+今回使ったイメージでは、ビルドの際に``sh``（=``dash``）が使われていました。
+``source``コマンドが見つからないためのエラーだったので、``.``に置き換えたらOKでした。
+
+```console
+$ docker container run -it 98a8e65e9ad7
+
+root@2efac1aa7f10:/work#
+root@2efac1aa7f10:/work# pwd
+/work
+
+root@2efac1aa7f10:/work# poetry --version
+Poetry (version 1.8.2)
+```
+
+作成したイメージのID（今回は98a8e65e9ad7）を指定して、コンテナを起動しました。
+``CMD ["/bin/bash"]``を指定したので、コンテナ名の後にコマンドがなくても``bash``が起動することが確認できました。
+コンテナにログインした直後のディレクトリも``WORKDIR /work``になっていました。
+開発環境で``poetry``が使えることも確認できました。
+
+```console
+$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+<none>       <none>    98a8e65e9ad7   14 minutes ago   1.12GB
+<none>       <none>    bd54a11ae615   15 minutes ago   1.06GB
+<none>       <none>    1c7489ad3729   18 minutes ago   1.06GB
+python       3.12      099bf23b94d9   3 days ago       1.02GB
+
+$ docker image rm 1c7489ad3729
+Error response from daemon: conflict: unable to delete 1c7489ad3729 (must be forced) - image is being used by stopped container 2caf4b98cb6f
+
+$ docker container stop 1c7489ad3729
+Error response from daemon: No such container: 1c7489ad3729
+
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+$ docker image rm -f 1c7489ad3729
+Deleted: sha256:1c7489ad3729ac06dedbf685cd92121888af5934cf869e68186b2ad343d93523
+
+// bd54a11ae615 も同様に削除した
+
+$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+<none>       <none>    98a8e65e9ad7   17 minutes ago   1.12GB
+python       3.12      099bf23b94d9   3 days ago       1.02GB
+```
+
+作成に失敗したイメージを削除しました。
+通常の``docker image rm``ではエラーがでました。
+コンテナを停止させてみたり、プロセスを確認してみたりしましたが、
+起動している様子がなかったので、強制削除（``docker image rm -f``）しました。
+指定したイメージが削除できたことを確認しました。
+
 ## リファレンス
 
 - [python - DockerHub](https://hub.docker.com/_/python/)
