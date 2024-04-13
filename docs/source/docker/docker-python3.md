@@ -263,6 +263,8 @@ CMD ["/bin/bash"]
 ```
 
 上記の内容の``Dockerfile``をホストPCに作成して、イメージをビルドしました。
+イメージサイズを節約するためには、``RUN``コマンドをひとまとめにするほうがよいそうです。
+今回は、動作確認のためとりあえず、それぞれ書くことにしました。
 
 ```console
 $ mkdir -p sandbox/docker-python3/
@@ -367,6 +369,110 @@ python       3.12      099bf23b94d9   3 days ago       1.02GB
 コンテナを停止させてみたり、プロセスを確認してみたりしましたが、
 起動している様子がなかったので、強制削除（``docker image rm -f``）しました。
 指定したイメージが削除できたことを確認しました。
+
+## サイズを節約したい
+
+```console
+$ docker image pull python:3.12-slim
+3.12-slim: Pulling from library/python
+13808c22b207: Pull complete
+6c9a484475c1: Pull complete
+78bef5c7424f: Pull complete
+42f0d54f5caa: Pull complete
+1723cff2f16b: Pull complete
+Digest: sha256:541d45d3d675fb8197f534525a671e2f8d66c882b89491f9dda271f4f94dcd06
+
+$ docker image ls
+REPOSITORY   TAG         IMAGE ID       CREATED         SIZE
+python       3.12        099bf23b94d9   3 days ago      1.02GB
+python       3.12-slim   0e42464fe231   3 days ago      130MB
+```
+
+``python:3.12-slim``のイメージはサイズが10分の1くらいのようです。
+これまで確認したことを、``slim``イメージでも実行できることを確認しました。
+
+```console
+// Dockerfileを修正してから再ビルド
+$ docker build .
+
+$ docker image ls
+REPOSITORY   TAG         IMAGE ID       CREATED          SIZE
+<none>       <none>      140edf9fc946   10 seconds ago   231MB
+python       3.12        099bf23b94d9   3 days ago       1.02GB
+python       3.12-slim   0e42464fe231   3 days ago       130MB
+```
+
+``FROM python:3.12-slim``に修正して、再ビルドしたDockerイメージのサイズは231MBでした。
+
+:::{note}
+
+``python:3.12``と``python:3.12-slim``では、デフォルトのコマンド数などが異なります。
+
+```console
+$ docker container run -it python:3.12 bash
+root@e6c5e9cc0332:/# ls /usr/bin/ | wc
+    671     671    6635
+```
+
+```console
+$ docker container run -it python:3.12-slim bash
+root@c1e899682772:/# ls /usr/bin/ | wc
+    277     277    1986
+```
+
+``python:3.12-slim``には``git``などのコマンドが含まれていないため、自分で追加する必要があります。
+
+:::
+
+## Gitを追加したい
+
+```docker
+FROM python:3.12-slim
+
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends git
+RUN apt-get -y clean
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN mkdir work
+WORKDIR /work
+RUN pip3 install -U virtualenv
+RUN virtualenv venv
+RUN . venv/bin/activate
+RUN pip3 install -U poetry
+CMD ["/bin/bash"]
+```
+
+```console
+docker build .
+[+] Building 0.1s (15/15)FINISHED docker:desktop-linux
+ => [internal] load build definition from Dockerfile 0.0s
+ => => transferring dockerfile: 357B 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim 0.0s
+ => [internal] load .dockerignore 0.0s
+ => => transferring context: 2B 0.0s
+ => [ 1/11] FROM docker.io/library/python:3.12-slim 0.0s
+ => CACHED [ 2/11] RUN apt-get update 0.0s
+ => CACHED [ 3/11] RUN apt-get install -y --no-install-recommends git 0.0s
+ => CACHED [ 4/11] RUN apt-get -y clean 0.0s
+ => CACHED [ 5/11] RUN rm -rf /var/lib/apt/lists/* 0.0s
+ => CACHED [ 6/11] RUN mkdir work 0.0s
+ => CACHED [ 7/11] WORKDIR /work 0.0s
+ => CACHED [ 8/11] RUN pip3 install -U virtualenv 0.0s
+ => CACHED [ 9/11] RUN virtualenv venv 0.0s
+ => CACHED [10/11] RUN . venv/bin/activate 0.0s
+ => CACHED [11/11] RUN pip3 install -U poetry 0.0s
+ => exporting to image 0.0s
+ => => exporting layers 0.0s
+ => => writing image sha256:a7a2226589fee35e6b723730b2eaac6e7b4ab1b085a05a7c9d14e35ff4154333 0.0s
+
+$ docker image ls
+REPOSITORY   TAG         IMAGE ID       CREATED         SIZE
+<none>       <none>      a7a2226589fe   2 minutes ago   333MB
+python       3.12-slim   0e42464fe231   3 days ago      130MB
+```
+
+``git``を追加すると``333 MB``に増加しました。
 
 ## リファレンス
 
