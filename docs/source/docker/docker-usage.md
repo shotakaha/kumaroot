@@ -42,4 +42,5 @@ docker-nginx
 docker-wordpress
 docker-python3
 docker-mystmd
+docker-hugo
 ```
