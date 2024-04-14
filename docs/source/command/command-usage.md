@@ -61,6 +61,8 @@ command-npm
 command-spack
 command-tlmgr
 command-ghq
+command-poetry
+command-rye
 ```
 
 ## シェルしたい
