@@ -22,4 +22,6 @@ altair-hconcat
 altair-vconcat
 altair-datetime
 altair-color
+altair-errorbars
+altair-scatter
 ```
