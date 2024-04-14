@@ -7,6 +7,24 @@ $ apt
 Debian系のLinuxでパッケージ管理を行うためのコマンドラインツールです。
 昔は``apt-get``と``apt-cache``使っていた記憶がありますが、いまは``apt``を使うみたいです。
 
+## パッケージリストを更新したい（``apt update``）
+
+```console
+# apt-get update
+$ apt update
+```
+
+``update``コマンドで、パッケージの更新を確認できます。
+更新確認用のリストは``/etc/apt/sources.list``に保存されます。
+
+:::{note}
+
+``apt-get``は昔からあるコマンドで、``apt``は2016年ころに導入されたコマンド体系です。
+できることはほぼ同じで、対話シェルでは``apt``の利用が推奨されています。
+ただし、シェルスクリプトやDockerではまだ``apt-get``を使うほうがよいみたいです。
+
+:::
+
 ## パッケージを検索したい（``apt search``）
 
 ```console
@@ -20,15 +38,16 @@ $ apt search ripgrep
 ```console
 # apt-get install パッケージ名
 $ apt install パッケージ名
+
 $ apt install ripgrep
+$ apt-get install -y --no-install-recommends git    // Dockerfile
 ```
 
-## パッケージリストを更新したい（``apt update``）
+``install``コマンドでパッケージをインストールできます。
+複数のパッケージ名を一度に指定できます。
+インストールされたパッケージは``/var/lib/apt/lists/``で確認できます。
 
-```console
-# apt-get update
-$ apt update
-```
+Dockerfileなどでは、``-y / --yes``や``--no-install-recommends``などのオプションをつけて使います。
 
 ## オススメのパッケージ
 
