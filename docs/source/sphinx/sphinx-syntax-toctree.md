@@ -36,6 +36,15 @@ reST形式で書くと次のようになります。
 ```
 :::
 
+:::{seealso}
+
+- [](../hugo/hugo-tableofcontents.md)
+- [](../latex/latex-tableofcontents.md)
+- [](../myst/myst-toc.md)
+- [](../typst/typst-outline.md)
+
+:::
+
 ## 目次の深さを設定したい（``maxdepth:``）
 
 ファイルの中にある見出しを表示する**深さ**を設定できます。

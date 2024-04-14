@@ -11,6 +11,16 @@
 \listoftables     % 表目次
 ```
 
+:::{seealso}
+
+- [](../hugo/hugo-tableofcontents.md)
+- [](../myst/myst-toc.md)
+- [](../sphinx/sphinx-syntax-toctree.md)
+- [](../typst/typst-outline.md)
+
+:::
+
+
 ## 目次の深さを変更したい
 
 ```latex

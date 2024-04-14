@@ -20,3 +20,12 @@ chapters:
       - file: samples/0002
       - file: samples/0003
 ```
+
+:::{seealso}
+
+- [](../hugo/hugo-tableofcontents.md)
+- [](../latex/latex-tableofcontents.md)
+- [](../sphinx/sphinx-syntax-toctree.md)
+- [](../typst/typst-outline.md)
+
+:::

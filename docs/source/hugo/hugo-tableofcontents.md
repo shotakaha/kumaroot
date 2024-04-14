@@ -13,6 +13,16 @@
 
 ``{{ .TableOfContents }}``で、コンテンツ内の見出しを目次として表示できます。
 
+:::{seealso}
+
+- [](../latex/latex-tableofcontents.md)
+- [](../myst/myst-toc.md)
+- [](../sphinx/sphinx-syntax-toctree.md)
+- [](../typst/typst-outline.md)
+
+:::
+
+
 ## 目次レベルを変更したい（``markup.tableOfContents``）
 
 ```toml

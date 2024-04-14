@@ -13,6 +13,9 @@
 
 :::{seealso}
 
-[](../latex/latex-tableofcontents.md)
+- [](../hugo/hugo-tableofcontents.md)
+- [](../latex/latex-tableofcontents.md)
+- [](../myst/myst-toc.md)
+- [](../sphinx/sphinx-syntax-toctree.md)
 
 :::
