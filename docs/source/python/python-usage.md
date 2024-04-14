@@ -58,6 +58,7 @@ python-pandas
 python-plotly
 python-altair
 python-textblob
+python-pydantic
 ```
 
 ```{toctree}
