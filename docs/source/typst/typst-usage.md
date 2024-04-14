@@ -56,6 +56,7 @@ typst-list
 typst-strong
 typst-lorem
 typst-link
+typst-math
 ```
 
 ## カスタマイズしたい
