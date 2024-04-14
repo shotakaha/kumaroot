@@ -3,7 +3,7 @@
     pair: MyST; install
 ```
 
-## インストールしたい
+# インストールしたい（``npm install -g mystmd``）
 
 ```console
 $ npm install -g mystmd
@@ -24,7 +24,7 @@ $ which myst
 
 :::
 
-## インストールしたい（``pipx``）
+## インストールしたい（``pipx install mystmd``）
 
 ```console
 $ pipx install mystmd
@@ -44,7 +44,7 @@ MyST requires node 16, 18, or 20; you are running node 21.
 [v1.1.7のリリース](https://github.com/executablebooks/mystmd/releases/tag/myst-cli%401.1.7)からPyPIにデプロイされるようになりました。
 [pipx](../python/python-pipx.md)でもインストールできますが、Nodeのバージョンが合っていないと使えないみたいです。
 
-## インストールしたい（``poetry``）
+## インストールしたい（``poetry add mystmd``）
 
 ```console
 $ poetry add mystmd
