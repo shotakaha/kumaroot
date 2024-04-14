@@ -40,6 +40,16 @@ $ docker run イメージ名
 イメージを更新して、コンテナを再起動する手順を整理しました。
 同じコンテナを複数起動するとエラーがでるので、一度停止してから再起動します。
 
+## プラットフォームを変更したい（``--platform``）
+
+```console
+$ docker image build --platform=プラットフォーム名
+$ docker image build --platform=linux/arm64
+```
+
+``--platform``オプションで、利用するプラットフォームに合わせてイメージをビルドできます。
+``linux/arm64``はラズパイで使うツールをビルドするときに使いました。
+
 ## リファレンス
 
 - [docker image build - docs.docker.com](https://docs.docker.com/reference/cli/docker/image/build/)
