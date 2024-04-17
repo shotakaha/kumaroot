@@ -1,5 +1,53 @@
 # CHANGELOG.md
 
+## v1.34.0 (2024-04-18)
+
+### Feat
+
+- **docker/docker-exec.md**: docker exec を追加した
+- **myst/myst-build-gitlab.md**: GitLab Pages のサンプルを追加した
+- **sphinx/sphinx-extensions-napoleon.md**: sphinx.ext.napoleonを追加した
+
+### Fix
+
+- **docker/docker-dockerfile-cmd.md**: CMDコマンドを追加した
+- **docker/docker-dockerfile-shell.md**: SHELLコマンドを追加した
+- **sphinx/sphinx-syntax-toctree.md**: 相互リンクを追加した
+- **myst/myst-install.md**: 見出しを修正した
+- **python/python-usage.md**: 目次を整理した
+- **typst/typst-usage.md**: 目次を整理した
+- **plotly/plotly-usage.md**: 目次を整理した
+- **hugo/hugo-scratch.md**: ファイル名を修正した
+- **command/command-usage.md**: 目次を整理した
+- **altair/altair-usage.md**: 目次を整理した
+- **docker/docker-image-build.md**: platformを追加した
+- **command/command-apt.md**: aptとapt-getの注釈を追記した
+- **docker/docker-dockerfile-run.md**: apt-getのおまじないを修正した
+- **command/command-apt.md**: manpages.ubuntu.comのリンクを追加した
+- **docker/docker-usage.md**: ファイル名を変更した
+- **docker/docker-build.md**: docker build を修正した
+- **docker/docker-build.md**: ビルドを追記した
+- **docker/docker-image-pull.md**: コマンド名を追記した
+- **docker/docker-usage.md**: ファイル名を整理した renamed:    docs/source/docker/docker-exec.md -> docs/source/docker/docker-container-exec.md renamed:    docs/source/docker/docker-run.md -> docs/source/docker/docker-container-run.md renamed:    docs/source/docker/docker-image.md -> docs/source/docker/docker-image-pull.md
+- **docker/docker-usage.md**: Dockerfileの書き方を追加した
+- **docker/docker-dockerfile-run.md**: RUNを追加した
+- **docker/docker-dockerfile-workdir.md**: WORKDIRを追加した
+- **docker/docker-dockerfile-from.md**: FROMを追加した
+- **docker/docker-python3.md**: WORKDIR を修正した
+- **docker/docker-python3.md**: python:3.12-slimにgitを追加した
+- **docker/docker-ls.md**: リファレンスを追加した
+- **docker/docker-hugo.md**: Hugoしたい
+- **docker/docker-mystmd.md**: Mystしたい
+- **docker/docker-python3.md**: Dockerfileを追加した
+- **docker/docker-python3.md**: 仮想環境を追加した
+- **docker/docker-python3.md**: Python3のコンテナを操作する手順を確認した
+- **docker/docker-usage.md**: 目次を整理した
+- **docker/docker-run.md**: docker runを追加し、他を整理した
+- **docker/docker-exec.md**: 見出しを変更した
+- **docker/docker-exec.md**: docker container execと同じであると追記した
+- **myst/myst-build-typst.md**: Typst形式wの出力方法を追記した
+- **command/command-mise.md**: upgradeの手順を追記した
+
 ## v1.33.0 (2024-04-09)
 
 ### Feat
