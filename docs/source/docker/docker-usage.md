@@ -36,6 +36,7 @@ maxdepth: 1
 docker-dockerfile-from
 docker-dockerfile-workdir
 docker-dockerfile-run
+docker-dockerfile-shell
 ```
 
 ## 実践例
