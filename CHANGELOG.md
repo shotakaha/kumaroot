@@ -1,5 +1,32 @@
 # CHANGELOG.md
 
+## v1.34.0 (2024-04-18)
+
+### Feat
+
+- **docker/docker-container-exec.md**: docker container exec を追加した
+- **docker/docker-usage.md**: Dockerfileの書き方を追加した
+- **docker/docker-dockerfile-cmd.md**: CMDコマンドを追加した
+- **docker/docker-dockerfile-from.md**: FROMを追加した
+- **docker/docker-dockerfile-run.md**: RUNを追加した
+- **docker/docker-dockerfile-shell.md**: SHELLコマンドを追加した
+- **docker/docker-dockerfile-workdir.md**: WORKDIRを追加した
+- **myst/myst-build-gitlab.md**: GitLab Pages のサンプルを追加した
+- **sphinx/sphinx-extensions-napoleon.md**: sphinx.ext.napoleonを追加した
+
+### Fix
+
+- **command/command-apt.md**: aptとapt-getの注釈を追記した
+- **command/command-mise.md**: upgradeの手順を追記した
+- **docker/docker-hugo.md**: Hugoしたい
+- **docker/docker-image-build.md**: platformを追加した
+- **docker/docker-image-pull.md**: コマンド名を追記した
+- **docker/docker-ls.md**: リファレンスを追加した
+- **docker/docker-mystmd.md**: Mystしたい
+- **docker/docker-python3.md**: Python3のコンテナを操作する手順を確認した
+- **myst/myst-build-typst.md**: Typst形式wの出力方法を追記した
+- **sphinx/sphinx-syntax-toctree.md**: 相互リンクを追加した
+
 ## v1.33.0 (2024-04-09)
 
 ### Feat
