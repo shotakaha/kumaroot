@@ -34,6 +34,105 @@ if __name__ == "__main__":
 （やってみようと思って調べたことはありますが実際に作ったことはない・・・）
 ``Typer``は、引数とオプション、コマンドの説明も、いつもの関数を作る作業の延長ででき、非常に簡単だと感じました。
 
+## コマンドしたい（``typer.Argument`` / ``typer.Option``）
+
+```python
+import typer
+from typing_extensions import Annotated
+
+def vth(
+    """
+    コマンドの説明
+    """
+    ch Annotated[int, typer.Argument(help="チャンネル番号")],
+    vth: Annotated[int, typer.Argument(help="スレッショルド値")],
+    max_retry: Annotated[int, typer.Option(help="リトライ数")] = 3,
+    load_from: Annotated[str, typer.Option(help="設定ファイル名")] = "daq.toml"
+    ):
+    pass
+
+if __name__ == "__main__":
+    typer.run(vth)
+```
+
+コマンドとして実行したい関数名を``typer.run``に渡します。
+関数の``docstring``がコマンドの説明になります。
+
+``typer.Argument``で引数を設定できます。
+``typer.Option``でオプション引数を設定できます。
+
+``typing_extensions.Annotated``で引数の説明を追加できます。
+追加方法などは、ドキュメントを参照してください。
+
+:::{hint}
+
+``typer.Argument`` / ``typer.Option``と
+デフォルト値のあり / なしを考えると
+以下の表のような引数名のパターンが考えられます。
+
+| | デフォルト値なし | デフォルト値あり |
+|---|---|---
+| ``typer.Argument`` | **CLI arguments** | optional CLI arguments |
+| ``typer.Option`` | required CLI options | **CLI options** |
+
+通常は、
+CLI arguments（必須の位置引数）、
+CLI options（オプション引数）
+のみのコマンドを設計するとよいと思います。
+
+ただし、
+optional CLI arguments（位置引数なのにオプション）、
+required CLI options（オプション引数なのに必須）
+も、名前がちょっとおかしい気がしますが、定義できるようになっています。
+
+:::
+
+
+## サブコマンドしたい（``@app.command``）
+
+```python
+import typer
+
+app = typer.Typer()
+
+@app.command()
+def vth(
+    """
+    コマンドの説明
+    """
+    ch Annotated[int, typer.Argument(help="チャンネル番号")],
+    vth: Annotated[int, typer.argument(help="スレッショルド値")],
+    max_retry: Annotated[int, typer.argument(help="リトライ数")] = 3,
+    load_from: Annotated[str, typer.argument(help="設定ファイル名")] = "daq.toml"
+    ):
+    pass
+
+if __name__ == "__main__":
+    app()
+```
+
+``@app.command``デコレーターでサブコマンドを定義できます。
+
+:::{note}
+
+``app``の部分は任意のオブジェクト名を使用できます。
+上記のサンプルでは``app = typer.Typer()``を作成しているため、デコレーターは``@app.command``になります。
+
+:::
+
+
+## 出力に色をつけたい（``from rich import print``）
+
+```python
+import typer
+from rich import print
+
+...（省略）...
+```
+
+``rich``パッケージの``print``を使うと、出力を色付けできます。
+色付けの詳細や、その他の表示形式はドキュメントを参照してください。
+
 ## 中断／終了したい（``typer.Exit``）
 
 ```python
