@@ -14,6 +14,26 @@ data = pd.DataFrame(辞書型オブジェクト)
 行に対する操作なのか、列に対する操作なのか、
 を意識すると扱いやすいと思います。
 
+## 辞書型を変換したい
+
+```python
+import random
+import pandas as pd
+
+n = 1000
+samples = {
+    "x": [random.gauss() for i in range(n)],
+    "y": [random.uniform(4, 8) for i in range(n)],
+    "z": [random.randint(0, 10) for i in range(n)],
+}
+
+data = pd.DataFrame(samples)
+data
+```
+
+リスト型の値を持つ辞書型オブジェクト（``dict[str, list]型``）は、そのままデータフレームに変換できます。
+辞書型オブジェクトのキーがカラム名になります。
+
 ## 辞書型リストを変換したい
 
 ```python
