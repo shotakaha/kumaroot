@@ -1,4 +1,4 @@
-# 疑似乱数したい（``random`` / ``numpy.random``）
+# 擬似乱数したい（``random`` / ``numpy.random``）
 
 ```python
 import random
