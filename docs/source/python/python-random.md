@@ -148,3 +148,6 @@ rng.choice(seq, 5)  # size=5
 
 - [Random Generator - numpy.org](https://numpy.org/doc/stable/reference/random/generator.html)
 - [Random sampling - numpy.org](https://numpy.org/doc/stable/reference/random/index.html)
+- [random - docs.python.org](https://docs.python.org/ja/3/library/random.html)
+- [secrets - docs.python.org](https://docs.python.org/ja/3/library/secrets.html)
+
