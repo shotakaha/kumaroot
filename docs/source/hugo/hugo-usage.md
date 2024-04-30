@@ -63,6 +63,7 @@ hugo-config-services
 ---
 maxdepth: 1
 ---
+hugo-title
 hugo-layouts-baseof
 hugo-layouts-single
 hugo-layouts-list
