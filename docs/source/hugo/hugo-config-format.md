@@ -1,20 +1,23 @@
 # 日付フォーマットしたい（``.Format``）
 
-```html
-{{ now.Format "2006" }}
-```
+/config/_default/hugo.toml
+:   ```toml
+    [params]
+    date_format = "2006-01-02"
+    ```
+
+/content/記事/index.md
+:   ```toml
+    date = "2024-04-30T15:30:34+09:00"
+    ```
+
+/layouts/_default/single.html
+:   ```html
+    {{ .Date.Format .Site.Params.date_format }}
+    ```
 
 [.Format](https://gohugo.io/methods/time/format/)関数を使って日付フォーマットできます。
-フォーマット文字列は設定ファイルで定義できます。
-
-```html
-{{ now.Format .Site.Params.date_format }}
-```
-
-```toml
-[params]
-date_format = "2006-01-02"
-```
+フォーマット文字列は設定ファイルで定義します。
 
 ## ISO8601形式にしたい
 
@@ -25,3 +28,29 @@ date_format = "2006-01-02"
 
 [Schema用](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/schema.html)の内部テンプレートからISO8601形式に変換している箇所を抜粋しました。
 ウェブ標準などで日付フォーマットが定まっている場合は、このようにテンプレート内で固定するとよさそうです。
+
+## コピーライト表示したい
+
+/config/_default/params.toml
+:   ```html
+    [footer]
+    showCopyright = true
+    ```
+
+/layouts/partials/copyright.html
+:   ```html
+    {{ if .Site.Params.footer.showCopyright | defaut true }}
+    <div class="copyright">
+        <span>&copy; {{ now.Format "2006" }}</span>
+    </div>
+    {{ end }}
+    ```
+
+フッター領域のコピーライト表示に「年」を併記したい場合を想定したサンプルです。
+複数のテンプレートで利用したいので、部分テンプレートとして作成しました。
+また、設定ファイルで非表示に設定できるようにしてあります。
+
+## リファレンス
+
+- [Date - gohugo.io](https://gohugo.io/methods/page/date/)
+- [Format - gohugo.io](https://gohugo.io/methods/time/format/)
