@@ -26,3 +26,8 @@
 
 ``.Ancestors``は現在のページからトップページまで遡ったページ情報が順番に格納されるページ変数です。
 ``.Ancestors.Reverse``で逆順にすることで、いわゆる「パンくずリスト」の順番でページを取り出しています。
+
+## リファレンス
+
+- [Ancestors - gohugo.io](https://gohugo.io/methods/page/ancestors/)
+- [Breadcrumbs - hugocodex.org](https://hugocodex.org/add-ons/breadcrumbs/)
