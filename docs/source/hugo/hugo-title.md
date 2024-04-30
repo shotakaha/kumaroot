@@ -31,3 +31,10 @@
 :   ```html
     <h1>記事のタイトル 🩷</h1>
     ```
+
+## リファレンス
+
+- [Title - gohugo.io](https://gohugo.io/methods/resource/title/)
+- [strings.Title - gohugo.io](https://gohugo.io/functions/strings/title/)
+- [transform.Emojify - gohugo.io](https://gohugo.io/functions/transform/emojify/)
+- [Single page templates - gohugo.io](https://gohugo.io/templates/single-page-templates/)
