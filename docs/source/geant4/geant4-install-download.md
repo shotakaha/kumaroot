@@ -1,13 +1,18 @@
 # ソースコードを準備する
 
 ```console
+// インストール作業用ディレクトリで作業する
 $ cd $G4HOME/g4install
+
+// ブラウザからダウンロードしたGeant4一式を移動する
 $ mv ~/Downloads/geant4-v11.2.1.zip .
+
+// ファイルを展開する
 $ unzip geant4-v11.2.1.zip
 ```
 
 インストール作業用ディレクトリ（``$G4HOME/g4install/``）にGeant4のソースコードを準備します。
-ソースコードの最新版は[Geant4公式サイト](https://geant4.web.cern.ch/download/)からダウンロードします。
+ソースコードの最新版は[Geant4公式サイト](https://geant4.web.cern.ch/download/)からダウンロードできます。
 
 :::{note}
 

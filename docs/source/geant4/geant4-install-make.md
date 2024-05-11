@@ -1,8 +1,13 @@
 # ビルドする（``make`` / ``make install``）
 
 ```console
+// ビルド用ディレクトリで作業する
 $ cd $G4HOME/g4install/build/
-$ make -j8    # プロセッサの数を指定する
+
+// プロセッサの数を指定する
+$ make -j8
+
+// インストールする
 $ make install
 ```
 
