@@ -2,6 +2,7 @@
 
 ```console
 $ git clone リポジトリのURL
+$ git clone リポジトリのURL パス名
 
 $ git clone https://github.com/shotakaha/kumaroot.git
 $ ls
@@ -9,7 +10,8 @@ kumaroot
 ```
 
 ``git clone``コマンドでリポジトリをクローンできます。
-クローンすると、デフォルトでリポジトリ名のディレクトリが作成されます。
+デフォルトでリポジトリ名と同じディレクトリが作成されます。
+第二引数に、ローカルのパス名を指定して変更できます。
 
 ## タグ／ブランチをしていしたい（``-b / --branch``）
 
@@ -23,7 +25,7 @@ $ git clone -b ブランチ名 --single-branch リポジトリのURL
 
 ``--single-branch``オプションを追加すると、特定のブランチだけクローンできます。
 
-## シャロークローンしたい（``--depth``）
+## shallowクローンしたい（``--depth``）
 
 ```console
 $ git clone --depth 1 リポジトリのURL
@@ -32,8 +34,9 @@ $ git clone -b ブランチ名 --single-branch --depth 1 リポジトリのURL
 
 ``--depth``オプションで、取得するコミット履歴を制限できます。
 前述した``--branch ブランチ名`` / ``--single-branch``と一緒に使うのがよいみたいです。
+大規模なリポジトリをクローンする場合や、一時的に使いたい場合に便利です。
 
-## パーシャルクローンしたい（``--filter``）
+## partialクローンしたい（``--filter``）
 
 ```console
 # blob-less クローン
