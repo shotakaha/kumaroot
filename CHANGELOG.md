@@ -1,5 +1,34 @@
 # CHANGELOG.md
 
+## v1.34.1 (2024-05-12)
+
+### Fix
+
+- **hugo/hugo-page-variables.md**: ページ変数を追加した
+- **mystmd/python-platformdirs.ipynb**: platformdirsを使ってみた
+- **mystmd/pandas-gps.ipynb**: 修正した
+- **geant4/geant4-install.md**: Geant4のインストール手順を再確認した
+- **command/command-ghq.md**: ghq get でできないことのメモを追記した
+- **command/command-ghq.md**: ghq getに追記した
+- **command/command-ghq.md**: ghq listに追記した
+- **python/python-platformdirs.md**: リポジトリのURLを追加した
+- **git/git-clone.md**: クローンのパターンを追加した
+- **requirements.txt**: パッケージを更新した
+- **hugo/hugo-partials-breadcrumbs.md**: リファレンスを追加した
+- **hugo/hugo-config-format.md**: コピーライト表示を追記した
+- **hugo/hugo-taxonomy.md**: タクソノミーを追加した
+- **hugo/hugo-title.md**: リファレンスを追加した
+- **hugo/hugo-title.md**: タイトルを追加した
+- **python/python-random.md**: 見出しの誤植を修正した
+- **mystmd/python-random.ipynb**: secretsを追記した
+- **mystmd/python-random.ipynb**: secretsのサンプルを追加した
+- **python/python-random.md**: リファレンスを追加した
+- **python/python-typer.md**: typerを追記した
+- **mystmd/pandas-dataframe.ipynb**: numpy.randomも追加した
+- **python/python-random.md**: numpy.randomも追加した
+- **mystmd/pandas-dataframe.ipynb**: pandas.DataFrameを整理した
+- **mystmd/pandas-gps.ipynb**: GPS追加した
+
 ## v1.34.0 (2024-04-18)
 
 ### Feat
