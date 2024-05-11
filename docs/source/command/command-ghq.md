@@ -26,36 +26,51 @@ Cloning into '~/repos/github.com/shotakaha/kumaroot'...
 ``ghq get``コマンドで、``ghq.root``で設定したパスの下に、リポジトリのURLに沿った形式でクローンできるようになります。
 どのディレクトリで実行してもOKなのも、このコマンドが便利な点です。
 
+```console
+$ ghq get shotakaha/kumaroot
+    exists /Users/shotakaha/repos/github.com/shotakaha/kumaroot
+```
+
+すでにクローンしてあるプロジェクトを指定した場合は、
+クローン済であることを教えてくれます。
+
+## リポジトリを更新したい（``ghq get -u``）
+
+```console
+$ ghq get -u リポジトリ名
+$ ghq get -u shotakaha/kumaroot
+update ~/repos/github.com/shotakaha/kumaroot/
+       git pull --ff-only
+...
+```
+
+``-u, --update``オプションを使って、リポジトリを更新できます。
+内部で``git pull --ff-only``しているようです。
+
 ## デフォルトディレクトリを設定したい
 
 ```console
 $ git config --global ghq.root "~/repos/"
 ```
 
-``git config``コマンドを使って``ghq.root``を設定します。
-デフォルトでは{file}`~/ghq`に設定されていますが、僕は{file}`~/repos/`に変更しました。
+``git config``コマンドを使って``ghq.root``を変更できます。
+デフォルトでは{file}`~/ghq`に設定されています。
 
 :::{hint}
 
-もともと{file}`~/repos/`の下にクローンする形で管理していました。
+``ghq``コマンドは、僕の使い方にとてもマッチしていたツールでした。
 
-GitHubは{file}`~/repos/github/`に、GitLabは{file}`~/repos/gitlab/`にというように、サービスごとにサブディレクトリを分けていました。
-また、動作確認したいリポジトリは{file}`~/repos/sandbox/`の下にクローンして、使い捨てられるようにしていました。
-なので``ghq``コマンドは、僕の使い方にとてもマッチしていたツールです。
+このコマンドを知る以前は、同じようなことを手動でやっていました。
+
+- Gitリポジトリはすべて{file}`~/repos/`の下で管理
+- GitHubは{file}`~/repos/github/`の下にクローン
+- GitLabは{file}`~/repos/gitlab/`の下にクローン
+- 上記のクローンするパスは自分で指定
+
+また、動作確認したいリポジトリは{file}`~/repos/sandbox/`の下にクローンして、いつでも使い捨てられるようにしているのですが、この使い方に並行して``ghq``コマンドを導入できました。
 
 :::
 
-
-
-## リポジトリを更新したい（``ghq get -u``）
-
-```console
-$ ghq get -u リポジトリ名
-$ ghq get -u kumaroot
-update ~/repos/github.com/shotakaha/kumaroot/
-```
-
-``-u, --update``オプションを使って、リポジトリを更新できます。
 
 ## リポジトリを確認したい（``ghq list``）
 
