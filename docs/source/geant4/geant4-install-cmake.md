@@ -26,6 +26,40 @@ $ cmake \
 
 :::
 
+## ビルドオプションを確認する
+
+| オプション名 | デフォルト値 | 推奨値 | 説明 |
+|---|---|---|---|
+| CMAKE_INSTALL_PREFIX |  ``/usr/local/`` | ``$HOME/geant4/``| Geant4をインストールするパス |
+| CMAKE_PREFIX_PATH | | ``$(brew --prefix qt@5)`` | Geant4のビルドに必要な外部パッケージのパス。``;``（セミコロン）で複数のパスを指定できる |
+| CMAKE_INSTALL_BINDIR | ``bin`` | | 実行ファイルがインストールされるパス |
+| CMAKE_INSTALL_INCLUDEDIR | ``include`` | | ヘッダーファイルがインストールされるパス |
+| CMAKE_INSTALL_LIBDIR | ``lib(+?SUFFIX))`` | | ライブラリがルがインストールされるパス |
+| CMAKE_INSTALL_DATAROOTDIRR | ``share`` | | 読み取り専用のデータセットがルがインストールされるパス |
+| GEANT4_INSTALL_DATA |  ``ON`` | ``ON`` | インストール時にGeant4のデータセットのダウンロードを有効にするフラグ |
+| GEANT4_INSTALL_DATADIR | ``CMAKE_INSTALL_DATAROOTDIR`` | | データセットをインストールするパス |
+| GEANT4_INSTALL_EXAMPLES | ``ON`` | | サンプルプロジェクトを有効にするフラグ |
+| GEANT4_INSTALL_PACKAGE_CACHE | ``ON`` | | サンプルプロジェクトを有効にするフラグ |
+| GEANT4_USE_SYSTEM_CLHEP | ``OFF`` | ``OFF`` | システムのCLHEPライブラリを有効にするフラグ。RayTracerを有効にするフラグ。最近のGeant4はCLHEP同梱なのでOFFでOK |
+| GEANT4_USE_SYSTEM_EXPAT | ``ON`` | | システムのExpatを有効にするフラグ。|
+| GEANT4_USE_SYSTEM_ZLIB | ``OFF`` | | システムのzlibを有効にするフラグ。|
+| GEANT4_USE_GDML | ``OFF`` | | GDMLを有効にするフラグ |
+| GEANT4_USE_INVENTOR_QT | ``OFF`` | | OpenInventorQtを有効にするフラグ |
+| GEANT4_USE_OPENGL_X11 | ``OFF`` | ``ON`` | X11（XQuartz） OpenGLを有効にするフラグ |
+| GEANT4_USE_QT | ``OFF`` | ``ON`` | Qt5を有効にするフラグ |
+| GEANT4_USE_QT6 | ``OFF`` | | Qt6を有効にするフラグ |
+| GEANT4_USE_RAYTRACER_X11 | ``OFF`` | | RayTracerを有効にするフラグ |
+| GEANT4_USE_VTK | ``OFF`` | | VTKを有効にするフラグ。|
+| GEANT4_USE_XM | ``OFF`` | | Motifを有効にするフラグ。|
+| GEANT4_USE_SMARTSTACK | ``OFF`` | | G4SmartStackを有効にするフラグ。|
+| GEANT4_USE_FREETYPE | ``OFF`` | | Freetypeフォントを有効にするフラグ。|
+| GEANT4_USE_HDF5 | ``OFF`` | | HDF5形式を有効にするフラグ。|
+
+
+
+[Geant4 Build Options](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html#geant4buildo)を参照しました。
+
+
 ## ディレクトリ構成
 
 ```console
@@ -95,4 +129,5 @@ g4home
 ``build``の中にファイルが生成されました。
 このようなディレクトリ構成になっていたら、次に進んでください。
 （ディレクトリ構成は前ページと同じです）
+
 
