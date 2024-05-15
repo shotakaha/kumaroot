@@ -55,10 +55,26 @@ $ cmake \
 | GEANT4_USE_FREETYPE | ``OFF`` | | Freetypeフォントを有効にするフラグ。|
 | GEANT4_USE_HDF5 | ``OFF`` | | HDF5形式を有効にするフラグ。|
 
+[Geant4 Build Options](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html#geant4buildo)を参考に、
+使いそうなオプションや、知っておくとよさそうなオプション設定のデフォルト値を整理しました。
 
+:::{note}
 
-[Geant4 Build Options](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html#geant4buildo)を参照しました。
+可視化ツールにQt5を使う場合、Qt5がインストールされているパスを``CMAKE_PREFIX_PATH``で指定する必要があります。
+該当するパスを直接指定してもよいのですが、``brew --prefix パッケージ名``コマンドを使うことで、
+パソコンのシステム構成に依存しにくいように汎用化しています。
 
+```console
+// macOS (x86_64)
+$ brew --prefix qt@5
+/usr/local/qt@5
+
+// macOS (M2 Apple)
+$ brew --prefix qt@5
+/opt/homebrew/opt/qt@5
+```
+
+:::
 
 ## ディレクトリ構成
 
