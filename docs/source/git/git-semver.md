@@ -57,3 +57,8 @@
 
 ある程度、コミットを貯めた場合には、バージョンアップに関係する一連のコミットの中で、
 もっとも大きな変更値が適用されます。
+
+## リファレンス
+
+- [Conventional Commits v1.0.0](https://www.conventionalcommits.org/ja/v1.0.0/)
+- [Semantic Versioning 2.0.0](https://semver.org/lang/ja/)
