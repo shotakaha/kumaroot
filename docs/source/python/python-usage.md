@@ -19,6 +19,7 @@ python-re
 python-requests
 python-string
 python-subprocess
+python-tqdm
 ```
 
 ```{toctree}
