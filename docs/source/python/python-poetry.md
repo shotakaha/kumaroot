@@ -4,6 +4,7 @@
 $ pipx install poetry
 $ which poetry
 /Users/shotakaha/.local/bin/poetry
+
 $ poetry --version
 Poetry (version 1.8.2)
 ```
@@ -148,9 +149,22 @@ $ poetry install
 ## パッケージを公開したい（``poetry publish``）
 
 ```console
+// パッケージをビルドする
 $ poetry build
-$ poetry publish -r testpypi  # TestPyPIに公開
-$ poetry publish              # PyPIに公開
+Building パッケージ名 (バージョン番号)
+  - Building sdist
+  - Built パッケージ名-バージョン番号.tar.gz
+  - Building wheel
+  - Built パッケージ名-バージョン番号-py3-none-any.whl
+
+// TestPyPIに公開
+$ poetry publish -r testpypi
+Publishing パッケージ名 (バージョン番号) to testpypi
+ - Uploading パッケージ名-バージョン番号-py3-none-any.whl
+ - Uploading パッケージ名-バージョン番号.tar.gz
+
+// PyPIに公開
+$ poetry publish
 ```
 
 パッケージをビルドしてから公開します。
@@ -162,6 +176,25 @@ $ poetry publish              # PyPIに公開
 僕のZennスクラップ「[poetryを使ってpythonパッケージを作成する](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)」に、Poetryを使ってパッケージを新規作成してPyPIで公開するまでの手順を整理しました。
 
 :::
+
+### TestPyPI／PyPIを設定したい
+
+```console
+// testpypi という名前で TestPyPIを追加する
+$ poetry config repositories.testpypi https://test.pypi.org/legacy/
+
+// TestPyPIの個人ページで発行したAPIトークンを登録する
+$ poetry config pypi-token.testpypi <your-token>
+
+// PyPIの個人ページで発行したAPIトークンを登録する
+$ poetry config pypi-token.pypi <your-token>
+```
+
+TestPyPI／PyPIに公開するために、APIトークンを設定する必要があります。
+APIトークンは、それぞれのサービスの個人ページで発行したものをコピペしてください。
+
+他にもさまざまな種類のリポジトリを設定できます。
+詳しくは[Repositories](https://python-poetry.org/docs/repositories/)を参照してください。
 
 ## 現在の設定を確認したい（``poetry config``）
 
