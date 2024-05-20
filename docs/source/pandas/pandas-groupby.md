@@ -60,3 +60,7 @@ insight = pd.merge(_left, _right, on=group)
 
 上のサンプルでは、``pageview``と``session``のカラムは合計値（``sum``）、
 ``uvisitor``のカラムはカウント数（``count``）で集計しています。
+
+## リファレンス
+
+- [Group by: split-apply-combine](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
