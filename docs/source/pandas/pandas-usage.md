@@ -32,6 +32,7 @@ maxdepth: 1
 ---
 pandas-dataframe
 pandas-concat
+pandas-merge
 pandas-to_datetime
 pandas-replace
 pandas-rename
