@@ -20,6 +20,7 @@ python-requests
 python-string
 python-subprocess
 python-tqdm
+python-dunder
 ```
 
 ```{toctree}
