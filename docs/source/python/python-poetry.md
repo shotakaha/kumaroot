@@ -1,15 +1,6 @@
 # パッケージ管理したい（``poetry``）
 
 ```console
-$ pipx install poetry
-$ which poetry
-/Users/shotakaha/.local/bin/poetry
-
-$ poetry --version
-Poetry (version 1.8.2)
-```
-
-```console
 $ poetry add pandas matplotlib
 $ poetry add --group=dev ipykernel pytests commitizen ruff
 $ poetry add --group=docs sphinx_book_theme myst_parser
@@ -22,29 +13,22 @@ Pythonのパッケージ管理ツールはいろいろ存在していますが�
 ## インストールしたい（``pipx install poetry``）
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-```
-
-公式ドキュメントでは独自スクリプトを使った方法が推奨されています。
-
-```console
 $ pipx install poetry
 $ which poetry
-~/.local/bin/poetry
+/Users/shotakaha/.local/bin/poetry
+
+$ poetry --version
+Poetry (version 1.8.2)
+
+$ pipx inject poetry poetry-plugin-export
 ```
 
-``pip3``のインストールは推奨されてないみたいですが、``pipx``はフルサポートされています。
-
-```console
-$ brew install poetry
-$ which poetry
-/opt/homebrew/bin/poetry
-```
-
-Homebrewを使ったインストールでも、とくに問題なく使えました。
+公式ドキュメントでは``pipx``を使った方法が推奨されています。
+``pip3``のインストールは推奨されてないみたいです。
 
 :::{caution}
 
+Homebrewでもインストールできます。
 このいずれかひとつの方法でインストールしてください。
 
 :::
@@ -146,6 +130,16 @@ $ poetry install
 デフォルトでは``{cache-dir}/virtualenvs/``に設定されたパスの仮想環境を作成し、パッケージをインストールします。
 ``virtualenvs.in-project = true``に設定した場合は、プロジェクト内の``{project-dir}/.venv/``に仮想環境を作成します。
 
+## パッケージ環境を確認したい（``poetry check``）
+
+```console
+$ poetry check
+All set!
+
+$ poetry check --lock
+All set!
+```
+
 ## パッケージを公開したい（``poetry publish``）
 
 ```console
@@ -165,6 +159,9 @@ Publishing パッケージ名 (バージョン番号) to testpypi
 
 // PyPIに公開
 $ poetry publish
+Publishing パッケージ名 (バージョン番号) to pypi
+ - Uploading パッケージ名-バージョン番号-py3-none-any.whl
+ - Uploading パッケージ名-バージョン番号.tar.gz
 ```
 
 パッケージをビルドしてから公開します。
