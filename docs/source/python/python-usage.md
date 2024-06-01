@@ -72,6 +72,8 @@ python-black
 python-ruff
 python-icecream
 python-loguru
+python-pytest
+python-unittest-mock
 ```
 
 ```bash
