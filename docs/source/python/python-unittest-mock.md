@@ -4,7 +4,7 @@
 from unittest.mock import MagicMock
 ```
 
-## シリアル通信をモックしたい
+## シリアル通信をモックしたい（``MagicMock``）
 
 :パッケージ名/daq.py:read_event:
 
@@ -51,11 +51,45 @@ def test_daq_read_event():
 
 :::
 
-## ファイルをモックしたい
+## ファイル処理をモックしたい（``mock_open``）
 
 ```python
 from unittest.mock import MagicMock, mock_open
+
+@patch("pathlib.Path.open", new_callable=mock_open)
+def test save_events(mock_open):
+    # Arrange: ファイルをモック
+    fname = Path("remove_this_file_if_exists.csv")
+
+    # Act: ファイルを開き、データを追記する
+    n = 5
+    events = []
+    with fname.open("x") as f:
+        for _ in range(n):
+            event = read_event(port)  # 上でモックした値
+            f.write(event + "\n")
+            events.append(event)
+
+    # Assert
+    ## 取得したイベント数を確認
+    assert len(events) == n
+
+    ## ファイルを開いたモードと回数を確認
+    mock_open.assert_called_once_with("x")
+
+    ## writeが呼ばれた回数を確認
+    handle = mock_open()
+    assert handle.write.call_count == n
 ```
+
+``mock_open``で、実際にファイルを作ったり、書き込んだりせずに、ファイル処理をテストできます。
+ファイルが開けたかどうか、``read``／``write``処理が想定回数呼び出せたかどうか、などでアサートできます。
+
+ここでは``@patch``デコレータで、``pathlib.Path.open``をモックしています。
+この関数のスコープの中で呼ばれる``open``間数は、``mock_open``に置き換えられます。
+
+``mock_open``も``MagicMock``と同じように関数／メソッドを呼び出した回数を記録しています。
+そのため``関数名.call_count``でアサートできます。
 
 ## リファレンス
 
