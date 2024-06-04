@@ -36,21 +36,21 @@ geant4-v11.2.1.zip
 ../geant4-v11.2.1/
 
 // ccmakeでビルドオプションを確認する
-(~/geant4/build) $ ccmake ../geant4-v11.2.1/
+(~/geant4/build/) $ ccmake ../geant4-v11.2.1/
 
 // 設定ファイルなどが生成されていることを確認
-(~/geant4/build) $ ls
+(~/geant4/build/) $ ls
 // もともと空だったディレクトリに
 // いろいろファイルができていることを確認する
 
 // ビルドする
-$ make -j8
+(~/geant4/build/) $ make -j8
 
 // インストールする
-$ make install
+(~/geant4/build/) $ make install
 
 // インストール先のディレクトリ構成を確認
-$ tree ~/geant4/11.2.1/ -L 1
+(~/geant4/build/) $ tree ~/geant4/11.2.1/ -L 1
 /Users/shotakaha/geant4/11.2.1/
 ├── bin
 ├── include
@@ -70,8 +70,8 @@ geant4-install-brew
 geant4-install-mkdir
 geant4-install-download
 geant4-install-cmake-options
-geant4-install-ccmake
 geant4-install-cmake
+geant4-install-ccmake
 geant4-install-make
 ```
 

@@ -1,11 +1,9 @@
-# ビルドの準備する（``ccmake``）
+# ビルドを確認する（``ccmake``）
 
 ```console
 // ビルド用ディレクトリで作業する
-$ cd $C4HOME/g4install/build/
-
 // CMakeLists.txtがあるディレクトリを指定する
-$ ccmake ../geant4-v11.2.1/
+(~/geant4/build/) $ ccmake ../geant4-v11.2.1/
 ```
 
 ``cmake``を使って、ビルドに必要なファイルを作成します。

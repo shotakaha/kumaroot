@@ -1,11 +1,9 @@
-# ビルドの準備する（``cmake``）
+# ビルドを準備する（``cmake``）
 
 ```console
 // ビルド用ディレクトリで作業する
-$ cd $G4HOME/g4install/build
-
 // オプションを指定してcmakeする
-$ cmake \
+(~/geant4/build/) $ cmake \
 -DMAKE_INSTALL_PREFIX=$G4HOME/g4install/install \
 -DGEANT4_INSTALL_DATA=ON \
 -DGEANT4_INSTALL_DATADIR=$G4HOME/g4install/data \
