@@ -1,8 +1,43 @@
 # エラー対処
 
+## 環境変数のエラー
+
+サンプルがビルドできるかテストしようとしたら、次のエラーがでました。
+これは、Geant4関係の環境変数が設定されてないことが原因でした。
+``$CMAKE_INSTALL_PREFIX/bin/geant4.sh``にある設定用のスクリプトを読み込ませて解決できました。
+
+```console
+$ cmake ..
+CMake Error at CMakeLists.txt:13 (find_package):
+  By not providing "FindGeant4.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "Geant4", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "Geant4" with any
+  of the following names:
+
+    Geant4Config.cmake
+    geant4-config.cmake
+
+  Add the installation prefix of "Geant4" to CMAKE_PREFIX_PATH or set
+  "Geant4_DIR" to a directory containing one of the above files.  If "Geant4"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+-- Configuring incomplete, errors occurred!
+```
+
 ## C compiler - broken
 
-``CMake``を更新したら、アプリケーションがビルドできなくなりました。
+``CMake``を更新したあと、アプリケーションがビルドできなくなりました。
+``CMAKE_OSX_SYSROOT``に設定されるSDKツールのバージョンが変わってしまったのが原因のようです。
+
+```diff
+- /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk   # Geant4インストール時に指定されたバージョン（自動）
++ /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk   # CMake更新後のバージョン
+```
+
+スクリプトや環境変数の再設定で解決する方法は分かりませんでした。
 Geant4をリビルド＆インストールしたら解決しました。
 
 参考までに、CMakeを更新（3.29.2 -> 3.29.3）したあとのコンパイルエラーをメモしておきます。
@@ -62,3 +97,5 @@ Call Stack (most recent call first):
 すでにビルド済みのアプリケーションの実行ファイルは実行できました。
 
 :::
+
+
