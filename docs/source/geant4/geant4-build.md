@@ -1,19 +1,24 @@
 # ビルドしたい（``cmake``）
 
 ```console
-// プロジェクト内で作業
+// プロジェクト内に移動する
 $ cd $G4WORK/プロジェクト
-$ mkdir build
-$ cd build
-$ cmake ..    # CMakeList.txtがあるディレクトリを指定する
-$ make -j8    # cmake -j8 --build .  でもOK
-// 必要ならば make install する
+
+// ビルド用ディレクトリを作成する
+(プロジェクト) $ mkdir build
+(プロジェクト)$ cd build
+
+// ビルド準備する
+(プ/build) $ cmake ..
+
+// ビルドする
+(プ/build) $ make -j8   # 必要ならば make install する
 ```
 
-Geant4本体と同じようにアプリケーションのビルドにも[CMake](https://cmake.org/)を使います。
-自分で作るアプリケーションも、付属サンプルのように``CMakeLists.txt``を用意することが必要です。
+Geant4本体と同じようにアプリケーションも[CMake](https://cmake.org/)でビルド準備します。
+自作アプリケーションも、付属サンプルのように``CMakeLists.txt``が必要です。
 
-ここでも``cmake``の作法（out-of-source）にしたがい、ビルド用のディレクトリを作成して作業します。
+ここでも``cmake``の作法（out-of-source）にしたがい、ビルド用ディレクトリで作業します。
 ディレクトリ名は任意ですが、分かりやすく``build``としました。
 ビルド作業はすべてこのディレクトリで行います。
 
