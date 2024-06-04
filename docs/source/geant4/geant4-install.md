@@ -49,8 +49,13 @@ $ make -j8
 // インストールする
 $ make install
 
-// ディレクトリ構成を確認
-$ tree ~/repos/g4home -L 3
+// インストール先のディレクトリ構成を確認
+$ tree ~/geant4/11.2.1/ -L 1
+/Users/shotakaha/geant4/11.2.1/
+├── bin
+├── include
+├── lib
+└── share
 ```
 
 Geant4は自分でビルドしてインストールする必要があります。
