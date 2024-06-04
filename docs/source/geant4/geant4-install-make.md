@@ -2,15 +2,24 @@
 
 ```console
 // ビルド用ディレクトリで作業する
-$ cd $G4HOME/g4install/build/
+$ cd ~/geant4/build
 
 // プロセッサの数を指定する
-$ make -j8
+(~/geant4/build/) $ make -j8
 # ビルドがはじまる
 # 実行したマシンのスペックによるが、30分以上かかると思う
+```
 
+ビルド用ディレクトリで``make``コマンドを実行します。
+複数のプロセッサを持ったCPUを使っている場合は、``-j 利用するプロセッサー数``オプションを使うことで、
+並列処理により、ビルド時間を短縮できます。
+
+``GEANT4_INSTALL_DATA=ON``にした場合は、Geant4用データのダウンロードがはじまるため、
+ネットワークに接続した状態で実行する必要があります。
+
+```console
 // インストールする
-$ make install
+(~/geant4/build/) $ make install
 Install the project...
 -- Install configuration: "Release"
 -- Installing: /usr/local/share/Geant4/data/...省略...
@@ -22,32 +31,29 @@ Install the project...
 -- Installing: /usr/local/share/Geant4/examples/...省略...
 ```
 
-ビルド用ディレクトリで``make``コマンドを実行します。
-複数のプロセッサを持ったCPUを使っている場合は、``-j 利用するプロセッサー数``オプションを使いましょう。
-並列処理により、ビルド時間を短縮できます。
-
-``GEANT4_INSTALL_DATA=ON``にした場合は、Geant4用データのダウンロードがはじまるため、ネットワークに接続した状態で実行する必要があります。
-（ネットワークに接続してない場合にどうなるかは未確認）
-
-ビルドが終わったら``make install``コマンドを実行します。
+ビルドできたら``make install``コマンドを実行します。
 ``CMAKE_INSTALL_PREFIX``で指定したディレクトリにGeant4がインストール（コピー）されます。
-
-:::{note}
-
-デフォルトで``CMAKE_INSTALL_PREFIX=/usr/local/``になっています。
-この場合は、管理者パスワードの入力が必要かもしれません。
-
-:::
 
 ## アンインストールしたい
 
 ```console
 // ビルド用ディレクトリで作業する
 // インストール時に使ったMakefileが残っていることが前提
-$ cd $G4HOME/g4install/build
-$ make uninstall
+$ cd ~/geant4/build/
+(~/geant4/build/) $ make uninstall
 ```
 
+ビルド時に使った``Makefile``が残っていれば、``make uninstall``でアンインストールできます。
+``Makefile``が残っていない場合は、``CMAKE_INSTALL_PREFIX``で指定したディレクトリを削除します。
+
+:::{note}
+
+デフォルトで``CMAKE_INSTALL_PREFIX=/usr/local/``になっていますが、
+これだと削除しにくいため、必ず設定することをオススメします。
+
+``/usr/local/``にインストールした場合は、もう一度Makefileを作れば、アンストールできると思います（未確認）。
+
+:::
 
 ## ディレクトリ構成
 
