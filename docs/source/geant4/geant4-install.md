@@ -7,35 +7,46 @@ $ brew install --cask xquartz
 $ brew install qt@5
 
 // Geant4用ディレクトリを作成する
-$ mkdir ~/repos/g4home
+$ mkdir ~/geant4
 
 // ソースコードをダウンロードする
-$ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
-$ unzip geant4-v11.2.1.zip
-
-// インストール先のディレクトリを作成する
-$ mkdir 11.2.1  # Geant4のバージョンにした
+(~/geant4/) $ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
+(~/geant4/) $ unzip geant4-v11.2.1.zip
 
 // cmakeでビルド作業するディレクトリを作成する
-$ mkdir build
+(~/geant4/) $ mkdir build
 
 // 現在のディレクトリ構成を確認する
-$ ls ls
-ls -1
-11.2.1/
+(~/geant4/) $ ls -1
 build/
 geant4-v11.2.1/
 geant4-v11.2.1.zip
 
-// cmakeでビルドする
-$ cd build
-$ export G4HOME=~/repos/g4home
-$ cmake -DMAKE_INSTALL_PREFIX=$G4HOME/g4install/install -DGEANT4_INSTALL_DATA=ON -DGEANT4_INSTALL_DATADIR=$G4HOME/g4install/data -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_RAYTRACER_X11=ON -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) ../geant4-v11.2.1/
-$ ls
-ビルドに必要なファイルが作成されていることを確認
+// cmakeのビルド用ディレクトリに移動する
+(~/geant4/) $ cd build
+
+// cmakeのビルドオプションを設定
+(~/geant4/build/) $ cmake \
+-DCMAKE_INSTALL_PREFIX=~/geant4/11.2.1/ \
+-DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) \
+-DGEANT4_INSTALL_DATA=ON \
+-DGEANT4_USE_OPENGL_X11=ON \
+-DGEANT4_USE_RAYTRACER_X11=ON \
+-DGEANT4_USE_QT=ON \
+../geant4-v11.2.1/
+
+// ccmakeでビルドオプションを確認する
+(~/geant4/build) $ ccmake ../geant4-v11.2.1/
+
+// 設定ファイルなどが生成されていることを確認
+(~/geant4/build) $ ls
+// もともと空だったディレクトリに
+// いろいろファイルができていることを確認する
 
 // ビルドする
 $ make -j8
+
+// インストールする
 $ make install
 
 // ディレクトリ構成を確認
