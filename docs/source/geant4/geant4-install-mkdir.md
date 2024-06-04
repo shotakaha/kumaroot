@@ -17,11 +17,9 @@ $ mkdir ~/geant4/build
 ## ディレクトリ構成
 
 ```console
-$ tree ~/geant4 -L 2
-~/geant4
-├── build
-├── geant4-v11.2.1      # 次のページで用意する
-└── geant4-v11.2.1.zip  # 次のページで用意する
+$ tree ~/geant4 -L 1
+geant4
+└── build
 ```
 
 このようなディレクトリ構成になっていたら、次に進んでください。
