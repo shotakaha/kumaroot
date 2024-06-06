@@ -29,16 +29,15 @@ CMake Error at CMakeLists.txt:13 (find_package):
 
 ## C compiler - broken
 
-``CMake``を更新したあと、アプリケーションがビルドできなくなりました。
+たぶん``Xcode.app``を更新したため、アプリケーションがビルドできなくなりました。
 ``CMAKE_OSX_SYSROOT``に設定されるSDKツールのバージョンが変わってしまったのが原因のようです。
 
 ```diff
 - /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk   # Geant4インストール時に指定されたバージョン（自動）
-+ /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk   # CMake更新後のバージョン
++ /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk   # Xcode更新後のバージョン
 ```
 
 スクリプトや環境変数の再設定で解決する方法は分かりませんでした。
-たぶん``Xcode.app``を更新したため、アプリケーションがビルドできなくなりました。
 Geant4をリビルド＆インストールしたら解決しました。
 
 ```console
