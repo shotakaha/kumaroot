@@ -1,19 +1,24 @@
 # ビルドしたい（``cmake``）
 
 ```console
-// プロジェクト内で作業
+// プロジェクト内に移動する
 $ cd $G4WORK/プロジェクト
-$ mkdir build
-$ cd build
-$ cmake ..    # CMakeList.txtがあるディレクトリを指定する
-$ make -j8    # cmake -j8 --build .  でもOK
-// 必要ならば make install する
+
+// ビルド用ディレクトリを作成する
+(プロジェクト) $ mkdir build
+(プロジェクト)$ cd build
+
+// ビルド準備する
+(プ/build) $ cmake ..
+
+// ビルドする
+(プ/build) $ make -j8   # 必要ならば make install する
 ```
 
-Geant4本体と同じようにアプリケーションのビルドにも[CMake](https://cmake.org/)を使います。
-自分で作るアプリケーションも、付属サンプルのように``CMakeLists.txt``を用意することが必要です。
+Geant4本体と同じようにアプリケーションも[CMake](https://cmake.org/)でビルド準備します。
+自作アプリケーションも、付属サンプルのように``CMakeLists.txt``が必要です。
 
-ここでも``cmake``の作法（out-of-source）にしたがい、ビルド用のディレクトリを作成して作業します。
+ここでも``cmake``の作法（out-of-source）にしたがい、ビルド用ディレクトリで作業します。
 ディレクトリ名は任意ですが、分かりやすく``build``としました。
 ビルド作業はすべてこのディレクトリで行います。
 
@@ -41,37 +46,3 @@ $ ./実行ファイル名 マクロ.mac    # バッチモード
 マクロは、対話モードで使用するコマンドをまとめたようなファイルです。
 対話モードで起動するときも、同じディレクトリにある
 ``init_vis.mac``と``vis.mac``が読み込まれるようです。
-
-## 環境変数のエラー
-
-```console
-$ cmake ..
-CMake Error at CMakeLists.txt:13 (find_package):
-  By not providing "FindGeant4.cmake" in CMAKE_MODULE_PATH this project has
-  asked CMake to find a package configuration file provided by "Geant4", but
-  CMake did not find one.
-
-  Could not find a package configuration file provided by "Geant4" with any
-  of the following names:
-
-    Geant4Config.cmake
-    geant4-config.cmake
-
-  Add the installation prefix of "Geant4" to CMAKE_PREFIX_PATH or set
-  "Geant4_DIR" to a directory containing one of the above files.  If "Geant4"
-  provides a separate development package or SDK, be sure it has been
-  installed.
-
--- Configuring incomplete, errors occurred!
-```
-
-Geant4に関する環境変数の設定を忘れて``cmake``するとエラーになります。
-インストール先（``$G4HOME/g4install/install``）の中にある設定スクリプト（``bin/geant4.sh``）を、その場で読み込んでからビルドしなおしてください。
-
-```console
-// bash/zshの場合
-$ source $G4HOME/g4install/install/geant4.sh
-
-// csh/tcshの場合
-$ source $G4HOME/g4install/install/geant4.csh
-```

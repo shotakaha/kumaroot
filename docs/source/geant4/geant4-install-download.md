@@ -35,28 +35,13 @@ $ cd ~/geant4/
 ## ディレクトリ構成
 
 ```console
-$ tree g4home -L 3
-g4home
-└── g4install
-    ├── build
-    ├── data
-    ├── geant4-v11.2.1    # 展開したソースコード一式
-    │   ├── CHANGELOG -> ReleaseNotes
-    │   ├── CITATION.cff
-    │   ├── CMakeLists.txt
-    │   ├── CONTRIBUTING.rst
-    │   ├── LICENSE
-    │   ├── README.rst
-    │   ├── ReleaseNotes
-    │   ├── cmake
-    │   ├── config
-    │   ├── environments
-    │   ├── examples
-    │   ├── packaging
-    │   └── source
-    ├── geant4-v11.2.1.zip    # ダウンロードしたファイル
-    └── install
+$ tree ~/geant4 -L 1
+geant4/
+├── build
+├── geant4-v11.2.1      // 展開したソースコード一式
+└── geant4-v11.2.1.zip  // ダウンロードしたファイル
+
+3 directories, 1 file
 ```
 
 このようなディレクトリ構成になっていたら、次に進んでください。
-

@@ -2,21 +2,22 @@
 
 ```console
 $ mkdir ~/repos/sandbox/g4work/  # 作業ディレクトリを作成
-$ cp $SPACK_ROOT/opt/spack/darwin-sonoma-skylake/apple-clang-15.0.0/geant4-11.1.2-t26aalvrzmo2u5jyhj3nvv6gihtty7cv/share/Geant4/examples .
-$ ls -1 examples
+$ cd ~/repos/sandbox/g4work/
+(~/r/s/g4work/) $ cp ~/geant4/11.2.1/share/Geant4/examples .
+(~/r/s/g4work/) $ ls -1 examples
 CMakeLists.txt
 GNUmakefile
 History
 README
 README.HowToRun
 README.HowToRunMT
-advanced/
-basic/
-extended/
+advanced/     // advancedサンプル
+basic/        // basicサンプル
+extended/     // extendedサンプル
 novice
 ```
 
-Geant4付属のサンプルが、インストールしたディレクトリの``shared/Geant4/examples``にあります。
+Geant4付属のサンプルは、インストール先の``$CMAKE_INSTALL_PREFIX/shared/Geant4/examples``にあります。
 
 それを作業用ディレクトリにコピーしています。
 作業用ディレクトリの名前は任意ですが、慣例（？）で``g4work``としました。

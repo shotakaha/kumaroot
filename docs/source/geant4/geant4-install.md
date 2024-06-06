@@ -10,6 +10,7 @@ $ brew install qt@5
 $ mkdir ~/geant4
 
 // ソースコードをダウンロードする
+$ cd ~/geant4/
 (~/geant4/) $ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
 (~/geant4/) $ unzip geant4-v11.2.1.zip
 
