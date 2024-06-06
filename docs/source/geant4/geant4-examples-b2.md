@@ -111,3 +111,65 @@ for (G4int copy_number=0; copy_number < fNumberOfChambers; copy_number++>){
 
 マクロで外部磁場の強さを変更しています。
 どうやってるんだろう？
+
+
+## ビルド時のログ
+
+```console
+$ cd examples/basic/B2/B2a
+(B2a) $ mkdir build
+
+(B2a) $ cd build
+
+(B2a/build) $ cmake ..
+-- The C compiler identification is AppleClang 15.0.0.15000309
+-- The CXX compiler identification is AppleClang 15.0.0.15000309
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found EXPAT: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libexpat.tbd (found suitable version "2.5.0", minimum required is "2.5.0")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found OpenGL: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework
+-- Found X11: /opt/homebrew/include
+-- Looking for XOpenDisplay in /opt/homebrew/lib/libX11.dylib;/opt/homebrew/lib/libXext.dylib
+-- Looking for XOpenDisplay in /opt/homebrew/lib/libX11.dylib;/opt/homebrew/lib/libXext.dylib - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - not found
+-- Found XQuartzGL: /usr/X11R6/include
+-- Found Geant4: /Users/shotakaha/geant4/11.2.1/lib/cmake/Geant4/Geant4Config.cmake (found version "11.2.1")
+-- Configuring done (1.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/shotakaha/repos/sandbox/g4work/examples/basic/B2/B2a/build3
+
+(B2a/build) $ make -j8
+[ 10%] Building CXX object CMakeFiles/exampleB2a.dir/exampleB2a.cc.o
+[ 20%] Building CXX object CMakeFiles/exampleB2a.dir/src/DetectorConstruction.cc.o
+[ 40%] Building CXX object CMakeFiles/exampleB2a.dir/src/EventAction.cc.o
+[ 40%] Building CXX object CMakeFiles/exampleB2a.dir/src/DetectorMessenger.cc.o
+[ 50%] Building CXX object CMakeFiles/exampleB2a.dir/src/TrackerHit.cc.o
+[ 60%] Building CXX object CMakeFiles/exampleB2a.dir/src/RunAction.cc.o
+[ 70%] Building CXX object CMakeFiles/exampleB2a.dir/src/ActionInitialization.cc.o
+[ 80%] Building CXX object CMakeFiles/exampleB2a.dir/src/PrimaryGeneratorAction.cc.o
+[ 90%] Building CXX object CMakeFiles/exampleB2a.dir/src/TrackerSD.cc.o
+[100%] Linking CXX executable exampleB2a
+[100%] Built target exampleB2a
+
+(B2a/build) $ ./exampleB2a
+```
