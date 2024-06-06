@@ -2,10 +2,8 @@
 
 ## C compiler - broken
 
-``CMake``を更新したら、アプリケーションがビルドできなくなりました。
+たぶん``Xcode.app``を更新したため、アプリケーションがビルドできなくなりました。
 Geant4をリビルド＆インストールしたら解決しました。
-
-参考までに、CMakeを更新（3.29.2 -> 3.29.3）したあとのコンパイルエラーをメモしておきます。
 
 ```console
 $ cd ~/repos/sandbox/g4work/examples/basic/B1/
