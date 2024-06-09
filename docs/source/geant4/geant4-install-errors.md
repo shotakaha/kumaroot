@@ -1,14 +1,25 @@
 # エラー対処
 
-## 環境変数のエラー
+## CMake Error at CMakeLists.txt
 
-サンプルがビルドできるかテストしようとしたら、次のエラーがでました。
-これは、Geant4関係の環境変数が設定されてないことが原因でした。
-``$CMAKE_INSTALL_PREFIX/bin/geant4.sh``にある設定用のスクリプトを読み込ませて解決できました。
+Geant4関係の環境変数が設定されていないと``cmake``するときにエラーとなります。
+``$CMAKE_INSTALL_PREFIX/bin/geant4.sh``にある設定用のスクリプトを読み込ませて解決できます。
 
 ```console
 $ cmake ..
-CMake Error at CMakeLists.txt:13 (find_package):
+-- The C compiler identification is AppleClang 15.0.0.15000309
+-- The CXX compiler identification is AppleClang 15.0.0.15000309
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Error at CMakeLists.txt:14 (find_package):
   By not providing "FindGeant4.cmake" in CMAKE_MODULE_PATH this project has
   asked CMake to find a package configuration file provided by "Geant4", but
   CMake did not find one.
@@ -23,6 +34,7 @@ CMake Error at CMakeLists.txt:13 (find_package):
   "Geant4_DIR" to a directory containing one of the above files.  If "Geant4"
   provides a separate development package or SDK, be sure it has been
   installed.
+
 
 -- Configuring incomplete, errors occurred!
 ```
