@@ -39,7 +39,7 @@ void EventAction::BeginOfEventAction(const G4Event *aEvent)
 
 ヒット情報（``G4THitMap``や``G4THitsCollection``）はここで初期化します。
 
-::
+:::
 
 ## イベント終了したい（``EndOfEventAction``）
 
