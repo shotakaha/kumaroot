@@ -1,9 +1,14 @@
-# 付属サンプルで遊べる（``examples``）
+# 付属サンプルの遊び方（``examples``）
 
 ```console
-$ mkdir ~/repos/sandbox/g4work/  # 作業ディレクトリを作成
+// 作業ディレクトリを作成して移動する
+$ mkdir ~/repos/sandbox/g4work/
 $ cd ~/repos/sandbox/g4work/
+
+// Geant4のサンプルをコピーする
 (~/r/s/g4work/) $ cp ~/geant4/11.2.1/share/Geant4/examples .
+
+// サンプルの中身を確認する
 (~/r/s/g4work/) $ ls -1 examples
 CMakeLists.txt
 GNUmakefile
