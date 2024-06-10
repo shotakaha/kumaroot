@@ -1,9 +1,13 @@
-# エラー対処
+# インストール／ビルド時のエラーと対処法
 
 ## CMake Error at CMakeLists.txt
 
-Geant4関係の環境変数が設定されていないと``cmake``するときにエラーとなります。
+アプリケーションをはじめてビルド、もしくは``cmake``からリビルドするときに、Geant4関係の環境変数が設定されていないとエラーになります。
 ``$CMAKE_INSTALL_PREFIX/bin/geant4.sh``にある設定用のスクリプトを読み込ませて解決できます。
+
+:::{note}
+すでに``cmake``したことがあり、ビルド用ディレクトリに``CMakeCache.txt``がある場合は、環境変数を読み込まなくても``make -j8``でビルドできます（たぶん）。
+:::
 
 ```console
 $ cmake ..
@@ -41,16 +45,26 @@ CMake Error at CMakeLists.txt:14 (find_package):
 
 ## C compiler - broken
 
-たぶん``Xcode.app``を更新したため、アプリケーションがビルドできなくなりました。
-``CMAKE_OSX_SYSROOT``に設定されるSDKツールのバージョンが変わってしまったのが原因のようです。
+久しぶりに使ってみたら、アプリケーションがビルドできなくなりました。
+OSの更新、Xcodeの更新、CMakeの更新のどこかのタイミングでビルドできなくなってしまったと思うのですが、どれが原因か切り分けられていません。
+
+エラーを確認すると
+``CMAKE_OSX_SYSROOT``に設定されているSDKツールのバージョンと、現在のシステムに存在するSDKのバージョンが変わってしまったのが原因だと思います。
 
 ```diff
 - /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk   # Geant4インストール時に指定されたバージョン（自動）
-+ /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk   # Xcode更新後のバージョン
++ /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk   # 現在のシステムに存在するバージョン
 ```
 
-スクリプトや環境変数の再設定で解決する方法は分かりませんでした。
-Geant4をリビルド＆インストールしたら解決しました。
+とりあえず、Geant4をリビルド＆インストールしたら解決しました。
+
+:::{note}
+
+もしかしたら、アプリのビルド用ディレクトリで``ccmake ..``を実行して``CMAKE_OSX_SYSROOT``を編集してもよかったかもしれません。
+
+ただし、この対処方法だと、アプリケーションごとに編集が必要になるはずなので、結局どこかの時点でリビルド＆インストールする必要がでてきそうです。
+
+:::
 
 ```console
 $ cd ~/repos/sandbox/g4work/examples/basic/B1/

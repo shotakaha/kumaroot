@@ -78,7 +78,6 @@ geant4-install-cmake
 geant4-install-ccmake
 geant4-install-make
 geant4-install-env
-geant4-install-errors
 ```
 
 
