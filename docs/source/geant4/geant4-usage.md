@@ -92,6 +92,7 @@ G4Material *fWater = nistManager->FindOrBuildMaterial("G4_WATER");
 ---
 maxdepth: 1
 ---
+geant4-material-table
 geant4-material
 geant4-element
 geant4-air
