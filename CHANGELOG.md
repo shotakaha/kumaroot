@@ -1,5 +1,56 @@
 # CHANGELOG.md
 
+## v1.35.0 (2024-06-10)
+
+### Feat
+
+- **python/python-usage.md**: ユニットテスト関係を追加した
+- **python/python-dunder.md**: dunderを追加した
+- **pandas/pandas-merge.md**: pandas.merge を追加した
+- **python/python-tqdm.md**: tqdmを追加した
+
+### Fix
+
+- **altair/altair-errorbars.md**: エラーバー付きの散布図を追加した
+- **geant4/geant4-material-table.md**: G4MaterialTableを追加した
+- **geant4/geant4-install-env.md**: 環境変数の設定を整理した
+- **geant4/geant4-install-errors.md**: エラー対処を整理した
+- **geant4/geant4-cpp.md**: Geant4のコーディングガイドを追記した
+- **geant4/geant4-examples.md**: コピー手順を整理した
+- **geant4/geant4-eventaction.md**: 修正した
+- **geant4/geant4-install-errors.md**: エラーを整理した
+- **geant4/geant4-install-errors.md**: CMake -> Xcodeが原因だと思う
+- **geant4/geant4-install-errors.md**: アプリをビルドするときのエラーを整理した
+- **geant4/geant4-build.md**: アプリケーションのビルド手順を整理した
+- **geant4/geant4-examples.md**: サンプルがあるパスを修正した
+- **geant4/geant4-install-make.md**: インストール手順を整理した
+- **geant4/geant4-install-errors.md**: CMakeの更新ではなくXcodeの更新エラーかもしれない
+- **geant4/geant4-examples-b2.md**: ビルド時のログを追加した
+- **geant4/geant4-install-env.md**: 環境変数の設定を別ページにした
+- **geant4/geant4-install-ccmake.md**: ccmakeの画面を整理した
+- **geant4/geant4-install-cmake.md**: ビルドオプションを整理した
+- **geant4/geant4-install.md**: インストール手順を整理した
+- **geant4/geant4-install.md**: 手順を整理した
+- **geant4/geant4-install.md**: Geant4のインストール手順を整理した
+- **geant4/geant4-install-cmake-options.md**: ビルドオプションの確認を別ページにした
+- **python/python-unittest-mock.md**: ファイル処理のモックを追記した
+- **python/python-poetry.md**: poetry-plugin-export を追加した
+- **git/git-clone.md**: クローンするときのtipsを追加した
+- **pandas/pandas-merge.md**: マージ情報を追記した
+- **mystmd/python-tqdm.ipynb**: tqdmの使い方を追加した
+- **pandas/pandas-groupby.md**: split-apply-combineのリファレンスを追加した
+- **python/python-poetry.md**: パッケージを公開する方法を整理した
+- **git/git-cliff.md**: git cliffを追加した
+- **altair/altair-layer.md**: 重ね書きする方法を整理した
+- **git/git-semver.md**: リファレンスを追加した
+- **geant4/geant4-install.md**: CMakeの更新バージョンを追記した
+- **geant4/geant4-install.md**: Fishする場合を追記した
+- **geant4/geant4-install.md**: リビルドが必要なときを追記した
+- **geant4/geant4-install-cmake.md**: CMAKE_PREFIX_PATHに設定するパスに関するメモを追記した
+- **geant4/geant4-install-cmake.md**: ビルドオプションを整理した
+- **geant4/geant4-install-make.md**: make install の手順を整理した
+- **geant4/geant4-install-mkdir.md**: ディレクトリ構造を整理した
+
 ## v1.34.1 (2024-05-12)
 
 ### Fix
