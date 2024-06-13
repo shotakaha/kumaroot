@@ -1,4 +1,4 @@
-# トラックしたい（``G4Track``）
+# トラック情報したい（``G4Track``）
 
 [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)は、トラック情報を管理するオブジェクトです。
 トラック粒子の進む方向のオブジェクトです。

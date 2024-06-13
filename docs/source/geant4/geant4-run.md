@@ -1,4 +1,4 @@
-# ランしたい（``G4Run``）
+# ラン情報したい（``G4Run``）
 
 ```cpp
 aRun->GetNumberOfEvents()
