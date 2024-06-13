@@ -73,7 +73,7 @@ G4LogicalVolume *pTankLogical = new G4LogicalVolume(
 
 :::{seealso}
 
-- [](./geant4-material.md)
+- [](./geant4-nistmanager.md)
 - [](./geant4-pvplacement.md)
 - [](./geant4-pvreplica.md)
 - [](./geant4-world.md)
