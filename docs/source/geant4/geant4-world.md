@@ -1,9 +1,9 @@
-# 実験室を作りたい（``DefineWorldVolume``）
+# 実験室を作りたい
 
 実験室（＝ワールド）の定義し、論理物体を返す関数を作成します。
 これを``DetectorConstruction::Construct``の中で呼び、物理物体として配置します。
 
-## DefineWorldVolume
+## 実験室を定義する関数
 
 ワールドのボリュームを定義します。
 引数で論理物体の名前を設定できるようになっています。
@@ -49,37 +49,15 @@ G4LogicalVolume *DefineWorldVolume(const G4String &name){
 }
 ```
 
-## DetectorConstruction.hh
+## 使い方
+
+``DetectorConstruction::Construct()``の中で使います。
 
 ```cpp
-#ifndef DetectorConstruction_h
-#define DetectorConstruction_h 1
-
-#include "G4VPhysicalVolume.hh"
-
-class DetectorConstruction : public G4VUserDetectorConstruction
-{
-    public:
-        G4VPhysicalVolume* Construct() override;
-}
-
-#endif DetectorConstruction_h
-```
-
-## DetectorConstruction.cc
-
-```cpp
-#include "DetectorConstruction.hh"
-
-#include "G4Box.hh"
-#include "G4LogicalVolume.hh"
-#include "G4VPhysicalVolume.hh"
-#include "G4NistManager.hh"
-
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
     // 実験室の論理物体を取得する
-    auto pWorldLogical = DefineWorldVolume("WorldLogical")
+    auto pWorldLogical = DefineWorldVolume("world")
 
     // 実験室の置き場所を決める
     G4RotationMatrix rotation = G4RotationMatrix();       // 回転 : なし
