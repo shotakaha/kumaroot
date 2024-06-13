@@ -1,8 +1,8 @@
 # 空気を作りたい（``G4_AIR``）
 
 ```cpp
-G4NistManager *nist = G4NistManager::Instance()
-G4Material *Air = nist->FindOrBuildMaterial("G4_AIR")
+G4NistManager *nm = G4NistManager::Instance()
+G4Material *air = nm->FindOrBuildMaterial("G4_AIR")
 ```
 
 ``G4_AIR``でNISTデータにある空気を生成できます。

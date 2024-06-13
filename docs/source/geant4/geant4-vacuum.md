@@ -1,8 +1,8 @@
 # 真空を作りたい（``G4_Galactic``）
 
 ```cpp
-G4NistManager *nist = G4NistManager::Instance()
-G4Material *Vacuum = nist->FindOrBuildMaterial("G4_Galactic")
+G4NistManager *nm = G4NistManager::Instance()
+G4Material *vacuum = nm->FindOrBuildMaterial("G4_Galactic")
 ```
 
 ``G4_Galactic``で真空（らしき状態）を生成できます。
@@ -10,7 +10,7 @@ G4Material *Vacuum = nist->FindOrBuildMaterial("G4_Galactic")
 ## カスタイマイズしたい
 
 ```cpp
-G4Material *Vacuum = new G4Material(
+G4Material *vacuum = new G4Material(
     "interGalactic",
     1.,            // 原子番号
     1.008*g/mole,  // 質量/モル

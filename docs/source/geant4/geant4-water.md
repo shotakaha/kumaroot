@@ -1,8 +1,8 @@
 # 水を作りたい（``G4_WATER``）
 
 ```cpp
-G4NistManager *nist = G4NistManager::Instance()
-G4Material *fWater = nist->FindOrBuildMaterial("G4_WATER")
+G4NistManager *nm = G4NistManager::Instance()
+G4Material *water = nm->FindOrBuildMaterial("G4_WATER")
 ```
 
 ``G4_WATER``でNISTデータにある水を生成できます。
@@ -10,7 +10,8 @@ G4Material *fWater = nist->FindOrBuildMaterial("G4_WATER")
 ## 水蒸気したい（``GA_WATER_VAPOR``）
 
 ```cpp
-G4Material *fWaterVapor = nist->FindOrBuildMaterial("G4_WATER")
+G4NistManager *nm = G4NistManager::Instance()
+G4Material *vapor = nm->FindOrBuildMaterial("G4_WATER_VAPOR")
 ```
 
 ``G4_WATER_VAPOR``で水蒸気を生成できます。

@@ -1,8 +1,8 @@
 # アクリルを作りたい（``G4_PLEXIGLASS``）
 
 ```cpp
-G4NistManager *nist = G4NistManager::Instance();
-G4Material *fAcrylic = nist->FindOrBuildMaterial("G4_PLEXIGLASS");
+G4NistManager *nm = G4NistManager::Instance();
+G4Material *acrylic = nm->FindOrBuildMaterial("G4_PLEXIGLASS");
 ```
 
 ``G4_PLEXIGLASS``でアクリル材（アクリル樹脂）を生成できます。
