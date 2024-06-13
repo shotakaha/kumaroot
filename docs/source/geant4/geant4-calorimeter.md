@@ -86,7 +86,6 @@ G4LogicalVolume *DefineCalorimeterVolume(const G4String &name)
 
 ## 使い方
 
-
 ```cpp
 class DetectorConstruction : public G4VUserDetectorConstruction
 {

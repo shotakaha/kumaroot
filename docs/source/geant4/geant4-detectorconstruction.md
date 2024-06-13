@@ -1,60 +1,52 @@
 # 測定器を作りたい（``G4VUserDetectorConstruction``）
 
-```cpp
-// include/MYDetectorConstruction.hh
 
-#ifndef MYDetectorConstruction_h
-#define MYDetectorConstruction_h 1
-
-#include "G4VUserDetectorConstruction.hh"
-
-#include "G4VPhysicalVolume.hh"
-#include "G4LogicalVolume.hh"
-
-class MYDetectorConstruction : public G4VUserDetectorConstruction
-{
-    public:
-        DetectorConstruction() = default;
-        ~DetectorConstruction() override = default;
-
-        G4VPhysicalVolume* Construct() override;
-
-    private:
-        G4LogicalVolume *fWorldL
-        G4LogicalVolume *fTankL
-        G4LogicalVolume *fPmtL
-
-}
-#endif
-```
 
 ```cpp
-// src/MYDetectorConstruction.cc
 
-#include "MYDetectorConstruction.hh"
+// ローカル関数（でもクラスの中の関数にしてもよい）
+DefineWorldVolume(const G4String &name){...};
+DefineDetectorVolume(const G4String &name){...};
+DefineSubDetectorVolume(const G4String &name){...};
 
-G4VPhysicalVolume* DetectorConstruction::Construct()
+// 測定器の建設に必要なメイン関数
+G4VPhysicalVolume *DetectorConstruction::Construct()
 {
-    // ワールド
-    G4Material *fAir = new G4Material(...);
-    G4Box *fWorldS = new G4Box("worldS", ...);
-    G4LogicalVolume *fWorldL = new G4LogicalVolume(fWorldS, fAir, "worldL");
+    // 論理物体を取得する
+    auto worldLogical = DefineWorldVolume("world");
+    auto detectorLogical = DefineDetectorVolume("detector");
+
+    // ワールドを配置する
     G4Transform3D location = G4Transform3D(nullptr, nullptr);
-    G4VPhysicalVolume *fWorldP = new G4PVPlacement(location, fWorldL, "worldP", nullptr, ...);
+    G4VPhysicalVolume *world = new G4PVPlacement(
+        location,
+        worldLogical,    // G4LogicalVolume: 配置する論理物体
+        "worldPhysical",
+        nullptr,         // G4LogicalVolume: 親となる論理物体
+        ...);
 
-    // 測定器（例：水タンク）
-    G4LogicalVolume *fTankL = new G4LogicalVolume(...);
-    new G4PVPlacement(...);
+    // 測定器を配置する
+    G4Transform3D location = G4Transform3D(nullptr, nullptr);
+    new G4PVPlacement(
+        location,
+        detectorLogical,  // G4LogicalVolume: 配置する論理物体
+        "detectorP",
+        worldLogical,     // G4LogicalVolume: 親となる論理物体
+        ...);
 
-    // 検出器（例：光電子増倍管）
-    G4LogicalVolume *fPmtL = new G4LogicalVolume(...);
-    new G4PVPlacement(...);
-
-    // 必ずワールドをリターンする
-    return fWorldP
+    return world;
 }
 ```
 
-``MYDetectorConstruction``クラスは、``G4VUserDetectorConstruction``を継承して作成します。
+測定器を構築するクラスは、``G4VUserDetectorConstruction``を継承して作成します。
+その中の``DetectorConstruction::Construct()``をオーバーライドして実装します。
 
-``G4VSolid``、``G4LogicalVolume``、``G4VPhysicalVolume``を使って、Geant4の中に構造物を配置できます。
+附属サンプルを眺めると、``Construct()``関数の中で、ワールドも測定器も一緒くたに定義しているのですが、個人的には測定器のパーツ単位でモジュール化するとよいと思います。
+
+:::{note}
+
+測定器のサイズがすでに決まっている場合は、
+ワールドや測定器のサイズはハードコードしてしまっても
+問題ないと思います。
+
+:::
