@@ -1,13 +1,14 @@
 # PMTを作りたい
 
 ```cpp
-G4LogicalVolume *DefinePmtVolume(const G4String &name){
+G4LogicalVolume *DefinePmtWindow(const G4String &name){
 
     // 材料を準備
     G4NistManager *nm = new G4NistManager::Instance();
     auto material = nm->FindOrBuildMaterial("G4_PLEXIGLASS")
 
     // 形状を定義
+    // PMTの入射窓を、平たい円柱で作成
     auto solid = new G4Tubs(
         "windowSolid",
         0.,          // G4double: 内径
