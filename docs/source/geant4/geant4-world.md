@@ -1,4 +1,55 @@
-# 実験室を作りたい（``World``）
+# 実験室を作りたい（``DefineWorldVolume``）
+
+実験室（＝ワールド）の定義し、論理物体を返す関数を作成します。
+これを``DetectorConstruction::Construct``の中で呼び、物理物体として配置します。
+
+## DefineWorldVolume
+
+ワールドのボリュームを定義します。
+引数で論理物体の名前を設定できるようになっています。
+
+```cpp
+G4LogicalVolume *DefineWorldVolume(const G4String &name){
+
+    // 実験室の素材を決める
+    G4NistManager *nm = new G4NistManager::Instance();
+    auto material = nm->FindOrBuildMaterial("G4_AIR");
+
+    // 実験室の大きさ
+    G4double halfX = 50.0 * cm;
+    G4double halfY = 50.0 * cm;
+    G4double halfZ = 50.0 * cm;
+
+    // 実験室の形状
+    auto solid = new G4Box(
+        "worldSolid",    // 名前
+        halfX,
+        halfY,
+        halfZ,
+    )
+
+    // 実験室
+    auto logical = new G4LogicalVolume(
+        solid,       // G4VSolid
+        material,    // G4Material
+        name,        // 名前
+        nullptr,     // G4FieldManager
+        nullptr,     // G4VSensitiveDetector
+        nullptr,     // G4UserLimits
+    )
+
+    G4cout << "World: "
+    << "x=" << 2 * halfX / cm << " cm, "
+    << "y=" << 2 * halfY / cm << " cm, "
+    << "z=" << 2 * halfZ / cm << " cm, "
+    << "of " << material->GetName()
+    << G4endl;
+
+    return logical
+}
+```
+
+## DetectorConstruction.hh
 
 ```cpp
 #ifndef DetectorConstruction_h
@@ -15,6 +66,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 #endif DetectorConstruction_h
 ```
 
+## DetectorConstruction.cc
+
 ```cpp
 #include "DetectorConstruction.hh"
 
@@ -25,33 +78,15 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
-    // 実験室の大きさ
-    G4Double world_x = 50.*m;
-    G4Double world_y = 50.*m;
-    G4Double world_z = 50.*m;
-
-    // 実験室の形を決める
-    G4double width, length, height;
-    G4Box *pWorldSolid = new G4Box(
-        "WorldSolid",
-        width=0.5*world_x,
-        length=0.5*world_y,
-        height=0.5*world_z)
-
-    // 実験室の素材を決める
-    G4NistManager *nm = new G4NistManager::Instance();
-    G4Material *pAir = nm->FindOrBuildMaterial("G4_AIR");
-    G4LogicalVolume *pWorldLogical = new G4LogicalVolume(
-        pWorldSolid,    // G4VSolid : この論理ボリュームの形状
-        pAir,           // G4Material : この論理ボリュームの素材
-        "WorldLogical"  // G4String : この論理ボリュームの名前
-    )
+    // 実験室の論理物体を取得する
+    auto pWorldLogical = DefineWorldVolume("WorldLogical")
 
     // 実験室の置き場所を決める
     G4RotationMatrix rotation = G4RotationMatrix();       // 回転 : なし
     G4ThreeVector direction = G4ThreeVector(0., 0., 0.);  // 方向 :  (0, 0, 0)
     G4Transform3D location = G4Transform3D(rotation, direction)  // 座標
 
+    // 実験室を配置する
     G4VPhysicalVolume *pWorldPhysical = new G4PVPlacement(
         location,         // G4Transform3D : 論理ボリュームを配置する座標
         pWorldLogical,    // G4LogicalVolume : 配置する論理ボリューム
