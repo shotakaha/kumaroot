@@ -1,7 +1,5 @@
 # 測定器を作りたい（``G4VUserDetectorConstruction``）
 
-
-
 ```cpp
 
 // ローカル関数（でもクラスの中の関数にしてもよい）

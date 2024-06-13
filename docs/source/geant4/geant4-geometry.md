@@ -71,29 +71,11 @@ G4LogicalVolume *pTankLogical = new G4LogicalVolume(
 素材（``G4Material``）と形状（``G4VSolid``）を指定して、
 論理ボリューム（``G4LogicalVolume``オブジェクト）を作成します。
 
-## 測定器の並べ方
+:::{seealso}
 
-```cpp
-G4RotationMatrix rotation = G4RotationMatrix();  // no rotation
-G4ThreeVector direction = G4ThreeVector();       // at (0, 0, 0)
-G4Transform3D location = G4Ttransform3D(fRotation, fDirection)
-G4VPhysicalVolume *pTankPhysical = new G4PVPlacement(
-    location,
-    pTankLogical,     // この論理ボリューム
-    "TankPhysical",
-    pWorldLogical,    // 親となる論理ボリューム
-    false,      // boolean operation
-    0,          // copy number
-    True,       // check overlaps
-)
-```
-
-``G4PVPlacement``を使って、測定器を配置します。
-測定器の場所は、次に書いた**World**の原点に対して座標を指定します。
-
-## 実験室の作り方
-
+- [](./geant4-material.md)
+- [](./geant4-pvplacement.md)
+- [](./geant4-pvreplica.md)
 - [](./geant4-world.md)
 
-
-
+:::
