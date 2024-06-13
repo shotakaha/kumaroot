@@ -76,16 +76,41 @@ geant4-macro
 geant4-batch
 geant4-uimanager
 geant4-runmanager
-geant4-detectorconstruction
 geant4-actioninitialization
+```
+
+
+## 測定器したい
+
+```cpp
+runManager->SetUserInitialization(new DetectorConstruction());
+```
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-detectorconstruction
+geant4-pvplacement
+geant4-pvreplica
+geant4-world
+geant4-tank
+geant4-pmt
+geant4-calorimeter
+geant4-hodoscope
+geant4-qe
+geant4-magneticfield
 ```
 
 ## 物質したい
 
 ```cpp
-G4NistManager *nistManager = new G4NistManager::Instance();
-G4Material *fAir = nistManager->FindOrBuildMaterial("G4_AIR");
-G4Material *fWater = nistManager->FindOrBuildMaterial("G4_WATER");
+G4NistManager *nm = new G4NistManager::Instance();
+auto air = nm->FindOrBuildMaterial("G4_AIR");    // 空気
+auto water = nm->FindOrBuildMaterial("G4_WATER");    // 水
+auto vacuum = nm->FindOrBuildMaterial("G4_Galactic");    // 真空
+auto acrylic = nm->FindOrBuildMaterial("G4_PLEXIGLASS");    // アクリルガラス
+auto sc = nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");    // プラスチックシンチレーター
 ```
 
 ```{toctree}
@@ -103,27 +128,6 @@ geant4-vacuum
 geant4-glass
 geant4-petroleum
 geant4-plastic-scintillator
-```
-
-## 測定器したい
-
-```cpp
-runManager->SetUserInitialization(new DetectorConstruction());
-```
-
-```{toctree}
----
-maxdepth: 1
----
-geant4-pvplacement
-geant4-pvreplica
-geant4-world
-geant4-tank
-geant4-pmt
-geant4-calorimeter
-geant4-hodoscope
-geant4-qe
-geant4-magneticfield
 ```
 
 ## 相互作用したい
