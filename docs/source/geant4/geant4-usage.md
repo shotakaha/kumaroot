@@ -115,8 +115,8 @@ auto sc = nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");    // プラス
 ---
 maxdepth: 1
 ---
+geant4-nistmanager
 geant4-material-table
-geant4-material
 geant4-element
 geant4-air
 geant4-water
