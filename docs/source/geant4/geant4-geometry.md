@@ -1,9 +1,16 @@
 # ジオメトリ作成の流れ
 
 ```cpp
+// 1. 素材（マテリアル）を用意する
 G4Material *pMaterial = new G4Material(...)
+
+// 2. 形状（ソリッド）を作成する
 G4VSolid *pDetectorSolid = new G4Box(...)
+
+// 3. 測定器（論理物体）を組み立てる
 G4LogicalVolume *pDetectorLogical = new G4LogicalVolume(...)
+
+// 4. 測定器（物理物体）を配置する
 G4VPhysicalVolume *pDetectorPhysical = new G4PVPlacement(...)
 ```
 
@@ -12,8 +19,8 @@ Geant4空間に配置する構造体を**ジオメトリ**と呼びます。
 
 1. 素材（マテリアル）を用意する（``G4Material``）
 2. 形状（ソリッド）を作成する（``G4VSolid``）
-3. 測定器を組み立てる（``G4LogicalVolume``）
-4. 測定器を配置する（``G4VPhysicalVolume``）
+3. 測定器（論理物体）を組み立てる（``G4LogicalVolume``）
+4. 測定器（物理物体）を配置する（``G4VPhysicalVolume``）
 
 とても分かりやすいオブジェクト指向な設計になっていて、
 現実世界の実験と同じように、素材と形状を決めて測定装置を作り、実験室に配置します。
@@ -86,32 +93,7 @@ G4VPhysicalVolume *pTankPhysical = new G4PVPlacement(
 
 ## 実験室の作り方
 
-```cpp
-G4NistManager *nm = new G4NistManager::Instance();
-G4Material *pAir = nm->FindOrBuilldMaterial("G4_AIR");
+- [](./geant4-world.md)
 
-G4double world_x = 50.*m;
-G4double world_y = 50.*m;
-G4double world_z = 50.*m;
-G4Box *pWorldSolid = new G4Box("WorldSolid", 0.5*world_x, 0.5*world_y, 0.5*world_z);
-G4LogicalVolume *pWorldLogical = new G4LogicalVolume(pWorldSolid, pAir, "Kamioka Mine");
 
-G4RotationMatrix rotation = G4RotationMatrix();    // no rotation
-G4ThreeVector direction = G4ThreeVector();         // at (0, 0, 0)
-G4Transform3D location = G4Ttransform3D(location, direction)
-G4VPhysicalVolume *pWorldPhysical = new G4PVPlacement(
-    location,
-    pWorldLogical,
-    "WorldPhysical",
-    nullptr,    // mother volume = none
-    false,      // boolean operation = false
-    0,          // copy number
-    True        // check overlaps
-    )
-```
 
-通常**World**と呼ばれる実験室の空間を作成します。
-地球上の実験室を想定して空気で満たしておきました。
-
-このボリュームは親ボリュームを持ちません。
-すべての測定装置はこの空間の中に収まるように配置する必要があります。

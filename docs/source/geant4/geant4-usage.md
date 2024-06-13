@@ -35,9 +35,7 @@ geant4-document
 geant4-examples
 geant4-class-reference
 geant4-overview
-geant4-geometry
 geant4-drivers
-geant4-scoring
 geant4-mandatory-classes
 geant4-units
 geant4-constants
@@ -89,6 +87,7 @@ runManager->SetUserInitialization(new DetectorConstruction());
 ---
 maxdepth: 1
 ---
+geant4-geometry
 geant4-detectorconstruction
 geant4-pvplacement
 geant4-pvreplica
@@ -160,6 +159,7 @@ geant4-runaction
 ## 測定したい
 
 ```{toctree}
+geant4-scoring
 geant4-step
 geant4-track
 geant4-event
