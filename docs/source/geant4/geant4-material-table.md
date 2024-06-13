@@ -1,19 +1,19 @@
 # 材料を確認したい（``G4Material::GetMaterialTable``）
 
 ```cpp
-G4NistManager *nistManager = G4NistManager::Instance();
-nistManager->FindOrBuildMaterial("G4_AIR");
-nistManager->FindOrBuildMaterial("G4_Pb");
-nistManager->FindOrBuildMaterial("G4_Xe");
-nistManager->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
+G4NistManager *nm = G4NistManager::Instance();
+nm->FindOrBuildMaterial("G4_AIR");
+nm->FindOrBuildMaterial("G4_Pb");
+nm->FindOrBuildMaterial("G4_Xe");
+nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
 
 G4cout << *(GetMaterial::GetMaterialTable()) << G4endl;
 ```
 
-``GetMaterial::GetMaterialTable()``で、アプリケーションの中で定義された（＝``G4NistManager``で呼ばれた）材料を確認できます。
-材料名のほかに、構成している元素の種類も確認できます。
+アプリケーションの中で``G4NistManager``で定義した材料は、
+``GetMaterial::GetMaterialTable()``で確認できます。
 
-また、材料が論理ボリュームで使われているかどうかも確認できます。
+材料名に加えて、構成している元素の種類も確認できます。
 
 ```console
 ***** Table : Nb of materials = 4 *****
@@ -84,7 +84,6 @@ G4cout << *(GetMaterial::GetMaterialTable()) << G4endl;
          --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:  0.011 %
           ElmMassFraction:   8.53 %  ElmAbundance  52.63 %
 ```
-
 
 ## リファレンス
 
