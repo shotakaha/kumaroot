@@ -1,53 +1,60 @@
 # ファイル出力したい（``G4VAnalysisManager``）
 
 ```cpp
-G4AnalysisManager *analysis_manager = new G4AnalysisManager::Instance();
+G4AnalysisManager *am = new G4AnalysisManager::Instance();
 
 // RunAction::BeginOfRunActionで設定する
-analysis_manager->SetDefaultFileType("csv");
-analysis_manager->SetFileName("ファイル名");
-analysis_manager->OpenFile();
+am->SetDefaultFileType("csv");
+am->SetFileName("ファイル名");
+am->OpenFile();
 
 // EventActionで設定する
-analysis_manager->Write();
+am->Write();
 
 // RunAction::EndOfRunActionで設定する
-analysis_manager->CloseFile();
+am->CloseFile();
 ```
 
-Geant4は独自のデータベース形式を持っていません。
-その代わりに、ユーザー自身がいろいろなフォーマットに出力できるように[G4VAnalysisManager](https://geant4.kek.jp/Reference/11.2.0/classG4VAnalysisManager.html)というインターフェース的なクラスが用意されています。
+[G4VAnalysisManager](https://geant4.kek.jp/Reference/11.2.0/classG4VAnalysisManager.html)を使って、ファイルに出力できます。
+
+Geant4は独自のデータベース形式を持たない代わりに、
+ユーザー自身がいろいろなフォーマットに出力できるようになっています。
 
 ## CSV形式にしたい
 
-```cfg
-/analysis/setDefaultFileType csv
-```
-
 ```cpp
-analysis_manager->SetDefaultFileType("csv");
+am->SetDefaultFileType("csv");
 ```
 
 一般的なユーザーであればCSV形式で出力するとよいと思います。
 CSV形式であれば、ユーザーが使い慣れているツールで解析できます。
 
-## ROOT形式にしたい
-
 ```cfg
-/analysis/setDefaultFileType root
+/analysis/setDefaultFileType csv
 ```
 
+同様の設定はマクロコマンドでもできます。
+
+## ROOT形式にしたい
+
 ```cpp
-analysis_manager->SetDefaultFileType("root");
+am->SetDefaultFileType("root");
 ```
 
 HEP業界のユーザーであればROOT形式のほうが使いやすいと思います。
 付属サンプルROOTファイルで出力されるようになっています。
 
+```cfg
+/analysis/setDefaultFileType root
+```
+
+同様の設定はマクロコマンドでもできます。
+
 ## AnalysisManagerを使いたくない
 
+``G4AnalysisManager``を使わなくてもファイルに出力できます。
+その場合、C++の標準ライブラリを使い、
 ユーザーのお好みで
 ``std::tuple``、
 ``std::map``、
-``std::vector``などを使って、
-ファイルに出力すればOKだそうです。
+``std::vector``などを使います。
