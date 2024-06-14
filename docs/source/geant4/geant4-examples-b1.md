@@ -1,6 +1,6 @@
 # B1したい（``examples/basic/B1/``）
 
-
+![](./fig/exampleB1.png)
 
 ```console
 $ tree B1 -L 2
