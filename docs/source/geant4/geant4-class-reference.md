@@ -78,3 +78,31 @@ G4Track::SetTouchableHandle(const G4TouchableHandle &apValue)
 
 定数（``const``な変数）や``enum``数は``k*``を接頭辞にした``PascalCase``が使われています。
 
+
+
+---
+
+## リファレンスのリファレンス
+
+僕がよく使う参照する項目のリストです。
+Geant4 v11.2.0 のDoxygenを参照しています。
+
+### ユーザーフックとなる仮想クラス
+
+自作クラスで継承するクラスたちです。
+オーバーライドして実行する必要がある純粋仮想関数を調べるときに参照します。
+
+- [G4VUserDetectorConstruction](https://geant4.kek.jp/Reference/11.2.0/classG4VUserDetectorConstruction.html)
+- [G4VUserPhysicsList](https://geant4.kek.jp/Reference/11.2.0/classG4VUserPhysicsList.html)
+- [G4VUserActionInitialization](https://geant4.kek.jp/Reference/11.2.0/classG4VUserActionInitialization.html)
+- [G4VUserPrimaryGeneratorAction](https://geant4.kek.jp/Reference/11.2.0/classG4VUserPrimaryGeneratorAction.html)
+
+### 測定器の作成に必要なクラス
+
+- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4VPhysicalVolume.html)
+- [G4Box](https://geant4.kek.jp/Reference/11.2.0/classG4Box.html)
+- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)
+- [G4PVPlacement](https://geant4.kek.jp/Reference/11.2.0/classG4PVPlacement.html)
+- [G4PVReplica](https://geant4.kek.jp/Reference/11.2.0/classG4PVReplica.html)
+- [G4RunManager](https://geant4.kek.jp/Reference/11.2.0/classG4RunManager.html)
+- [G4RunManagerFactory](https://geant4.kek.jp/Reference/11.2.0/classG4RunManagerFactory.html)
