@@ -65,97 +65,43 @@ new G4PVPlacement(
 )
 ```
 
-## 結晶を作成する
+## 放射線源を作成する
 
 ```cpp
-void DefineMaterials()
+
+void PrimaryGneneratorAction::GeneratePrimaries(G4Event *aEvent)
 {
-    G4NistManager *nm = new G4NistManager::Instance();
-    G4bool isotopes = false;
+    G4int numberOfParticles = 1;
+    auto fParticleGun = new G4ParticleGun(numberOfParticles);
 
-    G4Element* O = nm->FindOrBuildElement("O", isotopes);
-    G4Element* Si = nm->FindOrBuildElement("Si", isotopes);
-    G4Element* Lu = nm->FindOrBuildElement("Lu", isotopes);
+    // Fluorine
+    G4int Z = 9
+    G4int A = 18;
+    G4double ionCharge = 0. * eplus;
+    G4double exciteEnergy = 0. * keV;
 
-    auto LSO = new G4Material("Lu2SiO5", 7.4 * g / cm3, 3);
-    LSO->AddElement(Lu, 2);
-    LSO->AddElement(Si, 1);
-    LSO->AddElement(O, 5);
+    G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(Z, A, exciteEnergy);
+
+    fParticleGun->SetParticleDefinition(ion);
+    fParticleGun->SetParticleCharge(ionCharge);
+
+    // 入射位置の初期値
+    G4double x0 = 4. * cm;
+    G4double y0 = 4. * cm;
+    G4double z0 = 4. * cm;
+
+    G4double dx0 = 1. * cm;
+    G4double dy0 = 1. * cm;
+    G4double dz0 = 1. * cm;
+
+    // 入射位置をランダムにする
+    x0 += dx0 * (G4UniformRand() - 0.5);
+    y0 += dy0 * (G4UniformRand() - 0.5);
+    z0 += dz0 * (G4UniformRand() - 0.5);
+
+    auto vertex = G4ThreeVector(x0, y0, z0);
+    fParticleGun->SetParticlePosition(vertex);
+    fParticleGun->GeneratePrimaryVertex(aEvent);
 }
+
 ```
-
-```cpp
-G4LogicalVolume* DefineCrystalVolume(const G4String &aName)
-{
-    // 材料を準備する
-    G4NistManager *nm = new G4NistManager::Instance()
-    auto material = nm->FindOrBuildMaterial("Lu2SiO5")
-
-    // 結晶の形を作成する
-    // 外形の寸法
-    G4double fullX = 6.0 * cm;
-    G4double fullY = 6.0 * cm;
-    G4double fullZ = 3.0 * cm;
-    // 容器の厚み
-    G4double gap = 0.5 * mm;
-
-    // 内形の寸法（の半分）
-    G4double halfX = 0.5 * (fullX - gap);
-    G4double halfY = 0.5 * (fullY - gap);
-    G4double halfZ = 0.5 * (fullZ - gap);
-
-    auto solid = new G4Box(
-        "crystalSolid",
-        halfX,
-        halfY,
-        halfZ
-    )
-
-    G4LogicalVolume* logical = new G4LogicalVolume(
-        solid,
-        material,
-        aName
-    )
-
-    return logical;
-}
-```
-
-```cpp
-G4VPhysicalVolume* DefineDetectorVolume(const G4String &aName)
-{
-    auto logicCrystal = DefineCrystalVolume("CrystalLV");
-
-    G4int numberOfCrystals = 32;
-    G4int numberOfRings = 9;
-
-    G4double dPhi = twopi / numberOfCrystals
-    G4double half_dPhi = 0.5 * dPhi;
-    G4double cos_dPhi = std::cos(half_dPhi);
-    G4double tan_dPhi = std::tan(half_dPhi);
-
-    G4double ring_R1 = 0.5 * fullY / tan_dPhi;
-    G4double ring_R2 = (ring_R1 + fullZ) / cos_dPhi;
-    G4double dZ = numberOfRings * fullX;
-
-    for (G4int icrystal = 0; icrystal < n_crystals; icrystal++) {
-        G4double phi = icrystal * dPhi;
-        G4RotationMatrix rotation = G4RotationMatrix();
-        rotation.rotateY(90 * deg);
-        rotation.rotateZ(dphi);
-        G4ThreeVector uz = G4ThreeVector(std::cos(phi), std::sin(phi), 0.);
-        G4ThreeVector position = (ring_R1 + 0.5 * dZ) * uz;
-        G4Transform3D transform = G4Transform3D(rotation, position);
-
-        new G4PVPlacement(
-            transform,
-            logicCrystal,
-            aName,
-            logicRing,
-            icrystal,
-            fCheckOverlaps
-        );
-    }
-}
-```
-
