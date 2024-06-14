@@ -1,33 +1,40 @@
 # シミュレーションの流れ
 
-Geant4シミュレーションにはさまざまな管理者（manager）が登場し、シミュレーションの進行管理を手伝ってくれます。
-また、測定の基本単位は「ラン（Run）」で、実際の素粒子物理学分野の実験手順を、パソコンの中で再現した作りになっています。
+Geant4シミューレーションは、実際の素粒子物理学分野の実験手順を、
+パソコンの中で再現した作りになっています。
 
-詳細は[Basic concept of Run](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/run.html)を参照してください。
+## 管理者の体制
 
-## メイン関数
+Geant4には4人の管理者が存在し、次のような順番になっています。
+それぞれが隣り合った管理者に処理をお願いしたり、報告を受けたりする体制になっています。
+
+1. ``G4RunManager``: G4**Event**Managerにイベント処理ををお願いする。
+2. ``G4EventManager``: G4**Tracking**Managerにトラッキング処理をお願いする。終了したらG4**Run**Managerに報告する。
+3. ``G4TrackingManager``: G4**Stepping**Managerにステッピング処理をお願いする。終了したらG4**Event**Managerに報告する。
+4. ``G4SteppingManager``: ステッピング処理を実行する。終了したらG4**Tracking**Managerに報告する。
+
+ユーザーが直接指示するのは``G4RunManager``だけでOKです。
 
 ```cpp
 int main()
 {
     // ランマネージャー
     // マルチスレッド対応など、実行環境に応じて、よしなにやってくれる
-    auto runManager = G4RunManagerFactory::CreateRunManager();
+    auto rm = G4RunManagerFactory::CreateRunManager();
 
     // ジオメトリの作成
     // G4VUserDetectorConstructionを継承
     // DetectorConstruction::Construct()を実行
-    runManager->SetUserInitialization(new DetectorConstruction);
-
+    rm->SetUserInitialization(new DetectorConstruction);
 
     // 相互作用モデル
     // G4VModularPhysicsListの具象クラスを利用
-    runManager->SetUserInitialization(new PhysicsList);
+    rm->SetUserInitialization(new PhysicsList);
 
     // ユーザーアクションの設定
     // G4VUserActionInitializationを継承
     // ActionInitialization::Build()を実行
-    runManager->SetUserInitialization(new ActionInitialization);
+    rm->SetUserInitialization(new ActionInitialization);
 
     // ActionInitialization::Build()の内容
     // SetUserAction(PrimaryGeneratorAction);  // <-- G4VUserPrimaryGeneratorActionを継承
@@ -37,28 +44,16 @@ int main()
     // SetUserAction(SteppingAction);  // <-- G4UserSteppingActionを継承
 
     // ランマネージャーの初期化
-    runManager->Initialize();
+    rm->Initialize();
     G4int nEvents
-    runManager->BeamOn(nEvents);
+    rm->BeamOn(nEvents);
 
     // ランマネージャーの解放
-    delete runManager;
+    delete rm;
 }
 ```
 
-
-
-## 管理者の体制
-
-1. ``G4RunManager``: G4**Event**Managerにイベント処理ををお願いする。
-2. ``G4EventManager``: G4**Tracking**Managerにトラッキング処理をお願いする。終了したらG4**Run**Managerに報告する。
-3. ``G4TrackingManager``: G4**Stepping**Managerにステッピング処理をお願いする。終了したらG4**Event**Managerに報告する。
-4. ``G4SteppingManager``: ステッピング処理を実行する。終了したらG4**Tracking**Managerに報告する。
-
-シミュレーションの中で管理者は上のような順番になっています。
-それぞれが隣り合った管理者に処理をお願いしたり、報告を受けたりする体制となっています。
-
-## ランの管理（``G4RunManager``）
+## ランの管理者（``G4RunManager``）
 
 ``G4RunManager``はラン（``G4Run``）の進行管理を担当します。
 ランは測定の基本単位で、ビーム入射（``BeamOn``）するごとにランが1つ実行されます。``BeamOn(回数)``で、複数回のランをまとめて実行できます。
@@ -104,3 +99,20 @@ Event、Tracking、Steppingでどのような処理をするかは、
 
 ``G4SteppingManager``は、シミュレーションの中で粒子が進む最小距離であるステップ（``G4Step``）の進行管理を担当します。
 ステップは、移動前、移動中、移動後の3つの状態で管理されます。
+
+## 測定の基本はステップ（``G4Step``）
+
+```cpp
+// G4Step *aStep は事前に定義済み
+G4double energy_deposit = aStep->GetTotalEnergyDeposit();
+```
+
+測定の基本単位はステップ（``G4Step``）です。
+[G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)や
+[G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)の
+リファレンスを確認し、できること（得られる物理量など）を把握しておくと、
+自分のアプリケーション作成に役立つはずです。
+
+## リファレンス
+
+- [Basic concept of Run](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/run.html)
