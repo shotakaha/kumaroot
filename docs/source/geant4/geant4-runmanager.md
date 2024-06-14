@@ -12,9 +12,10 @@ int main(int argc, char** argv) {
 }
 ```
 
-``G4RunManagerFactory::CreateRunManager()``で、環境に応じたインスタンスを作成します。
+[G4RunManagerFactory](https://geant4.kek.jp/Reference/11.2.0/classG4RunManagerFactory.html)で、環境に応じたインスタンスを作成します。
 具体的には、マルチスレッドが有効な場合は``G4MTRunManager``、
 無効な場合は``G4RunManager``のインスタンスになります。
+とくに理由がない場合は、このクラスを使えばよいと思います。
 
 :::{hint}
 
