@@ -1,21 +1,35 @@
-# ランマネージャー（``G4RunManager``）
+# ランマネージャーしたい（``G4RunManagerFactory``）
 
 ```cpp
 #include "G4RunManagerFactory.hh"
 
-auto *runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
+int main(int argc, char** argv) {
+    auto rm = G4RunManagerFactory::CreateRunManager();
+
+    rm->Initialize();
+    delete rm;
+    return 0
+}
 ```
 
-[CreateRunManager](https://apc.u-paris.fr/~franco/g4doxy4.11/html/classG4RunManagerFactory.html)をって、
-その場にあったランマネージャーを作成できます。
-付属サンプルの多くも使っていました。
+``G4RunManagerFactory::CreateRunManager()``で、環境に応じたインスタンスを作成します。
+具体的には、マルチスレッドが有効な場合は``G4MTRunManager``、
+無効な場合は``G4RunManager``のインスタンスになります。
+
+:::{hint}
+
+``auto``はC++11から利用できるようになった型名です。
+初期化されたインスタンスから適切な型を推測します。
+インスタンスがポインターである場合は``auto*``が使えます。
+
+:::
 
 ## シングルスレッドしたい（``G4RunManager``）
 
 ```cpp
 #include "G4RunManager.hh"
 
-G4RunManager* runManager = new G4RunManager();
+auto rm = new G4RunManager();
 ```
 
 ## マルチスレッドしたい（``G4MTRunManager``）
@@ -23,14 +37,17 @@ G4RunManager* runManager = new G4RunManager();
 ```cpp
 #include "G4RunManager.hh"
 
-G4MTRunManager * runManager = new G4MTRunManager();
-runManager->SetNumberOfThreads(8);
+auto rm = new G4MTRunManager();
+rm->SetNumberOfThreads(8);
 ```
 
 マルチスレッド機能を有効にしてビルドしていると、使うことができます。
-使用するスレッドの数は、マクロでも変更できます。
+
+## マクロしたい
 
 ```cfg
 /run/numberOfThreads 8
 /run/initialize
 ```
+
+使用するスレッドの数は、マクロでも変更できます。
