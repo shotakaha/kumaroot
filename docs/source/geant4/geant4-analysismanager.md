@@ -18,6 +18,33 @@ Geant4は独自のデータベース形式を持たない代わりに、
 以下は、付属サンプルB5の該当箇所を抜粋して、説明を追加してみました。
 
 ```cpp
+// //////////////////////////////////////////////////
+// include/RunAction.hh
+// //////////////////////////////////////////////////
+
+#include "G4UserRunAction.hh"
+#include "G4Run.hh"
+
+class RunAction : public G4UserRunAction
+{
+    public:
+      RunAction();
+      ~RunAction() override = default;
+
+      void BeginOfRunAction(const G4Run* aRun) override;
+      void EndOfRunAction(const G4Run* aRun) override;
+
+    private:
+      // （オプション）
+      // EventAction* fEventAction = nullptr;
+}
+```
+
+```cpp
+// //////////////////////////////////////////////////
+// src/RunAction.cc
+// //////////////////////////////////////////////////
+
 // RunActionのコンストラクタ（初期化）
 RunAction::RunAction()
 {
@@ -75,8 +102,12 @@ RunAction::RunAction()
 ```
 
 ```cpp
+// //////////////////////////////////////////////////
+// src/RunAction.cc
+// //////////////////////////////////////////////////
+
 // ラン開始時の処理
-void RunAction::BeginOfRunAction()
+void RunAction::BeginOfRunAction(const G4Run* aRun)
 {
     // AnalysisManagerのインスタンスを取得する
     // AMがシングルトンなので、作成済みのインスタンスが取得できる
@@ -94,8 +125,12 @@ void RunAction::BeginOfRunAction()
 ```
 
 ```cpp
+// //////////////////////////////////////////////////
+// src/RunAction.cc
+// //////////////////////////////////////////////////
+
 // ラン終了時の処理
-void RunAction::EndOfRunAction()
+void RunAction::EndOfRunAction(const G4Run* aRun)
 {
     // AnalysisManagerのインスタンスを取得する
     // AMがシングルトンなので、作成済みのインスタンスが取得できる
@@ -113,14 +148,12 @@ void RunAction::EndOfRunAction()
 }
 ```
 
+:::{hint}
 
-このときに、データを保存する「箱の形」も``CreateH1``や``CreateNtuple``で作成します。
+データ取得はイベントごとやステップごとに値を取得するため、
+``EventAction``クラスや``SteppingAction``クラスで定義します。
 
-- ``RunAction::RunAction`` - コンストラクター
-- ``RunAction::BeginOfRunAction`` - ラン開始時の動作
-- ``RunAction::EndOfRunAction`` - ラン終了時の動作
-
-
+:::
 
 ## ファイル名を変更したい（``SetFileName``）
 
@@ -174,3 +207,4 @@ AnalysisManagerを使った付属サンプルのほとんどがROOTファイル�
 ## リファレンス
 
 - [G4AnalysisManager](https://geant4.kek.jp/Reference/11.2.0/classG4VAnalysisManager.html)
+- [G4UserRunAction](https://geant4.kek.jp/Reference/11.2.0/classG4UserRunAction.html)
