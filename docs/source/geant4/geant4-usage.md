@@ -86,12 +86,12 @@ geant4-analysismanager
 geant4-uimanager
 ```
 
-
-
 ## 測定器したい
 
 ```cpp
-runManager->SetUserInitialization(new DetectorConstruction());
+auto* rm = G4RunManagerFactory::CreateRunManager();
+auto* detector = new DetectorConstruction;
+rm->SetUserInitialization(detector);
 ```
 
 ```{toctree}
@@ -141,6 +141,12 @@ geant4-plastic-scintillator
 
 ## 相互作用したい
 
+```cpp
+auto* rm = G4RunManagerFactory::CreateRunManager();
+auto* physics = new FTFP_BERT;
+rm->SetUserInitialization(physics);
+```
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -151,6 +157,12 @@ geant4-opticalphoton
 ```
 
 ## ユーザーアクションしたい
+
+```cpp
+auto* rm = G4RunManagerFactory::CreateRunManager();
+auto* actions = new ActionInitialization;
+rm->SetUserInitialization(actions);
+```
 
 ```{toctree}
 ---
