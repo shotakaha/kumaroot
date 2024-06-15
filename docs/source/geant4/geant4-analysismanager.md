@@ -121,6 +121,7 @@ void RunAction::BeginOfRunAction(const G4Run* aRun)
     // ファイルを開く
     // ファイル名はコンストラクタで設定済み
     am->OpenFile();
+    G4cout << "File opened: " << am->GetFileName() << G4endl;
 }
 ```
 
@@ -145,6 +146,7 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
     // 保持したままにしている
     // デフォルトは自動リセットされる
     // am->CloseFile(reset=true);
+    G4cout << "File closed: " << am->GetFileName() << G4endl;
 }
 ```
 
@@ -175,8 +177,6 @@ am->SetDefaultFileType("csv");  // CSV形式
 am->SetDefaultFileType("root");  // ROOT形式
 ```
 
-
-
 一般的なユーザーであればCSV形式で出力するとよいと思います。
 CSV形式であれば、ユーザーが使い慣れているツールで解析できます。
 
@@ -191,6 +191,61 @@ AnalysisManagerを使った付属サンプルのほとんどがROOTファイル�
 /analysis/setDefaultFileType csv
 /analysis/setDefaultFileType root
 ```
+
+:::
+
+## ヒストグラムを作成したい（``CreateH1`` / ``CreateH2`` / ``CreateH3``）
+
+```cpp
+auto am = G4AnalysisManager::Instance()
+// 1Dヒストグラム
+am->CreateH1("name1", "title", xbins, xmin, xmax);  // h1 Id = 0
+am->CreateH1("name2", "title", xbins, xmin, xmax);  // h1 Id = 1
+
+// 2Dヒストグラム
+am->CreateH2("name3", "title", xbins, xmin, xmax, ybins, ymin, ymax);  // h2 Id = 0
+am->CreateH2("name4", "title", xbins, xmin, xmax, ybins, ymin, ymax);  // h2 Id = 1
+```
+
+``CreateH1``、``CreateH2``、``CreateH3``でヒストグラムを準備できます。
+
+## ヒストグラムを確認したい（``ListH1`` / ``ListH2`` / ``ListH3``）
+
+```cpp
+// ヒストグラムを確認
+G4cout << "H1s: " << am->ListH1() << G4endl;
+G4cout << "H2s: " << am->ListH2() << G4endl;
+```
+
+``ListH1``、``ListH2``、``ListH3``で作成したヒストグラムを確認できます。
+
+## ヒストグラムIDを取得したい（``GetH1Id`` / ``GetH2Id`` / ``GetH3Id``）
+
+```cpp
+// ヒストグラムのIDを取得
+G4int id1 = am->GetH1Id("name1");
+G4int id2 = am->GetH1Id("name2");
+G4int id3 = am->GetH2Id("name3");
+G4int id4 = am->GetH2Id("name4");
+```
+
+ヒストグラムを作成したときの名前を使って、ヒストグラムのIDを取得できます。
+``EventAction``クラスで、ヒストグラムに値をフィルするときに利用できます。
+
+## ヒストグラムにフィルしたい（``FillH1`` / ``FillH2`` / ``FillH3``）
+
+```cpp
+am->FillH1(id, value, weight);
+am->FillH2(id, xvalue, yvalue, weight);
+am->FillH3(id, xvalue, yvalue, zvalue, weight);
+```
+
+ヒストグラムIDを指定して値をフィルできます。
+
+:::{note}
+
+このメソッドは基本的に``EventAction``クラスで使うメソッドです。
+``RunAction``クラスで使うことはないと思います。
 
 :::
 
