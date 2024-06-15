@@ -9,6 +9,8 @@ um->ApplyCommand("/control/execute vis.mac");
 ``ApplyCommand``メソッドで起動時にコマンドを指定できます。
 付属サンプルでは、デフォルトの可視化用マクロを読み込ませていました。
 
+
+
 ## ランを開始したい（``/run/beamOn``）
 
 ```cfg
@@ -56,11 +58,25 @@ um->ApplyCommand("/control/execute vis.mac");
 ただし、入射粒子のエネルギーを大きくしたしりて、
 トラック数が多くなるときは非表示にしたほうがいいかもしれません。
 
-## マクロを読み込む（``/control/execute/``）
+## マクロを読み込みたい（``/control/execute``）
 
 ```cfg
-/control/execute マクロ名
+/control/execute ファイル名
+/control/execute マクロ名.mac
 ```
 
-``/control/execute``で対話モード中に既存のマクロを読み込むことができます。
+``/control/execute``で対話モードの途中にマクロを読み込むことができます。
+引数にはファイル名（の相対パス）を指定します。
 
+Geant4ではマクロファイルの拡張子に``.mac``を使っていますが、
+ASCIIテキストファイルであればOKです。
+
+:::{hint}
+
+僕は、セットアップ用のマクロ（``setup.mac``）を作成し、
+その中で用途別マクロを読み込ませることにしています。
+
+可視化に関するマクロ、ランに関するマクロなど、
+適度なサイズに分割することで、マクロの編集が簡単になります。
+
+:::

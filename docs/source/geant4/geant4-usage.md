@@ -75,10 +75,18 @@ maxdepth: 1
 ---
 geant4-macro
 geant4-batch
-geant4-uimanager
 geant4-runmanager
 geant4-actioninitialization
+geant4-analysismanager
 ```
+
+## 対話モードしたい
+
+```{toctree}
+geant4-uimanager
+```
+
+
 
 ## 測定器したい
 
@@ -170,7 +178,6 @@ geant4-run
 geant4-scoringmanager
 geant4-sensitivedetector
 geant4-multifunctionaldetector
-geant4-analysismanager
 geant4-accumulable
 ```
 
