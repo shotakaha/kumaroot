@@ -51,14 +51,14 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
 のように継承したクラス名がわかるように、主要な部分を残して使うことが多いようです。
 
-## 関数名
+### 関数名
 
 関数名は``PascalCase``が使われています。
 セッターは``Set*``、ゲッターは``Get*``が接頭辞に使われています。
 
 関数の引数名は、`G4Step *aStep`、``G4Event *anEvent``のように``a``からはじまる変数名が多いです。
 
-## 変数名
+### 変数名
 
 変数名は``PascalCase``が使われています。
 また、ゆるめのシステムハンガリアン記法が使われている気がします。
@@ -84,7 +84,33 @@ G4Track::SetTouchableHandle(const G4TouchableHandle &apValue)
 
 定数（``const``な変数）や``enum``数は``k*``を接頭辞にした``PascalCase``が使われています。
 
+### 型の名前
+
+```cpp
+G4String name = "Geant4";     // String型
+G4int numberOfParticles = 1;  // int型
+G4double energy = 1.0 * GeV;  // double型
+// 他にもある
+```
+
+``G4*型``を使うことが推奨されています。
+プラットフォームによる型の実装の違いを吸収してくれます（たぶん）。
+
+### 出力ストリーム
+
+```cpp
+G4cout << "標準出力" << G4endl;
+G4err << "標準エラー出力" << G4endl;
+G4debug << "デバッグ用出力" << G4endl;
+```
+
+ターミナルへの出力は、C++標準の``std::cout``や``std::cerr``の代わりに
+Geant4が用意している``G4cout``、``G4cerr``、``G4debug``を使うのがよいそうです。
+
+``G4debug``はQtで表示すると赤色でハイライトされるので、デバッグ時の確認がしやすいのでオススメです。
+
 ## リファレンス
 
 - [Geant4 Coding Guidelines](https://geant4-internal.web.cern.ch/collaboration/coding_guidelines)
 - [Geant4 Coding-style Guidelines Motivations](https://geant4-internal.web.cern.ch/collaboration/coding_style_guidelines_motivations)
+- [G4cout, G4cerr and G4debug](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/mainProgram.html#g4cout-g4cerr-and-g4debug)
