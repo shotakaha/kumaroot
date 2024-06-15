@@ -52,3 +52,8 @@ rm->SetNumberOfThreads(8);
 ```
 
 使用するスレッドの数は、マクロでも変更できます。
+
+## リファレンス
+
+- [G4RunManagerFactory - Geant4 Doxygen](https://geant4.kek.jp/Reference/11.2.0/classG4RunManagerFactory.html)
+- [G4RunManager - Geant4 Doxygen](https://geant4.kek.jp/Reference/11.2.0/classG4RunManager.html)
