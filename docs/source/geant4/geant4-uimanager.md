@@ -9,8 +9,6 @@ um->ApplyCommand("/control/execute vis.mac");
 ``ApplyCommand``メソッドで起動時にコマンドを指定できます。
 付属サンプルでは、デフォルトの可視化用マクロを読み込ませていました。
 
-
-
 ## ランを開始したい（``/run/beamOn``）
 
 ```cfg
