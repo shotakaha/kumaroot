@@ -87,6 +87,7 @@ maxdepth: 1
 geant4-runmanager
 geant4-actioninitialization
 geant4-analysismanager
+geant4-particlegun
 ```
 
 ## 測定器したい
@@ -171,12 +172,10 @@ rm->SetUserInitialization(actions);
 ---
 maxdepth: 1
 ---
-geant4-particles
-geant4-particlegun
 geant4-primarygeneratoraction
-geant4-steppingaction
-geant4-eventaction
 geant4-runaction
+geant4-eventaction
+geant4-steppingaction
 ```
 
 - ``G4UserTrackingAction``

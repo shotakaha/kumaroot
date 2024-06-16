@@ -22,6 +22,15 @@ class EventAction: public G4UserEventAction
 }
 ```
 
+## 初期化したい（``EventAction``）
+
+```cpp
+EventAction::EventAction(RunAction* /* aAction */)
+{
+
+}
+```
+
 ## イベント開始したい（``BeginOfEventAction``）
 
 ```cpp
@@ -47,15 +56,12 @@ void EventAction::BeginOfEventAction(const G4Event *aEvent)
 void EventAction::EndOfEventAction(const G4Event *aEvent)
 {
 
+    auto am = G4AnalysisManager::Instance();
+    G4int id1 = am->GetH1Id("名前");
+    am->FillH1(id1, 値);
 
 }
 ```
 
 ``EndOfEventAction``はイベントの終わりに実行されるメソッドです。
 イベントごとデータを集計して、イベントサマリーを表示できます。
-
-:::{note}
-
-アナリシスマネージャー（``G4AnalysisManager``）に向けた出力は、ここで設定できます。
-
-:::
