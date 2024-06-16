@@ -56,6 +56,17 @@ geant4-examples-b4
 geant4-examples-b5
 ```
 
+## 実験したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-command
+geant4-macro
+geant4-batch
+```
+
 ## マクロしたい
 
 ```{toctree}
@@ -67,24 +78,15 @@ geant4-macro-vis
 geant4-macro-gui
 ```
 
-## 実験したい
+## ユーザー操作したい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
-geant4-command
-geant4-macro
-geant4-batch
 geant4-runmanager
 geant4-actioninitialization
 geant4-analysismanager
-```
-
-## 対話モードしたい
-
-```{toctree}
-geant4-uimanager
 ```
 
 ## 測定器したい
