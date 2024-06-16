@@ -111,3 +111,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* /*aEvent*/)
 ``G4UniformRand``を使って入射場所をランダムに設定できます。
 付属サンプルB1では、標的となる論理ボリュームのサイズを利用して、座標を決めていました。
 
+## リファレンス
+
+- [G4ParticleGun](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleGun.html)
+- [G4ParticleTable](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleTable.html)
+- [G4PrimaryParticle](https://geant4.kek.jp/Reference/11.2.0/classG4PrimaryParticle.html)
+- [G4PrimaryVertex](https://geant4.kek.jp/Reference/11.2.0/classG4PrimaryVertex.html)
+- [PDG Identifiers - Particle Data Group](https://pdg.lbl.gov/2024/pdgid/PDGIdentifiers.html)
