@@ -1,30 +1,27 @@
-# マクロしたい
+# マクロしたい（``/control/execute``）
+
+[前のページ](./geant4-command.md)で紹介したコマンド操作を、
+ひとつファイルにまとめてマクロを作成できます。
+
+```cfg
+/control/execute ファイル名.mac
+```
+
+Geant4では、慣習的にマクロの拡張子を``.mac``としているようですが、
+テキストファイルであればなんでもOKです。
+
+## 起動時にマクロしたい（``G4UIManager``）
 
 ```cpp
 int main(int argc, char** argv)
 {
-  // Construct the default run manager
-  auto runManager = G4RunManagerFactory::CreateRunManager();
-
-  // Set mandatory initialization classes
-  runManager->SetUserInitialization(new DetectorConstruction);
-  runManager->SetUserInitialization(new FTFP_BERT);
-  runManager->SetUserInitialization(new ActionInitialization);
-
-  // Initialize G4 kernel
-  runManager->Initialize();
-
-  //read a macro file of commands
-  G4UImanager* uiManager = G4UImanager::GetUIpointer();
-  G4String command = "/control/execute ";
-  G4String fileName = argv[1];
-  uiManager->ApplyCommand(command+fileName);
-
-  // job termination
-  delete runManager;
-  return 0;
+    // 第一引数がマクロの場合
+    G4String fileName = argv[1];
+    G4String command = "/control/execute ";
+    G4UImanager* um = G4UImanager::GetUIpointer();
+    um->ApplyCommand(command+fileName);
 }
 ```
 
-実行プログラムの引数で、マクロファイルを読み込めるようにしたメイン関数です。
-``G4UImanager``でマクロを読み込めるようにしています。
+``main()``関数で``G4UImanager``を設定すると
+アプリケーション起動時に、マクロを読み込むことができます。
