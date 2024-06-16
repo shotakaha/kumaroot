@@ -73,6 +73,7 @@ geant4-macro-gui
 ---
 maxdepth: 1
 ---
+geant4-command
 geant4-macro
 geant4-batch
 geant4-runmanager
