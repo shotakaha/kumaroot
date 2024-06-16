@@ -20,6 +20,17 @@ class RunAction: public G4UserRunAction
 }
 ```
 
+## 初期化したい（``RunAction``）
+
+```cpp
+RunAction::RunAction()
+{
+    auto am = G4AnalysisManager::Instance();
+    am->SetFilename("ファイル名");
+    am->SetDefaultFileType("csv");
+}
+```
+
 ## ラン開始したい（``BeginOfRunAction``）
 
 ```cpp
@@ -27,11 +38,14 @@ void RunAction::BeginOfRunAction(const G4Run *aRun)
 {
     // 内部変数（プライベート変数など）の初期化など
     fEnergyDeposit = 0;
+    auto am = G4AnalysisManager::Instance();
+    am->OpenFile();
 }
 ```
 
 ``BeginOfRunAction``はラン開始に実行されるメソッドです。
-ランごとのデータを代入するために用意した変数は、ここで初期化できます。
+ランごとのデータを初期化したり、
+保存先のファイルの設定をするとよいです。
 
 ## ラン終了したい（``EndOfRunAction``）
 
@@ -39,6 +53,9 @@ void RunAction::BeginOfRunAction(const G4Run *aRun)
 void RunAction::EndOfRunAction(const G4Run *aRun)
 {
 
+    auto am = G4AnalysisManager::Instance();
+    am->Write();
+    am->CloseFile();
 
 }
 ```
