@@ -1,7 +1,9 @@
 # AnaEx03したい（``extended/analysis/AnaEx03/``）
 
-``AnaEx03``の題材は[B3](./geant4-examples-b3.md)と同じようなカロリメータです。
-[G4AnalyticsManager](./geant4-analysismanager.md)を使う場合の参考になると思います。
+Geant4.11.1で追加された``/analysis``コマンドのデモになっています。
+[G4AnalyticsManager](./geant4-analysismanager.md)をマクロで操作する参考になると思います。
+
+測定器の構成は、[B3](./geant4-examples-b3.md)と同じようなカロリメータです。
 
 ## ビルドしたい
 
@@ -56,5 +58,8 @@ CSV形式は、サブディレクトリにファイルが作成されました�
 Geant4をビルドするときにHDF5オプションを有効にしていないため、
 HDF5形式の出力は失敗しました。
 
+## リファレンス
+
+- [examples/extended/analysys/AnaEx03](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleAnaEx03.html)
 
 
