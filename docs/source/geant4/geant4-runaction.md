@@ -20,6 +20,13 @@ class RunAction: public G4UserRunAction
 }
 ```
 
+:::{seealso}
+
+- [](./geant4-run.md)
+- [](./geant4-analysismanager.md)
+
+:::
+
 ## 初期化したい（``RunAction``）
 
 ```cpp

@@ -170,7 +170,7 @@ rm->SetUserInitialization(actions);
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 geant4-primarygeneratoraction
 geant4-runaction
@@ -184,11 +184,14 @@ geant4-steppingaction
 ## 測定したい
 
 ```{toctree}
-geant4-scoring
-geant4-step
-geant4-track
-geant4-event
+---
+maxdepth: 1
+---
 geant4-run
+geant4-event
+geant4-track
+geant4-step
+geant4-scoring
 geant4-scoringmanager
 geant4-sensitivedetector
 geant4-multifunctionaldetector
