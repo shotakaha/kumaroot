@@ -1,46 +1,43 @@
 # バッチモードしたい
 
 ```cpp
-#include "G4RunManager.hh"
+#include "DetectorConstruction.hh"
+#include "PhysicsList.hh"
+#include "ActionInitialization.hh"
 
-#include "MYDetectorConstruction.hh"
-#include "MYPhysicsList.hh"
-#include "MYActionInitialization.hh"
+#include "G4RunManagerFactory.hh"
 
-int main()
+int main(int argc, char** argv)
 {
     // RunManagerを作成
-    G4RunManager *runManager = new G4RunManager;
+    auto rm = G4RunManagerFactory::CreateRunManager();
 
-    // 必須ユーザークラスを設定
-    runManager->SetUserInitialization(new MYDetectorConstruction);
-    runManager->SetUserInitialization(new MYPhysicsList);
-    runManager->SetUserInitialization(new MYActionInitialization);
+    // 測定器
+    auto* detector = new DetectorConstruction;
+    rm->SetUserInitialization(detector);
+
+    // 相互作用
+    auto* physics = new PhysicsList;
+    rm->SetUserInitialization(physics);
+
+    // ユーザー設定
+    auto* actions = new ActionInitialization;
+    rm->SetUserInitialization(actions);
 
     // Geant4のカーネルを初期化
-    runManager->Initialize()
+    rm->Initialize()
 
     // ランを開始
-    G4int numberOfEvent = 10
-    runManager->BeamOn(numberOfEvent);
+    // 第一引数: イベント数
+    G4int numberOfEvent = argv[1]
+    rm->BeamOn(numberOfEvent);
 
     // RunManagerを削除
-    delete runManager;
+    delete rm;
+
     return 0;
 }
 ```
 
 バッチモードで実行する場合の必要最低限の``main()``関数です。
-これをビルドして実行します。
-
-```console
-$ cd プロジェクト名
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make -j8
-$ ./実行ファイル
-```
-
-実行時の引数は必要ありません。
-イベント数はハードコードしてあるので、変更した場合は再ビルドが必要です。
+第一引数をイベント数としました。
