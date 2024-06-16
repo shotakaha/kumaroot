@@ -105,3 +105,7 @@ void PrimaryGneneratorAction::GeneratePrimaries(G4Event *aEvent)
 }
 
 ```
+
+## リファレンス
+
+- [Example B3](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleB3.html)

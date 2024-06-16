@@ -18,3 +18,7 @@ $ cd examples/basic/B4/B4d
 
 ``examples/basic/B4/``の中には``B4a``、``B4b``、``B4c``、``B4d``のディレクトリがあります。
 ``B4d``は``G4AnalysisManager``を使ってROOTファイルに出力する方法を確認できます。
+
+## リファレンス
+
+- [Example B4](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleB4.html)

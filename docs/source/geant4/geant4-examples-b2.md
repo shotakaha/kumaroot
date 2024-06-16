@@ -173,3 +173,7 @@ $ cd examples/basic/B2/B2a
 
 (B2a/build) $ ./exampleB2a
 ```
+
+## リファレンス
+
+- [Example B2](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleB2.html)

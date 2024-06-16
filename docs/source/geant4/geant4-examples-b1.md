@@ -85,3 +85,6 @@ G4UImanager *uiManager = G4UImanager::GetUIpointer();
 ``exampleB1.cc``で使われているマネージャーたちを集めてみました。
 4種類のマネージャーがいました。ランの管理人が``G4RunManagerFactory``クラスで、その他はビジュアライズ関係の管理人たちです。
 
+## リファレンス
+
+- [Example B1](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleB1.html)

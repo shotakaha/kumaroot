@@ -3,7 +3,7 @@
 Geant4.11.1で追加された``/analysis``コマンドのデモになっています。
 [G4AnalyticsManager](./geant4-analysismanager.md)をマクロで操作する参考になると思います。
 
-測定器の構成は、[B3](./geant4-examples-b3.md)と同じようなカロリメータです。
+測定器の構成は、[B4](./geant4-examples-b4.md)と同じようなカロリメータです。
 
 ## ビルドしたい
 

@@ -17,3 +17,6 @@ $ cd examples/basic/B5
 (B5/build/) $ ./exampleB5
 ```
 
+## リファレンス
+
+- [Example B5](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleB5.html)
