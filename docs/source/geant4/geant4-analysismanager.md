@@ -109,6 +109,9 @@ RunAction::RunAction()
 // ラン開始時の処理
 void RunAction::BeginOfRunAction(const G4Run* aRun)
 {
+    // ラン番号を表示する
+    G4cout << "Run started: " << run->GetRunID() << G4endl;
+
     // AnalysisManagerのインスタンスを取得する
     // AMがシングルトンなので、作成済みのインスタンスが取得できる
     auto am = G4AnalysisManager::Instance()
@@ -194,6 +197,16 @@ AnalysisManagerを使った付属サンプルのほとんどがROOTファイル�
 
 :::
 
+## サブディレクトリを作成したい（``SetHistoDirectoryName`` / ``SetNtupleDirectoryName``）
+
+```cpp
+am->SetHistoDirectoryName("histo");
+am->SetNtupleDirectoryName("ntuple");
+```
+
+CSV形式のファイルを保存するディレクトリを設定できます。
+ディレクトリはあらかじめ作成しておく必要があります。
+
 ## ヒストグラムを作成したい（``CreateH1`` / ``CreateH2`` / ``CreateH3``）
 
 ```cpp
@@ -209,17 +222,7 @@ am->CreateH2("name4", "title", xbins, xmin, xmax, ybins, ymin, ymax);  // h2 Id 
 
 ``CreateH1``、``CreateH2``、``CreateH3``でヒストグラムを準備できます。
 
-## ヒストグラムを確認したい（``ListH1`` / ``ListH2`` / ``ListH3``）
-
-```cpp
-// ヒストグラムを確認
-G4cout << "H1s: " << am->ListH1() << G4endl;
-G4cout << "H2s: " << am->ListH2() << G4endl;
-```
-
-``ListH1``、``ListH2``、``ListH3``で作成したヒストグラムを確認できます。
-
-## ヒストグラムIDを取得したい（``GetH1Id`` / ``GetH2Id`` / ``GetH3Id``）
+### ヒストグラムIDを取得したい（``GetH1Id`` / ``GetH2Id`` / ``GetH3Id``）
 
 ```cpp
 // ヒストグラムのIDを取得
@@ -232,7 +235,7 @@ G4int id4 = am->GetH2Id("name4");
 ヒストグラムを作成したときの名前を使って、ヒストグラムのIDを取得できます。
 ``EventAction``クラスで、ヒストグラムに値をフィルするときに利用できます。
 
-## ヒストグラムにフィルしたい（``FillH1`` / ``FillH2`` / ``FillH3``）
+### ヒストグラムにフィルしたい（``FillH1`` / ``FillH2`` / ``FillH3``）
 
 ```cpp
 am->FillH1(id, value, weight);
@@ -248,6 +251,52 @@ am->FillH3(id, xvalue, yvalue, zvalue, weight);
 ``RunAction``クラスで使うことはないと思います。
 
 :::
+
+### ヒストグラムを確認したい（``GetH1`` / ``GetH2`` / ``GetH3``）
+
+```cpp
+auto h1 = am->GetH1(id);
+G4String name = am->GetH1Name(id);
+
+G4double mean = h1->mean();
+G4double rms = h1->rms();
+```
+
+ヒストグラムIDを指定して、ヒストグラムを取得できます。
+取得したヒストグラムを使って、平均値などを取得できます。
+
+```cpp
+G4int nH1s = am->GetNofH1s;
+for ( G4int i=0; i<nH1s; ++i) {
+    auto h1 = am->GetH1(i);
+    if (h1 == nullptr) continue;
+    G4String name = am->GetH1Name(i);
+    G4cout << "Name: " << name << G4endl;
+    G4cout << "Mean: " << h1->mean() << G4endl;
+    G4cout << "Rms: " << h1->rms() << G4endl;
+}
+```
+
+``GetNofH1``でヒストグラムの数が取得できます。
+その数だけループして確認できます。
+
+## Ntupleを作成したい（``CreateNtuple`` / ``CreateNtupleDColumn`` / ``FinishNtuple``）
+
+```cpp
+am->CreateNtuple("Ntuple1", "title1");  // ntuple Id = 0
+am->CreateNtupleIColumn("name1");  // column Id = 0
+am->CreateNtupleDColumn("name2");  // column Id = 1
+am->FinishNtuple();
+
+am->CreateNtuple("Ntuple2", "title2");  // ntuple Id = 1
+am->CreateNtupleIColumn("name3");  // column Id = 0
+am->CreateNtupleDColumn("name4");  // column Id = 1
+am->FinishNtuple();
+```
+
+``CreateNtuple``でNtupleを作成し
+``CreateNtupleDColumn``でカラムを作成します。
+``FinishNtuple``することで複数のNtupleを作成できます。
 
 ## AnalysisManagerを使いたくない
 
