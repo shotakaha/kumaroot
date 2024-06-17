@@ -72,6 +72,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
 #include "DetectorConstruction.hh"
 
+namespace 名前空間
+{
 // //////////////////////////////////////////////////
 // コンストラクター
 // //////////////////////////////////////////////////
@@ -124,6 +126,8 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
 
     return world;
 }
+
+} // 名前空間
 ```
 
 :::{seealso}
