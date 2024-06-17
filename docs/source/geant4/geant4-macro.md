@@ -70,6 +70,42 @@ Geant4では、慣習的にマクロの拡張子に``.mac``を使っています
 実行したコマンドのリストをファイルに保存できます。
 デフォルトのファイル名は``G4history.macro``です。
 
+## データを保存したい（``/analysis/``）
+
+```cfg
+/analysis/setDefaultFileType "csv"
+/analysis/open ファイル名
+
+# 入射粒子の設定
+/gun/particle mu-
+
+# Run1: 10 events
+/gun/energy 1.0 GeV
+/run/beamOn 10
+/analysis/write
+/analysis/reset
+
+# Run2: 50 events
+/gun/energy 500. MeV
+/run/beamOn 50
+/analysis/write
+/analysis/reset
+
+/analysis/closeFile
+```
+
+``/analysis/``コマンドで、測定したデータを保存できます。
+``/analysis/closeFile``でファイルを閉じる前ならば、
+条件を変更して複数のランを実行できます。
+
+:::{seealso}
+
+``/analysis/``コマンドを使うために、``G4AnalysisManager``を有効にする必要があります。
+
+- [](./geant4-analysismanager.md)
+
+:::
+
 ## 起動時にマクロしたい（``G4UIManager``）
 
 ```cpp
