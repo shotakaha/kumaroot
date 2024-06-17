@@ -24,7 +24,6 @@ class EventAction: public G4UserEventAction
 
 :::{seealso}
 
-- [](./geant4-run.md)
 - [](./geant4-event.md)
 - [](./geant4-analysismanager.md)
 
