@@ -220,3 +220,5 @@ geant4-visattributes
 - [Geant4 Download](https://geant4.web.cern.ch/download/)
 - [Geant4 Book for Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/index.html)
 - [Geant4 Material Database](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html)
+- [Geant4 初心者講習会](https://wiki.kek.jp/display/geant4/Tutorial+Notes+for+Novice+Users)（Geant4 v10.0対応）
+- [Geant4 初心者講習会・研究会2024](https://wiki.kek.jp/display/geant4/Geant4+Japanese+Tutorial+for+Detector+Simulation+2024)（Geant4 v11.2準拠）
