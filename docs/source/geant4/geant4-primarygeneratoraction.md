@@ -66,6 +66,28 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event *aEvent)
 } // 名前空間
 ```
 
+## メイン関数
+
+```cpp
+int main(int argc, char** argv)
+{
+    auto rm = G4RunManagerFactory::CreateRunManager();
+
+    // DetectorConstruction
+    // PhysicsList
+
+    auto actions = new ActionInitialization;
+    rm->SetUserInitialization(actions);
+}
+```
+
+:::{caution}
+
+`PrimaryGeneratorAction`は、メイン関数の中ではなく、
+`ActionInitialization`クラスの中でセットアップします。
+
+:::
+
 ## リファレンス
 
 - [G4VUserPrimaryGeneratorAction](https://geant4.kek.jp/Reference/11.2.0/classG4VUserPrimaryGeneratorAction.html)
