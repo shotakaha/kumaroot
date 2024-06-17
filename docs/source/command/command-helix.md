@@ -41,6 +41,26 @@ vimより、コマンド操作のキーバインドに一貫性があったり�
 | `w` | 次の文字に移動 | `move_next_word_start` |
 | `b` | 前の文字に移動 | `move_prev_word_start` |
 | `G <n>` | `<n>`行目に移動 | `goto_line` |
+| `Ctrl-f` | 1ページ進む | `page_down` |
+| `Ctrl-b` | 1ページ戻る | `page_up` |
+| `Ctrl-d` | 半ページ進む | `page_cursor_half_down` |
+| `Ctrl-u` | 半ページ戻る | `page_cursor_half_up` |
+
+### gotoモード
+
+| キー | 操作内容 | コマンド |
+|---|---|---|
+| `g` `g` | ファイルの先頭に移動 | `goto_file_start` |
+| `g` `e` | ファイルの末尾に移動 | `goto_last_line` |
+| `g` `h` | 行の先頭に移動 | `goto_line_start` |
+| `g` `l` | 行の末尾に移動 | `goto_line_end` |
+| `g` `t` | ウィンドウの上部に移動 | `goto_window_top` |
+| `g` `c` | ウィンドウの中央に移動 | `goto_window_center` |
+| `g` `b` | ウィンドウの下部に移動 | `goto_window_bottom` |
+| `g` `n` | 次のバッファーに移動 | `goto_next_buffer` |
+| `g` `p` | 前のバッファーに移動 | `goto_previous_buffer` |
+| `g` `a` | 直前のバッファーに移動 | `goto_last_accessed_file` |
+
 
 ## 検索したい
 
