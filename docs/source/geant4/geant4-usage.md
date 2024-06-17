@@ -79,6 +79,17 @@ geant4-macro-vis
 geant4-macro-gui
 ```
 
+## 必須クラスしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-detectorconstruction
+geant4-physicslist
+geant4-primarygeneratoraction
+```
+
 ## ユーザー操作したい
 
 ```{toctree}
@@ -104,7 +115,6 @@ rm->SetUserInitialization(detector);
 maxdepth: 1
 ---
 geant4-geometry
-geant4-detectorconstruction
 geant4-pvplacement
 geant4-pvreplica
 geant4-world
@@ -156,7 +166,6 @@ rm->SetUserInitialization(physics);
 ---
 maxdepth: 1
 ---
-geant4-physicslist
 geant4-ftfp_bert
 geant4-opticalphoton
 ```
@@ -173,7 +182,6 @@ rm->SetUserInitialization(actions);
 ---
 maxdepth: 1
 ---
-geant4-primarygeneratoraction
 geant4-runaction
 geant4-run
 geant4-eventaction
