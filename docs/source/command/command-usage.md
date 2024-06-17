@@ -18,6 +18,7 @@
 ---
 maxdepth: 1
 ---
+command-bat
 command-cd
 command-date
 command-ls
