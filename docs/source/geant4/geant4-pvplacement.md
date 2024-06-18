@@ -12,7 +12,8 @@ new G4PVPlacement(
 )
 ```
 
-[G4PVPlacement](https://geant4.kek.jp/Reference/11.2.0/classG4PVPlacement.html)で論理ボリュームを配置できます。
+[G4PVPlacement](https://geant4.kek.jp/Reference/11.2.0/classG4PVPlacement.html)は``G4VPhysicalVolume``を具象化したクラスです。
+論理物体（logical volume）を物理物体（physical volume）として配置できます。
 
 ## 複数の測定器を配置したい
 
@@ -24,7 +25,7 @@ G4Transform3D location = G4Transform3D(rotation, direction);
 
 G4int z = 0;
 for (int i = 0; i < n_detectors; i++) {
-    z = i * 10*cm;
+    z = i * 10 * cm;
     direction = G4ThreeVector(0.*cm, 0.*cm, z);
     location = G4Transform3D(rotation, direction);
     new G4PVPlacement(
@@ -39,4 +40,9 @@ for (int i = 0; i < n_detectors; i++) {
 }
 ```
 
-測定器を複数配置する場合は、コピー番号を別々にします。
+複数の測定器を配置する場合は、コピー番号（``copyNo``）を変更することで、異なる物理物体としてアクセスできます。
+区別する必要がない場合は、同じ値でOKです。
+
+## リファレンス
+
+- [G4PVPlacement](https://geant4.kek.jp/Reference/11.2.0/classG4PVPlacement.html)
