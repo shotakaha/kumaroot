@@ -222,6 +222,15 @@ geant4-vismanager
 geant4-visattributes
 ```
 
+## 外部ライブラリしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-loguru
+```
+
 ## リファレンス
 
 - [Geant4](https://geant4.web.cern.ch/)
