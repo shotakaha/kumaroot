@@ -46,3 +46,10 @@ FetchContent_MakeAvailable(名前)
 
 ``FetchContent``モジュールで、外部リポジトリを取得できます。
 取得したファイルは``build/_deps/``にキャッシュされます。
+
+## VS Code したい
+
+次の2つの拡張をVS Codeに追加してください。
+
+- [C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+- [CMake Tools extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
