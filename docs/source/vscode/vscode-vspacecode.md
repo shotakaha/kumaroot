@@ -73,17 +73,17 @@ VSpaceCodeでもそれをしたい・・・が、やりかたわからない。
 {
     "vim.statusBarColorControl": true,
     // "vim.statusBarColors.モード名": ["#背景色", "#文字色"]
-    "vim.statusBarColors.normal": ["#e27878", "#161821"],
-    "vim.statusBarColors.insert": ["#84a0c6", "#161821"],
-    "vim.statusBarColors.visual": ["#a093c7", "#161821"],
-    "vim.statusBarColors.visualline": ["#a093c7", "#161821"],
-    "vim.statusBarColors.visualblock": ["#a093c7", "#161821"],
-    "vim.statusBarColors.replace": ["#e2a478", "#161821"],
-    // "vim.statusBarColors.commandlineinprogress": ["#818596", "#161821"],
-    // "vim.statusBarColors.searchinprogressmode": ["#818596", "#161821"],
-    // "vim.statusBarColors.easymotionmode": ["#818596", "#161821"],
-    // "vim.statusBarColors.easymotioninputmode": ["#818596", "#161821"],
-    // "vim.statusBarColors.surroundinputmode": ["#818596", "#161821"],
+    "vim.statusBarColors.normal": ["#e27878", "#161821"],  // red系
+    "vim.statusBarColors.insert": ["#b4be82", "#161821"],  // green系
+    "vim.statusBarColors.replace": ["#e2a478", "#161821"], // orange系
+    "vim.statusBarColors.visual": ["#a093c7", "#161821"],       // purple系
+    "vim.statusBarColors.visualline": ["#a093c7", "#161821"],   // purple系
+    "vim.statusBarColors.visualblock": ["#a093c7", "#161821"],  // purple系
+    // "vim.statusBarColors.commandlineinprogress": ["#e2a478", "#161821"],
+    // "vim.statusBarColors.searchinprogressmode": ["#e2a478", "#161821"],
+    // "vim.statusBarColors.easymotionmode": ["#e2a478", "#161821"],  // orange系
+    // "vim.statusBarColors.easymotioninputmode": ["#e2a478", "#161821"],
+    // "vim.statusBarColors.surroundinputmode": ["#e2a478", "#161821"],
 }
 ```
 

@@ -18,3 +18,16 @@
 : ``{プロジェクトのパス}/.vscode/settings.json``。
   ワークスペース設定用のファイルです。
   プロジェクトメンバーで共有したい設定などを追加します。
+
+## 編集タブの色を変えたい
+
+```json
+"workbench.colorCustomizations": {
+    "tab.activeBackground": "#e2a478",
+    "tab.activeForeground": "#161821",
+    "tab.inactiveBackground": "#c6c8d1",
+    "tab.inactiveForeground": "#161821",
+},
+```
+
+ページ上部に表示されるタブの色を変更できます。
