@@ -55,6 +55,7 @@ maxdepth: 1
 command-apt
 command-asdf
 command-brew
+command-cmake
 command-docker
 command-gem
 command-mise
