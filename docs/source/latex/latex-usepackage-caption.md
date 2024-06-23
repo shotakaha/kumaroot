@@ -1,22 +1,6 @@
 # キャプションしたい（``caption``）
 
 ```latex
-\usepackage{caption}
-
-\begin{figure}
-    \centering
-    \captionsetup{width=0.8\linewidth}
-    \includegraphics[width=0.9\linewidth]{ファイル名}
-    \caption{図のキャプション}
-\end{figure}
-```
-
-``caption``パッケージを使って画像キャプションの表示を変更できます。
-キャプションのフォントのサイズを、本文より小さくしたり、図番号からキャプションを字下げしたり、図番号のみ太字にしたりできます。
-
-## 一括設定したい
-
-```latex
 %% プリアンブル
 \usepackage{caption}
 \captionsetup{
@@ -35,5 +19,29 @@
 \end{figure}
 ```
 
-パッケージオプションでも設定できますが、``\captionsetup``を使ったほうが設定が読みやすいと思います。
+``caption``パッケージを使って画像キャプションの表示を変更できます。
+``\captionsetup``で、本文中のキャプションを一括設定できます。
+キャプションのフォントのサイズを、本文より小さくしたり、図番号からキャプションを字下げしたり、図番号のみ太字にしたりできます。
 詳しくは``$ texdoc caption``して設定オプションを確認してください。
+
+:::{hint}
+
+LaTeXで幅を設定する場合``\textwidth``もしくは``\linewidth``を基準にすることが多いです。
+個人的に図のキャプションは、画像の幅よりも狭くしたい派なので、``\linewidth``を基準にしています。
+
+:::
+
+## 個別設定したい
+
+```latex
+\usepackage{caption}
+
+\begin{figure}
+    \centering
+    \captionsetup{width=0.8\linewidth}
+    \includegraphics[width=0.9\linewidth]{ファイル名}
+    \caption{図のキャプション}
+\end{figure}
+```
+
+``figure``環境の中で``\captionsetup``して、個別で設定できます。
