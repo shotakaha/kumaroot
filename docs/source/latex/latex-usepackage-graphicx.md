@@ -95,3 +95,16 @@ LuaLaTeXの場合は自動判断してくれるため、逆に、何も指定し
 パソコンで作成した画像の色空間は``RGB``となっています。
 これを印刷物にする場合、色空間を``CMYK``に変換する必要があります。
 変換はAdobe PhotoshopやAdobe Illustratorなどを使うとよいです。
+
+## 枠線みしたい（``\fbox``）
+
+```latex
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=0.9\linewidth]{ファイル名}}
+    \caption{図のキャプション}
+\end{figure}
+```
+
+図を``\fbox``で囲むと枠線をつけることができます。
+枠線の太さなど、詳細な設定をしたい場合は、別のパッケージを使う必要があります。
