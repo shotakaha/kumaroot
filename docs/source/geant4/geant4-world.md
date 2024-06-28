@@ -11,7 +11,7 @@
 これを``DetectorConstruction::Construct``の中で呼び出して、物理物体として配置します。
 
 ```cpp
-G4LogicalVolume *DefineWorldVolume(const G4String &name){
+G4LogicalVolume *CreateWorldVolume(const G4String &name){
 
     // 実験室の素材を決める
     G4NistManager *nm = new G4NistManager::Instance();
@@ -23,22 +23,22 @@ G4LogicalVolume *DefineWorldVolume(const G4String &name){
     G4double halfZ = 50.0 * cm;
 
     // 実験室の形状
-    auto solid = new G4Box(
+    auto solid = new G4Box{
         "worldSolid",    // 名前
         halfX,
         halfY,
         halfZ,
-    )
+    };
 
     // 実験室
-    auto logical = new G4LogicalVolume(
+    auto logical = new G4LogicalVolume{
         solid,       // G4VSolid
         material,    // G4Material
         name,        // 名前
         nullptr,     // G4FieldManager
         nullptr,     // G4VSensitiveDetector
         nullptr,     // G4UserLimits
-    )
+    };
 
     G4cout << "World: "
     << "x=" << 2 * halfX / cm << " cm, "
@@ -47,7 +47,7 @@ G4LogicalVolume *DefineWorldVolume(const G4String &name){
     << "of " << material->GetName()
     << G4endl;
 
-    return logical
+    return logical;
 }
 ```
 
@@ -59,7 +59,7 @@ G4LogicalVolume *DefineWorldVolume(const G4String &name){
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
     // 実験室の論理物体を取得する
-    auto pWorldLogical = DefineWorldVolume("world")
+    auto pWorldLogical = CreateWorld("world")
 
     // 実験室の置き場所を決める
     G4RotationMatrix rotation = G4RotationMatrix();       // 回転 : なし
@@ -102,7 +102,7 @@ Geant4では生成された粒子が「実験室の外側に飛び出す」か�
 
 :::
 
-## 見えなくする
+## 非表示にしたい
 
 ```cpp
 pWorldLogical->SetVisAttributes(G4VisAttributes::GetInvisible());
