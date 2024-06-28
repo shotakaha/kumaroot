@@ -1,8 +1,8 @@
 # Sensitive Detectorしたい（``G4VSensitiveDetector``）
 
 測定器のヒット情報を取得するためには、論理ボリュームにSensitive Detector（以下SD）を設定します。
-SDは[G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)クラスを継承して作成します。
-ひとつの論理ボリュームに複数のSDを設定できます。
+SensitiveDetectorは[G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)クラスを継承して作成します。
+ひとつの論理ボリュームに複数のSensitiveDetectorを設定できます。
 
 ```cpp
 #ifndef SensitiveDetector_h
