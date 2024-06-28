@@ -1,15 +1,16 @@
 # スコアリングしたい（``G4ScoringManager``）
 
 ```cpp
-int main() {
-    auto *runManager = new G4RunManagerFactory::CreateRunManager();
-
-    G4ScoringManager *scoringManager = G4ScoringManager::GetScoringManager();
-    // scoringManager->SetVerboseLevel(1);
+int main(int argc, char** argv)
+{
+    auto *rm = new G4RunManagerFactory::CreateRunManager();
+    auto *sm = G4ScoringManager::GetScoringManager();
+    // sm->SetVerboseLevel(1);
 }
 ```
 
-メイン関数で``G4ScoringManager``を用意します。
+``main()``関数で``G4ScoringManager``を有効にし、
+マクロを使ってスコアリング方法を設定します。
 
 ```cfg
 # メッシュを設定
@@ -33,26 +34,32 @@ int main() {
 /score/dumpAllQuantityToFile メッシュ名 ファイル名
 ```
 
-マクロを使って物理量を測定できます。
-メッシュ付きのボリュームは、パラレルワールドに作成されるようです。
-実際に作成した測定器の配置に合うように、位置／サイズを指定する必要があります。
+``G4ScoringManager``は、スコアリングするときに、
+メッシュ付きのボリュームを**パラレルワールド**に作成します。
+マクロの中で``DetectorConstruction``した測定器の配置に合うように、位置／サイズを指定する必要があります。
+
+:::{caution}
+
+メッシュボリュームと、測定器のボリュームの境界面がずれていると、標準出力に警告が表示されます。
+
+:::
 
 ## メッシュしたい（``/score/create/``）
 
 ```cfg
-// 直方体メッシュ
+# 直方体メッシュ
 /score/create/boxMesh meshName
 /score/mesh/boxSize dX dY dZ unit
 /score/mesh/nBin dX dY dZ
 
-// 円柱メッシュ
+# 円柱メッシュ
 /score/create/cylinderMesh meshName
 /score/mesh/cylinderSize dR dZ unit
 /score/mesh/nBin dR dZ dPhi
 ```
 
 ``/score/create/メッシュ形状``でメッシュを作成できます。
-メッシュ形状は直方体と円柱があります。
+メッシュ形状は直方体（``boxMesh``）と円柱（``cylinderMesh``）があります。
 
 ``/score/mesh/形状``でメッシュ全体の大きさを設定、
 ``/score/mesh/nBin``でメッシュの分割数を設定できます。
@@ -61,28 +68,73 @@ int main() {
 
 ```cfg
 /score/quantity/touch quantityName
-/score/quantity/energyDeposit quantityName unit  # エネルギー損失
-/score/quantity/cellCharge quantityName unit # 電荷の合計
+
+# エネルギー損失
+/score/quantity/energyDeposit quantityName unit
+
+# 電荷量
+/score/quantity/cellCharge quantityName unit
 /score/quantity/cellFlux quantityName unit #
 /score/quantity/passageCellFlux
-/score/quantity/nOfStep quantityName bFlag       # Number of step scorer
-/score/quantity/nOfSecondary quantityName  # Number of secondary scorer
-/score/quantity/trackLength quantityName bWeight bKineticEnergy bVelocity unit   # トラックの長さ
-/score/quantity/nOfCollision  quantityName bWeight # Number of collision scorer
-/score/quantity/nOfTrack quantityName dDirection bWeight # Number of track scorer
-/score/quantity/nOfTerminatedTrack quantityName bWeight      # Number of terminated track scorer
-/score/quantity/volumeFlux quantityName bCosTheta dDirection    # Number of particles getting into the volume without normalized by the surface area
+
+# Number of step scorer
+/score/quantity/nOfStep quantityName bFlag
+
+# Number of secondary scorer
+/score/quantity/nOfSecondary quantityName
+
+# トラックの長さ
+/score/quantity/trackLength quantityName bWeight bKineticEnergy bVelocity unit
+
+# Number of collision scorer
+/score/quantity/nOfCollision  quantityName bWeight
+
+# Number of track scorer
+/score/quantity/nOfTrack quantityName dDirection bWeight
+
+# Number of terminated track scorer
+/score/quantity/nOfTerminatedTrack quantityName bWeight
+# Number of particles getting into the volume without normalized by the surface area
+/score/quantity/volumeFlux quantityName bCosTheta dDirection
 /score/quantity/population quantityName bWeight
 ```
 
 ## フィルターしたい（``/score/filter/``）
 
 ```cfg
-/score/filter/charged filterName # Charged particle filter
-/score/filter/neutral filterName # Neutral particle filter
-/score/filter/kineticEnergy filterName Elow Ehigh unit # Kinetic energy filter
-/score/filter/particle filterName particleNames  # Particle filter
+# 荷電粒子のフィルター
+/score/filter/charged filterName
+
+# 中性粒子のフィルター
+/score/filter/neutral filterName
+
+# 運動エネルギーのフィルター
+/score/filter/kineticEnergy filterName Elow Ehigh unit
+
+# 粒子名のフィルター
+/score/filter/particle filterName particleNames
+
+# 粒子名と運動エネルギーのフィルター
 /score/filter/particleWithKineticEnergy filterName Elow Ehigh unit particleNames
 ```
 
-``/score/filter/フィルター``で、測定する対象をフィルターできます。
+``/score/filter/フィルター``で、測定する対象をフィルタリングできます。
+
+:::{note}
+
+```cfg
+/score/filter/charged chargedParticleFilter
+```
+
+たとえば、荷電粒子フィルターは、以下の条件分岐に相当します。
+
+```cpp
+// G4Step *aStepとする
+if( aStep->GetTrack()->GetParticleDefinition()->GetPDGCharge() != 0 )
+{
+    // 荷電粒子に対する処理
+}
+```
+
+
+:::
