@@ -5,12 +5,16 @@ VS Codeでは
 「フォルダー設定」
 「ワークスペース設定」
 のレベルで設定が変更できます。
-それぞれのファイル名は以下のようになっています。
 
-| 設定レベル | ファイル名 |
-|---|---|
-| ユーザー設定 | ``{$HOME}/Library/Application Support/Code/User/settings.json`` |
-| フォルダー設定 | ``フォルダー名/.vscode/settings.json`` |
+コマンドパレットで``settings.json``と検索すると、
+次の候補がヒットするので、カスタムしたい項目を選択します。
+それぞれのファイル名は以下のように対応しています。
+
+| 設定レベル | コマンド名 | ファイル名 |
+|---|---|---|
+| デフォルト設定 | ``Preferences: Open Default Settings`` | |
+| ユーザー設定 | ``Preferences: Open User Settings`` | ``{$HOME}/Library/Application Support/Code/User/settings.json`` |
+| フォルダー設定 | ``Preferences: Open Workspace Settings`` | ``フォルダー名/.vscode/settings.json`` |
 
 「ユーザー設定」に記述した個人の設定は、``Settings Sync``機能により
 GitHub（もしくはMS）アカウントを介して、異なるパソコン間で同期できます。
@@ -19,20 +23,49 @@ GitHub（もしくはMS）アカウントを介して、異なるパソコン間
 「フォルダー設定」のファイルを追加しておくと、
 プロジェクトメンバーで設定を共通化できます。
 
-コマンドパレットで``settings.json``と検索すると、
-次の候補がヒットするので、カスタムしたい項目を選択します。
-
-1. ``Preferences: Open User Settings (JSON)``
-2. ``Preferences: Open Workspace Settings (JSON)``
-
 ## フォントを変えたい
 
 ```json
 {
     "editor.fontSize": 15,
-    "editor.fontFamily": "HackGen, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "PlemolJP, HackGen, Menlo, Consolas, monospace",
 }
 ```
+
+フォントは日本語に対応したプログラミングフォントに変更しておくとよいです。
+先頭に書いたフォントが優先されます。
+フォントが見つからなかった場合には、OSごとのデフォルト等幅フォント（``monospace``）にフォールバックするようにしておきます。
+
+:::{seealso}
+
+フォントはHomebrewでも追加できます。
+僕が使っている日本語に対応したプログラミングフォントの例です。
+
+- [白源（HackGen）](https://github.com/yuru7/HackGen)
+- [PlemolJP](https://github.com/yuru7/PlemolJP)
+- [Monaspace](https://monaspace.githubnext.com/)
+
+:::
+
+## テーマを変えたい
+
+```json
+{
+    "workbench.colorTheme": "Iceberg Light",
+}
+```
+
+VS Code全体のカラースキームを変更できます。
+上記のサンプルでは[cocoponさんのIceberg](https://marketplace.visualstudio.com/items?itemName=cocopon.iceberg-theme)を使っています。
+
+:::{seealso}
+
+- [Iceberg - dark blue color scheme for Vim/NeoVim](https://cocopon.github.io/iceberg.vim/)
+- [Iceberg Theme - VS Marketplace](https://marketplace.visualstudio.com/items?itemName=cocopon.iceberg-theme)
+- [Philosophy of Iceberg](https://speakerdeck.com/cocopon/creating-your-lovely-color-scheme)
+
+:::
+
 
 ## 編集タブの色を変えたい
 
