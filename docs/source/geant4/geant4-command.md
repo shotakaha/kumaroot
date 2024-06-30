@@ -179,3 +179,40 @@ geantino,
 粒子名そのものや、記号で表現します。
 反粒子は``anti_*``ではじまるものがほとんどですが、
 荷電レプトン（とパイ中間子）は、そのまま``*-``／``*+``と書きます。
+
+## カット長を確認したい（``/cuts/dump``）
+
+```cfg
+/cuts/dump
+```
+
+```text
+========= Table of registered couples ============================
+
+Index : 0     used in the geometry : Yes
+ Material : G4_AIR
+ Range cuts        :  gamma  700 um     e-  700 um     e+  700 um  proton 700 um
+ Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton 70 keV
+ Region(s) which use this couple :
+    DefaultRegionForTheWorld
+
+Index : 1     used in the geometry : Yes
+ Material : G4_BGO
+ Range cuts        :  gamma  700 um     e-  700 um     e+  700 um  proton 700 um
+ Energy thresholds :  gamma  64.4521 keV    e-  770.195 keV    e+  731.433 keV proton 70 keV
+ Region(s) which use this couple :
+    DefaultRegionForTheWorld
+
+==================================================================
+```
+
+``/cuts/dump``で、二次粒子を生成するかどうかの閾値を確認できます。
+閾値は **カット長（＝粒子の飛程）** で設定されていて、デフォルトだと、ガンマ線、電子、陽電子、陽子の飛程の閾値はすべて 700 um になっていました。
+エネルギーの閾値は、設定した物体の材料の情報から、自動で計算されます。
+
+:::{note}
+
+Geant4では生成された粒子の運動エネルギーがゼロになるまで粒子輸送を計算します。
+二次粒子（＝二次、三次、四次、・・・）の生成閾値を変更することで、どこまで計算するかを設定できます。
+
+:::
