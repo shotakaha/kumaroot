@@ -70,7 +70,6 @@ VS Code全体のカラースキームを変更できます。
 
 :::
 
-
 ## 編集タブの色を変えたい
 
 ```json
@@ -86,3 +85,25 @@ VS Code全体のカラースキームを変更できます。
 
 エディター領域に表示される色を変更できます。
 上のサンプルでは、編集中のタブが目立つように背景色を変えています。
+
+## 対応する括弧（ブラケット）したい
+
+```json
+{
+    "editor.barcketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+}
+```
+
+コード中の対応する括弧（ブラケット）を強調表示できます。
+HTMLファイルを編集したり、JSONファイルを確認したりする場合に便利です。
+
+## コード補完したい
+
+```json
+"editor.inlayHints.enabled": "offUnlessPressed",
+```
+
+関数のヒント表示の設定です。
+デフォルトは``"on"``ですが、毎回表示されるのも
+邪魔だったので``"offUnlessPressed"``にしました。
