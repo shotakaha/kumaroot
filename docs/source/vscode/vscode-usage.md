@@ -27,4 +27,5 @@ vscode-copy-paste
 vscode-region
 vscode-color
 vscode-encoding
+vscode-indent
 ```
