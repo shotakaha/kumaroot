@@ -28,13 +28,17 @@ GitHub（もしくはMS）アカウントを介して、異なるパソコン間
 ```json
 {
     "editor.fontSize": 15,
-    "editor.fontFamily": "PlemolJP, HackGen, Menlo, Consolas, monospace",
+    "editor.fontFamily": "Monaspace Krypton, PlemolJP, HackGen, Menlo, Consolas, monospace",
 }
 ```
 
 フォントは日本語に対応したプログラミングフォントに変更しておくとよいです。
 先頭に書いたフォントが優先されます。
-フォントが見つからなかった場合には、OSごとのデフォルト等幅フォント（``monospace``）にフォールバックするようにしておきます。
+
+上記のサンプルでは、英文フォントに``Monaspace Krypton``、
+和文フォントに``PlemolJP``を適用しています。
+また、フォントが見つからなかった場合に備えて、
+``HackGen``やOSごとのデフォルト等幅フォント（``monospace``）にフォールバックするようにしてあります。
 
 :::{seealso}
 
