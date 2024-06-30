@@ -25,15 +25,26 @@ GitHub（もしくはMS）アカウントを介して、異なるパソコン間
 1. ``Preferences: Open User Settings (JSON)``
 2. ``Preferences: Open Workspace Settings (JSON)``
 
+## フォントを変えたい
+
+```json
+{
+    "editor.fontSize": 15,
+    "editor.fontFamily": "HackGen, Menlo, Monaco, 'Courier New', monospace",
+}
+```
+
 ## 編集タブの色を変えたい
 
 ```json
-"workbench.colorCustomizations": {
-    "tab.activeBackground": "#e2a478",
-    "tab.activeForeground": "#161821",
-    "tab.inactiveBackground": "#c6c8d1",
-    "tab.inactiveForeground": "#161821",
-},
+{
+    "workbench.colorCustomizations": {
+        "tab.activeBackground": "#e2a478",
+        "tab.activeForeground": "#161821",
+        "tab.inactiveBackground": "#c6c8d1",
+        "tab.inactiveForeground": "#161821",
+    },
+}
 ```
 
 エディター領域に表示される色を変更できます。
