@@ -26,4 +26,5 @@ vscode-open-file
 vscode-copy-paste
 vscode-region
 vscode-color
+vscode-encoding
 ```
