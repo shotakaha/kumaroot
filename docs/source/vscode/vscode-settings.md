@@ -1,23 +1,29 @@
-# カスタマイズしたい（``settings.json``）
+# 設定したい（``settings.json``）
 
-コマンドパレットを開き``settings.json``と検索します。
-次の3つの候補がヒットするので、カスタムしたい項目を選択します。
+VS Codeでは
+「ユーザー設定」
+「フォルダー設定」
+「ワークスペース設定」
+のレベルで設定が変更できます。
+それぞれのファイル名は以下のようになっています。
 
-``Preferences: Open Default Settings (JSON)``
-: ``{どこかのパス}/defaultSettings.json``。
-  おそらく全体設定用のファイルです。
-  どのパスにあるかぱっと分かりませんでした。
-  きっと編集しない方がよさそうです。
+| 設定レベル | ファイル名 |
+|---|---|
+| ユーザー設定 | ``{$HOME}/Library/Application Support/Code/User/settings.json`` |
+| フォルダー設定 | ``フォルダー名/.vscode/settings.json`` |
 
-``Preferences: Open User Settings (JSON)``
-: ``~/settings.json``。
-  ユーザー設定用のファイルです。
-  基本的にこのファイルに追加します。
+「ユーザー設定」に記述した個人の設定は、``Settings Sync``機能により
+GitHub（もしくはMS）アカウントを介して、異なるパソコン間で同期できます。
 
-``Preferences: Open Workspace Settings (JSON)``
-: ``{プロジェクトのパス}/.vscode/settings.json``。
-  ワークスペース設定用のファイルです。
-  プロジェクトメンバーで共有したい設定などを追加します。
+ソースコードをリポジトリで管理している場合、
+「フォルダー設定」のファイルを追加しておくと、
+プロジェクトメンバーで設定を共通化できます。
+
+コマンドパレットで``settings.json``と検索すると、
+次の候補がヒットするので、カスタムしたい項目を選択します。
+
+1. ``Preferences: Open User Settings (JSON)``
+2. ``Preferences: Open Workspace Settings (JSON)``
 
 ## 編集タブの色を変えたい
 
@@ -30,4 +36,5 @@
 },
 ```
 
-ページ上部に表示されるタブの色を変更できます。
+エディター領域に表示される色を変更できます。
+上のサンプルでは、編集中のタブが目立つように背景色を変えています。
