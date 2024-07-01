@@ -1,22 +1,14 @@
-# ターミナルを開きたい
+# ターミナルを開きたい（``command + j``）
 
-View: Toggle Panel Visibility
-: {kbd}`cmd` + {kbd}`j`
-: {kbd}`SPC T j`
+| コマンド名 | キーバインド |
+|---|---|
+| View: Toggle Panel Visibility | {kbd}`command + j` |
+| View: Toggle Terminal | {kbd}`control + (backtick)` |
+| View: Toggle Problem | {kbd}`shift + command + m` |
+| View: Toggle Output | {kbd}`shift + command + u`|
+| View: Toggle Debug Console | {kbd}`shift + command + y` |
 
-View: Toggle Terminal
-: {kbd}`control` + {kbd}`(backtick)`
-
-View: Toggle Problem
-: {kbd}`shift` + {kbd}`cmd` + {kbd}`m`
-
-View: Toggle Output
-: {kbd}`shift` + {kbd}`cmd` + {kbd}`u`
-
-View: Toggle Debug Console
-: {kbd}`shift` + {kbd}`cmd` + {kbd}`y`
-
-VS Codeを使いながら、ウィンドウの下部にターミナルを開くことができます。
+エディター画面の下にパネルを開くことができます。
 上記のショートカットはトグルできます。
 
 :::{note}
@@ -26,11 +18,13 @@ VS Codeを使いながら、ウィンドウの下部にターミナルを開く�
 
 ## ターミナルを増やしたい
 
-- {kbd}`shift` + {kbd}`control` + {kbd}`(backtick)` Terminal Create: New Terminal
-- {kbd}`shift` + {kbd}`cmd` + {kbd}`]` Terminal: Focus Next Terminal Group
-- {kbd}`shift` + {kbd}`cmd` + {kbd}`[` Terminal: Focus Next Previous Group
-- Terminal: Switch Active Terminal
+| コマンド名 | キーバインド |
+|---|---|
+| Terminal Create: New Terminal | {kbd}`shift + control + (backtick)` |
+| Terminal: Focus Next Terminal Group | {kbd}`shift + command + ]` |
+| Terminal: Focus Next Previous Group | {kbd}`shift + command + [` |
+| Terminal: Switch Active Terminal | |
 
-エティタ画面下のターミナルパネルにあるターミナルは、マウス操作で増やすことができます。
-パネル右端の{kbd}`+`マークをクリックすると新規シェルが開きます。
-その右にある{kbd}`下矢印`マークをクリックすると、新規シェルを選択できます。
+エディター画面の下に開いたターミナルパネルは、マウス操作で増やすことができます。
+パネル右端の{kbd}`+（プラス）`マークをクリックすると新規シェルが開きます。
+その右にある{kbd}`↓（下矢印）`マークをクリックすると、新規シェルを選択できます。
