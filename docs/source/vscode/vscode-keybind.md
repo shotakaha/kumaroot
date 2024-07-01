@@ -1,18 +1,7 @@
-# コマンドパレットしたい
+# キーバインドを表示したい（``command+k`` + ``command+s``）
 
-- {kbd}`shift + cmd + p`
-- {kbd}`SPC SPC`
-
-VS Codeにおけるコマンドランチャーです。
-Emacsの``smex``や``anything/helm``、``ivy``のような役割を担うものです。
-VS Codeで唯一覚えるべきショートカットキーといっても過言ではないでしょう。
-
-他のショートカットキーを忘れてしまっても、コマンドパレットを起動すれば、キーワードで検索できます。
-
-## キーバインドを表示したい
-
-- {kbd}`cmd - k` + {kbd}`cmd - s`
-- {kbd}`cmd - k` + {kbd}`cmd - r`
+- {kbd}`command + k` + {kbd}`command + s`
+- {kbd}`command + k` + {kbd}`command + r`
 
 ## キーバインドを削除したい
 
@@ -26,7 +15,11 @@ VS Codeで唯一覚えるべきショートカットキーといっても過言�
 }
 ```
 
-{file}`keybindings.json`を直接編集して、コマンドの先頭に``-``をつけることで、特定のキーバインドを削除できます。
+特定のキーバインドを削除したい場合は、{file}`keybindings.json`を直接編集します。
+削除したいコマンドの先頭に``-``をつけます。
 
-{kbd}`cmd + b`はデフォルトではサイドバー表示のON/OFFのトグル（``workbench.action.toggleSidebarVisibility``）なのですが ``Markdown All in One`` プラグインによって、**太字**のトグル（``markdown.extension.editing.toggleBold``）に上書きされていました。
-``.md``ファイルを編集するときに、不便だったので削除しました。
+上記のサンプルでは、``.md``ファイル編集時の{kbd}`command + b`の動作を無効にしています。
+
+{kbd}`command + b`はデフォルトではサイドバー表示のON/OFFをトグル（``workbench.action.toggleSidebarVisibility``）するキーバインドです。
+しかし、``Markdown All in One``拡張を使っていたため、**太字**のトグル（``markdown.extension.editing.toggleBold``）に上書きされていました。
+``.md``ファイルを編集するときにだけ挙動が変わるのが不便だったので削除しました。

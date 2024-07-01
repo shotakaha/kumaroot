@@ -18,6 +18,7 @@ maxdepth: 1
 vscode-install
 vscode-settings
 vscode-settings-sync
+vscode-command-palette
 vscode-keybind
 vscode-terminal
 vscode-sidebar
