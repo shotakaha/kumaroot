@@ -26,6 +26,7 @@ vscode-region
 vscode-color
 vscode-encoding
 vscode-indent
+vscode-snippets
 ```
 
 ## 拡張パッケージの設定
