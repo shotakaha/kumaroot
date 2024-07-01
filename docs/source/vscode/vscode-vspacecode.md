@@ -55,7 +55,9 @@ Emacsでも読み取りモード（{kbd}`ctr-x` + {kbd}`ctr-q`）を愛用して
 VSpaceCodeでもそれをしたい・・・が、やりかたわからない。
 :::
 
-## モードごとにステータスバーに色をつけたい
+## ユーザー設定
+
+### ステータスバーに色をつけたい
 
 ```json
 {
@@ -63,11 +65,9 @@ VSpaceCodeでもそれをしたい・・・が、やりかたわからない。
 }
 ```
 
-モード別にステータスバーの色を変更できます。
-設定項目で``vim.statusBarColorControl``を有効にするか、
-{file}`settings.json`に``"vim.statusBarColorControl": true``を追記します。
+``vim.statusBarColorControl``で、Vimのモードごとにステータスバーの色を表示できます。
 
-### 色をカスタマイズしたい
+### ステータスバーの色を変更したい
 
 ```json
 {
@@ -87,7 +87,10 @@ VSpaceCodeでもそれをしたい・・・が、やりかたわからない。
 }
 ```
 
-モードごとの色をカスタマイズできます。
-``normal``は書き込みNGなので赤系、``insert``は書き込みOKなので青系、``visual``は紫系、とすることにして、
-[Iceberg](https://cocopon.github.io/iceberg.vim/)というテーマを好んで使っているので、
+Vimのモードごとにステータスバーの色を変更できます。
+``normal``は書き込みNGなので赤系、
+``insert``は書き込みOKなので緑系、
+``visual``は紫系、にしてあります。
+
+全体に[Iceberg](https://cocopon.github.io/iceberg.vim/)テーマを使っているため、
 そのパレットから色を選択しました。
