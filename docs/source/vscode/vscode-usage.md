@@ -9,18 +9,16 @@
 - パネル
 - ステータスバー
 
+## 基本設定
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
 vscode-install
-vscode-extensions
-vscode-disable-extensions
-vscode-vspacecode
 vscode-settings
 vscode-keybind
 vscode-terminal
-vscode-magit
 vscode-sidebar
 vscode-open-file
 vscode-copy-paste
@@ -28,4 +26,18 @@ vscode-region
 vscode-color
 vscode-encoding
 vscode-indent
+```
+
+## 拡張パッケージの設定
+
+```{toctree}
+vscode-extensions
+vscode-disable-extensions
+vscode-vspacecode
+vscode-awesome-emacs-keymap
+vscode-magit
+vscode-japanese-proofreading
+vscode-markdown
+vscode-make
+vscode-cmake
 ```

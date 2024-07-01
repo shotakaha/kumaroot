@@ -68,8 +68,9 @@ Monaspaceには5種類のフォントがあります。
 }
 ```
 
-VS Code全体のカラースキームを変更できます。
-上記のサンプルでは[cocoponさんのIceberg](https://marketplace.visualstudio.com/items?itemName=cocopon.iceberg-theme)を使っています。
+VS Code全体のテーマ（＝色使い）は拡張パッケージを使って変更できます。
+僕は[Iceberg Theme](https://marketplace.visualstudio.com/items?itemName=cocopon.iceberg-theme)（のLight Theme）を使っています。
+もともとVim用テーマとして開発されたプラグインですが、VS Codeとターミナルでも使えるようになっています。
 
 :::{seealso}
 
