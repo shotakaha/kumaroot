@@ -97,6 +97,26 @@ C++11からインスタンスの初期化に``{}``（中括弧／波括弧）が
 とくに``std::vector``の初期化が簡単に書けるようになっています。
 また、型安全性も向上していて、モダンC++での使用が推奨されている初期化スタイルだそうです。
 
+### autoキーワード
+
+```cpp
+G4NistManager *nm = new G4NistManager::Instance();
+auto *nm = G4NistManager::Instance();
+```
+
+``auto``は型推論で変数の型を指定するためのキーワードです。
+使いたい型が分かりきっている場合や、返り値の型名が長い場合に使うと可読性が向上します。
+ただし、濫用すると可読性が下がります（すべて``auto``になってしまい、逆に分かりづらくなります）
+
+Geant4はクラス名が長いものが多いため、どんどん使ってよいと思います。
+
+### C++の参考サイト
+
+- [ISO C++](https://isocpp.org/): C++の公式サイト
+- [C++ Reference](https://en.cppreference.com/w/): C++標準ライブラリのリファレンス
+- [Learn C++](https://www.learncpp.com/): C++学習サイト。ハンズオンではなく読みもの
+- [Modern C++ Features](https://github.com/AnthonyCalandra/modern-cpp-features): モダンC++の各機能の簡易まとめ
+
 ## Geant4のコーディングガイド
 
 Geant4を使っていて感じる「慣習のようなもの」を整理しました。
