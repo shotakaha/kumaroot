@@ -19,3 +19,15 @@
 ```
 
 ## ワークスペース設定
+
+```json
+{
+    "cmake.generator": "Unix Makefiles",
+    "cmake.sourceDirectory": "${workspaceFolder}/source用ディレクトリ",
+    "cmake.buildDirectory": "${workspaceFolder}/build用ディレクトリ",
+    "cmake.installPrefix": "${workspaceFolder}"
+}
+```
+
+CMakeを走らせるときの設定は、ワークスペースごとに設定するとよいです。
+上記サンプルは``Makefile``を使ってビルドする場合の設定です。
