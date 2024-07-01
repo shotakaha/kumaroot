@@ -17,6 +17,7 @@ maxdepth: 1
 ---
 vscode-install
 vscode-settings
+vscode-settings-sync
 vscode-keybind
 vscode-terminal
 vscode-sidebar
@@ -27,6 +28,7 @@ vscode-color
 vscode-encoding
 vscode-indent
 vscode-snippets
+
 ```
 
 ## 拡張パッケージの設定
