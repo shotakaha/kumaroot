@@ -87,21 +87,37 @@ $ brew tap homebrew/cask-fonts
 ```
 
 フォント用のタップ（``homebrew/cask-fonts``）を使えるようにしておきます。
+
+:::{seealso}
+
+```console
+Warning: Formula homebrew/cask-fonts/font-fira-code was renamed to homebrew/cask/font-fira-code.
+```
+
+2024年（のどこか）から、フォントがCaskに取り込まれたようで、
+``brew tap homebrew/cask-fonts``する必要はなくなりました。
+
+:::
+
 [Google Fonts](https://fonts.google.com/)にあるフォントもインストールできます。
 
-- ``brew install font-monomaniac-one`` [Monomaniac One](https://fonts.google.com/specimen/Monomaniac+One)
 - ``brew install font-cherry-bomb-one`` [Cherry Bomb One](https://fonts.google.com/specimen/Cherry+Bomb+One)
+- ``brew install font-chokokutai`` [Chokokutai](https://fonts.google.com/specimen/Chokokutai))
 - ``brew install font-darumadrop-one``
 - ``brew install font-dotgothic16``
 - ``brew install font-hachi-maru-pop``
-- ``brew install font-hackgen``
 - ``brew install font-hackgen-nerd``
+- ``brew install font-hackgen`` [HackGen](https://github.com/yuru7/HackGen)
 - ``brew install font-klee-one``
-- ``brew install font-merienda``
 - ``brew install font-merienda-one``
+- ``brew install font-merienda``
+- ``brew install font-monaspace`` [Monaspace](https://monaspace.githubnext.com/)
+- ``brew install font-monomaniac-one`` [Monomaniac One](https://fonts.google.com/specimen/Monomaniac+One)
 - ``brew install font-noto-sans-cjk-jp``
 - ``brew install font-noto-serif-cjk-jp``
+- ``brew install font-plemol-jp`` [PlemolJP](https://github.com/yuru7/PlemolJP)
 - ``brew install font-rampart-one``
+- ``brew install font-reggae-one`` [Reggae One](https://fonts.google.com/specimen/Reggae+One)
 - ``brew install font-rocknroll-one``
 - ``brew install font-source-han-code-jp``
 - ``brew install font-source-han-sans``
@@ -109,8 +125,6 @@ $ brew tap homebrew/cask-fonts
 - ``brew install font-stick``
 - ``brew install font-yomogi``
 - ``brew install font-yusei-magic`` [Yusei Magic](https://fonts.google.com/specimen/Yusei+Magic)
-- ``brew install font-reggae-one`` [Reggae One](https://fonts.google.com/specimen/Reggae+One)
-- ``brew install font-chokokutai`` [Chokokutai](https://fonts.google.com/specimen/Chokokutai))
 
 ## zsh のパスを設定したい
 
