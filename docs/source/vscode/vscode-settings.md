@@ -27,27 +27,36 @@ GitHub（もしくはMS）アカウントを介して、異なるパソコン間
 
 ```json
 {
-    "editor.fontSize": 15,
+    "editor.fontSize": 20,
     "editor.fontFamily": "Monaspace Krypton, PlemolJP, HackGen, Menlo, Consolas, monospace",
 }
 ```
 
-フォントは日本語に対応したプログラミングフォントに変更しておくとよいです。
+フォントを日本語に対応したプログラミングフォントに変更しておくとよいです。
 先頭に書いたフォントが優先されます。
 
-上記のサンプルでは、英文フォントに``Monaspace Krypton``、
+上記のサンプルでは、
+フォントサイズは少し大きめに設定してあります。
+
+英文フォントに``Monaspace Krypton``、
 和文フォントに``PlemolJP``を適用しています。
 また、フォントが見つからなかった場合に備えて、
 ``HackGen``やOSごとのデフォルト等幅フォント（``monospace``）にフォールバックするようにしてあります。
 
 :::{seealso}
 
-フォントはHomebrewでも追加できます。
 僕が使っている日本語に対応したプログラミングフォントの例です。
+フォントはHomebrewで追加しました。
 
-- [白源（HackGen）](https://github.com/yuru7/HackGen)
-- [PlemolJP](https://github.com/yuru7/PlemolJP)
-- [Monaspace](https://monaspace.githubnext.com/)
+- 和文フォント
+  - [白源（HackGen）](https://github.com/yuru7/HackGen)
+  - [PlemolJP](https://github.com/yuru7/PlemolJP)
+- 英文フォント
+  - [Monaspace](https://monaspace.githubnext.com/)
+
+Monaspaceには5種類のフォントがあります。
+``Monaspace Krypton``はmechanical sansという形で、ロボットぽくてプログミング用にいいなと思いました。
+リガチャ（合字）機能もありますが、有効にしていません。
 
 :::
 
