@@ -116,6 +116,9 @@ Geant4はクラス名が長いものが多いため、どんどん使ってよ�
 - [C++ Reference](https://en.cppreference.com/w/): C++標準ライブラリのリファレンス
 - [Learn C++](https://www.learncpp.com/): C++学習サイト。ハンズオンではなく読みもの
 - [Modern C++ Features](https://github.com/AnthonyCalandra/modern-cpp-features): モダンC++の各機能の簡易まとめ
+- [C++ Support in Clang](https://clang.llvm.org/cxx_status.html)
+- [C++ Standards Support in GCC](https://gcc.gnu.org/projects/cxx-status.html)
+
 
 ## Geant4のコーディングガイド
 
