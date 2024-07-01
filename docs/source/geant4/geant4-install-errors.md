@@ -122,4 +122,85 @@ Call Stack (most recent call first):
 
 :::
 
+## no LC_RPATH's found
 
+```console
+(build/)$ make
+(build/)$ make install
+(build/)$ cd ../bin
+(bin/)$ ./exampleB2a
+dyld[63969]: Library not loaded: @rpath/libG4Tree.dylib
+  Referenced from: <30677C2E-3240-3E3D-ADB8-3ED418861748>
+  Reason: no LC_RPATH's found
+```
+
+``make install``したパスの実行ファイルを起動すると``no LC_RPATH's found``というエラーがでた。
+これはアプリに必要な``.dylib``（ダイナミックライブラリ）のパス設定がうまくできていないのが原因で、
+Geant4特有ではなく、macOSでCMakeビルドしたアプリに起きるエラーです。
+
+### 一時的な対処（``install_name_tool``）
+
+```console
+// ライブラリがあるパスを検索する
+(bin/)$ mdfind libG4Tree.dylib
+...
+~/geant4/11.2.1/lib/libG4Tree.dylib
+...
+
+// ライブラリを追加する
+(bin/)$ install_name_tool -add_rpath ~/geant4/11.2.1/lib/ ./exampleB2a
+(bin/)$ ./exampleB2a
+```
+
+検索コマンドでライブラリのパスを確認しました。
+今回の場合は``~/geant4/11.2.1/lib/``に目的のファイルがありました。
+``install_name_tool``コマンドで、実行ファイルにライブラリのパスを追加しました。
+どのパスからでも実行できるようになりました。
+
+:::{caution}
+
+この対策だと、アプリを再ビルドするたびに、設定しなおす必要があります。
+
+:::
+
+### CMakeLists.txtを修正する
+
+```cmake
+#----------------------------------------------------------------------------
+# RPATH settings
+#----------------------------------------------------------------------------
+
+# 他の設定の前に追加
+set(CMAKE_MAXOSX_RPATH TRUE)
+
+# ライブラリのパスを設定（ほぼ直パス）
+set(G4LIB "$ENV{HOME}/geant4/11.2.1/lib")
+
+# ビルド時のRPATH設定
+set(CMAKE_BUILD_RPATH ${G4LIB})
+
+# インストール時のRPATH設定
+set(CMAKE_INSTALL_RPATH ${G4LIB})
+
+# 実行時のRPATH設定
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+```
+
+``CMakeLists.txt``にRPATH設定を追加しました。
+``add_executable``や``target_link_libraries``より前で設定する必要があります。
+
+### 環境変数を設定する
+
+```bash
+export DYLD_LIBRARY_PATH=$HOME/geant4/11.2.1/lib:$DYLD_LIBRARY_PATH
+```
+
+いくつものGeant4プロジェクトを抱えている（もしくはテストしている）場合は、
+環境変数を設定したほうがよいかもしれません。
+上記の設定はZshとはBashで有効です。
+
+試していませんが、Fishの場合は以下で設定できるはずです。
+
+```fish
+set -x DYLD_LIBRARY_PATH $HOME/geant4/11.2.1/lib $DYLD_LIBRARY_PATH
+```
