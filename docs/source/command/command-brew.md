@@ -84,6 +84,7 @@ $ brew upgrade
 
 ```console
 $ brew tap homebrew/cask-fonts
+
 ```
 
 フォント用のタップ（``homebrew/cask-fonts``）を使えるようにしておきます。
@@ -96,6 +97,17 @@ Warning: Formula homebrew/cask-fonts/font-fira-code was renamed to homebrew/cask
 
 2024年（のどこか）から、フォントがCaskに取り込まれたようで、
 ``brew tap homebrew/cask-fonts``する必要はなくなりました。
+
+```console
+$ brew doctor
+Warning: You have the following deprecated, official taps tapped:
+  Homebrew/homebrew-cask-fonts
+Untap them with `brew untap`.
+
+$ brew untap Homebrew/homebrew-cask-fonts
+Untapping homebrew/cask-fonts...
+Untapped (263 files, 24.9MB).
+```
 
 :::
 
