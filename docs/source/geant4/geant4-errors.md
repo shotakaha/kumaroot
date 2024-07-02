@@ -1,13 +1,11 @@
-# インストール／ビルド時のエラーと対処法
+# エラー対処
 
-## CMake Error at CMakeLists.txt
+## No "FindGeant4.cmake"
 
-アプリケーションをはじめてビルド、もしくは``cmake``からリビルドするときに、Geant4関係の環境変数が設定されていないとエラーになります。
-``$CMAKE_INSTALL_PREFIX/bin/geant4.sh``にある設定用のスクリプトを読み込ませて解決できます。
+アプリケーションをはじめてビルドしたときにエラーが発生しました。
+これは、Geant4関連の変数が設定されていないため、CMakeが``find_package``できないために生じるエラーです。
 
-:::{note}
-すでに``cmake``したことがあり、ビルド用ディレクトリに``CMakeCache.txt``がある場合は、環境変数を読み込まなくても``make -j8``でビルドできます（たぶん）。
-:::
+### エラーの内容
 
 ```console
 $ cmake ..
@@ -39,32 +37,38 @@ CMake Error at CMakeLists.txt:14 (find_package):
   provides a separate development package or SDK, be sure it has been
   installed.
 
-
 -- Configuring incomplete, errors occurred!
 ```
 
+### 対処方法
+
+```console
+$ source $HOME/geant4/11.2.1/bin/geant4.sh
+```
+
+``$CMAKE_INSTALL_PREFIX/bin/geant4.sh``にある設定用スクリプトを読み込ませると解決できます。
+Geant4をよく使う場合は、``.zshrc``に追記することをオススメします。
+
+:::{note}
+
+すでに``cmake``したことがあり、ビルド用ディレクトリに``CMakeCache.txt``のキャッシュがある場合は、環境変数を読み込まなくても``make -j8``でビルドできます（たぶん）。
+CMakeでクリーン＆リビルドするとエラーになります。
+
+:::
+
 ## C compiler - broken
 
-久しぶりに使ってみたら、アプリケーションがビルドできなくなりました。
-OSの更新、Xcodeの更新、CMakeの更新のどこかのタイミングでビルドできなくなってしまったと思うのですが、どれが原因か切り分けられていません。
-
-エラーを確認すると
-``CMAKE_OSX_SYSROOT``に設定されているSDKツールのバージョンと、現在のシステムに存在するSDKのバージョンが変わってしまったのが原因だと思います。
+macOSのコマンドラインツールのバージョンが変わってしまったために発生したエラーのようです。
+エラーメッセージを読んで、``CMAKE_OSX_SYSROOT``に設定されているSDKツールのバージョンと、現在のシステムに存在するSDKのバージョンを確認したら異なっていました。
 
 ```diff
 - /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk   # Geant4インストール時に指定されたバージョン（自動）
 + /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk   # 現在のシステムに存在するバージョン
 ```
 
-とりあえず、Geant4をリビルド＆インストールしたら解決しました。
+OSの更新か、Xcodeの更新のどちらかのタイミングだと思うのですが、原因の切り分けはできていません。
 
-:::{note}
-
-もしかしたら、アプリのビルド用ディレクトリで``ccmake ..``を実行して``CMAKE_OSX_SYSROOT``を編集してもよかったかもしれません。
-
-ただし、この対処方法だと、アプリケーションごとに編集が必要になるはずなので、結局どこかの時点でリビルド＆インストールする必要がでてきそうです。
-
-:::
+### エラーの内容
 
 ```console
 $ cd ~/repos/sandbox/g4work/examples/basic/B1/
@@ -122,7 +126,25 @@ Call Stack (most recent call first):
 
 :::
 
-## no LC_RPATH's found
+### 対処方法
+
+とりあえず、Geant4をリビルド＆インストールしたら解決しました。
+
+:::{note}
+
+もしかしたら、アプリのビルド用ディレクトリで``ccmake ..``を実行して``CMAKE_OSX_SYSROOT``を編集してもよかったかもしれません。
+
+ただし、この対処方法だと、アプリケーションごとに編集が必要になるはずなので、結局どこかの時点でリビルド＆インストールする必要がでてきそうです。
+
+:::
+
+## No LC_RPATH's found
+
+``make install``したパスにある実行ファイルを起動したら、``no LC_RPATH's found``という実行時エラーが発生しました。
+これはアプリに必要な``.dylib``（ダイナミックライブラリ）のパス設定ができておらず、実行時にライブラリへのリンクがうまくいかないのが原因です。
+Geant4特有ではなく、macOSでCMakeビルドしたアプリで発生するエラーです。
+
+### エラーの内容
 
 ```console
 (build/)$ make
@@ -134,11 +156,7 @@ dyld[63969]: Library not loaded: @rpath/libG4Tree.dylib
   Reason: no LC_RPATH's found
 ```
 
-``make install``したパスの実行ファイルを起動すると``no LC_RPATH's found``というエラーがでた。
-これはアプリに必要な``.dylib``（ダイナミックライブラリ）のパス設定がうまくできていないのが原因で、
-Geant4特有ではなく、macOSでCMakeビルドしたアプリに起きるエラーです。
-
-### 一時的な対処（``install_name_tool``）
+### 一時的な対処方法（``install_name_tool``）
 
 ```console
 // ライブラリがあるパスを検索する
@@ -152,18 +170,17 @@ Geant4特有ではなく、macOSでCMakeビルドしたアプリに起きるエ�
 (bin/)$ ./exampleB2a
 ```
 
-検索コマンドでライブラリのパスを確認しました。
+``install_name_tool``コマンドで、実行ファイルにライブラリのパスを追加すると、一時的に解決できます。
+ライブラリのパスは検索コマンドで確認しました。
 今回の場合は``~/geant4/11.2.1/lib/``に目的のファイルがありました。
-``install_name_tool``コマンドで、実行ファイルにライブラリのパスを追加しました。
-どのパスからでも実行できるようになりました。
 
 :::{caution}
 
-この対策だと、アプリを再ビルドするたびに、設定しなおす必要があります。
+一時的な対策なので、アプリをリビルドするたびに、再設定が必要です。
 
 :::
 
-### CMakeLists.txtを修正する
+### プロジェクトごとの対処方法
 
 ```cmake
 #----------------------------------------------------------------------------
@@ -189,14 +206,14 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 ``CMakeLists.txt``にRPATH設定を追加しました。
 ``add_executable``や``target_link_libraries``より前で設定する必要があります。
 
-### 環境変数を設定する
+### ユーザーごとの対処方法
 
 ```bash
 export DYLD_LIBRARY_PATH=$HOME/geant4/11.2.1/lib:$DYLD_LIBRARY_PATH
 ```
 
 いくつものGeant4プロジェクトを抱えている（もしくはテストしている）場合は、
-環境変数を設定したほうがよいかもしれません。
+ユーザーの環境変数を設定したほうがよいかもしれません。
 上記の設定はZshとはBashで有効です。
 
 試していませんが、Fishの場合は以下で設定できるはずです。
@@ -204,3 +221,4 @@ export DYLD_LIBRARY_PATH=$HOME/geant4/11.2.1/lib:$DYLD_LIBRARY_PATH
 ```fish
 set -x DYLD_LIBRARY_PATH $HOME/geant4/11.2.1/lib $DYLD_LIBRARY_PATH
 ```
+

@@ -22,7 +22,17 @@ geant4-versions
 geant4-install
 geant4-spack
 geant4-install-env
-geant4-install-errors
+```
+
+## エラー対処
+
+遭遇したエラーと対処方法をまとめました。
+
+```{toctree}
+---
+maxdepth: 2
+---
+geant4-errors
 ```
 
 ## 知っておきたかったこと
