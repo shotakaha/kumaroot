@@ -249,6 +249,9 @@ maxdepth: 1
 ---
 geant4-step
 geant4-step-track
+geant4-step-steplength
+geant4-step-boundary
+geant4-step-status
 % geant4-step-totalenergydeposit
 % geant4-step-secondary
 geant4-step-energy

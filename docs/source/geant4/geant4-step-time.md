@@ -1,16 +1,16 @@
-# ステップ点の時刻をしりたい（``GetLocalTime`` / ``GetGlobalTime`` / ``GetProperTime``）
+# ステップ点の時刻をしりたい（``GetGlobalTime`` / ``GetLocalTime`` / ``GetProperTime``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();
-G4double local_time = pre_step->GetLocalTime();
 G4double global_time = pre_step->GetGlobalTime();
+G4double local_time = pre_step->GetLocalTime();
 G4double proper_time = pre_step->GetProperTime();
 ```
 
 ステップの時刻を取得するメソッドは3種類あります。
 
-``GetLocalTime``でトラックが生成されてからの経過時間、
 ``GetGlobalTime``でトラックが含まれるイベントが生成されてからの経過時間、
+``GetLocalTime``でトラックが生成されてからの経過時間、
 ``GetProperTime``で固有時間（トラックが生成されてからの経過時間の静止系の時刻）を取得できます。
 
 :::{seealso}

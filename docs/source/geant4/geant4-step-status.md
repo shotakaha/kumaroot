@@ -1,4 +1,4 @@
-# ステップの境界状態をしりたい（``GetStepStatus``）
+# ステップ点の境界判断したい（``GetStepStatus``）
 
 ```cpp
 // 始点の状態
@@ -11,6 +11,7 @@ G4StepStatus status = post_step->GetStepStatus();
 ```
 
 ``GetStepStatus``で、ステップ点の境界の状態を取得できます。
+
 ``fWorldBoundary``はステップ点がワールド境界に到達した状態、
 ``fGeomBoundary``はステップ点が物質の境界に到達した状態です。
 他の状態は[enum G4StepStatus](https://geant4.kek.jp/lxr/source//track/include/G4StepStatus.hh)で確認できます。
@@ -22,22 +23,28 @@ G4StepStatus status = post_step->GetStepStatus();
 
 :::
 
-## ステップがジオメトリの中にあるかしりたい
+## ステップがジオメトリに入ったことをしりたい
 
 ```cpp
-auto pre_step = aStep->GetPreStepPoint();
-auto status = pre_step->GetStepStatus();
+auto step_point = aStep->GetPreStepPoint();
+auto status = step_point->GetStepStatus();
 if (status == fGeomBoundary) {
     // ジオメトリ内にある場合の処理
 }
 ```
 
-## ステップがワールドの外にあるかしりたい
+ステップが新しいジオメトリに入ったことは
+「始点がfGeomBoundary」かどうかで判断できます。
+
+## ステップがジオメトリから出たことをしりたい
 
 ```cpp
-auto post_step = aStep->GetPostStepPoint();
-auto status = post_step->GetStepStatus();
-if (status != fWorldBoundary) {
-    // ワールドの中にある場合の処理
+auto step_point = aStep->GetPostStepPoint();
+auto status = step_point->GetStepStatus();
+if (status == fGeomBoundary) {
+    // ジオメトリ内にある場合の処理
 }
 ```
+
+ステップが現在のジオメトリから出たことは
+「終点がfGeomBoundary」かどうかで判断できます。
