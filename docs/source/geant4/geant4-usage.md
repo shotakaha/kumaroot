@@ -114,6 +114,9 @@ geant4-particlegun
 
 ## ボリュームしたい
 
+論理ボリュームは、Geant4空間の中に配置される前の状態で``G4LogicalVolume``クラスで作成します。
+物理ボリュームは、Geant4空間に配置された論理ボリュームのことで、``G4VPhysicalVolume``を継承したクラスで作成します。
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -123,33 +126,12 @@ geant4-logicalvolume-mass
 geant4-logicalvolume-visattributes
 geant4-logicalvolume-sensitivedetector
 geant4-logicalvolume-fieldmanager
-geant4-pvplacement
-geant4-pvreplica
+geant4-physicalvolume
+geant4-physicalvolume-pvplacement
+geant4-physicalvolume-pvreplica
 ```
 
-## ジオメトリしたい
-
-```cpp
-auto* rm = G4RunManagerFactory::CreateRunManager();
-auto* detector = new DetectorConstruction;
-rm->SetUserInitialization(detector);
-```
-
-```{toctree}
----
-maxdepth: 1
----
-geant4-geometry
-geant4-geometry-world
-geant4-geometry-tank
-geant4-pmt
-geant4-calorimeter
-geant4-hodoscope
-geant4-qe
-geant4-magneticfield
-```
-
-## 物質したい
+## マテリアルしたい
 
 ```cpp
 G4NistManager *nm = new G4NistManager::Instance();
@@ -175,6 +157,28 @@ geant4-material-vacuum
 geant4-material-glass
 geant4-material-petroleum
 geant4-material-plastic-scintillator
+```
+
+## ジオメトリしたい
+
+```cpp
+auto* rm = G4RunManagerFactory::CreateRunManager();
+auto* detector = new DetectorConstruction;
+rm->SetUserInitialization(detector);
+```
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-geometry
+geant4-geometry-world
+geant4-geometry-tank
+geant4-pmt
+geant4-calorimeter
+geant4-hodoscope
+geant4-qe
+geant4-magneticfield
 ```
 
 ## 相互作用したい
