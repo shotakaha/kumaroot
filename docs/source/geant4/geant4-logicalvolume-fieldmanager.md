@@ -1,4 +1,4 @@
-# 論理ボリュームに電磁場を追加したい（``SetFieldManager``）
+# 論理ボリュームに電磁場を設定したい（``SetFieldManager``）
 
 ```cpp
 auto logical_volume = G4LogicalVolume{...};

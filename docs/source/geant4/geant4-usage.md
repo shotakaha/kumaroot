@@ -112,6 +112,21 @@ geant4-analysismanager
 geant4-particlegun
 ```
 
+## ボリュームしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-logicalvolume
+geant4-logicalvolume-mass
+geant4-logicalvolume-visattributes
+geant4-logicalvolume-sensitivedetector
+geant4-logicalvolume-fieldmanager
+geant4-pvplacement
+geant4-pvreplica
+```
+
 ## ジオメトリしたい
 
 ```cpp
@@ -125,11 +140,6 @@ rm->SetUserInitialization(detector);
 maxdepth: 1
 ---
 geant4-geometry
-geant4-logicalvolume
-geant4-logicalvolume-sensitivedetector
-geant4-logicalvolume-fieldmanager
-geant4-pvplacement
-geant4-pvreplica
 geant4-geometry-world
 geant4-geometry-tank
 geant4-pmt

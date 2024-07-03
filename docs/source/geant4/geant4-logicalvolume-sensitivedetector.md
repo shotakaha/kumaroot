@@ -1,4 +1,4 @@
-# 論理ボリュームをSensitiveDetectorにしたい（``SetSensitiveDetector``）
+# 論理ボリュームにSensitiveDetectorを設定したい（``SetSensitiveDetector``）
 
 ```cpp
 // class SensitiveDetector: public G4VSensitiveDetector とする
