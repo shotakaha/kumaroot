@@ -199,7 +199,6 @@ geant4-event
 geant4-trackingaction
 geant4-track
 geant4-steppingaction
-geant4-step
 ```
 
 - ``G4UserStackingAction``
@@ -223,6 +222,26 @@ geant4-accumulable
 geant4-particletable
 geant4-muon
 geant4-geantino
+```
+
+## ステップ情報したい（``G4Step``）
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-step
+geant4-step-track
+% geant4-step-totalenergydeposit
+% geant4-step-secondary
+geant4-step-energy
+geant4-step-volume
+geant4-step-mass
+geant4-step-position
+geant4-step-time
+geant4-step-momentum
+geant4-step-velocity
+geant4-step-charge
 ```
 
 ## 可視化したい
