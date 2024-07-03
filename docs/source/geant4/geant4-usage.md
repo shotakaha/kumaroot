@@ -112,7 +112,7 @@ geant4-analysismanager
 geant4-particlegun
 ```
 
-## 測定器したい
+## ジオメトリしたい
 
 ```cpp
 auto* rm = G4RunManagerFactory::CreateRunManager();
@@ -125,10 +125,13 @@ rm->SetUserInitialization(detector);
 maxdepth: 1
 ---
 geant4-geometry
+geant4-logicalvolume
+geant4-logicalvolume-sensitivedetector
+geant4-logicalvolume-fieldmanager
 geant4-pvplacement
 geant4-pvreplica
-geant4-world
-geant4-tank
+geant4-geometry-world
+geant4-geometry-tank
 geant4-pmt
 geant4-calorimeter
 geant4-hodoscope
@@ -154,14 +157,14 @@ maxdepth: 1
 geant4-nistmanager
 geant4-material-table
 geant4-element
-geant4-air
-geant4-water
-geant4-ethanol
-geant4-acrylic
-geant4-vacuum
-geant4-glass
-geant4-petroleum
-geant4-plastic-scintillator
+geant4-material-air
+geant4-material-water
+geant4-material-ethanol
+geant4-material-acrylic
+geant4-material-vacuum
+geant4-material-glass
+geant4-material-petroleum
+geant4-material-plastic-scintillator
 ```
 
 ## 相互作用したい
