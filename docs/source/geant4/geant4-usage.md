@@ -227,10 +227,10 @@ geant4-steppingaction
 maxdepth: 1
 ---
 geant4-scoring
-geant4-scoringmanager
-geant4-sensitivedetector
-geant4-multifunctionaldetector
-geant4-accumulable
+geant4-scoring-manager
+geant4-scoring-sensitivedetector
+geant4-scoring-multifunctionaldetector
+geant4-scoring-accumulable
 ```
 
 ## 入射粒子したい
