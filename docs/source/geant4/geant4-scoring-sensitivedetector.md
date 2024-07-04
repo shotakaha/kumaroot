@@ -1,8 +1,25 @@
 # Sensitive Detectorしたい（``G4VSensitiveDetector``）
 
-測定器のヒット情報を取得するためには、論理ボリュームにSensitive Detector（以下SD）を設定します。
-SensitiveDetectorは[G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)クラスを継承して作成します。
-ひとつの論理ボリュームに複数のSensitiveDetectorを設定できます。
+測定器のヒット情報を取得するために、``G4VSensitiveDetector``を継承したクラスを作成します。
+``G4VSensitiveDetector``クラスは純粋仮想クラスであり、
+``Initialize``、``ProcessHits``、``EndOfEvent``の3つのメソッドを
+自作クラス内で上書きして定義します。
+
+作成したSDインスタンスは、論理ボリュームに設定します。
+さらに、SensitiveDetecotrManagerに追加します。
+
+:::{seealso}
+
+- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
+
+:::
+
+## Hitクラスしたい（``std::tuple``）
+
+```cpp
+Hit = std::tuple<G4double, G4double, G4double>
+```
+
 
 ```cpp
 #ifndef SensitiveDetector_h
