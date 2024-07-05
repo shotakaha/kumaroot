@@ -21,4 +21,3 @@ if (pre_step->IsLastStepInVolume()) {...}
 - [](./geant4-step-status.md)
 
 :::
-
