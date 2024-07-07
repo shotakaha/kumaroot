@@ -1,11 +1,12 @@
 # ステップのトラックをしりたい（``GetTrack``）
 
 ```cpp
-auto track = aStep->GetTrack();
+// G4Step *aStep
+G4Track *track = aStep->GetTrack();
 G4int track_id = track->GetTrackID();
 ```
 
-該当するステップがあるトラックを取得できます。
+該当するステップがあるトラック（``G4Track``）を取得できます。
 トラックIDなどにアクセスできるようになります。
 
 :::{seealso}
