@@ -1,17 +1,27 @@
 # ステップ点のボリュームをしりたい（``GetPhysicalVolume``）
 
 ```cpp
-G4PreStepPoint pre_step = aStep->GetPreStepPoint();
-G4VPhysicalVolume *physical_volume = pre_step->GetPhysicalVolume();
-G4int copy_number = physical_volume->GetCopyNo();
-G4String name = physical_volume->GetName();
-G4LogicalVolume *logical_volume = physical_volume->GetLogicalVolume();
-G4Material *material = logical_volume->GetMaterial();
+// G4Step *aStep
+G4Track *track = aStep->GetTrack();
+G4StepPoint *pre_step = aStep->GetPreStepPoint();
+G4StepPoint *post_step = aStep->GetPostStepPoint();
+
+// 現在のステップのボリュームを取得する
+auto current_volume = track->GetVolume();
+auto current_volume = pre_step->GetPhysicalVolume();
+
+// 次のステップのボリュームを取得する
+auto next_volume = track->GetNextVolume();
+auto next_volume = post_step->GetPhysicalVolume();
 ```
 
-ステップのボリューム情報は、``PreStepPoint``から取得できます。
-``GetPhysicalVolume``でステップ（の始点）がある物理ボリュームを取得し、
-その物理ボリュームを介して論理ボリュームを取得できます。
+物理ボリューム（``G4VPhysicalVolume``）が欲しい場合は、``G4Track``もしくは``G4StepPoint``クラスのオブジェクトから取得できます。
+
+現在のステップのボリューム情報は、ステップの始点（``PreStepPoint``）から取得します。
+また、次のボリューム情報は``PostStepPoint``から取得します。
+
+取得した物理ボリューム（のポインター）を介して論理ボリュームを取得できます。
+物理ボリュームの操作は[](./geant4-physicalvolume.md)を参照してください。
 
 :::{seealso}
 

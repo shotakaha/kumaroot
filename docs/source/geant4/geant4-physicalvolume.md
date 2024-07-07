@@ -3,11 +3,14 @@
 ```cpp
 // ステップ（の始点）の物理ボリュームを取得
 auto pre_step = aStep->GetPreStepPoint();
-auto physical_volume = pre_step->GetPhysicalVolume();
+auto pv = pre_step->GetPhysicalVolume();
 
-auto name = physical_volume->GetName();
-auto logical_volume = physical_volume->GetLogicalVolume();
-auto mother_volume = physical_volume->GetMotherLogical();
+auto name = pv->GetName();
+G4int copy_number = pv->GetCopyNo();
+
+auto lv = pv->GetLogicalVolume();
+auto mv = pv->GetMotherLogical();
+auto material = lv->GetMaterial();
 ```
 
 物理ボリュームから論理ボリュームにアクセスできます。
