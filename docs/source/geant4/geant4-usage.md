@@ -229,6 +229,7 @@ maxdepth: 1
 geant4-scoring
 geant4-scoring-manager
 geant4-scoring-sensitivedetector
+geant4-scoring-hitscollection
 geant4-scoring-multifunctionaldetector
 geant4-scoring-accumulable
 ```
@@ -241,7 +242,7 @@ geant4-muon
 geant4-geantino
 ```
 
-## ステップ情報したい（``G4Step``）
+## ステップ操作したい（``G4Step`` / ``G4Track``）
 
 ```{toctree}
 ---
@@ -250,6 +251,7 @@ maxdepth: 1
 geant4-step
 geant4-step-track
 geant4-step-steplength
+geant4-step-particle
 geant4-step-boundary
 geant4-step-status
 % geant4-step-totalenergydeposit
