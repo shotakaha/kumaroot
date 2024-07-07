@@ -1,18 +1,18 @@
-# ステップ点のボリュームをしりたい（``GetPhysicalVolume``）
+# ステップのボリュームを取得したい（``GetPhysicalVolume``）
 
 ```cpp
 // G4Step *aStep
-G4Track *track = aStep->GetTrack();
 G4StepPoint *pre_step = aStep->GetPreStepPoint();
 G4StepPoint *post_step = aStep->GetPostStepPoint();
+G4Track *track = aStep->GetTrack();
 
 // 現在のステップのボリュームを取得する
-auto current_volume = track->GetVolume();
 auto current_volume = pre_step->GetPhysicalVolume();
+auto current_volume = track->GetVolume();
 
 // 次のステップのボリュームを取得する
-auto next_volume = track->GetNextVolume();
 auto next_volume = post_step->GetPhysicalVolume();
+auto next_volume = track->GetNextVolume();
 ```
 
 物理ボリューム（``G4VPhysicalVolume``）が欲しい場合は、``G4Track``もしくは``G4StepPoint``クラスのオブジェクトから取得できます。
