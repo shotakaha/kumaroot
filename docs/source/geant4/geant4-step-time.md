@@ -6,9 +6,9 @@ G4double global_time = pre_step->GetGlobalTime();
 G4double local_time = pre_step->GetLocalTime();
 G4double proper_time = pre_step->GetProperTime();
 
-G4debug << "GlobalTime=" << G4BestUnit(global_time, "Time") >> G4endl;
-G4debug << "LocalTime=" << G4BestUnit(local_time, "Time") >> G4endl;
-G4debug << "ProperTime=" << G4BestUnit(proper_time, "Time") >> G4endl;
+G4debug << "GlobalTime=" << G4BestUnit{global_time, "Time"} >> G4endl;
+G4debug << "LocalTime=" << G4BestUnit{local_time, "Time"} >> G4endl;
+G4debug << "ProperTime=" << G4BestUnit{proper_time, "Time"} >> G4endl;
 // GlobalTime=532.954 ps
 // LocalTime=356.027 ps
 // ProperTime=0 ps

@@ -7,7 +7,7 @@ G4ThreeVector position = pre_step->GetPosition();
 G4debug << position << G4endl;
 // (2.83459,1.19586,5)
 
-G4debug << G4BestUnit(position, "Length") << G4endl;
+G4debug << G4BestUnit{position, "Length"} << G4endl;
 // 2.83459 1.19586 0.5 cm
 ```
 

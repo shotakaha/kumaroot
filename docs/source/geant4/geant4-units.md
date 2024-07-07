@@ -92,6 +92,9 @@ becquerel (Bq) = 1e-09
 ## 単位を出力したい
 
 ```cpp
+#include "G4SystemOfUnits.hh"
+#include "G4UnitsTable.hh"
+
 G4cout << KineticEnergy/keV << " keV";
 G4cout << density/(g/cm3)   << " g/cm3";
 G4cout << G4BestUnit(StepSize, "Length");
@@ -99,6 +102,16 @@ G4cout << G4BestUnit(StepSize, "Length");
 
 物理量を任意の単位で出力したい場合は、その単位名で割り算します。
 また、``G4BestUnit``を使うと、適切な大きさの単位を計算して出力できます。
+
+:::{note}
+
+``g``や``eV``などの単位を扱う場合は``G4SystemOfUnit.hh``が必要です。
+``G4BestUnit``を使う場合は``G4UnitsTable.hh``が必要です。
+
+取得した値を確認するモジュールでは、
+どちらもインクルードしておけばよいと思います。
+
+:::
 
 ## 単位を追加したい（``G4UnitDefinition``）
 
@@ -114,3 +127,8 @@ new G4UnitDefinition ( "meter/ns", "m/ns", "Speed", m/ns );
 ``G4UnitDefitinion``で新しい単位を追加できます。
 上記のサンプルでは``Speed``カテゴリを新しく作成し、``km/h``と``m/ns``を追加しています。
 
+:::{seealso}
+
+- [System of Units](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/unitSystem.html)
+
+:::
