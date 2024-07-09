@@ -17,6 +17,16 @@ auto logical_volume = G4LogicalVolume{
 また、ボリュームにかかる力場（電磁場、重力場）を追加したり、
 SensitiveDetectorを追加したりできます。
 
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-logicalvolume-mass
+geant4-logicalvolume-visattributes
+geant4-logicalvolume-sensitivedetector
+geant4-logicalvolume-fieldmanager
+```
+
 :::{seealso}
 
 - [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)

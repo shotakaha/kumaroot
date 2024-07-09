@@ -112,23 +112,17 @@ geant4-analysismanager
 geant4-particlegun
 ```
 
-## ボリュームしたい
+## ボリューム操作したい
 
 論理ボリュームは、Geant4空間の中に配置される前の状態で``G4LogicalVolume``クラスで作成します。
 物理ボリュームは、Geant4空間に配置された論理ボリュームのことで、``G4VPhysicalVolume``を継承したクラスで作成します。
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 0
 ---
 geant4-logicalvolume
-geant4-logicalvolume-mass
-geant4-logicalvolume-visattributes
-geant4-logicalvolume-sensitivedetector
-geant4-logicalvolume-fieldmanager
 geant4-physicalvolume
-geant4-physicalvolume-pvplacement
-geant4-physicalvolume-pvreplica
 ```
 
 ## マテリアルしたい

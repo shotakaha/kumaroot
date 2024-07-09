@@ -15,6 +15,14 @@ auto material = lv->GetMaterial();
 
 物理ボリュームから論理ボリュームにアクセスできます。
 
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-physicalvolume-pvplacement
+geant4-physicalvolume-pvreplica
+```
+
 :::{seealso}
 
 - [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4VPhysicalVolume.html)
