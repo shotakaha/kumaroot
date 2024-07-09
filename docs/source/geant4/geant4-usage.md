@@ -209,7 +209,6 @@ rm->SetUserInitialization(actions);
 ---
 maxdepth: 1
 ---
-geant4-runaction
 geant4-run
 geant4-event
 geant4-trackingaction
