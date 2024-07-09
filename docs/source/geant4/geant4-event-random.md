@@ -1,4 +1,4 @@
-# 乱数シードをしりたい（``RandomNumberStatus``）
+# 乱数シードをしりたい（``G4Event::GetRandomNumberStatus``）
 
 ```cpp
 // G4Event *aEvent

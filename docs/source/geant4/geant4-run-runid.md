@@ -1,4 +1,4 @@
-## ラン番号をしりたい（``GetRunID``）
+# ラン番号をしりたい（``G4Run::GetRunID``）
 
 ```cpp
 // G4Run *aRun;

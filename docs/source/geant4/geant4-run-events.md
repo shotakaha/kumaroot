@@ -1,4 +1,4 @@
-# イベント数をしりたい（``GetNumberOfEvents``）
+# イベント数をしりたい（``G4Run::GetNumberOfEvents``）
 
 ```cpp
 G4int n_events = aRun->GetNumberOfEvents();
