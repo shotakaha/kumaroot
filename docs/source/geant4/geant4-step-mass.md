@@ -1,4 +1,4 @@
-# ステップ点の質量をしりたい（``GetMass``）
+# ステップ点の質量をしりたい（``G4StepPoint::GetMass``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();

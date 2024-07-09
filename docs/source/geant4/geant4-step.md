@@ -49,14 +49,13 @@ auto post_step = aStep->GetPostStepPoint()
 ---
 maxdepth: 1
 ---
+geant4-step-length
+geant4-step-energy
 geant4-step-track
-geant4-step-steplength
-geant4-step-particle
-geant4-step-boundary
 geant4-step-status
+geant4-step-boundary
 % geant4-step-totalenergydeposit
 % geant4-step-secondary
-geant4-step-energy
 geant4-step-volume
 geant4-step-mass
 geant4-step-position

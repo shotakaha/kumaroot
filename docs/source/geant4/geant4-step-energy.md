@@ -1,4 +1,4 @@
-# ステップのエネルギー損失をしりたい（``GetTotalEnergyDeposit``）
+# ステップのエネルギー損失をしりたい（``G4Step::GetTotalEnergyDeposit``）
 
 ```cpp
 G4double energy_deposit = aStep->GetTotalEnergyDeposit();

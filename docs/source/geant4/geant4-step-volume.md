@@ -1,4 +1,4 @@
-# ステップのボリュームを取得したい（``GetPhysicalVolume``）
+# ステップ点のボリュームを取得したい（``G4StepPoint::GetPhysicalVolume``）
 
 ```cpp
 // G4Step *aStep

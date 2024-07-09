@@ -1,4 +1,4 @@
-# ステップ点の境界判断したい（``GetStepStatus``）
+# ステップ点の境界判断したい（``G4StepPoint::GetStepStatus``）
 
 ```cpp
 // 始点の状態

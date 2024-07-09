@@ -1,4 +1,4 @@
-# ステップ点の速度をしりたい（``GetVelocity``）
+# ステップ点の速度をしりたい（``G4StepPoint::GetVelocity``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();
@@ -7,7 +7,7 @@ G4double velocity = pre_step->GetVelocity();
 
 ``GetVelocity``で速度を取得できます。
 
-## ステップ点のベータをしりたい（``GetBeta``）
+## ステップ点のベータをしりたい（``G4StepPoint::GetBeta``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();
@@ -22,7 +22,7 @@ G4double beta = pre_step->GetBeta();
 
 :::
 
-## ステップ点のガンマをしりたい（``GetGamma``）
+## ステップ点のガンマをしりたい（``G4StepPoint::GetGamma``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();

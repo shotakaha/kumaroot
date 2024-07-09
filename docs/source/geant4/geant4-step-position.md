@@ -1,4 +1,4 @@
-# ステップ点の座標をしりたい（``G4Step::GetPosition``）
+# ステップ点の座標をしりたい（``G4StepPoint::GetPosition``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();

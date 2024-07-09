@@ -1,4 +1,4 @@
-# ステップの長さをしりたい（``StepLength``）
+# ステップの長さをしりたい（``G4Step::StepLength``）
 
 ```cpp
 G4double aStep->GetStepLength();

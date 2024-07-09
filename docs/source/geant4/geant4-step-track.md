@@ -1,4 +1,4 @@
-# ステップのトラックをしりたい（``GetTrack``）
+# ステップのトラックをしりたい（``G4Step::GetTrack``）
 
 ```cpp
 // G4Step *aStep

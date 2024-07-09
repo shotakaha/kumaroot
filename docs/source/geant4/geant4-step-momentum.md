@@ -1,4 +1,4 @@
-# ステップ点の運動量をしりたい（``GetMomentum``）
+# ステップ点の運動量をしりたい（``G4StepPoint::GetMomentum``）
 
 ```cpp
 auto pre_step = aStep-GetPreStepPoint();
@@ -17,6 +17,12 @@ G4debug << G4BestUnit(momentum, "Energy") << G4endl;
 
 ``G4BestUnit``のカテゴリーに運動量（``Momentum``）はありません。
 単位のオーダーは同じになると思うので、``Energy``で代用しています。
+
+:::
+
+:::{seealso}
+
+- [](./geant4-track-momentum.md)
 
 :::
 
