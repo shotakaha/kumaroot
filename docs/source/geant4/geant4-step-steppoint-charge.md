@@ -1,4 +1,4 @@
-# ステップ点のの電荷をしりたい（``G4StepPoint::GetCharge``）
+# ステップ点の電荷をしりたい（``G4StepPoint::GetCharge``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();

@@ -64,6 +64,7 @@ geant4-step-steppoint-time
 geant4-step-steppoint-momentum
 geant4-step-steppoint-velocity
 geant4-step-steppoint-charge
+geant4-step-steppoint-energy
 geant4-steppingaction
 ```
 
