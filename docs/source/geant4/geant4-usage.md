@@ -211,7 +211,6 @@ maxdepth: 1
 ---
 geant4-run
 geant4-event
-geant4-trackingaction
 geant4-track
 geant4-steppingaction
 ```
