@@ -51,18 +51,19 @@ maxdepth: 1
 ---
 geant4-step-length
 geant4-step-energy
-geant4-step-track
-geant4-step-status
-geant4-step-boundary
 % geant4-step-totalenergydeposit
 % geant4-step-secondary
-geant4-step-volume
-geant4-step-mass
-geant4-step-position
-geant4-step-time
-geant4-step-momentum
-geant4-step-velocity
-geant4-step-charge
+geant4-step-track
+geant4-step-steppoint
+geant4-step-steppoint-status
+geant4-step-steppoint-boundary
+geant4-step-steppoint-volume
+geant4-step-steppoint-mass
+geant4-step-steppoint-position
+geant4-step-steppoint-time
+geant4-step-steppoint-momentum
+geant4-step-steppoint-velocity
+geant4-step-steppoint-charge
 geant4-steppingaction
 ```
 
