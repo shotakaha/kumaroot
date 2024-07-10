@@ -100,7 +100,7 @@ geant4-physicslist
 geant4-primarygeneratoraction
 ```
 
-## ユーザー操作したい
+## マネージャー操作したい
 
 ```{toctree}
 ---
@@ -125,7 +125,7 @@ geant4-logicalvolume
 geant4-physicalvolume
 ```
 
-## マテリアルしたい
+## マテリアル操作したい
 
 ```cpp
 G4NistManager *nm = new G4NistManager::Instance();
@@ -140,9 +140,10 @@ auto sc = nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");    // プラス
 ---
 maxdepth: 1
 ---
-geant4-nistmanager
+geant4-material
+geant4-material-nistmanager
 geant4-material-table
-geant4-element
+geant4-material-element
 geant4-material-air
 geant4-material-water
 geant4-material-ethanol
@@ -209,8 +210,6 @@ geant4-event
 geant4-track
 geant4-step
 ```
-
-- ``G4UserStackingAction``
 
 ## 測定したい
 

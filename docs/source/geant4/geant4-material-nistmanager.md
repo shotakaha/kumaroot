@@ -1,39 +1,54 @@
-# 材料を調達したい（``G4NistManager``）
+# 定義済みのマテリアルを使いたい（``G4NistManager::Instance``）
 
 ```cpp
 #include "G4NistManager.hh"
 
-G4NistManager *nistManager = new G4NistManager::GetInstance();
+G4NistManager *nm = new G4NistManager::GetInstance();
 
-G4Element *H = nistManager->FindOrBuildElement("G4_H")
-G4Element *O = nistManager->FindOrBuildElement("G4_O")
+G4Element *H = nm->FindOrBuildElement("G4_H")
+G4Element *O = nm->FindOrBuildElement("G4_O")
 
-G4Material *H2O = nistManager->FindOrBuildMaterial("G4_WATER")
-G4Material *Air = nistManager->FindOrBuildMaterial("G4_AIR")
+G4Material *H2O = nm->FindOrBuildMaterial("G4_WATER")
+G4Material *Air = nm->FindOrBuildMaterial("G4_AIR")
 ```
 
-``G4NistManager``を使って、NISTの材料データベースにある元素や化合物などを調達できます。
-元素（``G4Element``）が欲しい時は``FindOrBuildElement``メソッド、
-物質（``G4Material``）が欲しい時は``FindOrBuildElement``メソッドを使います。
+いろいろな元素や化合物の基本的な特性は、
+NISTの材料データベースに整理されています。
+``G4NistManager``で、この材料データベースから材料を取り寄せることができます。
 
+## 物質取り寄せたい（``G4NistManager::FindOrBuildMaterial``）
+
+``FindOrBuildMaterial``で物質（``G4Material``）を取得できます。
 利用可能なマテリアル名は[Geant4 Material Database](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html)を参照してください。
 
-水素（``G4_H``）からカリフォルニウムまでの元素や、
-水（``G4_WATER``）、空気（``G4_AIR``）、
+水（``G4_WATER``）、
+空気（``G4_AIR``）、
 素粒子・原子核実験でよく利用するような材料（``G4_lXe``、``G4_PbWO4``、``G4_STAINLESS-STEEL``、``G4_Galactic``（＝真空））なども定義されています。
 
-一般的な物質が欲しい場合は、まずこのリストから探すのがよいと思います。
+一般的な物質が欲しい場合は、まずこのデータベースから探すのがよいと思います。
 
-## 特殊な材料を調達したい（``BuildMaterialWithNewDensity``）
+## 元素を取り寄せたい（``G4NistManager::FindOrBuildElement``）
 
 ```cpp
-auto nistManager = G4NistManager::Instance();
-nistManager->FindOrBuildMaterial("G4_Ar");  // density = 1.66201 mg/cm3
-G4double density = 1.782 * mg/cm3;
-nistManager->BuildMaterialWithNewDensity("Ar_heavy", "G4_Ar", density);
+G4NistManager *nm = new G4NistManager::GetInstance();
+G4Element *H = nm->FindOrBuildElement("G4_H")
+G4Element *O = nm->FindOrBuildElement("G4_O")
 ```
 
-``G4NistManager::BuildMaterialWithNewDensity``メソッドで、NISTの材料データベースを基にしながら、密度などを変更できます。
+``FindOrBuildElement``メソッドで
+元素（``G4Element``）を取得できます。
+水素（``G4_H``）からカリフォルニウムまでの元素が登録されています。
+
+## 特殊な材料を調達したい（``G4NistManager::BuildMaterialWithNewDensity``）
+
+```cpp
+auto nm = G4NistManager::Instance();
+nm->FindOrBuildMaterial("G4_Ar");  // density = 1.66201 mg/cm3
+G4double density = 1.782 * mg/cm3;
+nm->BuildMaterialWithNewDensity("Ar_heavy", "G4_Ar", density);
+```
+
+``BuildMaterialWithNewDensity``メソッドで、NISTの材料データベースを基にしながら、密度などを変更できます。
 
 ## 一括で調達したい
 
