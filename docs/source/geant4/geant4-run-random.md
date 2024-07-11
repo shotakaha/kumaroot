@@ -5,6 +5,7 @@
 G4String status = aRun->GetRandomNumberStatus();
 
 G4debug << "Random number status at the start of the run: " << status << G4endl;
+// MixMaxRng-begin 3
 ```
 
 ランを開始したときの、乱数発生器の状態を取得できます。

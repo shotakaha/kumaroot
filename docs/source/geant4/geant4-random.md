@@ -6,6 +6,7 @@
 long seed = CLHEP::HepRandom::getTheSeed();
 
 G4debug << "Current seed: " << seed << G4endl;
+// Current seed: 3
 ```
 
 ## 乱数設定を保存／復元したい
