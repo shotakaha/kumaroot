@@ -204,11 +204,20 @@ rm->SetUserInitialization(actions);
 ---
 maxdepth: 1
 ---
-geant4-random
 geant4-run
 geant4-event
 geant4-track
 geant4-step
+```
+
+## 乱数したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-random
+geant4-random-direction
 ```
 
 ## 測定したい
