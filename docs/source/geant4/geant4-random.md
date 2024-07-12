@@ -62,3 +62,10 @@ G4Random::setTheSeeds(seeds);
 ```
 
 ``<chrono>``モジュールを使って時刻ベースの乱数を設定する方法です。
+
+:::{seealso}
+
+- [CLHEP::HepRandom](https://geant4.kek.jp/Reference/11.2.0/classCLHEP_1_1HepRandom.html)
+- [CLHEP::HepRandomEngine](https://geant4.kek.jp/Reference/11.2.0/classCLHEP_1_1HepRandomEngine.html)
+
+:::
