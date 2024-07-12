@@ -44,6 +44,11 @@ EventAction::EventAction(RunAction* /* aAction */)
 ```cpp
 void EventAction::BeginOfEventAction(const G4Event *aEvent)
 {
+    // イベント操作
+    aEvent->Print();
+    G4int event_id = aEvent->GetEventID();
+    G4String random_status = aEvent->GetRandomNumberStatus();
+
     // 内部変数（プライベート変数など）の初期化など
     fEnergyDeposit = 0;
 }
@@ -57,6 +62,13 @@ void EventAction::BeginOfEventAction(const G4Event *aEvent)
 ヒット情報（``G4THitMap``や``G4THitsCollection``）はここで初期化します。
 
 :::
+
+:::{seealso}
+
+- [](./geant4-event.md)
+
+:::
+
 
 ## イベント終了したい（``EndOfEventAction``）
 

@@ -1,11 +1,11 @@
-# イベント番号をしりたい（``EventID``）
+# イベント番号をしりたい（``G4Event::EventID``）
 
 ```cpp
 // G4Event *aEvent;
 G4int event_id = aEvent->GetEventID();
 ```
 
-## イベント番号を出力したい（``Print``）
+## イベント番号を出力したい（``G4Event::Print``）
 
 ```cpp
 // G4Event *aEvent
