@@ -80,16 +80,41 @@ void SensitiveDetector::EndOfEvent(G4HCofThisEvent *aHCE)
 ## ProcessHits
 
 ```cpp
-void SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHitory *aTouchable)
+void SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHitory* /* aTouchable */)
 {
     // スコアリングの本体を記述する
-    // ステップのあるジオメトリを取得するためにG4TouchableHistoryを使う
+    // *aTouchableはobsolete
 
+    // ステップ操作
+    G4double step_length = aStep->GetStepLength();
+    G4double energy_deposit = aStep->GetEnergyDeposit();
+
+    // ステップポイント操作
+    G4StepPoint *pre_step = aStep->GetPreStepPoint();
+    G4ThreeVector xyz = pre_step->GetPosition();
+    G4double time = pre_step->GetGlobalTime();
+
+    // ボリューム操作
+    auto pv = pre_step->GetPhysicalVolume();
+    G4String pv_name = pv->GetName();
+    G4int pv_number = pv->GetCopyNo();
+    auto lv = pv->GetLobicalVolume();
+    G4Material material = lv->GetMaterial();
+    G4double mass = lv->GetMass();
 }
 ```
 
 ``ProcessHitss``にスコアリングしたい内容を記述します。
 この関数はステップが発生するたびに自動的に呼び出されます。
+
+:::{seealso}
+
+- [](./geant4-step.md)
+- [](./geant4-track.md)
+- [](./geant4-physicalvolume.md)
+- [](./geant4-logicalvolume.md)
+
+:::
 
 ## 論理ボリュームに割り当てたい（``SetSensitiveDetector``）
 
