@@ -1,4 +1,4 @@
-# イベント一覧がほしい（``G4Run::EventVector``）
+# イベント一覧がほしい（``G4Run::GetEventVector``）
 
 ```cpp
 // G4Run *aRun

@@ -43,10 +43,19 @@ RunAction::RunAction()
 ```cpp
 void RunAction::BeginOfRunAction(const G4Run *aRun)
 {
-    // 内部変数（プライベート変数など）の初期化など
-    fEnergyDeposit = 0;
+    // G4Runに対する操作
+    G4int run_id = aRun->GetRunID();
+    G4int n_events = aRun->GetNumberOfEvents();
+    auto events = aRun->GetEventVector();
+    G4String random_status = aRun->GetRandomNumberStatus();
+
+    // 保存ファイルの作成
     auto am = G4AnalysisManager::Instance();
     am->OpenFile();
+
+    // 内部変数の初期化
+    fEnergyDeposit = 0;
+
 }
 ```
 
@@ -59,11 +68,15 @@ void RunAction::BeginOfRunAction(const G4Run *aRun)
 ```cpp
 void RunAction::EndOfRunAction(const G4Run *aRun)
 {
+    // G4Runに対する操作
+    G4int run_id = aRun->GetRunID();
+    G4int n_events = aRun->GetNumberOfEvents();
+    auto events = aRun->GetEventVector();
+    G4String random_status = aRun->GetRandomNumberStatus();
 
     auto am = G4AnalysisManager::Instance();
     am->Write();
     am->CloseFile();
-
 }
 ```
 
