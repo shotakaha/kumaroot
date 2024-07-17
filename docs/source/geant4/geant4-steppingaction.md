@@ -65,14 +65,6 @@ void SteppingAction::UserSteppingAction(const G4Step *aStep)
 
 ## ステップの現在情報が欲しい
 
-```cpp
-G4ThreeVector position = aStep->GetPreStepPoint()->GetPosition();
-G4double local_time = aStep->GetPreStepPoint()->GetLocalTime();
-G4ThreeVector momentum = aStep->GetPreStepPoint()->GetMomentum();
-G4double total_energy = aStep->GetPreStepPoint()->GetTotalEnergy();
-G4double kinetic_energy = aStep->GetPreStepPoint()->GetKineticEnergy();
-```
-
 現在のステップの情報は、**ステップの始点**（``aStep->GetPreStepPoint``）から取得します。
 始点（と終点）は``G4StepPoint``クラスのオブジェクトなので[G4StepPoint Class Reference](https://apc.u-paris.fr/~franco/g4doxy/html/classG4StepPoint.html)を参照しながら、欲しい物理量を探します。
 
