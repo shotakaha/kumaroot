@@ -1,12 +1,36 @@
 # Sensitive Detectorしたい（``G4VSensitiveDetector``）
 
-測定器のヒット情報を取得するために、``G4VSensitiveDetector``を継承したクラスを作成します。
-``G4VSensitiveDetector``クラスは純粋仮想クラスであり、
-``Initialize``、``ProcessHits``、``EndOfEvent``の3つのメソッドを
-自作クラス内で上書きして定義します。
+```cpp
+#ifndef SensitiveDetector_h
+#define SensitiveDetector_h 1
 
-作成したSDインスタンスは、論理ボリュームに設定します。
-さらに、SensitiveDetectorManagerに追加します。
+#include "G4HCofThisEvent.hh"
+#include "G4Step.hh"
+#include "G4TouchableHistory.hh"
+#include "G4VSensitiveDetector.hh"
+
+class SensitiveDetector : public G4VSensitiveDetector
+{
+  public:
+    SensitiveDetector(const G4String name);
+    void Initialize(G4HCofThisEvent *aHCE) override;
+    void EndOfEvent(G4HCofThisEvent *aHCE) override;
+    G4bool ProcessHits(G4Step *aStep, G4TouchableHistory *aTouchable) override;
+}
+
+#endif // SensitiveDetector_h
+```
+
+測定器のヒット情報を取得するために、論理ボリュームを``SensitiveDetector``に設定します。
+``SensitiveDetector``は、``G4VSensitiveDetector``クラスを継承してユーザーが作成します。
+
+``G4VSensitiveDetector``クラスは抽象基底クラスで、
+``Initialize``、``ProcessHits``、``EndOfEvent``の3つの仮想関数を持っています。
+これらのメソッドをoverrideして定義します。
+
+作成したSesnsitiveDetectorは、論理ボリュームに追加し、
+さらに、G4SDManagerに追加します。
+詳しくは[](./geant4-logicalvolume-sensitivedetector.md)に整理しました。
 
 :::{seealso}
 
@@ -22,34 +46,19 @@
 Hit = std::tuple<G4double, G4double, G4double>
 ```
 
+C++標準の配列コンテナーを使って、ヒット情報をユーザーが定義します。
+
 ## 自作ヒットしたい（``G4VHit``）
 
-```cpp
-#ifndef SensitiveDetector_h
-#define SensitiveDetector_h 1
+Geant4には``G4VHit``や``G4VHitsCollection``というヒット用の配列クラスがあります。
+「C++はいまいち分からん」というひとは、こちらを使ってみるのもいいかもしれません。
+詳しくは[](./geant4-scoring-hitscollection.md)に整理しました。
 
-#include "G4HCofThisEvent.hh"
-#include "G4Step.hh"
-#include "G4TouchableHistory.hh"
-#include "G4VSensitiveDetector.hh"
+:::{note}
 
-class SensitiveDetector : public G4VSensitiveDetector
-{
-    public:
-        SensitiveDetector(const G4String name)
-        void Initialize(G4HCofThisEvent *aHCE) override
-        void EndOfEvent(G4HCofThisEvent *aHCE) override
-        G4bool ProcessHits(G4Step *aStep, G4TouchableHistory *aTouchable) override
-}
+Geant4講習会2024では、C++標準ライブラリの``std::vector``や``std::tuple``などを使って、自分でイチから実装する方法をオススメしていました。
 
-#endif // SensitiveDetector_h
-```
-
-SDのクラスを自作する場合、
-``Initialize``、
-``EndOfEvent``、
-``ProcessHits``、
-の3つのメソッドを実装する必要があります。
+:::
 
 ## Initialize
 

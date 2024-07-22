@@ -1,20 +1,4 @@
-# ヒットしたい（``G4VHit`` / ``G4VHitsCollection`` / ``G4HCofThisEvent``）
-
-測定器のヒット情報は、ユーザーが定義する必要があります。
-ヒット用の抽象基底クラスである``G4VHit``を継承して実装します。
-
-``G4Event``を処理する際に、たくさんの``G4VHit``（の派生クラスの）オブジェクトが生成されます。
-これらのヒット情報は、配列コンテナー（``G4HitsCollection``と、そのテンプレートクラス``G4THitsCollection``）に集めることができます。
-
-ここでは[Hits - Book for Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/hit.html)を参考に、これらのクラスの使い方を整理します。
-
-:::{note}
-
-Geant4講習会2024では、C++標準ライブラリの``std::vector``や``std::tuple``などを使って、自分でイチから実装する方法をオススメしていました。
-
-:::
-
-## G4VHitしたい
+# ヒット操作したい（``G4VHit`` / ``G4VHitsCollection`` / ``G4HCofThisEvent``）
 
 ```cpp
 #include "G4VHit.hh"
@@ -60,13 +44,29 @@ class TrackerHit : public G4VHit
 using TrackerHitsCollection = G4THitsCollection<TrackerHit>;
 ```
 
+測定器のヒット情報は、ユーザーが定義する必要があります。
 このサンプルコードは``examples/basic/B2a/TrackerHit.hh``を参照し（ちょっと修正し）ました。
 ``G4VHit``クラスを継承して、トラッカー（＝飛跡検出器）のヒットを取得する``TrackerHit``クラスを作成しています。
 
-取得したい値はクラス内のプライベート変数で定義すればOKです。
-また、それらの変数へのセッターとゲッターも定義しておきます。
+``G4VHit``はヒット用の抽象基底クラスで、
+``Draw``と``Print``の2つの仮想関数を持っています。
+これらのメソッドをoverrideして定義します。
 
-クラスを定義したあと、``G4THitsCollection``を使って``TrackerHit``クラスを引数とするテンプレートクラスを定義します。
+また、``new``と``delte``をインライン関数で作成しています。
+これは、サンプルコードをそのまま真似しました。
+
+ヒット情報として取得したい物理量は、プライベート変数で定義しています。
+また、それらの変数へのセッターとゲッターもpublicメソッドで定義してあります。
+
+クラスを定義したあと、``G4THitsCollection``を使って``TrackerHit``クラスを引数とするテンプレートクラスを定義してあります。
+ここも、サンプルコードをそのまま真似しました。
+
+## ヒット情報したい（``G4VHit``）
+
+``G4Event``を処理する際に、たくさんの``G4VHit``（の派生クラスの）オブジェクトが生成されます。
+これらのヒット情報は、配列コンテナー（``G4HitsCollection``と、そのテンプレートクラス``G4THitsCollection``）に集めることができます。
+
+ここでは[Hits - Book for Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/hit.html)を参考に、これらのクラスの使い方を整理します。
 
 ## メモリ管理したい（``G4Allocator``）
 
