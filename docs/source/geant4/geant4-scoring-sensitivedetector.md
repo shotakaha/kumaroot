@@ -60,61 +60,61 @@ Geant4講習会2024では、C++標準ライブラリの``std::vector``や``std::
 
 :::
 
-## Initialize
-
-```cpp
-void SensitiveDetector::Initialize(G4HCofThisEvent *aHCE)
-{
-
-
-}
-```
-
-``Initialize``はイベントの開始時に呼ばれます。
-このイベントのヒットコレクションを初期化します。
-自前のデータ構造も定義できます。
-
-## EndOfEvent
-
-```cpp
-void SensitiveDetector::EndOfEvent(G4HCofThisEvent *aHCE)
-{
-
-}
-```
-
-``EndOfEvent``はイベントの最後に呼ばれます。
-ステップごとに足し上げたスコアをヒットコレクションなどに保存します。
-
 ## ProcessHits
 
 ```cpp
-void SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHitory* /* aTouchable */)
+
+#include "TrackerHit.hh"
+
+G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory* /* aTouchable */)
 {
-    // スコアリングの本体を記述する
-    // *aTouchableはobsolete
+    G4debug << "SensitiveDetector::ProcessHits" << G4endl;
 
-    // ステップ操作
-    G4double step_length = aStep->GetStepLength();
-    G4double energy_deposit = aStep->GetEnergyDeposit();
-
-    // ステップポイント操作
-    G4StepPoint *pre_step = aStep->GetPreStepPoint();
-    G4ThreeVector xyz = pre_step->GetPosition();
-    G4double time = pre_step->GetGlobalTime();
-
-    // ボリューム操作
+    //
+    auto pre_step = aStep->GetPreStepPoint();
+    auto track = pre_step->GetTrack();
     auto pv = pre_step->GetPhysicalVolume();
-    G4String pv_name = pv->GetName();
-    G4int pv_number = pv->GetCopyNo();
-    auto lv = pv->GetLobicalVolume();
-    G4Material material = lv->GetMaterial();
-    G4double mass = lv->GetMass();
+    auto lv = pv->GetLogicalVolume();
+
+    // TrackerHitを作成して代入
+    // - TrackerHitはG4VHitを継承して、別ファイル（TrackerHit.hh/.cc）に作成
+    // - 各種セッターはTrackerHitで定義する
+    // - 値をセットするときに単位計算をしておく
+    TrackerHit *newHit = new TrackerHit{};
+    newHit->SetDetectorID(pv->GetCopyNo());
+    newHit->SetTrackID(track->GetTrackID());
+    newHit->SetPVName(pv->GetName());
+    newHit->SetLVName(lv->GetName());
+    newHit->SetGlobalTime(pre_step->GetGlobalTime() / ns);
+    newHit->SetXYZ(pre_step->GetPosition() / mm);
+    newHit->SetEnergyDeposit(aStep->GetTotalEnergyDeposit() / MeV);
+    newHit->SetTrackLength(track->GetTrackLength() / cm);
+    newHit->SetStepLength(track->GetStepLength() / cm);
+
+    // ヒット情報を確認
+    newHit->Print();
+
+    // ヒット配列にヒットを追加
+    fHitsCollection->insert(newHit);
+
+    return true;
+
 }
 ```
 
-``ProcessHitss``にスコアリングしたい内容を記述します。
-この関数はステップが発生するたびに自動的に呼び出されます。
+``ProcessHits``は、ヒット情報を処理するメインのメソッドです。
+
+ひとつめの引数は``(G4Step *aStep)``になっているので、
+[G4Step操作](./geant4-step.md)や
+[G4Track操作](./geant4-track.md)でできることを使って、
+取得したい値を定義できます。
+
+ふたつめの引数は``(G4TouchableHistory*)``となっていますが、
+これはもう使われてない（obsolete）そうです。
+
+このメソッドは、SD内でステップ処理が発生するたびに自動的に呼び出されます。
+（たぶん）G4SDManagerが管理してくれているため、
+ユーザーが境界判断しなくていいので楽ちんです。
 
 :::{seealso}
 
@@ -124,6 +124,43 @@ void SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHitory* /* aToucha
 - [](./geant4-logicalvolume.md)
 
 :::
+
+## Initialize
+
+```cpp
+void SensitiveDetector::Initialize(G4HCofThisEvent *aHCE)
+{
+    G4debug << "SensitiveDetector::Initialize" << G4endl;
+
+    // ヒット用の配列（TrackerHitsCollection）を初期化
+    fHitsCollection = new TrackerHitsCollection{};
+
+    // "ヒット配列名"で、G4SDManagerからヒット配列IDを取得
+    // aHCEにTrackerHitsCollectionを追加
+    G4int hcID = G4SDManager::GetSDMpointer()->GetCollectionID("ヒット配列名");
+    aHCE->AddHitsCollection(hcID, fHitsCollection);
+
+};
+```
+
+``Initialize``は、``G4EventManager``がイベント処理を開始する時に実行されます
+（``BeginOfEventAction``より先に実行されます）。
+
+ここで、イベントのヒットコレクションを初期化したり、
+自前のデータ構造を定義したりします。
+
+## EndOfEvent
+
+```cpp
+void SensitiveDetector::EndOfEvent(G4HCofThisEvent *aHCE)
+{
+    G4debug << "SensitiveDetector::EndOfEvent" << G4endl;
+
+}
+```
+
+``EndOfEvent``はイベントの最後に呼ばれます。
+ステップごとに足し上げたスコアをヒットコレクションなどに保存します。
 
 ## 論理ボリュームに割り当てたい（``SetSensitiveDetector``）
 

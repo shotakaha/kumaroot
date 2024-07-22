@@ -16,28 +16,37 @@ class TrackerHit : public G4VHit
     void Print() override;
 
     // 4. セッター／ゲッターを定義
-    void SetTrackID(G4int track_id) { fTrackID = track_id; };
-    G4int GetTrackID() { return fTrackID; };
+    void SetDetectorID(G4int copy_number) { fDetectorID = copy_number; };
+    G4int GetDetectorID() const { return fDetectorID; };
 
-    void SetChamberNumber(G4int chamber_number) { fChamberNumber = chamber_number; };
-    G4int GetChamberNumber() { return fChamberNumber; };
+    void SetTrackID(G4int track_id) { fTrackID = track_id; };
+    G4int GetTrackID() const { return fTrackID; };
 
     void SetEnergyDeposit(G4double energy_deposit) { fEnergyDeposit = energy_deposit; };
-    G4double GetEnergyDeposit() { return fEnergyDeposit; };
+    G4double GetEnergyDeposit() const { return fEnergyDeposit; };
 
-    void SetPosition(G4ThreeVector xyz) { fPosition = xyz; } ;
-    G4ThreeVector GetPosition() { return fPosition; };
+    void SetPosition(G4ThreeVector xyz) { fXYZ = xyz; } ;
+    G4ThreeVector GetPosition() const { return fXYZ; };
 
-    void SetGlobalTime(G4double global_time) { fGlobalTime = global_time; };
-    G4double GetGlobalTime() { return fGlobalTime; };
+    void SetGlobalTime(G4double time) { fGlobalTime = time; };
+    G4double GetGlobalTime() const { return fGlobalTime; };
+
+    void SetTrackLength(G4double length) { fTrackLength = length; };
+    G4double GetTrackLength() const { return fTrackLength; };
+
+    void SetStepLength(G4double length) { fStepLength = length; };
+    G4double GetStepLength() const { return fStepLength; };
 
   private:
     // 5. 測定したい値を定義する
-    G4int fTrackID = -1;
-    G4int fChamberNumber = -1;
-    G4double fEnergyDeposit = 0.;
-    G4ThreeVector fPosition;
-    G4double fGlobalTime = -1;
+    G4int fDetectorID{-1};
+    G4int fTrackID{-1};
+    G4double fEnergyDeposit{0.};
+    G4ThreeVector fXYZ{};
+    G4double fGlobalTime{0.};
+    G4double fStepLength{0.};
+    G4double fTrackLength{0.};
+
 };
 
 // TrackerHitクラスを型にしたテンプレート
@@ -60,6 +69,46 @@ using TrackerHitsCollection = G4THitsCollection<TrackerHit>;
 
 クラスを定義したあと、``G4THitsCollection``を使って``TrackerHit``クラスを引数とするテンプレートクラスを定義してあります。
 ここも、サンプルコードをそのまま真似しました。
+
+## Print
+
+```cpp
+void TrackerHit::Print()
+{
+    G4debug << "TrackerHit::Print" << G4endl;
+
+    G4debug << "DetectorID" << fDetectorID << G4endl;
+    G4debug << "TrackID" << fTrackID << G4endl;
+    G4debug << "XYZ" << G4BestUnit(fXYZ, "Length") << G4endl;
+    G4debug << "GlobalTime" << G4BestUnit(fGlobalTime, "Time") << G4endl;
+    G4debug << "EnergyDeposit" << G4BestUnit(fEnergyDeposit, "Energy") << G4endl;
+    G4debug << "TrackLength" << G4BestUnit(fTrackLength, "Length") << G4endl;
+    G4debug << "StepLength" << G4BestUnit(fStepLength, "Length") << G4endl;
+};
+```
+
+``Print``で、ヒット配列の値を確認しています。
+
+## Draw
+
+```cpp
+void TrackerHit::Draw()
+{
+    G4debug << "TrackerHit::Draw" << G4endl;
+    auto vm = G4VVisManager::GetConcreteInstance();
+    if (vm)
+    {
+        G4Circle circle(fXYZ);
+        circle.SetScreenSize(4.);
+        circle.SetFillStyle(G4Circle::filled);
+        G4VisAttributes color{G4Colour::Red()};
+        circle.SetVisAttributes(color);
+        vm->Draw(circle);
+    };
+};
+```
+
+``Draw``で、可視化するときのヒット点の見た目を設定できます。
 
 ## ヒット情報したい（``G4VHit``）
 
