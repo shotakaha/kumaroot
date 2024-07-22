@@ -34,11 +34,10 @@ namespace プロジェクト名
 class ActionInitialization : public G4VUserActionInitialization
 {
     public:
-        ActionInitialization();
-        virtual ~ActionInitialization();
-        virtual void BuildForMaster() const;
-        virtual void Build() const;
-
+        ActionInitialization() = default;
+        ~ActionInitialization() override = default;
+        void BuildForMaster() const override;
+        void Build() const override;
 }
 }  // プロジェクト名
 #endif
