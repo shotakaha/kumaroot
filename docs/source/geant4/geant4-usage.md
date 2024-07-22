@@ -71,11 +71,29 @@ geant4-examples-anaex03
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
-geant4-command
-geant4-macro
-geant4-batch
+geant4-main
+geant4-detectorconstruction
+geant4-physicslist
+geant4-actioninitialization
+geant4-primarygeneratoraction
+geant4-runaction
+geant4-eventaction
+geant4-trackingaction
+geant4-steppingaction
+```
+
+## ステップ操作したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+geant4-run
+geant4-event
+geant4-track
+geant4-step
 ```
 
 ## マクロしたい
@@ -89,17 +107,6 @@ geant4-macro-vis
 geant4-macro-gui
 ```
 
-## 必須クラスしたい
-
-```{toctree}
----
-maxdepth: 1
----
-geant4-detectorconstruction
-geant4-physicslist
-geant4-primarygeneratoraction
-```
-
 ## マネージャー操作したい
 
 ```{toctree}
@@ -107,7 +114,6 @@ geant4-primarygeneratoraction
 maxdepth: 1
 ---
 geant4-runmanager
-geant4-actioninitialization
 geant4-analysismanager
 geant4-particlegun
 ```
@@ -154,7 +160,7 @@ geant4-material-petroleum
 geant4-material-plastic-scintillator
 ```
 
-## ジオメトリしたい
+## ジオメトリ操作したい
 
 ```cpp
 auto* rm = G4RunManagerFactory::CreateRunManager();
@@ -192,23 +198,7 @@ geant4-ftfp_bert
 geant4-opticalphoton
 ```
 
-## ユーザーアクションしたい
 
-```cpp
-auto* rm = G4RunManagerFactory::CreateRunManager();
-auto* actions = new ActionInitialization;
-rm->SetUserInitialization(actions);
-```
-
-```{toctree}
----
-maxdepth: 1
----
-geant4-run
-geant4-event
-geant4-track
-geant4-step
-```
 
 ## 乱数したい
 

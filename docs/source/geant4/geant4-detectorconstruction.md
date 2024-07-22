@@ -151,13 +151,11 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
 
 :::{seealso}
 
-- [](./geant4-pvplacement.md)
-- [](./geant4-pvreplica.md)
-- [](./geant4-world.md)
+- [](./geant4-physicalvolume-pvplacement.md)
+- [](./geant4-physicalvolume-pvreplica.md)
+- [](./geant4-geometry-world.md)
 
 :::
-
-
 
 ## リファレンス
 

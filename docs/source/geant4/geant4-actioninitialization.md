@@ -94,3 +94,11 @@ void ActionInitialization::Build() const
 
 ``PrimaryGeneratorAction``の設定は必須です。
 その他のアクション設定は任意です。
+
+:::{seealso}
+- [](./geant4-primarygeneratoraction.md)
+- [](./geant4-runaction.md)
+- [](./geant4-eventaction.md)
+- [](./geant4-trackingaction.md)
+- [](./geant4-steppingaction.md)
+:::
