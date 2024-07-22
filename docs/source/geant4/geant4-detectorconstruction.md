@@ -15,6 +15,25 @@
 
 :::
 
+## メイン関数
+
+```cpp
+#include "DetectorConstruction.hh"
+
+int main(int argc, char** argv)
+{
+    auto rm = G4RunManagerFactory::CreateRunManager();
+
+    auto detector = new DetectorConstruction{};
+    rm->SetUserInitialization(detector);
+
+}
+```
+
+メイン関数では、
+``DetectorConstruction``のインスタンスを作成し、
+``SetUserInitialization``でRunManagerに追加します。
+
 ## ヘッダーファイル
 
 ```cpp
@@ -138,22 +157,7 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
 
 :::
 
-## メイン関数
 
-```cpp
-#include "DetectorConstruction.hh"
-
-int main(int argc, char** argv)
-{
-    auto rm = G4RunManagerFactory::CreateRunManager();
-
-    auto detector = new DetectorConstruction;
-    rm->SetUserInitialization(detector);
-
-}
-```
-
-メイン関数で作成したインタンスをRunManagerに渡します。
 
 ## リファレンス
 

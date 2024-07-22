@@ -1,10 +1,5 @@
 # 相互作用したい（``G4VModularPhysicsList``）
 
-```cpp
-G4VModularPhysicsList* physics_list = new FTFP_BERT;
-runManager->SetUserInitialization(physics_list);
-```
-
 粒子と物質の相互作用モデルを定義して``G4RunManager``に設定します。
 
 Geant4チームが用意した**Reference Physics List**を利用できます。
@@ -18,6 +13,24 @@ Geant4チームが用意した**Reference Physics List**を利用できます。
 | FTFP_BERT_HP | 標準 | Bertiniモデル | Fritiofモデル | 高精度 |
 | FTFP_BERT_LV | Livermoreモデル | Bertiniモデル | Fritiofモデル | - |
 | QGSP_BERT | 標準 | Bertiniモデル | QGSモデル | - |
+
+## メイン関数
+
+```cpp
+#include "FTFP_BERT.hh"
+
+int main(int argc, char** argv)
+{
+    auto rm = G4RunManagerFactory::CreateRunManager();
+
+    auto physics = new FTFP_BERT{};
+    rm->SetUserInitialization(physics);
+
+}
+```
+
+メイン関数では、Geant4チームが用意したモデルのインスタンスを作成し、
+``SetUserInitialization``でRunManagerに追加します。
 
 ## カスタムしたい（``G4VUserPhysicsList``）
 

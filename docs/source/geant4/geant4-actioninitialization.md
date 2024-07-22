@@ -1,5 +1,27 @@
 # ユーザーアクションしたい（``G4VUserActionInitialization``）
 
+## メイン関数
+
+```cpp
+// プロジェクト名.cc
+#include "G4RunManagerFactory.hh"
+
+#include "ActionInitialization.hh"  // <-- 自作クラス
+
+int main()
+{
+    auto rm = G4RunManagerFactory::CreateRunManager();
+
+    auto actions = new ActionInitialization{};
+    rm->SetUserInitialization(actions);
+}
+```
+
+メイン関数で、``ActionInitialization``のインスタンスを作成し、
+``SetUserInitialization``を使ってRunManagerに登録します。
+
+## ヘッダーファイル
+
 ```cpp
 // include/ActionInitialization.hh
 #ifndef ActionInitialization_H
@@ -30,6 +52,8 @@ class ActionInitialization : public G4VUserActionInitialization
 
 ``Build``はワーカースレッド用のユーザーアクションです。
 こちらはカスタマイズ設定が必要です。
+
+## ソースファイル
 
 ```cpp
 // src/ActionInitialization.cc
@@ -70,18 +94,3 @@ void ActionInitialization::Build() const
 
 ``PrimaryGeneratorAction``の設定は必須です。
 その他のアクション設定は任意です。
-
-```cpp
-// プロジェクト名.cc
-#include "G4RunManagerFactory.hh"
-
-#include "ActionInitialization.hh"  // <-- 自作クラス
-
-int main()
-{
-    auto *runManager = G4RunManagerFactory::CreateRunManager();
-    runManager->SetUserInitialization(new ActionInitialization);
-}
-```
-
-``main``関数の中でユーザーアクションは``SetUserInitialization``を使ってランマネージャーに登録します。
