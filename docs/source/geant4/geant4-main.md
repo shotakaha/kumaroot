@@ -24,15 +24,22 @@ int main(int argc, char** argv)
 }
 ```
 
+1. G4RunManagerFactory
+2. G4VisExecutive
+3. G4UImanager
+
 ```{toctree}
 geant4-command
 geant4-macro
 gean4-batch
 ```
 
-
 :::{seealso}
 - [](./geant4-detectorconstruction.md)
 - [](./geant4-physicslist.md)
 - [](./geant4-actioninitialization.md)
 :::
+
+## リファレンス
+
+- [How to Define the main() Program](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/mainProgram.html)
