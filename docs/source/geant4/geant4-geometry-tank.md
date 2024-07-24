@@ -1,38 +1,71 @@
-# 水タンクを作りたい
-
-## 水タンクを定義する関数
+# 水タンクを作りたい（``SetupTankVolume``）
 
 ```cpp
-G4LogicalVolume *DefineWaterTank(const G4String &name){
+// include/Geometry.hh
 
-    // 材料を準備する
-    G4NistManager *nm = G4NistManager::Instance();
-    auto material = nm->FindOrBuild("G4_WATER");
+#ifndef Geometry_h
+#define Geometry_h 1
 
-    // サイズを定義する
-    G4double diameter = 39.3 * m;
-    G4double height = 41.4 * m;
+#include "G4VUserDetectorConstruction.hh"
+#include "G4SystemOfUnit.hh"
+#include "G4LogicalVolume.hh"
 
-    // ソリッド（形状）の作成
-    // 内径, 外径, 高さ, sphi, dphi
-    G4double rmin, rmax, z, sphi, dphi;
+class Geometry : public G4VUserDetectorConstruction
+{
+  private:
+    G4LogicalVolume* SetupTankVolume();
+    G4String fTankLVName{"Tank"};
+    G4String fTankMaterial{"G4_WATER"};
+    G4double fTankDiameter = 39.3 * m;
+    G4double fTankHeight = 41.4 * m;
+};
+
+#endif
+```
+
+``Geometry``クラスのヘッダーファイルの中で、
+``SetupTankVolume``と関連する内部変数を定義します。
+
+水タンクの大きさはスーパーカミオカンデ（直径39.3m、高さ41.4m）にしてあります。
+
+## 水タンクを準備する
+
+```cpp
+G4LogicalVolume *Geometry::SetupWaterTank()
+{
+    // パラメーターの確認
+    G4String logical_name = fTankLVName;     // "Tank"
+    G4String material_name = fTankMaterial;  // "G4_WATER"
+    G4double diameter = fTankDiameter;       // 39.3 * m;
+    G4double height = fTankHeight;           // 41.4 * m;
+
+    // 形状を定義
+    G4double r_min{0. * cm};         // 底面の内径
+    G4double r_max{0.5 * diameter};  // 底面の外径
+    G4double half_z{0.5 * height};   // 円柱の高さ（の半分）
+    G4double s_phi{0. * deg};        // 円の角度（始点）
+    G4double d_phi{360. * deg};      // 円の角度（終点）
     auto solid = new G4Tubs(
-        "tankSolid",
-        rmin=0.,
-        rmax=0.5*diameter,
-        z=0.5*height,
-        sphi=0.*deg,
-        dphi=360.*deg,
-    )
+        "tankSolid",    // ソリッド名
+        r_min,
+        r_max,
+        half_z,
+        s_phi,
+        d_phi
+    );
 
-    // 論理物体の作成
+    // 材料を定義
+    auto nm = G4NistManager::Instance();
+    auto material = nm->FindOrBuild(material_name);
+
+    // 論理ボリュームを定義
     auto logical = new G4LogicalVolume(
-        solid,     // G4VSolid : 形状
-        material,  // G4Material : 素材（「水」は先に作っておく）
-        name,      // 名前（引数で指定）
+        solid,        // G4VSolid
+        material,     // G4Material
+        logical_name, // 名前
     )
 
-    // ワイヤーフレームを着色（オプション）
+    // （オプション）ワイヤーフレームを着色
     auto color = new G4VisAttributes(true, G4Colour(0., 0.5, 1.)); // 青系
     logical->SetVisAttributes(color);
 
@@ -40,34 +73,48 @@ G4LogicalVolume *DefineWaterTank(const G4String &name){
 }
 ```
 
-タンクのサイズはスーパーカミオカンデ（直径39.3m、高さ41.4m）にしてあります。
+``G4Tubs``で円柱を作成しました。
+円柱の材料を``G4_WATER``にしました。
+水タンクの論理ボリュームができました。
 
-## 使い方
-
-``DetectorConstruction::Construct()``の中で使います。
+## 水タンクを配置する
 
 ```cpp
-G4VPhysicalVolume* DetectorConstruction::Construct(){
-    // 論理物体を取得
-    auto pWorldLogical = DefineWorlfVolume("world");
-    auto pTankLogical = DefineWaterTank("waterTank");
+G4VPhysicalVolume* SetVolumes()
+{
+    // Worldを準備する
+    auto world = SetupWorldVolume();
+    // Worldを配置する
+    auto theWorld = new G4PVPlacement{...};
 
-    // 物理ボリュームの作成
-    // タンクを縦置きにする
+    // WaterTankを準備する
+    auto tank = SetupWaterTankVolume();
+
+    // タンクは縦置きにしたい
     G4RotationMatrix rotation = G4RotationMatrix(0., 90.*deg, 0.);
     G4ThreeVector direction = G4ThreeVector(0., 0., 0.);
-    G4Transform3D location = G4Transform3D(rotation, direction);
+    G4Transform3D origin = G4Transform3D(rotation, direction);
 
     new G4PVPlacement(
-        location,        // G4Transform3D : 配置する座標
-        pTankLogical,    // G4LogicalVolume : 子ボリューム
-        "TankPhysical",  // G4String : 名前
-        pWorldLogical,   // G4LogicalVolume : 親ボリューム
+        origin,          // 子ボリュームの位置
+        tank,            // 子ボリューム
+        "TankPhysical",  // 名前
+        theWorld,        // 親ボリューム
         false,           // no boolean operation
         0,               // G4int : copy number
         true,
-    )
+    );
+
+    return theWorld;
 }
 ```
 
-水タンクを配置できました。
+スーパーカミオカンデをイメージしているため、
+水タンクを縦置きにしています。
+
+``G4RotationMatrix``でY軸方向に90度回転させました。
+縦置きにするために、どの引数を変更すればよいか、
+よくわからなかったので、コンパイル＆実行して確認しながら調整しました。
+
+ワールドの中心に配置したかったので、
+``G4ThreeVector``は原点のままにしています。
