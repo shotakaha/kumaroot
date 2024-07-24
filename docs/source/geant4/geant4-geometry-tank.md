@@ -1,43 +1,15 @@
 # 水タンクを作りたい（``SetupTankVolume``）
 
-```cpp
-// include/Geometry.hh
-
-#ifndef Geometry_h
-#define Geometry_h 1
-
-#include "G4VUserDetectorConstruction.hh"
-#include "G4SystemOfUnit.hh"
-#include "G4LogicalVolume.hh"
-
-class Geometry : public G4VUserDetectorConstruction
-{
-  private:
-    G4LogicalVolume* SetupTankVolume();
-    G4String fTankLVName{"Tank"};
-    G4String fTankMaterial{"G4_WATER"};
-    G4double fTankDiameter = 39.3 * m;
-    G4double fTankHeight = 41.4 * m;
-};
-
-#endif
-```
-
-``Geometry``クラスのヘッダーファイルの中で、
-``SetupTankVolume``と関連する内部変数を定義します。
-
-水タンクの大きさはスーパーカミオカンデ（直径39.3m、高さ41.4m）にしてあります。
-
-## 水タンクを準備する
+スーパーカミオカンデ（直径39.3m、高さ41.4m）サイズの水タンクを配置します。
 
 ```cpp
-G4LogicalVolume *Geometry::SetupWaterTank()
+G4LogicalVolume *SetupWaterTank()
 {
-    // パラメーターの確認
-    G4String logical_name = fTankLVName;     // "Tank"
-    G4String material_name = fTankMaterial;  // "G4_WATER"
-    G4double diameter = fTankDiameter;       // 39.3 * m;
-    G4double height = fTankHeight;           // 41.4 * m;
+    // パラメーター設定
+    G4String logical_name{"Tank"};
+    G4String material_name{"G4_WATER"};
+    G4double diameter{39.3 * m};
+    G4double height{41.4 * m};
 
     // 形状を定義
     G4double r_min{0. * cm};         // 底面の内径
@@ -46,7 +18,7 @@ G4LogicalVolume *Geometry::SetupWaterTank()
     G4double s_phi{0. * deg};        // 円の角度（始点）
     G4double d_phi{360. * deg};      // 円の角度（終点）
     auto solid = new G4Tubs(
-        "tankSolid",    // ソリッド名
+        "TankSolid",    // ソリッド名
         r_min,
         r_max,
         half_z,
@@ -77,7 +49,7 @@ G4LogicalVolume *Geometry::SetupWaterTank()
 円柱の材料を``G4_WATER``にしました。
 水タンクの論理ボリュームができました。
 
-## 水タンクを配置する
+## 水タンクを配置したい
 
 ```cpp
 G4VPhysicalVolume* SetVolumes()
