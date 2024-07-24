@@ -173,6 +173,7 @@ rm->SetUserInitialization(detector);
 maxdepth: 1
 ---
 geant4-geometry
+geant4-geometry-solid
 geant4-geometry-world
 geant4-geometry-tank
 geant4-geometry-pmt
