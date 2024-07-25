@@ -4,4 +4,3 @@
 G4Step step = aTrack->GetStep();
 ```
 
-
