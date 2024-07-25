@@ -61,26 +61,8 @@ using SensorHitsCollection = G4THitsCollection<SensorHit>;
 測定器のヒット情報は、ユーザーが定義する必要があります。
 このサンプルコードは``examples/basic/B2a/TrackerHit.hh``を参照し（ちょっと修正し）ました。
 
-有感検出器（``Sensor``）ヒットを取得する``SensorHit``クラスを、
+有感検出器でのヒットを取得する``SensorHit``クラスを、
 ``G4VHit``クラスを継承して作成しています。
-
-:::{note}
-
-このページでは「汎用的なヒット」という意味で``SensorHit``としました。
-もし、具体的な検出器名があるなら、それに置き換えてみると、サンプルコードが理解しやすくなると思います。
-
-:::
-
-:::{hint}
-
-1. 飛跡検出器 → ``TrackerHit``
-1. カロリメーター → ``CaloHit``
-1. ホドスコープ → ``HodoHit``
-1. ピクセル検出器 → ``PixelHit``
-1. 光電子増倍管 → ``PmtHit``
-1. MPPC → ``MppcHit``
-
-:::
 
 ``G4VHit``はヒット用の抽象基底クラスで、
 ``Draw``と``Print``の2つの仮想関数を持っています。
@@ -95,12 +77,8 @@ using SensorHitsCollection = G4THitsCollection<SensorHit>;
 クラスを定義したあと、``G4THitsCollection``を使って``TrackerHit``クラスを引数とするテンプレートクラスを定義してあります。
 ここも、サンプルコードをそのまま真似しました。
 
-## ヒット情報したい（``G4VHit``）
-
 ``G4Event``を処理する際に、たくさんの``G4VHit``（の派生クラスの）オブジェクトが生成されます。
 これらのヒット情報は、配列コンテナー（``G4HitsCollection``と、そのテンプレートクラス``G4THitsCollection``）に集めることができます。
-
-ここでは[Hits - Book for Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/hit.html)を参考に、これらのクラスの使い方を整理します。
 
 ```{toctree}
 geant4-sensor-hit-print
@@ -109,6 +87,26 @@ geant4-sensor-hit-allocator
 geant4-sensor-hit-hitscollection
 geant4-sensor-hit-hitsmap
 ```
+
+## 有感検出器とヒット用クラス
+
+このページでは「汎用的なヒット」という意味で``SensorHit``としました。
+可能な限りすべてのデータを取得してファイルに書き出し、
+解析でフィルタリングしようという魂胆です。
+こういうことができるのが、シミュレーションのおもしろい部分かなと思います。
+
+もし、具体的な検出器があり、その完全再現を目指すならば、それらに特化したクラスを作成するとよいかもしれません。
+
+:::{hint}
+
+1. 飛跡検出器 → ``TrackerHit``
+1. カロリメーター → ``CaloHit``
+1. ホドスコープ → ``HodoHit``
+1. ピクセル検出器 → ``PixelHit``
+1. 光電子増倍管 → ``PmtHit``
+1. MPPC → ``MppcHit``
+
+:::
 
 ## イベントのヒットしたい（``G4HCofThisEvent``）
 
