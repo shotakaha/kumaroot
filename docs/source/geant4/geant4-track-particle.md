@@ -17,6 +17,20 @@ aTrack->GetDynamicParticle();
 aTrack->GetDefinition();
 ```
 
+## 粒子を判別したい
+
+```cpp
+if (aTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition())
+{
+  // 光子の場合の処理;
+};
+
+if (aTrack->GetDefinition() == G4Electron::ElectronDefinition())
+{
+  // 電子の場合の処理;
+}
+```
+
 :::{seealso}
 
 - [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
