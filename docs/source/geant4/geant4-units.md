@@ -135,4 +135,3 @@ new G4UnitDefinition ( "meter/ns", "m/ns", "Speed", m/ns );
 ## リファレンス
 
 - [G4UnitsTable.hh](https://geant4.kek.jp/Reference/11.2.0/G4UnitsTable_8hh_source.html)
-

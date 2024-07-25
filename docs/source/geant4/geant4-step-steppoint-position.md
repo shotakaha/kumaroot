@@ -26,6 +26,19 @@ G4debug << position / m << G4endl;
 
 :::
 
+## 中点にしたい
+
+```cpp
+auto pre_step = aStep->GetPreStepPoint();
+auto post_step = aStep->GetPostStepPoint();
+
+G4ThreeVector position = pre_step->GetPosition() + post_step->GetPosition();
+position /= 2.;
+```
+
+ステップの中点を、粒子の座標としたい場合の計算方法です。
+始点と終点の座標を取得し、2で割っています。
+
 :::{seealso}
 
 - [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)
