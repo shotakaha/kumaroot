@@ -35,9 +35,15 @@ gean4-batch
 ```
 
 :::{seealso}
-- [](./geant4-detectorconstruction.md)
-- [](./geant4-physicslist.md)
-- [](./geant4-actioninitialization.md)
+
+- [](./geant4-user-detectorconstruction.md)
+- [](./geant4-user-physicslist.md)
+- [](./geant4-user-actioninitialization.md)
+- [](./geant4-user-runaction.md)
+- [](./geant4-user-eventaction.md)
+- [](./geant4-user-trackingaction.md)
+- [](./geant4-user-steppingaction.md)
+
 :::
 
 ## リファレンス
