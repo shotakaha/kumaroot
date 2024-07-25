@@ -165,8 +165,8 @@ rm->SetUserInitialization(physics);
 ---
 maxdepth: 1
 ---
-geant4-physicslist
-geant4-physicslist-examples
+geant4-physics
+geant4-physics-examples
 ```
 
 ## 測定したい
