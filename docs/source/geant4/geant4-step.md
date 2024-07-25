@@ -70,12 +70,9 @@ geant4-step-steppoint-momentum
 geant4-step-steppoint-velocity
 geant4-step-steppoint-charge
 geant4-step-steppoint-energy
-geant4-steppingaction
 ```
 
-:::{seealso}
+## リファレンス
 
 - [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)
 - [G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)
-
-:::

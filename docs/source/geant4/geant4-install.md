@@ -73,11 +73,7 @@ maxdepth: 1
 geant4-install-brew
 geant4-install-mkdir
 geant4-install-download
-geant4-install-cmake-options
 geant4-install-cmake
 geant4-install-ccmake
 geant4-install-make
 ```
-
-
-
