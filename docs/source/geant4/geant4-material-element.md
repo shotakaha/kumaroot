@@ -1,4 +1,4 @@
-# 錬金術したい（``G4Material`` / ``G4Element`` / ``G4Isotope``）
+# 元素したい（``G4Material``）
 
 ```cpp
 #include "G4Material.hh"

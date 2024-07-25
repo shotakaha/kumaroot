@@ -13,7 +13,7 @@ auto logical_volume = G4LogicalVolume{
 ```
 
 ``G4LogicalVolume``はGeant4空間の中に配置する前の状態のボリュームです。
-形と材質を設定して定義します。
+形状（``G4VSolid``）と素材（``G4Material``）を設定して定義します。
 また、ボリュームにかかる力場（電磁場、重力場）を追加したり、
 SensitiveDetectorを追加したりできます。
 

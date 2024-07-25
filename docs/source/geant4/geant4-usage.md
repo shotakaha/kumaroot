@@ -118,17 +118,23 @@ geant4-analysismanager
 geant4-particlegun
 ```
 
-## ボリューム操作したい
+## ジオメトリ操作したい
 
-論理ボリュームは、Geant4空間の中に配置される前の状態で``G4LogicalVolume``クラスで作成します。
-物理ボリュームは、Geant4空間に配置された論理ボリュームのことで、``G4VPhysicalVolume``を継承したクラスで作成します。
+```cpp
+auto* rm = G4RunManagerFactory::CreateRunManager();
+auto* detector = new DetectorConstruction;
+rm->SetUserInitialization(detector);
+```
 
 ```{toctree}
 ---
-maxdepth: 0
+maxdepth: 2
 ---
+geant4-geometry
+geant4-geometry-solid
 geant4-logicalvolume
 geant4-physicalvolume
+geant4-geometry-examples
 ```
 
 ## マテリアル操作したい
@@ -144,37 +150,10 @@ auto sc = nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");    // プラス
 
 ```{toctree}
 ---
-maxdepth: 1
----
-geant4-material
-geant4-material-nistmanager
-geant4-material-table
-geant4-material-element
-geant4-material-air
-geant4-material-water
-geant4-material-ethanol
-geant4-material-acrylic
-geant4-material-vacuum
-geant4-material-glass
-geant4-material-petroleum
-geant4-material-plastic-scintillator
-```
-
-## ジオメトリ操作したい
-
-```cpp
-auto* rm = G4RunManagerFactory::CreateRunManager();
-auto* detector = new DetectorConstruction;
-rm->SetUserInitialization(detector);
-```
-
-```{toctree}
----
 maxdepth: 2
 ---
-geant4-geometry
-geant4-geometry-solid
-geant4-geometry-examples
+geant4-material
+geant4-material-examples
 ```
 
 ## 相互作用したい
@@ -191,18 +170,6 @@ maxdepth: 1
 ---
 geant4-ftfp_bert
 geant4-opticalphoton
-```
-
-
-
-## 乱数したい
-
-```{toctree}
----
-maxdepth: 1
----
-geant4-random
-geant4-random-direction
 ```
 
 ## 測定したい
@@ -232,6 +199,16 @@ geant4-geantino
 ```{toctree}
 geant4-vismanager
 geant4-visattributes
+```
+
+## 乱数したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-random
+geant4-random-direction
 ```
 
 ## 外部ライブラリしたい
