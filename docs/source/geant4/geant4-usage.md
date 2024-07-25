@@ -165,8 +165,8 @@ rm->SetUserInitialization(physics);
 ---
 maxdepth: 1
 ---
-geant4-ftfp_bert
-geant4-opticalphoton
+geant4-physicslist
+geant4-physicslist-examples
 ```
 
 ## 測定したい
