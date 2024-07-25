@@ -1,28 +1,19 @@
-# C++/Geant4のスタイリングガイド
-
-C/C++の書き方については[Googleが作ったC++のスタイルガイド](https://google.github.io/styleguide/cppguide.html)が参考になります。
-よい書き方／よくない書き方の例に加え、メリット／デメリットなども書いてあるため、自分のアプリケーションで採用するかどうかの判断材料になります。
-また、``cpplint``というリンターもあります。
-
-Geant4には明確なコーディングガイドがありません。
-Geant4は開発の歴史も長く、すでに広く利用されているツールキットであるため、
-それぞれのアプリケーションのコーディングルールを尊重し、
-Geant4側から強制はしないというスタンスのようです。
-しかし、附属サンプルを使ってみたり、リファレンスガイドを参照したとき「慣習」のようなものを感じました
-（C++の慣習なのか、Geant4の慣習なのかは区別できていません）。
-
-:::{note}
-
-``cpplint``はもともとGoogleが開発していたオープンソースプロジェクトでしたが、現在ではGoogleの手を離れたプロジェクトになっているようです。
-
-:::
-
-## C++の豆知識
+# C++の豆知識
 
 ひさしぶりにC++を使ってみたら、いろいろな機能が増えていました。
 Geant4のサンプルコードを読むときに知っておくとよさそうだと思ったことを整理しておきます。
 
-### C++の変遷
+## スタイリングガイド
+
+```{toctree}
+---
+maxdepth: 1
+---
+geant4-cpp-google
+geant4-cpp-geant4
+```
+
+## C++の変遷
 
 | C++ | リリース年 | ISO |
 |---|---|---|
@@ -46,7 +37,7 @@ Geant4（v4.11.2）はC++17に対応しています。
 
 :::
 
-### STL（Standard Template Library）
+## STL（Standard Template Library）
 
 ```cpp
 #include <vector>  // std::vector
@@ -58,7 +49,7 @@ Geant4（v4.11.2）はC++17に対応しています。
 STLはC++98から標準ライブラリとして採用されているそうです。
 大学院生のころ（2010年ころ）は、よく分からないまま使うのを避けてきた気がします。
 
-### 一様初期化
+## 一様初期化
 
 ```cpp
 // 変数の初期化
@@ -70,15 +61,19 @@ char z = "z";
 int x{100};
 double y{3.14};
 char z{"z"};
-
 ```
+
+C++11からインスタンスの初期化に``{}``（中括弧／波括弧）が使えるようになっていました。
 
 ```cpp
 // 配列の初期化
 int array[] = {1, 2, 3, 4, 5};
+
 // 配列の一様初期化
 int array[]{1, 2, 3, 4, 5};
 ```
+
+・・・なんで括弧の使い方を増やしてしまったんだと思いましたが、変数、配列・コンテナー、構造体、クラスなどを同じ書式で初期化できるのがメリットのようです。
 
 ```cpp
 // コンテナーの初期化
@@ -91,9 +86,6 @@ vec.push_back(3);
 std::vector<int> vec{1, 2, 3};
 ```
 
-C++11からインスタンスの初期化に``{}``（中括弧／波括弧）が使えるようになっていました。
-
-・・・なんで括弧の使い方を増やしてしまったんだと思いましたが、変数、配列・コンテナー、構造体、クラスなどを同じ書式で初期化できるのがメリットのようです。
 とくに``std::vector``の初期化が簡単に書けるようになっています。
 また、型安全性も向上していて、モダンC++での使用が推奨されている初期化スタイルだそうです。
 
@@ -103,10 +95,13 @@ C++11からインスタンスの初期化に``{}``（中括弧／波括弧）が
 
 :::
 
-### autoキーワード
+## autoキーワード
 
 ```cpp
+// 型を指定
 G4NistManager *nm = new G4NistManager::Instance();
+
+// 型を推論
 auto *nm = G4NistManager::Instance();
 ```
 
@@ -131,100 +126,3 @@ Geant4はクラス名が長いものが多いため、どんどん使ってよ�
 - [C++ Support in Clang](https://clang.llvm.org/cxx_status.html)
 - [C++ Standards Support in GCC](https://gcc.gnu.org/projects/cxx-status.html)
 
-## Geant4のコーディングガイド
-
-Geant4を使っていて感じる「慣習のようなもの」を整理しました。
-
-:::{note}
-
-20年近くの開発の歴史があるせいなのか、命名規則が混在している印象です。
-内部のソースコードや附属サンプルも一貫してないと感じる箇所もありました。
-これはもう、いっぱいサンプルを読んで、雰囲気に慣れるしかなさそうです。
-
-:::
-
-### ファイル名
-
-ファイル名は``PascalCase``が使われています。
-ヘッダーファイルは``include/クラス名.hh``、
-ソースファイルは``src/クラス名.cc``にあります。
-
-### クラス名
-
-クラス名は``PascalCase``が使われています。
-Geant4が提供するクラスの接頭辞は``G4*``が使われています。
-さらに抽象クラスは``G4V*``、
-ユーザー設定のためのフック用クラスは``G4User*``もしくは``G4VUser*``が使われています。
-
-```cpp
-class DetectorConstruction : public G4VUserDetectorConstruction
-{
-    // 自作クラスの実装
-}
-```
-
-のように継承したクラス名がわかるように、主要な部分を残して使うことが多いようです。
-
-### 関数名
-
-関数名は``PascalCase``が使われています。
-セッターは``Set*``、ゲッターは``Get*``が接頭辞に使われています。
-
-関数の引数名は、`G4Step *aStep`、``G4Event *anEvent``のように``a``からはじまる変数名が多いです。
-
-### 変数名
-
-変数名は``PascalCase``が使われています。
-また、ゆるめのシステムハンガリアン記法が使われている気がします。
-
-プライベートなメンバー変数の接頭辞には``f*``が使われています。
-
-```cpp
-G4int fNumberOfChambers = 5;
-G4LogicalVolume *fLogicalChamber = nullptr;
-```
-
-変数がポインターの場合は``p*``や``fp*``、
-引数の場合は``aValue``や``&aValue``、``&apValue``を使っていることが多いです。
-
-```cpp
-// G4Trackのメソッドを抜粋
-G4Track::SetTrackID(const G4int aValue)
-G4Track::SetPosition(const G4ThreeVector &aValue)
-G4Track::SetTouchableHandle(const G4TouchableHandle &apValue)
-```
-
-### 定数
-
-定数（``const``な変数）や``enum``数は``k*``を接頭辞にした``PascalCase``が使われています。
-
-### 型の名前
-
-```cpp
-G4String name = "Geant4";     // String型
-G4int numberOfParticles = 1;  // int型
-G4double energy = 1.0 * GeV;  // double型
-// 他にもある
-```
-
-``G4*型``を使うことが推奨されています。
-プラットフォームによる型の実装の違いを吸収してくれます（たぶん）。
-
-### 出力ストリーム
-
-```cpp
-G4cout << "標準出力" << G4endl;
-G4err << "標準エラー出力" << G4endl;
-G4debug << "デバッグ用出力" << G4endl;
-```
-
-ターミナルへの出力は、C++標準の``std::cout``や``std::cerr``の代わりに
-Geant4が用意している``G4cout``、``G4cerr``、``G4debug``を使うのがよいそうです。
-
-``G4debug``はQtで表示すると赤色でハイライトされるので、デバッグ時の確認がしやすいのでオススメです。
-
-## リファレンス
-
-- [Geant4 Coding Guidelines](https://geant4-internal.web.cern.ch/collaboration/coding_guidelines)
-- [Geant4 Coding-style Guidelines Motivations](https://geant4-internal.web.cern.ch/collaboration/coding_style_guidelines_motivations)
-- [G4cout, G4cerr and G4debug](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/mainProgram.html#g4cout-g4cerr-and-g4debug)
