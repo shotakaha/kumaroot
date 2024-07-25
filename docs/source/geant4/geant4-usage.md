@@ -134,18 +134,15 @@ geant4-geometry
 geant4-geometry-solid
 geant4-logicalvolume
 geant4-physicalvolume
+geant4-sensitivedetector
 geant4-geometry-examples
 ```
 
 ## マテリアル操作したい
 
 ```cpp
-G4NistManager *nm = new G4NistManager::Instance();
-auto air = nm->FindOrBuildMaterial("G4_AIR");    // 空気
-auto water = nm->FindOrBuildMaterial("G4_WATER");    // 水
-auto vacuum = nm->FindOrBuildMaterial("G4_Galactic");    // 真空
-auto acrylic = nm->FindOrBuildMaterial("G4_PLEXIGLASS");    // アクリルガラス
-auto sc = nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");    // プラスチックシンチレーター
+auto nm = new G4NistManager::Instance();
+auto air = nm->FindOrBuildMaterial("G4_AIR");
 ```
 
 ```{toctree}
@@ -160,7 +157,7 @@ geant4-material-examples
 
 ```cpp
 auto* rm = G4RunManagerFactory::CreateRunManager();
-auto* physics = new FTFP_BERT;
+auto* physics = new FTFP_BERT{};
 rm->SetUserInitialization(physics);
 ```
 
