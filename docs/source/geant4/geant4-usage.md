@@ -134,7 +134,7 @@ geant4-geometry
 geant4-geometry-solid
 geant4-logicalvolume
 geant4-physicalvolume
-geant4-sensitivedetector
+geant4-sensor
 geant4-geometry-examples
 ```
 

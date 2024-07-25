@@ -24,7 +24,16 @@ SDに設定した論理ボリュームに粒子が入射すると``ProcessHits(G
 整理しました。
 
 :::{seealso}
-- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)
-- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
+
+ここでは個別の論理ボリュームにSensitiveDetectorを設定する方法を紹介しましたが、多くのサンプルでは、ジオメトリ用クラスの``ConstructSDandField``の中で
+``SetSensitiveDetector``しています。
+詳しくは次のページを参照してください。
+
+- [](./geant4-sensitivedetector.md)
 
 :::
+
+## リファレンス
+
+- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)
+- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
