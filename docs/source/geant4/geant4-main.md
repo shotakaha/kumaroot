@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 ```{toctree}
 geant4-command
 geant4-macro
-gean4-batch
+geant4-batch
 ```
 
 :::{seealso}
