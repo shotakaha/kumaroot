@@ -170,17 +170,11 @@ rm->SetUserInitialization(detector);
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 geant4-geometry
 geant4-geometry-solid
-geant4-geometry-world
-geant4-geometry-tank
-geant4-geometry-pmt
-geant4-calorimeter
-geant4-hodoscope
-geant4-qe
-geant4-magneticfield
+geant4-geometry-examples
 ```
 
 ## 相互作用したい
