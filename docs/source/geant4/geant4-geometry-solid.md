@@ -18,10 +18,50 @@ G4Tubs("name", r_min, r_max, half_z, s_phi, d_phi);
 
 :::
 
-:::{seealso}
+## 四角柱したい（``G4Box``）
+
+```cpp
+auto solid = G4Box{
+    "solidBox",  // 任意の名前
+    half_x,      // x方向の長さ（の1/2）
+    half_y,      // y方向の長さ（の1/2）
+    half_z       // z方向の長さ（の1/2）
+};
+```
+
+``G4Box``で四角柱のソリッドが作成できます。
+ソリッドの名前は、あとから参照することもないため、自由に設定してよいと思います。
+縦x・横y・高さzの長さには、作成したい大きさの1/2の値を設定します。
+
+## 円柱したい（``G4Tubs``）
+
+```cpp
+auto solid = G4Tubs{
+    "solidTube",  // 任意の名前
+    r_min,    // 底面の内径
+    r_max,    // 底面の外径
+    half_z,   // 高さ（の半分）
+    s_phi,    // 中心角の始点
+    d_phi,    // 中心角の終点
+}
+```
+
+``G4Tubs``で円柱のソリッドが作成できます。
+ソリッドの名前は、あとから参照することもないため、自由に設定してよいと思います。
+底面の内径と外径、
+円柱の高さ（の半分）、
+中心角の始点と終点の角度、を設定します。
+
+:::{hint}
+
+``r_min``（内径）を0より大きい値、
+``s_phi``と``d_phi``で中心角の範囲を定めると
+扇形の円柱になります。
+
+:::
+
+## リファレンス
 
 - [G4VSolid](https://geant4.kek.jp/Reference/11.2.0/classG4VSolid.html)
 - [G4Box](https://geant4.kek.jp/Reference/11.2.0/classG4Box.html)
 - [G4Tubs](https://geant4.kek.jp/Reference/11.2.0/classG4Tubs.html)
-
-:::
