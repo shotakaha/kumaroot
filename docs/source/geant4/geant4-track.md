@@ -1,10 +1,18 @@
 # トラック操作したい（``G4Track``）
 
-[G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)は、トラック情報を管理するオブジェクトです。
-トラック粒子の進む方向のオブジェクトです。
-ステップと同等の情報を持っていますが、薄皮一枚くらい上位のオブジェクト（というイメージ）です。
+``G4Track``はトラック情報を管理するクラスです。
+ユーザーアクション設定の
+[UserTrackingAction](./geant4-user-trackingaction.md)や
+[UserSteppingAction](./geant4-user-steppingaction.md)から
+情報を取得したいときに使います。
 
-トラック情報は``G4UserTrackingAction``クラスをフックにしてカスタマイズするのに使います。
+:::{note}
+
+トラックは、粒子が進んできた情報を含んでいて、
+トラックが生成されたときの情報と、
+最新のステップの状態を取得できます。
+
+:::
 
 ```{toctree}
 ---
@@ -24,10 +32,6 @@ geant4-track-status
 geant4-trackingaction
 ```
 
-:::{seealso}
+## リファレンス
 
 - [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
-
-:::
-
-

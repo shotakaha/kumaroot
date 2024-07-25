@@ -1,5 +1,10 @@
 # ステップ操作したい（``G4Step``）
 
+``G4Step``はステップ情報を管理するクラスです。
+ユーザーアクション設定の
+[UserSteppingAction](./geant4-user-steppingaction.md)から
+情報を取得したいときに使います。
+
 ```cpp
 // G4Step *aStep
 
