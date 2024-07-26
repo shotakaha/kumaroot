@@ -15,11 +15,16 @@ virtual void EndOfEvent(G4HCofThisEvent*) {};
 virtual G4bool ProcessHits(G4Step *aStep, G4TouchableHistory* /*ROhist*/) = 0;
 ```
 
-コンストラクターとデストラクターはデフォルトのままでOKです。
+親クラスのメンバー関数を抜粋しました。
+コンストラクターデストラクターは、このまま引き継げばよさそうです。
+（コンストラクターは3種類ありますが、一番使いやすそうな形を使えばOKです）。
+
 ``Initialize()``は、イベントの開始時に実行される関数です。
 ``EndOfEvent()``は、イベントの終了時に実行される関数です。
+これらの仮想関数は、目的に合わせて自作クラスでoverrideします。
+
 ``ProcessHits()``は、ステップが有感検出器の中にあるときに実行される関数です。
-これらの（純粋）仮想関数を、自作クラスでoverrideします。
+この純粋仮想関数は、自作クラスでoverrideが必要です。
 
 ## Sensorクラス
 

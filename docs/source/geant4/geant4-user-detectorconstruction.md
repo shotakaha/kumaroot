@@ -14,7 +14,7 @@ virtual G4VPhysicalVolume* Construct() = 0;
 virtual void ConstructSDandField();
 ```
 
-親クラスのメンバー変数を確認しました。
+親クラスのメンバー関数を抜粋しました。
 コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
 ``Construct()``は、Geant4で使う測定器を作るための関数です。
 純粋仮想関数になっているため、自作クラスでoverrideが必要です。

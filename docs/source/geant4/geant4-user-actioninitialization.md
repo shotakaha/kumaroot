@@ -11,11 +11,10 @@ virtual void Build() const = 0;
 virtual void BuildForMaster() const {};
 ```
 
-親クラスのメンバー変数を確認しました。
+親クラスのメンバー関数を抜粋しました。
 コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
 ``Build()``は、ユーザーアクションを設定するための関数です。
 純粋仮想関数になっているため、自作クラスでoverrideが必要です。
-
 ``BuildForMaster()``は、マルチスレッド環境で実行する場合に、
 RunActionの設定が必要です。
 

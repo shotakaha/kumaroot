@@ -13,7 +13,7 @@ virtual ~G4VUserPrimaryGeneratorAction() = default;
 virtual void GeneratePrimaries(G4Event *aEvent) = 0;
 ```
 
-親クラスのメンバー変数を確認しました。
+親クラスのメンバー関数を抜粋しました。
 コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
 ``GeneratePrimaries()``は、イベントの一次粒子を設定するための関数です。
 純粋仮想関数になっているため、自作クラスでoverrideが必要です。

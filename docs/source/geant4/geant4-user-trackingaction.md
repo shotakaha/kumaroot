@@ -11,7 +11,7 @@ virtual void PreUserTrackingAction(const G4Track*){};
 virtual void PostUserTrackingAction(const G4Track*){};
 ```
 
-親クラスのメンバー変数を確認しました。
+親クラスのメンバー関数を抜粋しました。
 
 :::{note}
 
