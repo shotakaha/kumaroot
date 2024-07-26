@@ -4,19 +4,62 @@
 void PrimaryGenerator::GeneratePrimaries(G4Event *aEvent)
 {
     auto gps = G4GeneralParticleSource{};
-    gps->SetParticleDefinition(...);
-    gps->SetNumberOfParticles(...);
 
+    // 入射する粒子数
+    G4int n_particles = 100;
+    gps->SetNumberOfParticles(n_particles);
+
+    // 入射する粒子の種類
+    G4ParticleTable *table = G4ParticleTable::GetParticleTable();
+    G4ParticleDefinition *particle = table->FindParticle("粒子名");
+    gps->SetParticleDefinition(particle);
+
+    // 粒子の分布
     gps->SetFlatSampling(true);
     gps->SetMultipleVertex(true);
 
     // G4EventにGPSを追加する
-    gps->GeneratePrymaryVertex(aEvent);
+    gps->GeneratePrimaryVertex(aEvent);
 };
 ```
 
 ``G4GeneralParticleSource``はGeant4標準のPrimaryGeneratorのひとです。
 ``G4ParticleGun``と異なり、平面上に入射粒子を生成できます。
+
+## マクロしたい（``/gps/``）
+
+### 入射粒子を設定したい
+
+| コマンド名 | 引数 | デフォルト値 | 内容 |
+|---|---|---|---|
+| ``/gps/list`` | | | 利用可能な粒子名のリストを表示する |
+| ``/gps/particle`` | 粒子名 | geantino | 入射粒子名を設定 |
+| ``/gps/direction`` | Px Py Pz | 1 0 0 | 入射方向を設定 |
+| ``/gps/energy`` | E 単位 | 1 MeV | 入射エネルギーを設定 |
+| ``/gps/position`` | X Y Z 単位 | 0 0 0 cm | 入射位置を設定 |
+| ``/gps/time`` | t0 単位 | 0 ns | 入射時刻を設定 |
+| ``/gps/number`` | N | 1 | 入射粒子数を設定 |
+| ``/gps/source/multiplevertex`` | flag | false | trueにすると複数のvertexを生成できる |
+| ``/gps/source/flatsampling`` | flag | false | trueにするとソースの強度が無視される |
+
+### 入射位置を設定したい
+
+| コマンド名 | 引数 | デフォルト値 | 内容 |
+|---|---|---|---|
+| ``/gps/pos/type`` | 分布の種類 | Point | 分布の種類を設定（Point / Beam / Surface / Volume） |
+| ``/gps/pos/shape`` | 分布の形 | | Planeの場合: Circle / Annulus / Ellipse / Square / Rectangle |
+| ``/gps/pos/centre`` | X Y Z 単位 | 0 0 0 cm | 中心座標を設定 |
+| ``/gps/pos/halfx`` | X 単位 | 0 cm | X方向の幅 |
+| ``/gps/pos/halfy`` | Y 単位 | 0 cm | X方向の幅 |
+| ``/gps/pos/halfz`` | Z 単位 | 0 cm | X方向の幅 |
+
+### 入射角度を設定したい
+
+| コマンド名 | 引数 | デフォルト値 | 内容 |
+|---|---|---|---|
+| ``/gps/ang/type`` | 分布の種類 | iso | 分布の種類を設定（iso / cos / planar / beam1d / beam2d / focused / user） |
+| ``/gps/ang/mintheta`` | $\theta$ 単位 | 0 rad | 最小値を設定 |
+| ``/gps/ang/maxtheta`` | $\theta$ 単位 | $\pi$ rad | 最小値を設定 |
 
 ## リファレンス
 
