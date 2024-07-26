@@ -14,12 +14,24 @@ virtual G4VPhysicalVolume* Construct() = 0;
 virtual void ConstructSDandField();
 ```
 
-コンストラクターとデストラクターはデフォルトのままでOKです。
-``Construct()``は、Geant4の中に測定器を作るための関数です。
-純粋仮想関数になっているため、自作クラスでoverrideします。
+親クラスのメンバー変数を確認しました。
+コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
+``Construct()``は、Geant4で使う測定器を作るための関数です。
+純粋仮想関数になっているため、自作クラスでoverrideが必要です。
+``ConstructSDandField()``は、論理ボリュームに対して
+有感検出器（SensitiveDetector）を設定するための関数です。
+マルチスレッド環境で実行する場合は、自作クラスでoverrideが必要です。
 
-また、マルチスレッド環境では、有感検出器（SensitiveDetector）の設定を
-``ConstructSDandField()``をoverrideして実装します。
+:::{note}
+
+シングルスレッドで実行する場合は、
+``ConstructSDandField``ではなく、
+``Construct``の中で設定すればよいはずです。
+
+``ConstructSDandField``はGeant4.10で追加されたようなので、
+それ以前はそうしてたはず。
+
+:::
 
 ## Geometryクラス
 

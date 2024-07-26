@@ -14,10 +14,13 @@ virtual void BeginOfRunAction(const G4Run* /*aRun*/) {};
 virtual void EndOfRunAction(const G4Run* /*aRun*/) {}
 ```
 
-コンストラクターとデストラクターはデフォルトのままでOKです。
+親クラスのメンバー変数を確認しました。
+コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
 ``BeginOfRunAction()``は、ランの開始時に実行される関数です。
 ``EndOfRunAction()``は、ランの終了時に実行される関数です。
-どちらも仮想関数になっているため、自作クラスでoverrideします。
+
+どちらも仮想関数になっているため、設定は必須ではありません。
+必要に応じて自作クラスでoverrideします。
 
 ## RunActionクラス
 

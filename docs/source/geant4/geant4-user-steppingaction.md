@@ -27,8 +27,14 @@ virtual ~G4UserSteppingAction() = default;
 virtual void UserSteppingAction(const G4Step*){};
 ```
 
-## SteppingActionクラス
+親クラスのメンバー変数を確認しました。
+コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
+``UserSteppingAction()``は、ステッピング処理で実行される関数です。
 
+仮想関数になっているため、設定は必須ではありません。
+必要に応じて自作クラスでoverrideします。
+
+## SteppingActionクラス
 
 ```cpp
 // SteppingAction.hh

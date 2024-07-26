@@ -14,10 +14,13 @@ virtual void BeginOfEventAction(const G4Event* aEvent);
 virtual void EndOfEventAction(const G4Event* aEvent);
 ```
 
-コンストラクターとデストラクターはデフォルトのままでOKです。
+親クラスのメンバー変数を確認しました。
+コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
 ``BeginOfEventAction()``は、イベントの開始時に実行される関数です。
 ``EndOfEventAction()``は、イベント終了時に実行される関数です。
-どちらも仮想関数になっているため、自作クラスでoverrideします。
+
+どちらも仮想関数になっているため、設定は必須ではありません。
+必要に応じて自作クラスでoverrideします。
 
 ## EventActionクラス
 
