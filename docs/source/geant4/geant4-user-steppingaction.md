@@ -1,10 +1,34 @@
 # ステッピングアクションしたい（``G4UserSteppingAction``）
 
+ステップごとのデータを収集したい場合は、
+``G4UserSteppingAction``クラスを継承したクラスを作成します。
+
+:::{hint}
+
+測定器のヒット情報を取得するときにステップ情報へのアクセスが必要になります。
+その場合は、迷わず[G4VSensitiveDetectorクラス](./geant4-sensor-sensitivedetector.md)を使いましょう。
+
+:::
+
 :::{seealso}
 
 - [](./geant4-step.md)
+- [](./geant4-sensor-sensitivedetector.md)
 
 :::
+
+## 親クラス
+
+- [G4UserSteppingAction](https://geant4.kek.jp/Reference/11.2.0/classG4UserSteppingAction.html)
+
+```cpp
+G4UserSteppingAction();
+virtual ~G4UserSteppingAction() = default;
+virtual void UserSteppingAction(const G4Step*){};
+```
+
+## SteppingActionクラス
+
 
 ```cpp
 // SteppingAction.hh
@@ -37,11 +61,6 @@ class SteppingAction : public G4UserSteppingAction
 ステッピングアクションは``G4UserSteppingAction``を継承したクラスを自作します。
 仮想関数として定義されている``UserSteppingAction``を実装します。
 
-:::{note}
-
-ステップ処理をするときに、ステップが測定したいボリュームにあるかどうかの判断も必要になりますが、[G4VSensitiveDetector](./geant4-sensitivedetector.md)を使うとGeant4にお任せできます。
-
-:::
 
 ```cpp
 void SteppingAction::UserSteppingAction(const G4Step *aStep)
