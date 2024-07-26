@@ -1,5 +1,26 @@
 # ヒット情報したい（``G4VHit`` / ``G4VHitsCollection`` / ``G4HCofThisEvent``）
 
+有感検出器でのヒット情報を格納するためには
+``G4VHit``クラスを継承したクラスを作成します。
+
+## 親クラス
+
+- [G4VHit](https://geant4.kek.jp/Reference/11.2.0/classG4VHit.html)
+
+```cpp
+G4VHit() = default;
+virtual G4VHit() = default;
+virtual void Draw() {};
+virtual void Print() {};
+```
+
+コンストラクターとデストラクターはデフォルトのままでOKです。
+``Draw()``は、イベントを描画するときのヒット点の見た目を調整する関数です。
+``Print()``は、ヒットの情報を出力する関数です。
+どちらも仮想関数になっているため、必要に応じて自作クラスでoverrideします。
+
+## SensorHitクラス
+
 ```cpp
 #ifndef SensorHit_h
 #define SensorHit_h 1
@@ -10,6 +31,9 @@ class SensorHit : public G4VHit
 {
   public:
     // 1. コンストラクターなどを定義
+    SensorHit() = default;
+    ~SensorHit() = default;
+
     // 2. new / delete を実装
     inline void* operator new(size_t);
     inline void operator delete(void*);
