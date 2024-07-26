@@ -3,23 +3,50 @@
 イベントごとのデータを収集したい場合は、
 ``G4UserEventAction``クラスを継承したクラスを作成します。
 
+## 親クラス
+
+- [G4UserEventAction](https://geant4.kek.jp/Reference/11.2.0/classG4UserEventAction.html)
+
 ```cpp
+G4UserEventAction();
+virtual ~G4UserEventAction() = default;
+virtual void BeginOfEventAction(const G4Event* aEvent);
+virtual void EndOfEventAction(const G4Event* aEvent);
+```
+
+コンストラクターとデストラクターはデフォルトのままでOKです。
+``BeginOfEventAction()``は、イベントの開始時に実行される関数です。
+``EndOfEventAction()``は、イベント終了時に実行される関数です。
+どちらも仮想関数になっているため、自作クラスでoverrideします。
+
+## EventActionクラス
+
+```cpp
+// include/EventAction.hh
+
+#ifndef EventAction_h
+#define EventAction_h 1
 
 #include "G4UserEventAction.hh"
 
 #include "RunAction.hh"
 
+namespace ToyMC
+{
+
 class EventAction: public G4UserEventAction
 {
-    public:
-        EventAction(RunAction *aAction);
-        ~EventAction() override = default;
+  public:
+    EventAction() = default;
+    ~EventAction() = default;
 
-        void BeginOfEventAction(const G4Event *aEvent) override;
-        void EndOfEventAction(const G4Event *aEvent) override;
-    private:
-        fEnergyDeposit = -1;
-}
+    void BeginOfEventAction(const G4Event *aEvent) override;
+    void EndOfEventAction(const G4Event *aEvent) override;
+};
+
+};  // namespace ToyMC
+
+#endif
 ```
 
 :::{seealso}

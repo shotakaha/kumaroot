@@ -22,7 +22,6 @@ virtual void EndOfRunAction(const G4Run* /*aRun*/) {}
 ## RunActionクラス
 
 ```cpp
-
 // include/RunAction.hh
 
 #ifndef RunAction_h
