@@ -2,152 +2,194 @@
 
 測定器の構造を定義するクラスは、必須クラスのひとつで、
 ``G4VUserDetectorConstruction``クラスを継承して作成します。
-``G4VUserDetectorConstruction::Construct``が純粋仮想関数になっていて、
-測定器を建設する作業はこの関数をオーバーライドして実装します。
 
-ここではクラス名を``DetectorConstruction``としました。
-また、必要な論理物体（G4LogicalVolume）を作成する関数も用意しました。
+## 親クラス
 
-:::{hint}
-
-付属サンプルの多くは``Construct()``関数の中で、必要な構造体をまとめて定義しています。これは、可読性＆カスタマイズ性がよくないと感じます。
-個人的には測定器の構成要素ごとに論理物体を返す関数にするとよいと思います。
-
-:::
-
-## メイン関数
+- [G4VUserDetectorConstruction](https://geant4.kek.jp/Reference/11.2.0/classG4VUserDetectorConstruction.html)
 
 ```cpp
-#include "DetectorConstruction.hh"
-
-int main(int argc, char** argv)
-{
-    auto rm = G4RunManagerFactory::CreateRunManager();
-
-    auto detector = new DetectorConstruction{};
-    rm->SetUserInitialization(detector);
-
-}
+G4VUserDetectorConstruction() = default;
+virtual ~G4UserDetectorConstruction() = default;
+virtual G4VPhysicalVolume* Construct() = 0;
+virtual void ConstructSDandField();
 ```
 
-メイン関数では、
-``DetectorConstruction``のインスタンスを作成し、
-``SetUserInitialization``でRunManagerに追加します。
+コンストラクターとデストラクターはデフォルトのままでOKです。
+``Construct()``は、Geant4の中に測定器を作るための関数です。
+純粋仮想関数になっているため、自作クラスでoverrideします。
 
-## ヘッダーファイル
+また、マルチスレッド環境では、有感検出器（SensitiveDetector）の設定を
+``ConstructSDandField()``をoverrideして実装します。
+
+## Geometryクラス
 
 ```cpp
 // //////////////////////////////////////////////////
-// include/DetectorConstruction.hh
+// include/Geometry.hh
 // //////////////////////////////////////////////////
 
 #include "G4VUserDetectorConstruction.hh"
 #include "G4LogicalVolume.hh"
 #include "G4SystemOfUnits.hh"
 
-namespace 名前空間
+namespace ToyMC
 {
 
-class DetectorConstruction : public G4VUserDetectorConstruction
+class Geometry : public G4VUserDetectorConstruction
 {
     public:
-        DetectorConstruction();
-        ~DetectorConstruction();
-        G4PhysicalVolume* Construct();
+        // コンストラクタとデストラクタは
+        // 親クラスを引き継ぐことにする
+        Geometry() = default;
+        ~Geometry() = default;
 
-        // サブ関数（オプション）
-        G4LogicalVolume* CreateWorldVolume(const G4String &pName);
-        G4LogicalVolume* CreateDetectorVolume(const G4String &pName);
-        G4LogicalVolume* CreateSubDetectorVolume(const G4String &pName);
+    public:
+        // これらの関数は override する
+        G4PhysicalVolume* Construct() override;
+        void ConstructSDandField() override;
 
+    // __________________________________________________
+    // これ以降は僕のベストプラクティス
     private:
-        // ワールドの大きさ
+        // ワールドを設定するための関数とパラメーター
+        G4LogicalVolume* SetupWorldVolume();
+        G4String fWorldLVName = "World";
+        G4String fWorldMaterial = "G4_AIR";
         G4double fWorldX = 15. * cm;
         G4double fWorldY = 15. * cm;
         G4double fWorldZ = 15. * cm;
 
-        // 測定器の大きさ
+    private:
+        // 測定器を設定するための関数とパラメーター
+        // 測定器ごとに用意する
+        G4LogicalVolume* SetupDetectorVolume();
+        G4String fDetectorLVName = "Detector";
+        G4String fDetectorMaterial = "G4_WATER";
         G4double fDetectorX = 5. * cm;
         G4double fDetectorY = 5. * cm;
         G4double fDetectorZ = 5. * cm;
-}
-} // 名前空間
+
+    public:
+        // main()関数から測定器のパラメーターを確認・変更するメソッド
+        G4String GetDetectorLVName() const { return fDetectorLVName; };
+        void SetDetectorLVName(const G4String &name) { fDetectorLVName = name};
+
+        G4String GetDetectorMaterial() const { return fDetectorMaterial; };
+        void SetDetectorMaterial(const G4String &name) { fDetectorMaterial = name};
+
+        G4double GetDetectorX() const { return fDetectorX; };
+        void SetDetectorX(const G4double length) { fDetectorX = length; };
+
+        G4double GetDetectorY() const { return fDetectorY; };
+        void SetDetectorY(const G4double length) { fDetectorY = length; };
+
+        G4double GetDetectorZ() const { return fDetectorZ; };
+        void SetDetectorZ(const G4double length) { fDetectorZ = length; };
+
+};
+}; // ToyMC
 ```
+
+自作クラス名を``Geometry``として作成しています。
+``namespace``は``ToyMC``（お遊びのモンテカルロの意味）としました。
+
+また、必要な論理物体（G4LogicalVolume）を作成する関数も用意しました。
+
+```cpp
+public:
+    Geometry() = default;
+    ~Geometry() = default;
+```
+
+コンストラクターとデストラクターは親クラスを引き継ぐことにしました。
+
+```cpp
+public:
+    G4PhysicalVolume* Construct() override;
+    void ConstructSDandField() override;
+```
+
+``override``キーワードを設定し、親クラスが持っている（純粋）仮想関数を上書きすることを明示しました。
+また、overrideをつけておくと、関数名をタイポしていた場合にコンパイルエラーで指摘してくれます。
+
+```cpp
+private:
+    // ワールドを設定するための関数とパラメーター
+    G4LogicalVolume* SetupWorldVolume();
+    G4String fWorldLVName = "World";
+    G4String fWorldMaterial = "G4_AIR";
+    G4double fWorldX = 15. * cm;
+    G4double fWorldY = 15. * cm;
+    G4double fWorldZ = 15. * cm;
+```
+
+これ以降は、僕がカスタマイズするときのベストプラクティス（と思っている）な書き方です。参考までにどうぞ。
+ここでは、ワールドの大きさのパラメーターと、それをセットアップする関数を宣言しています。
+具体的な中身は[](./geant4-geometry-world.md)を参照してください。
+
+```cpp
+private:
+    // 測定器を設定するための関数とパラメーター
+    // 測定器ごとに用意する
+    G4LogicalVolume* SetupDetectorVolume();
+    G4String fDetectorLVName = "Detector";
+    G4String fDetectorMaterial = "G4_WATER";
+    G4double fDetectorX = 5. * cm;
+    G4double fDetectorY = 5. * cm;
+    G4double fDetectorZ = 5. * cm;
+
+public:
+    // main()関数から測定器のパラメーターを確認・変更するメソッド
+    G4String GetDetectorLVName() const { return fDetectorLVName; };
+    void SetDetectorLVName(const G4String &name) { fDetectorLVName = name};
+
+    G4String GetDetectorMaterial() const { return fDetectorMaterial; };
+    void SetDetectorMaterial(const G4String &name) { fDetectorMaterial = name};
+
+    G4double GetDetectorX() const { return fDetectorX; };
+    void SetDetectorX(const G4double length) { fDetectorX = length; };
+
+    G4double GetDetectorY() const { return fDetectorY; };
+    void SetDetectorY(const G4double length) { fDetectorY = length; };
+
+    G4double GetDetectorZ() const { return fDetectorZ; };
+    void SetDetectorZ(const G4double length) { fDetectorZ = length; };
+```
+
+実験室の中に配置する物体を作成する部分です。
+配置する測定器の種類の数だけ、コピペが必要です。
+
+ここでは大きさをprivateで定義し、それにアクセスするためのセッター／ゲッターをpublicで定義しました。
+これにより``main()``関数から測定器のパラメーターを変更できます。
+
+## メイン関数
+
+```cpp
+#include "Geometry.hh"
+
+int main(int argc, char** argv)
+{
+    auto rm = G4RunManagerFactory::CreateRunManager();
+
+    auto geometry = new Geometry{};
+    geometry->SetDetectorMaterial("G4_Pb");  // 測定器の素材を"G4_Pb"に変更
+    rm->SetUserInitialization(geometry);
+
+}
+```
+
+``main()``関数の中で、
+``Geometry``クラスのインスタンスを作成し、
+``SetUserInitialization``でRunManagerに追加します。
+
+publicなセッターを作成しておいたため、``geometry->SetDetectorMaterial``のように変更できます。
 
 :::{hint}
 
-測定器のサイズはプライベート変数で定義しました。
-すでに大きさが決まっている場合は、ソースにハードコードして
-しまっても問題ないと思います。
+実験の最適なセットアップを検討している段階では、検出器や標的の素材を変えたり、厚みを変えたりしたいはずです。
+``main()``関数から変更できるようにしておくと、そのようなスタディがはかどります。
 
 :::
-
-## ソースファイル
-
-```cpp
-// //////////////////////////////////////////////////
-// src/DetectorConstruction.cc
-// //////////////////////////////////////////////////
-
-#include "DetectorConstruction.hh"
-
-namespace 名前空間
-{
-// //////////////////////////////////////////////////
-// コンストラクター
-// //////////////////////////////////////////////////
-DetectorConstruction::DetectorConstruction()
-{
-
-}
-
-// //////////////////////////////////////////////////
-// デストラクター
-// //////////////////////////////////////////////////
-DetectorConstruction::~DetectorConstruction()
-{
-
-}
-
-// //////////////////////////////////////////////////
-// 論理物体を準備する関数（オプション）
-// //////////////////////////////////////////////////
-G4LogicalVolume* DetectorConstruction::DefineWorldVolume(const G4String &name){...};
-G4LogicalVolume* DetectorConstruction::DefineDetectorVolume(const G4String &name){...};
-G4LogicalVolume* DetectorConstruction::DefineSubDetectorVolume(const G4String &name){...};
-
-// //////////////////////////////////////////////////
-// 測定器の建設に実装が必要な関数
-// //////////////////////////////////////////////////
-G4VPhysicalVolume *DetectorConstruction::Construct()
-{
-    // 論理物体を取得する
-    auto worldLogical = DefineWorldVolume("world");
-    auto detectorLogical = DefineDetectorVolume("detector");
-
-    // ワールドを配置する
-    G4Transform3D location = G4Transform3D(nullptr, nullptr);
-    G4VPhysicalVolume *world = new G4PVPlacement(
-        location,
-        worldLogical,    // G4LogicalVolume: 配置する論理物体
-        "worldPhysical",
-        nullptr,         // G4LogicalVolume: 親となる論理物体
-        ...);
-
-    // 測定器を配置する
-    G4Transform3D location = G4Transform3D(nullptr, nullptr);
-    new G4PVPlacement(
-        location,
-        detectorLogical,  // G4LogicalVolume: 配置する論理物体
-        "detectorP",
-        worldLogical,     // G4LogicalVolume: 親となる論理物体
-        ...);
-
-    return world;
-}
-
-} // 名前空間
-```
 
 :::{seealso}
 
@@ -157,6 +199,3 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
 
 :::
 
-## リファレンス
-
-- [G4VUserDetectorConstruction](https://geant4.kek.jp/Reference/11.2.0/classG4VUserDetectorConstruction.html)

@@ -1,83 +1,81 @@
-# 実験室を作りたい
-
-通常**World**（ワールド）と呼ばれる実験室の空間を作成します。
-このボリュームは親ボリュームを持たず、
-すべての測定装置はこの空間の中に収まるように配置する必要があります。
-
-## 実験室を定義する関数
-
-ワールドの論理物体を返す関数を作成します。
-引数で論理物体の名前を設定できるようになっています。
-これを``DetectorConstruction::Construct``の中で呼び出して、物理物体として配置します。
+# 実験室を作りたい（``SetupWorldVolume``）
 
 ```cpp
-G4LogicalVolume *CreateWorldVolume(const G4String &name){
+G4LogicalVolume *SetupWorldVolume(){
 
-    // 実験室の素材を決める
-    G4NistManager *nm = new G4NistManager::Instance();
-    auto material = nm->FindOrBuildMaterial("G4_AIR");
+    // パラメーターの設定
+    G4String logical_volume = "World";
+    G4String material_name = "G4_AIR";
+    G4String length_x = 1. * m;
+    G4String length_y = 1. * m;
+    G4String length_z = 1. * m;
 
-    // 実験室の大きさ
-    G4double halfX = 50.0 * cm;
-    G4double halfY = 50.0 * cm;
-    G4double halfZ = 50.0 * cm;
+    // 形状を定義
+    G4double halfX = 0.5 * length_x;
+    G4double halfY = 0.5 * length_y;
+    G4double halfZ = 0.5 * length_z;
 
-    // 実験室の形状
     auto solid = new G4Box{
-        "worldSolid",    // 名前
+        "solid",    // 名前
         halfX,
         halfY,
         halfZ,
     };
 
+    // 実験室の素材を決める
+    G4NistManager *nm = new G4NistManager::Instance();
+    auto material = nm->FindOrBuildMaterial(material_name);
+
     // 実験室
     auto logical = new G4LogicalVolume{
-        solid,       // G4VSolid
-        material,    // G4Material
-        name,        // 名前
-        nullptr,     // G4FieldManager
-        nullptr,     // G4VSensitiveDetector
-        nullptr,     // G4UserLimits
+        solid,         // G4VSolid
+        material,      // G4Material
+        logical_name,  // 名前
+        nullptr,       // G4FieldManager
+        nullptr,       // G4VSensitiveDetector
+        nullptr,       // G4UserLimits
     };
-
-    G4cout << "World: "
-    << "x=" << 2 * halfX / cm << " cm, "
-    << "y=" << 2 * halfY / cm << " cm, "
-    << "z=" << 2 * halfZ / cm << " cm, "
-    << "of " << material->GetName()
-    << G4endl;
-
     return logical;
 }
 ```
 
-## 使い方
+Geant4で通常**World**（ワールド）と呼ばれるシミュレーション用の実験室を作成します。
+このボリュームは親ボリュームを持たず、
+すべての測定装置はこの空間の中に収まるように配置する必要があります。
 
-``DetectorConstruction::Construct()``の中で使います。
+ここでは形状を``G4Box``（箱型）、
+素材を``G4_AIR``（空気）に設定した
+論理ボリュームを作成しています。
+
+ワールドの論理物体を返す関数を作成します。
+引数で論理物体の名前を設定できるようになっています。
+これを``DetectorConstruction::Construct``の中で呼び出して、物理物体として配置します。
+
+## 実験室を配置したい
 
 ```cpp
-G4VPhysicalVolume* DetectorConstruction::Construct()
+G4VPhysicalVolume* SetVolumes()
 {
     // 実験室の論理物体を取得する
-    auto pWorldLogical = CreateWorld("world")
+    auto world = SetupWorldVolume();
 
     // 実験室の置き場所を決める
-    G4RotationMatrix rotation = G4RotationMatrix();       // 回転 : なし
-    G4ThreeVector direction = G4ThreeVector(0., 0., 0.);  // 方向 :  (0, 0, 0)
-    G4Transform3D location = G4Transform3D(rotation, direction)  // 座標
+    G4RotationMatrix rotation = G4RotationMatrix{};       // 回転 : なし
+    G4ThreeVector position = G4ThreeVector{0., 0., 0.};  // 方向 :  (0, 0, 0)
+    G4Transform3D origin = G4Transform3D{rotation, position}  // 座標
 
     // 実験室を配置する
-    G4VPhysicalVolume *pWorldPhysical = new G4PVPlacement(
-        location,         // G4Transform3D : 論理ボリュームを配置する座標
-        pWorldLogical,    // G4LogicalVolume : 配置する論理ボリューム
-        "WorldPhysical",  // G4String : この物理ボリュームの名前
-        0,                // G4LogicalVolume: 親ボリュームはなし
-        false,            // G4bool pMany（廃止）
-        0,                // G4int pCopyNo : コピー番号
-        true              // G4bool check overlaps
+    G4VPhysicalVolume *theWorld = new G4PVPlacement(
+        location,    // G4Transform3D : 論理ボリュームを配置する座標
+        world,       // G4LogicalVolume : 配置する論理ボリューム
+        "theWorld",  // G4String : この物理ボリュームの名前
+        0,           // G4LogicalVolume: 親ボリュームはなし
+        false,       // G4bool pMany（廃止）
+        0,           // G4int pCopyNo : コピー番号
+        true         // G4bool check overlaps
     )
 
-    return pWorldPhysical;
+    return theWorld;
 }
 ```
 
