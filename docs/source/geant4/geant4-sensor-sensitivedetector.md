@@ -1,5 +1,28 @@
 # SensitiveDetectorしたい（``G4VSensitiveDetector``）
 
+測定器の有感検出器でのヒットを収集したい場合は、
+``G4VSensitiveDetector``クラスを継承したクラスを作成します。
+
+## 親クラス
+
+- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
+
+```cpp
+explicit G4VSensitiveDetector(G4String name);
+virtual ~G4VSensitiveDetector() = default;
+virtual void Initialize(G4HCofThisEvent*) {};
+virtual void EndOfEvent(G4HCofThisEvent*) {};
+virtual G4bool ProcessHits(G4Step *aStep, G4TouchableHistory* /*ROhist*/) = 0;
+```
+
+コンストラクターとデストラクターはデフォルトのままでOKです。
+``Initialize()``は、イベントの開始時に実行される関数です。
+``EndOfEvent()``は、イベントの終了時に実行される関数です。
+``ProcessHits()``は、ステップが有感検出器の中にあるときに実行される関数です。
+これらの（純粋）仮想関数を、自作クラスでoverrideします。
+
+## Sensorクラス
+
 ```cpp
 // include/Sensor.hh
 
@@ -11,17 +34,22 @@
 #include "G4TouchableHistory.hh"
 #include "G4VSensitiveDetector.hh"
 
+namespace ToyMC
+{
+
 class Sensor : public G4VSensitiveDetector
 {
   public:
     Sensor(const G4String &name);
-    ~Sensor() override;
+    ~Sensor() = default;
 
   public:
     void Initialize(G4HCofThisEvent *aHCE) override;
     void EndOfEvent(G4HCofThisEvent *aHCE) override;
     G4bool ProcessHits(G4Step *aStep, G4TouchableHistory *aTouchable) override;
-}
+};
+
+};  // namespace ToyMC
 
 #endif // Sensor_h
 ```
