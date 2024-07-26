@@ -66,11 +66,15 @@ class SteppingAction : public G4UserSteppingAction
 ## 境界判断したい
 
 ```cpp
-auto pre_step = aStep->GetPreStepPoint();
-auto status = pre_step->GetStepStatus();
 
-if (status == fWorldBoundary) { "ワールド境界の外に到達" };
-if (status == fGeomBoundary) { "ジオメトリ境界に到達 = いまのボリュームに入射した" };
-if (status == fUserDefinedLimit) { "ユーザー設定のリミットに到達" };
-if (status == fUndefined) { "ステップが未定義" };
+void SteppingAction::UserSteppingAction(const G4Step *aStep)
+{
+    auto pre_step = aStep->GetPreStepPoint();
+    auto status = pre_step->GetStepStatus();
+
+    if (status == fWorldBoundary) { G4cout << "ワールド境界の外に到達" << G4endl; };
+    if (status == fGeomBoundary) { G4cout << "ジオメトリ境界に到達 = いまのボリュームに入射した" << G4endl; };
+    if (status == fUserDefinedLimit) { G4cout << "ユーザー設定のリミットに到達" << G4endl; };
+    if (status == fUndefined) { G4coud << "ステップが未定義" << G4endl; };
+};
 ```
