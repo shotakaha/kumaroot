@@ -3,21 +3,50 @@
 ランごとのデータを収集したい場合は、
 ``G4UserRunAction``クラスを継承したクラスを作成します。
 
+## 親クラス
+
+- [G4UserRunAction](https://geant4.kek.jp/Reference/11.2.0/classG4UserRunAction.html)
+
+```cpp
+G4UserRunAction();
+virtual ~G4UserRunAction() = default;
+virtual void BeginOfRunAction(const G4Run* /*aRun*/) {};
+virtual void EndOfRunAction(const G4Run* /*aRun*/) {}
+```
+
+コンストラクターとデストラクターはデフォルトのままでOKです。
+``BeginOfRunAction()``は、ランの開始時に実行される関数です。
+``EndOfRunAction()``は、ランの終了時に実行される関数です。
+どちらも仮想関数になっているため、自作クラスでoverrideします。
+
+## RunActionクラス
+
 ```cpp
 
+// include/RunAction.hh
+
+#ifndef RunAction_h
+#define RunAction_h 1
+
 #include "G4UserRunAction.hh"
+#include "G4Run.hh"
+
+namespace ToyMC
+{
 
 class RunAction: public G4UserRunAction
 {
-    public:
-        RunAction();
-        ~RunAction() override = default;
+  public:
+    RunAction();
+    ~RunAction() = default;
 
-        void BeginOfRunAction(const G4Run *aRun) override;
-        void EndOfRunAction(const G4Run *aRun) override;
-    private:
-        fEnergyDeposit = -1;
-}
+    void BeginOfRunAction(const G4Run *aRun) override;
+    void EndOfRunAction(const G4Run *aRun) override;
+};
+
+};  // namespace ToyMC
+
+#endif
 ```
 
 :::{seealso}
