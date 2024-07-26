@@ -1,7 +1,7 @@
 # 入射粒子したい（``G4ParticleGun``）
 
 ```cpp
-PrimaryGeneratorAction::PrimaryGeneratorAction()
+void PrimaryGenerator::GeneratePrimaries(G4Event *aEvent)
 {
     // 入射する粒子数
     G4int n_particles = 100;
@@ -19,8 +19,14 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
     // 入射するエネルギー
     auto energy = 3.0 * GeV;
     gun->SetParticleEnergy(energy);
+
+    // G4EventにGunを追加する
+    gun->GeneratePrimaryVertex(aEvent);
 }
 ```
+
+``G4GeneralParticleSource``はGeant4標準のPrimaryGeneratorのひとです。
+``G4ParticleGun``と異なり、平面上に入射粒子を生成できます。
 
 ## 粒子の種類を変更したい（``SetParticleDefinition``）
 
