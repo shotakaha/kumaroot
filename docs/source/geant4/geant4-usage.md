@@ -170,7 +170,17 @@ geant4-physics
 geant4-physics-examples
 ```
 
-## 測定したい
+## 入射粒子したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+geant4-source
+geant4-source-examples
+```
+
+## 記録したい
 
 ```{toctree}
 ---
@@ -183,13 +193,7 @@ geant4-scoring-multifunctionaldetector
 geant4-scoring-accumulable
 ```
 
-## 入射粒子したい
 
-```{toctree}
-geant4-particletable
-geant4-muon
-geant4-geantino
-```
 
 ## 可視化したい
 
