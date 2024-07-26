@@ -28,6 +28,9 @@ virtual void ConstructSDandField();
 // include/Geometry.hh
 // //////////////////////////////////////////////////
 
+#ifndef Geometry_h
+#define Geometry_h 1
+
 #include "G4VUserDetectorConstruction.hh"
 #include "G4LogicalVolume.hh"
 #include "G4SystemOfUnits.hh"
@@ -37,57 +40,60 @@ namespace ToyMC
 
 class Geometry : public G4VUserDetectorConstruction
 {
-    public:
-        // コンストラクタとデストラクタは
-        // 親クラスを引き継ぐことにする
-        Geometry() = default;
-        ~Geometry() = default;
+  public:
+    // コンストラクタとデストラクタは
+    // 親クラスを引き継ぐことにする
+    Geometry() = default;
+    ~Geometry() = default;
 
-    public:
-        // これらの関数は override する
-        G4PhysicalVolume* Construct() override;
-        void ConstructSDandField() override;
+  public:
+    // これらの関数は override する
+    G4PhysicalVolume* Construct() override;
+    void ConstructSDandField() override;
 
-    // __________________________________________________
-    // これ以降は僕のベストプラクティス
-    private:
-        // ワールドを設定するための関数とパラメーター
-        G4LogicalVolume* SetupWorldVolume();
-        G4String fWorldLVName = "World";
-        G4String fWorldMaterial = "G4_AIR";
-        G4double fWorldX = 15. * cm;
-        G4double fWorldY = 15. * cm;
-        G4double fWorldZ = 15. * cm;
+  // __________________________________________________
+  // これ以降は僕のベストプラクティス
+  private:
+    // ワールドを設定するための関数とパラメーター
+    G4LogicalVolume* SetupWorldVolume();
+    G4String fWorldLVName = "World";
+    G4String fWorldMaterial = "G4_AIR";
+    G4double fWorldX = 15. * cm;
+    G4double fWorldY = 15. * cm;
+    G4double fWorldZ = 15. * cm;
 
-    private:
-        // 測定器を設定するための関数とパラメーター
-        // 測定器ごとに用意する
-        G4LogicalVolume* SetupDetectorVolume();
-        G4String fDetectorLVName = "Detector";
-        G4String fDetectorMaterial = "G4_WATER";
-        G4double fDetectorX = 5. * cm;
-        G4double fDetectorY = 5. * cm;
-        G4double fDetectorZ = 5. * cm;
+  private:
+    // 測定器を設定するための関数とパラメーター
+    // 測定器ごとに用意する
+    G4LogicalVolume* SetupDetectorVolume();
+    G4String fDetectorLVName = "Detector";
+    G4String fDetectorMaterial = "G4_WATER";
+    G4double fDetectorX = 5. * cm;
+    G4double fDetectorY = 5. * cm;
+    G4double fDetectorZ = 5. * cm;
 
-    public:
-        // main()関数から測定器のパラメーターを確認・変更するメソッド
-        G4String GetDetectorLVName() const { return fDetectorLVName; };
-        void SetDetectorLVName(const G4String &name) { fDetectorLVName = name};
+  public:
+    // main()関数から測定器のパラメーターを確認・変更するメソッド
+    G4String GetDetectorLVName() const { return fDetectorLVName; };
+    void SetDetectorLVName(const G4String &name) { fDetectorLVName = name};
 
-        G4String GetDetectorMaterial() const { return fDetectorMaterial; };
-        void SetDetectorMaterial(const G4String &name) { fDetectorMaterial = name};
+    G4String GetDetectorMaterial() const { return fDetectorMaterial; };
+    void SetDetectorMaterial(const G4String &name) { fDetectorMaterial = name};
 
-        G4double GetDetectorX() const { return fDetectorX; };
-        void SetDetectorX(const G4double length) { fDetectorX = length; };
+    G4double GetDetectorX() const { return fDetectorX; };
+    void SetDetectorX(const G4double length) { fDetectorX = length; };
 
-        G4double GetDetectorY() const { return fDetectorY; };
-        void SetDetectorY(const G4double length) { fDetectorY = length; };
+    G4double GetDetectorY() const { return fDetectorY; };
+    void SetDetectorY(const G4double length) { fDetectorY = length; };
 
-        G4double GetDetectorZ() const { return fDetectorZ; };
-        void SetDetectorZ(const G4double length) { fDetectorZ = length; };
+    G4double GetDetectorZ() const { return fDetectorZ; };
+    void SetDetectorZ(const G4double length) { fDetectorZ = length; };
 
 };
-}; // ToyMC
+
+}; // namespace ToyMC
+
+#endif
 ```
 
 自作クラス名を``Geometry``として作成しています。

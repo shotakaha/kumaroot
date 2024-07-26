@@ -1,5 +1,78 @@
 # ユーザーアクションしたい（``G4VUserActionInitialization``）
 
+## 親クラス
+
+- [G4VUserActionInitialization](https://geant4.kek.jp/Reference/11.2.0/classG4VUserActionInitialization.html)
+
+```cpp
+G4VUserActionInitialization() = default;
+virtual ~G4VUserActionInitialization() = default;
+virtual void Build() const = 0;
+virtual void BuildForMaster() const {};
+```
+
+コンストラクターとデストラクターはデフォルトのままでOKです。
+``Build()``は、ユーザーアクションを設定するための関数です。
+純粋仮想関数になっているため、自作クラスでoverrideします。
+
+また、マルチスレッド環境では、
+``BuildForMaster()``の中でランアクションを設定します。
+
+:::{note}
+
+ソースコードに以下のようにコメントされていました。
+
+```cpp
+// Virtual method to be implemented by the user to instantiate user
+// run action class object to be used by G4MTRunManager. This method
+// is not invoked in the sequential mode. The user should not use
+// this method to instantiate user action classes except for user
+// run action.
+virtual void BuildForMaster() const {}
+```
+
+``BuildForMaster()``の中ではランアクションクラス以外は使ってはいけないようです。
+
+## ActionInitializationクラス
+
+```cpp
+// include/ActionInitialization.hh
+
+#ifndef ActionInitialization_h
+#define ActionInitialization_h 1
+
+#include "G4VUserActionInitialization.hh"
+
+namespace ToyMC
+{
+
+class ActionInitialization : public G4VUserActionInitialization
+{
+  public:
+    ActionInitialization() = default;
+    ~ActionInitialization() = default;
+
+  public:
+    void BuildForMaster() const override;
+    void Build() const override;
+};
+
+};  // namespace ToyMC
+
+#endif
+```
+
+ユーザーアクションは``G4VUserActionInitialization``を継承したクラスを自作します。
+そのメンバーには仮想関数として``BuildForMaster``と``Build``を定義します。
+
+``BuildForMaster``はマルチスレッドモードのマスタースレッド用のユーザーアクションです。
+とくに追加設定は必要はありません。
+
+``Build``はワーカースレッド用のユーザーアクションです。
+こちらはカスタマイズ設定が必要です。
+
+:::
+
 ## メイン関数
 
 ```cpp
@@ -20,37 +93,7 @@ int main()
 メイン関数で、``ActionInitialization``のインスタンスを作成し、
 ``SetUserInitialization``を使ってRunManagerに登録します。
 
-## ヘッダーファイル
 
-```cpp
-// include/ActionInitialization.hh
-#ifndef ActionInitialization_H
-#define ActionInitialization_H 1
-
-#include "G4VUserActionInitialization.hh"
-
-namespace プロジェクト名
-{
-class ActionInitialization : public G4VUserActionInitialization
-{
-    public:
-        ActionInitialization() = default;
-        ~ActionInitialization() override = default;
-        void BuildForMaster() const override;
-        void Build() const override;
-}
-}  // プロジェクト名
-#endif
-```
-
-ユーザーアクションは``G4VUserActionInitialization``を継承したクラスを自作します。
-そのメンバーには仮想関数として``BuildForMaster``と``Build``を定義します。
-
-``BuildForMaster``はマルチスレッドモードのマスタースレッド用のユーザーアクションです。
-とくに追加設定は必要はありません。
-
-``Build``はワーカースレッド用のユーザーアクションです。
-こちらはカスタマイズ設定が必要です。
 
 ## ソースファイル
 
