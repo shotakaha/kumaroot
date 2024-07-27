@@ -26,6 +26,10 @@ virtual void Print() {};
 #define SensorHit_h 1
 
 #include "G4VHit.hh"
+#include "G4Step.hh"
+
+namespace ToyMC
+{
 
 class SensorHit : public G4VHit
 {
@@ -36,38 +40,23 @@ class SensorHit : public G4VHit
 
     // 2. new / delete を実装
     inline void* operator new(size_t);
-    inline void operator delete(void*);
+    inline void operator delete(void* hit);
 
-    // 3. 純粋仮想関数 を実装
+    // 3. 仮想関数 を実装
     void Draw() override;
     void Print() override;
 
-    // 4. セッター／ゲッターを定義
-    void SetDetectorID(G4int copy_number) { fDetectorID = copy_number; };
-    G4int GetDetectorID() const { return fDetectorID; };
+    // 4. カスタム関数
+    void Fill(G4Step *aStep);
 
-    void SetTrackID(G4int track_id) { fTrackID = track_id; };
-    G4int GetTrackID() const { return fTrackID; };
-
-    void SetEnergyDeposit(G4double energy_deposit) { fEnergyDeposit = energy_deposit; };
-    G4double GetEnergyDeposit() const { return fEnergyDeposit; };
-
-    void SetPosition(G4ThreeVector xyz) { fXYZ = xyz; } ;
-    G4ThreeVector GetPosition() const { return fXYZ; };
-
-    void SetGlobalTime(G4double time) { fGlobalTime = time; };
-    G4double GetGlobalTime() const { return fGlobalTime; };
-
-    void SetTrackLength(G4double length) { fTrackLength = length; };
-    G4double GetTrackLength() const { return fTrackLength; };
-
-    void SetStepLength(G4double length) { fStepLength = length; };
-    G4double GetStepLength() const { return fStepLength; };
 
   private:
     // 5. 測定したい値を定義する
     G4int fDetectorID{-1};
+    G4int fCopyNumber{-1};
+    G4int fReplicaNumber{-1};
     G4int fTrackID{-1};
+    G4int fStepID{-1};
     G4double fEnergyDeposit{0.};
     G4ThreeVector fXYZ{};
     G4double fGlobalTime{0.};
@@ -76,39 +65,129 @@ class SensorHit : public G4VHit
 
 };
 
-// TrackerHitクラスを型にしたテンプレート
+// __________________________________________________
+// SensorHitクラス型のヒット配列テンプレートの型エイリアス
 using SensorHitsCollection = G4THitsCollection<SensorHit>;
 
+// __________________________________________________
+// スレッドローカルなメモリアロケーターの定義
+// マルチスレッド環境で、スレッドごとにメモリを確保
+extern G4ThreadLocal G4Allocator<SensorHit> *SensorHitAllocator;
+
+// __________________________________________________
+inline void *SensorHit::operator new(size_t)
+{
+    // new演算子:
+    // コンストラクターの前に実行される特殊関数
+    // SensorHitに必要なメモリをG4Allocatorで割り当てる
+
+    if (!SensorHitAllocator) {
+        SensorHitAllocator = new G4Allocator<SensorHit>;
+    }
+    return (void *)SensorHitAllocator->MallocSingle();
+}
+
+// __________________________________________________
+inline void SensorHit::operator delete(void *hit)
+{
+    // delete演算子
+    // デストラクターの後に実行される特殊関数
+    // new演算子で割り当てたメモリを解放する
+    SensorHitAllocator->FreeSingle((SensorHit *)hit);
+}
+
+}; // namespace ToyMC
 #endif
 ```
 
-測定器のヒット情報は、ユーザーが定義する必要があります。
-このサンプルコードは``examples/basic/B2a/TrackerHit.hh``を参照し（ちょっと修正し）ました。
+測定器のヒット情報は``G4VHit``クラスを継承してユーザーが定義する必要があります。
+ヒット情報の取得／ファイル出力はGeant4シミュレーションで結果を得るためにとても大事なアイテムです。
+しかし、初心者向けの解説を見つけることができず、このクラスの役割を理解するのにかなり苦戦しました。
+ここでは、その汗と涙と努力の結晶をまとめてみました。
 
-有感検出器でのヒットを取得する``SensorHit``クラスを、
-``G4VHit``クラスを継承して作成しています。
+サンプルコードは``examples/basic/B2a/TrackerHit.hh``を参考に改変しました。
+有感検出器でヒットを取得するクラスを``SensorHit``クラスと名づけました。
+このクラスの役割は次のとおりです。
 
-``G4VHit``はヒット用の抽象基底クラスで、
-``Draw``と``Print``の2つの仮想関数を持っています。
-これらのメソッドをoverrideして定義します。
+1. コンストラクター／デストラクターは親クラスを引き継ぐ
+2. ``SensorHit``型のヒット配列の型エイリアスを定義する（``SensorHitsCollection``）
+3. スレッドローカルなメモリ割り当てを定義する（``SensorHitAllocator``）
+4. 最適なメモリ管理のため``new``演算子／``delete``演算子を定義する
+5. ``Draw()``／``Print()``をoverrideして定義する
+6. ``Fill(G4Step *aStep)``と必要なprivate変数を定義する
 
-また、``new``と``delte``をインライン関数で作成しています。
-これは、サンプルコードをそのまま真似しました。
+たくさんの役割／処理が登場するので、順番に紹介します。
 
-ヒット情報として取得したい物理量は、プライベート変数で定義しています。
-また、それらの変数へのセッターとゲッターもpublicメソッドで定義してあります。
+## コンストラクターとデストラクター
 
-クラスを定義したあと、``G4THitsCollection``を使って``TrackerHit``クラスを引数とするテンプレートクラスを定義してあります。
-ここも、サンプルコードをそのまま真似しました。
+```cpp
+public:
+  SensorHit() = default;
+  ~SensorHit() = default;
+```
 
-``G4Event``を処理する際に、たくさんの``G4VHit``（の派生クラスの）オブジェクトが生成されます。
-これらのヒット情報は、配列コンテナー（``G4HitsCollection``と、そのテンプレートクラス``G4THitsCollection``）に集めることができます。
+``SensorHit``クラスの初期化／削除するときに実行されるコンストラクターとデストラクターは、親クラス（``G4VHit``）を引き継いでおきます。
+ユーザーがカスタマイズする必要はありません。
+
+## 型エイリアス: ``SensorHitsCollection``
+
+```cpp
+using SensorHitsCollection = G4THitsCollection<SensorHit>;
+```
+
+``SensorHitsCollection``という名前の型エイリアスを定義しています。
+
+``G4THitsCollection``は、親をたどると``std:vector``型をベースにしたテンプレートクラスです。
+なので``SensorHit``型を要素に持つ``std:vector``配列とイメージしておけばよいと思います。
+
+```cpp
+// Sensor.cc
+auto fHitsCollection = new SensorHitsCollection{}
+```
+
+有感検出器のヒット情報（``SensorHit``）を格納する配列（``SensorHitsCollection``）として使います。
+具体的な使い方は[Sensorクラス](./geant4-sensor-sensitivedetector.md)を参照してください。
+
+## G4ThreadLocalとG4Allocator
+
+```cpp
+extern G4ThreadLocal G4Allocator<SensorHit> *SensorHitAllocator;
+```
+
+``SensorHitAllocator``という名前で、スレッド別にメモリ領域を割り当てるアロケーターを定義しています。
+詳細は[](./geant4-sensor-hit-allocator.md)に整理しました。
+
+## ``new``演算子と``delete``演算子
+
+```cpp
+public:
+  inline void* operator new(size_t);
+  inline void operator delete(void* hit);
+```
+
+``new``演算子は、コンストラクターの前に実行される特殊関数です。
+ここで``SensorHitAllocator``を使って、``SensorHit``クラスに必要なメモリ領域を割り当てます。
+
+``delete``演算子は、デストラクターの後に実行される特殊関数です。
+前述した``new``演算子で割り当てたメモリ領域を解放します。
+
+## ``Draw()``と``Print()``関数
+
+``Draw``と``Print``は仮想関数です。
+必要であればこれらををoverrideして定義します。
+
+- [](./geant4-sensor-hit-print.md)
+- [](./geant4-sensor-hit-draw.md)
+
+## ``Fill(G4Step *aStep)``関数
+
+``Fill``は僕が追加したカスタム関数です。
+``G4Step``を引数と渡し、``Fill``の中でprivate変数に値を直接代入するという設計です。
+これにより、private変数ごとのゲッター／セッターを作成する必要がなくなります。
 
 ```{toctree}
 geant4-sensor-hit-print
 geant4-sensor-hit-draw
-geant4-sensor-hit-allocator
-geant4-sensor-hit-hitscollection
 geant4-sensor-hit-hitsmap
 ```
 
@@ -151,6 +230,9 @@ void SensitiveDetector::EndOfEvent(G4HCofThisEvent *aHC) {
     }
 }
 ```
+
+``G4Event``を処理する際に、たくさんの``G4VHit``（の派生クラスの）オブジェクトが生成されます。
+これらのヒット情報は、配列コンテナー（``G4HitsCollection``と、そのテンプレートクラス``G4THitsCollection``）に集めることができます。
 
 ``G4Event``は``G4HCofThisEvent``というヒット配列を持っています。
 イベントごとのヒット情報は、このオブジェクト（のポインター）を介してアクセスてきます。
