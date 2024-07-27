@@ -1,4 +1,4 @@
-# ヒット情報したい（``G4VHit`` / ``G4VHitsCollection`` / ``G4HCofThisEvent``）
+# ヒット情報したい（``G4VHit``）
 
 有感検出器でのヒット情報を格納するためには
 ``G4VHit``クラスを継承したクラスを作成します。

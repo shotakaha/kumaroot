@@ -1,10 +1,10 @@
-# メモリを割り当てたい（``G4Allocator``）
+# メモリ割り当てしたい（``G4Allocator``）
 
 ```cpp
 #include "G4VHit.hh"
 #include "G4Allocator.hh"
 
-class TrackerHit : public G4VHit
+class SensorHit : public G4VHit
 {
     inline void* operator new(size_t);
     inline void operator delete(void*);
@@ -12,35 +12,37 @@ class TrackerHit : public G4VHit
 
 //////////////////////////////////////////////////
 // （スレッドローカルな）グローバル変数を定義
-extern G4ThreadLocal G4Allocator<TrackerHit>* TrackerHitAllocator;
+// 1. スレッドごとにSensorHit型に必要なメモリを確保する
+// 2. そのメモリ領域を SensorHitAllocator と名付ける
+extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
 
 //////////////////////////////////////////////////
-inline void* TrackerHit::operator new(size_t)
+inline void* SensorHit::operator new(size_t)
 {
     // new演算子でメモリを割り当てるとき
     // {
-    //     TrackerHit *hit = new TrackerHit();
+    //     SensorHit *hit = new SensorHit();
     // }
-    // 1. TrackerHitAllocatorに割り当てられたメモリのポインターを取得する
+    // 1. SensorHitAllocatorに割り当てられたメモリのポインターを取得する
     // 2. 初期化されてない場合は、新しくG4Allocator<TrackerHit>オブジェクトを作成
-    if(!TrackerHitAllocator) {
-        TrackerHitAllocator = new G4Allocator<TrackerHit>;
+    if(!SensorHitAllocator) {
+        SensorHitAllocator = new G4Allocator<SensorHit>;
     }
-    return (void *) TrackerHitAllocator->MallocSingle();
+    return (void *) SensorHitAllocator->MallocSingle();
 };
 
 //////////////////////////////////////////////////
-inline void TrackerHit::operator delete(void *hit)
+inline void SensorHit::operator delete(void *hit)
 {
     // delete演算子でメモリを解放するとき
     //
     // {
-    //     TrackerHit *hit = new TrackerHit();
+    //     SensorHit *hit = new SensorHit();
     //     delete hit
     // }
     //
-    // 1. TrackerHitAllocatorに割り当てられたメモリのポインターを解放する
-    TrackerHitAllocator->FreeSingle((TrackerHit*)hit);
+    // 1. SensorHitAllocatorに割り当てられたメモリのポインターを解放する
+    SensorHitAllocator->FreeSingle((SensorHit*)hit);
 };
 ```
 
