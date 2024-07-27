@@ -16,3 +16,8 @@ typedef G4THitsCollection<SensorHit> SensorHitsCollection;
 
 サンプルをいくつか確認すると``typedef``と``using``で定義されているケースがありました。
 基本的には同じことができるのですが、高機能な``using``を使えばよいようです。
+
+## リファレンス
+
+- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4VHitsCollection.html)
+- [G4THitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4THitsCollection.html)

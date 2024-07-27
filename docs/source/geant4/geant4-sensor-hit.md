@@ -189,6 +189,7 @@ public:
 geant4-sensor-hit-print
 geant4-sensor-hit-draw
 geant4-sensor-hit-hitsmap
+geant4-sensor-hit-hcofthisevemt
 ```
 
 ## 有感検出器とヒット用クラス
