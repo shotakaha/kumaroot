@@ -34,6 +34,8 @@ virtual G4bool ProcessHits(G4Step *aStep, G4TouchableHistory* /*ROhist*/) = 0;
 #ifndef Sensor_h
 #define Sensor_h 1
 
+#include "SensorHit.hh"
+
 #include "G4HCofThisEvent.hh"
 #include "G4Step.hh"
 #include "G4TouchableHistory.hh"
@@ -53,6 +55,12 @@ class Sensor : public G4VSensitiveDetector
     void EndOfEvent(G4HCofThisEvent *aHCE) override;
     G4bool ProcessHits(G4Step *aStep, G4TouchableHistory *aTouchable) override;
 };
+
+  private:
+    // SensorHitクラスで定義した型エイリアスを使って
+    // 有感検出器で必要なヒット配列を準備する。
+    G4int fHcID = 0;
+    SensorHitsCollection *fHitsCollection{nullptr};
 
 };  // namespace ToyMC
 
@@ -76,7 +84,7 @@ void Sensor::Initialize(G4HCofThisEvent *aHCE)
 {
     // ヒット配列を初期化
     fHitsCollection = new SensorHitsCollection{};
-
+    aHCE->AddHitsCollection(fHcID, fHitsCollection);
 };
 ```
 
@@ -95,6 +103,7 @@ void Sensor::Initialize(G4HCofThisEvent *aHCE)
 
 void Sensor::EndOfEvent(G4HCofThisEvent *aHCE)
 {
+    G4int entries = fHitsCollection->entries();
     // ヒット配列を取得
     aHCE->Get...
 
