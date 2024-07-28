@@ -81,7 +81,14 @@ CSV形式のファイルを保存するディレクトリを設定できます�
 ```cpp
 auto am = G4AnalysisManager::Instance()
 // 1Dヒストグラム
-am->CreateH1("name1", "title", xbins, xmin, xmax);  // h1 Id = 0
+am->CreateH1(
+    "name1",  // オブジェクト名
+    "title",  // ヒストグラムのタイトル
+    xbins,    // ビンの数
+    xmin,     // ビンの最小値
+    xmax      // ビンの最大値
+);  // h1 Id = 0
+
 am->CreateH1("name2", "title", xbins, xmin, xmax);  // h1 Id = 1
 
 // 2Dヒストグラム
@@ -113,13 +120,6 @@ am->FillH3(id, xvalue, yvalue, zvalue, weight);
 ```
 
 ヒストグラムIDを指定して値をフィルできます。
-
-:::{note}
-
-このメソッドは基本的に``EventAction``クラスで使うメソッドです。
-``RunAction``クラスで使うことはないと思います。
-
-:::
 
 ## ヒストグラムを確認したい（``GetH1`` / ``GetH2`` / ``GetH3``）
 
@@ -163,9 +163,12 @@ am->CreateNtupleDColumn("name4");  // column Id = 1
 am->FinishNtuple();
 ```
 
-``CreateNtuple``でNtupleを作成し
-``CreateNtupleDColumn``でカラムを作成します。
-``FinishNtuple``することで複数のNtupleを作成できます。
+``CreateNtuple``でNtupleを作成します。
+``CreateNtupleDColumn``や
+``CreateNtupleIColumn``でカラムを定義します。
+``FinishNtuple``でNtupleを閉じます。
+
+これを繰り返すことで複数のNtupleを作成できます。
 
 ## AnalysisManagerを使いたくない
 
@@ -175,7 +178,6 @@ am->FinishNtuple();
 ``std::tuple``、
 ``std::map``、
 ``std::vector``などを使います。
-
 
 [G4VAnalysisManager](https://geant4.kek.jp/Reference/11.2.0/classG4VAnalysisManager.html)を使って、ファイルに出力できます。
 Geant4は独自のデータベース形式を持たない代わりに、
