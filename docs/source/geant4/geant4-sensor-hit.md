@@ -48,7 +48,8 @@ class SensorHit : public G4VHit
 
     // 4. カスタム関数
     void Fill(G4Step *aStep);
-
+    G4String ToCsvString() const;
+    G4String ToLtsvString() const;
 
   private:
     // 5. 測定したい値を定義する
