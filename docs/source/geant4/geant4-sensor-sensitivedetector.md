@@ -148,16 +148,9 @@ G4bool Sensor::ProcessHits(G4Step *aStep, G4TouchableHistory* /* aTouchable */) 
     auto hit = new SensorHit{};
 
     // ヒット情報を代入
-    hit->SetEnergyDeposit(aStep->GetTotalEnergy() / MeV);
-    hit->SetGlobalTime(pre_step->GetGlobalTime());
-    hit->SetXYZ(pre_step->GetPosition() / mm);
-    hit->SetTrackID(track->GetTrackID());
-    hit->SetTrackLength(track->GetTrackLength() / mm);
-    hit->SetStepLength(track->GetStepLength() / mm);
-    hit->SetStepNumber(track->GetCurrentStepNumber());
-    hit->SetDetectorID(pv->GetCopyNo());
-    hit->SetPVName(pv->GetName());
-    hit->SetLVName(lv->GetName());
+    // - SensorHit::Fill(G4Step *aStep)のカスタム関数を追加
+    // - SensorHitの内部変数に値を代入
+    hit->Fill(aStep);
 
     // 代入したヒット情報を確認
     hit->Print();
