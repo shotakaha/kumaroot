@@ -1,6 +1,6 @@
-# ドキュメントが充実
+# ドキュメントの頼りかた
 
-Geant4は公式ドキュメントがしっかりとしています。
+Geant4は目的別の公式ドキュメントがしっかりとしています。
 困ったときは、まずドキュメントを読むとよいと思います。
 
 ## For Application Developers
@@ -13,3 +13,14 @@ Geant4は公式ドキュメントがしっかりとしています。
 
 [User's Guide for Toolkit Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForToolkitDeveloper/html/index.html)にはGeant4の設計思想が書いてあります。
 それぞれのクラスがどのように設計されているかを知っていると、アプリケーション開発の役に立ちます。
+
+## Reference Guide
+
+[Geant4 Reference Guide](https://geant4.kek.jp/Reference/)は
+Doxygenで生成されたクラスリファレンスです。
+KEKでホストされているリファレンスは、右上の検索ボックスでクラス名を前方一致検索できます。
+それぞれのクラスがどういうメソッドを持つか調べることができます。
+
+ただし、メソッドで得られる内容については詳しく書かれていないため、
+関連するヘッダーファイルを確認することをオススメします。
+ヘッダーファイルのコメントに追加情報が書かれていることもよくあります。
