@@ -3,6 +3,25 @@
 Geant4シミューレーションは、実際の素粒子物理学分野の実験手順を、
 パソコンの中で再現した作りになっています。
 
+1. main()
+2. (main) Geometry::Geometry()
+3. (main) ActionInitialization::BuildForMaster()
+4. (main) Geometry::Construct()
+5. (main) Geometry::ConstructSDandField()
+6. (main) Sensor::Sensor()
+7. (thread) ActionInitialization::Build()
+8. (thread) Geometry::ConstructSDandField()
+9. (thread) Sensor::Sensor()
+10. (thread) Sensor::Initialize()
+11. (thread) Sensor::ProcessHits()
+12. (thread) SensorHit::operator new
+13. (thread) SensorHit::SensorHit()
+14. (thread) SensorHit::Fill()
+15. (thread) SensorHit::Print()
+16. (thread) Sensor::ProcessHits()
+17. ...
+18. (thread) Sensor::EndOfEvent()
+
 ## 管理者の体制
 
 Geant4には4人の管理者が存在し、次のような順番になっています。
@@ -14,44 +33,6 @@ Geant4には4人の管理者が存在し、次のような順番になってい�
 4. ``G4SteppingManager``: ステッピング処理を実行する。終了したらG4**Tracking**Managerに報告する。
 
 ユーザーが直接指示するのは``G4RunManager``だけでOKです。
-
-```cpp
-int main()
-{
-    // ランマネージャー
-    // マルチスレッド対応など、実行環境に応じて、よしなにやってくれる
-    auto rm = G4RunManagerFactory::CreateRunManager();
-
-    // ジオメトリの作成
-    // G4VUserDetectorConstructionを継承
-    // DetectorConstruction::Construct()を実行
-    rm->SetUserInitialization(new DetectorConstruction);
-
-    // 相互作用モデル
-    // G4VModularPhysicsListの具象クラスを利用
-    rm->SetUserInitialization(new PhysicsList);
-
-    // ユーザーアクションの設定
-    // G4VUserActionInitializationを継承
-    // ActionInitialization::Build()を実行
-    rm->SetUserInitialization(new ActionInitialization);
-
-    // ActionInitialization::Build()の内容
-    // SetUserAction(PrimaryGeneratorAction);  // <-- G4VUserPrimaryGeneratorActionを継承
-    // SetUserAction(RunAction);  // <-- G4UserRunActionを継承
-    // SetUserAction(EventAction);  // <-- G4UserEventActionを継承
-    // SetUserAction(TrackingAction);  // <-- G4UserTrackingActionを継承
-    // SetUserAction(SteppingAction);  // <-- G4UserSteppingActionを継承
-
-    // ランマネージャーの初期化
-    rm->Initialize();
-    G4int nEvents
-    rm->BeamOn(nEvents);
-
-    // ランマネージャーの解放
-    delete rm;
-}
-```
 
 ## ランの管理者（``G4RunManager``）
 

@@ -193,8 +193,6 @@ geant4-scoring-multifunctionaldetector
 geant4-scoring-accumulable
 ```
 
-
-
 ## 可視化したい
 
 ```{toctree}
@@ -210,6 +208,13 @@ maxdepth: 1
 ---
 geant4-random
 geant4-random-direction
+```
+
+## 対話モードしたい
+
+```{toctree}
+geant4-command
+geant4-macro
 ```
 
 ## 外部ライブラリしたい

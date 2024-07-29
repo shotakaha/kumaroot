@@ -1,11 +1,16 @@
 # メイン関数したい（``main()``）
 
 ```cpp
+#include "Geometry.hh"              // G4VUserDetectorConstructionを継承した自作クラス
+#include "ActionInitialization.hh"  // G4VUserActionInitializationを継承した自作クラス
+
+#include "G4RunManagerFactory.hh"
+
 int main(int argc, char** argv)
 {
     auto rm = G4RunManagerFactory::CreateRunManager();
 
-    auto detector = new DetectorConstruction{};
+    auto geometry = new Geometry{};
     rm->SetUserInitialization(detector);
 
     auto physics = new FTFP_BERT{};
@@ -16,23 +21,19 @@ int main(int argc, char** argv)
 
     rm->Initialize();
 
-    G4int nevents = 100;
-    rm->BeamOn(nevents);
+    G4int n_events = 100;
+    rm->BeamOn(n_events);
 
     delete rm;
     return 0;
 }
 ```
 
+バッチモードで実行する場合の必要最低限の``main()``関数です。
+
 1. G4RunManagerFactory
 2. G4VisExecutive
 3. G4UImanager
-
-```{toctree}
-geant4-command
-geant4-macro
-geant4-batch
-```
 
 :::{seealso}
 
