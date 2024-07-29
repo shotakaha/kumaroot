@@ -1,5 +1,21 @@
 # ロガーしたい（``loguru::loguru``）
 
+```cpp
+#include <loguru::loguru>
+
+// ロガーの初期化
+loguru::init(argc, argv);
+
+// ファイルの設定
+loguru::add_file("everything.log", loguru::Append, loguru::Verbosity_MAX);
+
+// ログ表示
+LOG_F(DEBUG, "Debug")
+LOG_F(INFO, "Info")
+LOG_F(WARNING, "Warning")
+LOG_F(ERROR, "Error")
+```
+
 Geant4を実行すると大量のデフォルト出力に埋もれてしまうことがあります。
 必要なログ情報は見た目をわかりやすくして出力してあると便利です。
 
