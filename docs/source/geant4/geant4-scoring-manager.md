@@ -9,6 +9,10 @@ int main(int argc, char** argv)
 }
 ```
 
+対話モードやマクロを使ってスコアリングする場合は``G4ScoringManager``を使います。
+RunManagerを作成したあとに、ScoringManagerを作成して有効にします。
+このマネージャーを使うと**イベントごと**のスコアリング結果を収集できるようになります。
+
 ``main()``関数で``G4ScoringManager``を有効にし、
 マクロを使ってスコアリング方法を設定します。
 

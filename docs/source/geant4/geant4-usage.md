@@ -187,7 +187,6 @@ geant4-source-examples
 maxdepth: 1
 ---
 geant4-scoring
-geant4-scoring-manager
 geant4-scoring-sensitivedetector
 geant4-scoring-multifunctionaldetector
 geant4-scoring-accumulable
