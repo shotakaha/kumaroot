@@ -1,4 +1,4 @@
-# ステップ点の座標をしりたい（``G4StepPoint::GetPosition``）
+# ステップポイントの座標をしりたい（``G4StepPoint::GetPosition``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();
@@ -9,10 +9,17 @@ G4debug << position << G4endl;
 
 G4debug << G4BestUnit{position, "Length"} << G4endl;
 // 2.83459 1.19586 0.5 cm
+
+G4debug << position.getX() / cm << " [cm]" << G4endl;
+G4debug << position.getY() / cm << " [cm]" << G4endl;
+G4debug << position.getZ() / cm << " [cm]" << G4endl;
+// 2.83459 [cm]
+// 1.19586 [cm]
+// 0.5 [cm]
 ```
 
-ステップの位置を取得できます。
-この座標は**世界座標**と呼ぶようで、ワールドボリュームの中心が原点になっています。
+``GetPosition``でステップポイントの座標を取得できます。
+この座標は**世界座標**と呼ぶそうで、ワールドボリュームの中心が原点になっています。
 
 :::{note}
 
@@ -26,7 +33,7 @@ G4debug << position / m << G4endl;
 
 :::
 
-## 中点にしたい
+## ステップポイントの座標の中点したい
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();

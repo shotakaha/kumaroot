@@ -1,4 +1,4 @@
-# ステップ点のエネルギーをしりたい（``G4StepPoint::GetTotalEnergy``）
+# ステップポイントのエネルギーをしりたい（``G4StepPoint::GetTotalEnergy``）
 
 ```cpp
 // G4Step *aStep;

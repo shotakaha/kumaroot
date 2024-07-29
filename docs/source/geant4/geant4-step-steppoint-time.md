@@ -1,4 +1,4 @@
-# ステップ点のグローバル時刻をしりたい（``G4StepPoint::GetGlobalTime``）
+# ステップポイントのグローバル時刻をしりたい（``G4StepPoint::GetGlobalTime``）
 
 ```cpp
 // G4Step *aStep
@@ -20,7 +20,7 @@ G4debug << "[Track]    GlobalTime=" << G4BestUnit{track_time, "Time"} >> G4endl;
 ```
 
 ステップの時刻を取得するメソッドは3種類あります。
-``GetGlobalTime``で、トラックが含まれるイベントが生成されてからの経過時間が取得できます。
+``GetGlobalTime``で、トラックが含まれる**イベントが生成されてからの経過時間**が取得できます。
 
 トラックのグローバル時刻はステップ終点の時刻と一致します。
 
@@ -51,7 +51,7 @@ G4debug << "[Track]    LocalTime=" << G4BestUnit{track_time, "Time"} >> G4endl;
 // [Track]    LocalTime=390.86 ps
 ```
 
-``GetLocalTime``で、トラックが生成されてからの経過時間が取得できます。
+``GetLocalTime``で、**トラックが生成されてからの経過時間**が取得できます。
 トラックのローカル時刻はステップ終点の時刻と一致します。
 
 ## 固有時刻をしりたい（``G4StepPoint::GetProperTime``）

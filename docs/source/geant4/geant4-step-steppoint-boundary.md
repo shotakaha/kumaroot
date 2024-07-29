@@ -1,4 +1,4 @@
-# ステップ点の境界判断したい（``G4StepPoint::IsFirstStepInVolume``）
+# ステップポイントの境界判断したい（``G4StepPoint::IsFirstStepInVolume``）
 
 ```cpp
 G4StepPoint pre_step = aStep->GetPreStepPoint();

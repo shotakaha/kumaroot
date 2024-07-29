@@ -1,14 +1,14 @@
-# ステップ点のボリュームをしりたい（``G4StepPoint::GetPhysicalVolume``）
+# ステップポイントのボリュームをしりたい（``G4StepPoint::GetPhysicalVolume``）
 
 ```cpp
 // G4Step *aStep
-G4StepPoint *pre_step = aStep->GetPreStepPoint();
-G4StepPoint *post_step = aStep->GetPostStepPoint();
 
 // 現在のステップのボリュームを取得する
+G4StepPoint *pre_step = aStep->GetPreStepPoint();
 auto current_volume = pre_step->GetPhysicalVolume();
 
 // 次のステップのボリュームを取得する
+G4StepPoint *post_step = aStep->GetPostStepPoint();
 auto next_volume = post_step->GetPhysicalVolume();
 ```
 

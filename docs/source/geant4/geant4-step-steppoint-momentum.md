@@ -1,4 +1,4 @@
-# ステップ点の運動量をしりたい（``G4StepPoint::GetMomentum``）
+# ステップポイントの運動量をしりたい（``G4StepPoint::GetMomentum``）
 
 ```cpp
 auto pre_step = aStep-GetPreStepPoint();

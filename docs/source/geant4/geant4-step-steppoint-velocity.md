@@ -1,4 +1,4 @@
-# ステップ点の速度をしりたい（``G4StepPoint::GetVelocity``）
+# ステップポイントの速度をしりたい（``G4StepPoint::GetVelocity``）
 
 ```cpp
 auto pre_step = aStep->GetPreStepPoint();
