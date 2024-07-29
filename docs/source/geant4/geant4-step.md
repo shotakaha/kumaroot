@@ -1,9 +1,6 @@
 # ステップ操作したい（``G4Step``）
 
 ``G4Step``はステップ情報を管理するクラスです。
-ユーザーアクション設定の
-[UserSteppingAction](./geant4-user-steppingaction.md)から
-情報を取得したいときに使います。
 
 ```cpp
 // G4Step *aStep
@@ -17,24 +14,14 @@ auto post_step = aStep->GetPostStepPoint()
 
 **ステップ** はGeant4が粒子輸送のシミュレーションを進行する基本単位で、このステップを進める処理を**ステッピング**と呼びます。
 
-:::{hint}
-
-「ステップを制するものは、Geant4を制す」
-・・・とは言われていませんが、それくらい重要なコンセプトだと思っています。
-
-:::
-
 ステップは
 **始点**（``PreStepPoint``）と
 **終点**（``PostStepPoint``）で構成されていて、
 ステッピングすると前のステップの終点が、次のステップの始点になります。
 
-[G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)はステップ情報を管理するクラスです。
-始点と終点は[G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)クラスのオブジェクトになっています。
-
+始点と終点はそれぞれ``G4StepPoint``クラスのオブジェクトになっています。
 現在のステップの情報は、基本的に始点（``PreStepPoint``）から取得できます。
-
-終点（``PostStepPoint``）からは、次のステップの情報を取得できます。
+次のステップの情報は終点（``PostStepPoint``）から取得できます。
 
 :::{note}
 
@@ -47,8 +34,10 @@ auto post_step = aStep->GetPostStepPoint()
 
 :::
 
-ステップ情報は、ユーザーアクション設定の[SteppingAction](./geant4-steppingaction.md)で設定して取得します。
-このユーザーアクションの中で、必要なステップ情報の取得＆集計して、イベント情報を計算します。
+ユーザーアクション設定の
+[UserSteppingAction](./geant4-user-steppingaction.md)や
+[SensitiveDetectorのProcessHits](./geant4-sensor-sensitivedetector.md)などで
+以下のようなステップおよびステップポイントに紐づいた物理量を取得したいときに使います。
 
 ```{toctree}
 ---
@@ -71,6 +60,21 @@ geant4-step-steppoint-charge
 geant4-step-steppoint-energy
 geant4-step-steppoint-touchable
 ```
+
+:::{hint}
+
+「ステップを制するものは、Geant4を制す」
+・・・とは言われていませんが、それくらい重要なコンセプトだと思っています。
+
+:::
+
+:::{seealso}
+
+- [](./geant4-user-steppingaction.md)
+- [](./geant4-sensor-sensitivedetector.md)
+- [](./geant4-sensor-hit-fill.md)
+
+:::
 
 ## リファレンス
 
