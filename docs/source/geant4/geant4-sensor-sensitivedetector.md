@@ -16,8 +16,7 @@ virtual G4bool ProcessHits(G4Step *aStep, G4TouchableHistory* /*ROhist*/) = 0;
 ```
 
 親クラスのメンバー関数を抜粋しました。
-コンストラクターデストラクターは、このまま引き継げばよさそうです。
-（コンストラクターは3種類ありますが、一番使いやすそうな形を使えばOKです）。
+コンストラクターとデストラクターは、このまま引き継げばよさそうです。
 
 ``Initialize()``は、イベントの開始時に実行される関数です。
 ``EndOfEvent()``は、イベントの終了時に実行される関数です。
@@ -73,7 +72,35 @@ class Sensor : public G4VSensitiveDetector
 ``Initialize``、``ProcessHits``、``EndOfEvent``の3つの仮想関数を持っています。
 これらのメソッドをoverrideして定義します。
 
-## 初期化したい（``Initialize``）
+## コンストラクター（``Sensor::Sensor``）
+
+```cpp
+Sensor::Sensor(const G4String &name) : G4VSensitiveDetector{name}
+{
+    ;
+}
+```
+
+``SensorHit``クラスのコンストラクターで、親の``G4VSensitiveDetector``クラスの初期化が必要です。
+引数（``name``）をそのまま使って、初期化リストで初期化しています。
+
+:::{note}
+
+``G4VSensitiveDetector``のコンストラクターには``explicit``キーワードが付けられています。
+これは、**暗黙の型変換を防ぐ** ためのキーワードです。
+
+```cpp
+// OK
+G4VSensitiveDetector detector{"DetectorName"};
+
+// NG
+// G4String -> G4VSensitiveDetector に勝手に変換されるのを防止
+G4VSensitiveDetector detector = "DetectorName";
+```
+
+:::
+
+## 初期化したい（``Sensor::Initialize``）
 
 ```cpp
 // src/Sensor.cc
@@ -94,7 +121,7 @@ void Sensor::Initialize(G4HCofThisEvent *aHCE)
 
 イベントの開始時に、このヒット配列を初期化しておきます。
 
-## 集計したい（``EndOfEvent``）
+## 集計したい（``Sensor::EndOfEvent``）
 
 ```cpp
 // src/Sensor.cc
@@ -115,7 +142,7 @@ void Sensor::EndOfEvent(G4HCofThisEvent *aHCE)
 ヒット配列のデータを集計したり、
 ファイルに書き出したりできます。
 
-## ヒット処理したい（``ProcessHits``）
+## ヒット処理したい（``Sensor::ProcessHits``）
 
 ```cpp
 // src/Sensor.cc
