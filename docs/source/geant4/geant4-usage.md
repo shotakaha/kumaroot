@@ -224,7 +224,7 @@ maxdepth: 1
 ---
 geant4-fetchcontent-loguru
 geant4-fetchcontent-cxxopts
-geant4-fetchcontent-tomlplusplu
+geant4-fetchcontent-tomlplusplus
 ```
 
 ## リファレンス

@@ -3,21 +3,96 @@
 ```cpp
 #include <loguru::loguru>
 
-// ロガーの初期化
-loguru::init(argc, argv);
+int main(int argc, char** argv)
+{
+  // ロガーの初期化
+  loguru::init(argc, argv);
 
-// ファイルの設定
-loguru::add_file("everything.log", loguru::Append, loguru::Verbosity_MAX);
+  // ファイルの設定
+  loguru::add_file("everything.log", loguru::Append, loguru::Verbosity_MAX);
 
-// ログ表示
-LOG_F(DEBUG, "Debug")
-LOG_F(INFO, "Info")
-LOG_F(WARNING, "Warning")
-LOG_F(ERROR, "Error")
+  // ログ表示
+  LOG_F(ERROR, "Error")
+  LOG_F(WARNING, "Error | Warning")
+  LOG_F(INFO, "Error | Warning | Info")
+  VLOG_F(0, "INFOと同じ")
+  VLOG_F(1, "ERROR | WARNING | INFO | 1")
+  ...
+  VLOG_F(9, "MAX = すべて")
+}
 ```
 
-Geant4を実行すると大量のデフォルト出力に埋もれてしまうことがあります。
-必要なログ情報は見た目をわかりやすくして出力してあると便利です。
+シミュレーションの進行状況は、ログファイルに出力して確認できるようにしておくとよいです。
+ここでは``loguru``でログを設定／出力する方法を紹介します。
+
+## ログ出力したい（``LOG_F`` / ``VLOG_F``）
+
+```cpp
+LOG_F(ログレベル, "表示内容");
+LOG_F(INFO, "RunID= %d", aRun->GetRunID());
+LOG_F(INFO, "EventID= %d", aEvent->GetEventID());
+LOG_F(INFO, "TrackID= %d", aTrack->GetTrackID());
+LOG_F(INFO, "StepID= %d", aTrack->GetCurrentStepNumber());
+VLOG_F(1, "ParentID= %d", aTrack->GetParentID());
+VLOG_F(2, "PVName= %s", aTouchable->GetVolume()->GetName().c_str());
+```
+
+``LOG_F``形の関数では文字列、
+``VLOG_F``形の関数では数値で、表示するときのログレベルをします。
+表示内容は``printf``形式で指定きます。
+``G4String``は``.c_str()``で文字列への変換が必要です。
+
+## ログレベル
+
+```cpp
+FATAL
+ERROR    // -2
+WARNING  // -1
+INFO     // 0
+1 - 9
+```
+
+``loguru``のログレベルは（FATALを除いて）``-2 - 9``段階まで用意されています。
+
+## 表示レベル（``loguru::g_stderr_verbosity``）
+
+```cpp
+loguru::g_stderr_verbosity = 表示レベル
+loguru::g_stderr_verbosity = loguru::Verbosity_WARNING;  // WARNING（=-1）以下を表示
+loguru::g_stderr_verbosity = loguru::Verbosity_INFO; // INFO（=0）以下を表示
+loguru::g_stderr_verbosity = loguru::Verbosity_1;  // 1以下を表示
+loguru::g_stderr_verbosity = loguru::Verbosity_2; // 2以下を表示
+loguru::g_stderr_verbosity = loguru::Verbosity_MAX; // MAX（=9）以下を表示
+```
+
+``loguru::g_stderr_verbosity``で表示レベルを変更できます。
+設定した表示レベル**以下**のログレベルに設定したログ表示されます。
+
+## ファイルにログしたい（``add_file``）
+
+```cpp
+loguru::add_file("ファイル名", モード, 表示レベル);
+
+// ファイル名: everything.log
+// モード: 追記
+// 表示レベル: INFO以下（=INFO / WARNING / ERROR）
+loguru::add_file("everything.log", loguru::Append, loguru::Verbosity_INFO);
+
+// ファイル名: latest.log
+// モード: 上書き
+// 表示レベル: MAX以下（=すべて）
+loguru::add_file("latest.log", loguru::Truncate, loguru::Verbosity_MAX);
+```
+
+``loguru::add_file``でログをファイルに出力できます。
+ファイルへの書き込みモードや、
+書き込むログの表示レベルを設定できます。
+
+## syslogしたい（``add_syslog``）
+
+```cpp
+loguru::add_syslog("ファイル名", 表示レベル);
+```
 
 ## CMakeLists.txtの編集
 
@@ -54,6 +129,10 @@ int main(int argc, char **argv)
     // main関数（メインファイル）の先頭で初期化する
     // 一度だけでよい（はず）
     loguru::init(argc, argv);
+
+    // ファイルにすべてログする
+    loguru::add_file("everything.log", loguru::Truncate, loguru::Verbosity_MAX);
+
     LOG_F(INFO, "Setup loguru");
 }
 ```
@@ -72,9 +151,11 @@ int main(int argc, char **argv)
 ```
 
 ``#include <loguru::loguru>``でロガーが利用できるようになります。
-メインファイルの先頭でロガーを初期化（）``loguru::init``します。
+メインのファイルの先頭で
+ロガーを初期化（``loguru::init``）したり、
+ログファイルの設定（``loguru::add_file``）したりします。
+
 他のファイルでは初期化せずともログ出力できるようになります。
-ログ出力は``printf``形式で指定できます。
 
 ## リファレンス
 
