@@ -1,34 +1,50 @@
 # 入射粒子を分布したい（``G4GeneralParticleSource``）
 
 ```cpp
-void PrimaryGenerator::GeneratePrimaries(G4Event *aEvent)
-{
-    auto gps = G4GeneralParticleSource{};
-
-    // 入射する粒子数
-    G4int n_particles = 100;
-    gps->SetNumberOfParticles(n_particles);
-
-    // 入射する粒子の種類
-    G4ParticleTable *table = G4ParticleTable::GetParticleTable();
-    G4ParticleDefinition *particle = table->FindParticle("粒子名");
-    gps->SetParticleDefinition(particle);
-
-    // 粒子の分布
-    gps->SetFlatSampling(true);
-    gps->SetMultipleVertex(true);
-
-    // G4EventにGPSを追加する
-    gps->GeneratePrimaryVertex(aEvent);
-};
+auto particleGPS = G4GeneralParticleSource();
 ```
 
 ``G4GeneralParticleSource``はGeant4標準のPrimaryGeneratorのひとです。
 ``G4ParticleGun``と異なり、平面上に入射粒子を生成できます。
+また、マクロのみで操作できます。
 
-## マクロしたい（``/gps/``）
+## GPSを設定したい
 
-### 入射粒子を設定したい
+```cpp
+// PrimaryGenerator.hhで
+// メンバー変数として定義する
+class PrimaryGenerator::G4VUserPrimaryGeneratorAction{
+  private:
+    G4GeneralParticleSource *fParticleGPS;
+}
+
+// __________________________________________________
+PrimaryGenerator::PrimaryGenerator()
+{
+    // コンストラクターでGPS初期化
+    fParticleGPS = G4GeneralParticleSource{};
+}
+
+// __________________________________________________
+PrimaryGenerator::~PrimaryGenerator()
+{
+    // デストラクターでGPSを解放
+    delete fParticleGPS
+}
+
+// __________________________________________________
+void PrimaryGenerator::GeneratePrimaries(G4Event *aEvent)
+{
+    // G4EventにGPSを追加する
+    fParticleGPS->GeneratePrimaryVertex(aEvent);
+};
+```
+
+ヘッダーファイルで``G4GeneralParticleSource``のポインターをメンバー変数として定義します。
+コンストラクターでGPSを初期化し、
+``GeneratePrimaries``の中でイベントに追加します。
+
+## 入射粒子のマクロしたい
 
 | コマンド名 | 引数 | デフォルト値 | 内容 |
 |---|---|---|---|
@@ -42,7 +58,7 @@ void PrimaryGenerator::GeneratePrimaries(G4Event *aEvent)
 | ``/gps/source/multiplevertex`` | flag | false | trueにすると複数のvertexを生成できる |
 | ``/gps/source/flatsampling`` | flag | false | trueにするとソースの強度が無視される |
 
-### 入射位置を設定したい
+## 入射位置のマクロしたい
 
 | コマンド名 | 引数 | デフォルト値 | 内容 |
 |---|---|---|---|
@@ -53,7 +69,7 @@ void PrimaryGenerator::GeneratePrimaries(G4Event *aEvent)
 | ``/gps/pos/halfy`` | Y 単位 | 0 cm | X方向の幅 |
 | ``/gps/pos/halfz`` | Z 単位 | 0 cm | X方向の幅 |
 
-### 入射角度を設定したい
+## 入射角度のマクロしたい
 
 | コマンド名 | 引数 | デフォルト値 | 内容 |
 |---|---|---|---|
