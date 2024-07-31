@@ -3,7 +3,6 @@
     pair: Python; usage
 ```
 
-
 # Pythonの使い方
 
 ```{toctree}
@@ -21,6 +20,7 @@ python-string
 python-subprocess
 python-tqdm
 python-dunder
+python-particle
 ```
 
 ```{toctree}
