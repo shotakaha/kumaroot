@@ -77,6 +77,8 @@ SensorHitsCollection hit_collection();
 SensorHitsCollection hit_collection("DetectorName", "CollectionName");
 ```
 
+:::
+
 ## SensorHitクラス
 
 ``SensorHitsCollection``型は、``SensorHit``クラスのファイルの中で定義します。
