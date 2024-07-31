@@ -11,7 +11,6 @@ geant4-sensor-hit-fill
 geant4-sensor-hit-to_csv_string
 geant4-sensor-hit-to_ltsv_string
 geant4-sensor-sdmanager
-geant4-sensor-hit-hitscollection
 geant4-sensor-hit-hitsmap
 geant4-sensor-hit-hcofthisevemt
 ```
