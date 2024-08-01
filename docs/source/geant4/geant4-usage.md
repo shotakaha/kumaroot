@@ -49,6 +49,7 @@ geant4-mandatory-classes
 geant4-units
 geant4-constants
 geant4-cpp
+geant4-string
 ```
 
 ## 例題したい
