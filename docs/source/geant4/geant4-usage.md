@@ -223,6 +223,7 @@ geant4-macro
 ---
 maxdepth: 1
 ---
+geant4-std-chrono
 geant4-fetchcontent-loguru
 geant4-fetchcontent-cxxopts
 geant4-fetchcontent-tomlplusplus
