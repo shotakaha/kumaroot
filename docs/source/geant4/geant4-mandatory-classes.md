@@ -17,21 +17,25 @@ Geant4は**ツールキット**として配布されており、カスタマイ�
 int main(int argc, char** argv)
 {
     // RunManagerを作成
-    auto *runManager = G4RunManagerFactory::CreateRunManager();
+    auto *rm = G4RunManagerFactory::CreateRunManager();
 
     // 必須ユーザークラスを設定
-    runManager->SetUserInitialization(new DetectorConstruction);
-    runManager->SetUserInitialization(new PhysicsList);
-    runManager->SetUserInitialization(new ActionInitialization);
+    auto geometry = new Geometry{}
+    rm->SetUserInitialization(geometry);
+    auto physics = new FTFP_BERT{};
+    rm->SetUserInitialization(physics);
+    auto actions = new ActionInitialization{};
+    rm->SetUserInitialization(actions);
 
     // Geant4のカーネルを初期化
-    runManager->Initialize()
+    rm->Initialize()
 
     // シミューレーションを開始
-    runManager->BeamOn()
+    G4int n_runs = 10
+    rm->BeamOn(n_runs)
 
     // あと片付け
-    delete runManager;
+    delete rm;
 }
 ```
 
@@ -39,39 +43,32 @@ int main(int argc, char** argv)
 これに対話モードや、可視化ツールとスコアリングの設定などを追加します。
 付属サンプルのメイン関数を使い回せばよいので、自作度は高くありません。
 
-## DetectorConstruction（必須クラス）【★★★★★】
+## DetectorConstruction【★★★★★】
 
 :自作度: ★★★★★
 
 測定器のジオメトリを作成するクラスです。
+自分の実験に合わせてユーザーが実装する必要があります。
 ``G4VUserDetectorConstruction``を継承して作成します。
-純粋仮想関数である``Construct``の自作が必要です。
 
-``SensitiveDetector``などの設定フックとして``ConstructSDandField``が用意されています。
+:::{seealso}
 
-:::{mermaid}
-classDiagram
-    G4VUserDetectorConstruction <|-- DetectorConstruction
-    class DetectorConstruction{
-      +DetectorConstruction() = default
-      +~DetectorConstruction() override = default
-      +G4VPhysicalVolume* Construct()
-      +G4VPhysicalVolume* ConstructSDandField()
-    }
-    class G4VUserDetectorConstruction{
-      +G4VUserDetectorConstruction()
-      +virtual ~G4VUserDetectorConstruction()
-      +virtual G4VPhysicalVolume* Construct() = 0
-      +virtual void ConstructSDandField()
-    }
+- [](./geant4-user-detectorconstruction.md)
+
 :::
 
-## PhysicsList（必須クラス）【★・・・・】
+## PhysicsList【★・・・・】
 
 :自作度: ★・・・・
 
 物理の相互作用モデルを設定するクラスです。
 必須クラスですが、定義済みのモデルを使うことができるので、自作度は高くありません。
+
+:::{seealso}
+
+- [](./geant4-user-physicslist.md)
+
+:::
 
 基本的な相互作用モデルは、Geant4チームが用意してくれたクラスを利用できます。
 さらに、それらを組み合わせて定義されたプリセットもいくつか用意されています。
@@ -82,102 +79,32 @@ classDiagram
 
 本気で相互作用モデルを実装したい場合は、``G4VPhysicsList``を継承したクラスを作成すればよいと思いますが、これはかなり上級者向けだと思います。
 
-:::{mermaid}
-classDiagram
-    G4VUserPhysicsList <|-- G4VModularPhysicsList
-    G4VModularPhysicsList <|-- FTFP_BERT
-    G4VModularPhysicsList <|-- QBBC
-    G4VModularPhysicsList <|-- QGSP_BERT
-    G4VModularPhysicsList <|-- QGSP_BIC
-    class G4VUserPhysicsList {
-        +G4VUserPhysicsList()
-        +virtual ~G4VUserPhysicList()
-        +G4VUserPhysicsList(const G4VUserPhysicsList &aPhysicsList)
-        +void Construct()
-        +virtual void ConstructParticle() = 0
-        +virtual void ConstructProcess() = 0
-        +virtual void SetCuts()
-    }
-    class G4VModularPhysicsList {
-        +G4VModularPhysicsList()
-        +virtual ~G4VModularPhysicsList
-        +virtual void ConstructParticle()
-        +virtual void ConstructProcess()
-        +void RegisterPhysics(G4VPhysicsConstructor *aPhysics)
-        +void ReplacePhysics(G4VPhysicsConstructor *aPhysics)
-        +void RemovePhysics(G4VPhysicsConstructor *aPhysics)
-    }
-:::
-
-## ActionInitialization（必須クラス）【★・・・・】
+## ActionInitialization【★・・・・】
 
 :自作度: ★・・・・
 
 ユーザーアクションを設定するクラスです。
 ``G4VUserActionInitialization``を継承して作成します。
-純粋仮想関数である``Build``の中で、自分の目的に必要なユーザーアクションを設定します。
-必須クラスですが、自作度は低く、使い回しが可能です。
+付属サンプルの使い回しでOKです。
 
-マルチスレッド機能が有効なときは、``Build``の内容が``Worker``ノードで実行されます。
-``Master``ノードの設定フックとして``BuildForMaster``が用意されていますが、こちらは基本的にそのままでよいはずです。
+:::{seealso}
 
-:::{note}
-
-このクラスは、マルチスレッド機能に対応するために用意されたラッパー的なクラスだと思います。
-``Build``の中の``SetUserAction``で設定する各種のユーザーアクションクラスを編集するほうが多いと思います。
-
-```cpp
-void ActionInitialization::Build()
-{
-    SetUserAction(new RunAction);
-    SetUserAction(new EventAction);
-    SetUserAction(new StackingAction);
-    SetUserAction(new TrackingAction);
-    SetUserAction(new SteppingAction);
-}
-```
+- [](./geant4-user-actioninitialization.md)
 
 :::
 
-:::{mermaid}
-
-classDiagram
-    G4VUserActionInitialization <|-- ActionInitialization
-    class ActionInitialization{
-      +ActionInitialization() = default
-      +~ActionInitialization() override = default
-      +void BuidForMaster() const override
-      +void Build() const override
-    }
-    class G4VUserActionInitialization{
-      +G4VUserActionInitialization()
-      +virtual ~G4VUserActionInitialization()
-      +virtual void BuildForMaster() const
-      +virtual void Build() const = 0
-    }
-:::
-
-## PrimaryGeneratorAction（必須クラス）【★★★★・】
+## PrimaryGeneratorAction【★★★★・】
 
 :自作度: ★★★★・
 
 入射粒子の初期条件を設定するクラスです。
+自分の実験に合わせてユーザーが実装する必要があります。
 ``G4VUserPrimaryGeneratorAction``を継承して作成します。
-純粋仮想関数である``GeneratePrimaries``を自分で実装します。
 
-:::{mermaid}
-classDiagram
-    G4VUserPrimaryGeneratorAction <|-- PrimaryGeneratorAction
-    class PrimaryGeneratorAction{
-      +PrimaryGeneratorAction() = default
-      +~PrimaryGeneratorAction() override = default
-      +void GeneratePrimaries(G4Event *aEvent)
-    }
-    class G4VUserPrimaryGeneratorAction{
-      +G4VUserPrimaryGeneratorAction()
-      +virtual ~G4VUserPrimaryGeneratorAction()
-      +virtual void GeneratePrimaries(G4Event *aEvent)=0
-    }
+:::{seealso}
+
+- [](./geant4-user-primarygeneratoraction.md)
+
 :::
 
 ## SteppingAction【★★★★★】
@@ -185,99 +112,56 @@ classDiagram
 :自作度: ★★★★★
 
 ステップごとのユーザーアクションを設定するクラスです。
+必須クラスではないですが、ユーザーの目的にあった物理量を取得するために、作成する必要があります。
 ``G4UserSteppingAction``クラスを継承して作成します。
-ユーザー設定用のフックとして``UserSteppingAction``が用意されています。
+また、どちらかというと有感検出器（``G4VSensitiveDetector``）を作成したほうがよいです。
 
-必須クラスではないですが、自分の目的にあった物理量を取得するために、結局作成することになると思います。
+:::{seealso}
 
-:::{mermaid}
-classDiagram
-    G4UserSteppingAction <|-- SteppingAction
-    class G4UserSteppingAction{
-      +G4UserSteppingAction()
-      +virtual ~G4UserSteppingAction()
-      +virtual void UserSteppingAction(const G4Step *aStep)
-    }
-    class SteppingAction{
-      +SteppingAction() = default
-      +~SteppingAction() override = default
-      +void UserSteppingAction(const G4Step *aStep)
-    }
+- [](./geant4-user-steppingaction.md)
+- [](./geant4-sensor-sensitivedetector.md)
+
 :::
 
-### TrackingAction【★★・・・】
+## TrackingAction【★・・・・】
 
-:自作度: ★★・・・
+:自作度: ★・・・・
 
 トラックごとのユーザーアクションを設定するクラスです。
 ``G4UserSteppingAction``クラスを継承して作成します。
-ユーザー設定用のフックとして``UserSteppingAction``が用意されています。
+ユーザー実装が必要なユースケースがわかりません。
 
-:::{mermaid}
-classDiagram
-    G4UserTrackingAction <|-- TrackingAction
-    class G4UserTrackingAction{
-      +G4UserTrackingAction()
-      +virtual ~G4UserTrackingAction()
-      +virtual void PreUserTrackingAction(const G4Track *aTrack)
-      +virtual void PostUserTrackingAction(const G4Track *aTrack)
-    }
-    class TrackingAction{
-      +TrackingAction() = default
-      +~TrackingAction() override = default
-      +void PreUserTrackingAction(const G4Track *aTrack)
-      +void PostUserTrackingAction(const G4Track *aTrack)
-    }
+:::{seealso}
+
+- [](./geant4-user-trackingaction.md)
+
 :::
 
-### EventAction【★★★★・】
-
-:自作度: ★★★★・
-
-イベントごとのユーザーアクションを設定するクラスです。
-
-:::{mermaid}
-classDiagram
-    G4UserEventAction <|-- EventAction
-    class G4UserEventAction{
-      +G4UserEventAction()
-      +virtual ~G4UserEventAction()
-      +virtual void BeginOfEventAction(const G4Event *aEvent)
-      +virtual void EndOfEventAction(const G4Event *aEvent)
-    }
-    class EventAction{
-      +EventAction() = default
-      +~EventAction() override = default
-      +void BeginOfEventAction(const G4Event *aEvent)
-      +void EndOfEventAction(const G4Event *aEvent)
-    }
-:::
-
-## RunAction【★★・・・】
+## EventAction【★★・・・】
 
 :自作度: ★★・・・
 
-ランごとのユーザーアクションを設定するクラスです。
+イベントごとのユーザーアクションを設定するクラスです。
+``G4UserEventAction``クラスを継承して作成します。
 
-:::{mermaid}
-classDiagram
-    G4UserRunAction <|-- RunAction
-    class G4UserRunAction{
-      +G4UserRunAction()
-      +virtual ~G4UserRunAction()
-      +virtual void BeginOfRunAction(const G4Run *aRun)
-      +virtual void EndOfRunAction(const G4Run *aRun)
-    }
-    class RunAction{
-      +RunAction() = default
-      +~RunAction() override = default
-      +void BeginOfRunAction(const G4Run *aRun)
-      +void EndOfRunAction(const G4Run *aRun)
-    }
+:::{seealso}
+
+- [](./geant4-user-eventaction.md)
+
 :::
 
+## RunAction【★・・・・】
 
+:自作度: ★・・・・
 
+ランごとのユーザーアクションを設定するクラスです。
+``G4UserRunAction``クラスを継承して作成します。
+
+:::{seealso}
+
+- [](./geant4-user-runaction.md)
+
+:::
 
 ## Geant4のクラス構造
 
