@@ -2,6 +2,11 @@
 
 ```cpp
 G4THitsCollection<SensorHit> hit_collection;
+
+// テンプレートクラスを使うことで、任意の型を持った変数を定義できます。
+// ここでは
+// hit_collection = [SensorHit1, SensorHit2, SensorHit3, ...]
+// のようなSensorHitオブジェクトが詰まったコンテナー配列を定義しています。
 ```
 
 ひとつイベントで発生した複数のヒットは、``SensorHit``型を持つヒット配列として保存します。
