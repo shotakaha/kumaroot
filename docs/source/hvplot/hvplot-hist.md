@@ -5,7 +5,7 @@ import pandas as pd
 import hvplot.pandas
 
 # data : pd.DataFrame
-data.hvplot.hist("energy_deposit")
+data.hvplot.hist("energy_deposit", xlabel="Energy Deposit [MeV]")
 ```
 
 ``hvplot.hist``でヒストグラムを作成できます。
