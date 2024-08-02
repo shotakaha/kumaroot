@@ -3,24 +3,98 @@
 Geant4シミューレーションは、実際の素粒子物理学分野の実験手順を、
 パソコンの中で再現した作りになっています。
 
-1. main()
-2. (main) Geometry::Geometry()
-3. (main) ActionInitialization::BuildForMaster()
-4. (main) Geometry::Construct()
-5. (main) Geometry::ConstructSDandField()
-6. (main) Sensor::Sensor()
-7. (thread) ActionInitialization::Build()
-8. (thread) Geometry::ConstructSDandField()
-9. (thread) Sensor::Sensor()
-10. (thread) Sensor::Initialize()
-11. (thread) Sensor::ProcessHits()
-12. (thread) SensorHit::operator new
-13. (thread) SensorHit::SensorHit()
-14. (thread) SensorHit::Fill()
-15. (thread) SensorHit::Print()
-16. (thread) Sensor::ProcessHits()
-17. ...
-18. (thread) Sensor::EndOfEvent()
+## メイン関数のフロー
+
+``main()``関数で``G4RunManager``がどのように処理を進めるかを、
+フローチャートに整理しました。
+
+```console
+main
+|-- RunManager
+|    |-- Geometry::Geometry()
+|    |-- Physics::Physics()
+|    \-- ActionInitialization::ActionInitialization()
+|        \-- ActionInitialization::Build()
+|            |-- PrimaryGenerator::PrimaryGenerator()
+|            |-- RunAction::RunAction()
+|            |-- EventAction::EventAction()
+|            |-- TrackingAction::TrackingAction()
+|            \-- SteppingAction::SteppingAction()
+|
+|   // RunManagerを初期化
+|   // 1. 測定器の設定
+|   // 2. 有感検検出器の設定
+|   // 3. ジオメトリのロック
+|-- RunManager::Initialize()
+|    |-- Geometry::Construct()
+|    |   \-- Geometry::SetupVolumes()
+|    \-- Geometry::ConstructSDandField()
+|        |-- Sensor::Sensor{}
+|        |-- SDManager::GetSDMpointer()
+|        \-- Geometry::SetSensitiveDetector()
+|
+|   // ビームを入射
+|   // 1. ラン開始時のアクションを処理
+|   // 2. 入射粒子を設定
+|   // 3. イベント開始時のアクションを処理
+|   // 4. トラッキング開始前のアクションを処理
+|   // 5. 有感検出器にヒットがあったときの処理
+|   // 6. ステッピング中の処理
+|   // 7. トラッキング終了後のアクションを処理
+|   // 8. イベント終了時のアクションを処理
+|   // 9. ラン終了時のアクションを処理
+|-- RunManager::BeamOn()
+|    |-- RunAction::BeginOfRunAction()
+|    |-- PrimaryGenerator::GeneratePrimaries()
+|    |   |-- ParticleGun{}
+|    |   |    |-- SetParticleDefinition()
+|    |   |    |-- SetParticleMomentumDirection()
+|    |   |    |-- SetParticleEnergy()
+|    |   |    \-- SetParticlePosition()
+|    |   \-- GeneratePrimaryVertex()
+|    |-- EventAction::BeginOfEventAction()
+|    |-- TrackingAction::PreUserTrackingAction()
+|    |
+|    |   // ステップが有感検出器にある場合
+|    |   // 1. ProcessHitsの処理
+|    |   // 2. UserSteppingActionの処理
+|    |-- SensorHit::ProcessHits()
+|    |   \-- SensorHit{}
+|    |-- SteppingAction::UserSteppingAction()
+|    |-- SensorHit::ProcessHits()
+|    |   \-- SensorHit{}
+|    |
+|    |   // ステップが有感検出器にない場合
+|    |   // 1. UserSteppingActionの処理
+|    |-- SteppingAction::UserSteppingAction()
+|    |-- SteppingAction::UserSteppingAction()
+|    |-- SteppingAction::UserSteppingAction()
+|    |-- TrackingAction::PostUserTrackingAction()
+|    |
+|    |-- // 複数のトラックがある場合
+|    |-- // 上記の処理を繰り返す
+|    |
+|    |-- EventAction::EndOfEventAction()
+|    \-- RunAction::EndOfRunAction()
+|
+|-- delete RunManager
+|    |-- Geometry::~Geometry()
+|    |-- ActionInitialization::~ActionInitialization()
+|    |-- PrimaryGenerator::~PrimaryGenerator()
+|    |-- SteppingAction::~SteppingAction()
+|    |-- TrackingAction::~TrackingAction()
+|    |-- EventAction::~EventAction()
+|    \-- RunAction::~RunAction()
+|
+exit
+```
+
+:::{hint}
+
+このフローチャートは、Geant4をはじめるときに一番欲しかった情報かもしれないです。
+実際に自分で出力して確認したことで、理解度が格段にあがった気がします。
+
+:::
 
 ## 管理者の体制
 
