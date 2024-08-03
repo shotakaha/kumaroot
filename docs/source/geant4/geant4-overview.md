@@ -176,6 +176,13 @@ G4double energy_deposit = aStep->GetTotalEnergyDeposit();
 リファレンスを確認し、できること（得られる物理量など）を把握しておくと、
 自分のアプリケーション作成に役立つはずです。
 
+:::{seealso}
+
+- [](./geant4-step.md)
+- [](./geant4-sensor-sensitivedetector.md)
+
+:::
+
 ## リファレンス
 
 - [Basic concept of Run](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/run.html)
