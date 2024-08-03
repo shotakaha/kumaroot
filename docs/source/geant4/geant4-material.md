@@ -19,4 +19,5 @@ geant4-material-table
 geant4-material-material
 geant4-material-element
 geant4-material-isotope
+geant4-material-propertiestable
 :::
