@@ -1,4 +1,4 @@
-# 運動量を変更したい（``SetParticleMomentum``）
+# 入射運動量したい（``SetParticleMomentum``）
 
 ```cpp
 gun->SetParticleMomentum(400 * MeV);

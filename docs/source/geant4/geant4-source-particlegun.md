@@ -20,6 +20,9 @@ G4ParticleGun *gun = new G4ParticleGun(n_particles);
 :::
 
 ```{toctree}
+---
+maxdepth: 1
+---
 geant4-source-particlegun-definition
 geant4-source-particlegun-energy
 geant4-source-particlegun-momentum

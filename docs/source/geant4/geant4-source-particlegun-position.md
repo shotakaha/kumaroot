@@ -1,4 +1,4 @@
-# 入射場所を変更したい（``SetParticlePosition``）
+# 入射場所したい（``SetParticlePosition``）
 
 ```cpp
 position = G4ThreeVector(x0, y0, z0);

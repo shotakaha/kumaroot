@@ -1,4 +1,4 @@
-# 粒子の種類を変更したい（``SetParticleDefinition``）
+# 入射粒子の種類したい（``SetParticleDefinition``）
 
 ```cpp
 G4ParticleGun *gun = new G4ParticleGun(1);

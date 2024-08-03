@@ -1,4 +1,4 @@
-# エネルギーを変更したい（``SetParticleEnergy``）
+# 入射エネルギーしたい（``SetParticleEnergy``）
 
 ```cpp
 G4double energy = 400 * MeV;
