@@ -208,6 +208,7 @@ maxdepth: 1
 ---
 geant4-random
 geant4-random-direction
+geant4-random-plane
 ```
 
 ## 対話モードしたい
