@@ -63,6 +63,48 @@ class SteppingAction : public G4UserSteppingAction
 ステッピングアクションは``G4UserSteppingAction``を継承したクラスを自作します。
 仮想関数として定義されている``UserSteppingAction``を実装します。
 
+## UserSteppingAction
+
+```cpp
+void SteppingAction::UserSteppingAction(const G4Step *aStep)
+{
+    G4coud << "UserSteppingAction" << G4endl;
+
+    G4int parent_id = aStep->GetTrack()->GetParentID();
+
+    // 入射粒子の位置を表示
+    if (parent_id == 0) {
+        G4int track_id = aStep->GetTrack()->GetTrackID();
+        G4int step_id = aStep->GetTrack()->GetCurrentStepNumber();
+        auto p = aStep->GetPreStepPoint()->GetPosition() / mm;
+        auto q = aStep->GetPostStepPoint()->GetPosition() / mm;
+        G4cout << "TrackID: " << track_id << G4endl;
+        G4cout << "StepID: " << step_id << G4endl;
+        G4cout
+          << "Pre : (" << p.getX()
+          << ", " << p.getY()
+          << ", " << p.getZ()
+          << ") [mm]"
+          << G4endl;
+        G4cout
+          << "Post: (" << q.getX()
+          << ", " << q.getY()
+          << ", " << q.getZ()
+          << ") [mm]"
+          << G4endl;
+    }
+}
+```
+
+入射した粒子のステッピング処理を確認するため、ステップ番号とその両端の座標を表示してみました。
+このようにデバッグ的に``UserSteppingAction``をしてみるのはよいと思いますが、測定器のヒット情報は``G4VSensitiveDetector::ProcessHits``に定義したほうがよいと思います。
+
+:::{seealso}
+
+- [](./geant4-sensor-sensitivedetector.md)
+
+:::
+
 ## 境界判断したい
 
 ```cpp
