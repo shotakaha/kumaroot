@@ -15,5 +15,8 @@ auto physics = G4OpticalPhoton::OpticalPhoton();
 
 Geant4では、ガンマ線（``G4Gamma``）とOptical Photon（``G4OpticalPhoton``）は別々のクラスで定義されていて、お互いが変換されることはありません。
 
-Optical Photonは、チェレンコフ放射（``G4Cerenkov``）や
-シンチレーション光（``G4Scintillation``）の物理プロセスで放出されます。
+Optical Photonは、
+チェレンコフ放射（``G4Cerenkov``）、
+シンチレーション光（``G4Scintillation``）、
+遷移放射（``G4TransitionRadiation``）
+の物理プロセスで放出されます。

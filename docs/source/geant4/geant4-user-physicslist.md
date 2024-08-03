@@ -22,8 +22,6 @@ void RegisterPhysics(G4VPhysicsConstructor*);
 モデルの名前と内容は[Guide for Physics Lists](https://geant4-userdoc.web.cern.ch/UsersGuides/PhysicsListGuide/html/index.html)で確認できます。
 モデル名は、利用している相互作用モデルを使った命名規則になっています。
 
-- [](./geant4-physics-ftfp_bert.md)
-
 ## メイン関数
 
 ```cpp
@@ -39,8 +37,10 @@ int main(int argc, char** argv)
 }
 ```
 
-メイン関数では、Geant4チームが用意したモデルのインスタンスを作成し、
-``SetUserInitialization``でRunManagerに追加します。
+メイン関数で Reference Physics Listを作成してRunManagerに追加します。
+
+- [](./geant4-physics-ftfp_bert.md)
+- [](./geant4-physics-opticalphysics.md)
 
 ## カスタムしたい（``G4VUserPhysicsList``）
 
