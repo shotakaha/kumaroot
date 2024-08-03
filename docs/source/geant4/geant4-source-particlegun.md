@@ -1,32 +1,23 @@
 # 入射粒子したい（``G4ParticleGun``）
 
 ```cpp
-void PrimaryGenerator::GeneratePrimaries(G4Event *aEvent)
-{
-    // 入射する粒子数
-    G4int n_particles = 100;
-    G4ParticleGun *gun = new G4ParticleGun(n_particles);
-
-    // 入射する粒子の種類
-    G4ParticleTable *table = G4ParticleTable::GetParticleTable();
-    G4ParticleDefinition *particle = table->FindParticle("粒子名");
-    gun->SetParticleDefinition(particle);
-
-    // 入射する方向を設定
-    auto direction = G4ThreeVector(0., 0., 1.);
-    gun->SetParticleMomentumDirection(direction);
-
-    // 入射するエネルギー
-    auto energy = 3.0 * GeV;
-    gun->SetParticleEnergy(energy);
-
-    // G4EventにGunを追加する
-    gun->GeneratePrimaryVertex(aEvent);
-}
+G4int n_particles = 1;
+G4ParticleGun *gun = new G4ParticleGun(n_particles);
 ```
 
-``G4GeneralParticleSource``はGeant4標準のPrimaryGeneratorのひとです。
-``G4ParticleGun``と異なり、平面上に入射粒子を生成できます。
+``G4ParticleGun``はGeant4標準の粒子生成クラスのひとつです。
+種類、方向、座標、エネルギーなどを固定した1種類の入射粒子を生成できます。
+
+:::{caution}
+
+あくまで1種類のParticleGunを生成するクラスです。
+上記のサンプルで``n_particles=100``にした場合、
+同じ設定の粒子が100個生成されます。
+
+粒子をランダムに入射したい場合は、``n_particles=1``に設定し、
+``BeamOn(100)``のようにイベント数を増やすとよいです。
+
+:::
 
 ## 粒子の種類を変更したい（``SetParticleDefinition``）
 
@@ -46,8 +37,8 @@ gun->SetParticleDefinition(particle);
 ## エネルギーを変更したい（``SetParticleEnergy``）
 
 ```cpp
-G4ParticleGun *gun = new G4ParticleGun(1);
-gun->SetParticleEnergy(400 * MeV);
+G4double energy = 400 * MeV;
+gun->SetParticleEnergy(energy);
 ```
 
 ``SetParticleEnergy``で入射粒子のエネルギーを変更できます。
@@ -66,7 +57,6 @@ gun->SetParticleMomentum(400 * MeV);
 ## 入射方向を変更したい（``SetParticleMomentumDirection``）
 
 ```cpp
-G4ParticleGun *gun = new G4ParticleGun(1);
 G4ThreeVector direction = G4ThreeVector(0., -1., 0.);
 gun->SetParticleMomentumDirection(direction);
 ```
@@ -85,7 +75,6 @@ Geant4の世界には重力がないと思うので、横から打っても、�
 ## 入射場所を変更したい（``SetParticlePosition``）
 
 ```cpp
-G4ParticleGun *gun = new G4ParticleGun(1);
 position = G4ThreeVector(x0, y0, z0);
 gun->SetParticlePosition(position);
 ```
@@ -116,6 +105,15 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* /*aEvent*/)
 
 ``G4UniformRand``を使って入射場所をランダムに設定できます。
 付属サンプルB1では、標的となる論理ボリュームのサイズを利用して、座標を決めていました。
+
+## イベントに追加したい（``GeneratePrimaryVertex``）
+
+```cpp
+// G4EventにGunを追加する
+gun->GeneratePrimaryVertex(aEvent);
+```
+
+``GeneratePrimaryVertex``で、作成したParticleGunをイベントに追加します。
 
 ## リファレンス
 
