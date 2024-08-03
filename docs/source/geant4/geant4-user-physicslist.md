@@ -40,6 +40,7 @@ G4VModularPhysicsList()
 void ConstructParticle() override;
 void ConstructProcess() override;
 void RegisterPhysics(G4VPhysicsConstructor*);
+
 ```
 
 ``G4VModularPhysicsList``は``G4VUserPhysicList``を継承したクラスです。

@@ -6,6 +6,16 @@
 そのため、チェレンコフ光（``G4Cerenkov``）や
 シンチレーション光（``G4Scintillation``）などの光子は、ガンマ線（``G4Gamma``）とは別の粒子として定義されています。
 
+```cpp
+#include "G4OpticalPhoton.hh"
+
+auto physics = G4OpticalPhoton::Definition();
+
+// 以下の2つのstaticメソッドはDefinition()と同じ
+auto physics = G4OpticalPhoton::OpticalPhotonDefinition();
+auto physics = G4OpticalPhoton::OpticalPhoton();
+```
+
 ## 物理モデルに追加したい
 
 ```cpp
