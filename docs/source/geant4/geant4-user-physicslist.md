@@ -14,6 +14,38 @@ Geant4チームが用意した**Reference Physics List**を利用できます。
 | FTFP_BERT_LV | Livermoreモデル | Bertiniモデル | Fritiofモデル | - |
 | QGSP_BERT | 標準 | Bertiniモデル | QGSモデル | - |
 
+## 親クラス
+
+- G4VUserPhysicsList
+
+```cpp
+G4VUserPhysicList();
+virtual ~G4VUserPhysicList();
+virtual void ConstructParticle() = 0;
+virtual void ConstructProcess() = 0;
+virtual void SetCuts();
+```
+
+親クラスのメンバー関数を抜粋しました。
+コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
+``ConstructParticle()``と``ConstructProcess()``は、純粋仮想関数になっているため、自作クラスでoverrideが必要です。
+``SetCuts()``は、粒子輸送の閾値を設定する仮想関数です。
+overrideして閾値をカスタマイズできます。
+
+- G4VModularPhysicsList
+
+```cpp
+G4VModularPhysicsList()
+~G4VModularPhysicsList() override;
+void ConstructParticle() override;
+void ConstructProcess() override;
+void RegisterPhysics(G4VPhysicsConstructor*);
+```
+
+``G4VModularPhysicsList``は``G4VUserPhysicList``を継承したクラスです。
+Geant4標準のリファレンス物理モデルもこのクラスを継承しています。
+``RegisterPhysics``で、他のリファレンス物理モデルを追加できます。
+
 ## メイン関数
 
 ```cpp
