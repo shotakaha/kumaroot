@@ -19,68 +19,13 @@ G4ParticleGun *gun = new G4ParticleGun(n_particles);
 
 :::
 
-## 粒子の種類を変更したい（``SetParticleDefinition``）
-
-```cpp
-G4ParticleGun *gun = new G4ParticleGun(1);
-G4ParticleTable *table = G4ParticleTable::GetParticleTable();
-G4ParticleDefinition *particle = table->FindParticle("粒子名");
-gun->SetParticleDefinition(particle);
+```{toctree}
+geant4-source-particlegun-definition
+geant4-source-particlegun-energy
+geant4-source-particlegun-momentum
+geant4-source-particlegun-direction
+geant4-source-particlegun-position
 ```
-
-``SetParticleDefinition``で入射する粒子の種類を変更できます。
-
-ただし、粒子名をそのまま設定することはできません。
-まず``G4ParticleTable``から粒子情報（質量、電荷、スピンなど）を取得して、
-それを``SetParticleDefinition``に渡す手順になっています。
-
-## エネルギーを変更したい（``SetParticleEnergy``）
-
-```cpp
-G4double energy = 400 * MeV;
-gun->SetParticleEnergy(energy);
-```
-
-``SetParticleEnergy``で入射粒子のエネルギーを変更できます。
-運動量をすでに設定していた場合は0に変更されるようです。
-
-## 運動量を変更したい（``SetParticleMomentum``）
-
-```cpp
-G4ParticleGun *gun = new G4ParticleGun(1);
-gun->SetParticleMomentum(400 * MeV);
-```
-
-``SetParticleMomentum``で入射粒子の運動量を変更できます。
-エネルギーを設定していなかった場合、入射粒子の質量を考慮したエネルギーが設定されます。
-
-## 入射方向を変更したい（``SetParticleMomentumDirection``）
-
-```cpp
-G4ThreeVector direction = G4ThreeVector(0., -1., 0.);
-gun->SetParticleMomentumDirection(direction);
-```
-
-```SetParticleMomentumDirection``で入射方向を変更できます。
-方向は（x, y, z）の単位ベクトルで指定します。
-上のサンプルは鉛直下向きに入射しています。
-
-:::{note}
-
-Geant4の世界には重力がないと思うので、横から打っても、上から打っても同じだと思います。
-ただ、ミューオンを上から入射したほうが、見た目的に宇宙線っぽくなります。
-
-:::
-
-## 入射場所を変更したい（``SetParticlePosition``）
-
-```cpp
-position = G4ThreeVector(x0, y0, z0);
-gun->SetParticlePosition(position);
-```
-
-``SetParticlePosition``で入射位置を変更できます。
-座標は``G4ThreeVector``で設定します。
 
 ## ランダムに入射したい
 
