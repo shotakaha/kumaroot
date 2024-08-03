@@ -1,36 +1,10 @@
 # 相互作用したい（``G4VModularPhysicsList``）
 
-粒子と物質の相互作用モデルを定義して``G4RunManager``に設定します。
-
-Geant4チームが用意した**Reference Physics List**を利用できます。
-モデルの内容は[Gude for Physics Lists](https://geant4-userdoc.web.cern.ch/UsersGuides/PhysicsListGuide/html/index.html)で確認できます。
-
-モデル名は、利用している相互作用モデルを使った命名規則になっています。
-
-| モデル名 | 電磁相互作用 | 低エネルギーハドロン | 高エネルギーハドロン | 中性子輸送 |
-|---|---|---|---|---|
-| FTFP_BERT | 標準 | Bertiniモデル | Fritiofモデル | - |
-| FTFP_BERT_HP | 標準 | Bertiniモデル | Fritiofモデル | 高精度 |
-| FTFP_BERT_LV | Livermoreモデル | Bertiniモデル | Fritiofモデル | - |
-| QGSP_BERT | 標準 | Bertiniモデル | QGSモデル | - |
+粒子と物質の相互作用を定義するクラスは、必須クラスのひとつです。
+Geant4で用意されている**Reference Physics List**を利用するのが簡単です。
+このPhysicsListは``G4VModularPhysicsList``を継承したクラスです。
 
 ## 親クラス
-
-- G4VUserPhysicsList
-
-```cpp
-G4VUserPhysicList();
-virtual ~G4VUserPhysicList();
-virtual void ConstructParticle() = 0;
-virtual void ConstructProcess() = 0;
-virtual void SetCuts();
-```
-
-親クラスのメンバー関数を抜粋しました。
-コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
-``ConstructParticle()``と``ConstructProcess()``は、純粋仮想関数になっているため、自作クラスでoverrideが必要です。
-``SetCuts()``は、粒子輸送の閾値を設定する仮想関数です。
-overrideして閾値をカスタマイズできます。
 
 - G4VModularPhysicsList
 
@@ -40,12 +14,15 @@ G4VModularPhysicsList()
 void ConstructParticle() override;
 void ConstructProcess() override;
 void RegisterPhysics(G4VPhysicsConstructor*);
-
 ```
 
 ``G4VModularPhysicsList``は``G4VUserPhysicList``を継承したクラスです。
-Geant4標準のリファレンス物理モデルもこのクラスを継承しています。
-``RegisterPhysics``で、他のリファレンス物理モデルを追加できます。
+``RegisterPhysics``で、他のリファレンス物理モデル（``G4VPhysicsConstructor``）を追加できます。
+
+モデルの名前と内容は[Guide for Physics Lists](https://geant4-userdoc.web.cern.ch/UsersGuides/PhysicsListGuide/html/index.html)で確認できます。
+モデル名は、利用している相互作用モデルを使った命名規則になっています。
+
+- [](./geant4-physics-ftfp_bert.md)
 
 ## メイン関数
 
@@ -67,4 +44,31 @@ int main(int argc, char** argv)
 
 ## カスタムしたい（``G4VUserPhysicsList``）
 
-定義されていない相互作用が必要な場合は``G4VUserPhysicsList``を継承してカスタムできるようになっています。
+定義されていない相互作用（やその組み合わせ）が必要な場合は``G4VUserPhysicsList``クラスを継承してユーザーがカスタムできるようになっています。
+
+- G4VUserPhysicsList
+
+```cpp
+G4VUserPhysicList();
+virtual ~G4VUserPhysicList();
+virtual void ConstructParticle() = 0;
+virtual void ConstructProcess() = 0;
+virtual void SetCuts();
+```
+
+親クラスのメンバー関数を抜粋しました。
+コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
+``ConstructParticle()``と``ConstructProcess()``は、純粋仮想関数になっているため、自作クラスでoverrideが必要です。
+``SetCuts()``は、粒子輸送の閾値を設定する仮想関数です。
+overrideして閾値をカスタマイズできます。
+
+```cpp
+G4VUserPhysicList() = default;
+~G4VUserPhysicList() = default;
+void ConstructParticle() override;
+void ConstructProcess() override;
+void SetCuts() override;
+```
+
+- [](./geant4-physics-constructparticle.md)
+- [](./geant4-physics-constructprocess.md)
