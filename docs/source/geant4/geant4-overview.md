@@ -1,9 +1,27 @@
 # シミュレーションの流れ
 
-Geant4シミューレーションは、実際の素粒子物理学分野の実験手順を、
-パソコンの中で再現した作りになっています。
+Geant4にはシミュレーション進行を担当する4種類のManagerクラスがあります。
+それぞれが隣り合ったManagerクラスに処理をお願いしたり、結果を受けたりする体制が組まれています。
 
-## メイン関数のフロー
+1. ``G4RunManager``:
+**G4Run**を管理するクラス。
+G4**Event**Managerにイベント処理ををお願いする。
+2. ``G4EventManager``:
+**G4Event**を管理するクラス。
+G4**Tracking**Managerにトラッキング処理をお願いする。
+イベント処理が終了したらG4**Run**Managerに報告する。
+3. ``G4TrackingManager``:
+**G4Track**を管理するクラス。
+G4**Stepping**Managerにステッピング処理をお願いする。
+トッラッキング処理が終了したらG4**Event**Managerに報告する。
+4. ``G4SteppingManager``:
+**G4Step**を管理するクラス。
+ステッピング処理を実行する。
+ステッピング処理が終了したらG4**Tracking**Managerに報告する。
+
+この中で、ユーザーが直接指示するのは``G4RunManager``だけでOKです。
+
+## メイン関数のフローチャート
 
 ``main()``関数で``G4RunManager``がどのように処理を進めるかを、
 フローチャートに整理しました。
@@ -63,15 +81,18 @@ main
 |    |-- SteppingAction::UserSteppingAction()
 |    |-- SensorHit::ProcessHits()
 |    |   \-- SensorHit{}
+|    |-- SteppingAction::UserSteppingAction()
 |    |
 |    |   // ステップが有感検出器にない場合
 |    |   // 1. UserSteppingActionの処理
 |    |-- SteppingAction::UserSteppingAction()
 |    |-- SteppingAction::UserSteppingAction()
-|    |-- SteppingAction::UserSteppingAction()
 |    |-- TrackingAction::PostUserTrackingAction()
 |    |
 |    |-- // 複数のトラックがある場合
+|    |-- //   PreUserTrackingAction
+|    |-- //   PreSteppingAction or ProcessHits
+|    |-- //   PostUserTrackingAction
 |    |-- // 上記の処理を繰り返す
 |    |
 |    |-- EventAction::EndOfEventAction()
@@ -89,24 +110,16 @@ main
 exit
 ```
 
+必須クラスの他に、各種ユーザーアクションや有感検出器を設定し、
+それらがどのタイミングで処理されるのかを確認しました。
+それぞれのタイミングを把握することで、Geant4の理解度が格段にあがり、
+どのファイルに実装すればよいかも目星がつくようになりました。
+
 :::{hint}
 
 このフローチャートは、Geant4をはじめるときに一番欲しかった情報かもしれないです。
-実際に自分で出力して確認したことで、理解度が格段にあがった気がします。
 
 :::
-
-## 管理者の体制
-
-Geant4には4人の管理者が存在し、次のような順番になっています。
-それぞれが隣り合った管理者に処理をお願いしたり、報告を受けたりする体制になっています。
-
-1. ``G4RunManager``: G4**Event**Managerにイベント処理ををお願いする。
-2. ``G4EventManager``: G4**Tracking**Managerにトラッキング処理をお願いする。終了したらG4**Run**Managerに報告する。
-3. ``G4TrackingManager``: G4**Stepping**Managerにステッピング処理をお願いする。終了したらG4**Event**Managerに報告する。
-4. ``G4SteppingManager``: ステッピング処理を実行する。終了したらG4**Tracking**Managerに報告する。
-
-ユーザーが直接指示するのは``G4RunManager``だけでOKです。
 
 ## ランの管理者（``G4RunManager``）
 
