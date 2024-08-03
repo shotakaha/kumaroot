@@ -63,3 +63,13 @@ material->SetMaterialPropertiesTable(property);
 ``examples/extended/optical/LXe/``のサンプルを参照しました。
 屈折率と吸収長の他に、シンチレーション光のプロパティ（光量や時定数）をいくつか設定しています。
 シンチレーション光は2種類設定できるようです。
+
+## OpticalSurfaceしたい
+
+```cpp
+G4OpticalSurface surface = new G4OpticalSurface("Surface");
+surface->SetType(dielectric_dielectric);
+surface->SetFinish(ground);  // rough surface
+surface->SetModel(unified);  // UNIFIED model
+surface->SetMaterialPropertiesTable(表面のプロパティ);
+```
