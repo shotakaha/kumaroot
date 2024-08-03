@@ -3,8 +3,17 @@
 ```cpp
 #include "G4Scintillation.hh"
 
-auto sc = G4Scintillation{};
+G4Scintillation *process = G4Scintillation{};
+
+process->SetScintillationYieldFactor(1.0);
+process->SetTrackSecondariesFirst(true);
 ```
+
+:::{seealso}
+
+- [](./geant4-material-propertiestable.md)
+
+:::
 
 ## シンチレーション光の数をしりたい（``GetNumPhotons``）
 
