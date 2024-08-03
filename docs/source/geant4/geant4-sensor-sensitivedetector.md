@@ -190,11 +190,10 @@ G4bool Sensor::ProcessHits(G4Step *aStep, G4TouchableHistory* /* aTouchable */) 
 ```
 
 ``ProcessHits``はSensitiveDetectorのヒット情報を処理するときのメインの関数です。
-この関数は、有感検出器の中でステップ処理が発生するたびに自動的に呼び出されます。
-
 データを残すかどうかの条件や、
 どのようなデータを取得するかは、
-ユーザーがこの関数の中で実装する必要があります。
+ユーザーがこの関数の中で実装します。
+この関数は、ステップが有感検出器の中にあるとき、自動的に呼ばれます。
 
 ひとつめの引数は``(G4Step *aStep)``になっているので、
 [G4Step操作](./geant4-step.md)や
@@ -205,9 +204,11 @@ G4bool Sensor::ProcessHits(G4Step *aStep, G4TouchableHistory* /* aTouchable */) 
 
 :::{hint}
 
-おそらく``UserSteppingAction``でも同じような処理を定義できます。
-しかし、（たぶん）G4SDManagerが管理してくれているため、
-ユーザーが境界判断しなくていいため、SensitiveDetectorを使う方が楽ちんです。
+おそらく[UserSteppingAction](./geant4-user-steppingaction.md)の亜種です。
+（たぶん）G4SDManagerが管理してくれているため、ステップが有感検出器の中にあるとき、ユーザーが境界判断しなくても、自動的に呼ばれます。
+SensitiveDetectorを使う方が楽ちんです。
+
+測定器のヒット情報を知りたい場合は、SensitiveDetectorだけを定義すればOKです。
 
 :::
 
