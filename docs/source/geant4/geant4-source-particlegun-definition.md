@@ -12,3 +12,8 @@ gun->SetParticleDefinition(particle);
 ただし、粒子名をそのまま設定することはできません。
 まず``G4ParticleTable``から粒子情報（質量、電荷、スピンなど）を取得して、
 それを``SetParticleDefinition``に渡す手順になっています。
+
+## リファレンス
+
+- [G4ParticleTable](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleTable.html)
+- [PDG Identifiers - Particle Data Group](https://pdg.lbl.gov/2024/pdgid/PDGIdentifiers.html)

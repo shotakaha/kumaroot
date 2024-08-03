@@ -63,7 +63,3 @@ gun->GeneratePrimaryVertex(aEvent);
 ## リファレンス
 
 - [G4ParticleGun](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleGun.html)
-- [G4ParticleTable](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleTable.html)
-- [G4PrimaryParticle](https://geant4.kek.jp/Reference/11.2.0/classG4PrimaryParticle.html)
-- [G4PrimaryVertex](https://geant4.kek.jp/Reference/11.2.0/classG4PrimaryVertex.html)
-- [PDG Identifiers - Particle Data Group](https://pdg.lbl.gov/2024/pdgid/PDGIdentifiers.html)
