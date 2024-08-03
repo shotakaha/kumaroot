@@ -2,6 +2,7 @@
 
 ```{toctree}
 geant4-physics-ftfp_bert
+geant4-physics-opticalphysics
 geant4-physics-opticalphoton
 geant4-physics-cerenkov
 geant4-physics-scintillation
