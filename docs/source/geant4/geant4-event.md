@@ -14,6 +14,7 @@ geant4-event-primaryvertex
 geant4-event-random
 geant4-event-hc
 geant4-event-trajectorycontainer
+geant4-event-manager
 ```
 
 ## リファレンス
