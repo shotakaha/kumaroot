@@ -48,7 +48,7 @@ PMTに入射した光子の数を知りたい場合は、``G4SensitiveDetector``
 ## PMTを配置したい
 
 ```cpp
-G4LogicalVolume* SetPmtArray()
+G4LogicalVolume* SetupPmtArray()
 {
     // 親ボリューム
     auto container = // 親ボリュームを作成する

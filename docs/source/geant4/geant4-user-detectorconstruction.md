@@ -121,6 +121,8 @@ public:
 
 コンストラクターとデストラクターは親クラスを引き継ぐことにしました。
 
+## Geometry::Construct
+
 ```cpp
 public:
     G4PhysicalVolume* Construct() override;
@@ -129,6 +131,19 @@ public:
 
 ``override``キーワードを設定し、親クラスが持っている（純粋）仮想関数を上書きすることを明示しました。
 また、overrideをつけておくと、関数名をタイポしていた場合にコンパイルエラーで指摘してくれます。
+
+```cpp
+G4VPhysicalVolume *Construct()
+{
+    return SetupVolumes();
+}
+```
+
+- [](./geant4-geometry-examples.md)
+- [](./geant4-geometry-world.md)
+- [](./geant4-geometry-tank.md)
+
+## メンバー変数
 
 ```cpp
 private:

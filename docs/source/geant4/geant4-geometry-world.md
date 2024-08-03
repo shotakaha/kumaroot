@@ -54,7 +54,7 @@ Geant4で通常**World**（ワールド）と呼ばれるシミュレーショ�
 ## 実験室を配置したい
 
 ```cpp
-G4VPhysicalVolume* SetVolumes()
+G4VPhysicalVolume* SetupVolumes()
 {
     // 実験室の論理物体を取得する
     auto world = SetupWorldVolume();

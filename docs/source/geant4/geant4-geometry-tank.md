@@ -52,7 +52,7 @@ G4LogicalVolume *SetupWaterTank()
 ## 水タンクを配置したい
 
 ```cpp
-G4VPhysicalVolume* SetVolumes()
+G4VPhysicalVolume* SetupVolumes()
 {
     // Worldを準備する
     auto world = SetupWorldVolume();
