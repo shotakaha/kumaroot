@@ -24,5 +24,6 @@ int main()
 :::{seealso}
 
 - [](./geant4-physics-opticalphoton.md)
+- [](./geant4-material-propertiestable.md)
 
 :::
