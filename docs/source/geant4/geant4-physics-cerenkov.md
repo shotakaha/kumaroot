@@ -1,9 +1,9 @@
-# チェレンコフ光した（``G4Cerenkov``）
+# チェレンコフ放射したい（``G4Cerenkov``）
 
 ```cpp
 #include "G4Cerenkov.hh"
 
-auto cerenkov = new G4Cerenkov();
+auto cerenkov = new G4Cerenkov{};
 cerenkov->SetMaxNumPhotonsPerStep(数値);
 ```
 
