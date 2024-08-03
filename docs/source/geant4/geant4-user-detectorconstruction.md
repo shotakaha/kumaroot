@@ -132,16 +132,8 @@ public:
 ``override``キーワードを設定し、親クラスが持っている（純粋）仮想関数を上書きすることを明示しました。
 また、overrideをつけておくと、関数名をタイポしていた場合にコンパイルエラーで指摘してくれます。
 
-```cpp
-G4VPhysicalVolume *Construct()
-{
-    return SetupVolumes();
-}
-```
-
-- [](./geant4-geometry-examples.md)
-- [](./geant4-geometry-world.md)
-- [](./geant4-geometry-tank.md)
+- [](./geant4-geometry-construct.md)
+- [](./geant4-geometry-constructSDandField.md)
 
 ## メンバー変数
 
