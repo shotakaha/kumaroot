@@ -165,7 +165,7 @@ rm->SetUserInitialization(physics);
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 geant4-physics
 geant4-physics-examples
