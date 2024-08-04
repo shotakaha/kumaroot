@@ -36,10 +36,8 @@ Water->AddElement(O, 1);
 ## 光学特性したい
 
 ```cpp
-const G4int entries = 35;
-
 // Optical Photonのエネルギー
-G4double photon_energy[entries] = {
+std::vector<G4double> photon_energy{
     2.034*eV, 2.068*eV, 2.103*eV, 2.139*eV,
     2.177*eV, 2.216*eV, 2.256*eV, 2.298*eV,
     2.341*eV, 2.386*eV, 2.433*eV, 2.481*eV,
@@ -52,7 +50,7 @@ G4double photon_energy[entries] = {
     };
 
 // エネルギーごとの反射率
-G4double refractive_index[entries] = {
+std::vector<G4double> refractive_index{
     1.3435, 1.344,  1.3445, 1.345,  1.3455,
     1.346,  1.3465, 1.347,  1.3475, 1.348,
     1.3485, 1.3492, 1.35,   1.3505, 1.351,
@@ -63,7 +61,7 @@ G4double refractive_index[entries] = {
     };
 
 // エネルギーごとの吸収長
-G4double absorption_length[nEntries] = {
+std::vector<G4double> absorption_length{
     3.448*m,  4.082*m,  6.329*m,  9.174*m, 12.346*m, 13.889*m,
     15.152*m, 17.241*m, 18.868*m, 20.000*m, 26.316*m, 35.714*m,
     45.455*m, 47.619*m, 52.632*m, 52.632*m, 55.556*m, 52.632*m,
@@ -72,11 +70,10 @@ G4double absorption_length[nEntries] = {
     17.500*m, 14.500*m, 14.500*m, 14.500*m, 14.500*m
     };
 
-// AddConstProperty(キー, 特性値, 数）
-// AddProperty(キー, 光子のエネルギー, 特性値, 数）
 G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
-mpt->AddProperty("RINDEX", photon_energy, refractive_index, entries);
-mpt->AddProperty("ABSLENGTH", photon_energy, absorption_length, entries);
+mpt->AddProperty("RINDEX", photon_energy, refractive_index);
+mpt->AddProperty("ABSLENGTH", photon_energy, absorption_length);
+
 fWater->SetMaterialPropertiesTable(mpt)
 ```
 
