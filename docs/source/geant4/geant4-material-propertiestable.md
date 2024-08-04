@@ -19,6 +19,9 @@ OpticalPhysicsの物理プロセスを使う場合、
 素材の屈折率（``RINDEX``）や
 吸収長（``ABSLENGTH``）などの性質をユーザーが設定する必要があります。
 
+それぞれの物理プロセスで必要なパラメーターの設定は
+[Configuration - Book For Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html#configuration)を参照してください。
+
 ## チェレンコフ光したい
 
 ```cpp
@@ -73,3 +76,7 @@ surface->SetFinish(ground);  // rough surface
 surface->SetModel(unified);  // UNIFIED model
 surface->SetMaterialPropertiesTable(表面のプロパティ);
 ```
+
+## リファレンス
+
+- [Material Properties Table](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html)
