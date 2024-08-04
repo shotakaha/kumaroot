@@ -10,19 +10,39 @@ int main()
     rm->SetUserInitialization(physics);
 
     auto optical_params = G4OpticalParameters::Instance();
-    optical_params->SetWSLTimeProfile("delta");
+
+    // G4Cerenkovの設定
+    optical_params->SetMaxNumPhotonsPerStep(100);
+    optical_params->SetMaxBetaChangePerStep(10.0);
+    optical_params->SetCerenkovStackPhotons(true);
+    optical_params->SetCerenkovTrackSecondariesFirst(true);
+    optical_params->SetCerenkovVerbosity(1);
+
+    // G4Scintillationの設定
+    optical_params->SetScintByParticleType(false);
+    optical_params->SetScintTrackInfo(false);
+    optical_params->SetScintTrackSecondariesFirst(true);
+    optical_params->SetScintFiniteRiseTime(false);
+    optical_params->SetScintStackPhotons(true);
+    optical_params->SetScintVerboseLevel(1);
+
+    // G4OpAbsorptionの設定
+    optical_params->SetAbsorptionVerboseLevel(1);
 }
 ```
 
 ``FTFP_BERT``モデルに``OpticalPhysics``を追加しています。
-
-このOpticalPhysicsでは、
+``G4OpticalPhysics``では、
+チェレンコフ光（``G4Cerenkov``）、
+シンチレーション光（``G4Scintillation``）、
 吸収（``G4OpAbsorption``）、
 レイリー散乱（``G4OpRayleigh``）、
 ミー散乱（``G4OpMieHG``）、
 波長変換（``G4OpWLS``と``G4OpWLS2``）、
 境界での散乱（``G4OpBoundary``）、
 の物理プロセスを通じて相互作用できるようになります。
+
+また、``G4OpticalParameters``で、それぞれのプロセスのパラメーターを設定できます。
 
 :::{seealso}
 
@@ -47,5 +67,6 @@ int main()
 /process/optical/processActivation OpWLS2 true
 ```
 
+``G4OpticalParameters``の設定はマクロで変更できます。
 ``processActivation``でOpticalPhysicsで有効にする物理プロセスを選択できます。
 デフォルトでは、関係するすべてのプロセスが有効になっています。

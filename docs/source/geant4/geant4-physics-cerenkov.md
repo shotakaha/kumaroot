@@ -3,11 +3,12 @@
 ```cpp
 #include "G4Cerenkov.hh"
 
-G4Cerenkov* process = new G4Cerenkov{};
-
-G4int max_photons = 300;
-process->SetMaxNumPhotonsPerStep(max_photons);
-process->SetTrackSecondariesFirst(true);
+auto params = G4OpticalParameters::Instance();
+params->SetMaxNumPhotonsPerStep(100);
+params->SetMaxBetaChangePerStep(10.0);
+params->SetCerenkovStackPhotons(true);
+params->SetCerenkovTrackSecondariesFirst(true);
+params->SetCerenkovVerbosity(1);
 ```
 
 チェレンコフ放射は、物質に屈折率（``RINDEX``）が設定されているボリュームで生成されます。

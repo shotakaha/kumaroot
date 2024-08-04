@@ -3,10 +3,13 @@
 ```cpp
 #include "G4Scintillation.hh"
 
-G4Scintillation *process = G4Scintillation{};
-
-process->SetScintillationYieldFactor(1.0);
-process->SetTrackSecondariesFirst(true);
+auto params = G4OpticalParameters::Instance();
+params->SetScintByParticleType(false);
+params->SetScintTrackInfo(false);
+params->SetScintTrackSecondariesFirst(true);
+params->SetScintFiniteRiseTime(false);
+params->SetScintStackPhotons(true);
+params->SetScintVerboseLevel(1);
 ```
 
 ## プロパティしたい
