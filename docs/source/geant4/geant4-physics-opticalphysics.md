@@ -8,6 +8,9 @@ int main()
 
     physics->RegisterPhysics(optical_physics);
     rm->SetUserInitialization(physics);
+
+    auto optical_params = G4OpticalParameters::Instance();
+    optical_params->SetWSLTimeProfile("delta");
 }
 ```
 
@@ -27,3 +30,22 @@ int main()
 - [](./geant4-material-propertiestable.md)
 
 :::
+
+## マクロで設定したい（``/process/optical/``）
+
+```cfg
+/process/optical/verbose 1
+
+# /process/optical/processActivation KEY bool
+/process/optical/processActivation Cerenkov true
+/process/optical/processActivation Scintillation true
+/process/optical/processActivation OpAbsorption true
+/process/optical/processActivation OpRayleigh true
+/process/optical/processActivation OpMieHG true
+/process/optical/processActivation OpBoundary true
+/process/optical/processActivation OpWLS true
+/process/optical/processActivation OpWLS2 true
+```
+
+``processActivation``でOpticalPhysicsで有効にする物理プロセスを選択できます。
+デフォルトでは、関係するすべてのプロセスが有効になっています。

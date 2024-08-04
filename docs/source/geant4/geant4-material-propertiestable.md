@@ -1,26 +1,30 @@
 # マテリアルのプロパティしたい（``G4MaterialPropertiesTable``）
 
 ```cpp
-// std::vector<G4double> photon_energy = {光子のエネルギーの配列};
-// std::vector<G4double> refractive_index = {光子のエネルギーに対応した屈折率};
-// std::vector<G4double> absorption_length = {光子のエネルギーに対応した吸収長};
-// size_t n_entries = photon_energy.size();
-
-G4MaterialPropertiesTable *property = new G4MaterialPropertiesTable();
-property->AddProperty("RINDEX", photon_energy, refractive_index, n_entries);
-property->AddProperty("ABSLENGTH", photon_energy, absorption, n_entries);
-
+// 素材：水（G4_WATER）
 G4NistManager *nm = new G4NistManager::GetInstance();
 G4Material *material = nm->FindOrBuildMaterial("G4_WATER");
+
+
+// プロパティを設定（水のpre-defined値を使用）
+G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
+mpt->AddProperty("RINDEX", "Water");
+
 material->SetMaterialPropertiesTable(table);
 ```
 
 OpticalPhysicsの物理プロセスを使う場合、
 素材の屈折率（``RINDEX``）や
 吸収長（``ABSLENGTH``）などの性質をユーザーが設定する必要があります。
-
 それぞれの物理プロセスで必要なパラメーターの設定は
 [Configuration - Book For Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html#configuration)を参照してください。
+
+なお、Geant v11.0 から
+``Air``（空気）、
+``Water``（水）、
+``PMMA``（アクリル樹脂／ポリメタクリル酸メチル）、
+``Fused Silica``（石英ガラス）
+に対して屈折率のpre-defined値が追加されています。
 
 ## チェレンコフ光したい
 
@@ -67,6 +71,8 @@ material->SetMaterialPropertiesTable(property);
 屈折率と吸収長の他に、シンチレーション光のプロパティ（光量や時定数）をいくつか設定しています。
 シンチレーション光は2種類設定できるようです。
 
+- [](./geant4-physics-scintillation.md)
+
 ## OpticalSurfaceしたい
 
 ```cpp
@@ -80,3 +86,4 @@ surface->SetMaterialPropertiesTable(表面のプロパティ);
 ## リファレンス
 
 - [Material Properties Table](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html)
+- [RefractiveIndex Database](https://refractiveindex.info/)
