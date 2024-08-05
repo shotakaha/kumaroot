@@ -604,9 +604,9 @@ snowballstemmer==2.2.0 ; python_version >= "3.10" and python_version < "4.0" \
 sphinx-copybutton==0.5.2 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:4cf17c82fb9646d1bc9ca92ac280813a3b605d8c421225fd9913154103ee1fbd \
     --hash=sha256:fb543fd386d917746c9a2c50360c7905b605726b9355cd26e9974857afeae06e
-sphinx-design==0.6.0 ; python_version >= "3.10" and python_version < "4.0" \
-    --hash=sha256:e9bd07eecec82eb07ff72cb50fc3624e186b04f5661270bc7b62db86c7546e95 \
-    --hash=sha256:ec8e3c5c59fed4049b3a5a2e209360feab31829346b5f6a0c7c342b894082192
+sphinx-design==0.6.1 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:b11f37db1a802a183d61b159d9a202314d4d2fe29c163437001324fe2f19549c \
+    --hash=sha256:b44eea3719386d04d765c1a8257caca2b3e6f8421d7b3a5e742c0fd45f84e632
 sphinx-rtd-theme==2.0.0 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:bd5d7b80622406762073a04ef8fadc5f9151261563d47027de09910ce03afe6b \
     --hash=sha256:ec93d0856dc280cf3aee9a4c9807c60e027c7f7b461b77aeffed682e68f0e586
