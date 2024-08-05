@@ -135,9 +135,18 @@ geant4-geometry
 geant4-geometry-solid
 geant4-logicalvolume
 geant4-physicalvolume
-geant4-sensor
 geant4-touchable
 geant4-geometry-examples
+```
+
+## SensitiveDetectorしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+geant4-sensor
+geant4-sensor-examples
 ```
 
 ## マテリアル操作したい
