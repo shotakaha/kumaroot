@@ -114,17 +114,3 @@ G4double QuantumEfficiency(G4double energy)
 ```
 
 光電子増倍管の量子効率と、入射窓の透過度を入力して、実行的な量子効率を計算しています。
-
-## 波長をエネルギーに変換したい
-
-```cpp
-void WavelengthToEnergy(std::vector<G4double> &wavelength)
-{
-    // wavelength [m]
-    // energy [eV]
-    for (auto& length : wavelength) {
-        length = CLHEP::h_Planck * CLHEP::c_light / (length / m) / eV;
-    };
-};
-```
-

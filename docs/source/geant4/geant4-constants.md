@@ -38,3 +38,29 @@ using CLHEP::universe_mean_density;
 ```
 
 CLHEPライブラリの物理定数を読み込み、グローバル変数として使えるようになっています。
+
+## 波長をエネルギーに変換したい
+
+```cpp
+#include "G4PhysicalConstants.hh"
+#include "G4SystemOfUnit.hh"
+
+std::vector<G4double> WavelengthToEnergy(const std::vector<G4double>& wavelength)
+{
+    // wavelength [m]
+    // energy [eV]
+    std::vector<G4double> energy;
+    for (auto length : wavelength) {
+        length = length / m;  // [m] に変換
+        G4double e = CLHEP::h_Planck * CLHEP::c_light / v / eV;  // [eV] に変換
+        energy.push_back(e);
+    };
+    return energy;
+};
+```
+
+:::{math}
+
+E = h\nu = \frac{hc}{\lambda}
+
+:::
