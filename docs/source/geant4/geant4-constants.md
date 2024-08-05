@@ -39,6 +39,14 @@ using CLHEP::universe_mean_density;
 
 CLHEPライブラリの物理定数を読み込み、グローバル変数として使えるようになっています。
 
+| 名前 | 値 | 単位 |
+|---|---|---|
+| ``CLHEP::pi`` | 3.141592653589793d | |
+| ``CLHEP::c_light`` | $299.792458$ | km / s |
+| ``CLHEP::h_Planck`` | $4.135669239559144 \times 10^{-12}$ | eV s |
+| ``CLHEP::hbar_Planck`` | $6.582122024689376 \times 10^{-13}$ |eV s |
+| ``CLHEP::hbarc`` | $1.9732705406375647 \times 10^{-10}$ | eV m |
+
 ## 波長をエネルギーに変換したい
 
 ```cpp
@@ -49,10 +57,14 @@ std::vector<G4double> WavelengthToEnergy(const std::vector<G4double>& wavelength
 {
     // wavelength [m]
     // energy [eV]
+    // h_Planck = 4.135669239559144e-12 [eV s]
+    // c_light  = 299.792458 [km / s]
+    const G4double h = CLHEP::h_Planck;
+    const G4double c = CLHEP::c_light / m;  // [m] に変換
     std::vector<G4double> energy;
     for (auto length : wavelength) {
-        length = length / m;  // [m] に変換
-        G4double e = CLHEP::h_Planck * CLHEP::c_light / v / eV;  // [eV] に変換
+        length = length / m;     // [m] に変換
+        G4double e = h * c / length / eV;  // [eV] に変換
         energy.push_back(e);
     };
     return energy;
