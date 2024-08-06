@@ -13,6 +13,7 @@ hvplot-install
 hvplot-extension
 hvplot-pandas
 hvplot-hist
+hvplot-bar
 hvplot-scatter
 hvplot-errorbars
 ```
