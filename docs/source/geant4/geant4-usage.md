@@ -114,7 +114,7 @@ geant4-macro-gui
 ---
 maxdepth: 1
 ---
-geant4-runmanager
+geant4-run-manager
 geant4-analysismanager
 geant4-particlegun
 ```
