@@ -5,11 +5,11 @@
 G4NistManager *nm = new G4NistManager::GetInstance();
 G4Material *material = nm->FindOrBuildMaterial("G4_WATER");
 
-
 // プロパティを設定（水のpre-defined値を使用）
 G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
 mpt->AddProperty("RINDEX", "Water");
 
+// マテリアルにプロパティを設定
 material->SetMaterialPropertiesTable(table);
 ```
 
@@ -29,8 +29,10 @@ OpticalPhysicsの物理プロセスを使う場合、
 ## チェレンコフ光したい
 
 ```cpp
-property->AddProperty("RINDEX", photon_energy, refractive_index, n_entries);
-property->AddProperty("ABSLENGTH", photon_energy, absorption, n_entries);
+// AddProperty("キー名", std::vector配列, std::vector配列)
+// AddProperty("キー名", 配列, 配列, 配列の数)
+mpt->AddProperty("RINDEX", photon_energy, refractive_index, n_entries);
+mpt->AddProperty("ABSLENGTH", photon_energy, absorption, n_entries);
 ```
 
 ## シンチレーション光したい
@@ -85,5 +87,6 @@ surface->SetMaterialPropertiesTable(表面のプロパティ);
 
 ## リファレンス
 
+- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)
 - [Material Properties Table](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html)
 - [RefractiveIndex Database](https://refractiveindex.info/)

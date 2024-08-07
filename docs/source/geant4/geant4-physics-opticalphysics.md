@@ -80,3 +80,8 @@ geant4-physics-opticalphoton
 ``G4OpticalParameters``の設定はマクロで変更できます。
 ``processActivation``でOpticalPhysicsで有効にする物理プロセスを選択できます。
 デフォルトでは、関係するすべてのプロセスが有効になっています。
+
+## リファレンス
+
+- [G4OpticalPhysics](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalPhysics.html)
+- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalParameters.html)
