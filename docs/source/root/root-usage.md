@@ -75,6 +75,8 @@ root-tfile
 ```{toctree}
 root-hist
 root-tgraph
+root-tgrapherrors
+root-tmultigraph
 ```
 
 ## キャンバス操作したい

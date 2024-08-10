@@ -1,9 +1,16 @@
-# TGraph編
+# グラフしたい（``TGraph``）
 
-## グラフに順に点を足していきたい
+```cpp
+TGraph *g;
+g->SetPoint(g->GetN(), x1, y1);
+g->SetPoint(g->GetN(), x2, y2);
+g->SetPoint(g->GetN(), x3, y3);
+```
 
-- 方眼紙にプロットするように、１点ずつ点を打つようなグラフ（散布図）を作りたい人向け
-- FADCの波形データをプロットした場合を例に示す
+``TGraph::SetPoint``で、データ点を順番に追加できます。
+方眼紙にプロットするように、1点ずつ点を打つようなグラフ（散布図）を作りたい人に向いています。
+
+## FADCの波形データをプロットしたい
 
 ```cpp
 const Int_t N = t->GetEntries();
@@ -24,6 +31,8 @@ for (Int_t ientry = 0; ientry < N; ientry++) {
 }
 ```
 
+上記サンプルは、FADCの波形データをプロットした場合のものです。
+
 ## エラーを付ける際の注意点
 
 - 上のループはTGraphErrorsでも使用可能
@@ -39,37 +48,3 @@ Int_t npt = gre->GetN();
 gre->SetPoint(npt, x, y);
 gre->SetPoint(npt, xerr, yerr);  // 第一引数の値を一緒にする
 ```
-
-## エラーバー付きのグラフを作成した
-
-- TGraphErrorsクラスを使う
-
-```cpp
-const int npoints = 10;
-double x[npoints] = {1, 2, 4, 8, 16, 3, 9, 18, 5, 25};
-
-TGraphErrors *gre;
-gre = new TGraphErrors(npoints);
-
-for (int i = 0; i < npoints; i++){
-    gre->SetPoint(i, x[i], 3*x[i]-x[i]);
-    gre->SetPointError(i, 0.5, TMath::Sqrt(x[i]));
-}
-
-gre->Draw("ap");
-```
-
-## TMultiGraph
-
-```cpp
-TMultiGraph *mg = new TMultiGraph("mg", "mg")
-TGraph *g[4];
-for (Int_t i = 0; i < 4; i++) {
-    g[i] = new TGraph(0);
-    mg->Add(g[i], "pl");
-}
-mg->Draw()
-```
-
-- TMultiGraphでGetXaxis()するときには、以下のtipsが必要
-  - [[http://root.cern.ch/phpBB3/viewtopic.php?f=3&t=4041]]
