@@ -61,44 +61,53 @@ gPadは current canvas へのポインタなので、下のようにも書くこ
     gPad->SetLogy();
 
 
-複数のキャンバスをPDFに保存したい
-==================================================
+## 複数のキャンバスをPDFに保存したい
 
-PDF形式で保存する場合のみ、複数のキャンバスを1つのPDFに書き出すことができる。
-やったことないけれどPostScriptでもできるらしい。PNGはできない。
+```cpp
+// ファイル名を設定する
+TString name;
+name.Form("canvas.pdf");
+
+// キャンバスを作成する
+TCanvas *c1 = new TCanvas(name.Data(), name.Data(), 1000, 500);
+
+// PDFファイルを開く
+c1->Print(name + "[", "pdf");
+
+for (Int_t ihist = 0; ihist < Nhists; ihist++) {
+    // ヒストグラムを描画する
+    hist[ihist]->Draw();
+    // キャンバスをPDFファイルに追加する
+    c1->Print(name, "pdf")
+}
+
+// PDFファイルを閉じる感じ
+c1->Print(name + "]", "pdf");
+```
+
+PDF形式で保存する場合にかぎり、複数のキャンバスを1つのPDFに書き出すことができます。
+（やったことないけれどPostScriptでもできるらしいです。PNGはできません。）
 
 ROOT公式ユーザーズガイド “9. Graphics and the Graphical Userinterface :
 The Postscript Interface” (p139)参照
 
-.. code:: cpp
+```cpp
+// c1->Print(name + "]", "pdf");
 
-    TString name;
-    name.Form("canv.pdf");
-    TCanvas *c1 = new TCanvas(name.Data(), name.Data(), 1000, 500);
+c2->Print(name, "pdf")
+c2->Print(name + "]", "pdf")
+```
 
-    c1->Print(name + "[", "pdf");    // ここで"canv.pdf"を開く感じ
+最後の一文を活用して、別のTCanvasオブジェクトを追加し
+て保存することもできます。
 
-    for (Int_t ihist = 0; ihist < Nhists; ihist++) {
-        hist[ihist]->Draw();
-        c1->Print(name, "pdf")       // ここで、キャンバスを保存する
-    }
-    c1->Print(name + "]", "pdf");    // ここで"canv.pdf"を閉じる感じ
-
-最後の一文を以下のように変更すれば、別のTCanvasオブジェクトを追加し
-て保存することができる。
-
-.. code:: cpp
-
-    c2->Print(name, "pdf")
-    c2->Print(name + "]", "pdf")
-
-
+:::{note}
 
 括弧（ ``[`` と ``(`` ）の違いについて
---------------------------------------------------
 
+| 種類 | 説明 |
+|---|---|
+| ``[`` | この時点ではページを出力しない |
+| ``(`` | この時点でページを出力する（空白のページができる？） |
 
-``[``
-    この時点ではページを出力しない
-``(``
-    この時点でページを出力する（空白のページができる？）
+:::
