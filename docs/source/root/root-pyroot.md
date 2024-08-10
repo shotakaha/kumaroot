@@ -3,6 +3,10 @@
 ```python3
 import ROOT
 ROOT.__version__
+# '6.32.02'
+
+ROOT.__file__
+# '/opt/homebrew/Cellar/root/6.32.02_1/lib/root/ROOT/__init__.py'
 ```
 
 PyROOTモジュールを使うと、PythonからROOTを操作できるようになります。
