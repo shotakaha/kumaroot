@@ -34,8 +34,9 @@ root-tutorial
 ## 全体設定したい
 
 ```{toctree}
-root-global
+root-groot
 root-gstyle
+root-gsystem
 ```
 
 ```{toctree}
