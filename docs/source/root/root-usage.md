@@ -55,7 +55,7 @@ CSVなどのテキスト形式で取得したデータをすぐに``TTree``に�
 root-ttree
 root-ttree-readfile
 root-ttree-branch
-root-chain
+root-tchain
 ```
 
 ## ファイル操作したい
