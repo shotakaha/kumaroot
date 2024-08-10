@@ -20,11 +20,11 @@ root-global-setrgb
 ---
 maxdepth: 1
 ---
-root-global-setoptstat
-root-global-setoptfit
-root-global-sethistlinewidth
-root-global-settimedisplay
-root-global-setpadgrid
-root-global-setoptlog
-root-global-setndivisions
+root-gstyle-sethistlinewidth
+root-gstyle-setndivisions
+root-gstyle-setoptfit
+root-gstyle-setoptlog
+root-gstyle-setoptstat
+root-gstyle-setpadgrid
+root-gstyle-settimedisplay
 ```
