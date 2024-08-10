@@ -14,11 +14,21 @@
 うまく動かない箇所は、各自で``ROOT6``の使い方を調べてください。
 ```
 
+## インストールしたい
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-install
+root-config
+root-pyroot
+```
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-tutorial
 root-global
 root-ttree
@@ -30,7 +40,6 @@ root-canvas
 root-tgraph
 root-tlegend
 root5-root6
-root-pyroot
 root-emacs
 ```
 
