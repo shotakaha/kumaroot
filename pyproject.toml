@@ -39,6 +39,7 @@ geodatasets = "^2024.7.0"
 cartopy = "^0.23.0"
 geoviews = "^1.12.0"
 tqdm = "^4.66.4"
+uproot = "^5.3.10"
 
 
 [tool.poetry.group.mystmd.dependencies]
