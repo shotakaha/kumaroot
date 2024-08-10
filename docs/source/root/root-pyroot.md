@@ -1,5 +1,10 @@
 # PyROOTしたい（ROOT + Python）
 
+```python3
+import ROOT
+ROOT.__version__
+```
+
 PyROOTモジュールを使うと、PythonからROOTを操作できるようになります。
 HomebrewでROOTをインストールした場合、システムのPythonライブラリにインストールされます。
 ``virtualenvs`` や ``Poetry`` などで仮想環境を構築している場合、別途インストールが必要です。
