@@ -18,7 +18,10 @@ PyROOT自体はPyPIで公開されていませんが ``uproot`` パッケージ�
 $ poetry add uproot
 ```
 
-## MacPortsしたい
+## （削除予定）MacPortsしたい
+
+> この段落の内容は古くなっています。
+> 10年くらいMacPortsは使っていないため、近いうちに削除します。
 
 ``MacPorts`` でインストールする場合は、Pythonの {command}`variants` を指定します。
 ``ROOT6`` では ``+python27`` がデフォルトで **ON** になっています。
