@@ -13,18 +13,3 @@ root-global-rootrc
 root-global-setstyle
 root-global-setrgb
 ```
-
-## gStyle
-
-```{toctree}
----
-maxdepth: 1
----
-root-gstyle-sethistlinewidth
-root-gstyle-setndivisions
-root-gstyle-setoptfit
-root-gstyle-setoptlog
-root-gstyle-setoptstat
-root-gstyle-setpadgrid
-root-gstyle-settimedisplay
-```

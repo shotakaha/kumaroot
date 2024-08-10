@@ -25,12 +25,23 @@ root-config
 root-pyroot
 ```
 
+## チュートリアルしたい
+
+```{toctree}
+root-tutorial
+```
+
+## 全体設定したい
+
+```{toctree}
+root-global
+root-gstyle
+```
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
-root-tutorial
-root-global
 root-ttree
 root-hist
 root-chain
