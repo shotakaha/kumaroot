@@ -35,11 +35,3 @@ maxdepth: 1
 ---
 root-install-macports
 ```
-
-## PyROOTしたい
-
-```python
-import ROOT
-```
-
-HomebrewでインストールするとPyROOTも標準で使えます（たぶん）
