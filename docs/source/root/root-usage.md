@@ -54,7 +54,12 @@ CSVなどのテキスト形式で取得したデータをすぐに``TTree``に�
 ```{toctree}
 root-ttree
 root-ttree-readfile
+root-ttree-entries
 root-ttree-branch
+root-ttree-fill
+root-ttree-write
+root-ttree-print
+root-ttree-draw
 root-tchain
 ```
 
