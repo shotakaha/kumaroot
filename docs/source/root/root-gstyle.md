@@ -11,6 +11,7 @@ root-gstyle-setoptlog
 root-gstyle-setoptstat
 root-gstyle-setpadgrid
 root-gstyle-settimedisplay
+root-gstyle-font
 ```
 
 ## リファレンス
