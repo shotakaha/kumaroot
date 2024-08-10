@@ -1,8 +1,12 @@
 # 複雑な構造のデータを読み込みたい（ ``TTree::Branch`` ）
 
-.. code:: cpp
+```cpp
+tree->Branch("run", &run, "run/I")
+```
 
-    tree->Branch("run", &run, "run/I")
+``TTree::Branch``で、複雑なデータ構造を設定＆読み込みできます。
+前述した[TTree::ReadFile](./root-ttree-readfile.md)は、カラムの値がひとつの場合に便利です。
+カラムの値が配列を持つ場合は、Branchを使います。
 
 ```cpp
 TBranch* Branch(const char* name,

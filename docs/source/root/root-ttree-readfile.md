@@ -1,4 +1,4 @@
-# データをすぐに読み込みたい（``TTree::ReadFile``）
+# データをTTreeに変換したい（``TTree::ReadFile``）
 
 ```{code-block} cpp
 ---
@@ -10,10 +10,10 @@ tree->ReadFile("入力ファイル名", "列1/I:列2/I:列3/D", ",");  // CSVを
 tree->Draw("列1");  // 列1のヒストグラムを作成
 ```
 
+``TTree::ReadFile``で、テキスト形式のファイルを読み込み、TTreeに変換できます。
+
 ```cpp
-Long64_t ReadFile(const char* filename,
-                  const char* branchDescriptor = "",
-                  char delimiter = ' ')
+ReadFile("ファイル名", "ブランチ設定", "区切り文字")
 ```
 
 ``filename``
@@ -35,17 +35,16 @@ Long64_t ReadFile(const char* filename,
 
 ## サンプルコード
 
-ここに``100行4列``のデータのテキストファイルがあるとします。
+``100行4列``のCSV形式のファイルを読み込みます。
 このファイルの「行数」はイベント数に相当し、
 「列数」は取得したデータの項目に相当します。
 
-```unixconfig
+```csv
 # ch1,ch2,ch3,ch4,temp
 100,105,104,103,20.5
 101,106,103,100,20.7
 ...
 ```
-
 
 ```cpp
 // data2tree.C

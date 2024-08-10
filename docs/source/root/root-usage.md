@@ -47,8 +47,14 @@ root-gsystem
 
 ## TTree操作したい
 
+``TTree``はROOTのデータ構造の基本です。
+CSVなどのテキスト形式で取得したデータをすぐに``TTree``に変換しておくと、ROOTを使ったデータ解析が捗ります。
+また、複数のTTreeを読み込む場合は``TChain``クラスが便利です。
+
 ```{toctree}
 root-ttree
+root-ttree-readfile
+root-ttree-branch
 root-chain
 ```
 

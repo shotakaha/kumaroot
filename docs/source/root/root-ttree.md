@@ -1,9 +1,4 @@
-# TTree編
-
-ROOTを使った解析において``TTree``（もしくは次の章の``TChain``）は
-必ずおさえておくべきクラスだと考えています。
-
-取得したデータはさっさと``TTree``に変換してしまって、データ解析を楽しみましょう。
+# TTreeしたい（``TTree``）
 
 ```{code-block} cpp
 ---
@@ -15,10 +10,10 @@ tree->ReadFile("入力ファイル名", "列1/I:列2/I:列3/D", ",");  // CSVを
 tree->Draw("列1");  // 列1のヒストグラムを作成
 ```
 
+``TTree``でTTreeオブジェクトを作成できます。
+
 ```cpp
-TTree TTree(const char* name,
-            const char* title,
-            Int_t splitlevel = 99)
+TTree("name", "title", splitlevel)
 ```
 
 ``name``
@@ -38,8 +33,7 @@ TTree TTree(const char* name,
 ---
 maxdepth: 1
 ---
-root-ttree-readfile
-root-ttree-branch
+
 ```
 
 ```{note}
@@ -50,3 +44,11 @@ root-ttree-branch
 ``TTree``は``TNtuple``を含んでいるはずなので、
 どんどん読み替えていってよいと思います。
 ```
+
+```python
+from ROOT import TTree
+```
+
+## リファレンス
+
+- [TTree](https://root.cern.ch/doc/master/classTTree.html)
