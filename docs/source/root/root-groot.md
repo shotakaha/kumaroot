@@ -1,15 +1,16 @@
-# 全体設定編（ ``gROOT`` , ``gStyle`` , ``gSystem`` ）
-
-表示方法や画面の設定を一括変更する場合は ``TROOTクラス`` 、 ``TStyleクラス`` 、 ``TSystem`` を使います。
-実際に使用するのは ``gROOT`` 、 ``gStyle`` 、 ``gSystem`` というグローバル変数です。
-
-## gROOT
+# 全体設定したい（ ``gROOT``）
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
-root-global-rootrc
-root-global-setstyle
-root-global-setrgb
+root-rootrc
+root-groot-setstyle
+root-groot-setrgb
 ```
+
+## リファレンス
+
+- [TROOT](https://root.cern.ch/doc/master/classTROOT.html)
+
+

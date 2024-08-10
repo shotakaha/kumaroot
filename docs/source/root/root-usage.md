@@ -33,7 +33,13 @@ root-tutorial
 
 ## 全体設定したい
 
+表示方法や画面の設定を一括変更する場合は ``TROOTクラス`` 、 ``TStyleクラス`` 、 ``TSystem`` を使います。
+実際に使用するのは ``gROOT`` 、 ``gStyle`` 、 ``gSystem`` というグローバル変数です。
+
 ```{toctree}
+---
+maxdepth: 2
+---
 root-groot
 root-gstyle
 root-gsystem
