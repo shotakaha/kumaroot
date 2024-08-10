@@ -45,18 +45,40 @@ root-gstyle
 root-gsystem
 ```
 
+## TTree操作したい
+
+```{toctree}
+root-ttree
+root-chain
+```
+
+## ファイル操作したい
+
+```{toctree}
+root-tstring
+root-tfile
+```
+
+## ヒストグラム操作したい
+
+```{toctree}
+root-hist
+root-tgraph
+```
+
+## キャンバス操作したい
+
+```{toctree}
+root-canvas
+root-tlegend
+```
+
+## その他
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
-root-ttree
-root-hist
-root-chain
-root-tfile
-root-tstring
-root-canvas
-root-tgraph
-root-tlegend
 root5-root6
 root-emacs
 ```
