@@ -1,4 +1,13 @@
-# PyROOTしたい（ROOT + Python）
+# PyROOTしたい（``$PYTHONPATH``）
+
+```bash
+export ROOTSYS=$(root-config --prefix)
+export PYTHONPATH=$ROOTSYS/lib/root:$PYTHONPATH
+```
+
+PyROOTパッケージを使うと、PythonからROOTを操作できるようになります。
+PyROOTパッケージはROOTをインストールしたパスにあります。
+環境変数``$PYTHONPATH``にそのパスを追加する必要があります。
 
 ```python3
 import ROOT
@@ -9,14 +18,14 @@ ROOT.__file__
 # '/opt/homebrew/Cellar/root/6.32.02_1/lib/root/ROOT/__init__.py'
 ```
 
-PyROOTモジュールを使うと、PythonからROOTを操作できるようになります。
-HomebrewでROOTをインストールした場合、システムのPythonライブラリにインストールされます。
-``virtualenvs`` や ``Poetry`` などで仮想環境を構築している場合、別途インストールが必要です。
-PyROOT自体はPyPIで公開されていませんが ``uproot`` パッケージでインストールできます。
+:::{note}
 
-```console
-$ poetry add uproot
-```
+``$PYTHONPATH``だけを設定しても、付属の設定スクリプトを使って他の環境変数と一緒に設定してもOKです。
+
+- [](./root-install-env.md)
+
+:::
+
 
 ## （削除予定）MacPortsしたい
 

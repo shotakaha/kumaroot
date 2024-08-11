@@ -1,4 +1,4 @@
-# インストール設定を確認したい（``root-config``）
+# 設定を確認したい（``root-config``）
 
 ```console
 $ root-config --help
