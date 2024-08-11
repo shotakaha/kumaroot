@@ -12,6 +12,7 @@ root-gstyle-setoptstat
 root-gstyle-setpadgrid
 root-gstyle-settimedisplay
 root-gstyle-font
+root-gstyle-canvas
 ```
 
 ## リファレンス
