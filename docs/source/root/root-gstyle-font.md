@@ -1,6 +1,9 @@
-# フォントしたい
+# フォントしたい（``gStyle->SetTextFont``）
 
 ```cpp
+// フォント
+gStyle->SetTextFont(62);
+
 // 図タイトル
 gStyle->SetTitleFont(62, "xyz");
 
