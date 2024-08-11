@@ -31,6 +31,12 @@ root-pyroot
 root-tutorial
 ```
 
+## 対話モードしたい
+
+```{toctree}
+root-rint-calculator
+```
+
 ## 全体設定したい
 
 表示方法や画面の設定を一括変更する場合は ``TROOTクラス`` 、 ``TStyleクラス`` 、 ``TSystem`` を使います。

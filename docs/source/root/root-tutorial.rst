@@ -14,7 +14,6 @@
    root-tutorial-prepare
    root-tutorial-start
    root-tutorial-quit
-   root-tutorial-calculator
    root-tutorial-rootrc
    root-tutorial-demos
    root-tutorial-hsimple
