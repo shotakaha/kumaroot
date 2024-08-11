@@ -35,6 +35,8 @@ root-tutorial
 
 ```{toctree}
 root-rint
+root-rint-quit
+root-rint-macro
 root-rint-calculator
 ```
 
