@@ -34,6 +34,7 @@ root-tutorial
 ## 対話モードしたい
 
 ```{toctree}
+root-rint
 root-rint-calculator
 ```
 
