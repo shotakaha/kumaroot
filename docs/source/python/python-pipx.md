@@ -45,3 +45,15 @@ $ pipx reinstall-all
 
 Python本体を更新したあとは再インストールが必要です。
 ``reinstall-all``を使って、すべてのパッケージを再インストールできます。
+
+## インストールしたパッケージ
+
+```console
+$ pipx install poetry
+$ pipx install commitizen
+$ pipx install jupyter --include-deps
+```
+
+``jupyter``は、いろいろなサブパッケージに分割されているようです。
+必要なサブパッケージがわかっていたら、そちらを直接指定すればよいです。
+とりあえず全部でよい場合は``--include-deps``でインストールできます。
