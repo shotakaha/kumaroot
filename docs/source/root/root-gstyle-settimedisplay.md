@@ -3,7 +3,7 @@
 ```cpp
 gStyle->SetTimeOffset(-788918400);    // set diff. btw Unix and ROOT epoch
 graph->GetXaxis()->SetTimeDisplay(1);
-graph->GetXaxis()->SetTimeFormat("%Y\/%m\/%d");
+graph->GetXaxis()->SetTimeFormat("%Y-%m-%dT%H:%M:%S");
 graph->GetXaxis()->SetTimeOffset(0, "gmt");    // set GMT+0
 ```
 
@@ -47,7 +47,7 @@ epochの時間ではなく、作成したグラフ／ヒストグラムの軸に
 ## 月日と時刻を2段にして表示したい
 
 ```cpp
-graph->GetXaxis()->SetTimeFormat("#splitline{/%m\/%d}{%H:%M}");
+graph->GetXaxis()->SetTimeFormat("#splitline{%m-%d}{%H:%M}");
 ```
 
 長時間測定した場合、時刻の他に、日付も表示したほうがわかりやすくなります。
