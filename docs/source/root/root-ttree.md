@@ -5,36 +5,24 @@
 linenos: true
 emphasize-lines: 1
 ---
+// TTree::TTree("name", "title", splitlevel)
 TTree *tree = new TTree("t1", "test measurement");
 tree->ReadFile("入力ファイル名", "列1/I:列2/I:列3/D", ",");  // CSVを読み込んだ想定
 tree->Draw("列1");  // 列1のヒストグラムを作成
 ```
 
-``TTree``でTTreeオブジェクトを作成できます。
+``TTree::TTree``でTTreeオブジェクトを作成できます。
+第1引数は、TTreeオブジェクトの名前を設定します。
+他のオブジェクトと重複しないようにします。
 
-```cpp
-TTree("name", "title", splitlevel)
-```
+第2引数は、データの説明などを設定します。
+``TFile``で開いたときに表示される文字列です。
+空欄でも構いませんが、1行くらいの簡単な説明をつけておくとよいです。
 
-``name``
-:   TTreeオブジェクトの名前です。
-    他のオブジェクトと重複しないようにしてください。
+第3引数は``splitlevel``です。
+デフォルト値は99です。
+使ったことがないので、デフォルト値のままでよいと思います。
 
-``title``
-:   データの説明です。
-    ``TFile``で開いたときに表示される文字列です。
-    なくても構いませんが、1行くらいの簡単な説明をきちんとつけておくとよいです。
-
-``splitlevel``
-:   使ったことがないです。
-
-
-```{toctree}
----
-maxdepth: 1
----
-
-```
 
 ```{note}
 「さるROOT」や他のウェブサイトでは
@@ -47,6 +35,8 @@ maxdepth: 1
 
 ```python
 from ROOT import TTree
+
+t = TTree("tree", "tree description");
 ```
 
 ## リファレンス
