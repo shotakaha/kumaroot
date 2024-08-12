@@ -1,31 +1,36 @@
-# PyROOTしたい（``$PYTHONPATH``）
+# PyROOTしたい（``import ROOT``）
+
+```python3
+>>> import ROOT
+>>> ROOT.__version__
+'6.32.02'
+
+>>> ROOT.__file__
+'/opt/homebrew/Cellar/root/6.32.02_1/lib/root/ROOT/__init__.py'
+```
+
+``import ROOT``でPyROOTパッケージを読み込むと、PythonからROOTを操作できるようになります。
+PyROOTパッケージはROOTをインストールしたパスにあります。
+
+## パス設定（``$PYTHONPATH``）
 
 ```bash
 export ROOTSYS=$(root-config --prefix)
 export PYTHONPATH=$ROOTSYS/lib/root:$PYTHONPATH
 ```
 
-PyROOTパッケージを使うと、PythonからROOTを操作できるようになります。
-PyROOTパッケージはROOTをインストールしたパスにあります。
-環境変数``$PYTHONPATH``にそのパスを追加する必要があります。
-
-```python3
-import ROOT
-ROOT.__version__
-# '6.32.02'
-
-ROOT.__file__
-# '/opt/homebrew/Cellar/root/6.32.02_1/lib/root/ROOT/__init__.py'
-```
+[環境変数の設定](./root-install-env.md)で``PYTHONPATH``も設定されるはずですが、
+使用しているPython環境によっては、パスが認識されない場合があります。
+その場合は、環境変数``$PYTHONPATH``にパスを追加するとよいはずです。
 
 :::{note}
 
-``$PYTHONPATH``だけを設定しても、付属の設定スクリプトを使って他の環境変数と一緒に設定してもOKです。
-
-- [](./root-install-env.md)
+``virtualenv``や``Poetry``などで仮想環境上に構築している場合、
+``jupyter-lab``を``pipx``でインストールした場合、
+VS Code上のJupyter（``ipykernel``）を使っている場合などで、
+うまくimportできない場合は、まず``PYTHONPATH``の設定を確認してみるとよいと思います。
 
 :::
-
 
 ## （削除予定）MacPortsしたい
 
