@@ -26,6 +26,12 @@ ROOT6で``Cling``が採用され、エラーメッセージ表示なども丁寧
 ```cpp
 {
     gStyle->SetStyle("Plain");
+    gStyle->SetHistLineWidth(2);
+    // gStyle->SetHistLineStyle(0);
+    // gStyle->SetHistLineColor(1);
+    // gStyle->SetHistFillStyle(0);
+    // gStyle->SetHistFillColor(1);
+    gStyle->SetNdivisions(20510);  // 100分割
 
     printf("\nWelcome to プロジェクト名\n\n");
     printf("\nまずこれをして\n\n");
