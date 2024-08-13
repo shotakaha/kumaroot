@@ -6,25 +6,26 @@
 #include <map>
 
 std::map<std::string, G4int> fHitInt{};
-fHitInt["run_id", fRunID];
-fHitInt["event_id", fEventID];
-fHitInt["track_id", fTrackID];
-fHitInt["parent_id", fTrackParentID];
-fHitInt["step_id", fStepID];
+fHitInt["run_id"] = fRunID;
+fHitInt["event_id"] = fEventID;
+fHitInt["track_id"] = fTrackID;
+fHitInt["parent_id"] = fTrackParentID;
+fHitInt["step_id"] = fStepID;
 
 std::map<std::string, G4double> fHitDouble{};
-fHitDouble["energy_deposit", fEnergyDeposit / MeV];
-fHitDouble["step_x", fStepXYZ.getX() / mm];
-fHitDouble["step_y", fStepXYZ.getY() / mm];
-fHitDouble["step_z", fStepXYZ.getZ() / mm];
+fHitDouble["energy_deposit"] = fEnergyDeposit / MeV;
+fHitDouble["step_x"] = fStepXYZ.getX() / mm;
+fHitDouble["step_y"] = fStepXYZ.getY() / mm;
+fHitDouble["step_z"] = fStepXYZ.getZ() / mm;
 
 std::map<std::string, G4String> fHitString{};
-fHitString["material_name", fMaterialName];
+fHitString["material_name"] = fMaterialName;
 ```
 
 ``std::map``で辞書型の配列を定義できます。
-``G4VHit``（を継承してユーザが定義したクラス）のヒット情報を、
-カラム名と一緒にまとめるために使うとよいと思います。
+上のサンプルは、``G4VHit``（を継承してユーザが定義したクラス）のヒット情報を、
+カラム名と一緒にまとめるために使った例です。
+後述のLTSV形式の文字列を生成するために使ってみました。
 
 ## LTSV形式したい
 
@@ -44,7 +45,6 @@ key1:value    key2:value    key3:value    ...
 
 また、データの数を追加／削除したときにも、解析ツールの修正をあまりしなくてすみます。
 そもそも、データ自身がカラム名を持っているので、特定の解析ツールへの依存性がないのも利点です。
-
 
 :::{note}
 
@@ -91,3 +91,28 @@ key1:value, key2:value, key3:value, ...
 ```
 
 行頭と行末に``,``は不要なので``is_first``変数をつかって調整しています。
+
+## LTSV形式を読み込みたい
+
+```python
+import csv
+from pathlib import Path
+
+import pandas as pd
+
+def ltsv2data(fname: Path)
+    rows = []
+    with fname.open("r") as f:
+        reader = csv.reader(f)
+        for line in reader:
+            row = dict(field.split(":", 1) for field in line)
+            rows.append(row)
+    data = pd.DataFrame(rows)
+    return data
+
+fname = Path("LTSV形式のファイル.csv")
+data = ltsv2data(fname);
+```
+
+作成したLTSV形式のファイルをPythonのCSVモジュールで読み込み、
+pandas.DataFrameに変換する関数を置いておきます。
