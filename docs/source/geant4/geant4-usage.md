@@ -235,6 +235,7 @@ maxdepth: 1
 ---
 geant4-cmake-tools
 geant4-std-vector
+geant4-std-map
 geant4-std-stream
 geant4-std-chrono
 geant4-fetchcontent-loguru
