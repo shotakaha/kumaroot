@@ -6,7 +6,7 @@ $ pipx upgrade パッケージ名
 $ pipx uninstall パッケージ名
 ```
 
-仮想環境でパッケージを管理すう場合は``pipx``コマンドを使います。
+仮想環境でパッケージを管理する場合は``pipx``コマンドを使います。
 ``pipx``は``Homebrew``を使ってインストールします。
 
 ```console
@@ -15,6 +15,9 @@ $ brew link pipx
 $ pipx ensurepath
 ```
 
+``pipx``をインストールしたら、初回のみ``ensurepath``します。
+シェルによらずこのコマンドで、PATHに``$HOME/.local/bin``が追加されます。
+
 ## シェル補完したい
 
 ```console
@@ -22,6 +25,28 @@ $ register-python-argcomplete --shell fish pipx >~/.config/fish/completions/pipx
 ```
 
 ``pipx``コマンドのシェル補完が使えるようにすると便利です。
+
+## パッケージを一覧したい（``list``）
+
+```console
+$ pipx list
+venvs are in ~/.local/pipx/venvs
+apps are exposed on your $PATH at ~/.local/bin
+manual pages are exposed at ~/.local/share/man
+   package commitizen 3.29.0, installed using Python 3.12.2
+    - cz
+    - git-cz
+   package mystmd 1.3.4, installed using Python 3.12.5
+    - myst
+   package poetry 1.8.3, installed using Python 3.12.3
+    - poetry
+
+```
+
+``list``でインストールしたパッケージを一覧できます。
+仮想環境（``venv``）のパスや、
+インストールに使ったPythonのバージョン、
+一緒にインストールされた依存パッケージの名前なども確認できます。
 
 ## 一括で更新したい（``upgrade-all``）
 
@@ -43,7 +68,7 @@ upgraded package pyright from 1.1.335 to 1.1.336 (location: ~/.local/pipx/venvs/
 $ pipx reinstall-all
 ```
 
-Python本体を更新したあとは再インストールが必要です。
+Python本体を更新した場合、パッケージの再インストールが必要です。
 ``reinstall-all``を使って、すべてのパッケージを再インストールできます。
 
 ## インストールしたパッケージ
@@ -51,7 +76,11 @@ Python本体を更新したあとは再インストールが必要です。
 ```console
 $ pipx install poetry
 $ pipx install commitizen
+$ pipx install sphinx
+$ pipx install sphinx-autobuild
+$ pipx install mystmd
 $ pipx install jupyter --include-deps
+
 ```
 
 ``jupyter``は、いろいろなサブパッケージに分割されているようです。
