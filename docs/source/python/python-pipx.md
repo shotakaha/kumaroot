@@ -80,6 +80,8 @@ $ pipx install sphinx
 $ pipx install sphinx-autobuild
 $ pipx install mystmd
 $ pipx install jupyter --include-deps
+$ pipx install ruff
+$ pipx install pytest
 
 ```
 
