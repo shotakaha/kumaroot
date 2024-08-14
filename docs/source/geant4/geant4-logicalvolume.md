@@ -47,6 +47,7 @@ geant4-logicalvolume-mass
 geant4-logicalvolume-visattributes
 geant4-logicalvolume-sensitivedetector
 geant4-logicalvolume-fieldmanager
+geant4-logicalvolume-store
 ```
 
 ## リファレンス
