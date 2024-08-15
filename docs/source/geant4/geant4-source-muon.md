@@ -30,7 +30,8 @@ PrimaryGeneratorAction::GeneratePrimaries(G4Event *aEvent)
 }
 ```
 
-[ミューオン](https://pdg.lbl.gov/2020/listings/rpp2020-list-muon.pdf)は正ミューオン（``mu+``）、負ミューオン（``mu-``）が用意されています。
+地表に降り注ぐ宇宙線は、そのほとんどがミュー粒子と考えられます。
+Geant4の[ミューオン](https://pdg.lbl.gov/2020/listings/rpp2020-list-muon.pdf)は、正ミューオン（``mu+``）、負ミューオン（``mu-``）がそれぞれ用意されています。
 
 ## 天頂角分布したい
 
