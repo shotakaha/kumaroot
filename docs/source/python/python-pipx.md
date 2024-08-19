@@ -88,3 +88,36 @@ $ pipx install pytest
 ``jupyter``は、いろいろなサブパッケージに分割されているようです。
 必要なサブパッケージがわかっていたら、そちらを直接指定すればよいです。
 とりあえず全部でよい場合は``--include-deps``でインストールできます。
+
+## 環境変数をしりたい（``environment``）
+
+```console
+$ pipx environment
+Environment variables (set by user):
+
+PIPX_HOME=
+PIPX_BIN_DIR=
+PIPX_MAN_DIR=
+PIPX_SHARED_LIBS=
+PIPX_DEFAULT_PYTHON=
+PIPX_FETCH_MISSING_PYTHON=
+USE_EMOJI=
+
+Derived values (computed by pipx):
+
+PIPX_HOME=~/.local/pipx
+PIPX_BIN_DIR=~/.local/bin
+PIPX_MAN_DIR=~/.local/share/man
+PIPX_SHARED_LIBS=~/.local/pipx/shared
+PIPX_LOCAL_VENVS=~/.local/pipx/venvs
+PIPX_LOG_DIR=~/.local/pipx/logs
+PIPX_TRASH_DIR=~/.local/pipx/trash
+PIPX_VENV_CACHEDIR=~/.local/pipx/.cache
+PIPX_STANDALONE_PYTHON_CACHEDIR=~/.local/pipx/py
+PIPX_DEFAULT_PYTHON=/opt/homebrew/opt/python@3.12/libexec/bin/python
+USE_EMOJI=true
+```
+
+``environment``コマンドで、``pipx``で有効な環境変数を確認できます。
+Python環境は、マシンによって異なる場合があります。
+ツールがうまく動かない場合の確認作業に役立つかもしれません。
