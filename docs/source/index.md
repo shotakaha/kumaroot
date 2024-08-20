@@ -28,6 +28,7 @@ matplotlib/matplotlib-usage
 altair/altair-usage
 plotly/plotly-usage
 hvplot/hvplot-usage
+streamlit/streamlit-usage
 rust/rust-usage
 gas/gas-usage
 html/html-usage
