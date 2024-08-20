@@ -24,4 +24,5 @@ altair-datetime
 altair-color
 altair-errorbars
 altair-scatter
+altair-save
 ```
