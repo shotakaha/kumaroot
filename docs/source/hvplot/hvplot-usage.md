@@ -16,6 +16,7 @@ hvplot-hist
 hvplot-bar
 hvplot-scatter
 hvplot-errorbars
+hvplot-lag_plot
 ```
 
 ## リファレンス
