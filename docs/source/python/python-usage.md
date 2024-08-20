@@ -21,6 +21,7 @@ python-subprocess
 python-tqdm
 python-dunder
 python-particle
+python-webbrowser
 ```
 
 ```{toctree}
