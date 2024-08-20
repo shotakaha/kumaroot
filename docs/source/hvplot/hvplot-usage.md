@@ -18,6 +18,7 @@ hvplot-scatter
 hvplot-errorbars
 hvplot-scatter_matrix
 hvplot-lag_plot
+hvplot-options
 ```
 
 ## リファレンス
