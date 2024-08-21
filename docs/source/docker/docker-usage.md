@@ -56,4 +56,5 @@ docker-wordpress
 docker-python3
 docker-mystmd
 docker-hugo
+docker-raspi
 ```
