@@ -24,10 +24,11 @@ python-particle
 python-webbrowser
 ```
 
+## パッケージ管理したい
+
 ```{toctree}
 ---
 maxdepth: 1
-caption: パッケージ管理したい
 ---
 python-import
 python-pyproject
@@ -38,10 +39,11 @@ python-virtualenv
 python-nodeenv
 ```
 
+## プロジェクトを作成＆管理したい
+
 ```{toctree}
 ---
 maxdepth: 1
-caption: プロジェクトを作成＆管理したい
 ---
 python-pyproject
 python-commitizen
@@ -49,10 +51,11 @@ python-pre-commit
 python-typer
 ```
 
+## データを整理したい
+
 ```{toctree}
 ---
 maxdepth: 1
-caption: データを整理したい
 ---
 python-typing
 python-dataclass
@@ -64,10 +67,11 @@ python-textblob
 python-pydantic
 ```
 
+## テスト＆デバッグしたい
+
 ```{toctree}
 ---
 maxdepth: 1
-caption: テスト＆デバッグしたい
 ---
 python-black
 python-ruff
@@ -75,6 +79,7 @@ python-icecream
 python-loguru
 python-pytest
 python-unittest-mock
+python-deprecated
 ```
 
 ```bash
