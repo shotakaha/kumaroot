@@ -37,6 +37,7 @@ print(us)
 ``BaseModel``を継承したクラスの中に``class Config:``を作りモデルの設定を変更できます。
 Pydanticのデフォルトでは`any`型は許可されていませんが、
 ``arbitrary_types_allowed = True``にすると使えるようになります。
+変更できる項目は [Model Config](https://docs.pydantic.dev/1.10/usage/model_config/)を参照してください。
 
 ## プライベート変数したい
 
