@@ -18,26 +18,27 @@ print(us)
 ``pydantic.BaseModel``を継承したクラスを作成します。
 メンバー変数の型ヒントは必須で、この型を使って代入時にバリデーションしてくれます。
 
-## Any型したい（``Model Config``）
+## モデルの設定したい（``Model Config``）
 
 ```python
 class UserSettings(BaseModel):
     settings: str
     drive: str = ""
-    data: any = ""
+    data: pd.DataFrame = pd.DataFrame()
 
     class Config:
         arbitrary_types_allowed = True
 
 us = UserSettings("設定ファイル名")
 print(us)
-# UserSettings(settings='設定ファイル名', drive='', data='')
+# UserSettings(settings='設定ファイル名', drive='', data=Empty DataFrame)
 ```
 
 ``BaseModel``を継承したクラスの中に``class Config:``を作りモデルの設定を変更できます。
-Pydanticのデフォルトでは`any`型は許可されていませんが、
+``pd.DataFrame``はPythonのデフォルトの型ではないため、そのままでは使えませんが、
 ``arbitrary_types_allowed = True``にすると使えるようになります。
-変更できる項目は [Model Config](https://docs.pydantic.dev/1.10/usage/model_config/)を参照してください。
+
+設定できる項目は [Model Config](https://docs.pydantic.dev/1.10/usage/model_config/)を参照してください。
 
 ## プライベート変数したい
 
@@ -48,7 +49,7 @@ from pydantic import BaseModel, PrivateAttr
 class UserSettings(BaseModel):
     settings: str
     drive: str = ""
-    _data: any = PrivateAttr()
+    _data: pd.DataFrame = PrivateAttr()
 
     class Config:
         arbitrary_types_allowed = True
@@ -58,8 +59,8 @@ print(us)
 # UserSettings(settings='設定ファイル', drive='')
 ```
 
-`PrivateAttr`でメンバー変数を隠蔽できます。
-変数名は、`_変数名`とする必要があります。
+初期化のときに`PrivateAttr()`を設定すると、メンバー変数を非表示にできます。
+変数名は、`_変数名`のように`sunder (single underscore)`する必要があります。
 
 ## リファレンス
 
