@@ -1687,13 +1687,13 @@ testing-docutils = ["pygments", "pytest (>=8,<9)", "pytest-param-files (>=0.6.0,
 
 [[package]]
 name = "mystmd"
-version = "1.3.3"
+version = "1.3.5"
 description = "Command line tools for MyST Markdown"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mystmd-1.3.3-py3-none-any.whl", hash = "sha256:fa1e02c014380ee8baa56190835bb15b654c9fb32d437d093ee1968927dc0e7e"},
-    {file = "mystmd-1.3.3.tar.gz", hash = "sha256:fb8ff87f415147ed0dd02ab8f41589772c4ea741250b61b75b85f9fb7e426d83"},
+    {file = "mystmd-1.3.5-py3-none-any.whl", hash = "sha256:fd5124f5616e3e96a5276af0f4bceeaef977c72cc2d684b78443e07870e90671"},
+    {file = "mystmd-1.3.5.tar.gz", hash = "sha256:f74346d6da3fe9d60acc5e52dc11916167261090c48e61628025fe37cf3f25c2"},
 ]
 
 [package.extras]
@@ -3710,4 +3710,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "dcbd168f25f26d15e34383b99d1296cd1051edfecbd5a3932676da5d86973e15"
+content-hash = "34171643567860e8f6b47b6c6458eba6e22f466a55d6e93f1408adcc04eadb34"
