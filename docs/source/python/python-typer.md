@@ -34,6 +34,68 @@ if __name__ == "__main__":
 （やってみようと思って調べたことはありますが実際に作ったことはない・・・）
 ``Typer``は、引数とオプション、コマンドの説明も、いつもの関数を作る作業の延長ででき、非常に簡単だと感じました。
 
+## 位置引数したい（``typer.Argument``）
+
+```python
+# 簡単設定
+ch: int  # 位置引数（required）
+
+# 詳細設定
+ch: Annotated[int, typer.Argument(help="チャンネル番号を指定")]     # 位置引数（required）
+ch: Annotated[int, typer.Argument(help="チャンネル番号を指定")] = 0 # 位置引数（optional）
+```
+
+コマンドの引数に型ヒントを指定します。
+引数のヘルプなど詳細設定したい場合は``typing_extensions.Annotated``を利用します。
+
+簡単設定では required な位置引数のみ設定できます。
+詳細設定では optional な位置引数も設定できます。
+
+```python
+import typer
+from typing_extensions import Annotated
+
+def command(
+    ch: int,
+    ):
+    pass
+
+def vth(
+    ch: Annotated[int, typer.Argument(help="チャンネル番号を指定")]
+    ):
+    pass
+```
+
+## オプション引数したい（``typer.Option``）
+
+```python
+# 簡単設定
+ch: int = 0  # オプション引数（optional）
+
+# 詳細設定
+ch: Annotated[int, typer.Option(help="チャンネル番号を指定")] = 0 # オプション引数（optional）
+ch: Annotated[int, typer.Option(help="チャンネル番号を指定")] = 0 # オプション引数（required）
+```
+
+デフォルト値を与えると、オプション引数になります。
+引数のヘルプなど詳細設定したい場合は``typing_extensions.Annotated``を利用します。
+
+簡単設定では optional なオプション引数のみ設定できます。
+詳細設定では required なオプション引数も設定できます。
+
+
+```python
+def vth(
+    ch: int
+    ):
+    pass
+
+def vth(
+    ch: Annotated[int, typer.Argument(help="チャンネル番号を指定")]
+    ):
+    pass
+```
+
 ## コマンドしたい（``typer.Argument`` / ``typer.Option``）
 
 ```python
