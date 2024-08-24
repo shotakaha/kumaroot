@@ -10,14 +10,23 @@ class UserSettings(BaseModel):
     drive: str = ""
     """（オプション）設定ファイルのディレクトリ名（相対パス）"""
 
-us = UserSettings("設定ファイル名")
+us = UserSettings(settings="設定ファイル名")
 print(us)
 # UserSettings(settings='設定ファイル名', drive='')
 ```
 
-``pydantic.BaseModel``を継承したクラスを作成します。
-メンバー変数の型ヒントは必須で、この型を使って代入時にバリデーションしてくれます。
+``pydantic``はPythonの型ヒントを利用したデータクラスです。
+``pydantic.BaseModel``を継承したクラスを作成し、すべてのメンバー変数に型ヒントを与えます。
+クラスをインスタンス化する時に、型ヒントにしたがってバリデーションしてくれます。
 設定できる型は[Fields](https://docs.pydantic.dev/dev/api/fields/)を参照してください。
+
+:::{caution}
+
+デフォルトでは、クラスをインスタンス化するときと、シリアライズするときにバリデーションが実行されるようです。
+メンバー変数に値を代入しただけでは、バリデーションは実行されないことに留意してください。
+（おそらくモデルやメンバー変数の設定で変更できると思います）
+
+:::
 
 :::{seealso}
 
@@ -39,16 +48,40 @@ class UserSettings(BaseModel):
 
 
 us = UserSettings("設定ファイル名")
-print(us)
+us
 # UserSettings(settings='設定ファイル名', drive='', data=Empty DataFrame)
+
 ```
 
-``BaseModel``を継承したクラスの中の``model_config``でPydanticの設定を変更できます。
+``model_config``でPydanticのモデル設定を変更できます。
+値は``ConfigDict``で設定します。
 設定できる項目は [ConfigDict](https://docs.pydantic.dev/dev/api/config/)を参照してください。
 
-上記サンプルでは、``pd.DataFrame``を設定できるようにしています。
+上記サンプルでは、``pd.DataFrame``を設定できるようにしました。
 ``pd.DataFrame``はPythonのデフォルトの型ではないため、そのままでは使えませんが、
 ``arbitrary_types_allowed = True``にすると使えるようになります。
+
+## データクラスを出力したい（``model_dump`` / ``model_dump_json``）
+
+```python
+us.model_dump()
+# {'settings': '設定ファイル名', 'drive': ''}
+
+us.model_dump_json()
+# '{"settings":"設定ファイル名","drive":""}'
+```
+
+``model_dump``で、データクラスの中身を出力（＝シリアライズ）できます。
+シリアライズするときに型ヒントを使ったバリデーションが実行されます。
+型ヒントと異なる値を代入していた場合は`UserWarning`が表示されます。
+
+:::{note}
+
+`arbitrary_types_allowed = True`としていたら
+``pd.DataFrame``はJSON形式にシリアライズできませんでした。
+モデル設定を変更した場合は、注意が必要かもしれません。
+
+:::
 
 ## プライベート変数したい
 
