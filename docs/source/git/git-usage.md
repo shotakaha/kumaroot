@@ -67,10 +67,8 @@ git-semver
 git-flow
 git-gitlab
 git-hooks
+git-lfs
 ```
-
-
-
 
 ## 関連ドキュメント
 
