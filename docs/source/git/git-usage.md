@@ -26,6 +26,7 @@ git-merge
 git-log
 git-diff
 git-rm
+git-revert
 ```
 
 ## リモートリポジトリしたい
