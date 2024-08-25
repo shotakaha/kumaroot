@@ -22,6 +22,8 @@ python-tqdm
 python-dunder
 python-particle
 python-webbrowser
+python-argparse
+python-typer
 ```
 
 ## パッケージ管理したい
@@ -48,7 +50,6 @@ maxdepth: 1
 python-pyproject
 python-commitizen
 python-pre-commit
-python-typer
 ```
 
 ## データを整理したい
