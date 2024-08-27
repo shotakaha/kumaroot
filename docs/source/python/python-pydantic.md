@@ -61,6 +61,45 @@ us
 ``pd.DataFrame``はPythonのデフォルトの型ではないため、そのままでは使えませんが、
 ``arbitrary_types_allowed = True``にすると使えるようになります。
 
+## カスタムバリデーターしたい（``field_validator``）
+
+```python
+from pydantic import BaseModel, field_validator
+import pandas as pd
+from typing import Any
+
+
+class UserSettings(BaseModel):
+    settings: str
+    drive: str
+    data: Any = pd.DataFrame({"timestamp": []})
+
+    @field_validator("data")
+    def check_dataframe(cls, field_value):
+        if not isinstance(field_value, pd.DataFrame):
+            raise ValueError("data must be a pandas.DataFrame")
+        required_columns = ["timestamp"]
+        if not all(col in field_value.columns for col in required_columns):
+            raise ValueError(
+                f"DataFrame must contain the following columns: {required_columns}"
+            )
+
+        return field_value
+
+us = UserSettings(settings="設定ファイル名", drive=".")
+# => OK
+
+us = UserSettings(settings="設定ファイル名", drive=".", data=pd.DataFrame({"time": []}))
+# => ValidationError
+```
+
+``arbitrary_types_allowed = True``にすると、そのフィールドのバリデーションがスキップされます。
+型安全を（ある程度）保ちたい場合は、``field_validator``で自分でバリデーターを定義できます。
+
+上記のサンプルでは、``data``に対してカスタムバリデーターを定義しています。
+``data``が``pd.DataFrame``であることと、必要なカラム名が存在することを確認しています。
+確認に失敗した場合は、``raise ValueError``を発生させ、説明を出力しています。
+
 ## データクラスを出力したい（``model_dump`` / ``model_dump_json``）
 
 ```python
@@ -110,3 +149,4 @@ print(us)
 - [pydantic/pydantic - GitHub](https://github.com/pydantic/pydantic)
 - [Configuration](https://docs.pydantic.dev/dev/concepts/config/)
 - [Fields](https://docs.pydantic.dev/dev/concepts/fields/)
+- [field_validator](https://docs.pydantic.dev/dev/api/functional_validators/)
