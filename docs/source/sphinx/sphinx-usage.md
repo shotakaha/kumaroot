@@ -44,6 +44,7 @@ sphinx-extensions-copybutton
 sphinx-extensions-ablog
 sphinx-extensions-datatemplates
 sphinx-extensions-napoleon
+sphinx-i18n
 ```
 
 ## マークアップしたい
