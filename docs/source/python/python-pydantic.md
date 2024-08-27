@@ -143,6 +143,71 @@ print(us)
 `PrivateAttr()`を初期値に設定すると、メンバー変数を非表示にできます。
 変数名は、`_変数名`のように`sunder (single underscore)`する必要があります。
 
+## 設定ファイルしたい
+
+```python
+import tomllib
+import datetime
+from pydantic import BaseModel
+
+class UserSettings(BaseModel):
+    string: str
+    integer: int
+    number: float
+    boolean: bool
+    local_datetime: datetime.datetime
+    local_date: datetime.date
+    local_time: datetime.time
+    array: list
+    table: dict
+    inline_table: dict
+    array_table: list
+
+# 設定ファイルはTOML形式
+# ここではTOMLのシンタックスを模した文字列
+
+settings_string = """
+[basic]
+string = "str"
+integer = 10
+number = 100.0
+boolean = true
+
+[datetime]
+local_datetime = "2024-08-28 12:34:56"
+local_date = "2024-08-28"
+local_time = "12:34:56"
+
+[arrays]
+array = ["array1", "array2", 0]
+inline_table = { k1 = "v1", k2 = "v2" }
+[arrays.table]
+k1 = "v1"
+k2 = 10
+
+[[arrays.array_table]]
+key = "key1"
+value = "value1"
+
+[[arrays.array_table]]
+key = "key2"
+value = "value2"
+"""
+
+# TOMLファイルを読み込む → dict型
+sd = tomllib.loads(settings_string)
+
+# 読み込んだ内容をフラットにする
+args = {**sd.get("basic", {}), **sd.get("datetime", {}), **sd.get("arrays", {})}
+
+# インスタンス化
+UserSettings(**args)
+```
+
+設定ファイルを読み込んで、クラスを初期化するケースはよくあります。
+このサンプルでは、``pydantic.BaseModel``を継承したクラスを使うことで、
+設定ファイルのバリデーションを実行しています。
+
 ## リファレンス
 
 - [Pydantic - docs.pydantic.dev](https://docs.pydantic.dev/latest/)
