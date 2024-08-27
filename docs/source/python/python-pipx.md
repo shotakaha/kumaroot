@@ -74,14 +74,16 @@ Python本体を更新した場合、パッケージの再インストールが�
 ## インストールしたパッケージ
 
 ```console
-$ pipx install poetry
 $ pipx install commitizen
+$ pipx install jupyter --include-deps
+$ pipx install jupytext
+$ pipx install mystmd
+$ pipx install poetry
+$ pipx install pytest
+$ pipx install ruff
 $ pipx install sphinx
 $ pipx install sphinx-autobuild
-$ pipx install mystmd
-$ pipx install jupyter --include-deps
-$ pipx install ruff
-$ pipx install pytest
+$ pipx install streamlit
 
 ```
 
