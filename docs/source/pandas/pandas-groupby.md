@@ -26,6 +26,15 @@ grouped["percentage"] = grouped[v] / n
 集計した値の割合を計算しています。
 集計したカラムの総計で、グループごとの集計値を割り算しています。
 
+## 平均値と標準偏差したい（``pandas.DataFrame.agg``）
+
+```python
+grouped = data.groupby(g)[v].agg(["mean", "std"]).reset_index()
+```
+
+``pd.DataFrame.agg``の引数にはリスト（や辞書）も設定できます。
+``mean``と``std``を与えると平均値と標準偏差をまとめて取得できます。
+
 ## 複数の方法で集計したい
 
 ```python
@@ -60,6 +69,13 @@ insight = pd.merge(_left, _right, on=group)
 
 上のサンプルでは、``pageview``と``session``のカラムは合計値（``sum``）、
 ``uvisitor``のカラムはカウント数（``count``）で集計しています。
+
+:::{note}
+
+このコードを書いたときは、``pd.DataFrame.agg``の引数に辞書を指定できることを認識していませんでした。
+もしかしたら、こんな回りくどいことをせずに計算できるかもしれません。
+
+:::
 
 ## リファレンス
 

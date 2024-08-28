@@ -13,7 +13,7 @@ mark * errors
 ```
 
 データフレームを整理し、平均値と標準偏差を計算します。
-``pd.DataFrame.groupby.agg``を使うと、``mean``と``std``を一度に取得できます。
+``pd.DataFrame.agg``を使うと、``mean``と``std``を一度に取得できます。
 
 ``hvplot.errorbars``は、両端のエラーバーのみを描画するため、
 ``hvplot.scatter``と重ね書きして中心点を描画します。
