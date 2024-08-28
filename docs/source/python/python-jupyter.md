@@ -1,4 +1,4 @@
-# Jupyter Lab したい
+# Jupyter Lab したい（``jupyter``）
 
 ```console
 $ pipx install jupyter --include-deps
