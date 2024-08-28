@@ -24,6 +24,7 @@ python-particle
 python-webbrowser
 python-argparse
 python-typer
+python-jupyter
 ```
 
 ## パッケージ管理したい
