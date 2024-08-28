@@ -2,10 +2,21 @@
 
 ```python
 import hvplot.pandas
-data.hvplot.scatter(x="Xの値", y="Yの値") * data.hvplot.errorbars(y="Yの値", yerr1="Yの誤差)
+
+g = ["x"]
+v = "y"
+grouped = data.groupby(g)[v].agg(["mean", "std"]).reset_index()
+
+mark = grouped.hvplot.scatter(x="x", y="mean")
+errors = grouped.hvplot.errorbars(x="x", y="mean", yerr1="std")
+mark * errors
 ```
 
-ベースとなる図にエラーバー付きの図を重ね書きします。
+データフレームを整理し、平均値と標準偏差を計算します。
+``pd.DataFrame.groupby.agg``を使うと、``mean``と``std``を一度に取得できます。
+
+``hvplot.errorbars``は、両端のエラーバーのみを描画するため、
+``hvplot.scatter``と重ね書きして中心点を描画します。
 
 :::{seealso}
 
