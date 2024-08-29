@@ -130,4 +130,5 @@ command-tar
 command-texdoc
 command-tig
 command-uname
+command-mysql
 ```
