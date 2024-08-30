@@ -27,6 +27,7 @@ python-argparse
 python-typer
 python-jupyter
 python-jupytext
+python-tomllib
 ```
 
 ## パッケージ管理したい
