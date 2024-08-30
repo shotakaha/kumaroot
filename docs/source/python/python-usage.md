@@ -13,6 +13,7 @@ python-install
 python-pathlib
 python-pendulum
 python-platformdirs
+python-platform
 python-random
 python-re
 python-requests
