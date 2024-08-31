@@ -45,7 +45,7 @@ pydantic = "^2.8.2"
 
 [tool.poetry.group.mystmd.dependencies]
 nodeenv = "^1.8.0"
-mystmd = "^1.3.5"
+mystmd = "^1.3.6"
 
 
 [tool.poetry.group.docs.dependencies]
