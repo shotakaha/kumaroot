@@ -31,14 +31,56 @@ $ which -a rye
 ## 新規プロジェクトしたい（``rye init``）
 
 ```console
-$ rye init  # デフォルトはカレントディレクトリ
-$ rye init プロジェクト名
-$ rye init --script
-$ rye init --license ライセンス名
+$ rye init PROJECT_NAME
+success: Initialized project in ./PROJECT_NAME
+  Run `rye sync` to get started
+
+$ tree PROJECT_NAME
+PROJECT_NAME
+├── .git/
+├── .gitignore
+├── .python-version
+├── README.md
+├── pyproject.toml
+└── src
+    └── project_name
+        └── __init__.py
+
+$ rye init PROJECT_NAME
+error: pyproject.toml already exists
 ```
 
-`rye init`コマンドでプロジェクトを初期化できます。
-デフォルトはカレントディレクトリが対象です。
+``init``コマンドでプロジェクトを初期化できます。
+Git関係のファイルも自動で生成されます。
+同名のプロジェクトがすでに存在する場合は、エラーになります
+プロジェクト名を省略した場合は、カレントディレクトリが初期化されます。
+
+```console
+$ rye init --script PROJECT_NAME
+PROJECT_NAME
+├── README.md
+├── pyproject.toml
+└── src
+    └── project_name
+        ├── __init__.py
+        └── __main__.py
+```
+
+``--script``オプションでスクリプト／CLIの作成に適したディレクトリ／ファイル構造を作成できます。
+
+```console
+$ rye init --license ライセンス名
+PROJECT_NAME
+├── LICENSE.txt
+├── README.md
+├── pyproject.toml
+└── src
+    └── project_name
+        └── __init__.py
+```
+
+``--license``オプションで、指定したライセンスの``LICENSE.txt``を自動で生成できます。
+ライセンス名が正しくない場合、初期化に失敗します。
 
 ## パッケージを追加したい（``rye add``）
 

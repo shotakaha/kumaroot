@@ -65,12 +65,26 @@ $ poetry completions fish | sd "'([^']+)''" '"$1"\'' > ~/.config/fish/completion
 ## 新規プロジェクトしたい（``poetry new``）
 
 ```console
-$ poetry new プロジェクト名
-$ cd プロジェクト名
+$ poetry new PROJECT_NAME
+Created package project_name in PROJECT_NAME
+
+$ tree -a PROJECT_NAME
+PROJECT_NAME
+├── README.md
+├── project_name
+│   └── __init__.py
+├── pyproject.toml
+└── tests
+    └── __init__.py
+
+$ poetry new PROJECT_NAME
+Destination ./PROJECT_NAME exists and is not empty
 ```
 
-新規プロジェクトを作成する場合は、``poetry new``コマンドを使います。
-``プロジェクト名``のディレクトリが作成され、その下に、``pyproject.toml``、``プロジェクト名``（＝プロジェクト本体のソースコード置き場）、``tests``などの必要なファイルが自動で生成されます。
+`new`コマンドでプロジェクトを初期化できます。
+テスト関係のファイルも自動で生成されます。
+同名のプロジェクトがすでに存在する場合は、エラーになります
+プロジェクト名を省略した場合は、エラーになります。
 
 ## 既存プロジェクトを使いたい（``poetry init``）
 
@@ -79,7 +93,7 @@ $ cd プロジェクト名
 $ poetry init
 ```
 
-既存のプロジェクトは``poetry init``を使って、対話的にプロジェクトを初期化できます。
+`init`コマンドで、既存のプロジェクトを初期化できます。
 プロンプトの表示にしたがってプロジェクト情報（プロジェクト名、説明、作成者、バージョン番号、ライセンスなど）を入力します。
 続けて、必要なパッケージに関するプロンプトが表示されるので、パッケージ名やバージョン番号を入力して、パッケージを選択します。
 これらの設定はすべて{file}`pyproject.toml`の``[tool.poetry]``セクションに保存されます。

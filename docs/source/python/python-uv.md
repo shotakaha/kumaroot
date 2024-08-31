@@ -19,12 +19,52 @@ $ which -a uvx
 ## 新規プロジェクトしたい（``uv init``）
 
 ```console
-$ uv init    # デフォルトはカレントディレクトリ
-$ uv init プロジェクト名
-$ uv init --package プロジェクト名
-$ uv init --app プロジェクト名
-$ uv init --lib プロジェクト名
+// プロジェクト名を指定して初期化する
+$ uv init PROJECT_NAME
+Initialized project `PROJECT_NAME` at `./PROJECT_NAME`
+
+// 初期化後のディレクトリ構造
+$ tree PROJECT_NAME
+PROJECT_NAME
+├── README.md
+├── hello.py
+└── pyproject.toml
+
+// 既存のプロジェクトがあるとエラーになる
+$ uv init PROJECT_NAME
+error: Project is already initialized in `./PROJECT_NAME`
 ```
+
+``init``コマンドでプロジェクトを初期化できます。
+同名のプロジェクトがすでに存在する場合は、エラーになります
+プロジェクト名を省略した場合は、カレントディレクトリが初期化されます。
+
+```console
+$ uv init --package PROJECT_NAME
+PROJECT_NAME
+├── README.md
+├── pyproject.toml
+└── src
+    └── project_name
+        └── __init__.py
+
+$ uv init --app PROJECT_NAME
+PROJECT_NAME
+├── README.md
+├── hello.py
+└── pyproject.toml
+
+$ uv init --lib PROJECT_NAME
+PROJECT_NAME
+├── README.md
+├── pyproject.toml
+└── src
+    └── project_name
+        └── __init__.py
+```
+
+また、``--package``、``--app``、``--lib``オプションで
+作成したいパッケージの目的に適したディレクトリ／ファイル構造を作成できます。
 
 ## パッケージを追加したい（``uv add``）
 
