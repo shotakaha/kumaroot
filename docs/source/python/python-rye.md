@@ -167,3 +167,77 @@ $ rye config --get behavior.global-python
 
 ``config``コマンドで設定オプションを確認、変更できます。
 デフォルトは``~/.rye/config.toml``が対象です。
+
+## Python環境したい（``rye pin`` / ``rye toolchain``）
+
+```console
+$ rye pin 3.12.5
+pinned 3.12.5 in ./.python-version
+
+$ rye sync
+Downloading cpython@3.12.5
+Checking checksum
+Unpacking
+Downloaded cpython@3.12.5
+...
+```
+
+`pin`コマンドでPython環境を指定できます。
+その設定は`.python-version`に保存されます。
+`pin`した時点では環境は変わらず、`sync`することで切り替えることができます。
+指定したバージョンがない場合は、自動ダウンロードがはじまります。
+
+```console
+// バージョンを指定してダウンロード
+$ rye toolchain fetch 3.12.4
+Downloading cpython@3.12.4
+Checking checksum
+Unpacking
+Downloaded cpython@3.12.4
+
+// 利用できるバージョンを確認
+$ rye toolchain list
+cpython@3.12.5 (~/.rye/py/cpython@3.12.5/bin/python3)
+cpython@3.12.4 (~/.rye/py/cpython@3.12.4/bin/python3)
+cpython@3.12.2 (~/.rye/py/cpython@3.12.2/bin/python3)
+cpython@3.11.8 (~/.rye/py/cpython@3.11.8/bin/python3)
+
+// 不要なバージョンを削除
+$ rye toolchain remove 3.12.4
+Removed installed toolchain cpython@3.12.4
+
+// パスを指定してローカル環境を使用
+$ rye toolchain register パス
+```
+
+また、``toolchain``コマンドで、Python環境を操作できます。
+
+```console
+$ rye toolchain remove 3.12.5
+error: toolchain cpython@3.12.5 is still in use by tool sphinx
+$ rye tools uninstall sphinx
+Uninstalled sphinx
+$ rye tools remove 3.12.5
+error: unrecognized subcommand
+```
+
+削除指定したバージョンがどこかで使われている場合は、エラーになります。
+その環境を利用しているパッケージ名が表示されるので、まずアンインストールして対応します。
+
+## 外部パッケージしたい（``rye tools``）
+
+```console
+$ rye tools list
+$ rye tools install パッケージ名
+$ rye tools uninstall パッケージ名
+```
+
+`tools`コマンドで`pipx`のようなことができます。
+コマンドは``~/.local/bin``に配置されます。
+
+:::{caution}
+
+`~/.local/bin`は`pipx`でインストールされるコマンドと同じパスです。
+同名のコマンドがある場合は**上書き**されます。
+
+:::
