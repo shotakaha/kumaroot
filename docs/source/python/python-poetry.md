@@ -140,17 +140,22 @@ $ poetry check --lock
 All set!
 ```
 
-## パッケージを公開したい（``poetry publish``）
+## パッケージをビルドしたい（``poetry build``）
 
 ```console
-// パッケージをビルドする
 $ poetry build
 Building パッケージ名 (バージョン番号)
   - Building sdist
   - Built パッケージ名-バージョン番号.tar.gz
   - Building wheel
   - Built パッケージ名-バージョン番号-py3-none-any.whl
+```
 
+`build`コマンドでパッケージをビルドできます。
+
+## パッケージを公開したい（``poetry publish``）
+
+```console
 // TestPyPIに公開
 $ poetry publish -r testpypi
 Publishing パッケージ名 (バージョン番号) to testpypi

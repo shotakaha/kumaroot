@@ -37,12 +37,13 @@ python-tomllib
 maxdepth: 1
 ---
 python-import
-python-pyproject
+python-nodeenv
 python-pip
 python-pipx
 python-poetry
+python-pyproject
 python-virtualenv
-python-nodeenv
+python-rye
 ```
 
 ## プロジェクトを作成＆管理したい
