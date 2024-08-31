@@ -121,6 +121,7 @@ command-find
 command-grep
 command-gzip
 command-launchctl
+command-systemctl
 command-mkcert
 command-myst
 command-pandoc
