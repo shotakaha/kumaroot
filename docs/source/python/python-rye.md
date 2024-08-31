@@ -94,3 +94,16 @@ $ rye publish
 ```
 
 ``publish``コマンドでビルドしたパッケージを公開できます。
+
+## 設定したい（``rye config``）
+
+```console
+$ rye config --show-path
+~/.rye/config.toml
+
+$ rye config --get behavior.use-uv
+$ rye config --get behavior.global-python
+```
+
+``config``コマンドで設定オプションを確認、変更できます。
+デフォルトは``~/.rye/config.toml``が対象です。
