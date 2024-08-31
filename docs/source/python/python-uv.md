@@ -94,8 +94,46 @@ $ uv sync --all-extras
 
 ## フォーマッターしたい
 
+```console
+$ uvx ruff format
+```
+
+`uvx`コマンドは、`pipx run`のようなことができます。
+`uv tool run`のエイリアスになっています。
+
 ## リンターしたい
+
+```console
+$ uvx ruff check
+```
 
 ## パッケージをビルドしたい
 
 ## パッケージを公開したい
+
+## 外部パッケージしたい（``uv tool``）
+
+```console
+$ uv tool dir
+~/.local/share/uv/tools
+
+$ uv tool update-shell
+Executable directory ~/.local/bin is already in PATH
+
+$ uv tool list
+$ uv tool run コマンド [オプション]
+$ uv tool install コマンド
+$ uv tool upgrade コマンド
+$ uv tool uninstall コマンド
+```
+
+`uv tool`コマンドで`pipx`のようなことができます。
+インストールされたパッケージは``uv tool dir``ディレクトリに保存され、
+コマンドは``~/.local/bin``に配置されます。
+
+:::{caution}
+
+`~/.local/bin`は`pipx`でインストールされるコマンドと同じパスです。
+同名のコマンドがすでにある場合はインストールに失敗します。
+
+:::
