@@ -1,7 +1,7 @@
-# リンターしたい（``ruff``）
+# フォーマッター／リンターしたい（``ruff``）
 
 ```console
-$ pip3 install ruff
+$ pipx install ruff
 ```
 
 Rustで書かれたPython用のリンター&フォーマッタです。
@@ -24,9 +24,12 @@ Pythonのリンター＆フォーマッタの変遷は闇が深そうです。
 
 :::
 
-## リンターしたい
+## リンターしたい（``ruff check``）
 
 ```console
+$ ruff check
+$ ruff check --fix
+$ ruff check --show-fixes
 $ ruff check ファイル名
 $ ruff check ファイル名 --select カテゴリ記号
 ```
@@ -43,16 +46,25 @@ $ ruff check ファイル名 --select カテゴリ記号
 $ ruff check . --select ALL
 ```
 
-## フォーマッタしたい
+## フォーマッタしたい（``ruff format``）
 
 ```console
+$ ruff format
+$ ruff format --check
+$ ruff format --diff
 $ ruff format ファイル名
 ```
 
 ``format``コマンドでフォーマッターとして利用できます。
 引数にファイル名を指定したり、確認したいディレクトリで``ruff format .``を指定して実行します。
 
-## ルール
+## ルールを確認したい（``ruff rule``）
+
+```console
+$ ruff rule ルールID
+```
+
+
 
 ``select``や``ignore``で設定できるカテゴリ記号は[公式ドキュメントの「ルール」](https://docs.astral.sh/ruff/rules/)に書いてあります。
 どんなものがあるかなと思って書き写してみたら、なんと58種類もありました。
