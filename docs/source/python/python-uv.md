@@ -1,5 +1,13 @@
 # パッケージ管理したい（``uv``）
 
+```console
+$ uv init プロジェクト名
+$ uv python pin バージョン
+$ uv sync
+$ uv add パッケージ名
+$ uv add --dev パッケージ名
+```
+
 ## インストールしたい
 
 ```console
