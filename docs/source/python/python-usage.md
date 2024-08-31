@@ -64,12 +64,13 @@ maxdepth: 1
 ---
 python-typing
 python-dataclass
+python-pydantic
 python-bs4
 python-pandas
 python-plotly
 python-altair
 python-textblob
-python-pydantic
+
 ```
 
 ## テスト＆デバッグしたい
