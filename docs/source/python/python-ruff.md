@@ -2,10 +2,12 @@
 
 ```console
 $ pipx install ruff
+$ ruff check
+$ ruff format
 ```
 
-Rustで書かれたPython用のリンター&フォーマッタです。
-これまで``black``、``isort``、``flake8``を組み合わせてできたことを``ruff``に集約できます。
+``ruff``はRustで書かれたPython用のリンター&フォーマッタです。
+これまで``black``、``isort``、``flake8``を組み合わせてできたことをすべて``ruff``に集約できます。
 設定を``pyproject.toml``に記述できるため、既存のPythonプロジェクトにも導入しやすいと思います。
 
 :::{note}
@@ -57,6 +59,14 @@ $ ruff format ファイル名
 
 ``format``コマンドでフォーマッターとして利用できます。
 引数にファイル名を指定したり、確認したいディレクトリで``ruff format .``を指定して実行します。
+
+```toml
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "double"
+```
 
 ## ルールを確認したい（``ruff rule``）
 
