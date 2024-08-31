@@ -1,9 +1,14 @@
 # パッケージ管理したい（``poetry``）
 
 ```console
+$ poetry new プロジェクト名
 $ poetry add pandas matplotlib
 $ poetry add --group=dev ipykernel pytests commitizen ruff
 $ poetry add --group=docs sphinx_book_theme myst_parser
+$ poetry install
+$ poetry shell
+$ poetry build
+$ poetry publish
 ```
 
 プロジェクトに依存するパッケージを管理したり、PyPIなどに公開するには[Poetry](https://python-poetry.org/)がオススメです。
