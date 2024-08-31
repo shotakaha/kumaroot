@@ -1,7 +1,11 @@
 # パッケージ管理したい（`rye`）
 
 ```console
+$ rye init プロジェクト名
+$ rye pin バージョン
+$ rye sync
 $ rye add パッケージ名
+$ rye add --dev パッケージ名
 $ rye sync
 $ rye fmt
 $ rye lint
