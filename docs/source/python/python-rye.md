@@ -13,6 +13,19 @@ $ rye publish
 
 ```console
 $ brew install rye
+
+$ rye --version
+rye 0.39.0
+commit: 0.39.0 (2024-08-21)
+platform: macos (aarch64)
+self-python: cpython@3.12.2
+symlink support: true
+uv enabled: true
+
+$ which -a rye
+/opt/homebrew/bin/rye
+~/.local/share/mise/installs/rye/latest/bin/rye
+~/.rye/shims/rye
 ```
 
 ## 新規プロジェクトしたい（``rye init``）
@@ -31,15 +44,16 @@ $ rye init --license ライセンス名
 
 ```console
 $ rye add パッケージ名
+$ rye remove パッケージ名
+
 $ rye add パッケージ名==バージョン
 $ rye add パッケージ名 --features パッケージ名
+$ rye add --dev パッケージ名
 $ rye add --git リポジトリ
 $ rye add --url URL
 ```
 
 `rye add`コマンドでプロジェクトにパッケージを追加できます。
-
-### 開発環境を追加したい（``rye add --dev``）
 
 ## パッケージをインストールしたい（``rye sync``）
 

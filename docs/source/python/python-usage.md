@@ -44,6 +44,7 @@ python-poetry
 python-pyproject
 python-virtualenv
 python-rye
+python-uv
 ```
 
 ## プロジェクトを作成＆管理したい
