@@ -13,6 +13,10 @@ $ rye build
 $ rye publish
 ```
 
+`rye`はPython環境の管理とパッケージ管理を一元管理できるツールです。
+`.python-version`でPython環境を管理し、
+`pyproject.toml`と`requirements.loc`（と`requirements-dev.lock`）のファイルを使って、依存関係を管理できます。
+
 ## インストールしたい
 
 ```console
