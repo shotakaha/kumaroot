@@ -1,19 +1,48 @@
 # パッケージ管理したい（``poetry``）
 
 ```console
+// プロジェクトの初期化
 $ poetry new プロジェクト名
+
+// パッケージ管理
 $ poetry add pandas matplotlib
 $ poetry add --group=dev ipykernel pytests commitizen ruff
 $ poetry add --group=docs sphinx_book_theme myst_parser
+
+// poetry.lockにある依存関係をインストール
 $ poetry install
+
+// 仮想環境を起動
 $ poetry shell
+
+// パッケージをビルド
 $ poetry build
+
+// パッケージをリポジトリに公開
 $ poetry publish
 ```
 
-プロジェクトに依存するパッケージを管理したり、PyPIなどに公開するには[Poetry](https://python-poetry.org/)がオススメです。
-Pythonのパッケージ管理ツールはいろいろ存在していますが、（おそらく複雑な歴史的な経緯があり）まったく統一されておらず、すべてを把握＆理解するのは不可能だと思います。
-僕は、たまたま使い始めてみたのですが、使い勝手がよいなと感じています。
+`poetry`はPythonのパッケージ管理とパッケージ公開できるツールです。
+`pyproject.toml`と`poetry.lock`の2つのファイルを使って依存関係を管理し、仮想環境も同時に作成できます。
+
+:::{seealso}
+
+Pythonのパッケージ管理ツールはいろいろ存在しています。
+おそらく複雑な歴史的経緯もあって、全体像を把握＆理解することはかなり難しそうですが、僕が通ってきた道には次のようなパッケージがありました。
+
+:標準モジュール: `pip` / `venv`
+:仮想環境: `virtualenv` / `pyenv` / `pipenv`
+:パッケージ公開: `twine`
+
+これらのパッケージを組み合わせて、開発環境を整える必要がありました。
+多くの先達たちが、その組み合わせのベストプラクティス的なものをブログ記事／Qiita記事などで紹介していました。
+
+このようなPython世界観の中で`poetry`が登場しました。
+2020年ころに使いはじめてみたところ、仮想環境の構築、依存関係の管理、リポジトリへの公開までの一連のステップがオールインワンで完結することがわかり、常用することに決めました。
+
+最近は2023年ころに登場した、より高速だという`rye`も使いはじめてみました。
+
+:::
 
 ## インストールしたい（``pipx install poetry``）
 
@@ -335,3 +364,7 @@ $ poetry config pypi-token.testpypi "TestPyPIのAPIトークン"
 ``PyPI``はデフォルトの公開先になっているため、リポジトリの設定は必要ありません。
 ``TestPyPI``に公開する場合は、リポジトリのURLを設定する必要があります。
 公開先のAPIトークンをそれぞれ事前に発行しておく必要があります。
+
+## リファレンス
+
+- [Poetry](https://python-poetry.org/)
