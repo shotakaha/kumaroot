@@ -8,6 +8,10 @@ $ uv add パッケージ名
 $ uv add --dev パッケージ名
 ```
 
+`uv`はPython環境の管理とパッケージ管理を一元管理できるツールです。
+`.python-version`でPython環境を管理し、
+`pyproject.toml`と`uv.lock`のファイルを使って依存関係を管理できます。
+
 ## インストールしたい
 
 ```console
