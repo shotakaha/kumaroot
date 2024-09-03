@@ -4,82 +4,64 @@
 
 ### Feat
 
-- **python/python-uv.md**: uvを追加した
-- **python/python-rye.md**: ryeを追加した
-- **command/command-systemctl.md**: systemctlを追加した
-- **python/python-tomllib.md**: tomllibを追加した
-- **python/python-platform.md**: platformを追加した
 - **command/command-mysql.md**: MySQLを追加した
-- **python/python-jupytext.md**: jupytextを追加した
-- **python/python-jupyter.md**: Jupyterを追加した
-- **sphinx/sphinx-i18n.md**: 翻訳（多言語化）を追加した
-- **python/python-argparse.md**: argparseを追加した
-- **git/git-revert.md**: git revertを追加した
-- **git/git-lfs.md**: Git LFSを追加した
-- **python/python-deprecated.md**: deprecatedを追加した
+- **command/command-systemctl.md**: systemctlを追加した
 - **docker/docker-raspi.md**: RPiのユースケースを追加した
-- **hvplot/hvplot-scatter_matrix.md**: hvplot.scatter_matrixを追加した
+- **git/git-lfs.md**: Git LFSを追加した
+- **git/git-revert.md**: git revertを追加した
+- **hvplot/hvplot-errorbars.md**: hvplot.errorbarsを追記した
 - **hvplot/hvplot-lag_plot.md**: hvplot.lag_plotを追加した
+- **hvplot/hvplot-options.md**: オプションを追加した
+- **hvplot/hvplot-save.md**: 保存する方法を追加した
+- **hvplot/hvplot-scatter_matrix.md**: hvplot.scatter_matrixを追加した
+- **python/python-argparse.md**: argparseを追加した
+- **python/python-deprecated.md**: deprecatedを追加した
+- **python/python-jupyter.md**: Jupyterを追加した
+- **python/python-jupytext.md**: jupytextを追加した
+- **python/python-platform.md**: platformを追加した
+- **python/python-rye.md**: ryeを追加した
+- **python/python-tomllib.md**: tomllibを追加した
+- **python/python-uv.md**: uvを追加した
 - **python/python-webbrowser.md**: webbrowserを追加した
+- **sphinx/sphinx-i18n.md**: 翻訳（多言語化）を追加した
 - **streamlit/streamlit-usage.md**: streamlitを追加した
 
 ### Fix
 
+- **altair/altair-save.md**: 保存する方法を追加した
 - **command/command-ssh-keygen.md**: SSH鍵を確認する方法を追記した
-- **python/python-uv.md**: 説明を整理した
-- **python/python-rye.md**: 説明を整理した
-- **python/python-poetry.md**: 説明を整理した
-- **python/python-rye.md**: Python固定を追記した
-- **python/python-uv.md**: uv toolを追記した
-- **python/python-ruff.md**: 設定を追記した
-- **python/python-poetry.md**: poetry定番を追加した
-- **python/python-rye.md**: rye定番を追加した
-- **python/python-uv.md**: uv定番を追加した
-- **python/python-rye.md**: 初期化コマンドを再確認した
-- **python/python-ruff.md**: ruffを更新した
-- **pyproject.toml**: myst-parserを更新した: 3.0.1 -> 4.0.0
-- **pyproject.toml**: mystmdを更新した: 1.3.5 -> 1.3.6
-- **poetry.lock**: パッケージを更新した
-- **python/python-rye.md**: 設定を確認する方法を追加した
-- **mystmd/scipy-interpolate.ipynb**: スプライン補間を追加した
-- **python/python-dataclass.md**: post_initを追加した
-- **mystmd/python-tomllib.ipynb**: tomllibを追加した
-- **command/command-mysql.md**: MySQLの使い方を追記した
+- **pandas/pandas-crosstab.md**: pd.crosstabを更新した
+- **geant4/geant4-logicalvolume-store.md**: G4LogicalVolumeStoreを追加した
+- **geant4/geant4-mandatory-classes.md**: クラスの自作度を整理した
+- **geant4/geant4-material-table.md**: MaterialTableのサンプルを整理した
+- **geant4/geant4-random-direction.md**: G4RandomDirectionを追加した
+- **geant4/geant4-sensor-processhits.md**: ヒット判断を追加した
+- **geant4/geant4-source-muon.md**: 天頂角分布を追加した
+- **geant4/geant4-std-map.md**: std::mapを追加した
 - **pandas/pandas-groupby.md**: groupbyを追記した
-- **hvplot/hvplot-errorbars.md**: hvplot.errorbarsを追記した
-- **python/python-pydantic.md**: 設定ファイルをバリデートしたい
-- **python/python-pydantic.md**: カスタムバリデーターを追加した
-- **python/python-pipx.md**: インストールしたパッケージリストを更新した
-- **docs/source/pandas/pandas-crosstab.md**: pd.crosstabを更新した
-- **python/python-typer.md**: typerを整理した
+- **python/python-dataclass.md**: post_initを追加した
+- **python/python-pipx.md**: pipxの使い方を整理した
+- **python/python-poetry.md**: poetry定番を追加した
+- **python/python-pydantic.md**: pydanticの使い方を追記した
+- **python/python-ruff.md**: 設定を追記した
 - **python/python-typer.md**: 位置引数／オプション引数の説明を追記した
-- **pyproject.toml**: mystmdを更新した: 1.3.3 -> 1.3.5
+- **streamlit/streamlit-usage.md**: streamlitの公式ページを追加した
+
+### Notebooks
+
 - **mystmd/**: MySTノートブックを更新した
 - **mystmd/python-pydantic.ipynb**: pydanticの確認用ノートブックを追加した
-- **pyproject.toml**: pydanticを追加した
-- **python/python-pydantic.md**: 参照していた情報が古かった
-- **python/python-pydantic.md**: pd.DataFrameできるようにした
-- **python/python-pydantic.md**: リンクを追加した
-- **python/python-pydantic.md**: pydanticの使い方を追記した
-- **geant4/geant4-material-table.md**: MaterialTableのサンプルを整理した
-- **altair/altair-save.md**: 保存する方法を追加した
-- **hvplot/hvplot-save.md**: 保存する方法を追加した
-- **hvplot/hvplot-options.md**: オプションを追加した
-- **streamlit/streamlit-usage.md**: streamlitの公式ページを追加した
-- **python/python-pipx.md**: pipx environmentを追加した
-- **geant4/geant4-random-direction.md**: G4RandomDirectionを追加した
-- **geant4/geant4-source-muon.md**: ミューオンの説明を追加した
-- **geant4/geant4-source-muon.md**: 関数名を修正した
-- **geant4/geant4-source-muon.md**: 天頂角分布を追加した
-- **geant4/geant4-sensor-processhits.md**: PMTを追加した
-- **geant4/geant4-sensor-processhits.md**: ヒット判断を追加した
-- **geant4/geant4-logicalvolume-store.md**: G4LogicalVolumeStoreを追加した
-- **python/python-pipx.md**: パッケージを追加した
-- **python/python-pipx.md**: pipxの使い方を整理した
-- **geant4/geant4-std-map.md**: std::mapに値を追加する文法を修正した
+- **mystmd/python-tomllib.ipynb**: tomllibを追加した
 - **mystmd/root-pyroot.ipynb**: 出力をクリアした
-- **geant4/geant4-std-map.md**: std::mapを追加した
-- **geant4/geant4-mandatory-classes.md**: クラスの自作度を整理した
+- **mystmd/scipy-interpolate.ipynb**: スプライン補間を追加した
+
+### Build
+
+- **poetry.lock**: パッケージを更新した
+- **pyproject.toml**: myst-parserを更新した: 3.0.1 -> 4.0.0
+- **pyproject.toml**: mystmdを更新した: 1.3.3 -> 1.3.5
+- **pyproject.toml**: mystmdを更新した: 1.3.5 -> 1.3.6
+- **pyproject.toml**: pydanticを追加した
 
 ## v1.36.0 (2024-08-12)
 
