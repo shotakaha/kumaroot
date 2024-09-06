@@ -100,6 +100,35 @@ r_{i} = y_{i}^{\text{data}} - y_{i}^{\text{fit}}
 
 :::
 
+## 共分散行列
+
+`pcov`は共分散行列（covariance matrix）を表すk行k列の2次元配列です。
+`k`はフィッティングのパラメーター数です。
+
+:::{math}
+
+\text{cov} = \pmatrix{
+    \sigma_{11} & \sigma_{12} & \cdots & \sigma_{1k} \\
+    \sigma_{21} & \sigma_{22} & \cdots & \sigma_{2k} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \sigma_{k1} & \sigma_{k2} & \cdots & \sigma_{kk}
+    }
+
+:::
+
+上記の`curve_fit`で求めた最適値（`popt`）の要素ごとの共分散が入っています。
+対角成分を使って、フィッティング全体の標準誤差を計算できます。
+
+:::{math}
+
+\text{err}
+& = \sqrt{\sigma_{11}^{2} + \sigma_{22}^{2} + \dots + \sigma_{kk}^{2}} \\
+& = \sqrt{\sum_{i=1}^{k}\sigma_{ii}^{2}}
+
+:::
+
+
+
 ## 結果のよしあし（Goodness of Fit）
 
 適切にフィットできたかどうか$\chi^{2}$値（ピアソンのカイ二乗検定）で判断します。
