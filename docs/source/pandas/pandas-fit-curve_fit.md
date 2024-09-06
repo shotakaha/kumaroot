@@ -108,15 +108,18 @@ r_{i} = y_{i}^{\text{data}} - y_{i}^{\text{fit}}
 :::{math}
 
 \text{cov} = \pmatrix{
-    \sigma_{11} & \sigma_{12} & \cdots & \sigma_{1k} \\
-    \sigma_{21} & \sigma_{22} & \cdots & \sigma_{2k} \\
+    \sigma_{11}^{2} & \sigma_{12}^{2} & \cdots & \sigma_{1k}^{2} \\
+    \sigma_{21}^{2} & \sigma_{22}^{2} & \cdots & \sigma_{2k}^{2} \\
     \vdots & \vdots & \ddots & \vdots \\
-    \sigma_{k1} & \sigma_{k2} & \cdots & \sigma_{kk}
+    \sigma_{k1}^{2} & \sigma_{k2}^{2} & \cdots & \sigma_{kk}^{2}
     }
 
 :::
 
-上記の`curve_fit`で求めた最適値（`popt`）の要素ごとの共分散が入っています。
+上記の`curve_fit`で求めた最適値（`popt`）の要素を使って、
+対角成分（``i=j``の成分）は分散、
+それ以外の成分（``i≠j``の成分）は共分散の値が入っています。
+
 対角成分を使って、フィッティング全体の標準誤差を計算できます。
 
 :::{math}
