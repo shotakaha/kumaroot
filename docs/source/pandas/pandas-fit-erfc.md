@@ -1,14 +1,5 @@
 # 相補誤差関数でフィットしたい（``scipy.special.erfc``）
 
-:::{math}
-
-\text{erf}(x) & = \frac{2}{\sqrt(\pi)} \int_{t=0}^{x} \exp(-t^{2}) \text{d}t
-
-
-\text{erfc}(x) & = 1 - \text{erf}(x)
-
-:::
-
 ```python
 import pandas as pd
 import numpy as np
@@ -67,6 +58,34 @@ def fit(data: pd.DataFrame, x: str, y: str):
 
     return popt, perr, x_fit, y_fit
 ```
+
+宇宙線測定時のスレッショルドを決定したときのサンプルです。
+スレッショルド値をスライドさせ、得られた検出率の曲線に対して、
+相補誤差関数でフィッティングしました。
+
+## 誤差関数
+
+:::{math}
+
+\text{erf}(x) = \frac{2}{\sqrt(\pi)} \int_{t=0}^{x} \exp(-t^{2}) \text{d}t
+
+:::
+
+誤差関数は、ガウス分布（正規分布）の累積分布関数です。
+宇宙線測定時の信号に乗るノイズはガウス分布にしたがうと仮定できます。
+あるスレッショルド値 $T$ に対して、信号の大きさ $x$ が $x < T$
+（$T$より小さい）となる確率を算出できます。
+
+## 相補誤差関数
+
+:::{math}
+
+\text{erfc}(x) = 1 - \text{erf}(x)
+
+:::
+
+あるスレッショルド値 $T$ に対して、信号の大きさ $x$ が $T < x$
+（$T$より大きい）となる確率を算出できます。
 
 ## リファレンス
 
