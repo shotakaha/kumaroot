@@ -7,8 +7,8 @@ from scipy.optimize import curve_fit
 # func: 任意の関数； y = func(x, *params) の形
 # x_data(array_like): X軸のデータ
 # y_data(array_like): Y軸のデータ
-# p_init(array_like): 初期パラメータ
-popt, pcov = curve_fit(func, x_data, y_data, p_init)
+# p0(array_like): 初期パラメータ
+popt, pcov = curve_fit(func, x_data, y_data, p0)
 
 # フィットのエラーを計算
 perr = np.sqrt(np.diag(pcov))
@@ -34,6 +34,44 @@ perr = np.sqrt(np.diag(pcov))
 
 実はフィットの中身をよく分かっていないことが分かったので、
 もう少し調べてから追記します。
+
+:::
+
+## 最適化したい（``method``）
+
+```python
+curve_fit(func, x_data, y_data, p0, method="lm")
+```
+
+``method``オプションで、フィッティングを最適化するアルゴリズムを変更できます。
+アルゴリズムは`lm`、`trf`、`dogbox`から選択します。
+デフォルトは`None`になっていて、
+制約条件がない場合（＝`bounds=(-np.inf, np.inf)`）は`lm`、
+制約条件がある場合は`trf`を使うことになっています。
+
+:lm:
+Levenberg-Marquardt アルゴリズム。
+MINPACKで実装されているものと同等。
+制約があるsparse Jacobianな場合は扱うことができない。
+制約条件がない場合に効率的な手法。
+
+:trf:
+Trust Region Reflective アルゴリズム。
+制約ががあるlarge sparse bounds に適している。
+一般的にロバストな手法。
+
+:dogbox:
+dogleg アルゴリズム。
+ランクが不足しているJacobianでは非推奨。
+
+:::{note}
+
+[curve_fitのソースコード](https://github.com/scipy/scipy/blob/v1.14.1/scipy/optimize/_minpack_py.py#L591-L1060)を確認すると、
+`method="lm"`の場合、[leastsq]()、
+それ以外の場合、[least_squares]()、を使っていました。
+
+どちらも最小二乗法でパラメーターのフィッティングをするものですが、
+`leastsq`はレガシーな関数で、ユーザーが新しく作成するスクリプトでの利用は推奨されていません。
 
 :::
 
