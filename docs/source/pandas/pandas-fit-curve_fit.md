@@ -14,9 +14,9 @@ popt, pcov = curve_fit(func, x_data, y_data, p0)
 perr = np.sqrt(np.diag(pcov))
 ```
 
-[scipy.optimize.curve_fit](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)で、任意の関数を使って曲線フィットできます。
+`scipy.optimize.curve_fit`で、任意の関数を使って曲線フィットできます。
 
-使い方自体はとても簡単で、実験で得られたデータ点と、フィットしたい関数を用意するだけです。
+引数には実験で得られたデータ点と、フィットしたい関数を用意すればOKです。
 具体例は[](./pandas-fit-gaussian.md)など、別ページに整理しました。
 
 ``func``にはフィットしたい関数を指定し、
@@ -36,6 +36,8 @@ NumPy配列（``nd.array``）に変換して渡しているサンプルもあり
 
 ```python
 curve_fit(func, x_data, y_data, p0, method="lm")
+curve_fit(func, x_data, y_data, p0, method="trf")
+curve_fit(func, x_data, y_data, p0, method="dogbox")
 ```
 
 ``method``オプションで、フィッティングを最適化するアルゴリズムを変更できます。
@@ -191,6 +193,8 @@ r_{i} = y_{i}^{\text{data}} - y_{i}^{\text{fit}}
 ## リファレンス
 
 - [scipy.optimize.curve_fit - SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)
+- [scipy.optimize.leastsq - SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.leastsq.html)
+- [scipy.optimize.least_squares - SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html)
 - [scipy.stats.chisquare](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html)
 - [scipy.stats.goodness_of_fit](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.goodness_of_fit.html)
 
