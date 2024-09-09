@@ -1,4 +1,4 @@
-# 任意の関数でフィットしたい（``scipy.optimize.curve_fit``）
+# 曲線フィットしたい（``scipy.optimize.curve_fit``）
 
 ```python
 import numpy as np
@@ -14,28 +14,23 @@ popt, pcov = curve_fit(func, x_data, y_data, p0)
 perr = np.sqrt(np.diag(pcov))
 ```
 
-[scipy.optimize.curve_fit](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)で、任意の関数を使ってフィットできます。
+[scipy.optimize.curve_fit](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)で、任意の関数を使って曲線フィットできます。
 
-``func``にはフィットに使う任意の関数を指定します。
+使い方自体はとても簡単で、実験で得られたデータ点と、フィットしたい関数を用意するだけです。
 具体例は[](./pandas-fit-gaussian.md)など、別ページに整理しました。
 
+``func``にはフィットしたい関数を指定し、
 ``x_data``、``y_data``は測定データの中でフィットに使う成分を指定します。
 データフレーム形式（``pd.DataFrame``）を使っている場合、``pd.Series``を指定すればOKです
-（NumPy配列（``nd.array``）に変換して渡しているサンプルもありますが必要ないはずです）。
+NumPy配列（``nd.array``）に変換して渡しているサンプルもありますが必要ないはずです。
 
-``p_init``はフィットの初期パラメーターを指定します。
+``p0``はフィットの初期パラメーターを指定します。
+初期パラメーターがまちがっていると、うまくフィットできない場合があります。
 測定データの分布を確認し、近そうな値を指定します。
-初期パラメーターが離れすぎていると、うまくフィットできない場合があります。
 
-``curve_fit``した結果は、フィット関数のパラメーター数に応じた値が``popt``と``pcov``として返ってきます。
+``curve_fit``の結果は、フィット関数のパラメーター数に応じた値が
+``popt``と``pcov``として返ってきます。
 ``pcov``の対角成分でフィットの誤差を計算できます。
-
-:::{note}
-
-実はフィットの中身をよく分かっていないことが分かったので、
-もう少し調べてから追記します。
-
-:::
 
 ## 最適化したい（``method``）
 
@@ -48,6 +43,11 @@ curve_fit(func, x_data, y_data, p0, method="lm")
 デフォルトは`None`になっていて、
 制約条件がない場合（＝`bounds=(-np.inf, np.inf)`）は`lm`、
 制約条件がある場合は`trf`を使うことになっています。
+
+`curve_fit`のフィッティングの基本は非線形の最小二乗法ですが、
+その計算アルゴリズムはいろいろあるようです。
+その中でもLevenberg-Marguardt法が広く使われているそうです。
+
 
 :lm:
 Levenberg-Marquardt アルゴリズム。
@@ -68,9 +68,9 @@ dogleg アルゴリズム。
 
 [curve_fitのソースコード](https://github.com/scipy/scipy/blob/v1.14.1/scipy/optimize/_minpack_py.py#L591-L1060)を確認すると、
 `method="lm"`の場合、[leastsq]()、
-それ以外の場合、[least_squares]()、を使っていました。
+それ以外の場合、[least_squares]()、を使っています。
 
-どちらも最小二乗法でパラメーターのフィッティングをするものですが、
+どちらも非線形最小二乗法を使ってパラメーターをフィッティングしますが、
 `leastsq`はレガシーな関数で、ユーザーが新しく作成するスクリプトでの利用は推奨されていません。
 
 :::
