@@ -11,6 +11,7 @@ maxdepth: 1
 ---
 python-install
 python-pathlib
+python-datetime
 python-pendulum
 python-platformdirs
 python-platform
