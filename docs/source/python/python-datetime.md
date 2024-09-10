@@ -15,7 +15,7 @@ print(now)
 Python3.6から`astimezone`というメソッドが使えるようになっていて、
 タイムゾーン情報を含む（`tz-aware`な）日時オブジェクトが簡単に取得できるようになっています。
 
-## 現在時刻したい（`now`）
+## 現在時刻したい（`datetime.datetime.now`）
 
 ```python
 from datetime import datetime
@@ -30,7 +30,7 @@ now = datetime.now().astimezone()
 デフォルトは`tz-naive`な日時オブジェクトですが、
 `astimezone`で`tz-aware`な日時オブジェクトに変換できます。
 
-## 日付から文字列にしたい（`strftime`）
+## 日付から文字列にしたい（`datetime.datetime.strftime`）
 
 ```python
 from datetime import datetime
@@ -40,18 +40,18 @@ now.strftime("%Y-%m-%dT%H:%M:%S.%f%z")
 # %Y: 西暦（4桁）
 # %m: 月（2桁; 0埋め）
 # %d: 日（2桁; 0埋め）
-# %H: 時（24h; 0埋め）
-# %M: 分（60m; 0埋め）
-# %S: 秒（60s; 0埋め）
+# %H: 時（2桁; 24h）
+# %M: 分（2桁; 0埋め）
+# %S: 秒（2桁; 0埋め）
 # %f: マイクロ秒（6桁; 0埋め）
-# %z: タイムゾーン；UTCオフセット
+# %z: タイムゾーン; UTCオフセット
 # %Z: タイムゾーン名
 ```
 
 `strftime`で日付オブジェクトを文字列に変換できます。
 変換するときに、フォーマットを指定できます。
 
-## 文字列から日付にしたい（`strptime`）
+## 文字列から日付にしたい（`datetime.datetime.strptime`）
 
 ```python
 from datetime import datetime
@@ -75,7 +75,7 @@ datetime.fromisoformat(date_string)
 日付がISO8601形式の文字列になっている場合は、
 `fromisoformat`が使えます。
 
-## UNIX時間を日付にしたい（`fromtimestamp`）
+## UNIX時間を日付にしたい（`datetime.datetime.fromtimestamp`）
 
 ```python
 import time
