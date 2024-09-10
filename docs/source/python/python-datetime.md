@@ -75,6 +75,15 @@ datetime.fromisoformat(date_string)
 日付がISO8601形式の文字列になっている場合は、
 `fromisoformat`が使えます。
 
+:::{hint}
+
+`strftime`は String Format Time、
+`strptime`は String Parse Time のことだそうです。
+ひと文字違いなので、どっちがどっちだったか、いまいち覚えられずにいましたが、
+これからは大丈夫そうです。
+
+:::
+
 ## UNIX時間を日付にしたい（`datetime.datetime.fromtimestamp`）
 
 ```python
