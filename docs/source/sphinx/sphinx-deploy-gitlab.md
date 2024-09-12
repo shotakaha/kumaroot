@@ -1,9 +1,12 @@
 # GitLab CIしたい（``.gitlab-ci.yml``）
 
-{file}`.gitlab-ci.yml`でGitLab CIを設定することで、Sphinxを使ったGitLab Pagesを自動でビルトできます。
-以下は、
-シンプルに``sphinxdoc/sphinx``イメージを使う方法と、
-``python``イメージと``poetry``を使う方法のサンプルです。
+GitLab CIを設定することで、Sphinxで生成したドキュメントを
+GitLab Pagesに自動で公開できるようになります。
+設定は{file}`.gitlab-ci.yml`に記述します。
+
+以下では、
+``sphinxdoc/sphinx``イメージを使う方法と、
+``python``イメージで``poetry``を使う方法のサンプルです。
 
 コメントアウトしている部分があったり、デバッグ用の出力があったりしますが、
 不要なものは適当にスキップして使ってください。
@@ -11,51 +14,46 @@
 ## Sphinxイメージを使いたい
 
 ```yaml
-image: sphinxdoc/sphinx:latest
-# image: sphinxdoc/sphinx-latexpdf:latest
-
-# stages:
-# - test
-
-# sast:
-#   stage: test
-# include:
-# - template: Security/SAST.gitlab-ci.yml
-
+# 環境変数の設定
 variables:
   PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
 
+# キャッシュするパスの設定
 cache:
   paths:
     - .cache/pip
     - venv/
 
-before_script:
-  - python -V
-  - pip --version
-  - pip install -r requirements.txt
-
+default:
+  image: sphinxdoc/sphinx:latest
+  # image: sphinxdoc/sphinx-latexpdf:latest
+  before_script:
+    - python -V
+    - pip --version
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -U pip
+    - pip install -r requirements.txt
 
 test:
   script:
-    - pip install black
-    - black --check .
     # build HTML pages
     - cd docs; make dirhtml
     - ls -ltr _build/
     - ls -ltr _build/dirhtml/
-  except:
-    - master
+  rules:
+    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
 
 pages:
   stage: deploy
   script:
     # build HTML pages
-    - cd docs; make dirhtml
+    - cd docs
+    - make dirhtml
     - mv _build/dirhtml/ ../public/
-    # build PDF
     # - make latexpdf
-    # - mv _build/latex public/
+    # - mv _build/latex/ファイル名.pdf ../public/
   artifacts:
     paths:
       - public
@@ -67,45 +65,64 @@ pages:
 依存関係は``pip install -r requirements.txt``で追加インストールしています。
 PDFを生成したい場合はイメージを``sphinx-latexpdf``に変更してください。
 
-## Poetryを使いたい
+## Python + Poetryを使いたい
 
 ```yaml
-# Official language image. Look for the different tagged releases at:
-# https://hub.docker.com/r/library/python/tags/
-image: python:latest
-
 # Change pip's cache directory to be inside the project directory since we can
 # only cache local items.
 variables:
   PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
 
+# キャッシュするパスを設定
 # Pip's cache doesn't store the python packages
 # https://pip.pypa.io/en/stable/reference/pip_install/#caching
-#
-# If you want to also cache the installed packages, you have to install
-# them in a virtualenv and cache it as well.
 cache:
   paths:
     - .cache/pip
     - venv/
 
-before_script:
-  - python -V # Print out python version for debugging
-  - pip install virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
-  - pip install -U pip
-  - pip install -U poetry
-  - which poetry
-  - poetry env info --path
-  - poetry install
-  #- poetry config virtualenv.in-project true
-  #- pip install -r requirements.txt
+default:
+  # 利用するイメージを設定
+  # Pythonのバージョンは以下で確認
+  # https://hub.docker.com/r/library/python/tags/
+  image: python:3.12
+  # ジョブの前に実行するスクリプトを設定
+  # virtualenvで仮想環境を作成し、そこのpoetryを追加
+  # poetry install で関係するパッケージを追加
+  # APIドキュメントのときは poetry install する
+  # ただのドキュメントの poetry install --no-root でもOK
+  before_script:
+    - python -V # Print out python version for debugging
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -U pip
+    - pip install -U poetry
+    - which poetry
+    - poetry env info --path
+    - poetry install
+    # もしくは
+    # - poetry install --no-root
 
-pages:
+# デフォルトブランチ以外にプッシュがあった場合：
+# ページがビルドできるかだけ確認する
+# （ページを公開しない）
+test:
   script:
-    - cd docs; make dirhtml
-    - mv _build/dirhtml/ ../public/
+    - poetry show --outdated
+    - cd docs; make dirhtml; cd ..;
+    - ls -ltr docs/_build/dirhtml/
+  rules:
+    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+
+# デフォルトブランチにプッシュ（やマージリクエスト）があった場合：
+# ページをビルドし、GitLab Pagesに公開する
+# "public"というartifactで公開している
+pages:
+  stage: deploy
+  script:
+    - cd docs; make dirhtml; cd..;
+    - mv docs/_build/dirhtml/ public/
   artifacts:
     paths:
       - public
@@ -113,8 +130,14 @@ pages:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 ```
 
-``Poetry``で環境構築したい場合の設定です。
-ベースは[Python公式のDockerイメージ](https://hub.docker.com/_/python)を使っています。
-そこに``virtualenv``で仮想環境を作成した上で、さらに``Poetry``で環境を構築しています。
+``Python + Poetry``で環境構築する場合の設定です。
+ベースとなるイメージは[Python公式のDockerイメージ](https://hub.docker.com/_/python)を使っています。
 
-依存パッケージにGitHubリポジトリを指定している場合など、``pip install -r requirements.txt``では解決できない場合に有効な設定だと思います。
+root権限でpipすると警告が表示されるため、
+``virtualenv``で仮想環境を作成した上に
+``Poetry``で環境を構築しています。
+
+## リファレンス
+
+- [sphinxdoc/sphinx - DockerHub](https://hub.docker.com/r/sphinxdoc/sphinx)
+- [python/python - DockerHub](https://hub.docker.com/_/python)
