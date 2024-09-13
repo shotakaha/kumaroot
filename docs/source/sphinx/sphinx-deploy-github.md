@@ -118,3 +118,11 @@ jobs:
           ls -ltr _build/
           ls -lst _build/dirhtml/
 ```
+
+## リファレンス
+
+- [actions/checkout](https://github.com/actions/checkout)
+- [actions/setup-python](https://github.com/actions/setup-python)
+- [actions/configure-pages](https://github.com/actions/configure-pages)
+- [actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact)
+- [actions/deploy-pages](https://github.com/actions/deploy-pages)
