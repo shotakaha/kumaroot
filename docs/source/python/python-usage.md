@@ -38,12 +38,12 @@ python-tomllib
 maxdepth: 1
 ---
 python-import
+python-pyproject
+python-virtualenv
 python-nodeenv
 python-pip
 python-pipx
 python-poetry
-python-pyproject
-python-virtualenv
 python-rye
 python-uv
 ```
