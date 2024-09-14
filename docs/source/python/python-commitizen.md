@@ -1,13 +1,21 @@
 # セマンティック・バージョニングしたい（``commitizen``）
 
 ```console
-$ pip3 install commitizen
-$ which cz
+$ cz c
 ```
 
 ``commitizen``はGitを使ったバージョン管理をサポートしてくれるパッケージです。
 コマンド名は``cz``です。
 ``cz サブコマンド``するだけで、セマンティック・バージョニングを簡単化できます。
+
+## インストールしたい
+
+- `pip`でインストール
+
+```console
+$ pip3 install commitizen
+$ which cz
+```
 
 :::{note}
 
@@ -16,15 +24,23 @@ $ which cz
 
 :::
 
-## Poetryしたい
+- `pipx`でインストール
+
+```console
+$ pipx install commitizen
+$ which cz
+~/.local/bin/cz
+```
+
+- `poetry`でインストール
 
 ```console
 $ poetry add commitizen --group dev
 ```
 
-Poetryを使ってチームの開発環境を構築している場合を想定しています。
-``commitizen``は開発しているパッケージでは直接使わないため、
-``dev``グループに追加します。
+Poetryを使ってチームで開発している場合は、開発環境にインストールしておくとよいかもしれません。
+``commitizen``はパッケージでは直接使わないため、
+``dev``グループに追加するとよいと思います。
 
 ## 初期化したい（``cz init``）
 
@@ -33,10 +49,10 @@ $ cd プロジェクト名
 $ cz init
 ```
 
-プロジェクトルートで初期化（``cz init``）して、設定ファイルを作成します。
-ターミナルに表示されるダイアログにしたがって矢印キーで選択します。
+``cz init`で、プロジェクトで`commitizen`が使えるように初期化できます。
+ターミナルに表示されるダイアログにしたがって矢印キーで選択すると、設定ファイルが作成されます。
 
-Pythonパッケージを開発している場合は{file}`pyproject.toml`を設定ファイルにするとよいです。
+Pythonパッケージを開発している場合は{file}`pyproject.toml`に設定を追加してまとめることができます。
 その他の場合は、自分の好みの形式を選択すればよいと思います。
 僕は{file}`.cz.toml`を選択する場合が多いです。
 
@@ -74,9 +90,11 @@ $ cz c
 $ cz bump -ch -cc
 ```
 
+``cz bump``で、これまでのコミットの内容／種類をベースに
+``semver``に沿ったバージョン番号のタグを作成し、
+設定ファイル内のバージョン番号を更新できます。
 プログラムの開発にひと区切りついたら、タグをつけましょう。
-``cz bump``コマンド、これまでのコミットの内容をもとにした``semver``で
-バージョン番号を更新すると同時に、タグを作成してくれます。
+
 ``-ch``オプションを使うと、{file}`CHANGELOG.md`を更新できます。
 バージョンアップしたり、変更履歴をまとたりする作業はなかなか大変ですが、一発でやってくれるのでとても助かります。
 
@@ -92,24 +110,35 @@ $ cz bump -ch -cc
 [tool]
 [tool.commitizen]
 ...
+version = "バージョン"
+tag_format = "v$version"
 version_files = [
-    "pyproject.toml:version"
-    "src/__init__.py",
+    # "ファイルのパス:変数名" の形式
+    "pyproject.toml:version",
+    "src/__init__.py:__version__",
+    "docs/conf.py:version",
+    "docs/conf.py:release",
+
 ]
 ```
 
-Pythonの場合、バージョン番号を書くファイルに決まりがありません。
-``src/__init__.py``だったり、``src/__version__.py``だったり、
-ひと（やチーム）によってさまざまです。
+``[tool.commitizen.version_files]``に
+`"ファイルのパス:変数名"`の形式で設定することで、
+ソースコードの中にあるバージョン番号も
+`cz bump`でまとめて更新できるようになります。
 
-``[tool.commitizen.version_files]``を設定すると、
-これらの外部ファイルにあるバージョン番号も
-まとめて更新できるようになります。
+Pythonの場合、バージョン番号を書くファイルに決まりがありませんが、なんとなく、次のような慣習があります。
 
-```{note}
+- ``src/__init__.py:__version__``
+- ``src/__version__.py``
 
-``commitizen``を使って``semver``管理ができるようになっていても、
-バージョン情報が書かれたファイルが散逸していては意味がありません。
-``version_files``で、関係するすべてのファイルを指定するとよいでしょう。
+また、Sphinxでドキュメントを作成している場合は、
+次のパスを設定すればOKです。
 
-```
+- `docs/conf.py:version`
+- `docs/source/conf.py:version`（`--sep`した場合）
+
+せっかく`commitizen`を使って`semver`管理しても、
+ソースコードの中にバージョン番号が散らばっていたら、
+意味がありません。
+初期設定のときに追加しておくとよいと思います。
