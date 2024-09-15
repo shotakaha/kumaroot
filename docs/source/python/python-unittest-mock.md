@@ -2,21 +2,45 @@
 
 ```python
 from unittest.mock import MagicMock
+from unittest.mock import patch
+from unittest.mock import mock_open
 ```
+
+## MagickMockしたい（``MagicMock``）
+
+```python
+from unittest.mock import MagicMock
+
+mock = MagicMock()
+mock.メソッド名.return_value = 返り値
+mock.メソッド名.return_value = [返り値]
+```
+
+`MagicMock`でモック用のオブジェクトを作成できます。
+モックは空箱のようなイメージで、任意のメソッドを追加でき、その返り値を設定できます。
+
+:::{hint}
+
+ユニットテストを作成するとき、どの部分をモックするかを考えることが重要です。
+経験が圧倒的に不足していて悩んでいましたが、最近では、ChatGPTに聞きながら作っています。
+
+:::
 
 ## シリアル通信をモックしたい（``MagicMock``）
 
-:パッケージ名/daq.py:read_event:
-
-```python
+```{code-block} python
+---
+caption: パッケージ名/daq.py:read_event
+---
 def read_event(port: serial.Serial) -> list[str]:
     data = port.readline().decode("UTF-8").strip().split()
     return data
 ```
 
-:tests/test_daq_read_event.py:
-
-```python
+```{code-block} python
+---
+caption: tests/test_daq_read_event.py
+---
 from unittest.mock import MagicMock
 from .daq import read_event
 
@@ -32,22 +56,24 @@ def test_daq_read_event():
     assert isinstance(data, list)
 ```
 
-シリアル通信でデータを取得する場合に作成したモックです。
-これは、検出器からの応答がスペース区切りの文字列になっている場合にテストしたものです。
+シリアル通信でデータを取得するための`read_event`という関数のテストです。
 
-``read_event``のユニットテストを作成する場合、接続がない状態でテストできるようにすると便利です。
-そのために、``serial.Serial``オブジェクトを``MagicMock``します。
+``read_event``では、PySerial（`serial.Serial`）を使ってシリアル通信をしていますが、ユニットテストでは接続がない状態で確認できるようにしたいです。
+そのために`MagickMock`で``serial.Serial``オブジェクトをモックしています。
 
-また``read_event``で``readline()``でデータを読み込んでいるため、
-その関数／メソッドの返り値を、測定データを模した形式でモックしています。
+また``read_event``では``readline()``でデータを取得しています。
+検出器が返すデータ形式がスペース区切りの文字列になっているため
+``mock_port.readline().decode.return_value = "値1 値2 ..."``としています。
 
-実際の検出器からのデータは、ある程度ランダムな数値になるはずです。
-そのため、値を検証するのではなく、得られたオブジェクトの型で検証することにしました。
+ただし、実際の検出器からのデータは、ある程度ランダムな数値です。
+そのため、返ってくる値そのものを検証する意味はありません。
+ここでは、得られたオブジェクトの型が正しいかどうかで検証することにしました。
 
 :::{tip}
 
-実際には``readline``の``return_value``を``FakeEvent``という自作クラスでモックしました。
-``FakeEvent``は、測定データが取りうる範囲からランダムな値を返すクラスです。
+実際の改良として``FakeEvent``クラスを作成し、
+``mock_port.readline().decode.return_value = FakeEvent().to_tsv_string()``でモックしました。
+``FakeEvent``クラスは、擬似データを生成するためのクラスで、測定データが取りうる範囲からランダムな値を返します。
 
 :::
 
