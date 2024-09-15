@@ -67,13 +67,14 @@ def test_download(mock_subprocess_run):
     )
 ```
 
-``@patch``デコレーターで、引数に指定した関数をモックできます。
+``@patch``デコレーターで引数に指定した関数をモックできます。
 
 上のサンプルは、
 ``sheet.download``の中で、
 ``subprocess.run``を使って
 `wget`を呼んでいる場合のテストです。
 `subprocess.run`をモックすることで、実際にwgetを実行せずに動作テストできるようにしています。
+モックには``mock_subprocess_run``でアクセスできます（たぶん自動で変数名が設定されるのだと思います）。
 
 wgetを実行していないため、`filename="output.csv"`に設定したファイルは作成されません。
 そのため、``assert_called_with``を使って、指定した引数で関数が呼ばれたかどうかで、動作確認しています。
