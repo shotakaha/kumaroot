@@ -178,3 +178,5 @@ r.cookies  # 辞書（みたいな）型
 ## リファレンス
 
 - [requests](https://requests.readthedocs.io/en/latest/)
+- [httpx](https://www.python-httpx.org/)
+- [urllib](https://docs.python.org/3/library/urllib.html)
