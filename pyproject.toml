@@ -41,6 +41,7 @@ geoviews = "^1.12.0"
 tqdm = "^4.66.4"
 uproot = "^5.3.10"
 pydantic = "^2.8.2"
+httpx = "^0.27.2"
 
 
 [tool.poetry.group.mystmd.dependencies]
