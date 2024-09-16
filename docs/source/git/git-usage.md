@@ -27,6 +27,7 @@ git-log
 git-diff
 git-rm
 git-revert
+git-tag
 ```
 
 ## リモートリポジトリしたい
