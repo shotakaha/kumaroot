@@ -1,4 +1,4 @@
-# Goole Apps Script の使い方
+# Google Apps Script の使い方
 
 ``Google Apps Script (GAS)``はGoogleのサービスを自動化させるためのスクリプト言語です。
 現在は[V8ランタイムに対応（2020年3月17日）](https://cloud.google.com/blog/ja/products/g-suite/data-processing-just-got-easier-apps-scripts-new-v8-runtime)していて、モダンなJavaScript環境のひとつとして使うことができます。
@@ -10,15 +10,16 @@ GASの情報を検索すると、新しい書き方と古い書き方が混ぜ�
 ---
 maxdepth: 1
 ---
-gas-variables.md
-gas-class.md
-gas-date.md
-gas-spreadsheet.md
-gas-document.md
-gas-gform.md
-gas-gmail.md
-gas-groups.md
-gas-request.md
+gas-variables
+gas-class
+gas-date
+gas-spreadsheet
+gas-document
+gas-gform
+gas-gmail
+gas-groups
+gas-request
+gas-clasp
 ```
 
 ## リファレンス
