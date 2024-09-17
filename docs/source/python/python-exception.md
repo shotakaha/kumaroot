@@ -132,6 +132,27 @@ else:
 ## 例外クラスをカスタムしたい（``Exception``）
 
 ```python
+# MODULE_NAME.py
+class CustomError(Exception):
+    """CustomError: 最小構成（何もしない）"""
+    pass
+
+def CustomFunction(...):
+    if 条件:
+        正常処理
+    else:
+        raise CustomError("エラー発生!"):
+```
+
+`Exception`クラスを継承して、例外クラスをカスタムできます。
+小規模なスクリプトでは、ビルトインの例外クラスで十分対応できると思うので、
+わざわざ例外クラスを自作する必要はありません。
+
+上記のサンプルは、例外クラス名だけを変更しています。
+公開されている有名なパッケージでもよく使われている気がします。
+
+```python
+# exceptions.py
 class CustomError(Exception):
     """CustomError: 自作の例外クラス"""
     def __init__(self,
@@ -159,20 +180,19 @@ class CustomError(Exception):
         return self.message
 ```
 
-例外クラスをカスタムする場合、`Exception`クラスを継承して作成します。
-小規模なスクリプトでは、ビルトインの例外クラスで十分対応できると思うので、
-わざわざ例外クラスを自作する必要はありません。
-
-もし、中規模〜大規模なパッケージを開発している場合には、
 以下のようなユースケースで、自作を検討したほうがいいかもしれません。
 
 1. 特定の例外シナリオに対処したい
 2. 例外処理をカプセル化したい
 3. 他の例外と区別したい
 
-カスタムした例外クラスは``@dataclass``デコレーターを使って簡略化できます。
+中規模〜大規模なパッケージを開発している場合には、複数の例外クラスが必要になるかもしれません。
+その場合は、`exceptions.py`のようなファイルに整理するのが一般的なようです。
+
+カスタムした例外クラスの作成は``@dataclass``デコレーターを使って簡略化できます。
 
 ```python
+# exceptions.py
 from dataclasses import dataclass
 
 @dataclass
@@ -189,6 +209,22 @@ class CustomError(Exception):
         if self.error_code is not None:
             return f"[{self.error_code}] {self.message}"
         return self.message
+```
+
+```python
+from .exceptions import CustomError
+
+def custom_function(...):
+    if 条件:
+        正常処理
+    else:
+        raise CustomError("エラー発生!", 101)
+
+try:
+    custom_function(...)
+except CustomError as e:
+    print(e)
+    # => "[101] エラー発生!"
 ```
 
 ## リファレンス
