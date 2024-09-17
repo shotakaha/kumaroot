@@ -133,7 +133,30 @@ else:
 
 ```python
 class CustomError(Exception):
-    """自作の例外クラス"""
+    """CustomError: 自作の例外クラス"""
+    def __init__(self,
+                message: str = "デフォルトのエラーメッセージ",
+                error_code: int | None = None
+        ):
+        """CustomErrorを初期化
+
+        Args:
+            message (str): エラーメッセージ
+            error_code (int): エラーコード
+        """
+        super().__init__(message)    # 親クラスのExceptionクラスの初期化
+        self.message = message
+        self.error_code = error_code
+
+    def __str__(self):
+        """例外の文字列表現
+
+        Returns:
+            str: [エラーコード] エラーメッセージ
+        """
+        if self.error_code is not None:
+            return f"{[{self.error_code}] {self.message}}"
+        return self.message
 ```
 
 例外クラスをカスタムする場合、`Exception`クラスを継承して作成します。
@@ -146,6 +169,27 @@ class CustomError(Exception):
 1. 特定の例外シナリオに対処したい
 2. 例外処理をカプセル化したい
 3. 他の例外と区別したい
+
+カスタムした例外クラスは``@dataclass``デコレーターを使って簡略化できます。
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class CustomError(Exception):
+    """CustomError: 自作の例外クラス
+
+    dataclassを使って簡略化
+    """
+    message: str = "デフォルトのエラーメッセージ"
+    error_code: int | None = None
+
+    def __str__(self):
+        """例外の文字列表現"""
+        if self.error_code is not None:
+            return f"[{self.error_code}] {self.message}"
+        return self.message
+```
 
 ## リファレンス
 
