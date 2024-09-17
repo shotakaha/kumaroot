@@ -29,6 +29,7 @@ python-typer
 python-jupyter
 python-jupytext
 python-tomllib
+python-exception
 ```
 
 ## パッケージ管理したい
