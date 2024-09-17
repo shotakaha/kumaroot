@@ -9,6 +9,9 @@ Gitはバージョン管理ツールです。ひとりでも気軽にはじめ�
 ソースコードに限らず、テキスト形式のファイルの管理が得意です。
 とてもとても簡単に導入できるので、修論や博論を執筆中の方は、いますぐ使いはじめることをオススメします！！
 
+
+## リポジトリの準備したい
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -17,17 +20,25 @@ git-install
 git-help
 git-config
 git-init
+```
+
+## リポジトリ操作したい
+
+```{toctree}
+---
+maxdepth: 1
+---
 git-status
-git-branch
-git-checkout
 git-add
 git-commit
-git-merge
 git-log
+git-branch
+git-checkout
+git-merge
+git-tag
 git-diff
 git-rm
 git-revert
-git-tag
 ```
 
 ## リモートリポジトリしたい
