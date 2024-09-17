@@ -33,6 +33,7 @@ git-add
 git-commit
 git-log
 git-branch
+git-switch
 git-checkout
 git-merge
 git-tag
