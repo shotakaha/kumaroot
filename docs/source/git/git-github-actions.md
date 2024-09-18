@@ -1,1 +1,34 @@
 # GitHub Actionsしたい
+
+## Dependabotしたい
+
+[Dependabot](https://docs.github.com/ja/code-security/dependabot/working-with-dependabot)は、プロジェクトで使っているツールが依存している
+パッケージに更新があったことを、
+プルリクエストでお知らせできるツールです。
+
+```{code-block} yaml
+---
+caption: .github/dependabot.yml
+---
+version: 2
+
+# 依存関係のアップデートに関する設定
+updates:
+# - package-ecosystem: "poetry" # パッケージマネージャー
+#   directory: "/"  # 依存関係を管理するファイルがあるパス
+#   schedule:
+#     interval: "daily", "weekly", "monthly" のいずれか
+  - package-ecosystem: "poetry"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+#  パッケージマネージャーを追加する場合
+#  - package-ecosystem: "npm"
+#    directory: "/"
+#    schedule:
+#      interval: "montly"
+
+# 依存関係のアップデートがあった場合
+# pull-requestを作成してお知らせ
+
+```
