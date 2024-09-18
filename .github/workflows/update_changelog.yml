@@ -1,0 +1,38 @@
+name: Update Changelog
+
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # 毎週月曜日の午前0時（UTC）に実行
+  workflow_dispatch: # 手動トリガーを有効にする
+
+jobs:
+  update_changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install Commitizen
+        run: |
+          pip install commitizen
+      - name: Update Changelog
+        run: |
+          cz changelog --incremental
+      - name: Commit Changes
+        run: |
+          if [ -n "$(git status --porcelain)"" ]; then
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git config --global user.name "GitHub Actions"
+            git add CHANGELOG.md
+            git commit -m "chore: update changelog [skip ci]"
+            git push origin main
+          else
+            echo "No changes in CHANGELOG.md Skipping commit."
+        fi
+
+
