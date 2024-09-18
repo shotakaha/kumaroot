@@ -29,10 +29,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # リポジトリをチェックアウト
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Poetry をインストール
       - name: Install Poetry
         run: pipx install poetry
+
+      # Python をセットアップ
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -42,8 +47,12 @@ jobs:
         run: |
           poetry --version
           poetry config --list
+
+      # 必要な依存関係をインストール
       - name: Install dependencies
         run: poetry install
+
+      # Sphinxをビルド
       - name: Build Sphinx
         run: |
           cd docs
