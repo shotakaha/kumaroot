@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install Commitizen
-        run: pip install commitizen
+        run: pipx install commitizen
       - name: Update Changelog
         run: cz changelog --incremental
       - name: Commit Changes
