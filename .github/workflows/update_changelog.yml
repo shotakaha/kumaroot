@@ -19,7 +19,7 @@ jobs:
       - name: Install Commitizen
         run: pipx install commitizen
       - name: Update Changelog
-        run: cz changelog --incremental
+        run: pipx cz changelog --incremental
       - name: Commit Changes
         run: |
           if [ -n "$(git status --porcelain)"" ]; then
