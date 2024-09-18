@@ -9,6 +9,7 @@
 
 ### Fix
 
+- **python/python-commitizen.md**: cz bumpを整理した
 - **python/python-commitizen.md**: cz changelog を追記した
 - **gas/gas-clasp.md**: claspの使い方を整理した
 - **gas/gas-clasp.md**: Git管理を追加した
