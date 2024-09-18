@@ -1,7 +1,9 @@
 # セマンティック・バージョニングしたい（``commitizen``）
 
 ```console
-$ cz c
+$ cz commit
+$ cz changelog --increment
+$ cz bump
 ```
 
 ``commitizen``はGitを使ったバージョン管理をサポートしてくれるパッケージです。
@@ -49,7 +51,7 @@ $ cd プロジェクト名
 $ cz init
 ```
 
-``cz init`で、プロジェクトで`commitizen`が使えるように初期化できます。
+`cz init`で`commitizen`が使えるようにプロジェクトを初期化できます。
 ターミナルに表示されるダイアログにしたがって矢印キーで選択すると、設定ファイルが作成されます。
 
 Pythonパッケージを開発している場合は{file}`pyproject.toml`に設定を追加してまとめることができます。
@@ -75,7 +77,6 @@ tag_format = "$version"
 $ git add ステージしたいファイル名
 $ cz commit
 $ cz c
-
 ```
 
 ``cz``にステージするためのコマンドはないため``git add``でステージします。
@@ -100,13 +101,21 @@ $ cz changelog --incremental
 $ cz changelog --dry-run
 ```
 
-`cz changelog`で、これまでのコミットログを使って変更ログ（changelog）を生成できます。
+`cz changelog`（もしくは`cz ch`）で、これまでのコミットログを使って変更ログ（changelog）を生成できます。
 デフォルトのファイル名は``CHANGELOG.md``です。
+ファイルがすでに存在する場合は上書きされます。
 `--file-name`オプションで変更できます。
+
+`--increment`オプションで、前回からの差分を追記できます。
+このオプションの使用はデフォルトにするとよいと思います。
+
+`--dry-run`オプションで事前確認できます。
+ファイルに保存せず、標準出力に表示されます。
 
 ## バージョンアップしたい（``cz bump``）
 
 ```bash
+$ cz bump --changelog --check-consistency
 $ cz bump -ch -cc
 ```
 
