@@ -26,7 +26,7 @@ $ npm install -g @google/clasp
 
 `@google/clasp`は2022年9月26日の2.4.2の公開以降、開発が停滞しているようです。
 
-::
+:::
 
 ## ログインしたい（``clasp login``）
 
@@ -47,7 +47,7 @@ GASを操作するために、Googleアカウントへのログインが必要�
 `clasp login`でブラウザが起動したら、
 ログインするGoogleアカウントの選択と、
 `clasp`に与えるアクセス権限を選択します。
-認証に成功すると、認証情報が`~/.clasprc.json`に保存されます。
+認証に成功すると、認証トークンが`~/.clasprc.json`に保存されます。
 
 ## 新規プロジェクトしたい（``clasp create``）
 
@@ -71,15 +71,18 @@ appsscript.json
 ```
 
 `clasp create`でプロジェクトを新規作成できます。
-``--title`でプロジェクトのタイトルを設定できます。
-``--rootDir``でプロジェクトのパスを設定できます。
+`--title`でプロジェクトのタイトルを設定できます。
+このオプションは、新しいディレクトリを作成するものではなく、ブラウザの編集ページのタイトルです。
+
+`--rootDir`でプロジェクトのパスを設定できます。
 デフォルトは、カレントディレクトリまでの絶対パスになってしまうので、`.`を指定するとよいと思います。
 
 また``--type``でプロジェクトの種類を選択できます。
-省略するとプロンプトで聞かれます。
+省略するとプロンプトが表示されるので矢印キーで選択します。
 
-スクリプトID（プロジェクトID）と、
-`rootDir`の情報は`.clasp.json`に保存されます。
+`.clasp.json`にスクリプトID（プロジェクトID）と、
+`rootDir`の情報が保存されます。
+基本的に1つのプロジェクトに1つの`.clasp.json`が対応します。
 
 :::{note}
 
@@ -87,9 +90,20 @@ GASには、Google Sheetなどのアプリに紐づいた状態のものと、�
 
 :::
 
+:::{caution}
+
+1つの`.clasp.json`に複数のプロジェクトを追加することはできないみたいです。
+
+:::
+
 ## 既存プロジェクトしたい（`clasp clone`）
 
 ```console
+// ディレクトリを作成する
+$ mkdir PROJECT_NAME
+$ cd PROJECT_NAME
+
+// 既存プロジェクトをクローンする
 $ clasp clone スクリプトID
 $ clasp clone スクリプトID --rootDir .
 Cloning files...
@@ -107,47 +121,76 @@ testDoGet.js     # ウェブ上で作成済みのスクリプト
 :::{note}
 
 スクリプトIDがよくわからない、もしくは、
-URLから抜き出すのがめんどくさい、という場合、
-URLをそのまま貼り付けてもOKみたいです。
+URLからわざわざ抜き出すのがめんどくさい、という場合は、
+コピペしたURLをそのまま貼り付けてもOKみたいです。
 
 :::
 
 ## ブラウザで開きたい（``clasp open``）
 
 ```console
+// プロジェクト情報（.clasp.json）を参照
 $ clasp open
-// ブラウザが起動する
+
+// スクリプトID
+$ clasp open スクリプトID
 ```
 
 `clasp open`でブラウザが起動します。
 `.clasp.json`に保存されているスクリプトIDの編集ページを開くことができます。
 
+## プロジェクトの更新（``clasp pull`` / ``clasp push``）
+
+```console
+// ウェブからプロジェクトを取得
+$ clasp pull
+$ clasp pull --versionNumber バージョン  # バージョン指定
+
+// プロジェクトを更新
+$ clasp push
+$ clasp push -w    # --watchモード
+```
+
+``pull``と``push``を使って、ローカルとリモートのプロジェクトをやりとりします。
+
 ## Git管理したい
 
 ```console
-// リポジトリを作成する
-$ mkdir PROJECT_NAME
+// リポジトリ用のディレクトリを作成する
+$ mkdir REPOS_NAME
 $ git init
-$ mkdir GASCRIPT
-$ cd GASCRIPT
+
+// スクリプト用のディレクトリを作成する
+$ mkdir PROJECT_NAME
+$ cd PROJECT_NAME
+
+// claspをローカルに追加
+$ npm install @google/clasp
+// node_modules などは .gitignoreに追加
+
+// 既存プロジェクトをクローンする
 $ clasp clone スクリプトID --rootDir .
 $ ls -la
 .clasp.json
 appsscript.json
 既存スクリプト.js
+
+// スクリプトをGitに追加する
 $ git add appsscript.json
 $ git add 既存スクリプト.js
-$ git add .clasp.json  // 場合による
+
+// プロジェクト情報は場合によりけり
+$ git add .clasp.json
 ```
 
-既存のスクリプトをGit管理するための
+既存のGASプロジェクトをGitで管理するための
 セットアップ手順を整理しました。
 
-ポイントは、プロジェクトの中に、
-GASを管理するためのサブディレクトリ（`GASCRIPT`）を作成し、
-その中でGASスクプトを`clasp`管理することにしました。
-こうすることで`clasp`周りで自動で生成されるファイルが、
-プロジェクトルートに散らばることを防ぐことができます。
+ポイントとして、
+リポジトリの中にGASプロジェクトごとのサブディレクトリ（`PROJECT_NAME`）を作成し、
+その中で`clasp clone --rootDir .`しています。
+
+こうすることで、1つの`.clasp.json`とプロジェクトの対応をキープすることができ、関連するプロジェクトが複数個に増加した場合にも対応できます。
 
 ## リファレンス
 
