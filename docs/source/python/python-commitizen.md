@@ -71,18 +71,38 @@ tag_format = "$version"
 
 ## コミットしたい（``cz c``）
 
-```bash
+```console
 $ git add ステージしたいファイル名
+$ cz commit
 $ cz c
+
 ```
 
-``cz``にステージするためのコマンドはありません。
-編集したファイルはまず``git add``してステージします。
+``cz``にステージするためのコマンドはないため``git add``でステージします。
 
-ステージした状態で、``git commit``の代わりに``cz c``を使います。
+ステージしたファイルがある状態で、``git commit``の代わりに``cz commit``（もしくは`cz c`）でコミットを作成します。
+
 プロンプトが表示されるので、聞かれた内容に沿って情報を選択／入力するとコミットメッセージができあがります。
 
 コミットメッセージのテンプレートは``cz info``もしくは``cz schema``、サンプルは``cz example``で確認できます。
+
+## 変更ログしたい（``cz changelog``）
+
+```console
+// 変更ログを作成（すべてのログ）
+$ cz changelog
+$ cz ch
+
+// 前回からの差分ログ
+$ cz changelog --incremental
+
+// 標準出力で確認
+$ cz changelog --dry-run
+```
+
+`cz changelog`で、これまでのコミットログを使って変更ログ（changelog）を生成できます。
+デフォルトのファイル名は``CHANGELOG.md``です。
+`--file-name`オプションで変更できます。
 
 ## バージョンアップしたい（``cz bump``）
 
