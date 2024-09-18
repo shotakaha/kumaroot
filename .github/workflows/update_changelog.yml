@@ -33,6 +33,6 @@ jobs:
             git push origin main
           else
             echo "No changes in CHANGELOG.md Skipping commit."
-        fi
+          fi
 
 
