@@ -1,0 +1,37 @@
+name: PR Tests
+
+# プルリクエストが作成、更新、または再オープンされたときにトリガー
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Poetry をインストール
+      - name: Install Poetry
+        run: pipx install poetry
+
+      # Python をセットアップ
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+
+      # 必要な依存関係をインストール
+      - name: Install dependencies
+        run: poetry install --no-root
+
+      # テストを実行
+      - name: Build Sphinx
+        run: |
+          cd docs
+          poetry run make dirhtml
