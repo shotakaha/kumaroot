@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # すべての履歴とタグを取得
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
