@@ -9,6 +9,10 @@
 
 ### Fix
 
+- **.github/workflows/update_changelog.yml**: cz changelog --incrementas
+- **.github/workflows/update_changelog.yml**: pipx cz changelog
+- **.github/workflows/update_changelog.yml**: pipx install commitizen
+- **.github/workflows/update_changelog.yml**: CHANGELOGを定期的に更新できるようにした
 - **python/python-commitizen.md**: cz bumpを整理した
 - **python/python-commitizen.md**: cz changelog を追記した
 - **gas/gas-clasp.md**: claspの使い方を整理した
