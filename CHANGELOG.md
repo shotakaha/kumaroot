@@ -1,5 +1,60 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **sphinx/sphinx-deploy-github.md**: GitHub Actionsを追加した
+- **python/python-datetime.md**: datetimeを追加した
+
+### Fix
+
+- **python/python-commitizen.md**: cz changelog を追記した
+- **gas/gas-clasp.md**: claspの使い方を整理した
+- **gas/gas-clasp.md**: Git管理を追加した
+- **git/git-log.md**: git-logを整理した
+- **gas/gas-clasp.md**: claspを追加した
+- **git/git-revert.md**: 連続してgit-revertできることを追記した
+- **git/git-restore.md**: git-restoreを追加した
+- **git/git-switch.md**: git-switchを追加した
+- **git/git-usage.md**: 使う順番を想定して目次を整理した
+- **python/python-exception.md**: 例外クラスのカスタマイズを追加した
+- **python/python-exception.md**: dataclassを使った例外クラスのサンプルを作成した
+- **python/python-exception.md**: raiseするときの注釈を追記した
+- **python/python-exception.md**: 例外のサンプルを追記した
+- **python/python-exception.md**: 例外処理を追記した
+- **python/python-subprocess.md**: subprocessを追記した
+- **python/python-exception.md**: 例外処理を追加した
+- **git/git-tag.md**: タグ名を確認した
+- **git/git-tag.md**: git-tagを追加した
+- **mystmd/python-requests.ipynb**: requestsの動作を確認した
+- **python/python-requests.md**: requestsを整理した
+- **pyproject.toml**: httpxを追加した: 0.27.2
+- **python/python-requests.md**: リファレンスを追加した
+- **python/python-requests.md**: requestsを追記した
+- **python/python-requests.md**: requestsを追記した
+- **python/python-pytest.md**: patch関数を追記した
+- **python/python-unittest-mock.md**: モックを追記した
+- **python/python-pytest.md**: @patchを修正した
+- **python/python-pytest.md**: @patchを追加した
+- **python/python-commitizen.md**: czを整理した
+- **python/python-usage.md**: パッケージ管理ツールの順番を整理した
+- **sphinx/sphinx-deploy-github.md**: GitHub Actionsのリンクを追加した
+- **command/command-pwgen.md**: syncBを追加した
+- **sphinx/sphinx-deploy-gitlab.md**: GitLab CIの設定を更新した
+- **.readthedocs.yml**: PDF生成をOFFにした
+- **python/python-datetime.md**: 覚え方を追記した
+- **python/python-pendulum.md**: pendulumをdatetimeと比較できるように整理した
+- **mystmd/scipy-special-erf.ipynb**: 誤差関数の使い方を確認した
+- **pandas/pandas-fit-curve_fit.md**: 微修正した
+- **pandas/pandas-fit-curve_fit.md**: フィッティングの備考を追記した
+- **pandas/pandas-fit-curve_fit.md**: 最適化する方法を追記した
+- **hvplot/hvplot-scatter.md**: 重ね書きする方法を追記した
+- **hvplot/hvplot-extension.md**: Colaboratoryではバックエンドをmatplotlibにしたほうがよいことを追記した
+- **pandas/pandas-fit-erfc.md**: 相補誤差関数を追記した
+- **pandas/pandas-fit-curve_fit.md**: 共分散行列を追記した
+- **pandas/pandas-fit-curve_fit.md**: 共分散行列の説明を追記した
+
 ## v1.37.0 (2024-09-03)
 
 ### Feat
