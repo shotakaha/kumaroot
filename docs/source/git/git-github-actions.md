@@ -11,7 +11,9 @@ name: Update Changelog
 
 on:
   schedule:
-    - cron: "0 0 * * 1"  # 毎週月曜日の午前0時（UTC）に実行
+    # 毎週月曜日の午前0時5分（UTC）に実行
+    # cronの書式: 分 時 日 月 曜日
+    - cron: "5 0 * * 1"
   workflow_dispatch: # 手動トリガーを有効にする
 
 jobs:
