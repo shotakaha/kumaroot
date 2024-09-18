@@ -1,10 +1,66 @@
 # GitHub Actionsしたい
 
+## Changelogを定期更新したい
+
+```{code-block} yaml
+---
+caption: .github/workflows/update_changelog.yml
+---
+name: Update Changelog
+
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # 毎週月曜日の午前0時（UTC）に実行
+  workflow_dispatch: # 手動トリガーを有効にする
+
+jobs:
+  update_changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        # リポジトリをチェックアウトする
+        # czでタグ情報も必要になるため
+        # すべての履歴とタグを取得する
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # すべての履歴とタグを取得
+      - name: Setup Python
+        # Pythonをセットアップする
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Commitizen
+        # pipxでcommitizenをインストール
+        run: pipx install commitizen
+      - name: Update Changelog
+        # 変更履歴の差分を生成する
+        run: cz changelog --incremental
+      - name: Commit Changes
+        # git status --porcelain で変更の有無を確認
+        # 変更がある場合はコミットする
+        #  - ユーザー名: GitHub Actions
+        #  - メールアドレス: github-actions[bot]
+        #  - メッセージ: [skip ci]をつける
+        # 変更がない場合はメッセージを残す
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git config --global user.name "GitHub Actions"
+            git add CHANGELOG.md
+            git commit -m "chore: update changelog [skip ci]"
+            git push origin main
+          else
+            echo "No changes in CHANGELOG.md Skipping commit."
+          fi
+```
+
+
 ## Dependabotしたい
 
 [Dependabot](https://docs.github.com/ja/code-security/dependabot/working-with-dependabot)は、プロジェクトで使っているツールが依存している
 パッケージに更新があったことを、
-プルリクエストでお知らせできるツールです。
+プルリクエストにできるツールです。
 
 ```{code-block} yaml
 ---
@@ -30,5 +86,4 @@ updates:
 
 # 依存関係のアップデートがあった場合
 # pull-requestを作成してお知らせ
-
 ```
