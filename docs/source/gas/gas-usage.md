@@ -11,6 +11,7 @@ GASの情報を検索すると、新しい書き方と古い書き方が混ぜ�
 maxdepth: 1
 ---
 gas-variables
+gas-namespace
 gas-class
 gas-date
 gas-spreadsheet
