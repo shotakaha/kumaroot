@@ -1,4 +1,4 @@
-# doGet関数したい
+# GETリクエストしたい（`doGet`）
 
 ```js
 function doGet(e) {
@@ -16,8 +16,8 @@ function doGet(e) {
 };
 ```
 
-`doGet`関数は、GASでHTTP GETリクエストを処理するための関数です。
-レスポンスは`ContentService.createTextOutput`などで生成します。
+`doGet`関数は、GASでGETリクエストを処理するための関数です。
+レスポンスは`ContentService.createTextOutput`などで生成し、ウェブアプリとしてデプロイできます。
 
 上のサンプルでは、
 `https://script.google.com/macros/s/スクリプトID/exec?name=John`へのアクセス（HTTP GET）を想定しています。
@@ -29,6 +29,16 @@ function doGet(e) {
 今回はただのテキスト情報なので、MIMEタイプをTEXTにしています。
 
 クエリを`?name=Smith`に変更すると、レスポンスも変わることが想像できると思います。
+
+## デプロイしたい
+
+GASのエディターからデプロイできます。
+
+1. `[デプロイ]` > `[新しいデプロイ]`
+2. 種類の選択: `ウェブアプリ`
+3. 説明: `（アプリの説明）`
+4. 次のユーザーとして実行: `[自分]`
+5. アクセスできるユーザー: `[全員]`
 
 ## シート名ごとに処理したい
 
