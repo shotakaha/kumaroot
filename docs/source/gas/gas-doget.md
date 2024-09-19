@@ -19,12 +19,14 @@ function doGet(e) {
 `doGet`関数は、GASでGETリクエストを処理するための関数です。
 レスポンスは`ContentService.createTextOutput`などで生成し、ウェブアプリとしてデプロイできます。
 
-上のサンプルでは、
-`https://script.google.com/macros/s/スクリプトID/exec?name=John`へのアクセス（HTTP GET）を想定しています。
-このアクセスのクエリは`?name=John`となっているので、
+上のサンプルでは、あるシートに紐づいた`doGet`間数を定義しています。
+GETリクエストは
+`https://script.google.com/macros/s/スクリプトID/exec?name=John`
+を想定しています。
+クエリが`?name=John`となっているので、
 `e.parameter.name`で`John`という値を取得できます。
 
-この`name`を使って`message`の文字列を作成しています。
+また`name`を使って`message`の文字列を作成しています。
 そして``ContentService.createTextOutput``を使ってレスポンスを作成しています。
 今回はただのテキスト情報なので、MIMEタイプをTEXTにしています。
 
@@ -77,3 +79,27 @@ GASで公開したウェブアプリは
 `https://script.google.com/macros/s/スクリプトID/exec`
 でアクセスできるようになります。
 クエリに`?sheetName=シート名`とすることで、該当するシートのコンテンツにアクセスできます。
+
+## 複数GETしたい
+
+```js
+DOGET = {
+    "action1": doGetOne,
+    "action2": doGetTwo,
+    "action3": doGetThree,
+}
+
+function doGet(e) {
+    const action = e.parameter.action
+    return DOGET[action](e)
+}
+
+function doGetOne(e){ ... }
+function doGetTwo(e){ ... }
+function doGetThree(e){ ... }
+```
+
+`doGet`関数は、ひとつのプロジェクトで、ひとつしか定義できない、特殊な関数です。
+しかし、スタンドアロンなプロジェクトから、
+複数のプロジェクトを操作したいこともあります。
+その場合、クエリーを使って分岐させます。
