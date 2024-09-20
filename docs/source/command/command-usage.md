@@ -132,4 +132,5 @@ command-texdoc
 command-tig
 command-uname
 command-mysql
+command-zellij
 ```
