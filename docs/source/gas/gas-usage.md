@@ -13,6 +13,7 @@ maxdepth: 1
 gas-variables
 gas-namespace
 gas-class
+gas-logger
 gas-date
 gas-spreadsheet
 gas-document
@@ -22,7 +23,6 @@ gas-groups
 gas-request
 gas-doget
 gas-clasp
-
 ```
 
 ## リファレンス
