@@ -42,6 +42,39 @@ GASのエディターからデプロイできます。
 4. 次のユーザーとして実行: `[自分]`
 5. アクセスできるユーザー: `[全員]`
 
+## テストしたい
+
+```js
+function testDoGetParameters() {
+    const e = {
+        "parameter": {
+            "name": "John"
+        }
+    };
+    const response = doGet(e);
+    const content = response.getContent();
+    Logger.log(`content: ${content}`)
+}
+
+function testDoGetURL() {
+    const base_url = ScriptApp.getService().getUrl();
+    Logger.log(`Base URL: ${base_url}`)
+    const query = "?name=John"
+    Logger.log(`Query: ${query}`)
+
+    const url = base_url + query
+
+    const options = {
+        "method": "GET",
+        "followRedirects": true,
+    };
+    const response = UrlFetchApp.fetch(url, options)
+    Logger.log(`response: ${response}`)
+}
+```
+
+[UrlFetchApp](./gas-request.md)で、`doGet`関数の動作確認ができます。
+
 ## シート名ごとに処理したい
 
 ```js
