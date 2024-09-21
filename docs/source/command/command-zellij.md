@@ -157,10 +157,16 @@ vitreous-apricot [Created 1m48s ago]
 
 ```fish
 # ~/.config/fish/config.fish
+
 if type -q zellij
-    echo "=== Current Zellij Sessions ==="
+    echo "=================================================="
+    echo "Current Zellij Sessions:"
     zellij list-sessions
-    echo "==============================="
+    echo "--------------------------------------------------"
+    echo "Next:"
+    echo "  Resume the session: 'zellij a SESSION_NAME'"
+    echo "  Delete the session: 'zellij d SESSION_NAME'"
+    echo "=================================================="
 end
 ```
 
