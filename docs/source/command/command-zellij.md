@@ -313,6 +313,34 @@ end
 いつも自動起動だとセッションが溜まってしまいそうなので、
 セッション名を確認できるようにだけしています。
 
+## コピーしたい（``copy_command`）
+
+```kdl
+// ~/.config/zellij/config.kdl
+
+// Provide a command to execute when copying text.
+// Examples:
+// copy_command "xclip -selection clipboard" // x11
+// copy_command "wl-copy"                    // wayland
+copy_command "pbcopy"                     // osx
+
+// Choose the destination for copied text
+// Options:
+//   - system (default)
+//   - primary
+//
+// copy_clipboard "primary"
+
+// Enable or disable automatic copy (and clear) of selection when releasing mouse
+// Default: true
+//
+// copy_on_select false
+```
+
+ペイン内に表示された内容をコピーする設定です。
+`copy_command "pbcopy"`でコピーできるようになります。
+また、デフォルトは`copy_on_select true`になっていて、ドラグするだけでコピーできます。
+
 ## リファレンス
 
 - [zellij](https://zellij.dev/)
