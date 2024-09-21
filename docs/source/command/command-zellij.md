@@ -187,3 +187,8 @@ $ zellij delete-all-sessions
 アクティブなセッションは削除されません。
 
 :::
+
+## リファレンス
+
+- [zellij](https://zellij.dev/)
+- [zellij-org/zellij - GitHub](https://github.com/zellij-org/zellij)
