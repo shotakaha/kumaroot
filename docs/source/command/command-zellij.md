@@ -28,7 +28,7 @@ $ zellij delete-session セッション名
 $ brew install zellij
 ```
 
-## セッションしたい（`-s` / `--session`）
+## セッションしたい（`--session` / `-s`）
 
 ```console
 $ zellij
@@ -49,7 +49,7 @@ $ zellij -s セッション名
 | {kbd}`ctrl + t` | タブ操作 |
 | {kbd}`ctrl + r` | リサイズ操作 |
 | {kbd}`ctrl + h` | 移動操作 |
-| {kbd}`ctrl + s` | 検索 |
+| {kbd}`ctrl + s` | ペイン内操作 |
 | {kbd}`ctrl + o` | セッション操作 |
 | {kbd}`ctrl + q` | 終了 |
 
@@ -97,7 +97,7 @@ $ zellij -s セッション名
 選択したペインのサイズを調整できます。
 キーで入力した方向に拡大・縮小します。
 
-## 移動操作（`ctrl + h`）
+## 移動操作したい（`ctrl + h`）
 
 | 操作キー | コマンド | 内容 |
 |---|---|---|
@@ -106,7 +106,7 @@ $ zellij -s セッション名
 選択したペインの表示位置を変更できます。
 キーで入力した方向のペインと入れ替えます。
 
-## 検索（`ctrl + s`）
+## ペイン内操作したい（`ctrl + s`）
 
 | 操作キー | コマンド | 内容 |
 |---|---|---|
@@ -117,7 +117,7 @@ $ zellij -s セッション名
 
 `less`コマンドのような操作ができます。
 
-## セッション操作（`ctrl + o`）
+## セッション操作したい（`ctrl + o`）
 
 | 操作キー | コマンド | 内容 |
 |---|---|---|
@@ -127,11 +127,12 @@ $ zellij -s セッション名
 作業を一時中断するときにデタッチしておけば、
 アタッチして再開できます。
 
-## セッションを再開したい（``attach``）
+## セッションを再開したい（``attach`` / `a`）
 
 ```console
 // 既存のセッションを再開
 $ zellij attach セッション名
+$ zellij a セッション名
 
 // セッション名がなければ作成
 $ zellij attach --create セッション名
@@ -140,37 +141,17 @@ $ zellij attach --create セッション名
 `attach`コマンドで、セッションを再開できます。
 `--create`オプションで、セッション名が存在しない場合に作成できます。
 
-## セッションを確認したい（``list-sessions``）
+## セッションを確認したい（``list-sessions`` / `ls`）
 
 ```console
 $ zellij list-sessions
+$ zellij ls
 kumaroot [Created 21m26m 59s ago] (current)
 vitreous-apricot [Created 1m48s ago]
 ```
 
 `list-sessions`コマンドで、セッション名を確認できます。
 作業開始前に使うとよいでしょう。
-
-:::{note}
-
-シェルの起動スクリプトに追記してもよいかもしれません。
-
-```fish
-# ~/.config/fish/config.fish
-
-if type -q zellij
-    echo "=================================================="
-    echo "Current Zellij Sessions:"
-    zellij list-sessions
-    echo "--------------------------------------------------"
-    echo "Next:"
-    echo "  Resume the session: 'zellij a SESSION_NAME'"
-    echo "  Delete the session: 'zellij d SESSION_NAME'"
-    echo "=================================================="
-end
-```
-
-:::
 
 ```console
 $ zellij list-sessions
@@ -189,11 +170,24 @@ No active zellij sessions found.
 `No active zellij sessions found.`
 と表示されます。
 
-## セッションを削除したい（``delete-session``）
+## セッションを終了したい（``kill-session`` / `k`）
+
+```console
+$ zellij kill-session セッション名
+$ zellij k セッション名
+
+$ zellij kill-all-sessions セッション名
+$ zellij ka セッション名
+```
+
+## セッションを削除したい（``delete-session`` / `d`）
 
 ```console
 $ zellij delete-session セッション名
+$ zellij d セッション名
+
 $ zellij delete-all-sessions
+$ zellij da
 ```
 
 `delete-session`コマンドで、デタッチされたセッションを削除できます。
@@ -204,6 +198,84 @@ $ zellij delete-all-sessions
 アクティブなセッションは削除されません。
 
 :::
+
+## 設定を確認したい（``setup --check``）
+
+```console
+// 設定を標準出力に表示
+$ zellij setup --check
+[Version]: "0.40.1"
+[CONFIG DIR]: Not Found
+[CONFIG FILE]: Not Found
+[DATA DIR]: "~/Library/Application Support/org.Zellij-Contributors.Zellij"
+[PLUGIN DIR]: "~/Library/Application Support/org.Zellij-Contributors.Zellij/plugins"
+[LAYOUT DIR]: Not Found
+[SYSTEM DATA DIR]: "/usr/share/zellij"
+[ARROW SEPARATOR]: 
+[MOUSE INTERACTION]:
+[DEFAULT EDITOR]: Not set, checked $EDITOR and $VISUAL
+[FEATURES]: []
+[DOCUMENTATION]: https://www.zellij.dev/documentation/
+```
+
+``setup --check``で現在の設定を確認できます。
+
+## キーバインドを設定したい
+
+```console
+// キーバインドを標準出力に表示
+$ zellij setup --dump-config
+
+// ファイルに保存
+$ mkdir ~/.config/zellij
+$ zellij setup --dump-config > ~/.config/zellij/config.kdl
+```
+
+`zellij`用の設定は`~/.config/zellij/`に保存します。
+設定ファイルはKDL形式が採用されています。
+
+:::{note}
+
+`0.32.0`以前はYAML形式だったようです。
+
+:::
+
+## コマンド補完したい
+
+```console
+// Fish用の補完を標準出力に表示
+$ zellij setup --generate-completion fish
+
+// ファイルに保存
+$ zellij setup --generate-completion fish > ~/.config/fish/completions/zellij.fish
+```
+
+## 自動起動したい
+
+```console
+// Fish用の補完を標準出力に表示
+$ zellij setup --generate-auto-start fish
+```
+
+自動で起動できるようのスクリプトがシェルごとに用意されています。
+
+```fish
+# ~/.config/fish/config.fish
+
+if type -q zellij
+    echo "=================================================="
+    echo "Current Zellij Sessions:"
+    zellij list-sessions
+    echo "--------------------------------------------------"
+    echo "Next:"
+    echo "  Resume the session: 'zellij a SESSION_NAME'"
+    echo "  Delete the session: 'zellij d SESSION_NAME'"
+    echo "=================================================="
+end
+```
+
+いつも自動起動だとセッションが溜まってしまいそうなので、
+セッション名を確認できるようにだけしています。
 
 ## リファレンス
 
