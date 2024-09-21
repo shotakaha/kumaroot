@@ -79,3 +79,8 @@ cnoremap <C-g> <Esc><Esc><Esc>
 tnoremap <C-g> <Esc><Esc><Esc>
 " xnoremap <C-g> <Esc><Esc><Esc>
 ```
+
+`vim`では困ったときに`Esc`を連打すれば、
+とりあえずノーマルモードに戻ってこれます。
+この仕草は、`Emacs`だと`C-g`（`keyboard-quit`）を連打するのに似ていると思っています。
+実際に`vim`を使っているときにも、クセで`C-g`することが多かいので`Esc`（の3連打）に設定してみました。
