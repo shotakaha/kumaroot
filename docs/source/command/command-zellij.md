@@ -26,7 +26,20 @@ $ zellij delete-session セッション名
 
 ```console
 $ brew install zellij
+$ brew install --cask font-hack-nerd-font
 ```
+
+`zellij`はHomebrewでインストールできます。
+また、ナビゲーションを表示するためにNerd Font系が必要です。
+`nerd`が含まれるフォントを追加し、ターミナルに設定してください。
+
+:::{note}
+
+僕はターミナル上のフォントを`Monaspace Krypton`に設定しています。
+このフォントはNerd Fontに対応していないため
+`--simplified-ui = true`に設定して使っています。
+
+:::
 
 ## セッションしたい（`--session` / `-s`）
 
@@ -233,6 +246,7 @@ $ zellij setup --dump-config > ~/.config/zellij/config.kdl
 
 `zellij`用の設定は`~/.config/zellij/`に保存します。
 設定ファイルはKDL形式が採用されています。
+設定できる内容は[Options](https://zellij.dev/documentation/options)で確認できます。
 
 :::{note}
 
