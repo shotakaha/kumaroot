@@ -341,6 +341,21 @@ copy_command "pbcopy"                     // osx
 `copy_command "pbcopy"`でコピーできるようになります。
 また、デフォルトは`copy_on_select true`になっていて、ドラグするだけでコピーできます。
 
+## Nerd Font設定したい（``simplified_ui``）
+
+```kdl
+// ~/.config/zellij/config.kdl
+
+//  Options:
+//    - true
+//    - false (Default)
+//
+simplified_ui true
+```
+
+ターミナル上の表示にNerd Fontに対応していないフォントを使いたいので、
+`simplified_ui true`にしました。
+
 ## リファレンス
 
 - [zellij](https://zellij.dev/)
