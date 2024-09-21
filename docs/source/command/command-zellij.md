@@ -150,7 +150,21 @@ vitreous-apricot [Created 1m48s ago]
 
 `list-sessions`コマンドで、セッション名を確認できます。
 作業開始前に使うとよいでしょう。
+
+:::{note}
+
 シェルの起動スクリプトに追記してもよいかもしれません。
+
+```fish
+# ~/.config/fish/config.fish
+if type -q zellij
+    echo "=== Current Zellij Sessions ==="
+    zellij list-sessions
+    echo "==============================="
+end
+```
+
+:::
 
 ```console
 $ zellij list-sessions
@@ -168,9 +182,6 @@ No active zellij sessions found.
 セッションがない場合は
 `No active zellij sessions found.`
 と表示されます。
-
-
-
 
 ## セッションを削除したい（``delete-session``）
 
