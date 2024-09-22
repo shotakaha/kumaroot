@@ -49,54 +49,56 @@ $ brew install vim
 ```vim
 set nocompatible  " vi互換モードを無効化（推奨）
 syntax enable
+set title
+set mouse=a  " マウス操作を有効化
+set lazyredraw
+set ttyfast
+
+" エンコーディング
+set encoding=utf-8
+set fileencoding=utf-8
+
+" 行番号表示
+set number
+set relativenumber
+
+" カーソル表示
+set cursorline
+set cursorcolumns
+
+" コマンド表示
+set cmdheight=2
+set showcmd
+
+" コマンド補完
+set wildmenu
+set wildmode=longest:full,full
+
+" 無名レジスタ＝クリップボード
+set clipboard=unnamedplus
+
+" 検索
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+
+" インデント
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set autoindent
+
+" 余白
+set scroffoff=8
+set sidescroll=8
+set wrap
+set linebreak
+set showbreak=>>>
+set splitbelow
+set splitright
 ```
-
-## Undoしたい
-
-```vim
-" デフォルト
-" <u> :undo
-" <C-r> :redo
-
-nnoremap u :undo<CR>
-nnoremap U :redo<CR>
-
-inoremap <C-/> <Esc>:undo<CR>
-inoremap <C-_> <Esc>:undo<CR>
-inoremap <C-?> <Esc>:redo<CR>
-
-xnoremap u <Esc>:undo<CR>
-xnoremap U <Esc>:redo<CR>
-```
-
-ノーマルモードで`u`と`U`が対になるように変更します。
-また、編集モードではEmacsのようなバインドを追加しています。
-
-## Read-Onlyしたい
-
-```vim
-nnoremap <C-x><C-r> <Esc><Esc><Esc>
-inoremap <C-x><C-r> <Esc><Esc><Esc>
-xnoremap <C-x><C-r> <Esc><Esc><Esc>
-```
-
-`C-x C-r`でノーマルモードにできるよう追加しました。
-
-## リーダーキーしたい（`mapleader`）
-
-```vim
-let mapleader = " "
-
-nnoremap <leader>ev :edit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-```
-
-`mapleader`でリーダーキーを変更できます。
-`"␣"`（空白スペース）に設定するとよいみたいです。
-
-上記のサンプルでは、ノーマルモードのとき
-`␣ev`で設定ファイルを編集、
-`␣sv`で設定ファイルを再読み込みできるようにしています。
 
 ## レジスターしたい
 
@@ -122,6 +124,14 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 `:registers`コマンドで、保存されているレジスターを確認できます。
 
+```vim
+" ~/.vimrc
+
+set clipboard=unnapedplus
+```
+
+デフォルトのレジスタを`"`（無名レジスタ）から`"+`（システムクリップボード）に変更できます。
+
 ## キーバインド設定したい
 
 ```vim
@@ -141,7 +151,37 @@ xnoremap キー コマンド    " ヴィジュアル + 編集モード
 
 ぼくは、すでにEmacs-likeなキーバインドに慣れ親しんでしまっているので、ここではそれにできるだけ操作感が近づくように設定を整理しました。
 
-## ノーマルモードしたい
+## リーダーキーしたい（`mapleader`）
+
+```vim
+let mapleader = " "
+
+nnoremap <leader>ev :edit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+```
+
+`mapleader`でリーダーキーを変更できます。
+リーダーキーを`"␣"`（空白スペース）に設定すると、ノーマルモードでのコマンド呼び出しを簡略化できます。
+
+:::{seealso}
+
+SpacemacsやVSpaceCode的な操作感です。
+
+:::
+
+上記のサンプルでは、ノーマルモードのときに
+`␣ev`で設定ファイルを編集、
+`␣sv`で設定ファイルを再読み込みできるようにしています。
+
+```vim
+" ~/.vimrc
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>x :wq<CR>
+```
+
+## keyboard-quitしたい
 
 ```vim
 " いろいろキャンセル
@@ -154,12 +194,161 @@ tnoremap <C-g> <Esc><Esc><Esc>
 " xnoremap <C-g> <Esc><Esc><Esc>
 ```
 
-`vim`では困ったときに`Esc`を連打すれば、
-とりあえずノーマルモードに戻ってこれます。
-この仕草は、`Emacs`だと`C-g`（`keyboard-quit`）を連打するのに似ていると思っています。
-実際に`vim`を使っているときにも、クセで`C-g`することが多かいので`Esc`（の3連打）に設定してみました。
+Emacsでは困ったときに`C-g`（`keyboard-quit`）（を連打して）コマンドを中断できます。
+`<Esc>`（の3連打）に割り当てることで、ノーマルモードに戻ってこれるようにしました。
 
-## ヤンクしたい
+:::{note}
+
+実際に`vim`を使っているときにも、クセで`C-g`してしまうことが多いので、このバインドは必須でした。
+
+:::
+
+## 移動したい
+
+```vim
+nnoremap <C-b> h
+inoremap <C-b> <Left>
+xnoremap <C-b> <Left>
+
+nnoremap <C-f> l
+inoremap <C-f> <Right>
+xnoremap <C-f> <Right>
+
+nnoremap <C-p> k
+inoremap <C-p> <Up>
+xnoremap <C-p> <Up>
+
+nnoremap <C-n> j
+inoremap <C-n> <Down>
+nnoremap <C-n> <Down>
+
+nnoremap <C-a> 0
+inoremap <C-a> <Home>
+xnoremap <C-a> <Home>
+
+nnoremap <C-e> $
+inoremap <C-e> <End>
+xnoremap <C-e> <End>
+```
+
+Emacsの移動系のバインド（でよく使うもの）を`vim`バインドに割り当てました。
+
+## ページ操作したい
+
+```vim
+nnoremap <C-v> <PageDown>
+inoremap <C-v> <PageDown>
+xnoremap <C-v> <PageDown>
+
+nnoremap <M-v> <PageUp>
+inoremap <M-v> <PageUp>
+xnoremap <M-v> <PageUp>
+
+nnoremap <C-l> zz
+```
+
+Emacsのページ操作系のコマンドを`vim`に割り当てました。
+
+`C-v`はvimのビジュアルモード（visual-block）に割り当てられていますが、`v`もしくは`V`で代替することにして、上書きしています。
+
+## ファイル操作したい
+
+```vim
+" 作成
+nnoremap <C-x><C-f> :e
+inoremap <C-x><C-f> <Esc>:e
+
+" 保存
+nnoremap <C-x><C-s> :w<CR>
+inoremap <C-x><C-s> <Esc>:w<CR>
+
+" 終了
+nnoremap <C-x><C-c> :q<CR>
+inoremap <C-x><C-c> <Esc>:q<CR>
+```
+
+Emacsのファイル操作系のコマンドに合わせてvimバインドを割り当てています。
+
+:::{note}
+
+vimデフォルトでは
+編集モードでの補完コマンドが
+`C-x`系バインドに割り当てられています。
+
+```vim
+inoremap <C-x><C-l> <Nop> " whole line completion
+inoremap <C-x><C-f> <Nop> " filename completion
+inoremap <C-x><C-n> <Nop> " next completion match
+inoremap <C-x><C-p> <Nop> " previous completion match
+inoremap <C-x><C-k> <Nop> " dictionary completion
+inoremap <C-x><C-t> <Nop> " tag completion
+inoremap <C-x><C-i> <Nop> " included files completion
+inoremap <C-x><C-u> <Nop> " complete uncapitalized
+inoremap <C-x><C-o> <Nop> " omni completion
+```
+
+あらかじめ無効にする設定を追加しておいてもよいかもしれません。
+
+:::
+
+## 検索したい
+
+```vim
+nnoremap <C-s> /
+inoremap <C-s> <Esc>/
+
+nnoremap <C-r> ?
+inoremap <C-r> <Esc>?
+```
+
+Emacsの検索系コマンドをvimバインドに割り当てました。
+
+## Undoしたい
+
+```vim
+" デフォルト
+" <u> :undo
+" <C-r> :redo
+
+nnoremap u :undo<CR>
+nnoremap U :redo<CR>
+```
+
+デフォルトのvimバインドでは、
+`:undo`と`:redo`のバインドが対称的でないため、設定を追加しました。
+
+```vim
+inoremap <C-/> <Esc>:undo<CR>
+inoremap <C-_> <Esc>:undo<CR>
+inoremap <C-?> <Esc>:redo<CR>
+
+xnoremap u <Esc>:undo<CR>
+xnoremap U <Esc>:redo<CR>
+```
+
+また、Emacsのようなバインドも追加しました。
+
+:::{note}
+
+Emacsには`redo`コマンドはありませんが、`undo-tree`や`redo+`などの外部パッケージで推奨されているバインドを参考にしました。
+
+:::
+
+## view-modeしたい
+
+```vim
+nnoremap <C-x><C-r> <Esc><Esc><Esc>
+inoremap <C-x><C-r> <Esc><Esc><Esc>
+xnoremap <C-x><C-r> <Esc><Esc><Esc>
+
+nnoremap <C-x><C-q> <Esc><Esc><Esc>
+inoremap <C-x><C-q> <Esc><Esc><Esc>
+xnoremap <C-x><C-q> <Esc><Esc><Esc>
+```
+
+`C-x C-r`もしくは`C-x C-q`でノーマルモードにできるよう追加しました。
+
+## 編集したい
 
 ```vim
 " デフォルト
@@ -168,10 +357,25 @@ tnoremap <C-g> <Esc><Esc><Esc>
 " dd: 行全体をカット
 " D : 行末までをカット
 " yy: 行全体をヤンク
-" Y : 行全体をヤンク
+" Y : 行全体をヤンク -> 行末までヤンクに変更
 
-nnoremap Y y$  " 行末までヤンクに変更
+nnoremap Y y$
+
+inoremap <C-h> <BS>
+inoremap <C-d> <Del>
+
+nnoremap <C-k> D
+inoremap <C-k> <Esc>Da
+
+nnoremap <C-y> p
+inoremap <C-y> <Esc>pa
 ```
+
+`Y`は、もともと**行全体をヤンク**するコマンドですが、他の編集系のコマンドと操作感を揃えるため、**行末までヤンク**に変更しています。
+
+また、Emacsの編集系の操作に合わせてvimバインドを割り当てています。
+
+編集モード（`inoremap`）でキル／ヤンクしたあとは、`a`コマンドで編集モードに戻ってこれるようにしています。
 
 ## 削除したい
 
@@ -184,3 +388,10 @@ nnoremap X "_D
 xnoremap x "_x
 onoremap x d
 ```
+
+vimmerのキーバインド記事でオススメされていた`x`と`d`コマンドを使い分け設定を採用しました。
+
+`x`は、もともと1文字削除（して無名レジスタに追加）するコマンドですが、`d`と機能的に似ています。
+そのため、レジスタに追加しない（＝`"_`（ブラックホールレジスタ）に追加）ようにするとよいそうです。
+
+`X`は、もともと前の文字を削除するコマンドですが、`D`と組み合わせて行末までを対象とすることで、大文字コマンドの操作感に統一感を持たせることができます。
