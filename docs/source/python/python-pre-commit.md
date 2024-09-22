@@ -93,7 +93,19 @@ repos:
     rev: v0.6.7
     hooks:
       - id: ruff
+        name: ruff-check
+        entry: ruff check .
+        language: python
+        types_or: [python, pyi]
+        args: ["--fix"]
+        require_serial: true
       - id: ruff-format
+        name: ruff-format
+        entry: ruff format .
+        language: python
+        types_or: [python, pyi]
+        args: []
+        require_serial: true
 ```
 
 ## 脆弱性を検出したい（`Bandit`）
