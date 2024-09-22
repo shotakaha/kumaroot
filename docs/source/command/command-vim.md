@@ -113,6 +113,27 @@ set splitbelow
 set splitright
 ```
 
+## ステータスラインしたい（`:set statusline`）
+
+```vim
+set statusline=[%{mode()}]\ %F%m\ \(%l,%c\)[%p%%\ %LL]%<%=%r%h%w%y[%{&fileencoding}][%{&fileformat}]%=[b=%n][t=%{&tabstop}][i=%{&shiftwidth}]
+```
+
+| コード | 表示内容 |
+|---|---|
+| `%f` / `%F` / `%t` | ファイル名 |
+| `%m` / `%M` | 修正フラグ |
+| `%r` / `%R` | ROフラグ |
+| `%h` / `%H` | Helpフラグ |
+| `%w` / `%W` | Previewフラグ |
+| `%y` / `%Y` | ファイルタイプ |
+| `%n` | バッファー番号 |
+| `%l` / `%c` | 行番号 / 列番号 |
+| `%L` | 行数 |
+| `%p%%` | 位置 |
+| `%<` | truncate |
+| `%=` | 均等 |
+
 ## レジスターしたい
 
 | 記号 | レジスターの種類 |
