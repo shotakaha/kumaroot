@@ -4,94 +4,61 @@
 
 ### Feat
 
-- **sphinx/sphinx-deploy-github.md**: GitHub Actionsを追加した
+- **command/command-zellij.md**: zellijを追加した
+- **gas/gas-clasp.md**: claspを追加した
+- **git/git-restore.md**: git-restoreを追加した
+- **git/git-switch.md**: git-switchを追加した
+- **git/git-tag.md**: git-tagを追加した
 - **python/python-datetime.md**: datetimeを追加した
+- **python/python-exception.md**: 例外処理を追加した
+- **sphinx/sphinx-deploy-github.md**: GitHub Actionsを追加した
 
 ### Fix
 
-- **gas/gas-spreadsheet.md**: スプレッドシート操作を整理した
-- **python/python-pre-commit.md**: ruffの設定を追記した
-- **python/python-pre-commit.md**: pre-commitのサンプルを追加した
-- **command/command-vim.md**: ステータスラインを追加した
+- **command/command-pwgen.md**: syncBを追加した
+- **command/command-vim.md**: キーバインドを追加した
 - **command/command-vim.md**: コマンド操作を追加した
-- **command/command-vim.md**: キーバインドを追加した
-- **command/command-vim.md**: キーバインドを追加した
-- **command/command-vim.md**: C-gを追記した
-- **command/command-vim.md**: リーダーキーを追記した
-- **command/command-vim.md**: キーバインド設定を追加した
-- **command/command-zellij.md**: NerdFont設定を追加した
-- **gas/gas-quota.md**: 使用制限を確認した
-- **command/command-zellij.md**: コピー設定を追記した
-- **command/command-zellij.md**: auto-startのデフォルトスクリプトを追加した
-- **command/command-zellij.md**: Nerd Font系の設定を追加した
-- **command/command-zellij.md**: コマンドを追加した
-- **command/command-zellij.md**: 修正した
-- **command/command-zellij.md**: Fish用のスクリプトを追加した
-- **command/command-zellij.md**: リファレンスを追加した
-- **command/command-zellij.md**: ゼリージュの由来を追記した
-- **command/command-zellij.md**: セッション操作を追記した
-- **command/command-zellij.md**: 追記した
-- **command/command-zellij.md**: zellijを追加した
-- **gas/gas-doget.md**: doGetのテストを追加した
-- **gas/gas-request.md**: UrlFetchApps の使い方を追加した
+- **command/command-vim.md**: ステータスラインを追加した
 - **gas/gas-logger.md**: Loggerを追加した
-- **gas/gas-doget.md**: 複数GETを追加した
 - **gas/gas-namespace.md**: 名前空間を追加した
-- **gas/gas-doget.md**: デプロイの手順を追加した
-- **gas/gas-doget.md**: doGet関数を追加した
-- **git/git-github-actions.md**: cronの書式をメモした
-- **git/git-github-actions.md**: コメントを追加した
+- **gas/gas-quota.md**: 使用制限を確認した
+- **gas/gas-request.md**: UrlFetchApps の使い方を追加した
+- **gas/gas-spreadsheet.md**: スプレッドシート操作を整理した
 - **git/git-github-actions.md**: Dependabotを追加した
+- **git/git-log.md**: git-logを整理した
+- **git/git-revert.md**: 連続してgit-revertできることを追記した
+- **git/git-usage.md**: 使う順番を想定して目次を整理した
+- **hvplot/hvplot-extension.md**: Colaboratoryではバックエンドをmatplotlibにしたほうがよいことを追記した
+- **hvplot/hvplot-scatter.md**: 重ね書きする方法を追記した
+- **mystmd/python-requests.ipynb**: requestsの動作を確認した
+- **mystmd/scipy-special-erf.ipynb**: 誤差関数の使い方を確認した
+- **pandas/pandas-fit-curve_fit.md**: フィッティングの備考を追記した
+- **pandas/pandas-fit-curve_fit.md**: 共分散行列の説明を追記した
+- **pandas/pandas-fit-erfc.md**: 相補誤差関数を追記した
+- **python/python-commitizen.md**: czを整理した
+- **python/python-datetime.md**: 覚え方を追記した
+- **python/python-pendulum.md**: pendulumをdatetimeと比較できるように整理した
+- **python/python-pre-commit.md**: pre-commitのサンプルを追加した
+- **python/python-pre-commit.md**: ruffの設定を追記した
+- **python/python-pytest.md**: patch関数を追記した
+- **python/python-requests.md**: requestsを追記した
+- **python/python-subprocess.md**: subprocessを追記した
+- **python/python-unittest-mock.md**: モックを追記した
+- **python/python-usage.md**: パッケージ管理ツールの順番を整理した
+- **sphinx/sphinx-deploy-github.md**: GitHub Actionsのリンクを追加した
+- **sphinx/sphinx-deploy-gitlab.md**: GitLab CIの設定を更新した
+
+### CIs
+
+- **.github/workflows/update_changelog.yml**: CHANGELOGを定期的に更新できるようにした
 - **.github/workflows/update_changelog.yml**: cz changelog --incrementas
 - **.github/workflows/update_changelog.yml**: pipx cz changelog
 - **.github/workflows/update_changelog.yml**: pipx install commitizen
-- **.github/workflows/update_changelog.yml**: CHANGELOGを定期的に更新できるようにした
-- **python/python-commitizen.md**: cz bumpを整理した
-- **python/python-commitizen.md**: cz changelog を追記した
-- **gas/gas-clasp.md**: claspの使い方を整理した
-- **gas/gas-clasp.md**: Git管理を追加した
-- **git/git-log.md**: git-logを整理した
-- **gas/gas-clasp.md**: claspを追加した
-- **git/git-revert.md**: 連続してgit-revertできることを追記した
-- **git/git-restore.md**: git-restoreを追加した
-- **git/git-switch.md**: git-switchを追加した
-- **git/git-usage.md**: 使う順番を想定して目次を整理した
-- **python/python-exception.md**: 例外クラスのカスタマイズを追加した
-- **python/python-exception.md**: dataclassを使った例外クラスのサンプルを作成した
-- **python/python-exception.md**: raiseするときの注釈を追記した
-- **python/python-exception.md**: 例外のサンプルを追記した
-- **python/python-exception.md**: 例外処理を追記した
-- **python/python-subprocess.md**: subprocessを追記した
-- **python/python-exception.md**: 例外処理を追加した
-- **git/git-tag.md**: タグ名を確認した
-- **git/git-tag.md**: git-tagを追加した
-- **mystmd/python-requests.ipynb**: requestsの動作を確認した
-- **python/python-requests.md**: requestsを整理した
-- **pyproject.toml**: httpxを追加した: 0.27.2
-- **python/python-requests.md**: リファレンスを追加した
-- **python/python-requests.md**: requestsを追記した
-- **python/python-requests.md**: requestsを追記した
-- **python/python-pytest.md**: patch関数を追記した
-- **python/python-unittest-mock.md**: モックを追記した
-- **python/python-pytest.md**: @patchを修正した
-- **python/python-pytest.md**: @patchを追加した
-- **python/python-commitizen.md**: czを整理した
-- **python/python-usage.md**: パッケージ管理ツールの順番を整理した
-- **sphinx/sphinx-deploy-github.md**: GitHub Actionsのリンクを追加した
-- **command/command-pwgen.md**: syncBを追加した
-- **sphinx/sphinx-deploy-gitlab.md**: GitLab CIの設定を更新した
 - **.readthedocs.yml**: PDF生成をOFFにした
-- **python/python-datetime.md**: 覚え方を追記した
-- **python/python-pendulum.md**: pendulumをdatetimeと比較できるように整理した
-- **mystmd/scipy-special-erf.ipynb**: 誤差関数の使い方を確認した
-- **pandas/pandas-fit-curve_fit.md**: 微修正した
-- **pandas/pandas-fit-curve_fit.md**: フィッティングの備考を追記した
-- **pandas/pandas-fit-curve_fit.md**: 最適化する方法を追記した
-- **hvplot/hvplot-scatter.md**: 重ね書きする方法を追記した
-- **hvplot/hvplot-extension.md**: Colaboratoryではバックエンドをmatplotlibにしたほうがよいことを追記した
-- **pandas/pandas-fit-erfc.md**: 相補誤差関数を追記した
-- **pandas/pandas-fit-curve_fit.md**: 共分散行列を追記した
-- **pandas/pandas-fit-curve_fit.md**: 共分散行列の説明を追記した
+
+### Dependencies
+
+- **pyproject.toml**: httpxを追加した: 0.27.2
 
 ## v1.37.0 (2024-09-03)
 
