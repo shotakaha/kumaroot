@@ -9,6 +9,38 @@
 
 ### Fix
 
+- **python/python-pre-commit.md**: ruffの設定を追記した
+- **python/python-pre-commit.md**: pre-commitのサンプルを追加した
+- **command/command-vim.md**: ステータスラインを追加した
+- **command/command-vim.md**: コマンド操作を追加した
+- **command/command-vim.md**: キーバインドを追加した
+- **command/command-vim.md**: キーバインドを追加した
+- **command/command-vim.md**: C-gを追記した
+- **command/command-vim.md**: リーダーキーを追記した
+- **command/command-vim.md**: キーバインド設定を追加した
+- **command/command-zellij.md**: NerdFont設定を追加した
+- **gas/gas-quota.md**: 使用制限を確認した
+- **command/command-zellij.md**: コピー設定を追記した
+- **command/command-zellij.md**: auto-startのデフォルトスクリプトを追加した
+- **command/command-zellij.md**: Nerd Font系の設定を追加した
+- **command/command-zellij.md**: コマンドを追加した
+- **command/command-zellij.md**: 修正した
+- **command/command-zellij.md**: Fish用のスクリプトを追加した
+- **command/command-zellij.md**: リファレンスを追加した
+- **command/command-zellij.md**: ゼリージュの由来を追記した
+- **command/command-zellij.md**: セッション操作を追記した
+- **command/command-zellij.md**: 追記した
+- **command/command-zellij.md**: zellijを追加した
+- **gas/gas-doget.md**: doGetのテストを追加した
+- **gas/gas-request.md**: UrlFetchApps の使い方を追加した
+- **gas/gas-logger.md**: Loggerを追加した
+- **gas/gas-doget.md**: 複数GETを追加した
+- **gas/gas-namespace.md**: 名前空間を追加した
+- **gas/gas-doget.md**: デプロイの手順を追加した
+- **gas/gas-doget.md**: doGet関数を追加した
+- **git/git-github-actions.md**: cronの書式をメモした
+- **git/git-github-actions.md**: コメントを追加した
+- **git/git-github-actions.md**: Dependabotを追加した
 - **.github/workflows/update_changelog.yml**: cz changelog --incrementas
 - **.github/workflows/update_changelog.yml**: pipx cz changelog
 - **.github/workflows/update_changelog.yml**: pipx install commitizen
