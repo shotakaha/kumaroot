@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.38.0 (2024-09-23)
 
 ### Feat
 
@@ -9,6 +9,7 @@
 
 ### Fix
 
+- **gas/gas-spreadsheet.md**: スプレッドシート操作を整理した
 - **python/python-pre-commit.md**: ruffの設定を追記した
 - **python/python-pre-commit.md**: pre-commitのサンプルを追加した
 - **command/command-vim.md**: ステータスラインを追加した
