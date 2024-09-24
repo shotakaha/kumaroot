@@ -4,6 +4,6 @@
         {
             "name": "sphinx",
             "makeArgs": ["html"]
-        },
+        }
     ]
 }
