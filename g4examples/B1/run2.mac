@@ -1,5 +1,5 @@
 # Macro file for example B1
-# 
+#
 # To be run preferably in batch, without graphics:
 # % exampleB1 run2.mac
 #
@@ -17,7 +17,7 @@
 #
 /run/printProgress 100
 /run/beamOn 1000
-# 
+#
 # proton 210 MeV to the direction (0.,0.,1.)
 # 1000 events
 #
