@@ -29,4 +29,3 @@
 スコープがローカルに限定された[.newScrach](https://neohugo.github.io/functions/scratch/#the-local-newscratch)関数もあります。
 
 ``.Scratch``に比べると、より変数っぽく使えます。
-

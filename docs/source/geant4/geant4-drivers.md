@@ -109,4 +109,3 @@ Default window size hint is: 600x600-0+0 (based on G4VisManager initialisation).
 ``OpenGLStoredX``、``OpenGLImmediateX``はXが起動すると期待したのですが、``illegal parameter``という警告が表示されました。
 
 ``HepRep``、``DAWN``、``VRML``、``gMocren``ではQtインターフェイスが起動し、ランを実行（``/run/beamOn イベント数``）するたびにファイルが生成されました。
-

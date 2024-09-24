@@ -33,4 +33,3 @@ $ code --update-extensions
 ```
 
 VS Codeに追加した拡張パッケージは、コマンドラインでも確認＆更新できます。
-

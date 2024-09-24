@@ -53,8 +53,3 @@ $ clang-format --style=スタイル名 --dump-config > .clang-format
 ```
 
 このように作成した``.clang-format``を少しずつカスタマイズするとよいと思います。
-
-
-
-
-

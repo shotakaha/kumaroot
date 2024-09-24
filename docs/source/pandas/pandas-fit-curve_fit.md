@@ -197,4 +197,3 @@ r_{i} = y_{i}^{\text{data}} - y_{i}^{\text{fit}}
 - [scipy.optimize.least_squares - SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html)
 - [scipy.stats.chisquare](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chisquare.html)
 - [scipy.stats.goodness_of_fit](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.goodness_of_fit.html)
-

@@ -48,4 +48,3 @@ Geant4 v11.2.0 のDoxygenを参照しています。
 - [G4PVReplica](https://geant4.kek.jp/Reference/11.2.0/classG4PVReplica.html)
 - [G4RunManager](https://geant4.kek.jp/Reference/11.2.0/classG4RunManager.html)
 - [G4RunManagerFactory](https://geant4.kek.jp/Reference/11.2.0/classG4RunManagerFactory.html)
-

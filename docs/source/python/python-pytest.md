@@ -144,6 +144,3 @@ def test_download():
         sheet.download()
         mock_subprocess_run.assert_called_with(...)
 ```
-
-
-

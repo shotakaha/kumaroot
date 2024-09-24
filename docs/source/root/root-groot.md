@@ -12,5 +12,3 @@ root-groot-setrgb
 ## リファレンス
 
 - [TROOT](https://root.cern.ch/doc/master/classTROOT.html)
-
-

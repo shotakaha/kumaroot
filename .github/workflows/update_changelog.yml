@@ -33,5 +33,3 @@ jobs:
           else
             echo "No changes in CHANGELOG.md Skipping commit."
           fi
-
-

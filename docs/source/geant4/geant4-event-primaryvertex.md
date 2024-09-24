@@ -25,4 +25,3 @@ G4PrimaryParticle *particle = vertex->GetPrimary(id);
 - [G4PrimaryParticle](https://apc.u-paris.fr/~franco/g4doxy/html/classG4PrimaryParticle.html)
 
 :::
-

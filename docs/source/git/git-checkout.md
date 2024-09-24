@@ -46,5 +46,3 @@ $ git config --global alias.co branch
 ```
 
 [Git本](https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E5%9F%BA%E6%9C%AC-Git-%E3%82%A8%E3%82%A4%E3%83%AA%E3%82%A2%E3%82%B9)にあるように、``co``をエイリアスとして設定しておくと便利です。
-
-

@@ -99,4 +99,3 @@ og:image:alt: "OGP画像の代替テキスト"
 - [sphinxext-opengraph - Read the Docs](https://sphinxext-opengraph.readthedocs.io/en/latest/)
 - [sphinxext-opengraph - GitHub](https://github.com/wpilibsuite/sphinxext-opengraph)
 - [The Open Graph Protocol](https://ogp.me/)
-

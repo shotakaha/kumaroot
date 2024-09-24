@@ -9,5 +9,3 @@ G4double energy_deposit = aStep->GetNonIonizingEnergyDeposit();
 ```
 
 現在のステップで落としたエネルギーの総量を取得できます。
-
-

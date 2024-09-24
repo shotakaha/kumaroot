@@ -34,4 +34,3 @@ Google Analyticsの測定タグは``[services]``セクションで設定でき�
 
 測定IDの設定を自作する場合は、``{{ site.Config.Services.GoogleAnalytics.ID }}``で呼び出します。
 これを応用すると、別の測定ツール（たとえば[Matomo](https://matomo.jp/)など）を組み込むことができます。
-

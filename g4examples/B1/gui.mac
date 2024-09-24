@@ -33,4 +33,3 @@
 /gui/addButton view "Update" "/vis/viewer/update"
 /gui/addButton view "Flush (= refresh + update)" "/vis/viewer/flush"
 /gui/addButton view "Update scene (= refresh + update)" "/vis/scene/notifyHandlers"
-

@@ -168,5 +168,3 @@
       (without visualization)
         % ./exampleB1 run2.mac
         % ./exampleB1 exampleB1.in > exampleB1.out
-
-

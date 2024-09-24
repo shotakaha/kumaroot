@@ -272,5 +272,3 @@ apple-clang@15.0.0:
 
 ``compiler info``でコンパイラーの詳細を確認できます。
 コンパイラーの詳細は``~/.spack/darwin/compilers.yaml``にも書いてありました。
-
-

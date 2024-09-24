@@ -26,4 +26,3 @@ petroleum->AddElement(O, 0.5*perCent);
 窒素N（0.4％以下）、
 酸素O（0.5％以下）、
 金属（0.5％以下）となるようです。
-

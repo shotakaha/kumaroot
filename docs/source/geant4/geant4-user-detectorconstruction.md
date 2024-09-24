@@ -223,4 +223,3 @@ publicなセッターを作成しておいたため、``geometry->SetDetectorMat
 - [](./geant4-geometry-world.md)
 
 :::
-

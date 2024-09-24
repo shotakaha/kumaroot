@@ -43,4 +43,3 @@ params->SetCerenkovVerbosity(1);
 ```cpp
 G4int n_photons = cerenkov->GetNumPhotons();
 ```
-
