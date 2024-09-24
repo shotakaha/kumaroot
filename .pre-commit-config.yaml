@@ -19,7 +19,7 @@ repos:
   - id: detect-private-key
   - id: check-merge-conflict
   - id: check-case-conflict
-  # - id: check-added-large-files
+  - id: check-added-large-files
   # args: ["--maxkb=500"]
 
   # - id: check-json
