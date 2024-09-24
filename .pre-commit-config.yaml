@@ -26,4 +26,4 @@ repos:
   # args: ["--maxkb=500"]
   - id: check-json
   - id: check-toml
-  # - id: check-yaml
+  - id: check-yaml
