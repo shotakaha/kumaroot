@@ -17,9 +17,10 @@ repos:
   rev: v4.6.0
   hooks:
   - id: detect-private-key
+  - id: check-merge-conflict
   # - id: check-added-large-files
   # args: ["--maxkb=500"]
-  # - id: check-merge-conflict
+
   # - id: check-json
   # - id: check-toml
   # - id: check-yaml
