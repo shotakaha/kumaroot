@@ -1,30 +1,36 @@
 # スプレッドシートしたい（``SpreadsheetApp``）
 
 ```js
-const spreadsheet = SpreadsheetApp.getActive()
-const sheet = spreadsheet.getActiveSheet();
-const data = sheet.getDataRange().getValues().slice(1);
-console.log(data);
+const book = SpreadsheetApp.getActive()
+const sheet = book.getActiveSheet();
+const range = sheet.getDataRange();
+const data = range.getValues().slice(1);
+Logger.log(data);
 ```
 
-GASでGoogleスプレッドシートを扱うには[SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスを使います。
-スプレッドシートには``スプレッドシート`` > ``シート`` > ``セル``という構造がありますが、それぞれ
-[Spredsheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)、[Sheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/sheet)、[Rangeクラス](https://developers.google.com/apps-script/reference/spreadsheet/range)のオブジェクトが対応します。
+[SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスで、Googleスプレッドシートを操作できます。
+
+スプレッドシートには``スプレッドシート`` > ``シート`` > ``セル``という構造があります。
+それぞれ
+[Spredsheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)、
+[Sheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/sheet)、
+[Rangeクラス](https://developers.google.com/apps-script/reference/spreadsheet/range)
+のオブジェクトが対応しています。
 
 上記のコードサンプルでは、取得したシートにある値を``getDataRange``ですべて選択し、``getValues``することで2次元配列のデータにしています。
-最後に中身を確認するために``console.log``しています。
+最後に中身を確認するために``Logger.log``しています。
 ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
 ## スプレッドシートを開きたい（``openById``）
 
 ```js
 // バインドされたスクリプト
-const spreadsheet = SpreadsheetApp.getActive();
-const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+const book = SpreadsheetApp.getActive();
+const book = SpreadsheetApp.getActiveSpreadsheet();
 
 // スタンドアロンなスクリプト
-const spreadsheet = SpreadsheetApp.openById("スプレッドシートのID");
-const spreadsheet = SpreadsheetApp.openByUrl("スプレッドシートのURL");
+const book = SpreadsheetApp.openById("スプレッドシートのID");
+const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 ```
 
 `getActive` / `getActiveSpreadsheet` で、スクリプトにバインドされたスプレッドシートを開くことができます。
@@ -167,20 +173,31 @@ cell.setFormula("=SUM(セル名:セル名)");
 ## シート名を変更したい（``setName``）
 
 ```js
-const spreadSheet = SpreadsheetApp.openById("ID");
-const sheet = spreadSheet.getSheetByName("変更前のシート名");
+const book = SpreadsheetApp.openById("移動元のID");
+const sheet = book.getSheetByName("変更前のシート名");
 sheet.setName("変更後のシート名");
 ```
 
 `setName`でシート名を変更できます。
 同じ名前のシートは作れません。
 
+## シートを複製したい（`copyTo`）
+
+```js
+const source = SpreadsheetApp.openById("コピー元のID");
+const target = SpreadsheetApp.openById("コピー先のID");
+const sheet = source.getSheetByName("複製したいシート名");
+const copied = sheet.copyTo(target);
+```
+
+`copyTo`で指定したシートを複製できます。
+
 ## シートを削除したい（``deleteSheet``）
 
 ```js
-const spreadSheet = SpreadsheetApp.openById("ID");
-const sheet = spreadSheet.getSheetByName("削除したいシート名");
-spreadSheet.deleteSheet(sheet);
+const book = SpreadsheetApp.openById("ID");
+const sheet = book.getSheetByName("削除したいシート名");
+book.deleteSheet(sheet);
 ```
 
 `deleteSheet`でシートを削除できます。
