@@ -30,6 +30,7 @@ python-jupyter
 python-jupytext
 python-tomllib
 python-exception
+python-decorator
 ```
 
 ## パッケージ管理したい
