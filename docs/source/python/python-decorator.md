@@ -105,4 +105,7 @@ def some_function(引数):
 
 ## リファレンス
 
-- [functools](https://docs.python.org/3/library/functools.html)
+- [functools - docs.python.org](https://docs.python.org/3/library/functools.html)
+- [関数定義 - docs.python.org](https://docs.python.org/ja/3/reference/compound_stmts.html#function)
+- [クラス定義 - docs.python.org](https://docs.python.org/ja/3/reference/compound_stmts.html#class)
+- [PEP318 - peps.python.org](https://peps.python.org/pep-0318/)
