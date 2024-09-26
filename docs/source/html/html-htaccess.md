@@ -44,6 +44,11 @@ Redirect 301 古いURL 新しいURL
 Order Allow,Deny
 Deny from 拒否IPアドレス もしくは 拒否ドメイン名
 Allow from all
+
+# Apache 2.4以降
+<RequireAll>
+  Require not ip 拒否IPアドレス
+</RequireAll>
 ```
 
 この設定で`Deny from`で指定したIPアドレスからのアクセスだけを拒否できます。
@@ -56,6 +61,13 @@ Allow from all
 Order Deny,Allow
 Deny from all
 Allow from 許可IPアドレス もしくは 許可ドメイン名
+
+# Apache 2.4以降
+<RequireAll>
+  Require ip 許可IPアドレス（192.168.1.1）
+  Require host 許可ドメイン名（example.com）
+</RequireAll>
+
 ```
 
 この設定で`Allow from`で指定したIPアドレスからのアクセスだけを許可できます。
@@ -65,7 +77,8 @@ Allow from 許可IPアドレス もしくは 許可ドメイン名
 # サブネットマスクを指定
 Order Deny,Allow
 Deny from all
-Allow from 許可IPアドレス/16
+Allow from 許可IPアドレス1
+Allow from 許可IPアドレス2/サブネットマスク
 ```
 
 `IPアドレス/16`のようにサブネットマスクを使って範囲を指定できます。
@@ -82,12 +95,24 @@ Allow from 許可IPアドレス/16
 
 :::
 
+## 複数アドレスしたい
+
 ```apache
 # コマンド
 <Files "ファイル名">
   Order Deny,Allow
-  Deny from all
-  Allow from 許可IPアドレス
+  Deny from 拒否IPアドレス
+  Allow from 許可IPアドレス1
+  Allow from 許可IPアドレス2/サブネットマスク
+</Files>
+
+# Apache 2.4以降
+<Files ファイル名>
+  <RequireAll>
+    Require not ip 拒否IPアドレス
+    Require ip 許可IPアドレス1
+    Require ip 許可IPアドレス2/サブネットマスク
+  </RequireAll>
 </Files>
 ```
 
