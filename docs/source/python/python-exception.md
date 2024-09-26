@@ -229,4 +229,5 @@ except CustomError as e:
 
 ## リファレンス
 
-- [Build-in Exceptions](https://docs.python.org/3/library/exceptions.html)
+- [Build-in Exceptions - docs.python.org](https://docs.python.org/3/library/exceptions.html)
+- [try文 - docs.python.org](https://docs.python.org/ja/3/reference/compound_stmts.html#the-try-statement)
