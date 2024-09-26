@@ -37,55 +37,63 @@ Redirect 301 古いURL 新しいURL
 ディレクトリごとに設置できるため、研究室サーバーの個人スペースなどでにも設置できます。
 `httpd.conf`などのサーバー設定ファイルの編集権限がないケースで活躍します。
 
-## ブラックリストしたい
+## アクセス制御を有効にしたい（`AllowOverride`）
 
-```apache
-# 特定のIPからのアクセスを拒否
-Order Allow,Deny
-Deny from 拒否IPアドレス もしくは 拒否ドメイン名
-Allow from all
-
-# Apache 2.4以降
-<RequireAll>
-  Require not ip 拒否IPアドレス
-</RequireAll>
+```console
+// httpd.confのパスを確認
+$ find . -name httpd.conf
 ```
 
-この設定で`Deny from`で指定したIPアドレスからのアクセスだけを拒否できます。
-アクセス源にドメイン名も指定できます。
-
-## ホワイトリストしたい
-
 ```apache
-# 特定のIPからのアクセスを許可
-Order Deny,Allow
-Deny from all
-Allow from 許可IPアドレス もしくは 許可ドメイン名
-
-# Apache 2.4以降
-<RequireAll>
-  Require ip 許可IPアドレス（192.168.1.1）
-  Require host 許可ドメイン名（example.com）
-</RequireAll>
-
+<Directory "該当のパス">
+  AllowOverride All
+  Require all granted
+</Directory>
 ```
 
-この設定で`Allow from`で指定したIPアドレスからのアクセスだけを許可できます。
-アクセス源にドメイン名も指定できます。
+`.htaccess`を使ってアクセス制御したい場合、
+該当ディレクトリに対して`AllowOverride`ディレクティブが有効になっている必要があります。
+
+## アクセス制御したい（`Required`）
 
 ```apache
-# サブネットマスクを指定
-Order Deny,Allow
-Deny from all
-Allow from 許可IPアドレス1
-Allow from 許可IPアドレス2/サブネットマスク
+# 一括許可／一括拒否
+Require all granted    # Allow from all に相当
+Require all denied     # Deny from all に相当
+
+# IPアドレス／ドメインを指定して許可
+Require ip 許可IPアドレス    # Allow from 許可IPアドレスに相当
+Require host 許可ドメイン名  # Allow from 許可IPドメイン名に相当
+
+# IPアドレス／ドメインを指定して拒否
+Require not ip 拒否IPアドレス    # Deny from 拒否IPアドレスに相当
+Require not host 拒否ドメイン名  # Deny from 拒否IPアドレスに相当
 ```
 
-`IPアドレス/16`のようにサブネットマスクを使って範囲を指定できます。
+`Require`ディレクティブを使って、アクセス制限を設定しています。
 
 :::{note}
 
-サブネットマスクは、IPアドレス（IPv4）を**ネットワーク部**と**ホスト部**に分けることで、
+`Require`ディレクティブはApache2.4で追加（改善？）されたディレクティブです。
+Apache 2.4からは`Require`ディレクティブを使うことが推奨されています。
+Apache 2.2までは`Order`、`Allow`、`Deny`ディレクティブが使われていましたが、
+将来的に廃止される予定だそうです。
+
+:::
+
+```apache
+Require ip 許可IPアドレス/サブネットマスク
+Require ip 192.168.1.1/8    # => 192.  0.0.0 - 192.255.255.255
+Require ip 192.168.1.1/16   # => 192.168.0.0 - 192.168.255.255
+Require ip 192.168.1.1/24   # => 192.168.1.0 - 192.168.  1.255
+```
+
+IPアドレスはサブネットマスクを使って範囲指定できます。
+
+:::{note}
+
+サブネットマスクは、
+IPアドレス（IPv4）を**ネットワーク部**と**ホスト部**に分けることで、
 巨大なIPアドレス空間を分割・管理するための仕組みです。
 
 サブネットマスクが
@@ -95,36 +103,29 @@ Allow from 許可IPアドレス2/サブネットマスク
 
 :::
 
-## 複数アドレスしたい
+## 複数条件したい（`RequireAny`）
 
 ```apache
-# コマンド
-<Files "ファイル名">
-  Order Deny,Allow
-  Deny from 拒否IPアドレス
-  Allow from 許可IPアドレス1
-  Allow from 許可IPアドレス2/サブネットマスク
-</Files>
-
-# Apache 2.4以降
-<Files ファイル名>
-  <RequireAll>
-    Require not ip 拒否IPアドレス
-    Require ip 許可IPアドレス1
+<Files "wp-login.php">
+  <RequireAny>
+    Require all denied
+    Require ip 許可IPアドレス1/サブネットマスク
     Require ip 許可IPアドレス2/サブネットマスク
-  </RequireAll>
+  </RequireAny>
 </Files>
 ```
 
-`Files`ディレクティブを使って、特定のファイルへのアクセスを制限できます。
-ファイル名は正規表現を使って指定できます。
+`RequiredAny`ディレクティブで、複数の条件を設定できます。
+上記のサンプルは、WordPressの管理画面へのアクセスを制御しています。
+`Files`ディレクティブを使って`wp-login.php`を指定し、
+指定したIPアドレスからのアクセスを許可しています。
 
 ## パスワード保護したい（Basic認証）
 
 ```apache
 AuthType Basic
 AuthName "Restricted Area"
-AuthUserFile /path/to/.htpasswd
+AuthUserFile /path/to/htpasswd
 Require valid-user
 ```
 
@@ -133,14 +134,17 @@ HTTPSが有効なウェブサイトであれば、Basic認証でよいそうで�
 
 ```console
 // .htpasswdが存在しない場合
-$ htpasswd -c /path/to/.htpasswd ユーザー名
+$ htpasswd -c /var/www/etc/.htpasswd ユーザー名
+// パスワードを入力
+// パスワードを入力（確認）
 
 // .htpasswdに追記する場合
-$ htpasswd /path/to/.htpasswd ユーザー名
+$ htpasswd /var/www/etc/.htpasswd ユーザー名
 ```
 
 サーバー内で`htpasswd`コマンドを使って`.htpasswd`ファイルを作成します。
-パスワードファイルは、`AuthUserFile`で指定したパスに配置します。
+パスワードファイルは、ウェブで公開されるディレクトリの外に作成し、
+`AuthUserFile`で指定したパスに配置します。
 パスワードはハッシュ化されて、このファイルに保存されます。
 
 :::{note}
@@ -150,9 +154,9 @@ HTTPSが有効なサイトでは、通信が暗号化されているので`Basic
 
 :::
 
-## リダイレクトしたい
+## リダイレクトしたい（`Redirect`）
 
-```htaccess
+```apache
 # 301: 恒久的リダイレクト
 Redirect 301 古いURL 新しいURL
 
@@ -160,8 +164,27 @@ Redirect 301 古いURL 新しいURL
 Redirect 302 古いURL 新しいURL
 ```
 
+`Redirect`ディレクティブを使ってURLのリダイレクトを設定できます。
+
+## HTTPSリダイレクトしたい（`RewriteRule`）
+
+```apache
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+```
+
+`RewriteRule`ディレクティブを使って、HTTPSリダイレクトを設定できます。
+`RewriteEngine`、`RewriteCond`ディレクティブを合わせて使います。
+また、リダイレクトには`mod_rewrite`モジュールが有効になっている必要があります。
+
 ## リファレンス
 
+- [Access Control - httpd.apache.org](https://httpd.apache.org/docs/2.4/howto/access.html)
+- [認証・承認・アクセス制御 - httpd.apache.org](https://httpd.apache.org/docs/2.4/howto/auth.html)
 - [Apacheチュートリアル: .htaccess](https://httpd.apache.org/docs/2.4/ja/howto/htaccess.html)
-- [RequireAll](https://httpd.apache.org/docs/2.4/ja/mod/mod_authz_core.html#requireall)
 - [Require](https://httpd.apache.org/docs/2.4/ja/mod/mod_authz_core.html#require)
+- [RequireAll](https://httpd.apache.org/docs/2.4/ja/mod/mod_authz_core.html#requireall)
+- [AllowOverride](https://httpd.apache.org/docs/2.4/ja/mod/core.html#allowoverride)
