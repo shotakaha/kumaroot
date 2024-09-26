@@ -159,3 +159,9 @@ Redirect 301 古いURL 新しいURL
 # 302: 一時的リダイレクト
 Redirect 302 古いURL 新しいURL
 ```
+
+## リファレンス
+
+- [Apacheチュートリアル: .htaccess](https://httpd.apache.org/docs/2.4/ja/howto/htaccess.html)
+- [RequireAll](https://httpd.apache.org/docs/2.4/ja/mod/mod_authz_core.html#requireall)
+- [Require](https://httpd.apache.org/docs/2.4/ja/mod/mod_authz_core.html#require)
