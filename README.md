@@ -21,6 +21,7 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 
 - [HTML](https://kumaroot.readthedocs.org)
 - [PDF](https://readthedocs.org/projects/kumaroot/downloads/)
+- [GitHub Pages](https://shotakaha.github.io/kumaroot/)
 
 ### Read the Docsで公開する方法
 
