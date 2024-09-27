@@ -103,8 +103,11 @@ const options = {
 
 ```js
 function send_to_slack() {
-    const url = "SlackのURL（hooks.slack.com）";
-    const data = {
+    // Incoming Webhooksを有効にする
+    const url = "https://hooks.slack.com/services/トークン";
+
+    // 通知する内容
+    const message = {
         "channel" : "チャンネル名",
         "username": "通知ボットの名前",
         "attachments":[{
@@ -112,8 +115,12 @@ function send_to_slack() {
         }],
         "icon_emoji": "絵文字コード",
     };
-    // JSON形式に変換
-    const payload = JSON.stringify(data);
+
+    // 通知内容をJSON形式に変換
+    const payload = JSON.stringify(message);
+
+    // リクエストのオプション
+    // POST で payloadを追加
     const options = {
         "method" : "POST",
         "contentType": "application/json",
@@ -122,9 +129,128 @@ function send_to_slack() {
     }
     // データをSlackにPOSTする
     const response = UrlFetchApp.fetch(url, options);
-    Logger.log(response);
+
+    // レスポンスの内容で成功／失敗をチェックする
+    const status = response.getResponseCode();
+    Logger.log(`status: ${status}`);    // => 200 / 404
+    const content = response.getContentText();
+    Logger.log(`content: ${content}`);  // => ok  / No service
 }
 ```
 
-すでに使っているSlack通知用のスクリプト``UrlFetchApp``を使っている箇所を抜粋しました。
-SlackのHook用URLを作ったり、``data``にどんな値を入れられるかは、別途適切なドキュメントを参照してください。
+Slackの`Incoming Webhooks`アプリを使って、外部サービスからSlackに通知できるようになります。
+基本となる手順は以下の通りです。
+
+1. 通知する内容を作成する
+2. JSON形式に変換する
+3. POSTメソッドでリクエストを送信する
+
+Incoming WebhooksのURLの作り方や、
+``message``に追加できる値については、
+それぞれ適切なドキュメントを参照してください。
+
+## Slackのメンバー数を取得したい
+
+```js
+function getSlackMembers() {
+    // Slack API Tokenをあらかじめ取得する
+    // 以下のスコープが必要
+    // - users:read
+    // - users.read.email （アドレスを取得する場合）
+    const token = "Slack_API_トークン";
+
+    // APIのエンドポイント -> JSON形式のデータが返ってくる
+    const url = "https://slack.com/api/users.list";
+
+    // リクエストのオプション
+    // ヘッダーに認証情報を追加する
+    const options = {
+        "method": "get",
+        "headers": {
+            "Authorization": "Bearer " + token;
+        }
+    };
+
+    // リクエスト
+    const response = UrlFetchApp.fetch(url, options);
+    const content = response.getContentText();
+    const data = JSON.parse(content);
+
+    if (data.ok) {
+        const members = data.members.map(function(member) {
+            const item = {
+                "id": member.id,
+                "name": member.name,
+                "real_name": member.real_name,
+                "email": member.profile.email || "no_mail",
+                "is_bot": member.is_bot
+            };
+            return item;
+            }
+        );
+        return members;
+
+        // 次の forループ に相当
+        // const memberData;
+        // for (let i = 0; i < data.members.length; i++) {
+        //    const member = data.members[i];
+        //    const item = {
+        //        "id": member.id,
+        //        "name": member.name,
+        //        "real_name": member.real_name,
+        //        "email": member.profile.email || "no_mail",
+        //    };
+        //    memberData.push(item);
+        //    };
+        // return memberData;
+    } else {
+        Logger.log(`Error: ${data.error}`);
+    };
+};
+```
+
+Slack APIトークンのスコープは以下を設定します。
+
+- `users:read`
+- `users:read.email`（メールアドレスを取得する場合
+
+取得できるユーザー情報のサンプル
+
+- `id`
+- `name`
+- `real_name`
+- `is_admin`
+- `is_owner`
+- `is_primary_owner`
+- `is_bot`
+- `updated`
+- `profile.email`
+- `profile.real_name` (= `real_name`)
+- `profile.display_name`
+
+`data`の構造
+
+```json
+{
+    "ok": true,
+    "members": [
+        {
+            "id": "ユーザーID",
+            "team_id": "ワークスペースID",
+            "name": "ユーザー名",
+            ...
+            "profile": {
+                "email": "メールアドレス",
+                ...
+            },
+            "is_bot": false,
+            ...
+        },
+        {
+            "id": "次のユーザーID",
+            ...
+        }
+        // 他のメンバーの情報
+    ]
+}
+```
