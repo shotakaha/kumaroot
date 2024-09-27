@@ -31,6 +31,7 @@ python-jupytext
 python-tomllib
 python-exception
 python-decorator
+python-gitlab
 ```
 
 ## パッケージ管理したい
