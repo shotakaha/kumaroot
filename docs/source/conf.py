@@ -95,6 +95,8 @@ myst_number_code_blocks = [
     "rst",
     "toml",
     "typst",
+    "js",
+    "apache",
 ]
 
 # -- Options for Math -------------------------------------------------
