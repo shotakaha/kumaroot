@@ -4,13 +4,19 @@
 const book = SpreadsheetApp.getActive()
 const sheet = book.getActiveSheet();
 const range = sheet.getDataRange();
-const data = range.getValues().slice(1);
+const rows = range.getValues();
+
+// 見出しとデータに分割
+const headers = rows[0];
+const data = rows.slice(1);
+
+Logger.log(`見出し：${headers}`);
 Logger.log(data);
 ```
 
 [SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスで、Googleスプレッドシートを操作できます。
 
-スプレッドシートには``スプレッドシート`` > ``シート`` > ``セル``という構造があります。
+スプレッドシートには``ブック（スプレッドシート）`` > ``シート`` > ``セル``という構造があります。
 それぞれ
 [Spredsheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)、
 [Sheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/sheet)、
@@ -18,6 +24,7 @@ Logger.log(data);
 のオブジェクトが対応しています。
 
 上記のコードサンプルでは、取得したシートにある値を``getDataRange``ですべて選択し、``getValues``することで2次元配列のデータにしています。
+
 最後に中身を確認するために``Logger.log``しています。
 ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
