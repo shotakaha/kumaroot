@@ -1,10 +1,9 @@
-# 変数したい
+# 変数したい（`var` / `let` / `const`）
 
 ```js
 var a = 任意のオブジェクト
 const b = 再代入できないオブジェクト
 let c = 再代入できるオブジェクト
-
 ```
 
 変数を宣言する方法は``var``、``const``、``let``の3種類があります。
@@ -27,34 +26,3 @@ let c = 再代入できるオブジェクト
 そこで、エラーがでる場合は``let``に置きかえましょう。
 そして、プログラムが動けばOKです。
 
-## 関数したい
-
-```js
-function 関数名(引数) {
-    // 関数を定義
-    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = sheet.getSheetByName(引数);
-    return sheet;
-}
-```
-
-``function``を使って関数を定義できます。
-GASプログラミングは、この関数の集合体、として作成することがほとんどです。
-
-同じプロジェクト内で、ファイル（っぽいもの）を分けることができますが、すべてグローバル関数のように扱われます。
-なので、関数名が重複しないように気をつけましょう。
-
-JavaScriptの関数名は``camelCase``にすることが多いようですが、GASが提供する関数（``onOpen``や``onFormSubmit``など）との区別を分かりやすくするため、このドキュメントでは自作の関数は``snake_case``で書くことにします。
-
-## map関数したい
-
-```js
-const 変数 = 配列.map(function(引数) {
-        処理
-        return 返り値;
-    });
-```
-
-```python
-変数 = [処理 for 引数 in 配列]
-```
