@@ -28,7 +28,7 @@ for project in projects:
 - `pipx`でインストール
 
 ```console
-pipx install python-gitlab
+pipx install python-gitlab[autocompletion]
   installed package python-gitlab 4.11.1
   These apps are now globally available
     - gitlab
@@ -44,9 +44,16 @@ $ poetry add python-gitlab --group dev
 - `uv tool`でインストール
 
 ```console
-$ uv tool install python-gitlab
+$ uv tool install python-gitlab[autocompletion]
 Installed 1 executable: gitlab
 ```
+
+- コマンド補完
+
+```console
+$ register-python-argcomplete --shell fish gitlab > ~/.config/fish/completions/gitlab.fish
+```
+
 
 ## リファレンス
 
