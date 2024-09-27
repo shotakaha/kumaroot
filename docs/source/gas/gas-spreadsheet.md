@@ -94,6 +94,42 @@ function readData() {
 
 `getValues`で、選択したセル範囲の値を配列として取得できます。
 
+## データをフィルターしたい
+
+```js
+function filterData(data) {
+    const filtered = data.filter(function(要素, インデックス, 配列) {
+        return 条件;
+    })
+}
+```
+
+`filter`メソッドを使って、条件に一致した要素を抽出できます。
+
+## データをマッピングしたい
+
+```js
+function parseData(data) {
+    const parsed = data.map(d => {
+        const item = {
+            timestamp: d[0],
+            name: d[3],
+            email: d[2],
+            ...
+        };
+        return item;
+    });
+    return parsed;
+}
+
+const data = readData();
+const filtered = filterData(data);
+const parsed = parseData(filtered);
+```
+
+`map`メソッドを使って、データを整形できます。
+フォームで集めたデータを、任意の順番に並べ替えたいときに使います。
+
 ## データを追加したい（``appendRow``）
 
 ```js
