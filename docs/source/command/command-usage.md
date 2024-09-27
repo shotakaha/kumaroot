@@ -134,4 +134,5 @@ command-uname
 command-mysql
 command-zellij
 command-glib
+command-gitlab
 ```
