@@ -16,6 +16,7 @@ gas-namespace
 gas-class
 gas-logger
 gas-date
+gas-id
 gas-spreadsheet
 gas-document
 gas-gform
