@@ -6,7 +6,7 @@ import os
 
 # PATトークンはソースにベタ書きしない
 # .env などに保存して管理する
-token = os.getenviron["GITLAB_PAT_TOKEN"]
+token = os.environ["GITLAB_PAT_TOKEN"]
 gl = gitlab.Gitlab(private_token=token)
 
 # 認証（オプション）
