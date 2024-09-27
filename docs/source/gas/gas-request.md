@@ -316,3 +316,40 @@ Slack APIトークンのスコープは以下を設定します。
     ]
 }
 ```
+
+## GitLabにコミットしたい
+
+```js
+function commitToGitLab(data) {
+    // data: コミットしたい内容
+
+    // GitLabのAPIエンドポイント
+    const projectId = "プロジェクトID"
+    const filePath = "ファイルパス"
+    const url = `https://gitlab.com/api/v4/${projectId}/repository/files/${filePath}`;
+
+    // GitLabのPersonal API Token (PAT)
+    const token = "GitLabのPAT"
+
+    const content = {
+        branch: "main",
+        commit_message: "Update from Google Sheets",
+        content: data,
+        encoding: "base64",
+    };
+    const payload = JSON.stringify(content);
+
+    const options = {
+        method: "put,
+        headers: {
+            "PRIVATETOKEN": token,
+            "Content-Type": "application/json"
+        },
+        payload: payload,
+    };
+
+    const response = UrlFetchApp.fetch(url, options);
+    const status = response.getResponseCode();
+    Logger.log(`status: ${status}`);
+}
+```
