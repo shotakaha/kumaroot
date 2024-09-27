@@ -157,7 +157,7 @@ function getSlackMembers() {
     // 以下のスコープが必要
     // - users:read
     // - users.read.email （アドレスを取得する場合）
-    const token = "Slack_API_トークン";
+    const token = "SlackのAPIトークン";
 
     // APIのエンドポイント -> JSON形式のデータが返ってくる
     const url = "https://slack.com/api/users.list";
@@ -167,7 +167,7 @@ function getSlackMembers() {
     const options = {
         "method": "get",
         "headers": {
-            "Authorization": "Bearer " + token;
+            "Authorization": "Bearer " + token,
         }
     };
 
@@ -191,7 +191,7 @@ function getSlackMembers() {
         return members;
 
         // 次の forループ に相当
-        // const memberData;
+        // const members = [];
         // for (let i = 0; i < data.members.length; i++) {
         //    const member = data.members[i];
         //    const item = {
@@ -200,13 +200,75 @@ function getSlackMembers() {
         //        "real_name": member.real_name,
         //        "email": member.profile.email || "no_mail",
         //    };
-        //    memberData.push(item);
+        //    members.push(item);
         //    };
-        // return memberData;
+        // return members;
     } else {
         Logger.log(`Error: ${data.error}`);
     };
 };
+
+function writeToSheet() {
+    // 指定したスプレッドシートを取得
+    const sheetId = "シートID"
+    const book = SpreadsheetApp.openById(sheetId);
+
+    // メンバー数を記録するシート
+    let sheet_counter = book.getSheetByName("slackCounter");
+    if (!sheet_counter){
+        sheet_counter = book.insertSheet("slackCounter");
+        sheet_counter.appendRow(["更新日", "メンバー数"])
+    }
+
+    // メンバー情報を記録するシート
+    let sheet_roster = book.getSheetByName("slackRoster");
+    if (!sheet_roster) {
+        sheet_roster = book.insertSheet("slackRoster");
+    }
+
+    // Slackの情報を取得
+    const members = getSlackMembers();
+    if (!members || members.length === 0) {
+        Logger.log("メンバー情報の取得に失敗");
+        return;
+    }
+
+    // 見出し行を取得
+    const headers = Object.keys(members[0]);
+
+    // メンバー情報を2次元配列に変換
+    const data = members.map(member => headers.map(header => member[header] || ""));
+    //
+    // 次のforループに相当
+    // const data = [];
+    // for (let i = 0; i < members.length; i++) {
+    //     const member = members[i];
+    //     const row = [];
+    //     for (let j = 0; j < headers.length; j++) {
+    //         const header = headers[j]
+    //         const item = member[header] || ""
+    //         row.push(item);
+    //     }
+    //     data.push(row);
+    // }
+
+    // データを出力する
+
+    // 1. 既存のシートにメンバー数を追記する
+    // 実行した時刻を最終更新日とする
+    const now = new Date();
+    const lastUpdated = Utilities.formatDate(now, "JST", "yyyy-MM-dd HH:mm:ssZ");
+    sheet_counter.appendRow([lastUpdated, members.length]);
+
+    // 2. 現在のメンバー情報をシートに書き出す
+    // 既存のシートをクリア
+    sheet_roster.clear();
+    sheet_roster.appendRow(headers);
+    const nrows = data.length;
+    const ncols = headers.length;
+    const range = sheet_roster.getRange(2, 1, nrows, ncols);
+    range.setValues(data);
+}
 ```
 
 Slack APIトークンのスコープは以下を設定します。
