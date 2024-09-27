@@ -353,3 +353,151 @@ function commitToGitLab(data) {
     Logger.log(`status: ${status}`);
 }
 ```
+
+## GitLabにマージリクエストしたい
+
+```js
+function pushDataToGitLabWithMR() {
+
+    const projectId = "GitLabのプロジェクトID";
+    const token = "GitLabのPAT";
+
+    // 実行時のタイムスタンプを使ってユニークなブランチ名を作成
+    // シートの入力されたタイムスタンプでもいいかも
+    const branchName = "update-from-google-sheet-" + new Date().getTime();
+
+    const check = checkBranchExists(projectId, branchName);
+    if ( !check ) {
+        createNewBranch(projectId, branchName, "main", token);
+    };
+    commitToBranch(projectId, branchName, "data.csv", content, token);
+    createMergeRequest(projectId, branchName, "main", title, description, token);
+}
+
+function createNewBranch(
+    projectId,
+    newBranchName,
+    baseBranchName,
+    token
+    ) {
+        const url = `https://gitlab.com/api/v4/projects/${projectId}/repository/branches`;
+
+        const payload = {
+            branch: newBranchName,
+            ref: baseBranchName
+        };
+
+        const options = {
+            method: "post",
+            headers: {
+                "PRIVATE-TOKEN": token,
+                "Content-Type": "application/json"
+            },
+            payload: JSON.stringify(payload)
+        };
+
+        const response = UrlFetchApp.fetch(url, options);
+        const status = response.getResponseCode();
+        const body = response.getContentText();
+        Logger.log(`createNewBranch: ${status}: ${body}`);
+    };
+
+function commitToBranch(
+    projectId,
+    branchName,
+    filePath,
+    fileContent,
+    token
+    ) {
+        const url = `https://gitlab.com/api/v4/projects/${projectId}/repository/files/${encodeURIComponent(filePath)}`;
+
+        const payload = {
+            branch: branchName,
+            commit_message: "Googleシートのデータを追加",
+            content: Utilities.base64Encode(fileContent),
+            encoding: "base64"
+        };
+
+        const options = {
+            method: "put",
+            headers: {
+                "PRIVATE-TOKEN": token,
+                "Content-Type": "application/json"
+            },
+            payload: JSON.stringify(payload)
+        };
+
+        const response = UrlFetch(url, options);
+        const status = response.getResponseCode();
+        const body = response.getContentText();
+        Logger.log(`commitToBranch: ${status}: ${body}`)
+
+    };
+
+function createMergeRequest(
+    projectId,
+    sourceBranchName,
+    targetBranchName,
+    title,
+    description,
+    token
+    ) {
+        const url = `https://gitlab.com/api/v4/projects/${projectId}/merge_requests`;
+        const payload = {
+            source_branch: sourceBranchName,
+            target_branch: targetBranchName,
+            title: title,
+            description: description,
+            remove_source_branch: true
+        };
+
+        const options = {
+            method: "post",
+            headers: {
+                "PRIVATE-TOKEN": token,
+                "Content-Type": "application/json"
+            },
+            payload: JSON.stringify(payload)
+        };
+
+        const response = UrlFetchApp.fetch(url, options);
+        const status = response.getResponseCode();
+        const body = response.getContentText();
+        Logger.Log(`createMergeRequest: ${status}: ${body}`);
+    }
+
+function checkBranchExists(
+    projectId,
+    branchName,
+    token
+    ) {
+        const url = `https://gitlab.com/api/v4/projects/${projectId}/repository/branches/${encodeURIComponent(branchName)}`;
+        const options = {
+            method: "get",
+            headers: {
+                "PRIVATE-TOKEN": token
+            }
+        };
+
+        const response = UrlFetchApp.fetch(url, options);
+        const status = response.getResponseCode();
+        const body = response.getContentText();
+        Logger.log(`checkBranchExists: ${status}: ${body}`);
+
+        if (status === 200) {
+            // ブランチが存在する場合
+            return true;
+        } else {
+            // ブランチが存在しない場合
+            return false;
+        };
+    };
+```
+
+GoogleシートのデータをGitLabに追加することを想定したサンプルです。
+`main`ブランチに直接コミットするのではなく、マージリクエストを作成しています。
+
+1. `main`ブランチから新規ブランチを作成する
+2. 作成したブランチにコミットする
+3. マージリクエストを作成する
+
