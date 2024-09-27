@@ -101,6 +101,31 @@ function readData() {
 
 `getValues`で、選択したセル範囲の値を配列として取得できます。
 
+## 選択範囲のデータを取得したい
+
+```js
+function getCurrentRowData() {
+    const book = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = book.getActiveSheet();
+    // 選択されたセルの範囲を取得
+    const range = sheet.getActiveRange();
+    // 選択されたセルの行番号を取得
+    const row_number = range.getRow();
+
+    Logger.log(`選択した行: ${row_number}`);
+
+    const row = sheet.getRange(row_number, 1, 1, sheet.getLastColumn());
+    const data = row.getValues();
+
+    Logger.log(`行のデータ: ${data}`);
+
+    return data;
+}
+```
+
+スプレッドシート上で選択したセルの範囲を操作するサンプルです。
+`getActiveほにゃらら`で**選択した範囲**のオブジェクトを取得できます。
+
 ## データをフィルターしたい
 
 ```js
