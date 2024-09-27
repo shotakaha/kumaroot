@@ -16,6 +16,7 @@ gas-namespace
 gas-class
 gas-logger
 gas-date
+gas-filter
 gas-id
 gas-spreadsheet
 gas-document
