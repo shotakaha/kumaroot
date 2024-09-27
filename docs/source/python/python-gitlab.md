@@ -23,7 +23,7 @@ for project in projects:
 ## インストールしたい
 
 `python-gitlab`パッケージをインストールします。
-`gitlab`というCLIもインストールされます。
+[gitlab](../command/command-gitlab.md)というCLIもインストールされます。
 
 - `pipx`でインストール
 
@@ -47,13 +47,6 @@ $ poetry add python-gitlab --group dev
 $ uv tool install python-gitlab[autocompletion]
 Installed 1 executable: gitlab
 ```
-
-- コマンド補完
-
-```console
-$ register-python-argcomplete --shell fish gitlab > ~/.config/fish/completions/gitlab.fish
-```
-
 
 ## リファレンス
 
