@@ -133,4 +133,5 @@ command-tig
 command-uname
 command-mysql
 command-zellij
+command-glib
 ```
