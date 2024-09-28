@@ -83,19 +83,19 @@ $ pre-commit run --all-files
 
 ```yaml
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
-    hooks:
-      - id: check-added-large-files
-        args: ["--maxkb=500"]
-      - id: check-merge-conflict
-      - id: check-json
-      - id: check-toml
-      - id: check-yaml
-      - id: detect-private-key
-      - id: end-of-file-fixer
-      - id: trailing-whitespace
-        args: ["--markdown-linebreak-ext=md"]
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0
+  hooks:
+  - id: check-added-large-files
+    args: ["--maxkb=500"]
+  - id: check-merge-conflict
+  - id: check-json
+  - id: check-toml
+  - id: check-yaml
+  - id: detect-private-key
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+    args: ["--markdown-linebreak-ext=md"]
 ```
 
 `pre-commit-hooks`のフックから、
@@ -105,12 +105,12 @@ repos:
 
 ```yaml
 repos:
-  - repo: ...
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.7
-    hooks:
-      # - id: ruff
-      - id: ruff-format
+- repo: ...
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.6.7
+  hooks:
+  # - id: ruff
+  - id: ruff-format
 ```
 
 `ruff`で`ruff check .``が実行されます。
@@ -134,7 +134,6 @@ repos:
 
 `cz init`すると追加されているはずのフックです。
 `stages: [commit-msg]`でコミットメッセージだけにフックがかかるようになっています。
-
 
 ## poetryしたい
 
@@ -172,14 +171,27 @@ Read the Docsに公開するために`requirements.txt`が必要です。
 
 ```yaml
 repos:
-  - repo: ...
-  - repo: ...
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.4
-    hooks:
-      - id: bandit
-        args: ["-r", "ディレクトリ名"]
+- repo: ...
+- repo: ...
+- repo: https://github.com/PyCQA/bandit
+  rev: 1.7.4
+  hooks:
+  - id: bandit
+    args: ["-r", "ディレクトリ名"]
 ```
+
+## nbstripoutしたい
+
+```yaml
+repos:
+- repo: ...
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.5.0
+  hooks:
+  - id: nbstripout
+```
+
+`nbstripout`で、コミット前にJupyter Notebookの出力をクリアできます。
 
 ## リファレンス
 
