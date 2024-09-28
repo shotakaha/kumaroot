@@ -1,5 +1,61 @@
 # CHANGELOG.md
 
+## v1.39.0 (2024-09-28)
+
+### Feat
+
+- **command/command-gitlab.md**: python-gitlabを追加した
+- **python/python-gitlab.md**: python-gitlabを追加した
+- **html/html-htaccess.md**: アクセス制限を追加した
+
+### Fix
+
+- **python/python-pre-commit.md**: nbstripoutを追加した
+- **mystmd/python-gitlab.ipynb**: ノートブック出力を削除した
+- **mystmd/python-gitlab.ipynb**: GitLab APIの使い方を確認した
+- **gas/gas-variables.md**: Set型を追記した
+- **gas/gas-variables.md**: さまざまな型を追加した
+- **git/git-gitlab.md**: コミットを追加した
+- **mystmd/python-gitlab.ipynb**: GitLab APIのテストを追加した
+- **python/python-gitlab.md**: コマンドのリンクを追加した
+- **command/command-glib.md**: glibを追加した
+- **python/python-gitlab.md**: コマンド補完を追記した
+- **gas/gas-request.md**: マージリクエストを追加した
+- **git/git-gitlab.md**: PATを追加した
+- **git/git-gitlab.md**: GitLab APIのエンドポイントを整理した
+- **gas/gas-request.md**: 具体例を追加した
+- **gas/gas-request.md**: 具体例を追記した
+- **gas/gas-request.md**: 具体例を追加した
+- **gas/gas-spreadsheet.md**: 選択した範囲のデータを取得した
+- **gas/gas-spreadsheet.md**: サンプルを更新した
+- **gas/gas-filter.md**: フィルタリングを追加した
+- **gas/gas-id.md**: サービスごとのIDを整理した
+- **gas/gas-spreadsheet.md**: よく使うデータ処理を追加した
+- **gas/gas-function.md**: 関数定義を別ページにした
+- **html/html-htaccess.md**: アクセス制限を追記した
+- **html/html-htaccess.md**: リファレンスを追加した
+- **html/html-htaccess.md**: Apache 2.4以降の書式を追加した
+- **command/command-xargs.md**: xargsの説明を追記した
+- **python/python-decorator.md**: 説明を整理した
+- **python/python-decorator.md**: リファレンスを追加した
+- **python/python-decorator.md**: デコレーターを整理した
+- **python/python-decorator.md**: デコレーターを追加した
+- **poetry.lock**: パッケージを更新した
+- **.pre-commit-config.yaml**: hookを追加した: ruff-format
+- **.pre-commit-config.yaml**: hookを追加した: check-xml
+- **.pre-commit-config.yaml**: hookを追加した: check-yaml
+- **.pre-commit-config.yaml**: hookを追加した: check-toml
+- **.vscode/settings.json**: JSON形式を修正した
+- **.pre-commit-config.yaml**: hookを追加した: check-json
+- **.pre-commit-config.yaml**: hookを追加した: trailing-whitespace
+- **.pre-commit-config.yaml**: hookを追加した: end-of-file-fixer
+- **.pre-commit-config.yaml**: hookを追加した: check-added-large-files
+- **.pre-commit-config.yaml**: hookを追加した: check-case-conflict
+- **.pre-commit-config.yaml**: hookを追加した: check-merge-conflict
+- **.pre-commit-config.yaml**: hookを追加した: detect-private-key
+- **.pre-commit-config.yaml**: hookを更新した
+- **gas/gas-spreadsheet.md**: シートを複製する方法を追加した
+
 ## v1.38.0 (2024-09-23)
 
 ### Feat
