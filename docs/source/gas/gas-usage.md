@@ -27,6 +27,7 @@ gas-request
 gas-doget
 gas-clasp
 gas-quota
+gas-version
 ```
 
 ## リファレンス
