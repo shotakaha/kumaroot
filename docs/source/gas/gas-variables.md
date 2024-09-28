@@ -172,6 +172,11 @@ Map型は順序を保ったオブジェクト型です。
 // Setコンストラクター
 const numbers = [1, 4, 3, 2, 4];
 const set = new Set(numbers);
+
+// 値を追加
+set.add(10);
+set.add(10);
+set.add(13);
 ```
 
 Set型は重複しない値を保持する配列です。
