@@ -78,7 +78,22 @@ PROJECT_NAME
 また、``--package``、``--app``、``--lib``オプションで
 作成したいパッケージの目的に適したディレクトリ／ファイル構造を作成できます。
 
-## パッケージを追加したい（``uv add``）
+## 仮想環境したい（`uv venv`）
+
+```console
+$ cd PROJECT_NAME
+$ uv venv
+Using CPython 3.12.6 interpreter at: /opt/homebrew/opt/python@3.12/bin/python3.12
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate.fish
+
+$ source .venv/bin/activate.fish
+```
+
+`venv`コマンドで仮想環境を`.venv/`ディレクトリに作成できます。
+`source .venv/bin/activate.fish`で仮想環境をアクティベートできます。
+
+## パッケージを追加したい（``uv add`` / `uv remove`）
 
 ```console
 $ uv add パッケージ名
@@ -89,12 +104,22 @@ $ uv add パッケージ名 --extra パッケージ名
 $ uv add --dev パッケージ名s
 ```
 
-## パッケージをインストールしたい（``uv sync``）
+`add`コマンドで`pyproject.toml`に依存パッケージを追加できます。
+`remove`コマンドで削除できます。
+
+## パッケージをインストールしたい（`uv sync` / `uv lock`）
 
 ```console
+$ uv lock
+
 $ uv sync
 $ uv sync --all-extras
 ```
+
+`lock`コマンドでロックファイル（`uv.lock`）を更新できます。
+
+`sync`コマンドでロックファイルを元に、プロジェクトに必要なパッケージを追加／更新できます。
+`--all-extras`オプションで、依存パッケージのオプションも追加できます。
 
 ## フォーマッターしたい
 
@@ -111,9 +136,9 @@ $ uvx ruff format
 $ uvx ruff check
 ```
 
-## パッケージをビルドしたい
+## パッケージをビルドしたい（`uv build`）
 
-## パッケージを公開したい
+## パッケージを公開したい（`uv publish`）
 
 ## 外部パッケージしたい（``uv tool``）
 
