@@ -225,3 +225,23 @@ $ arduino-cli upload スケッチ名 --port ポート名 --fqbn ボードのFQBN
 ```console
 $ arduino-cli completion fish > ~/.config/fish/completions/arduino-cli.fish
 ```
+
+## 設定したい（`config`）
+
+```console
+// 現在の設定を確認する
+$ arduino-cli config dump
+{}
+
+// 設定を初期化する
+$ arduino-cli config init
+Config file written to: ~/Library/Arduino15/arduino-cli.yaml
+
+// 設定を確認する
+$ arduino-cli config dump
+board_manager:
+    additional_urls: []
+```
+
+`config`コマンドで、Arduino周りの設定ができます。
+設定ファイルは`~/Library/Arduino15/arduino-cli.yaml`に作成されました。
