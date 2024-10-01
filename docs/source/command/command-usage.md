@@ -135,4 +135,5 @@ command-mysql
 command-zellij
 command-glib
 command-gitlab
+command-arduino-cli
 ```
