@@ -1,5 +1,13 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **git/git-remote.md**: git-remoteを追記した
+- **gas/gas-class.md**: thisキーワードを追記した
+- **gas/gas-version.md**: ECMAScriptバージョンを追加した
+
 ## v1.39.0 (2024-09-28)
 
 ### Feat
