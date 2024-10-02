@@ -32,6 +32,7 @@ python-tomllib
 python-exception
 python-decorator
 python-gitlab
+python-urllib
 ```
 
 ## パッケージ管理したい
