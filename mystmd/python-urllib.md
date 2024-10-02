@@ -56,6 +56,7 @@ print(f"{p.fragment=}")
 
 - `urlsplit`でURLを分割できる
 - `urlsplit` -> `SplitResult`オブジェクト
+- `SplitResult`も named tuple みたいなオブジェクト
 
 ```{code-cell} ipython3
 from urllib.parse import urlsplit
@@ -73,6 +74,8 @@ print(f"{s.fragment=}")
 
 - `urldefrag`でフラグメントを抽出できる
 - `urldefrag` -> `DefragResult`オブジェクト
+- `DefragResult`もnamed tupleみたいなオブジェクト
+- フラグメントを抽出するだけなので、あまり使い所がわからない
 
 ```{code-cell} ipython3
 from urllib.parse import urldefrag
