@@ -47,9 +47,10 @@ from urllib.parse import urlencode
 q1 = {"key1": "value1", "key2": "value2"}
 q2 = [("key1", "value1"), ("key2": "value2")]
 
-urlencode(q1)  # key1=value1&key2=value2
-urlencode(q2)  # key1=value1&key2=value2
+urlencode(q1, doseq=True)  # key1=value1&key2=value2
+urlencode(q2, doseq=True)  # key1=value1&key2=value2
 ```
 
 `urlencode`で、辞書型／リスト型になっているクエリを文字列に変換できます。
+`doseq=True`オプションが必須です。
 `parse_qs` / `parse_qsl`で取得したオブジェクトも復元できます。
