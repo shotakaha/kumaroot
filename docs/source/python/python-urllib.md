@@ -38,3 +38,18 @@ response = requests.get(url="https://httpbin.org/get", params=parse_qsl(o.query)
 ```
 
 どちらの結果も[requests](./python-requests.md)の`params`に直接渡すことができます。
+
+## クエリを文字列にしたい（`urlencode`）
+
+```python
+from urllib.parse import urlencode
+
+q1 = {"key1": "value1", "key2": "value2"}
+q2 = [("key1", "value1"), ("key2": "value2")]
+
+urlencode(q1)  # key1=value1&key2=value2
+urlencode(q2)  # key1=value1&key2=value2
+```
+
+`urlencode`で、辞書型／リスト型になっているクエリを文字列に変換できます。
+`parse_qs` / `parse_qsl`で取得したオブジェクトも復元できます。
