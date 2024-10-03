@@ -1,0 +1,4 @@
+[formats]
+"notebooks/" = "ipynb"
+"mystmd/" = "md:myst"
+"scripts/" = "py:light"
