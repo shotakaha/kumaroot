@@ -121,10 +121,6 @@ sqroot.SetLineWidth(6)
 ```
 
 ```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
 pad1.SetGridx()
 pad1.SetGridy()
 pad1.GetFrame().SetBorderMode(-1)
@@ -189,8 +185,4 @@ c1.Draw()
 
 ```{code-cell} ipython3
 c1.Draw()
-```
-
-```{code-cell} ipython3
-
 ```

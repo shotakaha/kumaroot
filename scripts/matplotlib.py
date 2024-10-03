@@ -202,6 +202,3 @@ iris.frame[names].plot(
     bins=30,
     orientation="horizontal",
 )
-# -
-
-

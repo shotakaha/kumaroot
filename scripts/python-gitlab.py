@@ -224,8 +224,8 @@ response.text
 #
 # - `:id` = `project_id`
 # - `ref_name` = ブランチ名、タグ名、リビジョンの範囲
-# - `since` = 
-# - `until` = 
+# - `since` =
+# - `until` =
 # - `path` = ファイルパス
 # - `author` = コミット作成者
 
@@ -270,7 +270,7 @@ response.text
 # --header "Content-Type: application/json"
 # --data "$PAYLOAD"
 # "https://gitlab.example.com/api/v4/projects/1/repository/commits"
-# ```     
+# ```
 #
 # レスポンス
 #
@@ -282,7 +282,7 @@ response.text
 #     - `'{"message":"A file with this name already exists"}'`
 #   - 存在しないファイルに対して`action: update`した場合
 #     - `'{"message":"A file with this name doesn\'t exist"}'`
-#   
+#
 # メモ
 #
 # - `file_path`に作成／更新するファイルパスを指定する

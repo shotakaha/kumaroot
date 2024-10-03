@@ -25,11 +25,3 @@ soup = BeautifulSoup(html.content)
 ```{code-cell} ipython3
 soup.head
 ```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
-```

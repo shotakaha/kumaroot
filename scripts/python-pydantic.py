@@ -194,8 +194,3 @@ sd = tomllib.loads(settings_string)
 args = {**sd.get("basic", {}), **sd.get("datetime", {}), **sd.get("arrays", {})}
 
 UserSettings(**args)
-# -
-
-
-
-

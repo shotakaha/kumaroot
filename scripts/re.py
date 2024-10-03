@@ -104,7 +104,6 @@ m.re
 m.group()
 
 
-
 # アクセス日時を抽出したい
 #
 # - 時刻は``[``と``]``で囲まれた内容
@@ -163,5 +162,3 @@ m.group("size")
 m.group("referer")
 
 m.group("ua")
-
-

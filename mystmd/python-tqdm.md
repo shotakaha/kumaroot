@@ -69,7 +69,3 @@ from tqdm import tqdm
 for i in tqdm(range(3)):
     time.sleep(1)
 ```
-
-```{code-cell} ipython3
-
-```

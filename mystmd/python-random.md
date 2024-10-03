@@ -168,7 +168,3 @@ print(secrets.token_urlsafe(20))
 print(secrets.token_urlsafe(30))
 print(secrets.token_urlsafe(40))
 ```
-
-```{code-cell} ipython3
-
-```

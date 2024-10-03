@@ -84,7 +84,7 @@ point = { x = 1, y = 2 }
 
 # テーブル
 [animal]
-type.name = "pug" 
+type.name = "pug"
 """
 
 tomllib.loads(s)

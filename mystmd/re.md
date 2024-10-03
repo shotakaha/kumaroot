@@ -126,10 +126,6 @@ m.re
 m.group()
 ```
 
-```{code-cell} ipython3
-
-```
-
 アクセス日時を抽出したい
 
 - 時刻は``[``と``]``で囲まれた内容
@@ -225,8 +221,4 @@ m.group("referer")
 
 ```{code-cell} ipython3
 m.group("ua")
-```
-
-```{code-cell} ipython3
-
 ```

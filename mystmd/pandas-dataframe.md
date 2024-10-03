@@ -18,7 +18,7 @@ keywords: [python, pandas]
 authors:
   - Shota Takahashi
 exports:
-  - format: pdf  
+  - format: pdf
 ---
 
 ```{code-cell} ipython3
@@ -128,24 +128,4 @@ samples = [
 ]
 data = pd.DataFrame(samples, columns=["x", "y", "z"])
 data
-```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
 ```

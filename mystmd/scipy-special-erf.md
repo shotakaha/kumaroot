@@ -63,9 +63,5 @@ data.hvplot.scatter(x="x", grid=True, width=800, height=400)
 ```
 
 ```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
 erf_function(x, amp, mu, sigma)
 ```

@@ -208,7 +208,3 @@ iris.frame[names].plot(
     orientation="horizontal",
 )
 ```
-
-```{code-cell} ipython3
-
-```

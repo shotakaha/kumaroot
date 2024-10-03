@@ -150,6 +150,3 @@ fig, axs = plt.subplots()
 
 countries.query(q).plot(ax=axs)
 gps.plot.scatter(x="longitude", y="latitude", c="altitude_wgs84", ax=axs)
-# -
-
-

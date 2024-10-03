@@ -18,7 +18,7 @@ keywords: [python, pandas]
 authors:
   - Shota Takahashi
 exports:
-  - format: pdf  
+  - format: pdf
 ---
 
 ```{code-cell} ipython3
@@ -77,8 +77,4 @@ c
 
 ```{code-cell} ipython3
 np.histogram(data["age"])
-```
-
-```{code-cell} ipython3
-
 ```

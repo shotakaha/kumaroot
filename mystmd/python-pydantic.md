@@ -202,11 +202,3 @@ args = {**sd.get("basic", {}), **sd.get("datetime", {}), **sd.get("arrays", {})}
 
 UserSettings(**args)
 ```
-
-```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
-
-```
