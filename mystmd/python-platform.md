@@ -40,7 +40,7 @@ platform.uname()
 - プラットフォーム名（OS名）を取得できる
   - ``sys.platform``と``platform.system``がある
   - ``platform.system``を使えばよさそう
-- macOSの場合`Darwin`になる   
+- macOSの場合`Darwin`になる
 
 ```{code-cell} ipython3
 sys.platform

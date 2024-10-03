@@ -93,7 +93,7 @@ urllib.request.urlopen(
 
 ```python
 requests.get(
-    url, 
+    url,
     params=None,   # dict
     **kwargs,      # request(kwargs)
     )

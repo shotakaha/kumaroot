@@ -19,7 +19,7 @@
 # authors:
 #   - Shota Takahashi
 # exports:
-#   - format: pdf  
+#   - format: pdf
 # ---
 
 # +
@@ -60,7 +60,6 @@ z = rng.integers(0, 10, size=n)
 # ```
 #
 # - リスト型の値をもつ辞書型オブジェクトは、そのまま``pd.DataFrame`` に食べさせることができます。
-#
 
 # +
 rng = np.random.default_rng()
@@ -129,13 +128,3 @@ samples = [
 data = pd.DataFrame(samples, columns=["x", "y", "z"])
 data
 # -
-
-
-
-
-
-
-
-
-
-

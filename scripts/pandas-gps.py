@@ -99,7 +99,6 @@ data.hvplot.errorbars(x="time", y="altitude", yerr1="vertical_accuracy", c="spee
 # - [geopandas.points_from_xy](https://geopandas.org/en/stable/docs/reference/api/geopandas.points_from_xy.html)
 # - [EPSG:4326](https://epsg.io/4326) : WGS84 / 地理座標系（緯度経度） / GPSで利用される座標系
 #   - European Petroleum Survey Group（現在 International Association of Oil & Gas Producers)
-#
 
 gps = gpd.GeoDataFrame(
     data,
@@ -152,5 +151,3 @@ fig, axs = plt.subplots()
 countries.query(q).plot(ax=axs)
 gps.plot.scatter(x="longitude", y="latitude", c="altitude_wgs84", ax=axs)
 # -
-
-

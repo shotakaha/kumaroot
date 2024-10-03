@@ -17,7 +17,6 @@
 # - `requests`: https://requests.readthedocs.io/en/latest/user/quickstart/
 # - `httpx`: https://www.python-httpx.org/
 # - `urllib.request`: https://docs.python.org/3/library/urllib.request.html#module-urllib.request
-#
 
 # リクエストを送るURLは``https://httpbin.org``にする。
 # このサーバーは、HTTPリクエストとレスポンスの動作をテストするための無料のサービス。
@@ -57,7 +56,6 @@ r_hpx = httpx.get(TARGET_URL, timeout=5)
 # ## 結果を確認
 #
 # `urllib`はオブジェクトのアドレスが返ってくるので、実行結果がすぐにはわかりませんが、`requests`と`httpx`はオブジェクトを`print`するだけで実行結果が確認できます。
-#
 
 print(f"{r_url=}")
 print(f"{r_req=}")
@@ -86,7 +84,7 @@ print(f"{type(r_hpx)=}")
 #
 # ```python
 # requests.get(
-#     url, 
+#     url,
 #     params=None,   # dict
 #     **kwargs,      # request(kwargs)
 #     )
@@ -115,20 +113,17 @@ print(f"{type(r_hpx)=}")
 #     trust_env: 'bool' = True,
 # ) -> 'Response'
 # ```
-#
 
 # # ヘッダーを操作したい
 #
 # - レスポンスのヘッダー確認する
 # - リクエストにヘッダーを追加する
-#
 
 # ## レスポンスのヘッダーを確認する
 #
 # レスポンスで取得したオブジェクトにはヘッダー情報が含まれています。
 # `urllib.request`は`r.headers.items()`、
 # `requests`と`httpx`は`r.headers`で確認できます。
-#
 
 print(f"{r_url.headers.items()=}")
 print(f"{r_req.headers=}")
@@ -138,7 +133,6 @@ print(f"{r_hpx.headers=}")
 #
 # `requests.get`と`httpx.get`は`headers`オプションで、ヘッダー情報を追加できます。
 # `urllib.request`では`urllib.request.Request`オジェクトを作成し、`urlopen`に渡すことで、ヘッダー情報を追加できます。
-#
 
 # +
 HEADERS = {"user-agent": "kumaroot-test/0.0.1"}

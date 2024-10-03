@@ -115,9 +115,9 @@
 
 # ## フィット関数
 #
-# A cubic spline is composed of several cubic polynomials, each defined on a subinterval between two data points 
+# A cubic spline is composed of several cubic polynomials, each defined on a subinterval between two data points
 #
-# ### データ区間 
+# ### データ区間
 #
 # ```math
 # [x_{i}, x_{i+1}]
@@ -130,7 +130,6 @@
 # ```
 #
 # $a_{i}, b_{i}, c_{i}, d_{i}$ はそれぞれのデータ区間の係数
-#
 
 # # コードサンプル
 #
@@ -233,7 +232,6 @@ splined.hvplot.line(x="time", y="amplitude")
 #
 # - スプラインとデータ点をプロット： スプラインがどの程度データの形状に沿っているかを比較する
 # - 振動をチェック： 特にデータ点の少ない領域や境界で、スプラインに非現実的な振動が生じないことを確認する
-#
 
 # ## 2. 残差分析
 #
@@ -252,24 +250,23 @@ splined.hvplot.line(x="time", y="amplitude")
 # $y_{i}$は実データ、$\hat{y}_{i}$はスプライン補間したでデータ
 #
 #
-# RMSE= 
+# RMSE=
 # n
 # 1
 # ​
-#   
+#
 # i=1
 # ∑
 # n
 # ​
-#  Residual 
+#  Residual
 # i
 # 2
-#
 
 # ​
-#  
+#
 # ​
-#  
+#
 # RMSE provides a single number summarizing the average size of the residuals.
 #
 # 1. Cross-Validation
@@ -279,10 +276,10 @@ splined.hvplot.line(x="time", y="amplitude")
 # For each data point, leave it out of the fitting process, fit the spline to the remaining data, and then evaluate how well the spline predicts the left-out point.
 # Compute the error for each left-out point and summarize them (e.g., with RMSE).
 # k-Fold Cross-Validation:
-# Divide the data into 
+# Divide the data into
 # 𝑘
 # k subsets.
-# For each subset, fit the spline on the remaining 
+# For each subset, fit the spline on the remaining
 # 𝑘
 # −
 # 1

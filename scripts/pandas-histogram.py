@@ -19,7 +19,7 @@
 # authors:
 #   - Shota Takahashi
 # exports:
-#   - format: pdf  
+#   - format: pdf
 # ---
 
 # +
@@ -73,5 +73,3 @@ c
 # -
 
 np.histogram(data["age"])
-
-

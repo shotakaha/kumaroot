@@ -20,13 +20,11 @@ exports:
   - format: pdf
 ---
 
-+++
-
 +++ {"part": "abstract"}
+
 Python標準モジュールの``time``と``datetime``、
 そして外部モジュールの``pendulum``を使って、
 よくある日時の取り扱いを比べてみました。
-+++
 
 +++
 

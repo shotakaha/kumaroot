@@ -100,7 +100,6 @@ sqroot.SetLineColor(4)
 sqroot.SetLineWidth(6)
 
 
-
 pad1.SetGridx()
 pad1.SetGridy()
 pad1.GetFrame().SetBorderMode(-1)
@@ -147,5 +146,3 @@ c1.Update()
 c1.Draw()
 
 c1.Draw()
-
-

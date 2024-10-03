@@ -71,8 +71,9 @@ us.model_dump()
 # - ``model_dump_json()``はできない
 # - ``PydanticSerializationError: Unable to serialize unknown type: <class 'pandas.core.frame.DataFrame'>``
 
+# +
 # us.model_dump_json()
-
+# -
 
 # ## カスタムバリデーターしたい
 #
@@ -109,8 +110,9 @@ us = UserSettings(settings="設定ファイル名", drive=".")
 
 us.model_dump()
 
+# +
 # us.model_dump_json()
-
+# -
 
 # ## 設定ファイルしたい
 #
@@ -193,7 +195,3 @@ args = {**sd.get("basic", {}), **sd.get("datetime", {}), **sd.get("arrays", {})}
 
 UserSettings(**args)
 # -
-
-
-
-

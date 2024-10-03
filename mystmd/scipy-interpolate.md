@@ -130,9 +130,9 @@ kernelspec:
 
 ## フィット関数
 
-A cubic spline is composed of several cubic polynomials, each defined on a subinterval between two data points 
+A cubic spline is composed of several cubic polynomials, each defined on a subinterval between two data points
 
-### データ区間 
+### データ区間
 
 ```math
 [x_{i}, x_{i+1}]
@@ -276,25 +276,25 @@ R_{i} = y_{i} − \hat{y}_{i}​
 $y_{i}$は実データ、$\hat{y}_{i}$はスプライン補間したでデータ
 
 
-RMSE= 
+RMSE=
 n
 1
 ​
-  
+
 i=1
 ∑
 n
 ​
- Residual 
+ Residual
 i
 2
 
 +++
 
 ​
- 
+
 ​
- 
+
 RMSE provides a single number summarizing the average size of the residuals.
 
 1. Cross-Validation
@@ -304,10 +304,10 @@ Leave-One-Out Cross-Validation (LOOCV):
 For each data point, leave it out of the fitting process, fit the spline to the remaining data, and then evaluate how well the spline predicts the left-out point.
 Compute the error for each left-out point and summarize them (e.g., with RMSE).
 k-Fold Cross-Validation:
-Divide the data into 
+Divide the data into
 𝑘
 k subsets.
-For each subset, fit the spline on the remaining 
+For each subset, fit the spline on the remaining
 𝑘
 −
 1
