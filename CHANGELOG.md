@@ -2,8 +2,37 @@
 
 ## Unreleased
 
+### Feat
+
+- **python/python-urllib.md**: urllib.parseを追加した
+- **command/command-arduino-cli.md**: arduino-cliを追加した
+
 ### Fix
 
+- **.pre-commit-config.yaml**: jupytextを無効にした
+- **.pre-commit-config.yaml**: nbstripoutを無効化した
+- jupytext --sync mystmd/*.md
+- **notebooks/myst.yml**: add mystmd
+- **.pre-commit-config.yaml**: 順番を変更した
+- メタデータを個別に修正した
+- jupytext --sync
+- **mystmd/index.md**: moved from notebooks/index.md - renamed:    notebooks/index.md -> mystmd/index.md
+- **notebooks/python-urllib.md**: removed
+- **scripts/**: jupytext --sync で生成したpyファイル
+- **mystmd/**: jupytext --syncで生成したmdファイル
+- **jupytext.toml**: jupytextの全体設定を追加した
+- **mystmd/myst.yml**: moved from notebooks/myst.yml
+- **notebooks/**: renamed from mystmd
+- **python/python-jupytext.md**: jupytextを追記した
+- **mystmd/python-urllib.md**: 微修正
+- **mystmd/python-urllib.md**: jupytextした
+- **python/python-urllib.md**: doseqオプションが必要なことを追記した
+- **python/python-urllib.md**: urlencodeを追記した
+- **.pre-commit-config.yaml**: jupytextを無効にした
+- **.pre-commit-config.yaml**: jupytext: v1.16.4b
+- **.pre-commit-config.yaml**: nbstripout: 0.5.0 -> 0.7.1
+- **command/command-arduino-cli.md**: configコマンドを追記した
+- **python/python-uv.md**: uvコマンドを追記した
 - **git/git-remote.md**: git-remoteを追記した
 - **gas/gas-class.md**: thisキーワードを追記した
 - **gas/gas-version.md**: ECMAScriptバージョンを追加した
