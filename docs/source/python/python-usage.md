@@ -10,29 +10,37 @@
 maxdepth: 1
 ---
 python-install
-python-pathlib
+python-argparse
 python-datetime
+python-decorator
+python-dunder
+python-exception
+python-gitlab
+python-particle
+python-pathlib
 python-pendulum
-python-platformdirs
 python-platform
+python-platformdirs
 python-random
 python-re
 python-requests
 python-string
 python-subprocess
+python-tomllib
 python-tqdm
-python-dunder
-python-particle
-python-webbrowser
-python-argparse
 python-typer
+python-urllib
+python-webbrowser
+```
+
+## Jupyterしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 python-jupyter
 python-jupytext
-python-tomllib
-python-exception
-python-decorator
-python-gitlab
-python-urllib
 ```
 
 ## パッケージ管理したい
@@ -77,7 +85,6 @@ python-pandas
 python-plotly
 python-altair
 python-textblob
-
 ```
 
 ## テスト＆デバッグしたい
