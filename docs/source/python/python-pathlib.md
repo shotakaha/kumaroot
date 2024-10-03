@@ -103,22 +103,36 @@ with p.open(mode="w", encoding="utf-8") as f:
 テキストデータの場合は`mode="w"`、
 バイナリデータの場合は`mode="wb"`に設定します。
 
-## ディレクトリを作成したい
+## ディレクトリを作成したい（`mkdir`）
 
 ```python
-p = Path(write_to)
+p = Path("ディレクトリ名")
 p.mkdir()
 ```
 
-`mkdir`でディレクトリを作成できます。
+`mkdir` メソッドでディレクトリを作成できます。
 すでにディレクトリが存在している場合は``FileExistsError``となります。
-上書きを防止したい場合は、{command}`try ... except:`でこのエラーをキャッチすればOKです。
 
 ```python
-p.mkdir(parents=True, exist_ok=True)
+p = Path("ディレクトリ名")
+try:
+    p.mkdir()
+except FileExistsError as e:
+    print("ディレクトリはすでに存在します")
 ```
 
-ディレクトリを必ず作成したい場合は、``parents``と``exist_ok``オプションを使うとよいです。
+上書きを防止したい場合は、、`try ... except:`でこのエラーをキャッチすればOKです。
+
+```python
+p = Path("ディレクトリ名/サブディレクトリ名/ファイル名.csv")
+# 親ディレクトリのPathオブジェクトを取得
+# p.parent => Path("ディレクトリ名/サブディレクトリ名")
+p.parent.mkdir(parents=True, exist_ok=True)
+p.write_text("テキストデータ")
+```
+
+中間ディレクトリも含めて作成することもできます。
+ディレクトリを必ず作成したい場合は、``parents=True``と``exist_ok=True``オプションを設定します。
 
 ## パスを連結したい
 
