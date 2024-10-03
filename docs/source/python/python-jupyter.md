@@ -1,6 +1,16 @@
 # Jupyter Lab したい（``jupyter``）
 
 ```console
+$ jupyter --version
+
+// Jupyter Notebookを起動
+$ jupyter notebook
+
+// Jupyter Labを起動
+$ jupyter lab
+```
+
+```console
 $ pipx install jupyter --include-deps
 ```
 
