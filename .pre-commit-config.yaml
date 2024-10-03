@@ -13,6 +13,15 @@ repos:
   - id: poetry-export
     args: ["--format", "requirements.txt", "--output", "requirements.txt"]
     verbose: true
+#- repo: https://github.com/mwouts/jupytext
+#  rev: v1.16.4b
+#  hooks:
+#  - id: jupytext
+#    args: ["--sync", "notebooks/*.ipynb"]
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.7.1
+  hooks:
+  - id: nbstripout
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.6.0
   hooks:
@@ -32,11 +41,3 @@ repos:
   rev: v0.6.8
   hooks:
   - id: ruff-format
-- repo: https://github.com/kynan/nbstripout
-  rev: 0.7.1
-  hooks:
-  - id: nbstripout
-#- repo: https://github.com/mwouts/jupytext
-#  rev: v1.16.4b
-#  hooks:
-#  - id: jupytext
