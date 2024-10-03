@@ -43,19 +43,20 @@ url
 
 # ブランチAPI
 
-https://gitlab-docs.creationline.com/ee/api/branches.html
+- https://gitlab-docs.creationline.com/ee/api/branches.html
 
 +++
 
 ## ブランチを確認する
 
-エンドポイント
+- エンドポイント
 
-```
-GET /projects/:id/repository/branches/:branch
+```console
+GET
+/projects/:id/repository/branches/:branch
 ```
 
-リクエストの例
+- リクエストの例
 
 ```console
 $ curl
@@ -63,17 +64,12 @@ $ curl
 "https://gitlab.com/api/v4/projects/:id/repository/branches/:branch"
 ```
 
-引数
-
-- `:id` = `project_id`
-- `:branch` = `branch_name`
-
-レスポンス
-
-ステータスコードを確認
-
-- ブランチがある: 200
-- ブランチがない: 404 `{'message': '404 Branch Not Found'}`
+- 引数
+  - `:id` = `project_id`
+  - `:branch` = `branch_name`
+- レスポンス（ステータスコードを確認）
+  - ブランチがある: 200
+  - ブランチがない: 404 `{'message': '404 Branch Not Found'}`
 
 ```{code-cell} ipython3
 # 必要な引数
@@ -102,13 +98,14 @@ response.json()
 
 ## ブランチを作成する
 
-エンドポイント
+- エンドポイント
 
-```
-POST /projects/:id/repository/branches
+```console
+POST
+/projects/:id/repository/branches
 ```
 
-リクエストの例
+- リクエストの例
 
 ```console
 $ curl
