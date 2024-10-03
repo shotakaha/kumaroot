@@ -10,11 +10,13 @@ $ jupyter notebook
 $ jupyter lab
 ```
 
+## インストールしたい（`jupyter`）
+
 ```console
 $ pipx install jupyter --include-deps
 ```
 
-`pipx`でJupyter環境をインストールしました。
+`pipx`でJupyter環境をインストールできます。
 Jupyter関係のツールは、サブパッケージに分かれていますが、
 ``--include-deps``ですべてインストールできます。
 
