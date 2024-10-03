@@ -21,7 +21,7 @@ fnames = sorted(p.glob("*.csv"))
 `Path.glob(パターン)`だとジェネレーターが返ってくるので、
 `sorted`して、ファイル名の順番に並べたリスト型に変換しています。
 
-## ファイルを開きたい
+## ファイルを開きたい（`open`）
 
 ```python
 p = Path("ファイル名")
@@ -39,11 +39,34 @@ with open(p, "r") as f:
     # ファイル操作
 ```
 
+## ファイルから読み込みたい（`read_text` / `read_bytes`）
+
+```python
+p = Path("ファイル名")
+p.read_text(encoding="utf-8")  # mode="r"
+p.read_bytes()    # mode="rb"
+```
+
+`reat_text`メソッドで、ファイルからテキストデータを読み込めます。
+エンコーディングはデフォルトでUTF-8ですが、`encoding`オプションで変更できます。
+バイナリーデータを読み込む場合は`read_bytes`を使います。
+これらのメソッドの内部処理では
+コンテキストマネージャーを使っています。
+
+```python
+with p.open(mode="r", encoding="utf-8") as f:
+    lines = f.read()
+```
+
+`open`メソッドを使って、コンテキストマネージャーを明示的に書いたサンプルです。
+テキストデータの場合は`mode="r"`、
+バイナリデータの場合は`mode="rb"`に設定します。
+
 ## ファイルに書き込みたい（`write_text` / `write_bytes`）
 
 ```python
 p = Path("ファイル名")
-p.write_text("テキストデータ", encoding="utf-8")      # mode="w"
+p.write_text("テキストデータ", encoding="utf-8")  # mode="w"
 p.write_bytes("バイナリーデータ")   # mode="wb"
 ```
 
