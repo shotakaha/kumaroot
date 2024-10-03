@@ -270,7 +270,7 @@ response.text
 # --header "Content-Type: application/json"
 # --data "$PAYLOAD"
 # "https://gitlab.example.com/api/v4/projects/1/repository/commits"
-# ```  
+# ```
 #
 # レスポンス
 #
