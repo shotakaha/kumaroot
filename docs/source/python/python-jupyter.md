@@ -2,6 +2,21 @@
 
 ```console
 $ jupyter --version
+jupyter --version
+Selected Jupyter core packages...
+IPython          : not installed
+ipykernel        : not installed
+ipywidgets       : not installed
+jupyter_client   : not installed
+jupyter_core     : 5.7.2
+jupyter_server   : not installed
+jupyterlab       : not installed
+nbclient         : not installed
+nbconvert        : not installed
+nbformat         : not installed
+notebook         : not installed
+qtconsole        : not installed
+traitlets        : 5.14.3
 
 // Jupyter Notebookを起動
 $ jupyter notebook
@@ -17,6 +32,8 @@ $ jupyter lab
 ```console
 $ pipx install jupyter --include-deps
 ```
+
+- `uv`でインストール
 
 ```console
 $ uv tool install jupyter-core
@@ -108,6 +125,9 @@ Jupyter関係のツールは、サブパッケージに分かれていますが�
 ```console
 // インストール済みの拡張機能を確認
 $ jupyter labextension list
+JupyterLab v4.2.5
+~/.local/share/uv/tools/jupyterlab/share/jupyter/labextensions
+    jupyterlab_pygments v0.3.0 enabled OK (python, jupyterlab_pygments)
 
 // 拡張機能のインストール
 $ jupyter labextension install 拡張パッケージ名
@@ -117,6 +137,16 @@ $ jupyter labextension uninstall 拡張パッケージ名
 ```
 
 `labextention`コマンドで、Jupyter Labの拡張機能を操作できます。
+
+:::{caution}
+
+> (Deprecated) Uninstalling extensions with the jupyter labextension uninstall command is now deprecated and will be removed in a future major version of JupyterLab.
+>
+> Users should manage prebuilt extensions with package managers like pip and conda, and extension authors are encouraged to distribute their extensions as prebuilt packages
+
+`labextension`コマンドでインストール、アンインストールする方法は非推奨だそうです。
+
+:::
 
 ```console
 $ jupyter labextension install @jupyterlab/extensionmanager
