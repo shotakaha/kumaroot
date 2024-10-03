@@ -84,7 +84,7 @@ print(f"{type(r_hpx)=}")
 #
 # ```python
 # requests.get(
-#     url,
+#     url, 
 #     params=None,   # dict
 #     **kwargs,      # request(kwargs)
 #     )

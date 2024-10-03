@@ -19,7 +19,7 @@
 # authors:
 #   - Shota Takahashi
 # exports:
-#   - format: pdf
+#   - format: pdf  
 # ---
 
 # +
@@ -128,3 +128,13 @@ samples = [
 data = pd.DataFrame(samples, columns=["x", "y", "z"])
 data
 # -
+
+
+
+
+
+
+
+
+
+

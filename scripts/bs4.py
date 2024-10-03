@@ -20,3 +20,7 @@ html = requests.get(url)
 soup = BeautifulSoup(html.content)
 
 soup.head
+
+
+
+

@@ -50,3 +50,5 @@ platformdirs.user_data_dir(appname="アプリ名")
 
 # アプリ名、バージョンを指定
 platformdirs.user_data_dir(appname="アプリ名", version="メジャー番号.マイナー番号")
+
+
