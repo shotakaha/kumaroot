@@ -82,6 +82,41 @@ Path.cwd()
 ホームディレクトリとカレントディレクトリを取得する``Path``のクラスメソッドがあります。
 ``Path.home()``と``Path.cwd()``でそれぞれのディレクトリ名を``Path``オブジェクトとして取得できます。
 
+## ファイルに書き込みたい（`write_text` / `write_bytes`）
+
+```python
+p = Path("ファイル名")
+p.write_text("テキストデータ", encoding="utf-8")      # mode="w"
+p.write_bytes("バイナリーデータ")   # mode="wb"
+```
+
+`write_text`メソッドで、ファイルにテキストデータを書き込めます。
+エンコーディングはデフォルトでUTF-8ですが、`encoding`オプションで変更できます。
+バイナリーデータを書き込む場合は`write_bytes`を使います。
+これらのメソッドの内部処理では
+受け取ったデータの型チェックと、
+コンテキストマネージャーを使っています。
+
+```python
+# with...as構文
+with p.open(mode="w", encoding="utf-8") as f:
+    f.write("テキストデータ")
+```
+
+`open`メソッドを使って、コンテキストマネージャーを明示的に書いたサンプルです。
+テキストデータの場合は`mode="w"`、
+バイナリデータの場合は`mode="wb"`に設定します。
+
+```python
+# openコマンド
+p = Path("ファイル名")
+with open(p, mode="w") as f:
+    f.write("テキストデータ")
+```
+
+従来の`open`コマンドで書いたサンプルです。
+引数には直接Pathオブジェクトを渡すことができます。
+
 ## リファレンス
 
 - [pathlib - docs.python.org](https://docs.python.org/ja/3/library/pathlib.html)
