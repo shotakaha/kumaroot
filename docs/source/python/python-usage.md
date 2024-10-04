@@ -24,6 +24,7 @@ python-platformdirs
 python-random
 python-re
 python-requests
+python-httpx
 python-string
 python-subprocess
 python-tomllib
