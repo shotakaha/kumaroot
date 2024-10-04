@@ -3,13 +3,18 @@
 ```python
 import requests
 
-r = requests.get("https://httpbin.org/get", timeout=10)
-print(r)  # <Response [200]>
-type(r)   # requests.models.Response
+try:
+    r = requests.get("https://httpbin.org/get", timeout=10)
+    r.raise_for_status()
+    print(f"{r.status_code}: {r.reason}")
+except Exceptions as e:
+    print(f"error: {e}")
 ```
 
-`requests`でウェブページのソースを取得できます。
-取得した値は`requests.models.Response`オブジェクトに入っています。
+`requests`でウェブページのリソースを取得できます。
+「HTTP for Humans」を謳っていて、直感的なHTTP操作ができます。
+
+`.raise_for_status`で、レスポンスのステータスコードが400番台、500番台のときに例外を発生させることができます。
 
 :::{hint}
 
