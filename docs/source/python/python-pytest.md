@@ -63,18 +63,6 @@ $ tree
 自作パッケージと同階層に``tests``ディレクトリを作成し、
 その中にユニットテストを作成しています。
 
-## パッチしたい（`@patch`）
-
-```python
-@patch("モジュール名.クラス名")
-def test_テスト関数(モック名):
-    """ユニットテストの説明"""
-    # テストを書く
-    # モック名.メソッド名.return_value = モック値
-```
-
-``@patch``デコレーターで引数に指定した関数をモックできます。
-
 ```python
 import pytest
 from unittest.mock import patch

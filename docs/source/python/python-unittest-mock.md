@@ -6,6 +6,15 @@ from unittest.mock import patch
 from unittest.mock import mock_open
 ```
 
+`unittest`はPythonの標準モジュールです。
+`unittest.mock`は、そこに含まれているモック用のモジュールです。
+
+:::{note}
+
+ユニットテストに[pytest](./python-pytest.md)を使っている場合は、`pytest-mock`を使うとよいです。
+
+:::
+
 ## MagickMockしたい（``MagicMock``）
 
 ```python
@@ -17,7 +26,7 @@ mock.メソッド名.return_value = [返り値]
 ```
 
 `MagicMock`でモック用のオブジェクトを作成できます。
-モックは空箱のようなイメージで、任意のメソッドを追加でき、その返り値を設定できます。
+モックは**万能の空箱**のようなイメージで、任意のメソッドを追加して、その返り値を設定できます。
 
 :::{hint}
 
@@ -25,6 +34,20 @@ mock.メソッド名.return_value = [返り値]
 経験が圧倒的に不足していて悩んでいましたが、最近では、ChatGPTに聞きながら作っています。
 
 :::
+
+## パッチしたい（`@patch`）
+
+```python
+from unittest.mock import patch
+
+@patch("モジュール名.クラス名")
+def test_テスト関数(モック名):
+    """ユニットテストの説明"""
+    # テストを書く
+    # モック名.メソッド名.return_value = モック値
+```
+
+``@patch``デコレーターで引数に指定した関数をモックできます。
 
 ## シリアル通信をモックしたい（``MagicMock``）
 
@@ -109,10 +132,11 @@ def test save_events(mock_open):
 ```
 
 ``mock_open``で、実際にファイルを作ったり、書き込んだりせずに、ファイル処理をテストできます。
-ファイルが開けたかどうか、``read``／``write``処理が想定回数呼び出せたかどうか、などでアサートできます。
+ファイルは作成されないので、
+ファイルが開けたかどうか、``read``／``write``処理が想定回数呼び出せたかどうか、などでアサートします。
 
-ここでは``@patch``デコレータで、``pathlib.Path.open``をモックしています。
-この関数のスコープの中で呼ばれる``open``間数は、``mock_open``に置き換えられます。
+このサンプルでは``@patch``デコレータで、``pathlib.Path.open``をモックしています。
+この関数のスコープの中で呼ばれる``open``関数は、``mock_open``に置き換えられています。
 
 ``mock_open``も``MagicMock``と同じように関数／メソッドを呼び出した回数を記録しています。
 そのため``関数名.call_count``でアサートできます。

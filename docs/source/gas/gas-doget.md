@@ -19,7 +19,7 @@ function doGet(e) {
 `doGet`関数は、GASでGETリクエストを処理するための関数です。
 レスポンスは`ContentService.createTextOutput`などで生成し、ウェブアプリとしてデプロイできます。
 
-上のサンプルでは、あるシートに紐づいた`doGet`間数を定義しています。
+上のサンプルでは、あるシートに紐づいた`doGet`関数を定義しています。
 GETリクエストは
 `https://script.google.com/macros/s/スクリプトID/exec?name=John`
 を想定しています。
