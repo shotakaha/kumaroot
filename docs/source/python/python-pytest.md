@@ -144,3 +144,93 @@ def test_download():
         sheet.download()
         mock_subprocess_run.assert_called_with(...)
 ```
+
+## モックしたい
+
+モック／パッチの作り方はまだわかっていないので、
+ChatGPTに聞きながら書くことが多いです。
+
+## ファイル書き込みをモックしたい（`pathlib.Path.write_text`）
+
+```python
+def 関数名(引数):
+    p = Path("ファイル名")
+    p.write_text("ファイルの内容", encoding="utf-8")
+```
+
+`pathlib.Path.write_text`を使っている関数のユニットテストを作成したときのサンプルです。
+関数名や引数名は適当に置き換えて読んでください。
+
+```python
+from unittest.mock import patch
+
+@path("pathlib.Path.write_text")
+def test_関数名(mock_write):
+    # test strings
+    text = "ファイル内容"
+
+    # run a function
+    関数名(引数)
+
+    # assertion
+    # write_textが1回だけ呼ばれたことを確認
+    mock_write.assert_called_once_with(text, encoding="utf-8")
+```
+
+`pathlib.Path.write_text`をモックします。
+`write_text`は内部で`pathlib.Path.open`を使っていますが、
+`mock_open`は必要ありません。
+
+:::{note}
+
+`open`関数を使う場合は`mock_open`が必要です。
+
+:::
+
+## HTTPリクエストをモックしたい（`requests.get`）
+
+```python
+def 関数名(引数):
+    try:
+        response = requests.get(url, params, timeout=30)
+        response.raise_for_status()
+        if response.ok:
+            # ファイルに書き込む
+            p = Path("ファイル名")
+            p.write_text(response.text, encoding="utf-8")
+        else:
+            msg = "no response"
+            raise ValueError(msg)
+    except Exceptions as e:
+        print(e)
+```
+
+`requests`モジュールを使ってURLにアクセスし、
+レスポンス（のテキストデータ）をファイルに保存する処理をモックです。
+前述したファイル処理のモックを組み合わせています。
+
+```python
+from unittest.mock import patch
+
+@patch("pathlib.Path.write_text")
+@patch("requests.get")
+def test_関数名(mock_get, mock_write):
+    # テスト用の文字列
+    text = "レスポンスのテキストデータ"
+
+    mock_get.return_value.ok = True
+    mock_get.return_value.text = text
+
+    関数名(引数)
+
+    # GETリクエストの呼び出しを確認
+    mock_get.assert_called_once_with(url, params, timeout=30)
+    # ファイル書き込みの呼び出しを確認
+    mock_write.assert_called_once_with(text, encoding="utf-8")
+```
+
+`requests.get`をモックします。
+`return_value`を使って、テストしたい関数の中の処理で必要な値を設定しています。
+
+また、前述のようにファイル保存の部分もモックしたいので、
+`@patch`デコレーターを複数適用しています。
