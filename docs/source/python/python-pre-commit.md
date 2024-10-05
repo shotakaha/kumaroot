@@ -8,9 +8,10 @@ $ pre-commit install
 $ pre-commit run --all-files
 ```
 
-`pre-commit`はGit hooksを使って、コミット前にコードのチェック作業を自動化できるツールです。
-Pythonで書かれていますが、いろいろなプログラミング言語やプロジェクトで使えるようになっています。
+`pre-commit`は[Git Hooks](../git/git-hooks.md)を使って、コミット前などにコードのチェック作業などを自動化できるツールです。
+`pre-commit`以外にも`commit-msg`や`pre-push`などさまざまなフックに対応しています。
 設定ファイルは`.pre-commit-config.yaml`です。
+Pythonで書かれていますが、いろいろなプログラミング言語やプロジェクトで使えるようになっています。
 
 :::{note}
 
@@ -47,8 +48,6 @@ $ uv tool install pre-commit
 $ uv tool upgrade pre-commit
 ```
 
-以下ではフォーマッタに[black](./python-black.md)、リンターに[ruff](./python-ruff.md)を使う方法で設定します。
-
 ## 設定したい（`.pre-commit-config.yaml`）
 
 ```yaml
@@ -75,9 +74,8 @@ $ pre-commit run --all-files
 ```
 
 `run`コマンドでフックの確認ができます。
-`--all-files``オプションで、カレントディレクトリの下にあるすべてのファイルに対してチェックをかけられます。
-``trailing-whitespace``や``end-of-file-fixer``などのフックを有効にしている場合は、
-ファイルが修正されます。
+`--all-files`オプションで、カレントディレクトリの下にあるすべてのファイルに対してチェックを実行します。
+``trailing-whitespace``や``end-of-file-fixer``などのフックを有効にしている場合、ファイルが自動で修正されます。
 
 ## pre-commit-hooksしたい
 
@@ -113,7 +111,11 @@ repos:
   - id: ruff-format
 ```
 
-`ruff`で`ruff check .``が実行されます。
+[ruff](./python-ruff.md)は、Pythonプロジェクトの
+リンター＆フォーマッターです。
+`pre-commit`フックに設定しておくとよいと思います。
+
+`ruff`を有効にすると`ruff check .`が実行されます。
 ファイルは修正されません。
 
 `ruff-format`を有効にすると`ruff format .`が実行されます。
@@ -129,11 +131,12 @@ repos:
   hooks:
   - id: commitizen
     stages:
-      - commit-msg
+    - commit-msg
 ```
 
+`commitizen (cz)`はコミットメッセージの規律を守るためのツールです。
 `cz init`すると追加されているはずのフックです。
-`stages: [commit-msg]`でコミットメッセージだけにフックがかかるようになっています。
+`stages: [commit-msg]`でコミットメッセージを保存したあとにフックがかかるようにしておきます。
 
 ## poetryしたい
 
@@ -145,19 +148,23 @@ repos:
   hooks:
   - id: poetry-check
     args: [--lock]
+    stages: [pre-push]
   #- id: poetry-lock
   - id: poetry-export
     args: [--format, requirements.txt, --output, requirements.txt]
+    stages: [pre-push]
   #- id: poetry-install
 ```
 
+Pythonプロジェクトを`poetry`で管理している場合は、
 `poetry-check`（＝`poetry check`）、
 `poetry-lock`（＝`poetry lock`）、
 `poetry-export`（＝`poetry export`）、
 `poetry-install`（＝`poetry install`）
-のフックが利用できます。
+のフックを導入してみるとよいかもしれません。
 
-それぞれに`args`を設定して使うとよいと思います。
+それぞれに適切な`args`を設定して使うとよいと思います。
+また、コミット時ではなくプッシュ時（`pre-push`）に設定するとよいと思います。
 
 :::{note}
 
@@ -191,7 +198,43 @@ repos:
   - id: nbstripout
 ```
 
-`nbstripout`で、コミット前にJupyter Notebookの出力をクリアできます。
+Jupyter Notebookを使っている場合、
+実行結果を削除したファイルをコミットしたい場合があります。
+`nbstripout`でコミット前に出力をクリアできます。
+
+:::{note}
+
+`.ipynb`ファイルは、実行結果を残しているといつのまにか間に肥大化している可能性があります。
+また、デバッグ用途に使っている場合、
+うっかりとシークレット情報を出力に残したままにしてしまう可能性もあります。
+そのようなことを回避したい場合、このツールは有用です。
+:::
+
+## pytestしたい
+
+```yaml
+repos:
+- repo: local
+  hooks:
+  - id: pytest
+    name: pytest
+    entrypoint: pytest --verbose
+    stages:
+      - [pre-push]
+    language: system
+```
+
+[pytest](./python-pytest.md)用のフックはGitHub上にはないようです。
+`pre-commit`はローカル（`local`）にインストールされているコマンドを使うことができます。
+プッシュ時（`pre-push`）にテストを走らせるとよいと思います。
+
+:::{note}
+
+テストはCI/CDでも実行しているかもしれません。
+ローカルからのプッシュ前に確認を追加することで、
+パイプライン時間の無駄遣いを減らすことができます。
+
+:::
 
 ## リファレンス
 
