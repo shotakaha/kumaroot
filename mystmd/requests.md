@@ -41,6 +41,7 @@ import urllib.request
 import urllib.parse
 import requests
 import httpx
+from pathlib import Path
 
 print(f"{requests.__version__=}")
 print(f"{httpx.__version__=}")
@@ -308,36 +309,30 @@ r = urllib.request.Request(url=PARAMS_URL, headers=HEADERS, method="GET")
 r_url = urllib.request.urlopen(r, timeout=5)
 
 r_req = requests.get(BASE_URL, headers=HEADERS, params=PARAMS, timeout=5)
-r_req.encoding = "utf-8"
+# r_req.encoding = "utf-8"
 
 r_hpx = httpx.get(
     BASE_URL, headers=HEADERS, params=PARAMS, timeout=5, follow_redirects=True
 )
-r_hpx.encoding = "utf-8"
+# r_hpx.encoding = "utf-8"
 ```
 
 ```{code-cell} ipython3
 data = r_url.read()
 content = data.decode("utf-8")
-with open("content_urllib.csv", "w") as f:
-    # print(content)
-    f.write(content)
-
-
-content = r_req.text
-with open("content_requests.csv", "w") as f:
-    # print(content)
-    f.write(content)
+p = Path("content_urllib.csv")
+p.write_text(content, encoding="utf-8")
+print(f"saved {p}")
 
 ###
 
+p = Path("content_requests.csv")
+p.write_text(r_req.text, encoding="utf-8")
+print(f"saved {p}")
 
-content = r_hpx.text
-with open("content_httpx.csv", "w", encoding="utf-8") as f:
-    # print(content)
-    f.write(content)
-```
+###
 
-```{code-cell} ipython3
-httpx.URL?
+p = Path("content_httpx.csv")
+p.write_text(r_hpx.text, encoding="utf-8")
+print(f"saved {p}")
 ```

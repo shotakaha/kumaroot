@@ -27,6 +27,7 @@
 # TARGET_URL = "https://example.com"
 TARGET_URL = "https://httpbin.org/get"
 
+
 # インポート
 #
 # - `urllib.request`: 標準モジュール
@@ -38,9 +39,11 @@ import urllib.request
 import urllib.parse
 import requests
 import httpx
+from pathlib import Path
 
 print(f"{requests.__version__=}")
 print(f"{httpx.__version__=}")
+
 # -
 
 # # リクエストの作成
@@ -53,6 +56,7 @@ r_url = urllib.request.urlopen(TARGET_URL, timeout=5)
 r_req = requests.get(TARGET_URL, timeout=5)
 r_hpx = httpx.get(TARGET_URL, timeout=5)
 
+
 # ## 結果を確認
 #
 # `urllib`はオブジェクトのアドレスが返ってくるので、実行結果がすぐにはわかりませんが、`requests`と`httpx`はオブジェクトを`print`するだけで実行結果が確認できます。
@@ -61,11 +65,13 @@ print(f"{r_url=}")
 print(f"{r_req=}")
 print(f"{r_hpx=}")
 
+
 # オブジェクトの型を確認
 
 print(f"{type(r_url)=}")
 print(f"{type(r_req)=}")
 print(f"{type(r_hpx)=}")
+
 
 # 関数のシグネチャ
 #
@@ -129,6 +135,7 @@ print(f"{r_url.headers.items()=}")
 print(f"{r_req.headers=}")
 print(f"{r_hpx.headers=}")
 
+
 # ## リクエストにヘッダーを追加する
 #
 # `requests.get`と`httpx.get`は`headers`オプションで、ヘッダー情報を追加できます。
@@ -141,6 +148,7 @@ r = urllib.request.Request(url=TARGET_URL, headers=HEADERS, method="GET")
 r_url = urllib.request.urlopen(r, timeout=5)
 r_req = requests.get(TARGET_URL, headers=HEADERS, timeout=5)
 r_hpx = httpx.get(TARGET_URL, headers=HEADERS, timeout=5)
+
 # -
 
 # 追加した情報は、それぞれのモジュールの`Request`オブジェクトで確認できる。
@@ -149,11 +157,13 @@ print(f"{r.headers=}")
 print(f"{r_req.request.headers=}")
 print(f"{r_hpx.request.headers=}")
 
+
 # レスポンスには含まれない
 
 print(f"{r_url.headers.items()=}")
 print(f"{r_req.headers=}")
 print(f"{r_hpx.headers=}")
+
 
 # # クエリ操作したい
 #
@@ -173,11 +183,13 @@ r_url = urllib.request.urlopen(r, timeout=5)
 
 r_req = requests.get(TARGET_URL, headers=HEADERS, params=PARAMS, timeout=5)
 r_hpx = httpx.get(TARGET_URL, headers=HEADERS, params=PARAMS, timeout=5)
+
 # -
 
 print(f"{r_url.url=}")
 print(f"{r_req.request.url=}")
 print(f"{r_hpx.request.url=}")
+
 
 # # ステータスを確認したい
 #
@@ -202,6 +214,7 @@ except urllib.error.HTTPError as e:
 
 r_req = requests.get(TARGET_URL, timeout=5)
 r_hpx = httpx.get(TARGET_URL, timeout=5)
+
 # -
 
 # 例外処理が発生すると、`r_url`が生成されないため、以下は`requests`と`httpx`のレスポンスを確認する
@@ -209,12 +222,15 @@ r_hpx = httpx.get(TARGET_URL, timeout=5)
 print(f"{r_req.status_code=}")
 print(f"{r_hpx.status_code=}")
 
+
 print(f"{r_req.ok=}")
 print(f"{r_hpx.is_success=}")
+
 
 print(f"{r_url.reason=}")
 print(f"{r_req.reason=}")
 print(f"{r_hpx.reason_phrase=}")
+
 
 # # レスポンスを確認
 #
@@ -228,6 +244,7 @@ TARGE_URL = "https://httpbin.org/get"
 r_url = urllib.request.urlopen(TARGET_URL, timeout=5)
 r_req = requests.get(TARGET_URL, timeout=5)
 r_hpx = httpx.get(TARGET_URL, timeout=5)
+
 # -
 
 # ## `urllib.request`
@@ -246,12 +263,14 @@ with open("content_urllib.txt", "w") as f:
     print(content)
     f.write(content)
 
+
 # +
 content = r_req.text
 
 with open("content_requests.txt", "w") as f:
     print(content)
     f.write(content)
+
 
 # +
 r_hpx.encoding = "utf-8"
@@ -260,6 +279,7 @@ content = r_hpx.text
 with open("content_httpx.txt", "w") as f:
     print(content)
     f.write(content)
+
 # -
 
 # # 実際のユースケースで確認
@@ -271,6 +291,7 @@ EXPORT_URL = "https://docs.google.com/spreadsheets/d/16Sc_UgShNuxMfRnBiFsjmfThE1
 BASE_URL = "https://docs.google.com/spreadsheets/d/16Sc_UgShNuxMfRnBiFsjmfThE1VfVhJf3jgmxNvFeEI/export"
 PARAMS = {"gid": "0", "format": "csv"}
 
+
 # +
 # クエリ付きURLの作り方は力づく
 PARAMS_URL = BASE_URL + "?" + urllib.parse.urlencode(query=PARAMS)
@@ -278,33 +299,30 @@ r = urllib.request.Request(url=PARAMS_URL, headers=HEADERS, method="GET")
 r_url = urllib.request.urlopen(r, timeout=5)
 
 r_req = requests.get(BASE_URL, headers=HEADERS, params=PARAMS, timeout=5)
-r_req.encoding = "utf-8"
+# r_req.encoding = "utf-8"
 
 r_hpx = httpx.get(
     BASE_URL, headers=HEADERS, params=PARAMS, timeout=5, follow_redirects=True
 )
-r_hpx.encoding = "utf-8"
+# r_hpx.encoding = "utf-8"
+
 
 # +
 data = r_url.read()
 content = data.decode("utf-8")
-with open("content_urllib.csv", "w") as f:
-    # print(content)
-    f.write(content)
-
-
-content = r_req.text
-with open("content_requests.csv", "w") as f:
-    # print(content)
-    f.write(content)
+p = Path("content_urllib.csv")
+p.write_text(content, encoding="utf-8")
+print(f"saved {p}")
 
 ###
 
+p = Path("content_requests.csv")
+p.write_text(r_req.text, encoding="utf-8")
+print(f"saved {p}")
 
-content = r_hpx.text
-with open("content_httpx.csv", "w", encoding="utf-8") as f:
-    # print(content)
-    f.write(content)
+###
 
-# +
-# httpx.URL?
+p = Path("content_httpx.csv")
+p.write_text(r_hpx.text, encoding="utf-8")
+print(f"saved {p}")
+

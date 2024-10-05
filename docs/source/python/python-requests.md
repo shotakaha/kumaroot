@@ -64,11 +64,8 @@ REST APIのようにJSON形式のレスポンスは`json()`メソッドで確認
 
 ```python
 r = requests.get("https://example.com")
-content = r.text
 p = Path("output.html")
-
-with p.open("w", encoding="utf-8") as f:
-    f.write(content)
+p.write_text(r.text, encoding="utf-8")
 ```
 
 テキスト形式のレスポンスは、通常のファイル出力を使って保存できます。
