@@ -53,7 +53,8 @@ Emacsをターミナル内で起動する場合は``emacs -nw``でもできま�
 
 ```unixconfig
 [alias]
-    co = checkout
+    # co = checkout
+    co = switch
     ci = commit
     st = status
     br = branch
