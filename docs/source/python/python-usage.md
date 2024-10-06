@@ -94,13 +94,16 @@ python-textblob
 ---
 maxdepth: 1
 ---
+python-loguru
+python-icecream
+python-deprecated
 python-black
 python-ruff
-python-icecream
-python-loguru
 python-pytest
 python-unittest-mock
-python-deprecated
+python-mypy
+python-pyright
+python-tox
 ```
 
 ```bash
