@@ -1,6 +1,9 @@
 # 型チェックしたい（`mypy`）
 
 ```console
+$ mypy --version
+mypy 1.11.2 (compiled: yes)
+
 $ mypy --ignore-missing-imports ファイル名 or ディレクトリ名
 ```
 
