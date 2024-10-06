@@ -98,6 +98,9 @@ def read_event(port: serial.Serial) -> list[str]:
     return data
 ```
 
+シリアル通信でデータを取得するための`read_event`という関数です。
+USB接続がない状態でユニットテストできるようにします。
+
 ```{code-block} python
 ---
 caption: tests/test_daq_read_event.py
@@ -117,10 +120,8 @@ def test_daq_read_event():
     assert isinstance(data, list)
 ```
 
-シリアル通信でデータを取得するための`read_event`という関数のテストです。
-
-``read_event``では、PySerial（`serial.Serial`）を使ってシリアル通信をしていますが、ユニットテストでは接続がない状態で確認できるようにしたいです。
-そのために`MagickMock`で``serial.Serial``オブジェクトをモックしています。
+`serial.Serial`オブジェクトを`MagicMock`することで、
+USB接続がない状態で`read_event`のユニットテストできます。
 
 また``read_event``では``readline()``でデータを取得しています。
 検出器が返すデータ形式がスペース区切りの文字列になっているため
@@ -181,8 +182,12 @@ def test save_events(mock_open):
 
 ## HTTPリクエストをモックしたい
 
+:::{seealso}
+
 - [](./python-requests.md)
 - [](./python-httpx.md)
+
+:::
 
 ## リファレンス
 
