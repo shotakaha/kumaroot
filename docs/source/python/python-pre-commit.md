@@ -101,25 +101,11 @@ repos:
 
 ## ruff-pre-commitしたい
 
-```yaml
-repos:
-- repo: ...
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.6.7
-  hooks:
-  # - id: ruff
-  - id: ruff-format
-```
-
-[ruff](./python-ruff.md)は、Pythonプロジェクトの
+`ruff`は、Pythonプロジェクトの
 リンター＆フォーマッターです。
-`pre-commit`フックに設定しておくとよいと思います。
+コミットごとに自動チェックすることで、コードの表記ゆれを抑えることができます。
 
-`ruff`を有効にすると`ruff check .`が実行されます。
-ファイルは修正されません。
-
-`ruff-format`を有効にすると`ruff format .`が実行されます。
-ファイルは修正されます。
+フックの設定方法は[](./python-ruff.md)を参照してください。
 
 ## commitizenしたい
 
