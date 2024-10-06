@@ -182,6 +182,7 @@ def test save_events(mock_open):
 ## HTTPリクエストをモックしたい
 
 - [](./python-requests.md)
+- [](./python-httpx.md)
 
 ## リファレンス
 
