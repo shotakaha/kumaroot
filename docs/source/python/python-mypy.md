@@ -4,6 +4,26 @@
 $ mypy --ignore-missing-imports ファイル名 or ディレクトリ名
 ```
 
+## インストールしたい（`mypy`）
+
+- `pipx`でインストール
+
+```console
+$ pipx install mypy
+```
+
+- `poetry`でインストール
+
+```console
+$ poetry add mypy --group test
+```
+
+- `uv`でインストール
+
+```console
+$ uv tool install mypy
+```
+
 ## リファレンス
 
 - [mypy](https://mypy.readthedocs.io/en/stable/index.html)
