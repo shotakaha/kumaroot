@@ -1,42 +1,51 @@
 # ユニットテストしたい（``pytest``）
 
 ```console
+$ pytest --version
+pytest 8.3.3
+
 $ pytest
 $ pytest --verbose
 $ pytest ファイル名
 ```
 
-`pytest`をプロジェクトのルートディレクトリで実行すると、テストをまとめて実行できます。
-``--verbose``オプションで、それぞれのテスト結果を表示できます。
+`pytest`はPythonのユニットテスト群をまとめて実行できるツールです。
+プロジェクトのルートディレクトリで実行すればテストをまとめて実行できます。
+``--verbose``オプションで、それぞれのテストごとに結果を表示できます。
 
 ## インストールしたい（``pytest``）
 
+- `pipx`でインストール
+
 ```console
-$ pip3 install pytest
 $ pipx install pytest
+```
+
+- `poetry`でインストール
+
+```console
+$ poetry add pytest --group=test
+$ poetry add pytest-mock --group=test  # モックを使ったユニットテスト
+$ poetry add pytest-cov --group=test   # カバレッジの計測
+$ poetry add pytest-html --group=test  # テスト結果をHTMLファイルに出力
+```
+
+`poetry`で管理している場合は``--group=test``に分類するとよいと思います。
+
+- `uv`でインストール
+
+```console
 $ uv tool install pytest
+$ uv tool install pytest-mock
+$ uv tool install pytest-cov
 ```
 
-`pytest`は`pipx`や`uv`などでもインストールできます。
+`pipx`や`uv`を使ってシステム（の仮想環境）にインストールできます。
 
-```console
-$ pip3 install pytest-mock
-```
-
-`pytest-mock`をインストールすると、
-[unittest.mock](./python-unittest-mock.md)が使えるようになります。
-`pytest-mock`はコマンドラインツールではないため、`pipx`などではインストールできません。
-
-```console
-$ poetry add pytest --group test
-$ poetry add pytest-mock --group test  # モックを使ったユニットテスト
-$ poetry add pytest-cov --group test   # テストカバレッジの計測
-$ poetry add pytest-html --group test  # テスト結果をHTMLファイルに出力
-```
-
-`poetry`などで開発環境を管理している場合は、
-``--group test``などに分類するとよいです。
-
+テスト結果をHTMLファイルに出力する場合は`pytest-html`のが必要です。
+[unittest.mock](./python-unittest-mock.md)を使う場合は、
+`pytest-mock`もインストールしておくとよいです。
+カバレッジを計測した場合は`pytest-cov`が必要です。
 
 ## ディレクトリ構造
 
