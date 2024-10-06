@@ -15,7 +15,7 @@ from unittest.mock import mock_open
 
 :::
 
-## MagickMockしたい（``MagicMock``）
+## MagicMockしたい（``MagicMock``）
 
 ```python
 from unittest.mock import MagicMock
@@ -48,6 +48,44 @@ def test_テスト関数(モック名):
 ```
 
 ``@patch``デコレーターで引数に指定した関数をモックできます。
+
+## 複数パッチしたい（``@patch``）
+
+```python
+# @デコレーターの順番と引数の順番の対応に注意
+@patch("モジュール名.クラス名3")  # => モック名3 で受け取る
+@patch("モジュール名.クラス名2")  # => モック名2 で受け取る
+@patch("モジュール名.クラス名1")  # => モック名1 で受け取る
+def test_テスト関数(モック名1, モック名2, モック名3):
+    """複数のモックを使ったテスト"
+
+    モック名1.メソッド名.return_value = ...
+    モック名2.メソッド名.return_value = ...
+    モック名3.メソッド名.return_value = ...
+```
+
+ひとつのテスト関数に、複数の``@patch``デコレーターを使用できます。
+テスト用の関数の引数で、それぞれのモックを受け取ることができます。
+デコレーターの順番と引数の順番の対応に注意が必要です。
+
+## パッチしたい（``patch``）
+
+```python
+def test_テスト関数():
+    with patch("モジュール名.クラス名") as モック名:
+        # テストを書く
+```
+
+``@patch``デコレーターは、`patch`関数としてコンテキストマネージャーのように使うことができます。
+
+```python
+def test_download():
+    with patch("subprocess.run") as mock_subprocess_run:
+        url = TEST_SHARED_URL
+        sheet = Sheet(...)
+        sheet.download()
+        mock_subprocess_run.assert_called_with(...)
+```
 
 ## シリアル通信をモックしたい（``MagicMock``）
 

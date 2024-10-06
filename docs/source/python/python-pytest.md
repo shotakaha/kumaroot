@@ -105,42 +105,7 @@ def test_download(mock_subprocess_run):
 wgetを実行していないため、`filename="output.csv"`に設定したファイルは作成されません。
 そのため、``assert_called_with``を使って、指定した引数で関数が呼ばれたかどうかで、動作確認しています。
 
-## 複数パッチしたい（``@patch``）
 
-```python
-@patch("モジュール名.クラス名3")
-@patch("モジュール名.クラス名2")
-@patch("モジュール名.クラス名1")
-def test_テスト関数(モック名1, モック名2, モック名3):
-    """複数のモックを使ったテスト"
-
-    モック名1.メソッド名.return_value = ...
-    モック名2.メソッド名.return_value = ...
-    モック名3.メソッド名.return_value = ...
-```
-
-ひとつのテスト関数に、複数の``@patch``デコレーターを使用できます。
-それぞれのモック名を引数に設定することで、モックにアクセスできるようになりますが、
-デコレーターをつける順番に注意が必要です。
-
-## パッチしたい（``patch``）
-
-```python
-def test_テスト関数():
-    with patch("モジュール名.クラス名") as モック名:
-        # テストを書く
-```
-
-``@patch``デコレーターは、`patch`関数としてコンテキストマネージャーのように使うことができます。
-
-```python
-def test_download():
-    with patch("subprocess.run") as mock_subprocess_run:
-        url = TEST_SHARED_URL
-        sheet = Sheet(...)
-        sheet.download()
-        mock_subprocess_run.assert_called_with(...)
-```
 
 ## モックしたい
 
