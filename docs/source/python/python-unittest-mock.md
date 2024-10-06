@@ -179,6 +179,10 @@ def test save_events(mock_open):
 ``mock_open``も``MagicMock``と同じように関数／メソッドを呼び出した回数を記録しています。
 そのため``関数名.call_count``でアサートできます。
 
+## HTTPリクエストをモックしたい
+
+- [](./python-requests.md)
+
 ## リファレンス
 
 - [unittest.mock](https://docs.python.org/3/library/unittest.mock.html)

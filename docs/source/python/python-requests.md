@@ -191,12 +191,12 @@ macOSの場合は`(Macintosh; Intel Mac OS X 13_0)`
 
 :レンダリングエンジン / Gecko互換性:
 ブラウザで使用しているレンダリングエンジンの情報を記述します。
-FireFoxでは`Gecko/バージョン`、
+Firefoxでは`Gecko/バージョン`、
 ChromeやSafariでは`AppleWebkit/バージョン (KHTML, like Gecko)`となります。
 
 :ブラウザー情報:
 ブラウザー名とバージョン情報を記述します。
-FireFoxの場合は`Firefox/バージョン`、
+Firefoxの場合は`Firefox/バージョン`、
 Safariの場合は`Version/16.0`、
 ChromeやChromeベースの場合は`Chrome/バージョン`、
 Edgeの場合は`Edg/バージョン`と書くようです。
@@ -216,7 +216,7 @@ WebKitベースのブラウザーのSafari互換性の情報を記述します�
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"}
 ```
 
--  Mozilla Firefox (v102.0) / WindowsPC
+- Mozilla Firefox (v102.0) / WindowsPC
 
 ```python
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0"}
@@ -233,6 +233,46 @@ headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebK
 ```python
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.79"}
 ```
+
+## モックしたい
+
+```python
+from unittest.mock import patch
+
+@patch("pathlib.Path.write_text")
+@patch("requests.get")
+def test_requests(mock_get, mock_write):
+    # テスト用の文字列
+    text_data = "モックしたテキストデータ"
+
+    # response.ok の返り値をモック
+    # response.text の返り値をモック
+    mock_get.return_value.ok = True
+    mock_get.return_value.text = text_data
+
+
+    関数(引数)
+    # 内部で requests.get している関数
+    #   response = requests.get(url="URL", timeout=30)
+    #   p = Path("ファイル名")
+    #   p.write_text(response.text)
+
+    # request.get の呼び出しを確認
+    mock_get.assert_called_once_with(url="URL", timeout=30)
+    # Path.write_text の呼び出しを確認
+    mock_write.assert_called_once_with(text_data)
+```
+
+`requests.get`でGETリクエストして取得したレスポンス（＝テキストデータ）を
+`Path.write_text`でファイルに保存する関数のユニットテストのサンプルです。
+
+関数のロジックを確認するためのユニットテストの場合、
+実際にGETリクエストを発生させたり、
+ファイルを作成したりする必要はありません。
+
+`requests.get`と`pathlib.Path.write_text`をモックし、
+`assert_called_once_with(引数)`で、
+それぞれの関数が適切な引数で呼び出されたことを確認しています。
 
 ## リファレンス
 
