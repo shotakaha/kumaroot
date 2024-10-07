@@ -72,3 +72,10 @@ html_theme_options = {
 ```
 
 ``Read the Docs``のドキュメントを参照すると、[Configuration](https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html)のページにオプションの設定方法が書かれていました。
+
+:::{caution}
+
+`v3.0.0`で `analytics_id`と`analytics_anonymize_ip`の設定が廃止されました。
+[sphinxcontrib.googleanalytics](./sphinx-extensions-googleanalytics.md)パッケージで代替できます。
+
+:::
