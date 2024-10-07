@@ -4,11 +4,50 @@
 
 ### Feat
 
+- **git/git-ignore.md**: gitignoreを追加した
+- **python/python-tox.md**: toxを追加した
+- **python/python-pyright.md**: pyrightを追加した
+- **python/python-mypy.md**: mypyを追加した
+- **python/python-httpx.md**: httpxを追加した
 - **python/python-urllib.md**: urllib.parseを追加した
 - **command/command-arduino-cli.md**: arduino-cliを追加した
 
 ### Fix
 
+- **git/git-config.md**: coのエイリアスを変更した
+- **python/python-pyproject.md**: 主要セクションを追記した
+- **python/python-pyright.md**: pyrightのバージョンを追記した
+- **python/python-mypy.md**: mypyのバージョンを追記した
+- **python/python-tox.md**: toxを追記した
+- **python/python-usage.md**: 目次を追加した
+- **python/python-unittest-mock.md**: シリアル通信モックを修正した
+- **python/python-httpx.md**: モックする方法を追記した
+- **python/python-requests.md**: モックする方法を移動した
+- **python/python-pytest.md**: @patchをunittest.mockに移動した
+- **python/python-pytest.md**: インストール手順を整理した
+- **git/git-branch.md**: mergedオプションを追記した
+- **python/python-ruff.md**: pre-commit-hooksの設定を移動した
+- **python/python-black.md**: 感想を追加した
+- **python/python-black.md**: 説明を整理した
+- **python/python-pre-commit.md**: pytestを追加した
+- **git/git-hooks.md**: Hooksを調べた
+- **python/python-pytest.md**: patchデコレーターをunittest.mockに移動した
+- **python/python-pytest.md**: モックのサンプルを追加した
+- **python/python-pathlib.md**: write_textのオプションを追記した
+- **python/python-requests.md**: 保存方法を修正した
+- **python/python-requests.md**: サンプルを更新した
+- **python/python-jupyter.md**: 廃止予定であることを追記した
+- **python/python-jupyter.md**: uvでインストールした
+- **python/python-jupyter.md**: インストール方法を追記した
+- **python/python-jupyter.md**: 基本コマンドを追記した
+- **python/python-jupyter.md**: 拡張機能を追記した
+- **python/python-pathlib.md**: mkdirを追記した
+- **python/python-pathlib.md**: openを追記した
+- **python/python-pathlib.md**: read_textを追記した
+- **python/python-pathlib.md**: コンテンツを並び替えた
+- **python/python-pathlib.md**: write_textを追記した
+- **python/python-usage.md**: 目次を修正した
+- **mystmd/gitlab.md**: テキストを修正
 - **.pre-commit-config.yaml**: jupytextを無効にした
 - **.pre-commit-config.yaml**: nbstripoutを無効化した
 - jupytext --sync mystmd/*.md
@@ -36,6 +75,13 @@
 - **git/git-remote.md**: git-remoteを追記した
 - **gas/gas-class.md**: thisキーワードを追記した
 - **gas/gas-version.md**: ECMAScriptバージョンを追加した
+
+### Refactor
+
+- **indexes**: それぞれのインデックスを更新した
+- **scripts**: ファイル名を変更して再プロセスした
+- **mystmd**: ファイル名を変更して再度プロセスした
+- **notebooks/**: ファイル名を変更した
 
 ## v1.39.0 (2024-09-28)
 
