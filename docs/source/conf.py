@@ -116,7 +116,6 @@ html_logo = "./_static/quma.jpeg"
 html_static_path = ["_static"]
 html_css_files = ["css/heading.css"]
 html_theme_options = {
-    "analytics_id": "G-F2T33GE7N3",  #  Provided by Google in your dashboard
     "prev_next_buttons_location": "both",
     "style_external_links": True,
     "style_nav_header_background": "darkorange",
