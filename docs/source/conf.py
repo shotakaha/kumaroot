@@ -31,6 +31,7 @@ extensions = [
     "sphinx_design",
     "sphinx_tags",
     "sphinxcontrib.mermaid",
+    "sphinxcontrib.googleanalytics",
 ]
 
 templates_path = ["_templates"]
@@ -121,6 +122,9 @@ html_theme_options = {
     "style_nav_header_background": "darkorange",
 }
 
+# -- Options for Google Analytics --------------------------------------------------
+googleanalytics_enabled = True
+googleanalytics_id = "G-F2T33GE7N3"
 
 # -- Options for OGP --------------------------------------------------
 
