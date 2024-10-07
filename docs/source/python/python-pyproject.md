@@ -67,4 +67,3 @@ build-backend = "poetry.core.masonry.api"
 - [PEP517 - A build-system independent format for source trees](https://peps.python.org/pep-0517/)
 - [PEP518 - Specifying Minimum Build System Requirements for Python Projects](https://peps.python.org/pep-0518/)
 - [PEP621 - Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
-
