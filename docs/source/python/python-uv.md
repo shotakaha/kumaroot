@@ -12,7 +12,7 @@ $ uv add --dev パッケージ名
 `.python-version`でPython環境を管理し、
 `pyproject.toml`と`uv.lock`のファイルを使って依存関係を管理できます。
 
-## インストールしたい
+## インストールしたい（`uv`）
 
 ```console
 $ brew install uv
@@ -79,6 +79,23 @@ $ uv init PROJECT_NAME
 error: Project is already initialized in `./PROJECT_NAME`
 ```
 
+## Python管理したい（`uv python`）
+
+```console
+// 環境を確認
+$ uv python dir
+$ uv python list
+$ uv python list --only-installed
+
+// インストール&ピン留め
+$ uv python install
+$ uv python pin
+$ uv python uninstall
+```
+
+`python`コマンドで、利用するPythonの実行環境を管理できます。
+またサブコマンドの`--python`オプションで、実行環境を変更できます。
+
 ## 仮想環境したい（`uv venv`）
 
 ```console
@@ -91,7 +108,8 @@ Activate with: source .venv/bin/activate.fish
 $ source .venv/bin/activate.fish
 ```
 
-`venv`コマンドで仮想環境を`.venv/`ディレクトリに作成できます。
+`venv`コマンドで仮想環境を作成できます。
+仮想環境はデフォルトで`.venv/`ディレクトリに作成されます。
 `source .venv/bin/activate.fish`で仮想環境をアクティベートできます。
 
 ## パッケージを追加したい（``uv add`` / `uv remove`）
