@@ -28,6 +28,10 @@ $ which -a uvx
 /opt/homebrew/bin/uvx
 ```
 
+Pythonの実行環境を操作できるコマンドなので、
+Homebrewを使ってシステム全体にインストールしました。
+`pipx`や`poetry`でもインストールできます。
+
 ## 新規プロジェクトしたい（``uv init``）
 
 ```console
@@ -183,5 +187,13 @@ $ uv tool uninstall コマンド
 
 `~/.local/bin`は`pipx`でインストールされるコマンドと同じパスです。
 同名のコマンドがある場合はインストールに**失敗**します。
+
+:::
+
+:::{note}
+
+`uv tool`でインストールしたコマンドを、
+一括でアップグレードする方法はありません。
+現在、[uvのGitHub issue](https://github.com/astral-sh/uv/issues/1419)で議論されているようです。
 
 :::
