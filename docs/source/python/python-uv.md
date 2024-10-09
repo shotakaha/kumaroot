@@ -1,7 +1,7 @@
 # パッケージ管理したい（``uv``）
 
 ```console
-$ uv init プロジェクト名
+$ uv init プロジェクト名 --app --package --vcs git
 $ uv python pin バージョン
 $ uv sync
 $ uv add パッケージ名
@@ -31,6 +31,38 @@ $ which -a uvx
 ## 新規プロジェクトしたい（``uv init``）
 
 ```console
+$ uv --version
+uv 0.4.20 (Homebrew 2024-10-08)
+
+// デフォルト（--app --no-package）
+$ uv init PROJECT_NAME
+
+// ライブラリ作成（--lib --package）
+$ uv init PROJECT_NAME --lib
+
+// CLI&パッケージ（--app --package）
+$ uv init PROJECT_NAME --app --package
+```
+
+`init`コマンドでプロジェクトを初期化できます。
+同名のプロジェクトがすでに存在する場合は、エラーになります
+プロジェクト名を省略した場合は、カレントディレクトリが初期化されます。
+
+目的にあったディレクトリ構造を自動で構成できるオプションも用意されています。
+デフォルトは`--app --no-package`に相当し、ローカルで利用するCLIの仕様になっています。
+
+| PyPI | ライブラリ（`--lib`） | アプリ（`--app`） |
+|---|---|---|
+| 公開したい（`--package`） | `--lib` | `--app --package` |
+| 公開しない（`--no-package`） | `--lib --no-package` | `--app` |
+
+:::{caution}
+
+`--app` / `--lib` / `--script`オプションは同時に使えないようになっています。
+
+:::
+
+```console
 // プロジェクト名を指定して初期化する
 $ uv init PROJECT_NAME
 Initialized project `PROJECT_NAME` at `./PROJECT_NAME`
@@ -46,37 +78,6 @@ PROJECT_NAME
 $ uv init PROJECT_NAME
 error: Project is already initialized in `./PROJECT_NAME`
 ```
-
-``init``コマンドでプロジェクトを初期化できます。
-同名のプロジェクトがすでに存在する場合は、エラーになります
-プロジェクト名を省略した場合は、カレントディレクトリが初期化されます。
-
-```console
-$ uv init --package PROJECT_NAME
-PROJECT_NAME
-├── README.md
-├── pyproject.toml
-└── src
-    └── project_name
-        └── __init__.py
-
-$ uv init --app PROJECT_NAME
-PROJECT_NAME
-├── README.md
-├── hello.py
-└── pyproject.toml
-
-$ uv init --lib PROJECT_NAME
-PROJECT_NAME
-├── README.md
-├── pyproject.toml
-└── src
-    └── project_name
-        └── __init__.py
-```
-
-また、``--package``、``--app``、``--lib``オプションで
-作成したいパッケージの目的に適したディレクトリ／ファイル構造を作成できます。
 
 ## 仮想環境したい（`uv venv`）
 
