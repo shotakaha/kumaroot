@@ -171,3 +171,18 @@ Pythonの場合、バージョン番号を書くファイルに決まりがあ�
 ソースコードの中にバージョン番号が散らばっていたら、
 意味がありません。
 初期設定のときに追加しておくとよいと思います。
+
+## フックしたい（`commitizen`）
+
+```yaml
+repos:
+- repo: https://github.com/commitizen-tools/commitizen
+  rev: v3.29.0
+  hooks:
+  - id: commitizen
+    stages:
+    - commit-msg
+```
+
+`commitizen (cz)`は[pre-commit](./python-pre-commit.md)に組み込むことができます。
+`stages: [commit-msg]`でコミットメッセージを保存したあとにフックがかかるようにしておきます。

@@ -108,24 +108,14 @@ repos:
 リンター＆フォーマッターです。
 コミットごとに自動チェックすることで、コードの表記ゆれを抑えることができます。
 
-フックの設定方法は[](./python-ruff.md)を参照してください。
+フックの設定方法は[](./python-ruff.md)に整理しました。
 
 ## commitizenしたい
 
-```yaml
-repos:
-- repo: ...
-- repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.29.0
-  hooks:
-  - id: commitizen
-    stages:
-    - commit-msg
-```
-
-`commitizen (cz)`はコミットメッセージの規律を守るためのツールです。
-`cz init`すると追加されているはずのフックです。
+`commitizen (cz)`はコミットメッセージの形式を守るためのツールです。
 `stages: [commit-msg]`でコミットメッセージを保存したあとにフックがかかるようにしておきます。
+
+フックの設定方法は[](./python-commitizen.md)に整理しました。
 
 ## poetryしたい
 
