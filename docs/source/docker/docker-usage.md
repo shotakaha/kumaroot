@@ -51,6 +51,7 @@ docker-compose
 docker-compose-ls
 docker-compose-up-down
 docker-compose-start-stop
+docker-compose-cp
 ```
 
 ## 実践例
