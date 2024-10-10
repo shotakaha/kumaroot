@@ -11,6 +11,8 @@ Dockerはコンテナ型仮想化技術を使ったプラットフォームで�
 ``Docker``にはデスクトップアプリ``Docker Desktop``があります。
 コンテナ管理／イメージ管理／ボリューム管理に関する情報やその操作はデスクトップアプリのGUIも頼るとよいと思います。
 
+## コンテナしたい（`docker`）
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -24,7 +26,6 @@ docker-container
 docker-container-run
 docker-container-exec
 docker-volume
-docker-compose
 ```
 
 ## Dockerfileしたい
@@ -38,6 +39,17 @@ docker-dockerfile-workdir
 docker-dockerfile-shell
 docker-dockerfile-run
 docker-dockerfile-cmd
+```
+
+## 複数コンテナしたい（`docker compose`）
+
+```{toctree}
+---
+maxdepth: 1
+---
+docker-compose
+docker-compose-up-down
+docker-compose-start-stop
 ```
 
 ## 実践例
