@@ -1,8 +1,11 @@
 # コンテナを起動したい（``docker container run``）
 
 ```console
-$ docker run オプション イメージ名 コマンド
+// 推奨コマンド
 $ docker container run オプション イメージ名 コマンド
+
+// 初期コマンド
+$ docker run オプション イメージ名 コマンド
 ```
 
 ``docker run``コマンドで``イメージ名:タグ``を指定して、コンテナを起動できます。
@@ -30,21 +33,24 @@ $ docker container run --name コンテナ名
 ```console
 $ docker container run -it イメージ名 [コマンド]
 
-# Ubuntuコンテナのデフォルトシェル（sh）を起動したい
+// Ubuntuコンテナのデフォルトシェル（sh）を起動したい
 $ docker container run -it ubuntu:latest
 ```
 
 ``-it``オプションを使って、コンテナ内のターミナル（``sh``）に接続できます。
 すでに起動しているコンテナに接続する場合は[docker container exec](./docker-exec.md)します。
 
-## ポートを指定したい（``-p`` / ``--publish``）
+## ポートしたい（``-p`` / ``--publish``）
 
-```bash
+```console
 $ docker container run -p ホスト側:コンテナ側
+
+// localhost:8080 で（コンテナ:80に）アクセス
+$ docker container run -p 8080:80 httpd:2.4
 ```
 
-``-p``オプションを使って、ポート番号を指定できます。
-ポート番号は``ホスト側:コンテナ側``の形式で記述します。
+`-p`オプションを使って、ポート番号を指定し、port forwardingできます。
+ポート番号の書式は``ホスト側:コンテナ側``です。
 ``http://localhost:ホスト側のポート番号``でコンテナにアクセスできます。
 
 ## バックグラウンドで起動したい（``-d`` / ``--detach``）
@@ -57,8 +63,11 @@ $ docker container run -d イメージ名
 
 ## ボリュームを指定したい（``-v`` / ``--volume``）
 
-```bash
+```console
+// named volume
 $ docker container run -v ホスト側（named volume）:コンテナ側
+
+// bind volume
 $ docker container run -v ホスト側（bind volume）:コンテナ側
 ```
 
