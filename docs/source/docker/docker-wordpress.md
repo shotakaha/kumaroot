@@ -48,40 +48,53 @@ WordPressのデータベースとしてMySQLとMariaDBが利用できます。
 - [bitnami/wordpress](https://hub.docker.com/r/bitnami/wordpress)
 
 
-## docker-compose.yml
+## Composeしたい（`wordpress`）
 
 ```yaml
 # docker-wordpress/docker-compose.yml
-version: "3"
 
 services:
-    wordpress:
-        image: wordpress
-        restart: always
-        ports:
-            - 8080:80
-        environment:
-            WORDPRESS_DB_HOST: db
-            WORDPRESS_DB_USER: exampleuser
-            WORDPRESS_DB_PASSWORD: examplepass
-            WORDPRESS_DB_NAME: exampledb
-        volumes:
-            - wordpress:/var/www/html
+  # WordPressコンテナ
+  wordpress:
+    image: wordpress
+    # 依存関係の設定
+    # db -> wordpressの順にコンテナを作成する
+    depends_on:
+      - db
+    # 再起動の設定
+    restart: always
+    # WordPressの環境変数
+    environment:
+      # DBのコンテナ名
+      WORDPRESS_DB_HOST: db
+      # DBのユーザー名
+      WORDPRESS_DB_USER: exampleuser
+      # DBのパスワード
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    # ポート設定
+    ports:
+      - "8080:80"
+    # ボリューム設定
+    volumes:
+      - wp-data:/var/www/html
 
-    db:
-        image: mysql:5.7
-        restart: always
-        environment:
-            MYSQL_DATABASE: exampledb
-            MYSQL_USER: exampleuser
-            MYSQL_PASSWORD: examplepass
-            MYSQL_RANDOM_ROOT_PASSWORD: "1"
-        volumes:
-            - db:/var/lib/mysql
+  # MySQLコンテナ
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - db-data:/var/lib/mysql
 
+# named volumeの設定
 volumes:
-    wordpress:
-    db:
+    wp-data:
+    db-data:
 ```
 
 ### 設定の概要
