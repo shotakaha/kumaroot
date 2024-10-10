@@ -52,16 +52,16 @@ $ uv tool upgrade pre-commit
 
 ```yaml
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0  # 最新バージョンにする
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-added-large-files
-  - repo: リポジトリ
-    rev: バージョン
-    hooks:
-      - id: フック名
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0  # 最新バージョンにする
+  hooks:
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+  - id: check-added-large-files
+- repo: リポジトリ
+  rev: バージョン
+  hooks:
+  - id: フック名
 ```
 
 `.pre-commit-config.yaml`にフック情報を記述します。
@@ -84,16 +84,19 @@ repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.6.0
   hooks:
+  - id: detect-private-key
+  - id: trailing-whitespace
+    args: ["--markdown-linebreak-ext=md"]
+  - id: end-of-file-fixer
+  - id: check-case-conflict
+  - id: check-merge-conflict
   - id: check-added-large-files
     args: ["--maxkb=500"]
-  - id: check-merge-conflict
   - id: check-json
   - id: check-toml
   - id: check-yaml
-  - id: detect-private-key
-  - id: end-of-file-fixer
-  - id: trailing-whitespace
-    args: ["--markdown-linebreak-ext=md"]
+  - id: name-tests-test
+    args: [--pytest-test-first]
 ```
 
 `pre-commit-hooks`のフックから、
