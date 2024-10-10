@@ -1,6 +1,12 @@
 # 複数のコンテナを使いたい（``compose.yaml``）
 
+```console
+$ docker compose version
+Docker Compose version v2.29.2-desktop.2
+```
+
 ```yaml
+# compose.yaml
 services:
   コンテナ名:
     image: イメージ名

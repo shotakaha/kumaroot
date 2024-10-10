@@ -48,6 +48,7 @@ docker-dockerfile-cmd
 maxdepth: 1
 ---
 docker-compose
+docker-compose-ls
 docker-compose-up-down
 docker-compose-start-stop
 ```
