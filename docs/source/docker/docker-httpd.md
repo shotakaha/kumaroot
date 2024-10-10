@@ -1,17 +1,43 @@
 # ウェブサーバーしたい（``httpd``）
 
-```bash
-$ docker run -d -p 8080:80 --name my-httpd httpd
+```console
+$ docker container run -d -p 8080:80 --name my-httpd httpd:2.4
+$ docker container stop my-httpd
 ```
 
-代表的なApacheをDockerを使って遊んでみようと思います。
+Dockerを使ってApacheサーバーで遊んでみようと思います。
 Apacheコンテナのイメージ名は[httpd](https://hub.docker.com/_/httpd/)です。
-ポート番号を8080番（``-p 8080:80``）し、コンテナの名前を``my-httpd``（``--name httpd``）として起動しています。
+
+ポート番号を8080番（``-p 8080:80``）にし、
+コンテナの名前を``my-httpd``（``--name httpd``）として起動しています。
+
 コンテナが起動したらブラウザで``http://localhost:8080``を開いて「It works!」と表示されていればOKです。
 
 コンテナには任意の名前をつけることができます。
 僕はテスト時には``my-イメージ名``とつけることにしています。
 以下では、このコンテナ名を使って、起動したコンテナに``docker exec -it``でログインしています。
+
+## Composeしたい
+
+```console
+$ docker compose up -d
+$ docker compose down
+```
+
+
+
+```yaml
+services:
+  web:
+    image: httpd:2.4
+    container_name: my-httpd
+    parts:
+      - "8080:80"
+```
+
+
+
+
 
 ## コマンドを追加したい（``apt-get``）
 

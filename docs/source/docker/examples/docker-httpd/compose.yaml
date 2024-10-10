@@ -1,0 +1,11 @@
+# docker container run -d -p 8080:80 httpd:2.4 に相当
+#
+# 作成: docker compose up -d
+# ブラウザで確認: http://127.0.0.1:8080/
+# 削除: docker compose down
+services:
+  web:
+    image: httpd:2.4
+    container_name: my-httpd
+    ports:
+      - "8080:80"
