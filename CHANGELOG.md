@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.40.0 (2024-10-10)
 
 ### Feat
 
@@ -14,6 +14,20 @@
 
 ### Fix
 
+- **python/python-pre-commit.md**: commitizenのフック設定を移動した
+- **python/python-pre-commit.md**: pre-commit-hooksのサンプルを追記した
+- **python/python-uv.md**: uvに追記した
+- **python/python-mypy.md**: py.typedを追記した
+- **python/python-uv.md**: uv pythonを追記した
+- **python/python-uv.md**: uv initを整理した
+- **docs/source/conf.py**: sphinx_rtd_themeのオプションを整理した
+- **requirements.txt**: パッケージを更新した
+- **sphinx/sphinx-html-theme-rtd.md**: GA4設定が廃止されたことを追記した
+- **docs/source/conf.py**: GA4の設定を追加した
+- **pyproject.toml**: sphinxcontrib-googleanalytics を追加した: 0.4
+- **poetry.lock**: 18パッケージを更新した
+- **pyproject.toml**: sphinxを更新した: 7.4.7 -> 8.0.2
+- **pyproject.toml**: sphinx_rtd_themeを更新した: 2.0.0 -> 3.0.0
 - **git/git-config.md**: coのエイリアスを変更した
 - **python/python-pyproject.md**: 主要セクションを追記した
 - **python/python-pyright.md**: pyrightのバージョンを追記した
