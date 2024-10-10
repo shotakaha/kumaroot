@@ -1,15 +1,27 @@
-# 複数のコンテナを使いたい（``compose``）
+# 複数のコンテナを使いたい（``compose.yaml``）
 
-```bash
-$ docker compose up -d
-$ docker compose down
+```yaml
+services:
+  コンテナ名:
+    image: イメージ名
+    volumes:
+      - ホストOSのパス:コンテナのパス
 ```
 
-ひとつのコンテナにはひとつの役割を持たせるのがDockerの大原則です。
-あらかじめ役割を分けておくことで、ソフトウェアのバージョンアップなどの改善作業が簡単になります。
+`docker compose`で一度に複数のコンテナを作成・実行できます。
+設定は`compose.yaml`で管理します。
 
-しかし、コンテナの数が増えると、その管理は煩雑になります。
-それを解決するのが``docker compose``コマンドです。
-使用するコンテナごとの設定を``docker-compose.yml``にひとまとめにして整理できます。
+:::{caution}
 
-もともと``docker-compose``という独立した（？）（python？）コマンドだったのですが、あるときから``docker``のサブコマンドとして（Go言語で）実装されました。
+Docker ComposeにはV1とV2があります。
+Compose V1は`docker-compose`というコマンド名（pythonで実装？）で、設定ファイルは`docker-compose.yaml`でした。
+Compose V2で`docker compose`という`docker`のサブコマンド（Go言語で実装）になり、設定ファイル名は`compose.yaml`が推奨されています。
+
+Compose V1のサポートは2023年6月に終了しています。
+また、Docker Desktop v4.33.0（2024年7月）で`docker-compose`コマンドが削除されました。
+
+:::
+
+## リファレンス
+
+- [Docker Compose - docs.docker.com](https://docs.docker.com/compose/)
