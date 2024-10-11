@@ -110,8 +110,7 @@ volumes:
 
 ## DockerHubの
 
-- [wordpress](https://hub.docker.com/_/wordpress/)
-- [bitnami/wordpress](https://hub.docker.com/r/bitnami/wordpress)
+
 
 
 ## WordPressの設定
@@ -125,3 +124,13 @@ WordPressの設定は``wp-config.php``に記述します。
 - ``-e WORDPRESS_DB_NAME=...``
 - ``-e WORDPRESS_TABLE_PREFIX=...``
 - ``-e WORDPRESS_DEBUG=1``
+
+## リファレンス
+
+- [wordpress - DockerHub](https://hub.docker.com/_/wordpress/)
+- [mariadb - DockerHub](https://hub.docker.com/_/mariadb)
+- [mysql - DockerHub](https://hub.docker.com/_/mysql)
+- [bitnami/wordpress - DockerHub](https://hub.docker.com/r/bitnami/wordpress)
+- [bitnami/mariadb](https://hub.docker.com/r/bitnami/mariadb)
+- [bitnami/mysql](https://hub.docker.com/r/bitnami/mysql)
+- [wordpress-mysql - Awesome Compose](https://github.com/docker/awesome-compose/tree/master/wordpress-mysql)
