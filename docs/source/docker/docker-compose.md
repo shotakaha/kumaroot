@@ -56,6 +56,14 @@ services:
 
 `services`セクションで設定できることを整理しました。
 
+:::{note}
+
+Compose V1の初期には、`compose.yaml`の先頭で`version: "3"`のようにバージョン指定していました。
+Docker Compose 1.27.0以降では、`version`キーは不要になっています。
+
+:::
+
 ## リファレンス
 
 - [Docker Compose - docs.docker.com](https://docs.docker.com/compose/)
+- [Compose Specification - docs.docker.jp](https://docs.docker.jp/compose/compose-file/index.html)
