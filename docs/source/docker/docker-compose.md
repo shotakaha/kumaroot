@@ -1,4 +1,4 @@
-# 複数のコンテナを使いたい（``compose.yaml``）
+# コンテナしたい（``compose.yaml``）
 
 ```console
 $ docker compose version

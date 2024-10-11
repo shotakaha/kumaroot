@@ -1,4 +1,4 @@
-# 複数コンテナを作成／削除したい（`up` / `down`）
+# コンテナを作成／削除したい（`compose up` / `compose down`）
 
 ```console
 // 複数コンテナを作成

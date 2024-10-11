@@ -1,4 +1,4 @@
-# 複数コンテナーを一時停止／再開したい（`stop` / `start`）
+# コンテナを一時停止／再開したい（`compose stop` / `compose start`）
 
 ```console
 // 複数コンテナを一時停止
