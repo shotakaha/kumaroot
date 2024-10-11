@@ -10,9 +10,19 @@ $ docker container run -d
 ```
 
 MariaDBを起動するとき、`-e`オプションで環境変数を設定する必要があります。
-環境変数名はDockerHubで確認できます。
-
 この数のオプションを毎回入力するのはミスの元なので、`compose.yaml`で管理するのがよいと思います。
+初回起動時は、これらの値でデータベースが初期化されます。
+
+| 変数名 | 説明 |
+|---|---|
+| `MARIADB_ROOT_PASSWORD` | DBのrootパスワード |
+| `MARIADB_DATABASE` | DB名 |
+| `MARIADB_USER` | DBのユーザー名 |
+| `MARIADB_USER_PASSWORD` | DBユーザーのパスワード |
+| `MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1` | |
+| `MARIADB_RANDOM_ROOT_PASSWORD=1` | |
+
+設定できる変数名はDockerHubで確認できます。
 
 ## Composeしたい（`mariadb`）
 
@@ -146,6 +156,38 @@ $ docker compose down
  ✔ Network docker-mariadb_default  Removed```
 ```
 
+## リストアしたい
+
+```yaml
+services:
+  db:
+    image: mariadb:11.5.2-noble
+    environment:
+      MARIADB_ROOT_PASSWORD: root_pass
+      MARIADB_DATABASE: test_db
+      MARIADB_USER: test_user
+      MARIADB_PASSWORD: test_pass
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql
+
+# named volumes
+volumes:
+  db-data:
+```
+
+ダンプしたデータベースがある場合、
+コンテナ内の`/docker-entrypoint-initdb.d/`にマウントすることで、
+コンテナ起動時にデータベースをリストアできます。
+
+:::{seealso}
+
+- [mariadb-dump](https://mariadb.com/kb/en/mariadb-dump/)
+- [mariabackup](https://mariadb.com/kb/en/mariabackup/)
+
+:::
+
 ## リファレンス
 
 - [mariadb - DockerHub](https://hub.docker.com/_/mariadb)
+- [Container Backup and Restoration - mariadb.com](https://mariadb.com/kb/en/container-backup-and-restoration/)
