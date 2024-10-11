@@ -32,10 +32,28 @@ services:
     tty: true
 ```
 
-```comsole
+```console
 $ docker compose up -d
+[+] Running 2/2
+ ✔ ubuntu Pulled
+   ✔ f29bcb9f3dcd Pull complete
+[+] Running 2/2
+ ✔ Network docker-ubuntu_default  Created
+ ✔ Container my-ubuntu            Started
+
 $ docker compose ls
+NAME             STATUS        CONFIG FILES
+docker-ubuntu    running(1)    docker-ubuntu/compose.yaml
+
+$ docker container ls
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+f7539a2ffecf   ubuntu:24.10   "/bin/bash"   4 minutes ago   Up 4 minutes             my-ubuntu
+
 $ docker compose down
+docker compose down
+[+] Running 2/1
+ ✔ Container my-ubuntu            Removed
+ ✔ Network docker-ubuntu_default  Removed
 ```
 
 ## リファレンス
