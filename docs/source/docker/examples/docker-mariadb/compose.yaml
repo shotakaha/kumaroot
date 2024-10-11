@@ -1,4 +1,7 @@
+# mariadb: https://hub.docker.com/_/mariadb
+# phpMyAdmin: https://hub.docker.com/_/phpmyadmin
 services:
+  # MariaDBコンテナ
   db:
     image: mariadb:11.5.2-noble
     environment:
@@ -8,5 +11,22 @@ services:
       MARIADB_PASSWORD: test_pass
     volumes:
       - db-data:/var/lib/mysql
+
+  # phpMyAdminコンテナ
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    depends_on:
+      - db
+    environment:
+      # MariaDBのコンテナ名
+      PMA_HOST: db
+      PMA_USER: test_user
+      PMA_PASSWORD: test_pass
+    ports:
+      - "8080:80"
+    volumes:
+      - pma-data:/sessions
+
 volumes:
   db-data:
+  pma-data:
