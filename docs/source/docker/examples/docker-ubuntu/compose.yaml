@@ -1,0 +1,9 @@
+# docker container run -d --name my-ubuntu ubuntu:24.10
+#
+# docker compose up -d
+# docker compose down
+services:
+  ubuntu:
+    image: ubuntu:24.10
+    container_name: my-ubuntu
+    tty: true

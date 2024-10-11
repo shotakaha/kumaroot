@@ -1,28 +1,42 @@
 # Ubuntuを使いたい
 
-```bash
-$ docker run -d --name my-ubuntu ubuntu
-$ docker exec -it my-ubuntu bash
+```console
+// コンテナを起動
+$ docker container run -d --name my-ubuntu ubuntu
+
+// コンテナの状態を確認
+$ docker container ls
+
+// コンテナ内のBashを起動
+$ docker container exec -it my-ubuntu bash
+
+// コンテナを停止＆削除
+$ docker container stop my-ubuntu
+$ docker container rm my-ubuntu
 ```
 
 Ubuntuコンテナをバックグラウンドで起動（``-d``）します。
-コンテナ名は``my-ubuntu``（``--name my-ubuntu``）としています。
-起動したコンテナに接続（``docker exec -it``）し``bash``に切り替えます。
+コンテナ名は``my-ubuntu``（``--name my-ubuntu``）にしました。
+起動したコンテナに接続（``docker exec -it``）し``bash``を起動します。
+使い終わったら、
+`docker container stop`と
+`docker container rm`で片付けておきます。
 
-## コンテナを削除したい
+## Composeしたい
 
-```bash
-# コンテナ名を確認する
-$ docker ps
-
-# コンテナを停止する
-$ docker stop my-ubuntu
-
-# コンテナを削除する
-$ docker rm my-ubuntu
+```yaml
+# compose.yaml
+services:
+  ubuntu:
+    image: ubuntu:24.10
+    tty: true
 ```
 
-起動時に指定したコンテナ名を使って、コンテナを停止（``stop``）してから削除（``rm``）します。
+```comsole
+$ docker compose up -d
+$ docker compose ls
+$ docker compose down
+```
 
 ## リファレンス
 
