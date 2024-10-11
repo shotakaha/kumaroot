@@ -1,0 +1,12 @@
+services:
+  db:
+    image: mariadb:11.5.2-noble
+    environment:
+      MARIADB_ROOT_PASSWORD: root_pass
+      MARIADB_DATABASE: test_db
+      MARIADB_USER: test_user
+      MARIADB_PASSWORD: test_pass
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:
