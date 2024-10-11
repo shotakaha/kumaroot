@@ -24,7 +24,7 @@ services:
       MARIADB_ROOT_PASSWORD: root_pass
       MARIADB_DATABASE: test_db
       MARIADB_USER: test_user
-      MADIADB_PASSWORD: test_pass
+      MARIADB_PASSWORD: test_pass
     volumes:
       - db-data:/var/lib/mysql
 
@@ -32,6 +32,17 @@ services:
 volumes:
   db-data:
 ```
+
+`environment`キーで、MariaDBのデータベースに接続するための情報を設定しています。
+`volumes`キーで、データの保存先を`named volume`に設定しています。
+
+:::{note}
+
+より実用的には、
+パスワード情報はベタ書きするのではなく、
+`.env`などに保存して環境変数として読み込めるようにするのがよいです。
+
+:::
 
 ```console
 // 設定を確認
