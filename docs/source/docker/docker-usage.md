@@ -1,17 +1,10 @@
 # Docker の使い方
 
-Dockerはコンテナ型仮想化技術を使ったプラットフォームです。
-プロダクション環境の構築や複製作業を簡単にしたり、
-開発環境の構築をサポートするために使います。
-
-ここでは主に、複数のパソコンで同じ開発環境を構築する手順を整理します。
-{file}`Dockerfile`というビルドスクリプトをベースにコンテナイメージを作成します。
-作成したイメージを元にコンテナを起動します。
-
-``Docker``にはデスクトップアプリ``Docker Desktop``があります。
-コンテナ管理／イメージ管理／ボリューム管理に関する情報やその操作はデスクトップアプリのGUIも頼るとよいと思います。
-
-## コンテナしたい（`docker`）
+`Docker`は**コンテナ型仮想化技術**を使ったプラットフォームです。
+使い捨てを前提とした**コンテナ**を管理することで、
+開発環境の構築や運用が簡単になります。
+個人開発の場合、必ずしも導入する必要はないですが、機能は知っておいたほうがよいかもしれません。
+コンテナのベースとなるイメージは`Docker Hub`に代表されるレジストリで公開されています。
 
 ```{toctree}
 ---
@@ -19,29 +12,11 @@ maxdepth: 1
 ---
 docker-install
 docker-tutorial
-docker-ls
-docker-image-pull
-docker-image-build
-docker-container
-docker-container-run
-docker-container-exec
-docker-volume
 ```
 
-## Dockerfileしたい
+## コンテナ操作したい（`docker compose`）
 
-```{toctree}
----
-maxdepth: 1
----
-docker-dockerfile-from
-docker-dockerfile-workdir
-docker-dockerfile-shell
-docker-dockerfile-run
-docker-dockerfile-cmd
-```
-
-## 複数コンテナしたい（`docker compose`）
+`docker compose`は複数のコンテナを管理するためのコマンドです。
 
 ```{toctree}
 ---
@@ -52,6 +27,39 @@ docker-compose-ls
 docker-compose-up-down
 docker-compose-start-stop
 docker-compose-cp
+```
+
+## 単一コンテナしたい（`docker`）
+
+`docker`コマンドは、単一のコンテナを管理するためのコマンドです。
+
+```{toctree}
+---
+maxdepth: 1
+---
+docker-ls
+docker-image-pull
+docker-image-build
+docker-container
+docker-container-run
+docker-container-exec
+docker-volume
+```
+
+## カスタムしたい（`Dockerfile`）
+
+既存のイメージをベースにして、カスタマイズしたイメージを作成できます。
+イメージの作成手順は`Dockerfile`に保存します。
+
+```{toctree}
+---
+maxdepth: 1
+---
+docker-dockerfile-from
+docker-dockerfile-workdir
+docker-dockerfile-shell
+docker-dockerfile-run
+docker-dockerfile-cmd
 ```
 
 ## 実践例
