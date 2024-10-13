@@ -136,4 +136,5 @@ command-zellij
 command-glib
 command-gitlab
 command-arduino-cli
+command-expect
 ```
