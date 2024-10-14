@@ -1,0 +1,12 @@
+# $ docker compose ps
+# $ docker compose exec ubuntu bash
+# [root@] # apt update
+# [root@] # apt upgrade
+# [root@] # apt autoremove
+
+services:
+  ubuntu:
+    image: ubuntu:24.10
+    tty: true
+    #volumes:
+    #  - ./etc/ssh/:/etc/ssh/
