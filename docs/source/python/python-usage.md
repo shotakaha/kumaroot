@@ -32,6 +32,7 @@ python-tqdm
 python-typer
 python-urllib
 python-webbrowser
+python-pexpect
 ```
 
 ## Jupyterしたい
