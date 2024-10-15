@@ -1,5 +1,41 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **docker/docker-compose-exec.md**: docker compose execを追加した
+- **docker/docker-mariadb.md**: MariaDBを追加した
+- **docker/docker-compose-cp.md**: docker compose cp を追加した
+- **docker/docker-compose-ls.md**: docker compose lsを追加した
+- **docker/docker-compose-start-stop.md**: compose start / stopを追加した
+- **docker/docker-compose-up-down.md**: compose up /down を追記した
+- **docker/docker-compose.md**: docker compose を追加した
+
+### Fix
+
+- **docker/docker-image-build.md**: platformの選択肢を整理した
+- **docker/docker-mariadb.md**: リファレンスを追加した
+- **docker/docker-compose-up-down.md**: detachオプションを明記した
+- **docker/examples/docker-mariadb/compose.yaml**: phpMyAdminを追加した
+- **docker/examples/docker-wordpress-mariadb/compose.yaml**: wordpress-mariadbのサンプルを追加した
+- **docker/docker-mariadb.md**: それぞれのキーの設定を追記した
+- **docker/docker-volume.md**: docker volumeに追記した
+- **docker/docker-mariadb.md**: mariadbのサンプルを追記した
+- **docker/docker-compose.md**: version指定が不要になったことを追記した
+- **docker/docker-usage.md**: Dockerの使い方のヒントを追記した
+- **docker/docker-compose-ls.md**: コンテナを確認する方法を追記した
+- **docker/docker-wordpress.md**: リファレンスを追加した
+- **docker/docker-nginx.md**: Nginxに追記した
+- **docker/docker-ubuntu.md**: composeのサンプルを追加した
+- **docker/docker-ubuntu.md**: Ubuntuコンテナに追記した
+- **docker/docker-usage.md**: 目次を整理した
+- **docker/docker-install.md**: バージョンを更新した
+- **docker/docker-wordpress.md**: WordPressを整理中
+- 更新した
+- **docker/docker-compose.md**: servicesの設定を追記した
+- **docker/docker-httpd.md**: compose.yamlを追加した
+
 ## v1.40.0 (2024-10-10)
 
 ### Feat
