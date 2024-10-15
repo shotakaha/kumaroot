@@ -10,9 +10,6 @@ macOS／Windowsの場合は`Docker Desktop`のインストールが必要です�
 macOSの場合、Homebrewで``Docker Desktop``をインストールできます。
 ``docker``という名前で``formula``と``cask``の両方があって紛らわしいですが、``Docker Desktop``は``cask``の方です。
 
-また、``docker``コマンドを使う場合には、
-あらかじめ``Docker Desktop``を起動しておく必要があります。
-
 ```console
 // Dockerのバージョンを確認
 $ docker --version
@@ -41,3 +38,13 @@ DRIVER    VOLUME NAME
 $ docker compose ls
 NAME    STATUS    CONFIG FILES
 ```
+
+## 起動しない場合
+
+```console
+$ docker container ls
+Cannot connect to the Docker daemon at unix:///Users/shotakaha/.docker/run/docker.sock. Is the docker daemon running?
+```
+
+``docker``コマンドを使う場合には、
+あらかじめ``Docker Desktop``を起動しておく必要があります。
