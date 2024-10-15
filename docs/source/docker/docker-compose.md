@@ -1,9 +1,11 @@
-# コンテナしたい（``compose.yaml``）
+# コンテナ管理したい（``compose.yaml``）
 
 ```console
 $ docker compose version
 Docker Compose version v2.29.2-desktop.2
 ```
+
+`docker compose`は複数のコンテナを管理するコマンドです。
 
 ```yaml
 # compose.yaml
@@ -14,14 +16,26 @@ services:
       - ホストOSのパス:コンテナのパス
 ```
 
-`docker compose`で一度に複数のコンテナを作成・実行できます。
 設定は`compose.yaml`で管理します。
 
-:::{caution}
+:::{seealso}
 
 Docker ComposeにはV1とV2があります。
-Compose V1は`docker-compose`というコマンド名（pythonで実装？）で、設定ファイルは`docker-compose.yaml`でした。
-Compose V2で`docker compose`という`docker`のサブコマンド（Go言語で実装）になり、設定ファイル名は`compose.yaml`が推奨されています。
+Compose V1は`docker-compose`というコマンドです。Pythonで実装された単独ツールで、設定ファイルは`docker-compose.yaml`です。
+
+Compose V2は`docker compose`というサブコマンドです。
+Go言語で再実装され、Docker CLIに統合されたことで、より多くの機能を使うことができます。
+設定ファイル名は
+`docker-compose.yaml`もそのまま使えますが、
+`compose.yaml`が推奨されています。
+
+ウェブ検索すると、
+V1コマンドの記事もたくさんヒットしますが、
+適宜V2に読み替えるのがよさそうです。
+
+:::
+
+:::{caution}
 
 Compose V1のサポートは2023年6月に終了しています。
 また、Docker Desktop v4.33.0（2024年7月）で`docker-compose`コマンドが削除されました。
@@ -55,11 +69,13 @@ services:
 ```
 
 `services`セクションで設定できることを整理しました。
+詳細は[Compose Specification](https://docs.docker.jp/compose/compose-file/index.html)を参照してください。
 
-:::{note}
+:::{seealso}
 
-Compose V1の初期には、`compose.yaml`の先頭で`version: "3"`のようにバージョン指定していました。
-Docker Compose 1.27.0以降では、`version`キーは不要になっています。
+Compose V1の初期には`docker-compose.yaml`の先頭に
+`version: "3"`のようにバージョン指定をしていましたが、
+Docker Compose 1.27.0以降では`version`キーは不要です。
 
 :::
 
