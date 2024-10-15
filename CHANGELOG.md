@@ -1,9 +1,12 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.41.0 (2024-10-16)
 
 ### Feat
 
+- **docker/examples/docker-ssh/Dockerfile**: SSHコンテナのサンプルを追加した
+- **python/python-pexpect.md**: pexpectを追加した
+- **command/command-expect.md**: expectコマンドを追加した
 - **docker/docker-compose-exec.md**: docker compose execを追加した
 - **docker/docker-mariadb.md**: MariaDBを追加した
 - **docker/docker-compose-cp.md**: docker compose cp を追加した
@@ -14,6 +17,10 @@
 
 ### Fix
 
+- **docker/docker-compose.md**: Docker Composeを整理した
+- **docker/docker-usage.md**: Dockerの概要を修正した
+- **docker/docker-install.md**: Docker Desktopの起動が必要なことを追記した
+- **python/python-pexpect.md**: rsyncのサンプルを追加した
 - **docker/docker-image-build.md**: platformの選択肢を整理した
 - **docker/docker-mariadb.md**: リファレンスを追加した
 - **docker/docker-compose-up-down.md**: detachオプションを明記した
