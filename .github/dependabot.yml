@@ -2,12 +2,6 @@ version: 2
 
 # 依存関係のアップデートに関する設定
 updates:
-    # poetryの依存関係
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-
     # GitHub Actionsの依存関係
   - package-ecosystem: "github-actions"
     directory: "/"
