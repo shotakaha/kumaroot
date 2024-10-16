@@ -2,19 +2,17 @@ version: 2
 
 # 依存関係のアップデートに関する設定
 updates:
-# - package-ecosystem: "poetry" # パッケージマネージャー
-#   directory: "/"  # 依存関係を管理するファイルがあるパス
-#   schedule:
-#     interval: "daily", "weekly", "monthly" のいずれか
-  - package-ecosystem: "poetry"
+    # poetryの依存関係
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
-#  パッケージマネージャーを追加する場合
-#  - package-ecosystem: "npm"
-#    directory: "/"
-#    schedule:
-#      interval: "montly"
+
+    # GitHub Actionsの依存関係
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
 
 # 依存関係のアップデートがあった場合
 # pull-requestを作成してお知らせ
