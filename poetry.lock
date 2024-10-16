@@ -229,42 +229,42 @@ xyzservices = ">=2021.09.1"
 
 [[package]]
 name = "cartopy"
-version = "0.23.0"
+version = "0.24.1"
 description = "A Python library for cartographic visualizations with Matplotlib"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 files = [
-    {file = "Cartopy-0.23.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:374e66f816c3bafa48ffdbf6abaefa67063b405fac5f425f9be241cdf3498352"},
-    {file = "Cartopy-0.23.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:2bae450c4c913796cad0b7ce05aa2fa78d1788de47989f0a03183397648e24be"},
-    {file = "Cartopy-0.23.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a40437596e8ac5e74575eab822c661f4e725bd995cfd9e445069695fe9086b42"},
-    {file = "Cartopy-0.23.0-cp310-cp310-win_amd64.whl", hash = "sha256:3292d6d403137eed80d32014c2f28de6282bed8824213f4b4c2170f388b24a1b"},
-    {file = "Cartopy-0.23.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:86b07b6794b616674e4e485b8574e9197bca54a4467d28dd01ae0bf178f8dc2b"},
-    {file = "Cartopy-0.23.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:8dece2aa8d5ff7bf989ded6b5f07c980fb5bb772952bc7cdeab469738abdecee"},
-    {file = "Cartopy-0.23.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a9dfd28352dc83d6b4e4cf85d84cb50fc4886d4c1510d61f4c7cf22477d1156f"},
-    {file = "Cartopy-0.23.0-cp311-cp311-win_amd64.whl", hash = "sha256:b2671b5354e43220f8e1074e7fe30a8b9f71cb38407c78e51db9c97772f0320b"},
-    {file = "Cartopy-0.23.0-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:80b9fd666fd47f6370d29f7ad4e352828d54aaf688a03d0b83b51e141cfd77fa"},
-    {file = "Cartopy-0.23.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:43e36b8b7e7e373a5698757458fd28fafbbbf5f3ebbe2d378f6a5ec3993d6dc0"},
-    {file = "Cartopy-0.23.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:550173b91155d4d81cd14b4892cb6cabe3dd32bd34feacaa1ec78c0e56287832"},
-    {file = "Cartopy-0.23.0-cp312-cp312-win_amd64.whl", hash = "sha256:55219ee0fb069cc3254426e87382cde03546e86c3f7c6759f076823b1e3a44d9"},
-    {file = "Cartopy-0.23.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:6279af846bf77d9817ab8792a8e38ca561878f048bba1afdae3e3a30c5432bfd"},
-    {file = "Cartopy-0.23.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:843bf9dc0a18e1a8eed872c49e8092e8a8109e4dce285ad96752841e21e8161e"},
-    {file = "Cartopy-0.23.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:350ff8802e2bc617c09bd6148aeb46e841775a846bfaa6e635a212d1eaf5ab66"},
-    {file = "Cartopy-0.23.0-cp39-cp39-win_amd64.whl", hash = "sha256:b52ab2274ad7504955854ef8d6f603e41f5d7163d02b29d369cecdbd29c2fda1"},
-    {file = "Cartopy-0.23.0.tar.gz", hash = "sha256:231f37b35701f2ba31d94959cca75e6da04c2eea3a7f14ce1c75ee3b0eae7676"},
+    {file = "Cartopy-0.24.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:ce0c83314570c61a695a1f7c3a4a22dc75f79d28f4c68b88a8aeaf13d6a2343c"},
+    {file = "Cartopy-0.24.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:511f992340baea2c171cb17b3ef595537e5355640f3baa7ac895de25df016a70"},
+    {file = "Cartopy-0.24.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:54f4d23961e0f9436baaf4747928361ccdcc893fa9b7bad9f615551bc8aa3fe8"},
+    {file = "Cartopy-0.24.1-cp310-cp310-win_amd64.whl", hash = "sha256:e0b55526b605a9dee4fa3d7e5659b6d7d9d30e609bc5e62487bc4f7d8e90873b"},
+    {file = "Cartopy-0.24.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:4a14638b63d7df2858f73e9f8f4f4826d7c9cf13781aa6824fa0134fbaebbd98"},
+    {file = "Cartopy-0.24.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:d74b4a3eae9e570f474276fb61847112cdccdead396ec2ddad226dad9eaf4564"},
+    {file = "Cartopy-0.24.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dfa38fb216cfd16cc266fd6f86b60ebdf0056839b490f38d2d89229b03abc877"},
+    {file = "Cartopy-0.24.1-cp311-cp311-win_amd64.whl", hash = "sha256:f440ddb61171319adf34ecec4d91202864cd514a7bc8a252e0ff7788a6604031"},
+    {file = "Cartopy-0.24.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:a984e33977daed8f760c09c331c8368a6af060db1190af89d74a027c272e39c3"},
+    {file = "Cartopy-0.24.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:71d8a6d061d0764aba3baf357a68f3d73796a8a46d34b8c9fb241171b273c69e"},
+    {file = "Cartopy-0.24.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2f354a1d902a8d6ee33b099acc86ac2e1af528bbc0ea718b834111c97e604981"},
+    {file = "Cartopy-0.24.1-cp312-cp312-win_amd64.whl", hash = "sha256:b1bb2d02b31884ee1d4f14e5b436bbf95745eac39c6fc0d6c67c83bb907b55b3"},
+    {file = "Cartopy-0.24.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:d279968b845f72e3423e454b2b0b985fb2389e6ccd18fb73324abeca4e43f516"},
+    {file = "Cartopy-0.24.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:f0963b80a048252815c56fbd21bc4e5d163618a9eaa36c8898ce2c60b6c03979"},
+    {file = "Cartopy-0.24.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dfdde0a6e0e56c5fc46f4e7d332237eb31bbd9908417f0f190fda5d322754184"},
+    {file = "Cartopy-0.24.1-cp313-cp313-win_amd64.whl", hash = "sha256:b17cf23dd74d0a922c2a5682dacef3c0bf89fa8c0bd0eae96b87fb684f966b15"},
+    {file = "cartopy-0.24.1.tar.gz", hash = "sha256:01c910d5634c69a7efdec46e0a17d473d2328767f001d4dc0b5c4b48e585c8bd"},
 ]
 
 [package.dependencies]
-matplotlib = ">=3.5"
-numpy = ">=1.21"
-packaging = ">=20"
+matplotlib = ">=3.6"
+numpy = ">=1.23"
+packaging = ">=21"
 pyproj = ">=3.3.1"
 pyshp = ">=2.3"
-shapely = ">=1.7"
+shapely = ">=1.8"
 
 [package.extras]
 doc = ["pydata-sphinx-theme", "sphinx", "sphinx-gallery"]
-ows = ["OWSLib (>=0.20.0)", "pillow (>=6.1.0)"]
-plotting = ["pillow (>=6.1.0)", "scipy (>=1.3.1)"]
+ows = ["OWSLib (>=0.27.0)", "pillow (>=9.1)"]
+plotting = ["pillow (>=9.1)", "scipy (>=1.9)"]
 speedups = ["fiona", "pykdtree"]
 srtm = ["beautifulsoup4"]
 test = ["coveralls", "pytest (>=5.1.2)", "pytest-cov", "pytest-mpl (>=0.11)", "pytest-xdist"]
@@ -4038,4 +4038,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "3bf19d0353ac24eb0e09bde184a23b34b31bee68fb162ad8fbeb33da8aba6061"
+content-hash = "fea9b71e82b0848a90da0bf0d7bab1801508400b17697facc9975efec066d4fc"
