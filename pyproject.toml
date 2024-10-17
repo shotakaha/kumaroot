@@ -44,6 +44,7 @@ tqdm = "^4.66.4"
 uproot = "^5.3.10"
 pydantic = "^2.8.2"
 httpx = "^0.27.2"
+pexpect = "^4.9.0"
 
 
 [tool.poetry.group.mystmd.dependencies]
