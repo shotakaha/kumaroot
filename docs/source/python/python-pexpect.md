@@ -3,21 +3,23 @@
 ```python
 import pexpect
 
-child = pexpect.spawn("ssh ユーザー名@ホスト名")
-child.expect("password:")
-child.sendline("パスワード")
-child.expect("ユーザー名@ホスト名")
-child.sendline("exit")
+child = pexpect.spawn("コマンド")
+child.expect("待ち文字列")
+child.sendline("別のコマンド")
+child.expect("待ち文字列")
+child.terminate()
 ```
 
 `pexpect`は[expect](../command/command-expect.md)をPythonで実行できるようにしたツールです。
-SSHやFTPなど対話処理が必要な手順を自動化できます。
+リモートサーバーとRsyncやSSHなどするときに必要なパスワード入力などの
+対話処理を含んだ手順を自動化できます。
 
 Pure Pythonで書かれており、
 expectやTcl、その他のC言語モジュールを必要としません。
-また、文字のエスケープや改行処理をうまく扱ってくれます。
+また、文字のエスケープや改行処理もうまく扱ってくれるため
+素のexpectより読み書きしやすいと思います。
 
-## プロンプト待ちしたい（`expect`）
+## 待ち文字列したい（`expect`）
 
 ```python
 # str型
@@ -27,9 +29,11 @@ child.expect("文字列")
 child.expect(["文字列1", "文字列2"])
 ```
 
-`expect`で直前のコマンド処理の結果を確認できます。
+`expect`で直前のコマンド処理が成功したときの表示を指定できます。
 引数には`str`型や`list[str]`型を指定できます。
 返り値はマッチした文字列のインデックスになっています。
+
+## パスワード待ちしたい
 
 ```python
 # 接続成功したとき
@@ -51,8 +55,24 @@ child.sendline("パスワード")
 ...
 ```
 
-リストを指定した場合、マッチした文字列のインデックスが
-返ってくることを利用して、簡単な成功／失敗の判断ができます。
+RsyncやSSH接続すると、パスワード認証を要求されます。
+`password:`文字列を`.expect`することで、接続確認ができます。
+また、接続できなかったときの文字列を確認することで、例外として処理できます。
+
+上のサンプルでは`ok`と`ng`のリストを定義し、
+マッチしたときに返ってくる文字列のインデックスを利用して
+簡単な成功／失敗の判断をしています。
+
+## プロンプト待ちしたい
+
+```python
+PROMPT = ["\\$", "\\#"]
+child.sendline("コマンド")
+child.expect(PROMPT)
+```
+
+標準的なサーバー設定のプロンプト表示は、`$`が一般ユーザー、`#`が管理者ユーザーとなっています。
+`$`もしくは`#`を待つことでサーバー内での作業を続けることができます。
 
 ## パスワード送信したい（`sendline`）
 
@@ -68,7 +88,9 @@ child.sendline(pw)
 ```
 
 `sendline`で文字列／コマンドを送信できます。
+パスワード認証を求められたら、パスワードを送信する必要があります。
 このサンプルは、よく利用するパスワード送信部分の抜粋です。
+
 パスワードのベタ書きを避けるため、
 `.env`に環境変数として定義し
 `dotenv`モジュールで読み込んでいます。
@@ -104,35 +126,22 @@ total size is XXXXXXXXXX  speedup is XXXXXX.XX
 [rsync](../command/command-rsync.md)で
 リモートサーバーからファイルを取得したときの
 ターミナル表示のサンプルです。
-これを`pexpect`すると以下のようになります。
+これを再現するように`pexpect`で手順を並べていきます。
 
 ```python
 import pexpect
 
-# 事前準備
-src = "ユーザー名@ホスト名:パス/"
-dest = "./パス/"
-options = ["-auvz", "--dry-run"]
-cmd = (" ").join(["rsync", *options, src, dest])
-# rsync -auvz --dry-run SRC DEST
-
-# Rsyncを開始
-child = pexpect.spawn(cmd)
-# パスワード認証を確認
-child.expect("password:")
-# パスワードを送信
-child.sendline("パスワード")
-# 処理が終わることを確認
-child.expect(pexpect.EOF)
-
-# 結果を取得
-result = child.before.decode("utf-8")
+# rsyncを開始
+child = pexpect.spawn("rsync -auvz SRC_REMOTE DEST_LOCAL")
+child.expect("password:")     # パスワード認証を確認
+child.sendline("パスワード")    # パスワードを送信
+child.expect(pexpect.EOF)     # 処理が終わることを確認
+result = child.before.decode("utf-8") # 結果を取得
 print(result)
 ```
 
-`password:`の文字列が表示されていたら、
-パスワードを送信できるようにしました。
-また、`pexpect.EOF`を`expect`することで、
+`password:`の文字列が表示されたあとに、パスワードを送信しています。
+`pexpect.EOF`を`.expect`することで、
 ファイル転送の処理の完了を待つことができます。
 
 実行した結果は`before`にバイナリ文字列で保存されています。
@@ -146,41 +155,65 @@ print(result)
 
 :::
 
-## SSH接続したい
+## SSH接続したい（`pexpect.pxssh`）
 
 ```console
 $ ssh ユーザー名@ホスト名
 ユーザー名@ホスト名's password: （パスワードを入力）
 Last login: 日時 from IPアドレス
-[ユーザー名@ホスト名 ~]$ ls
-Downloads  README.md
+[ユーザー名@ホスト名 ~]$ uptime
 [ユーザー名@ホスト名 ~]$ exit
 logout
 ```
 
-上のサンプルは、ターミナルからSSH接続してディレクトリを確認するときのプロンプト表示です。
+SSH接続するときのターミナル表示のサンプルです。
 
 ```python
-# SSH接続を開始する
-child = pexpect.spawn("ssh ユーザー名@ホスト名")
+from pexpect import pxssh
 
-# パスワードを要請されたことを確認する
-child.expect("password:")
-# パスワードを送信する
-child.sendline("パスワード")
+ssh = pxssh.pxssh(encoding="utf-8")
+ssh.login(hostname, username, password)
 
-# ログインしたことを確認する
-child.expect("Last login:")
-# lsコマンドを送信する
-child.sendline("ls")
+ssh.sendline("uptime")
+ssh.prompt()
+print(ssh.before)
+
+ssh.sendline("df -h")
+ssh.prompt()
+print(ssh.before)
+
+ssh.logout()
 ```
 
-`pexpect`で処理を再現してみました。
-最初は`spawn`コマンドで開始します。
-その後、プロンプト表示を`expect`で確認し、
-続きの処理コマンドを`sendline`で送信するという手順を繰り返します。
+`pexpect.pxssh`モジュールで簡単にSSH接続できます。
+この手順を`pexpect.spawn`で書きなおすと以下のようになります。
 
-`expect`では正規表現（の短文マッチ）を使って、プロンプトに表示された内容を確認できます。
+```python
+import pexpect
+
+# 待機するプロンプト表示
+PROMPT = ["\\$", "\\#"]
+
+# SSH接続を開始する
+child = pexpect.spawn("ssh ユーザー名@ホスト名")
+child.expect("password:")
+
+# パスワードを送信してログインする
+child.sendline("パスワード")
+child.expect(PROMPT)
+
+# コマンド（uptime）を実行
+child.sendline("uptime")
+child.expect(PROMPT)
+print(child.before.decode("utf-8"))
+
+# コマンド（df -h）を実行
+child.sendline("df -h")
+child.expect(PROMPT)
+print(child.before.decode("utf-8"))
+
+child.terminate()
+```
 
 ## リファレンス
 
