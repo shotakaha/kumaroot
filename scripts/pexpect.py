@@ -137,7 +137,8 @@ password = os.environ.get("PASSWORD")
 
 
 cmd = (" ").join(["ssh", f"{username}@{hostname}"])
-PROMPT = "[\\$\\#] "
+# PROMPT = "[\\$\\#] "
+PROMPT = ["\\$", "\\#"]
 
 
 child = pexpect.spawn(cmd)

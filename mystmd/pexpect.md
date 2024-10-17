@@ -149,7 +149,8 @@ password = os.environ.get("PASSWORD")
 
 ```{code-cell} ipython3
 cmd = (" ").join(["ssh", f"{username}@{hostname}"])
-PROMPT = "[\\$\\#] "
+# PROMPT = "[\\$\\#] "
+PROMPT = ["\\$", "\\#"]
 ```
 
 ```{code-cell} ipython3
