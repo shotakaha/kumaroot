@@ -45,6 +45,7 @@ uproot = "^5.3.10"
 pydantic = "^2.8.2"
 httpx = "^0.27.2"
 pexpect = "^4.9.0"
+python-dotenv = "^1.0.1"
 
 
 [tool.poetry.group.mystmd.dependencies]
