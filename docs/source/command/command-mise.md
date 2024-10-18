@@ -1,21 +1,24 @@
 # 開発環境を切り替えたい（``mise``）
 
 ```console
+$ mise use python@3.11
+```
+
+`mise`（ミーズ）は開発環境のバージョンを切り替えるためのツールです。
+同様のツールに[anyenv](https://anyenv.github.io/)や[asdf](https://asdf-vm.com/)などがありますが、
+最近は[mise](https://github.com/jdx/mise)を使うのがよさそうです。
+
+## インストールしたい（`mise`）
+
+```console
 $ brew install mise
+
 $ mise --version
 2024.3.11 macos-x64 (2024-03-30)    # Intelの場合
 2024.3.11 macos-arm64 (2024-03-30)  # Apple Siliconの場合
 ```
 
-```console
-$ mise use -g python
-$ mise use -g pipx
-$ mise use -g poetry
-```
-
-環境開発を切り替えるツールです。
-同様のツールに[anyenv](https://anyenv.github.io/)や[asdf](https://asdf-vm.com/)などがありますが、
-最近は[mise](https://github.com/jdx/mise)を使うのがよさそうです。
+`mise`はHomebrewでインストールできます。
 
 :::{note}
 
@@ -23,30 +26,46 @@ $ mise use -g poetry
 
 :::
 
-## プラグイン設定を確認したい（``ls``）
+## 環境を切り替えたい（`mise use`）
+
+```console
+// プロジェクト（＝現在のディレクトリ）に追加
+$ mise use python@3.11
+$ cat ./.mise.toml
+[tools]
+python = "3.11"
+```
+
+`use`コマンドでツールの環境を切り替えることができます。
+設定は`./.mise.toml`に保存されます。
+
+指定したバージョンのツールが見つからない場合は、``mise install``コマンドが自動実行され、
+``~/.local/share/mise/installs/``の中にインストールされます。
+実行ファイルはバージョンごとに分けてインストールされます。
+
+```console
+// システムに追加
+$ mise use --global python@3.12
+$ cat ~/.config/mise/config.toml
+[tools]
+python = "3.12"
+
+[env]
+```
+
+`--global`オプションで個人環境全体に追加できます。
+設定は`~/.config/mise/config.toml`に保存されます。
+
+## 環境を確認したい（``ls``）
 
 ```console
 $ mise ls
-$ mise ls プラグイン名
-
-// $HOMEで実行した場合
-$ mise ls python
-Plugin  Version  Config Source              Requested
-python  3.11.6
-python  3.11.8
-python  3.12.2   ~/.config/mise/config.toml latest
-
-// $KumaROOT（このリポジトリ）で実行した場合
-$ mise ls python
-Plugin  Version  Config Source                                    Requested
-python  3.11.6
-python  3.11.8   ~/repos/github.com/shotakaha/kumaroot/.mise.toml 3.11
-python  3.12.2
+Tool      Version   Config Source                 Requested
+node      23.0.0    ~/.config/mise/config.toml    latest
+python    3.11.10
 ```
 
-``ls``コマンドで、プラグイン設定を確認できます。
-設定ファイルのパスも確認できます。
-ローカル設定ができているか確認できます。
+`ls`コマンドで設定されている環境と`mise`設定のパスを確認できます。
 
 ## 更新したい（``up`` / ``upgrade``）
 
@@ -67,28 +86,7 @@ python  3.12.3  ~/.config/mise/config.toml 3.12
 ``list``コマンドでプラグインの更新の有無を確認できます。
 ``upgrade``コマンドでプラグイン本体を一括で更新できます。
 
-## プラグインを使いたい（``use``）
-
-```console
-// システム全体に設定
-$ mise use -g プラグイン名
-
-// ローカルに設定
-$ mise use プラグイン名
-$ mise use プラグイン名@バージョン
-```
-
-``use``コマンドで、利用するプラグインのバージョンを変更できます。
-バージョンを省略すると``latest``になります。
-
-``-g``オプションでシステム全体のバージョン指定ができます。
-グローバルな設定は``~/.config/mise/config.toml``に保存されます。
-ローカルな設定は``mise use``したパスの``.mise.toml``に保存されます。
-
-指定したバージョンのプラグインが見つからない場合は、自動的に``install``コマンドが実行され、``~/.local/share/mise/installs/``にインストールされます。
-実行ファイルはバージョンごとに分けてインストールされます。
-
-### Pythonを使いたい
+## Pythonを使いたい（`mise use python`）
 
 ```console
 $ mise use python
@@ -118,7 +116,7 @@ $ which python
 ~/.local/share/mise/installs/python/3.11/bin/python
 ```
 
-### Nodeを使いたい
+## Nodeを使いたい（`mise use node`）
 
 ```console
 $ which myst
@@ -146,7 +144,7 @@ Homebrewを使ってインストールした``node``を``noode@21``に更新し�
 
 :::
 
-## プラグイン名を確認したい（``plugins ls-remote``）
+## プラグイン名を確認したい（``mise plugins ls-remote``）
 
 ```console
 $ mise plugins ls-remote
@@ -154,7 +152,7 @@ $ mise plugins ls-remote
 
 ``plugins ls-remote``コマンドで、利用できるプラグイン名を一覧できます。
 
-## プラグインのバージョンを一覧したい（``ls-remote``）
+## プラグインのバージョンを一覧したい（``mise ls-remote``）
 
 ```console
 $ mise ls-remote プラグイン名
