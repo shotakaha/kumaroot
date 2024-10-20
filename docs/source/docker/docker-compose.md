@@ -77,6 +77,12 @@ Compose V1の初期には`docker-compose.yaml`の先頭に
 `version: "3"`のようにバージョン指定をしていましたが、
 Docker Compose 1.27.0以降では`version`キーは不要です。
 
+```console
+WARN[0000] ./docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+```
+
+`version`キーを定義している場合は、WARNINGが表示されます。
+
 :::
 
 ## リファレンス
