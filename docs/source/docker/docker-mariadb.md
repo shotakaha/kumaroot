@@ -1,12 +1,12 @@
 # MariaDBしたい（`mariadb`）
 
 ```console
-$ docker container run -d
-  -v db-data:/var/lib/mysql
-  -e MARIADB_ROOT_PASSWORD=root_pass
-  -e MARIADB_DATABASE=test_db
-  -e MARIADB_USER=test_user
-  -e MARIADB_PASSWORD=test_pass mariadb:11.6
+$ docker container run --detach
+  --env MARIADB_ROOT_PASSWORD=root_pass
+  --env MARIADB_DATABASE=test_db
+  --env MARIADB_USER=test_user
+  --env MARIADB_PASSWORD=test_pass mariadb:11.6
+  --volume db-data:/var/lib/mysql
 ```
 
 MariaDBを起動するとき、`-e`オプションで環境変数を設定する必要があります。
@@ -30,29 +30,61 @@ MariaDBを起動するとき、`-e`オプションで環境変数を設定する
 services:
   db:
     image: mariadb:11.5.2-noble
+    container_name: mariadb
+    restart: always
     environment:
       MARIADB_ROOT_PASSWORD: root_pass
       MARIADB_DATABASE: test_db
       MARIADB_USER: test_user
       MARIADB_PASSWORD: test_pass
     volumes:
+      # データベース本体（named volumeに保存）
       - db-data:/var/lib/mysql
+      # 外部データを使う場合
+      # 初期化SQL（bind volumeで同期）
+      #- ./initdb.d:/docker-entrypoint-initdb.d
+      # 設定ファイル（bind volumeで同期）
+      # - ./conf.d:/etc/mysql/conf.d
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
 
 # named volumes
 volumes:
   db-data:
 ```
 
-`environment`キーで、MariaDBのデータベースに接続するための情報を設定しています。
-`volumes`キーで、データの保存先を`named volume`に設定しています。
+`environment`キーで、MariaDBのデータベースを初期化／接続するための情報を設定しています。
 
 :::{note}
 
-より実用的には、
-パスワード情報はベタ書きするのではなく、
+より実用的には、パスワード情報はベタ書きするのではなく、
 `.env`などに保存して環境変数として読み込めるようにするのがよいです。
 
 :::
+
+`volumes`キーで、データの保存先を設定しています。
+データベース本体は`named volume`で設定しています。
+設定ファイルや、起動時に外部データベースを使いたい場合は、
+`bind volume`で読み込ませることができます。
+
+`adminer`はMySQL/MariaDBなどのデータベースを、ブラウザから操作できるツールです。
+`localhost:8081`でアクセスできるようにしました。
+
+:::{note}
+
+`adminer`自身はすでに開発がdeprecatedな状態なのですが、
+軽量なのでテスト用にはちょうどよいと思います。
+本番で使う場合は`phpMyAdmin`を使うほうがいいかもしれません。
+
+:::
+
+
 
 ```console
 // 設定を確認
