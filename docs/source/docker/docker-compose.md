@@ -85,6 +85,19 @@ WARN[0000] ./docker-compose.yml: the attribute `version` is obsolete, it will be
 
 :::
 
+## 設定を確認したい（`docker compose config`）
+
+```console
+$ docker compose config
+$ docker compose config --services
+$ docker compose config --images
+$ docker compose config --environment
+$ docker compose config --variables
+$ docker compose config --volumes
+```
+
+`docker compose config`コマンドで`compose.yaml`の設定内容を確認できます。
+
 ## リファレンス
 
 - [Docker Compose - docs.docker.com](https://docs.docker.com/compose/)
