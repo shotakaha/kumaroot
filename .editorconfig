@@ -8,9 +8,12 @@ end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
-max_line_length = 0
+max_line_length = 120
 trim_trailing_whitespace = true
 
 # Tab indentation (no size specified)
 [Makefile]
 indent_style = tab
+
+[*.{yml,yaml}]
+indent_size = 2
