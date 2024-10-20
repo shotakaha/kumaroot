@@ -357,6 +357,44 @@ MariaDB [(none)]> SHOW DATABASES;
 | sys                |
 +--------------------+
 5 rows in set (0.001 sec)
+
+MariaDB [(none)]> CREATE USER 'test_user'@'localhost' IDENTIFIED BY 'test_pass';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON my_database.* TO 'test_user'@'localhost';
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [(none)]> exit;
+Bye
+```
+
+```console
+// test_userでログイン
+# mariadb -u test_user -p
+Enter password: test_pass
+
+MariaDB [(none)]> show DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_database        |
++--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [(none)]> exit;
+Bye
+```
+
+```console
+// コンテナを終了
+# exit
+
+// コンテナを削除
+$ docker compose down
 ```
 
 ## リファレンス
