@@ -41,23 +41,9 @@ services:
       MARIADB_PASSWORD: test_pass
     volumes:
       # データベース本体（named volumeに保存）
-      # データベース本体（named volumeに保存）
       - db-data:/var/lib/mysql
       # 設定ファイル（bind volumeでマウント）
       - ./config:/etc/mysql/conf.d
-      # 外部データを使う場合
-      # 初期化SQL（bind volumeで同期）
-      #- ./initdb.d:/docker-entrypoint-initdb.d
-      # 設定ファイル（bind volumeで同期）
-      # - ./conf.d:/etc/mysql/conf.d
-
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - 8081:8080
-
 
 # named volumes
 volumes:
