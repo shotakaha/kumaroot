@@ -35,15 +35,15 @@ services:
     image: イメージ名:タグ
     volumes:
       # named volume
-      - db-data:/var/lib/mysql
+      - db_data:/var/lib/mysql
       # bind volume
       - ./html:/var/www/html
 volumes:
-  db-data
+  db_data:
 ```
 
 `compose.yaml`の`volumes`キーでボリュームを設定できます。
-`docker compose up -d`するときに自動でボリュームを紐づけてくれます。
+`docker compose up -d`すると、自動でボリュームを紐づけてくれます。
 
-コンテナを削除（`docker compose down`）しても、ボリュームは残ります。
-ボリュームも削除する場合は`docker compose down --volumes`します。
+`docker compose down`でコンテナを削除しても、ボリュームは残ります。
+`docker compose down --volumes`でボリュームも削除できます。
