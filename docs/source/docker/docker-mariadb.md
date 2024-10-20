@@ -62,49 +62,10 @@ MariaDBデータベースは、コンテナの初回起動時に初期化され�
 `bind volume`でマウントしています。
 
 ```console
-// 設定を確認
-$ docker compose config
-name: docker-mariadb
-services:
-  db:
-    environment:
-      MARIADB_DATABASE: test_db
-      MARIADB_PASSWORD: test_pass
-      MARIADB_ROOT_PASSWORD: root_pass
-      MARIADB_USER: test_user
-    image: mariadb:11.5.2-noble
-    networks:
-      default: null
-    volumes:
-      - type: volume
-        source: db-data
-        target: /var/lib/mysql
-        volume: {}
-networks:
-  default:
-    name: docker-mariadb_default
-volumes:
-  db-data:
-    name: docker-mariadb_db-data
-
-// Composeを起動
+// コンテナを起動
 $ docker compose up -d
-[+] Running 9/9
- ✔ db Pulled
-   ✔ 25a614108e8d Pull complete
-   ✔ 9ecb4eecca9c Pull complete
-   ✔ 35745a5f0897 Pull complete
-   ✔ bb6982bee1d3 Pull complete
-   ✔ 722a6dac2c26 Pull complete
-   ✔ fc059a825764 Pull complete
-   ✔ 677b7c31cba3 Pull complete
-   ✔ 610d14c9e7f5 Pull complete
-[+] Running 3/3
- ✔ Network docker-mariadb_default   Created
- ✔ Volume "docker-mariadb_db-data"  Created
- ✔ Container docker-mariadb-db-1    Started
 
-// Composeの状態を確認
+// コンテナの状態を確認
 $ docker compose ls
 NAME              STATUS        CONFIG FILES
 docker-mariadb    running(1)    docker-mariadb/compose.yaml
@@ -169,26 +130,62 @@ $ docker compose down
 services:
   db:
     image: mariadb:11.5.2-noble
+    environment:
+      # 管理者パスワードの設定（適当でOK）
+      MARIADB_ROOT_PASSWORD: 管理者用パスワード
+      # ランダムでよい場合
+      # MARIADB_RANDOM_ROOT_PASSWORD: yes
+      # なしでもよい場合
+      # MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
+
+      # データベース設定
+      # リストアするデータと同じ内容にする
+      MARIADB_DATABASE: データベース名
+      MARIADB_USER: ユーザー名
+      MARIADB_PASSWORD: パスワード
     volumes:
       # データベース本体（named volume）
       - db-data:/var/lib/mysql
       # 起動時に読み込むデータベースの設定（bind volume）
       # backup.sql をマウント
+      # ファイルを個別に指定
       - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql
+      # ディレクトリをまるっと指定できる
+      # - ./backup/:/docker-entrypoint-initdb.d/
 
 # named volumes
 volumes:
   db-data:
 ```
 
-コンテナ内の`/docker-entrypoint-initdb.d/`に
-ダンプしたSQLファイルをマウントすることで、
-コンテナ起動時に既存のデータベースを読み込ませることができます。
-すべての環境変数（`environment`）は無視されます。
+既存のデータベースMariaDBコンテナに読み込む設定です。
+データベースはあらかじめSQLファイルにダンプします。
 
-起動時に認識される拡張子は
-`.sh`、`.sql`、`.sql.gz`、`.sql.xz`、`.sql.zst`です。
+`volumes`キーを設定し、ダンプしたSQLファイルを`bind volume`としてマウントします。
+マウント先はコンテナ内の`/docker-entrypoint-initdb.d/`に設定します。
+拡張子は`.sh`、`.sql`、`.sql.gz`、`.sql.xz`、`.sql.zst`にします。
 複数のファイルがある場合、アルファベット順に読み込まれます。
+
+`environment`キーにはリストアするデータベースの情報（データベース名、ユーザー名、パスワード）を設定します。
+管理者のパスワードは、コンテナ用に設定してOKです。
+`MARIADB_ROOT_PASSWORD`で適当な文字列を指定するか、
+`MARIADB_RANDOM_ROOT_PASSWORD`で任意の文字列を自動設定できます。
+
+コンテナを起動して、データベースにアクセスできるか確認します。
+
+```console
+$ docker compose up -d
+$ docker compose ls
+
+// MariaDBコンテナ（サービス名: db）にログイン
+$ docker compose exec db bash
+# mysql -u ユーザー名 -p
+Enter password: パスワード
+MariaDB [(none)]> SHOW DATABASES;
+MariaDB [(none)]> USE データベース名;
+MariaDB [(データベース名)]> SHOW TABLES;
+MariaDB [(データベース名)]>
+```
 
 :::{seealso}
 
