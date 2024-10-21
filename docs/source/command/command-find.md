@@ -116,3 +116,34 @@ $ find 検索パス -type d -empty -delete
 
 ``-empty``オプションを使って、空のディレクトリが検索できます。
 ``-delete``オプションを追加して、一括削除できます。
+
+## GFSローテーションしたい
+
+```bash
+#!/bin/bash
+
+# 日次：毎日；7回分を保存
+# 週次：毎週日曜日；4回分を保存
+
+SOURCE_DIR="バックアップしたいディレクトリ"
+BACKUP_DIR="バックアップを保存するディレクトリ"
+
+# バックアップ日時：ファイル名に追加
+DATE=$(date +%Y%m%d)
+
+# 日次バックアップ
+tar zcvf ${BACKUP_DIR}/daily/${DATE}_backup_daily.tar.gz ${SOURCE_DIR}
+find ${BACKUP_DIR}/daily/ -type f -mtime +7 -print0 | xargs -0 rm
+
+# 週次バックアップ
+if [[ $(date +%u) -eq 7 ]]; then
+    tar zcvf ${BACKUP_DIR}/weekly/${DATE}_backup_weekly.tar.gz ${SOURCE_DIR}
+    find ${BACKUP_DIR}/weekly/ -type f -mtime +28 -print0 | xargs -0 rm
+fi
+```
+
+`-mtime`オプションを活用すると
+日次・週次・月次バックアップを取得するときにローテーションが組めます。
+このようなローテーションを
+GFS（Grandfather-Father-Son）ローテーションと
+呼ぶそうです。
