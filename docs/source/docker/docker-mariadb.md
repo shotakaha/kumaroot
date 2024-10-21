@@ -1,5 +1,51 @@
 # MariaDBしたい（`mariadb`）
 
+```yaml
+services:
+  db:
+    image: mariadb:11.5.2-noble
+    container_name: mariadb
+    restart: always
+    environment:
+      # 管理者パスワードの設定
+      MARIADB_ROOT_PASSWORD: root_pass
+      # MARIADB_RANDOM_ROOT_PASSWORD: yes
+      # MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+      # データベースの設定
+      MARIADB_DATABASE: test_db
+      MARIADB_USER: test_user
+      MARIADB_PASSWORD: test_pass
+    volumes:
+      # データベース本体（named volumeに保存）
+      - db-data:/var/lib/mysql
+      # 設定ファイル（bind volumeでマウント）
+      - ./config:/etc/mysql/conf.d
+      # 既存のデータベース（bind volumeでマウント）
+      - ./backup/:/docker-entrypoint-initdb.d/
+
+# named volumes
+volumes:
+  db-data:
+```
+
+`mariadb`イメージを使ってコンテナを起動します。
+MariaDBデータベースは、コンテナの初回起動時に初期化されます。
+データベース名やパスワードなど、初期化に必要な情報は
+`environment`キーで設定します。
+設定できる環境変数は
+[MariaDB Knowledge Base](https://mariadb.com/kb/en/mariadb-server-docker-official-image-environment-variables/)
+を参照してください。
+
+実用としては、パスワード情報はベタ書きするのではなく
+`.env`などに保存して環境変数として読み込むようにします。
+
+`volumes`キーで、データの保存先を設定しています。
+データベース本体は`named volume`で設定しています。
+設定ファイルや、起動時に外部データベースを使いたい場合は、
+`bind volume`でマウントしています。
+
+## コマンドしたい（`docker container run`）
+
 ```console
 $ docker container run --detach
   --env MARIADB_ROOT_PASSWORD=root_pass
@@ -9,62 +55,23 @@ $ docker container run --detach
   --volume db-data:/var/lib/mysql
 ```
 
-MariaDBを起動するとき、`-e`オプションで環境変数を設定する必要があります。
-この数のオプションを毎回入力するのはミスの元なので、`compose.yaml`で管理するのがよいと思います。
-初回起動時は、これらの値でデータベースが初期化されます。
+`docker compose`した内容を`docker`コマンドで実行したサンプルです。
+`-e / --env`オプションで環境変数を設定できますが、
+この数のオプションを毎回入力するのはミスの元なので、
+`compose.yaml`で管理するのがよいと思います。
 
-| 変数名 | 説明 |
-|---|---|
-| `MARIADB_ROOT_PASSWORD` | DBのrootパスワード |
-| `MARIADB_DATABASE` | DB名 |
-| `MARIADB_USER` | DBのユーザー名 |
-| `MARIADB_USER_PASSWORD` | DBユーザーのパスワード |
-| `MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1` | |
-| `MARIADB_RANDOM_ROOT_PASSWORD=1` | |
+## コンテナを操作したい
 
-設定できる環境変数は
-[MariaDB Knowledge Base](https://mariadb.com/kb/en/mariadb-server-docker-official-image-environment-variables/)
-を参照してください。
-
-## Composeしたい（`mariadb`）
-
-```yaml
-services:
-  db:
-    image: mariadb:11.5.2-noble
-    container_name: mariadb
-    restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: root_pass
-      MARIADB_DATABASE: test_db
-      MARIADB_USER: test_user
-      MARIADB_PASSWORD: test_pass
-    volumes:
-      # データベース本体（named volumeに保存）
-      - db-data:/var/lib/mysql
-      # 設定ファイル（bind volumeでマウント）
-      - ./config:/etc/mysql/conf.d
-
-# named volumes
-volumes:
-  db-data:
-```
-
-MariaDBデータベースは、コンテナの初回起動時に初期化されます。
-データベース名やパスワードなど、初期化に必要な情報は
-`environment`キーで設定します。
-実用としては、パスワード情報はベタ書きするのではなく
-`.env`などに保存して環境変数として読み込むようにします。
-
-`volumes`キーで、データの保存先を設定しています。
-データベース本体は`named volume`で設定しています。
-設定ファイルや、起動時に外部データベースを使いたい場合は、
-`bind volume`でマウントしています。
+- 起動
 
 ```console
 // コンテナを起動
 $ docker compose up -d
+```
 
+- 状態を確認
+
+```console
 // コンテナの状態を確認
 $ docker compose ls
 NAME              STATUS        CONFIG FILES
@@ -74,14 +81,26 @@ docker-mariadb    running(1)    docker-mariadb/compose.yaml
 $ docker compose ps
 NAME                   IMAGE                   COMMAND                   SERVICE   CREATED          STATUS          PORTS
 docker-mariadb-db-1    mariadb:11.5.2-noble    "docker-entrypoint.s…"    db        4 minutes ago    Up 4 minutes    3306/tcp
+```
 
+- コンテナ内のDBにアクセス
+
+```console
 // コンテナ（db）内で mariadb --version を実行
 $ docker compose exec db mariadb --version
 mariadb from 11.5.2-MariaDB, client 15.2 for debian-linux-gnu (aarch64) using  EditLine wrapper
+```
 
-// コンテナ（db）内のシェル（/bin/bash）を起動
-$ docker compose exec db /bin/bash
+- コンテナにログイン
 
+```console
+// コンテナ（db）内のシェル（bash）を起動
+$ docker compose exec db bash
+```
+
+- コンテナ内でDB操作
+
+```console
 // （コンテナ内#） MariaDBのバージョンを確認
 root@28add7da43c1:/# mariadb --version
 mariadb from 11.5.2-MariaDB, client 15.2 for debian-linux-gnu (aarch64) using  EditLine wrapper
@@ -104,7 +123,11 @@ Bye.
 // （コンテナ内#） シェルを終了
 root@28add7da43c1:/# exit
 exit
+```
 
+- 一時停止
+
+```console
 // Composeを一時停止
 $ docker compose stop
 [+] Stopping 1/1
@@ -116,7 +139,11 @@ NAME                STATUS              CONFIG FILES
 
 $ docker compose ps
 NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+```
 
+- 削除
+
+```console
 // コンテナを削除
 $ docker compose down
 [+] Running 2/0
@@ -159,7 +186,7 @@ volumes:
 ```
 
 既存のデータベースMariaDBコンテナに読み込む設定です。
-データベースはあらかじめSQLファイルにダンプします。
+データベースはあらかじめSQLファイルにダンプしておきます。
 
 `volumes`キーを設定し、ダンプしたSQLファイルを`bind volume`としてマウントします。
 マウント先はコンテナ内の`/docker-entrypoint-initdb.d/`に設定します。
@@ -194,21 +221,19 @@ MariaDB [(データベース名)]>
 
 :::
 
-## データベース操作したい（`adminer`）
+## ウェブクライアントしたい（`adminer`）
 
 ```yaml
 services:
+  # MariaDBコンテナの設定
   db:
     image: mariadb:11.5.2-noble
     container_name: mariadb
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: root_pass
-      MARIADB_DATABASE: test_db
-      MARIADB_USER: test_user
-      MARIADB_PASSWORD: test_pass
+      ...
     volumes:
-      - db_data:/var/lib/mysql
+      - ...
 
   adminer:
     image: adminer
@@ -222,8 +247,9 @@ volumes:
   db_data:
 ```
 
-`adminer`はMySQL/MariaDBなどのデータベースを、ブラウザから操作できるツールです。
+`adminer`はMySQL/MariaDBなどのデータベースに対応したウェブクライアントツールです。
 `localhost:8081`でアクセスして、データベースにログインできます。
+`phpMyAdmin`に比べるとコンテナ設定が簡単です。
 
 :::{note}
 
@@ -232,6 +258,14 @@ volumes:
 本番で使う場合は`phpMyAdmin`を使うほうがいいかもしれません。
 
 :::
+
+## ウェブクライアントしたい（`phpMyAdmin`）
+
+```yaml
+services:
+```
+
+`phpmyadmin`はMySQL/MariaDBなどのデータベースに対応したウェブクライアントツールです。
 
 ## セットアップしたい（`mariadb-secure-installation`）
 
