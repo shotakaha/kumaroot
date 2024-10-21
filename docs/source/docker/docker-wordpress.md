@@ -1,4 +1,4 @@
-# WordPressを使いたい
+# WordPressしたい（`wordpress`）
 
 Dockerを使ってWordPressを構築してみます。
 

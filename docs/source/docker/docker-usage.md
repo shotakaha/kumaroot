@@ -87,16 +87,11 @@ docker-dockerfile-cmd
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
-docker-ubuntu
-docker-busybox
-docker-httpd
-docker-nginx
-docker-wordpress
-docker-python3
-docker-mystmd
-docker-hugo
-docker-raspi
-docker-mariadb
+docker-examples-linux
+docker-examples-web
+docker-examples-databases
+docker-examples-cms
+docker-examples-others
 ```
