@@ -1,0 +1,11 @@
+# https://hub.docker.com/_/debian
+
+# Usage:
+# $ docker compose up -d
+# $ docker compose exec debian bash
+# $ docker compose down -v
+
+services:
+  debian:
+    image: debian:bookworm-slim
+    tty: true
