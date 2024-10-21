@@ -1,4 +1,9 @@
 # https://hub.docker.com/_/httpd
+# Tags:
+# - httpd:latest
+# - httpd:2.4
+# - httpd:2.4-bookworm
+# - httpd:2.4-alpine
 #
 # docker container run -d -p 8080:80 httpd:2.4 に相当
 #
