@@ -1,5 +1,29 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **python/python-pexpect.md**: pexpectを追加した
+
+### Fix
+
+- **docker/docker-mariadb.md**: composeの設定を追記した
+- **docker/docker-volume.md**: ボリュームのcomposeを追記した
+- **docker/docker-mariadb.md**: データベースにtest_userを追加した
+- **docker/docker-compose.md**: versionキーのwarningを追記した
+- **docker/docker-mariadb.md**: DB操作を追記した
+- **command/command-mise.md**: miseコマンドを整理した
+- **command/command-docker.md**: dockerコマンドを整理した
+- **command/command-date.md**: フォーマット指定子を追加した
+- **python/python-pexpect.md**: 見出しを整理した
+- **pyproject.toml**: dotenvを追加した: 1.0.1
+- **scripts/requests.py**: 更新した
+- **pyproject.toml**: pexpectを追加した: 4.9.0
+- **.github/renovate.json**: renovateの設定ファイルを移動した
+- **.renovaterc.json**: renovateの設定を追加した
+- **python/python-exception.md**: 例外処理を整理した
+
 ## v1.41.0 (2024-10-16)
 
 Docker / Docker Compose 強化リリース
