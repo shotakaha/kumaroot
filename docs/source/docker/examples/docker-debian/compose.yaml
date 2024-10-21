@@ -1,9 +1,9 @@
 # https://hub.docker.com/_/debian
 
 # Usage:
-# $ docker compose up -d
+# $ docker compose up --detach
 # $ docker compose exec debian bash
-# $ docker compose down -v
+# $ docker compose down --volumes
 
 services:
   debian:
