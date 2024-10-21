@@ -31,6 +31,7 @@ command-pwgen
 command-ripgrep
 command-tldr
 command-zoxide
+command-mktemp
 ```
 
 ## エディターしたい
