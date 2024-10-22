@@ -52,3 +52,14 @@ $ mktemp --directory --tmpdir=.
 
 `--directory`オプションで一時的なディレクトリを作成できます。
 `--tmpdir`オプションと組み合わせて、任意のディレクトリの中に作成できます。
+
+## スクリプトしたい
+
+```bash
+#!/usr/bin/env bash
+
+# 一時ファイル作成し、ファイル名を取得
+temp_file = $(mktemp)
+# 終了時に削除
+trap 'rm -v "${temp_file}"' EXIT
+```
