@@ -33,6 +33,7 @@ command-tldr
 command-zoxide
 command-mktemp
 command-df
+command-du
 ```
 
 ## エディターしたい
