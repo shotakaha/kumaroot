@@ -32,6 +32,7 @@ command-ripgrep
 command-tldr
 command-zoxide
 command-mktemp
+command-df
 ```
 
 ## エディターしたい
