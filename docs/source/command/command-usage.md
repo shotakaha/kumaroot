@@ -34,6 +34,7 @@ command-zoxide
 command-mktemp
 command-df
 command-du
+command-crontab
 ```
 
 ## エディターしたい
