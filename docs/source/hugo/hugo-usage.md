@@ -25,12 +25,11 @@ HugoはJSの知識がなくても（そしてGoの知識がなくても）、HTM
 maxdepth: 1
 ---
 hugo-install
+hugo-page-bundles
 hugo-new
 hugo-themes
 hugo-demo
 hugo-data
-hugo-page-bundles
-hugo-content
 hugo-static
 hugo-page-variables
 hugo-frontmatter
