@@ -46,13 +46,14 @@ hugo-tableofcontents
 maxdepth: 1
 ---
 hugo-config
-hugo-config-menu
+hugo-config-hugo
 hugo-config-permalinks
 hugo-config-copyright
 hugo-config-format
 hugo-config-paginate
 hugo-config-markup
 hugo-config-services
+hugo-config-menu
 ```
 
 % hugo-templates-homepage

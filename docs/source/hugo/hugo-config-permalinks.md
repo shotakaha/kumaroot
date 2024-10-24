@@ -1,4 +1,4 @@
-# パーマリンクしたい（``permalinks``）
+# パーマリンクしたい（`[permalinks]`）
 
 ```toml
 [permalinks]
@@ -8,34 +8,37 @@ post = "/:section/:year/:month/:day"  # ==> /{ja, en}/post/2023/10/23/
 post = "/blog/:year/:month/:day"      # ==> /{ja, en}/blog/2023/123
 ```
 
-記事やページのURLパターンは[permalinks](https://gohugo.io/content-management/urls/#permalinks)で変更できます。
-フロントマターでも設定できますが、全体設定（``hugo.toml``）で設定するとよいでしょう。
+`[permalinks]`セクションで、ビルドした記事やページのURLパターンを設定できます。
 デフォルト（＝設定なし）はファイル名をベースとしたURLです。
+パーマリンクはサイト全体で統一したほうがよいため、全体設定（`config/_default/hugo.toml`）に記述します。
+
+## 多言語したい
 
 パーマリンクは多言語サイトでも同じように設定できます。
 実際に次のようなコンテンツ構造のサイトで動作確認しました。
 
 ```console
 content/
-|-- _index.ja.md
-|-- _index.en.md
-|-- about.ja.md
-|-- about.en.md
+|-- _index.ja.md    --> public/ja/index.html
+|-- _index.en.md    --> public/en/index.html
+|-- about.ja.md     --> public/ja/about/index.html
+|-- about.en.md     --> public/en/about/index.html
 |-- post/
-    |-- _index.ja.md
-    |-- _index.en.md
-    |-- 記事1.ja.md
-    |-- 記事1.en.md
+    |-- _index.ja.md   --> public/ja/blog/index.html
+    |-- _index.en.md   --> public/en/blog/index.html
+    |-- 記事1.ja.md     --> public/ja/blog/年/月/日/index.html
+    |-- 記事1.en.md     --> public/en/blog/年/月/日/index.html
 ```
 
 ## セクション名を変更したい
 
 ```toml
 [permalinks]
-  [permalinks.page]
-    post = "/articles/:year/:yearday"
-  [permalinks.section]
-    post = "/articles/"
+[permalinks.page]
+post = "/articles/:year/:yearday"
+
+[permalinks.section]
+post = "/articles/"
 ```
 
 ``post``セクションのパーマリンクを``/articles/``に変更しています。
@@ -67,3 +70,7 @@ URLが重複してりまうようなパターンは好ましくありません�
 
 Hugoの場合、ページIDは自動で割り振られないので、運用でカバーするしかありません。
 同じ日にいくつも記事を作成しないのであれば、公開日ベースのパターンにするのがよいと思います。
+
+## リファレンス
+
+- [permalinks](https://gohugo.io/content-management/urls/#permalinks)
