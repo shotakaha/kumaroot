@@ -1,4 +1,4 @@
-# メニューしたい（`[menu]`）
+# メニューしたい（`[menu]` / `menu.toml`）
 
 ```toml
 [menu]

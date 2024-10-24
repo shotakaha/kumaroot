@@ -16,4 +16,11 @@ hugo-partials-meta
 hugo-partials-header
 hugo-partials-aside
 hugo-partials-breadcrumbs
+hugo-ogp
+```
+
+## ショートコードしたい（`/layouts/shortcodes/`）
+
+```{toctree}
+hugo-shortcodes-figure
 ```

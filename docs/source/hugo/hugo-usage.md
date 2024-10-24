@@ -33,6 +33,7 @@ hugo-data
 hugo-assets
 hugo-static
 hugo-themes
+hugo-i18n
 ```
 
 ## 再編中
@@ -45,7 +46,6 @@ hugo-new
 hugo-demo
 hugo-page-variables
 hugo-frontmatter
-hugo-shortcodes-figure
 hugo-scratch
 hugo-printf
 hugo-tableofcontents
@@ -58,18 +58,7 @@ hugo-tableofcontents
 maxdepth: 1
 ---
 hugo-title
-hugo-ogp
 hugo-pipes-tocss
-```
-
-## 多言語したい
-
-```{toctree}
----
-maxdepth: 1
----
-hugo-config-languages
-hugo-i18n
 ```
 
 ## デプロイしたい

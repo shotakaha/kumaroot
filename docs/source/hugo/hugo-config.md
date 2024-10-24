@@ -33,6 +33,7 @@ hugo-config-markup
 hugo-config-services
 hugo-config-menu
 hugo-config-taxonomies
+hugo-config-languages
 ```
 
 ## 設定ファイルしたい（`hugo --config`）
