@@ -26,11 +26,25 @@ maxdepth: 1
 ---
 hugo-install
 hugo-page-bundles
+hugo-config
+hugo-content
+hugo-layouts
+hugo-data
+hugo-assets
+hugo-static
+hugo-themes
+```
+
+## 再編中
+
+
+```{toctree}
+---
+maxdepth: 1
+---
 hugo-new
 hugo-themes
 hugo-demo
-hugo-data
-hugo-static
 hugo-page-variables
 hugo-frontmatter
 hugo-shortcodes-figure
@@ -45,7 +59,6 @@ hugo-tableofcontents
 ---
 maxdepth: 1
 ---
-hugo-config
 hugo-config-hugo
 hugo-config-permalinks
 hugo-config-copyright

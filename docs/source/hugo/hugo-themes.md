@@ -1,4 +1,4 @@
-# テーマしたい
+# テーマしたい（`/themes/`）
 
 [Hugo Themes](https://themes.gohugo.io/)からテーマを選択できます。
 

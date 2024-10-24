@@ -1,4 +1,4 @@
-# 静的ファイルを置きたい
+# 静的ファイルしたい（`/static/`）
 
 ```toml
 staticDir = ["static"]
