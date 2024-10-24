@@ -47,3 +47,7 @@ Markdownのパーサーには[goldmark](https://github.com/yuin/goldmark/)が使
 
 Goldmarkを使っている場合、[目次の設定](https://gohugo.io/getting-started/configuration-markup/#table-of-contents)ができます。
 デフォルトでは``h2``見出しから``h3``見出しを``ul``でマークアップします。
+
+## リファレンス
+
+- [Configure Markup](https://gohugo.io/getting-started/configuration-markup/)
