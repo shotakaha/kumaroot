@@ -1,20 +1,21 @@
-# 多言語サイトしたい（``.Site.Languages``）
+# 言語設定したい（`[languages]` / `languages.toml`）
 
 ```toml
 defaultContentLanguage = "ja"
 defaultContentLanguageInSubdir = true
 
 [languages]
-  [languages.ja]
-    languageCode = "ja"
-    languageName = "日本語"
-    title = "日本語のサイト名"
-    weight = 0
-  [languages.en]
-    languageCode = "en"
-    languageName = "English"
-    title = "英語のサイト名"
-    weight = 10
+[languages.ja]
+  languageCode = "ja"
+  languageName = "日本語"
+  title = "日本語のサイト名"
+  weight = 0
+
+[languages.en]
+  languageCode = "en"
+  languageName = "English"
+  title = "英語のサイト名"
+  weight = 10
 ```
 
 Hugoはデフォルトで[多言語サイト](https://gohugo.io/content-management/multilingual/)に対応できます。
@@ -27,51 +28,28 @@ Hugoはデフォルトで[多言語サイト](https://gohugo.io/content-manageme
 言語ごとの詳細設定は、それぞれの言語セクションの中で定義します。
 ``languageCode``は[RFC5646](https://datatracker.ietf.org/doc/html/rfc5646)で定義されている言語コードをすべて小文字で設定します
 
+## テンプレートしたい（`.Site.Languages`）
+
 ## 多言語コンテンツを作成したい
 
 Hugoでは、ファイル名を基準にした方法と、サブディレクトリ名を基準にした方法で多言語に対応するコンテンツを管理できます。
 どちらを選択するかは、作成する用途に合わせて決めることになると思います。
 それぞれに一長一短あると思いますが、混ぜるのは危険です（たぶん）。
 
-
-
-### ファイル名で管理したい
-
-全体設定に追記することはとくにありません。
-コンテンツファイルの名前を以下のように``{ファイル名}.{言語名}.md``にします。
-``{言語名}``を省略した場合は、デフォルトの言語に設定されます。
+## ファイル名したい
 
 ```console
-/content/about.ja.md  # {BaseURL}/ja/about/
-/content/about.en.md  # {BaseURL}/en/about/
+/content/about/index.ja.md  # ==> {BaseURL}/ja/about/index.html
+/content/about/index.en.md  # ==> {BaseURL}/en/about/index.html
 ```
+
+複数の言語のページを作成する場合、
+ファイル名を``{ファイル名}.{言語名}.md``にします。
+``{言語名}``を省略した場合は、デフォルトの言語に設定されます。
 
 とくに理由がなければ、多言語コンテンツのファイル名は揃えるとよいです。
 これらは、自動で言語スイッチャーに登録されます。
 ファイル名が異なる場合でも、frontmatterで同じ``translationKey``を設定することで、異なる言語間の関係を張ることができます。
-
-### サブディレクトリ名で管理したい（``contentDir``）
-
-```toml
-[languages]
-  [languages.ja]
-    languageCode = "ja"
-    languageName = "日本語"
-    title = "日本語のサイト名"
-    contentDir = "content/ja"
-    weight = 0
-  [languages.en]
-    disabled = false
-    languageCode = "en"
-    languageDirection = "ltr"
-    languageName = "English"
-    title = "英語のサイト名"
-    contentDir = "content/en"
-    weight = 10
-```
-
-言語ごとの詳細設定で``contentDir``を指定します。
-コンテンツ数が多くなる場合は、こちらの方法がよいかもしれません。
 
 ## 翻訳ページを表示したい
 
