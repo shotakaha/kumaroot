@@ -32,6 +32,7 @@ hugo-config-paginate
 hugo-config-markup
 hugo-config-services
 hugo-config-menu
+hugo-config-taxonomies
 ```
 
 ## 設定ファイルしたい（`hugo --config`）

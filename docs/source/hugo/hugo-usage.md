@@ -58,7 +58,6 @@ hugo-tableofcontents
 maxdepth: 1
 ---
 hugo-title
-hugo-taxonomy
 hugo-ogp
 hugo-pipes-tocss
 ```
