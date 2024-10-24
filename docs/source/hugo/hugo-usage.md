@@ -37,13 +37,11 @@ hugo-themes
 
 ## 再編中
 
-
 ```{toctree}
 ---
 maxdepth: 1
 ---
 hugo-new
-hugo-themes
 hugo-demo
 hugo-page-variables
 hugo-frontmatter
@@ -53,23 +51,6 @@ hugo-printf
 hugo-tableofcontents
 ```
 
-## 全体設定したい
-
-```{toctree}
----
-maxdepth: 1
----
-hugo-config-hugo
-hugo-config-permalinks
-hugo-config-copyright
-hugo-config-format
-hugo-config-paginate
-hugo-config-markup
-hugo-config-services
-hugo-config-menu
-```
-
-% hugo-templates-homepage
 ## テンプレートしたい
 
 ```{toctree}
