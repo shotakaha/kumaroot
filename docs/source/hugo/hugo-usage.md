@@ -59,17 +59,7 @@ maxdepth: 1
 ---
 hugo-title
 hugo-taxonomy
-hugo-layouts-baseof
-hugo-layouts-single
-hugo-layouts-list
-hugo-layouts-home
-hugo-layouts-404
-hugo-partials-head
-hugo-partials-meta
 hugo-ogp
-hugo-partials-header
-hugo-partials-aside
-hugo-partials-breadcrumbs
 hugo-pipes-tocss
 ```
 
