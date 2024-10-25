@@ -17,6 +17,7 @@ maxdepth: 1
 hugo-frontmatter
 hugo-frontmatter-title
 hugo-frontmatter-date
+hugo-frontmatter-images
 ```
 
 ## 設定ファイルしたい（`contentDir`）
