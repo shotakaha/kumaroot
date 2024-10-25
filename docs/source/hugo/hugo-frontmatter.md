@@ -16,25 +16,6 @@ draft = true
 HugoではTOML、YAML、JSON、ORGの4つの形式でフロントマターを記述できます。
 このドキュメントのサンプルはTOML形式で記述しています。
 
-## タイトルしたい
-
-```toml
-title = "正式なタイトル"
-linktitle = "リンク用のタイトル"
-```
-
-```html
-<ul>
-    {{ range .Pages.ByLinkTitle }}
-    <li>{{ .LinkTitle }}</li>
-    {{ end }}
-</ul>
-```
-
-``.LinkTitle``を使ってリンク用の短いタイトルを設定できます。
-関連コンテンツやサイドバーなどにリンク一覧を生成する場合に使ったりします。
-``.LinkTitle``が設定されていない場合は``.Title``が表示されます。
-
 ## 日付したい
 
 ```toml

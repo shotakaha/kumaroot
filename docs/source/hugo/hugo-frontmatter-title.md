@@ -23,6 +23,16 @@ linkTitle = "リンク用のタイトル"
 `{{ .LinkTitle }}`でリンク用のタイトルを表示できます。
 `.LinkTitle`が設定されてない場合は`.Title`が適用されます。
 
+```html
+<ul>
+    {{ range .Pages.ByLinkTitle }}
+    <li>{{ .LinkTitle }}</li>
+    {{ end }}
+</ul>
+```
+
+関連コンテンツやサイドバーなどにリンク一覧を生成する場合に使ったりします。
+
 ## リファレンス
 
 - [PAGE.Title](https://gohugo.io/methods/page/title/)
