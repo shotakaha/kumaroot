@@ -4,9 +4,10 @@
 ---
 maxdepth: 1
 ---
+hugo-content-more
+hugo-content-shortcodes
 hugo-content-links
 hugo-content-figure
-hugo-content-shortcodes
 hugo-content-youtube
 ```
 
