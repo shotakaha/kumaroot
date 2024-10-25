@@ -1,4 +1,18 @@
-# ページ割りしたい
+# ページ割り設定したい（`[pagination]` / `pagination.toml`）
+
+```toml
+# hugo.toml
+[pagination]
+pageSize = 10
+path = "page"
+```
+
+`[pagination]`セクションでページ割りを設定できます。
+デフォルトのページ割りは10ページ／記事ごとになっています。
+
+:::{note}
+
+これまでは以下のように`paginate`キーで設定していました。
 
 ```toml
 # hugo.toml
@@ -6,8 +20,9 @@ paginate = 10
 paginatePath = "page"
 ```
 
-[ページ割り](https://gohugo.io/templates/pagination/)するときのページ数を設定できます。
-デフォルトのページ割りは10ページ／記事ごとになっています。
+`v0.128.0`からdeprecatedになり、将来的に削除される予定だそうです。
+
+:::
 
 ## 記事一覧に追加したい
 
@@ -36,3 +51,7 @@ paginatePath = "page"
     </ul>
 </nav>
 ```
+
+## リファレンス
+
+- [Pagination - Templates - gohugo.io](https://gohugo.io/templates/pagination/)
