@@ -7,15 +7,15 @@ maxdepth: 1
 hugo-config-hugo
 hugo-config-sections
 hugo-config-environment
+hugo-config-languages
+hugo-config-menu
 hugo-config-permalinks
+hugo-config-taxonomies
+hugo-config-paginate
+hugo-config-services
 hugo-config-copyright
 hugo-config-format
-hugo-config-paginate
 hugo-config-markup
-hugo-config-services
-hugo-config-menu
-hugo-config-taxonomies
-hugo-config-languages
 ```
 
 ## 設定ファイルを変更したい（`hugo --config`）
