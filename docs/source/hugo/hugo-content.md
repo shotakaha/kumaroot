@@ -5,6 +5,7 @@
 maxdepth: 1
 ---
 hugo-content-more
+hugo-content-toc
 hugo-content-shortcodes
 hugo-content-links
 hugo-content-figure

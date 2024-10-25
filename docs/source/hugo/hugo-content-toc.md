@@ -6,12 +6,21 @@
 # 目次したい（``.TableOfContents``）
 
 ```html
+{{ block "main" . }}
 <div class="toc">
-    {{ .TableOfContents }}
+  {{ .TableOfContents }}
 </div>
+
+{{ .Content }}
+
+<div class="toc">
+  {{ .TableOfContents }}
+</div>
+{{ end }}
 ```
 
 ``{{ .TableOfContents }}``で、コンテンツ内の見出しを目次として表示できます。
+上のサンプルでは本文コンテンツの上下に目次を挿入しています。
 
 :::{seealso}
 
@@ -22,8 +31,7 @@
 
 :::
 
-
-## 目次レベルを変更したい（``markup.tableOfContents``）
+## 設定したい（``markup.tableOfContents``）
 
 ```toml
 [markup]
@@ -33,9 +41,9 @@ endLevel = 3     # [1-6]
 ordered = false  # [false|true]
 ```
 
-``markup.tableOfContents``オプションで、目次レベルを設定できます。
-``startLevel``と``endLevel``で、表示する見出しの深さを設定できます。
-``ordered``で``<ul>``と``<ol>``を切り替えできます。
+`[markup]`セクションで目次レベルを設定できます。
+`startLevel`と`endLevel`で、表示する見出しの深さを設定できます。
+`ordered`で`<ul>`タグを使うか、`<ol>`タグを使うか、切り替えできます。
 
 ## リファレンス
 

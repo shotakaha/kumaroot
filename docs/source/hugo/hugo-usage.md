@@ -47,7 +47,6 @@ hugo-demo
 hugo-page-variables
 hugo-scratch
 hugo-printf
-hugo-tableofcontents
 ```
 
 ## テンプレートしたい
