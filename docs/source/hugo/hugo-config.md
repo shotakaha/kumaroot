@@ -11,7 +11,7 @@ hugo-config-languages
 hugo-config-menu
 hugo-config-permalinks
 hugo-config-taxonomies
-hugo-config-paginate
+hugo-config-pagination
 hugo-config-googleAnalytics
 hugo-config-copyright
 hugo-config-format
