@@ -18,6 +18,7 @@ hugo-frontmatter
 hugo-frontmatter-title
 hugo-frontmatter-date
 hugo-frontmatter-images
+hugo-frontmatter-taxonomies
 ```
 
 ## 設定ファイルしたい（`contentDir`）
