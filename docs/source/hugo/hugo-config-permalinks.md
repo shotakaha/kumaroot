@@ -121,4 +121,6 @@ Hugoの場合、ページIDは自動で割り振られないので、運用で�
 
 ## リファレンス
 
-- [permalinks](https://gohugo.io/content-management/urls/#permalinks)
+- [URL Management](https://gohugo.io/content-management/urls/)
+- [Permalinks](https://gohugo.io/content-management/urls/#permalinks)
+- [Tokens](https://gohugo.io/content-management/urls/#tokens)
