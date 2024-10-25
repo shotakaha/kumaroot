@@ -24,3 +24,7 @@ isCJKLanguage = true
 
 日本語などを使う場合は設定しましょう。
 マルチバイト文字に対して、``.WordCount`` や``.Count``が正確になるらしいです。
+
+## リファレンス
+
+- [Front matter](https://gohugo.io/content-management/front-matter/)
