@@ -28,3 +28,4 @@ CSVファイルを読み込む場合は``getCSV``を使います。
 ## リファレンス
 
 - [Data Templates](https://gohugo.io/templates/data-templates/)
+- [Data sources](https://gohugo.io/content-management/data-sources/)
