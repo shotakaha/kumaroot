@@ -6,6 +6,8 @@ maxdepth: 1
 ---
 hugo-content-links
 hugo-content-figure
+hugo-content-shortcodes
+hugo-content-youtube
 ```
 
 ## フロントマターしたい
