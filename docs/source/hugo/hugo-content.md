@@ -5,6 +5,7 @@
 maxdepth: 1
 ---
 hugo-content-title
+hugo-content-date
 hugo-content-links
 hugo-content-figure
 ```
