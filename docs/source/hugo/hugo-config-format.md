@@ -1,24 +1,26 @@
-# 日付フォーマットしたい（``.Format``）
+# 日付フォーマットしたい（`.params.date_format`）
 
-/config/_default/hugo.toml
-:   ```toml
-    [params]
-    date_format = "2006-01-02"
-    ```
+```toml
+# hugo.toml
+[params]
+date_format = "2006-01-02"
+```
+
+`[params]`セクションで日付フォーマットを設定します。
+
+## テンプレートしたい（`.Date.Format`）
+
+```html
+{{ .Date.Format .Site.Params.date_format }}
+```
+
+[.Date.Format](https://gohugo.io/methods/time/format/)関数を使って日付フォーマットできます。
+フォーマット文字列は設定ファイルで定義します。
 
 /content/記事/index.md
 :   ```toml
     date = "2024-04-30T15:30:34+09:00"
     ```
-
-/layouts/_default/single.html
-:   ```html
-    {{ .Date.Format .Site.Params.date_format }}
-    ```
-
-[.Format](https://gohugo.io/methods/time/format/)関数を使って日付フォーマットできます。
-フォーマット文字列は設定ファイルで定義します。
-
 ## ISO8601形式にしたい
 
 ```html
