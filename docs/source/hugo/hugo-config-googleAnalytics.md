@@ -1,9 +1,15 @@
-# Google Analytics設定したい（`services.googleAnlytics`）
+# Google Analytics設定したい（`services.googleAnlytics` / `privacy.googleAnalytics`）
 
 ```toml
+# hugo.toml
 [services]
 [services.googleAnalytics]
 ID = "G-測定ID"
+
+[privacy]
+[privacy.googleAnalytics]
+disable = true
+respectDoNotTrack = true
 ```
 
 Hugoデフォルトの[内部テンプレート](https://gohugo.io/templates/internal/)を使う場合、

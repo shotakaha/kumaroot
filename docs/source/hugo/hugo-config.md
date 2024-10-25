@@ -12,7 +12,7 @@ hugo-config-menu
 hugo-config-permalinks
 hugo-config-taxonomies
 hugo-config-paginate
-hugo-config-services
+hugo-config-googleAnalytics
 hugo-config-copyright
 hugo-config-format
 hugo-config-markup
