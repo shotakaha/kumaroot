@@ -1,6 +1,9 @@
 # コンテンツしたい（`/content/`）
 
 ```{toctree}
+---
+maxdepth: 1
+---
 hugo-content-title
 ```
 
