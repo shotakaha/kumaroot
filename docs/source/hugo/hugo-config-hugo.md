@@ -1,12 +1,63 @@
 # 設定ファイル（``hugo.toml``）
 
 ```toml
+# /hugo.toml もしくは
+# /config/_default/hugo.toml
+
 baseURL = "https://example.com/sub/"
+title = "サイト全体のタイトル"
+theme = ["テーマ名"]
+
+# サイト言語の設定
+defaultContentLanguage = "ja"
+defaultContentLanguageInSubdir = false
+hasCJKLanguage = true
+
+# サイトのオプション
+enableEmoji = true
+enableGitInfo = false
+enableMissingTranslationPlaceholder = true
+enableRobotsTXT = true
+
+# ビルド時のオプション設定
+buildDrafts = true
+buildFuture = true
+timeout = "30s"
+
+# パーマリンク設定
+[permalinks]
+pages = "/:section/:filename"
+posts = "/:section/:year/:yearday"
+
+# タクソノミーの設定
+[taxonomies]
+tag = "tags"
+category = "categories"
+author = "authors"
+
+# ページ割の設定
+[pagination]
+pageSize = 20
+
+# ビルドするファイルの設定
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+# GAの設定
+[services]
+[services.googleAnalytics]
+ID = "G-測定タグID"
+
+# プライバシー設定
+[privacy]
+[privacy.googleAnalytics]
+disable = true
+respectDoNotTrack = true
 ```
 
 サイトの設定は``hugo.toml``に記述します。
 設定の形式は``TOML`` / ``YAML`` / ``JSON``が利用できます。
-僕は``TOML``を好んで使っています。
+僕は``TOML``形式を使っています。
 
 :::{attention}
 v0.110からデフォルトの設定ファイル名が``hugo.toml``に変更されました。
