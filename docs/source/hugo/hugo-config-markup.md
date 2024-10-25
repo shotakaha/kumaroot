@@ -1,4 +1,4 @@
-# マークアップしたい
+# マークアップ設定したい（`[markup]` / `markup.toml`）
 
 ```toml
 [markup]

@@ -1,4 +1,4 @@
-# メニューしたい（`[menu]` / `menu.toml`）
+# メニュー設定したい（`[menu]` / `menu.toml`）
 
 ```toml
 [menu]

@@ -1,4 +1,4 @@
-# パーマリンクしたい（`[permalinks]` / `permalinks.toml`）
+# パーマリンク設定したい（`[permalinks]` / `permalinks.toml`）
 
 ```toml
 # config/_default/hugo.toml

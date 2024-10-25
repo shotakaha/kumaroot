@@ -1,4 +1,4 @@
-# Google Analyticsしたい
+# Google Analytics設定したい（`services.googleAnlytics`）
 
 ```toml
 [services]

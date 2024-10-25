@@ -1,4 +1,4 @@
-# タクソノミーしたい（`[taxonomies]` / `taxonomies.toml`）
+# タクソノミー設定したい（`[taxonomies]` / `taxonomies.toml`）
 
 ```toml
 # /config/_default/hugo.toml

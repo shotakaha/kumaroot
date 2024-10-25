@@ -1,4 +1,4 @@
-# 日付フォーマットしたい（`.params.date_format`）
+# 日付フォーマットしたい（`params.date_format`）
 
 ```toml
 # hugo.toml
@@ -21,6 +21,7 @@ date_format = "2006-01-02"
 :   ```toml
     date = "2024-04-30T15:30:34+09:00"
     ```
+
 ## ISO8601形式にしたい
 
 ```html
