@@ -32,35 +32,42 @@ HTMLタグはセマンティックに沿って並べるのがよいと思いま�
 ブロックテンプレートや部分テンプレートを読み込み、
 なるべく**具体的に書かない**ことが重要だと思います。
 
-## 表示言語の設定（``lang属性``）
+## 表示言語したい（`lang` / `dir`）
 
-[lang属性](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/lang)には、ウェブサイトに書かれている言語、もしくはユーザーが入力すべき言語を設定します。デフォルト値は``unknown``なので、適切な値を指定することが推奨されています。
+```html
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}"
+      dir="{{ or site.Language.LanguageDirection 'ltr' }}">
+<head>
+```
 
-[多言語サイトの設定](./hugo-config-languages.md)に書いたように全体設定で``languageCode``を指定します。
+ページの[lang属性](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/lang)にはウェブサイトに書かれている言語、
+もしくはユーザーが入力すべき言語を設定します。
+デフォルト値は``unknown``なので、適切な値を指定することが推奨されています。
 
-## 部分テンプレートしたい
-
-すべてに共通するパーツは[部分テンプレート機能](https://gohugo.io/templates/partials/)を使うことで、テンプレート制作にかかる手間を削減できます。
+[多言語サイトの設定](./hugo-config-languages.md)で定義した、サイト全体の言語コードを指定します。
 
 ## ブロックテンプレートしたい
 
 ```html
-{{ block "main" . }}
+{{ define "main" . }}
 <!-- デフォルトのテンプレートを書くことができます -->
 <p>メインブロックが定義されていません。</p>
 <p>以下のテンプレートを追加することを検討してください。</p>
 <ul>
-    <li>ページ用テンプレート: <code>/layouts/_default/single.html</code></li>
-    <li>リスト用テンプレート: <code>/layouts/_default/list.html</code></li>
+  <li>ページ用テンプレート: <code>/layouts/_default/single.html</code></li>
+  <li>リスト用テンプレート: <code>/layouts/_default/list.html</code></li>
 </ul>
 {{ end }}
 ```
 
-ベーステンプレート（``baseof.html``）の中で[ブロックテンプレート機能](https://gohugo.io/templates/base/)を利用できます。
-テンプレートの種類によって変えたい部分だけをブロックテンプレートに置き換えることで、テンプレートのメンテナンスコストを減らします。
+ベーステンプレートの中に**ブロックテンプレート機能**を埋め込んでおきます。
+ブロックテンプレートは、いわばプレースホルダーのようなもので、
+テンプレートの種類によってカスタマイズしたい部分だけを置き換えることができます。
 
-上記のサンプルでは、メインコンテンツに相当する部分を``{{ define "main" }}``と定義しておき、表示内容は[ページ用テンプレート](./hugo-layouts-single.md)と[リスト用テンプレート](./hugo-layouts-list.md)でそれぞれで上書きすることを想定しています。
+上記のサンプルでは、メインコンテンツに相当する部分を``{{ define "main" }}``と定義しておき、
+表示内容は[ページ用テンプレート](./hugo-layouts-single.md)と[リスト用テンプレート](./hugo-layouts-list.md)でそれぞれで上書きすることを想定しています。
 
 ## リファレンス
 
 - [Base templates](https://gohugo.io/templates/base/)
+-
