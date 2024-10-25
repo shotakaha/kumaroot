@@ -4,10 +4,19 @@
 ---
 maxdepth: 1
 ---
-hugo-content-title
-hugo-content-date
 hugo-content-links
 hugo-content-figure
+```
+
+## フロントマターしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+hugo-frontmatter
+hugo-frontmatter-title
+hugo-frontmatter-date
 ```
 
 ## 設定ファイルしたい（`contentDir`）

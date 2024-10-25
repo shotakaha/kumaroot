@@ -45,7 +45,6 @@ maxdepth: 1
 hugo-new
 hugo-demo
 hugo-page-variables
-hugo-frontmatter
 hugo-scratch
 hugo-printf
 hugo-tableofcontents
