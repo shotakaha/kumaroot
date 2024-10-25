@@ -25,5 +25,7 @@ linkTitle = "リンク用のタイトル"
 
 ## リファレンス
 
-- [Title - Page Methods - gohugo.io](https://gohugo.io/methods/page/title/)
-- [LinkTitle - Page Methods - gohugo.io](https://gohugo.io/methods/page/linktitle/)
+- [PAGE.Title](https://gohugo.io/methods/page/title/)
+- [PAGE.LinkTitle](https://gohugo.io/methods/page/linktitle/)
+- [PAGE.Permalink](https://gohugo.io/methods/page/permalink/)
+- [PAGE.RelPermalink](https://gohugo.io/methods/page/relpermalink/)
