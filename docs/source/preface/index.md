@@ -1,20 +1,18 @@
 # はじめに
 
 こんにちは、くまです。
+
 現在、とある研究所で科学広報／科学コミュニケータをしています。
-
 学生時代には高エネルギー物理学実験を専攻していました。
-このドキュメントは、そんな大学院生のころに書き溜めはじめた自分用のDokuWikiをベースにしています。
 
-当時のDokuWiki（[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)）は、もうアクセスができなくなっていますが、ROOTの使い方が目玉コンテンツでした！（たぶん）
+大学院生のときに本格的にプログラミングをはじめたころ、
+研究室の個人用DokuWiki（[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)）に
+使い方を書き溜めるようにしていました。
+このドキュメントをそのときの内容をベースにしています。
 
-DokuWikiの引っ越し先をあれこれ検討した結果、
-[Sphinx](https://www.sphinx-doc.org/ja/master/)で文書を作成、
-[GitHub](https://github.com/shotakaha/kumaroot)でソースを管理、
-[Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開することにしました。
-
-現在もちまちまとコンテンツを増改築しており、ROOTに限らずいろいろと情報を整理しています。
-どれかひとつでも誰かの参考になるページがあれば幸いです。
+通りいっぺんの使い方は
+そのツールの公式ドキュメント（や先達のブログ記事など）に任せ、
+「〇〇したい」という見出しを基本とした実用的な逆引き辞典を目指しています。
 
 ```{toctree}
 ---

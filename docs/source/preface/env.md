@@ -1,6 +1,13 @@
 # ドキュメント環境
 
-このドキュメントをビルドしている環境です。
+DokuWikiの引っ越し先をあれこれ検討した結果、
+[GitHub](https://github.com/shotakaha/kumaroot)でソースを管理、
+[Sphinx](https://www.sphinx-doc.org/ja/master/)で文書を作成、
+[Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開することにしました。
+
+## ローカルの開発環境
+
+このドキュメントをビルドしているローカル環境です。
 
 > 2023/05/22時点
 
