@@ -28,7 +28,22 @@ Logger.log(data);
 最後に中身を確認するために``Logger.log``しています。
 ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
-## スプレッドシートを開きたい（``openById``）
+## スプレッドシートを作成したい（`create`）
+
+```js
+const book = SpreadsheetApp.create("スプレッドシート名");
+const book = SpreadsheetApp.create("スプレッドシート名", 行数, 列数);
+
+const id = book.getId();
+const name = book.getName();
+const url = book.getUrl();
+const nrows = book.getLastRow();
+const ncols = book.getLastColumn();
+```
+
+`create`メソッドでスプレッドシートを新規作成できます。
+
+## スプレッドシートを開きたい（`openById` / `openByUrl`）
 
 ```js
 // バインドされたスクリプト
@@ -248,6 +263,16 @@ sheet.setName("変更後のシート名");
 
 `setName`でシート名を変更できます。
 同じ名前のシートは作れません。
+
+## スプレッドシート全体を複製したい（`copy`）
+
+```js
+const book = SpreadsheetApp.openById("コピー元のID");
+const copied = book.copy("コピー先のファイル名");
+```
+
+`copy`メソッドでスプレッドシート全体を複製できます。
+新しいブックが作成されるため、URLも新規発行されます。
 
 ## シートを複製したい（`copyTo`）
 
