@@ -3,7 +3,7 @@
 こんにちは、くまです。
 
 現在、とある研究所で科学広報／科学コミュニケータをしています。
-学生時代には高エネルギー物理学実験を専攻していました。
+学生時代に高エネルギー物理学実験を専攻していました。
 
 大学院生のときに本格的にプログラミングをはじめたころ、
 研究室の個人用DokuWiki（[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)）に

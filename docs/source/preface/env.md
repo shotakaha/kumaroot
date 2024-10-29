@@ -1,6 +1,6 @@
 # ドキュメント環境
 
-DokuWikiの引っ越し先をあれこれ検討した結果、
+DokuWikiの引っ越し先をあれこれ検討した結果、いちから作り直すことにして、
 [GitHub](https://github.com/shotakaha/kumaroot)でソースを管理、
 [Sphinx](https://www.sphinx-doc.org/ja/master/)で文書を作成、
 [Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開することにしました。
