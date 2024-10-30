@@ -1,5 +1,32 @@
 # フォームしたい（``FormApp``）
 
+## 回答時にレスポンス取得したい（`onFormSubmit`）
+
+```js
+/**
+ * @params {FormSubmitEvent} e - 送信トリガーが発生したときに自動的に渡されるイベントオブジェクト
+ *
+function onFormSubmit(e) {
+    // 回答をまとめて取得する
+    const itemResponses = e.response.getItemResponses();
+
+    // 回答を「質問名：回答」の形式に変換
+    const fallback = itemResponses.map(function(itemResponse) {
+        const title = itemResponse.getItem().getTitle();
+        const response = itemResponse.getResponse();
+        return `${title}: ${response}`;
+    }).join("\n");
+
+    // 質問1: 回答1\n
+    // 質問2: 回答2\n
+    // 質問3: 回答3\n
+}
+```
+
+`onFormSubmit`は、回答者がフォームを送信したときにトリガーされる関数です。
+引数`e`にはイベントオブジェクトが自動的に渡されます。
+`e.response.getItemResponses`で回答（`ItemResponse`オブジェクト）の配列を取得できます。
+
 ## 回答後のメッセージをカスタマイズしたい
 
 ```js
