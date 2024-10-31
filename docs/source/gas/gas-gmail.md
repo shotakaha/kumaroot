@@ -1,4 +1,4 @@
-# メールしたい（``MailApp``）
+# メールしたい（`MailApp` / `GmailApp`）
 
 ```js
 MailApp.sendEmail("メッセージオブジェクト");
@@ -6,36 +6,50 @@ MailApp.sendEmail("宛先", "件名", "本文");
 MailApp.sendEmail("宛先", "件名", "本文", "オプション");
 ```
 
-GASからメールするには[MailApp](https://developers.google.com/apps-script/reference/mail/mail-app)を使う方法
-[GmailApp](https://developers.google.com/apps-script/reference/gmail/gmail-app)を使う方法の2通りあります。
+GASからメールするには
+`MailApp`クラスを使う方法と
+`GmailApp`クラスを使う方法の2通りあります。
 
-メールを送るだけなら``MailApp``シンプルかつ十分です。
-メールボックス全体をあれこれしたい場合は``GmailApp``を使います。
+メールを送るだけなら``MailApp``がシンプルかつ十分です。
+下書きを作成したり、メールボックス全体をあれこれ操作したりしたい場合は``GmailApp``を使います。
 
-## ドキュメントから本文を読み込んでメールしたい
+## メールしたい（`MailApp.sendEmail`）
 
 ```js
+// @params {string} mailTo - 宛先アドレス
+// @params {string} docId - 本文用ドキュメントのID
 function send_mail(mailTo, docId) {
-    // mailTo = 宛先アドレス
-    // docId = GoogleドキュメントのID
-
     const doc = DocumentApp.openById(docId);
     const mailTitle = doc.getName();
     const mailBody = doc.getBody().getText();
     const mailOption = {
-        name: "送信元の名前",
         cc: "CCの宛先",
         bcc: "BCCの宛先",
+        name: "送信元の名前（デフォルト：ユーザー名）",
+        replyTo: "返信先アドレス（デフォルト：ユーザーのアドレス）",
         }
     MailApp.sendEmail(mailTo, mailTitle, mailBody, mailOption);
 }
 ```
 
-Googleドキュメントと連携してメールを送信できます。
-``sendEmail("宛先", "件名", "本文")``を使うのが一番理解しやすいと思います。
-ドキュメントのタイトルをメールの件名にし、内容をメールの本文として読み込んでいます。
+`sendEmail`でメールを送信できます。
+このメソッドには複数のシグネチャがあります。
+`sendEmail("宛先", "件名", "本文")`が一番直感的で使いやすいと思います。
+
+Cc/Bccをしたい場合や、送信元の名前を変更したい場合は
+`sendEmail("宛先", "件名", "本文", "オプション")`を使います。
 メールの宛先（``to`` / ``cc`` / ``bcc``）は``,（カンマ）``で区切って複数指定できます。
-オプションで``name``を定義すると、メールの送信元の名前を設定できます。
+
+## メールの残り回数をしりたい（`getRemainingDailyQuote`）
+
+```js
+const quota = MailApp.getRemainingDailyQuote();
+Logger.info("残り回数 = " + quota);
+```
+
+1日あたりの100回の送信回数の制限があります。
+`getRemainingDailyQuota`でメール送信の残り回数を確認できます。
+デバッグ中は``console.log``や``Logger.info``を使って確認しながら作業するとよいです。
 
 ## スプレッドシートからデータを読み込んでメールしたい
 
@@ -56,26 +70,35 @@ function send_mail(mailTo, sheetId, sheetName) {
 Googleスプレッドシートと連携することもできます。
 シートの内容をメールで送信する場合を考えてみました。
 
-## メールの残り回数をしりたい
+## 下書きを作成したい（`GmailApp.createDraft`）
 
 ```js
-const quota = MailApp.getRemainingDailyQuote();
-Logger.info("残り回数 = " + quota);
-```
-
-GASで送信できる1日のメール回数には制限あります。
-[getRemainingDailyQuota](https://developers.google.com/apps-script/reference/mail/mail-app?hl=ja#getremainingdailyquota)を使って残り回数を取得できます。
-デバッグ中は``console.log``や``Logger.info``を使って確認しながら作業するとよいでしょう。
-
-## 下書きを作成してからメールしたい
-
-```js
+// 下書きを作成する
 const draft = GmailApp.createDraft("宛先", "件名", "本文", "オプション")
-Logger.info("draft = " + draft)
 // メールを送信する
-// draft.send();
+draft.send();
+
+Logger.info("draft = " + draft)
+// const message = draft.getMessage();
+// message.getId()
+// message.getDate()
+// message.getTo()
+// message.getCc()
+// message.getBcc()
+// message.getFrom()
+// message.getReplyTo()
+// message.getSubject()
+// message.getBody()
 ```
 
-``GmailApp.createDraft``でメールの下書きが作成できます。
-この段階ではまだメールが送信されないので、デバッグ作業に重宝します。
+``GmailApp.createDraft``でメールの下書きを作成できます。
+オプションは`MailApp.sendEmail`と同じで、送信元の表示名を変更したり、
+返信先アドレスを設定したりできます。
+
+下書きを作成した段階ではメールが送信されないため、デバッグ作業に重宝します。
 メールを送りたいときは``send()``します。
+
+## リファレンス
+
+- [Class GmailApp](https://developers.google.com/apps-script/reference/gmail/gmail-app)
+- [Class MailApp](https://developers.google.com/apps-script/reference/mail/mail-app)
