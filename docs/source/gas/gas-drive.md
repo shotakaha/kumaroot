@@ -36,3 +36,7 @@ folder.setSharing(access, permission);
 と
 [Enum Permission](https://developers.google.com/apps-script/reference/drive/permission)
 を参照してください。
+
+## リファレンス
+
+- [Class DriveApp](https://developers.google.com/apps-script/reference/drive/drive-app)
