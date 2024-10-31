@@ -17,12 +17,12 @@
 maxdepth: 1
 ---
 html-doctype
+html-semantic
 html-meta
 html-p
 html-img
 html-figure
 html-a
-html-semantic
 html-jsonld
 html-htaccess
 ```

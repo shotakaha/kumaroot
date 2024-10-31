@@ -104,7 +104,7 @@
 </html>
 ```
 
-HTMLの[セマンティクス](https://developer.mozilla.org/ja/docs/Glossary/Semantics)は、文書構造を基に、適切なタグを割り当てることです。
+[セマンティクス](https://developer.mozilla.org/ja/docs/Glossary/Semantics)は文書構造を基に、適切なHTMLタグを割り当てることです。
 タグ割り当ては具体的に定義されておらず、作成者やユースケースに依存しています。
 [コンテンツカテゴリー](https://developer.mozilla.org/ja/docs/Web/HTML/Content_categories)の区分を参考にするとよいと思います。
 
@@ -173,3 +173,5 @@ LaTeXで文書を作成したり、WordやGoogleドキュメントのアウト�
 - [audio](https://developer.mozilla.org/ja/docs/Web/HTML/Element/audio)
 - [video](https://developer.mozilla.org/ja/docs/Web/HTML/Element/video)
 - [iframe](https://developer.mozilla.org/ja/docs/Web/HTML/Element/iframe)
+
+## リファレンス
