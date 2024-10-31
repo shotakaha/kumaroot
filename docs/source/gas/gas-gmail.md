@@ -6,15 +6,19 @@ MailApp.sendEmail("宛先", "件名", "本文");
 MailApp.sendEmail("宛先", "件名", "本文", "オプション");
 ```
 
-GASからメールするには
-`MailApp`クラスを使う方法と
-`GmailApp`クラスを使う方法の2通りあります。
+`MailApp.sendEmail`でメールを送信できます。
+メールの差出人は自分のGmailアドレスです。
+宛先（`to`）は`,（カンマ）`で区切って複数アドレスを指定できます。
 
-`MailApp`は送信専用です。シンプルで使いやすいです。
+GASでメールを制御する場合、
+送信専用の`MailApp`クラスと
+メールボックス操作もできる`GmailApp`クラスがあります。
+
+送信のみであればシンプルな`MailApp`で十分です。
 下書きを作成したり、自分のメールボックス全体にアクセスしたり、
 あれこれ操作したい場合は``GmailApp``を使います。
 
-## メールしたい（`MailApp.sendEmail`）
+## 送信オプションしたい（`MailApp.sendEmail`）
 
 ```js
 // @params {string} mailTo - 宛先アドレス
@@ -33,15 +37,15 @@ function send_mail(mailTo, docId) {
 }
 ```
 
-`sendEmail`でメールを送信できます。
-このメソッドには複数のシグネチャがあります。
-`sendEmail("宛先", "件名", "本文")`が一番直感的で使いやすいと思います。
-
+`sendEmail`には複数のシグネチャがあります。
 Cc/Bccをしたい場合や、送信元の名前を変更したい場合は
 `sendEmail("宛先", "件名", "本文", "オプション")`を使います。
-メールの宛先（``to`` / ``cc`` / ``bcc``）は``,（カンマ）``で区切って複数指定できます。
+メールの宛先（``to`` / ``cc`` / ``bcc``）は``,（カンマ）``で区切って複数アドレスを指定できます。
 
-## メールの残り回数をしりたい（`getRemainingDailyQuote`）
+このサンプルでは、ドキュメントから本文を読み込んでいます。
+読み込み先をスプレッドシートに置き換えることもできます。
+
+## 残り回数したい（`getRemainingDailyQuote`）
 
 ```js
 const quota = MailApp.getRemainingDailyQuote();
@@ -52,26 +56,7 @@ Logger.info("残り回数 = " + quota);
 `getRemainingDailyQuota`でメール送信の残り回数を確認できます。
 デバッグ中は``console.log``や``Logger.info``を使って確認しながら作業するとよいです。
 
-## スプレッドシートからデータを読み込んでメールしたい
-
-```js
-function send_mail(mailTo, sheetId, sheetName) {
-    // mailTo = 宛先のアドレス
-    // sheetId = GoogleプレッドシートのID
-    // sheetName = シートの名前
-
-    const sheet = SpreadsheetApp.openById(sheedId).getSheetByName(sheetName);
-    const data = sheet.getDataRange().getValues();
-    const mailTitle = sheet.getName();
-    const mailBody = // dataをなんとかして文字列に変換する
-    MailApp.sendEmail(mailTo, mailTitle, mailBody);
-}
-```
-
-Googleスプレッドシートと連携することもできます。
-シートの内容をメールで送信する場合を考えてみました。
-
-## 下書きを作成したい（`GmailApp.createDraft`）
+## 下書きしたい（`GmailApp.createDraft`）
 
 ```js
 // 下書きを作成する
