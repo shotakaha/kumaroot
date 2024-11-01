@@ -10,6 +10,18 @@
 また、現在のウェブ標準は[WHATWG](https://developer.mozilla.org/ja/docs/Glossary/WHATWG)が決めた[HTML Living Standard](https://html.spec.whatwg.org/multipage/)です。
 [Can I Use](https://caniuse.com/)でブラウザごとの対応状況を調べることができます。
 
+## セマンティクスしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+html-semantic
+html-main
+html-footer
+html-nav
+```
+
 ## HTMLしたい
 
 ```{toctree}
@@ -17,7 +29,6 @@
 maxdepth: 1
 ---
 html-doctype
-html-semantic
 html-meta
 html-p
 html-img
