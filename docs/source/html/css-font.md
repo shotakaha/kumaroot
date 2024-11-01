@@ -6,7 +6,7 @@ body {
 }
 ```
 
-[font](https://developer.mozilla.org/ja/docs/Web/CSS/font)を使って、フォント表示に関するプロパティを一括指定できます。
+`font`プロパティでフォント表示を設定できます。
 
 ## 書体したい（``font-family``）
 
@@ -16,7 +16,7 @@ body {
 }
 ```
 
-[font-familyプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/font-family)を使って、ウェブ表示に使う書体を指定できます。
+`font-family`で書体を変更できます。
 複数の書体を、優先度をつけて設定できます。
 
 ## サイズしたい（``font-size``）
@@ -31,8 +31,22 @@ h5 { font-size: 1.5rem; }  /* 1.5倍 */
 h6 { font-size: 1.5rem; }  /* 1.5倍 */
 ```
 
-[font-sizeプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/font-size)を使って、フォントの大きさを変更できます。
-ルート要素のフォントサイズを基準にする``rem``を使うと、ウェブサイト全体で統一感が出せると思います。
+`font-size`でフォントの大きさを変更できます。
+サイズに`rem`を使うとウェブサイト全体の文字の統一感を出しやすくなると思います。
 
-上記サンプルでは、ルート要素（``body``）のサイズを``20px``に設定し、それぞれの見出しのサイズを``x倍``に変更しています。
-``h4``から``h6``は、このほうが使いやすいかなと思ってフォントサイズを同じにしてあります。
+上記サンプルでは、
+ルート要素（``body``）のサイズを``20px``に設定し、
+それぞれの見出しのサイズを``x倍``に変更しています。
+
+:::{note}
+
+実際に使ってみると`h4`から`h6`は見出しとしての出番が少ないタグです。
+フォントサイズは同じにして、別の装飾で見分けられるようにしています。
+
+:::
+
+## リファレンス
+
+- [fontプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/font)
+- [font-familyプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/font-family)
+- [font-sizeプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/font-size)
