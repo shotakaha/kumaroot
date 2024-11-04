@@ -1,120 +1,95 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.42.0 (2024-11-04)
 
 ### Feat
 
-- **command/command-jsdoc.md**: jsdocを追加した
-- **html/html-nav.md**: navタグを追加した
-- **html/html-footer.md**: footerタグを追加した
-- **html/html-main.md**: mainタグを追加した
-- **gas/gas-drive.md**: ドライブ操作（DriveApp）を追加した
-- **hugo/hugo-partials.md**: 部分テンプレートを別ファイルにした
-- **hugo/hugo-content-more.md**: リード文を追加した
-- **hugo/hugo-content-youtube.md**: YouTube埋め込みを追加した
-- **hugo/hugo-content-shortcodes.md**: shortcodes記法を追加した
-- **hugo/hugo-content-title.md**: ページタイトルの設定を追加した
 - **command/command-crontab.md**: crontabを追加した
-- **command/command-du.md**: duを追記した
 - **command/command-df.md**: dfを追加した
+- **command/command-du.md**: duを追記した
+- **command/command-jsdoc.md**: jsdocを追加した
 - **command/command-mktemp.md**: mktempを追加した
 - **command/command-mktemp.md**: mktempを追加した
 - **docker/docker-postgresql.md**: PostgreSQLのコンテナを追加した
+- **gas/gas-drive.md**: ドライブ操作（DriveApp）を追加した
+- **html/html-footer.md**: footerタグを追加した
+- **html/html-main.md**: mainタグを追加した
+- **html/html-nav.md**: navタグを追加した
+- **hugo/hugo-content-more.md**: リード文を追加した
+- **hugo/hugo-content-shortcodes.md**: shortcodes記法を追加した
+- **hugo/hugo-content-title.md**: ページタイトルの設定を追加した
+- **hugo/hugo-content-youtube.md**: YouTube埋め込みを追加した
+- **hugo/hugo-partials.md**: 部分テンプレートを別ファイルにした
 - **python/python-pexpect.md**: pexpectを追加した
 
 ### Fix
 
-- **hugo/hugo-printf.md**: printfに追記した
-- **html/css-font.md**: font-sizeに追記した
-- **html/html-usage.md**: 目次を整理した
-- **html/css-display.md**: displayプロパティを整理した
-- **html/html-a.md**: ハイパーリンク設定に追記した
-- **html/html-usage.md**: 目次を修正した
-- **gas/gas-gmail.md**: 全体的に整理した
-- **gas/gas-gmail.md**: MailApp / GmailApp のちがいを明記した
-- **gas/gas-drive.md**: リファレンスを追加した
-- **gas/gas-gmail.md**: MailApp / GmailAppの使い方を整理した
-- **gas/gas-gform.md**: FormAppの使い方を整理した
-- **gas/gas-gform.md**: FormAppを追記した
-- **gas/gas-spreadsheet.md**: スプレッドシートを作成／複製する方法を追記した
-- **gas/gas-spreadsheet.md**: ピボットテーブルを追加した
-- **preface**: prefaceを整理した
-- **hugo/hugo-layouts-baseof.md**: ベーステンプレートを整理した
-- **hugo/hugo-content.md**: 目次を整理した
-- **hugo/hugo-layouts-baseof.md**: リファレンスを追記した
-- **hugo/hugo-assets.md**: レイファレンスを追記した
-- **hugo/hugo-data.md**: リファレンスを追記した
-- **hugo/hugo-frontmatter-taxonomies.md**: リファレンスを追記した
-- **hugo/hugo-frontmatter.md**: リファレンスを追記した
-- **hugo/hugo-frontmatter-taxonomies.md**: タクソノミーを追加した
-- **hugo/hugo-frontmatter-draft.md**: 下書き設定を追加した
-- **hugo/hugo-frontmatter-images.md**: 関連画像を整理した
-- **hugo/hugo-frontmatter-date.md**: 日付を移動した
-- **hugo/hugo-frontmatter-title.md**: linkTitleのリストを追記した
-- **hugo/hugo-content.md**: 構成を整理した
-- **hugo/hugo-content-date.md**: dateを追加した
-- **preface/disclaimer.md**: GA4利用を明記した
-- **preface/disclaimer.md**: ページ末尾のリファレンスについて明記した
-- **hugo/hugo-content-figure.md**: 画像挿入を追加した
-- **hugo/hugo-content-title.md**: リファレンスを追加した
-- **hugo/hugo-config.md**: 目次を整理した
-- **hugo/hugo-config-services.md**: privacyセクションを追加した
-- **hugo/hugo-config.md**: 目次を整理した
-- **hugo/hugo-config-permalinks.md**: リファレンスを追加した
-- **hugo/hugo-config-paginate.md**: ページ割り設定を追記した
-- **hugo-config**: 見出しを修正した
-- **hugo/hugo-config-format.md**: 日付フォーマットを整理した
-- **hugo/hugo-config-copyright.md**: 著作権表示を整理した
-- **hugo/hugo-config-sections.md**: 設定ファイルの分割機能を整理した
-- **hugo/hugo-config-hugo.md**: hugo.tomlのサンプルを追加した
-- **hugo/hugo-config.md**: 設定ファイルの作り方を整理した
-- **hugo/hugo-config-markup.md**: リファレンスを追記した
-- **hugo/hugo-config.md**: 設定ファイルの作り方を追記した
-- **hugo/hugo-content.md**: コンテンツ管理を追加した
-- **hugo/hugo-assets.md**: アセット機能を追加した
-- **hugo/hugo-config-languages.md**: サイト言語の設定を追記した
-- **hugo/hugo-usage.md**: 目次を整理した
-- **hugo/hugo-config-taxonomies.md**: タクソノミーを追加した
-- **hugo/hugo-layouts.md**: テンプレート設定を移動した
-- **hugo/hugo-config.md**: サイト設定を移動した
-- **hugo/hugo-usage.md**: 再編中
-- **hugo/hugo-config-permalinks.md**: パーマリンク設定を追加した
-- **hugo/hugo-config.md**: 設定ファイルの構成を修正した
-- **hugo/hugo-page-bundles.md**: コンテンツ構造を追記した
-- **command/command-find.md**: find -> xargs を追加した
-- **command/command-rsync.md**: オプションを整理した
-- **command/command-rsync.md**: rsyncに追記した
-- **command/command-date.md**: 日付変換を追記した
 - **command/command-awk.md**: awkを整理した
+- **command/command-date.md**: 日付変換を追記した
+- **command/command-docker.md**: dockerコマンドを整理した
 - **command/command-du.md**: CSV変換を追加した
+- **command/command-find.md**: find -> xargs を追加した
+- **command/command-mise.md**: miseコマンドを整理した
 - **command/command-mktemp.md**: スクリプトのサンプルを追記した
-- **command/command-find.md**: GFSローテーションを追記した
+- **command/command-rsync.md**: オプションを整理した
 - **command/command-xargs.md**: xargsを整理した
-- **docker/examples/docker-nginx/compose.yaml**: nginxのサンプルを追加した
+- **docker/docker-compose.md**: versionキーのwarningを追記した
+- **docker/docker-mariadb.md**: composeの設定を追記した / DB操作を追記した / リストアする方法を整理した
+- **docker/docker-usage.md**: 実践例を分類した
+- **docker/docker-volume.md**: ボリュームのcomposeを追記した
 - **docker/examples/**: サンプルを修正した
 - **docker/examples/docker-debian/compose.yaml**: Debianコンテナのサンプルを追加した
-- **docker/docker-usage.md**: 実践例を分類した
-- **docker/docker-mariadb.md**: 構成を整理した
-- **docker/docker-mariadb.md**: リストアする方法を整理した
-- **docker/docker-compose.md**: configを追記した
-- **.editorconfig**: yamlの設定を追加した
-- **docker/docker-mariadb.md**: 修正した
-- **docker/docker-mariadb.md**: composeの設定を追記した
-- **docker/docker-mariadb.md**: composeの設定を追記した
-- **docker/docker-volume.md**: ボリュームのcomposeを追記した
-- **docker/docker-mariadb.md**: データベースにtest_userを追加した
-- **docker/docker-compose.md**: versionキーのwarningを追記した
-- **docker/docker-mariadb.md**: DB操作を追記した
-- **command/command-mise.md**: miseコマンドを整理した
-- **command/command-docker.md**: dockerコマンドを整理した
-- **command/command-date.md**: フォーマット指定子を追加した
+- **docker/examples/docker-nginx/compose.yaml**: nginxのサンプルを追加した
+- **gas/gas-date.md**: 日付の指定子を追加した
+- **gas/gas-drive.md**: リファレンスを追加した
+- **gas/gas-gform.md**: FormAppの使い方を整理した
+- **gas/gas-gmail.md**: MailApp / GmailAppの使い方を整理した
+- **gas/gas-spreadsheet.md**: スプレッドシートを作成／複製する方法を追記した / ピボットテーブルを追加した
+- **html/css-display.md**: displayプロパティを整理した
+- **html/css-font.md**: font-sizeに追記した
+- **html/html-a.md**: ハイパーリンク設定に追記した
+- **html/html-usage.md**: 目次を整理した
+- **hugo/hugo-assets.md**: アセット機能を追加した
+- **hugo/hugo-config-copyright.md**: 著作権表示を整理した
+- **hugo/hugo-config-format.md**: 日付フォーマットを整理した
+- **hugo/hugo-config-hugo.md**: hugo.tomlのサンプルを追加した
+- **hugo/hugo-config-languages.md**: サイト言語の設定を追記した
+- **hugo/hugo-config-markup.md**: リファレンスを追記した
+- **hugo/hugo-config-paginate.md**: ページ割り設定を追記した
+- **hugo/hugo-config-permalinks.md**: パーマリンク設定を追加した
+- **hugo/hugo-config-sections.md**: 設定ファイルの分割機能を整理した
+- **hugo/hugo-config-services.md**: privacyセクションを追加した
+- **hugo/hugo-config-taxonomies.md**: タクソノミーを追加した
+- **hugo/hugo-config.md**: 設定ファイルの作り方を整理した
+- **hugo/hugo-content-date.md**: dateを追加した
+- **hugo/hugo-content-figure.md**: 画像挿入を追加した
+- **hugo/hugo-content-title.md**: リファレンスを追加した
+- **hugo/hugo-content.md**: コンテンツ管理を追加した
+- **hugo/hugo-data.md**: リファレンスを追記した
+- **hugo/hugo-frontmatter-date.md**: 日付を移動した
+- **hugo/hugo-frontmatter-draft.md**: 下書き設定を追加した
+- **hugo/hugo-frontmatter-images.md**: 関連画像を整理した
+- **hugo/hugo-frontmatter-taxonomies.md**: タクソノミーを追加した
+- **hugo/hugo-frontmatter-title.md**: linkTitleのリストを追記した
+- **hugo/hugo-frontmatter.md**: リファレンスを追記した
+- **hugo/hugo-layouts-baseof.md**: ベーステンプレートを整理した
+- **hugo/hugo-layouts.md**: テンプレート設定を移動した
+- **hugo/hugo-page-bundles.md**: コンテンツ構造を追記した
+- **hugo/hugo-printf.md**: printfに追記した
+- **hugo/hugo-usage.md**: 目次を整理した
+- **preface**: prefaceを整理した
+- **preface/disclaimer.md**: GA4利用を明記した / ページ末尾のリファレンスについて明記した
+- **python/python-exception.md**: 例外処理を整理した
 - **python/python-pexpect.md**: 見出しを整理した
-- **pyproject.toml**: dotenvを追加した: 1.0.1
 - **scripts/requests.py**: 更新した
-- **pyproject.toml**: pexpectを追加した: 4.9.0
+
+## Dependencies
+
+- **.editorconfig**: yamlの設定を追加した
 - **.github/renovate.json**: renovateの設定ファイルを移動した
 - **.renovaterc.json**: renovateの設定を追加した
-- **python/python-exception.md**: 例外処理を整理した
+- **pyproject.toml**: dotenvを追加した: 1.0.1
+- **pyproject.toml**: pexpectを追加した: 4.9.0
 
 ## v1.41.0 (2024-10-16)
 
