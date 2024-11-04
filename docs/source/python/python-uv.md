@@ -87,7 +87,14 @@ error: Project is already initialized in `./PROJECT_NAME`
 
 ```console
 $ uv python pin 3.12
+Pinned `.python-version` to `3.12`
+
 $ uv run python --version
+Python 3.12.7
+
+// HomebrewのPythonは3.13.0
+$ python3 --version
+Python 3.13.0
 ```
 
 `uv python`コマンドでPythonの実行環境を設定できます。
@@ -103,6 +110,8 @@ $ uv python dir
 
 // インストール
 $ uv python install 3.12
+Installed Python 3.12.7 in 5.67s
+ + cpython-3.12.7-macos-aarch64-none
 
 // アンインストール
 $ uv python uninstall 3.12
@@ -130,7 +139,7 @@ cpython-3.9.6-macos-aarch64-none      /Library/Developer/CommandLineTools/usr/bi
 ```console
 $ cd PROJECT_NAME
 $ uv venv
-Using CPython 3.12.6 interpreter at: /opt/homebrew/opt/python@3.12/bin/python3.12
+Using CPython 3.12.7
 Creating virtual environment at: .venv
 Activate with: source .venv/bin/activate.fish
 
