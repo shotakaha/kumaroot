@@ -4,6 +4,11 @@
 
 ### Feat
 
+- **command/command-jsdoc.md**: jsdocを追加した
+- **html/html-nav.md**: navタグを追加した
+- **html/html-footer.md**: footerタグを追加した
+- **html/html-main.md**: mainタグを追加した
+- **gas/gas-drive.md**: ドライブ操作（DriveApp）を追加した
 - **hugo/hugo-partials.md**: 部分テンプレートを別ファイルにした
 - **hugo/hugo-content-more.md**: リード文を追加した
 - **hugo/hugo-content-youtube.md**: YouTube埋め込みを追加した
@@ -19,6 +24,19 @@
 
 ### Fix
 
+- **hugo/hugo-printf.md**: printfに追記した
+- **html/css-font.md**: font-sizeに追記した
+- **html/html-usage.md**: 目次を整理した
+- **html/css-display.md**: displayプロパティを整理した
+- **html/html-a.md**: ハイパーリンク設定に追記した
+- **html/html-usage.md**: 目次を修正した
+- **gas/gas-gmail.md**: 全体的に整理した
+- **gas/gas-gmail.md**: MailApp / GmailApp のちがいを明記した
+- **gas/gas-drive.md**: リファレンスを追加した
+- **gas/gas-gmail.md**: MailApp / GmailAppの使い方を整理した
+- **gas/gas-gform.md**: FormAppの使い方を整理した
+- **gas/gas-gform.md**: FormAppを追記した
+- **gas/gas-spreadsheet.md**: スプレッドシートを作成／複製する方法を追記した
 - **gas/gas-spreadsheet.md**: ピボットテーブルを追加した
 - **preface**: prefaceを整理した
 - **hugo/hugo-layouts-baseof.md**: ベーステンプレートを整理した
