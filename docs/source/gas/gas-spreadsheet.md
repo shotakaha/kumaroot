@@ -74,21 +74,21 @@ const sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
 ## セルを選択したい（``getRange``）
 
 ```js
-const cell = sheet.getRange("セル名");
+const range = sheet.getRange("セル名");
 const range = sheet.getRange("行番号", "列番号");
 const range = sheet.getRange("セル名:セル名");
 const range = sheet.getRange("行番号", "列番号", "行数");
 const range = sheet.getRange("行番号", "列番号", "行数", "列数");
 
-const nrows = sheet.getLastRow();
-const ncols = sheet.getLastColumns();
-const range = sheet.getRange(1, 1, nrows, ncols);
-
-// データがある範囲
+// すべてのデータの範囲
 const range = sheet.getDataRange()
-
 // 見出しを除外したデータの範囲
 const range = sheet.getDataRange.slice(1);
+
+// 別の選択方法
+const nrows = sheet.getLastRow();
+const ncols = sheet.getLastColumns();
+const range = sheet.getRange(2, 1, nrows, ncols);
 ```
 
 `getRange`で、セル名や番地（行番号と列番号）を使ってセル（の範囲）を選択できます。
@@ -98,25 +98,46 @@ const range = sheet.getDataRange.slice(1);
 ## データを取得したい（`getValues`）
 
 ```js
-function readData() {
-    const sheetName = "Sheet 1";
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
-    // セル（の範囲）を指定
-    const range = sheet.getDataRange();
-    const data = range.getValues();
+const range = sheet.getDataRange();
+const rows = range.getValues();
+```
 
-    // データの行数と値を確認
-    const nrows = data.length;
-    Logger.log(`nrows: ${nrows}`);
-    Logger.log(`data: ${data}`);
+`getValues`で選択した範囲オブジェクトの値を2次元配列で取得できます。
 
-    return data;
+```js
+// シートからデータを読み込む汎用的な関数
+// @param {Sheet} sheet - Sheetオブジェクト
+// @param {numbers} skiprows - スキップする行の数
+function readDataFromSheet(sheet, skiprows=0) {
+    const rows = sheet.getDataRange().getValues().slice(skiprows);
+
+    // 見出しとデータを分割
+    const headers = rows[0]
+    const data = rows.slice(1);
+
+    Logger.log(`rows: ${rows.length}`);
+    Logger.log(`headers: ${headers.length}`);
+    Logger.log(`data: ${data.length}`);
+
+    return {"headers": headers, "data": data};
+}
+
+//
+// テスト関数
+//
+// フォームで収集したマスターデータを読み込みテストに利用
+function testReadDataFromSheet() {
+    const book = SpreadsheetApp.getActiveSpreadsheet();
+    // シート名は"masterData"とする
+    const sheet = book.getSheetByName("masterData");
+    // 分割代入で返り値を受け取る
+    const {headers, data} = readDataFromSheet(sheet);
 }
 ```
 
-`getValues`で、選択したセル範囲の値を配列として取得できます。
+スプレッドシートからデータを取得するときによく使う関数のサンプルです。
 
-## 選択範囲のデータを取得したい
+## 選択範囲のデータを取得したい（`getActiveRange`）
 
 ```js
 function getCurrentRowData() {
@@ -139,7 +160,7 @@ function getCurrentRowData() {
 ```
 
 スプレッドシート上で選択したセルの範囲を操作するサンプルです。
-`getActiveほにゃらら`で**選択した範囲**のオブジェクトを取得できます。
+`getActiveRange`で**シート上で選択した範囲**の値を取得しています。
 
 ## データをフィルターしたい
 
@@ -180,17 +201,13 @@ const parsed = parseData(filtered);
 ## データを追加したい（``appendRow``）
 
 ```js
-function createData() {
-    // （シートの取得は省略）
-
-    // データのカラム数と同じ要素の配列を作成
-    const data = ["A", "B", "C", "D"];
-    // データをシート末尾に追記
-    sheet.appendRow(data);
-}
+// データのカラム数と同じ要素の配列を作成
+const data = ["A", "B", "C", "D"];
+// データをシート末尾に追記
+sheet.appendRow(data);
 ```
 
-`appendRow`で、既存のシート末尾にデータを追加できます。
+`appendRow`で既存のシート末尾にデータを追加できます。
 
 :::{note}
 
