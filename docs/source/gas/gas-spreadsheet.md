@@ -29,25 +29,12 @@ Logger.log(data);
 ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
 ```{toctree}
+---
+maxdepth: 1
+---
 gas-spreadsheet-create
+gas-spreadsheet-openById
 ```
-
-
-## スプレッドシートを開きたい（`openById` / `openByUrl`）
-
-```js
-// バインドされたスクリプト
-const book = SpreadsheetApp.getActive();
-const book = SpreadsheetApp.getActiveSpreadsheet();
-
-// スタンドアロンなスクリプト
-const book = SpreadsheetApp.openById("スプレッドシートのID");
-const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
-```
-
-`getActive` / `getActiveSpreadsheet` で、スクリプトにバインドされたスプレッドシートを開くことができます。
-
-`openById` / `openByUrl`で、スタンドアロンなスクリプトや他のアプリからスプレッドシートを開くことができます。
 
 ## シートを開きたい（``getSheetByName``）
 
