@@ -28,20 +28,10 @@ Logger.log(data);
 最後に中身を確認するために``Logger.log``しています。
 ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
-## スプレッドシートを作成したい（`create`）
-
-```js
-const book = SpreadsheetApp.create("スプレッドシート名");
-const book = SpreadsheetApp.create("スプレッドシート名", 行数, 列数);
-
-const id = book.getId();
-const name = book.getName();
-const url = book.getUrl();
-const nrows = book.getLastRow();
-const ncols = book.getLastColumn();
+```{toctree}
+gas-spreadsheet-create
 ```
 
-`create`メソッドでスプレッドシートを新規作成できます。
 
 ## スプレッドシートを開きたい（`openById` / `openByUrl`）
 
