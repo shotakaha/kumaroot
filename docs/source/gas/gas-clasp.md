@@ -139,7 +139,7 @@ $ clasp open スクリプトID
 `clasp open`でブラウザが起動します。
 `.clasp.json`に保存されているスクリプトIDの編集ページを開くことができます。
 
-## プロジェクトの更新（``clasp pull`` / ``clasp push``）
+## プロジェクトを更新したい（``clasp pull`` / ``clasp push``）
 
 ```console
 // ウェブからプロジェクトを取得
@@ -153,22 +153,114 @@ $ clasp push -w    # --watchモード
 
 ``pull``と``push``を使って、ローカルとリモートのプロジェクトをやりとりします。
 
-## Git管理したい
+## バージョン管理したい（`clasp version` / `clasp versions`）
 
 ```console
-// リポジトリ用のディレクトリを作成する
-$ mkdir REPOS_NAME
-$ git init
+// バージョンを確認
+$ clasp versions
+~ 4 Versions ~
+1 - v0.1.1
+2 - v0.1.2
+3 - v0.1.3
+4 - v0.1.4
 
-// スクリプト用のディレクトリを作成する
-$ mkdir PROJECT_NAME
-$ cd PROJECT_NAME
+// アノテーションをつけてバージョン管理
+$ clasp version "v0.1.5"
+
+$ clasp versions
+~ 5 Versions ~
+1 - v0.1.1
+2 - v0.1.2
+3 - v0.1.3
+4 - v0.1.4
+5 - v0.1.5
+```
+
+`clasp version "アノテーション"`でバージョン管理できます。
+GAS内のバージョン番号は自動でインクリメントされます。
+あとで確認しやすいようにアノテーションにGitのタグ番号を含めておくとよさそうです。
+
+`clasp versions`で、これまでに作成したバージョンを確認できます。
+一度作成したバージョンは削除できません。
+
+## デプロイ管理したい（`clasp deploy` / `clasp deployments`）
+
+```console
+// デプロイIDを確認
+$ clasp deployments
+1 Deployments.
+- AKfycb...9Qm8gE @HEAD
+
+// 作成済みバージョン番号を指定してデプロイ
+$ clasp deploy --version 1 --description "v0.1.1"
+
+// デプロイIDを確認
+$ clasp deployments
+2 Deployments.
+- AKfycb...9Qm8gE @HEAD
+- AKfycb...LH8l3z @1 - v0.1.1
+
+// デプロイを削除
+$ clasp undeploy AKfycb...LH8l3z
+```
+
+`clasp deploy`でデプロイするバージョンを管理できます。
+`--version`には、`clasp version`で作成したバージョン番号を指定します。
+`--description`でアノテーションを追加できます。
+
+`clasp deployments`でデプロイIDを確認できます。
+またバージョン管理と異なり`clasp undeploy`でデプロイを削除できます。
+
+:::{note}
+
+`--version`によるバージョン指定を省略した場合は、
+自動インクリメントされたバージョン番号が追加され、割り当てられます。
+バージョンが追加されたことは`clasp versions`で確認できます。
+
+:::
+
+## Git管理したい
+
+- ディレクトリ構成
+
+```text
+リポジトリ名
+|-- プロジェクト名
+|    |-- main.js
+|    |-- module1.js
+|    |-- module2.js
+|-- .git/
+|-- node_modules/
+|-- package.json
+```
+
+リポジトリの中にGASプロジェクト用のディレクトリを作成すると、
+リポジトリ内を散らけずに管理できます。
+また、関連するGASプロジェクトが増えた場合も、簡単に追加できます。
+
+- ワークフロー
+
+```console
+//////////////////////////////////////////////////
+// 初回の準備
+//////////////////////////////////////////////////
+
+// ディレクトリを作成する
+$ mkdir リポジトリ名
+$ mkdir リポジトリ名/プロジェクト名
 
 // claspをローカルに追加
+$ cd リポジトリ名
 $ npm install @google/clasp
-// node_modules などは .gitignoreに追加
+// --> package.jsonやnode_modulesが作成される
+
+// Gitする
+$ git init
+$ touch .gitignore
+// node_modules などを追加する
 
 // 既存プロジェクトをクローンする
+$ cd プロジェクト名
 $ clasp clone スクリプトID --rootDir .
 $ ls -la
 .clasp.json
@@ -181,10 +273,50 @@ $ git add 既存スクリプト.js
 
 // プロジェクト情報は場合によりけり
 $ git add .clasp.json
+
+//////////////////////////////////////////////////
+// 編集
+// - 普段どおり開発しGit管理する
+// - 編集したファイルの同期を忘れないようにする
+//////////////////////////////////////////////////
+
+// ブラウザで編集した内容を取り込む
+$ clasp pull
+
+// ローカルで編集した内容を反映させる
+$ clasp push
+
+//////////////////////////////////////////////////
+// バージョン管理
+// - Gitでタグ管理する
+// - GASのバージョン（のアノテーション）はGitタグを基準にする
+// - GASのデプロイはオプションでもよい
+//////////////////////////////////////////////////
+
+// タグを作成
+$ git tag "0.1.2"
+$ git push origin --tags
+$ git tag -l
+0.1.1
+0.1.2
+
+// GASのバージョン管理
+$ clasp version "v0.1.2"
+$ clasp versions
+~ 2 Versions ~
+1 - v0.1.1
+2 - v0.1.2
+
+// （オプション）GASのデプロイ管理
+$ clasp deploy --version 2 --description "v0.1.2"
+$ clasp deployments
+3 Deployments.
+- AKfycb...9Qm8gE @HEAD
+- AKfycb...LH8l3z @1 - v0.1.1
+- AKfycb...itf33M @2 - v0.1.2
 ```
 
-既存のGASプロジェクトをGitで管理するための
-セットアップ手順を整理しました。
+既存のGASプロジェクトをGitで管理するためのセットアップ手順を整理しました。
 
 ポイントとして、
 リポジトリの中にGASプロジェクトごとのサブディレクトリ（`PROJECT_NAME`）を作成し、
