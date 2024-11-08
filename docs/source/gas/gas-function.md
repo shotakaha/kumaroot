@@ -93,3 +93,57 @@ Pythonのリスト内包表記のようなものだと思います。
 アロー関数はES6で新機能として導入された書式です。
 利用可能な環境であれば積極的に使ってよさそうです。
 ただし、あまりに複雑な処理には（可読性の観点から？）適さないようなので、従来の`function`を使った書式との使い分けを考える必要もありそうです。
+
+## 合計したい
+
+```js
+// 配列の合計を取得
+//
+// - 配列の要素が数値であるかのチェックはしてない
+//
+// @param {number[]} numbers - 数値の配列
+// @return {number} sum - 配列の合計値
+function getSum(numbers) {
+    let sum = 0;
+    for (const n of numbers) {
+        sum += n;
+    }
+    return sum;
+}
+```
+
+JSにはビルトインのsum関数がないようなので、自分で定義します。
+
+:::{note}
+
+`reduce`関数を使うともっとスマートに定義できるようです。
+
+:::
+
+## カラムを取得したい
+
+```js
+//
+// シート情報（=2次元配列）からカラム情報を取得
+//
+// @param {Array<Array<*>>} rows - 2次元配列（見出しなし）
+// @param {Array<string>} headers - 見出し
+// @param {string} name - カラム名
+// @return {Array<*>} cols - 指定したカラム名の値
+function getColumn(rows, headers, name) {
+    // 指定したカラム名のインデックス番号を取得
+    const index = headers.indexOf(name);
+    const cols = rows.map(row => row[index]);
+    return cols;
+}
+```
+
+スプレッドシートのデータは2次元配列で読み込んで処理することが多いです。
+その場合、多くのデータフレームにあるようにカラム名で該当する配列を取得できると便利だなと思ったので、自分で定義しています。
+
+:::{note}
+
+指定したカラム名が見出しの配列に含まれてない場合や、
+データが2次元配列かどうかなどのエラーチェックを追加すると、もっと安全に利用できます。
+
+:::
