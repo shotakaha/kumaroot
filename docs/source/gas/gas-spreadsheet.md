@@ -86,11 +86,11 @@ const rows = range.getValues();
 // @param {Sheet} sheet - Sheetオブジェクト
 // @param {numbers} skiprows - スキップする行の数
 function readDataFromSheet(sheet, skiprows=0) {
+    // 1行目を見出し（=カラム名）にする
     const rows = sheet.getDataRange().getValues().slice(skiprows);
 
     // 見出しとデータを分割
-    const headers = rows[0]
-    const data = rows.slice(1);
+    const [headers, ...data] = rows;
 
     Logger.log(`rows: ${rows.length}`);
     Logger.log(`headers: ${headers.length}`);
