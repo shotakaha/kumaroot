@@ -1,3 +1,5 @@
+# ブック操作したい（`Spreadsheet`）
+
 # スプレッドシートを開きたい（`openById` / `openByUrl`）
 
 ```js
