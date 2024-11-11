@@ -35,33 +35,8 @@ maxdepth: 1
 gas-spreadsheet-create
 gas-spreadsheet-openById
 gas-spreadsheet-getSheetByName
+gas-spreadsheet-getDataRange
 ```
-
-
-
-## セルを選択したい（``getRange``）
-
-```js
-const range = sheet.getRange("セル名");
-const range = sheet.getRange("行番号", "列番号");
-const range = sheet.getRange("セル名:セル名");
-const range = sheet.getRange("行番号", "列番号", "行数");
-const range = sheet.getRange("行番号", "列番号", "行数", "列数");
-
-// すべてのデータの範囲
-const range = sheet.getDataRange()
-// 見出しを除外したデータの範囲
-const range = sheet.getDataRange.slice(1);
-
-// 別の選択方法
-const nrows = sheet.getLastRow();
-const ncols = sheet.getLastColumns();
-const range = sheet.getRange(2, 1, nrows, ncols);
-```
-
-`getRange`で、セル名や番地（行番号と列番号）を使ってセル（の範囲）を選択できます。
-``getDataRange``でデータが存在する範囲をすべて選択できます。
-データに見出しを含みたくない場合は``slice(1)``するとよいです。
 
 ## データを取得したい（`getValues`）
 
