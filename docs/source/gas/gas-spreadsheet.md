@@ -34,19 +34,10 @@ maxdepth: 1
 ---
 gas-spreadsheet-create
 gas-spreadsheet-openById
+gas-spreadsheet-getSheetByName
 ```
 
-## シートを開きたい（``getSheetByName``）
 
-```js
-const sheet = SpreadsheetApp.getActiveSheet();
-const sheet = SpreadsheetApp.openById("スプレッドシートID").getSheetsByName("シート名");
-const sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
-```
-
-シートには``Spreadsheet``オブジェクトを通してアクセスできます。
-スプレッドシートIDとシート名を使って、特定のスプレッドシートを取得できます。
-``getSheets``（複数形）で複数のシートを配列として取得できます。
 
 ## セルを選択したい（``getRange``）
 

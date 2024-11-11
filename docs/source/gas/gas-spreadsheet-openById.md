@@ -13,7 +13,7 @@ const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 
 `SpreadsheetApp.openByUrl`を使ってURLを直接指定して開くことができます。
 
-## バインドしたスプレッドシートを開きたい（`getActiveSpreadsheet）
+## バインドしたスプレッドシートを開きたい（`getActiveSpreadsheet`）
 
 ```js
 // バインドされたスクリプト
