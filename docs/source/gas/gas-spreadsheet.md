@@ -33,9 +33,9 @@ Logger.log(data);
 maxdepth: 1
 ---
 gas-spreadsheet-create
-gas-spreadsheet-openById
-gas-spreadsheet-getSheetByName
-gas-spreadsheet-getDataRange
+gas-spreadsheet-book
+gas-spreadsheet-sheet
+gas-spreadsheet-range
 ```
 
 ## データを取得したい（`getValues`）
