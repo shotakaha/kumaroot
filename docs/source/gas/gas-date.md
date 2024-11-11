@@ -121,6 +121,27 @@ GASの`Utilities.formatDate`メソッドで、任意の表示形式に変更で�
 | `Z` | タイムゾーン | RFC 822 time zone | +0900 |
 | `XX` | タイムゾーン | ISO 8601 time zone | +0900 |
 
+## 週末したい
+
+```js
+// 週末かどうか判定する
+//
+// @param {Date} date - 日付オブジェクト
+function isHoliday(date) {
+    // 曜日を取得
+    const day = date.getDay();
+
+    // 0: 日曜日 ... 6:土曜日
+    if (day === 0 || day === 6) {
+        return true;
+    } else {
+        return false;
+    };
+};
+```
+
+`getDay`で曜日を取得できます。
+
 ## リファレンス
 
 - [formatDate](https://developers.google.com/apps-script/reference/utilities/utilities?hl=ja#formatDate(Date,String,String))
