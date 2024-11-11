@@ -102,9 +102,9 @@ const options = {
 ## Slackに通知したい
 
 ```js
-function send_to_slack() {
+function sendToSlack() {
     // Incoming Webhooksを有効にする
-    const url = "https://hooks.slack.com/services/トークン";
+    const webhookUrl = "https://hooks.slack.com/services/トークン";
 
     // 通知する内容
     const message = {
