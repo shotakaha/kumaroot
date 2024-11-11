@@ -1,5 +1,20 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **gas/gas-variables.md**: nullとundefinedを追加した
+- **gas/gas-function.md**: 関数のサンプルを追加した
+- **gas/gas-spreadsheet.md**: シートの値の受け取り方を簡単にした
+- **gas/gas-clasp.md**: バージョン管理の手順を追記した
+- **gas/gas-variables.md**: 分割代入を追加した
+- **gas/gas-spreadsheet-openById.md**: openByIdを別ページにした
+- **gas/gas-spreadsheet-create.md**: createを別ページにした
+- **gas/gas-spreadsheet.md**: readDataFromSheetを追加した
+- **python/python-uv.md**: pinした結果を追記した
+- **python/python-uv.md**: Python実行環境を追加した
+
 ## v1.42.0 (2024-11-04)
 
 ### Feat
