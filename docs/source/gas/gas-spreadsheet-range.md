@@ -1,7 +1,14 @@
 # セル操作したい（`Range`）
 
+```js
+const range = sheet.getRange("A1:C3");
+range.setFontColorObject("#fff");
+range.setBackgroundbject("#000");
+```
 
-# 範囲選択したい（`getDataRange`）
+`Range`オブジェクトで、シート上の選択した範囲に対して操作できます。
+
+## すべてのデータを選択したい（`getDataRange`）
 
 ```js
 // すべてのデータの範囲
