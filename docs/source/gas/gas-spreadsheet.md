@@ -36,6 +36,7 @@ gas-spreadsheet-create
 gas-spreadsheet-book
 gas-spreadsheet-sheet
 gas-spreadsheet-range
+gas-spreadsheet-pivottable
 ```
 
 ## データを取得したい（`getValues`）
