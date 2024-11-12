@@ -48,8 +48,23 @@ pivotTable.addColumnGroup(index);
 引数にインデックスを指定する必要があるため、
 見出し行に対して`indexOf`して取得するとよいです。
 
+## フィルターを追加したい（`addFilter`）
+
+```js
+const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
+const col = "カラム3";
+const index = headers.indexOf(col);
+const criteria = SpreadsheetApp.newFilterCriteria().whenCellNotEmpty().build();
+pivotTable.addFilter(index, criteria);
+```
+
+`FilterCriteriaBuilder`でフィルター条件を新規作成できます。
+シート集計時に、空白セルを除外したり、ある日付や値でフィルターしたりできるようになります。
+条件にマッチしたメソッドを呼んだあとに`.build()`するとフィルター用オブジェクトが作成されます。
+
 ## リファレンス
 
 - [Class PivotTable](https://developers.google.com/apps-script/reference/spreadsheet/pivot-table)
 - [Class PivotGroup](https://developers.google.com/apps-script/reference/spreadsheet/pivot-group)
 - [Class PivotValue](https://developers.google.com/apps-script/reference/spreadsheet/pivot-value)
+- [Class FilterCriteriaBuilder](https://developers.google.com/apps-script/reference/spreadsheet/filter-criteria-builder)
