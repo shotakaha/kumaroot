@@ -24,6 +24,7 @@ gas-document
 gas-gform
 gas-gmail
 gas-groups
+gas-calendar
 gas-request
 gas-doget
 gas-clasp
