@@ -1,4 +1,4 @@
-# ピボットテーブルしたい（`PivotTable`）
+# ピボットテーブル操作したい（`PivotTable`）
 
 スプレッドシートのデータを整理するとき、ピボットテーブルはとても便利です。
 
@@ -58,9 +58,8 @@ const criteria = SpreadsheetApp.newFilterCriteria().whenCellNotEmpty().build();
 pivotTable.addFilter(index, criteria);
 ```
 
-`FilterCriteriaBuilder`でフィルター条件を新規作成できます。
-シート集計時に、空白セルを除外したり、ある日付や値でフィルターしたりできるようになります。
-条件にマッチしたメソッドを呼んだあとに`.build()`するとフィルター用オブジェクトが作成されます。
+`addFilter`でフィルターを追加できます。
+フィルター条件は[](./gas-spreadsheet-filter.md)を参考に`FilterCriteria`オブジェクトを作成します。
 
 ## リファレンス
 
