@@ -1,9 +1,13 @@
 # スプレッドシートしたい（``SpreadsheetApp``）
 
 ```js
+// アクティブなスプレッドシート（＝ブック）を取得する
 const book = SpreadsheetApp.getActive()
+// アクティブなシートを取得する
 const sheet = book.getActiveSheet();
-const range = sheet.getDataRange();
+// アクティブなセル範囲を取得する
+const range = sheet.getActiveRange();
+// セルの値を2次元配列で取得する
 const rows = range.getValues();
 
 // 見出しとデータに分割
@@ -37,6 +41,7 @@ gas-spreadsheet-book
 gas-spreadsheet-sheet
 gas-spreadsheet-range
 gas-spreadsheet-pivottable
+gas-spreadsheet-filter
 ```
 
 ## データを取得したい（`getValues`）
