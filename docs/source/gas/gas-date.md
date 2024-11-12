@@ -142,6 +142,30 @@ function isHoliday(date) {
 
 `getDay`で曜日を取得できます。
 
+## 月初／月末したい
+
+```js
+const d1 = new Date();
+d1.setDate(1);
+d1.setHours(0);
+d1.setMinutes(0);
+d1.setSeconds(0);
+//     2024-11-13 12:34:56
+// ==> 2024-11-01 00:00:00
+
+const d2 = new Date();
+d2.setMonth(d2.getMonth() + 1);
+d2.setDate(1);
+d2.setHours(0);
+d2.setMinutes(0);
+d2.setSeconds(0);
+//     2024-11-13 12:34:56
+// ==> 2024-12-01 00:00:00
+```
+
+現在日時を基準に、月初と月末を取得できます。
+カレンダーから毎月のイベントを取得したい場合に使えます。
+
 ## リファレンス
 
 - [formatDate](https://developers.google.com/apps-script/reference/utilities/utilities?hl=ja#formatDate(Date,String,String))
