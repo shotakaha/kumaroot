@@ -11,7 +11,7 @@ for (const event of events) {
 };
 ```
 
-## イベントを取得したい
+## イベントを取得したい（`getEvents`）
 
 ```js
 const event = calendar.getEventsForDay(日時);
@@ -27,7 +27,7 @@ const events = calendar.getEvents(開始日, 終了日);
 
 :::
 
-## イベントを追加したい
+## イベントを追加したい（`createEvent`）
 
 ```js
 calendar.createEvent(タイトル, 開始日時, 終了日時, オプション);
