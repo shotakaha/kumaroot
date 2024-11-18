@@ -2,8 +2,26 @@
 
 ## Unreleased
 
+### Feat
+
+- **gas/gas-calendar.md**: カレンダーを追加した
+- **gas/gas-spreadsheet-filter.md**: フィルター操作を追加した
+- **gas/gas-spreadsheet-pivottable.md**: PivotTableを追加した
+
 ### Fix
 
+- **gas/gas-calendar.md**: 見出しを修正した
+- **gas/gas-date.md**: 月初／月末を追記した
+- **gas/gas-spreadsheet.md**: サンプルを修正した
+- **gas/gas-spreadsheet-pivottable.md**: フィルターを追加した
+- **gas/gas-spreadsheet-range.md**: セル操作を追記した
+- **gas/gas-spreadsheet**: 見出しを修正した
+- **gas/gas-spreadsheet.md**: ページ名を変更した
+- **gas/gas-spreadsheet-getDataRange.md**: セル操作を追加した
+- **gas/gas-spreadsheet-getSheetByName.md**: シート操作を追加した
+- **gas/gas-request.md**: sendToSlackを修正した
+- **gas/gas-date.md**: 週末判定を追加した
+- **gas/gas-date.md**: 日付操作に追記した
 - **gas/gas-variables.md**: nullとundefinedを追加した
 - **gas/gas-function.md**: 関数のサンプルを追加した
 - **gas/gas-spreadsheet.md**: シートの値の受け取り方を簡単にした
