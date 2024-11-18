@@ -27,6 +27,7 @@ gas-groups
 gas-calendar
 gas-request
 gas-doget
+gas-trigger
 gas-clasp
 gas-quota
 gas-version
