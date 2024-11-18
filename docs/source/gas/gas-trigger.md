@@ -21,6 +21,33 @@ ScriptApp.newTrigger("関数名")
 `timeBased`で時間主導型の`ClockTriggerBuilder`を作成できます。
 ここでは`onWeekDay`でトリガーを発行する曜日を設定しています。
 
+## トリガーを確認したい（`getProjectTriggers`）
+
+```js
+const triggers = ScriptApp.getProjectTriggers();
+const n = triggers.length;
+Logger.log(`Current project has ${n} triggers.`);
+
+for (const trigger of triggers) {
+    // トリガーするイベントタイプ
+    const eventType = trigger.getEventType();
+    // トリガーで呼び出される関数
+    const handlerFunction = trigger.getHandlerFunction();
+    // トリガーを起動するイベントのソース
+    const triggerSource = trigger.getTriggerSource();
+    // ソースに固有のID
+    // クロックイベントの場合 null
+    const triggerSourceId = trigger.getTriggerSourceId();
+    // ユニークなトリガーID
+    const uniqueId = trigger.getUniqueId();
+}
+```
+
+`getProjectTriggers`で、現在のプロジェクトとユーザーに
+関連づけられているトリガーをすべて取得できます。
+
+
+
 ## リファレンス
 
 - [Class ScriptApp](https://developers.google.com/apps-script/reference/script/script-app)
