@@ -46,7 +46,21 @@ for (const trigger of triggers) {
 `getProjectTriggers`で、現在のプロジェクトとユーザーに
 関連づけられているトリガーをすべて取得できます。
 
+## トリガーを削除したい（`deleteTrigger`）
 
+```js
+const fn = someFunction;
+const triggers = ScriptApp.getProjectTriggers();
+for (const trigger of triggers) {
+    if (trigger.getHandlerFunction() === fn) {
+        ScriptApp.deleteTrigger(trigger);
+    }
+}
+```
+
+`deleteTrigger`で任意のトリガーを削除できます。
+`Trigger.getHandlerFunction`で判定することで、
+特定のトリガーを削除できます。
 
 ## リファレンス
 
