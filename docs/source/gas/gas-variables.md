@@ -171,13 +171,24 @@ const person = new Object();
 person.name = "Alice";
 person.age = 25;
 person.job = "Engineer";
+```
 
+`Object`（オブジェクト型）はJavaScriptにビルトインされている型のひとつで、
+**キー**と**値**の組み合わせ（Key-Value Pair）を持つデータ構造です。
+キーに文字列またはシンボルを使用できます。
+
+```js
 // ドット表記法
 person.name
 
 // ブラケット記法
 person["name"]
+```
 
+Objectのプロパティは`.`（ドット記法）もしくは`[]`（ブラケット記法）でアクセスできます。
+存在しないプロパティにアクセスした場合は`undefined`になります。
+
+```js
 // キーの確認
 if ("name" in person) {
     // キーが存在するときの処理
@@ -205,9 +216,16 @@ for (let [key, value] of entries) {
 }
 ```
 
-オブジェクト型（`Object`）はキーと値の組み合わせ（Key-Value Pair）を持つデータ構造です。
 `for...in`でキーをループ、
 `for...of`で要素（`[キー, 値]`）をループできます。
+
+```js
+// JSON文字列をObject型に変換
+const object = JSON.parse(jsonString);
+
+// ObjectをJSON文字列に変換
+const json = JSON.stringify(object);
+```
 
 ## Map型したい（`Map`）
 
@@ -220,21 +238,46 @@ map.set("name", "Alice");
 map.set("age", 25);
 map.set(1, "Number 1");
 map.set(true, "Boolean");
+```
 
+`Map`型は、ECMAScript2015（ES6）で追加されたビルトイン型のひとつです。
+Object型と同じ、**キー**と**値**の組み合わせ（Key-Value Pair）を持つデータ構造です。
+ただし、Object型と異なり、プロパティの追加順が保証されていたり、キーや値にオブジェクトとプリミティブ値を使用できたりします。
+また、大量のデータを扱う場合、Object型よりパフォーマンスがよいそうです。
+
+`set`メソッドでアイテムを追加できます。
+
+```js
 // 値を取得
 map.get("name");
+```
 
+`get`メソッドでアイテムを取得できます。
+
+```js
 // 値の削除
 map.delete("age");
+```
 
-// サイズの確認
-map.size();
+`delete`メソッドでアイテムを削除できます。
 
+```js
 // キーの確認
-if (map.has(1)) {
+if (map.has("age")) {
     // キーが存在するときの処理
 }
+```
 
+`has`メソッドで、キーが存在するか確認できます。
+
+```js
+// サイズの確認
+map.size();
+```
+
+`size`メソッドで、Mapオブジェクトの要素数を取得できます。
+
+```js
 // for...ofループ
 for (let [key, value] of map){
     const item = `${key}: ${value}`;
