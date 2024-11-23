@@ -11,17 +11,24 @@ const date = new Date();
 
 ## 配列したい（`Array`）
 
+```js
+const array = new Array();
+array.push("a1");
+array.push("a2");
+array.push("a3");
+```
+
 ## 辞書したい（`Map`）
 
 ```js
 const map = new Map();
-map.set("key1", "value1");
-map.set("key2", "value2");
+map.set("key1", "a1");
+map.set("key2", "b1");
 ```
 
 ```js
 // まとめて初期化
-const map = new Map( [["key1", "value1"], ["key2", "value2"]]);
+const map = new Map([["key1", "a1"], ["key2", "b1"]]);
 ```
 
 ```js
@@ -35,14 +42,14 @@ for (const [key, value] of map) {
 
 ```js
 const set = new Set();
-set.add("name1");
-set.add("name2");
-set.add("name1");  // <- 同じ値を追加しても
+set.add("a1");
+set.add("b1");
+set.add("a1");  // <- 同じ値を追加しても
 ```
 
 ```js
 // 配列を渡してユニークな値を取得する
-const set = new Set([...]);
+const set = new Set(["a1", "b1", "a1"]);
 ```
 
 ## 日付したい（`Date`）
