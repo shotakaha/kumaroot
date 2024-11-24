@@ -178,67 +178,6 @@ const object = JSON.parse(jsonString);
 const json = JSON.stringify(object);
 ```
 
-## Map型したい（`Map`）
-
-```js
-// Mapコンストラクター
-const map = new Map();
-
-// 値を追加
-map.set("name", "Alice");
-map.set("age", 25);
-map.set(1, "Number 1");
-map.set(true, "Boolean");
-```
-
-`Map`型は、ECMAScript2015（ES6）で追加されたビルトイン型のひとつです。
-Object型と同じ、**キー**と**値**の組み合わせ（Key-Value Pair）を持つデータ構造です。
-ただし、Object型と異なり、プロパティの追加順が保証されていたり、キーや値にオブジェクトとプリミティブ値を使用できたりします。
-また、大量のデータを扱う場合、Object型よりパフォーマンスがよいそうです。
-
-`set`メソッドでアイテムを追加できます。
-
-```js
-// 値を取得
-map.get("name");
-```
-
-`get`メソッドでアイテムを取得できます。
-
-```js
-// 値の削除
-map.delete("age");
-```
-
-`delete`メソッドでアイテムを削除できます。
-
-```js
-// キーの確認
-if (map.has("age")) {
-    // キーが存在するときの処理
-}
-```
-
-`has`メソッドで、キーが存在するか確認できます。
-
-```js
-// サイズの確認
-map.size();
-```
-
-`size`メソッドで、Mapオブジェクトの要素数を取得できます。
-
-```js
-// for...ofループ
-for (let [key, value] of map){
-    const item = `${key}: ${value}`;
-    console.log(item);
-}
-```
-
-Map型は順序を保ったオブジェクト型です。
-また、要素数が大きくなったときは、オブジェクト型に比べて高速に動作するそうです。
-
 ## Set型したい（`Set`）
 
 ```js

@@ -11,26 +11,7 @@ const date = new Date();
 
 ```{toctree}
 js-array
-```
-
-## 辞書したい（`Map`）
-
-```js
-const map = new Map();
-map.set("key1", "a1");
-map.set("key2", "b1");
-```
-
-```js
-// まとめて初期化
-const map = new Map([["key1", "a1"], ["key2", "b1"]]);
-```
-
-```js
-// Mapオブジェクトの中身を確認
-for (const [key, value] of map) {
-    console.log(`${key}=${value}`);
-}
+js-map
 ```
 
 ## 集合したい（`Set`）

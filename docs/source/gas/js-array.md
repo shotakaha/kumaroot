@@ -75,3 +75,7 @@ const newArrays = arrays.filter(value => {
     return 条件;
 })
 ```
+
+## リファレンス
+
+- [Array - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array)
