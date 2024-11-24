@@ -12,20 +12,7 @@ const date = new Date();
 ```{toctree}
 js-array
 js-map
-```
-
-## 集合したい（`Set`）
-
-```js
-const set = new Set();
-set.add("a1");
-set.add("b1");
-set.add("a1");  // <- 同じ値を追加しても
-```
-
-```js
-// 配列を渡してユニークな値を取得する
-const set = new Set(["a1", "b1", "a1"]);
+js-set
 ```
 
 ## 日付したい（`Date`）

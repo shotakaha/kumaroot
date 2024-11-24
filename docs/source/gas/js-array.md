@@ -37,7 +37,8 @@ console.log(array[3]);  // -> a3
 ```js
 array.length;  // -> 3
 for (let i = 0; i < array.length; i++ ) {
-    console.log(array[i]);
+    const item = array[i];
+    console.log(item);
 }
 ```
 
@@ -47,22 +48,22 @@ for (let i = 0; i < array.length; i++ ) {
 
 ```js
 // for...ofループ
-for (const value of arrays) {
-    console.log(value);
+for (const item of arrays) {
+    console.log(item);
 }
 ```
 
 ```js
 // forEachメソッド
-const newArrays = arrays.forEach(value => {
+const newArrays = arrays.forEach(item => {
     // 処理
-    console.log(value)
+    console.log(item)
 })
 ```
 
 ```js
 // mapメソッド
-const newArrays = arrays.map(value => {
+const newArrays = arrays.map(item => {
     // 処理
     return 結果;
 })
@@ -70,7 +71,7 @@ const newArrays = arrays.map(value => {
 
 ```js
 // filterメソッド
-const newArrays = arrays.filter(value => {
+const newArrays = arrays.filter(item => {
     // フィルター処理
     return 条件;
 })
