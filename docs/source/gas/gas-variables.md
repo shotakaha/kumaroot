@@ -107,55 +107,6 @@ if (name) {
 
 :::
 
-## 配列型したい（`Array`）
-
-```js
-// 配列リテラル
-const fruits = ["apple", "banana"];
-
-// Arrayコンストラクタ
-const fruits = new Array("apple", "banana");
-
-// 空の配列
-const fruits = [];
-
-// 配列に追加
-fruits.push("apple");
-fruits.push("banana");
-
-// 配列の要素を取得
-console.log(fruits[0]);
-console.log(fruits[1]);
-
-// 配列の長さ
-fruits.length;
-
-// forループ
-for (let i = 0; i < fruits.length; i++) {
-    // 処理
-    const fruit = fruits[i];
-    console.log(fruit);
-}
-
-// forEachメソッド
-const newFruits = fruits.forEach(fruit => {
-    // 処理
-    console.log(fruit);
-    });
-
-// mapメソッド
-const newFruits = fruits.map(fruit => {
-    // 処理
-    return 結果;
-})
-
-// filterメソッド
-const newFruits = fruits.filter(fruit => {
-    // 処理
-    return 条件;
-})
-```
-
 ## オブジェクト型したい（`Object`）
 
 ```js

@@ -9,13 +9,8 @@ const set = new Set();
 const date = new Date();
 ```
 
-## 配列したい（`Array`）
-
-```js
-const array = new Array();
-array.push("a1");
-array.push("a2");
-array.push("a3");
+```{toctree}
+js-array
 ```
 
 ## 辞書したい（`Map`）

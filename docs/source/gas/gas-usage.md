@@ -10,6 +10,7 @@ GASの情報を検索すると、新しい書き方と古い書き方が混ぜ�
 ---
 maxdepth: 1
 ---
+js-usage
 gas-variables
 gas-function
 gas-namespace
