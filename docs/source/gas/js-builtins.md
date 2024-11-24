@@ -11,6 +11,7 @@ const date = new Date();
 
 ```{toctree}
 js-array
+js-object
 js-map
 js-set
 ```
