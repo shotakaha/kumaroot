@@ -28,16 +28,20 @@ map.set("key3", "c1");
 `set`メソッドで値（`Key-Value Pair`）を追加できます。
 
 ```js
-map.get("key1");  // -> a1
+map.get("key1");    // -> a1
+map.get("NO_KEY");  // -> undefined
 ```
 
 `get`メソッドでキーを指定して、値を取得できます。
+存在しないキーを指定した場合は`undefined`になります。
 
 ```js
-map.delete("key2");
+map.delete("key2");    // -> true
+map.delete("NO_KEY");  // -> false
 ```
 
 `delete`メソッドで指定したキーを削除できます。
+返り値は`Boolean`になっているので、削除できたかどうかの判定に利用できます。
 
 ```js
 // キーの確認
