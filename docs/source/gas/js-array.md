@@ -44,6 +44,28 @@ for (let i = 0; i < array.length; i++ ) {
 
 `.length`で配列の長さを取得できます。
 
+## 結合したい（`Array.concat`）
+
+```js
+const array1 = ["a", "b", "c"];
+const array2 = [1, 2, 3];
+const array3 = ["7", "8", "9"];
+const array4 = array1.concat(array2, array3);
+console.log(array4);
+// -> ["a", "b", "c", 1, 2, 3, "7", "8", "9"];
+```
+
+`concat`メソッドで配列を連結できます。
+複数の配列を連結できます。
+
+```js
+const array5 = [...array1, ...array2];
+console.log(array5);
+// -> ["a", "b", "c", 1, 2, 3];
+```
+
+スプレッド演算子（`...配列`）でも連結できます。
+
 ## ループしたい
 
 ```js
@@ -53,6 +75,8 @@ for (const item of arrays) {
 }
 ```
 
+## `forEach`したい
+
 ```js
 // forEachメソッド
 const newArrays = arrays.forEach(item => {
@@ -60,6 +84,8 @@ const newArrays = arrays.forEach(item => {
     console.log(item)
 })
 ```
+
+## `map`したい
 
 ```js
 // mapメソッド
@@ -69,13 +95,62 @@ const newArrays = arrays.map(item => {
 })
 ```
 
+`map`メソッドで配列の要素に対して、同じ処理を適用できます。
+
+```js
+// 平方根を計算したい
+const numbers = [1, 4, 9, 16];
+const sqrtNumbers = numbers.map(Math.sqrt);
+console.log(sqrtNumbers);
+// -> [1, 2, 3, 4];
+```
+
+## `filter`したい
+
 ```js
 // filterメソッド
+const newArrays = arrays.filter(callbackFn);
+
 const newArrays = arrays.filter(item => {
     // フィルター処理
     return 条件;
 })
 ```
+
+`filter`メソッドを使って、配列から条件にマッチした要素を抽出できます。
+
+```js
+// 正の数を取得したい
+const numbers = [1, -4, 9, -16];
+const positives = numbers.filter(num => num > 0);
+console.log(positives);
+// -> [1, 9];
+```
+
+## `reduce`したい
+
+```js
+const newScalar = arrays.reduce(callbackFn, initialValue);
+```
+
+```js
+const numbers = [10, 20, 30, 40];
+const sum = numbers.reduce((total, num) => total + num, 0);
+const average = sum / numbers.length;
+console.log(sum);  // -> 100
+console.log(average);  // -> 25
+```
+
+## 最大値・最小値したい（`Math.max` / `Math.min`）
+
+```js
+const numbers = [10, 20, 5, 40];
+const max = Math.max(...numbers);
+const min = Math.min(...numbers);
+```
+
+`Math.max`、`Math.min`とスプレッド演算子（`...配列名`）を使って、
+最大値、最小値を取得できます。
 
 ## リファレンス
 
