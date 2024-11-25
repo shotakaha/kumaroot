@@ -12,7 +12,6 @@ maxdepth: 1
 ---
 js-usage
 gas-variables
-gas-function
 gas-namespace
 gas-class
 gas-logger
