@@ -135,7 +135,12 @@ const newScalar = arrays.reduce(callbackFn, initialValue);
 
 ```js
 const numbers = [10, 20, 30, 40];
-const sum = numbers.reduce((total, num) => total + num, 0);
+const sum = numbers.reduce((left, right) => left + right, 0);
+// step1. 初期値を 0 に設定
+// step2. left=0, right=10 で計算 -> 10
+// step3. left=直前の値, right=20 で計算 -> 30
+// step4. left=直前の値, right=30 で計算 -> 60
+// step5. left=直前の値, right=40 で計算 -> 100
 const average = sum / numbers.length;
 console.log(sum);  // -> 100
 console.log(average);  // -> 25
