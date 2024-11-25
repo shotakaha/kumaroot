@@ -141,6 +141,19 @@ console.log(sum);  // -> 100
 console.log(average);  // -> 25
 ```
 
+## `flat`したい
+
+```js
+const array1 = [1, 2, [3, 4]];
+const array2 = array1.flat();
+console.log(array2);
+// -> [1, 2, 3, 4];
+```
+
+`flat`メソッドで配列を平坦化できます。
+引数に平坦化の深さを指定できます。
+平坦化する際、配列の空要素は削除されます。
+
 ## 最大値・最小値したい（`Math.max` / `Math.min`）
 
 ```js
