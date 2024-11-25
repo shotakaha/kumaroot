@@ -4,12 +4,20 @@
 
 ### Feat
 
+- **gas/js-console.md**: コンソール出力を追加した
+- **gas/js-usage.md**: JavaScriptの基本を追加した
+- **gas/gas-trigger.md**: トリガー設定を追加した
 - **gas/gas-calendar.md**: カレンダーを追加した
 - **gas/gas-spreadsheet-filter.md**: フィルター操作を追加した
 - **gas/gas-spreadsheet-pivottable.md**: PivotTableを追加した
 
 ### Fix
 
+- **gas/js-builtins.md**: 配列を追加した
+- **gas/js-builtins.md**: 組み込みオブジェクトを追加した
+- **gas/gas-variables.md**: 更新した
+- **gas/gas-trigger.md**: deleteTriggerを追記した
+- **gas/gas-trigger.md**: getProjectTriggersを追記した
 - **gas/gas-calendar.md**: 見出しを修正した
 - **gas/gas-date.md**: 月初／月末を追記した
 - **gas/gas-spreadsheet.md**: サンプルを修正した
