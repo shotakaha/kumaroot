@@ -58,6 +58,21 @@ map.size();  // -> 3
 
 `size`メソッドで、Mapオブジェクトの要素数を取得できます。
 
+## 値を確認したい
+
+```js
+console.log(map);  // -> {}
+// Arrayに変換すると確認しやすい
+Array.from(map);  // -> [[キー, 値]]
+Array.from(map.entries()); // -> [[キー, 値]]
+Array.from(map.keys());  // -> [キー]
+Array.from(map.values());  // -> [値]
+```
+
+`.keys`、`.values`、`.entries`で`Map`オブジェクトのプロパティを取得できます。
+ただし、そのまま出力しても`{}`と表示されるだけです。
+`Array.from`で配列に変換すると確認しやすいです。
+
 ## ループしたい
 
 ```js
