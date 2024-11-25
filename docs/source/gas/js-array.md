@@ -165,6 +165,48 @@ const min = Math.min(...numbers);
 `Math.max`、`Math.min`とスプレッド演算子（`...配列名`）を使って、
 最大値、最小値を取得できます。
 
+## 配列同士の演算したい
+
+```js
+left = [1, 2, 3];
+right = [4, 5, 6];
+const added = left.map((value, index) => value + right[index]);
+const subtracted = left.map((value, index) => value - right[index]);
+const multiplied = left.map((value, index) => value * right[index]);
+const divided = left.map((value, index) => value / right[index]);
+const modulo = left.map((value, index) => value % right[index]);
+const powered = left.map((value, index) => Math.pow(value, right[index]));
+```
+
+配列同士の演算はビルトインされていないので、`map`メソッドを使って自分で定義します。
+
+```js
+function addLists(left, right) {
+    if (left.length !== right.length) {
+        throw new Error("Arrays must have the same length.");
+    }
+    return left.map((value, index) => value + right[index]);
+}
+```
+
+それぞれ関数にしておくとよさそうです。
+
+```js
+const arrays = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+const result = arrays.reduce((left, right) => AddLists(left, right));
+// step1. arrays[0] を初期値として使用
+// step2. left=arrays[0], right=arrays[1] を計算
+//    -> [5, 7, 9]
+// step3. left=直前の結果, right=arrays[2] を計算
+//    -> [12, 15, 18]
+```
+
+複数の配列を処理する場合`reduce`メソッドを利用すると簡潔にかけます。
+
 ## リファレンス
 
 - [Array - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array)
