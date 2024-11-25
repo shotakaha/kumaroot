@@ -29,14 +29,36 @@ const range = sheet.getRange(2, 1, nrows, ncols);
 ## セル選択したい（`getRange`）
 
 ```js
+// A1表記で指定
 const range = sheet.getRange("セル番地");
-const range = sheet.getRange("行番号", "列番号");
 const range = sheet.getRange("セル番地:セル番地");
+// 行番号／列番号で指定
+const range = sheet.getRange("行番号", "列番号");
 const range = sheet.getRange("行番号", "列番号", "行数");
 const range = sheet.getRange("行番号", "列番号", "行数", "列数");
 ```
 
 `Sheet.getRange`で、セル名や番地（行番号と列番号）を使ってセル（の範囲）を選択できます。
+
+## 値を読み込みたい（`getValues`）
+
+```js
+const dataTable = range.getValues();
+```
+
+`getValues`メソッドで、選択した範囲の値を2次元配列として取得できます。
+
+## 値を書き込みたい（`setValues`）
+
+```js
+const dataTable = [[二次元配列]];
+const nrows = dataTable.length;   // 行の数
+const ncols = dataTable[0].length;  // 見出しの数＝列の数
+sheet.getRange(1, 1, nrows, ncols).setValues(dataTable);
+```
+
+`setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
+書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`nrows`と`ncols`を`dataTable`から取得しています。
 
 ## リファレンス
 
