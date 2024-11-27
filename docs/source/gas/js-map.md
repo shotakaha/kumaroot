@@ -73,6 +73,28 @@ Array.from(map.values());  // -> [値]
 ただし、そのまま出力しても`{}`と表示されるだけです。
 `Array.from`で配列に変換すると確認しやすいです。
 
+## キー名を変更したい
+
+```js
+if (map.has("oldKey")) {
+    map.set("newKey", map.get("oldKey"));
+    map.delete("oldKey");
+}
+```
+
+キー名を直接変更するメソッドはありませんが、`has`、`set`、`get`、`delete`を総動員させるとできます。
+キーの順番が変更されるので注意が必要です。
+
+## キーの順番をソートしたい
+
+```js
+const sorted = [...sourceMap.entries()].sort((a, b) => {
+    // キーを文字列として比較
+    return a[0].localCompare(b[0]);
+    })
+const sortedMap = new Map(sorted);
+```
+
 ## ループしたい
 
 ```js
@@ -81,6 +103,30 @@ for (const [key, value] of map) {
     console.log(`${key}=${value}`);
 }
 ```
+
+## グループ化したい（`Map.groupBy`）
+
+```js
+Map.groupBy(反復可能なオブジェクト, 条件を定義した関数)
+// -> それぞれのグループのキーを持つMapオブジェクト
+```
+
+## 特定のキーを取得したい
+
+```js
+// 取得したいキー
+const filterKeys = new Set(["key1", "key2"]);
+
+// 中間処理
+const filtered = Array.from(sourceMap.entries()).filter(([key, value])) => filterKeys.has(key);
+// -> [ [key1, value1], [key3, value3] ]
+
+const filteredMap = new Map(filtered);
+// -> Map { "key1": value1, "key3": value3 }
+```
+
+`Map.entries`で配列に変換し、`filter`メソッドを使うことで、
+Mapオブジェクトから特定のキー（とその値）を抽出できます。
 
 ## リファレンス
 
