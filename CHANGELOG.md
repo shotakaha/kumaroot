@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.43.0 (2024-11-27)
 
 ### Feat
 
@@ -13,6 +13,19 @@
 
 ### Fix
 
+- **git/git-tag.md**: 最新のタグを取得する方法を追記した
+- **gas/js-array.md**: reduceを分解した
+- **gas/js-array.md**: 配列同士の演算を追加した
+- **gas/js-array.md**: flatを追加した
+- **gas/js-array.md**: 配列の操作を追加した
+- **gas/js-function.md**: ファイル名を変更した
+- **gas/js-map.md**: Array.fromすることを追記した
+- **gas/js-map.md**: 存在しないキーを追記した
+- **gas/gas-spreadsheet-range.md**: getValues / setValuesを追記した
+- **gas/js-object.md**: Objectを追加した
+- **gas/js-set.md**: Setを追加した
+- **gas/js-map.md**: Mapを追加した
+- **gas/js-array.md**: 配列を追加した
 - **gas/js-builtins.md**: 配列を追加した
 - **gas/js-builtins.md**: 組み込みオブジェクトを追加した
 - **gas/gas-variables.md**: 更新した
