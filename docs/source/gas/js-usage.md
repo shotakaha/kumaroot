@@ -1,4 +1,4 @@
-# JavaScriptの基本
+# JavaScriptしたい
 
 ```{toctree}
 js-builtins

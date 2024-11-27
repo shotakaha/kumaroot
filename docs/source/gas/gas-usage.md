@@ -10,7 +10,6 @@ GASの情報を検索すると、新しい書き方と古い書き方が混ぜ�
 ---
 maxdepth: 1
 ---
-js-usage
 gas-variables
 gas-namespace
 gas-class
@@ -28,9 +27,14 @@ gas-calendar
 gas-request
 gas-doget
 gas-trigger
+gas-properties
 gas-clasp
 gas-quota
 gas-version
+```
+
+```{toctree}
+js-usage
 ```
 
 ## リファレンス
