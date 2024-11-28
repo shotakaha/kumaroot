@@ -15,7 +15,61 @@
 データを多角的に確認したい場合は、同じデータに対して、
 複数のピボットテーブルを作成することもあります。
 
+## ピボットテーブルを作成したい（`createPivotTable`）
+
+```js
+// ピボットテーブルに使用する範囲
+const readRange = readSheet.getRange(...);
+
+// ピボットテーブルを出力する範囲
+// （ここでは新しいシートの範囲を指定）
+const pivotRange = writeSheet.getRange("A1");
+
+// （空の）ピボットテーブルを作成
+const pivotTable = pivotRange.createPivotTable(readRange);
+
+// 行・列・ピボット値・フィルターを追加
+pivotTable.addRowGroup(カラムのインデックス);
+pivotTable.addColumnGroup(カラムのインデックス);
+pivotTable.addPivotValue(カラムのインデックス, 集計方法);
+pivotTable.addFilter(カラムのインデックス, フィルター)
+```
+
+`createPivotTable`メソッドで、ピボットテーブルを作成できます。
+作成するときに、**使用するデータの範囲** と **ピボットテーブルを出力するセル** の`Range`オブジェクトの指定が必要です。
+
+:::{note}
+
+ピボットテーブルは、利用するデータ範囲と同じシートに作成できます。
+そのときは、選択したデータ範囲と重ならないようにする必要があります。
+
+```js
+const readRange = readSheet.getRange("A1:D10");
+
+// 行方向に作成する場合
+const lastRow = readRange.getLastRow();
+const pivotRange = readSheet.getRange(lastRow + 2, 1);
+
+// 列方向に作成する場合
+const lastCol = readRange.getLastColumn();
+const pivotRange = readSheet.getRange(1, lastCol + 2);
+```
+
+`Range.getLastRow`や`Range.getLastColumn`を使って、
+出力範囲の選択を自動化できます。
+
+:::
+
 ## 行を追加したい（`addRowGroup`）
+
+```js
+const pivotGroup = pivotTable.addRowGroup(sourceDataColumn);
+```
+
+`PivotTable.addRowGroup`で行グループを追加できます。
+引数にカラム名のインデックスが必要です。
+返り値は`PivotGroup`です。
+ひとつの`PivotTable`に複数の行グループを追加できます。
 
 ```js
 const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
@@ -28,8 +82,8 @@ if (row.order === "descending") {
 };
 ```
 
-`PivotTable.addRowGroup`で行グループを追加できます。
-引数にインデックスを指定する必要があるため、見出し行に対して`indexOf`して取得するとよいです。
+カラムのインデックスは、`Arrays.indexOf`で取得できます。
+ただし、`A`列を`1`と数えるため`+1`が必要です。
 
 返り値は`PivotGroup`オブジェクトが新規作成されます。
 このオブジェクトに対してソートしたり、
@@ -38,15 +92,33 @@ if (row.order === "descending") {
 ## 列を追加したい（`addColumnGroup`）
 
 ```js
-const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
-const col = "カラム2";
-const index = headers.indexOf(col);
-pivotTable.addColumnGroup(index);
+const pivotGroup = pivotTable.addColumnGroup(sourceDataColumn);
 ```
 
 `PivotTable.addColumnGroup`で列グループを追加できます。
-引数にインデックスを指定する必要があるため、
-見出し行に対して`indexOf`して取得するとよいです。
+引数にカラム名のインデックスが必要です。
+返り値は`PivotGroup`です。
+ひとつの`PivotTable`に複数の列グループを追加できます。
+
+```js
+const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
+const col = "カラム2";
+const index = headers.indexOf(col) + 1;
+pivotTable.addColumnGroup(index);
+```
+
+カラムのインデックスは、`Arrays.indexOf`で取得できます。
+ただし、`A`列を`1`と数えるため`+1`が必要です。
+
+## ピボット値を追加したい（`addPivotValue`）
+
+```js
+const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
+const col = "カラム2";
+const index = headers.indexOf(col) + 1;
+const method = SpreadsheetApp.PivotTableSummarizeFunction.COUNTA;
+pivotTable.addPivotValue(index, method);
+```
 
 ## フィルターを追加したい（`addFilter`）
 
