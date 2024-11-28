@@ -110,25 +110,6 @@ pivotTable.addColumnGroup(index);
 カラムのインデックスは、`Arrays.indexOf`で取得できます。
 ただし、`A`列を`1`と数えるため`+1`が必要です。
 
-## 行グループ／列グループを設定したい（`PivotGroup`）
-
-```js
-// 表示順
-pivotGroup.sortAscending();
-pivotGroup.sortDescending();
-pivotGroup.sortBy(value, oppositeGroupValues);
-
-// 表内に合計値を表示
-pivotGroup.showTotals(showTotals);
-
-// その他
-pivotGroup.setDisplayName(name);
-pivotGroup.setDateTimeGroupingRule(dateTimeGroupingRuleType);
-pivotGroup.setHistogramGroupingRule(min, max, bins);
-```
-
-行グループ、列グループに対応した`PivotGroup`オブジェクトを操作して、表示順などの設定できます。
-
 ## ピボット値を追加したい（`addPivotValue`）
 
 ```js
@@ -151,6 +132,53 @@ pivotTable.addFilter(index, criteria);
 
 `addFilter`でフィルターを追加できます。
 フィルター条件は[](./gas-spreadsheet-filter.md)を参考に`FilterCriteria`オブジェクトを作成します。
+
+## 行グループ／列グループの詳細設定したい（`PivotGroup`）
+
+```js
+// 表示順
+pivotGroup.sortAscending();
+pivotGroup.sortDescending();
+pivotGroup.sortBy(value, oppositeGroupValues);
+
+// 表内に合計値を表示
+pivotGroup.showTotals(showTotals);
+
+// その他
+pivotGroup.setDisplayName(name);
+pivotGroup.setDateTimeGroupingRule(dateTimeGroupingRuleType);
+pivotGroup.setHistogramGroupingRule(min, max, bins);
+```
+
+行グループ、列グループに対応した`PivotGroup`オブジェクトを操作して、表示順などの設定できます。
+
+## 日時を集計したい（`PivotGroup.setDateTimeGroupingRule`）
+
+```js
+const index = 見出し.indexOf("タイムスタンプ") + 1;
+
+const pivotRow = pivotTable.addRowGroup(index);
+const byHour = SpreadsheetApp.DateTimeGroupingRuleType.HOUR;
+pivotRow.setDateTimeGroupingRule(byHour);
+pivotRow.setDisplayName("時刻");
+
+const pivotCol = pivotTable.addColumnGroup(index);
+const byDay = SpreadsheetApp.DateTimeGroupingRuleType.DAY_OF_WEEK;
+pivotCol.setDateTimeGroupingRule(byDay);
+pivotCol.setDisplayName("曜日");
+
+const method = SpreadsheetApp.PivotTableSummarizeFunction.COUNTA
+const pivotVal = pivotTable.addPivotValue(index, method);
+```
+
+`PivotGroup.setDateTimeGroupingRule`で日時データをグルーピングできます。
+設定値は`SpreadsheetApp.DateTimeGroupingRuleType`の中で定義されている値から選択します。
+
+:::{note}
+
+日時でないカラムを渡してもエラーはでません。
+
+:::
 
 ## リファレンス
 
