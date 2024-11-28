@@ -116,6 +116,24 @@ Map.groupBy(反復可能なオブジェクト, 条件を定義した関数)
 // -> それぞれのグループのキーを持つMapオブジェクト
 ```
 
+## 配列にしたい
+
+```js
+Array.from(map.entries());
+Array.from(map.keys());
+Array.from(map.values());
+```
+
+`Array.from`で配列に変換できます。
+
+## オブジェクトにしたい
+
+```js
+Object.from(map.entries());
+```
+
+`Object.from`でオブジェクトに変換できます。
+
 ## 特定のキーを取得したい
 
 ```js
