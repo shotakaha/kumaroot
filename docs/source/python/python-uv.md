@@ -206,11 +206,19 @@ $ uv tool dir
 $ uv tool update-shell
 Executable directory ~/.local/bin is already in PATH
 
+// パッケージを確認する
 $ uv tool list
+
+// パッケージを更新する
+$ uv tool upgrade パッケージ名
+$ uv tool upgrade --all
+
+// パッケージを削除する
+$ uv tool uninstall パッケージ名
+$ uv tool uninstall --all
+
 $ uv tool run コマンド [オプション]
 $ uv tool install コマンド
-$ uv tool upgrade コマンド
-$ uv tool uninstall コマンド
 ```
 
 `uv tool`コマンドで`pipx`のようなことができます。
@@ -226,8 +234,9 @@ $ uv tool uninstall コマンド
 
 :::{note}
 
-`uv tool`でインストールしたコマンドを、
-一括でアップグレードする方法はありません。
+~~`uv tool`でインストールしたコマンドを、
+一括でアップグレードする方法はありません。~~
 現在、[uvのGitHub issue](https://github.com/astral-sh/uv/issues/1419)で議論されているようです。
+→ issueはopenになっていますが、`upgrade --all`オプションが追加されていました（2024/11/29）
 
 :::
