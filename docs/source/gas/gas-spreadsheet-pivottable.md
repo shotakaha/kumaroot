@@ -21,17 +21,22 @@
 // ピボットテーブルに使用する範囲
 const readRange = readSheet.getRange(...);
 
-// ピボットテーブルを出力する範囲
-// （ここでは新しいシートの範囲を指定）
+// ピボットテーブルを出力するセルを選択
 const pivotRange = writeSheet.getRange("A1");
 
 // （空の）ピボットテーブルを作成
 const pivotTable = pivotRange.createPivotTable(readRange);
 
-// 行・列・ピボット値・フィルターを追加
+// 行グループを追加
 pivotTable.addRowGroup(カラムのインデックス);
+
+// 列グループを追加
 pivotTable.addColumnGroup(カラムのインデックス);
+
+// ピボット値を追加
 pivotTable.addPivotValue(カラムのインデックス, 集計方法);
+
+// フィルターを追加
 pivotTable.addFilter(カラムのインデックス, フィルター)
 ```
 
@@ -60,55 +65,21 @@ const pivotRange = readSheet.getRange(1, lastCol + 2);
 
 :::
 
-## 行を追加したい（`addRowGroup`）
+## 行や列を追加したい（`addRowGroup` / `addColumnGroup`）
 
 ```js
-const pivotGroup = pivotTable.addRowGroup(sourceDataColumn);
+const pivotGroup = pivotTable.addRowGroup(インデックス);
+const pivotGroup = pivotTable.addColumnGroup(インデックス);
 ```
 
-`PivotTable.addRowGroup`で行グループを追加できます。
+`PivotTable.addRowGroup`で行グループ、
+`PivotTable.addColumnGroup`で列グループを追加できます。
+
 引数にカラム名のインデックスが必要です。
-返り値は`PivotGroup`です。
-ひとつの`PivotTable`に複数の行グループを追加できます。
-
-```js
-const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
-const row = {name: "カラム1", order: "descending" };
-const index = headers.indexOf(row.name);
-const pivotRowGroup = pivotTable.addRowGroup(index);
-if (row.order === "descending") {
-    // 降順に並べる
-    pivotRowGroup.sortDescending();
-};
-```
-
-カラムのインデックスは、`Arrays.indexOf`で取得できます。
-ただし、`A`列を`1`と数えるため`+1`が必要です。
+ひとつの`PivotTable`に対して複数の行グループ／列グループを追加できます。
 
 返り値は`PivotGroup`オブジェクトが新規作成されます。
-このオブジェクトに対してソートしたり、
-総計を表示したり、設定できます。
-
-## 列を追加したい（`addColumnGroup`）
-
-```js
-const pivotGroup = pivotTable.addColumnGroup(sourceDataColumn);
-```
-
-`PivotTable.addColumnGroup`で列グループを追加できます。
-引数にカラム名のインデックスが必要です。
-返り値は`PivotGroup`です。
-ひとつの`PivotTable`に複数の列グループを追加できます。
-
-```js
-const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
-const col = "カラム2";
-const index = headers.indexOf(col) + 1;
-pivotTable.addColumnGroup(index);
-```
-
-カラムのインデックスは、`Arrays.indexOf`で取得できます。
-ただし、`A`列を`1`と数えるため`+1`が必要です。
+このオブジェクトに対してソートしたり、総計を表示したり、設定できます。
 
 ## ピボット値を追加したい（`addPivotValue`）
 
