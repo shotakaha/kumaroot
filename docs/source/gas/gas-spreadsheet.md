@@ -42,6 +42,7 @@ gas-spreadsheet-sheet
 gas-spreadsheet-range
 gas-spreadsheet-pivottable
 gas-spreadsheet-filter
+gas-spreadsheet-chart
 ```
 
 ## データを取得したい（`getValues`）
@@ -293,20 +294,6 @@ range.setBackgrounds("色");
 ```
 
 選択したセルに対して、フォントやスタイル、文字色などを設定できます。
-
-## グラフしたい（`newChart`）
-
-```js
-const chart = sheet.newChart()
-    .asBarChart()
-    .addRange(データの範囲)
-    .setPosition(表示位置)
-    .setOption("height", 高さ)
-    .setOption("width", 幅)
-    .setOption("title", タイトル)
-    .build();
-sheet.insertChart(chart);
-```
 
 ## カスタムメニューしたい（``getUi``）
 
