@@ -1,5 +1,22 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **python/python-uv.md**: upgrade --all を追記した
+- **gas/js-map.md**: 変換を追記した
+- **gas/js-map.md**: Mapの初期化を追記した
+- **gas/js-function.md**: オプション引数を追記した
+- **gas/gas-spreadsheet-pivottable.md**: ヒートマップを追加した
+- **gas/gas-spreadsheet-pivottable.md**: PivotGroupを追記した
+- **gas/gas-spreadsheet-pivottable.md**: createPivotTableを追記した
+- **gas/gas-spreadsheet-range.md**: 範囲選択を整理した
+- **gas/gas-properties.md**: PropertiesServiceを追加した
+- **gas/js-map.md**: Map型の操作を追記した
+- **gas/js-function.md**: 関数宣言を整理した
+- **gas/gas-namespace.md**: 名前空間を追記した
+
 ## v1.43.0 (2024-11-27)
 
 GAS / JSの強化リリース
