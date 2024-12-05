@@ -151,6 +151,16 @@ const pivotVal = pivotTable.addPivotValue(index, method);
 
 :::
 
+## ヒストグラムしたい（`PivotGroup.setHistogramGroupingRule`）
+
+```js
+const pivotRow = pivotTable.addRowGroup(index);
+pivotRow.setHistogramGroupingRule(min, max, bins);
+```
+
+`PivotGroup.setHistogramGroupingRule`で行グループ／列グループを、任意のビン数でヒストグラム（度数分布）にできます。
+行／列に指定したカラムの値が連続値の場合にとても便利です。
+
 ## リファレンス
 
 - [Class PivotTable](https://developers.google.com/apps-script/reference/spreadsheet/pivot-table)
