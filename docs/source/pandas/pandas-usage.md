@@ -83,6 +83,7 @@ pandas-fit-curve_fit
 pandas-fit-gaussian
 pandas-fit-erfc
 pandas-fit-poisson
+pandas-interpolate-spline
 ```
 
 ## 可視化したい
