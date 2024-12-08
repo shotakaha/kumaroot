@@ -15,6 +15,38 @@ kernelspec:
 
 +++
 
+## リファレンス
+
+- [Interpolation](https://docs.scipy.org/doc/scipy/reference/interpolate.html)
+- [scipy.interpolate.interp1d](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
+
++++
+
+## 補間
+
+測定したデータ点を使って、欠損値を**補間**する手法
+
++++
+
+## サンプルデータを作成
+
+```{code-cell} ipython3
+import numpy as np
+import pandas as pd
+import hvplot.pandas
+
+x = np.linspace(0, 2 * np.pi, 10)
+y = np.sin(x)
+
+points = {"x": x, "y": y}
+
+data = pd.DataFrame(points)
+data
+
+data.hvplot.scatter(x="x", y="y")
+# data.hvplot.line(x="x", y="y")
+```
+
 ## 1. 線形補間（Linear Interpolation）
 
 :特性:
@@ -29,7 +61,24 @@ kernelspec:
 :欠点:
 データが非線形に変化する場合には不正確
 
-+++
+:メソッド:
+[numpy.interp](https://numpy.org/devdocs/reference/generated/numpy.interp.html)
+
+```{code-cell} ipython3
+x_data = data["x"]
+y_data = data["y"]
+
+x_fine = np.linspace(x_data.min(), x_data.max(), 10)
+
+f = np.interp(x_fine, x_data.to_list(), y_data.to_list())
+f
+
+points = {"x": x_fine, "y": f}
+data_linear = pd.DataFrame(points)
+data_linear
+
+data_linear.hvplot.line(x="x", y="y")
+```
 
 ## 2. スプライン補間（Spline Interpolation）
 

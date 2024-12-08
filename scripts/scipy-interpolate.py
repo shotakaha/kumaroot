@@ -14,6 +14,35 @@
 
 # # データを補間したい（``scipy.interpolate``）
 
+# ## リファレンス
+#
+# - [Interpolation](https://docs.scipy.org/doc/scipy/reference/interpolate.html)
+# - [scipy.interpolate.interp1d](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
+
+# ## 補間
+#
+# 測定したデータ点を使って、欠損値を**補間**する手法
+
+# ## サンプルデータを作成
+
+# +
+import numpy as np
+import pandas as pd
+import hvplot.pandas
+
+x = np.linspace(0, 2 * np.pi, 10)
+y = np.sin(x)
+
+points = {"x": x, "y": y}
+
+data = pd.DataFrame(points)
+data
+
+data.hvplot.scatter(x="x", y="y")
+# data.hvplot.line(x="x", y="y")
+
+# -
+
 # ## 1. 線形補間（Linear Interpolation）
 #
 # :特性:
@@ -27,6 +56,26 @@
 #
 # :欠点:
 # データが非線形に変化する場合には不正確
+#
+# :メソッド:
+# [numpy.interp](https://numpy.org/devdocs/reference/generated/numpy.interp.html)
+
+# +
+x_data = data["x"]
+y_data = data["y"]
+
+x_fine = np.linspace(x_data.min(), x_data.max(), 10)
+
+f = np.interp(x_fine, x_data.to_list(), y_data.to_list())
+f
+
+points = {"x": x_fine, "y": f}
+data_linear = pd.DataFrame(points)
+data_linear
+
+data_linear.hvplot.line(x="x", y="y")
+
+# -
 
 # ## 2. スプライン補間（Spline Interpolation）
 #
@@ -168,6 +217,7 @@ plt.legend()
 plt.title("Cubic Spline Interpolation of Sample Data")
 plt.grid(True)
 plt.show()
+
 # -
 
 # ## 要素を分割
@@ -181,11 +231,13 @@ amplitude = np.exp(-time) * np.sin(2 * np.pi * time)
 data = pd.DataFrame({"time": time, "amplitude": amplitude})
 
 data.hvplot.scatter(x="time", y="amplitude")
+
 # -
 
 # 三次スプライン補間を実行
 # CubicSpline(x, y) -> CubicSpline
 cs = CubicSpline(data["time"], data["amplitude"])
+
 
 # - ドキュメントには明記されていないけれど、CubicSplineオブジェクトの中には、それぞれの区間の補間関数がある
 #   - ``cs.c``の中に4つのリストがある -> $a, b, c, d$ に相当
@@ -206,6 +258,7 @@ cs.extrapolate  # True
 # cs.roots() -> numpy.ndarray
 # cs.solve() -> numpy.ndarray
 
+
 # +
 # 補間後のデータを生成
 time_new = np.linspace(0, 10, 500)  # より細かい時間軸に補間
@@ -213,12 +266,14 @@ amplitude_new = cs(time_new)
 splined = pd.DataFrame({"time": time_new, "amplitude": amplitude_new})
 
 splined.hvplot.line(x="time", y="amplitude")
+
 # -
 
 (
     splined.hvplot.line(x="time", y="amplitude", grid=True, width=600, height=400)
     * data.hvplot.scatter(x="time", y="amplitude", grid=True, color="red")
 )
+
 
 # # スプライン補間の精度を評価する
 #
