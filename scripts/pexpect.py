@@ -24,7 +24,6 @@ import os
 import pexpect
 
 print(f"{pexpect.__version__=}")
-
 # -
 
 # 環境変数を読み込む
@@ -33,13 +32,11 @@ print(f"{pexpect.__version__=}")
 import dotenv
 
 dotenv.load_dotenv()
-
 # -
 
 hostname = os.environ.get("HOST")
 username = os.environ.get("USER")
 password = os.environ.get("PASSWORD")
-
 
 # - `pexect.spwan`で`rsync`コマンドを実行する
 # - ホストに接続すると表示される`password:`という文字列を`expect`する
@@ -50,10 +47,8 @@ dest = "."
 cmd = (" ").join(["rsync", *options, src, dest])
 # cmd
 
-
 child = pexpect.spawn(cmd)
 child.expect(["password:"])
-
 
 # - `password:`の文字列を確認したら、`sendline`でパスワードを送信する
 # - パスワード認証に成功すると`rsync`でファイル転送が開始する
@@ -63,19 +58,16 @@ child.sendline(password)
 child.expect(pexpect.EOF)
 child.terminate()
 
-
 # - 転送時に標準出力に表示された内容は、`expect`でマッチした文字列の前（`before`）で確認できる
 # - `before`はバイナリー文字列になっているため`.decode("utf-8")`でテキスト文字列に変換する
 
 print(child.before.decode("utf-8"))
 # print(child.after.decode("utf-8"))
 
-
 # - `pexpect.pxssh`モジュールを使ってSSH接続する
 # - `ssh`接続してファイルを作成する
 
 from pexpect import pxssh
-
 
 # - ログインに必要な情報を準備する
 # - パスワードはソースコードにベタ書きせず、環境変数などから読み込む
@@ -83,7 +75,6 @@ from pexpect import pxssh
 hostname = os.environ.get("HOST")
 username = os.environ.get("USER")
 password = os.environ.get("PASSWORD")
-
 
 # - `pexpext.pxssh.pxssh()`オブジェクトを初期化する
 #   - `encoding="utf-8"`を指定すると、`.decode`が不要になる
@@ -97,7 +88,6 @@ password = os.environ.get("PASSWORD")
 ssh = pxssh.pxssh(encoding="utf-8")
 connected = ssh.login(hostname, username, password)
 
-
 # - `uptime`コマンドを実行する
 # - コマンド実行後に、プロンプトが返ってくるのを待つ
 #   - `.prompt()`という便利関数がある
@@ -108,18 +98,15 @@ ssh.sendline("uptime")
 ssh.prompt()
 print(ssh.before)
 
-
 # - `touch`コマンドで空のファイルを作成する
 
 ssh.sendline("netstat")
 ssh.prompt()
 print(ssh.before)
 
-
 # - 終わったらログアウトする
 
 ssh.logout()
-
 
 # - `pxssh.pxssh`オブジェクトを調べた
 # - `.prompt()`で処理を待てるのは、`.PROMPT`が設定されているから
@@ -135,30 +122,24 @@ hostname = os.environ.get("HOST")
 username = os.environ.get("USER")
 password = os.environ.get("PASSWORD")
 
-
 cmd = (" ").join(["ssh", f"{username}@{hostname}"])
 # PROMPT = "[\\$\\#] "
 PROMPT = ["\\$", "\\#"]
-
 
 child = pexpect.spawn(cmd)
 child.expect("password:")
 print(child.before.decode("utf-8"))
 
-
 child.sendline(password)
 child.expect(PROMPT)
 print(child.before.decode("utf-8"))
-
 
 child.sendline("uptime")
 child.expect(PROMPT)
 print(child.before.decode("utf-8"))
 
-
 child.sendline("last")
 child.expect(PROMPT)
 print(child.before.decode("utf-8"))
-
 
 child.terminate(force=True)
