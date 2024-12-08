@@ -28,6 +28,12 @@ data["y_splined"] = f_splined(x_data)
 Pandas自体にはスプライン補間機能がありませんが、
 `scipy.interpolate`モジュールの`interp1d`を使って、データをスプライン補間できます。
 
+:::{note}
+
+`interp1d`はレガシーなクラスとなっていて、将来的に削除される可能性があります。
+
+:::
+
 ## 細分化したスプライン補間したい
 
 ```python
@@ -60,3 +66,10 @@ splined = {
 }
 splined = pd.DataFrame(splined)
 ```
+
+## リファレンス
+
+- [numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
+- [scipy.interpolate.interp1d](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
+- [scipy.interpolate.CubicSpline](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html)
+- [Interpolation - SciPy](https://docs.scipy.org/doc/scipy/tutorial/interpolate.html)
