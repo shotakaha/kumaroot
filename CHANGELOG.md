@@ -4,6 +4,15 @@
 
 ### Fix
 
+- **scripts/pexpect.py**: 更新した
+- **notebooks/scipy-interpolate.ipynb**: 補間の使い方を確認中
+- **pandas/pandas-interpolate-spline.md**: CubicSplineを追加した
+- **pandas/pandas-interpolate-spline.md**: リファレンスを追加した
+- **gas/gas-spreadsheet-chart.md**: グラフ種類を追加した
+- **pandas/pandas-interpolate-spline.md**: スプライン補間を追加した
+- **gas/gas-spreadsheet-chart.md**: グラフの作り方を追加した
+- **docs/source/gas/gas-spreadsheet-pivottable.md**: ヒストグラムを追記した
+- **gas/gas-spreadsheet-pivottable.md**: ピボットテーブル操作を追記した
 - **python/python-uv.md**: upgrade --all を追記した
 - **gas/js-map.md**: 変換を追記した
 - **gas/js-map.md**: Mapの初期化を追記した
