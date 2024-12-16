@@ -4,6 +4,9 @@
 
 ### Fix
 
+- **geant4/geant4-versions.md**: CMakeのミニマムバージョンを追記した
+- **geant4/geant4-scoring-accumulable.md**: G4AccValueに変更されたことを追記した
+- **geant4/geant4-versions.md**: Geant4 11.3.0 がリリースされた
 - **scripts/pexpect.py**: 更新した
 - **notebooks/scipy-interpolate.ipynb**: 補間の使い方を確認中
 - **pandas/pandas-interpolate-spline.md**: CubicSplineを追加した
