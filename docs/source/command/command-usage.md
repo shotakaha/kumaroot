@@ -69,6 +69,8 @@ command-tlmgr
 command-ghq
 command-poetry
 command-rye
+command-softwareupdate
+command-xcode
 ```
 
 ## シェルしたい
