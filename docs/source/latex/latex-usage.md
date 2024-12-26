@@ -47,9 +47,11 @@ latex-hyperref
 ---
 maxdepth: 1
 ---
+latex-pmatrix
 latex-hepparticles
 latex-physics
 latex-siunitx
+
 ```
 
 ## その他
