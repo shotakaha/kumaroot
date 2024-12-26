@@ -4,6 +4,9 @@
 
 ### Fix
 
+- **command/command-xcode.md**: Command Line Toolsのインストールを追記した
+- **command/command-xcode.md**: Xcodeを追加した
+- **command/command-softwareupdate.md**: softwareupdateを追加した
 - **geant4/geant4-versions.md**: CMakeのミニマムバージョンを追記した
 - **geant4/geant4-scoring-accumulable.md**: G4AccValueに変更されたことを追記した
 - **geant4/geant4-versions.md**: Geant4 11.3.0 がリリースされた
