@@ -8,7 +8,8 @@
 \usepackage[hiragino-pro, hiragino-pron]{luatexja-preset}
 ```
 
-和文フォントのプリセットを切り替えるパッケージです。
+`luatexja-preset`は`luatexja`の拡張パッケージで、
+和文フォントのプリセットを切り替えることができます。
 よく使われている和文フォント設定を1行で指定できます。
 
 ## プリセットに含まれる和文書体

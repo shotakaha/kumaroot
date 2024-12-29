@@ -39,6 +39,7 @@ latex-figure
 latex-amsmath
 latex-bibliography
 latex-hyperref
+latex-microtype
 ```
 
 ## 物理したい

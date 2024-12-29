@@ -42,5 +42,4 @@ maxdepth: 1
 latex-plautopatch
 latex-inputenc
 latex-fontenc
-latex-microtype
 ```
