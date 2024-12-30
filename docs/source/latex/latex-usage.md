@@ -40,6 +40,7 @@ latex-amsmath
 latex-bibliography
 latex-hyperref
 latex-microtype
+latex-minipage
 ```
 
 ## 物理したい
