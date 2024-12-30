@@ -4,6 +4,11 @@
 
 ### Fix
 
+- **latex/latex-latexja**: latexja周りのパッケージを整理した
+- **latex/latex-luatexja.md**: 和文フォントを追記した
+- **latex/latex-pmatrix.md**: LaTeXソースを追記した
+- **latex/latex-pmatrix.md**: 行列の追加した
+- **command/command-xcode.md**: xcode-selectを追記した
 - **command/command-xcode.md**: Command Line Toolsのインストールを追記した
 - **command/command-xcode.md**: Xcodeを追加した
 - **command/command-softwareupdate.md**: softwareupdateを追加した
