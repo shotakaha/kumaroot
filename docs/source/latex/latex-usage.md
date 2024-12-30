@@ -41,6 +41,7 @@ latex-bibliography
 latex-hyperref
 latex-microtype
 latex-minipage
+latex-showframe
 ```
 
 ## 物理したい
