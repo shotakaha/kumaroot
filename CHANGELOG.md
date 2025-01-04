@@ -4,44 +4,30 @@
 
 ### Fix
 
-- **command/command-xcode.md**: xcode-selectを追加した
+- **command/command-softwareupdate.md**: softwareupdateを追加した
+- **command/command-xcode.md**: Command Line Toolsのインストールを追記した
+- **docs/source/gas/gas-spreadsheet-pivottable.md**: ヒストグラムを追記した
+- **gas/gas-namespace.md**: 名前空間を追記した
+- **gas/gas-properties.md**: PropertiesServiceを追加した
+- **gas/gas-spreadsheet-chart.md**: グラフの作り方を追加した
+- **gas/gas-spreadsheet-pivottable.md**: ピボットテーブル操作を追記した
+- **gas/gas-spreadsheet-range.md**: 範囲選択を整理した
+- **gas/js-function.md**: 関数宣言を整理した
+- **gas/js-map.md**: Map型の操作を追記した
+- **geant4/geant4-scoring-accumulable.md**: G4AccValueに変更されたことを追記した
+- **geant4/geant4-versions.md**: CMakeのミニマムバージョンを追記した
+- **geant4/geant4-versions.md**: Geant4 11.3.0 がリリースされた
+- **latex/latex-luatexja-otf.md**: latexja-otfを追記した
+- **latex/latex-luatexja-ruby.md**: ルビの振り方を追記した
+- **latex/latex-luatexja.md**: 和文フォントを追記した
+- **latex/latex-minipage.md**: minipage環境を追加した
+- **latex/latex-pmatrix.md**: 行列の追加した
 - **latex/latex-showframe.md**: showframeパッケージを追加した
 - **latex/latex-usepackage-geometry.md**: geometryパッケージを整理した
-- **latex/latex-minipage.md**: minipage環境を追加した
-- **latex/latex-luatexja-ruby.md**: ルビの振り方を追記した
-- **latex/latex-luatexja-otf.md**: latexja-otfを追記した
-- **latex/latex-latexja**: latexja周りのパッケージを整理した
-- **latex/latex-luatexja.md**: 和文フォントを追記した
-- **latex/latex-pmatrix.md**: LaTeXソースを追記した
-- **latex/latex-pmatrix.md**: 行列の追加した
-- **command/command-xcode.md**: xcode-selectを追記した
-- **command/command-xcode.md**: Command Line Toolsのインストールを追記した
-- **command/command-xcode.md**: Xcodeを追加した
-- **command/command-softwareupdate.md**: softwareupdateを追加した
-- **geant4/geant4-versions.md**: CMakeのミニマムバージョンを追記した
-- **geant4/geant4-scoring-accumulable.md**: G4AccValueに変更されたことを追記した
-- **geant4/geant4-versions.md**: Geant4 11.3.0 がリリースされた
-- **scripts/pexpect.py**: 更新した
 - **notebooks/scipy-interpolate.ipynb**: 補間の使い方を確認中
-- **pandas/pandas-interpolate-spline.md**: CubicSplineを追加した
-- **pandas/pandas-interpolate-spline.md**: リファレンスを追加した
-- **gas/gas-spreadsheet-chart.md**: グラフ種類を追加した
 - **pandas/pandas-interpolate-spline.md**: スプライン補間を追加した
-- **gas/gas-spreadsheet-chart.md**: グラフの作り方を追加した
-- **docs/source/gas/gas-spreadsheet-pivottable.md**: ヒストグラムを追記した
-- **gas/gas-spreadsheet-pivottable.md**: ピボットテーブル操作を追記した
 - **python/python-uv.md**: upgrade --all を追記した
-- **gas/js-map.md**: 変換を追記した
-- **gas/js-map.md**: Mapの初期化を追記した
-- **gas/js-function.md**: オプション引数を追記した
-- **gas/gas-spreadsheet-pivottable.md**: ヒートマップを追加した
-- **gas/gas-spreadsheet-pivottable.md**: PivotGroupを追記した
-- **gas/gas-spreadsheet-pivottable.md**: createPivotTableを追記した
-- **gas/gas-spreadsheet-range.md**: 範囲選択を整理した
-- **gas/gas-properties.md**: PropertiesServiceを追加した
-- **gas/js-map.md**: Map型の操作を追記した
-- **gas/js-function.md**: 関数宣言を整理した
-- **gas/gas-namespace.md**: 名前空間を追記した
+- **scripts/pexpect.py**: 更新した
 
 ## v1.43.0 (2024-11-27)
 
