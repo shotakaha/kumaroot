@@ -1,9 +1,15 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.43.1 (2025-01-05)
 
 ### Fix
 
+- **command/command-xcode.md**: xcode-selectを追加した
+- **latex/latex-showframe.md**: showframeパッケージを追加した
+- **latex/latex-usepackage-geometry.md**: geometryパッケージを整理した
+- **latex/latex-minipage.md**: minipage環境を追加した
+- **latex/latex-luatexja-ruby.md**: ルビの振り方を追記した
+- **latex/latex-luatexja-otf.md**: latexja-otfを追記した
 - **latex/latex-latexja**: latexja周りのパッケージを整理した
 - **latex/latex-luatexja.md**: 和文フォントを追記した
 - **latex/latex-pmatrix.md**: LaTeXソースを追記した
