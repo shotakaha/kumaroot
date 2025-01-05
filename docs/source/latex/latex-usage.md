@@ -68,7 +68,7 @@ latex-pmatrix
 latex-hepparticles
 latex-physics
 latex-siunitx
-
+latex-feynman
 ```
 
 ## その他
