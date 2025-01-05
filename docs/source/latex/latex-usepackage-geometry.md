@@ -22,11 +22,15 @@
   headsep=10mm,
   footskip=15mm
 }
+
+% 行間を設定
+\renewcommand{\baselinestretch}{1.5}
 ```
 
 `geometry`パッケージでレイアウトをカスタマイズできます。
 `\geometry`コマンドはプリアンブルに書きます。
 LaTeXの標準マクロでレイアウトを調整するのはとても大変なので、迷わずこのパッケージを使いましょう。
+ただし、行間の設定はできないため、`\baselinestretch`を`\renewcommand`する必要があります。
 
 :::{hint}
 
@@ -65,18 +69,18 @@ LaTeXの標準マクロでレイアウトを調整するのはとても大変な
 
 また、用紙サイズ（幅と高さ）を単位込みで直接指定できます。
 
-## 印刷サイズを変えたい
+## 印刷サイズを変えたい（`paper`）
 
 ```latex
 \geometry{
-    paper=a4paper,
-    layout=a5paper,
+    paper=a4paper,    % 用紙サイズ
+    layout=a5paper,   % 印刷サイズ
 }
 ```
 
 A4用紙にA5サイズのレイアウトを表示する方法です。
 
-## テキストエリアしたい
+## テキストエリアしたい（`text`）
 
 ```latex
 \geometry{
@@ -89,7 +93,7 @@ A4用紙にA5サイズのレイアウトを表示する方法です。
 }
 ```
 
-## ヘッダーしたい（``headheight``）
+## ヘッダーしたい（`headheight`）
 
 ```latex
 \geometry{
@@ -99,8 +103,8 @@ A4用紙にA5サイズのレイアウトを表示する方法です。
 }
 ```
 
-``headheight``でヘッダーエリアの高さを設定できます。
-ヘッダーエリアとテキストエリアの間の距離を``headsep``で設定できます。
+`headheight`でヘッダーの高さを設定できます。
+`headsep`と`footskip`で、ヘッダー／フッターとテキストエリアの間のアキを設定できます。
 
 ## 一部だけレイアウトしたい（``\newgeometry``）
 
