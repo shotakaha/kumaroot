@@ -44,6 +44,19 @@ latex-minipage
 latex-showframe
 ```
 
+## カスタムしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-def
+latex-newcommand
+latex-newenvironment
+latex-renewcommand
+```
+
+
 ## 物理したい
 
 ```{toctree}

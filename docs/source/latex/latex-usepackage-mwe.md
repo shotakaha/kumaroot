@@ -13,7 +13,9 @@
 \end{figure}
 ```
 
-``mwe``はMinimum Working Examplesの略です。
+`mwe`パッケージで、ダミーコンテンツを挿入できます。
+mweはMinimum Working Examplesの略です。
+
 LaTeXのQ&Aフォーラムで、デバッグ用サンプル共有を簡単にするためのパッケージです。
 ダミーのテキスト（``blindtext``）や画像の挿入ができます。
 
