@@ -51,11 +51,11 @@ latex-showframe
 maxdepth: 1
 ---
 latex-def
+latex-group
+latex-renewcommand
 latex-newcommand
 latex-newenvironment
-latex-renewcommand
 ```
-
 
 ## 物理したい
 
