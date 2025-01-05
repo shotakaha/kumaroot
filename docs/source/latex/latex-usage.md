@@ -55,6 +55,7 @@ latex-group
 latex-renewcommand
 latex-newcommand
 latex-newenvironment
+latex-providespackage
 ```
 
 ## 物理したい
