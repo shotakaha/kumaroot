@@ -1,5 +1,16 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **latex/latex-feynman.md**: ファインマン図を追加した
+- **latex/latex-usepackage-geometry.md**: geometryの設定を追記した
+- **latex/latex-setlength.md**: 長さ指定を追記した
+- **latex/latex-providespackage.md**: パッケージかする手順を追加した
+- **latex/latex-group.md**: ローカルスコープを追加した
+- **latex/latex-newcommand.md**: カスタムコマンド系を整理した
+
 ## v1.43.1 (2025-01-05)
 
 ### Fix
