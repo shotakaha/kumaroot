@@ -26,23 +26,113 @@ maxdepth: 1
 ---
 latex-install
 latex-tlmgr
-latex-build
-latex-documentclass
 latex-usepackage
+```
+
+## タイプセットしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-build
+```
+
+## ドキュメントクラスしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-documentclass
+```
+
+## フォントしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
 latex-fonts
+```
+
+## ページ設定したい
+
+```{toctree}
+---
+maxdepth: 2
+---
 latex-page
-latex-par
+```
+
+## 見出ししたい
+
+```{toctree}
+---
+maxdepth: 2
+---
 latex-heading
 latex-tableofcontents
-latex-enumitem
-latex-emph
-latex-figure
-latex-amsmath
-latex-bibliography
+```
+
+## 段落したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-par
 latex-hyperref
-latex-microtype
-latex-minipage
-latex-showframe
+latex-emph
+```
+
+## 画像したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-figure
+```
+
+## 数式したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-amsmath
+```
+
+## 箇条書きしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-enumitem
+```
+
+## 参考文献したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-bibliography
+```
+
+## 物理したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-pmatrix
+latex-hepparticles
+latex-physics
+latex-siunitx
+latex-feynman
 ```
 
 ## カスタムしたい
@@ -59,19 +149,6 @@ latex-newenvironment
 latex-providespackage
 ```
 
-## 物理したい
-
-```{toctree}
----
-maxdepth: 1
----
-latex-pmatrix
-latex-hepparticles
-latex-physics
-latex-siunitx
-latex-feynman
-```
-
 ## その他
 
 ```{toctree}
@@ -85,6 +162,9 @@ latex-ide
 latex-online
 latex-document
 latex-history
+latex-microtype
+latex-minipage
+latex-showframe
 ```
 
 ## リファレンス
