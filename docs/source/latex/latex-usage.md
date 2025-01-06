@@ -76,6 +76,8 @@ latex-page
 maxdepth: 2
 ---
 latex-heading
+latex-maketitle
+latex-titlepage
 latex-tableofcontents
 ```
 
