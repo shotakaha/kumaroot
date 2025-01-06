@@ -13,7 +13,8 @@ $ poetry add --group=docs sphinx_book_theme myst_parser
 $ poetry install
 
 // 仮想環境を起動
-$ poetry shell
+$ poetry shell         # poetry < 2.0.0
+$ poetry env activate  # poetry >= 2.0.0
 
 // パッケージをビルド
 $ poetry build
@@ -40,7 +41,7 @@ Pythonのパッケージ管理ツールはいろいろ存在しています。
 このようなPython世界観の中で`poetry`が登場しました。
 2020年ころに使いはじめてみたところ、仮想環境の構築、依存関係の管理、リポジトリへの公開までの一連のステップがオールインワンで完結することがわかり、常用することに決めました。
 
-最近は2023年ころに登場した、より高速だという`rye`も使いはじめてみました。
+最近は2024年ころに登場した、より高速だという`uv`も使いはじめてみました。
 
 :::
 
