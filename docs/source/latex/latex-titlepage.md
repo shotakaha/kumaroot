@@ -24,6 +24,28 @@
 文字サイズや改行位置など、すべて自分で設定します。
 また、各要素間の間隔もすべて設定が必要です。
 
+## 水平線したい（`\rule`）
+
+```latex
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}  % 上部のアキを調整
+  %
+  \rule{\textwidth}{5pt} \\[1cm]
+  {\Huge ドキュメントのタイトル} \\[1cm]
+  {\LARGE サブタイトル} \\[1cm]
+  \rule{\textwidth}{5pt} \\[2cm]
+  % ロゴを挿入
+  \includegraphics[width=0.4\textwidth]{画像ファイル.jpg} \\[2cm]
+  {\Large 名前} \\[1cm]
+  {\large 日付} \\[3cm]
+  \vfill  % ページ末尾までのアキを自動調整
+  {\large 所属名／プロジェクト名}
+\end{titlepage}
+```
+
+タイトルとサブタイトルが目立つように上下に水平線を追加してみました。
+
 ## 背景画像したい（`background`）
 
 ```latex
