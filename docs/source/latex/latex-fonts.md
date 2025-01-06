@@ -40,7 +40,6 @@ latex-japanese
 maxdepth: 1
 caption: LuaLaTeXしたい
 ---
-latex-fontspec
 latex-luatexja
 latex-luatexja-preset
 latex-luatexja-fontspec
@@ -53,7 +52,6 @@ latex-luatexja-ruby
 maxdepth: 1
 caption: (u)pLaTeX
 ---
-latex-lmodern
 latex-kanji-config-udpmap-sys
 latex-otf
 ```

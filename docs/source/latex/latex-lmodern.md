@@ -1,14 +1,14 @@
-# 欧文フォントを設定したい（``lmodern``）
+# 欧文フォントしたい（``lmodern``）
 
 ```latex
+% (u)platex
 % プリアンブル
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 ```
 
-欧文フォントをLatin Modern系に設定するパッケージです。
-(u)pLaTeXでは[fontenc](latex-fontenc.md)パッケージと合わせて、かならず読み込んでおくとよいです。
-LuaLaTeXはLatin Modern系がデフォルトになっているので、読み込む必要はありません。
+`lmodern`は(u)pLaTeXの欧文フォントをLatin Modern系に設定するパッケージです。
+[fontenc](latex-fontenc.md)パッケージと合わせて、かならず読み込んでおくとよいです。
 
 セリフ体
 :   Latin Modern Roman (lmr)
@@ -18,3 +18,9 @@ LuaLaTeXはLatin Modern系がデフォルトになっているので、読み込
 
 タイプライタ体
 :   Latin Modern Typewrite Type (lmtt)
+
+:::{note}
+
+LuaLaTeXはLatin Modern系がデフォルトになっているので、読み込む必要はありません。
+
+:::
