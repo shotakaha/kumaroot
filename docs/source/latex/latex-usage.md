@@ -25,6 +25,7 @@ LaTeXの開発も進んでいて、以前とは変わっている方法もあり
 maxdepth: 1
 ---
 latex-install
+latex-tlmgr
 latex-build
 latex-documentclass
 latex-usepackage
