@@ -8,9 +8,25 @@
 `xcolor`で文字色や背景色を変更できます。
 `graphicx`パッケージと一緒に使うことが多いです。
 
+## カラーパレットしたい
+
+```latex
+\usepackage{xcolor}  % 19色
+\usepackage[dvipsnames]{xcolor}  % +68色
+\usepackage[svgnames]{xcolor}    % +31色
+\usepackage[x11names]{xcolor}    % +289色
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+```
+
+オプションで、利用できる色を増やすことができます。
+オプションは`dvipsnames`、`svgnames`、`x11names`の3つあります。
+すべてを指定することもできます。
+それぞれのオプションで増える色名は`xcolor`のドキュメントで確認できます。
+
 ## 文字色したい（`\textcolor`）
 
 ```latex
+{\color{文字色}テキスト}
 \textcolor{文字色}{テキスト}
 
 \textcolor{red}{赤色のテキスト}
