@@ -1,39 +1,49 @@
 # (u)pLaTeXしたい（``ptex2pdf``）
 
-
-```bash
+```console
 $ ptex2pdf -l -u ファイル名  # upLaTeX
 $ ptex2pdf -l ファイル名     # pLaTeX
 ```
 
-``(u)pLaTeX``を使ってPDFを作成する場合は``ptex2pdf``コマンドを使います。
-``upLaTeX``のタイプセットは``-l -u``オプション、
-``pLaTeX``のタイプセットは``-l``オプションをつけて実行します。
+`ptex2pdf`で、`(u)pLateX`を使ってPDFを出力できます。
+
+`upLaTeX`エンジンの場合は、`-l -u`オプション、
+`pLaTeX`エンジンの場合は、`-l`オプションをつけて実行します。
+
+## .latexmkrc
+
+```unixconfig
+$ latex = "ptex2pdf -l -u %O"
+```
 
 ## ドキュメントクラス
 
 ```latex
-\documentclass{jlreq}
-\documentclass[dvipdfmx]{jsarticle}    % pLaTeX
+% pLaTeX
+\documentclass[dvipdfmx]{jsarticle}
+```
+
+`pLateX`の場合、ドキュメントクラスは`jsarticle`を使います。
+ドライバーは`dvipdfmx`を指定します。
+
+```latex
+% upLaTeX
 \documentclass[uplatex, dvipdfmx]{jsarticle}     % upLaTeX
 ```
 
-``(u)pLaTeX``を使う場合も、ドキュメントクラスに``jlreq``が使えます。
-昔からある``jsarticle``系も使えます。
+`upLaTeX`を使う場合、ドキュメントクラスのオプションに`uplatex`が必要です。
 
-## latexmkrc
-
-```text
-#$pdf_mode = 4;
-#@default_files = ("ファイル1", "ファイル2");
-# ライブプレビューに関する設定
-#$preview_continuous_mode = 1;
-#$pvc_timeout = 1;
-#$pvc_timeout_mins = 10;  # 30min; default
-3$sleep_time = 60;  # 60s
-# $out_dir = "outd";
-# $aux_dir = "auxd";
+```latex
+% (u)pLaTeX
+\documentclass{jlreq}
 ```
+
+`jlreq`クラスは、`(u)pLaTeX`にも対応しています。
+
+## 併用パッケージ
+
+`(u)pLaTeX`はいわゆる「レガシーLaTeX」です。
+フォント周りの設定や、パッケージ互換性の自動検出など、一緒に利用することが推奨されているパッケージが多々あります。
 
 ```{toctree}
 ---
