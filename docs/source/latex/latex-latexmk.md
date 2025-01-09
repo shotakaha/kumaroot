@@ -6,8 +6,8 @@
 # タイプセットしたい（`latexmk`）
 
 ```console
-$ latexmk
 $ latexmk [オプション] ファイル名  # .texはあってもなくてもよい
+$ latexmk  # ファイル名がなくてもよい（ときもある）
 ```
 
 `latexmk`はLaTeX版Makefileのようなもので、
