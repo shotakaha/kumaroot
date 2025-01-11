@@ -11,10 +11,10 @@ OpenSSLを使ったさまざまな操作ができます。
 ## 証明書したい（`openssl x509`）
 
 ```console
-# 証明書を表示
+// 証明書を表示
 $ openssl x509 -in 証明書.pem -noout -text
 
-# 証明書の有効期限を確認
+// 証明書の有効期限を確認
 $ openssl x509 -in 証明書.pem -noout -dates
 ```
 
@@ -46,11 +46,34 @@ $ openssl x509 -in 証明書.pem -noout -dates
 ## CSRしたい（`openssl req`）
 
 ```console
-$ openssl req -new -key 秘密鍵.key -out CSR証明書.pem
+// CSRを確認
+$ openssl req -in 証明書署名要求.csr -noout -text
 ```
 
-`openssl req`コマンドと秘密鍵を使ってCSR証明書を作成できます。
+`openssl req`コマンドで、CSRファイルを操作できます。
 
 ```console
+// CSRを作成
+$ openssl req -new -key 秘密鍵.key -out 証明書署名要求.csr
+```
+
+`-new`オプションと秘密鍵を使ってCSRファイルを生成できます。
+
+
+:::{note}
+
+**証明書署名要求**（CSR; Certificate Signing Request）は、公開鍵基盤（PKI）において証明書を発行してもらうために必要なデータを含んだファイルです。
+
+認証局にCSRファイルを提出し、証明書を発行してもらいます。
+CSRの提出方法は、利用する認証局の手順を確認してください。
+
+大学や研究機関の場合、UPKI（University Public Key Infrastructure）が利用できるかもしれません。
+UPKIは、国立情報学研究所（NII）が運営する
+中間認証局を通じて、X.509証明書を発行してもらえるサービスです。
+
+:::
+
+```console
+// 自己証明書
 $ openssl req -new -key 秘密鍵.key -out 自己証明書.pem -x509 -nodes -sha256 -days 365
 ```
