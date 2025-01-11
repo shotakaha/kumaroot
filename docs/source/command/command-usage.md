@@ -103,6 +103,7 @@ command-dig
 command-goaccess
 command-gping
 command-httpie
+command-openssl
 command-ping
 command-rsync
 command-ssh
