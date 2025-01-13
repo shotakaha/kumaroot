@@ -18,7 +18,9 @@
 | pTeX | 1991 | pTeX | TeX82 | pLaTeX | TeX82を拡張したエンジン。日本語組版（縦書き、禁則処理、和文フォントなど）に対応 |
 | eTeX | 1994 | eTeX | TeX82 | - | TeX82を拡張したエンジン。レジスタを増加。プリミティブを追加。 |
 | LaTeX2e | 1994 | TeX82 | - | LaTeX2e | LaTeX2eをリリース。LaTeX2.09の後継バージョン |
+| dvipdfm | 1997 | - | - | - | DVIをPDFに変換するツール。PostScriptを介さずに直接PDFを生成 |
 | pdfTeX | 1997 | pdfTeX | TeX82 | pdfLaTeX | Han The ThanhがpdfTeXをリリース。PostScriptを介さずにPDFを直接生成できるようになる。 |
+| dvipdfmx | 2002 | - | - | - | CJK対応したdvipdfm |
 | xindy | 2004 | - | - | - | MakeIndexの後継となる索引生成ツール。Unicodeに対応 |
 | XeTeX | 2005 | XeTeX | eTeX | XeLaTeX | XeTeXのリリース。eTeXを拡張したエンジン。Unicode対応。OpenTypeフォント対応。|
 | LuaTeX | 2007 | LuaTeX | pdfTeX | LuaLaTeX | LuaLaTeXのリリース。pdfTeXを拡張したエンジン。Unicode対応。Lua対応。 |
