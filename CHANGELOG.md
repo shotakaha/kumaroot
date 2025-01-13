@@ -2,8 +2,33 @@
 
 ## Unreleased
 
+### Feat
+
+- **command/command-openssl.md**: OpenSSLを追加した
+
 ### Fix
 
+- **command/command-openssl.md**: CSRを追記した
+- **latex/latex-uplatex.md**: uplatexの使い方を整理した
+- **latex/latex-lualatex.md**: lualatexの使い方を整理した - modified:   docs/source/latex/latex-build.md - modified:   docs/source/latex/latex-latexmk.md - modified:   docs/source/latex/latex-lualatex.md
+- **latex/latex-latexmk.md**: latexmkを追記した
+- **latex/latex-masterthesis.md**: 内部リンクを追加した
+- **latex/latex-masterthesis.md**: 修論の書き方を整理した
+- **latex/latex-titlepage.md**: タイトルの装飾を追加した
+- **latex/latex-titlepage.md**: 背景画像を追加した
+- **latex/latex-titlepage.md**: titlepageを追加した
+- **latex/latex-online.md**: オンラインエディタの情報を追加した
+- **latex/latex-biblatex.md**: biblatexを追加した
+- **latex/latex-texdoc.md**: texdocを追加した
+- **latex/latex-kpsewhich.md**: kpsewhichを追加した
+- **python/python-poetry.md**: poetry shell -> poetry env activate への移行が必要
+- **latex/latex-usepackage-xcolor.md**: カラーパレットを追加した
+- **latex/latex-usepackage-xcolor.md**: 文字色の設定を整理した
+- **latex/latex-newcommand.md**: codeコマンドを追加した
+- **latex/latex-fonts.md**: フォント設定を整理した
+- **latex/latex-usage.md**: 目次を整理した
+- **latex/latex-tlmgr.md**: tlmgrを別ページにした
+- **latex/latex-tikz-feynman.md**: tikz-feynmanを追記した
 - **latex/latex-feynman.md**: ファインマン図を追加した
 - **latex/latex-usepackage-geometry.md**: geometryの設定を追記した
 - **latex/latex-setlength.md**: 長さ指定を追記した
