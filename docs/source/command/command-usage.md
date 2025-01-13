@@ -123,6 +123,7 @@ maxdepth: 1
 command-1password
 command-clang-format
 command-exa
+command-fc-list
 command-fd
 command-find
 command-grep
