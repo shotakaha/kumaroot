@@ -188,6 +188,7 @@ latex_elements = {
 
 # Loaded before hyperref
 latex_elements["extrapackages"] = r"""
+\usepackage{luatexja}
 \usepackage{physics}
 """
 
