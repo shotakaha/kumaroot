@@ -147,12 +147,13 @@ r_{i} = y_{i}^{\text{data}} - y_{i}^{\text{fit}}
 
 :::{math}
 
-\text{cov} = \pmatrix{
+\text{cov} =
+\begin{pmatrix}
     \sigma_{11}^{2} & \sigma_{12}^{2} & \cdots & \sigma_{1k}^{2} \\
     \sigma_{21}^{2} & \sigma_{22}^{2} & \cdots & \sigma_{2k}^{2} \\
     \vdots & \vdots & \ddots & \vdots \\
     \sigma_{k1}^{2} & \sigma_{k2}^{2} & \cdots & \sigma_{kk}^{2}
-    }
+\end{pmatrix}
 
 :::
 
