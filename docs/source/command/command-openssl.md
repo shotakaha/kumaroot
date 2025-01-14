@@ -53,12 +53,32 @@ $ openssl req -in 証明書署名要求.csr -noout -text
 `openssl req`コマンドで、CSRファイルを操作できます。
 
 ```console
-// CSRを作成
-$ openssl req -new -key 秘密鍵.key -out 証明書署名要求.csr
+// CSRを新規作成
+$ openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr
+// CSRに必要なDN情報を入力する
+// -----
+Country Name (2 letter code) []: JP # 国名を2文字で入力する
+State or Province Name (full name) [Some-State]: Xxxxx # 県名を入力する
+Locality Name (eg, city) []: # 都市名
+Organization Name (eg, company) []: # 機関名
+Organizational Unit Name (eg, section) []: # スキップ
+Common Name (e.g. server FQDN or YOUR name) []: # URLを入力する（一番大事）
+Email Address []: # スキップ
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []: # スキップ
+An optional company name []: # スキップ
 ```
 
-`-new`オプションと秘密鍵を使ってCSRファイルを生成できます。
+`-new`オプションで、秘密鍵とCSRファイルを生成できます。
+`-newkey rsa:ビット長`で鍵の長さを変更できます。デフォルトは`rsa:2048`です。
+`-nodes`でパスワードなし秘密鍵を生成します。
+`-keyout`で生成する秘密鍵のファイル名を変更できます。ここでは`server.key`としました。
+`-out`で生成するCSRのファイル名を変更できます。ここでは`server.csr`としました。
 
+コマンドを実行すると、DN（Distinguished Name）を入力するダイアログが表示されます。
+必要な情報を適宜入力します。
 
 :::{note}
 
