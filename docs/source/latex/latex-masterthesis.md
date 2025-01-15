@@ -1,4 +1,4 @@
-# 修論を書きたい
+# 修論したい
 
 自分の修士論文を振り返りながら、いまならどういう風にLaTeXを使うとよいか考えてみます。
 これから修論を書く準備をする学生の参考になればよいなと思っています。
@@ -8,14 +8,14 @@
 
 \usepackage{graphicx}
 \usepackage{xcolor}
-\usepackage{wrapfig}
-\usepackage{subfigure}
-\usepackage{wallpaper}
-\usepackage{ulem}
-\usepackage{float}
-\usepackage{lineno}
-\usepackage{physics}
-\usepackage{hyperref}
+% \usepackage{wrapfig}  % 2003年のパッケージのようなので、新しいパッケージを探したほうがいいかもしれない
+% \usepackage{subfigure} % 2002年のパッケージ。現在は非推奨。代わりにsubcaption を利用する。
+% \usepackage{wallpaper}  % 2006年のパッケージ
+\usepackage{ulem}  % 2019
+% \usepackage{float}  % 2001
+% \usepackage{lineno}  % 2001
+\usepackage{physics}  % 2012
+\usepackage{hyperref}  % 2024
 
 \begin{document}
 
@@ -84,15 +84,32 @@ TeX Liveの和文フォントは、源ノフォント（源ノ明朝、源ノ角
 ```latex
 \documentclass[report]{jlreq}
 
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{enuitem}
-\usepackage{physics}
-\usepackage{siunitx}
-\usepackage{hyperref}
+\usepackage{geometry}  % ページ設定
+\usepackage{fancyhdr}  % ヘッダー／フッターの装飾
+\usepackage{graphicx}  % 画像
+\usepackage{xcolor}  % 色
+\usepackage{enuitem}  % 箇条書き
+\usepackage{biblatex}  % 参考文献
+\usepackage{physics}  % 物理記号
+\usepackage{siunitx}  % 物理量・単位
+\usepackage{tikz-feynman}  % ファインマン図
+\usepackage{hyperref}  % ハイパーリンク
 
 \begin{document}
 
+% 表紙の作成
+
+% 概要
+
+% 本文
+
+\include{ch1/ch1.tex}
+\include{ch2/ch2.tex}
+\include{ch2/ch2.tex}
+
+% 補遺
+
+% 参考文献
 
 \end{document}
 ```
@@ -104,9 +121,10 @@ masterthesis
   |-- README.md
   |-- LICENSE.md
   |-- Makefile
+  |-- .latexmkrc
   |-- .gitignore
+  |
   |-- src/
-  |    |-- latexmkrc
   |    |-- main.tex
   |    |-- ch1/
   |    |    |-- ch1.tex
@@ -118,25 +136,55 @@ masterthesis
   |    |    |-- fig4.pdf
   |    |-- bib/
   |    |    |-- references.bib
-  |-- build/
-  |    |-- main.pdf
+  |
+  |-- _aux/
   |    |-- main.aux
   |    |-- main.log
-  |-- shared/
-  |    |-- 20241227_main.pdf
-  |    |-- 20250106_main.pdf
+  |
+  |-- _build/
+  |    |-- main.pdf
+  |
+  |-- _shared/
+  |    |-- 20241227_v01_main.pdf
+  |    |-- 20250106_v02_main.pdf
 ```
 
-チャプターごとにディレクトリを分割し、
+| パス | 内容 | Git管理 |
+|---|---|---|
+| `.latexmkrc` | ビルドの設定 | True |
+| `Makefile` | タイプセットの手順書 | True |
+| `src` | `.tex`ファイルの保存先 | True |
+| `_aux` | `aux`ファイルの出力先 | `.gitignore`に追加 |
+| `_build` | ビルドしたPDFの出力先 | `.gitignore`に追加 |
+| `_shared` | 関係者に回覧した原稿データ | `.gitignore`に追加 |
+
+文書はチャプターごとにディレクトリを分割し、
 それぞれにソースと画像をまとめておくとよいと思います。
 また、出力ファイルはソースとは別のディレクトリに生成するとよいです。
 
-指導教官（や共同研究者）に添削／校正をお願いしたファイルは、
-別のディレクトリに、共有した日付ごとに保存しておくとよいです。
+関係者（指導教員や共同研究者）に添削／校正をお願いしたファイルは、
+あとで確認できるように、別のディレクトリにコピーを保存しておくとよいです。
+ファイル名は共有した日付（とバージョン）を含めるとよいです。
 
-## バージョン管理
+:::{tip}
 
-ソースはGitでバージョン管理します。
-また、GitHubもしくはGitLabにリポジトリを作成し、ソース一式を保存しておきます。
+日付は西暦を含めた`yyyymmdd`形式が認識しやすいです。
+バージョン番号は、日ごとではなく、全体の通し番号にしておくと、
+最新版がわかりやすくなります。
 
-GitHubもGitLabも無料プランでプライベートリポジトリを作成できます。
+「最新版（latest）」や「最終版（final）」などは、
+切羽詰まったときほど混乱の元になるので、
+絶対に使わないようにしましょう。
+
+:::
+
+## Git管理
+
+修論の執筆者は原則ひとりですが、ソースはGitでバージョン管理するとよいです。
+また、GitHubもGitLabも、無料プランでプライベートリポジトリを作成できるため、
+修論用のリポジトリを作成しておくとよいです。
+CI/CD機能を活用すれば、最新版のビルドを自動化することもできます。
+
+これらのリポジトリは、修論データのバックアップ先にもなります。
+〆切間際にパソコンの調子が悪くなったという話は（なぜか）よく聞きます。
+バックアップ先を分散させることで、万が一の場合のリスクを減らすことができます。
