@@ -121,8 +121,17 @@ masterthesis
   |-- README.md
   |-- LICENSE.md
   |-- Makefile
-  |-- .latexmkrc
   |-- .gitignore
+  |
+  |-- latexmkrc (or .latexmkrc)
+  |-- main.tex
+  |
+  |-- preamble/
+  |    |-- pages.tex
+  |    |-- figure.tex
+  |    |-- math.tex
+  |    |-- physics.tex
+  |    |-- hyperref.tex
   |
   |-- src/
   |    |-- main.tex
@@ -151,9 +160,11 @@ masterthesis
 
 | パス | 内容 | Git管理 |
 |---|---|---|
-| `.latexmkrc` | ビルドの設定 | True |
+| `latexmkrc` | ビルドの設定 | True |
 | `Makefile` | タイプセットの手順書 | True |
-| `src` | `.tex`ファイルの保存先 | True |
+| `main.tex` | ビルド対象のファイル | True |
+| `preamble` | プリアンブル設定の保存先 | True |
+| `src` | 本文ファイルの保存先 | True |
 | `_aux` | `aux`ファイルの出力先 | `.gitignore`に追加 |
 | `_build` | ビルドしたPDFの出力先 | `.gitignore`に追加 |
 | `_shared` | 関係者に回覧した原稿データ | `.gitignore`に追加 |
