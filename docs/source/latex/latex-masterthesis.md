@@ -6,29 +6,58 @@
 ```latex
 \documentclass[report, paper=a4paper, fontsize=11pt, jafontsize=11pt, line_length=40zw, ]{jlreq}
 
-\usepackage{graphicx}
-\usepackage{xcolor}
-% \usepackage{wrapfig}  % 2003年のパッケージのようなので、新しいパッケージを探したほうがいいかもしれない
-% \usepackage{subfigure} % 2002年のパッケージ。現在は非推奨。代わりにsubcaption を利用する。
-% \usepackage{wallpaper}  % 2006年のパッケージ
-\usepackage{ulem}  % 2019
-% \usepackage{float}  % 2001
-% \usepackage{lineno}  % 2001
-\usepackage{physics}  % 2012
-\usepackage{hyperref}  % 2024
+% 和文の設定
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage{luatexja-ruby}
+
+% パッケージ設定
+\input{preamble/pages.tex}
+\input{preamble/figure.tex}
+\input{preamble/math.tex}
+\input{preamble/physics.tex}
+\input{preamble/hyperref.tex}
+
+% 自作マクロの設定
+\input{preamble/macros.tex}
+
+% ビルドするページの設定
+\includeonly{
+    src/title/title,
+    %src/abstract/abstract,
+    src/ch1/ch1,
+    % ...
+    %src/chN/chN,
+    %src/thanks/thanks,
+    %src/refs/refs,
+}
 
 \begin{document}
 
-\maketitle
+% 表紙
+% titlepage環境で表紙を作成する
+\include{src/title/title}
 
-\begin{abstract}
-\end{abstract}
+% 概要
+% abstract環境で概要を作成する
+\include{src/abstract/abstract}
 
+% 目次を出力
 \tableofcontents
 \listoffigures
 \listoftables
 
+% 本文
+\include{src/ch1/ch1}
+\include{src/ch2/ch2}
+% ...
+\include{src/chN/chN}
 
+% 謝辞
+\include{src/thanks/thanks}
+
+% 参考文献
+\include{src/refs/refs}
 
 \end{document}
 ```
@@ -70,6 +99,45 @@ LuaLaTeXを選択した場合、ドキュメントクラスは[jlreq](./latex-jl
 TeX Liveの和文フォントは、源ノフォント（源ノ明朝、源ノ角ゴシック）をベースにした**原ノ味フォント**（原ノ味明朝、原ノ味角ゴシック）がデフォルトになっています。とくに変更する必要はないです。
 
 フォントを変更したい場合は[luatexja-fontspec](./latex-luatexja-fontspec.md)パッケージを使います。
+
+## 表紙（`src/title/title.tex`）
+
+```latex
+\begin{titlepage}
+
+\begingroup
+修士論文
+\endgroup
+
+\begingroup
+\Large
+論文のタイトル\\
+長い場合は改行して整える
+\endgroup
+
+\begingroup
+\includegraphics[0.3\textwidth]{ロゴ.pdf}
+\endgroup
+
+\begingroup
+著者名
+\endgroup
+
+\begingroup
+所属
+\endgroup
+
+\begingroup
+提出日
+\endgroup
+
+\end{titlepage}
+```
+
+修士論文の表紙は、記載する内容も多く`\maketitle`では力不足です。
+`titlepage`環境を使って、イチから並べるのがよいと思います。
+タイトルを見栄えのよいサイズに変更したり、
+大学のロゴを挿入したり、自由にカスタマイズできます。
 
 ## 参考文献の管理
 
@@ -199,3 +267,12 @@ CI/CD機能を活用すれば、最新版のビルドを自動化することも
 これらのリポジトリは、修論データのバックアップ先にもなります。
 〆切間際にパソコンの調子が悪くなったという話は（なぜか）よく聞きます。
 バックアップ先を分散させることで、万が一の場合のリスクを減らすことができます。
+
+## ビルド設定（`latexmkrc`）
+
+```bash
+@default_file = ("main.tex");
+$pdf_mode = 4;
+$out_dir = "_build";
+$aux_dir = "_aux";
+```
