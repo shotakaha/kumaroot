@@ -56,8 +56,10 @@ latex-documentclass
 maxdepth: 2
 ---
 latex-fonts
+latex-luatexja
 latex-lmodern
 latex-fontspec
+latex-japanese
 ```
 
 ## ページ設定したい

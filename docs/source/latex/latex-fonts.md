@@ -32,26 +32,4 @@ latex-font-series
 latex-font-shape
 latex-font-size
 latex-fonts-more
-latex-japanese
-```
-
-```{toctree}
----
-maxdepth: 1
-caption: LuaLaTeXしたい
----
-latex-luatexja
-latex-luatexja-preset
-latex-luatexja-fontspec
-latex-luatexja-otf
-latex-luatexja-ruby
-```
-
-```{toctree}
----
-maxdepth: 1
-caption: (u)pLaTeX
----
-latex-kanji-config-udpmap-sys
-latex-otf
 ```
