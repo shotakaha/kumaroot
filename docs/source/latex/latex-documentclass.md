@@ -9,6 +9,22 @@ LaTeXの文書作成は、まず、このドキュメントクラス選びから
 目的や使用する言語に応じて、適切なクラスを選択してください。
 また、学会や雑誌によっては専用のクラスを用意している場合もあります。
 
+## クラスオプションしたい
+
+`jlreq`と`ltjsclasses`を中心に、目的別にクラスオプションを整理しました。
+
+```{toctree}
+---
+maxdepth: 1
+---
+latex-documentclass-paper
+latex-documentclass-fontsize
+latex-documentclass-twocolumn
+latex-documentclass-landscape
+latex-documentclass-hanging
+latex-documentclass-tate
+```
+
 ## 欧文クラスしたい
 
 ```latex
@@ -53,12 +69,6 @@ W3Cワーキンググループで議論されている「[日本語組版処理�
 maxdepth: 1
 ---
 latex-jlreq
-latex-documentclass-paper
-latex-documentclass-fontsize
-latex-documentclass-twocolumn
-latex-documentclass-landscape
-latex-documentclass-hanging
-latex-documentclass-tate
 ```
 
 ```latex
