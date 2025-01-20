@@ -6,7 +6,7 @@ maxdepth: 1
 ---
 latex-install
 latex-tlmgr
-latex-usepackage
 latex-kpsewhich
 latex-texdoc
+latex-usepackage
 ```
