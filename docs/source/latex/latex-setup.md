@@ -9,5 +9,6 @@ latex-tlmgr
 latex-kpsewhich
 latex-texdoc
 latex-chktex
+latex-detex
 latex-usepackage
 ```
