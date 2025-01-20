@@ -118,7 +118,7 @@ latex-amsmath
 ---
 maxdepth: 2
 ---
-latex-enumitem
+latex-list
 ```
 
 ## 参考文献したい
