@@ -4,10 +4,35 @@
 
 ### Feat
 
+- **command/command-fc-list.md**: fc-listを追加した
 - **command/command-openssl.md**: OpenSSLを追加した
 
 ### Fix
 
+- **latex/fonts**: フォント設定の構成を整理した
+- **latex/latex-documentclass.md**: 記事の構成を整理した
+- **latex/latex-documentclass.md**: 和文クラスの説明を整理した
+- **latex/latex-documentclass.md**: 早見表を追加した
+- **latex/latex-documentclass.md**: ドキュメントクラスの選び方を追加した
+- **latex/latex-subcaption.md**: subcaptionを追加した
+- **latex/latex-masterthesis.md**: 修論のテンプレートを再考した
+- **latex/latex-masterthesis.md**: ディレクトリ構造を再考した
+- **latex/latex-usepackage-minted.md**: mintedの使い方を整理した
+- **command/command-openssl.md**: 暗号化アルゴリズムを追記した
+- **latex/latex-masterthesis.md**: ディレクトリ構成に追記した
+- **sphinx/sphinx-autobuild.md**: autobuildの設定を整理した
+- **sphinx/sphinx-latex-docclass.md**: ドキュメントクラスを整理した
+- **sphinx/sphinx-latex-engine.md**: lualatexをオススメした
+- **docs/source/conf.py**: luatexjaパッケージを追加した
+- **pandas/pandas-fit-curve_fit.md**: pmatrixの誤記を修正した
+- **conf.py**: copyright year を更新した
+- **command/command-openssl.md**: opensslを整理した
+- **command/command-openssl.md**: 自己署名証明書の作成手順を追記した
+- **command/command-openssl.md**: CSR生成のコマンドを追記した
+- **latex/latex-history.md**: dvipdfmxを追記した
+- **latex/latex-usepackage-caption.md**: captionを追記した
+- **latex/latex-history.md**: TeXの系譜を整理した
+- **latex/latex-siunitx.md**: siunitxのコマンドを整理した
 - **command/command-openssl.md**: CSRを追記した
 - **latex/latex-uplatex.md**: uplatexの使い方を整理した
 - **latex/latex-lualatex.md**: lualatexの使い方を整理した - modified:   docs/source/latex/latex-build.md - modified:   docs/source/latex/latex-latexmk.md - modified:   docs/source/latex/latex-lualatex.md
