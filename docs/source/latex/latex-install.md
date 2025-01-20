@@ -3,10 +3,13 @@
     pair: LaTeX; install
 ```
 
-# インストール
+# インストールしたい
 
 ```console
 $ brew install --cask mactex
+
+// TeXShop.appなどが不要な場合
+$ brew install --cask mactex-no-gui
 ```
 
 TeXLiveはHomebrew（{command}`brew`コマンド）を使ってインストールできます。

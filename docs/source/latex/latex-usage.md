@@ -20,15 +20,13 @@ LaTeXの開発も進んでいて、以前とは変わっている方法もあり
 また、クラウドLaTeXのOverleafのドキュメントもとても充実しています。
 どのパッケージを使うとよさげかの参考にするとよいです。
 
+## 環境構築したい
+
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
-latex-install
-latex-tlmgr
-latex-usepackage
-latex-kpsewhich
-latex-texdoc
+latex-setup
 ```
 
 ## タイプセットしたい
