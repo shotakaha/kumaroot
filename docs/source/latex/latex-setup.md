@@ -8,5 +8,6 @@ latex-install
 latex-tlmgr
 latex-kpsewhich
 latex-texdoc
+latex-chktex
 latex-usepackage
 ```
