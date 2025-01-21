@@ -10,4 +10,6 @@ latex-usepackage-layout
 latex-usepackage-fancyhdr
 latex-usepackage-fncychap
 latex-include
+latex-showframe
+latex-microtype
 ```

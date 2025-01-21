@@ -115,6 +115,7 @@ latex-emph
 latex-minted
 latex-xcolor
 latex-bxjalipsum
+latex-minipage
 ```
 
 ## 図版したい
@@ -181,9 +182,6 @@ latex-ide
 latex-online
 latex-document
 latex-history
-latex-microtype
-latex-minipage
-latex-showframe
 ```
 
 ## リファレンス
