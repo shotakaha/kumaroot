@@ -44,6 +44,5 @@ UTF-8やシフトJISのようなファイルのエンコーディングとはま
 使っているLaTeXの種類（レガシーLaTeXかモダンLaTeXか）に応じて、フォント関連のパッケージをうまく使い分けるのがよさそうです。
 
 ```{toctree}
-latex-kanji-config-udpmap-sys
 latex-otf
 ```

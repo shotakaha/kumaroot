@@ -10,5 +10,5 @@ latex-kpsewhich
 latex-texdoc
 latex-chktex
 latex-detex
-latex-usepackage
+latex-kanji-config-udpmap-sys
 ```
