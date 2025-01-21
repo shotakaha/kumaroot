@@ -1,5 +1,7 @@
-# 縦組みしたい
+# 縦組みしたい（`tate`）
 
 ```latex
 \documentclass[tate]{jlreq}
 ```
+
+`tate`オプションで縦書きにできます。

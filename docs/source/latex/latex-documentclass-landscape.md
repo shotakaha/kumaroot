@@ -1,4 +1,4 @@
-# 用紙を横向きにしたい
+# 横向きにしたい（`landscape`）
 
 ```latex
 \documentclass[landscape]{jlreq}
@@ -6,4 +6,4 @@
 \documentclass[uplatex, dvipdfmx, landscape]{jsarticle}
 ```
 
-``landscape``オプションを使うと用紙を横向きにできます。
+`landscape`オプションで用紙を横向きにできます。
