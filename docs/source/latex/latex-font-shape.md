@@ -1,4 +1,4 @@
-# フォントのシェープを切り替えたい（``\textsc``）
+# シェープしたい（`\textsc`）
 
 ```latex
 {\upseries ...} または \textup{...}    % Upright（デフォルト）

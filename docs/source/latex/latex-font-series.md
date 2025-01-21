@@ -1,4 +1,4 @@
-# フォントのウェイトを切り替えたい（``\textbf``）
+# ウェイトしたい（`\textbf`）
 
 ```latex
 {\mdseries ...} または \textmd{...}    % Medium（デフォルト）
