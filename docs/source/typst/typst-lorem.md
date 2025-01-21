@@ -28,6 +28,6 @@
 
 :::{seealso}
 
-- [](../latex/latex-usepackage-bxjalipsum.md)
+- [](../latex/latex-bxjalipsum.md)
 
 :::

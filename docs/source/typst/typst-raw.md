@@ -11,6 +11,6 @@
 
 :::{seealso}
 
-- [](../latex/latex-usepackage-minted.md)
+- [](../latex/latex-minted.md)
 
 :::

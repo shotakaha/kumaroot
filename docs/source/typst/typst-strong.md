@@ -26,6 +26,6 @@
 
 :::{seealso}
 
-- [](../latex/latex-usepackage-xcolor.md)
+- [](../latex/latex-xcolor.md)
 
 :::

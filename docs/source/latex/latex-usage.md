@@ -90,9 +90,9 @@ maxdepth: 2
 latex-par
 latex-hyperref
 latex-emph
-latex-usepackage-minted
-latex-usepackage-xcolor
-latex-usepackage-bxjalipsum
+latex-minted
+latex-xcolor
+latex-bxjalipsum
 ```
 
 ## 図版したい
@@ -102,7 +102,7 @@ latex-usepackage-bxjalipsum
 maxdepth: 2
 ---
 latex-figure
-latex-usepackage-booktabs
+latex-booktabs
 ```
 
 ## 数式したい

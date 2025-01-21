@@ -93,4 +93,4 @@
 ```
 
 ``\headrule``と``\footrule``を``\renewcommand``して、ヘッダー／フッターの色を変更できます。
-色は[xcolorパッケージ](./latex-usepackage-xcolor.md)を使ってカスタムカラーを定義し、``\textcolor``コマンドを使って変更します。
+色は[xcolorパッケージ](./latex-xcolor.md)を使ってカスタムカラーを定義し、``\textcolor``コマンドを使って変更します。
