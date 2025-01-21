@@ -23,6 +23,7 @@ latex-documentclass-twocolumn
 latex-documentclass-landscape
 latex-documentclass-hanging
 latex-documentclass-tate
+latex-documentclass-twoside
 ```
 
 ## 欧文クラスしたい
