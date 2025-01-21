@@ -1,12 +1,21 @@
-# LuaLaTeXしたい（``lualatex``）
+# LuaLaTeXしたい（`lualatex`）
 
-```bash
-$ lualatex ファイル名
-$ latexmk -lualatex ファイル名
+```console
+$ lualatex --version
+This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)
+Development id: 7611
+
+$ lualatex ファイル名.tex
 ```
 
-``LuaLaTeX``エンジンを使ってPDFを作成したい場合は、
-``lualatex``コマンドもしくは``latexmk``コマンドに``-lualatex``オプションをつけて実行します。
+`lualatex`コマンドで、`LuaTeX`エンジン（現在は、その後継の`LuaHBTeX`）を
+使ってPDFファイルを生成できます。
+
+```console
+$ latexmk -lualatex ファイル名.tex
+```
+
+`latexmk`コマンドの場合は、`-lualatex`オプションをつけて実行します。
 
 ## .latexmkrc
 
