@@ -47,6 +47,16 @@ maxdepth: 2
 latex-documentclass
 ```
 
+## プリアンブルしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-preamble
+```
+
+
 ## フォントしたい
 
 ```{toctree}
@@ -144,20 +154,6 @@ latex-hepparticles
 latex-physics
 latex-siunitx
 latex-feynman
-```
-
-## カスタムしたい
-
-```{toctree}
----
-maxdepth: 1
----
-latex-def
-latex-group
-latex-renewcommand
-latex-newcommand
-latex-newenvironment
-latex-providespackage
 ```
 
 ## その他
