@@ -90,15 +90,19 @@ maxdepth: 2
 latex-par
 latex-hyperref
 latex-emph
+latex-usepackage-minted
+latex-usepackage-xcolor
+latex-usepackage-bxjalipsum
 ```
 
-## 画像したい
+## 図版したい
 
 ```{toctree}
 ---
 maxdepth: 2
 ---
 latex-figure
+latex-usepackage-booktabs
 ```
 
 ## 数式したい

@@ -19,8 +19,4 @@ maxdepth: 1
 ---
 latex-linebreak
 latex-flushright
-latex-usepackage-booktabs
-latex-usepackage-xcolor
-latex-usepackage-bxjalipsum
-latex-usepackage-minted
 ```
