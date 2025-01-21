@@ -1,4 +1,4 @@
-# ``jlreq``したい
+# 和文クラスしたい（`jlreq`）
 
 ```latex
 \documentclass{jlreq}  % articleに相当
@@ -6,40 +6,33 @@
 \documentclass[book]{jlreq}  % bookに相当
 ```
 
-ドキュメントクラスには``article``や``report``などの文書スタイルを指定できます。
-デフォルトは``article``です。
+`jlreq`はLuaTeX-jaコミュニティが開発している和文クラスです。
+W3Cワーキンググループで議論されている
+「[日本語組版処理の要件](https://www.w3.org/TR/jlreq/)」
+の実装を試しているクラスです。
 
-### article
+美文書LaTeXも第9版からこのクラスに移行したそうなので、
+これからの日本語標準クラスといってよいと思います。
+これから作成する文書は、迷わず`jlreq`でよいと思います。
 
-トップレベルが節（``\section``）の文書ができます。
-**片面印刷を想定**して、左右ページのデザインは同じです。
-学生実験のレポートなど短めの文章作成に向いています。
-
-### report
-
-トップレベルが章（``\chapter``）の文書ができます。
-**片面印刷を想定**して、左右ページのデザインは同じです。
-修士論文など長めの文章作成に向いています。
-
-### book
-
- トップレベルが章（``\chapter``）の文書ができます。
-**両面印刷を想定**して、左右ページのデザインが異なっています。
-僕は使ったことがありませんが、書籍の作成に向いているようです。
-
-
-## 1行あたりの文字数を指定したい
+## 1行あたりの文字数を指定したい（`line_length`）
 
 ```latex
-\documentclass[line_length=40zw]{jlreq}  % 全角40文字（デフォルト）
-\documentclass[line_length=28zw]{jlreq}  % 全角28文字
+% 全角40文字（デフォルト）
+\documentclass[line_length=40zw]{jlreq}
+
+% 全角28文字に変更
+\documentclass[line_length=28zw]{jlreq}
 ```
 
-## 1ページあたりの行数を指定したい
+## 1ページあたりの行数を指定したい（`number_of_lines`）
 
 ```latex
-\documentclass[number_of_lines=30]{jlreq}  % 30行（デフォルト）
-\documentclass[number_of_lines=27]{jlreq}  % 27行
+% 30行（デフォルト）
+\documentclass[number_of_lines=30]{jlreq}
+
+% 27行に変更
+\documentclass[number_of_lines=27]{jlreq}
 ```
 
 ## 余白を調整したい
@@ -59,11 +52,3 @@
 
 **柱**
 :   各ページの上か下に出力する章や節の名前です。
-
-
-
-
-
-## リファレンス
-
-- {command}`jlreq`
