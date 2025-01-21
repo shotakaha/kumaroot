@@ -1,4 +1,11 @@
-# plautopatch
+# 互換性を確認したい（`plautopatch`）
+
+:::{note}
+
+(u)pLaTeXの設定です。
+LuaLaTeXでは必要ありません。
+
+:::
 
 ```latex
 %\RequirePackage{plautopatch}
@@ -11,7 +18,3 @@
 
 パッケージの衝突があった場合は、
 自動追加されたパッケージの一覧を実行結果で確認できます。
-
-## リファレンス
-
-- {command}`plautopatch`

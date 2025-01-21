@@ -1,19 +1,25 @@
 # (u)pLaTeXしたい（``ptex2pdf``）
 
 ```console
-$ ptex2pdf -l -u ファイル名  # upLaTeX
+$ ptex2pdf -v
+This is ptex2pdf[.lua] version 20200520.0.
+
 $ ptex2pdf -l ファイル名     # pLaTeX
+$ ptex2pdf -l -u ファイル名  # upLaTeX
 ```
 
 `ptex2pdf`で、`(u)pLateX`を使ってPDFを出力できます。
-
 `upLaTeX`エンジンの場合は、`-l -u`オプション、
 `pLaTeX`エンジンの場合は、`-l`オプションをつけて実行します。
 
 ## .latexmkrc
 
 ```unixconfig
-$ latex = "ptex2pdf -l -u %O"
+# platex
+$latex = "ptex2pdf -l %O"
+
+# uplatex
+$latex = "ptex2pdf -l -u %O"
 ```
 
 ## ドキュメントクラス
