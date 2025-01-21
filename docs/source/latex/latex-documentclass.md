@@ -19,22 +19,7 @@ latex-jsclasses
 和文の場合は、歴史的な経緯からいくつかの選択肢があります。
 ただし、新しく書きはじめる場合は`jlreq`クラスを利用すればOKです。
 
-## クラスオプションしたい
 
-`jlreq`と`ltjsclasses`を中心に、目的別にクラスオプションを整理しました。
-
-```{toctree}
----
-maxdepth: 1
----
-latex-documentclass-paper
-latex-documentclass-fontsize
-latex-documentclass-twocolumn
-latex-documentclass-landscape
-latex-documentclass-hanging
-latex-documentclass-tate
-latex-documentclass-twoside
-```
 
 ## クラス早見表したい
 

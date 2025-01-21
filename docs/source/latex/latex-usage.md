@@ -57,6 +57,7 @@ latex-build
 maxdepth: 2
 ---
 latex-documentclass
+latex-documentclass-options
 ```
 
 ## プリアンブルしたい
@@ -67,7 +68,6 @@ maxdepth: 2
 ---
 latex-preamble
 ```
-
 
 ## フォントしたい
 
