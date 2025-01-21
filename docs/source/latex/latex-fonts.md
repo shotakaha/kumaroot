@@ -1,27 +1,6 @@
 # フォントしたい
 
-```latex
-\usepackage{luatexja-fontspec}
-
-% 欧文フォントの設定
-\setmainfont{KiwiMaru-Regular}
-\setsansfont{ReggaeOne-Regular}
-\setmonofont{HackGen35Console-Regular}
-
-% 和文フォントの設定
-\setmainjfont{KiwiMaru-Regular}
-\setsansjfont{ReggaeOne-Regular}
-\setmonojfont{HackGen35Console-Regular}
-```
-
-LuaLaTeXでは、任意のフォントを簡単に埋め込むことができます。
-(u)pLaTeXは、地獄（だった？）のでオススメしません。
-
-:::{hint}
-
-最近のTeXLiveでは、欧文フォントは**Latin Modern**、和文フォントは**原の味**がデフォルトになっているため、わざわざフォントを変える必要はないと思います。
-
-:::
+フォントを操作する方法を整理しました。
 
 ```{toctree}
 ---
@@ -33,3 +12,18 @@ latex-font-shape
 latex-font-size
 latex-fonts-more
 ```
+
+文字のフォント選びは文書の印象を大きく左右します。
+LuaLaTeXでは、[fontspec](./latex-fontspec.md)や[luatex-fontspec](./latex-luatexja-fontspec.md)を使うことで、
+かなり簡単かつ自由にフォント設定を変更できるようになっています。
+
+:::{hint}
+
+最近のTeXディストリビューションは、
+欧文フォントは**Latin Modern**、
+和文フォントは**原の味（HaranoAji）**
+がデフォルトのフォントになっています。
+
+はじめてLaTeXを使う場合は、フォントを変更せずに使っても問題はありません。
+
+:::
