@@ -19,29 +19,42 @@ LaTeXで扱う長さを調べてみると、``\setlength``コマンドをを直�
 
 ## 単位したい
 
-LaTeXで利用できる長さについては[Length in LaTeX - Overleaf](https://www.overleaf.com/learn/latex/Lengths_in_LaTeX)が参考になります。
+
 
 | 単位 | 説明 |
 |---|---|
-| `pt` | ポイント。約1/72.27インチ。 }
+| `pt` | ポイント。約1/72.27インチ。 |
 | `in` | インチ。25.4mm。 |
 | `mm` | ミリメートル |
 | `cm` | センチメートル |
-| `ex` | 小文字の``x``の高さ。使用するフォントに依存。 |
-| `em` | 大文字の``M``の横幅。使用するフォントに依存。 |
+| `ex` | 小文字の`x`の高さ。使用するフォントに依存。 |
+| `em` | 大文字の`M`の横幅。使用するフォントに依存。 |
 | `zw` | 和文フォントの文字幅。Zenkaku Width。LuaLaTeXでは`\zw`。|
-| `zh` | zwと同じ大きさ。使わないほうがよい（とどこかでみた）|
-| `truemm` | ``geometry``パッケージで使える（真の？）mm |
+| `zh` | `zw`と同じ大きさ。使わないほうがよい（とどこかでみた）|
+| `truemm` | 物理的な実寸。PDF出力時に使うとよい。 |
 
-LaTeXの長さの単位です。
-和文の場合は``zw``を長さの基準にするとよいと思います。
+LaTeXで利用できる長さの単位です。
+[Length in LaTeX - Overleaf](https://www.overleaf.com/learn/latex/Lengths_in_LaTeX)を参考にしました。
 
 :::{note}
 
-(u)pLaTeXでは``数zw``をそのまま使えますが、LuaLaTeXでは``数\zw``と書きます。
-以下ではLuaLaTeXを想定して``\zw``で書いてます。
+(u)pLaTeXでは`数zw`の形で使えますが、
+LuaLaTeXでは`数\zw`とコマンド形式にする必要があります。
+以下ではLuaLaTeXを想定して`\zw`で書いています。
 
 :::
+
+### `mm`と`truemm`
+
+LaTeXはDVI形式を介して、PDF形式だったり、PostScript形式だったりと
+さまざまな出力形式に変換する仕組みがベースになっています。
+
+また、LaTeX内部では長さを`pt`に変換してから処理されます。
+そのため、DVI形式から変換するときの
+出力先の設定（解像度や拡大縮小スケール）に長さが依存します。
+
+`truemm`はこの影響を受けない長さの単位です。
+モダンLaTeXで直接PDFで出力する場合は`truemm`を使うとよいようです。
 
 ## 行間したい（`\baselineskip`）
 
