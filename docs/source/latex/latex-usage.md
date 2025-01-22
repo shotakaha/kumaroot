@@ -126,6 +126,7 @@ latex-minted
 latex-xcolor
 latex-bxjalipsum
 latex-minipage
+latex-markdown
 ```
 
 ## 図版したい
