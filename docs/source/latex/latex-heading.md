@@ -3,5 +3,4 @@
 ```{toctree}
 latex-section
 latex-index
-latex-ref
 ```

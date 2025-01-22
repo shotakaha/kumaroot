@@ -118,6 +118,7 @@ latex-tableofcontents
 maxdepth: 2
 ---
 latex-par
+latex-ref
 latex-hyperref
 latex-emph
 latex-minted
