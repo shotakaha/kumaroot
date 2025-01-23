@@ -1,17 +1,47 @@
 # 相互参照したい（`cleveref`）
 
 ```latex
+% プリアンブル
 \usepackage{cleveref}
+% \crefname{環境名}{単数}{複数形}
+\crefname{section}{セクション}{セクション}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
 
-\section{見出しを参照}
-\label{sec:label1}
+\begin{figure}
+  \centering
+  \includegraphics[オプション]{ファイル名}
+  \caption{キャプション}
+  \label{キー}
+\end{figure}
 
-相互参照を \ref{sec:label}章 に整理しました。
-相互参照を \cref{sec:label} に整理しました。
+図\ref{sec:キー} に示しました。
+\cref{sec:label} に示しました。
 ```
 
+`cleveref`は相互参照の機能を拡張するパッケージです。
 標準の[ref](./latex-ref.md)コマンドでは、
-ユーザーが「図」「表」など、参照先に合わせて本文中に入力する必要がありました。
+ユーザーが「図」「表」など、参照先の環境に合わせて本文中に入力する必要がありました。
+`\ref`を`\cref`や`\Cref`コマンドに変えるだけで、その煩わしさから解放されます。
 
-`cleveref`パッケージに含まれる、`\cref`、`\Cref`コマンドを使うと、
-自動で判別してくれます。
+```latex
+% プリアンブル
+\usepackage{hyperref}
+\usepackage{cleveref}
+```
+
+[hyperrefパッケージ](./latex-hyperref.md)と一緒に使う場合は、
+`hyperref`のあとに読み込みます。
+
+:::{note}
+
+```latex
+\usepackage{cleveref}
+\usepackage{hyperref}
+```
+
+`hyperref`より前に読み込むと、タイプセット時にエラーになります。
+
+:::
+
+## 相互参照カウンター
