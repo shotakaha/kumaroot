@@ -3,19 +3,38 @@
     pair: LaTeX; hyperlink
 ```
 
-# ハイパーリンクしたい（``hyperref``）
+# ハイパーリンクしたい（`hyperref`）
+
+```latex
+% プリアンブル
+\usepackage[オプション]{hyperref}
+
+% autorefを日本語化
+\renewcommand{\sectionautorefname}{章}
+\renewcommand{\figureautorefname}{図}  % Figure. -> 図
+\renewcommand{\tableautorefname}{表}
+\renewcommand{\equationautorefname}{式}
+```
+
+`hyperref`は、相互参照などを自動でハイパーリンクにしてくれるパッケージです。
+多くのパッケージに影響を与える可能性があるため、一番最後に読み込むことが推奨されています。
+
+`\href`コマンドで、本文中にハイパーリンクを挿入できます。
+`\autoref`コマンドで、本文中の相互参照をサポートできます。
+デフォルトは英語で出力されますが、[\renewcommand](./latex-renewcommand.md)で日本語に変更できます。
+
+## 日本語したい（`pxjahyper`）
 
 ```latex
 \usepackage{hyperref}
-\usepackage{pxjahyper}  % (u)pLaTeXの場合、これも追加推奨
+\usepackage{pxjahyper} % (u)pLaTeXの場合、これも追加推奨
 ```
 
-文書にハイパーリンクを作成するためのパッケージです。
-パッケージを読み込む順番は一番最後にしたほうがよいようです。
+和文クラスで`hyperref`を使うと、ページから文章がはみ出したり、
+目次のしおりが文字化けしたりします。
+そのような場合は`pxjahyper`パッケージを使います。
 
-日本語のドキュメントクラスで``hyperref``を使った場合、文章がページからはみ出したり、目次のしおりが文字化けしたりするため、``pxjahyper``パッケージも一緒に読み込んでおくとよいです。
-
-## オプションを設定したい
+## オプションを設定したい（`\hypersetup`）
 
 ```latex
 % パッケージオプション
