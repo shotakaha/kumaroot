@@ -101,9 +101,6 @@ latex-page
 maxdepth: 2
 ---
 latex-heading
-latex-maketitle
-latex-titlepage
-latex-tableofcontents
 ```
 
 ## 段落したい
@@ -129,7 +126,6 @@ maxdepth: 2
 ---
 latex-link
 ```
-
 
 ## 図版したい
 
