@@ -2,5 +2,4 @@
 
 ```{toctree}
 latex-section
-latex-index
 ```

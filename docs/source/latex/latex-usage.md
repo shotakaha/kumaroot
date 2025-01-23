@@ -35,11 +35,6 @@ LaTeXに入門するためには、まず
 研究室の本棚に置かれていたもので、改訂第3版（2004年1月30日発売）と少し版が古いものでした。
 当時はまったく気にしていませんでしたが、
 
-
-
-
-
-
 ## 環境構築したい
 
 ```{toctree}
@@ -118,9 +113,6 @@ latex-tableofcontents
 maxdepth: 2
 ---
 latex-par
-latex-ref
-latex-cleveref
-latex-hyperref
 latex-emph
 latex-minted
 latex-xcolor
@@ -128,6 +120,16 @@ latex-bxjalipsum
 latex-minipage
 latex-markdown
 ```
+
+## リンクしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-link
+```
+
 
 ## 図版したい
 
