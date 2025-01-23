@@ -1,66 +1,89 @@
 # 相互参照したい（`\ref`）
 
 ```latex
-% ラベル（＝参照先）
-\label{ラベル名}
+% 参照キー（＝ラベル）を設定
+\label{キー}
 
 % 参照番号を取得
-\ref{ラベル名}
+\ref{キー}
 
 % 参照ページ数を取得
-\pageref{ラベル名}
+\pageref{キー}
 ```
 
-相互参照では、参照先に設定した**ラベル**を参照元で呼びだしています。
-`\label`コマンドで参照先にラベルを作成し、
-`\ref`もしくは`\pageref`でそのラベルを指定し、参照番号を取得します。
+相互参照では、参照先に設定した**ラベル**を参照元で呼び出して使います。
+`\label`コマンドで参照先にラベル（一意のキー）を作成します。
+`\ref`で参照番号を取得できます。
+`\pageref`で参照ページを取得できます。
 
-## 章・節番号を参照したい（`\ref`）
+## 見出しを参照したい（`\ref`）
 
 ```latex
 \section{相互参照したい}
-\label{sec:ref}
+\label{sec:キー}
 
 \subsubsection{ラベルをつける}
-\label{subsec:label}
+\label{subsec:キー}
 
 
 % また別のセクション
-相互参照については\ref{sec:ref}章に書きました。
-参照先を作成するコマンドは\ref{subsec:label}節にも書きました。
+相互参照については\ref{sec:キー}章に書きました。
+参照先を作成するコマンドは\ref{subsec:キー}節にも書きました。
 ```
 
-章・節見出しを参照する場合は、
-`\section`、`\subsection`コマンドのあとに`\label{ラベル名}`を定義します。
-ラベル名は、`sec:`などのように接頭辞をつけておくと管理しやすいです。
+見出しを参照する場合は、
+章見出し（`\section`）、節見出し（`\subsection`）コマンドのあとにラベルを設定します。
 
 ```latex
-\pageref{sec:ref}ページに書きました。
-\pageref{subsec:label}ページに書きました。
+\pageref{sec:キー}ページに書きました。
+\pageref{subsec:キー}ページに書きました。
 ```
 
 また`\pageref`コマンドでページ番号を取得できます。
 
-## 図番号したい
+:::{hint}
+
+管理のしやすさ向上のため、ラベル名には`sec:`や`subsec:`などのように、
+定義した環境の接頭辞をつけることが多いみたいです。
+LaTeX内部では、環境ごとに参照カウンターが存在するので、必須ではありません。
+
+:::
+
+## 図を参照したい
 
 ```latex
 \begin{figure}
   \centering
   \includegraphics[オプション]{ファイル名}
   \caption{キャプション}
-  \label{fig:label_name}
+  \label{fig:キー}
 \end{figure}
 
-それについては図\ref{fig:label_name}にまとめました。
+それについては図\ref{fig:キー}にまとめました。
 ```
 
-`figure`環境の中に`\label`を定義することで、図番号を参照できます。
-`\ref`自体は番号を返すため「図（もしくは Fig.）」などは自分で書く必要があります。
+`figure`環境の中でラベルを定義すると、図の番号を参照できます。
+`\ref`自体は番号を返すため「図」などを自分で書く必要があります。
+
+## 参照カウンターしたい
+
+```latex
+\newcommand{\figref}[1]{図\ref{#1}}
+\newcommand{\tabref}[1]{表\ref{#1}}
+\newcommand{\equref}[1]{式(\ref{#1})}
+\newcommand{\secref}[1]{第\ref{#1}章}
+```
+
+これは、僕が修論で実際に使っていた設定です。
+「図」「表」「式」などの入力を省略したかったので、
+[\newcommand](./latex-newcommand.md)で自作コマンドを定義しました。
 
 :::{seealso}
 
-[newcommand](./latex-newcommand.md)で自作マクロを定義するか、
-[cleveref](./latex-cleveref.md)パッケージを使うと簡単にできます。
+いまなら以下のコマンドを使います。
+
+- [hyperref](./latex-hyperref.md)の`\autoref`
+- [cleveref](./latex-cleveref.md)の`\cref`
 
 :::
 
@@ -73,7 +96,7 @@
 相互作用のしくみを理解しておくとよいと思います。
 
 1回目のコンパイル
-: 文書内の相互参照ラベル（`\label`）を認識し、すべてのラベルのデータなどを含む補助ファイル（`.aux`ファイル）を生成する
+: 文書内にある相互参照のラベル（`\label`）を認識し、すべてのラベルのデータなどを含む補助ファイル（`.aux`ファイル）を生成する
 
 2回目のコンパイル
 : `.aux`ファイルの内容を、メインの`.tex`ファイルと組み合わせて、ラベルの参照番号を取得する
