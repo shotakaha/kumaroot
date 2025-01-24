@@ -21,8 +21,10 @@ E = mc^{2}
 \end{equation}
 ```
 
-`markdown`パッケージで、LaTeX文書をMarkdown記法で作成できます。
+`markdown`は、Markdown記法を使えるようにするパッケージです。
+`CommonMark`に対応しています。
 `hybrid`オプションを有効にすると、`markdown`環境の中でLaTeXコマンドが使えるようになります。
+
 ひとつの文書の中で、LaTeX記法とMarkdown記法のいいとこどりができるように
 使い分けると執筆の効率があがりそうです。
 
@@ -74,3 +76,31 @@ Belle II 測定器は\qtyproduct{8x8x8}{\m}の大きな測定器です。
 LaTeXコマンドが使えるようになります。
 `markdown`環境の中は、Markdown記法で閉じていたほうがよいと思います。
 ただ、単位表示の[siunitxパッケージ](./latex-siunitx.md)は便利すぎる。
+
+## Markdownのフレーバー
+
+| 年 | フレーバー | 概要 | 拡張機能 |
+|---|---|---|---|
+| 2004 | Markdown | Markdownのオジリナル版 | |
+| 2005 | MultiMarkdown | Markdownの拡張版 | 脚注、表、引用、メタデータ、LaTeXのサポート |
+| 2006 | Pandoc Markdown | Pandocツール用 | 数式、脚注、スライド作成 |
+| 2008 | kramdown | Ruby用 | 表、数式、カスタム要素 |
+| 2009 | GitHub Flavored Markdown | GitHub用 | 表、チェックボックス、コードブロック、URLの自動リンク |
+| 2014 | CommonMark | Markdownの標準化 | 一貫性と互換性のあるパーサー、多言語対応 |
+
+Markdownから派生／拡張した記法のことを**フレーバー**と呼びます。
+フレーバーを年表にしてみましたが、多種多様なことがわかります。
+
+よく知られているのはGitHub Flavored Markdown（GFM）だと思います。
+GFMのリリースでMarkdown記法が普及しました。
+また、このように多様化したフレーバーの標準化を目指しているのが`CommonMark`です。
+近年の拡張はこの`CommonMark`がベースになっています。
+
+:::{seealso}
+
+Markdownのオリジナル作者たちと、
+標準化を目指したコミュニティはバチバチのようです。
+なので、そのままMarkdownを名乗ることが許されず、
+`CommonMark`という別の名前になっているらしいです。
+
+:::
