@@ -82,7 +82,6 @@ latex-fonts
 latex-luatexja
 latex-lmodern
 latex-fontspec
-latex-japanese
 latex-font-dotgothic16
 latex-font-kiwi-maru
 latex-font-hiragino
@@ -188,13 +187,12 @@ latex-feynman
 ---
 maxdepth: 1
 ---
+latex-misc
 latex-masterthesis
 latex-a0poster
 latex-primer
 latex-ide
 latex-online
-latex-document
-latex-history
 ```
 
 ## リファレンス
