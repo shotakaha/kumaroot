@@ -84,6 +84,7 @@ latex-lmodern
 latex-fontspec
 latex-japanese
 latex-font-dotgothic16
+latex-font-kiwi-maru
 ```
 
 ## ページ設定したい
