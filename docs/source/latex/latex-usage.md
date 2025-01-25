@@ -85,6 +85,7 @@ latex-fontspec
 latex-japanese
 latex-font-dotgothic16
 latex-font-kiwi-maru
+latex-font-hiragino
 ```
 
 ## ページ設定したい
