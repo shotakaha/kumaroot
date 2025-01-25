@@ -86,6 +86,7 @@ latex-japanese
 latex-font-dotgothic16
 latex-font-kiwi-maru
 latex-font-hiragino
+latex-font-zen-maru-gothic
 ```
 
 ## ページ設定したい
