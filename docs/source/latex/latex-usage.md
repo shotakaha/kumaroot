@@ -83,6 +83,7 @@ latex-luatexja
 latex-lmodern
 latex-fontspec
 latex-japanese
+latex-font-dotgothic16
 ```
 
 ## ページ設定したい
