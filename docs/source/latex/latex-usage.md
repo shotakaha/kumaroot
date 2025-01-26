@@ -147,8 +147,10 @@ latex-list
 ---
 maxdepth: 2
 ---
+latex-bib
 latex-bibliography
 latex-biblatex
+latex-bibtex
 ```
 
 ## 物理したい
