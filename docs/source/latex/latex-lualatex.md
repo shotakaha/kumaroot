@@ -107,3 +107,18 @@ language: bash
 language: latex
 ---
 :::
+
+:::{seealso}
+
+- [](./latex-latexmkrc.md)
+- [](./latex-jlreq.md)
+- [](./latex-luatexja-preset.md)
+- [](./latex-biblatex.md)
+- [](./latex-usepackage-graphicx.md)
+- [](./latex-usepackage-geometry.md)
+- [](./latex-usepackage-fancyhdr.md)
+- [](./latex-usepackage-layout.md)
+- [](./latex-bxjalipsum.md)
+- [](./latex-maketitle.md)
+
+:::
