@@ -8,7 +8,8 @@ Development id: 7611
 $ lualatex ファイル名.tex
 ```
 
-`lualatex`コマンドで、`LuaTeX`エンジン（現在は、その後継の`LuaHBTeX`）を
+`lualatex`コマンドで、`LuaTeX`エンジン
+（実際はその後継の`LuaHBTeX`エンジン）を
 使ってPDFファイルを生成できます。
 
 ```console
@@ -54,14 +55,6 @@ $pdf_mode = 4;
 
 :::
 
-## main.tex
-
-:::{literalinclude} ../_static/latex/templates/lualatex-jlreq/main.tex
----
-language: tex
----
-:::
-
 ## 参考文献したい
 
 ```console
@@ -96,3 +89,21 @@ $ lualatex ファイル名.tex
 
 `.bcf`は**Biber Control File**というXML形式のファイルです。
 LaTeXとBiberで文献情報をやりとりする中間ファイルとして必要です。
+
+## サンプル
+
+- `latexmkrc`
+
+:::{literalinclude} ../_static/latex/templates/lualatex-jlreq/latexmkrc
+---
+language: bash
+---
+:::
+
+- `main.tex`
+
+:::{literalinclude} ../_static/latex/templates/lualatex-jlreq/main.tex
+---
+language: latex
+---
+:::

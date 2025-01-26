@@ -1,7 +1,11 @@
-\documentclass[article, line_length=40zw, head_space=30mm, foot_space=30mm, gutter=30mm]{jlreq}
+\documentclass[article, head_space=25truemm, foot_space=25truemm, gutter=15truemm]{jlreq}
 
 %% 和文フォントの設定
 \usepackage[haranoaji]{luatexja-preset}
+
+%% 参考文献
+\usepackage{biblatex}
+\addbibresource{参考文献.bib}
 
 \usepackage{graphicx}
 
@@ -36,8 +40,8 @@
 
 \author{
     すごい著者 \thanks{すごい大学} \\ \and
-    これまたすごい著者 \thanks{すごい研究所} \\ \and
-    これまたすごい著者 \thanks{すごい研究所}
+    これまたすごい著者 \thanks{こっちの研究所} \\ \and
+    またまたすごい著者 \thanks{あっちの研究所}
 }
 
 
@@ -63,5 +67,8 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 %% レイアウトを確認
 \newpage
 \layout
+
+%% 参考文献を出力
+\printbibliography[title={参考文献}]
 
 \end{document}

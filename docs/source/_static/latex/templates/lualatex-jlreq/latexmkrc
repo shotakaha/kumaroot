@@ -1,7 +1,12 @@
+# LuaLaTeXを設定
 $pdf_mode = 4;
+# 補助ファイルの生成ディレクトリ
+$aux_dir = "_aux";
+# PDFの生成ディレクトリ
+$out_dir = "_build";
+# ライブプレビューの設定
 $preview_continuous_mode = 1;
+# 一定時間操作がなかったらプレビューを終了
 $pvc_timeout = 1;
 $pvc_timeout_mins = 10;  # 30min; default
 $sleep_time = 60;  # 60s
-$out_dir = "_build";
-$aux_dir = "_aux";
