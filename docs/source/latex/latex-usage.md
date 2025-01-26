@@ -100,7 +100,6 @@ latex-emph
 latex-minted
 latex-xcolor
 latex-bxjalipsum
-latex-minipage
 latex-markdown
 ```
 
@@ -119,6 +118,7 @@ latex-link
 ---
 maxdepth: 2
 ---
+latex-minipage
 latex-figure
 latex-booktabs
 ```

@@ -11,7 +11,7 @@
 
 ## CKM行列したい
 
-小林・益川行列は次のように出力できます。
+小林・益川行列は次のコードで出力できます。
 
 ```latex
 \begin{align}
@@ -33,7 +33,7 @@ V_{\text{td}} & V_{\text{ts}} & V_{\text{tb}}
 \end{pmatrix}
 :::
 
-Wolfenstein表記は次のように出力できます。
+Wolfenstein表記は次のコードで出力できます。
 
 ```latex
 \begin{align}
