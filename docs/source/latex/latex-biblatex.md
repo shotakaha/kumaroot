@@ -6,6 +6,7 @@
 
 \begin{document}
 
+% 本文の末尾
 \printbibliography
 
 \end{document}

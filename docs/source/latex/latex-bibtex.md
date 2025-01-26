@@ -40,3 +40,17 @@ $ cat /usr/local/texlive/2024/texmf-dist/bibtex/bst/base/plain.bst
 
 [kpsewhich](./latex-kpsewhich.md)で`スタイル名.bst`を検索してパスを確認できます。
 このファイルの内容を直接確認すると、表示される内容が（なんとなく）分かります。
+
+:::{caution}
+
+```latex
+! Package biblatex Error:
+ '\bibliographystyle' invalid
+ for 'biblatex'.
+```
+
+`\bibliographystyle`コマンドは
+[biblatexパッケージ](./latex-biblatex.md)と一緒には使えませんでした。
+
+
+:::
