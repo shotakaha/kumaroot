@@ -54,6 +54,61 @@ BibLaTeXは、BibTeX形式に最適化された古いスタイルファイルと
 
 :::
 
+## 文献の種類
+
+| 文献の種類 | 説明 |
+|---|---|
+| `article` | 学術雑誌に掲載された論文 |
+| `book` | 書籍 |
+| `booklet` | 小冊子 |
+| `inbook` | 書籍の一部 |
+| `proceedings` | プロシーディングス（の全体）|
+| `inproceedings` | プロシーディングスの一部 |
+| `manual` | 操作マニュアル |
+| `masterthesis` | 修士論文 |
+| `phdthesis` | 博士論文 |
+| `misc` | 分類が難しい論文 |
+| `unpublished` | 未発表の論文 |
+
+利用可能な文献の種類の一部をリストしました。
+自分で考えると迷うこともあるので、
+公開されている文献に関しては、文献管理ツール自動分類してもらうと楽ちんです。
+
+## 文献のフィールド
+
+| フィールド名 | 説明 |
+|---|---|
+| `address` | 出版社や機関の所在地 |
+| `annote` | 注釈 |
+| `author` | 著者名 |
+| `booktitle` | 書籍や会議録のタイトル |
+| `chapter` | 書籍の特定の章番号 |
+| `edition` | 書籍の版数 |
+| `editor` | 編集者名 |
+| `howpublished` | 公開方法 |
+| `institution` | 発行機関名 |
+| `journal` | 学術雑誌の名前 |
+| `key` | 文献の参照用キー |
+| `month` | 発行月 |
+| `number` | 号数 |
+| `note` | 文献に関するメモ |
+| `organization` | 主催／後援の団体名 |
+| `pages` | ページ番号または範囲 |
+| `publisher` | 出版社名 |
+| `school` | 学位論文を発行した大学名 |
+| `series` | 雑誌や書籍のシリーズ名 |
+| `title` | 文献のタイトル |
+| `type` | 文献の種類 |
+| `volume` | 巻号 |
+| `year` | 発行年 |
+| `abstract` | 文献の概要 |
+| `doi` | DOI識別子 |
+| `isbn` | 書籍のISBN番号 |
+| `issn` | 雑誌のISSN番号 |
+| `url` | 文献のURL |
+| `eprint` | プレプリントの識別子 |
+| `language` | 文献の言語 |
+
 ## 学術雑誌したい（`article`）
 
 ```bibtex
@@ -100,58 +155,3 @@ BibLaTeXは、BibTeX形式に最適化された古いスタイルファイルと
   doi = {DOI識別子}
 }
 ```
-
-## 文献の種類をしりたい
-
-| 文献の種類 | 説明 |
-|---|---|
-| `article` | 学術雑誌に掲載された論文 |
-| `book` | 書籍 |
-| `booklet` | 小冊子 |
-| `inbook` | 書籍の一部 |
-| `proceedings` | プロシーディングス（の全体）|
-| `inproceedings` | プロシーディングスの一部 |
-| `manual` | 操作マニュアル |
-| `masterthesis` | 修士論文 |
-| `phdthesis` | 博士論文 |
-| `misc` | 分類が難しい論文 |
-| `unpublished` | 未発表の論文 |
-
-利用可能な文献の種類の一部をリストしました。
-自分で考えると迷うこともあるので、
-公開されている文献に関しては、文献管理ツール自動分類してもらうと楽ちんです。
-
-## 文献のフィールドをしりたい
-
-| フィールド名 | 説明 |
-|---|---|
-| `address` | 出版社や機関の所在地 |
-| `annote` | 注釈 |
-| `author` | 著者名 |
-| `booktitle` | 書籍や会議録のタイトル |
-| `chapter` | 書籍の特定の章番号 |
-| `edition` | 書籍の版数 |
-| `editor` | 編集者名 |
-| `howpublished` | 公開方法 |
-| `institution` | 発行機関名 |
-| `journal` | 学術雑誌の名前 |
-| `key` | 文献の参照用キー |
-| `month` | 発行月 |
-| `number` | 号数 |
-| `note` | 文献に関するメモ |
-| `organization` | 主催／後援の団体名 |
-| `pages` | ページ番号または範囲 |
-| `publisher` | 出版社名 |
-| `school` | 学位論文を発行した大学名 |
-| `series` | 雑誌や書籍のシリーズ名 |
-| `title` | 文献のタイトル |
-| `type` | 文献の種類 |
-| `volume` | 巻号 |
-| `year` | 発行年 |
-| `abstract` | 文献の概要 |
-| `doi` | DOI識別子 |
-| `isbn` | 書籍のISBN番号 |
-| `issn` | 雑誌のISSN番号 |
-| `url` | 文献のURL |
-| `eprint` | プレプリントの識別子 |
-| `language` | 文献の言語 |
