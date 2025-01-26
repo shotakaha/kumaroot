@@ -61,3 +61,35 @@ $pdf_mode = 4;
 language: tex
 ---
 :::
+
+## 参考文献したい
+
+```console
+// 参考文献リストに必要な補助ファイルを生成
+$ lualatex ファイル名.tex
+// -> main.aux
+// -> main.bcf
+// -> main.log
+// -> main.pdf
+// -> main.run.xml
+// -> main.toc
+
+// 参考文献リストを生成
+$ biber ファイル名
+// -> main.aux
+// -> main.bcf
+// -> main.log
+// -> main.pdf
+// -> main.run.xml
+// -> main.toc
+// -> main.bbl  <-- new
+// -> main.blg  <-- new
+
+// 参照を正しく出力
+$ lualatex ファイル名.tex
+$ lualatex ファイル名.tex
+```
+
+参考文献リストを生成するための手順です。
+`.bcf`ファイルを使って`.bbl`と`.blg`ファイルを生成します。
+`latexmk`を使うと、この一連の処理を自動化できます。
