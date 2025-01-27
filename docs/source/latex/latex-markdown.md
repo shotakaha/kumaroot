@@ -45,7 +45,7 @@ E = mc^{2}
 
 もし`$...$`記法が効かない場合、`texMathDollars`オプションを明示してください。
 
-```{latex}
+```latex
 \usepackage[hybrid,texMathDollors]{markdown}
 ```
 
