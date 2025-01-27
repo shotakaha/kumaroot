@@ -4,5 +4,6 @@
 latex-bibunsho
 latex-japanese
 latex-history
+latex-kanji
 latex-document
 ```
