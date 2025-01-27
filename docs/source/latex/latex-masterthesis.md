@@ -280,10 +280,10 @@ $ latexmk main.tex
 行あたりの文字数（`line_length`）はお好みで設定してください。
 
 もし、大学や研究室で形式が決まっているならば
-[geometry](./latex-usepackage-geometry.md)パッケージで
+[geometry](./latex-geometry.md)パッケージで
 ページ設定するとよいかもしれません。
 
-ヘッダーやフッターを表示したい場合は[fancyhdr](./latex-usepackage-fancyhdr.md)パッケージ、
+ヘッダーやフッターを表示したい場合は[fancyhdr](./latex-fancyhdr.md)パッケージ、
 表紙をカスタマイズしたい場合は[titlepage](./latex-titlepage.md)環境を使うとよいと思います。
 
 ## フォントの選択

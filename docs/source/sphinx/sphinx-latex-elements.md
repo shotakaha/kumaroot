@@ -90,4 +90,4 @@ latex_elements = {
 ```
 
 Sphinxのデフォルトは``Bjarne``ですが、``Bjornstrup``に変更するとよいと思います。
-選択できるテーマは[fncychapパッケージ](../latex/latex-usepackage-fncychap.md)を参照してください。
+選択できるテーマは[fncychapパッケージ](../latex/latex-fncychap.md)を参照してください。

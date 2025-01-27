@@ -42,4 +42,4 @@ A判はISO規格とJIS規格でサイズが同じですが、B判は異なりま
 | B5判 | 182mm $\times$ 257mm | |
 | レター判 | 8.5in. $\times$ 11in. | 欧文デフォルト |
 
-より柔軟に用紙サイズを設定したい場合は[geometryパッケージ](./latex-usepackage-geometry.md)を使います。
+より柔軟に用紙サイズを設定したい場合は[geometryパッケージ](./latex-geometry.md)を使います。

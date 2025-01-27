@@ -5,11 +5,11 @@
 maxdepth: 2
 ---
 latex-setlength
-latex-usepackage-layout
+latex-layout
 latex-showframe
-latex-usepackage-geometry
-latex-usepackage-fancyhdr
-latex-usepackage-fncychap
+latex-geometry
+latex-fancyhdr
+latex-fncychap
 latex-include
 latex-microtype
 ```

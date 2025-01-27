@@ -1,8 +1,8 @@
 # 画像したい
 
 ```{toctree}
-latex-usepackage-graphicx
-latex-usepackage-caption
+latex-graphicx
+latex-caption
 latex-subcaption
-latex-usepackage-mwe
+latex-mwe
 ```

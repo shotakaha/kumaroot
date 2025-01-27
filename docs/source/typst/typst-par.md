@@ -20,7 +20,7 @@
 :::{seealso}
 
 - [](../latex/latex-linebreak.md)
-- [](../latex/latex-usepackage-geometry.md)
+- [](../latex/latex-geometry.md)
 
 :::
 
