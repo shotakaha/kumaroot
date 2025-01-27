@@ -1,28 +1,28 @@
-# 日本語とLaTeX
+# 日本語LaTeX
 
-日本語はマルチバイトコードであるため、LaTeXでコンパイルするのが難しかったみたいです。
-それに対処する歴史的な紆余曲折から日本語版LaTeXにはさまざまな派生品が存在します。
-この歴史の詳細に関しては、三重大学の奥村さんのウェブサイトをはじめ、ググってみるとよいでしょう。
+TeX／LaTeXの開発はASCII文字を中心にはじまったため、
+日本語対応は一筋縄ではいかなかったようで、
+先人たちのさまざまな苦労の上に成り立っています。
 
-## 2020年ころの話
+## 2020年からの話
 
-日本語のLaTeX文書の作成には ``(u)pLaTeX + dvipdfmx`` もしくは``LuaLaTeX`` を使います。
-とくに``LuaLaTeX``はDVIファイルを作成せずに、直接PDFファイルを作ることができます。
-
-```bash
+```console
 $ lualatex --help  # ヘルプを表示
 $ lualatex hoge    # LuaLaTeXの場合
 ```
 
-{command}`latexmk`という便利なコンパイル用のコマンドもあります。
-LaTeXでは目次や索引の生成のために複数回コンパイルする必要がありますが、
-それをよしなに取り扱ってくれます。
-{file}`latexmkrc`を作成し、``$pdf_mode = 4;``と書いておきます。
+欧文では`pdfLaTeX`を使うのが一般的になった感じがしました。
+また、和文で`XeLaTeX`や`LuaLaTeX`の利用が広がってきたと思います。
+ただし、コンパイル速度の観点から
+`(u)pLaTeX + dvipdfmx`を使う人も周りに多かった印象です。
 
-```bash
-$ latexmk  # 設定をlatexmkrcから読み込む
+```console
+$ latexmk main.tex
 ```
 
+この頃から`latexmk`コマンドを使うようになりました。
+このコマンド自体はずいぶん前からあるようですが、
+全然知りませんでした。
 
 ## 2015年ころの話
 
@@ -32,41 +32,39 @@ $ latexmk  # 設定をlatexmkrcから読み込む
 2020年からはLuaLaTeXを使うのをオススメします。
 ```
 
-日本語のLaTeX文書の作成には ``(u)pLaTeX`` と ``dvipdfmx`` を使います。
-{command}`(u)platex` コマンドでLaTeX文書をコンパイルしDVIファイルを作成、
-そして{command}`dvipdfmx` コマンドでDVIファイルをPDFファイルに変換する、
-とう二段構えの処理をします。
-
-```bash
+```console
 $ platex hoge.tex
 $ dvipdfmx hoge.dvi
 ```
 
-これをまとめて処理してくれるのが{command}`ptex2pdf`コマンドです。
-（おそらく）MacTeXをインストールすると勝手についてきます。
+長い間、和文LaTeXの作成には
+`(u)pLaTeX`と
+`dvipdfmx`を使うのが定番でした。
 
-```bash
-$ ptex2pdf -h          # ヘルプを表示
-$ ptex2pdf -l hoge     # platex + dvipdfmx の場合
-$ ptex2pdf -l -u hoge  # uplatex + dvipdfmx の場合
+まず`(u)platex` コマンドでLaTeXファイルからDVIファイルを作成し、
+次に`dvipdfmx` コマンドでDVIファイルをPDFファイルに変換する、
+という二段構えの処理でPDFを生成します。
+
+```console
+// ヘルプを表示
+$ ptex2pdf -h
+
+// platex + dvipdfmx で処理
+$ ptex2pdf -l hoge
+
+// uplatex + dvipdfmx で処理
+$ ptex2pdf -l -u hoge
 ```
 
-ただのスクリプト（Luaで書かれてるみたい）なので、気になる人は中を見てみるとよいでしょう。
+この一連の処理をいい感じにまとめてくれたのが
+`ptex2pdf`コマンドです。
+このコマンドは、MacTeX（もしくはTeXLive）と一緒にインストールされます。
 
-```bash
+```console
 $ which ptex2pdf
 /Library/TeX/texbin/ptex2pdf
 
 $ less /Library/TeX/texbin/ptex2pdf
 ```
 
-## OpenTypeフォント
-
-OpenTypeフォントは従来の**PostScript Type 1 形式**と
-**TrueType**形式を包含する新しいフォント形式です。
-
-フォント名に
-スタンダード（``Std``）はAdobe-Japan1-3（9354グリフ）対応を含み、
-プロ（``Pro``）はAdobe-Japan1-3（15444グリフ）対応や
-Adobe-Japan1-5（20316グリフ）対応したものです。
-プロ6（``Pr6N``）はAdobe-Japan1-6（23058グリフ）に対応です。
+`ptex2pdf`自体は、Luaスクリプトなので、気になる人は中を見てみるとよいでしょう。
