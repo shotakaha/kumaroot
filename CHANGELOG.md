@@ -11,7 +11,7 @@
 
 - **latex/latex-page.md**: ページ設定の目次を整理した
 - **latex/latex-usage.md**: 見出しの分類を変更した
-- **latex/latex-lualatex.md**: 関連パッケージのリンクを追記した - modified:   docs/source/_static/latex/templates/lualatex-jlreq/main.tex - modified:   docs/source/latex/latex-lualatex.md
+- **latex/latex-lualatex.md**: 関連パッケージのリンクを追記した
 - **latex/latex-lualatex.md**: サンプルを更新した
 - **latex/latex-lualatex.md**: bcfの説明を追加した
 - **latex/latex-masterthesis.md**: 修論作成の手順を整理した
@@ -61,17 +61,17 @@
 - **latex/latex-documentclass-twoside.md**: 両面印刷を追加した
 - **latex/latex-uplatex.md**: uplatexを整理した
 - **latex/latex-lualatex.md**: lualatexコマンドを整理した
-- **latex/latex-preamble.md**: 目次を整理した - new file:   docs/source/latex/latex-preamble.md - modified:   docs/source/latex/latex-usage.md
+- **latex/latex-preamble.md**: 目次を整理した
 - **latex/latex-kanji-config-udpmap-sys.md**: いまは不要なことを明記した
 - **latex/latex-luatexja.md**: 注意書きを追加した
-- **latex/latex-font-family**: 書体の特徴を追加した - modified:   docs/source/latex/latex-font-family.md - modified:   docs/source/latex/latex-font-series.md - modified:   docs/source/latex/latex-font-shape.md - modified:   docs/source/latex/latex-font-size.md
+- **latex/latex-font-family**: 書体の特徴を追加した
 - **latex/latex-usage.md**: ファイル名を変更した
 - **latex/latex-par.md**: テキスト編集の目次を整理した
 - **latex/latex-masterthesis.md**: 修論作成の手順を整理した
 - **latex/latex-detex.md**: detexを追加した
 - **latex/latex-chktex.md**: chktexを追加した
 - **latex/latex-install.md**: MacTeXのインストールを整理した
-- **latex/latex-setup.md**: 目次を整理した - modified:   docs/source/latex/latex-install.md - new file:   docs/source/latex/latex-setup.md - modified:   docs/source/latex/latex-usage.md
+- **latex/latex-setup.md**: 目次を整理した
 - **latex/latex-list.md**: 箇条書きの環境を整理した
 - **latex/fonts**: フォント設定の構成を整理した
 - **latex/latex-documentclass.md**: 記事の構成を整理した
@@ -99,7 +99,7 @@
 - **latex/latex-siunitx.md**: siunitxのコマンドを整理した
 - **command/command-openssl.md**: CSRを追記した
 - **latex/latex-uplatex.md**: uplatexの使い方を整理した
-- **latex/latex-lualatex.md**: lualatexの使い方を整理した - modified:   docs/source/latex/latex-build.md - modified:   docs/source/latex/latex-latexmk.md - modified:   docs/source/latex/latex-lualatex.md
+- **latex/latex-lualatex.md**: lualatexの使い方を整理した
 - **latex/latex-latexmk.md**: latexmkを追記した
 - **latex/latex-masterthesis.md**: 内部リンクを追加した
 - **latex/latex-masterthesis.md**: 修論の書き方を整理した
