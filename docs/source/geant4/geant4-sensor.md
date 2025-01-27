@@ -18,5 +18,5 @@ geant4-sensor-hit-draw
 geant4-sensor-hit-print
 geant4-sensor-sdmanager
 geant4-sensor-hit-hitsmap
-geant4-sensor-hit-hcofthisevemt
+geant4-sensor-hit-hcofthisevent
 ```
