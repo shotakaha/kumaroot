@@ -116,7 +116,7 @@ maxdepth: 1
 ---
 geant4-run-manager
 geant4-analysismanager
-geant4-particlegun
+geant4-source-particlegun
 ```
 
 ## ジオメトリ操作したい
