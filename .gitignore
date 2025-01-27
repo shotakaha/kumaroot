@@ -3,10 +3,9 @@
 ##################################################
 
 docs/source/_static/kumaroot.pdf
-auxd/
-outd/
-main.pdf
 _build
+_aux
+main.pdf
 
 ##################################################
 # macOS
