@@ -9,6 +9,70 @@
 
 ### Fix
 
+- **latex/latex-page.md**: ページ設定の目次を整理した
+- **latex/latex-usage.md**: 見出しの分類を変更した
+- **latex/latex-lualatex.md**: 関連パッケージのリンクを追記した - modified:   docs/source/_static/latex/templates/lualatex-jlreq/main.tex - modified:   docs/source/latex/latex-lualatex.md
+- **latex/latex-lualatex.md**: サンプルを更新した
+- **latex/latex-lualatex.md**: bcfの説明を追加した
+- **latex/latex-masterthesis.md**: 修論作成の手順を整理した
+- **latex/latex-bib.md**: 見出しを整理した
+- **latex/latex-biblatex.md**: biblatexの使い方を整理した
+- **latex/latex-lualatex.md**: biberを追加した
+- **latex/latex-masterthesis.md**: 修論のディレクトリ構造を変更した
+- **latex/latex-online.md**: フォルダ分類を追加した
+- **latex/latex-online.md**: Zoteroの使い方を追記した
+- **latex/latex-bibtex.md**: biblatexと一緒に使えないことを追記した
+- **latex/latex-bib.md**: bibファイルの作り方を追記した
+- **latex/latex-bibliography.md**: 文献キーの付け方を追記した
+- **latex/latex-bibliography.md**: thebibliographyの使い方を整理した
+- **latex/latex-bibtex.md**: bibtexを追加した
+- **latex/latex-bib.md**: bibファイルを追加した
+- **latex/latex-bibunsho.md**: LaTeX美文書を追加した
+- **latex/latex-misc.md**: 雑談スペースを作成した
+- **latex/latex-font-zen-maru-gothic.md**: Zen丸ゴシックを追加した
+- **latex/latex-font-hiragino.md**: ヒラギノのウェイトを追記した
+- **latex/latex-font-hiragino.md**: ヒラギノを追加した
+- **latex/latex-font-kiwi-maru.md**: KiwiMaruを追加した
+- **latex/latex-font-dotgothic16.md**: ドット文字の設定を追加した
+- **latex/latex-siunitx.md**: パーセントを追加した
+- **latex/latex-markdown.md**: フレーバーについてまとめた
+- **latex/latex-hyperref.md**: hyperrefを整理した
+- **latex/latex-cleveref.md**: cleverefを追記した
+- **latex/latex-ref.md**: 相互参照を整理した
+- **latex/latex-heading.md**: 見出し用のコマンドを整理した
+- **latex/latex-link.md**: 参照系の項目を整理した
+- **latex/latex-booktabs.md**: booktabsを整理しました
+- **latex/latex-maketitle.md**: 表紙の設定を整理した
+- **latex/latex-markdown.md**: hybridモードを追記した
+- **latex/latex-setlength.md**: mmとtruemmを追記した
+- **latex/latex-markdown.md**: インライン数式のオプションを追加した
+- **latex/latex-markdown.md**: markdownパッケージを追加した
+- **latex/latex-cleveref.md**: cleverefを追加した
+- **latex/latex-ref.md**: 相互参照を整理した
+- **latex/latex-usage.md**: 導入文を整理中
+- **latex/latex-jlreq.md**: jlreqのオプションを確認中
+- **latex/latex-documentclass-tate.md**: 見出しを修正した
+- **latex/latex-documentclass-options.md**: クラスオプションを別ページにした
+- **latex-documentclass-twocolumn.md**: 2段組を整理した
+- **latex/latex-usage.md**: 目次を整理した
+- **latex/latex-usage.md**: 導入文を修正した
+- **latex/latex-documentclass.md**: ドキュメントクラスを整理した
+- **latex/latex-classes.md**: 欧文クラスを追加した
+- **latex/latex-documentclass-twoside.md**: 両面印刷を追加した
+- **latex/latex-uplatex.md**: uplatexを整理した
+- **latex/latex-lualatex.md**: lualatexコマンドを整理した
+- **latex/latex-preamble.md**: 目次を整理した - new file:   docs/source/latex/latex-preamble.md - modified:   docs/source/latex/latex-usage.md
+- **latex/latex-kanji-config-udpmap-sys.md**: いまは不要なことを明記した
+- **latex/latex-luatexja.md**: 注意書きを追加した
+- **latex/latex-font-family**: 書体の特徴を追加した - modified:   docs/source/latex/latex-font-family.md - modified:   docs/source/latex/latex-font-series.md - modified:   docs/source/latex/latex-font-shape.md - modified:   docs/source/latex/latex-font-size.md
+- **latex/latex-usage.md**: ファイル名を変更した
+- **latex/latex-par.md**: テキスト編集の目次を整理した
+- **latex/latex-masterthesis.md**: 修論作成の手順を整理した
+- **latex/latex-detex.md**: detexを追加した
+- **latex/latex-chktex.md**: chktexを追加した
+- **latex/latex-install.md**: MacTeXのインストールを整理した
+- **latex/latex-setup.md**: 目次を整理した - modified:   docs/source/latex/latex-install.md - new file:   docs/source/latex/latex-setup.md - modified:   docs/source/latex/latex-usage.md
+- **latex/latex-list.md**: 箇条書きの環境を整理した
 - **latex/fonts**: フォント設定の構成を整理した
 - **latex/latex-documentclass.md**: 記事の構成を整理した
 - **latex/latex-documentclass.md**: 和文クラスの説明を整理した
