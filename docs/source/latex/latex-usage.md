@@ -166,6 +166,15 @@ latex-siunitx
 latex-feynman
 ```
 
+## スライドしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-beamer
+```
+
 ## その他
 
 ```{toctree}
