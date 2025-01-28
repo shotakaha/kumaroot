@@ -89,6 +89,22 @@
 
 :::
 
+## モード設定（`\mode`）
+
+```latex
+\mode<presentation>
+\mode<beamer>
+\mode<second>
+\mode<handout>
+\mode<trans>
+\mode<article>
+\mode<all>
+```
+
+`\mode`コマンドで動作モードを変更できます。
+デフォルトは`beamer`です。
+
+
 ## 併用不可のパッケージ
 
 以下のパッケージは併用しないほうがよさそうです。
