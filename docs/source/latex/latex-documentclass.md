@@ -14,6 +14,7 @@ latex-classes
 latex-jlreq
 latex-ltjsclasses
 latex-jsclasses
+latex-beamer
 ```
 
 和文の場合は、歴史的な経緯からいくつかの選択肢があります。
