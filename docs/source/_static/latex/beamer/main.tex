@@ -47,108 +47,11 @@
     \end{minted}
 \end{frame}
 
-\section{日本語の設定}
-\begin{frame}[fragile]
-    \frametitle{日本語の設定}
-    \begin{minted}{latex}
-\usepackage[no-math,deluxe,hiragino-pron]{luatexja-preset}
-\setmonofont{MoralerspaceKrypton}
-\setmonojfont{MoralerspaceKrypton}
-\renewcommand{\kanjifamilydefault}{\gtdefault}
-    \end{minted}
-\end{frame}
-
-\section{表紙の設定}
-\begin{frame}[fragile]
-    \frametitle{表紙の設定}
-    \begin{columns}
-        \column{0.45\textwidth}
-        \begin{minted}{latex}
-% プリアンブル
-\title{タイトル}
-\author{名前}
-\institute{所属}
-\date{\today}
-        \end{minted}
-
-        \column{0.45\textwidth}
-        \begin{minted}{latex}
-% 本文
-\maketitle
-        \end{minted}
-    \end{columns}
-\end{frame}
-
-\section{コードブロックの設定}
-\begin{frame}[fragile]
-    \frametitle{コードブロックの設定}
-    \begin{minted}{latex}
-\usepackage{minted}
-\setmintedstyle{material}
-    \end{minted}
-\end{frame}
-
-\section{箇条書き（itemize）}
-\begin{frame}[fragile]
-    \frametitle{箇条書き（itemize）}
-    \begin{columns}
-        \column{0.45\textwidth}
-        \begin{itemize}
-            \item ばなな
-            \item りんご
-            \item ぶどう
-        \end{itemize}
-        \column{0.45\textwidth}
-        \begin{minted}{latex}
-\begin{itemize}
-    \item ばなな
-    \item りんご
-    \item ぶどう
-\end{itemize}
-        \end{minted}
-    \end{columns}
-\end{frame}
-
-\section{箇条書き（enumerate）}
-\begin{frame}[fragile]
-    \frametitle{箇条書き（enumerate）}
-    \begin{columns}
-        \column{0.45\textwidth}
-        \begin{enumerate}
-            \item ばなな
-            \item りんご
-            \item ぶどう
-        \end{enumerate}
-        \column{0.45\textwidth}
-        \begin{minted}{latex}
-\begin{enumerate}
-    \item ばなな
-    \item りんご
-    \item ぶどう
-\end{enumerate}
-        \end{minted}
-    \end{columns}
-\end{frame}
-
-\section{箇条書き（description）}
-\begin{frame}[fragile]
-    \frametitle{箇条書き（description）}
-    \begin{columns}
-        \column{0.45\textwidth}
-        \begin{description}
-            \item [ばなな] バショウ科
-            \item [りんご] バラ科
-            \item [ぶどう] ブドウ科
-        \end{description}
-        \column{0.45\textwidth}
-        \begin{minted}{latex}
-\begin{description}
-    \item [ばなな] バショウ科
-    \item [りんご] バラ科
-    \item [ぶどう] ブドウ科
-\end{description}
-        \end{minted}
-    \end{columns}
-\end{frame}
+\include{page/luatexja}
+\include{page/minted}
+\include{page/maketitle}
+\include{page/itemize}
+\include{page/enumerate}
+\include{page/description}
 
 \end{document}
