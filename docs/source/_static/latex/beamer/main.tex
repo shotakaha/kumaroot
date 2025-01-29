@@ -3,9 +3,13 @@
 %\usecolortheme{rose}
 \useinnertheme{rectangles}
 
+\usepackage[hybrid]{markdown}
+
 %\usepackage{luatexja}
 \usepackage[no-math,deluxe,hiragino-pron]{luatexja-preset}
 \renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[no-math,deluxe,match,hiragino-pron]{luatexja-preset}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
 \setmonofont{MoralerspaceKrypton}
 \setmonojfont{MoralerspaceKrypton}
 
@@ -24,14 +28,15 @@
 
 \title{スライドの作り方}
 \author{qumasan}
-\institute{qumasan}
+\institute{KumaROOT}
+\logo{ロゴ}
 \date{\today}
-
 
 \begin{document}
 
 \begin{frame}
-\maketitle
+%\maketitle
+\titlepage
 \end{frame}
 
 \section*{もくじ}
@@ -55,5 +60,19 @@
 \include{page/itemize}
 \include{page/enumerate}
 \include{page/description}
+
+\begin{frame}
+    \frametitle{数式}
+    \begin{equation}
+        E = mc^{2}
+    \end{equation}
+
+    \begin{align}
+        E &= \sqrt{m^{2} + p^{2}}\\
+        E^{2} &= m^{2} + p^{2}
+    \end{align}
+
+\end{frame}
+
 
 \end{document}
