@@ -2,11 +2,31 @@
 
 ```latex
 % コンテンツを上揃え[t]
-\documentclass[t]{beamer}
-\usepackage{luatexja}
+\documentclass[t, aspectratio=169]{beamer}
+\usepackage[no-math, deluxe]{luatexja-preset}
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\renewcommand{\emph}[1]{{\upshape\bfseries #1}}
+
+\title{タイトル}
+\author{名前}
+\institute[省略形]{所属}
+\date[省略形]{\today}
 
 \begin{document}
 
+% 表紙
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% 目次
+\section*{目次}
+\begin{frame}
+  \frametitle{もくじ}
+  \tableofcontents
+\end{frame}
+
+% 本文
 \section{スライド1}
 \begin{frame}
   \frametitle{スライド1}
@@ -22,11 +42,39 @@
 
 `beamer`クラスでスライド形式の文書を作成できます。
 コンテンツはデフォルトで中央揃えになっているので、
-`[t]`オプションで、上揃えにしています。
+`[t]`オプションで上揃えにしています。
 
-`beamer`の基本単位は`frame`環境です。
+## スライドサイズしたい（`aspectratio`）
 
-[luatexjaパッケージ](./latex-luatexja.md)で日本語を扱えるようになります。
+```latex
+\documentclass[aspectratio=169]{beamer}
+```
+
+`aspectratio`オプションで、スライドのサイズを変更できます。
+デフォルトは`43`（4:3）です。
+
+## 日本語したい（`luatexja-preset`）
+
+```latex
+\usepackage[no-math, deluxe]{luatexja-preset}
+% ゴシック体に変更
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+% \gtdefault: ゴシック体
+% \mcdefault: 明朝体
+% \rmdefault: ローマン体
+% 強調を太字（デフォルトは斜体）
+\renewcommand{\emph}[1]{{\upshape\bfseries #1}}
+% \upshape: 立体フォント
+% \bfseries: 太字
+```
+
+[luatexja-presetパッケージ](./latex-luatexja-preset.md)で、
+和文フォントを使えるようにします。
+`deluxe`オプションで多書体を使えるようにしておきます。
+
+また、`\kanjifamilydefault`のデフォルト値は明朝体になっているため
+ゴシック体（`\gtdefault`）に変更しています。
+`\emph`コマンドも斜体ではなく**太字の立体**に変更しています。
 
 ## スライドしたい（`frame`）
 
@@ -35,17 +83,45 @@
 \section{タイトル}
 \begin{frame}
   \frametitle{タイトル}
-
-  \begin{itemize}
-    \item 箇条書き
-  \end{itemize}
-
+  内容
 \end{frame}
 ```
 
 `frame`環境の中にスライドを作成します。
 この中で`itemize`や`enumerate`、`equation`などの環境を
 使ってコンテンツを整理できます。
+
+## 表紙したい（`titlepage`）
+
+```latex
+% プリアンブル
+\title[短いタイトル]{タイトル}
+\author{名前}
+\institute{所属}
+\date{報告日}
+
+% 本文
+\begin{frame}
+  \titlepage
+\end{frame}
+```
+
+`\titlepage`で表紙を出力できます。
+出力する情報はプリアンブルで設定します。
+
+## 目次したい（`\tableofcontents`）
+
+```latex
+\section*{目次}
+\begin{frame}
+  \frametitle{もくじ}
+  \tableofcontents
+\end{frame}
+```
+
+[\tableofcontentsコマンド](./latex-tableofcontents.md)でもくじを出力できます。
+目次は`\section{}`や`\subsection{}`で設定します。
+`\frametitle{}`は目次に自動追加されません。
 
 ## ブロックしたい（`block`）
 
@@ -62,7 +138,7 @@
 目的別のブロック環境が用意されています。
 それぞれの表示形式は選択したテーマに依存します。
 
-## 段組したい（`columns`
+## 段組したい（`columns`）
 
 ```latex
 \begin{frame}
@@ -205,7 +281,7 @@ $ mdfind beameroutertheme | rg .sty
 7. dove
 8. fly
 9. lily
-10. onarca
+10. monarca
 11. orchid
 12. rose
 13. gull
