@@ -238,35 +238,35 @@ $ mdfind beameroutertheme | rg .sty
 
 27種類あります。
 
-| テーマ名 |
-|---|
-| AnnArbor |
-| Antibes |
-| Bergen |
-| Berkeley |
-| Berlin |
-| Boadilla |
-| CambridgeUS |
-| Copenhagen |
-| Darmstadt |
-| Dresden |
-| EastLansing |
-| Frankfurt |
-| Goettingen |
-| Hannover |
-| Ilmenau |
-| JuanLesPins |
-| Luebeck |
-| Madrid |
-| Malmoe |
-| Marburg |
-| Montpellier |
-| PaloAlto |
-| Pittsburgh |
-| Rochester |
-| Singapore |
-| Szeged |
-| Warsaw |
+| テーマ名 | 基本色 | サイドバー | ヘッダー |
+|---|---|---|---|
+| AnnArbor | 黄と青 | - | - |
+| Antibes | 青 | - | あり |
+| Bergen | 青 | left | - |
+| Berkeley | 青 | left | - |
+| Berlin | 青 | - | left |
+| Boadilla | 白と青 | - | - |
+| CambridgeUS | 白と赤 | - | あり |
+| Copenhagen | 青 | - | tree |
+| Darmstadt | 青 | - | nav |
+| Dresden | 青 | - | nav |
+| EastLansing | 緑 | - | split |
+| Frankfurt | 青 | - | nav |
+| Goettingen | 薄青 | right | - |
+| Hannover | 薄青 | left | - |
+| Ilmenau | 青 | - | nav |
+| JuanLesPins | 青 | - | section |
+| Luebeck | 青 | - | tree |
+| Madrid | 青 | - | - |
+| Malmoe | 青 | - | split/tree |
+| Marburg | 白と青 | right | - |
+| Montpellier | 白 | - | section |
+| PaloAlto | 青 | left | - |
+| Pittsburgh | 白 | - | - |
+| Rochester | 青 | - | - |
+| Singapore | 白 | - | nav |
+| Szeged | 白 | - | nav |
+| Warsaw | 青 | - | tree |
 
 ### カラーパレット名の一覧（`\usecolortheme`）
 
