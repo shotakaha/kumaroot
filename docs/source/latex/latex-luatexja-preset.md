@@ -1,4 +1,4 @@
-# プリセットな和文フォントしたい（``luatexja-preset``）
+# 和文フォントしたい（`luatexja-preset`）
 
 ```latex
 % プリアンブル
@@ -8,24 +8,68 @@
 \usepackage[hiragino-pro, hiragino-pron]{luatexja-preset}
 ```
 
-`luatexja-preset`は`luatexja`の拡張パッケージで、
-和文フォントのプリセットを切り替えることができます。
-よく使われている和文フォント設定を1行で指定できます。
+`luatexja-preset`で、プリセットされた和文フォントを設定できます。
+[luatex-fontspecパッケージ](./latex-luatexja-fontspec.md)の設定を1行で指定できます。
 
-## プリセットに含まれる和文書体
+## 多書体したい（`deluxe`）
 
-1. ``haranoaji``: 原ノ味フォント
-2. ``ipaex``: IPAexフォント
-3. ``sourcehan``: 源ノ明朝・源ノ角ゴシックフォント
-4. ``hiragino-pro``: ヒラギノフォント
-5. ``jis90``: できるだけJIS90字形（JIS X 0208:1990）
-6. ``jis2004``: できるだけJIS2004字形（JIS X 0213:2004）
-7. ``deluxe``: 明朝3ウェイト（l/m/b）、ゴシック3ウェイト（m/b/eb）、丸ゴシック1ウェイト（mg）の7書体
-8. ``bold``: デフォルトのゴシック体を太字
+```latex
+% プリアンブル
+\usepackage[deluxe]{luatexja-preset}
+\usepackage[deluxe,フォント名]{luatexja-preset}
+```
 
-などなどあります。
+`deluxe`オプションで、明朝3ウェイト（l/m/b）、ゴシック3ウェイト（m/b/eb）、丸ゴシック1ウェイト（mg）の7書体を設定できます。
 
-## リファレンス
+## 原ノ味フォントしたい（`haranoaji`）
 
-- {command}`texdoc luatexja-preset`
-- {command}`texdoc luatexja`
+```latex
+% プリアンブル
+\usepackage[haranoaji]{luatexja-preset}
+
+% TeXLive2020以降はデフォルト
+\usepackage{luatexja-preset}
+```
+
+`haranoaji`オプションで原ノ味フォント（2004字形）を設定できます。
+TeXLive2020以降はデフォルトのフォントになっているため、省略できます。
+
+## IPAexフォントしたい（`ipaex`）
+
+```latex
+% プリアンブル
+\usepackage[ipaex]{luatexja-preset}
+```
+
+## ヒラギノしたい（`hiragino-pron`）
+
+```latex
+% プリアンブル
+\usepackage[deluxe, hiragino-pron]{luatexja-preset}
+```
+
+`hiragino-pron`オプションでヒラギノフォント（2004字形）を設定できます。
+ヒラギノフォントはmacOSにプリインストールされています。
+
+## BIZ UDしたい（`bizud`）
+
+```latex
+% プリアンブル
+\usepackage[bizud]{luatexja-preset}
+```
+
+`bizud`オプションでBIZ UDゴシック／明朝を設定できます。
+BIZ UDはWindows 10のデフォルトフォントです。
+
+## 字形したい（`jis2004` / `jis90`）
+
+```latex
+% JIS2004字形（JIS X 0213:2004）
+\usepackage[jis2004]{luatexja-preset}
+
+% JIS90字形（JIS X 0208:1990）
+\usepackage[jis90]{luatexja-preset}
+```
+
+`jis2004`、`jis90`オプションで字形を変更できます。
+とくに理由がなければ`jis90`を選ぶ必要はありません。
