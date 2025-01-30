@@ -1,30 +1,7 @@
-# 自由に和文フォントしたい（`luatexja-fontspec`）
+# 和文フォントしたい（`luatexja-fontspec`）
 
 ```latex
-\usepackage{luatexja-fontspec}
-
-\setmainjfont{和文フォント／本文}
-\setsansjfont{和文フォント／見出し}
-\setmonojfont{和文フォント／コードブロック}
-
-\setmainfont{欧文フォント／本文}
-\setsansfont{欧文フォント／見出し}
-\setmonofont{欧文フォント／コードブロック}
-```
-
-`luatexja-fontspec`は
-[luatexja](./latex-luatexja.md)と
-[fontspec](./latex-fontspec.md)を組み合わせて、
-和文フォントと欧文フォントを統一的に設定するためのパッケージです。
-`luatexja-fontspec`を読み込むと、`fontspec`パッケージも同時に読み込まれます。
-
-`setmainfont` / `setsansfont` / `setmonofont`で欧文フォント、
-`setmainjfont` / `setsansjfont` / `setmonojfont`で和文フォントを設定できます。
-プリセット（[luatexja-preset](./latex-luatexja-preset.md)）以外のフォントを指定できます。
-フォント名は自分のパソコンのフォントブックにあるものを探してください。
-
-```latex
-\documentclass[a4paper]{article}
+% プリアンブル
 \usepackage{luatexja-fontspec}
 
 % 欧文フォントの設定
@@ -38,10 +15,46 @@
 \setmonojfont{HackGen35Console-Regular}
 ```
 
-上記の例は、変更が分かりやすいようにすべて別のフォントを設定しています。
+`luatexja-fontspec`で和文フォントを自由に設定できます。
+このパッケージを読み込むと、
+[luatexja](./latex-luatexja.md)と
+[fontspec](./latex-fontspec.md)も読み込まれるため、
+和文フォントと欧文フォントを統一的に設定できます。
 
-実用的なことを考えると、本文用フォントと見出し用フォントは同じファミリーの異なったウェイトを設定すると、簡単に統一感を出せてよいと思います。
+## 本文フォントしたい（`\setmainjfont`）
 
-:::{note}
-本文はセリフ体（明朝体）、見出しはサンセリフ体（ゴシック体）、コードブロックはモノスペース体（等幅体）を使うことが多いです。
-:::
+```latex
+% プリアンブル
+\setmainfont{フォント名}
+\setmainjfont{フォント名}
+```
+
+`\setmainjfont{}`で和文の本文フォントを変更できます。
+明朝体のフォントを設定することが多いです。
+シリーズ（ウェイト）は軽めにするとよいです。
+
+## 見出しフォントしたい（`\setsansjfont`）
+
+```latex
+% プリアンブル
+\setsansfont{フォント名}
+\setsansjfont{フォント名}
+```
+
+`\setsansjfont{}`で和文の見出しフォントを変更できます。
+ゴシック体のフォントを設定することが多いです。
+シリーズ（ウェイト）は重めにするとよいです。
+[\section{}](./latex-section.md)などで表示されるフォントです。
+
+## 等幅フォントしたい（`\setmonojfont`）
+
+```latex
+% プリアンブル
+\setmonofont{フォント名}
+\setmonojfont{フォント名}
+```
+
+`\setmonojfont{}`で和文の等幅フォントを変更できます。
+モノスペース体のフォントを設定することが多いです。
+シリーズ（ウェイト）は軽めがよいと思います。
+`verbatim`環境や[minted環境](./latex-minted.md)で表示されるフォントです。
