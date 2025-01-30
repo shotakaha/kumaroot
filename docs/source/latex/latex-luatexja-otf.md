@@ -1,4 +1,4 @@
-# もっと和文フォントしたい（``latexja-otf``）
+# 異字体したい（`latexja-otf`）
 
 ```latex
 \usepackage{luatexja-otf}

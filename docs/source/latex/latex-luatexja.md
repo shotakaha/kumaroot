@@ -1,11 +1,23 @@
-# 和文フォントしたい（``luatexja``）
+# 和文対応したい（`luatexja`）
 
 ```latex
 \usepackage{luatexja}
 ```
 
-LuaLaTeXの場合、`luatexja`パッケージを読み込むだけで和文フォントが使えます。
-原の味フォント（`haranoaji`）が設定されます。
+`luatexja`は文書を和文対応させるパッケージです。
+ドキュメントクラスに依らず、和文のフォントや組版の規則を設定できます。
+デフォルトのフォントは原ノ味フォント（`haranoaji`）です。
+
+:::{seealso}
+
+フォントの変更は、以下のページに整理しました。
+
+- [](./latex-luatexja-fontspec.md)
+- [](./latex-luatexja-preset.md)
+
+:::
+
+## 欧文クラスしたい（`classes` + `luatexja`）
 
 ```latex
 % compiler: LuaLaTeX
@@ -13,7 +25,8 @@ LuaLaTeXの場合、`luatexja`パッケージを読み込むだけで和文フ�
 \usepackage{luatexja}
 ```
 
-ドキュメントクラスは`article`などの欧文用クラスでも大丈夫です。
+`article`などの欧文クラスで、
+和文設定が使えるようになります。
 テンプレートが配布されている海外の学会などで、一部（や一時的に）日本語を使いたい場合に役に立ちます。
 
 :::{caution}
@@ -25,12 +38,19 @@ LuaLaTeXの場合、`luatexja`パッケージを読み込むだけで和文フ�
 
 :::
 
-```{toctree}
----
-maxdepth: 1
----
-latex-luatexja-preset
-latex-luatexja-fontspec
-latex-luatexja-otf
-latex-luatexja-ruby
+## スライドしたい（`beamer` + `luatexja`）
+
+```latex
+\documentclass[t]{beamer}
+\usepackage{luatexja}
 ```
+
+スライド作成の定番の[beamerクラス](./latex-beamer.md)で、
+和文設定が使えるようになります。
+
+:::{note}
+
+`beamer`は`dvipdfm`に対応していないため、
+(u)pLaTeXを使ったスライド作成はできません。
+
+:::

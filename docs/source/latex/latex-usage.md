@@ -61,10 +61,15 @@ latex-preamble
 ---
 maxdepth: 2
 ---
-latex-fonts
-latex-luatexja
-latex-lmodern
 latex-fontspec
+latex-luatexja
+latex-luatexja-fontspec
+latex-luatexja-preset
+latex-otf
+latex-luatexja-otf
+latex-luatexja-ruby
+latex-fonts
+latex-lmodern
 latex-font-dotgothic16
 latex-font-kiwi-maru
 latex-font-hiragino
