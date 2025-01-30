@@ -9,18 +9,45 @@
 \setmonofont{Source Code Pro}
 ```
 
-`fontspec`でフォントを自由に設定できます。
-LuaLaTeXとXeLaTeXでOpenTypeフォントが自由に指定できるようになります。
+`fontspec`でUnicode対応のフォントを自由に設定できます。
+手持ちのフォントを有効活用できます。
 
-TeXLive2020以降では、欧文フォントは**Latin Modern系**、
-和文フォントは**原ノ味系**がデフォルトになっているそうなので、
-かならず必要な設定というわけではないかもしれません。
+:::{note}
 
-セリフ体
-:   Source Serif Pro
+TeXLive2020以降では、デフォルトが
+欧文フォントは**Latin Modern系（lmodern）**、
+和文フォントは**原ノ味系（haranoaji）**が
+なっています。
 
-サンセリフ体
-:   Source Sans Pro
+:::
 
-タイプライタ体
-:   Source Code Pro
+## 本文フォントしたい（`\setmainfont`）
+
+```latex
+% プリアンブル
+\setmainfont{フォント名}[詳細設定]
+```
+
+## 見出しフォントしたい（`\setsansfont`）
+
+```latex
+% プリアンブル
+\setsansfont{フォント名}
+```
+
+## 等幅フォントしたい（`\setmonofont`）
+
+```latex
+% プリアンブル
+\setmonofont{フォント名}
+```
+
+## 強調したい（`\strong`）
+
+```latex
+% 本文
+fontspecパッケージを追加すると
+\strong{strong}で\strong{強調}できます。
+```
+
+`\strong{}`で**太字で強調**できます。
