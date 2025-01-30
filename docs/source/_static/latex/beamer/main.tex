@@ -5,14 +5,14 @@
 
 \usepackage[hybrid]{markdown}
 
-%\usepackage{luatexja}
+% フォントの設定
 \usepackage[no-math,deluxe,hiragino-pron]{luatexja-preset}
-\renewcommand{\kanjifamilydefault}{\gtdefault}
-%\usepackage[no-math,deluxe,match,hiragino-pron]{luatexja-preset}
-%\renewcommand{\kanjifamilydefault}{\gtdefault}
 \setmonofont{MoralerspaceKrypton}
 \setmonojfont{MoralerspaceKrypton}
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{unicode-math}
 
+% コードブロックの設定
 \usepackage{xcolor}
 \definecolor{gray}{rgb}{.9, .9, .9}
 
@@ -26,6 +26,7 @@
     bgcolor=gray,
 }
 
+% 表紙の情報
 \title{スライドの作り方}
 \author{qumasan}
 \institute{KumaROOT}
@@ -54,13 +55,16 @@
     \end{minted}
 \end{frame}
 
-\include{page/luatexja}
-\include{page/minted}
-\include{page/maketitle}
-\include{page/itemize}
-\include{page/enumerate}
-\include{page/description}
+\section{数式フォントの設定}
+\begin{frame}[fragile]
+    \frametitle{数式フォントの設定}
+    \begin{minted}{latex}
+\usepackage[no-math]{luatexja-fontspec}
+\usepackage{unicode-math}
+    \end{minted}
+\end{frame}
 
+\section{数式}
 \begin{frame}
     \frametitle{数式}
     \begin{equation}
@@ -72,7 +76,32 @@
         E^{2} &= m^{2} + p^{2}
     \end{align}
 
+    \begin{equation}
+    ∫dx = x
+    \end{equation}
+
 \end{frame}
+
+
+\appendix
+
+\section*{バックアップ}
+\begin{frame}
+    \frametitle{バックアップ}
+    \tableofcontents
+\end{frame}
+
+% 使い方が確認できたら、フレームごとにファイルを作成する
+% スライドの順番の入れ替えができるようになる
+\include{page/luatexja}
+\include{page/minted}
+\include{page/maketitle}
+\include{page/itemize}
+\include{page/enumerate}
+\include{page/description}
+
+
+
 
 
 \end{document}
