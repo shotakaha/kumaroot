@@ -181,6 +181,15 @@ maxdepth: 2
 latex-beamer
 ```
 
+## パッケージしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-package
+```
+
 ## その他
 
 ```{toctree}
