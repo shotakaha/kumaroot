@@ -62,7 +62,6 @@ latex-preamble
 maxdepth: 2
 ---
 latex-fontspec
-latex-unicode-math
 latex-luatexja
 latex-luatexja-fontspec
 latex-luatexja-preset
@@ -136,6 +135,7 @@ latex-booktabs
 maxdepth: 2
 ---
 latex-amsmath
+latex-unicode-math
 ```
 
 ## 箇条書きしたい
