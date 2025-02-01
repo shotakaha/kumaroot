@@ -77,6 +77,24 @@ LaTeXコマンドが使えるようになります。
 `markdown`環境の中は、Markdown記法で閉じていたほうがよいと思います。
 ただ、単位表示の[siunitxパッケージ](./latex-siunitx.md)は便利すぎる。
 
+:::{note}
+
+ログファイルに `hybrid`オプションは`soft-deprecated`なので、
+代替オプションを明示的に選択するようにという警告がでていました。
+
+```latex
+Package markdown Warning: The `hybrid` option has been soft-deprecated.
+(markdown)                Consider using one of the following better options
+(markdown)                for mixing TeX and markdown: `contentBlocks`,
+(markdown)                `rawAttribute`, `texComments`, `texMathDollars`,
+(markdown)                `texMathSingleBackslash`, and
+(markdown)                `texMathDoubleBackslash`. For more information, see
+(markdown)                the user manual at
+(markdown)                <https://witiko.github.io/markdown/>.
+```
+
+:::
+
 ## Markdownのフレーバー
 
 | 年 | フレーバー | 概要 | 拡張機能 |
