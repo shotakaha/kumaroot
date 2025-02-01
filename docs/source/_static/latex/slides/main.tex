@@ -1,0 +1,65 @@
+\documentclass[slide]{ltjsarticle}
+%\documentclass[landscape]{jlreq}
+
+\usepackage[showframe]{geometry}
+\geometry{margin=1em}
+\usepackage{layout}
+
+\usepackage{mwe}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[R]{\includegraphics[height=1em]{example-image.pdf}}
+\fancyfoot{}
+\fancyfoot[R]{{\small}\thepage}
+
+\usepackage[deluxe,hiragino-pron]{luatexja-preset}
+
+
+\usepackage[hybrid]{markdown}
+\usepackage{minted}
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+\titleformat{\section}{\newpage\Large\bfseries}{\thesection}{1em}{}
+
+
+\title{日本語スライド作成}
+\author{qumasan}
+
+\begin{document}
+
+\layout
+
+\section{はじめに}
+
+\begin{markdown}
+- `ltjsarticle'でスライド
+- それ
+- あれ
+\end{markdown}
+
+\section{ドキュメントクラス}
+
+\begin{markdown}
+```latex
+\documentclass[slide]{ltjsarticle}
+```
+
+- クラス: `ltjsarticle`
+- オプション: `slide`
+
+\end{markdown}
+
+\section{パッケージ読み込み}
+
+\begin{markdown}
+```latex
+\usepackage{geometry}
+\usepackage[hybrid]{markdown}
+\usepackage{enumitem}
+```
+\end{markdown}
+
+\end{document}
