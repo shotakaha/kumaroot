@@ -136,6 +136,7 @@ maxdepth: 2
 ---
 latex-amsmath
 latex-unicode-math
+latex-pmatrix
 ```
 
 ## 箇条書きしたい
@@ -165,7 +166,6 @@ latex-bibtex
 ---
 maxdepth: 1
 ---
-latex-pmatrix
 latex-hepparticles
 latex-physics
 latex-siunitx
