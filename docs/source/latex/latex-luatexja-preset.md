@@ -73,3 +73,12 @@ BIZ UDはWindows 10のデフォルトフォントです。
 
 `jis2004`、`jis90`オプションで字形を変更できます。
 とくに理由がなければ`jis90`を選ぶ必要はありません。
+
+## 依存パッケージ
+
+```console
+$ kpsewhich luatexja-preset.sty | xargs cat | rg RequirePackage
+\RequirePackage{expl3,l3keys2e}
+\RequirePackage{luatexja}
+  \RequirePackage{luatexja-fontspec}
+```

@@ -31,3 +31,28 @@ Unicode文字がそのまま使えるので`\int`を`∫`で書くことがで�
 数学記号には読み方がよくわからない記号もあったりします。
 そのような場合にそのまま入力（もしくはコピペ）できるのは、
 便利かなと思います。
+
+## 依存パッケージ
+
+```console
+$ kpsewhich unicode-math.sty | xargs cat | rg RequirePackage
+\RequirePackage{expl3}
+// LuaTeXの場合
+\RequirePackageWithOptions{unicode-math-luatex}
+// XeTeXの場合
+\RequirePackageWithOptions{unicode-math-xetex}
+```
+
+```console
+$ kpsewhich unicode-math-luatex | xargs cat | rg RequirePackage
+\RequirePackage{xparse,l3keys2e}
+\RequirePackage{fontspec}
+\RequirePackage{fix-cm}
+\RequirePackage{amsmath}
+\RequirePackage{lualatex-math}
+```
+
+`RequirePackage`を辿ると
+[fontspecパッケージ](./latex-fontspec.md)、
+[amsmathパッケージ](./latex-amsmath.md)
+を読み込んでいることが分かります。

@@ -58,3 +58,14 @@
 モノスペース体のフォントを設定することが多いです。
 シリーズ（ウェイト）は軽めがよいと思います。
 `verbatim`環境や[minted環境](./latex-minted.md)で表示されるフォントです。
+
+## 依存パッケージ
+
+```console
+$ kpsewhich luatexja-fontspec.sty | xargs cat | rg RequirePackage
+\RequirePackage{l3keys2e,luatexja}
+\RequirePackage{fontspec}[2019/03/15]% v2.7c
+    \RequirePackage{luatexja-fontspec-29e} % v2.9e
+    \RequirePackage{luatexja-fontspec-29c} % v2.9c
+  \RequirePackage{luatexja-fontspec-27c} % v2.7c
+```

@@ -54,3 +54,24 @@
 (u)pLaTeXを使ったスライド作成はできません。
 
 :::
+
+## 依存パッケージ
+
+```console
+$ kpsewhich luatexja.sty | xargs cat | rg RequirePackage
+// \RequirePackage{expl3} needed if the version of l3kernel is v6111
+\RequirePackage{luatexja-core,luatexja-compat}
+```
+
+```console
+$ kpsewhich luatexja-core.sty | xargs cat | rg RequirePackage
+\RequirePackage{infwarerr}
+\RequirePackage{luatexbase}
+\RequirePackage{luaotfload}
+\RequirePackage{ltxcmds}    [2011/11/09] % v1.22
+\RequirePackage{pdftexcmds} [2011/11/29] % v0.20
+\RequirePackage{xkeyval}    [2012/10/14] % v2.6b
+\RequirePackage{etoolbox}
+\IfFileExists{everyhook.sty}{\RequirePackage{everyhook}\ltj@everyhook@availtrue}{}
+\RequirePackage{ltj-base}
+```

@@ -63,3 +63,15 @@ fontspecパッケージを追加すると
 ```
 
 `\strong{}`で**太字で強調**できます。
+
+## 依存パッケージ
+
+```console
+$ kpsewhich fontspec.sty | xargs cat | rg RequirePackage
+\RequirePackage{xparse}
+// LuaTeXの場合
+\RequirePackage{luaotfload}
+\RequirePackage{fontspec-luatex}
+// XeTeXの場合
+\RequirePackage{fontspec-xetex}
+```
