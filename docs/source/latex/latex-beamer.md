@@ -52,6 +52,7 @@
 
 `aspectratio`オプションで、スライドのサイズを変更できます。
 デフォルトは`43`（4:3）です。
+`169`で16:9に変更できます。
 
 ## 日本語したい（`luatexja-preset`）
 
@@ -69,12 +70,16 @@
 ```
 
 [luatexja-presetパッケージ](./latex-luatexja-preset.md)で、
-和文フォントを使えるようにします。
-`deluxe`オプションで多書体を使えるようにしておきます。
-
+和文フォントを使えるようにしました。
+`deluxe`オプションで多書体を使えるようにもしてあります。
 また、`\kanjifamilydefault`のデフォルト値は明朝体になっているため
 ゴシック体（`\gtdefault`）に変更しています。
+
 `\emph`コマンドも斜体ではなく**太字の立体**に変更しています。
+ただし`luatexja-preset`で読み込まれる
+[fontspecパッケージ](./latex-fontspec.md)で
+`\strong{}`コマンドが使えるようになるため、
+必要ないかもしれません。
 
 ## スライドしたい（`frame`）
 
@@ -87,9 +92,9 @@
 \end{frame}
 ```
 
-`frame`環境の中にスライドを作成します。
-この中で`itemize`や`enumerate`、`equation`などの環境を
-使ってコンテンツを整理できます。
+`beamer`では`frame`環境が1枚のスライドに相当します。
+この環境の墓で、`itemize`や`enumerate`、`equation`などの環境を
+使ってコンテンツを記述します。
 
 ## 表紙したい（`titlepage`）
 
@@ -120,8 +125,22 @@
 ```
 
 [\tableofcontentsコマンド](./latex-tableofcontents.md)でもくじを出力できます。
-目次は`\section{}`や`\subsection{}`で設定します。
-`\frametitle{}`は目次に自動追加されません。
+目次は`\section{}`や`\subsection{}`で追加できます。
+
+## 見出ししたい（`\section` / `\frametitle`）
+
+```latex
+\section{目次用のタイトル}
+\begin{frame}
+\frametitle{スライドのタイトル}
+
+\end{frame}
+```
+
+`frame`環境の中の`\frametitle{}`で
+スライドのタイトルを設定できます。
+このコマンドは、目次（`\tableofcontents`）には使われないため、
+`frame`環境の外で`\section{}`などを設定する必要があります。
 
 ## ブロックしたい（`block`）
 
@@ -137,6 +156,40 @@
 `exampleblock`、など
 目的別のブロック環境が用意されています。
 それぞれの表示形式は選択したテーマに依存します。
+
+## 箇条書きしたい（`itemize`）
+
+[itemize環境](./latex-itemize.md)、
+[enumerate環境](./latex-enumerate.md)、
+[description環境](./latex-description.md)が
+そのまま利用できます。
+
+:::{note}
+
+[enumitemパッケージ](./latex-enumitem.md)は読み込まない方がよさそうです。
+`beamer`内部で`paralist`パッケージを使っているみたいなので、
+箇条書きのカスタマイズにはそちらを使う方がいいかもです。
+
+:::
+
+## コードブロックしたい（`minted`）
+
+```latex
+% プリアンブル
+\usepackage{minted}
+
+% 本文
+\begin{frame}[fragile]
+\begin{minted}{latex}
+  \begin{itemize}
+    \item アイテム
+  \end{itemize}
+\end{minted}
+\end{frame}
+```
+
+[mintedパッケージ](./latex-minted.md)でコードブロックを表示できます。
+`frame`環境のオプションに`[fragile]`を追加する必要があります。
 
 ## 段組したい（`columns`）
 
@@ -154,7 +207,7 @@
 \end{frame}
 ```
 
-`columns`環境と`\column`コマンドで段組できます。
+`columns`環境と`column`環境もしくは`\column`コマンドで段組できます。
 段組した中に、コンテンツを配置します。
 ブロック環境も配置できます。
 
