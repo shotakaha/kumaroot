@@ -2,7 +2,10 @@
 %\documentclass[landscape]{jlreq}
 
 \usepackage[showframe]{geometry}
-\geometry{margin=1em}
+\geometry{
+    margin=10truemm,
+    headheight=20truemm,
+    headsep=10truemm,}
 \usepackage{layout}
 
 \usepackage{mwe}
@@ -14,15 +17,31 @@
 \fancyfoot{}
 \fancyfoot[R]{{\small}\thepage}
 
-\usepackage[deluxe,hiragino-pron]{luatexja-preset}
+\usepackage[deluxe,match,hiragino-pron]{luatexja-preset}
+\setmonofont{MoralerspaceKrypton}
+\setmonojfont{MoralerspaceKrypton}
 
 
 \usepackage[hybrid]{markdown}
 \usepackage{minted}
 
 \usepackage{enumitem}
-\usepackage{titlesec}
-\titleformat{\section}{\newpage\Large\bfseries}{\thesection}{1em}{}
+
+% 見出し（section）で改ページ
+\usepackage[compact]{titlesec}
+%\titlelabel{\thetitle.\quad}
+% \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
+% 1. {<command>} : 再定義する見出しコマンド（\part, \chapter, \section, \subsection, \subsubsection, \paragraph, \subparagraph）
+% -. [<shape>]: paragraph shape（hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame)
+% 2. {<format>}: format applied to whole title (= label and text).
+% 3. {<label>}: define label.
+% 4. {<sep>}: horizontal separation btw label and title body. 長さを設定する。displayの場合はvertical方向のアキ。frameの場合はタイトルと枠のパディング
+% 5. {<before-code>}: code preceding the title body
+% -. [<after-code>]: code following the title body
+\titleformat{\section}{\newpage\ebseries\Large}{\ebseries\thesection.}{0.1em}{}
+% \titlespacing{<command>}{<left>}{<before-sep>}{<after-sep>}{<right-sep>}
+% \titleline[<align>]{<horizontal material}
+%\titleline[l]{\rule{\textwidth}{1em}}
 
 
 \title{日本語スライド作成}
