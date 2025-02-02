@@ -65,7 +65,6 @@ latex-fontspec
 latex-luatexja
 latex-luatexja-fontspec
 latex-luatexja-preset
-latex-otf
 latex-luatexja-otf
 latex-luatexja-ruby
 latex-fonts
