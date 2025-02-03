@@ -1,5 +1,50 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **latex/latex-otf.md**: 削除した
+- **latex/latex-luatexja-otf.md**: luatexja-otfとotfの内容をまとめた
+- **latex/latex-titlesec.md**: titlesecを追記した
+- **latex/latex-titlesec.md**: titlesecを追加した
+- **docs/source/_static/latex/slides/main.tex**: ltjsarticleでスライドを作成するサンプルを追加した
+- **latex/latex-markdown.md**: hybridオプションに関する警告を追記した
+- **latex/latex-requirepackage.md**: バージョン指定を追記した
+- **latex/latex-amsmath.md**: 数式の使い方を整理した
+- **latex/latex-usage.md**: 目次を整理した
+- **latex/latex-luatexja-preset.md**: パッケージの依存関係を確認した
+- **latex/latex-needstexformat.md**: NeedsTeXFormatを追加した
+- **latex/latex-package.md**: パッケージを作成するためのセクションを作成した
+- **latex/latex-kanji.md**: AdobeJapan1を追記した
+- **latex/beamer/main.tex**: 確認済みの内容はバックアップに移動した
+- **latex/latex-luatexja-ruby.md**: latexja-rubyを整理した
+- **latex/latex-font-series.md**: シリーズを整理した
+- **latex/latex-unicode-math.md**: unicode-mathを追加した
+- **latex/latex-luatexja.md**: luatexjaを整理した - modified:   docs/source/latex/latex-luatexja-otf.md - modified:   docs/source/latex/latex-luatexja.md - modified:   docs/source/latex/latex-otf.md - modified:   docs/source/latex/latex-usage.md
+- **latex/latex-luatexja-preset.md**: luatexja-presetを整理した
+- **latex/latex-luatexja-fontspec.md**: luatexja-fontspecを整理した
+- **latex/latex-fontspec.md**: フォント設定の参考を追加した
+- **latex/latex-fontspec.md**: fontspecを整理した
+- **docs/source/_static/latex/beamer/main.tex**: beamerのサンプルを更新した - modified:   docs/source/_static/latex/beamer/main.tex - modified:   docs/source/_static/latex/beamer/page/minted.tex
+- **latex/latex-beamer.md**: テーマの基本色を確認した - modified:   docs/source/_static/latex/beamer/main.tex - modified:   docs/source/latex/latex-beamer.md
+- **docs/source/_static/latex/beamer/main.tex**: スライドごとにファイルに分割した
+- **docs/source/_static/latex/beamer/main.tex**: beamerのサンプルを追加した - new file:   docs/source/_static/latex/beamer/latexmkrc - new file:   docs/source/_static/latex/beamer/main.tex
+- **latex/latex-beamer.md**: beamerの使い方を追加した
+- **latex/latex-beamer.md**: モード設定を追記した
+- **latex/latex-beamer.md**: beamerの使い方を追加した
+- **latex/latex-beamer.md**: beamer用のセクションを追加した - new file:   docs/source/latex/latex-beamer.md - modified:   docs/source/latex/latex-documentclass-beamer.md
+- **latex/latex-documentclass-beamer.md**: パスを整理した
+- **latex/latex-beamer.md**: beamerクラスを追加した
+- **latex/latex-japanese.md**: 日本語LaTeXについて追記した
+- **latex/latex-misc.md**: 雑談を整理した
+- **latex/examples/latexmkrc**: LaTeXのサンプルの設定を修正した
+- **.gitignore**: LaTeX関係の補助ファイルを除外した
+- **git/git-usage.md**: git-cliffを追加した
+- **geant4/geant4-sensor.md**: 目次のリンクを修正した
+- **geant4/geant4-usage.md**: 目次のリンクを修正した
+- **latex/latex-markdown.md**: 誤植を修正した
+
 ## v1.44.0 (2025-01-27)
 
 LaTeX 強化リリース
