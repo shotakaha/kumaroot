@@ -3,7 +3,12 @@
 %\usecolortheme{rose}
 \useinnertheme{rectangles}
 
-\usepackage[hybrid]{markdown}
+\usepackage[
+    hybrid,
+    gfmAutoIdentifiers=true,
+    strikeThrough=True,
+    taskLists=true,
+    ]{markdown}
 
 % フォントの設定
 \usepackage[no-math,deluxe,hiragino-pron]{luatexja-preset}
@@ -54,6 +59,18 @@
 \usetheme{Luebeck}
     \end{minted}
 \end{frame}
+
+\section{markdownの設定}
+\begin{frame}
+    \frametitle{markdownの設定}
+ここにMarkdown環境を配置する
+%\begin{markdown}
+%- 箇条書き
+%- 箇条書き
+%\end{markdown}
+\end{frame}
+
+
 
 \section{数式フォントの設定}
 \begin{frame}[fragile]
