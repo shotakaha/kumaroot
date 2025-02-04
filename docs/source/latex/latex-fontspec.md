@@ -26,6 +26,15 @@ TeXLive2020以降では、デフォルトが
 ```latex
 % プリアンブル
 \setmainfont{フォント名}[詳細設定]
+
+\setmainfont{HiraginoSans}[
+    BoldFeature={HiraginoSans-W8},
+    ItalicFeature={HiraginoSans-W7},
+    BoldItalicFeatures={HiraginoSans-W9},
+    SlantedFeature{HiraginoSans-W6},
+    SmallCapsFeature={...},
+    UprightFeature={HiraginoSans-W5},
+]
 ```
 
 `\setmainfont{}`で欧文の本文フォントを変更できます。
@@ -36,7 +45,7 @@ TeXLive2020以降では、デフォルトが
 
 ```latex
 % プリアンブル
-\setsansfont{フォント名}
+\setsansfont{フォント名}[フォント詳細]
 ```
 
 `\setsansfont{}`で欧文の見出しフォントを変更できます。
@@ -47,7 +56,7 @@ TeXLive2020以降では、デフォルトが
 
 ```latex
 % プリアンブル
-\setmonofont{フォント名}
+\setmonofont{フォント名}[フォント詳細]
 ```
 
 `\setmonofont{}`で欧文の等幅フォントを変更できます。
@@ -63,6 +72,17 @@ fontspecパッケージを追加すると
 ```
 
 `\strong{}`で**太字で強調**できます。
+
+## 数式フォントしたい（`no-math`）
+
+```latex
+% プリアンブル
+\usepackage[no-math]{fontspec}
+\usepackage{unicode-math}
+```
+
+`no-math`オプションで、`fontspec`による数式フォントの変更を無効にできます。
+[unicode-mathパッケージ](./latex-unicode-math.md)などで、数式フォントを別に設定する場合は、このオプションを設定しておくとよいかもしれません。
 
 ## 依存パッケージ
 
