@@ -81,6 +81,54 @@ z_{2} & = cx + dy
 
 :::
 
+## 黒板太字したい（`\mathbb`）
+
+```latex
+\mathbb{ABCdef7890}
+```
+
+:::{math}
+\mathbb{ABCdef7890}
+:::
+
+`\mathbb{}`で文字スタイルを黒板文字（blackboard bold）に変更できます。
+
+## 筆記体したい（`\mathcal`）
+
+```latex
+\mathcal{ABCdef7890}
+```
+
+:::{math}
+\mathcal{ABCdef7890}
+:::
+
+`\mathcal{}`で文字スタイルを筆記体（caligraphy）に変更できます。
+
+## 花文字したい（`\mathscr`）
+
+```latex
+\mathscr{ABCdef7890}
+```
+
+:::{math}
+\mathscr{ABCdef7890}
+:::
+
+`\mathscr{}`で文字スタイルを花文字（script font）に変更できます。
+
+## ドイツ文字したい（`\mathfrak`）
+
+```latex
+\mathfrak{ABCdef7890}
+```
+
+:::{math}
+\mathfrak{ABCdef7890}
+:::
+
+`\mathfrak{}`で文字スタイルをドイツ文字（fraktur）に変更できます。
+
 ## ベクトルや行列を表示したい
 
 ```latex
