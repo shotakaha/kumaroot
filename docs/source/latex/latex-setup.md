@@ -10,6 +10,8 @@ latex-kpsewhich
 latex-texdoc
 latex-chktex
 latex-detex
-latex-kanji-config-udpmap-sys
+latex-latexpand
 latex-latexdiff
+latex-kanji-config-udpmap-sys
+
 ```
