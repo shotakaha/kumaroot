@@ -2,4 +2,5 @@
 
 ```{toctree}
 latex-draftwatermark
+latex-changes
 ```
