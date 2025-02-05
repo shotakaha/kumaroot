@@ -180,6 +180,15 @@ maxdepth: 2
 latex-beamer
 ```
 
+## 校正したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+latex-proofread
+```
+
 ## パッケージしたい
 
 ```{toctree}
