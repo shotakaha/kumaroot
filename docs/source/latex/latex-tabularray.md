@@ -6,7 +6,6 @@
 \UseTblrLibrary{booktabs}
 
 % 本文
-
 \begin{tblr}{lccr}
 \toprule
 Alpha & Beta & Gamma & Delta \\
