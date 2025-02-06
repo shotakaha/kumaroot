@@ -13,5 +13,4 @@ latex-detex
 latex-latexpand
 latex-latexdiff
 latex-kanji-config-udpmap-sys
-
 ```

@@ -124,8 +124,7 @@ maxdepth: 2
 ---
 latex-minipage
 latex-figure
-latex-tabularray
-latex-booktabs
+latex-table
 ```
 
 ## 数式したい

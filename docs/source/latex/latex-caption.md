@@ -15,13 +15,14 @@
 \begin{figure}
   \centering
   \includegraphics[width=0.8\linewidth]{ファイル名}
-  \caption{図のキャプション。デフォルトだと行幅いっぱいに表示される。}
+  \caption[短いキャプション]{図のキャプション。デフォルトだと行幅いっぱいに表示される。}
 \end{figure}
 ```
 
-`caption`パッケージで図（figure）や表（table）などのキャプション表示をカスタマイズできます。
+`caption`パッケージで[図](./latex-figure.md)や[表](./latex-table.md)などのキャプションを設定できます。
 このパッケージを使うことで、キャプションの外観や配置、スタイルを細かく制御できます。
 
+`\caption[]{}`に設定した短いキャプションは`\listoffigures`や`\listoftables`に出力されます。
 ページ全体の設定は`\captionsetup`コマンドを利用します。
 詳しい使い方はパッケージのドキュメントを参照してください（`$ texdoc caption`）
 
@@ -74,7 +75,7 @@ LaTeXで幅を設定する場合、
     \centering
     \captionsetup{width=0.8\linewidth}
     \includegraphics[width=0.9\linewidth]{ファイル名}
-    \caption{図のキャプション}
+    \caption[短いキャプション]{図のキャプション}
 \end{figure}
 ```
 
