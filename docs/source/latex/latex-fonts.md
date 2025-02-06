@@ -11,6 +11,12 @@ latex-font-family
 latex-font-series
 latex-font-shape
 latex-font-size
+latex-fontspec
+latex-luatexja
+latex-luatexja-fontspec
+latex-luatexja-preset
+latex-luatexja-otf
+latex-luatexja-ruby
 latex-fonts-more
 ```
 
@@ -28,3 +34,13 @@ LuaLaTeXでは、[fontspec](./latex-fontspec.md)や[luatex-fontspec](./latex-lua
 はじめてLaTeXを使う場合は、フォントを変更せずに使っても問題はありません。
 
 :::
+
+## フォント設定のサンプル
+
+```{toctree}
+latex-lmodern
+latex-font-dotgothic16
+latex-font-kiwi-maru
+latex-font-hiragino
+latex-font-zen-maru-gothic
+```

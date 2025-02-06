@@ -1,4 +1,4 @@
-# ルビを振りたい（`luatexja-ruby`）
+# ルビしたい（`luatexja-ruby`）
 
 ```latex
 \ltjruby{素粒子}{そ|りゅう|し}

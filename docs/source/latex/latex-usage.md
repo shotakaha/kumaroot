@@ -61,18 +61,7 @@ latex-preamble
 ---
 maxdepth: 2
 ---
-latex-fontspec
-latex-luatexja
-latex-luatexja-fontspec
-latex-luatexja-preset
-latex-luatexja-otf
-latex-luatexja-ruby
 latex-fonts
-latex-lmodern
-latex-font-dotgothic16
-latex-font-kiwi-maru
-latex-font-hiragino
-latex-font-zen-maru-gothic
 ```
 
 ## ページ設定したい
