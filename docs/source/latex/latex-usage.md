@@ -124,6 +124,7 @@ maxdepth: 2
 ---
 latex-minipage
 latex-figure
+latex-tabularray
 latex-booktabs
 ```
 
