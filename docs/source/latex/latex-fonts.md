@@ -6,6 +6,7 @@
 ---
 maxdepth: 1
 ---
+latex-usefont
 latex-font-family
 latex-font-series
 latex-font-shape
