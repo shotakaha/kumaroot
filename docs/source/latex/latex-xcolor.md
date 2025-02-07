@@ -56,6 +56,27 @@
 `\color`コマンドや`\textcolor`コマンドで文字色を変更できます。
 個人的な好みから、以下では`\textcolor`コマンドを使います。
 
+## 背景色したい（`\pagecolor`）
+
+```latex
+% 本文
+\pagecolor{SpringGreen!20}
+\section{背景色あり}
+
+\newpage
+\newpage
+\newpage
+
+\pagecolor{White}
+\section{背景色なし（白）}
+```
+
+`\pagecolor{}`でページの背景色を変更できます。
+色指定に透明度を追加すると雰囲気がよくなることが多いです。
+
+このコマンドより後のすべてのページの背景色に適用されます。
+元に戻す場合、再度、コマンドの実行が必要です。
+
 ## 背景色したい（`\colorbox`）
 
 ```latex
