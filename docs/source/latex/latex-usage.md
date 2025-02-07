@@ -123,7 +123,6 @@ latex-table
 maxdepth: 2
 ---
 latex-amsmath
-latex-unicode-math
 latex-pmatrix
 ```
 

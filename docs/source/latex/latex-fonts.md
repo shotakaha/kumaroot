@@ -12,6 +12,8 @@ latex-font-series
 latex-font-shape
 latex-font-size
 latex-fontspec
+latex-fontsetup
+latex-unicode-math
 latex-luatexja
 latex-luatexja-fontspec
 latex-luatexja-preset
