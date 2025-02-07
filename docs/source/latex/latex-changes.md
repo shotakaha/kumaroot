@@ -22,9 +22,23 @@
 ```
 
 `changes`は変更箇所をわかりやすく表示できるパッケージです。
-Wordなどの変更履歴ツールのように、追加した部分や修正した部分を色とコメント付きで出力できます。
+Wordなどの変更履歴ツールのように、
+追加した部分や修正した部分を色とコメント付きで出力できます。
 
-`\definechangesauthor[]{}`でレビュワーの情報を設定します。
+## レビュワーしたい（`\definechangesauthor`）
+
+```latex
+% プリアンブル
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changes}
+
+% レビュワーを設定
+\definechangesauthor[name="Shota Takahashi", color=Green]{ST}
+\definechangesauthor[name="Qumasan", color=Goldenrod]{QM}
+```
+
+`\definechangesauthor[]{}`でレビュワーの情報を設定できます。
+[xcolorパッケージ](./latex-xcolor.md)を読み込み、色名を追加しておくとよいです。
 ここで設定したIDで
 `\added{}`、`\deleted{}`、`\replaced{}{}`、
 などのコマンドを使います。
