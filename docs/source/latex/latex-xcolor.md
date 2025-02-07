@@ -13,7 +13,7 @@
 ```latex
 \usepackage{xcolor}  % 19色
 \usepackage[dvipsnames]{xcolor}  % +68色
-\usepackage[svgnames]{xcolor}    % +31色
+\usepackage[svgnames]{xcolor}    % +151色
 \usepackage[x11names]{xcolor}    % +289色
 \usepackage[dvipsnames,svgnames,x11names]{xcolor}
 ```
@@ -22,6 +22,20 @@
 オプションは`dvipsnames`、`svgnames`、`x11names`の3つあります。
 すべてを指定することもできます。
 それぞれのオプションで増える色名は`xcolor`のドキュメントで確認できます。
+
+基本色は使いにくい色もあるので`dvipsnames`オプションは有効にするとよいと思います。
+`dvipsnames`を有効にすると、大文字ではじまる色名が利用可能になります。
+以下に、基本色の代替となりそうな色名をリストしてみました。
+
+| 基本色 | `dvipsnames`色 |
+|---|---|
+| `red` | `Red` / `OrangeRed` |
+| `green` | `Green` / `ForestGreen` |
+| `blue` | `Blue` / `RoyalBlue` |
+| `cyan` | `Cyan` / `ProcessBlue` |
+| `magenta` | `Magenta` / `WildStrawberry` |
+| `yellow` | `Yellow` / `Goldenrod` |
+| `lime` | `LimeGreen` |
 
 ## 文字色したい（`\textcolor`）
 
