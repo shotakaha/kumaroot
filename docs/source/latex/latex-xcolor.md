@@ -40,8 +40,10 @@
 ## 文字色したい（`\textcolor`）
 
 ```latex
-{\color{文字色}テキスト}
+% 本文
+{\color{文字色} テキスト}
 \textcolor{文字色}{テキスト}
+\textcolor{文字色!透過度}{テキスト}
 
 \textcolor{red}{赤色のテキスト}
 \textcolor{green}{緑色のテキスト}
@@ -54,6 +56,7 @@
 ```
 
 `\color`コマンドや`\textcolor`コマンドで文字色を変更できます。
+`色名!10`ようにして透過度を設定できます。
 個人的な好みから、以下では`\textcolor`コマンドを使います。
 
 ## 背景色したい（`\pagecolor`）
@@ -81,13 +84,17 @@
 
 ```latex
 % \colorbox{背景色}{テキスト}
-\colorbox{yellow}{背景が黄色の文字}
-
-% \fcolorbox{枠色}{背景色}{テキスト}
-\fcolorbox{red}{cyan}{枠が赤、背景がシアンの文字}
+\colorbox{Yellow}{背景が黄色の文字}
 ```
 
-`\colorbox`コマンドや`\fcolorbox`コマンドで背景色を変更できます。
+`\colorbox`コマンドで文字の背景色を変更できます。
+
+```latex
+% \fcolorbox{枠色}{背景色}{テキスト}
+\fcolorbox{Red}{Red!10}{枠が赤、背景が赤10パーセントの文字}
+```
+
+`\fcolorbox`コマンドで枠線付きにできます。
 
 ## グレースケールを使いたい
 
