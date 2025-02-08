@@ -3,7 +3,6 @@
 ```latex
 % プリアンブル
 \usepackage{xcolor}
-\definecolor{bg}{rgb}{.9, .9, .9}
 
 \usepackage{minted}
 \setminted{
@@ -12,7 +11,7 @@
     fontseries=upright,
     frame=leftline,
     linenos=true,
-    bgcolor=bg,
+    bgcolor=black!10,
 }
 
 % 本文
@@ -78,15 +77,14 @@ if __name__ == "__main__":
 
 ```latex
 \usepackage{xcolor}
-\definecolor{bg}{rgb}{.9, .9, .9}
 \setminted{
-    bgcolor=bg,
+    bgcolor=black!10,
 }
 ```
 
 `bgcolor`でコードブロックの背景色を変更できます。
 デフォルトは地の色なので、背景色を追加すると見やすくなります。
-色は`xcolor`パッケージでカスタマイズします。
+色は[xcolorパッケージ](./latex-xcolor.md)にある色名を使えばOKです。
 
 :::{note}
 
