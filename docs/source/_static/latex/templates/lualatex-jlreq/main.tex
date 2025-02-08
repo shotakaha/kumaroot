@@ -1,7 +1,7 @@
 \documentclass[
     article,
     head_space=25truemm,
-    foot_space=15truemm,
+    foot_space=10truemm,
     gutter=15truemm]{jlreq}
 
 %% 和文フォントの設定
@@ -31,17 +31,7 @@
 
 % 箇条書き
 \input{preamble/enumitem.tex}
-
-\usepackage[
-    definitionLists=true,
-    gfmAutoIdentifiers=true,
-    strikeThrough=true,
-    stripIndent=true,
-    subscripts=true,
-    superscripts=true,
-    taskLists=true,
-    texMathDollars=true,
-]{markdown}
+\input{preamble/markdown.tex}
 
 %% 参考文献
 \usepackage{biblatex}
@@ -119,15 +109,9 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 
 \subsection{geometry}
 
-\subsection{markdown}
+\subsection{markdownの設定}
 
-\begin{markdown}
-```latex
-\usepackage[
-    definitionLists=true,
-    ]{markdown}
-```
-\end{markdown}
+\inputminted{latex}{preamble/markdown.tex}
 
 \begin{markdown}
 `definitionLists=true`
