@@ -159,6 +159,22 @@ $\prescript{137}{55}{\mathrm{Cs}}$
 `\prescript{}{}{}`は元素記号を書くときにも活躍します。
 利用しない場合、`\hphantom{}`などを使って手動で字幅の調整が必要です。
 
+```latex
+\newcommand*{\isotope}[3]{%
+  \begingroup
+  \mathtoolset{
+    prescript-sup-format=\mathit,
+    prescript-sub-format=\mathbf,
+    prescript-arg-format=\mathrm,
+  }%
+  \prescript{#1}{#2}{#3}%
+  \endgroup
+}
+```
+
+`mathtools`のドキュメントには、同位体を表示するための
+コマンド例が載っていました。
+
 ## ベクトルや行列を表示したい
 
 ```latex
