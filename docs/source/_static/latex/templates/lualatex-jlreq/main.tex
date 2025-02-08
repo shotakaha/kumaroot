@@ -2,13 +2,17 @@
 
 %% 和文フォントの設定
 \usepackage[haranoaji,deluxe]{luatexja-preset}
+\setmonofont{MoralerSpaceKrypton}
+\setmonojfont{MoralerSpaceKrypton}
 
 %% ページ設定
-\usepackage{geometry}
+\usepackage[showframe]{geometry}
 \geometry{
     headheight=5\zw,
 }
-\usepackage{markdown}
+\usepackage[
+    definitionLists=true,
+]{markdown}
 
 %% ヘッダー／フッターの装飾
 \usepackage{fancyhdr}
@@ -25,7 +29,8 @@
 %\titleformat{\section}{}{\Large\bfseries}{\thesection}{1em}
 
 % 箇条書き
-\usepackage{enumitem}
+\input{preamble/enumitem.tex}
+
 
 %% 参考文献
 \usepackage{biblatex}
@@ -88,8 +93,15 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 
 \begin{markdown}
 ```latex
-\usepackage{markdown}
+\usepackage[
+    definitionLists=true,
+    ]{markdown}
 ```
+\end{markdown}
+
+\begin{markdown}
+`definitionLists=true`
+: `description`環境を有効にした
 \end{markdown}
 
 \section{見出しの設定}
@@ -122,11 +134,17 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 
 \section{箇条書き}
 
-\begin{minted}{latex}
-\usepackage{enumitem}
-\end{minted}
+\subsection{enumitemの設定}
 
-\subsection{itemize}
+\inputminted{latex}{./preamble/enumitem.tex}
+
+\begin{markdown}
+1. ラベル（番号や用語）と説明文の間隔を1文字分に変更した
+\end{markdown}
+
+\subsection{出力例}
+
+\subsubsection{itemize}
 
 \begin{minted}{latex}
 \begin{itemize}
@@ -162,7 +180,7 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 - \jalipsum{jugemu}
 \end{markdown}
 
-\subsection{enumerate}
+\subsubsection{enumerate}
 
 \begin{minted}{latex}
 \begin{enumerate}
@@ -199,7 +217,7 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \end{markdown}
 
 
-\subsection{description}
+\subsubsection{description}
 
 \begin{minted}{latex}
 \begin{description}
@@ -216,6 +234,38 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
     \item[いろは唄] \jalipsum{iroha}
     \item[寿限無] \jalipsum{jugemu}
 \end{description}
+
+\paragraph{markdown環境}
+
+\begin{markdown}
+```latex
+いろは唄
+: \jalipsum{iroha}
+
+寿限無
+: \jalipsum{jugemu}
+
+いろは唄
+: \jalipsum{iroha}
+
+寿限無
+: \jalipsum{jugemu}
+```
+\end{markdown}
+
+\begin{markdown}
+いろは唄
+: \jalipsum{iroha}
+
+寿限無
+: \jalipsum{jugemu}
+
+いろは唄
+: \jalipsum{iroha}
+
+寿限無
+: \jalipsum{jugemu}
+\end{markdown}
 
 \section{コードブロックの設定}
 
