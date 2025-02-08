@@ -116,6 +116,12 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \begin{markdown}
 `definitionLists=true`
 : `description`環境を有効にした
+
+`gfmAutoIdentifiers=true`
+: GitHub Flavored Markdown の自動検出を有効にした
+
+`strikeThrough=true`
+: ~~打ち消し線~~を有効にした
 \end{markdown}
 
 \section{見出しの設定}
@@ -246,7 +252,7 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
     \item[いろは唄] \jalipsum{iroha}
     \item[寿限無] \jalipsum{jugemu}
     \item[いろは唄] \jalipsum{iroha}
-    \item[寿限無] \jalipsum{jugemu}
+    \item[初恋] \jalipsum{hatsukoi}
 \end{description}
 
 \paragraph{markdown環境}
@@ -262,8 +268,8 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 いろは唄
 : \jalipsum{iroha}
 
-寿限無
-: \jalipsum{jugemu}
+初恋
+: \jalipsum{hatsukoi}
 ```
 \end{markdown}
 
@@ -277,8 +283,8 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 いろは唄
 : \jalipsum{iroha}
 
-寿限無
-: \jalipsum{jugemu}
+初恋
+: \jalipsum{hatsukoi}
 \end{markdown}
 
 \section{コードブロックの設定}
@@ -326,21 +332,13 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \end{minted}
 \jalipsum{jugemu}
 
-\subsection{草枕}
+\subsection{初恋}
 
 \begin{minted}{latex}
-    \jalipsum{kusamakura}
+    \jalipsum{hatsukoi}
 \end{minted}
+\jalipsum{hatsukoi}
 
-\jalipsum{kusamakura}
-
-\subsection{吾輩は猫である}
-
-\begin{minted}{latex}
-    \jalipsum{wagahai}
-\end{minted}
-
-\jalipsum{wagahai}
 
 %% レイアウトを確認
 \section{レイアウト}
@@ -349,6 +347,7 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
     \usepackage[japanese]{layout}
 \end{minted}
 
+\centering
 \layout
 
 %% 参考文献を出力
