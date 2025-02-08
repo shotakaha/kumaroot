@@ -1,4 +1,8 @@
-\documentclass[article, head_space=25truemm, foot_space=15truemm, gutter=15truemm]{jlreq}
+\documentclass[
+    article,
+    head_space=25truemm,
+    foot_space=15truemm,
+    gutter=15truemm]{jlreq}
 
 %% 和文フォントの設定
 \usepackage[haranoaji,deluxe]{luatexja-preset}
@@ -8,11 +12,8 @@
 %% ページ設定
 \usepackage[showframe]{geometry}
 \geometry{
-    headheight=5\zw,
+    headheight=6\zw,
 }
-\usepackage[
-    definitionLists=true,
-]{markdown}
 
 %% ヘッダー／フッターの装飾
 \usepackage{fancyhdr}
@@ -31,6 +32,16 @@
 % 箇条書き
 \input{preamble/enumitem.tex}
 
+\usepackage[
+    definitionLists=true,
+    gfmAutoIdentifiers=true,
+    strikeThrough=true,
+    stripIndent=true,
+    subscripts=true,
+    superscripts=true,
+    taskLists=true,
+    texMathDollars=true,
+]{markdown}
 
 %% 参考文献
 \usepackage{biblatex}
@@ -84,6 +95,25 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \end{abstract}
 
 \tableofcontents
+
+\section{ドキュメントクラスの設定}
+
+\begin{markdown}
+```latex'''
+\documentclass[
+    article,
+    head_space=25truemm,
+    foot_space=15truemm,
+    gutter=15truemm]{jlreq}
+```
+\end{markdown}
+
+\begin{markdown}
+1. ドキュメントクラスは`jlreq`を選択した
+1. `article`モードを設定した
+1. 天、地、ノドの余白を設定した
+\end{markdown}
+
 
 \section{ページ設定}
 
