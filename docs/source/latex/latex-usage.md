@@ -92,6 +92,7 @@ latex-par
 latex-emph
 latex-minted
 latex-xcolor
+latex-tcolorbox
 latex-bxjalipsum
 latex-markdown
 ```
