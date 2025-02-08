@@ -77,7 +77,7 @@ z_{2} & = cx + dy
 
 :::{note}
 
-昔は`eqarray`環境を使っていましたが、現在は非推奨となっています。
+昔は`eqnarray`環境を使っていましたが、現在は非推奨となっています。
 
 :::
 
@@ -128,6 +128,36 @@ z_{2} & = cx + dy
 :::
 
 `\mathfrak{}`で文字スタイルをドイツ文字（fraktur）に変更できます。
+
+## 順列・組み合わせしたい（`\prescript`）
+
+```latex
+% プリアンブル
+\usepackage{mathtools, amssymb}
+
+% 本文
+% prescriptなしでも出力できるが、可読性がよくない
+${}_{n}\mathrm{P}_{k}$
+${}_{n}\mathrm{C}_{k}$
+
+% 本文
+% \prescript{<sup>}{<sub>}{<arg>}
+$\prescript{}{n}{\mathrm{P}}_{k}$
+$\prescript{}{n}{\mathrm{C}}_{k}$
+```
+
+`\prescript{}{}{}`で前方に上付き文字、下付き文字をつけることができます。
+
+```latex
+% mathtoolsがないとき
+$^{137}_{\hphantom{0}55}\mathrm{Cs}$
+
+% mathtoolsがあるとき
+$\prescript{137}{55}{\mathrm{Cs}}$
+```
+
+`\prescript{}{}{}`は元素記号を書くときにも活躍します。
+利用しない場合、`\hphantom{}`などを使って手動で字幅の調整が必要です。
 
 ## ベクトルや行列を表示したい
 
