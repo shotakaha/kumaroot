@@ -19,6 +19,7 @@ latex-luatexja-fontspec
 latex-luatexja-preset
 latex-luatexja-otf
 latex-luatexja-ruby
+latex-polyglossia
 latex-fonts-more
 ```
 
