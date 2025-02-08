@@ -42,6 +42,8 @@
 \usepackage{biblatex}
 \addbibresource{参考文献.bib}
 
+\usepackage[italic]{hepnames}
+
 %% 本番では削除
 \usepackage[japanese]{layout}
 \usepackage{bxjalipsum}
@@ -314,6 +316,19 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \end{minted}
 \jalipsum{hatsukoi}
 
+\section{素粒子の名前}
+
+\begin{markdown}
+```latex
+\usepackage[italic]{hepnames}
+```
+\end{markdown}
+
+\subsection{B中間子}
+
+\begin{markdown}
+- $\PB$ / $\APB$
+\end{markdown}
 
 %% レイアウトを確認
 \section{レイアウト}
