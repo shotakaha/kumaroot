@@ -51,6 +51,18 @@
 
 `\text言語名{}`で、本文中に言語の切り替えができます。
 
+## 方言したい（`variant`）
+
+```latex
+\setotherlanguage[variant=american]{english}  % default
+\setotherlanguage[variant=australian]{english}
+\setotherlanguage[variant=british]{english}
+\setotherlanguage[variant=canadian]{english}
+\setotherlanguage[variant=newzealand]{english}
+```
+
+`variant`で言語ごとの方言を設定できます。
+
 ## フォントを設定したい
 
 ```latex
