@@ -33,26 +33,14 @@
 \input{preamble/enumitem.tex}
 \input{preamble/markdown.tex}
 
-%% 参考文献
-\usepackage{biblatex}
-\addbibresource{参考文献.bib}
-
 %% 図版の設定
 \usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{minted}
-\setminted{
-    fontfamily=tt,
-    fontseries=upright,
-    frame=leftline,
-    linenos=true,
-    bgcolor=black!10,
-    showspaces=true,
-    spacecolor=black!50,
-    stripall=true,
-    stripnl=true,
-}
+\input{preamble/minted.tex}
 
+%% 参考文献
+\usepackage{biblatex}
+\addbibresource{参考文献.bib}
 
 %% 本番では削除
 \usepackage[japanese]{layout}
@@ -289,20 +277,7 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 
 \section{コードブロックの設定}
 
-\begin{minted}{latex}
-\usepackage{minted}
-\setminted{
-    fontfamily=tt,
-    fontseries=upright,
-    frame=leftline,
-    linenos=true,
-    bgcolor=black!10,
-    showspaces=true,
-    spacecolor=black!50,
-    stripall=true,
-    stripnl=true,
-}
-\end{minted}
+\inputminted{latex}{preamble/minted.tex}
 
 \begin{markdown}
 `fontfamily=tt':
