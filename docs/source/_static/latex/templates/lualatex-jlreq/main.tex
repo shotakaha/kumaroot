@@ -1,19 +1,14 @@
 \documentclass[article, head_space=25truemm, foot_space=15truemm, gutter=15truemm]{jlreq}
 
 %% 和文フォントの設定
-\usepackage[haranoaji]{luatexja-preset}
+\usepackage[haranoaji,deluxe]{luatexja-preset}
 
-%% 参考文献
-\usepackage{biblatex}
-\addbibresource{参考文献.bib}
-
-\usepackage{graphicx}
-
-%% レイアウトの調整
+%% ページ設定
 \usepackage{geometry}
 \geometry{
     headheight=5\zw,
 }
+\usepackage{markdown}
 
 %% ヘッダー／フッターの装飾
 \usepackage{fancyhdr}
@@ -25,47 +20,271 @@
 \fancyfoot[C]{©️ KumaROOT / Shota Takahashi}
 \fancyfoot[R]{\thepage}
 
+%% 見出しの設定
+%\usepackage{titlesec}
+%\titleformat{\section}{}{\Large\bfseries}{\thesection}{1em}
+
+% 箇条書き
+\usepackage{enumitem}
+
+%% 参考文献
+\usepackage{biblatex}
+\addbibresource{参考文献.bib}
+
+%% 図版の設定
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{minted}
+\setminted{
+    fontfamily=tt,
+    fontseries=upright,
+    frame=leftline,
+    linenos=true,
+    bgcolor=black!10,
+    showspaces=true,
+    spacecolor=black!50,
+    stripall=true,
+    stripnl=true,
+}
+
+
 %% 本番では削除
 \usepackage[japanese]{layout}
 \usepackage{bxjalipsum}
 
+\usepackage{hyperref}
+
 %% 表紙の設定
 \title{LuaLaTeX + jlreq}
-
-% \renewcommand{\thefootnote}{\arabic{footnote}}
-\makeatletter
-% \let\@fnsymbol\@arabic
-\renewcommand{\@fnsymbol}[1]{\@arabic{#1}}
-\makeatother
 
 \author{
     すごい著者 \thanks{すごい大学} \\ \and
     これまたすごい著者 \thanks{こっちの研究所} \\ \and
     またまたすごい著者 \thanks{あっちの研究所}
 }
+\date{\today}
 
 
+% 本文ここから
 \begin{document}
 
-%% 表紙を出力
+% 表紙を出力
 \maketitle
 
+% 概要
 \begin{abstract}
 エンジンにLuaLaTeX、ドキュメントクラスにjlreqを使ったサンプルです。
 CTANで公開されているパッケージのみを使用し、独自パッケージなどは使わないつもりです。
 このソースをそのままLaTeXファイルに保存してコンパイルすればPDFができるはずです。
 \end{abstract}
 
-\section{寿限無}
+\tableofcontents
+
+\section{ページ設定}
+
+\subsection{geometry}
+
+\subsection{markdown}
+
+\begin{markdown}
+```latex
+\usepackage{markdown}
+```
+\end{markdown}
+
+\section{見出しの設定}
+
+\begin{minted}{latex}
+    \usepackage{titlesec}
+\end{minted}
 
 \jalipsum{jugemu}
 
-\section{草枕}
+\subsection{項}
+
+\jalipsum{iroha}
+
+\subsubsection{目}
+
+\jalipsum{jugemu}
+
+\paragraph{段落}
+
+\jalipsum{iroha}
+
+\subparagraph{小段落}
+
+\jalipsum{jugemu}
+
+
+
+
+
+\section{箇条書き}
+
+\begin{minted}{latex}
+\usepackage{enumitem}
+\end{minted}
+
+\subsection{itemize}
+
+\begin{minted}{latex}
+\begin{itemize}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+\end{itemize}
+\end{minted}
+
+\begin{itemize}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+\end{itemize}
+
+\paragraph{markdown環境}
+
+\begin{markdown}
+```latex
+- \jalipsum{iroha}
+- \jalipsum{jugemu}
+- \jalipsum{iroha}
+- \jalipsum{jugemu}
+```
+\end{markdown}
+
+\begin{markdown}
+- \jalipsum{iroha}
+- \jalipsum{jugemu}
+- \jalipsum{iroha}
+- \jalipsum{jugemu}
+\end{markdown}
+
+\subsection{enumerate}
+
+\begin{minted}{latex}
+\begin{enumerate}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+\end{enumerate}
+\end{minted}
+
+\begin{enumerate}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+    \item \jalipsum{iroha}
+    \item \jalipsum{jugemu}
+\end{enumerate}
+
+\paragraph{markdown環境}
+
+\begin{markdown}
+```latex
+1. \jalipsum{iroha}
+1. \jalipsum{jugemu}
+1. \jalipsum{iroha}
+1. \jalipsum{jugemu}
+```
+\end{markdown}
+
+\begin{markdown}
+1. \jalipsum{iroha}
+1. \jalipsum{jugemu}
+1. \jalipsum{iroha}
+1. \jalipsum{jugemu}
+\end{markdown}
+
+
+\subsection{description}
+
+\begin{minted}{latex}
+\begin{description}
+    \item[いろは唄] \jalipsum{iroha}
+    \item[寿限無] \jalipsum{jugemu}
+    \item[いろは唄] \jalipsum{iroha}
+    \item[寿限無] \jalipsum{jugemu}
+\end{description}
+\end{minted}
+
+\begin{description}
+    \item[いろは唄] \jalipsum{iroha}
+    \item[寿限無] \jalipsum{jugemu}
+    \item[いろは唄] \jalipsum{iroha}
+    \item[寿限無] \jalipsum{jugemu}
+\end{description}
+
+\section{コードブロックの設定}
+
+\begin{minted}{latex}
+\usepackage{minted}
+\setminted{
+    fontfamily=tt,
+    fontseries=upright,
+    frame=leftline,
+    linenos=true,
+    bgcolor=black!10,
+    showspaces=true,
+    spacecolor=black!50,
+    stripall=true,
+    stripnl=true,
+}
+\end{minted}
+
+\begin{markdown}
+`fontfamily=tt':
+コード内のフォント（とくにコメント）をモノスペース体／立体に変更した
+
+- コードブロックの左側に線を追加した
+- 行番号を表示した
+\end{markdown}
+
+\section{例文の設定}
+
+\begin{minted}{latex}
+    \usepackage{bxjalipsum}
+\end{minted}
+
+\subsection{いろは唄}
+
+\begin{minted}{latex}
+    \jalipsum{iroha}
+\end{minted}
+\jalipsum{iroha}
+
+\subsection{寿限無}
+
+\begin{minted}{latex}
+    \jalipsum{jugemu}
+\end{minted}
+\jalipsum{jugemu}
+
+\subsection{草枕}
+
+\begin{minted}{latex}
+    \jalipsum{kusamakura}
+\end{minted}
 
 \jalipsum{kusamakura}
 
+\subsection{吾輩は猫である}
+
+\begin{minted}{latex}
+    \jalipsum{wagahai}
+\end{minted}
+
+\jalipsum{wagahai}
+
 %% レイアウトを確認
-\newpage
+\section{レイアウト}
+
+\begin{minted}{latex}
+    \usepackage[japanese]{layout}
+\end{minted}
+
 \layout
 
 %% 参考文献を出力
