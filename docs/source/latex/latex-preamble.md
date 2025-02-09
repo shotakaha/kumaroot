@@ -7,5 +7,4 @@ latex-group
 latex-renewcommand
 latex-newcommand
 latex-newenvironment
-latex-providespackage
 ```

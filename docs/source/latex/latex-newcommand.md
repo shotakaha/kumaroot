@@ -27,3 +27,20 @@
 
 `\code`を`\texttt`コマンドのエイリアスとして定義しました。
 本文中にコードを入力する際に便利です。
+
+## 自作コマンドしたい（`\NewDocumentCommand`）
+
+```latex
+\usepackage{xparse}
+
+% \コマンド{arg1}[option]{arg2}
+\NewDocumentCommand{\コマンド名}{m o m}{%
+    % m: 位置引数
+    % o: オプション引数
+    {#1}
+    \IfValueT{#2}{#2}
+    {#3}
+}
+```
+
+`xparse`パッケージに含まれる`\NewDocumentCommand`を使うと、より柔軟にコマンドを作成できます。
