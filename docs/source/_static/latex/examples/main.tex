@@ -19,13 +19,16 @@
 \usepackage{abstract}
 
 % 見出し
-\renewcommand{\thepart}{\arabic{part}}
-\renewcommand{\thesection}{第\arabic{section}章}
-\renewcommand{\thesubsection}{第\arabic{section}.\arabic{subsection}節}
-\renewcommand{\thesubsubsection}{第\arabic{section}.\arabic{subsection}.\arabic{subsubsection}項}
+%\renewcommand{\thepart}{\arabic{part}}
+%\renewcommand{\thesection}{第\arabic{section}章}
+%\renewcommand{\thesubsection}{第\arabic{section}.\arabic{subsection}節}
+%\renewcommand{\thesubsubsection}{第\arabic{section}.\arabic{subsection}.\arabic{subsubsection}項}
+
 
 \input{preamble/enumitem.tex}
 \input{preamble/markdown.tex}
+
+%\input{preamble/titlesec.tex}
 
 % \renewcommand{\thesection}{第\arabic{section}章}
 % \renewcommand{\thesubsection}{第\arabic{section}.\arabic{subsection}節}
@@ -57,7 +60,8 @@
 \end{abstract}
 
 \tableofcontents
-\part{ドキュメントクラスの設定}
+
+\section{ドキュメントクラスの設定}
 
 \section{jlreqの設定}
 
@@ -73,39 +77,39 @@
 
 \include{packages/latexmk}
 
-\part{ページ設定}
+\section{ページ設定}
 
 \include{packages/maketitle}
 \include{packages/fancyhdr}
 
-\part{フォント設定}
+\section{フォント設定}
 
 \include{packages/fontspec}
 \include{packages/luatexja-ruby}
 
-\part{見出し}
+\section{見出し}
 
 \include{packages/heading}
-\part{箇条書き}
+\section{箇条書き}
 \include{packages/enumitem}
 \include{packages/itemize}
 \include{packages/enumerate}
 \include{packages/description}
 
 
-\part{コードブロック}
+\section{コードブロック}
 
 \include{packages/minted}
 
-\part{相互参照}
+\section{相互参照}
 \include{packages/hyperref}
 
-\part{科学}
+\section{科学}
 \include{packages/siunitx}
 \include{packages/physics}
 \include{packages/hepnames}
 
-\part{例文}
+\section{例文}
 
 \include{packages/bxjalipsum}
 
