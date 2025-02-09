@@ -1,9 +1,24 @@
 
-\section{コードブロック（minted）}
+\section{mintedの設定}
 
-\begin{minted}{latex}
-\usepackage{minted}
-\end{minted}
+\inputminted{latex}{preamble/minted.tex}
+
+\begin{markdown}
+    `fontfamily=tt` / `fontseries=upright`
+    : コード内のフォント（とくにコメント）をモノスペース体／立体に変更した
+
+    `frame=leftline`
+    : コードブロックの左端に実践を追加した
+
+    `linenos=true`
+    : 行番号を表示した
+
+    `bgcolor=black!10`
+    : 背景色を設定した（黒10パーセント）
+
+    `bgcolorpadding=1em`
+    : 背景のパディング（内側の余白）を1文字分に設定した
+\end{markdown}
 
 文書にコードブロックを表示する時に便利なパッケージです。
 \texttt{minted}環境や\texttt{mint}コマンド、\texttt{mintinline}コマンドが使えるようになります。

@@ -1,22 +1,26 @@
 \section{箇条書き（enumitem）}
 
-\begin{itemize}[leftmargin=3cm]
-    \item レベル1 - 箇条書き1
-    \begin{itemize}
-        \item レベル2 - 箇条書き1
-        \begin{itemize}
-            \item レベル3 - 箇条書き1
-            \begin{itemize}
-                \item レベル4 - 箇条書き1
-                \item レベル4 - 箇条書き2
-                \item レベル4 - 箇条書き3
-            \end{itemize}
-            \item レベル3 - 箇条書き2
-            \item レベル3 - 箇条書き3
-        \end{itemize}
-        \item レベル2 - 箇条書き2
-        \item レベル2 - 箇条書き3
-    \end{itemize}
-    \item レベル1 - 箇条書き2
-    \item レベル1 - 箇条書き3
-\end{itemize}
+
+\subsection{enumitemの設定}
+
+\inputminted{latex}{./preamble/enumitem.tex}
+
+\begin{markdown}
+`labelindent=1em`
+: テキスト領域の左端からラベルまでの余白を1文字分に設定した
+
+`leftmargin=*`
+: テキスト領域の左端から本文までの余白を`*`（たぶん自動？）に設定した
+
+`rightmargin=2em`
+: テキスト領域の右端から本文までの余白を2文字分に設定した。右端いっぱいまで文字を埋めるよりきれいに見える気がする。`*`を設定したらコンパイルエラーになった
+
+`labelsep=1em`
+: ラベルと本文のアキを1文字分に設定した
+
+`itemindent=2em`
+: `description`環境で、本文を折り返したときに2文字分のぶら下げを設定した
+
+`font=\ttfamily\bfseries`
+: `description`環境のラベルをモノスペース体に変更した。フォントは`\setmonofont{}`と`\setmonojfont{}`で設定した
+\end{markdown}
