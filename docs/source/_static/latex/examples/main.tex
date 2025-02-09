@@ -18,6 +18,12 @@
 \usepackage{bxjalipsum}
 \usepackage{abstract}
 
+% 見出し
+\renewcommand{\thepart}{\arabic{part}}
+\renewcommand{\thesection}{第\arabic{section}章}
+\renewcommand{\thesubsection}{第\arabic{section}.\arabic{subsection}節}
+\renewcommand{\thesubsubsection}{第\arabic{section}.\arabic{subsection}.\arabic{subsubsection}項}
+
 \input{preamble/enumitem.tex}
 \input{preamble/markdown.tex}
 
