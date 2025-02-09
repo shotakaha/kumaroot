@@ -49,6 +49,9 @@
 \usepackage{bxjalipsum}
 
 \usepackage{hyperref}
+\hypersetup{
+    unicode=true
+}
 
 %% 表紙の設定
 \title{LuaLaTeX + jlreq}
@@ -78,6 +81,8 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 
 \section{ドキュメントクラスの設定}
 
+\subsection{jlreqの設定}
+
 \begin{markdown}
 ```latex'''
 \documentclass[
@@ -97,7 +102,9 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 
 \section{ページ設定}
 
-\subsection{geometry}
+\subsection{フォントの設定}
+
+\subsection{geometryの設定}
 
 \subsection{markdownの設定}
 
@@ -113,6 +120,9 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 `strikeThrough=true`
 : ~~打ち消し線~~を有効にした
 \end{markdown}
+
+\subsection{fancyhdrの設定}
+
 
 \section{見出しの設定}
 
@@ -139,9 +149,6 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \jalipsum{jugemu}
 
 
-
-
-
 \section{箇条書き}
 
 \subsection{enumitemの設定}
@@ -149,7 +156,23 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \inputminted{latex}{./preamble/enumitem.tex}
 
 \begin{markdown}
-1. ラベル（番号や用語）と説明文の間隔を1文字分に変更した
+`labelindent=1em`
+: テキスト領域の左端からラベルまでの余白を1文字分に設定した
+
+`leftmargin=*`
+: テキスト領域の左端から本文までの余白を`*`（たぶん自動？）に設定した
+
+`rightmargin=2em`
+: テキスト領域の右端から本文までの余白を2文字分に設定した。右端いっぱいまで文字を埋めるよりきれいに見える気がする。`*`を設定したらコンパイルエラーになった
+
+`labelsep=1em`
+: ラベルと本文のアキを1文字分に設定した
+
+`itemindent=2em`
+: `description`環境で、本文を折り返したときに2文字分のぶら下げを設定した
+
+`font=\ttfamily\bfseries`
+: `description`環境のラベルをモノスペース体に変更した。フォントは`\setmonofont{}`と`\setmonojfont{}`で設定した
 \end{markdown}
 
 \subsection{出力例}
@@ -277,17 +300,50 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 : \jalipsum{hatsukoi}
 \end{markdown}
 
-\section{コードブロックの設定}
+\section{図の挿入}
+
+\subsection{graphicxの設定}
+
+\subsection{captionの設定}
+
+\subsection{subcaptionの設定}
+
+\section{表の挿入}
+
+\subsection{tabularrayの設定}
+
+\subsection{出力例}
+
+\section{コードブロック}
+
+\subsection{mintedの設定}
 
 \inputminted{latex}{preamble/minted.tex}
 
 \begin{markdown}
-`fontfamily=tt':
-コード内のフォント（とくにコメント）をモノスペース体／立体に変更した
+`fontfamily=tt` / `fontseries=upright`
+: コード内のフォント（とくにコメント）をモノスペース体／立体に変更した
 
-- コードブロックの左側に線を追加した
-- 行番号を表示した
+`frame=leftline`
+: コードブロックの左端に実践を追加した
+
+`linenos=true`
+: 行番号を表示した
+
+`bgcolor=black!10`
+: 背景色を設定した（黒10パーセント）
+
+`bgcolorpadding=1em`
+: 背景のパディング（内側の余白）を1文字分に設定した
 \end{markdown}
+
+
+\section{相互参照}
+
+\subsection{hyperrefの設定}
+
+\subsection{cleverefの設定}
+
 
 \section{例文の設定}
 

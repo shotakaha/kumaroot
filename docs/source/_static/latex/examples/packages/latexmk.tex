@@ -3,15 +3,8 @@
 \texttt{latexmk}というLaTeX版makeコマンドがあります。
 タイプセットに必要な設定を\texttt{latexmkrc}に記述すると、LaTeXエンジンなどに関係なく常に\texttt{latexmk}でタイプセット（コンパイル）できるようになります。
 
-\begin{minted}{bash}
-$pdf_mode = 4;
-$preview_continuous_mode = 1;
-$pvc_timeout = 1;
-$pvc_timeout_mins = 10;  # 30min; default
-$sleep_time = 60;  # 60s
-# $out_dir = "outd";
-# $aux_dir = "auxd";
-\end{minted}
+% 読み込むファイル名は main.tex からのパスでOK
+\inputminted{bash}{latexmkrc}
 
 \subsection{エンジンを設定する（\$pdf\_mode）}
 
