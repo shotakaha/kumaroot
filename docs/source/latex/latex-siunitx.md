@@ -163,3 +163,23 @@ $1.6 \text{cm} \times 2.3 \text{cm} \times 3.4 \text{cm}$
 
 英語で物理量を説明するのに合わせて設計されているようで、
 単位の前につけるか、後につけるか、マクロ名が変化します。
+
+## 表組したい（`S[table-format]`）
+
+```latex
+\begin{table}
+  \caption{測定データ}
+  \begin{tabular}[S[table-format=3.2] S[table-format=3.1]]
+    \toprule
+    { 長さ (cm)} & {質量 (kg)}\\
+    \midrule
+    12.34 & 5.6\\
+    123.45 & 45.6\\
+    1.23 & 0.9\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+```
+
+`S`列で表中の数値を揃えることができます。
+`table-format`オプションで揃えたい桁数を指定できます。
