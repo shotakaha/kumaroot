@@ -14,6 +14,26 @@
 
 本文中で局所的にウェイトを切り替えることができます。
 
+| コマンド形式 | 切り替え形式 | 説明 |
+|---|---|---|
+| `\textbf{...}` | `\bfseries` | Boldface |
+| `\textmd{...}` | `\mdseries` | Medium |
+
+フォントのウェイトは、名称ごとに100から900までの数値が割り当てられています。
+日本語フォントではWからはじまる番号になっていることもあります。
+
+| ウェイト | W番号 | 名称 |
+|---|---|---|
+| 100 | W1 | Thin / Hairline |
+| 200 | W2 | Extra Light / Ultra Light |
+| 300 | W3 | Light |
+| 400 | W4 | Regular / Normal |
+| 500 | W5 | Medium |
+| 600 | W6 | Semi Bold / Demi Bold |
+| 700 | W7 | Bold |
+| 800 | W8 | Extra Bold / Ultra Bold |
+| 900 | W9 | Black / Heavy |
+
 ## 太字したい（`\textbf`）
 
 ```latex
