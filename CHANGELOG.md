@@ -4,6 +4,63 @@
 
 ### Fix
 
+- **latex/latex-fncychap.md**: fncychapを整理した
+- **docs/source/_static/latex/examples/preamble/titlesec.tex**: titlesecの設定を追加した - modified:   docs/source/_static/latex/examples/main.tex - new file:   docs/source/_static/latex/examples/preamble/titlesec.tex
+- **latex/latex-newcommand.md**: NewDocumentCommandを追加した - modified:   docs/source/latex/latex-newcommand.md - modified:   docs/source/latex/latex-preamble.md
+- **latex/latex-titlesec.md**: 標準タイトルの設定を追加した
+- **latex/latex-section.md**: 見出しの再定義を追記した
+- **docs/source/_static/latex/examples/main.tex**: 内容を移動した
+- **docs/source/_static/latex/templates/lualatex-jlreq/main.tex**: このファイルの内容は別のファイルに移行することにした
+- **docs/source/_static/latex/examples/main.tex**: プリアンブルに追加した
+- **docs/source/_static/latex/examples/main.tex**: サンプルを更新した
+- **docs/source/_static/latex/examples/latexmkrc**: latexmkの設定を変更した
+- LaTeXのサンプルを整理した
+- **docs/source/_static/latex/templates/lualatex-jlreq/main.tex**: hepnamesのサンプルを追加した
+- **docs/source/_static/latex/templates/lualatex-jlreq/preamble/minted.tex**: mintedの設定を別ファイルにした
+- **docs/source/_static/latex/templates/lualatex-jlreq/main.tex**: サンプルを更新した
+- **docs/source/_static/latex/templates/lualatex-jlreq/preamble/markdown.tex**: markdownの設定を別ファイルにした
+- **docs/source/_static/latex/templates/lualatex-jlreq/main.tex**: サンプルを更新した
+- **docs/source/_static/latex/templates/lualatex-jlreq/main.tex**: サンプルを更新した
+- **docs/source/_static/latex/templates/lualatex-jlreq/main.tex**: サンプルを改良中
+- **docs/source/_static/latex/templates/lualatex-jlreq/latexmkrc**: pvcを無効にした
+- **latex/latex-minted.md**: 背景色のサンプルコードを変更した
+- **latex/latex-amsmath.md**: 同位体コマンドを追記した
+- **latex/latex-polyglossia.md**: 方言の設定を追記した
+- **latex/latex-polyglossia.md**: polyglossiaを追加した
+- **latex/latex-amsmath.md**: prescriptを追記した
+- **latex/latex-tcolorbox.md**: tcolorboxを追加した
+- **latex/latex-ltjsclasses.md**: englishオプションを追加した
+- **latex/latex-section.md**: 見出しの使い方を整理した
+- **latex/latex-xcolor.md**: 透過度を追記した
+- **latex/latex-xcolor.md**: pagecolorを追加した
+- **latex/latex-changes.md**: 色の変更を追加した
+- **latex/latex-xcolor.md**: 使うとよさそうな色名を追記した
+- **latex/latex-titlepage.md**: 表紙のパターンを追加した
+- **latex/latex-lmodern.md**: LatinModernを追記した
+- **latex/latex-fontsetup.md**: fontsetupを追加した
+- **latex/latex-usefont.md**: フォント要素の簡単な説明を追加した
+- **latex/latex-usefont.md**: このコマンドはあまり使わないことを注釈に追記した
+- **latex/latex-fonts.md**: フォント設定の目次を整理した
+- **latex/latex-usefont.md**: フォント設定を整理した
+- **latex/latex-table.md**: 図表の使い方を整理した
+- **docs/source/_static/latex/poster/latexmkrc**: pvcを無効にした
+- **latex/latex-tabularray.md**: tabularrayを追記した
+- **latex/latex-tabularray.md**: tabularrayのサンプルを追加した
+- **latex/latex-booktabs.md**: booktabsを整理した
+- **latex/latex-tabularray.md**: tabularrayを追加した
+- **latex/latex-changes.md**: changesを追加した
+- **latex/latex-tlmgr.md**: tlmgrを更新した
+- **latex/latex-latexpand.md**: latexpandを追加した
+- **latex/latex-latexdiff.md**: latexdiffを追加した
+- **latex/latex-draftwatermark.md**: draftwatermarkを追加した
+- **latex/latex-fontspec.md**: フォント設定の詳細を追記した
+- **latex/latex-amsmath.md**: 数式用のシェープを追記した
+- **latex/latex-amsmath.md**: 数式中のテキストを追記した
+- **docs/source/_static/latex/slides/main.tex**: スライドサイズの設定を確認中
+- **docs/source/_static/latex/beamer/main.tex**: markdownの設定を確認中
+- **latex/latex-geometry.md**: スライドサイズの設定を追記した
+- **latex/latex-beamer.md**: beamerの基本的な使い方を整理した
+- **docs/source/_static/latex/slides/main.tex**: スライド設定の迷子中
 - **latex/latex-otf.md**: 削除した
 - **latex/latex-luatexja-otf.md**: luatexja-otfとotfの内容をまとめた
 - **latex/latex-titlesec.md**: titlesecを追記した
