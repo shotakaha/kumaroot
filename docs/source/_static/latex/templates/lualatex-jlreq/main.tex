@@ -1,8 +1,8 @@
 \documentclass[
-    article,
-    head_space=25truemm,
-    foot_space=10truemm,
-    gutter=15truemm]{jlreq}
+  article,
+  head_space=25truemm,
+  foot_space=10truemm,
+gutter=15truemm]{jlreq}
 
 %% 和文フォントの設定
 \usepackage[haranoaji,deluxe]{luatexja-preset}
@@ -12,7 +12,7 @@
 %% ページ設定
 \usepackage[showframe]{geometry}
 \geometry{
-    headheight=6\zw,
+  headheight=6\zw,
 }
 
 %% ヘッダー／フッターの装飾
@@ -50,19 +50,18 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    unicode=true
+  unicode=true
 }
 
 %% 表紙の設定
 \title{LuaLaTeX + jlreq}
 
 \author{
-    すごい著者 \thanks{すごい大学} \\ \and
-    これまたすごい著者 \thanks{こっちの研究所} \\ \and
-    またまたすごい著者 \thanks{あっちの研究所}
+  すごい著者 \thanks{すごい大学} \\ \and
+  これまたすごい著者 \thanks{こっちの研究所} \\ \and
+  またまたすごい著者 \thanks{あっちの研究所}
 }
 \date{\today}
-
 
 % 本文ここから
 \begin{document}
@@ -72,9 +71,9 @@
 
 % 概要
 \begin{abstract}
-エンジンにLuaLaTeX、ドキュメントクラスにjlreqを使ったサンプルです。
-CTANで公開されているパッケージのみを使用し、独自パッケージなどは使わないつもりです。
-このソースをそのままLaTeXファイルに保存してコンパイルすればPDFができるはずです。
+  エンジンにLuaLaTeX、ドキュメントクラスにjlreqを使ったサンプルです。
+  CTANで公開されているパッケージのみを使用し、独自パッケージなどは使わないつもりです。
+  このソースをそのままLaTeXファイルに保存してコンパイルすればPDFができるはずです。
 \end{abstract}
 
 \tableofcontents
@@ -82,10 +81,6 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \section{ドキュメントクラスの設定}
 
 このファイルは examples/main.tex に移行することにしました
-
-
-
-
 
 \section{ページ設定}
 
@@ -98,14 +93,14 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
 \inputminted{latex}{preamble/markdown.tex}
 
 \begin{markdown}
-`definitionLists=true`
-: `description`環境を有効にした
+  `definitionLists=true`
+  : `description`環境を有効にした
 
-`gfmAutoIdentifiers=true`
-: GitHub Flavored Markdown の自動検出を有効にした
+  `gfmAutoIdentifiers=true`
+  : GitHub Flavored Markdown の自動検出を有効にした
 
-`strikeThrough=true`
-: ~~打ち消し線~~を有効にした
+  `strikeThrough=true`
+  : ~~打ち消し線~~を有効にした
 \end{markdown}
 
 \section{例文の設定}
@@ -134,7 +129,6 @@ CTANで公開されているパッケージのみを使用し、独自パッケ�
     \jalipsum{hatsukoi}
 \end{minted}
 \jalipsum{hatsukoi}
-
 
 %% レイアウトを確認
 \section{レイアウト}

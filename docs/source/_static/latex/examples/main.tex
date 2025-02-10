@@ -24,7 +24,6 @@
 %\renewcommand{\thesubsection}{第\arabic{section}.\arabic{subsection}節}
 %\renewcommand{\thesubsubsection}{第\arabic{section}.\arabic{subsection}.\arabic{subsubsection}項}
 
-
 \input{preamble/enumitem.tex}
 \input{preamble/markdown.tex}
 
@@ -54,9 +53,9 @@
 \maketitle
 
 \begin{abstract}
-この文書はドキュメントクラスに\texttt{jlreq}を指定し、
-\texttt{LuaLaTeX}を使ってビルドしています。
-\jalipsum{jugemu}
+  この文書はドキュメントクラスに\texttt{jlreq}を指定し、
+  \texttt{LuaLaTeX}を使ってビルドしています。
+  \jalipsum{jugemu}
 \end{abstract}
 
 \tableofcontents
@@ -70,9 +69,9 @@
 \end{minted}
 
 \begin{markdown}
-1. ドキュメントクラスは`jlreq`を選択した
-1. `article`モードを設定した
-1. 天、地、ノドの余白を設定した
+  1. ドキュメントクラスは`jlreq`を選択した
+  1. `article`モードを設定した
+  1. 天、地、ノドの余白を設定した
 \end{markdown}
 
 \include{packages/latexmk}
@@ -95,7 +94,6 @@
 \include{packages/itemize}
 \include{packages/enumerate}
 \include{packages/description}
-
 
 \section{コードブロック}
 
