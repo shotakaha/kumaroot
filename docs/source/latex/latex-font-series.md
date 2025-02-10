@@ -1,4 +1,4 @@
-# シリーズしたい（`\textbf`）
+# シリーズしたい（`\textmd` / `\textbf`）
 
 ```latex
 {\mdseries ...} または \textmd{...}    % Medium（デフォルト）
