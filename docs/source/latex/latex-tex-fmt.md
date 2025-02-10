@@ -10,6 +10,9 @@ $ tex-fmt main.tex
 
 // チェックのみ
 $ tex-fmt --check main.tex
+
+// 一括フォーマット
+$ tex-fmt ディレクトリ/*.tex
 ```
 
 `tex-fmt`はRust製のLaTeX用フォーマッターです。
