@@ -1,9 +1,11 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.44.1 (2025-02-10)
 
 ### Fix
 
+- **latex/latex-font-family.md**: 数式フォントの操作も追記した
+- **latex/latex-font-family.md**: フォント設定を整理した
 - **latex/latex-fncychap.md**: fncychapを整理した
 - **docs/source/_static/latex/examples/preamble/titlesec.tex**: titlesecの設定を追加した - modified:   docs/source/_static/latex/examples/main.tex - new file:   docs/source/_static/latex/examples/preamble/titlesec.tex
 - **latex/latex-newcommand.md**: NewDocumentCommandを追加した - modified:   docs/source/latex/latex-newcommand.md - modified:   docs/source/latex/latex-preamble.md
