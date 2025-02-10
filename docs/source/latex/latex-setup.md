@@ -12,5 +12,6 @@ latex-chktex
 latex-detex
 latex-latexpand
 latex-latexdiff
+latex-tex-fmt
 latex-kanji-config-udpmap-sys
 ```
