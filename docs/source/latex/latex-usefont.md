@@ -55,6 +55,15 @@ UTF-8やシフトJISのようなファイルのエンコーディングとはま
 欧文エンコーディングには`TU`（TeX Unicode）、`T1`、`OT1`（Old T1）があります。
 和文エンコーディングには`JY1`（pLaTeX）、`JY2`（upLaTeX）、`JY3`（LuaLaTeX）があります。
 
+| エンコーディング | 文字数 |
+|---|---|
+| `OT1` （Original TeX） | 128文字（7bit） |
+| `T1` (EC encoding) | 256文字（8bit） |
+| `TU` (TeX Unicode) | たくさん |
+| `JY1` | 約6800文字 / JIS X 0208準拠 / pLaTeX |
+| `JY2` | 約10000文字 / JIS X 0208 + 一部0213 / upLaTeX |
+| `JY3` | 約12000文字 / JIS X 0213準拠 / LuaLaTeX / XeLaTeX |
+
 最近のLaTeXはUnicodeに対応しているので、
 気にすることなく`TU`（と`JY3`）エンコーディングを利用すればよいです。
 
