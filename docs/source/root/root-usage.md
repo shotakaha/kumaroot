@@ -14,16 +14,13 @@
 うまく動かない箇所は、各自で``ROOT6``の使い方を調べてください。
 ```
 
-## インストールしたい
+## 環境構築したい
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
-root-install
-root-install-env
-root-config
-root-pyroot
+root-setup
 ```
 
 ## チュートリアルしたい

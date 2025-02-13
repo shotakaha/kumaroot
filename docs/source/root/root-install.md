@@ -1,7 +1,4 @@
-# インストール
-
-Macユーザーの場合、``Homebrew``を使ってインストールできます。
-インストールには``Xcode``が必要です。
+# インストールしたい
 
 ```console
 $ brew install root
@@ -14,6 +11,9 @@ ROOT Version: 6.32.02
 Built for macosxarm64 on Jun 18 2024, 03:44:55
 From heads/master@tags/v6-32-02
 ```
+
+`Homebrew`でインストールできます。
+インストールには`Xcode`が必要です。
 
 :::{seealso}
 
