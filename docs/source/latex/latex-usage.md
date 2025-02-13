@@ -199,6 +199,7 @@ latex-a0poster
 latex-primer
 latex-ide
 latex-online
+latex-docker
 ```
 
 ## リファレンス

@@ -1,6 +1,12 @@
 # Dockerしたい
 
 ```console
+$ docker container texlive/texlive:latest latexmk
+```
+
+## コンテナーを選びたい
+
+```console
 $ docker pull texlive/texlive:latest
 $ docker pull texlive/texlive:latest-full
 $ docker pull texlive/texlive:latest-medium
@@ -8,6 +14,13 @@ $ docker pull texlive/texlive:latest-small
 $ docker pull texlive/texlive:latest-basic
 $ docker pull texlive/texlive:latest-minimal
 ```
+
+TeXLiveの`scheme`に合わせて、イメージのタグが用意されています。
+これらのイメージは毎週更新されます。
+
+まずは、すべてのパッケージが利用できる`full`を選択すればOKです。
+必要最低限なパッケージでよい場合は`medium`、
+ゴリゴリにカスタマイズしたい場合は`basic`からはじめるのがよいと思います。
 
 | タグ | サイズ |
 |---|---|
