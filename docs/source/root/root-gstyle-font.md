@@ -1,4 +1,4 @@
-# フォントしたい（``gStyle->SetTextFont``）
+# フォントしたい（`gStyle->SetTextFont`）
 
 ```cpp
 // フォント
@@ -17,7 +17,7 @@ gStyle->SetLegendFont(62);
 gStyle->SetStatFont(62);
 ```
 
-``SetXXXFont``でフォントを変更できます。
+`SetXXXFont`でフォントを変更できます。
 フォントは以下の計算式で得られるコード番号で指定します。
 フォントIDは14種類が設定されています。
 任意の和文フォントを設定することはできなさそうです。
@@ -25,6 +25,15 @@ gStyle->SetStatFont(62);
 - ``font_code = 10 * font_id + precision``
   - ``font_id``: 1 - 14 (default: 6)
   - ``precision`` : 0 - 2  (default: 2)
+
+```cpp
+gStyle->GetTextFont();   // -> 62
+gStyle->GetTitleFont();  // -> 42
+gStyle->GetLegendFont();  // -> 42
+gStyle->GetStatFont();  // -> 42
+```
+
+`Get*Font()`で現在のフォント設定を確認できます。
 
 ## フォントID一覧
 
