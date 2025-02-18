@@ -47,9 +47,7 @@ root-rint-calculator
 ---
 maxdepth: 2
 ---
-root-groot
-root-gstyle
-root-gsystem
+root-global
 ```
 
 ## TTree操作したい

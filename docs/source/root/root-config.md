@@ -88,17 +88,3 @@ xrootd
 ```
 
 `--features`で、有効になっている機能を確認できます。
-
-```cpp
-gEnv->Print()
-```
-
-CINT内では`gEnv->Print()`で確認できます。
-
-```python
-import ROOT
-
-ROOT.gEnv.Print()
-```
-
-Pythonでは`ROOT.gEnv.Print()`で確認できます。
