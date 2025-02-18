@@ -6,4 +6,5 @@ latex-cleveref
 latex-hyperref
 latex-makeidx
 latex-imakeidx
+latex-glossaries
 ```
