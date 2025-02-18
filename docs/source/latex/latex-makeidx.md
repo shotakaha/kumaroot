@@ -3,7 +3,7 @@
     pair: LaTeX; 索引したい
 ```
 
-# 索引したい（`\index`）
+# 索引したい（`makeidx`）
 
 ```latex
 % プリアンブル
