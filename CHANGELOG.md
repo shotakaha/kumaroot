@@ -1,5 +1,21 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **root/root-config.md**: gEnv->Printを追記した
+- **latex/latex-docker.md**: タグの説明を追記した
+- **latex/latex-docker.md**: DockerでTeXLiveする方法を追記した
+- **root/root-rntuple.md**: RNTupleを追加した
+- **root/root-rdataframe.md**: RDataFrameを追加した
+- **latex/latex-usefont.md**: エンコーディングを表に整理した
+- **latex/latex-font-family.md**: フォント要素を整理した
+- **latex/latex-siunitx.md**: S列を追加した
+- **latex/latex-tex-fmt.md**: 一括フォーマットを追記した
+- **docs/source/_static/latex/examples/main.tex**: tex-fmtした
+- **latex/latex-tex-fmt.md**: tex-fmtを追加した
+
 ## v1.44.1 (2025-02-10)
 
 LaTeX強化リリース
