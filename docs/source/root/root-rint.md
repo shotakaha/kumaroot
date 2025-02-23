@@ -30,6 +30,16 @@ ROOT5以前は、バックエンドに`CINT`が使われていましたが、
 ROOT6から`Cling`に変更されました。
 `Cling`ではエラーメッセージの表示なども丁寧になっています。
 
+```{toctree}
+---
+maxdepth: 1
+---
+root-rint-quit
+root-rint-macro
+root-rint-calculator
+root-notebook
+```
+
 ## 起動時の設定したい（``rootlogon.C``）
 
 ```cpp

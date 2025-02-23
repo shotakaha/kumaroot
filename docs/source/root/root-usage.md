@@ -32,10 +32,10 @@ root-tutorial
 ## 対話モードしたい
 
 ```{toctree}
+---
+maxdepth: 2
+---
 root-rint
-root-rint-quit
-root-rint-macro
-root-rint-calculator
 ```
 
 ## 全体設定したい
