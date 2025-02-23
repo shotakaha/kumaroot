@@ -6,7 +6,7 @@ license = "MIT"
 authors = [{name="Shota Takahashi (KMI)", email="<shotakaha@kmi.nagoya-u.ac.jp>"}]
 urls = {"homepage" = "https://kumaroot.readthedocs.io/ja/latest/", "repository" = "https://github.com/shotakaha/kumaroot"}
 version = "1.44.1"
-requires-python = "^3.11"
+requires-python = "^3.12"
 
 [tool.poetry]
 package-mode = false
