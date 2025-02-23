@@ -10,16 +10,25 @@ $ root
   | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
+
+// 正規分布のヒストグラムを作成
+root [0] TH1F *h = new TH1F("h", "histogram", 100, -5, 5);
+root [1] for (int i = 0; i < 10000; i++) {
+root (cont'ed, cancel with .@) [2] h->Fill(gRandom->Gaus(0, 1));
+root (cont'ed, cancel with .@) [3] }
+root [4] h->Draw();
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
+root [5]
 ```
 
-ターミナルで``root``と入力して、ROOTシェル（`RINT`）を起動します。
+`root`コマンドでROOTの対話型シェル（Rint）を起動できます。
+C++はコンパイルが必要な言語ですが、
+RintのおかげてPythonのようにスクリプト言語のように使うことができます。
+Rintの中では`TAB`を使ってクラス名やメソッド名が補完できます。
 
-:::{note}
-
-ROOT5のインタプリターは``CINT``でした。
-ROOT6で``Cling``が採用され、エラーメッセージ表示なども丁寧になりました。
-
-:::
+ROOT5以前は、バックエンドに`CINT`が使われていましたが、
+ROOT6から`Cling`に変更されました。
+`Cling`ではエラーメッセージの表示なども丁寧になっています。
 
 ## 起動時の設定したい（``rootlogon.C``）
 
