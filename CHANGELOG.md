@@ -4,6 +4,21 @@
 
 ### Fix
 
+- **python/python-pyproject.md**: pyprojectを整理した
+- **pyproject.toml**: PEP621準拠に修正した
+- **pyproject.toml**: poetry-plugin-exportを追加した
+- **root/root-notebook.md**: ROOT Notebookを追加した
+- **root/root-rint.md**: Rintを整理した
+- **latex/latex-masterthesis.md**: 全体を修正した
+- **latex/latex-glossaries-extra.md**: glossaries-extraを追加した - new file:   docs/source/latex/latex-glossaries-extra.md - modified:   docs/source/latex/latex-link.md
+- **latex/latex-glossaries.md**: glossariesを追加した - new file:   docs/source/latex/latex-glossaries.md - modified:   docs/source/latex/latex-link.md
+- **latex/latex-imakeidx.md**: imakeidxを追加した - new file:   docs/source/latex/latex-imakeidx.md - modified:   docs/source/latex/latex-link.md - modified:   docs/source/latex/latex-makeidx.md
+- **latex/latex-makeidx.md**: makeidxに修正した - modified:   docs/source/latex/latex-link.md - renamed:    docs/source/latex/latex-index.md -> docs/source/latex/latex-makeidx.md
+- **latex/latex-makeindex.md**: latexmkrcのカスタム設定を追記した
+- **latex/latex-makeglossaries.md**: makeglossariesを追加した - new file:   docs/source/latex/latex-makeglossaries.md - modified:   docs/source/latex/latex-setup.md
+- **latex/latex-makeindex.md**: makeindexを追加した - new file:   docs/source/latex/latex-makeindex.md - modified:   docs/source/latex/latex-setup.md
+- **root/root-genv.md**: gEnvを追加した - modified:   docs/source/root/root-config.md - new file:   docs/source/root/root-genv.md - new file:   docs/source/root/root-global.md - modified:   docs/source/root/root-usage.md
+- **root/root-config.md**: 設定確認を追記した - modified:   docs/source/root/root-config.md - modified:   docs/source/root/root-install.md
 - **root/root-config.md**: gEnv->Printを追記した
 - **latex/latex-docker.md**: タグの説明を追記した
 - **latex/latex-docker.md**: DockerでTeXLiveする方法を追記した
