@@ -41,3 +41,11 @@ h->SetTitle("title;x;y")
 ```
 
 `SetTitle`でグラフのタイトルを変更できます。
+
+## 軸タイトルしたい（`SetXTitle`）
+
+```cpp
+h->SetXTitle("X軸タイトル")
+```
+
+`SetXTitle`でX軸のタイトルを変更できます。
