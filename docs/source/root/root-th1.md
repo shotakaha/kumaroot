@@ -57,3 +57,19 @@ h->SetStats();
 ```
 
 `SetStats`で描画時に統計ボックスを表示します。
+
+## 平均値したい（`GetMean`）
+
+```cpp
+h->GetMean();
+```
+
+`GetMean`でヒストグラムの平均値を取得できます。
+
+## RMSしたい（`GetRMS`）
+
+```cpp
+h->GetRMS();
+```
+
+`GetRMS`でヒストグラムにRoot Mean Squareを取得できます。
