@@ -24,7 +24,6 @@ maxdepth: 1
 ---
 root-th1
 root-th2
-root-hist-stats
 root-hist-mean
 ```
 

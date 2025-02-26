@@ -49,3 +49,11 @@ h->SetXTitle("X軸タイトル")
 ```
 
 `SetXTitle`でX軸のタイトルを変更できます。
+
+## 統計ボックスしたい（`SetStats`）
+
+```cpp
+h->SetStats();
+```
+
+`SetStats`で描画時に統計ボックスを表示します。
