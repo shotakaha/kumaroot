@@ -23,7 +23,7 @@
 maxdepth: 1
 ---
 root-th1
-root-hist-new
+root-th2
 root-hist-title
 root-hist-xtitle
 root-hist-stats
