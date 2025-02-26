@@ -32,3 +32,12 @@ TH1D *h = new TH1D("h1", "title;x;y", xbin, xmin, xmax);
 オブジェクトを初期化するときに、グラフのタイトルを指定できます。
 `タイトル;X軸タイトル;Y軸タイトル`のように`;`（セミコロン）で区切ると
 X軸とY軸のタイトルも同時に指定できます。
+
+## タイトルしたい（`SetTitle`）
+
+```cpp
+h->SetTitle("title")
+h->SetTitle("title;x;y")
+```
+
+`SetTitle`でグラフのタイトルを変更できます。
