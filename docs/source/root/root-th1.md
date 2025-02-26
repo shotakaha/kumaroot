@@ -33,22 +33,6 @@ TH1D *h = new TH1D("h1", "title;x;y", xbin, xmin, xmax);
 `タイトル;X軸タイトル;Y軸タイトル`のように`;`（セミコロン）で区切ると
 X軸とY軸のタイトルも同時に指定できます。
 
-## タイトルしたい（`SetTitle`）
-
-```cpp
-h->SetTitle("title")
-h->SetTitle("title;x;y")
-```
-
-`SetTitle`でグラフのタイトルを変更できます。
-
-## 軸タイトルしたい（`SetXTitle`）
-
-```cpp
-h->SetXTitle("X軸タイトル")
-```
-
-`SetXTitle`でX軸のタイトルを変更できます。
 
 ## 統計ボックスしたい（`SetStats`）
 
