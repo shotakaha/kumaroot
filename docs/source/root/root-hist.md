@@ -1,8 +1,7 @@
-==================================================
-ヒストグラム編（ ``TH1``, ``TH2`` ）
-==================================================
+# ヒストグラムしたい
 
-ROOT解析の基本であるヒストグラム（＝度数分布表）は以下の手順で作成・描画します。
+ヒストグラム（度数分布表）はROOTを使った解析の基本です。
+
 
 #. ヒストグラムのオブジェクトの作成
 #. ヒストグラムに値を詰める
@@ -19,21 +18,17 @@ ROOT解析の基本であるヒストグラム（＝度数分布表）は以下�
 また、線の色を変更したり、塗りつぶしたりと装飾することができます。
 
 
-.. toctree::
-   :maxdepth: 1
-
-   root-hist-new
-   root-hist-title
-   root-hist-xtitle
-   root-hist-stats
-   root-hist-mean
-
-
-
-
-
-
-
+```{toctree}
+---
+maxdepth: 1
+---
+root-th1
+root-hist-new
+root-hist-title
+root-hist-xtitle
+root-hist-stats
+root-hist-mean
+```
 
 
 
