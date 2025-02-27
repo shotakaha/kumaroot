@@ -29,7 +29,7 @@ vscode-color
 vscode-encoding
 vscode-indent
 vscode-snippets
-
+vscode-devcontainer
 ```
 
 ## 拡張パッケージの設定
