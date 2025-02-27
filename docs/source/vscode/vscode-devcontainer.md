@@ -57,7 +57,7 @@ Python3.11環境を構築するための`.devcontainer/devcontainer.json`の設�
 
 `image`
 : 使用するコンテナイメージです。
-ここではMSのコンテナレジストリを指定していますが、
+ここでは[Microsoftのコンテナレジストリ](https://mcr.microsoft.com/en-us/artifact/mar/devcontainers/python/tags)を指定していますが、
 Docker Hubなど他のコンテナレジストリにあるイメージも指定できます。
 
 `features`
