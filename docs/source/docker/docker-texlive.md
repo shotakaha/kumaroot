@@ -1,35 +1,50 @@
 # TeX Liveしたい
 
-```dockerfile
-FROM texlive/texlive:latest-basic
-RUN tlmgr update --all \
-  tlmgr install \
-  luatexja \
-  fontspec \
-  siunitx \
-  caption \
-  minted \
-  biblatex \
-  markdown \
-WORKDIR /workdir
-VOLUME ["/workdir"]
-CMD ["latexmk", "main.tex"]
+```console
+$ docker container run --rm -v "$(pwd)":/workdir -w /workdir texlive/texlive:latest-full latexmk main.tex
 ```
+
+[texlive/texlive](https://hub.docker.com/r/texlive/texlive)に、
+（おそらく）公式のTeX Liveイメージがあります。
+イメージのタグは、TeX Liveの`scheme`に合わせて用意されています。
+`latest`タグは毎週更新されます。
+
+上記の`docker`コマンドを毎回入力するのは大変なので、
+下記の`docker-compose.yaml`を作成するのがオススメです。
+
+## Docker Composeしたい
 
 ```yaml
 version: "3"
 services:
   texlive:
-    build: .
+    image: texlive/texlive:latest-full
     volumes:
-      - ./tex:/workdir
-      - ./output:/output
+      - .:/workdir
     working_dir: /workdir
     command: ["latexmk", "main.tex"]
 ```
 
+冒頭の`docker`コマンドの内容を`docker-compose.yaml`にしました。
+
 ```console
 $ docker compose up
+```
+
+`docker compose up`で`$ latexmk main.tex`が実行されます。
+実行後、コンテナは自動的に停止します。
+
+## ファイルを変更したい
+
+```console
+$ docker compose run texlive latexmk another.tex
+```
+
+`docker compose run コンテナ名 コマンド`で`command`を上書きできます。
+
+```console
+$ docker compose run texlive latexmk -pvc main.tex
+$ docker compose down
 ```
 
 ## イメージを選びたい
@@ -47,9 +62,8 @@ $ docker container run --rm -it イメージ名 bash
 [コンテナ内]$ exit
 ```
 
-Docker Hubの[texlive/texlive](https://hub.docker.com/r/texlive/texlive)に（おそらく）公式イメージがあります。
-TeX Liveの`scheme`に合わせて、イメージのタグが用意されています。
-`latest`タグは毎週更新されます。
+TeX Liveはschemeと、含まれているパッケージ数を確認しました。
+また、日本語LaTeXに必要なパッケージの有無も確認しました。
 
 | タグ名 | サイズ | パッケージ数 | `luatex` | `lualatex` | `luatexja` |
 |---|---|---|---|---|---|
@@ -65,3 +79,36 @@ TeX Liveの`scheme`に合わせて、イメージのタグが用意されてい�
 
 プロジェクト用の環境を構築する場合は`basic`を選択し、
 必要なパッケージを追加するのがよいと思います。
+
+## 必要なパッケージを追加したい
+
+```dockerfile
+FROM texlive/texlive:latest-basic
+RUN tlmgr update --all \
+  tlmgr install \
+  luatexja \
+  fontspec \
+  siunitx \
+  caption \
+  minted \
+  biblatex \
+  markdown \
+WORKDIR /workdir
+VOLUME ["/workdir"]
+CMD ["latexmk", "main.tex"]
+```
+
+`basic`などイメージを選択した場合、必要なパッケージは自分で追加する必要があります。
+`Dockerfile`を作成し、カスタムイメージを作成します。
+
+```console
+$ docker image build --tag イメージ名:タグ名 .
+```
+
+イメージ名:タグ名を指定して、カスタムイメージを作成します。
+
+```console
+$ docker container run --rm -v "$(pwd)":/workdir -w /workdir タグ名 latexmk main.tex
+```
+
+カスタムイメージを指定して`docker`コマンドを実行し、LaTeX文書がタイプセットできるか確認します。
