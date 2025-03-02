@@ -476,6 +476,36 @@ python       3.12-slim   0e42464fe231   3 days ago      130MB
 
 ``git``を追加すると``333 MB``に増加しました。
 
+## Dockerfile
+
+```dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+COPY . .
+CMD ["python", "app.py"]
+```
+
+```console
+$ docker build -t my-python-app .
+```
+
+## docker-compose.yml
+
+```yaml
+version: "3"
+services:
+  python-app:
+    image: python:3.12-slim
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python app.py
+```
+
+```console
+$ docker-compose up
+```
+
 ## リファレンス
 
 - [python - DockerHub](https://hub.docker.com/_/python/)
