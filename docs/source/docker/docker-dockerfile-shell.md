@@ -1,14 +1,17 @@
-# シェルを変更したい（``SHELL``）
+# シェルを変更したい（`SHELL`）
 
-```docker
+```dockerfile
+# sh -> bash
 SHELL ["/bin/bash", "-c"]
+
+# cmd -> powershell
 SHELL ["powershell", "--command"]
 ```
 
 [SHELL](https://docs.docker.com/reference/dockerfile/#shell)コマンドで、
 [RUN](./docker-dockerfile-run.md)コマンドを実行するシェルを変更できます。
 
-デフォルトは、Linuxイメージだと``["/bin/sh", "-c"]``、
+デフォルトは、Linuxイメージだと`["/bin/sh", "-c"]`、
 Windowsイメージだと``["cmd", "/S", "/C"]``です。
 
 ## リファレンス
