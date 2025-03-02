@@ -38,14 +38,9 @@ docker-setup
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 docker-compose
-docker-compose-ls
-docker-compose-up-down
-docker-compose-start-stop
-docker-compose-exec
-docker-compose-cp
 ```
 
 ## コンテナしたい（`docker`）
@@ -67,18 +62,11 @@ docker-volume
 
 ## カスタムしたい（`Dockerfile`）
 
-既存のイメージをベースにして、カスタマイズしたイメージを作成できます。
-イメージの作成手順は`Dockerfile`に保存します。
-
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
-docker-dockerfile-from
-docker-dockerfile-workdir
-docker-dockerfile-shell
-docker-dockerfile-run
-docker-dockerfile-cmd
+docker-dockerfile
 ```
 
 ## 実践例
