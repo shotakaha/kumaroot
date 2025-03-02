@@ -10,6 +10,7 @@ maxdepth: 2
 docker-dockerfile-from
 docker-dockerfile-workdir
 docker-dockerfile-shell
+docker-dockerfile-copy
 docker-dockerfile-run
 docker-dockerfile-cmd
 ```
