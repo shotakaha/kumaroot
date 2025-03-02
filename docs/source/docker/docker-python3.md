@@ -16,8 +16,18 @@ bitnami/python                    Bitnami container image for Python            
 ...
 ```
 
-``docker search``で公開されているイメージ名を検索しました。
-1つ目の公式イメージを使うことにしました。
+`docker search python`でDocker Hubに公開されているイメージ名を検索できます。
+
+[python](https://hub.docker.com/_/python)
+はDockerコミュニティが管理している公式イメージです。
+[circleci/python](https://hub.docker.com/r/circleci/python)
+はCircleCIが管理しているCI/CD環境向けに最適化されたイメージです。
+`poetry`などのプロジェクト管理ツールがインストールされています。
+[bitnami/python](https://hub.docker.com/r/bitnami/python)
+はBitnamiが管理している本番環境向けに最適化された軽量なイメージです。
+[ubuntu/python](https://hub.docker.com/r/ubuntu/python)
+はCanonicalが管理しているUbuntuベースのイメージです。
+Ubuntuの標準ライブラリなどが利用できます。
 
 ## イメージを取得する（``docker image pull``）
 
