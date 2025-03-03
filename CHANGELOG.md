@@ -1,9 +1,11 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.44.2 (2025-03-03)
 
 ### Fix
 
+- **docker/docker-dockerfile-run.md**: RUNコマンドを追記した
+- **docker/docker-container-run.md**: docker container runを修正した
 - **docker/docker-dockerfile-workdir.md**: ディレクトリ名のサンプルを追記した
 - **docker/docker-texlive.md**: 内容を整理した
 - **docker/docker-texlive.md**: TeX LiveのDockerfileを追加した
