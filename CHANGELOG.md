@@ -4,55 +4,48 @@
 
 ### Fix
 
-- **docker/docker-dockerfile-run.md**: RUNコマンドを追記した
 - **docker/docker-container-run.md**: docker container runを修正した
-- **docker/docker-dockerfile-workdir.md**: ディレクトリ名のサンプルを追記した
-- **docker/docker-texlive.md**: 内容を整理した
-- **docker/docker-texlive.md**: TeX LiveのDockerfileを追加した
 - **docker/docker-dockerfile-copy.md**: COPYを追記した
-- **docker/docker-dockerfile-shell.md**: シェルの設定を追記した
 - **docker/docker-dockerfile-from.md**: マルチステージビルドを追記した
-- **docker/docker-python3.md**: Python3イメージを追記した
-- **docker/docker-dockerfile-from.md**: python3の設定を追記した
+- **docker/docker-dockerfile-run.md**: RUNコマンドを追記した
+- **docker/docker-dockerfile-shell.md**: シェルの設定を追記した
+- **docker/docker-dockerfile-workdir.md**: ディレクトリ名のサンプルを追記した
 - **docker/docker-examples.md**: 目次を整理した
-- **docker/docker-usage.md**: 目次を整理した
+- **docker/docker-python3.md**: Python3イメージを追記した
 - **docker/docker-setup.md**: 目次を整理した
+- **docker/docker-texlive.md**: TeX LiveのDockerfileを追加した
+- **docker/docker-usage.md**: 目次を整理した
+- **docs/source/_static/latex/examples/main.tex**: tex-fmtした
+- **latex/latex-docker.md**: DockerでTeXLiveする方法を追記した
+- **latex/latex-font-family.md**: フォント要素を整理した
 - **latex/latex-fonts.md**: udpmapを確認する方法を追記した
-- **vscode/vscode-devcontainer.md**: MSのレジストリへのリンクを追加した
-- **vscode/vscode-devcontainer.md**: devcontainerを追加した
+- **latex/latex-glossaries-extra.md**: glossaries-extraを追加した
+- **latex/latex-glossaries.md**: glossariesを追加した
+- **latex/latex-imakeidx.md**: imakeidxを追加した
+- **latex/latex-makeglossaries.md**: makeglossariesを追加した
+- **latex/latex-makeidx.md**: makeidxに修正した
+- **latex/latex-makeindex.md**: makeindexを追加した
+- **latex/latex-masterthesis.md**: 全体を修正した
+- **latex/latex-siunitx.md**: S列を追加した
+- **latex/latex-tex-fmt.md**: tex-fmtを追加した
+- **latex/latex-usefont.md**: エンコーディングを表に整理した
+- **pyproject.toml**: PEP621準拠に修正した
+- **pyproject.toml**: poetry-plugin-exportを追加した
+- **python/python-pyproject.md**: pyprojectを整理した
+- **root/root-config.md**: 設定確認を追記した
+- **root/root-genv.md**: gEnvを追加した
+- **root/root-notebook.md**: ROOT Notebookを追加した
+- **root/root-rdataframe.md**: RDataFrameを追加した
+- **root/root-rint.md**: Rintを整理した
+- **root/root-rntuple.md**: RNTupleを追加した
 - **root/root-th1-title.md**: タイトルの設定方法を別ページに整理した
+- **root/root-th1.md**: TH1を整理した
+- **root/root-th1.md**: タイトルを変更する方法を追加した
 - **root/root-th1.md**: 平均値、RMSを取得する方法を追記した
 - **root/root-th1.md**: 統計ボックスを表示した
 - **root/root-th1.md**: 軸タイトルの変更方法を追記した
-- **root/root-th1.md**: タイトルを変更する方法を追加した
 - **root/root-th2.md**: TH2を整理した
-- **root/root-th1.md**: TH1を整理した
-- **python/python-pyproject.md**: pyprojectを整理した
-- **pyproject.toml**: PEP621準拠に修正した
-- **pyproject.toml**: poetry-plugin-exportを追加した
-- **root/root-notebook.md**: ROOT Notebookを追加した
-- **root/root-rint.md**: Rintを整理した
-- **latex/latex-masterthesis.md**: 全体を修正した
-- **latex/latex-glossaries-extra.md**: glossaries-extraを追加した - new file:   docs/source/latex/latex-glossaries-extra.md - modified:   docs/source/latex/latex-link.md
-- **latex/latex-glossaries.md**: glossariesを追加した - new file:   docs/source/latex/latex-glossaries.md - modified:   docs/source/latex/latex-link.md
-- **latex/latex-imakeidx.md**: imakeidxを追加した - new file:   docs/source/latex/latex-imakeidx.md - modified:   docs/source/latex/latex-link.md - modified:   docs/source/latex/latex-makeidx.md
-- **latex/latex-makeidx.md**: makeidxに修正した - modified:   docs/source/latex/latex-link.md - renamed:    docs/source/latex/latex-index.md -> docs/source/latex/latex-makeidx.md
-- **latex/latex-makeindex.md**: latexmkrcのカスタム設定を追記した
-- **latex/latex-makeglossaries.md**: makeglossariesを追加した - new file:   docs/source/latex/latex-makeglossaries.md - modified:   docs/source/latex/latex-setup.md
-- **latex/latex-makeindex.md**: makeindexを追加した - new file:   docs/source/latex/latex-makeindex.md - modified:   docs/source/latex/latex-setup.md
-- **root/root-genv.md**: gEnvを追加した - modified:   docs/source/root/root-config.md - new file:   docs/source/root/root-genv.md - new file:   docs/source/root/root-global.md - modified:   docs/source/root/root-usage.md
-- **root/root-config.md**: 設定確認を追記した - modified:   docs/source/root/root-config.md - modified:   docs/source/root/root-install.md
-- **root/root-config.md**: gEnv->Printを追記した
-- **latex/latex-docker.md**: タグの説明を追記した
-- **latex/latex-docker.md**: DockerでTeXLiveする方法を追記した
-- **root/root-rntuple.md**: RNTupleを追加した
-- **root/root-rdataframe.md**: RDataFrameを追加した
-- **latex/latex-usefont.md**: エンコーディングを表に整理した
-- **latex/latex-font-family.md**: フォント要素を整理した
-- **latex/latex-siunitx.md**: S列を追加した
-- **latex/latex-tex-fmt.md**: 一括フォーマットを追記した
-- **docs/source/_static/latex/examples/main.tex**: tex-fmtした
-- **latex/latex-tex-fmt.md**: tex-fmtを追加した
+- **vscode/vscode-devcontainer.md**: devcontainerを追加した
 
 ## v1.44.1 (2025-02-10)
 
