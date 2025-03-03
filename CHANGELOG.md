@@ -4,6 +4,27 @@
 
 ### Fix
 
+- **docker/docker-dockerfile-workdir.md**: ディレクトリ名のサンプルを追記した
+- **docker/docker-texlive.md**: 内容を整理した
+- **docker/docker-texlive.md**: TeX LiveのDockerfileを追加した
+- **docker/docker-dockerfile-copy.md**: COPYを追記した
+- **docker/docker-dockerfile-shell.md**: シェルの設定を追記した
+- **docker/docker-dockerfile-from.md**: マルチステージビルドを追記した
+- **docker/docker-python3.md**: Python3イメージを追記した
+- **docker/docker-dockerfile-from.md**: python3の設定を追記した
+- **docker/docker-examples.md**: 目次を整理した
+- **docker/docker-usage.md**: 目次を整理した
+- **docker/docker-setup.md**: 目次を整理した
+- **latex/latex-fonts.md**: udpmapを確認する方法を追記した
+- **vscode/vscode-devcontainer.md**: MSのレジストリへのリンクを追加した
+- **vscode/vscode-devcontainer.md**: devcontainerを追加した
+- **root/root-th1-title.md**: タイトルの設定方法を別ページに整理した
+- **root/root-th1.md**: 平均値、RMSを取得する方法を追記した
+- **root/root-th1.md**: 統計ボックスを表示した
+- **root/root-th1.md**: 軸タイトルの変更方法を追記した
+- **root/root-th1.md**: タイトルを変更する方法を追加した
+- **root/root-th2.md**: TH2を整理した
+- **root/root-th1.md**: TH1を整理した
 - **python/python-pyproject.md**: pyprojectを整理した
 - **pyproject.toml**: PEP621準拠に修正した
 - **pyproject.toml**: poetry-plugin-exportを追加した
