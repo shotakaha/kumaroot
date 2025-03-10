@@ -1,19 +1,4 @@
-# コンテナを作成／削除したい（`compose up` / `compose down`）
-
-```console
-// 複数コンテナを作成
-$ docker compose up -d
-
-// 複数コンテナを削除
-$ docker compose down
-```
-
-`docker compose up`コマンドでコンテナを作成できます。
-ローカルにイメージがない場合は、プルしてから実行されます。
-`-d / --detach`はバックグラウンド実行するためのオプションです。
-ほとんどの場合でつけておけばOKです。
-
-## コンテナを削除したい（`compose down`）
+# コンテナを削除したい（`compose down`）
 
 ```console
 $ docker compose down
@@ -24,11 +9,15 @@ $ docker compose down
 コンテナに紐づいているネットワークも自動で削除できます。
 ボリュームは削除されません。
 
+## ボリュームを削除したい（`--volumes`）
+
 ```console
 $ docker compose down --volumes
 ```
 
 `-v / --volumes`オプションで、作成したボリュームを削除できます。
+
+## イメージを削除したい（`--rmi`）
 
 ```console
 $ docker compose down --rmi local
