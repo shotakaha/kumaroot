@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **docker/docker-cli.md**: 新旧コマンド対応表を追加した
+- **python/python-pyproject.md**: キャレットが使えなくなったことを追記した
+
 ## v1.44.2 (2025-03-03)
 
 ### Fix
