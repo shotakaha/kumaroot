@@ -9,14 +9,22 @@ Docker Compose version v2.29.2-desktop.2
 
 ```yaml
 # compose.yaml
+
+# コンテナの設定
 services:
   コンテナ名:
     image: イメージ名
     volumes:
-      - ホストOSのパス:コンテナのパス
+      - data:コンテナのパス
+
+# ボリュームの設定
+volumes:
+  data:
 ```
 
-設定は`compose.yaml`で管理します。
+設定ファイルは`compose.yaml`です。
+`services`の中に利用するコンテナごとの設定、
+`volumes`の中に内部ボリュームの設定を記述できます。
 
 :::{seealso}
 
@@ -42,33 +50,34 @@ Compose V1のサポートは2023年6月に終了しています。
 
 :::
 
-## 設定したい（`services`）
+## コンテナ設定したい（`services`）
 
 ```yaml
 services:
   コンテナ名1:
-    image: イメージ名
     build: イメージのビルド設定
-    container_name: コンテナ名
-    working_dir: コンテナ内の作業ディレクトリ
     command: コンテナ起動時のコマンド
-    entrypoint: コンテナ起動時のentrypoint
+    container_name: コンテナ名
     depends_on: 依存関係のあるコンテナ名
-    networks: コンテナに接続するネットワーク
-    volumes: コンテナに接続するボリューム
-    environment: 環境変数の設定
+    entrypoint: コンテナ起動時のentrypoint
     env_file: 環境変数をファイルから設定
+    environment: 環境変数の設定
+    image: イメージ名
     labels: コンテナに追加するラベル
+    networks: コンテナに接続するネットワーク
     ports: ポート設定（port forwarding）
-    restart: 再起動時の設定（"no" / "always"）
+    restart: 再起動時の設定（"no" / "always" / "on-failure"など）
     tty: 擬似端末の配置（"false" / "true"）
+    volumes: コンテナに接続するボリューム
+    working_dir: コンテナ内の作業ディレクトリ
 
   コンテナ名2:
     image: イメージ名
     ...
 ```
 
-`services`セクションで設定できることを整理しました。
+`services`セクションでコンテナを設定できます。
+コンテナごとに必要な設定を記述します。
 詳細は[Compose Specification](https://docs.docker.jp/compose/compose-file/index.html)を参照してください。
 
 :::{seealso}
@@ -82,6 +91,35 @@ WARN[0000] ./docker-compose.yml: the attribute `version` is obsolete, it will be
 ```
 
 `version`キーを定義している場合は、WARNINGが表示されます。
+
+:::
+
+## ボリューム設定したい（`volumes`）
+
+```yaml
+services:
+  db:
+    image: mariadb:latest
+    volumes:
+      # 内部ボリューム:コンテナ内のパス
+      - db_data:/var/lib/mysql
+
+volumes:
+  # 内部ボリュームの作成
+  db_data:
+```
+
+`volumes`セクションでボリュームを設定できます。
+上記はMariaDBコンテナのボリュームの設定例です。
+コンテナの`/var/lib/mysql`に作成されるデータベースを
+`db_data`という名前をつけてDocker内の内部ボリュームに保存しています。
+
+:::{note}
+
+コンテナ内での作業結果は、基本的にコンテナを
+終了（`docker compose down`）したタイミングで削除されます。
+作業結果を残したい場合は、内部ボリュームもしくはバインドマウントとして
+データを残す必要があります。
 
 :::
 
