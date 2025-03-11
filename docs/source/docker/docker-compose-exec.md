@@ -27,3 +27,7 @@ root@ランダム:/作業ディレクトリのパス#
 
 [bashコマンド](../command/command-bash.md)でコンテナ内のシェルを起動できます。
 リモートサーバーにログインしたときのように、コンテナ内を操作できます。
+
+## リファレンス
+
+- [docker compose exec](https://docs.docker.jp/engine/reference/commandline/compose_exec.html)

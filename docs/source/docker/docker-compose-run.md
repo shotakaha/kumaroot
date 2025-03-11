@@ -14,3 +14,7 @@ $ docker compose run --rm texlive latexmk main.tex
 ```
 
 TeX Liveコンテナの`latexmk`コマンドでコンパイルしてみました。
+
+## リファレンス
+
+- [docker compose run - docs.docker.jp](https://docs.docker.jp/engine/reference/commandline/compose_run.html)

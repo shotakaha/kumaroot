@@ -11,3 +11,7 @@ $ docker compose cp コンテナ名:コンテナ内のパス ホストOSのパ�
 `docker compose cp`でホストPCとコンテナ間のファイルやフォルダのコピーができます。
 引数の順番を入れ替えるだけで、双方向のコピーが可能です。
 コンテナを指定する書式は`ssh`や`rsync`などと同じです。
+
+## リファレンス
+
+- [docker compose cp - docs.docker.jp](https://docs.docker.jp/engine/reference/commandline/compose_cp.html)

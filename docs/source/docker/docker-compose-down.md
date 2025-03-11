@@ -25,3 +25,8 @@ $ docker compose down --rmi all
 ```
 
 `--rmi`オプションで、コンテナ作成に使用したイメージも同時に削除できます。
+
+
+## リファレンス
+
+- [docker compose down - docs.docker.jp](https://docs.docker.jp/engine/reference/commandline/compose_down.html)

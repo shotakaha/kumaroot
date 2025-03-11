@@ -27,3 +27,7 @@ $ docker compose start
 
 `docker compose start`コマンドで、停止したコンテナを再開できます。
 コンテナが作成されてない場合、エラーになります。
+
+## リファレンス
+
+- [docker compose up - docs.docker.jp](https://docs.docker.jp/engine/reference/commandline/compose_up.html)
