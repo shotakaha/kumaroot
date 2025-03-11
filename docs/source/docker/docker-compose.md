@@ -9,5 +9,6 @@ docker-compose-ls
 docker-compose-up
 docker-compose-down
 docker-compose-exec
+docker-compose-run
 docker-compose-cp
 ```
