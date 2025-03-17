@@ -4,6 +4,15 @@
 
 ### Fix
 
+- **docker/docker-usage.md**: Dockerの使い方の導入を修正した
+- **docker/docker-texlive.md**: TeX LiveのDocker composeを追記した
+- **docker/docker-compose-run.md**: compose runを追記した
+- **command/command-awk.md**: 空白とカンマ区切りできるようにした
+- **docker/docker-compose-exec.md**: compose execの例を追記した
+- **docker/docker-compose-up.md**: stopとstartをまとめた
+- **docker/docker-compose-down.md**: upとdownを分割した
+- **docker/docker-compose-up-down.md**: downのオプションを追記した
+- **docker/docker-compose-yaml.md**: ボリューム設定を追加した
 - **docker/docker-cli.md**: 新旧コマンド対応表を追加した
 - **python/python-pyproject.md**: キャレットが使えなくなったことを追記した
 
