@@ -6,16 +6,36 @@ $ brew install vim
 
 ## コマンド操作したい
 
-```vim
-dd    " 1行を削除
-d$    " 行末まで削除
-d0    " 行頭まで削除
-d10l  " 10文字削除
-d10j  " 下10行を削除
-d10k  " 上10行を削除
-```
+| コマンド | 操作 |
+|---|---|
+| `Esc` | ノーマルモードに切り替える |
+| `j` `k` | カーソルを上下に移動する |
+| `h` `l` | カーソルを左右に移動する |
+| `v` `V` | 矩形選択モードに切り替える |
+| `0` `$` | 行頭・行末に移動する |
+| `d$` | カーソル位置から行末までカットする |
+| `y$` | カーソル位置から行末までコピーする |
+| `p` `P` | カーソル位置の前後にペーストする |
+| `x` | 1文字削除する |
+| `dd` | 1行削除する |
+| `yy` | 1行コピーする |
+| `i` `a` `o` `O` | 挿入モードに切り替える |
+| `:` | コマンドモードに切り替える |
+| `C-o` | 挿入モードで一時的のノーマルモードに切り替える |
+| `C-c` | コマンドモードでコマンドを中断しノーマルモードに切り替える |
 
-ノーマルモードで編集用のコマンド操作ができます。
+よく使うコマンド操作を整理しました。
+独特なキーバインドには慣れるほかないです。
+
+操作はノーマルモード↔︎挿入モードの切り替えが基本です。
+なので`Esc`と`i`をよく使います。
+ノーマルモードでは`j`/`k`/`l`/`h`でカーソルを移動します。
+挿入モードではまず矢印キーで移動すればよいです。
+
+`C-o`も覚えておくとよいコマンドのひとつです。
+このコマンドは、挿入モードで使えるコマンドで、一時的にノーマルモード（でコマンド）を実行し、
+また挿入モードに戻ることができます。
+なので、`<C-o>d$` → `p`で、挿入モードのままカット＆ペーストができます。
 
 ## 設定ファイルしたい（`~/.vimrc`）
 
@@ -169,13 +189,13 @@ set clipboard=unnapedplus
 ## キーバインド設定したい
 
 ```vim
-nnoremap キー コマンド    " ノーマルモード
-inoremap キー コマンド    " 編集モード
-vnoremap キー コマンド    " ヴィジュアルモード
-snoremap キー コマンド    " 選択モード
-cnoremap キー コマンド    " コマンド待機モード
-tnoremap キー コマンド    " ターミナルモード
-xnoremap キー コマンド    " ヴィジュアル + 編集モード
+nnoremap キー コマンド    " normalモード
+inoremap キー コマンド    " insertモード
+xnoremap キー コマンド    " visual + select
+cnoremap キー コマンド    " commandモード
+vnoremap キー コマンド    " visualモード
+snoremap キー コマンド    " selectモード
+tnoremap キー コマンド    " terminalモード
 ```
 
 モードごとにキーバインド設定を追加できます。
@@ -183,7 +203,10 @@ xnoremap キー コマンド    " ヴィジュアル + 編集モード
 非再帰的な`noremap`系のコマンドがあります。
 精通するまでは`noremap`系から使い始めればOKです。
 
-ぼくは、すでにEmacs-likeなキーバインドに慣れ親しんでしまっているので、ここではそれにできるだけ操作感が近づくように設定を整理しました。
+## Emacs風キーバインドにしたい
+
+Emacs風キーバインドの設定を[Gist](https://gist.github.com/shotakaha/39fa568a150084380a256b18b647612c)に整理しました。
+ご自由にお使いください。
 
 ## リーダーキーしたい（`mapleader`）
 
@@ -219,17 +242,15 @@ nnoremap <leader>x :wq<CR>
 
 ```vim
 " いろいろキャンセル
-nnoremap <C-g> <Esc><Esc><Esc>
-inoremap <C-g> <Esc><Esc><Esc>
-vnoremap <C-g> <Esc><Esc><Esc>
-snoremap <C-g> <Esc><Esc><Esc>
-cnoremap <C-g> <Esc><Esc><Esc>
-tnoremap <C-g> <Esc><Esc><Esc>
-" xnoremap <C-g> <Esc><Esc><Esc>
+nnoremap <C-g> <Esc><Esc>
+xnoremap <C-g> <Esc><Esc>
+inoremap <C-g> <Esc><Esc>
+cnoremap <C-g> <C-c><Esc><Esc>
 ```
 
-Emacsでは困ったときに`C-g`（`keyboard-quit`）（を連打して）コマンドを中断できます。
-`<Esc>`（の3連打）に割り当てることで、ノーマルモードに戻ってこれるようにしました。
+`C-g`（`keyboard-quit`）は、コマンドを中断するキーです。
+Emacsでは操作に困った時、とりあえずこのキーを連打すればOKです。
+`<Esc>`（の連打）に割り当てることで、ノーマルモードに戻ってこれるようにしました。
 
 :::{note}
 
@@ -240,29 +261,41 @@ Emacsでは困ったときに`C-g`（`keyboard-quit`）（を連打して）コ�
 ## 移動したい
 
 ```vim
-nnoremap <C-b> h
-inoremap <C-b> <Left>
-xnoremap <C-b> <Left>
-
+" C-f: forward char
 nnoremap <C-f> l
-inoremap <C-f> <Right>
-xnoremap <C-f> <Right>
+xnoremap <C-f> l
+inoremap <Right>
+cnoremap <Right>
 
-nnoremap <C-p> k
-inoremap <C-p> <Up>
-xnoremap <C-p> <Up>
+" C-b: backward char
+nnoremap <C-b> h
+xnoremap <C-b> h
+inoremap <C-b> <Left>
+cnoremap <C-b> <Left>
 
+" C-n: next line
 nnoremap <C-n> j
+xnoremap <C-n> j
 inoremap <C-n> <Down>
-nnoremap <C-n> <Down>
+cnoremap <C-n> <Down>
 
+" C-p: previous line
+nnoremap <C-p> k
+xnoremap <C-p> k
+inoremap <C-p> <Up>
+cnoremap <C-p> <Up>
+
+" C-a: beginning of the line
 nnoremap <C-a> 0
+xnoremap <C-a> 0
 inoremap <C-a> <Home>
-xnoremap <C-a> <Home>
+cnoremap <C-a> <Home>
 
+" C-e: end of the line
 nnoremap <C-e> $
+xnoremap <C-e> $
 inoremap <C-e> <End>
-xnoremap <C-e> <End>
+cnoremap <C-e> <End>
 ```
 
 Emacsの移動系のバインド（でよく使うもの）を`vim`バインドに割り当てました。
@@ -270,35 +303,56 @@ Emacsの移動系のバインド（でよく使うもの）を`vim`バインド�
 ## ページ操作したい
 
 ```vim
+" C-v: next page
 nnoremap <C-v> <PageDown>
-inoremap <C-v> <PageDown>
 xnoremap <C-v> <PageDown>
+inoremap <C-v> <PageDown>
+cnoremap <C-v> <PageDown>
 
+
+" M-v: previous page
 nnoremap <M-v> <PageUp>
-inoremap <M-v> <PageUp>
 xnoremap <M-v> <PageUp>
+inoremap <M-v> <PageUp>
+cnoremap <M-v> <PageUp>
 
+
+" C-l: center page
 nnoremap <C-l> zz
+xnoremap <C-l> zz
+inoremap <C-l> <C-o>zz
+cnoremap <C-l> <C-c>zz
 ```
 
 Emacsのページ操作系のコマンドを`vim`に割り当てました。
 
-`C-v`はvimのビジュアルモード（visual-block）に割り当てられていますが、`v`もしくは`V`で代替することにして、上書きしています。
+:::{note}
+
+`C-v`はvimのビジュアルモード（visual-block）への切り替えに割り当てられています。
+`V`（大文字）で切り替えることができるので、ここでは上書きしています。
+
+:::
 
 ## ファイル操作したい
 
 ```vim
-" 作成
-nnoremap <C-x><C-f> :e
-inoremap <C-x><C-f> <Esc>:e
+" C-x C-f: open file
+nnoremap <C-x><C-f> :e<SPACE>
+xnoremap <C-x><C-f> :e<SPACE>
+inoremap <C-x><C-f> <C-o>:e<SPACE>
+cnoremap <C-x><C-f> <C-c>:e<SPACE>
 
-" 保存
+" C-x C-s: save file
 nnoremap <C-x><C-s> :w<CR>
-inoremap <C-x><C-s> <Esc>:w<CR>
+xnoremap <C-x><C-s> :w<CR>
+inoremap <C-x><C-s> <C-o>:w<CR>
+cnoremap <C-x><C-s> <C-c>:w<CR>
 
-" 終了
+" C-x C-c: quit
 nnoremap <C-x><C-c> :q<CR>
-inoremap <C-x><C-c> <Esc>:q<CR>
+xnoremap <C-x><C-c> :q<CR>
+inoremap <C-x><C-c> <C-o>:q<CR>
+cnoremap <C-x><C-c> <C-c>:q<CR>
 ```
 
 Emacsのファイル操作系のコマンドに合わせてvimバインドを割り当てています。
@@ -328,11 +382,17 @@ inoremap <C-x><C-o> <Nop> " omni completion
 ## 検索したい
 
 ```vim
+" C-s: forward search
 nnoremap <C-s> /
+xnoremap <C-s> /
 inoremap <C-s> <Esc>/
+cnoremap <C-s> <Esc>/
 
+" C-r: backward search
 nnoremap <C-r> ?
+xnoremap <C-r> ?
 inoremap <C-r> <Esc>?
+cnoremap <C-r> <Esc>?
 ```
 
 Emacsの検索系コマンドをvimバインドに割り当てました。
@@ -371,16 +431,21 @@ Emacsには`redo`コマンドはありませんが、`undo-tree`や`redo+`など
 ## view-modeしたい
 
 ```vim
-nnoremap <C-x><C-r> <Esc><Esc><Esc>
-inoremap <C-x><C-r> <Esc><Esc><Esc>
-xnoremap <C-x><C-r> <Esc><Esc><Esc>
+" C-x C-r: view-mode (read-only)
+nnoremap <C-x><C-r> :set<SPACE>readonly!<CR>
+xnoremap <C-x><C-r> :set<SPACE>readonly!<CR>
+inoremap <C-x><C-r> <C-o>:set<SPACE>readonly!<CR>
+cnoremap <C-x><C-r> <C-c>:set<SPACE>readonly!<CR>
 
-nnoremap <C-x><C-q> <Esc><Esc><Esc>
-inoremap <C-x><C-q> <Esc><Esc><Esc>
-xnoremap <C-x><C-q> <Esc><Esc><Esc>
+" C-x C-q: view-mode (read-only)
+nnoremap <C-x><C-q> :set<SPACE>readonly!<CR>
+xnoremap <C-x><C-q> :set<SPACE>readonly!<CR>
+inoremap <C-x><C-q> <C-o>:set<SPACE>readonly!<CR>
+cnoremap <C-x><C-q> <C-c>:set<SPACE>readonly!<CR>
 ```
 
-`C-x C-r`もしくは`C-x C-q`でノーマルモードにできるよう追加しました。
+`:set readonly!`で読み取り専用モードをトグルできます。
+`C-x C-r`もしくは`C-x C-q`に割り当ててトグルできるようにしました。
 
 ## 編集したい
 
@@ -429,3 +494,5 @@ vimmerのキーバインド記事でオススメされていた`x`と`d`コマ�
 そのため、レジスタに追加しない（＝`"_`（ブラックホールレジスタ）に追加）ようにするとよいそうです。
 
 `X`は、もともと前の文字を削除するコマンドですが、`D`と組み合わせて行末までを対象とすることで、大文字コマンドの操作感に統一感を持たせることができます。
+
+#
