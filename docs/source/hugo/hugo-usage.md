@@ -20,12 +20,19 @@ HugoはJSの知識がなくても（そしてGoの知識がなくても）、HTM
 
 :::
 
+## セットアップしたい
+
+```{toctree}
+---
+maxdepth: 2
+---
+hugo-setup
+```
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
-hugo-install
-hugo-page-bundles
 hugo-config
 hugo-content
 hugo-layouts
@@ -42,7 +49,6 @@ hugo-i18n
 ---
 maxdepth: 1
 ---
-hugo-new
 hugo-demo
 hugo-page-variables
 hugo-scratch
