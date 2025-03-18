@@ -19,19 +19,32 @@ __pycache__/
 ...
 ```
 
-Git管理したくないファイル／ディレクトリは`.gitignore`にリストして除外できます。
+`.gitignore`で、プロジェクトごとにGit管理から除外するファイル／ディレクトリを指定できます。
 `.gitignore`はリポジトリのルートに作成します。
 
 依存パッケージや、自動生成されるファイル、
 シークレット情報が含まれるファイルなどはGit管理から除外する必要があります。
 
+ゼロから自分で作成するのは大変なので、
+[GitHubが公開している.gitignoreコレクション](https://github.com/github/gitignore)から探すか、
+後述のVS Codeの機能を使うとよいと思います。
+
+## VS Codeしたい
+
 1. VS Codeのコマンドパレットを起動
 2. `[Add gitignore]`を検索
-3. テンプレートを選択
-   - `macOS`
-   - `Python`
+3. テンプレートを選択（文字を入力して検索）
    - `C++`
    - `CMake`
+   - `GitHubPages`
+   - `Go`
+   - `macOS`
    - `Node`
+   - `Python`
    - `Rust`
    - `TeX`
+   - `VisualStudioCode`
+   - `WordPress`
+4. 追加方法を選択
+    - `Append`
+    - `Overwrite`
