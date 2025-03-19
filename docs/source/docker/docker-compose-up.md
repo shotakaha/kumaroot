@@ -1,13 +1,33 @@
-# コンテナを作成したい（`compose up`）
+# コンテナを起動したい（`compose up`）
 
 ```console
 $ docker compose up -d
 ```
 
-`docker compose up`コマンドでコンテナを作成できます。
-ローカルにイメージがない場合は、プルしてから実行されます。
+`docker compose up`コマンドで`compose.yaml`で指定したコンテナを起動できます。
 `-d / --detach`はバックグラウンド実行するためのオプションです。
 ほとんどの場合でつけておけばOKです。
+ローカルにイメージがない場合は、プルしてから実行されます。
+
+:::{note}
+
+複数のコンテナを起動する場合、コンテナ間のネットワークの作成も必要です。
+`docker compose up`は、
+`docker image pull`、
+`docker network create`、
+`docker container run`、
+をまとめて実行してくれます。
+
+:::
+
+## 設定ファイルを変更したい（`docker compose -f`）
+
+```console
+$ docker compose -f compose.other.yaml up -d
+```
+
+`-f / --file`オプションで設定ファイルを変更できます。
+同じような構成だけど少しだけ変えたい場合などに使用できます。
 
 ## コンテナを一時停止したい（`compose stop`）
 
