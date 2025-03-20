@@ -15,18 +15,14 @@ print(us)
 # UserSettings(settings='設定ファイル名', drive='')
 ```
 
-``pydantic``はPythonの型ヒントを利用したデータクラスです。
-``pydantic.BaseModel``を継承したクラスを作成し、すべてのメンバー変数に型ヒントを与えます。
-クラスをインスタンス化する時に、型ヒントにしたがってバリデーションしてくれます。
-設定できる型は[Fields](https://docs.pydantic.dev/dev/api/fields/)を参照してください。
+`pydantic`でPythonの型ヒントをデータクラスのバリデーションができます。
+`pydantic.BaseModel`を継承するだけで、そのデータクラスをインスタンス化する時に、
+型ヒントにしたがってバリデーションしてくれます。
+また、データクラスの変数は[Fields](https://docs.pydantic.dev/dev/api/fields/)で詳細に設定できます。
 
-:::{caution}
 
-デフォルトでは、クラスをインスタンス化するときと、シリアライズするときにバリデーションが実行されるようです。
-メンバー変数に値を代入しただけでは、バリデーションは実行されないことに留意してください。
-（おそらくモデルやメンバー変数の設定で変更できると思います）
 
-:::
+
 
 :::{seealso}
 
@@ -60,6 +56,67 @@ us
 上記サンプルでは、``pd.DataFrame``を設定できるようにしました。
 ``pd.DataFrame``はPythonのデフォルトの型ではないため、そのままでは使えませんが、
 ``arbitrary_types_allowed = True``にすると使えるようになります。
+
+## 再代入したい（`validate_assignment`）
+
+```python
+from pydantic import BaseModel, ConfigDict
+
+class UserSettings(BaseModel):
+    model_config = ConfigDict(validate_assignment=True)
+    settings: str
+```
+
+`validate_assignment=True`で、インスタンスに再代入したときにもバリデーションを追加できます。
+
+:::{caution}
+
+デフォルトでは、クラスをインスタンス化するときと、シリアライズするときにバリデーションが実行されます。
+メンバー変数に値を再代入しただけでは、バリデーションは実行されないことに留意してください。
+
+:::
+
+## リスト型したい（`list`）
+
+```python
+from pydantic import BaseModel, Field
+
+class UserSettings(BaseModel):
+    items: list[int] = Field(
+        default_factory=list,
+        min_items=1,
+        max_items=10,
+        description="整数のリスト",
+    )
+```
+
+`list[int]`の型ヒントを設定したあとで、`Field`で詳細に設定できます。
+
+:::{note}
+
+Python3.8以前では`typing`モジュールの`List[int]`を使う必要がありました。
+Python3.9以降では組み込みのジェネリック型である`list[int]`が推奨されています。
+
+:::
+
+## 例外処理したい（`ValidationError`）
+
+```python
+from pydantic import BaseModel, ValidationError
+
+class UserSettings(BaseModel):
+    name: str
+
+if __name__ == "__main__":
+    try:
+        us = UserSettings(name=100)
+        print(us)
+    except ValidationError as e:
+        print(e.errors())
+```
+
+`pydantic.ValidationError`でバリデーションエラーの場合に例外処理できます。
+`errors()`メソッドで、エラーになった理由などの詳細が確認できます。
 
 ## カスタムバリデーターしたい（``field_validator``）
 
