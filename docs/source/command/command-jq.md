@@ -80,3 +80,28 @@ $ jq -r 'paths(scalars) | select(length == 3) | "\\(.[1]) > \\(.[2])"' ファイ
 大きなJSONファイルだと、同じ構造が繰り返されていることが多いです。
 `sort`コマンドと`uniq`コマンドと組み合わせると、重複を削除できます。
 キーの順番は失われますが、ファイルの概要を把握するのに役立ちます。
+
+## 構造をしりたい
+
+```console
+$ jq 'paths | length' ファイル名.json | sort -n | tail -1
+```
+
+ファイルの階層の深さを確認できます。
+`paths`フィルタで、すべてのオブジェクトをリストに変換します。
+`length`フィルタで、リストのサイズを取得します。
+`sort -n`で番号順にソートし、`tail -1`で末尾の値を表示します。
+
+```console
+$ jq 'walk(if type == "object" or type == "array" then . else type end)' ファイル名
+```
+
+ファイルの階層構造を保ちながら、値の型を表示します。
+
+## YAMLしたい
+
+```console
+jq -r 'paths(scalars) as $p | "\($p | join(".")) = \(getpath($p))"' ファイル名.json
+```
+
+擬似的なYAML形式で表示します。
