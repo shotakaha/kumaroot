@@ -4,6 +4,16 @@
 
 ### Fix
 
+- **docker/docker-mariadb.md**: MariaDBを整理した
+- **python/python-pydantic.md**: 再代入時のバリデーションを追記した
+- **docker/docker-compose-up.md**: 設定ファイルを変更できることを追記した
+- **git/git-local.md**: 目次を整理した
+- **hugo/hugo-setup.md**: 目次を整理した
+- **git/git-ignore.md**: gitignoredを整理した
+- **.gitignore**: ignored vscode 設定
+- **git/git-config.md**: リポジトリ設定を整理した
+- **git/git-setup.md**: 目次を整理した
+- **command/command-vim.md**: vimのキーバインドを追加した
 - **docker/docker-usage.md**: Dockerの使い方の導入を修正した
 - **docker/docker-texlive.md**: TeX LiveのDocker composeを追記した
 - **docker/docker-compose-run.md**: compose runを追記した
