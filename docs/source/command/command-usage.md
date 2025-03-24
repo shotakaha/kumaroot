@@ -35,6 +35,7 @@ command-mktemp
 command-df
 command-du
 command-crontab
+command-jq
 ```
 
 ## エディターしたい
