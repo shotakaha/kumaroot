@@ -4,6 +4,7 @@
 
 ### Fix
 
+- **command/command-jq.md**: jqを追加した
 - **docker/docker-mariadb.md**: MariaDBを整理した
 - **python/python-pydantic.md**: 再代入時のバリデーションを追記した
 - **docker/docker-compose-up.md**: 設定ファイルを変更できることを追記した
