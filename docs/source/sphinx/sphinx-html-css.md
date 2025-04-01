@@ -1,4 +1,4 @@
-# CSSしたい（``html_css_files``）
+# CSSしたい（`html_css_files`）
 
 ```python
 # config.py
@@ -9,13 +9,8 @@ html_css_files = [
 ]
 ```
 
-カスタム用のCSSファイルを``docs/_static/custom.css``に配置します。
-``conf.py``の``html_static_path``には``_static``を、``html_css_files``にCSSファイル名を記述します。
-
-:::{hint}
-
-CSSファイルは複数指定できます。
-用途別にファイルを分割してもよいと思います。
+`html_css_files`でカスタムCSSを追加できます。
+ファイル名は`html_static_path`に設定したディレクトリからの相対パスにします。
 
 ```python
 html_css_files = [
@@ -24,7 +19,9 @@ html_css_files = [
 ]
 ```
 
-:::
+CSSファイルは複数指定できます。
+その場合、リストに記述した順番で読み込まれます。
+用途別にファイルを分割してもよいと思います。
 
 ## メディアクエリしたい
 
@@ -45,5 +42,58 @@ html_css_files = [
 ```html
 <link href="print.css" rel="stylesheet" media="print">
 ```
+
+:::
+
+## レイヤーしたい
+
+```python
+# conf.py
+html_css_files = [
+    "custom.css",
+]
+```
+
+`custom.css`とCSSのレイヤー機能（`@layer`）と組み合わせることで、スタイルを柔軟に制御できます。
+
+```css
+/* custom.css */
+/* @import は custom.css からの相対パス */
+@import url("reset.css") layer(reset);
+@import url("base.css") layer(base);
+@import url("layout.css") layer(layout);
+@import url("theme.css") layer(theme);
+@import url("components.css") layer(components);
+@import url("overrides.css") layer(overrides);
+
+/* レイヤーの優先度 : 低 -> 高 */
+@layer reset, base, layout, theme, components, overrides
+```
+
+このサンプルでは、`custom.css`の中でCSSファイル`@import`しています。
+それぞれのファイルの内容は[CSSの@layer](../html/css-layer.md)を参照してください。
+
+```console
+$ tree
+docs/
+  |-- conf.py
+  |-- _static/
+        |-- custom.css
+        |-- reset.css
+        |-- base.css
+        |-- layout.css
+        |-- theme.css
+        |-- components.css
+        |-- overrides.css
+```
+
+`_static`ディレクトリの中に、それぞれのCSSを配置しま
+す。
+CSSファイルの中身は空でも問題ありません。
+
+:::{note}
+
+CSSファイルの中身が空でも問題ありませんが、
+ファイルがない場合はエラーになります。
 
 :::
