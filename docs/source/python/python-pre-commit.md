@@ -1,4 +1,4 @@
-# コミットをチェックしたい（``pre-commit``）
+# コミット前にチェックしたい（`pre-commit`）
 
 ```console
 $ pre-commit --version
@@ -8,8 +8,8 @@ $ pre-commit install
 $ pre-commit run --all-files
 ```
 
-`pre-commit`は[Git Hooks](../git/git-hooks.md)を使って、コミット前などにコードのチェック作業などを自動化できるツールです。
-`pre-commit`以外にも`commit-msg`や`pre-push`などさまざまなフックに対応しています。
+`pre-commit`は[Git Hooks](../git/git-hooks.md)を使って、
+コミット前などにコードのチェック作業などを自動化できるツールです。
 設定ファイルは`.pre-commit-config.yaml`です。
 Pythonで書かれていますが、いろいろなプログラミング言語やプロジェクトで使えるようになっています。
 
@@ -67,7 +67,7 @@ repos:
 `.pre-commit-config.yaml`にフック情報を記述します。
 設定できるフックは[Supported Hooks](https://pre-commit.com/hooks.html)で確認できます。
 
-## フックしたい（`run`）
+## チェックしたい（`run`）
 
 ```console
 $ pre-commit run --all-files
@@ -75,7 +75,70 @@ $ pre-commit run --all-files
 
 `run`コマンドでフックの確認ができます。
 `--all-files`オプションで、カレントディレクトリの下にあるすべてのファイルに対してチェックを実行します。
-``trailing-whitespace``や``end-of-file-fixer``などのフックを有効にしている場合、ファイルが自動で修正されます。
+`trailing-whitespace`や`end-of-file-fixer`などのフックを有効にしている場合、ファイルが自動で修正されます。
+
+## フックしたい
+
+```console
+$ find .git/hooks -f type ! -name "*.sample" -perm u+x
+.git/hooks/pre-commit
+```
+
+`.git/hooks/`で、現在有効になっているGit Hooksを確認できます。
+`*.sample`が付いていない実行ファイルが有効なフックです。
+
+```console
+$ pre-commit install --hook-type フック名
+```
+
+`--hook-type フック名`オプションで、フックを追加できます。
+
+```console
+$ pre-commit install --install-hooks --hook-type pre-commit --hook-type commit-msg
+```
+
+`--install-hooks`オプションで、複数のフックをまとめて追加できます。
+
+```yaml
+# .pre-commit-config.yaml
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+  - pre-push
+```
+
+`.pre-commit-config.yaml`で有効にするフックを指定することもできます。
+
+デフォルトは`pre-commit`（コミットの直前）です。
+`commit-msg`や`pre-push`など以下のGit Hooksもサポートされています。
+
+| Git Hook | タイミング | 設定方法 |
+|---|---|---|
+| `commit-msg` | コミットメッセージ作成の直後 | `stages: [commit-msg]` |
+| `post-checkout` | ブランチ切り替えの直後 | `stages: [post-checkout]` |
+| `post-commit` | コミットの直後 | `stages: [post-commit]` |
+| `post-merge` | マージの直後 | `stages: [post-merge]` |
+| `post-rewrite` | コミットを修正した直後 | `stages: [post-merge]` |
+| `pre-commit` | コミットの直前 | デフォルト |
+| `pre-merge-commit` | マージコミットの直前 | デフォルト |
+| `pre-push` | プッシュの直前 | `stages: [push]` |
+| `pre-rebase` | リベースの直前 | `stages: [push]` |
+| `prepare-commit-msg` | コミットメッセージ作成の直前 | `stages: [push]` |
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+  - repo: リポジトリ
+    rev: バージョン
+    hooks:
+      - id: フック名
+        stages:
+          - フックのタイミング
+          - [pre-commit, commit-msg]
+```
+
+また、設定ファイルの`stages`セクションで、
+ツールごとに`pre-commit`フックを実行するタイミングを設定できます。
 
 ## pre-commit-hooksしたい
 
