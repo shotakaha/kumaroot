@@ -80,6 +80,7 @@ git-gitlab
 git-hooks
 git-lfs
 git-cliff
+git-review
 ```
 
 ## 関連ドキュメント
