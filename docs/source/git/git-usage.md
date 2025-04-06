@@ -37,6 +37,7 @@ git-merge
 git-diff
 git-rm
 git-revert
+git-worktree
 ```
 
 ## リモートリポジトリしたい
