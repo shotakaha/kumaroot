@@ -4,6 +4,16 @@
 
 ### Fix
 
+- **git/git-worktree.md**: worktreeを追記した
+- **git/git-branch.md**: ブランチ名を整理した
+- **.mise.toml**: miseを削除した
+- **git/git-worktree.md**: worktreeを追加した
+- **git/git-review.md**: ひとりレビューを追加した
+- **git/git-review.md**: レビューの手順を整理した
+- **docs/source/python/python-pre-commit.md**: pre-commitで設定できるフックの種類を追記した
+- **command/command-1password.md**: opコマンドを追記した
+- **sphinx/sphinx-html-css.md**: CSSのレイヤー機能を追加した
+- **command/command-jq.md**: よく使われるワンライナーを追記した
 - **command/command-jq.md**: jqを追加した
 - **docker/docker-mariadb.md**: MariaDBを整理した
 - **python/python-pydantic.md**: 再代入時のバリデーションを追記した
