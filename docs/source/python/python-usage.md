@@ -101,6 +101,7 @@ python-deprecated
 python-black
 python-ruff
 python-pytest
+python-coverage
 python-unittest-mock
 python-mypy
 python-pyright

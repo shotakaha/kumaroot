@@ -1,4 +1,4 @@
-# ユニットテストしたい（``pytest``）
+# ユニットテストしたい（`pytest`）
 
 ```console
 $ pytest --version
@@ -148,3 +148,43 @@ def test_関数名(mock_write):
 `open`関数を使う場合は`mock_open`が必要です。
 
 :::
+
+## 例外をテストしたい（`pytest.raises`）
+
+```python
+import pytest
+
+def test_関数名():
+    with pytest.raise(例外名):
+        関数(...)  # <- 例外を発生させる
+```
+
+`pytest.raise`で例外をテストできます。s
+
+## 繰り返しテストしたい（`@pytest.mark.parametrize`）
+
+```python
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [ (1, 2, 3),
+      (3, 4, 5),]
+)
+def test_関数名(a, b, expected):
+    assert 関数名(a, b) == expected
+```
+
+`@pytest.mark.parametrize`デコレータで、
+異なる値で繰り返しテストできます。
+
+## テスト用の設定したい（`@pytest.fixture`）
+
+```python
+@pytext.fixture
+def sample_data():
+    return [1, 2, 3]
+
+def test_data_length(sample_data):
+    assert len(sample_data) == 3
+```
+
+`@pytest.fixture`でテスト用の設定値を作成できます。
