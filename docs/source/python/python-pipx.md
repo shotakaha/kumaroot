@@ -6,8 +6,17 @@ $ pipx upgrade パッケージ名
 $ pipx uninstall パッケージ名
 ```
 
-仮想環境でパッケージを管理する場合は``pipx``コマンドを使います。
-``pipx``は``Homebrew``を使ってインストールします。
+`pipx`は実行ファイルをローカルな仮想環境にインストールするツールです。
+`Homebrew`でインストールできます。
+
+:::{caution}
+
+`pipx`でインストールできるのはコマンドラインツールとして利用できるパッケージのみです。
+`pandas`などライブラリとして利用するパッケージはインストールできません。
+
+:::
+
+## 設定したい（`ensurepath`）
 
 ```console
 $ brew install pipx
@@ -15,8 +24,8 @@ $ brew link pipx
 $ pipx ensurepath
 ```
 
-``pipx``をインストールしたら、初回のみ``ensurepath``します。
-シェルによらずこのコマンドで、PATHに``$HOME/.local/bin``が追加されます。
+`pipx`をインストールしたら、初回のみ、パスの設定が必要です。
+`pipx ensurepath`で、シェルによらず、PATHに`$HOME/.local/bin`が追加されます。
 
 ## シェル補完したい
 
@@ -24,9 +33,10 @@ $ pipx ensurepath
 $ register-python-argcomplete --shell fish pipx >~/.config/fish/completions/pipx.fish
 ```
 
-``pipx``コマンドのシェル補完が使えるようにすると便利です。
+`register-python-argcomplete`でシェル補完機能を追加できます。
+シェル上で`pipx`コマンドが補完されるようになるのでとても便利です。
 
-## パッケージを一覧したい（``list``）
+## パッケージを一覧したい（`list`）
 
 ```console
 $ pipx list
@@ -43,8 +53,8 @@ manual pages are exposed at ~/.local/share/man
 
 ```
 
-``list``でインストールしたパッケージを一覧できます。
-仮想環境（``venv``）のパスや、
+`pipx list`でインストールしたパッケージを一覧できます。
+仮想環境（`venv`）のパスや、
 インストールに使ったPythonのバージョン、
 一緒にインストールされた依存パッケージの名前なども確認できます。
 
