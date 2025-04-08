@@ -2,19 +2,22 @@
 
 ```console
 // ビルド用ディレクトリで作業する
-// オプションを指定してcmakeする
+(~/geant4/) $ cd build
+
+// Geant4オプションを指定してcmakeする
 (~/geant4/build/) $ cmake \
--DCMAKE_INSTALL_PREFIX=~/geant4/11.2.1 \
+-DCMAKE_INSTALL_PREFIX=~/geant4/11.x.y \
 -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) \
 -DGEANT4_INSTALL_DATA=ON \
 -DGEANT4_USE_OPENGL_X11=ON \
 -DGEANT4_USE_QT=ON \
-../geant4-v11.2.1/
+../geant4-v11.x.y/
 ```
 
-``cmake``を使ってビルドに必要なファイルを生成します。
-``-Dオプション名=設定値``でビルドオプションを変更できます。
-実行すると、ビルド用ディレクトリに``CMakeLists.txt``が生成されます。
+`cmake`を使ってビルドに必要なファイルを生成します。
+Geant4のビルドオプションは
+`-Dオプション名=設定値`で変更できます。
+実行すると、ビルド用ディレクトリに`CMakeLists.txt`が生成されます。
 
 ## ビルドオプションを確認する
 
@@ -48,11 +51,11 @@
 | GEANT4_USE_FREETYPE | ``OFF`` | | Freetypeフォントを有効にするフラグ。|
 | GEANT4_USE_HDF5 | ``OFF`` | | HDF5形式を有効にするフラグ。|
 
-
 ### Qtしたい
 
-可視化ツールにQt5を使う場合、Qt5がインストールされているパスを``CMAKE_PREFIX_PATH``で指定する必要があります。
-該当するパスを直接指定してもよいのですが、``brew --prefix パッケージ名``コマンドを使うことで、
+可視化ツールにQt5を使う場合、Qt5がインストールされているパスを`CMAKE_PREFIX_PATH`で指定する必要があります。
+該当するパスを直接指定してもよいのですが、
+``brew --prefix パッケージ名``コマンドを使うことで、
 パソコンのシステム構成に依存しにくいように汎用化しています。
 
 ```console
@@ -63,8 +66,11 @@ $ brew --prefix qt@5
 // macOS (M2 Apple)
 $ brew --prefix qt@5
 /opt/homebrew/opt/qt@5
-```
 
+// WSL2 (Ubuntu)
+$ brew --prefix qt@5
+/home/linuxbrew/.linuxbrew/opt/qt@5
+```
 
 ## ディレクトリ構成
 
