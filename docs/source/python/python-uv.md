@@ -17,26 +17,34 @@ $ uv add --dev パッケージ名
 ```console
 $ brew install uv
 
-$ uv --version
-uv 0.4.1 (Homebrew 2024-08-30)
-$ uvx --version
-uv-tool-uvx 0.4.1 (Homebrew 2024-08-30)
-
 $ which -a uv
 /opt/homebrew/bin/uv
+
+$ uv --version
+uv 0.6.13 (Homebrew 2025-04-07)
+
 $ which -a uvx
 /opt/homebrew/bin/uvx
+
+$ uvx --version
+uv-tool-uvx 0.6.13 (Homebrew 2025-04-07)
 ```
 
-Pythonの実行環境を操作できるコマンドなので、
-Homebrewを使ってシステム全体にインストールしました。
-`pipx`や`poetry`でもインストールできます。
+`uv`はHomebrewでインストールできます。
+`pipx`と同じような思想の`uvx`コマンドも使えるようになります。
 
-## 新規プロジェクトしたい（``uv init``）
+:::{note}
+
+`pip`や`pipx`、`poetry`でもインストールできます。
+CI/CDで使う場合は`pipx install uv`がよいと思います。
+
+:::
+
+## 新規プロジェクトしたい（`uv init`）
 
 ```console
-$ uv --version
-uv 0.4.20 (Homebrew 2024-10-08)
+$ uv init --version
+uv-init 0.6.13 (Homebrew 2025-04-07)
 
 // デフォルト（--app --no-package）
 $ uv init PROJECT_NAME
@@ -46,6 +54,9 @@ $ uv init PROJECT_NAME --lib
 
 // CLI&パッケージ（--app --package）
 $ uv init PROJECT_NAME --app --package
+
+// ドキュメントのみ
+$ uv init --bare --no-package PROJECT_DOCS
 ```
 
 `init`コマンドでプロジェクトを初期化できます。
@@ -86,6 +97,16 @@ error: Project is already initialized in `./PROJECT_NAME`
 ## Python管理したい（`uv python`）
 
 ```console
+$ uv python --version
+uv-python 0.6.13 (Homebrew 2025-04-07)
+
+$ uv python list
+```
+
+`uv python`コマンドでPythonの実行環境を設定できます。
+`uv python list`コマンドで、利用可能なPythonを確認できます。
+
+```console
 $ uv python pin 3.12
 Pinned `.python-version` to `3.12`
 
@@ -97,8 +118,7 @@ $ python3 --version
 Python 3.13.0
 ```
 
-`uv python`コマンドでPythonの実行環境を設定できます。
-`pin`コマンドでPythonのバージョンをピン留めできます。
+`uv python pin`コマンドで、プロジェクトごとのPythonのバージョンをピン留めできます。
 ピン留めしたバージョン情報は`.python-version`に保存されます。
 
 また、それぞれのサブコマンドの`--python`オプションで、実行環境を変更できます。
@@ -117,7 +137,7 @@ Installed Python 3.12.7 in 5.67s
 $ uv python uninstall 3.12
 ```
 
-`install`コマンドでPython実行環境をインストールできます。
+`uv python install`コマンドでPython実行環境をインストールできます。
 ピン留めしたいバージョンがインストールしてない場合、
 
 ```console
