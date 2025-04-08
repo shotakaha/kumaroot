@@ -22,10 +22,11 @@ macOSの場合`cmake`のCaskをインストールします。
 ## WSL2を準備する
 
 ```console
+$ apt install build-essential
 $ brew install cmake
 $ brew install qt@5
 ```
 
-WSL2の場合、`cmake`と`qt@5`の追加インストールが必要です。
-描画バックエンドは`Wayland`に対応しているため、
-X11（XQuartz）の追加インストールは不要です。
+WSL2の場合、`build-essential`でgccなどをインストールします。
+また、`cmake`と`qt@5`の追加インストールが必要です。
+描画バックエンドは`Wayland`に対応しているため、X11（XQuartz）の追加インストールは不要です。
