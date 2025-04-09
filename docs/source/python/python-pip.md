@@ -48,10 +48,44 @@ $ pip3 list --outdated | awk 'NR>2{print $1}' | xargs pip3 install -U pip
 
 ## 一括で追加したい（`--requirements`）
 
-`bash
+```console
 $ pip3 install --requirements ファイル名
 $ pip3 install -r requirements.txt
-`
+```
 
 `-r / --requirements`オプションでファイルに書かれているパッケージを一括インストールできます。
 ファイル名は通常`requrirements.txt`を使います。
+
+## Python環境を指定したい
+
+```console
+$ python3.10 -m pip install パッケージ名
+$ python3.11 -m pip install パッケージ名
+$ python3.12 -m pip install パッケージ名
+```
+
+`python -m pip`で`pip`をモジュールとして呼ぶことで、
+指定したPython環境にインストールできます。
+
+```console
+// python3の実行パスを確認
+$ which -a python3
+/opt/homebrew/bin/python3
+/usr/bin/python3
+
+// python3の実体を確認
+$ ls -1 /opt/homebrew/bin/python*
+/opt/homebrew/bin/python3
+/opt/homebrew/bin/python3-config
+/opt/homebrew/bin/python3.11
+/opt/homebrew/bin/python3.11-config
+/opt/homebrew/bin/python3.12
+/opt/homebrew/bin/python3.12-config
+/opt/homebrew/bin/python3.13
+/opt/homebrew/bin/python3.13-config
+```
+
+HomebrewでPythonをインストールして更新していると、
+気づかないうちに複数のPythonバージョンが溜まっていることがあります。
+パッケージがうまくインストールできなかったり、`import`できなかったりする場合は、
+自分がどのバージョンを使っているのか、確認するとよいです。
