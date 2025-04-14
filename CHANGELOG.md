@@ -4,6 +4,13 @@
 
 ### Fix
 
+- **python/python-pip.md**: pipに追記した
+- **python/python-pip.md**: pip/pipxを追記した
+- **python/python-uv.md**: uvを追加した
+- **geant4/geant4-install-download.md**: ダウンロードリンクを修正した
+- **geant4/geant4-install-brew.md**: WSL2の準備を追記した
+- **geant4/geant4-install-brew.md**: WSL2でのインストールを追加した
+- **python/python-coverage.md**: coverageを追加した
 - **git/git-worktree.md**: worktreeを追記した
 - **git/git-branch.md**: ブランチ名を整理した
 - **.mise.toml**: miseを削除した
