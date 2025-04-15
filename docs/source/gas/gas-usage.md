@@ -33,9 +33,11 @@ gas-quota
 gas-version
 ```
 
+## JavaScriptしたい
+
 ```{toctree}
 ---
-maxdepth:1
+maxdepth: 2
 ---
 js-usage
 ```
