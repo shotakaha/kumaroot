@@ -1,47 +1,23 @@
 # シート操作したい（`Sheet`）
 
-
-# シートを開きたい（`getSheetByName`）
-
 ```js
 const book = SpreadsheetApp.getActiveSpreadsheet();
-const sheetName = "シート名";
-const sheet = book.getSheetByName(sheetName);
-
-Logger.log(`シート名: ${sheet.getName()}`);
-Logger.log(`シート名: ${sheet.getSheetName()}`);
-Logger.log(`シートID: ${sheet.getSheetId()}`);
-Logger.log(`シートのインデックス: ${sheet.getIndex()}`);
+const sheet = book.getActiveSheet();
 ```
 
-`Spreadsheet.getSheetByName`でシート名を指定してシートを取得できます。
+`Sheet`オブジェクトで単一のシートを操作できます。
 
-## シートを追加したい（`insertSheet`）
+## シートの情報を確認したい
 
 ```js
-function getOrInsertSheet() {
-    const book = SpreadsheetApp.getActiveSpreadsheet();
-    const sheetName = "シート名";
-    const sheet = book.getSheetByName(sheetName) || book.insertSheet(sheetName);
-    return sheet;
-};
+const id = sheet.getId();
+const name = sheet.getName();
+const sheetName = sheet.getSheetName();
+
+const index = sheet.getIndex();
+const lastRow = sheet.getLastRow();
+const lastCol = sheet.getLastColumn();
 ```
-
-`Spreadsheet.insertSheet`でシートを追加できます。
-
-## すべてのシートを取得したい（`getSheets`）
-
-```js
-const book = SpreadsheetApp.getActiveSpreadsheet();
-const sheets = book.getSheets();
-Logger.log(sheets.length);
-
-for (const sheet of sheets) {
-    Logger.log(sheet.getName());
-}
-```
-
-``Spreadsheet.getSheets``（複数形）で複数のシートを配列として取得できます。
 
 ## リファレンス
 
