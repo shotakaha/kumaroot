@@ -34,6 +34,9 @@ gas-version
 ```
 
 ```{toctree}
+---
+maxdepth:1
+---
 js-usage
 ```
 
