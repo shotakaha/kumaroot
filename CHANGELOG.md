@@ -4,53 +4,45 @@
 
 ### Fix
 
-- **gas/gas-spreadsheet.md**: spreadsheetを修正した
-- **gas/gas-spreadsheet-sheet.md**: sheetを修正した
-- **gas/gas-spreadsheet-range.md**: rangeを修正した
+- **.gitignore**: ignored vscode 設定
+- **.mise.toml**: miseを削除した
+- **command/command-1password.md**: opコマンドを追記した
+- **command/command-awk.md**: 空白とカンマ区切りできるようにした
+- **command/command-jq.md**: よく使われるワンライナーを追記した
+- **command/command-vim.md**: vimのキーバインドを追加した
+- **docker/docker-cli.md**: 新旧コマンド対応表を追加した
+- **docker/docker-compose-down.md**: upとdownを分割した
+- **docker/docker-compose-exec.md**: compose execの例を追記した
+- **docker/docker-compose-run.md**: compose runを追記した
+- **docker/docker-compose-up-down.md**: downのオプションを追記した
+- **docker/docker-compose-up.md**: stopとstartをまとめた
+- **docker/docker-compose-up.md**: 設定ファイルを変更できることを追記した
+- **docker/docker-compose-yaml.md**: ボリューム設定を追加した
+- **docker/docker-mariadb.md**: MariaDBを整理した
+- **docker/docker-texlive.md**: TeX LiveのDocker composeを追記した
+- **docker/docker-usage.md**: Dockerの使い方の導入を修正した
+- **docs/source/python/python-pre-commit.md**: pre-commitで設定できるフックの種類を追記した
+- **gas/gas-spreadsheet-book.md**: ブック操作を追記した
 - **gas/gas-spreadsheet-range.md**: range操作を追加した
 - **gas/gas-spreadsheet-sheet.md**: シート操作を修正した
-- **gas/gas-spreadsheet-book.md**: ブック操作を追記した
-- **gas/js-jest.md**: describeを追加した
+- **gas/gas-spreadsheet.md**: spreadsheetを修正した
 - **gas/js-jest.md**: jestを追加した
-- **python/python-pip.md**: pipに追記した
-- **python/python-pip.md**: pip/pipxを追記した
-- **python/python-uv.md**: uvを追加した
-- **geant4/geant4-install-download.md**: ダウンロードリンクを修正した
-- **geant4/geant4-install-brew.md**: WSL2の準備を追記した
 - **geant4/geant4-install-brew.md**: WSL2でのインストールを追加した
-- **python/python-coverage.md**: coverageを追加した
-- **git/git-worktree.md**: worktreeを追記した
+- **geant4/geant4-install-download.md**: ダウンロードリンクを修正した
 - **git/git-branch.md**: ブランチ名を整理した
-- **.mise.toml**: miseを削除した
-- **git/git-worktree.md**: worktreeを追加した
-- **git/git-review.md**: ひとりレビューを追加した
-- **git/git-review.md**: レビューの手順を整理した
-- **docs/source/python/python-pre-commit.md**: pre-commitで設定できるフックの種類を追記した
-- **command/command-1password.md**: opコマンドを追記した
-- **sphinx/sphinx-html-css.md**: CSSのレイヤー機能を追加した
-- **command/command-jq.md**: よく使われるワンライナーを追記した
-- **command/command-jq.md**: jqを追加した
-- **docker/docker-mariadb.md**: MariaDBを整理した
-- **python/python-pydantic.md**: 再代入時のバリデーションを追記した
-- **docker/docker-compose-up.md**: 設定ファイルを変更できることを追記した
-- **git/git-local.md**: 目次を整理した
-- **hugo/hugo-setup.md**: 目次を整理した
-- **git/git-ignore.md**: gitignoredを整理した
-- **.gitignore**: ignored vscode 設定
 - **git/git-config.md**: リポジトリ設定を整理した
+- **git/git-ignore.md**: gitignoredを整理した
+- **git/git-local.md**: 目次を整理した
+- **git/git-review.md**: レビューの手順を整理した
 - **git/git-setup.md**: 目次を整理した
-- **command/command-vim.md**: vimのキーバインドを追加した
-- **docker/docker-usage.md**: Dockerの使い方の導入を修正した
-- **docker/docker-texlive.md**: TeX LiveのDocker composeを追記した
-- **docker/docker-compose-run.md**: compose runを追記した
-- **command/command-awk.md**: 空白とカンマ区切りできるようにした
-- **docker/docker-compose-exec.md**: compose execの例を追記した
-- **docker/docker-compose-up.md**: stopとstartをまとめた
-- **docker/docker-compose-down.md**: upとdownを分割した
-- **docker/docker-compose-up-down.md**: downのオプションを追記した
-- **docker/docker-compose-yaml.md**: ボリューム設定を追加した
-- **docker/docker-cli.md**: 新旧コマンド対応表を追加した
+- **git/git-worktree.md**: worktreeを追記した
+- **hugo/hugo-setup.md**: 目次を整理した
+- **python/python-coverage.md**: coverageを追加した
+- **python/python-pip.md**: pip/pipxを追記した
+- **python/python-pydantic.md**: 再代入時のバリデーションを追記した
 - **python/python-pyproject.md**: キャレットが使えなくなったことを追記した
+- **python/python-uv.md**: uvを追加した
+- **sphinx/sphinx-html-css.md**: CSSのレイヤー機能を追加した
 
 ## v1.44.2 (2025-03-03)
 
