@@ -1,63 +1,45 @@
 # セル操作したい（`Range`）
 
 ```js
+const range = sheet.getDataRange();
 const range = sheet.getRange("A1:C3");
-range.setFontColorObject("#fff");
-range.setBackgroundbject("#000");
 ```
 
-`Range`オブジェクトで、シート上の選択した範囲に対して操作できます。
+`Range`オブジェクトは、シート上の選択した範囲を操作できます。
 
-## すべてのデータを選択したい（`getDataRange`）
-
-```js
-// すべてのデータの範囲
-const range = sheet.getDataRange()
-
-// 見出しを除外したデータの範囲
-const range = sheet.getDataRange.slice(1);
-```
-
-`Sheet.getDataRange`で、シート上のデータが存在する範囲をすべて選択できます。
-データに見出しを含みたくない場合は``slice(1)``するとよいです。
-
-```js
-// 別の選択方法
-const nrows = sheet.getLastRow();
-const ncols = sheet.getLastColumns();
-const range = sheet.getRange(2, 1, nrows, ncols);
-```
-
-シートにあるデータの行数、列数を取得して、範囲選択することもできます。
-
-```js
-const lastRow = sheet.getLastRow();
-const newRange = sheet.getRange(lastRow+1, 1);
-```
-
-データを読み込むときより、既存のデータを追記したいときに利用します。
-
-## セル選択したい（`getRange`）
+## データを選択したい（`getRange`）
 
 ```js
 // A1表記で指定
-const range = sheet.getRange("セル番地");
-const range = sheet.getRange("セル番地:セル番地");
-// 行番号／列番号で指定
-const range = sheet.getRange("行番号", "列番号");
-const range = sheet.getRange("行番号", "列番号", "行数");
-const range = sheet.getRange("行番号", "列番号", "行数", "列数");
+// sheet.getRange("セル番地");
+// sheet.getRange("セル番地:セル番地");
+
+// A1セルを選択
+const range = sheet.getRange("A1");
+
+// A1セルからB3までの範囲を選択
+const range sheet.getRange("A1:B3");
 ```
 
-`Sheet.getRange`で、セル名や番地（行番号と列番号）を使ってセル（の範囲）を選択できます。
+`getRange`でセル（やセル範囲）を指定して選択できます。
+セル番地は大文字でも小文字でもOKです。
 
 ```js
-// B2セルを選択
-const range = sheet.getRange("B2");
-const range = sheet.getRange("b2");
+// 行番号／列番号で指定
+// sheet.getRange("行番号", "列番号");
+// sheet.getRange("行番号", "列番号", "行数");
+// sheet.getRange("行番号", "列番号", "行数", "列数");
+
+// 2行目3列目（=C2セル）を選択
+const range = sheet.getRange(2, 3);
+
+// 2行目3列目（=C2）から2行目2列目（=D3）の範囲を取得
+const range = sheet.getRange(2, 3, 2, 2);
 ```
 
-セル番地は大文字でも小文字でもOKです。
+`getRange`はR1C1表記にも対応しています。
+
+## データを列選択したい
 
 ```js
 // B列を全選択
@@ -75,6 +57,42 @@ const range = sheet.getRange("B");
 行全体は`getRange(開始セル:行番号)`で選択できます。
 `getRange(列番号 or 行番号)`だけだとエラーになります。
 
+## データを全選択したい（`getDataRange`）
+
+```js
+// すべてのデータの範囲
+const range = sheet.getDataRange()
+```
+
+`getDataRange`で、シートにあるデータを全選択できます。
+余計な空行・空列は含まれないので、シート全体でデータを管理している場合によく使います。
+
+```js
+// 見出しを除外したデータの範囲
+const range = sheet.getDataRange.slice(1);
+```
+
+シートの1行目は、見出しに設定している場合があります。
+見出しを含みたくない場合は`.slice(1)`するとよいです。
+
+```js
+// 別の選択方法
+const nrows = sheet.getLastRow();
+const ncols = sheet.getLastColumns();
+const range = sheet.getRange(2, 1, nrows, ncols);
+```
+
+シートにあるデータの行数、列数を取得して、`getRange`して範囲選択することもできます。
+
+```js
+const lastRow = sheet.getLastRow();
+const newRange = sheet.getRange(lastRow+1, 1);
+```
+
+データを読み込むときより、既存のデータを追記したいときに利用します。
+
+## セル選択したい（`getRange`）
+
 ```js
 // 選択範囲を確認
 range.activate();
@@ -86,7 +104,7 @@ range.activate();
 ## 値を読み込みたい（`getValues`）
 
 ```js
-const dataTable = range.getValues();
+const values = range.getValues();
 ```
 
 `getValues`メソッドで、選択した範囲の値を2次元配列として取得できます。
@@ -94,14 +112,14 @@ const dataTable = range.getValues();
 ## 値を書き込みたい（`setValues`）
 
 ```js
-const dataTable = [[二次元配列]];
-const nrows = dataTable.length;   // 行の数
-const ncols = dataTable[0].length;  // 見出しの数＝列の数
-sheet.getRange(1, 1, nrows, ncols).setValues(dataTable);
+const arrays = [[二次元配列]];
+const rows = dataTable.length;   // 行の数
+const cols = dataTable[0].length;  // 見出しの数＝列の数
+sheet.getRange(1, 1, rows, cols).setValues(arrays);
 ```
 
 `setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
-書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`nrows`と`ncols`を`dataTable`から取得しています。
+書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`rows`と`cols`を2次元配列から取得しています。
 
 ## リファレンス
 
