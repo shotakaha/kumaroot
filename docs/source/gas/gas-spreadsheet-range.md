@@ -121,6 +121,30 @@ sheet.getRange(1, 1, rows, cols).setValues(arrays);
 `setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
 書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`rows`と`cols`を2次元配列から取得しています。
 
+## 組み込み関数したい（`setFormula`）
+
+```js
+const cell = sheet.getRange("セル名");
+cell.setFormula("=SUM(セル名:セル名)");
+```
+
+`setFormula`でスプレッドシートの組み込み関数を利用できます。
+
+## セルの書式を変更したい
+
+```js
+const range = sheet.getRange(範囲); // 開始行, 開始列, 行数, 列数
+range.setFontSize(整数);
+range.setFontFamily("フォント名");
+range.setFontWeight("ウェイト名"); // "normal", "bold"
+range.setFontStyle("スタイル名");  // "normal", "italic"
+range.setFontLine("ライン名");    // "none", "underline", "line-through"
+range.setFontColors("色");
+range.setBackgrounds("色");
+```
+
+選択したセルに対して、フォントやスタイル、文字色などを設定できます。
+
 ## リファレンス
 
 - [Sheet.getDataRange](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getdatarange)
