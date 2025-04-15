@@ -1,9 +1,17 @@
 # CHANGELOG.md
 
-## Unreleased
+## v1.44.3 (2025-04-15)
 
 ### Fix
 
+- **gas/gas-spreadsheet.md**: spreadsheetを修正した
+- **gas/gas-spreadsheet-sheet.md**: sheetを修正した
+- **gas/gas-spreadsheet-range.md**: rangeを修正した
+- **gas/gas-spreadsheet-range.md**: range操作を追加した
+- **gas/gas-spreadsheet-sheet.md**: シート操作を修正した
+- **gas/gas-spreadsheet-book.md**: ブック操作を追記した
+- **gas/js-jest.md**: describeを追加した
+- **gas/js-jest.md**: jestを追加した
 - **python/python-pip.md**: pipに追記した
 - **python/python-pip.md**: pip/pipxを追記した
 - **python/python-uv.md**: uvを追加した
