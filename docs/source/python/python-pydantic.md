@@ -265,6 +265,79 @@ UserSettings(**args)
 このサンプルでは、``pydantic.BaseModel``を継承したクラスを使うことで、
 設定ファイルのバリデーションを実行しています。
 
+## 設定クラス
+
+ツールの設定を操作するクラスの作り方を整理します。
+
+1. 設定ファイルを定義する
+   1. `config.toml`のようなファイル
+   2. サポートするファイル形式を選択する: `TOML` / `YAML` / `JSON` / `CSV` などなど
+   3. 設定項目を決定する: `label` / `summary` / ...
+2. 設定のデータクラスを定義する
+   1. `class Config`のようなクラス
+   2. クラス内のデータ構造のみを定義する
+   3. ここで`Pydantic.BaseModel`を継承すると便利
+3. 設定の操作クラスを定義する
+   1. `class ConfigLoader`のようなクラス
+   2. 単一のデータクラスに、設定ファイルの値を読み込ませる
+   3. `BaseModel`を継承していると読み込み値が検証できる
+4. 設定の管理クラスを定義する
+   1. `class ConfigReader`、`class ConfigWriter`のようなクラス
+   2. 設定ファイルの検索や設定項目の表示などをまかせるクラス
+
+```python
+class RsyncTask(BaseModel):
+    """A single configuration
+
+    Attributes:
+        label (str): Unique identifier of the task.
+        summary (str): Short description of the task.
+        host (str): Remove host (e.g., "user@host.example.com") or "none" for local.
+        source (str): Source path of rsync.
+        target (str): Target path of rsync.
+        options (List[str]): List of rsync options.
+        enabled (bool): Whether the task is enabled
+    """
+
+    label: str
+    summary: str
+    host: str
+    source: str
+    target: str
+    options: list[str]
+    enabled: bool = True
+
+    @property
+    def is_remote(self) -> bool:
+        return self.host.lower() != "none"
+
+    @property
+    def rsync_source(self) -> str:
+        return f"{self.host}:{self.source}" if self.is_remote else self.source
+
+    @property
+    def rsync_target(self) -> str:
+        return self.target
+
+
+class ConfigLoader(BaseModel):
+    """Configuration loader
+
+    This class loads and parsed configuration files
+    """
+
+    fetch: dict[str, RsyncTask] = {}
+    backup: dict[str, RsyncTask] = {}
+
+    def get_enabled_task(self, kind: Literal["fetch", "backup"]) -> list[RsyncTask]:
+        settings = getattr(self)
+        return [setting for setting in settings.values() if setting.enabled]
+
+    def get_task_by_label
+
+
+
+
 ## リファレンス
 
 - [Pydantic - docs.pydantic.dev](https://docs.pydantic.dev/latest/)
