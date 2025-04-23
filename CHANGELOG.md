@@ -1,5 +1,7 @@
 # CHANGELOG.md
 
+## Unreleased
+
 ## v1.44.3 (2025-04-15)
 
 ### Fix
