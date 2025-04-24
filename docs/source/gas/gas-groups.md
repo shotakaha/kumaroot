@@ -9,66 +9,119 @@ console.log("メンバー数 = " + users.length);
 [GroupsAppクラス](https://developers.google.com/apps-script/reference/groups/groups-app)を使って、Googleグループを管理できます。
 ただし、無料のGoogleグループでは、グループメンバーの追加／削除などはできません。
 
-## グループのメンバー一覧を取得したい
+## メンバーを確認したい
 
 ```js
-function get_group_members(groupMail, spreadsheetId, sheetName) {
-  // あるMLのメンバー一覧を取得し、指定したスプレッドシートに書き込む
-  // スプレッドシートはすでに作成済み
+function getGroupMembers(groupMail) {
+    const group = GroupsApp.getGroupByEmail(groupMail);
+    const users = group.getUsers();
+    const n = users.length;
+    Logger.log(`Found ${n} members`);
+    if (n === 0 ) return [];
 
-  // groupMail = メーリングリストのアドレス
-  // spreadsheetID = スプレッドシートのID
-  // sheetName = シート名
+    const members = users.map(user => {
+        Utilities.sleep(500);
+        return {
+            email: user.getEmail(),
+            role: group.getRole(user),
+        }
+    })
 
-  // Googlegroupsの登録メンバーを取得する
-  const group = GroupsApp.getGroupByEmail(groupMail);
-  const users = group.getUsers();
-
-  // 書き込むためのスプレッドシートを開く
-  const sheet = SpreadsheetApp.openById(spreadsheetId).getSheetByName(sheetName);
-
-  // シートの内容を全て削除する
-  sheet.clear();
-
-  // 開始時刻
-  const startTime = Utilities.formatDate(new Date(), "Asia/Tokyo", "yyyy-MM-dd HH:mm:ss")
-  Logger.log(startTime)
-
-  // 見出し用の列を作成する
-  // 1行目: 最終更新日
-  sheet.getRange("A1").setValue("Last Updated")
-  sheet.getRange("B1").setValue(startTime)
-  // 2行目: メンバー数
-  sheet.appendRow(["users", users.length]);
-  // 3行目: 見出し（Role, Email）
-  sheet.appendRow(["Role", "Email"])
-
-  // メンバーの役割（Role）とメールアドレスをシートに追加する
-  // Utilities.sleepをしないと、アクセス回数が早すぎてエラーになる
-  for (const user of users) {
-    sheet.appendRow([group.getRole(user), user.getEmail()]);
-    Utilities.sleep(500);
-  }
-
-  // ソート
-  // Role列（A列）でソートする（逆順）
-  // OWNER -> MEMBER -> INVITED の順番にする
-  sheet.sort(1, ascending=false)
-
-  // 終了時刻
-  // 1行目の最終更新日を書き換える
-  const endTime = Utilities.formatDate(new Date(), "Asia/Tokyo", "yyyy-MM-dd HH:mm:ss")
-  Logger.log(endTime)
-  sheet.getRange("A1").setValue("Last Updated")
-  sheet.getRange("B1").setValue(endTime)
-
-  return sheet;
+    return members;
 }
 
-function get_group_members_of_YOURGROUP() {
-  const groupMail = "グループのアドレス";
-  const ssId = "作成済みのスプレッドシートID";
-  const name = "作成済みのシートID"
-  sheet = writeGroupMembers(groupMail, ssId, name);
+function logGroupMembers(members) {
+    Logger.log(JSON.stringify(members, null, 2));
+}
+
+function showGroupMembers() {
+    const members = getGroupMembers();
+    logGroupMembers(members);
+}
+```
+
+## グループに追加したい
+
+```js
+function addUserToGroup(email, options) {
+    const {
+        group = "group-name@example.com",    // googlegroupsのドメイン
+    } = options;
+
+    const group = GroupApp.getGroupByEmail(group);
+
+    const isRegistered = group.hasUser(email);
+    if (isRegistered) {
+        Logger.log(`${email}はグループに登録されています`)
+        return
+    }
+
+    group.addUser(email);
+    Logger.log(`${email}をグループに追加しました`)
+}
+```
+
+## グループから削除したい
+
+```js
+function removeUserFromGroup(email, options) {
+    const {
+        group = "group-name@example.com"
+    } = options;
+    const group = GroupApp.getGroupByEmail(group);
+    const isRegistered = group.hasUser(email);
+    if (!isRegistered) {
+        Logger.log(`${email}はグループに登録されていません`)
+    }
+
+    group.removeUser(email);
+    Logger.log(`${email}をグループから削除しました`)
+}
+```
+
+## メンバー一覧をシートに保存したい
+
+```js
+// ページ上部のサンプルを再利用する
+function getGroupMembers() {...};
+
+function writeGroupMembersToSheet(members, spreadsheetId, sheetName) {
+    const sheet = SpreadsheetApp.openById(spreadsheetId).getSheetByName(sheetName);
+    sheet.clear();
+
+    const now = Utilities.formatDate(new Date(), "Asia/Tokyo", "yyyy-MM-dd HH:mm:ss");
+    Logger.log(`Start at ${now}`);
+
+    // Update last-updated date
+    sheet.getRange("A1").setValue("Last Updated");
+    sheet.getRange("B1").setValue(now);
+
+    // Headers
+    sheet.appendRow(["users", members.length]);
+    sheet.appendRow(["Role", "Email"]);
+
+    // Data
+    for (const member of members) {
+        sheet.appendRow([member.role, member.email]);
+    }
+
+    // Sort
+    sheet.sort(1, false);
+
+    const end = Utilities.formatDate(new Date(), "Asia/Tokyo", "yyyy-MM-dd HH:mm:ss");
+    Logger.log(`End at ${end}`);
+    sheet.getRange("A1").setValue("Last Updated");
+    sheet.getRange("B1").setValue(end);
+
+    return sheet;
+}
+
+function exportGroupMembers() {
+    const groupMail = "group-name@example.com";
+    const bookId = "スプレッドシートのID";
+    const sheetName = "シートの名前";
+
+    const members = getGroupMembers(groupMail);
+    writeGroupMembersToSheet(members, bookId, sheetName);
 }
 ```
