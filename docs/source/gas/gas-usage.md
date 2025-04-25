@@ -31,6 +31,7 @@ gas-properties
 gas-clasp
 gas-quota
 gas-version
+gas-exports
 ```
 
 ## JavaScriptしたい
