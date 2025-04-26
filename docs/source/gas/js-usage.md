@@ -8,4 +8,5 @@ js-builtins
 js-console
 js-function
 js-jest
+js-biome
 ```
