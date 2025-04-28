@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Fix
+
+- **gas/js-biome.md**: biomeを追加した
+- **gas/gas-exports.md**: エクスポートを追加した
+- **gas/gas-groups.md**: グループの使い方を追記した
+- **gas/gas-trigger.md**: トリガー設定を追記した
+- **python/python-pydantic.md**: 設定ファイルを管理するクラスの手順を追記した
+- **gas/gas-drive.md**: DriveAppを追記した
+
 ## v1.44.3 (2025-04-15)
 
 ### Fix
