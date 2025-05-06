@@ -25,16 +25,25 @@ Pythonのリンター＆フォーマッタの変遷は闇が深そうです。
 ## インストールしたい（`ruff`）
 
 ```console
+// グローバルに追加
 $ pipx install ruff
 ```
 
 ```console
+// プロジェクトに追加（dev）
 $ poetry add ruff --group=dev
 ```
 
 ```console
+// プロジェクトに追加する場合（dev）
+$ uv add ruff --group dev
+
+// グローバルに追加
 $ uv tool install ruff
 ```
+
+`ruff`はCLIツールなので`pipx`や`uv tool`なのでグローバルにインストールできます。
+プロジェクトに追加する場合は `--group dev` オプションで追加するとよいです。
 
 ## フォーマットしたい（``ruff format``）
 
@@ -59,20 +68,33 @@ quote-style = "double"
 ## リンターしたい（``ruff check``）
 
 ```console
-$ ruff check
-$ ruff check --fix
-$ ruff check --show-fixes
+$ ruff check .
 $ ruff check ファイル名
-$ ruff check ファイル名 --select カテゴリ記号
-$ ruff check --statistics
 ```
 
-``check``コマンドでリンターを実行します。
-引数にファイル名を指定したり、確認したいディレクトリで``ruff check .``を指定したりできます。
-``--select``オプションを使って、チェックしたいカテゴリーやエラー番号などを指定できます。
-修正箇所はターミナルに出力されます。
+`ruff check`コマンドでリンターを実行します。
+引数にファイル名やディレクトリを指定できます。
+`ruff check .`でプロジェクト内のすべての該当するファイルを指定できます。
 
 ```console
+$ ruff check --show-fixes
+$ ruff check --fix
+```
+
+`--show-fixes`で修正が必要な箇所を表示します。
+`--fix`で軽微な修正を自動修正できます。
+修正された箇所はターミナルに出力されます。
+
+```console
+$ ruff check ファイル名 --select カテゴリ記号
+$ ruff check . --select ALL
+$ ruff check . --select E F W I D
+```
+
+`--select`オプションを使って、チェックしたいカテゴリーやエラー番号などを指定できます。
+
+```console
+$ ruff check --statistics
 $ ruff check --statistics --select ALL
 ```
 
