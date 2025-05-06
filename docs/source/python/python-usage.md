@@ -54,7 +54,6 @@ maxdepth: 1
 python-import
 python-pyproject
 python-venv
-python-virtualenv
 python-nodeenv
 python-pip
 python-pipx
