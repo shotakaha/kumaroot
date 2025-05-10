@@ -142,7 +142,7 @@ command-tig
 command-uname
 command-mysql
 command-zellij
-command-glib
+command-glab
 command-gitlab
 command-arduino-cli
 command-expect
