@@ -4,6 +4,11 @@
 
 ### Fix
 
+- **python/python-ruff.md**: ruffを追記した
+- **python/python-virtualenv.md**: virtualenvを削除した
+- **python/python-pip.md**: パッケージ管理ツール選択フローチャートを追加した
+- **python/python-venv.md**: venvを追加した
+- **python/python-uv.md**: uvを追記した
 - **gas/js-biome.md**: biomeを追加した
 - **gas/gas-exports.md**: エクスポートを追加した
 - **gas/gas-groups.md**: グループの使い方を追記した
