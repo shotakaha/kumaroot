@@ -4,6 +4,7 @@
 
 ### Fix
 
+- **command/command-glab.md**: glabを追加した
 - **python/python-ruff.md**: ruffを追記した
 - **python/python-virtualenv.md**: virtualenvを削除した
 - **python/python-pip.md**: パッケージ管理ツール選択フローチャートを追加した
