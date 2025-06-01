@@ -34,13 +34,14 @@ gas-version
 gas-exports
 ```
 
-## JavaScriptしたい
+## JavaScript / TypeScriptしたい
 
 ```{toctree}
 ---
 maxdepth: 2
 ---
 js-usage
+ts-usage
 ```
 
 ## リファレンス
