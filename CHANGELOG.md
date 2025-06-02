@@ -4,6 +4,8 @@
 
 ### Fix
 
+- **gas/ts-tsc.md**: tscを追加した
+- **gas/ts-typedoc.md**: TypeDocを追加した
 - **command/command-glab.md**: glabを追加した
 - **python/python-ruff.md**: ruffを追記した
 - **python/python-virtualenv.md**: virtualenvを削除した
