@@ -22,6 +22,7 @@ git/git-usage
 root/root-usage
 geant4/geant4-usage
 python/python-usage
+numpy/numpy-usage
 pandas/pandas-usage
 polars/polars-usage
 matplotlib/matplotlib-usage
