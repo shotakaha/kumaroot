@@ -78,20 +78,17 @@ np.empty(shape)    # 初期化してない配列
 ## 単位行列したい（`np.identity`）
 
 ```python
-np.identity(N)    # NxNの単位行列
+# NxNの単位行列
+# np.identity(N)
+np.identity(3)
 ```
 
 `np.identity`で任意のサイズの単位行列を生成できます。
 
 ```python
-np.diag([v1, v2, v3])   # 対角成分が [v1, v2, v3] の対角行列
+# 対角成分が [v1, v2, v3] の対角行列
+# np.diag([v1, v2, v3])
+np.diag([1., 1., 1.])
 ```
 
 `np.diag`で、任意の対角成分を持つ対角行列を生成できます。
-
-:::{note}
-
-`np.diag([1, 1, 1])`と`np.identity(3)`は
-見た目が同じになります。
-
-:::

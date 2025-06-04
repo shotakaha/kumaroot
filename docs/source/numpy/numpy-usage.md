@@ -19,4 +19,5 @@ maxdepth: 1
 numpy-ndarray
 numpy-arithmetic
 numpy-arange
+numpy-column_stack
 ```
