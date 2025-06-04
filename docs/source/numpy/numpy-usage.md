@@ -17,7 +17,8 @@ NumPyのすべての機能を理解する必要はありませんが、
 maxdepth: 1
 ---
 numpy-ndarray
-numpy-arithmetic
 numpy-arange
+numpy-linspace
+numpy-arithmetic
 numpy-column_stack
 ```
