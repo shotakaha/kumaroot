@@ -77,3 +77,12 @@ geant4-install-cmake
 geant4-install-ccmake
 geant4-install-make
 ```
+
+また、上記の手順を再利用可能な形に整理した方法も紹介します。
+
+```{toctree}
+---
+maxdepth: 2
+---
+geant4-install-taskfile
+```
