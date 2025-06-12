@@ -2,8 +2,15 @@
 
 ## Unreleased
 
+### Feat
+
+- **numpy/numpy-ndarray.md**: NumPyを追加した
+
 ### Fix
 
+- **numpy/numpy-column_stack.md**: column_stackを追加した
+- **numpy/numpy-usage.md**: numpyの位置付けを追記した
+- **numpy/numpy-arange.md**: np.arangeを追加した
 - **gas/ts-tsc.md**: tscを追加した
 - **gas/ts-typedoc.md**: TypeDocを追加した
 - **command/command-glab.md**: glabを追加した
