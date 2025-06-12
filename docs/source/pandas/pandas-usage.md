@@ -84,6 +84,7 @@ pandas-fit-gaussian
 pandas-fit-erfc
 pandas-fit-poisson
 pandas-interpolate-spline
+pandas-lmfit
 ```
 
 ## 可視化したい

@@ -50,7 +50,6 @@ curve_fit(func, x_data, y_data, p0, method="dogbox")
 その計算アルゴリズムはいろいろあるようです。
 その中でもLevenberg-Marguardt法が広く使われているそうです。
 
-
 :lm:
 Levenberg-Marquardt アルゴリズム。
 MINPACKで実装されているものと同等。
@@ -59,7 +58,7 @@ MINPACKで実装されているものと同等。
 
 :trf:
 Trust Region Reflective アルゴリズム。
-制約ががあるlarge sparse bounds に適している。
+制約があるlarge sparse bounds に適している。
 一般的にロバストな手法。
 
 :dogbox:
@@ -170,8 +169,6 @@ r_{i} = y_{i}^{\text{data}} - y_{i}^{\text{fit}}
 & = \sqrt{\sum_{i=1}^{k}\sigma_{ii}^{2}}
 
 :::
-
-
 
 ## 結果のよしあし（Goodness of Fit）
 
