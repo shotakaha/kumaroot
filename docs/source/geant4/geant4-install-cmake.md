@@ -19,6 +19,25 @@ Geant4のビルドオプションは
 `-Dオプション名=設定値`で変更できます。
 実行すると、ビルド用ディレクトリに`CMakeLists.txt`が生成されます。
 
+## ビルドオプションしたい（`CMakePresets.json`）
+
+```json
+{
+    "name": "geant4-build",
+    "displayName": "Geant4 Build",
+    "description": "Build Geant4 with OpenGL and Qt",
+    "generator": "Unix Makefiles",
+    "binaryDir": "${sourceDir}/build",
+    "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_INSTALL_PREFIX": "~/geant4/11.x.y",
+        "GEANT4_INSTALL_DATA": "ON",
+        "GEANT4_USE_OPENGL_X11": "ON",
+        "GEANT4_USE_QT": "ON"
+    }
+}
+```
+
 ## ビルドオプションを確認する
 
 [Geant4 Build Options](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html#geant4buildo)を参考に、
