@@ -1,7 +1,22 @@
 # cmakeしたい
 
 ```console
-$ brew install --cask cmake
+$ cmake [options] <path-to-source>
+$ cmake [options] -S <path-to-source> -B <path-to-build>
+```
+
+CMakeは、C++やCなどのプログラムを **ビルドするための設定を自動化** するツールです。
+ビルドに必要な情報を`CMakeLists.txt`に記述するだけで、
+使用するビルドツール（`make`や`ninja`）に応じた設定ファイルを自動で生成してくれます。
+
+また、CMakeはクロスプラットフォーム対応で
+Linux、macOS、Windowsなどさまざまな環境で
+同じように利用できます。
+
+## インストールしたい
+
+```console
+$ brew install cmake
 $ brew install cmake-docs
 
 $ cmake --version
@@ -11,11 +26,9 @@ $ ccmake --version
 ccmake version 3.29.6
 ```
 
-CMakeは、C++やCなどのプログラムを **ビルドするための設定を自動化** するファイルです。
-必要な設定は`CMakeLists.txt`に記述します。
-
-クロスプラットフォーム対応しており、
-`Makefile`などのビルド用ファイルを、プラットフォームに対応した形式で生成できます。
+CMakeはHomebrewでインストールできます。
+オフラインでドキュメントを確認したい場合は、
+`cmake-docs`も追加します。
 
 ## ビルドしたい
 
@@ -24,11 +37,9 @@ CMakeは、C++やCなどのプログラムを **ビルドするための設定�
 $ mkdir build
 $ cd build
 
-// cmakeを実行
+// cmakeを実行（CMakeLists.txtがあるディレクトリを指定）
 $ cmake ..
-
-// makeを実行
-$ make
+$ cmake --build ..
 ```
 
 `cmake`ではビルド用ディレクトリを作成することが **推奨** されています。

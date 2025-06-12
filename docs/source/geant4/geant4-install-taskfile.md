@@ -11,27 +11,30 @@ Geant4のバージョンを指定すればうまく動くはずです。
 ```yaml
 # Taskfile.yml
 #
+# 1. Workspace
 # cd ~/geant4
 #
+# 2. Download source code from the repository
 # wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
 # unzip geant4-v11.2.1.zip
 #
+# 3. Configure
 # mkdir build
-# cd build
-# cmake -DCMAKE_INSTALL=~/geant4/11.2.1 ../geant4-v11.2.1
+# cmake -DCMAKE_INSTALL="$(pwd)/v11.2.1" -S "$(pwd)/geant4-v11.2.1" -B "$(pwd)/build"
 # make -j8
 # make install
 
 version: '3'
 
 vars:
-  G4VERSION: "11.2.1"
-  G4STEM: "geant4-v{{.G4VERSION}}"
-  G4ZIP: "{{.G4STEM}}.zip"
-  G4URL: "https://gitlab.cern.ch/geant4/geant4/-/archive/v{{.G4VERSION}}/{{.G4ZIP}}"
+  G4VERSION: "v11.2.1"
   G4ROOT: "{{.HOME}}/geant4"
-  G4BUILD: "{{.G4ROOT}}/build"
-  G4PREFIX: "{{.G4ROOT}}/{{.G4VERSION}}"
+  G4SOURCE: "{{.G4HOME}}/geant4-{{.G4VERSION}}"
+  G4BUILD: "{{.G4HOME}}/build"
+  G4PREFIX: "{{.G4HOME}}/{{.G4VERSION}}"
+  G4ZIP: "geant4-{{.G4VERSION}}.zip"
+  G4URL: "https://gitlab.cern.ch/geant4/geant4/-/archive/{{.G4VERSION}}/{{.G4ZIP}}"
+
   QT_PATH:
     sh: brew --prefix qt@5
 
@@ -39,7 +42,7 @@ tasks:
   deps:
     desc: Install required dependencies via Homebrew
     cmds:
-      - brew install --cask cmake
+      - brew install cmake
       - brew install --cask xquartz
       - brew install qt@5
       - brew install ninja
@@ -59,30 +62,23 @@ tasks:
 
   configure-make:
     desc: Configure CMake with Unix Makefiles and installation options
-    dir: "{{.G4BUILD}}"
+    dir: "{{.G4ROOT}}"
+    env:
+      G4PREFIX: "{{.G4PREFIX}}"
+      QT_PATH: "{{.QT_PATH}}"
     cmds:
+      - mkdir {{.G4BUILD}}
       - cmake -DCMAKE_INSTALL_PREFIX={{.G4PREFIX}} \
               -DCMAKE_PREFIX_PATH={{.QT_PATH}} \
               -DGEANT4_INSTALL_DATA=ON \
               -DGEANT4_USE_OPENGL_X11=ON \
               -DGEANT4_USE_QT=ON \
-              ../{{.G4STEM}}
-
-  build-make:
-    desc: Build Geant4 with make
-    dir: "{{.G4BUILD}}"
-    cmds:
-      - make -j8
-
-  install-make:
-    desc: Install Geant4
-    dir: "{{.G4BUILD}}"
-    cmds:
-      - make install
+              -S {{.G4SOURCE}}
+              -B {{.G4BUILD}}
 
   configure-ninja:
     desc: Configure CMake with Ninja and installation options
-    dir: "{{.G4BUILD}}"
+    dir: "{{.G4ROOT}}"
     env:
       G4PREFIX: "{{.G4PREFIX}}"
       QT_PATH: "{{.QT_PATH}}"
@@ -93,19 +89,20 @@ tasks:
               -DGEANT4_INSTALL_DATA=ON \
               -DGEANT4_USE_OPENGL_X11=ON \
               -DGEANT4_USE_QT=ON \
-              ../{{.G4STEM}}
+              -S {{.G4SOURCE}}
+              -B {{.G4BUILD}}
 
-  build-ninja:
-    desc: Build Geant4 with Ninja
-    dir: "{{.G4BUILD}}"
+  build:
+    desc: Build Geant4
+    dir: "{{.G4ROOT}}"
     cmds:
-      - ninja
+      - cmake --build "{{.G4BUILD}}" --parallel
 
-  install-ninja:
+  install:
     desc: Install Geant4
-    dir: "{{.G4BUILD}}"
+    dir: "{{.G4ROOT}}"
     cmds:
-      - ninja install
+      - cmake --install "{{.G4BUILD}}"
 
   clean:
     desc: Remove build directory
@@ -120,7 +117,6 @@ tasks:
     desc: Source environment setup script
     cmds:
       - echo "Run 'source {{.G4PREFIX/bin/geant4.sh}}' in your shell"
-      - source {{.G4PREFIX}}/bin/geant4.sh
 ```
 
 ## ビルドオプションしたい
