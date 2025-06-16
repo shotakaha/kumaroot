@@ -3,6 +3,8 @@
 ```console
 $ cmake [options] <path-to-source>
 $ cmake [options] -S <path-to-source> -B <path-to-build>
+$ cmake --build <path-to-build> --parallel
+$ cmake --install <path-to-build>
 ```
 
 CMakeは、C++やCなどのプログラムを **ビルドするための設定を自動化** するツールです。
@@ -44,32 +46,111 @@ CMakeはHomebrewでインストールできます。
 オフラインでドキュメントを確認したい場合は、
 `cmake-docs`も追加します。
 
-## ビルドしたい
+## ビルド構成したい
 
 ```console
-// ビルド用ディレクトリを作成
-$ mkdir build
-$ cd build
-
-// cmakeを実行（CMakeLists.txtがあるディレクトリを指定）
-$ cmake [オプション] ..
-$ cmake --build ..
-$ cmake --install ..  # CMAKE_INSTALL_PREFIXにインストール
+$ mkdir <path-to-build>
+$ cd <path-to-build>
+$ cmake ..
 ```
 
-`cmake`では「**out-of-source build**」が **推奨** されており、
-ビルド用ディレクトリを作成する必要があります。
+`cmake`では「**out-of-source build**」が **推奨** されています。
 ソースコードとビルド環境を分離することで、
 ソースディレクトリ（やリポジトリ）を汚さずにすみます。
-また、`rm -rf build/`でビルド環境を完全に削除できます。
+また、ビルド環境を完全に削除しやすくなります。
+
+通常は`build`のようなビルド用ディレクトリを作成して`cmake ..`で
+ビルド構成ファイルを生成（=configure）します。
+必要なファイルはすべて`build`ディレクトリの中に生成されます。
 
 ```console
-$ cmake [オプション] -S ./source -B ./build
-$ cmake --build ./build
-$ cmake --install ./build  # CMAKE_INSTALL_PREFIXにインストール
+$ cmake -S source -B build
 ```
 
-ソースとビルド同じ階層にする場合は`-S`と`-B`オプションを使用します。
+`-S`と`-B`オプションを使って、ビルド対象を明示できます。
+ビルド作業をスクリプト化する場合には、
+これらのオプションを使った方が可読性があがります。
+
+## ビルドしたい（`--build`）
+
+```console
+$ cmake --build <path-to-build>
+```
+
+`cmake --build`で、ビルド構成ファイルにしたがってビルドします。
+
+```console
+$ cmake --build <path-to-build> --parallel <n>
+```
+
+`--parallel`オプションで並列ビルドできます。
+数値を指定して並列ジョブ数を変更できます。
+
+## インストールしたい（`--install`）
+
+```console
+$ cmake --install <path-to-build>
+```
+
+`cmake --install`でシステムにインストールできます。
+インストール先は`CMAKE_INSTALL_PREFIX`です。
+
+```console
+$ cmake --install <path-to-build> --prefix <path-to-install-binary>
+```
+
+`--prefix`オプションで、インストール先を一時的に変更できます。
+
+:::{note}
+
+```console
+$ cmake -DCMAKE_INSTALL_PREFIX=path-to-install -S source -B build
+```
+
+インストール先は、ビルド構成時のオプションで設定します。
+デフォルトは`/usr/local/`です。
+
+:::
+
+## オプション設定したい（`-Dオプション名`）
+
+```console
+$ cmake -Dオプション名 -S source -B build
+
+// インストール先を変更
+$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/.local/bin -S source -B build
+```
+
+`-Dオプション名=値`でビルドオオプショを変更できます。
+オプションは、CMakeの組み込みオプションもあれば、
+ユーザー定義されたオプションもあります。
+
+## 複数オプションしたい（`--preset` / `CMakePresets.json`）
+
+```console
+$ cmake --preset=プリセット名 -S source -B build
+```
+
+複数のオプションを設定する場合は、`CMakePresets.json`を作成し、
+`--preset`オプションでプリセット名を指定するとよいです。
+
+```json
+{
+    "name": "プリセット名",
+    "displayName": "表示名",
+    "description": "ビルド内容の説明",
+    "generator": "Ninja",
+    "binaryDir": "${sourceDir}/build",
+    "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install",
+        "...": "..."
+    }
+}
+```
+
+`Release`用と`Debug`用のように、
+ビルドタイプごとにプリセットを作成しておくのも便利です。
 
 ## ビルドタイプしたい（`-DCMAKE_BUILD_TYPE`）
 
@@ -137,30 +218,7 @@ $ cmake -G "Ninja" -Dオプション -S ./source -B ./build
 $ cmake --build ./build
 ```
 
-## オプション設定したい（`CMakePresets.json`）
 
-```console
-$ cmake --preset=プリセット名 ..
-```
-
-```json
-{
-    "name": "プリセット名",
-    "displayName": "表示名",
-    "description": "ビルド内容の説明",
-    "generator": "Ninja",
-    "binaryDir": "${sourceDir}/build",
-    "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install",
-        "...": "..."
-    }
-}
-```
-
-`CMakePresets.json`に
-ジェネレーターやオプションの設定を保存できます。
-`cmake`時に`--preset`オプションでプリセット名を指定します。
 
 ## ビルドの設定（`CMakeLists.txt`）
 
