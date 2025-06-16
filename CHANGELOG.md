@@ -8,6 +8,11 @@
 
 ### Fix
 
+- **command/command-cmake.md**: cmakeを追記した
+- **geant4/geant4-install-taskfile.md**: taskfileを追加した
+- **command/command-cmake.md**: cmakeの使い方を追加した
+- **pandas/pandas-lmfit.md**: lmfitを追加した
+- **numpy/numpy-linspace.md**: np.linspaceを追加した
 - **numpy/numpy-column_stack.md**: column_stackを追加した
 - **numpy/numpy-usage.md**: numpyの位置付けを追記した
 - **numpy/numpy-arange.md**: np.arangeを追加した
