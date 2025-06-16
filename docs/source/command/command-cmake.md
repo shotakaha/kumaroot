@@ -1,4 +1,4 @@
-# cmakeしたい
+# コンパイルしたい（`cmake`）
 
 ```console
 $ cmake [options] <path-to-source>
@@ -6,12 +6,26 @@ $ cmake [options] -S <path-to-source> -B <path-to-build>
 ```
 
 CMakeは、C++やCなどのプログラムを **ビルドするための設定を自動化** するツールです。
-ビルドに必要な情報を`CMakeLists.txt`に記述するだけで、
-使用するビルドツール（`make`や`ninja`）に応じた設定ファイルを自動で生成してくれます。
+`CMakeLists.txt`に記述されたビルド情報を元に、
+`make`や`ninja`などのビルドツールに応じた設定ファイル（`Makefile`や`ninja.build`）を
+自動で生成してくれます。
 
-また、CMakeはクロスプラットフォーム対応で
-Linux、macOS、Windowsなどさまざまな環境で
-同じように利用できます。
+また、クロスプラットフォーム対応しているため、
+Linux、macOS、Windowsなどさまざまな環境で利用できます。
+
+:::{note}
+
+これまでのビルド＆インストールで
+`./configure`していた部分で
+`cmake`します。
+
+```console
+./configure
+make
+make install
+```
+
+:::
 
 ## インストールしたい
 
@@ -38,13 +52,24 @@ $ mkdir build
 $ cd build
 
 // cmakeを実行（CMakeLists.txtがあるディレクトリを指定）
-$ cmake ..
+$ cmake [オプション] ..
 $ cmake --build ..
+$ cmake --install ..  # CMAKE_INSTALL_PREFIXにインストール
 ```
 
-`cmake`ではビルド用ディレクトリを作成することが **推奨** されています。
-ビルド用ディレクトリを使うことで、ソースディレクトリを汚さずにすみます。
+`cmake`では「**out-of-source build**」が **推奨** されており、
+ビルド用ディレクトリを作成する必要があります。
+ソースコードとビルド環境を分離することで、
+ソースディレクトリ（やリポジトリ）を汚さずにすみます。
 また、`rm -rf build/`でビルド環境を完全に削除できます。
+
+```console
+$ cmake [オプション] -S ./source -B ./build
+$ cmake --build ./build
+$ cmake --install ./build  # CMAKE_INSTALL_PREFIXにインストール
+```
+
+ソースとビルド同じ階層にする場合は`-S`と`-B`オプションを使用します。
 
 ## ビルドタイプしたい（`-DCMAKE_BUILD_TYPE`）
 
@@ -70,25 +95,14 @@ $ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
 
 :::
 
-### デバッグ用ビルドしたい
-
-デバッグ用、リリース用にそれぞれビルド用ディレクトリを作成することで、
-2つのビルド結果を同時に持つことができます。
-
 ```console
-$ mkdir build-debug
-$ cd build-debug
-$ cmake -DCMAKE_BUILD_TYPE=Debug ..
-$ make
+$ cmake -DCMAKE_BUILD_TYPE=Debug -S ./source -B ./build-debug
+$ cmake --build ./build
 ```
 
-### リリース用ビルドしたい
-
 ```console
-$ mkdir build-release
-$ cd build-release
-$ cmake -DCMAKE_BUILD_TYPE=Release ..
-$ make
+$ cmake -DCMAKE_BUILD_TYPE=Release -S ./source -B./build-release
+$ cmake --build ./build
 ```
 
 ## ジェネレーターしたい（`-G`）
@@ -113,6 +127,16 @@ $ cmake -G "Xcode"
 
 :::
 
+```console
+$ cmake -G "Unix Makefiles" -Dオプション -S ./source -B ./build
+$ cmake --build ./build
+```
+
+```console
+$ cmake -G "Ninja" -Dオプション -S ./source -B ./build
+$ cmake --build ./build
+```
+
 ## オプション設定したい（`CMakePresets.json`）
 
 ```console
@@ -134,9 +158,11 @@ $ cmake --preset=プリセット名 ..
 }
 ```
 
-## CMakeListsの設定
+`CMakePresets.json`に
+ジェネレーターやオプションの設定を保存できます。
+`cmake`時に`--preset`オプションでプリセット名を指定します。
 
-### 基本設定
+## ビルドの設定（`CMakeLists.txt`）
 
 ```cmake
 cmake_minimum_required(VERSION 3.16...3.27)
@@ -146,16 +172,10 @@ add_executable(名前 名前.cc ${sources} ${headers})
 target_link_libraries(名前 ライブラリ)
 ```
 
-### CMakeのバージョンしたい
+ビルドの設定は`CMakeLists.txt`に記述します。
+このファイルは、`CMake言語`（もしくはCMake構文）で記述します。
 
-```cmake
-cmake_minimum_required(VERSION 最小値)
-cmake_minimum_required(VERSION 最小値...最大値)
-```
-
-[cmake_minimum_required](https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html)コマンドで、CMakeのバージョンの最小値／最大値を指定できます。
-
-### 変数したい
+## 変数したい（`set`）
 
 ```cmake
 set(変数名 値)
@@ -163,7 +183,7 @@ set(変数名 値)
 
 [set](https://cmake.org/cmake/help/latest/command/set.html)コマンドで変数を定義できます。
 
-### デバッグしたい
+## メッセージしたい（`message`）
 
 ```cmake
 message(ログレベル "メッセージ")
@@ -174,7 +194,38 @@ message(STATUS "G4LIB=${G4LIB}")
 ログレベルは``STATUS``のほかに、``DEBUG``、``NOTICE``、``WARNING``、``FATAL_ERROR``などがあります。
 ``${変数名}``で、CMake内で定義した変数の値を参照できます。
 
-### ライブラリを使いたい（``find_package``）
+## CMakeのバージョンしたい（`cmake_minimum_required`）
+
+```cmake
+cmake_minimum_required(VERSION 最小値)
+cmake_minimum_required(VERSION 最小値...最大値)
+```
+
+[cmake_minimum_required](https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html)コマンドで、CMakeのバージョンの最小値／最大値を指定できます。
+
+## プロジェクト名したい（`project`）
+
+```cmake
+project(プロジェクト名)
+```
+
+```cmake
+project(プロジェクト名
+  VERSION 11.2.1
+  DESCRIPTION "プロジェクトの説明"
+  HOMEPAGE_URL "https://example.com"
+)
+
+message("Project Name: ${PROJECT_NAME}")
+message("Version: ${PROJECT_VERSION}")
+message("  Major: ${PROJECT_VERSION_MAJOR}")
+message("  Minor: ${PROJECT_VERSION_MINOR}")
+message("  Patch: ${PROJECT_VERSION_PATCH}")
+message("Description: ${PROJECT_DESCRIPTION}")
+message("Homepage URL: ${PROJECT_HOMEPAGE_URL}")
+```
+
+## ライブラリを使いたい（`find_package`）
 
 ```cmake
 find_package(パッケージ名 REQUIRED)
@@ -188,7 +239,7 @@ find_package(パッケージ名 REQUIRED)
 
 :::
 
-### 外部リポジトリを使いたい（``FetchContent``）
+## 外部リポジトリを使いたい（`FetchContent`）
 
 ```cmake
 include(FetchContent)
@@ -204,6 +255,88 @@ FetchContent_MakeAvailable(名前)
 取得したファイルは``build/_deps/``にキャッシュされます。
 
 具体的な使い方は、CMakeに対応したライブラリのREADMEなどに書いてあると思うので、個別に確認してください。
+
+## ビルド用ディレクトリを強制したい
+
+```cmake
+if(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
+  message(STATUS "This package requires an out-of-source build.")
+  message(STATUS "Please remove these files from ${CMAKE_CURRENT_BINARY_DIR} first:")
+  message(STATUS "CMakeCache.txt")
+  message(STATUS "CMakeFiles")
+  message(STATUS "Once these files are removed, create a separate directory")
+  message(STATUS "and run CMake from there")
+  message(FATAL_ERROR "in-source build detected")
+endif()
+```
+
+Out-of-source build を強制するための設定です。
+`CMakeLists.txt`の冒頭に記述しておくとよいです。
+
+## 組み込み変数したい
+
+```cmake
+get_cmake_property(_vars VARIABLES)
+foreach(v ${_vars})
+  message(STATUS "${v} = ${${v}}")
+endforeach()
+```
+
+組み込み関数の`get_cmake_property`を使って、
+プロジェクト内のすべての変数（`VARIABLES`）を出力できます。
+
+`VARIABLES`の他に、
+`CACHE_VARIABLES`、
+`COMMANDS`、
+`MODULES`のプロパティ名を指定できます。
+
+### プロジェクト情報したい
+
+- `PROJECT_NAME`: `project()`で定義したプロジェクト名
+- `PROJECT_SOURCE_DIR`: プロジェクトのルートソースディレクトリ
+- `PROJECT_BINARY_DIR`: プロジェクトのルートビルドディレクトリ
+- `CMAKE_PROJECT_NAME`: 最初に読み込まれたプロジェクトの名前
+- `CMAKE_SOURCE_DIR`: 最上位の`CMakeLists.txt`があるディレクトリ
+- `CMAKE_BINARY_DIR`: 最上位のビルドディレクトリ
+
+### バージョン情報したい
+
+- `PROJECT_VERSION`: `project()`で定義したバージョン番号
+- `PROJECT_VERSION_MAJOR`: メジャーバージョン
+- `PROJECT_VERSION_MINOR`: マイナーバージョン
+- `PROJECT_VERSION_PATCH`: パッチバージョン
+
+### CMake実行環境したい
+
+- `CMAKE_VERSION`: 実行中のCMakeのバージョン
+- `CMAKE_COMMAND`: `cmake`コマンドのパス
+- `CMAKE_ROOT`: CMakeのモジュールファイルがあるディレクトリ
+
+### パスを確認したい
+
+- `CMAKE_CURRENT_SOURCE_DIR`: 現在処理している`CMakeLists.txt`のあるディレクトリ
+- `CMAKE_CURRENT_BINARY_DIR`: 現在のビルド出力ディレクトリ
+- `CMAKE_CURRENT_LIST_FILE`: 現在処理中のファイル名
+- `CMAKE_CURRENT_LIST_DIR`: 現在処理中のファイルがあるディレクトリ名
+
+### ビルド環境を確認したい
+
+- `CMAKE_BUILD_TYPE`: ビルドタイプの種類
+- `CMAKE_INSTALL_PREFIX`: インストール先のパス
+- `CMAKE_RUNTIME_OUTPUT_DIRECTORY`: 実行ファイルの出力先
+- `CMAKE_LIBRARY_OUTPUT_DIRECTORY`: ライブラリの出力先
+- `CMAKE_SYSTEM_NAME`: ターゲットOSの名前
+- `CMAKE_HOST_SYSTEM_NAME`: ビルドを実行するマシンのOS名
+- `CMAKE_GENERATOR`: ビルドシステムの種類
+- `CMAKE_CACHEFILE_DIR`: `CMakeCache.txt`のディレクトリ名
+
+### コンパイラを確認したい
+
+- `CMAKE_C_COMPILER`: 使用するCコンパイラのパス
+- `CMAKE_C_FLAGS`: Cコンパイル時のフラグ
+- `CMAKE_CXX_COMPILER`: 使用するC++コンパイラのパス
+- `CMAKE_CXX_FLAGS`: C++コンパイル時のフラグ
+
 
 ## VS Code したい
 
