@@ -1,65 +1,87 @@
-# インストールしたい（``geant4``）
+# インストールしたい（`geant4`）
+
+Geant4本体は自分でビルドしてインストールする必要があります。
+ここでは、Geant4とCMakeの公式ドキュメントを参考にして、
+複数のGeant4のバージョンを管理する（マイ）ベストプラクティスを紹介します。
+
+## ディレクトリ構成したい
+
+```console
+~/geant4
+  |-- archives/
+  |    |-- geant4.v11.2.1.tar.gz
+  |    |-- geant4.v11.2.2.tar.gz
+  |    |-- geant4.v11.X.Y.tar.gz
+  |-- v11.2.1/
+  |    |-- CMakePresets.json
+  |    |-- source/CMakeLists.txt
+  |    |-- build/CMakeCache.txt
+  |    |-- install/
+  |-- v11.2.2/
+  |    |-- CMakePresets.json
+  |    |-- source/
+  |    |-- build/
+  |    |-- install/
+  |-- v11.X.Y/
+  |    |-- CMakePresets.json
+  |    |-- source/
+  |    |-- build/
+  |    |-- install/
+```
+
+`~/geant4`を作成し、Geant4専用のディレクトリとしています。
+この中に、バージョンごとのディレクトリを作成します。
+また、ダウンロードしたソースコードも`archives`に保存しておきます。
+
+## インストール手順のまとめ
 
 ```console
 // 外部ツールを準備する
-$ brew install --cask cmake
-$ brew install --cask xquartz
+$ brew install cmake
 $ brew install qt@5
+$ brew install --cask xquartz
+$ brew install ninja  # optional
 
-// Geant4用ディレクトリを作成する
+// ディレクトリを作成する
 $ mkdir ~/geant4
+$ mkdir ~/geant4/archives
+$ mkdir ~/geant4/v11.2.1
 
 // ソースコードをダウンロードする
+// 作業ディレクトリ: ~/geant4
+// 1. ~/geant4/ の直下にダウンロードして展開する
+// 2. ダウンロードしたファイルを archives に移動する
+// 3. 展開したディレクトリを v11.2.1/source にリネームする
 $ cd ~/geant4/
-(~/geant4/) $ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
-(~/geant4/) $ unzip geant4-v11.2.1.zip
+(~/geant4) $ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
+(~/geant4) $ unzip geant4-v11.2.1.zip
+(~/geant4) $ mv geant4-v11.2.1.zip archives/
+(~/geant4) $ mv geant4-v11.2.1 v11.2.1/source
 
-// cmakeでビルド作業するディレクトリを作成する
-(~/geant4/) $ mkdir build
-
-// 現在のディレクトリ構成を確認する
-(~/geant4/) $ ls -1
-build/
-geant4-v11.2.1/
-geant4-v11.2.1.zip
-
-// cmakeのビルド用ディレクトリに移動する
-(~/geant4/) $ cd build
-
-// cmakeのビルドオプションを設定
-(~/geant4/build/) $ cmake \
--DCMAKE_INSTALL_PREFIX=~/geant4/11.2.1/ \
+// ビルド構成 -> ビルド -> インストール
+// 作業ディレクトリ: ~/geant4/v11.2.1
+(~/geant4/v11.2.1) $ cmake \
+-S source \
+-B build \
+-DCMAKE_INSTALL_PREFIX=install \
 -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) \
 -DGEANT4_INSTALL_DATA=ON \
 -DGEANT4_USE_OPENGL_X11=ON \
 -DGEANT4_USE_RAYTRACER_X11=ON \
--DGEANT4_USE_QT=ON \
-../geant4-v11.2.1/
-
-// ccmakeでビルドオプションを確認する
-(~/geant4/build/) $ ccmake ../geant4-v11.2.1/
-
-// 設定ファイルなどが生成されていることを確認
-(~/geant4/build/) $ ls
-// もともと空だったディレクトリに
-// いろいろファイルができていることを確認する
-
-// ビルドする
-(~/geant4/build/) $ make -j8
-
-// インストールする
-(~/geant4/build/) $ make install
+-DGEANT4_USE_QT=ON
+(~/geant4/v11.2.1/) $ cmake --build build --parallel
+(~/geant4/v11.2.1/) $ cmake --install build --parallel
 
 // インストール先のディレクトリ構成を確認
-(~/geant4/build/) $ tree ~/geant4/11.2.1/ -L 1
-/Users/shotakaha/geant4/11.2.1/
+(~/geant4/v11.2.1/) $ tree ~/geant4/v11.2.1/install -L 1
+/Users/shotakaha/geant4/v11.2.1/install
 ├── bin
 ├── include
 ├── lib
 └── share
 
 // 環境変数を設定する
-$ source ~/geant4/bin/geant4.sh
+$ source ~/geant4/v11.2.1/install/bin/geant4.sh
 ```
 
 Geant4は自分でビルドしてインストールする必要があります。

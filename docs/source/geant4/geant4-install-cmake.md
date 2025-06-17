@@ -1,25 +1,41 @@
 # ビルドを準備する（``cmake``）
 
 ```console
-// ビルド用ディレクトリで作業する
-(~/geant4/) $ cd build
-
-// Geant4オプションを指定してcmakeする
-(~/geant4/build/) $ cmake \
--DCMAKE_INSTALL_PREFIX=~/geant4/11.x.y \
+// オプションを指定してcmakeする
+$ cd ~/geant4/v11.2.1
+(~/geant4/v11.2.1/) $ cmake \
+-G "Unix Makefiles" \
+-S source \
+-B build \
+-DCMAKE_INSTALL_PREFIX=install \
 -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) \
 -DGEANT4_INSTALL_DATA=ON \
 -DGEANT4_USE_OPENGL_X11=ON \
--DGEANT4_USE_QT=ON \
-../geant4-v11.x.y/
+-DGEANT4_USE_QT=ON
 ```
 
 `cmake`を使ってビルドに必要なファイルを生成します。
 Geant4のビルドオプションは
 `-Dオプション名=設定値`で変更できます。
-実行すると、ビルド用ディレクトリに`CMakeLists.txt`が生成されます。
 
-## ビルドオプションしたい（`CMakePresets.json`）
+```console
+(~/geant4/v11.2.1/) $ less build/CMakeCache.txt
+```
+
+`cmake`を実行すると、ビルド用ディレクトリに`CMakeCache.txt`が生成されます。
+このファイルを確認して、オプションが設定できているか確認できます。
+
+## オプションを再利用したい（`CMakePresets.json`）
+
+```console
+$ cmake \
+-S source \
+-B build \
+-DCMAKE_INSTALL_PREFIX=install \
+--preset=geant4-build
+```
+
+`CMakePresets.json`を使うと、オプション入力時のタイポを防ぐことができます。
 
 ```json
 {
@@ -30,7 +46,6 @@ Geant4のビルドオプションは
     "binaryDir": "${sourceDir}/build",
     "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_INSTALL_PREFIX": "~/geant4/11.x.y",
         "GEANT4_INSTALL_DATA": "ON",
         "GEANT4_USE_OPENGL_X11": "ON",
         "GEANT4_USE_QT": "ON"
@@ -45,7 +60,7 @@ Geant4のビルドオプションは
 
 | オプション名 | デフォルト値 | 推奨値 | 説明 |
 |---|---|---|---|
-| CMAKE_INSTALL_PREFIX |  ``/usr/local/`` | ``$HOME/geant4/バージョン番号`` | Geant4をインストールするパス |
+| CMAKE_INSTALL_PREFIX |  ``/usr/local/`` | ``$HOME/geant4/バージョン番号/install`` | Geant4をインストールするパス |
 | CMAKE_PREFIX_PATH | | ``$(brew --prefix qt@5)`` | Geant4のビルドに必要な外部パッケージのパス。``;``（セミコロン）で複数のパスを指定できる |
 | CMAKE_INSTALL_BINDIR | ``bin`` | | 実行ファイルがインストールされるパス |
 | CMAKE_INSTALL_INCLUDEDIR | ``include`` | | ヘッダーファイルがインストールされるパス |
@@ -94,8 +109,8 @@ $ brew --prefix qt@5
 ## ディレクトリ構成
 
 ```console
-$ tree ~/geant4/ -L 2
-geant4/
+$ tree ~/geant4/v11.2.1 -L 2
+geant4/v11.2.1
 ├── build
 │   ├── BuildProducts
 │   ├── CMakeCPackOptions.cmake
@@ -135,7 +150,7 @@ geant4/
 │   ├── geant4make.sh
 │   ├── source
 │   └── source_package_extras.cmake
-├── geant4-v11.2.1
+├── source
 │   ├── CHANGELOG -> ReleaseNotes
 │   ├── CITATION.cff
 │   ├── CMakeLists.txt
@@ -149,10 +164,8 @@ geant4/
 │   ├── examples
 │   ├── packaging
 │   └── source
-└── geant4-v11.2.1.zip
-
-20 directories, 35 files
 ```
 
-``build``の中にファイルが生成されました。
+`source/CMakeLists.txt`の内容をもとに、
+`build/CMakeCache.txt`が生成されました。
 このようなディレクトリ構成になっていたら、次に進んでください。

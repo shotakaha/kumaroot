@@ -1,25 +1,44 @@
-# 外部ツールを準備する（``brew install``）
+# 外部ツールを準備する（`brew install`）
 
-Geant4のビルドに必要な外部ツールは、あらかじめインストールが必要です。
-
-Geant4.10からデフォルトのビルドツールが`cmake`になったので、`cmake`は必須です。
-可視化ツールにOpenGLとQtを利用したいので、X11（XQuartz）とQt5を追加しています。
-
+Geant4のビルドに必要な外部ツールをインストールします。
 その他、使うことが分かっているツールがあれば、あらかじめインストールしておくとよいです。
 インストールできたら、次に進んでください。
 
-## macOSの場合
+## ビルドツール（`cmake` / `ninja`）
 
 ```console
-$ brew install --cask cmake
-$ brew install --cask xquartz
-$ brew install qt@5
+$ brew install cmake
 ```
 
-macOSの場合`cmake`のCaskをインストールします。
-また、X11が必要なので`XQuartz`をインストールします。
+Geant4.10からデフォルトのビルドツールが`cmake`になりました。
 
-## WSL2を準備する
+```console
+$ brew install ninja
+```
+
+`ninja`は`make`に代わるビルドコマンドです。
+モダンなツールが好きな場合は、インストールしてください。
+
+:::{note}
+
+一般に`ninja`のほうが`make`より高速にビルドできるらしいです。
+同じソースを、同じオプションでビルドした場合、ビルド結果は同じになります。
+
+:::
+
+## 描画ツール（`qt@5` / `xquartz`）
+
+```console
+$ brew install qt@5
+$ brew install --cask xquartz
+```
+
+Geant4のシミュレーション結果を可視化するためにOpenGLとQtを利用します。
+X11（XQuartz）はOpenGL、Qt5はQtの利用に必要です。
+
+## 番外編 : WSL2を準備する
+
+WindowsにGeant4をインストールする場合、WSL2環境を利用します。
 
 ```console
 $ apt install build-essential
