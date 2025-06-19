@@ -666,6 +666,6 @@ sphinxcontrib-serializinghtml==2.0.0 ; python_version >= "3.12" \
 sphinxext-opengraph==0.9.1 ; python_version >= "3.12" \
     --hash=sha256:b3b230cc6a5b5189139df937f0d9c7b23c7c204493b22646273687969dcb760e \
     --hash=sha256:dd2868a1e7c9497977fbbf44cc0844a42af39ca65fe1bb0272518af225d06fc5
-urllib3==2.4.0 ; python_version >= "3.12" \
-    --hash=sha256:414bc6535b787febd7567804cc015fee39daab8ad86268f1310a9250697de466 \
-    --hash=sha256:4e16665048960a0900c702d4a66415956a584919c03361cac9f1df5c5dd7e813
+urllib3==2.5.0 ; python_version >= "3.12" \
+    --hash=sha256:3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760 \
+    --hash=sha256:e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc
