@@ -1,40 +1,63 @@
-# 再利用可能にしたい
+# タスク化したい
 
-Geant4のインストール手順をタスク管理ツールを使って、再利用可能な形にしてみました。
-タスク実行には`go-task`を使用し、
-`CMakePresets.json`でビルドオプションを設定しました。
+タスク管理ツール（`go-task`）と、CMakeのプリセット設定（`CMakePresets.json`）を使って、Geant4のインストール手順を再利用可能な形にしてみました。
 
 Geant4のバージョンを指定すればうまく動くはずです。
+
+## ディレクトリ構成
+
+```console
+~/geant4
+  |-- Taskfile.yml
+  |-- CMakePresets.json
+  |-- archives/
+  |    |-- geant4.v11.X.Y.tar.gz
+  |-- v11.X.Y/
+  |    |-- source
+  |    |-- build
+  |    |-- install
+```
 
 ## タスクを分割したい
 
 ```yaml
 # Taskfile.yml
 #
-# 1. Workspace
-# cd ~/geant4
+# 1. Create Workspaces
+# mkdir -p $HOME/geant4/v11.2.1
 #
 # 2. Download source code from the repository
+# cd $HOME/geant4
 # wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
 # unzip geant4-v11.2.1.zip
 #
+# 3. Move source code
+# cd $HOME/geant4
+# mv geant4-v11.2.1.zip archives/
+# mv geant4-v11.2.1 v11.2.1/source
+#
 # 3. Configure
-# mkdir build
-# cmake -DCMAKE_INSTALL="$(pwd)/v11.2.1" -S "$(pwd)/geant4-v11.2.1" -B "$(pwd)/build"
-# make -j8
-# make install
+# cd $HOME/geant4/v11.2.1
+# cmake -DCMAKE_INSTALL_PREFIX="$(pwd)/install" -S "$(pwd)/source" -B "$(pwd)/build" --preset プリセット名
+#
+# 4. Build & Install
+# cd $HOME/geant4/v11.2.1
+# cmake --build build --parallel 8
+# cmake --install build
 
 version: '3'
 
 vars:
   G4VERSION: "v11.2.1"
-  G4ROOT: "{{.HOME}}/geant4"
-  G4SOURCE: "{{.G4HOME}}/geant4-{{.G4VERSION}}"
-  G4BUILD: "{{.G4HOME}}/build"
-  G4PREFIX: "{{.G4HOME}}/{{.G4VERSION}}"
-  G4ZIP: "geant4-{{.G4VERSION}}.zip"
+  G4NAME: "geant4-{{.G4VERSION}}"
+  G4ZIP: "{{.G4NAME}}.zip"
   G4URL: "https://gitlab.cern.ch/geant4/geant4/-/archive/{{.G4VERSION}}/{{.G4ZIP}}"
-
+  G4HOME: "{{.HOME}}/geant4"
+  G4WORK: "{{.G4HOME}}/{{.G4VERSION}}"
+  G4ARCHIVES: "{{.G4HOME}}/archives"
+  G4SOURCE: "{{.G4WORK}}/source"
+  G4BUILD: "{{.G4WORK}}/build"
+  G4INSTALL: "{{.G4WORK}}/install"
   QT_PATH:
     sh: brew --prefix qt@5
 
@@ -50,76 +73,70 @@ tasks:
   setup:
     desc: Create Geant4 working directory
     cmds:
-      - mkdir -p {{.G4ROOT}}
-      - mkdir -p {{.G4BUILD}}
+      - mkdir -p {{.G4WORK}}
+      - mkdir -p {{.G4ARCHIVES}}
 
   download:
     desc: Download and unzip Geant4 source code
-    dir: "{{.G4ROOT}}"
+    dir: "{{.G4HOME}}"
     cmds:
       - wget {{.G4URL}}
       - unzip {{.G4ZIP}}
 
-  configure-make:
-    desc: Configure CMake with Unix Makefiles and installation options
-    dir: "{{.G4ROOT}}"
-    env:
-      G4PREFIX: "{{.G4PREFIX}}"
-      QT_PATH: "{{.QT_PATH}}"
+  rename:
+    desc: Rename Geant4 source code
+    dir: "{{.G4HOME}}"
     cmds:
-      - mkdir {{.G4BUILD}}
-      - cmake -DCMAKE_INSTALL_PREFIX={{.G4PREFIX}} \
-              -DCMAKE_PREFIX_PATH={{.QT_PATH}} \
-              -DGEANT4_INSTALL_DATA=ON \
-              -DGEANT4_USE_OPENGL_X11=ON \
-              -DGEANT4_USE_QT=ON \
-              -S {{.G4SOURCE}}
-              -B {{.G4BUILD}}
+      - mv {{.G4ZIP}} {{.G4ARCHIVES}}
+      - mv {{.G4NAME}} {{.G4SOURCE}}
 
-  configure-ninja:
-    desc: Configure CMake with Ninja and installation options
-    dir: "{{.G4ROOT}}"
+  configure:
+    desc: Configure with CMake presets
+    dir: "{{.G4WORK}}"
     env:
-      G4PREFIX: "{{.G4PREFIX}}"
+      G4INSTALL: "{{.G4INSTALL}}"
       QT_PATH: "{{.QT_PATH}}"
     cmds:
-      - cmake -G Ninja \
-              -DCMAKE_INSTALL_PREFIX={{.G4PREFIX}} \
-              -DCMAKE_PREFIX_PATH={{.QT_PATH}} \
-              -DGEANT4_INSTALL_DATA=ON \
-              -DGEANT4_USE_OPENGL_X11=ON \
-              -DGEANT4_USE_QT=ON \
-              -S {{.G4SOURCE}}
-              -B {{.G4BUILD}}
+      - cmake --preset default
 
   build:
-    desc: Build Geant4
-    dir: "{{.G4ROOT}}"
+    desc: Build Geant4 using preset
+    dir: "{{.G4WORK}}"
     cmds:
-      - cmake --build "{{.G4BUILD}}" --parallel
+      - cmake --build --preset default
 
   install:
     desc: Install Geant4
-    dir: "{{.G4ROOT}}"
+    dir: "{{.G4WORK}}"
     cmds:
-      - cmake --install "{{.G4BUILD}}"
+      - cmake --install --preset default
+
+  uninstall:
+    desc: Remove installed Geant4 files
+    cmds:
+      - rm -rf {{.G4INSTALL}}
 
   clean:
     desc: Remove build directory
     cmds:
       - rm -rf {{.G4BUILD}}
 
+  reset:
+    desc: Remove build and install directories
+    cmds:
+      - rm -rf {{.G4BUILD}} {{.G4INSTALL}}
+
   tree:
     desc: Show installed directory structure
     cmds:
-      - tree {{.G4PREFIX}} -L 1
+      - tree {{.G4INSTALL}} -L 1
   env:
-    desc: Source environment setup script
+    desc: Show how to set up the Geant4 environment
     cmds:
-      - echo "Run 'source {{.G4PREFIX/bin/geant4.sh}}' in your shell"
+      - echo "Run 'source {{.G4INSTALL}}/bin/geant4.sh' to set up Geant4 in your shell"
 ```
 
-## ビルドオプションしたい
+## プリセットしたい
 
 ```json
 {
@@ -133,14 +150,26 @@ tasks:
         {
             "name": "default",
             "hidden": false,
+            "description": "Default build with Qt and OpenGL",
             "generator": "Ninja",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX": "${env.G4PREFIX}",
+                "CMAKE_INSTALL_PREFIX": "${env.G4INSTALL}",
                 "CMAKE_PREFIX_PATH": "${env.QT_PATH}",
-                "GEANT4_INSTALL_DATA": "ON"
+                "GEANT4_INSTALL_DATA": "ON",
+                "GEANT4_USE_OPENGL_X11": "ON",
+                "GEANT4_USE_QT": "ON"
             }
         }
-    ]
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "default",
+            "description": "Build using default preset",
+            "jobs": 8
+        }
+    ],
+    "testPresets": []
 }
 ```
 
@@ -149,28 +178,22 @@ tasks:
 ```console
 $ task deps
 $ task setup
-```
-
-```console
 $ task download
 ```
 
 ```console
-$ task configure-make
-$ task build-make
-$ task install-make
+$ task configure
+$ task build
+$ task install
 ```
 
 ```console
-$ task configure-ninja
-$ task build-ninja
-$ task install-ninja
-```
-
-```console
+$ task uninstall
 $ task clean
+$ task reset
 ```
 
 ```console
 $ task tree
+$ task env
 ```

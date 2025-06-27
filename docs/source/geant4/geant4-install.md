@@ -1,6 +1,14 @@
 # インストールしたい（`geant4`）
 
+```console
+$ cmake -S geant4-v11.2.1 -B build -Dオプション=...
+$ cmake --build build
+$ cmake --install build
+```
+
 Geant4本体は自分でビルドしてインストールする必要があります。
+最新のバージョンはCMake対応しており、一般的な手順でビルド＆インストールできます。
+
 ここでは、Geant4とCMakeの公式ドキュメントを参考にして、
 複数のGeant4のバージョンを管理する（マイ）ベストプラクティスを紹介します。
 

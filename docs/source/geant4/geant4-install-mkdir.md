@@ -1,4 +1,4 @@
-# 作業ディレクトリを準備する（``mkdir``）
+# 作業ディレクトリを準備する（`mkdir`）
 
 ```console
 // Geant4用のディレクトリを作成する
@@ -8,7 +8,8 @@ $ mkdir ~/geant4/
 $ mkdir ~/geant4/archives
 
 // バージョンごとのディレクトリを作成する
-$ mkdir ~/geant4/v11.2.1
+$ mkdir ~/geant4/v11.X.Y
+// mkdir ~/geant4/v11.2.1
 ```
 
 公式ドキュメントと講習会のインストール手順を参考に、自分なりにアレンジしました。

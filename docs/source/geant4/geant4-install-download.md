@@ -1,36 +1,24 @@
 # ソースコードを準備する
 
-最新版のソースコードのURLは[Geant4公式サイト](https://geant4.web.cern.ch/download/)で確認してください。
+最新版のソースコードを[Geant4公式サイト](https://geant4.web.cern.ch/download/)で確認し、ダウンロードします。
 
-:::{note}
+特定のバージョンが必要な場合は、
 
 [過去のリリース一覧](https://geant4.web.cern.ch/download/all)や、
-[CERNのGitLab](https://gitlab.cern.ch/geant4/geant4/-/releases)と
-[GitHub](https://github.com/Geant4/geant4/releases)に、
-これまでのリリースが公開されています。
-
-コラボレーションで開発していて、特定のバージョンが必要な場合は、
-これらのページからダウンロードできます。
-
-:::
-
-## 作業ディレクトリ
-
-```console
-$ cd ~/geant4/
-(~/geant4/) $
-```
-
-作業ディレクトリは`~/geant4/`です。
+[CERNのGitLab](https://gitlab.cern.ch/geant4/geant4/-/releases)、
+[GitHub](https://github.com/Geant4/geant4/releases)、
+からダウンロードできます。
 
 ## ダウンロードする（`wget`）
 
 ```console
+$ cd ~/geant4/
 // ダウンロードする
 (~/geant4/) $ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.X.Y/geant4-v11.X.Y.zip
 ```
 
-作業用ディレクトリ（`~/geant4/`）にGeant4のソースコードをダウンロードします。
+[wgetコマンド](../command/command-wget.md)でソースコードをダウンロードします。
+`~/geant4/`で作業します。
 ソースコードは`.zip`、`.tar.gz`、`.tar.bz2`、`.tar`の4種類の形式で用意されています。
 お好みの形式をダウンロードしてください。
 僕は`.zip`形式を選択しました。
@@ -58,19 +46,27 @@ geant4-v11.X.Y.zip
 geant4-v11.X.Y/
 ```
 
-ダウンロードしたファイルを、その場で展開します。
-`zip`形式でダウンロードしたので`unzip`します。
+`unzip`コマンドでZIP形式のファイルを展開します。
 
-## 移動する（`mv`）
+## リネームする（`mv`）
 
 ```console
-// 移動する
+// アーカイブに移動する
 (~/geant4/) $ mv geant4-v11.X.Y.zip archives/
+
+// リネームする
 (~/geant4/) $ mv geant4-v11.X.Y v11.X.Y/source
 ```
 
-ダウンロードしたファイルは`~/geant4/archives/`に移動し、
+ダウンロードしたZIP形式のファイルは`~/geant4/archives/`に移動し、
 展開したソース一式（＝ディレクトリ）は`~/geant4/v11.X.Y/source`にリネームします。
+
+:::{note}
+
+Geant4のソースコードはウェブ上にあるため、
+パソコンのディスク容量が節約したい場合、アーカイブを手元に残す必要はありません。
+
+:::
 
 ## ディレクトリ構成
 

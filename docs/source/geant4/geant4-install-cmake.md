@@ -1,4 +1,4 @@
-# ビルドを準備する（``cmake``）
+# ビルド構成したい（`cmake`）
 
 ```console
 // オプションを指定してcmakeする
@@ -24,6 +24,64 @@ Geant4のビルドオプションは
 
 `cmake`を実行すると、ビルド用ディレクトリに`CMakeCache.txt`が生成されます。
 このファイルを確認して、オプションが設定できているか確認できます。
+
+## ビルドツールを設定する（`-G`）
+
+```console
+$ cmake -G "Unix Makefiles"
+$ cmake -G "Ninja"
+```
+
+`-G`オプションでジェネレーター（＝ビルドツール）を変更できます。
+多くの場合、デフォルトは`make`（＝`Unix Makefiles`）です。
+
+## インストール先を設定する（`-DCMAKE_INSTALL_PREFIX`）
+
+```console
+// 絶対パスで指定
+$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/geant4/v11.2.1/install
+
+// 相対パスで指定
+$ cmake -DCMAKE_INSTALL_PREFIX=install
+```
+
+`CMAKE_INSTALL_PREFIX`オプションで、Geant4本体のインストール先のパスを変更できます。
+絶対パス、もしくは`cmake`を実行したパスからの相対パスを指定できます。
+
+## ライブラリを追加する（`-DCMAKE_PREFIX_PATH`）
+
+```console
+// macOSの設定
+$ cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt@5
+
+// 汎用的な設定
+$ cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
+```
+
+`CMAKE_PREFIX_PATH`で、ビルドに必要なライブラリのパスを追加できます。
+Qtを使う場合、ローカルにインストールされているQtのパスを指定する必要があります。
+
+:::{note}
+
+HomebrewでインストールしたQtのパスは、プラットフォームによって違うことがあります。
+`/opt/homebrew/opt/qt@5`のようなベタ書きではなく、
+`brew --prefix qt@5`で取得するほうが汎用的です。
+
+```console
+// macOS (x86_64)
+$ brew --prefix qt@5
+/usr/local/qt@5
+
+// macOS (M2 Apple)
+$ brew --prefix qt@5
+/opt/homebrew/opt/qt@5
+
+// WSL2 (Ubuntu)
+$ brew --prefix qt@5
+/home/linuxbrew/.linuxbrew/opt/qt@5
+```
+
+:::
 
 ## オプションを再利用したい（`CMakePresets.json`）
 
@@ -84,27 +142,6 @@ $ cmake \
 | GEANT4_USE_SMARTSTACK | ``OFF`` | | G4SmartStackを有効にするフラグ。|
 | GEANT4_USE_FREETYPE | ``OFF`` | | Freetypeフォントを有効にするフラグ。|
 | GEANT4_USE_HDF5 | ``OFF`` | | HDF5形式を有効にするフラグ。|
-
-### Qtしたい
-
-可視化ツールにQt5を使う場合、Qt5がインストールされているパスを`CMAKE_PREFIX_PATH`で指定する必要があります。
-該当するパスを直接指定してもよいのですが、
-``brew --prefix パッケージ名``コマンドを使うことで、
-パソコンのシステム構成に依存しにくいように汎用化しています。
-
-```console
-// macOS (x86_64)
-$ brew --prefix qt@5
-/usr/local/qt@5
-
-// macOS (M2 Apple)
-$ brew --prefix qt@5
-/opt/homebrew/opt/qt@5
-
-// WSL2 (Ubuntu)
-$ brew --prefix qt@5
-/home/linuxbrew/.linuxbrew/opt/qt@5
-```
 
 ## ディレクトリ構成
 
