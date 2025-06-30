@@ -83,21 +83,37 @@ $ brew --prefix qt@5
 
 :::
 
+## 可視化ドライバーしたい
+
+```console
+$ cmake -DGEANT4_USE_QT=ON -DGEANT4_USE_OPENGL_X11=ON
+```
+
+`GEANT4_USE_QT=ON`オプションでQtを、
+`GEANT4_USE_OPENGL_X11=ON`オプションでOpenGLを有効にします。
+
+:::{note}
+
+QtとOpenGLはそれぞれ役割が異なるため、この2つはセットで有効にする必要があります。
+Qtだけだど描画できず、OpenGLだけだと描画はできますが、ウィンドウ／メニューが貧弱になります。
+
+:::
+
 ## オプションを再利用したい（`CMakePresets.json`）
 
 ```console
 $ cmake \
 -S source \
 -B build \
--DCMAKE_INSTALL_PREFIX=install \
---preset=geant4-build
+--preset=geant4
 ```
 
-`CMakePresets.json`を使うと、オプション入力時のタイポを防ぐことができます。
+必要なオプションを`CMakePresets.json`にまとめることで、オプション設定を再利用できます。
+また、オプション設定時のタイポを防ぐことができます。
 
 ```json
 {
-    "name": "geant4-build",
+    "name": "geant4",
     "displayName": "Geant4 Build",
     "description": "Build Geant4 with OpenGL and Qt",
     "generator": "Unix Makefiles",
