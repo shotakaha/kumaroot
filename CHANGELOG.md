@@ -8,6 +8,8 @@
 
 ### Fix
 
+- **geant4/geant4-install.md**: インストール手順を整理した
+- **geant4/geant4-versions.md**: バージョン情報を整理した
 - **geant4/geant4-install.md**: Geant4のインストール手順を改訂した
 - **command/command-cmake.md**: cmakeを追記した
 - **command/command-cmake.md**: cmakeを追記した
