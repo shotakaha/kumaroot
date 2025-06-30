@@ -79,8 +79,9 @@ tasks:
 
   setup:
     desc: Create Geant4 working directory
+    status:
+      - test -d {{.G4HOME}}/archives
     cmds:
-      - mkdir -p {{.G4HOME}}
       - mkdir -p {{.G4HOME}}/archives
 
   fetch:
@@ -93,12 +94,12 @@ tasks:
 
   unzip:
     desc: Unzip Geant4 source code
-    dir: "{{.G4HOME}}/archives"
+    dir: "{{.G4HOME}}"
     status:
       - test -d {{.G4WORK}}/source
     cmds:
       - mkdir -p {{.G4WORK}}
-      - unzip {{.G4ZIP}}
+      - unzip ./archives/{{.G4ZIP}}
       - mv -n {{.G4NAME}} {{.G4WORK}}/source
 
   download:
@@ -106,7 +107,6 @@ tasks:
     cmds:
       - task: fetch
       - task: unzip
-
 
   configure:
     desc: Configure with CMake
@@ -128,19 +128,21 @@ tasks:
 
   uninstall:
     desc: Remove installed Geant4 files
+    dir: "{{.G4WORK}}"
     cmds:
-      - rm -rf {{.G4INSTALL}}
+      - rm -rf ./install
 
   clean:
     desc: Remove build directory
+    dir: "{{.G4WORK}}"
     cmds:
-      - rm -rf {{.G4BUILD}}
+      - rm -rf ./build
 
   reset:
     desc: Remove build and install directories
     cmds:
-      - rm -rf {{.G4BUILD}}
-      - rm -rf {{.G4INSTALL}}
+      - task: uninstall
+      - task: clean
 
   env:
     desc: Show how to set up the Geant4 environment
@@ -148,12 +150,20 @@ tasks:
       - echo "Run 'source {{.G4INSTALL}}/bin/geant4.sh' to set up Geant4 in your shell"
 
   main:
-    desc: Run download -> configure -> build -> install
+    desc: Run configure -> build -> install
     cmds:
-      - task: download
       - task: configure
       - task: build
       - task: install
+
+  default:
+    desc: Show tasks to run
+    cmds:
+      - echo "task setup"
+      - echo "task download"
+      - echo "task configure"
+      - echo "task build"
+      - echo "task install"
 ```
 
 ## プリセットしたい
