@@ -45,26 +45,33 @@ Geant4のバージョンを指定すればうまく動くはずです。
 # cmake --build build --parallel 8
 # cmake --install build
 
-version: '3'
+version: "3"
 
 vars:
   G4VERSION: "v11.2.1"
+  # home
+  G4HOME: "{{.HOME}}/geant4"
+  G4WORK: "{{.G4HOME}}/{{.G4VERSION}}"
+  # download
   G4NAME: "geant4-{{.G4VERSION}}"
   G4ZIP: "{{.G4NAME}}.zip"
   G4URL: "https://gitlab.cern.ch/geant4/geant4/-/archive/{{.G4VERSION}}/{{.G4ZIP}}"
-  G4HOME: "{{.HOME}}/geant4"
-  G4WORK: "{{.G4HOME}}/{{.G4VERSION}}"
-  G4ARCHIVES: "{{.G4HOME}}/archives"
+  # configure
+  GENERATOR: "Ninja"
+  QT_PATH:
+    sh: brew --prefix qt@5
+
+env:
   G4SOURCE: "{{.G4WORK}}/source"
   G4BUILD: "{{.G4WORK}}/build"
   G4INSTALL: "{{.G4WORK}}/install"
-  QT_PATH:
-    sh: brew --prefix qt@5
+  QT_PATH: "{{.QT_PATH}}"
 
 tasks:
   deps:
     desc: Install required dependencies via Homebrew
     cmds:
+      - brew install wget
       - brew install cmake
       - brew install --cask xquartz
       - brew install qt@5
@@ -73,43 +80,40 @@ tasks:
   setup:
     desc: Create Geant4 working directory
     cmds:
-      - mkdir -p {{.G4WORK}}
-      - mkdir -p {{.G4ARCHIVES}}
+      - mkdir -p {{.G4HOME}}
+      - mkdir -p {{.G4HOME}}/archives
 
   download:
-    desc: Download and unzip Geant4 source code
-    dir: "{{.G4HOME}}"
+    desc: Download and rename Geant4 source code
+    dir: "{{.G4HOME}}/archives"
     cmds:
       - wget {{.G4URL}}
-      - unzip {{.G4ZIP}}
 
-  rename:
-    desc: Rename Geant4 source code
+  unzip:
+    desc: Unzip and reaname Geant4 source code
     dir: "{{.G4HOME}}"
     cmds:
-      - mv {{.G4ZIP}} {{.G4ARCHIVES}}
-      - mv {{.G4NAME}} {{.G4SOURCE}}
+      - unzip ./archives/{{.G4ZIP}}
+      - mkdir -p {{.G4WORK}}
+      - mv {{.G4NAME}} {{.G4WORK}}/source
 
   configure:
-    desc: Configure with CMake presets
+    desc: Configure with CMake
     dir: "{{.G4WORK}}"
-    env:
-      G4INSTALL: "{{.G4INSTALL}}"
-      QT_PATH: "{{.QT_PATH}}"
     cmds:
-      - cmake --preset default
+      - cmake -G {{.GENERATOR}} -S source -B build -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH={{.QT_PATH}} -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT+ON -DGEANT4_USE_SYSTEM_ZLIB=ON
 
   build:
-    desc: Build Geant4 using preset
+    desc: Build Geant4 with CMake
     dir: "{{.G4WORK}}"
     cmds:
-      - cmake --build --preset default
+      - cmake --build build --parallel
 
   install:
-    desc: Install Geant4
+    desc: Install Geant4 with CMake
     dir: "{{.G4WORK}}"
     cmds:
-      - cmake --install --preset default
+      - cmake --install build --parallel
 
   uninstall:
     desc: Remove installed Geant4 files
@@ -124,7 +128,8 @@ tasks:
   reset:
     desc: Remove build and install directories
     cmds:
-      - rm -rf {{.G4BUILD}} {{.G4INSTALL}}
+      - rm -rf {{.G4BUILD}}
+      - rm -rf {{.G4INSTALL}}
 
   tree:
     desc: Show installed directory structure
