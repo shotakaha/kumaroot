@@ -1,11 +1,33 @@
-# ファイル出力したい（``G4VAnalysisManager``）
+# ファイル出力したい（`G4VAnalysisManager`）
 
 ```cpp
 auto am = G4AnalysisManager::Instance();
 ```
 
-``G4AnalysisManager::Instance``でAnalysisManagerを取得できます。
-AnalysisManagerはシングルトンになっています。
+`G4AnalysisManager`は、シミュレーションで得られた結果を管理するインスタンスです。
+シングルトンとして設計されており、
+`G4AnalysisManager::Instance`で取得できます。
+
+## 初期設定したい
+
+```cpp
+void MyRunAction::BeginOfRunAction(const G4Run* aRun) {
+    auto am = G4AnalysisManager::Instance();
+
+    am->SetVerboseLevel(1);  // ログ詳細レベル
+    am->SetFileName("my_output");  // 出力ファイル名
+    am->SetHistDirectoryName("hist");  // ヒストグラム用ディレクトリ
+    am->SetNtupleDirectoryName("ntuple");  // Ntuple用ディレクトリ
+    am->SetFirstHistoId(0);  // ヒストグラムの開始番号
+    am->SetFirstNtupleId(0);  // Ntupleの開始番号
+    am->SetNtupleMerging(true);  // マルチスレッド対応
+
+    am->OpenFile();  // 出力ファイルを開く
+}
+```
+
+`G4AnalysisManager`は
+`G4UserRunAction::BeginOfRunAction()`の中で設定します。
 
 ## ファイルを開きたい（``OpenFile``）
 

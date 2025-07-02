@@ -160,3 +160,20 @@ auto fms = G4FieldManagerStore::GetInstance();
 
 `G4FieldManagerStore`は、複数の電磁場管理オブジェクト（`G4FieldManager`）を保持するストアです。
 それぞれの論理ボリュームに設定されたフィールド管理を一元的に扱います。
+
+## G4AnalysisManager
+
+```cpp
+auto am = G4AnalysisManager::Instance();
+```
+
+`G4AnalysisManager`は、シミュレーションで得られた結果を管理するインスタンスです。
+ROOT、CSV、XMLなど複数の形式に出力できます。
+
+:::{seealso}
+
+詳しくは
+[](./geant4-analysismanager.md)
+に整理しました。
+
+:::
