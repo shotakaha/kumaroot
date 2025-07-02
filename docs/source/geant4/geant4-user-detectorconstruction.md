@@ -1,7 +1,8 @@
-# 測定器したい（``G4VUserDetectorConstruction``）
+# 測定器したい（`G4VUserDetectorConstruction`）
 
-測定器の構造を定義するクラスは、必須クラスのひとつで、
-``G4VUserDetectorConstruction``クラスを継承して作成します。
+測定器の構造はユーザーが定義する必要があります。
+`G4VUserDetectorConstruction`クラスを継承した自作クラスを作成し、
+`Construct`（必須）や`ConstructSDandField`（オプション）を実装します。
 
 ## 親クラス
 
@@ -14,22 +15,20 @@ virtual G4VPhysicalVolume* Construct() = 0;
 virtual void ConstructSDandField();
 ```
 
-親クラスのメンバー関数を抜粋しました。
-コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
-``Construct()``は、Geant4で使う測定器を作るための関数です。
+親クラス（`G4VUserDetectorConstruction`）のメンバー関数を抜粋しました。
+コンストラクターとデストラクターは、このデフォルトの設定を引き継げばよさそうです。
+
+`Construct()`は測定器の構造を初期化して配置する関数です。
 純粋仮想関数になっているため、自作クラスでoverrideが必要です。
-``ConstructSDandField()``は、論理ボリュームに対して
-有感検出器（SensitiveDetector）を設定するための関数です。
+必要なソリッド、論理ボリューム、物理ボリュームはすべてこの関数の中で生成します。
+
+`ConstructSDandField()`は、`Construct`で生成した論理ボリュームに対して
+有感検出器（SensitiveDetector）や場（Field）を設定するための関数です。
 マルチスレッド環境で実行する場合は、自作クラスでoverrideが必要です。
 
 :::{note}
 
-シングルスレッドで実行する場合は、
-``ConstructSDandField``ではなく、
-``Construct``の中で設定すればよいはずです。
-
-``ConstructSDandField``はGeant4.10で追加されたようなので、
-それ以前はそうしてたはず。
+`ConstructSDandField`はGeant4.10で追加されたようです。
 
 :::
 

@@ -15,7 +15,11 @@ auto rm = G4RunManager::GetRunManager();
 ユーザーアクション（`G4UserRunAction`など）を登録し、
 初期化、実行、終了までの一連の流れを管理します。
 
+:::{seealso}
+
 詳しくは[](./geant4-run-manager.md)に整理しました。
+
+:::
 
 ## G4NistManager
 
@@ -24,7 +28,14 @@ auto nm = G4NistManager::Instance();
 ```
 
 `G4NistManager`は、NISTに準拠した元素や物質を簡単に取得・生成できるシングルトンです。
-詳しくは[](./geant4-material-nistmanager.md)に整理しました。
+
+:::{seealso}
+
+詳しくは
+[](./geant4-material-nistmanager.md)
+に整理しました。
+
+:::
 
 ## G4MaterialTable
 
@@ -36,7 +47,14 @@ for (auto* material: *table) {
 ```
 
 `G4MaterialTable`は、すべての物質（`G4Material`など）のインスタンスの一覧を保持する静的テーブルです。
-詳しくは[](./geant4-material-table.md)に整理しました。
+
+:::{seealso}
+
+詳しくは
+[](./geant4-material-table.md)
+に整理しました。
+
+:::
 
 ## G4ParticleTable
 

@@ -1,4 +1,4 @@
-# ジオメトリ作成の流れ
+# ジオメトリを作成したい
 
 ```cpp
 // 1. 形状を定義する
@@ -28,25 +28,44 @@ Geant4空間に配置する構造体を**ジオメトリ**と呼びます。
 
 現実世界の実験と同じように、形状と材料を決めて測定装置を作り、実験室に配置するという、とても分かりやすいオブジェクト指向な設計になっています。
 
-## 形状を作成したい（``G4VSolid``）
+## 形状を作成したい（`G4VSolid`）
 
 ```cpp
 G4Box("name", half_x, half_y, half_z);
 G4Tubs("name", r_min, r_max, half_z, s_phi, d_phi);
 ```
 
-[](./geant4-geometry-solid.md)に整理しました。
+直方体（`G4Box`）や円筒（`G4Tubs`）など、`G4VSolid`を継承したクラスを使って、
+測定器の形状を定義します。
 
-## 素材を作成したい（``G4NistManager``）
+:::{seealso}
+
+詳しくは
+[](./geant4-geometry-solid.md)
+に整理しました。
+
+:::
+
+## 素材を作成したい（`G4Material`）
 
 ```cpp
 auto nm = G4NistManager::Instance();
-auto nm->FindOrBuildMaterial("G4_WATER");
+G4Material *pWater = nm->FindOrBuildMaterial("G4_WATER");
 ```
 
-[](./geant4-material.md)に整理しました。
+測定器に使う素材（`G4Material`）を定義します。
+`G4NistManager`を使ってNISTのデータベースに準拠した
+元素や物質の情報を簡単に取得できます。
 
-## 測定器を作成したい（``G4LogicalVolume``）
+:::{seealso}
+
+詳しくは
+[](./geant4-material.md)
+に整理しました。
+
+:::
+
+## 測定器を作成したい（`G4LogicalVolume`）
 
 ```cpp
 G4LogicalVolume(
@@ -60,33 +79,83 @@ G4LogicalVolume(
 );
 ```
 
-``G4LogicalVolume``で論理ボリュームを作成できます。
-引数からわかるように、形状（``G4VSolid``）と素材（``G4Material``）の設定が必要です。
-
+`G4LogicalVolume`で論理ボリュームを作成します。
+引数からわかるように、形状（`G4VSolid`）と素材（`G4Material`）の設定が必要です。
 論理ボリュームは複製して使い回すことができます。
-詳しくは[](./geant4-logicalvolume.md)に整理しました。
+
+:::{seealso}
+詳しくは
+[](./geant4-logicalvolume.md)
+に整理しました。
+:::
 
 :::{hint}
 
-磁場などの外場（``G4FieldManager``）や、
-有感検出器（``G4VSensitiveDetector``）の設定などもできますが、
-論理ボリュームを作成したあとで、設定を追加することが多いようです。
+`G4LogicalVolume`の引数を確認すると、
+磁場などの外場（`G4FieldManager`）や、
+有感検出器（`G4VSensitiveDetector`）も設定できます。
+
+しかし、最近のユーザーアプリケーションでは、
+`Construct`の中で論理ボリュームを作成したあとに、
+`ConstructSDandField`の中で設定を追加することが多いようです。
 
 :::
 
-## 測定器を配置する
+## 測定器を配置する（`G4PVPlacement`）
 
 ```cpp
-G4PVPlacement(...);
+new G4PVPlacement(
+    nullptr,                  // 回転；なし
+    G4ThreeVector(0, 0, 0),   // 配置；原点に配置
+    logicDetector,            // 論理ボリューム
+    "Detector",               // 物理ボリュームの名前； "Detector"
+    logicWorld,               // 親・論理ボリューム
+    false,                    // 多重配置； しない
+    0,                        // コピー番号
+    false                     // 物理ボリュームの重なり確認； しない
+```
+
+`G4PVPlacement`で論理ボリューム（`G4LogicalVolume`）を、
+物理ボリューム（`G4VPhysicalVolume`）として配置します。
+配置したボリュームは自動的に`G4PhysicalVolumeStore`にも追加されます。
+
+:::{seealso}
+
+詳しくは
+[](./geant4-physicalvolume-pvplacement.md)
+に整理しました。
+
+:::
+
+```cpp
 G4PVReplica(...);
 ```
 
-``G4PVPlacement``などの配置用クラスを使って論理ボリュームを実験室（ワールド）内に配置することで、物理ボリューム（``G4VPhysicalVolume``）になります。
+繰り返し構造をもつ測定器（や検出器）の場合は
+`G4PVReplica`で効率的に配置できます。
 
-また、これらの配置用クラスを使って、論理ボリュームを入れ子構造にできます。
-詳しくは、[](./geant4-physicalvolume-pvplacement.md)や
-[](./geant4-physicalvolume-pvreplica.md)に
-整理しました
+:::{seealso}
+
+詳しくは
+[](./geant4-physicalvolume-pvreplica.md)
+に整理しました
+
+:::
+
+:::{hint}
+
+`G4VPhysicalVolume`は物理ボリュームの抽象基底クラスであり、ユーザーが直接インスタンスを呼び出すことはできません。
+
+ユーザーのアプリケーションでは、
+`G4PVPlacement`（単体配置）、
+`G4PVReplica`（等間隔配置）、
+`G4PVParameterised`（反復配置）
+といった派生クラスを通じて利用します。
+
+ただし、`G4VPhysicalVolume* MyGeometry::Construct`のように
+関数の戻り値の型として使うことはあります。
+
+:::
 
 ## リファレンス
 
@@ -97,5 +166,3 @@ G4PVReplica(...);
 - [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4VPhysicalVolume.html)
 - [G4PVPlacement](https://geant4.kek.jp/Reference/11.2.0/classG4PVPlacement.html)
 - [G4PVReplica](https://geant4.kek.jp/Reference/11.2.0/classG4PVReplica.html)
-
-:::
