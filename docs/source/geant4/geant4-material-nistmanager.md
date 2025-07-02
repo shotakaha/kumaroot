@@ -3,7 +3,7 @@
 ```cpp
 #include "G4NistManager.hh"
 
-G4NistManager *nm = new G4NistManager::GetInstance();
+G4NistManager *nm = new G4NistManager::Instance();
 
 G4Element *H = nm->FindOrBuildElement("G4_H")
 G4Element *O = nm->FindOrBuildElement("G4_O")
@@ -12,11 +12,10 @@ G4Material *H2O = nm->FindOrBuildMaterial("G4_WATER")
 G4Material *Air = nm->FindOrBuildMaterial("G4_AIR")
 ```
 
-いろいろな元素や化合物の基本的な特性は、
-NISTの材料データベースに整理されています。
-``G4NistManager``で、この材料データベースから材料を取り寄せることができます。
+`G4NistManager`は、NIST（National Institute of Standards and Technology）に
+準拠した元素や物質を簡単に取得・生成できるシングルトンです。
 
-## 物質取り寄せたい（``G4NistManager::FindOrBuildMaterial``）
+## 物質を取り寄せたい（``G4NistManager::FindOrBuildMaterial``）
 
 ``FindOrBuildMaterial``で物質（``G4Material``）を取得できます。
 利用可能なマテリアル名は[Geant4 Material Database](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html)を参照してください。

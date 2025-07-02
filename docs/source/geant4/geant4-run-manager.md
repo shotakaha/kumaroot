@@ -11,15 +11,14 @@ auto rm = G4RunManagerFactory::CreateRunManager();
 // auto rm = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Serial);
 ```
 
-**G4RunManager**は、ラン（``G4Run``）の進行管理を担当します。
-また、実験責任者の役割を担っていて、ユーザーが``main()``関数から話しかけるのも、このインスタンスのみでOKです。
+`G4RunManager`はGeant4シミュレーション全体を統括する中核的なシングルトンです。
+ジオメトリ構築（`G4VUserDetectorConstruction`）、
+物理プロセスの定義（`G4VUserPhysicsList`）、および
+ユーザーアクション（`G4UserRunAction`など）を登録し、
+初期化、実行、終了までの一連の流れを管理します。
 
-ユーザーは、RunManagerを介して、
-ジオメトリ配置、
-相互作用モデル、
-入射粒子、
-有感検出器、などの設定を指示することで、
-Geant4シミュレーションを実行します。
+`G4RunManager`はクラス名の通り「実験責任者」の役割を担っており、
+ユーザーは`main()`関数からこのインスタンスに話しかけて実験（シミュレーション）を指示します。
 
 :::{note}
 
@@ -29,22 +28,19 @@ Geant4.11でマルチスレッド対応が追加されたため、
 
 :::
 
-## 実験を開始したい（``G4RunManager::Initialize``）
+## 実験を開始したい（`G4RunManager::Initialize`）
 
 ```cpp
-rm->SetUserInitialization(new Geometry{});
-rm->SetUserInitialization(new FTFP_BERT{});
-rm->SetUserInitialization(new ActionInitialiation{});
-
+auto rm = new G4RunManager();
+rm->SetUserInitialization(new MyGeometry{});
+rm->SetUserInitialization(new MyPhysics{});
+rm->SetUserInitialization(new MyAction{});
 rm->Initialize();
 ```
 
-``Initialize``で、
-ジオメトリの配置、
-相互作用の定義、入射粒子の条件など、
-シミュレーションに必要な初期設定が完了します。
-
-また、ラン実行中は、測定器の構造や相互作用などが
+ユーザーは、メインとなるファイルの中で`G4RunManager`クラスを
+明示的に`new`で生成し、各種の設定をした後に、`Initialize()`や`BeamOn()`を呼び出します。
+また、シミューレーション実行中は、測定器の構造や相互作用などが
 途中で変更されないように管理してくれます。
 
 ## 粒子を入射したい（``G4RunManager::BeamOn``）
@@ -54,7 +50,7 @@ G4int n_events = 100;
 rm->BeamOn(n_events);
 ```
 
-``BeamOn``で粒子を入射（発生）できます。
+`BeamOn`で粒子を入射（発生）できます。
 引数にイベント数を設定して、1回のランで複数回のイベントを実行できます。
 
 ## マクロで操作したい（``/run/``）

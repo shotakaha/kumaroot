@@ -1,4 +1,4 @@
-# OpticalPhysicsしたい（``G4OpticalPhysics``）
+# OpticalPhysicsしたい（`G4OpticalPhysics`）
 
 ```cpp
 int main()
@@ -19,6 +19,8 @@ int main()
     optical_params->SetCerenkovVerbosity(1);
 
     // G4Scintillationの設定
+    optical_params->SetScintYieldFactor(1.0);
+    optical_params->SetScintExcitationRatio(0.0);
     optical_params->SetScintByParticleType(false);
     optical_params->SetScintTrackInfo(false);
     optical_params->SetScintTrackSecondariesFirst(true);
@@ -31,18 +33,21 @@ int main()
 }
 ```
 
-``FTFP_BERT``モデルに``OpticalPhysics``を追加しています。
-``G4OpticalPhysics``では、
-チェレンコフ光（``G4Cerenkov``）、
-シンチレーション光（``G4Scintillation``）、
-吸収（``G4OpAbsorption``）、
-レイリー散乱（``G4OpRayleigh``）、
-ミー散乱（``G4OpMieHG``）、
-波長変換（``G4OpWLS``と``G4OpWLS2``）、
-境界での散乱（``G4OpBoundary``）、
-の物理プロセスを通じて相互作用できるようになります。
+`G4OpticalPhysics`で
+チェレンコフ光（`G4Cerenkov`）、
+シンチレーション光（`G4Scintillation`）、
+吸収（`G4OpAbsorption`）、
+レイリー散乱（`G4OpRayleigh`）、
+ミー散乱（`G4OpMieHG`）、
+波長変換（`G4OpWLS``と``G4OpWLS2`）、
+境界での散乱（`G4OpBoundary`）、
+の物理プロセスを通じて相互作用できます。
 
-また、``G4OpticalParameters``で、それぞれのプロセスのパラメーターを設定できます。
+それぞれのプロセスのパラメーターは、`G4OpticalParameters`を使ってグローバルに制御できます。
+`G4OpticalParameters::Instance()`はシングルトンになっているため、どこからでも呼び出すことができます。
+
+上記のサンプルでは、メインの相互作用（`FTFP_BERT`モデル）に
+`OpticalPhysics`を追加し、パラメーターを変更しています。
 
 ```{toctree}
 ---

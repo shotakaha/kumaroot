@@ -52,8 +52,6 @@ params->SetScintVerboseLevel(1);
 | ``TRITONSCINTILLATIONTIMECONSTANT1`` | Constant | Time constant for component 1 for tritons | Time |
 | ``TRITONSCINTILLATIONYIELD`` | Energy-dependent | Yield vector for tritons | 1/Energy |
 
-
-
 :::{seealso}
 
 - [](./geant4-material-propertiestable.md)
