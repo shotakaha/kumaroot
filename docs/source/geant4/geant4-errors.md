@@ -221,3 +221,44 @@ export DYLD_LIBRARY_PATH=$HOME/geant4/11.2.1/lib:$DYLD_LIBRARY_PATH
 ```fish
 set -x DYLD_LIBRARY_PATH $HOME/geant4/11.2.1/lib $DYLD_LIBRARY_PATH
 ```
+
+## No "Qt5CoreConfig.cmake"
+
+例題のアプリをビルドしたときに`Qt5CoreConfig.cmake`が見つからないというエラーが発生しました。
+`Qt5CoreConfig.cmake`のパスを確認し、`CMAKE_PREFIX_PATH`オプションに指定すると解決できます。
+
+### エラーの内容
+
+```console
+CMake Error at /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:78 (find_package):
+  By not providing "FindQt5Core.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "Qt5Core", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "Qt5Core" with any
+  of the following names:
+
+    Qt5CoreConfig.cmake
+    qt5core-config.cmake
+
+  Add the installation prefix of "Qt5Core" to CMAKE_PREFIX_PATH or set
+  "Qt5Core_DIR" to a directory containing one of the above files.  If
+  "Qt5Core" provides a separate development package or SDK, be sure it has
+  been installed.
+Call Stack (most recent call first):
+  /Users/shotakaha/geant4/v11.3.2/install/lib/cmake/Geant4/Geant4Config.cmake:371 (find_dependency)
+  CMakeLists.txt:13 (find_package)
+```
+
+### 対処方法
+
+```console
+$ locage Qt5CoreConfig.cmake
+/opt/homebrew/Cellar/qt@5/5.15.16_2/lib/cmake/Qt5Core/Qt5CoreConfig.cmake
+
+$ cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/Cellar/qt@5/5.15.16_2
+```
+
+`Qt5CoreConfig.cmake`のパスを確認します。
+現在の環境では`/opt/homebrew/Cellar/qt@5/5.15.16_2`の中にありました。
+このパスを`CMAKE_PREFIX_PATH`オプションに指定したら解決できました。
