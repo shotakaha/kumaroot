@@ -90,7 +90,7 @@ geant4-user-steppingaction
 
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 1
 ---
 geant4-run
 geant4-event

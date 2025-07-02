@@ -1,4 +1,4 @@
-# すべてのヒット配列をしりたい（``HCofThisEvent`` / ``DCofThisEvent``）
+# すべてのヒット配列をしりたい（`HCofThisEvent` / `DCofThisEvent`）
 
 ```cpp
 G4HCofThisEvent *hce = aEvent->GetHCofThisEvent()

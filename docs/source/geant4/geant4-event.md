@@ -1,9 +1,24 @@
-# イベント操作したい（``G4Event``）
+# イベント操作したい（`G4Event`）
 
-``G4Event``はイベント情報を管理するクラスです。
-ユーザーアクション設定の
-[UserEventAction](./geant4-user-eventaction.md)から
-情報を取得したいときに使います。
+```cpp
+void MyEventAction::EndOfEventAction(const G4Event* event) {
+    G4int eventID = event->GetEventID();
+    auto hce = event->GetHCofThisEvent();
+
+    if (hce) {
+        auto hitsCollection = static_cast<MyHitsCollection*>(hce->GetHC(hitsCollectionID));
+        // ヒット情報の解析など
+    }
+}
+```
+
+`G4Event`は「ひとつのイベント」を表すクラスです。
+ユーザーが`G4Event`を直接インスタンス化することはありません。
+
+このクラスは、ユーザーアクション設定の
+[UserEventAction](./geant4-user-eventaction.md)において、
+とくにイベントの終了時（`EndOfEventAction`）に、
+イベント番号やヒット情報を取得する際に使用します。
 
 ```{toctree}
 ---

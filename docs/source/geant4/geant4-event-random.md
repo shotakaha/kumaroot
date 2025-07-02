@@ -1,15 +1,27 @@
-# 乱数シードをしりたい（``G4Event::GetRandomNumberStatus``）
+# 乱数シードを取得したい（`G4Event::GetRandomNumberStatus`）
 
 ```cpp
-// G4Event *aEvent
-G4String status = aEvent->GetRandomNumberStatus();
-
-G4debug << "Random number status at the start of the event: " << status << G4endl;
-
+void MyEventAction::BeginOfEventAction(const G4Event* aEvent) {
+    G4String status = aEvent->GetRandomNumberStatus();
+    G4debug << "Random number status at the start of the event: " << status << G4endl;
+}
 ```
 
-イベントを開始したときの、乱数発生器の状態を取得できます。
-この状態値を保存することで、同じシミュレーション結果を再現できます。
+`G4Event::GetRandomNumberStatus`で、それぞれのイベントの乱数状態を取得できます。
+この状態値を使うと、同じシミュレーション結果を再現できます。
+
+```cpp
+void MyEventAction::EndOfEventAction(const G4Event* aEvent) {
+    G4String status = aEvent->GetRandomNumberStatus();
+
+    // ファイルに追記
+    std::ofstream fout("randomStatus.txt", std::ios::app);
+    fout << "EventID," << aEvent->GetEventID() << "," << status << "\n";
+    fout.close();
+}
+```
+
+`EndOfEventAction`で、この状態値を保存するのが一般的です。
 
 :::{seealso}
 
