@@ -86,6 +86,16 @@ geant4-user-trackingaction
 geant4-user-steppingaction
 ```
 
+## 測定器したい
+
+```{toctree}
+---
+maxdepth: 2
+---
+geant4-geometry-examples
+```
+
+
 ## ステップ操作したい
 
 ```{toctree}
@@ -137,7 +147,6 @@ geant4-geometry-solid
 geant4-logicalvolume
 geant4-physicalvolume
 geant4-touchable
-geant4-geometry-examples
 ```
 
 ## SensitiveDetectorしたい

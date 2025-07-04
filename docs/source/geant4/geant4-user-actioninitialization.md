@@ -19,6 +19,8 @@ class G4VUserActionInitialization {
   public:
     G4VUserActionInitialization() = default;
     virtual ~G4VUserActionInitialization() = default;
+
+  public:
     virtual void Build() const = 0;
     virtual void BuildForMaster() const {};
 };
@@ -124,9 +126,12 @@ void ActionInitialization::BuildForMaster() const {
 
 ```cpp
 // プロジェクト名.cc（ここではToyMC.cc）
-#include "G4RunManagerFactory.hh"
 
-#include "ActionInitialization.hh"  // <-- 自作クラス
+// ユーザー定義クラス
+#include "ActionInitialization.hh"
+
+// Geant4のクラス
+#include "G4RunManagerFactory.hh"
 
 int main(int argc, char** argv)
 {

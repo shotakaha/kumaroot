@@ -1,74 +1,97 @@
-# 相互作用したい（``G4VModularPhysicsList``）
+# 相互作用したい（`G4VModularPhysicsList`）
 
-粒子と物質の相互作用を定義するクラスは、必須クラスのひとつです。
-Geant4で用意されている**Reference Physics List**を利用するのが簡単です。
-このPhysicsListは``G4VModularPhysicsList``を継承したクラスです。
+`G4VModularPhysicsList`は、シミュレーションで使用する物理モデルを
+モジュール形式で構成できるようにするための基底クラスです。
+v4.8.0で導入されました。
 
-## 親クラス
+この枠組みにより、ユーザーはGeant4が提供する**Reference Physics List**を
+選んで柔軟に物理モデルを構築できます。
 
-- G4VModularPhysicsList
+:::{note}
+
+v4.8.0以前は
+`G4VUserPhysicList`を継承して、ユーザー自身がすべての粒子と
+物理過程を定義する必要があったそうです。
+
+この方法はコードの可読性・保守性に乏しく、
+物理モデルの再利用も困難だったため、
+モジュール形式の`G4VModularPhysicsList`が導入されたようです。
+
+:::
+
+## 親クラス（`G4VModularPhysicsList`）
 
 ```cpp
-G4VModularPhysicsList()
-~G4VModularPhysicsList() override;
-void ConstructParticle() override;
-void ConstructProcess() override;
-void RegisterPhysics(G4VPhysicsConstructor*);
+class G4VModularPhysicsList {
+  public:
+    G4VModularPhysicsList();
+    virtual ~G4VModularPhysicsList() override;
+
+  public:
+    virtual void ConstructParticle() override;
+    virtual void ConstructProcess() override;
+    void RegisterPhysics(G4VPhysicsConstructor*);
+}
 ```
 
-``G4VModularPhysicsList``は``G4VUserPhysicList``を継承したクラスです。
-``RegisterPhysics``で、他のリファレンス物理モデル（``G4VPhysicsConstructor``）を追加できます。
+親クラス（`G4VModularPhyisicsList`）の主要なメンバー関数を抜粋しました。
+
+`RegisterPhysics`で、
+Geant4が提供している物理モデルや、
+他のリファレンス物理モデル（`G4VPhysicsConstructor`を継承した自作クラス）を簡単に追加できます。
 
 モデルの名前と内容は[Guide for Physics Lists](https://geant4-userdoc.web.cern.ch/UsersGuides/PhysicsListGuide/html/index.html)で確認できます。
 モデル名は、利用している相互作用モデルを使った命名規則になっています。
 
-## メイン関数
+## メイン関数（`main`）
 
 ```cpp
+// プロジェクト名.cc（ここではToyMC.cc）
+
+
+// Geant4のクラス
 #include "FTFP_BERT.hh"
+#include "G4OpticalPhysics.hh"
+#include "G4RunManagerFactory.hh"
 
 int main(int argc, char** argv)
 {
     auto rm = G4RunManagerFactory::CreateRunManager();
 
+    // ジオメトリの設定（省略）
+    // 物理モデルの設定
+
     auto physics = new FTFP_BERT{};
+    physics->RegisterPhysics(new G4OpticalPhysics{});
     rm->SetUserInitialization(physics);
 
+    // ユーザーアクションの設定（省略）
+
+    // 実験開始（省略）
+    rm->Initialize();
+    rm->BeamOn();
+    delete rm;
+    return 0;
 }
 ```
 
-メイン関数で Reference Physics Listを作成してRunManagerに追加します。
+メイン関数で物理モデルを設定する最小構成です。
+FTFPモデル（`FTFP_BERT`）に
+光学モデル（`G4OpticalPhysics`）を追加し、
+`SetUserInitialization`を使ってRunManagerに登録しています。
+
+:::{seealso}
+
+使用した物理モデルは
 
 - [](./geant4-physics-ftfp_bert.md)
 - [](./geant4-physics-opticalphysics.md)
 
-## カスタムしたい（``G4VUserPhysicsList``）
+に整理しました。
 
-定義されていない相互作用（やその組み合わせ）が必要な場合は``G4VUserPhysicsList``クラスを継承してユーザーがカスタムできるようになっています。
+:::
 
-- G4VUserPhysicsList
-
-```cpp
-G4VUserPhysicList();
-virtual ~G4VUserPhysicList();
-virtual void ConstructParticle() = 0;
-virtual void ConstructProcess() = 0;
-virtual void SetCuts();
-```
-
-親クラスのメンバー関数を抜粋しました。
-コンストラクターとデストラクターは、この設定を引き継げばよさそうです。
-``ConstructParticle()``と``ConstructProcess()``は、純粋仮想関数になっているため、自作クラスでoverrideが必要です。
-``SetCuts()``は、粒子輸送の閾値を設定する仮想関数です。
-overrideして閾値をカスタマイズできます。
-
-```cpp
-G4VUserPhysicList() = default;
-~G4VUserPhysicList() = default;
-void ConstructParticle() override;
-void ConstructProcess() override;
-void SetCuts() override;
-```
+また、`G4VUserPhysicsConstructor`を継承して、完全自作の相互作用モジュールを作ることができます。
 
 - [](./geant4-physics-constructparticle.md)
 - [](./geant4-physics-constructprocess.md)
