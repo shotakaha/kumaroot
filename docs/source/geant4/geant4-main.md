@@ -1,39 +1,49 @@
 # メイン関数したい（``main()``）
 
 ```cpp
-#include "Geometry.hh"              // G4VUserDetectorConstructionを継承した自作クラス
-#include "ActionInitialization.hh"  // G4VUserActionInitializationを継承した自作クラス
+// ユーザー定義クラスを読み込む
+#include "Geometry.hh"
+#include "ActionInitialization.hh"
 
+// Geant4のクラスを読み込む
 #include "G4RunManagerFactory.hh"
+#include "FTFP_BERT.hh"    // 標準の物理モデルのひとつ
 
 int main(int argc, char** argv)
 {
     auto rm = G4RunManagerFactory::CreateRunManager();
 
+    // ジオメトリの設定
     auto geometry = new Geometry{};
     rm->SetUserInitialization(detector);
 
+    // 物理モデルの設定
     auto physics = new FTFP_BERT{};
     rm->SetUserInitialization(physics);
 
+    // ユーザーアクションの設定
     auto actions = new ActionInitialization{};
     rm->SetUserInitialization(actions);
 
+    // 実験開始
     rm->Initialize();
-
     G4int n_events = 100;
     rm->BeamOn(n_events);
 
+    // 実験終了
     delete rm;
     return 0;
 }
 ```
 
-バッチモードで実行する場合の必要最低限の``main()``関数です。
+Geant4でシミュレーションを実行する場合の、
+バッチモード用の必要最低限の`main()`関数の構成例です。
 
-1. G4RunManagerFactory
-2. G4VisExecutive
-3. G4UImanager
+このサンプルでは、次の3つの要素を設定しています。
+
+1. `geometry` : `G4VUserDetectorConstruction`を継承したユーザー定義クラス
+2. `physics` : `FTFP_BERT`（Geant4標準の物理モデルのひとつ）
+3. `actions` : `G4VUserActionInitialization`を継承したユーザー定義クラス
 
 :::{seealso}
 
@@ -47,7 +57,7 @@ int main(int argc, char** argv)
 
 :::
 
-## クラスの呼ばれ方
+## クラスが呼ばれる順番
 
 ```cpp
 {
