@@ -8,6 +8,20 @@
 
 ### Fix
 
+- **geant4/geant4-cpp-geant4.md**: Geant4のコーディング規約を整理した
+- **geant4/geant4-physics-opticalphysics.md**: 光学物理の設定を整理した
+- **geant4/geant4-user-physicslist.md**: 物理モデルを整理した
+- **geant4/geant4-user-actioninitialization.md**: ユーザーアクションの設定を整理した
+- **geant4/geant4-material-plastic-scintillator.md**: プラシンのサンプルを改良した
+- **geant4/geant4-singleton.md**: AnalysisManagerを追加した
+- **geant4/geant4-errors.md**: エラーの対処方法を追加した
+- **geant4/geant4-event.md**: イベント情報を追記した
+- **geant4/geant4-geometry.md**: ジオメトリの設定を追記した
+- **geant4/geant4-singleton.md**: シングルトンパターンを追加した
+- **geant4/geant4-install-taskfile.md**: タスクを整理した
+- **geant4/geant4-install-taskfile.md**: タスクの構造を整理した
+- **geant4/geant4-install-taskfile.md**: タスクを整理した
+- **geant4/geant4-install-cmake.md**: インストール手順を修正した
 - **geant4/geant4-install.md**: インストール手順を整理した
 - **geant4/geant4-versions.md**: バージョン情報を整理した
 - **geant4/geant4-install.md**: Geant4のインストール手順を改訂した
