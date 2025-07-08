@@ -1,14 +1,14 @@
-# 実験室を作りたい（``SetupWorldVolume``）
+# 実験室を作りたい（`MakeWorld`）
 
 ```cpp
-G4LogicalVolume *SetupWorldVolume(){
+G4LogicalVolume* MakeWorld(){
 
     // パラメーターの設定
-    G4String logical_volume = "World";
+    G4String logical_name = "World";
     G4String material_name = "G4_AIR";
-    G4String length_x = 1. * m;
-    G4String length_y = 1. * m;
-    G4String length_z = 1. * m;
+    G4double length_x = 1. * m;
+    G4double length_y = 1. * m;
+    G4double length_z = 1. * m;
 
     // 形状を定義
     G4double halfX = 0.5 * length_x;
@@ -23,8 +23,8 @@ G4LogicalVolume *SetupWorldVolume(){
     };
 
     // 実験室の素材を決める
-    G4NistManager *nm = new G4NistManager::Instance();
-    auto material = nm->FindOrBuildMaterial(material_name);
+    auto* nm = G4NistManager::Instance();
+    G4Material* material = nm->FindOrBuildMaterial(material_name);
 
     // 実験室
     auto logical = new G4LogicalVolume{

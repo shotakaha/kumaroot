@@ -1,31 +1,44 @@
-# SensitiveDetectorしたい（``G4VSensitiveDetector``）
+# SensitiveDetectorしたい（`G4VSensitiveDetector`）
 
-測定器の有感検出器でのヒットを収集したい場合は、
-``G4VSensitiveDetector``クラスを継承したクラスを作成します。
+`G4VSensitiveDetector`は、
+測定器／検出器内での有感領域で発生したヒットを収集するための抽象基底クラスです。
 
-## 親クラス
+ユーザーはこのクラスを継承して、自作のSensitiveDetectorクラスを実装できます。
+Geant4のイベント処理の枠組みに統合されており、測定に関する処理を`UserSteppingAction`などで一からを一から実装も記述するよりも、簡潔かつ効率的に実装できます。
+
+:::{note}
+
+**簡潔かつ効率的に実装**できるのですが、SensitiveDetectorの枠組み
+
+:::
+
+## 親クラス（`public G4VSensitiveDetector`）
 
 - [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
 
 ```cpp
-explicit G4VSensitiveDetector(G4String name);
-virtual ~G4VSensitiveDetector() = default;
-virtual void Initialize(G4HCofThisEvent*) {};
-virtual void EndOfEvent(G4HCofThisEvent*) {};
-virtual G4bool ProcessHits(G4Step *aStep, G4TouchableHistory* /*ROhist*/) = 0;
+class G4VSensitiveDetector {
+  public:
+    explicit G4VSensitiveDetector(G4String name);
+    virtual ~G4VSensitiveDetector() = default;
+    virtual void Initialize(G4HCofThisEvent*) {};
+    virtual void EndOfEvent(G4HCofThisEvent*) {};
+    virtual G4bool ProcessHits(G4Step *aStep, G4TouchableHistory* /*ROhist*/) = 0;
+}
 ```
 
-親クラスのメンバー関数を抜粋しました。
-コンストラクターとデストラクターは、このまま引き継げばよさそうです。
+親クラス（`G4VSensitiveDetector`）の主要なメンバー関数を抜粋しました。
+コンストラクターとデストラクターは、親クラスの設定を継承して使用できます。
 
-``Initialize()``は、イベントの開始時に実行される関数です。
-``EndOfEvent()``は、イベントの終了時に実行される関数です。
-これらの仮想関数は、目的に合わせて自作クラスでoverrideします。
+`ProcessHits()`は、ステップが有感検出器の中にあるときに呼ばれる純粋仮想関数で、必ずオーバーライドする必要があります。
 
-``ProcessHits()``は、ステップが有感検出器の中にあるときに実行される関数です。
-この純粋仮想関数は、自作クラスでoverrideが必要です。
+`Initialize()`はイベントの開始時に呼ばれる仮想関数で、
+ヒットコレクションの初期化などに使用します。
+`EndOfEvent()`はイベントの終了時に呼ばれる仮想関数で、
+ヒットコレクションの登録処理などに使用します。
+どちらの仮想関数も、必要に応じてオーバーライド可能です。
 
-## Sensorクラス
+## Sensor
 
 ```cpp
 // include/Sensor.hh

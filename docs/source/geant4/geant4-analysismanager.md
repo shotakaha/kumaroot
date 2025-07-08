@@ -1,55 +1,220 @@
-# ファイル出力したい（`G4VAnalysisManager`）
+# 解析マネージャーしたい（`G4VAnalysisManager`）
 
 ```cpp
 auto am = G4AnalysisManager::Instance();
 ```
 
-`G4AnalysisManager`は、シミュレーションで得られた結果を管理するインスタンスです。
-シングルトンとして設計されており、
-`G4AnalysisManager::Instance`で取得できます。
+`G4AnalysisManager`は、Geant4のシミュレーションで得られた結果を管理するインスタンスです。
+このクラスのおかげでROOT形式、CSV形式、XML形式への出力が標準機能として利用できます。
 
-## 初期設定したい
+`G4AnalysisManager::Instance`は、
+シングルトンとして設計されており、マルチスレッド環境にも対応しています。
+
+:::{note}
+
+`G4AnalysisManager`は Geant v10.0で導入されました。
+このクラスは、抽象基底クラスである`G4VAnalysisManager`を継承した具体クラスであり、
+ユーザーは通常この`G4AnalysisManager`を通じてヒストグラムやNtupleを操作します。
+
+:::
+
+## ラン情報を記録したい
 
 ```cpp
-void MyRunAction::BeginOfRunAction(const G4Run* aRun) {
-    auto am = G4AnalysisManager::Instance();
+// include/RunAction.hh
 
-    am->SetVerboseLevel(1);  // ログ詳細レベル
-    am->SetFileName("my_output");  // 出力ファイル名
-    am->SetHistDirectoryName("hist");  // ヒストグラム用ディレクトリ
-    am->SetNtupleDirectoryName("ntuple");  // Ntuple用ディレクトリ
-    am->SetFirstHistoId(0);  // ヒストグラムの開始番号
-    am->SetFirstNtupleId(0);  // Ntupleの開始番号
-    am->SetNtupleMerging(true);  // マルチスレッド対応
+#ifndef RUN_ACTION_HH
+#define RUN_ACTION_HH
 
-    am->OpenFile();  // 出力ファイルを開く
+#include "G4UserRunAction.hh"
+#include "G4String.hh"
+#include "globals.hh"
+
+class RunAction : public G4UserRunAction {
+  public:
+    RunAction();
+    virtual ~RunAction();
+
+    virtual void BeginOfRunAction(const G4Run* aRun) override;
+    virtual void EndOfRunAction(const G4Run* aRun) override;
+
+  private:
+    // 必要に応じてメンバー変数を追加
+    // - 値が一定（immutable）の変数
+    // - 複数のメンバー関数で共有したい変数
+    G4int fRunId = -1;
+    G4double fStartTime = 0;
+    G4String fSeedFileName;
+};
+
+#endif // RUN_ACTION_HH
+```
+
+ラン情報を記録するために、
+`G4UserRunAction`を継承したユーザー定義の`RunAction`クラスを作成します。
+
+このクラスの
+コンストラクターに`G4AnalysisManager`の初期化
+`BeginOfRunAction`にファイルを開く操作、
+`EndOfRunAction`にデータ保存とファイルに書き出す操作を実装します。
+
+### 初期化したい（`RunAction::RunAction`）
+
+```cpp
+void MyRunAction::RunAction() {
+  auto am = G4AnalysisManager::Instance();
+
+  // ログ詳細レベル（0-4）
+  am->SetVerboseLevel(1);
+  // 出力ファイル名
+  am->SetFileName("my_output");
+  // 出力形式（"root", "csv", "xml"）
+  am->SetDefaultFileType("root");
+  // ヒストグラム用ディレクトリ
+  am->SetHistDirectoryName("hist");
+  am->CreateH1("h1", "Edep in detector", 100, 0., 10.);
+
+  // Ntuple用ディレクトリ
+  am->SetNtupleDirectoryName("ntuple");
+  am->SetNtupleMerging(true);  // マルチスレッド対応
+
+  // ラン情報用Ntuple
+  am->CreateNtuple("runinfo", "Run Metadata");
+  am->CreateNtupleIColumn("runId");
+  am->CreateNtupleIColumn("nEvents");
+  am->CreateNtupleDColumn("startTime");  // unixtime
+  am->CreateNtupleDColumn("endTime");
+  am->CreateNtupleSColumn("fileName");
+  am->CreateNtupleSColumn("seedFile");
+  am->FinishNtuple();
 }
 ```
 
-`G4AnalysisManager`は
-`G4UserRunAction::BeginOfRunAction()`の中で設定します。
+出力するファイル名や形式、
+必要なヒストグラムやNtupleの定義は、
+RunActionクラスのコンストラクターの中で初期化します。
 
-## ファイルを開きたい（``OpenFile``）
-
-```cpp
-auto am = G4AnalysisManager::Instance();
-am->SetDefaultFileType("csv");
-am->SetFileName("ファイル名")
-am->OpenFile();
-
-G4debug << "File opened: " << am->GetFileName() << G4endl;
-// File opened: ファイル名.csv
-```
-
-## ファイルを閉じたい（``CloseFile``）
+### ラン開始時の処理（`RunAction::BeginOfRunAction`）
 
 ```cpp
-auto am = G4AnalysisManager::Instance();
-am->CloseFile()
+void MyRunAction::BeginOfRunAction(const G4Run* aRun) {
+  fStartTime = std::time(nullptr);
+  fRunId = run->GetRunID();
 
-G4debug << "File closed: " << am->GetFileName() << G4endl;
-// File closed: ファイル名.csv
+  // 出力ファイルを開く
+  auto am = G4AnalysisManager::Instance();
+  am->OpenFile();  // 出力ファイルを開く
+
+    //
+  fSeedFileName = "seed_run" + std::to_string(runId) + ".rndm";
+  CLHEP::HepRandom::saveEngineStatus(seedFileName);
+
+}
 ```
+
+シミュレーションがはじまると、`BeginOfRunAction`が呼ばれます。
+出力ファイルを開く操作（`OpenFile`）はここで実行します。
+
+### ラン終了時の処理（`RunAction::EndOfRunAction`）
+
+```cpp
+void MyRunAction::EndOfRunAction(const G4Run* aRun) {
+  G4int nEvents = aRun->GetNumberOfEvents();
+  G4double endTime = std::time(nullptr);
+  auto am = G4AnalysisManager::Instance();
+
+  // 出力ファイル名を取得
+  G4String outputFileName = am->GetFileName();
+
+  // 保存
+  am->FillNtupleIColumn(0, fRunId);
+  am->FillNtupleIColumn(1, nEvents);
+  am->FillNtupleDColumn(2, fStartTime);
+  am->FillNtupleDColumn(3, endTime);
+  am->FillNtupleSColumn(4, outputFileName);
+  am->FillNtupleSColumn(5, fSeedFileName);
+  am->AddNtupleRow();
+
+  am->Write();
+  am->CloseFile()
+}
+```
+
+シミュレーションの終了時に`EndOfRunAction`が呼ばれます。
+出力したファイルに書き込む操作（`Write`）と、
+閉じる操作（`CloseFile`）は、
+この中で実行します。
+
+マルチスレッド環境で実行した場合、
+各スレッドで記録されたデータは、ランの終了時に
+自動的にマスターで集約され、
+ひとつのファイルにまとめて保存されます。
+
+:::{note}
+
+`CloseFile`だけでは結果が保存されません。
+必ず`Write`を先に呼ぶ必要があります。
+
+:::
+
+## イベント情報したい
+
+```cpp
+// include/EventAction.hh
+
+#ifndef EVENT_ACTION_HH
+#define EVENT_ACTION_HH
+
+#include "G4UserEventAction.hh"
+#include "G4Event.hh"
+#include "globals.hh"
+
+class EventAction : public G4UserEventAction {
+  public:
+    EventAction();
+    virtual ~EventAction();
+
+    virtual void BeginOfEventAction(const G4Event* aEvent) override;
+    virtual void EndOfEventAction(const G4Event* aEvent) override;
+
+  private:
+    G4int fEventId = -1;
+    G4double fEnergyDeposit = 0;
+};
+
+#endif // EVENT_ACTION_HH
+```
+
+### イベント開始時の処理（`EventAction::BeginOfEventAction`）
+
+```cpp
+void EventAction::BeginOfEventAction(const G4Event* aEvent) {
+  fEventId = event->GetEventID();
+  fEnergyDeposit = 0;  // 初期化
+}
+```
+
+```cpp
+void EventAction::EndOfEventAction(const G4Event* aEvent) {
+    auto am = G4AnalysisManager::Instance();
+    am->FillNtupleIColumn(0, fEventId);
+    am->FillNtupleDColumn(1, fEnergyDeposit);
+    am->AddNtupleRow();
+}
+```
+
+### イベント終了時の処理（`EventAction::EndOfEventAction`）
+
+## ランアクションしたい
+
+```cpp
+void ActionInitialization::Build() const {
+    SetUserAction(new MyRunAction{});
+}
+```
+
+ユーザー定義した`MyRunAction`クラスは
+`ActionInitialization`への登録が必要です。
 
 ## ファイル名を変更したい（``SetFileName``）
 
@@ -360,8 +525,6 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 ``EventAction``クラスや``SteppingAction``クラスで定義します。
 
 :::
-
-
 
 ## リファレンス
 
