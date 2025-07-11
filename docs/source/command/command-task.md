@@ -1,20 +1,6 @@
 # タスクランナーしたい（`task`）
 
-```console
-// 初期化
-$ task --init
-Taskfile created: Taskfile.yml
-
-// タスク一覧を表示
-$ task --list-all
-task: Available tasks for this project:
-* default:
-
-// デフォルトのタスクを実行
-$ task
-Hello, World!
-
-// 指定したタスクを実行
+```cpp
 $ task タスク名
 ```
 
@@ -27,9 +13,20 @@ YAML形式の設定ファイル（`Taskfile.yml`）により、
 
 ```console
 $ brew install go-task
+
+// 初期化
+$ task --init
+Taskfile created: Taskfile.yml
+
+// デフォルトのタスクを実行
+$ task
+Hello, World!
 ```
 
 Homebrewで`go-task`フォーミュラをインストールします。
+任意のディレクトリで`task --init`を実行して、`Taskfile.yml`のひな形を生成します。
+ひな型はデフォルトで「Hello, World」を表示するようになっているので、
+そのまま`task`コマンドを実行して動作確認できます。
 
 :::{note}
 
@@ -56,7 +53,7 @@ tasks:
 ```
 
 タスクの設定は`Taskfile.yml`に記述します。
-`Taskfile.yml`はプロジェクトルートに配置します。
+`Taskfile.yml`は **プロジェクトルート** に配置します。
 まず`task --init`でひな形を生成し、編集する方法がオススメです。
 
 `vars`セクションで変数を定義できます。
@@ -135,3 +132,29 @@ tasks:
 条件が満たされない場合は、タスクは中断され、指定した`msg`が表示されます。
 上記のサンプルでは`build`ディレクトリが存在しない場合に
 エラーメッセージが表示されます。
+
+## 変数したい（`vars`）
+
+```yaml
+vars:
+  G4VERSION: "v11.3.2"
+  G4HOME: "{{.HOME}}/geant4"
+  QT_PATH:
+    sh: brew --prefix qt@5
+
+tasks:
+  setup:
+    cmds:
+      - echo "Installing Geant4 {{.G4VERSION}} to {{.G4HOME}}"
+      - echo "Qt is located at {{.QT_PATH}}"
+```
+
+`vars`セクションでタスク全体で利用するグローバル変数を定義できます。
+`{{.変数名}}`の形式で、Goテンプレート構文による変数展開ができます。
+`sh`オプションを使うと、シェルコマンドの出力を変数として使用できます。
+
+```console
+$ task setup G4VERSION=v11.2.1
+```
+
+`vars`で定義した変数は、`task`コマンドの引数として上書きできます。
