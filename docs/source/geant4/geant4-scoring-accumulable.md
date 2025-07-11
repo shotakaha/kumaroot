@@ -1,37 +1,55 @@
-# Accumulableしたい（``G4Accumulable``）
+# Accumulableしたい（`G4VAccumulable`）
 
-```cpp
-G4Accumulable<型> 変数名;
+`G4VAccumulable`は、マルチスレッド環境で
+スレッドセーフなデータ収集するための抽象基底クラスです。
+Geant4では、この機能を使って
+スレッドごとに独立してデータを蓄積し、
+ラン終了時にマスタースレッドで統合（accumulate）できます。
 
-// RunAction.hhのプライベート変数で定義
-G4Accumulable<G4double> energy_deposit = 0;
-
-// RunAction::RunAction()
-// コンストラクタでAccumulableManagerを作成
-G4AccumulableManager *accumulableManager = G4AccumulableManager::Instance()
-accumulableManager->RegisterAccumulable(energy_deposit);
-
-// RunAction::EndOfRunAction
-// ランの終了時にデータをマージ
-accumulableManager->Merge();
-```
-
-``G4Accumulable``は、ユーザーのデータ収集を簡単にするために追加された型（みたいなもの）です。
-``G4AccumulableManager``を使って、変数の代入／追加ができます。
-また、マルチスレッド環境で実行した場合、``Merge``を使ってそれぞれのWorkerノードで取得したデータをまとめることができます。
+この機能は、`G4VAccumulable`を継承した
+`G4AccValue<T>`や、
+`G4AccArray<T, N>`
+といったテンプレートクラスとして実装されていて、
+`G4AccumulablelManager`を通じて登録、初期化、集約、リセットできます。
 
 詳細は[Accumulables](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Analysis/accumulables.html)を参照してください。
 
+:::{hint}
+
+**アキュムレーター** は並列処理における一般的な概念のようです。
+スレッドごとに安全に隔離した変数を保持し、
+マスタースレッドで最終的に合算するという仕組みです。
+
+Geant4では`G4VAccumulable`クラスとして組み込み、
+実際には`G4AccValue<T>`などのテンプレートクラスで実装されています。
+
+:::
+
+## 変数したい（`G4AccValue`）
+
+```cpp
+G4Accumulable<型> 変数名;
+```
+
 :::{note}
 
-まったく調べてないですが、おそらく``std::vector``のような可変長リストなんだと思います。
+Geant4 11.3.0で、テンプレートクラス名が
+`G4Accumlable`から`G4AccValue`に変更になりました。
+新しくアプリを作成する場合は
+`G4AccValue`を使う方がよさそうです。
 
 :::
 
-:::{note}
+```cpp
+// RunAction.hhのプライベート変数で定義
+G4AccValue<G4double> energyEdeposit = 0;
 
-Geant4 11.3.0のリリースノートに、
-`G4Accumlable`から`G4AccValue`にクラス名を変更したと書いてある。
-この内容は、各自チェックが必要かもしれない。
+// RunAction::RunAction()
+// コンストラクタでAccumulableManagerを作成
+auto* am = G4AccumulableManager::Instance()
+am->Register(energyDeposit);
 
-:::
+// RunAction::EndOfRunAction
+// ランの終了時にデータをマージ
+am->Merge();
+```
