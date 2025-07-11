@@ -21,3 +21,8 @@ tasks:
     desc: Start VS Code
     cmds:
       - code .
+
+  export:
+    desc: Export requirements.txt
+    cmds:
+      - poetry export --output requirements.txt
