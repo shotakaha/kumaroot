@@ -1,0 +1,23 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "Run task html"
+    silent: true
+
+  html:
+    desc: Start Sphinx livehtml
+    dir: docs
+    cmds:
+      - poetry run make livehtml
+
+  code:
+    desc: Start VS Code
+    cmds:
+      - code .

@@ -66,6 +66,7 @@ command-gem
 command-mise
 command-npm
 command-spack
+command-task
 command-tlmgr
 command-ghq
 command-poetry
