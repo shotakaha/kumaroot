@@ -68,6 +68,7 @@ maxdepth: 1
 typst-styling
 typst-set
 typst-show
+typst-let
 typst-title
 typst-logo
 ```
