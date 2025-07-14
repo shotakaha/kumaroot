@@ -8,6 +8,13 @@
 
 ### Fix
 
+- **typst/typst-page.md**: ページ設定を追記した
+- **typst/typst-set.md**: Typstの使い方を追記した
+- **geant4/geant4-scoring-accumulable.md**: G4Accumlableを追記した
+- **task**: added poetry export task
+- **command/command-task.md**: Taskを更新した
+- **command-task**: added Taskfile.yml
+- **geant4-sensor-allocator.md**: G4Allocatorを整理した
 - **geant4/geant4-cpp-geant4.md**: Geant4のコーディング規約を整理した
 - **geant4/geant4-physics-opticalphysics.md**: 光学物理の設定を整理した
 - **geant4/geant4-user-physicslist.md**: 物理モデルを整理した
