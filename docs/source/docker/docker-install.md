@@ -1,14 +1,19 @@
 # インストールしたい（`docker`）
 
 ```console
-$ brew install --cask docker
+$ brew install --cask docker-desktop
 ```
 
 `Docker`はLinuxで動作するソフトウェアなので、
-macOS／Windowsの場合は`Docker Desktop`のインストールが必要です。
+macOS／Windowsで使用するには`Docker Desktop`のインストールが必要です。
+macOSでは、Homebrewを使ってインストールできます。
 
-macOSの場合、Homebrewで``Docker Desktop``をインストールできます。
-``docker``という名前で``formula``と``cask``の両方があって紛らわしいですが、``Docker Desktop``は``cask``の方です。
+:::{note}
+
+以前は`docker`という名前で、`formula`（CLIツール）と`cask`（GUIアプリ）の両方が提供されていて、紛らわしかったのですが、
+2025年6月にCaskのほうが`docker-desktop`にリネームされ、区別が明確になりました。
+
+:::
 
 ```console
 // Dockerのバージョンを確認

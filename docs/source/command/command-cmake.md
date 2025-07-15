@@ -46,6 +46,14 @@ CMakeはHomebrewでインストールできます。
 オフラインでドキュメントを確認したい場合は、
 `cmake-docs`も追加します。
 
+:::{note}
+
+以前は`cmake`という名前で、`formula`（CLIツール）と`cask`（GUIアプリ）の両方が提供されていました。
+2025年6月にCaskのほうが`cmake-app`にリネームされました。
+GUIアプリを使いたい場合は`brew install --cask cmake-app`してください。
+
+:::
+
 ## ビルド構成したい
 
 ```console
