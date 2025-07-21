@@ -8,6 +8,7 @@
 
 ### Fix
 
+- **docker/docker-install.md**: フォーミュラ名の変更を追記した
 - **typst/typst-page.md**: ページ設定を追記した
 - **typst/typst-set.md**: Typstの使い方を追記した
 - **geant4/geant4-scoring-accumulable.md**: G4Accumlableを追記した
