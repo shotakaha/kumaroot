@@ -26,3 +26,9 @@ tasks:
     desc: Export requirements.txt
     cmds:
       - poetry export --output requirements.txt
+
+  update:
+    desc: Update dependencies
+    cmds:
+      - poetry update
+      - task: export
