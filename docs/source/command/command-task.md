@@ -158,3 +158,58 @@ $ task setup G4VERSION=v11.2.1
 ```
 
 `vars`で定義した変数は、`task`コマンドの引数として上書きできます。
+
+## サンプルしたい
+
+実際に設定してみて、便利だと思ったタスクを紹介します。
+
+### Sphinxでライブビューしたい（`task livehtml`）
+
+```yaml
+tasks:
+  livehtml:
+    desc: Start Sphinx livehtml
+    dir: docs
+    cmds:
+      - poetry run make livehtml
+```
+
+`sphinx-autobuild`を使ってSphinxドキュメントをライブプレビューする設定です。
+
+通常は、ドキュメントのあるディレクトリ（`docs`）に移動してから`make livehtml`コマンドを実行する必要があります。
+このタスクを設定すると、どのディレクトリからでも`task livehtml`で確認できるようになります。
+
+### Poetryで更新したい（`task update`）
+
+```yaml
+tasks:
+  export:
+    desc: Export requirements.txt
+    cmds:
+      - poetry export --output requirements.txt
+
+  update:
+    desc: Update dependencies
+    cmds:
+      - poetry update
+      - task: export
+```
+
+Pythonパッケージを更新する設定です。
+最近は`pyproject.toml`で依存関係を管理するのが主流ですが、`requirements.txt`が必要な場合もまだまだあります（例：Read the Docs）。
+このタスクを設定すると、パッケージ更新と`requirements.txt`生成を一括で実行できるようになります。
+
+### VS Codeしたい（`task code`）
+
+```yaml
+tasks:
+  code:
+    desc: Start VS Code
+    cmds:
+      - code .
+```
+
+プロジェクトルートでVS Codeを開く設定です。
+`code .`をサブディレクトリで実行すると、親ディレクトリの構造にアクセスできません。
+このタスクの設定すると、プロジェクト内のどこからでも、常にプロジェクトルートで開くことができます。
+地味な設定ですが、かなり便利だと思っています。
