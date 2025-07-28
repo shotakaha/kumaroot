@@ -8,6 +8,8 @@
 
 ### Fix
 
+- **command/command-task.md**: タスクのサンプルを追加した
+- **task**: updated Taskfile
 - **docker/docker-install.md**: フォーミュラ名の変更を追記した
 - **typst/typst-page.md**: ページ設定を追記した
 - **typst/typst-set.md**: Typstの使い方を追記した
