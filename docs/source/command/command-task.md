@@ -1,6 +1,6 @@
 # タスクランナーしたい（`task`）
 
-```cpp
+```console
 $ task タスク名
 ```
 
@@ -162,6 +162,20 @@ $ task setup G4VERSION=v11.2.1
 ## サンプルしたい
 
 実際に設定してみて、便利だと思ったタスクを紹介します。
+
+### タスク一覧したい（`task default`）
+
+```yaml
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list
+    silent: true
+```
+
+いくつかのタスクを設定している場合、
+デフォルト（`default`）のタスクに`task --list`を設定しておくと便利です。
 
 ### Sphinxでライブビューしたい（`task livehtml`）
 

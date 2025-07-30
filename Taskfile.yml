@@ -8,10 +8,10 @@ vars:
 tasks:
   default:
     cmds:
-      - echo "Run task html"
+      - task --list
     silent: true
 
-  html:
+  livehtml:
     desc: Start Sphinx livehtml
     dir: docs
     cmds:
