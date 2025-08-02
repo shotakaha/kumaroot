@@ -1,6 +1,18 @@
-# パッケージ管理したい（``uv``）
+# パッケージ管理したい（`uv`）
 
 ```console
+// 仮想環境でパッケージ管理
+$ uv venv
+$ source .venv/
+$ uv pip install パッケージ名
+
+
+// 補助コマンド
+$ uv tool install パッケージ名
+$ uv tool uninstall パッケージ名
+$ uv tool list
+
+// パッケージ管理
 $ uv init プロジェクト名 --app --package --vcs git
 $ uv python pin バージョン
 $ uv add パッケージ名
@@ -16,21 +28,17 @@ $ uv pip check
 // パッケージ公開
 $ uv build
 $ uv publish
-
-// 補助コマンド
-$ uv tool install パッケージ名
-$ uv tool uninstall パッケージ名
-$ uv tool list
-
-// pip互換モード
-$ uv pip install パッケージ名
-$ uv pip uninstall パッケージ名
-$ uv pip freeze
 ```
 
 `uv`はPython環境の管理とパッケージ管理を一元管理できるツールです。
 `.python-version`でPython環境を管理し、
 `pyproject.toml`と`uv.lock`のファイルを使って依存関係を管理できます。
+
+:::{note}
+
+`uv`は`pip`の代替を目指しているツールです。
+
+:::
 
 ## インストールしたい（`uv`）
 
@@ -56,9 +64,40 @@ uv-tool-uvx 0.6.13 (Homebrew 2025-04-07)
 :::{note}
 
 `pip`や`pipx`、`poetry`でもインストールできます。
-CI/CDで使う場合は`pipx install uv`がよいと思います。
+CI/CDでPythonノベースイメージを使う場合は`pipx install uv`するのがよいと思います。
 
 :::
+
+## 仮想環境したい（`uv venv`）
+
+```console
+$ cd PROJECT_NAME
+$ uv venv
+Using CPython 3.12.7
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate.fish
+
+$ source .venv/bin/activate.fish
+```
+
+`uv venv`コマンドで仮想環境を作成できます。
+デフォルトで`.venv/`ディレクトリに作成されます。
+仮想環境を有効にするには`.venv/bin/`の中にシェルごとに用意されたスクリプトを実行します。
+`fish`の場合は`source .venv/bin/activate.fish`です。
+
+## パッケージ管理したい（`uv pip`）
+
+```console
+$ uv pip install パッケージ名
+$ uv pip uninstall パッケージ名
+$ uv pip freeze
+$ uv pip list --outdated
+
+$ up pip install -e パッケージのパス
+```
+
+`uv pip`は[pipコマンド](./python-pip.md)の互換モードを提供するコマンドで、`pip`より高速に動作します。
+パッケージは仮想環境（`./.venv`）にインストールされます。
 
 ## 新規プロジェクトしたい（`uv init`）
 
@@ -187,40 +226,6 @@ $ uv publish -r testpypi
 
 :::
 
-## pip互換したい（`uv pip`）
-
-```console
-$ uv pip install パッケージ
-```
-
-`uv pip`で[pipコマンド](./python-pip.md)の互換モードを利用できます。
-ロックファイルや仮想環境を作成せずにパッケージをインストールできます。
-一時的なインストールに利用できます。
-
-## 仮想環境したい（`uv venv`）
-
-```console
-$ cd PROJECT_NAME
-$ uv venv
-Using CPython 3.12.7
-Creating virtual environment at: .venv
-Activate with: source .venv/bin/activate.fish
-
-$ source .venv/bin/activate.fish
-```
-
-`venv`コマンドで仮想環境を作成できます。
-仮想環境はデフォルトで`.venv/`ディレクトリに作成されます。
-`source .venv/bin/activate.fish`で仮想環境をアクティベートできます。
-
-:::{note}
-
-`uv init`や`uv add`、`uv sync`を実行するときに`.venv`は自動で作成されます。
-なので、`uv venv`は省略して構いません。
-
-CI/CD環境で`uv pip install`を使う場合は、`uv venv`を事前に書いておくとよさそうです。
-
-:::
 
 ## Pythonを管理したい（`uv python`）
 
