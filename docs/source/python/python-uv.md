@@ -99,6 +99,13 @@ $ up pip install -e パッケージのパス
 `uv pip`は[pipコマンド](./python-pip.md)の互換モードを提供するコマンドで、`pip`より高速に動作します。
 パッケージは仮想環境（`./.venv`）にインストールされます。
 
+:::{note}
+
+`uv pip install`した場合、
+`pyproject.toml`や`uv.lock`には追加されません。
+
+:::
+
 ## 新規プロジェクトしたい（`uv init`）
 
 ```console
@@ -153,7 +160,7 @@ $ uv init PROJECT_NAME
 error: Project is already initialized in `./PROJECT_NAME`
 ```
 
-## パッケージを追加したい（``uv add`` / `uv remove`）
+## パッケージを追加したい（`uv add` / `uv remove`）
 
 ```console
 $ uv add パッケージ名
@@ -164,8 +171,12 @@ $ uv add パッケージ名 --extra パッケージ名
 $ uv add --dev パッケージ名s
 ```
 
-`add`コマンドで`pyproject.toml`に依存パッケージを追加できます。
-`remove`コマンドで削除できます。
+`uv add`コマンドでパッケージを追加します。
+パッケージの情報は
+`pyproject.toml`の`[dependencies]`セクションと
+`uv.lock`に追加されます。
+
+`uv remove`コマンドで削除できます。
 
 ## パッケージをインストールしたい（`uv sync` / `uv lock`）
 
@@ -174,6 +185,7 @@ $ uv lock
 
 $ uv sync
 $ uv sync --all-extras
+$ uv sync --upgrade
 ```
 
 `lock`コマンドでロックファイル（`uv.lock`）を更新できます。
@@ -226,8 +238,7 @@ $ uv publish -r testpypi
 
 :::
 
-
-## Pythonを管理したい（`uv python`）
+## Pythonを管理したい（`uv python pin`）
 
 ```console
 $ uv python pin 3.12
@@ -241,8 +252,7 @@ $ python3 --version
 Python 3.13.0
 ```
 
-`uv`の大きな特徴のひとつはPythonのバージョンも管理できることです。
-`uv python pin`コマンドで、プロジェクトが利用するPythonのバージョンを固定できます。
+`uv python pin`コマンドで、プロジェクトで利用するPythonのバージョンを指定できます。
 ピン留めしたバージョン情報は`.python-version`に保存されます。
 
 :::{note}
