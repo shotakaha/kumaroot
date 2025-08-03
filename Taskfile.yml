@@ -20,7 +20,7 @@ tasks:
   code:
     desc: Start VS Code
     cmds:
-      - code .
+      - poetry run code .
 
   export:
     desc: Export requirements.txt
