@@ -8,6 +8,11 @@
 
 ### Fix
 
+- **task**: タスク（code）を修正した
+- **python/python-uv.md**: uvを追記した
+- **python/python-uv.md**: uvを追記した
+- **notebooks/python-histogram.ipynb**: Pythonでヒストグラムを作成する方法を比較した
+- **command/command-task.md**: タスクランナーの使い方を更新した
 - **command/command-task.md**: タスクのサンプルを追加した
 - **task**: updated Taskfile
 - **docker/docker-install.md**: フォーミュラ名の変更を追記した
