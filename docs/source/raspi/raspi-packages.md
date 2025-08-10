@@ -34,7 +34,7 @@ $ sudo apt install tealdeer
 $ sudo apt install fish
 $ sudo apt install vim
 $ sudo apt install code
-$ sudo apt install python3-poetry
+$ sudo apt install python3-pip python3-venv pipx
 $ sudo apt install openssh-server
 ```
 
