@@ -13,4 +13,6 @@ raspi-python
 raspi-ssh
 raspi-vnc
 raspi-docker
+raspi-nodejs
+raspi-golang
 ```
