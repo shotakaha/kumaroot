@@ -171,3 +171,82 @@ def auto_detect_serial_port(ports: List[Dict[str, Any]]) -> str:
 
 OSごとに使用されているポート名を自動検出できるようにした関数です。
 前述の`find_serial_ports`とセットで利用することを想定しています。
+
+## 複数ポートしたい
+
+```python
+import serial
+import threading
+import time
+
+def read_loop(
+    port_name: str,
+    baudrate: int,
+    stop: threading.Event
+    ) -> None:
+    """Continuously read lines from a serial port and print them."""
+    try:
+        with serial.Serial(port_name, baudrate, timeout=1) as com:
+            print(f"[{port_name}] Opened")
+            while not stop.is_set():
+                raw = com.readline()
+                if not raw:
+                    # Avoid busy loop when data is not available
+                    time.sleep(0.01)
+                    continue
+                line = raw.decode("utf-8", errors="replace").strip()
+                if line:
+                    print(f"[{port_name}] {line}")
+    except serial.SerialException as e:
+        print(f"[{port_name}] Serial error: {e}")
+    finally:
+        print(f"[{port_name}] Closed")
+
+
+def wait_for_interrupt(
+    stop: threading.Event,
+    interval: float = 0.2
+    ) -> None:
+    """Block the main thread until Ctrl-C is pressed."""
+    try:
+        print("Press Ctrl-C to stop.")
+        while not stop.is_set()
+            # Avoid busy loop
+            time.sleep(interval)
+    except KeyboardInterrupt:
+        print("\nStopping all readers...")
+        stop.set()
+
+
+# 停止フラグ
+stop_event = threading.Event()
+
+# デバイスごとのスレッド
+threads = [
+    threading.Thread(target=read_loop, args=("/dev/ttyUSB0", 9600, stop_event)),
+    threading.Thread(target=read_loop, args=("/dev/ttyUSB1", 115200, stop_event))
+]
+
+# スレッドを起動
+for t in threads:
+    t.start()
+
+# 中断（Ctrl-C）待ち
+wait_for_interrupt(stop_event)
+for t in threads:
+    t.join()      # サブスレッドの終了を待つ
+print("All readers stopped.")
+```
+
+`threading`モジュールと組み合わせて、
+複数のデバイスから、同時にシリアル通信でデータを読み出すことができます。
+
+`Ctrl-C`による中断はメインスレッドにしか送られないため、
+サブスレッド（`threading.Thread`）の中では受け取れません。
+そのため、
+`except KeyboardInterrupt`は`read_loop`関数の中ではなく、
+メインスレッドの処理として記述します。
+
+その際に、停止フラグ用の`threading.Event()`を作成しておき、
+`KeyboardInterrupt`を検知したときに有効にすることで、
+サブスレッドを順番かつ安全に停止できます。
