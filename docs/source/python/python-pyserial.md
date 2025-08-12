@@ -172,7 +172,7 @@ def auto_detect_serial_port(ports: List[Dict[str, Any]]) -> str:
 OSごとに使用されているポート名を自動検出できるようにした関数です。
 前述の`find_serial_ports`とセットで利用することを想定しています。
 
-## 複数ポートしたい
+## 複数デバイスしたい（`threading`）
 
 ```python
 import serial
@@ -210,7 +210,7 @@ def wait_for_interrupt(
     """Block the main thread until Ctrl-C is pressed."""
     try:
         print("Press Ctrl-C to stop.")
-        while not stop.is_set()
+        while not stop.is_set():
             # Avoid busy loop
             time.sleep(interval)
     except KeyboardInterrupt:
@@ -218,24 +218,26 @@ def wait_for_interrupt(
         stop.set()
 
 
-# 停止フラグ
-stop_event = threading.Event()
+if __name__ == "__main__":
+    # 停止フラグ
+    stop_event = threading.Event()
 
-# デバイスごとのスレッド
-threads = [
-    threading.Thread(target=read_loop, args=("/dev/ttyUSB0", 9600, stop_event)),
-    threading.Thread(target=read_loop, args=("/dev/ttyUSB1", 115200, stop_event))
-]
+    # デバイスごとのスレッド
+    threads = [
+        threading.Thread(target=read_loop, args=("/dev/ttyUSB0", 9600, stop_event)),
+        threading.Thread(target=read_loop, args=("/dev/ttyUSB1", 115200, stop_event))
+    ]
 
-# スレッドを起動
-for t in threads:
-    t.start()
+    # スレッドを起動
+    for t in threads:
+        t.start()
 
-# 中断（Ctrl-C）待ち
-wait_for_interrupt(stop_event)
-for t in threads:
-    t.join()      # サブスレッドの終了を待つ
-print("All readers stopped.")
+    # 中断（Ctrl-C）待ち
+    wait_for_interrupt(stop_event)
+    for t in threads:
+        t.join()      # サブスレッドの終了を待つ
+
+    print("All readers stopped.")
 ```
 
 `threading`モジュールと組み合わせて、
@@ -250,3 +252,86 @@ print("All readers stopped.")
 その際に、停止フラグ用の`threading.Event()`を作成しておき、
 `KeyboardInterrupt`を検知したときに有効にすることで、
 サブスレッドを順番かつ安全に停止できます。
+
+## 複数デバイスしたい（`concurrent.futures.ThreadPoolExecutor`）
+
+```python
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor, wait
+import serial
+
+def read_loop(
+    port_name: str,
+    baudrate: int,
+    stop: threading.Event
+    ) -> None:
+    """Continuously read lines from a serial port and print them."""
+    try:
+        with serial.Serial(port_name, baudrate, timeout=1) as com:
+            print(f"[{port_name}] Opened")
+            while not stop.is_set():
+                raw = com.readline()
+                if not raw:
+                    time.sleep(0.01)
+                    continue
+                line = raw.decode("utf-8", errors="replace").strip()
+                if line:
+                    print(f"[{port_name}] {line}")
+    except serial.SerialException as e:
+        print(f"[{port_name}] Serial error: {e}")
+    finally:
+        print(f"[{port_name}] Closed")
+
+def wait_for_interrupt(
+    stop: threading.Event,
+    interval: float = 0.2
+    )-> None:
+    """Block the main thread until Ctrl-C is pressed"""
+    try:
+        print("Press Ctrl-C to stop.")
+        while not stop.is_set():
+            time.sleep(interval)
+    except KeyboardInterrupt:
+        print("\nStopping all readers...")
+        stop.set()
+
+if __name__ == "__main__":
+    # 停止フラグ
+    stop_event = threading.Event()
+
+    # ポートの定義
+    ports = [
+        ("/dev/ttyUSB0", 9600),
+        ("/dev/ttyUSB1", 115200),
+    ]
+
+    # スレッドプールで実行
+    with ThreadPoolExecutor(max_workers=len(ports)) as ex:
+        futures = [ex.submit(read_loop, port, baud, stop_event) for port, baud in ports]
+
+        # 状態確認
+        # for f in futures:
+        #   print(f.done(), f.running())
+
+        try:
+            wait_for_interrupt(stop_event)  # Ctrl-C 待ち
+        finally:
+            stop_event.set()
+            wait(futures)
+
+    print("All readers stopped.")
+```
+
+`ThreadPoolExecutor`を使って、複数デバイスの処理を書き換えてみました。
+`read_loop`関数と`wait_for_interrupt`関数の内容は同じです。
+
+スレッドの生成と管理を`ThreadPoolExecutor`に任せ、
+`ex.submit`でジョブを投入しています。
+`submit(fn, /, *args, **kwargs)`というシグネチャを持つため、
+実行したい関数（`fn`）と
+位置引数（`*args`）、
+キーワード引数（`**kwargs`）を
+そのまま指定すればOKです。
+
+変数`futures`には、非同期処理の結果（`concurrent.futures.Future`オブジェクト）が入っており、実行結果や例外を後で取得できるようになっています。
