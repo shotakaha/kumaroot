@@ -33,6 +33,7 @@ python-typer
 python-urllib
 python-webbrowser
 python-pexpect
+python-pyserial
 ```
 
 ## Jupyterしたい
