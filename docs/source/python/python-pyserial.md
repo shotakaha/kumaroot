@@ -22,6 +22,39 @@ except serial.SerialException as e:
 安全にポートを開閉できます。
 接続に失敗したときや、通信中にエラーが起きた場合は、`serial.SerialException`で例外を受け取れます。
 
+:::{seealso}
+
+シリアル通信は、データを1ビットずつ連続的（＝シリアル）に送る通信方式です。
+身近な例としては、パソコンや周辺機器をつなぐUSBがあります。
+
+IoT機器やマイコンでは、よりシンプルなUART通信がよく利用されます。
+UARTでは、1文字（通常8ビッド＝1バイト）を送る際に、
+スタートビット →
+データビット（通常8ビット） →
+パリティビット（任意） →
+ストップビット
+の順で送信します。
+
+送信側は、クロックのリズムに合わせて流しそうめんのように電気信号を送り出します。
+受信側は、この信号を順番どおりに受け取り、1バイト単位のデータに組み立てます。
+そのため、送信側と受信側で通信速度（ボーレート）をそろえることが重要です。
+
+:::
+
+:::{note}
+
+高速なシリアル通信が普及する以前は、パラレル通信が主流でした。
+パラレル通信は、複数ビットを同時に送る通信方式で、短距離であれば非常に高速です。
+一度に大量のデータを送ることができる反面、
+配線ケーブルが多くなる、
+長距離では信号の到着時がずれて誤動作しやすい、
+といった課題があります。
+
+現在では、こうした制約を避けるために
+高速なシリアル通信を複数本並列に使う方式が一般的です。
+
+:::
+
 ## インストールしたい
 
 ```console
@@ -75,6 +108,84 @@ if com.out_waiting > 0:
 
 `out_waiting`でバッファーに残っているデータのバイト数を確認できます。
 つまり、0より大きい場合は未送信データが残っているということです。
+
+## ファイルに出力したい
+
+```python
+import serial
+import csv
+import time
+from pathlib import Path
+from datetime import datetime
+from typing import Optional, List
+
+# 設定
+port_name = "/dev/ttyUSB0"
+baud = 9600
+
+# 保存先
+now =datetime.now()
+ymd = now.strftime("%Y%m%d")
+default_filename = now.strftime("%Y%m%d_%Hh%Mm%Ss.csv")
+csv_path = Path.cwd() / "data" / ymd / default_filename
+
+def read_line(
+    com: serial.Serial,
+    *,
+    encoding: str = "utf-8"
+    ) -> Optional[str]:
+    """Read one decoded line from the serial port."""
+    if com.in_waiting == 0:
+        return None
+    raw = com.readline()
+    if not raw:
+        return None
+    line = raw.decode(encoding, errors="ignore").strip()
+    return line or None
+
+def write_row(
+    writer: csv.writer,
+    line: str
+    ) -> List[str]:
+    """Write a CSV row to the file."""
+    parts = line.split()
+    timestamp = datetime.now().isoformat(timespec="seconds")
+    row = [timestamp] + parts + [len(parts)]
+    writer.writerow(row)
+    return row
+
+try:
+    with serial.Serial(port=port_name, baudrate=baud, timeout=1) as com:
+        print(f"[{com.port}] Opened")
+
+        # 接続が成功したときに保存先ディレクトリを作成
+        csv_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with csv_path.open("a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+
+            print(f"[{com.port}] Listening...")
+            while True:
+                line = read_line(com)
+                if line is None:
+                    time.sleep(0.01)
+                    continue
+
+                row = write_row(writer, line)
+                f.flush()
+                print(f"Added: {row}")
+
+except serial.SerialException as e:
+    print(f"Serial error: {e}")
+except KeyboardInterrupt:
+    print(f"Stopped by user.")
+```
+
+シリアル通信で取得したデータをCSV形式で保存するサンプルコードです。
+ポート接続を確認してから、ファイルを作成する手順になっています。
+
+`read_line`関数では、受信したデータを確認しています。
+`write_row`関数では、データを整形してCSVファイルに出力しています。
 
 ## ポートを確認したい（`serial.tools.list_ports`）
 
