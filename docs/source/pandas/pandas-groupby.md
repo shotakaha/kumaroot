@@ -7,9 +7,15 @@ v = ["集計したいカラム名"]
 data.groupby(g)[v].sum().reset_index()
 ```
 
-``グループ化したいカラム名``（のリスト）と``集計したいカラム名``（のリスト）を指定して、データを集計できます。
-``groupby``で返ってくるオブジェクトは（型名を確認して追記する）型になっています。
-そのままでは扱いづらいので``reset_index``して普通のデータフレームに変換しています。
+`groupby`で、データを指定したカラムの値でグループ化し、それぞれのグループに対して集計できます。
+`グループ化したいカラム名`（のリスト）と
+`集計したいカラム名`（のリスト）を指定して、データフレームを集計します。
+
+`groupby`の結果は`DataFrameGroupBy`型になっているため、
+`.sum()`や`.mean()`などの集計関数を適用する必要があります。
+
+また、集計結果はグループ化したカラムがインデックスになるため、
+`.reset_index()`して通常のデータフレームに変換することが多いです。
 
 ## パーセンテージを計算したい
 
@@ -47,7 +53,7 @@ v = ["pageview", "session"]
 # ユニークビジター数（＝同一IPアドレスの数）
 u = "uvisitor"
 
-# あとのデータ処理のためwカラム名を変更する
+# あとのデータ処理のためカラム名を変更する
 data.rename(columns={"ipaddress": u}, inplace=True)
 
 # 1次集計
@@ -74,6 +80,33 @@ insight = pd.merge(_left, _right, on=group)
 
 このコードを書いたときは、``pd.DataFrame.agg``の引数に辞書を指定できることを認識していませんでした。
 もしかしたら、こんな回りくどいことをせずに計算できるかもしれません。
+
+
+```python
+# グループ化したいカラム
+group: list[str] = ["グループ化したいカラム"]
+
+# あとのデータ処理のためカラム名を変更する
+data.rename(columns={"ipaddress": "uvisitor"}, inplace=True)
+
+# 集計方法を定義
+aggregation_rules = {
+    "pageview": "sum",
+    "session": "sum",
+    "uvisitor": "count",
+}
+
+# 集計
+insight = data.groupby(group).agg(aggregation_rules).reset_index()
+
+# カラム名をわかりやすく
+columns = {
+    "pageview": "total_pageview",
+    "session": "total_session",
+    "uvisitor": "unique_visitor",
+}
+insight.rename(columns=columns, inplace=True)
+```
 
 :::
 
