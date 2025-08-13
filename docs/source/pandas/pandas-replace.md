@@ -1,4 +1,4 @@
-# 空白を削除したい（``pandas.Series.str.replace``）
+# 空白を削除したい（`pandas.Series.str.replace`）
 
 ```python
 data["名前"].str.replace("　", "")  # 全角スペースを削除する

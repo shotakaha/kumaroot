@@ -1,4 +1,4 @@
-# データを抽出したい（``pandas.DataFrame.loc``）
+# ラベルで選択したい（`pandas.DataFrame.loc`）
 
 ```python
 data.loc["行ラベル", "列ラベル"]

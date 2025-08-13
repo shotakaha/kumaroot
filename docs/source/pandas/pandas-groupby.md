@@ -1,4 +1,4 @@
-# グループ集計したい（``pandas.DataFrame.groupby``）
+# グループ化したい（`pandas.DataFrame.groupby`）
 
 ```python
 g = ["グループ化したいカラム名"]

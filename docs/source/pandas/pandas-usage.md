@@ -13,33 +13,58 @@ pandas-install
 pandas-import
 ```
 
-## ファイル操作したい
-
-```{toctree}
----
-maxdepth: 1
----
-pandas-read_csv
-pandas-to_csv
-pandas-to_json
-```
-
-## 前処理したい
+## データフレームを作成したい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
 pandas-dataframe
-pandas-concat
-pandas-merge
-pandas-to_datetime
-pandas-replace
-pandas-rename
-pandas-sort_values
+pandas-from_dict
+pandas-from_list
+pandas-from_numpy
+pandas-from_records
+pandas-copy
 ```
 
-## 抽出したい
+## データを読み込みたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+pandas-read_csv
+```
+
+## データを保存したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+pandas-to_csv
+pandas-to_json
+```
+
+## データを確認したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+pandas-head
+pandas-tail
+pandas-info
+pandas-describe
+pandas-shape
+pandas-columns
+pandas-dtypes
+pandas-isna
+pandas-duplicated
+pandas-unique
+```
+
+## データを選択したい
 
 ```{toctree}
 ---
@@ -47,9 +72,38 @@ maxdepth: 1
 ---
 pandas-loc
 pandas-query
+pandas-sample
+```
+
+## データを整形したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+pandas-replace
+pandas-astype
+pandas-categorical
+pandas-to_datetime
+pandas-rename
 pandas-drop
-pandas-isna
-pandas-duplicated
+pandas-dropna
+pandas-fillna
+pandas-drop_duplicates
+```
+
+## データを変換したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+pandas-groupby
+pandas-pivot_table
+pandas-merge
+pandas-concat
+pandas-apply
+pandas-sort_values
 ```
 
 ## 集計したい
@@ -58,16 +112,23 @@ pandas-duplicated
 ---
 maxdepth: 1
 ---
-pandas-astype
-pandas-categorical
-pandas-unique
-pandas-groupby
-pandas-crosstab
+pansas-sum
 pandas-mean
 pandas-var
 pandas-std
 pandas-skew
 pandas-kurt
+pandas-count
+pandas-value_counts
+pandas-crosstab
+```
+
+## 度数分布したい
+
+```{toctree}
+---
+maxdepth: 1
+---
 pandas-cut
 ```
 

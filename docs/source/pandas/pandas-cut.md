@@ -1,4 +1,4 @@
-# 度数分布したい（``np.histogram``）
+# 度数分布したい（`np.histogram`）
 
 ```python
 freq, rank = np.histogram(データ, bins=ビン数)

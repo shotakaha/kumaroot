@@ -1,4 +1,4 @@
-# pandas.unique
+# ユニーク値を確認したい（`pandas.DataFrame.unique`）
 
 ## リファレンス
 

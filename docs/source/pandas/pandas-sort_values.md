@@ -1,4 +1,4 @@
-# データをソートしたい（``pandas.DataFrame.sort_values``）
+# ソートしたい（`pandas.DataFrame.sort_values`）
 
 ```python
 data.sort_values(by="カラム名")

@@ -1,4 +1,4 @@
-# データをマージしたい（``pandas.merge``）
+# 結合したい（``pandas.merge``）
 
 ```python
 left = pd.read_csv("測定データ")

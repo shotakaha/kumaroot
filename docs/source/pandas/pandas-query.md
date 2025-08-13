@@ -1,4 +1,4 @@
-# データを抽出したい（``pandas.DataFrame.query``）
+# 条件で抽出したい（`pandas.DataFrame.query`）
 
 ```python
 data.query("カラム名 > 値")

@@ -1,4 +1,4 @@
-# 型を変換したい（``pandas.DataFrame.astype``）
+# データ型を変換したい（`pandas.DataFrame.astype`）
 
 ```python
 data["カラム名"] = data["カラム名"].astype("型名")
