@@ -1,4 +1,4 @@
-# 散布図したい（``hvplot.scatter``）
+# 散布図したい（`hvplot.scatter`）
 
 ```python
 import hvplot.pandas
@@ -8,6 +8,10 @@ data.hvplot.scatter(
     )
 ```
 
+`hvplot.scatter`で散布図を作成できます。
+X軸とY軸に散布図に利用するカラム名を指定します。
+Y軸は複数のカラム名をリストで指定できます。
+
 :::{seealso}
 
 - [](../altair/altair-scatter.md)
@@ -15,6 +19,12 @@ data.hvplot.scatter(
 - [](../plotly/plotly-scatter.md)
 
 :::
+
+## マーカーしたい
+
+```python
+data.hvplot.scatter(x=..., y=..., marker="circle", s=50)
+```
 
 ## 重ね書きしたい
 
@@ -32,3 +42,4 @@ data[names].hvplot.scatter(x="X軸", grid=True)
 ## リファレンス
 
 - [Scatter - hvplot.holoviz.org](https://hvplot.holoviz.org/reference/tabular/scatter.html)
+- [hvPlot.scatter - hvplot.holoviz.org](https://hvplot.holoviz.org/en/docs/latest/ref/api/manual/hvplot.hvPlot.scatter.html)
