@@ -36,6 +36,7 @@ command-df
 command-du
 command-crontab
 command-jq
+command-screen
 ```
 
 ## エディターしたい
