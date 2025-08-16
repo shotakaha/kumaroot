@@ -50,6 +50,7 @@ command-emacs
 command-helix
 command-vim
 command-zed
+command-claude
 ```
 
 ## 環境構築したい
