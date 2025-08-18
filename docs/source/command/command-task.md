@@ -227,3 +227,35 @@ tasks:
 `code .`をサブディレクトリで実行すると、親ディレクトリの構造にアクセスできません。
 このタスクの設定すると、プロジェクト内のどこからでも、常にプロジェクトルートで開くことができます。
 地味な設定ですが、かなり便利だと思っています。
+
+### リポジトリを開きたい（`task view`）
+
+```yml
+vars:
+  GITLAB_REPOS: "https://gitlab.com/GROUP/PROJECT/"
+  GITLAB_PAGES: "https://GROUP.gitlab.io/PROJECT/"
+
+tasks:
+  view:
+    desc: Open repository
+    cmds:
+      - open {{.GITLAB_REPOS}}
+
+  view-issues:
+    desc: Open GitLab issues
+    cmds:
+      - open {{.GITLAB_REPOS}}/-/issues/
+
+  view-mr:
+    desc: Open GitLab Merge Requests
+    cmds:
+      - open {{.GITLAB_REPOS}}/-/merge_requests/
+
+  view-pages:
+    desc: Open GitLab Pages
+    cmds:
+      - open {{.GITLAB_PAGES}}
+```
+
+GitLabリポジトリをブラウザで開く設定です。
+リポジトリ本体、イシューやMRの一覧を設定しておくと便利です。
