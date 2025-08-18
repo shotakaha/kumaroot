@@ -4,10 +4,23 @@
 
 ### Feat
 
+- **python/python-pyserial.md**: PySerialの使い方を追加した
 - **numpy/numpy-ndarray.md**: NumPyを追加した
 
 ### Fix
 
+- **command/command-claude.md**: Claudeを追記した
+- **command/command-claude.md**: Claude Codeを追加した
+- **command/command-screen.md**: screenを追加した
+- **hvplot/hvplot-scatter.md**: hvplotの散布図を追記した
+- **hvplot/hvplot-options.md**: hvplotのオプション設定を追記した
+- **pandas/pandas-groupby.md**: groupbyを整理した
+- **pandas**: Pandasの使い方の分類を整理した
+- **python/python-pyserial.md**: ファイルに保存する方法を追記した
+- **python/python-pyserial.md**: 複数デバイス処理を追記した
+- **python/python-pyserial.md**: 複数デバイスのシリアル通信を追加した
+- **raspi/raspi-usage.md**: GoとNode環境のセットアップを追加した
+- **raspi/raspi-python.md**: Python環境のセットアップを追加した
 - **task**: タスク（code）を修正した
 - **python/python-uv.md**: uvを追記した
 - **python/python-uv.md**: uvを追記した
