@@ -45,14 +45,37 @@ GitLabホスト、使用するGitプロトコル（SSH/HTTPS/HTTP）、
 
 ```console
 // イシューを確認
-$ glab issue list
-$ glab issue view --web イシュー番号
+$ glab issue list         # オープンなイシュー覧
+$ glab issue list --all   # すべてのイシュー一覧（open/closed）
+$ glab issue list --search "SEARCH_WARD"     # キーワード検索
+$ glab issue list --label "bug,enhancement"  # ラベル検索
+
+// イシューを表示
+$ glab issue view <issue_id>                # イシューの詳細
+$ glab issue view <issue_id> --web          # ブラウザで開く
+$ glab issue note <issue_id> --message "comment"    # コメントを追加
+$ glab issue note <issue_id>                # エディタを開く
 
 // イシューを作成
-$ glab issue create --web --title タイトル
+$ glab issue create    # イシューを作成（interactive）
+$ glab issue create --title "title" --description "desc"
+
+// イシューを更新
+$ glab issue update <id> --title "new title"
+$ glab issue update <id> --description = "new desc"
+$ glab issue update <id> --assignee @username
+$ glab issue update <id> --label "bug,high"
+
+// イシューの状態管理
+$ glab issue close <id>
+$ glab issue reopen <id>
+$ glab issue delete <id>
+$ glab issue subscribe <id>
+$ glab issue unsubscribe <id>
 ```
 
-`glab issue`でイシューに関する操作ができます。
+`glab issue`でイシューを操作できます。
+さらにサブコマンドを持ち、
 `list`でイシューの一覧を取得し、
 `view 番号`でイシューの詳細を確認できます。
 `create`で新しいイシューを作成できます。
@@ -69,14 +92,45 @@ $ glab issue create --web --title タイトル
 ```console
 // MRを確認
 $ glab mr list
-$ glab mr view 番号 or ブランチ名
+$ glab mr list --all
 
+// MRの詳細
+$ glab mr view <mr_id>
+$ glab mr view <mr_id> --web
+$ glab mr note <mr_id> --message "comment"
+
+// MRを作成
+$ glab mr create
+$ glab mr create --title "feat: add feature" --description "Close #123"
+$ glab mr create --draft
+$ glab mr create --target-branch develop
+
+// MRの状態管理
+$ glab mr approve <mr_id>
+$ glab mr merge <mr_id>
+$ glab close <mr_id>
+$ glab reopen <mr_id>
+$ glab revoke <mr_id>
+$ glab delete <mr_id>
+$ glab subscribe <mr_id>
+$ glab unsubscribe <mr_id>
+```
+
+`glab mr`コマンドでマージリクエスト（MR）を操作できます。
+
+`glab mr`でマージリクエスト（MR）を操作ができます。
+さらにサブコマンドを持ち、
+`list`でMRの一覧を取得し、
+`view 番号`でMRの詳細を確認できます。
+`create`で新しいMRを作成できます。
+
+```console
 // 作業ブランチに移動
 $ git switch ブランチ名
 $ glab mr create --draft --fill
 ```
 
-`glab mr`でマージリクエスト（MR）を操作できます。
+
 
 `git switch`で作業ブランチに移動し、`glab mr create`で新しいMRを作成できます。
 `--draft`オプションでMRドラフトを作成できます。
@@ -91,16 +145,6 @@ $ git push  # or git push -u origin ブランチ名
 ```
 
 ローカルにあるリポジトリの操作は、いつも通り`git`を使います。
-
-## マージしたい
-
-```console
-// MRを承認（オプション）
-$ glab mr approve MR番号
-
-// MRをマージ
-$ glab mr merge MR番号
-```
 
 ## パイプラインしたい（`glab ci`）
 
