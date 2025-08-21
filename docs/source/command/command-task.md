@@ -13,7 +13,26 @@ YAML形式の設定ファイル（`Taskfile.yml`）により、
 
 ```console
 $ brew install go-task
+```
 
+Homebrewで`go-task`フォーミュラをインストールします。
+
+:::{note}
+
+`task`というフォーミュラがありますが、まったく別物です。
+
+:::
+
+```console
+$ pip install go-task-bin
+```
+
+`task`はGo言語で書かれたツールですが、
+`go-task-bin`というPythonパッケージでも提供されています。
+
+## 初期化したい（`task --init`）
+
+```console
 // 初期化
 $ task --init
 Taskfile created: Taskfile.yml
@@ -23,17 +42,11 @@ $ task
 Hello, World!
 ```
 
-Homebrewで`go-task`フォーミュラをインストールします。
-任意のディレクトリで`task --init`を実行して、`Taskfile.yml`のひな形を生成します。
+`task --init`で、`Taskfile.yml`のひな形を生成します。
+タスクランナーを導入したいディレクトリで実行してください。
+
 ひな型はデフォルトで「Hello, World」を表示するようになっているので、
 そのまま`task`コマンドを実行して動作確認できます。
-
-:::{note}
-
-TODO管理用のCLIツールにも同じ名前（`task`）のものがあります。
-`task`フォーミュラというフォームラは
-
-:::
 
 ## 設定ファイルしたい（`Taskfile.yml`）
 
@@ -42,24 +55,33 @@ TODO管理用のCLIツールにも同じ名前（`task`）のものがありま�
 
 version: '3'
 
+# グローバルに共有する変数
 vars:
   GREETING: Hello, World!
 
+# タスクの定義
 tasks:
   default:
     cmds:
       - echo "{{.GREETING}}"
     silent: true
+
+  タスク名:
+    desc: タスクの説明
+    dir: 実行するパス
+    cmds:
+      - コマンド1
+      - コマンド2
 ```
 
-タスクの設定は`Taskfile.yml`に記述します。
-`Taskfile.yml`は **プロジェクトルート** に配置します。
-まず`task --init`でひな形を生成し、編集する方法がオススメです。
+`Taskfile.yml`でタスクを設定できます。
+`Taskfile.yml`は **プロジェクトルート** に配置してください。
+前述したように`task --init`でひな形を生成し、編集する方法がオススメです。
 
 `vars`セクションで変数を定義できます。
 `tasks`セクションに、タスク名とその実行内容を定義します。
 
-## タスクしたい（`tasks` / `cmds` / `desc`）
+## タスクしたい（`cmds` / `desc`）
 
 ```yaml
 tasks:
@@ -68,22 +90,34 @@ tasks:
     cmds:
       - 実行コマンド1
       - 実行コマンド2
-
-  configure:
-    desc: Configure with CMake
-    cmds:
-      - cmake -S source -B build
-
-  build:
-    desc: Build with CMake
-    cmds:
-      - cmake --build build --parallel
 ```
 
 `tasks`セクションでは、1つ以上のタスクを定義できます。
 それぞれのタスクには、`タスク名`と`cmds`が必須です。
 `cmds`はリスト形式で複数のコマンドを順番に指定できます。
 `desc`で簡単な説明をつけるとよいです。
+
+```yaml
+tasks:
+  docs:
+    desc: Serve documentation locally
+    cmds:
+      - uv run mkdocs serve -o
+
+  docs:build:
+    desc: Build documentation as static HTML
+    cmds:
+      - uv run mkdocs build
+```
+
+`タスク名`はネストできます。
+タスクの目的ごとにカテゴリー化すると見通しがよくなります。
+
+:::{note}
+
+`task --list` で期待通りの順番に並ばないのは謎です。
+
+:::
 
 ## ディレクトリを指定したい（`dir`）
 
@@ -96,8 +130,8 @@ tasks:
       - poetry run make livehtml
 ```
 
-`dir`オプションを使うと、指定したディレクトリ内でコマンドを実行できます。
-パスは、プロジェクトルートからの相対パスを指定できます。
+`dir`オプションを使うと、コマンドを実行するディレクトリを設定できます。
+パスはプロジェクトルートからの相対パスで指定できます。
 ディレクトリが存在しない場合はエラーになります。
 
 ## 条件分岐したい（`status` / `preconditions`）
@@ -163,35 +197,18 @@ $ task setup G4VERSION=v11.2.1
 
 実際に設定してみて、便利だと思ったタスクを紹介します。
 
-### タスク一覧したい（`task default`）
-
-```yaml
-tasks:
-  default:
-    desc: Show available tasks
-    cmds:
-      - task --list
-    silent: true
+```{toctree}
+---
+maxdepth: 1
+---
+command-task-default
+command-task-doc
+command-task-test
+command-task-lint
+command-task-version
+command-task-release
+command-task-publish
 ```
-
-いくつかのタスクを設定している場合、
-デフォルト（`default`）のタスクに`task --list`を設定しておくと便利です。
-
-### Sphinxでライブビューしたい（`task livehtml`）
-
-```yaml
-tasks:
-  livehtml:
-    desc: Start Sphinx livehtml
-    dir: docs
-    cmds:
-      - poetry run make livehtml
-```
-
-`sphinx-autobuild`を使ってSphinxドキュメントをライブプレビューする設定です。
-
-通常は、ドキュメントのあるディレクトリ（`docs`）に移動してから`make livehtml`コマンドを実行する必要があります。
-このタスクを設定すると、どのディレクトリからでも`task livehtml`で確認できるようになります。
 
 ### Poetryで更新したい（`task update`）
 
