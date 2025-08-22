@@ -1,6 +1,9 @@
 # GitLabしたい（`glab`）
 
 ```console
+// ログイン
+$ glab auth login
+
 // イシューの確認
 $ glab issue list
 $ glab issue view issue番号
@@ -35,11 +38,75 @@ $ glab auth logout
 $ glab auth status
 ```
 
-はじめて使う場合は、認証が必要です。
-GitLabホスト、使用するGitプロトコル（SSH/HTTPS/HTTP）、
-認証方法の選択（ウェブブラウザ／PAT）などをターミナル上で対話的に選択します。
+`glab`をはじめて使う場合は、認証が必要です。
+認証には、ウェブ認証とトークン認証があります。
 
-設定した内容は`~/.config/glab-cli/config.yml`に保存されます。
+ちょっと使いたい場合はウェブ認証、
+しっかり使いたい場合はトークン認証で設定するとよいです。
+
+:::{note}
+
+トークン認証にはGitLab上でPAT（Personal Access Token）を作成する必要があります。
+トークンはページ上に1度しか表示されません。
+もし、コピーに失敗した場合は、そのトークンを削除して、新しいトークンを作成してください。
+
+トークンは「目的ごと」に個別に作成することが推奨されています。
+何に使われているトークンか後から思い出しやすくするため、
+トークン名は`用途-機器名-作成日`のような規則で命名するとよいです。
+
+:::
+
+### ウェブ認証したい
+
+```console
+$ glab auth login --hostname gitlab.com
+- Signing into gitlab.com
+? How would you like to sign in?  # [Web | Token]
+  // Webを選択 -> ブラウザで承認
+? What domains ...(省略)...? # [gitlab.com,gitlab.com:443,registry.gitlab.com]
+  // そのまま空欄でEnter
+? Choose default protocol: # [SSH | HTTPS | HTTP]
+  // SSHを選択
+
+✓ Configured Git protocol.
+✓ Configured API protocol.
+✓ Logged in as <username>
+✓ Configuration saved to /Users/<username>/.config/glab-cli
+```
+
+ウェブ認証を設定したときのログです。
+`--hostname gitlab.com`で、GitLabホストを`gitlab.com`に指定して、`login`コマンドを実行しました。
+プロンプトが表示されたので、そのまま対話的に選択して進めました。
+
+認証方法で`Web`を選択しました。
+ブラウザが起動したので、画面にしたがって承認しました。
+ドメイン選択では、そのままEnterを押しました。
+デフォルト値（`[giblab.com,gitlab.com:443,registory.gitlab.com]`）が設定されました。
+Gitプロトコルは`SSH`を選択しました。
+設定した内容が`~/.config/glab-cli/config.yml`に保存されました。
+
+:::{note}
+
+GitLabプロトコルは`SSH`もしくは`HTTPS`から選択します。
+`HTTP`は選択してはいけません。
+
+また、`SSH`を選択する場合、あらかじめGitLabにSSH鍵を登録しておく必要があります。
+ちょっと使いたい場合は`HTTPS`でも構いません。
+
+:::
+
+### トークン認証したい
+
+```console
+$ glab auth login --hostname gitlab.com
+- Signing into gitlab.com
+? How would you like to sign in? [Web | Token]
+  // Tokenを選択 -> PATを入力する流れになるはず
+```
+
+（あとで実行した結果を載せる）
+（トークンはほぼ同時にGitLab上で作成して待機しておくとよさそう）
+
 
 ## イシューしたい（`glab issue`）
 
@@ -154,3 +221,66 @@ $ glab ci view --web
 ```
 
 `glab ci`でパイプラインを操作できます。
+
+## ワークフロー
+
+```console
+# 新issueを起票（「なぜやるのか」→「なにをやるのか」を明確にする）
+$ glab issue create \
+  --title "Add feature" \
+  --description "## 概要 ...\n\n## 具体的 ..." \
+  --label "Type::Feature" \
+  --label "Priority::High"
+
+# 既存のissueを確認
+$ glab issue list --assignee <username>
+$ glab issue view <id>
+
+# worktreeを作成
+$ git fetch origin
+$ git worktree add -B <branch-name> worktrees/<branch-name> origin/main
+$ cd worktrees/<branch-name>
+(worktrees/branch-name)$ git push -u origin <branch-name>
+
+# コーディング
+# Make changes
+(worktrees/branch-name)$ git add --all
+(worktrees/branch-name)$ git commit -m "feat: summary (refs #<id>)"
+(worktrees/branch-name)$ git push
+
+# パイプラインの確認
+(worktrees/branch-name)$ glab ci status
+(worktrees/branch-name)$ glab pipeline list
+
+# マージリクエスト（下書き）を作成
+# パイプラインが成功したら、MRの下書きを作成
+(worktrees/branch-name)$ glab mr create \
+  --source-branch <branch-name> \
+  --target-branch main \
+  --title "feat: title"
+  --fill \
+  --draft \
+  --assignee @me
+(worktrees/branch-name)$ glab mr view --web
+
+# レビュー対応
+# Fix feedbacks
+(worktrees/branch-name)$ git add -A
+(worktrees/branch-name)$ git commit -m "fix: address review comments (refs #id)"
+(worktrees/branch-name)$ git push
+
+# マージリクエストを更新
+$ glab mr update <id> \
+  --description "## 概要...\n\n## 変更点 ...\n\nCloses #<id>"
+  --ready
+$ glab mr view <id>
+
+# マージ
+$ glab mr merge --delete-source-branch
+
+# 片付け
+$ git worktree remove worktrees/<branch-name>
+$ git fetch --prune
+$ git worktrees prune
+$ git branch -d <branch-name>
+```
