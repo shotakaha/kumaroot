@@ -100,12 +100,34 @@ GitLabプロトコルは`SSH`もしくは`HTTPS`から選択します。
 ```console
 $ glab auth login --hostname gitlab.com
 - Signing into gitlab.com
-? How would you like to sign in? [Web | Token]
-  // Tokenを選択 -> PATを入力する流れになるはず
+? How would you like to sign in? # [Token | Web]
+  // Tokenを選択
+? What domains does this host use for the container registry and image dependency proxy? # [gitlab.com,gitlab.com:443,registry.gitlab.com]
+  // そのまま空欄でEnter
+? Paste your authentication token: ************************** // GitLabで生成したPATをペースト
+? Choose default Git protocol: # [SSH | HTTPS | HTTP]
+  // SSHを選択
+
+✓ Configured Git protocol.
+✓ Configured API protocol.
+✓ Logged in as <username>
+✓ Configuration saved to /Users/<username>/.config/glab-cli/config.yml
 ```
 
 （あとで実行した結果を載せる）
 （トークンはほぼ同時にGitLab上で作成して待機しておくとよさそう）
+
+:::{note}
+
+トークンには`api`と`write_repository`権限を付与する必要があります。
+設定プロンプトで表示される`Tip`のURLをコピペしてアクセスすると、2つの権限にチェックの入った状態のページが表示されます。
+
+```console
+Tip: generate a personal access token at https://gitlab.com/-/user_settings/personal_access_tokens?scopes=api,write_repository.
+The minimum required scopes are 'api' and 'write_repository'.
+```
+
+:::
 
 
 ## イシューしたい（`glab issue`）
