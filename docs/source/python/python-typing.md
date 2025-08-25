@@ -1,4 +1,4 @@
-# 型ヒントしたい（``typing``）
+# 型ヒントしたい（`typing`）
 
 ```python
 # 変数名: 型ヒント = 値
@@ -11,6 +11,13 @@ holiday: tuple[int, int, int, str] = (2023, 5, 5, "こどもの日")
 Python3.5で追加された標準モジュールです。
 型ヒントがあると、VS CodeなどのIDEで編集中に型チェックしてくれるようになります。
 入力時に補完候補を表示してくれたり、値がマッチしていない部分をハイライトしてくれたりします。
+
+:::{note}
+
+Python3.12+であれば`typing`モジュールでOK。
+3.8から3.11もサポートするならば`typing_extensions`（後方互換性＋新機能テスト）も併用すると安全です。
+
+:::
 
 :::{note}
 
@@ -44,16 +51,37 @@ Python3.9以降であれば、ビルトインされている型で型ヒント�
 
 | 型 | 内容 |
 |---|---|
-| ``int`` | 整数値 |
-| ``float`` | 浮動小数点 |
-| ``bool`` | 真偽値 |
-| ``str`` | 文字列 |
-| ``bytes`` | 8ビット文字列 |
-| ``object`` | 任意のオブジェクト |
-| ``list[str]`` | （文字列の）リスト |
-| ``tuple[int, int]`` | 2要素のタプル |
-| ``tuple[int, ...]`` | 任意の要素数のタプル |
-| ``dict[str, int]`` | ``{文字列: 整数値}``の辞書 |
+| `int` | 整数値 |
+| `float` | 浮動小数点 |
+| `bool` | 真偽値 |
+| `str` | 文字列 |
+| `bytes` | 8ビット文字列 |
+| `object` | 任意のオブジェクト |
+| `list[str]` | （文字列の）リスト |
+| `tuple[int, int]` | 固定長のタプル |
+| `tuple[int, ...]` | 可変長のタプル |
+| `dict[str, int]` | `{文字列: 整数値}`の辞書 |
+
+## `Any`したい（`typing.Any`）
+
+```python
+from typing import Any
+```
+
+`typing.Any`は「なんでもOK」な特殊型です。
+プロトタイピングでとりあえず動かしたいときには便利ですが、
+型チェックが無効になるため、長期的に運用する場合は乱用禁止です。
+
+:::{note}
+
+`pyright`には独自拡張の`Unknown`型があります。
+`Unknown`も任意の型を表しますが、
+これは`Any`の「なんでもあり」と違い、
+「ここは型がわからない」という安全側のコンセプトです。
+
+`pyright`はTypeScriptをベースにしているためです。
+
+:::
 
 ## 追加の型を使いたい
 
@@ -65,14 +93,13 @@ from typing import Any, Iterable, Sequence, Mapping
 
 | 型 | 内容 |
 |---|---|
-| ``Any`` | なんでも |
 | ``Iterable[int]`` | 整数値の``list-like``な集まり |
 | ``Sequence[int]`` | 読み込み専用の``list-like``な集まり |
 | ``Mapping[str, int]`` | ``dict-like``な集まり |
 
 [mypyのチートシート](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)がとても参考になります。
 
-## 複数の型ヒントしたい
+## 複数の型ヒントしたい（`typing.Union`）
 
 ```python
 # Python3.9まで
@@ -87,7 +114,7 @@ x: list[int|str] = [3, 5, "test"]
 ``typing.Union``を使って、複数の型ヒントを組み合わせて指定できます。
 Python3.10以降ではOR記号（ ``|`` ） を使ってより簡単に表現できるようになりました。
 
-## ``None``したい
+## `None`したい（`typing.Optional`）
 
 ```python
 # Python3.9まで
@@ -98,8 +125,10 @@ x: Optional[str]
 x: str | None
 ```
 
-``None``を含む場合は``typing.Optional``を使います。
+`None`を含む場合は`typing.Optional`を使います。
+`Optional[X]`は`Union[X, None]`のシンタックスシュガーです。
 Python3.10以降ではOR記号（ ``|`` ） を使って直感的に表現できるようになりました。
+
 
 ## Duck Typeしたい
 
