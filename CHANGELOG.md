@@ -9,6 +9,12 @@
 
 ### Fix
 
+- **command/command-glab.md**: glabのトークン認証を追記した
+- **command/command-glab.md**: GitLabワークフローを追加した
+- **command-task**: タスクのサンプルを追加した
+- **command/command-task.md**: GitLab用のタスクを追加した
+- **command/command-glab.md**: glabコマンドを整理した
+- **command/command-claude.md**: vimモード切り替えを追加した
 - **command/command-claude.md**: Claudeを追記した
 - **command/command-claude.md**: Claude Codeを追加した
 - **command/command-screen.md**: screenを追加した
