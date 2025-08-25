@@ -27,6 +27,11 @@ tasks:
     cmds:
       - poetry export --output requirements.txt
 
+  outdated:
+    desc: Show outdated packages
+    cmds:
+      - poetry show --outdated
+
   update:
     desc: Update dependencies
     cmds:
