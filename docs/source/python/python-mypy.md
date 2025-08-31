@@ -1,11 +1,16 @@
 # 型チェックしたい（`mypy`）
 
 ```console
-$ mypy --version
-mypy 1.11.2 (compiled: yes)
+$ mypy ファイル名
+$ mypy ディレクトリ名
 
-$ mypy --ignore-missing-imports ファイル名 or ディレクトリ名
+# 多数のオプションあり
+$ mypy --ignore-missing-imports ファイル名
 ```
+
+`mypy`で、ファイル（やディレクトリ内のファイル）に対して、静的型チェックできます。
+厳密な型チェックを通過させるのはとても難しいので、
+オプションや設定ファイルで調整して使うのが一般的です。
 
 ## インストールしたい（`mypy`）
 
@@ -25,6 +30,43 @@ $ poetry add mypy --group test
 
 ```console
 $ uv tool install mypy
+$ mypy --version
+mypy 1.17.1 (compiled: yes)
+```
+
+## 設定ファイルしたい（`pyproject.toml`）
+
+`mypy`の設定は`pyproject.toml`の`[mypy]`セクションで変更できます。
+
+:::{note}
+
+`mypy.ini`、`.mypy.ini`、`setup.cfg`も利用できますが、
+最近は`pyproject.toml`にまとめるのが主流です。
+
+:::
+
+## 厳密チェックしたい（`mypy --strict`）
+
+```console
+$ mypy --strict ファイル名
+
+$ mypy
+  --warn-unused-configs \
+  --disallow-any-generics \
+  --warn-unused-configs \
+  --disallow-any-generics \
+  --disallow-subclassing-any \
+  --disallow-untyped-calls \
+  --disallow-untyped-defs \
+  --disallow-incomplete-defs \
+  --check-untyped-defs \
+  --disallow-untyped-decorators \
+  --warn-redundant-casts \
+  --warn-unused-
+    ignores, --warn-return-any, --no-implicit-reexport, --strict-equality,
+--strict-bytes, --extra-checks
+
+
 ```
 
 ## `py.typed`したい
