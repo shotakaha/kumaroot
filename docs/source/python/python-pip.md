@@ -1,4 +1,4 @@
-# パッケージ管理したい（``pip``）
+# パッケージ管理したい（`pip`）
 
 ```console
 $ pip3 install パッケージ名
@@ -27,7 +27,41 @@ Python2系から3系の移行期には、`pip`（＝2系）と`pip3`（＝3系�
 
 :::
 
-## パッケージを更新したい（`--upgrade`）
+## パッケージをインストールしたい（`pip install`）
+
+```console
+// 仮想環境を作成
+$ python3 -m venv .venv
+
+// 仮想環境を有効化
+$ source .venv/bin/acitivate
+
+// PyPIリポジトリにあるパッケージをインストール
+(.venv) $ pip install パッケージ名
+
+// 仮想環境を無効化する
+(.venv) $ deactivate
+```
+
+`pip install`でPyPIで公開されているパッケージをインストールできます。
+ただし、最近のPython環境では、グローバル環境に直接インストールするのは非推奨で、ブロックされることがあります。
+
+そのため、[venvパッケージ](./python-venv.md)で仮想環境を作成して、その中にインストールするのが標準的な方法です。
+仮想環境にインストールしたパッケージはシステムに影響しないため、
+複数のプロジェクトで異なる依存関係を安全に管理できます。
+
+:::{note}
+
+[PEP668](https://peps.python.org/pep-0668/)では、
+デフォルトでグローバル環境に `pip install` せずに、
+代わりに仮想環境を使うように案内すべきことが明示されています。
+
+仮想環境は `.venv`という名前のディレクトリに作成するのが一般的です。
+VS Codeでも自動検出してくれます。
+
+:::
+
+## パッケージを更新したい（`pip install --upgrade`）
 
 ```console
 $ pip3 install -U パッケージ名
@@ -71,6 +105,37 @@ $ pip3 freeze > requirements.txt
 
 :::
 
+## TestPyPIを使いたい（`--index-url` / `--extra-index-url`）
+
+```console
+$ pip install --index-url https://test.pypi.org/simple パッケージ名==バージョン
+```
+
+`--index-url`でパッケージ取得先URLを変更できます。
+`https://test.pypi.org/simple`に変更すると、TestPyPIにあるパッケージをインストールできるようになります。
+ただし、依存パッケージもすべてTestPyPIにないと失敗します。
+
+```console
+$ pip install --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple/ パッケージ名==バージョン
+```
+
+`--extra-index-url`で取得先URLを追加できます。
+`https://pypi.org/simple/`でPyPIを追加できます。
+TestPyPIにない依存パッケージは、PyPIからインストールできるようになります。
+
+```console
+$ mkdir -p /tmp/test-packages/
+$ cd /tmp/test-packages/
+$ python3 -m venv test-env
+$ source test-env/bin/activate
+(.venv) $ pip install --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple/ パッケージ名==バージョン
+(.venv) $ パッケージ --help
+```
+
+TestPyPIに公開した自作パッケージの動作確認をするときの手順です。
+`/tmp/`の中に作業ディレクトリを作成し、仮想環境を作ってインストールテストしています。
+この手順はタスク化しておくと便利です。
+
 ## Pythonの実行環境を指定したい
 
 ```console
@@ -107,34 +172,6 @@ HomebrewでPythonをインストールして更新していると、
 気づかないうちに複数のPythonバージョンが溜まっていることがあります。
 パッケージがうまくインストールできなかったり、`import`できなかったりする場合は、
 自分がどのバージョンを使っているのか、確認するとよいです。
-
-:::
-
-## 仮想環境と組み合わせる
-
-```console
-// 仮想環境を作成する
-$ python3 -m venv .venv
-
-// 仮想環境を有効にする
-$ source .venv/bin/activate
-
-// パッケージを追加する
-(.venv) $ pip install -r requirements.txt
-
-// 仮想環境を無効化する
-(.venv) $ deactivate
-```
-
-[venvパッケージ](./python-venv.md)と組み合わせて、仮想環境の中で使用できます。
-仮想環境を有効化すると、`pip`などのコマンドはすべて`.venv`の中に限定されます。
-インストールしたパッケージはグローバル（＝システム）に影響しないため、
-複数のプロジェクトで異なる依存関係を安全に管理できます。
-
-:::{note}
-
-仮想環境は`.venv`というディレクトリに作成するのが一般的です。
-VS Codeでも自動検出してくれます。
 
 :::
 
