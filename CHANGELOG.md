@@ -9,6 +9,12 @@
 
 ### Fix
 
+- **python/python-pip.md**: pip を追記した
+- **command/command-zed.md**: Zedを追加した
+- **python/python-mypy.md**: mypyの使い方を追記した
+- **python/python-typing.md**: typingを追記した
+- **python/python-typing.md**: typingを追記した
+- **python/python-pyright.md**: pyrightを追記した
 - **command/command-glab.md**: glabのトークン認証を追記した
 - **command/command-glab.md**: GitLabワークフローを追加した
 - **command-task**: タスクのサンプルを追加した
