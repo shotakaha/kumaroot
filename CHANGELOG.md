@@ -9,6 +9,10 @@
 
 ### Fix
 
+- **git/git-fork.md**: フォーク開発のワークフローを追記した
+- **command/command-claude.md**: claudeを追記した
+- **command/command-claude.md**: claudeを追記した
+- **python/python-pytest.md**: pytestを追記した
 - **python/python-pip.md**: pip を追記した
 - **command/command-zed.md**: Zedを追加した
 - **python/python-mypy.md**: mypyの使い方を追記した
