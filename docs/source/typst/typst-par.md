@@ -1,10 +1,7 @@
 # 段落したい（``#par``）
 
 ```typst
-#par(オプション)[コンテキスト]
-```
-
-```typst
+// ページ全体で設定
 #set par(
     leading: 0.65em,
     justify: false,
@@ -12,6 +9,11 @@
     first-line-indent: 0pt,
     hanging-indent: 0pt,
 )
+```
+
+```typst
+// 個別設定
+#par(オプション)[コンテキスト]
 ```
 
 [par要素](https://typst.app/docs/reference/model/par/)で段落の設定ができます。
@@ -24,14 +26,15 @@
 
 :::
 
-## 行間したい（``leading``）
+## 行間したい（`leading`）
 
 ```typst
 #set par(leading: 0.8em)
 ```
 
-``leading``オプションで行間を変更できます。
-デフォルトは``0.65em``ですが、和文ドキュメントだと少し窮屈に感じたため、少し広げて使っています。
+`leading`オプションで行間を変更できます。
+デフォルトは`0.65em`ですが、和文ドキュメントだと少し窮屈に感じます。
+少し広げて使うとよいと思います。
 
 ## 両端揃えしたい（``justify``）
 

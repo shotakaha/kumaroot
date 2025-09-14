@@ -1,29 +1,66 @@
-# 箇条書きしたい（``#list``）
+# 箇条書きしたい（`#list`）
 
-```text
+```typst
+// ページ全体で設定
+#set list(
+    indent: 1.2em,
+    body-indent: 0.5em,
+    spacing: 1em
+)
+```
+
+```typst
+// 個別設定
+#list(オプション)[りんご][ばなな][ぶどう]
+```
+
+```typst
+// Typst記法
 - りんご
   - あか
 - ばなな
   - きいろ
 - ぶどう
   - むらさき
-
-#list(オプション)[りんご][ばなな][ぶどう]
 ```
 
-## 箇条書きしたい（``#enum``）
+:::{seealso}
 
-```text
+- [list | Element | Typst](https://typst.app/docs/reference/model/list/)
+
+:::
+
+## 箇条書きしたい（`#enum`）
+
+```typst
+// ページ全体で設定
+#set enum(
+    indent: 1.2em,
+    body-indent: 0.5em,
+    spacing: 1em
+)
+```
+
+```typst
+// 個別設定
+#enum(オプション)[りんご][ばなな][むらさき]
+```
+
+```typst
+// Typst記法
 + りんご
   - あか
 + ばなな
   - きいろ
 + ぶどう
   - むらさき
-
-
-#enum(オプション)[りんご][ばなな][むらさき]
 ```
+
+:::{seealso}
+
+- [enum | Element | Typst](https://typst.app/docs/reference/model/enum/)
+
+:::
 
 ## 説明リストしたい（``#terms``）
 
