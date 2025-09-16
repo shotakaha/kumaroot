@@ -9,6 +9,7 @@
 
 ### Fix
 
+- **typst**: Typstの使い方を更新した
 - **git/git-fork.md**: フォーク開発のワークフローを追記した
 - **command/command-claude.md**: claudeを追記した
 - **command/command-claude.md**: claudeを追記した
