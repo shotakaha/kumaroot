@@ -7,6 +7,7 @@
 # ページ設定したい（`#page`）
 
 ```typst
+// #set page(..options)
 #set page(
     paper: "a4",
     margin: (x: 25mm, y: 25mm),
@@ -20,7 +21,10 @@
 )
 ```
 
-[pageキー](https://typst.app/docs/reference/layout/page/)で用紙サイズや余白の大きさ、ヘッダーやフッターの内容、ノンブルの表示方法など、ページ全体を設定できます。
+[page要素](https://typst.app/docs/reference/layout/page/)で
+用紙サイズや余白の大きさ、ヘッダーやフッターの内容、ノンブルの表示方法など、
+ページ全体を設定できます。
+`#set page(..options)`の形式で、ファイルの頭に記述します。
 
 :::{seealso}
 
@@ -61,11 +65,19 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 発表スライド用のサイズもありました。
 
 ```typst
+// 日本の名刺サイズ
 #set page(paper: "jp-business-card")  // w91.0 mm x h55.0 mm
 #set page(paper: "jp-shiroku-ban-4")  // w264.0 mm x h379.0 mm
 ```
 
-日本の名刺サイズもありました。
+日本の名刺サイズ（`jp-business-card`など）もありました。
+
+```typst
+// 横（width）と縦（height）で指定
+#set page(width: 91.0mm, height: 55.0mm)
+```
+
+`width`と`height`オプションで長さを直接指定できます。
 
 ## 余白したい（`margin`）
 
@@ -78,7 +90,9 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 
 ```typst
 #set page(
-    margin: (x: 8pt, y: 4pt),  // 左右: 8pt、上下: 4pt
+  margin: (
+    x: 2cm,    // 左右の余白
+    y: 1cm,    // 上下の余白
 )
 ```
 
@@ -86,6 +100,20 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 すべて別々（`top` / `bottom` / `left` / `right`）など柔軟に設定できます。
 
 ## ノンブルしたい（`numbering`）
+
+```typst
+#set page(numbering: none)   // 非表示（デフォルト）
+#set page(numbering: "1")    // 1, 2, 3, ... で表示
+#set page(numbering: "i")    // i, ii, iii, ... で表示
+
+// カスタム表示
+#set page(numbering: "1 of 1")   // 現在のページ数 of 総ページ数
+#set page(numbering: "1 / 1")    // 現在のページ数 / 総ページ数
+```
+
+`numbering`オプションでノンブル（＝ページ番号）を表示できます。
+ノンブルはデフォルトで非表示です。
+ユーザーが`numbering`オプションを明示する必要があります。
 
 ```typst
 // 表示内容: "現在のページ数／総ページ数"
@@ -103,40 +131,52 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 )
 ```
 
-`numbering`オプションでノンブル（＝ページ番号）を表示できます。
-また、`number-align`オプションでノンブルの表示位置を変更できます。
-
-:::{note}
-
-ノンブルはデフォルトで非表示です。
-ユーザーが`numbering`オプションを明示する必要があります。
-
-:::
+`number-align`オプションでノンブルの表示位置を変更できます。
 
 ```typst
-#show page(where: page(where: page.where(not page.first))): it => align(center + bottom)[#numbering("1 / 1")]
+#set page(
+  footer: context {
+    if counter(page).get().first() > 1 [
+      #align(center)[
+        #counter(page).display() / #counter(page).final()
+      ]
+    ]
+  }
+)
+
 ```
 
-表紙だけノンブルを非表示にしたい場合は`#show`ルールで設定します。
+表紙だけノンブルを非表示にしたい場合の設定です。
 
 ## ヘッダー／フッターしたい（`header` / `footer`）
 
 ```typst
+// 非表示
 #set page(
-    header: [
-        #set text(8pt)
-        ヘッダー
-    ],
-    footer: [
-        #set text(8pt)
-        フッター
-    ]
+    header: none,
+    footer: none,
+)
+
+// auto（ページ番号を表示）
+#set page(
+    numbering: "1"
+    footer: auto,
+    // or
+    // number-align: top,
+    // header: auto,
+)
+
+// カスタム設定
+#set page(
+    header: [ヘッダー],
+    footer: [フッター],
 )
 ```
 
 `header`オプションと`footer`オプションで、
 ドキュメント全体に共通のヘッダーやフッターを表示できます。
-デフォルトは`auto`になっていて、`numbering`オプションが有効な場合は、ノンブル（ページ番号）がフッターとして表示されます。
+デフォルトは`auto`になっていて、`numbering`オプションが有効な場合は、ノンブル（ページ番号）がフッターに表示されます。
+`number-align: top`を指定するとヘッダーに表示できます。
 
 ```typst
 header-ascent(30% + 0pt)
@@ -146,6 +186,69 @@ footer-descent(30% + 0pt)
 ヘッダーとフッターの表示位置は、それぞれ
 天（上の余白）、地（下の余白）からの相対位置で調整できます。
 `%`は余白に対する割合、`pt`はオフセット量です。
+
+```typst
+#set page(
+  header: [
+    #set text(size: 8pt)
+    #grid(
+      columns: (1fr, 1fr),
+      align: (left, right),
+      [授業名],
+      [学籍番号],
+    )
+    #line(length: 100%, stroke: 0.5pt)
+  ],
+  footer: [
+    #set text(size: 9pt)
+    #set align(center)
+    - #counter(page).display() -
+  ]
+)
+```
+
+講義のレポートなどで使えるシンプルなヘッダーとフッターのサンプルです。
+
+### 章ごとに変更したい
+
+```typst
+#let current-chapter = state("chapter", "")
+
+#set page(
+  header: context [
+    #set text(size: 9pt)
+    #let page-num = counter(page).get().first()
+    #if page-num > 1[
+      #grid(
+        columns: (1fr, 1fr),
+        align: (left, right),
+        [第#counter(heading).display()章: #current-chapter.get()],
+        [全体の文書タイトル]
+      )
+      #line(length: 100%, stroke: 0.5pt),
+    ]
+  ],
+  footer: context [
+    #set text(size: 9pt)
+    #set align(center)
+    #if counter(page).get().first() > 1[
+      - #counter(page).display() -
+    ]
+  ]
+)
+
+// 見出し（レベル1）が呼ばれるたびに `current-chapter`を更新
+#show heading.where(level: 1): it => {
+    current-chapter.update(it.body)  // 状態を更新
+    it  // 見出しをそのまま表示
+}
+```
+
+状態管理機能（`state`）を使って`current-chapter`を定義し、
+レベル1の見出しが呼ばれる更新されるにしています。
+
+`context`内で`current-chapter.get()`することで、
+各ページでの章タイトルを取得できます。
 
 ## 段組したい（`columns`）
 
