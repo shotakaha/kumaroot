@@ -72,6 +72,8 @@ typst-let
 typst-title
 typst-logo
 typst-state
+typst-block
+typst-box
 ```
 
 ## パッケージしたい
