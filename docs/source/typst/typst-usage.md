@@ -71,6 +71,7 @@ typst-show
 typst-let
 typst-title
 typst-logo
+typst-state
 ```
 
 ## パッケージしたい
