@@ -76,6 +76,18 @@ typst-block
 typst-box
 ```
 
+## ツールしたい
+
+Typstドキュメントやパッケージ開発に便利そうなツールをリストしています。
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-typstyle
+typst-tinymist
+```
+
 ## パッケージしたい
 
 [Typst Universe](https://typst.app/universe)をさまよって、便利そうなパッケージだなと思ったものをリストしています。
