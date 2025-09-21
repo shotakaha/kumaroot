@@ -1,11 +1,11 @@
-# (`tyler`)
+# パッケージ公開したい（`tyler`）
 
 ```console
 $ tyler check
 $ tyler build
 ```
 
-`tyler`はTypstを公開する手順を（半）自動化するパッケージです。
+`tyler`はTypstを公開する手順を（途中まで）自動化してくれるパッケージです。
 `tyler.toml`で設定を変更できます。
 
 ## インストール
@@ -16,6 +16,33 @@ $ npm install -g @mkpoli/tyler
 
 `tyler`はJavaScript/TypeScriptで作成されたCLIツールです。
 `npm`を使ってシステムにインストールしました。
+
+## 設定したい（`tyler.toml`）
+
+```toml
+[tool.tyler]
+srcdir = "src"
+outdir = "dist"
+ignore = [
+    "tests/",
+    "examples/",
+    "*.tmp",
+    ".DS_Store",
+]
+
+[tool.tyler.validation]
+check_manifest = true
+check_structure = true
+check_entrypoint = true
+
+[tool.tyler.publish]
+create_tags = true
+run_tests = false
+generate_docs = false
+```
+
+`tyler.toml`の`[tool.tyler]`セクションで設定します。
+`srcdir`、`outdir`、`ignore`はビルド環境に応じで設定してください。
 
 ## ビルド前の確認したい（`tyler check`）
 
@@ -43,6 +70,7 @@ $ tyler check --srcdir src
 ```
 
 修正して再度`tyler check`した結果です。
+Entrypointが確認でき、その後のチェックも進めることができました。
 
 ## ローカルビルドしたい（`tyler build --install`）
 
