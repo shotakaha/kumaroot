@@ -86,6 +86,7 @@ maxdepth: 1
 ---
 typst-typstyle
 typst-tinymist
+typst-tyler
 ```
 
 ## パッケージしたい
