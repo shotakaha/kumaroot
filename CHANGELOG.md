@@ -9,6 +9,13 @@
 
 ### Fix
 
+- **typst**: tylerの使い方を追加した
+- **tyler**: Tylerの使い方を確認した
+- **typst**: 関連ツール（typstyleとtinymist）を追加した
+- **typst**: ブロック要素とインライン要素を追加した
+- **typst**: stateを追加した
+- **typst**: page設定を追記した
+- **typst**: showの使い方を整理した
 - **typst**: Typstの使い方を更新した
 - **git/git-fork.md**: フォーク開発のワークフローを追記した
 - **command/command-claude.md**: claudeを追記した
