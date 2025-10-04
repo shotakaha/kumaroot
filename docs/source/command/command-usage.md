@@ -150,4 +150,5 @@ command-gitlab
 command-arduino-cli
 command-expect
 command-jsdoc
+command-specify
 ```
