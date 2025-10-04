@@ -9,6 +9,7 @@
 
 ### Fix
 
+- **typst**: raw要素を追記した
 - **typst**: tylerの使い方を追加した
 - **tyler**: Tylerの使い方を確認した
 - **typst**: 関連ツール（typstyleとtinymist）を追加した
