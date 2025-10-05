@@ -74,6 +74,7 @@ typst-logo
 typst-state
 typst-block
 typst-box
+typst-color
 ```
 
 ## ツールしたい
