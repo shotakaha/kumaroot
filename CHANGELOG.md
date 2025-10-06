@@ -4,11 +4,13 @@
 
 ### Feat
 
+- **command**: specify（スペック駆動開発）を追加した
 - **python/python-pyserial.md**: PySerialの使い方を追加した
 - **numpy/numpy-ndarray.md**: NumPyを追加した
 
 ### Fix
 
+- **typst**: 色の設定を追加した
 - **typst**: raw要素を追記した
 - **typst**: tylerの使い方を追加した
 - **tyler**: Tylerの使い方を確認した
