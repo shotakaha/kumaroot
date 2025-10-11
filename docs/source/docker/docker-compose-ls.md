@@ -1,18 +1,10 @@
-# コンテナを確認したい（`compose ls` / `compose logs`）
+# コンテナを確認したい（`compose ls`）
 
 ```console
 // Composeの状態を確認
 $ docker compose ls
 
-// Composeのコンテナを確認
-// docker container ls に相当
-$ docker compose ps
 
-// Composeのログを確認
-$ docker compose logs
-
-// Composeのプロセスを確認
-$ docker compose top
 ```
 
 `compose.yaml`をベースに作成したコンテナの状態を確認できます。
