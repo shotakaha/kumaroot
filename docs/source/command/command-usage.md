@@ -50,7 +50,18 @@ command-emacs
 command-helix
 command-vim
 command-zed
+```
+
+## エージェントしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 command-claude
+command-specify
+command-opencode
+command-ollama
 ```
 
 ## 環境構築したい
@@ -150,6 +161,4 @@ command-gitlab
 command-arduino-cli
 command-expect
 command-jsdoc
-command-specify
-command-opencode
 ```
