@@ -4,17 +4,20 @@
 services:
   db:
     image: mariadb:10.11
-    working_dir: /workspace
     restart: always
     environment:
       # 管理者パスワードの設定
-      MARIADB_ROOT_PASSWORD: root_pass
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}  # or root_pass
       # MARIADB_RANDOM_ROOT_PASSWORD: yes
       # MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
       # データベースの設定
-      MARIADB_DATABASE: test_db
-      MARIADB_USER: test_user
-      MARIADB_PASSWORD: test_pass
+      MARIADB_DATABASE: ${MARIADB_DATABASE}  # or test_db
+      MARIADB_USER: ${MARIADB_USER}  # or test_user
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}  # or test_pass
+      # 大きなダンプを扱う場合
+      # MARIADB_AUTO_UPGRADE: "1"
+    ports:
+      - "${MYSQL_PORT}:3306"
     volumes:
       # 内部ボリューム（named volume）
       # データベース本体
@@ -24,11 +27,27 @@ services:
       - ./config:/etc/mysql/conf.d
       # 初期化データベース
       - ./backups/:/docker-entrypoint-initdb.d/
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   adminer:
-    image: adminer
+    image: adminer:latest
     ports:
-      - 8081:80
+      - "${ADMINER_PORT}:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+      - TZ=Asia/Tokyo
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
 
 # named volumes
 volumes:
@@ -59,23 +78,7 @@ phpMyAdminに比べるとコンテナ設定が簡単です。
 設定ファイルや、起動時に外部データベースを使いたい場合は、
 `bind volume`でマウントしています。
 
-## データベースのバックアップ
-
-```console
-[server]$ mysqldump データベース名 > backup.sql
-```
-
-リモートサーバーでデータベース（をダンプした）バックアップファイル作成します。
-このファイルは[rsync](../command/command-rsync.md)などでローカルにダウンロードしてください。
-
-:::{seealso}
-
-- [mariadb-dump](https://mariadb.com/kb/en/mariadb-dump/)
-- [mariabackup](https://mariadb.com/kb/en/mariabackup/)
-
-:::
-
-## データベースを初期化
+## データベースを初期化したい
 
 ```yaml
 volumes:
@@ -84,6 +87,7 @@ volumes:
 
 Dockerのエントリーポイント機能を使って、上記のバックアップを使ってデータベースを初期化できます。
 MariaDBなどのデータベース系のイメージでは、
+データベース（`/var/lib/mysql`）が**空の時**に
 `/docker-entrypoint-initdb.d/`に配置したSQLファイルを使って、
 データベースが初期化できるようになっています。
 
@@ -91,7 +95,13 @@ MariaDBなどのデータベース系のイメージでは、
 バックアップファイルをローカルの`./backups/`に保存し、
 コンテナの`/docker-entrypoint-initdb.d/`にバインドマウントしています。
 
-拡張子は`.sh`、`.sql`、`.sql.gz`、`.sql.xz`、`.sql.zst`にします。
+拡張子は
+`.sh`、
+`.sql`、
+`.sql.gz`、
+`.sql.xz`、
+`.sql.zst`
+にします。
 複数のファイルがある場合、アルファベット順に読み込まれます。
 ファイルの先頭に数字をつけておくことで、読み込む順番を指定できます。
 
@@ -99,6 +109,61 @@ MariaDBなどのデータベース系のイメージでは、
 管理者のパスワードは、コンテナ用に設定してOKです。
 `MARIADB_ROOT_PASSWORD`で適当な文字列を指定するか、
 `MARIADB_RANDOM_ROOT_PASSWORD`で任意の文字列を自動設定できます。
+
+:::{note}
+
+再投入したい場合は、
+`docker compose down -v`でボリュームを削除して、再起動します。
+
+:::
+
+## データベースを手動で投入したい（`mariadb`）
+
+```console
+$ docker compose exec -T db \
+  mariadb \
+  -uroot -pROOT_PASSWORD \
+  DATABASE_NAME < dump.sql
+
+$ gunzip -dc dump.sql.gz | docker compose exec -T db \
+  mariadb \
+  -uroot -pROOT_PASSWORD \
+  DATABASE_NAME
+```
+
+既存のデータベースを投入する場合は、
+コンテナ内で`mariadb`コマンドを実行します。
+
+
+## データベースをバックアップしたい（`mariadb-dump`）
+
+```console
+$ docker compose exec -T db \
+  mariadb-dump \
+  -uroot -pROOT_PASSWORD \
+  --databases DATABASE_NAME \
+  --single-transaction \    # 一貫性の確保
+  --quick \    # メモリ節約
+  --routines \    # ストアドプロシージャと関数
+  --triggers \    # トリガ
+  --events \      # イベントスケジューラ
+  | gzip > dump.sql.gz
+```
+
+コンテナ側にあるMariaDBデータベース（`DATABASE_NAME`）を、
+ホスト側にダンプするサンプルです。
+読みやすさ（とコメント挿入）のために複数行にしましたが、一行で書いて書いまいません。
+
+ただし、このまま実行すると、ホスト側のターミナルの履歴にパスワードなどが残ります。
+実際の運用では`.env`で環境変数を設定し、
+`sh -lc`コマンドで読み込ませるとよいです。
+
+:::{seealso}
+
+- [mariadb-dump](https://mariadb.com/kb/en/mariadb-dump/)
+- [mariabackup](https://mariadb.com/kb/en/mariabackup/)
+
+:::
 
 ## サービスを起動したい
 
