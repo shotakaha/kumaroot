@@ -62,6 +62,7 @@ command-claude
 command-specify
 command-opencode
 command-ollama
+command-lmstudio
 ```
 
 ## 環境構築したい
