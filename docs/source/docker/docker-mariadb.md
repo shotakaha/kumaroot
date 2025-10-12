@@ -1,5 +1,42 @@
 # MariaDBしたい（`mariadb`）
 
+## 最小構成したい
+
+```yaml
+services:
+  db:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+    ports:
+      - "3306:3306"
+```
+
+### 動作確認したい
+
+```console
+// コンテナを起動する
+$ docker compose up -d
+
+// コンテナ内のMariaDBに接続する
+$ docker compose exec db mariadb -u root -p
+Enter password: # MARIADB_ROOT_PASSWORD (example) を入力
+MariaDB [(none)]>
+```
+
+### 動作確認用SQL
+
+```sql
+SHOW DATABASES;
+CREATE DATABASE test_db;
+USE test_db;
+CREATE TABLE hello (id INT PRIMARY KEY, message TEXT);
+INSET INTO hello VALUES (1, 'Hello MariaDB!');
+SELECT * FROM hello;
+```
+
+## 最適構成したい
+
 ```yaml
 services:
   db:
@@ -17,7 +54,7 @@ services:
       # 大きなダンプを扱う場合
       # MARIADB_AUTO_UPGRADE: "1"
     ports:
-      - "${MYSQL_PORT}:3306"
+      - "${MYSQL_PORT:-3306}:3306"
     volumes:
       # 内部ボリューム（named volume）
       # データベース本体
@@ -26,9 +63,9 @@ services:
       # 設定ファイル
       - ./config:/etc/mysql/conf.d
       # 初期化データベース
-      - ./backups/:/docker-entrypoint-initdb.d/
+      - ./setup:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "mariadb-admin", "ping", "localhost"]
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -66,49 +103,80 @@ phpMyAdminに比べるとコンテナ設定が簡単です。
 [MariaDB Knowledge Base](https://mariadb.com/kb/en/mariadb-server-docker-official-image-environment-variables/)
 を参照してください。
 
-:::{note}
-
-パスワード情報は`compose.yaml`にベタ書きするのではなく
-`.env`などに保存して環境変数として読み込むこともできます。
-
-:::
-
 `volumes`キーで、データの保存先を設定しています。
 データベース本体は`named volume`で設定しています。
 設定ファイルや、起動時に外部データベースを使いたい場合は、
 `bind volume`でマウントしています。
 
-## データベースを初期化したい
+### 認証情報を設定したい
+
+```yaml
+environment:
+  MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-root_pass}
+  MARIADB_DATABASE: ${MARIADB_DATABASE:-test_db}
+  MARIADB_USER: ${MARIADB_USER:-test_user}
+```
+
+MariaDBの公式イメージでは、以下の初期設定時の認証情報を設定できます。
+
+| 環境変数 | 説明 | 必須 | 備考 |
+|---|---|---|---|
+| `MARIADB_ROOT_PASSWORD` | rootユーザーのパスワード | 必須 | セキュリティ上、必ず設定が必要 |
+| `MARIADB_DATABASE` | 初期作成するデータベース名 | 任意 | アプリ用DBを自動作成 |
+| `MARIADB_USER` | 初期作成するユーザー名 | 任意 | アプリ用ユーザーを自動作成 |
+| `MARIADB_PASSWORD` | 上記ユーザーのパスワード | 任意 | `MARIADB_USER`とセットで使う |
+| `MARIADB_ALLOW_EMPTY_ROOT_PASSWORD` | rootパスワードを空にする | 任意 | セキュリティ上、オススメしない |
+| `MARIADB_RANDOM_ROOT_PASSWORD` | ランダムなrootパスワードを生成 | 任意 | ログに出力されるが、使いづらい |
+| `MARIADB_AUTO_UPGRADE` | 自動アップグレードを有効化 | 任意 | 大きなダンプやバージョン移行時に便利 |
+
+いったん初期化したコンテナでは、これらの環境変数を変更しても反映されません。
+変更を反映させたい場合は、ボリュームを削除して再起動してください。
+
+:::{note}
+
+認証情報は`compose.yaml`にベタ書きせず、
+`.env`に保存することが推奨されています。
+
+:::
+
+### ヘルスチェックしたい
+
+```yaml
+healthcheck:
+  test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+  interval: 10s
+  timeout: 5s
+  retries: 5
+  start_period: 30s
+```
+
+`mariadb-admin`で、MariaDBコンテナが応答可能かを確認しています。
+
+```console
+$ docker compose exec db mariadb-admin ping -h localhost -u root -p
+Enter password:  # example
+mysqld is alive
+```
+
+`docker compose exec`でも確認できます。
+`mariadb-admin`は`ping`の場合でも認証が必要です。
+
+### データベースを初期化したい
 
 ```yaml
 volumes:
-  - ./backups/:/docker-entrypoint-initdb.d/
+  # 内部ボリューム（named volume）
+  - db_data:/var/lib/mysql
+  # 初期化用のエントリーポイント
+  - ./setup:/docker-entrypoint-initdb.d
 ```
 
-Dockerのエントリーポイント機能を使って、上記のバックアップを使ってデータベースを初期化できます。
+Dockerのエントリーポイント機能を使って、データベースを初期化できます。
+
 MariaDBなどのデータベース系のイメージでは、
 データベース（`/var/lib/mysql`）が**空の時**に
 `/docker-entrypoint-initdb.d/`に配置したSQLファイルを使って、
 データベースが初期化できるようになっています。
-
-上記のサンプルでは、
-バックアップファイルをローカルの`./backups/`に保存し、
-コンテナの`/docker-entrypoint-initdb.d/`にバインドマウントしています。
-
-拡張子は
-`.sh`、
-`.sql`、
-`.sql.gz`、
-`.sql.xz`、
-`.sql.zst`
-にします。
-複数のファイルがある場合、アルファベット順に読み込まれます。
-ファイルの先頭に数字をつけておくことで、読み込む順番を指定できます。
-
-`environment`キーにはリストアするデータベースの情報（データベース名、ユーザー名、パスワード）を設定します。
-管理者のパスワードは、コンテナ用に設定してOKです。
-`MARIADB_ROOT_PASSWORD`で適当な文字列を指定するか、
-`MARIADB_RANDOM_ROOT_PASSWORD`で任意の文字列を自動設定できます。
 
 :::{note}
 
@@ -116,6 +184,62 @@ MariaDBなどのデータベース系のイメージでは、
 `docker compose down -v`でボリュームを削除して、再起動します。
 
 :::
+
+このサンプルでは
+ホスト側の`./setup/`を
+コンテナ側の`/docker-entrypoint-initdb.d/`にマウントしています。
+
+:::{note}
+
+既存のデータベスを使って初期化する場合、
+認証情報は（データベース名、ユーザー名、パスワード）は揃えたほうがいいようです。
+
+管理者のパスワードは、コンテナ用に設定してOKです。
+`MARIADB_ROOT_PASSWORD`で適当な文字列を指定するか、
+`MARIADB_RANDOM_ROOT_PASSWORD`で任意の文字列を自動設定できます。
+
+:::
+
+
+### 初期化用のSQLサンプル
+
+```sql
+-- データベースの作成（すでに MARIADB_DATABASE で作成されている場合は不要）
+CREATE DATABASE IF NOT EXISTS sample_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- ユーザーの作成と権限付与（MARIADB_USER で作成されている場合は不要）
+CREATE USER IF NOT EXISTS 'sample_user'@'%' IDENTIFIED BY 'sample_pass';
+GRANT ALL PRIVILEGES ON sample_db.* TO 'sample_user'@'%';
+FLUSH PRIVILEGES;
+
+-- テーブル作成
+USE sample_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 初期データ挿入
+INSERT INTO users (name, email) VALUES
+('Alice', 'alice@example.com'),
+```
+
+初期化用のSQLのサンプルです。
+`init.sql`のようなファイルに保存して、`setup/`に配置してください。
+
+エントリーポイントとして利用できる拡張子は
+`.sh`、
+`.sql`、
+`.sql.gz`、
+`.sql.xz`、
+`.sql.zst`
+です。
+
+複数のファイルがある場合、アルファベット順に読み込まれます。
+ファイルの先頭に数字をつけておくことで、読み込む順番を指定できます。
 
 ## データベースを手動で投入したい（`mariadb`）
 
