@@ -10,6 +10,13 @@
 
 ### Fix
 
+- **agent**: LM Studioを追加した
+- **agent**: Ollamaを追加した
+- **docker**: MariaDBの使い方を更新した
+- **docker**: MariaDBのサンプルを更新した
+- **docker**: サブコマンドの使い方を更新した
+- **opencode**: OpenCodeを追加した
+- **pytest**: テスト用のディレクトリ構造を整理した
 - **typst**: 色の設定を追加した
 - **typst**: raw要素を追記した
 - **typst**: tylerの使い方を追加した
