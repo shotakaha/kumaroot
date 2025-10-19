@@ -111,6 +111,18 @@ AIエージェントと相談しながら更新したりしてもOKです。
 仕様や実装の前提となる「不変のルール」を定めることが重要です。
 プロジェクトの目的や対象ユーザー、開発フロー、セキュリティ対策などを記述します。
 
+```console
+> /speckit.constitution
+ Beginner-friendly project
+ Educational docstrings
+ Spec-Driven development
+ Test-Driven development
+ Skeleton-src-tests development
+ src-tests symmetric patterns
+ DRY, SRP, and YAGNI principles
+ Semantic versioning
+```
+
 実装の詳細（使用する言語や依存パッケージなど）は、ここには記述せず、
 `README.md`や、エージェントごとの設定（`CLAUDE.md`、`GEMINI.md`、`AGENTS.md`など）に記述します。
 
