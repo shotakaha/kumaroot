@@ -10,6 +10,11 @@
 
 ### Fix
 
+- **command**: specifyを追記した
+- **jupytext**: JupyTextを修正した
+- **specify**: SpecKitの使い方を追記した
+- **wp-cli**: wp-cliの使い方を追加した
+- **wp-cli**: wp-cliを追加した
 - **agent**: LM Studioを追加した
 - **agent**: Ollamaを追加した
 - **docker**: MariaDBの使い方を更新した
