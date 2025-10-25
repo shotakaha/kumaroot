@@ -2,120 +2,95 @@
 
 ## v2.0.0 (2025-10-26)
 
+ひさびさにbumpしたらv2になってしまいました
+
 ### Feat
 
-- **command**: specify（スペック駆動開発）を追加した
-- **python/python-pyserial.md**: PySerialの使い方を追加した
+- **command/specify**: specify（スペック駆動開発）を追加した
 - **numpy/numpy-ndarray.md**: NumPyを追加した
+- **python/python-pyserial.md**: PySerialの使い方を追加した
 
 ### Fix
 
-- **command**: specifyを追記した
-- **jupytext**: JupyTextを修正した
-- **specify**: SpecKitの使い方を追記した
-- **wp-cli**: wp-cliの使い方を追加した
-- **wp-cli**: wp-cliを追加した
-- **agent**: LM Studioを追加した
-- **agent**: Ollamaを追加した
-- **docker**: MariaDBの使い方を更新した
-- **docker**: MariaDBのサンプルを更新した
-- **docker**: サブコマンドの使い方を更新した
-- **opencode**: OpenCodeを追加した
-- **pytest**: テスト用のディレクトリ構造を整理した
-- **typst**: 色の設定を追加した
-- **typst**: raw要素を追記した
-- **typst**: tylerの使い方を追加した
-- **tyler**: Tylerの使い方を確認した
-- **typst**: 関連ツール（typstyleとtinymist）を追加した
-- **typst**: ブロック要素とインライン要素を追加した
-- **typst**: stateを追加した
-- **typst**: page設定を追記した
-- **typst**: showの使い方を整理した
-- **typst**: Typstの使い方を更新した
-- **git/git-fork.md**: フォーク開発のワークフローを追記した
-- **command/command-claude.md**: claudeを追記した
-- **command/command-claude.md**: claudeを追記した
-- **python/python-pytest.md**: pytestを追記した
-- **python/python-pip.md**: pip を追記した
-- **command/command-zed.md**: Zedを追加した
-- **python/python-mypy.md**: mypyの使い方を追記した
-- **python/python-typing.md**: typingを追記した
-- **python/python-typing.md**: typingを追記した
-- **python/python-pyright.md**: pyrightを追記した
-- **command/command-glab.md**: glabのトークン認証を追記した
-- **command/command-glab.md**: GitLabワークフローを追加した
-- **command-task**: タスクのサンプルを追加した
-- **command/command-task.md**: GitLab用のタスクを追加した
-- **command/command-glab.md**: glabコマンドを整理した
-- **command/command-claude.md**: vimモード切り替えを追加した
-- **command/command-claude.md**: Claudeを追記した
+- **command/command-lmstudio.md**: LM Studioを追加した
+- **command/command-ollama.md**: Ollamaを追加した
 - **command/command-claude.md**: Claude Codeを追加した
-- **command/command-screen.md**: screenを追加した
-- **hvplot/hvplot-scatter.md**: hvplotの散布図を追記した
-- **hvplot/hvplot-options.md**: hvplotのオプション設定を追記した
-- **pandas/pandas-groupby.md**: groupbyを整理した
-- **pandas**: Pandasの使い方の分類を整理した
-- **python/python-pyserial.md**: ファイルに保存する方法を追記した
-- **python/python-pyserial.md**: 複数デバイス処理を追記した
-- **python/python-pyserial.md**: 複数デバイスのシリアル通信を追加した
-- **raspi/raspi-usage.md**: GoとNode環境のセットアップを追加した
-- **raspi/raspi-python.md**: Python環境のセットアップを追加した
-- **task**: タスク（code）を修正した
-- **python/python-uv.md**: uvを追記した
-- **python/python-uv.md**: uvを追記した
-- **notebooks/python-histogram.ipynb**: Pythonでヒストグラムを作成する方法を比較した
-- **command/command-task.md**: タスクランナーの使い方を更新した
-- **command/command-task.md**: タスクのサンプルを追加した
-- **task**: updated Taskfile
-- **docker/docker-install.md**: フォーミュラ名の変更を追記した
-- **typst/typst-page.md**: ページ設定を追記した
-- **typst/typst-set.md**: Typstの使い方を追記した
-- **geant4/geant4-scoring-accumulable.md**: G4Accumlableを追記した
-- **task**: added poetry export task
-- **command/command-task.md**: Taskを更新した
-- **command-task**: added Taskfile.yml
-- **geant4-sensor-allocator.md**: G4Allocatorを整理した
-- **geant4/geant4-cpp-geant4.md**: Geant4のコーディング規約を整理した
-- **geant4/geant4-physics-opticalphysics.md**: 光学物理の設定を整理した
-- **geant4/geant4-user-physicslist.md**: 物理モデルを整理した
-- **geant4/geant4-user-actioninitialization.md**: ユーザーアクションの設定を整理した
-- **geant4/geant4-material-plastic-scintillator.md**: プラシンのサンプルを改良した
-- **geant4/geant4-singleton.md**: AnalysisManagerを追加した
-- **geant4/geant4-errors.md**: エラーの対処方法を追加した
-- **geant4/geant4-event.md**: イベント情報を追記した
-- **geant4/geant4-geometry.md**: ジオメトリの設定を追記した
-- **geant4/geant4-singleton.md**: シングルトンパターンを追加した
-- **geant4/geant4-install-taskfile.md**: タスクを整理した
-- **geant4/geant4-install-taskfile.md**: タスクの構造を整理した
-- **geant4/geant4-install-taskfile.md**: タスクを整理した
-- **geant4/geant4-install-cmake.md**: インストール手順を修正した
-- **geant4/geant4-install.md**: インストール手順を整理した
-- **geant4/geant4-versions.md**: バージョン情報を整理した
-- **geant4/geant4-install.md**: Geant4のインストール手順を改訂した
-- **command/command-cmake.md**: cmakeを追記した
-- **command/command-cmake.md**: cmakeを追記した
-- **command/command-cmake.md**: cmakeを追記した
-- **geant4/geant4-install-taskfile.md**: taskfileを追加した
-- **command/command-cmake.md**: cmakeの使い方を追加した
-- **pandas/pandas-lmfit.md**: lmfitを追加した
-- **numpy/numpy-linspace.md**: np.linspaceを追加した
-- **numpy/numpy-column_stack.md**: column_stackを追加した
-- **numpy/numpy-usage.md**: numpyの位置付けを追記した
-- **numpy/numpy-arange.md**: np.arangeを追加した
-- **gas/ts-tsc.md**: tscを追加した
-- **gas/ts-typedoc.md**: TypeDocを追加した
+- **command/command-claude.md**: vimモード切り替えを追加した
+- **command/command-cmake.md**: CMakeを追加した
 - **command/command-glab.md**: glabを追加した
-- **python/python-ruff.md**: ruffを追記した
-- **python/python-virtualenv.md**: virtualenvを削除した
-- **python/python-pip.md**: パッケージ管理ツール選択フローチャートを追加した
-- **python/python-venv.md**: venvを追加した
-- **python/python-uv.md**: uvを追記した
-- **gas/js-biome.md**: biomeを追加した
+- **command/command-screen.md**: screenを追加した
+- **command/command-task.md**: タスクのサンプルを追加した
+- **command/command-zed.md**: Zedを追加した
+- **docker**: MariaDBの使い方を更新した
+- **docker**: サブコマンドの使い方を更新した
+- **gas/gas-drive.md**: DriveAppを追記した
 - **gas/gas-exports.md**: エクスポートを追加した
 - **gas/gas-groups.md**: グループの使い方を追記した
 - **gas/gas-trigger.md**: トリガー設定を追記した
+- **gas/js-biome.md**: biomeを追加した
+- **gas/ts-tsc.md**: tscを追加した
+- **gas/ts-typedoc.md**: TypeDocを追加した
+- **geant4-sensor-allocator.md**: G4Allocatorを整理した
+- **geant4/geant4-cpp-geant4.md**: Geant4のコーディング規約を整理した
+- **geant4/geant4-errors.md**: エラーの対処方法を追加した
+- **geant4/geant4-event.md**: イベント情報を追記した
+- **geant4/geant4-geometry.md**: ジオメトリの設定を追記した
+- **geant4/geant4-install-cmake.md**: インストール手順を修正した
+- **geant4/geant4-install-taskfile.md**: タスクを整理した
+- **geant4/geant4-install.md**: Geant4のインストール手順を改訂した
+- **geant4/geant4-material-plastic-scintillator.md**: プラシンのサンプルを改良した
+- **geant4/geant4-physics-opticalphysics.md**: 光学物理の設定を整理した
+- **geant4/geant4-scoring-accumulable.md**: G4Accumlableを追記した
+- **geant4/geant4-singleton.md**: シングルトンパターンを追加した
+- **geant4/geant4-user-actioninitialization.md**: ユーザーアクションの設定を整理した
+- **geant4/geant4-user-physicslist.md**: 物理モデルを整理した
+- **geant4/geant4-versions.md**: バージョン情報を整理した
+- **git/git-fork.md**: フォーク開発のワークフローを追記した
+- **hvplot/hvplot-options.md**: hvplotのオプション設定を追記した
+- **hvplot/hvplot-scatter.md**: hvplotの散布図を追記した
+- **jupytext**: JupyTextを修正した
+- **notebooks/python-histogram.ipynb**: Pythonでヒストグラムを作成する方法を比較した
+- **numpy/numpy-arange.md**: np.arangeを追加した
+- **numpy/numpy-column_stack.md**: column_stackを追加した
+- **numpy/numpy-linspace.md**: np.linspaceを追加した
+- **numpy/numpy-usage.md**: numpyの位置付けを追記した
+- **opencode**: OpenCodeを追加した
+- **pandas**: Pandasの使い方の分類を整理した
+- **pandas/pandas-groupby.md**: groupbyを整理した
+- **pandas/pandas-lmfit.md**: lmfitを追加した
+- **pytest**: テスト用のディレクトリ構造を整理した
+- **python/python-mypy.md**: mypyの使い方を追記した
+- **python/python-pip.md**: パッケージ管理ツール選択フローチャートを追加した
 - **python/python-pydantic.md**: 設定ファイルを管理するクラスの手順を追記した
-- **gas/gas-drive.md**: DriveAppを追記した
+- **python/python-pyright.md**: pyrightを追記した
+- **python/python-pyserial.md**: ファイルに保存する方法を追記した
+- **python/python-pyserial.md**: 複数デバイスのシリアル通信を追加した
+- **python/python-pyserial.md**: 複数デバイス処理を追記した
+- **python/python-pytest.md**: pytestを追記した
+- **python/python-ruff.md**: ruffを追記した
+- **python/python-typing.md**: typingを追記した
+- **python/python-uv.md**: uvを追記した
+- **python/python-venv.md**: venvを追加した
+- **python/python-virtualenv.md**: virtualenvを削除した
+- **raspi/raspi-python.md**: Python環境のセットアップを追加した
+- **raspi/raspi-usage.md**: GoとNode環境のセットアップを追加した
+- **specify**: SpecKitの使い方を追記した
+- **task**: added poetry export task
+- **task**: updated Taskfile
+- **task**: タスク（code）を修正した
+- **tyler**: Tylerの使い方を確認した
+- **typst**: page設定を追記した
+- **typst**: raw要素を追記した
+- **typst**: showの使い方を整理した
+- **typst**: stateを追加した
+- **typst**: tylerの使い方を追加した
+- **typst**: Typstの使い方を更新した
+- **typst**: ブロック要素とインライン要素を追加した
+- **typst**: 色の設定を追加した
+- **typst**: 関連ツール（typstyleとtinymist）を追加した
+- **typst/typst-page.md**: ページ設定を追記した
+- **typst/typst-set.md**: Typstの使い方を追記した
+- **wp-cli**: wp-cliを追加した
 
 ## v1.44.3 (2025-04-15)
 
