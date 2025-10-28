@@ -47,6 +47,74 @@ $ uv tool install pytest-cov
 `pytest-mock`もインストールしておくとよいです。
 カバレッジを計測した場合は`pytest-cov`が必要です。
 
+## マーカーしたい（`-m`）
+
+```console
+$ pytest テストのパス -m "xxx"
+
+$ pytest テストのパス -m "slow"
+$ pytest テストのパス -m "local"
+```
+
+`-m "マーカー名"`で`@pytest.mark.xxx`のデコレーターでマークしたテストだけを実行できます。
+
+```console
+$ pytest --markers
+
+// @pytest.mark.filterwarnings(warning)
+// @pytest.mark.skip(reason=None)
+// @pytest.mark.skipif(condition, ..., *, reason=...)
+// @pytest.mark.xfail(condition, ..., *, reason=..., run=True, raises=None, strict=xfail_strict)
+// @pytest.mark.parametrize(argnames, argvalues)
+// @pytest.mark.usefixtures(fixturename1, fixturename2, ...)
+```
+
+`--markers`オプションでマーカー名を確認できます。
+いくつかのマーカーはpytestにプリセットがあります。
+プロジェクト固有のマーカーは`pyproject.toml`で定義できます。
+
+```toml
+[tool.pytest.init_options]
+markers = [
+    "local: tests that should only run locally",
+    "slow: tests that take more than 1 second to run"
+]
+addopts = [
+    "-m", "not local",
+]
+```
+
+マーカー名に`not`をつけることで除外できます。
+このサンプルでは、時間のかかるテストなどに`@pytest.mark.local`とマークし、デフォルトでスキップするようにしています。
+
+## 詳細表示したい（`--verbose`）
+
+```console
+$ pytest テストのパス --verbose
+```
+
+`--verbose`オプションで、ファイル内のテスト関数を表示できます。
+
+## トレースバックを表示したい（`--tb`）
+
+```console
+$ pytest テストのパス --tb=short    # 簡潔
+$ pytest テストのパス --tb=long     # 詳細
+$ pytest テストのパス --tb=none     # 非表示
+```
+
+`--tb`オプションで、トレースバックの表示形式を変更できます。
+
+## 実行時間を確認したい（`--durations`）
+
+```console
+$ pytest テストのパス --verbose --durations=0
+$ pytest テストのパス --verbose --durations=10  # TOP10件
+```
+
+`--durations`オプションで、各テストの実行時間を表示できます。
+
+
 ## テスト用ディレクトリ（`tests`）
 
 ```console
