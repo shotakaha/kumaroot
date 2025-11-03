@@ -34,6 +34,7 @@ python-urllib
 python-webbrowser
 python-pexpect
 python-pyserial
+python-esptool
 ```
 
 ## Jupyterしたい
