@@ -31,6 +31,12 @@ typst-build
 typst-import
 ```
 
+## テンプレートしたい
+
+```{toctree}
+typst-with
+```
+
 ## 全体設定したい
 
 ```{toctree}
