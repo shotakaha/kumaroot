@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fix
+
+- **python/python-pytest.md**: マーカーなどを追加した
+
 ## v2.0.0 (2025-10-26)
 
 ひさびさにbumpしたらv2になってしまいました
