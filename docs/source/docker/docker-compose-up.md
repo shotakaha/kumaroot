@@ -1,4 +1,4 @@
-# コンテナを起動したい（`compose up`）
+# コンテナを起動したい（``docker compose up``）
 
 ```console
 $ docker compose up -d
@@ -8,6 +8,9 @@ $ docker compose up -d
 `-d / --detach`はバックグラウンド実行するためのオプションです。
 ほとんどの場合でつけておけばOKです。
 ローカルにイメージがない場合は、プルしてから実行されます。
+
+`-d`オプションをつけない場合は、フォアグラウンド実行となり、コンテナのログが標準出力に表示されます。
+開発時のデバッグには便利ですが、本番環境ではバックグラウンド実行することが一般的です。
 
 :::{note}
 
@@ -37,6 +40,8 @@ $ docker compose stop
 ```
 
 `docker compose stop`コマンドで、作成したコンテナを一時停止できます。
+コンテナはそのまま保存されているため、後で`docker compose start`で再開できます。
+コンテナを完全に削除したい場合は、`docker compose down`を使用してください。
 
 ## コンテナを再開したい（`compose start`）
 
