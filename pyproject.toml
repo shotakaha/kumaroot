@@ -5,7 +5,7 @@ readme = "README.md"
 license = "MIT"
 authors = [{name="Shota Takahashi (KMI)", email="<shotakaha@kmi.nagoya-u.ac.jp>"}]
 urls = {"homepage" = "https://kumaroot.readthedocs.io/ja/latest/", "repository" = "https://github.com/shotakaha/kumaroot"}
-version = "2025.11.0"
+version = "2025.11.1"
 requires-python = ">=3.12"
 
 [tool.poetry]
@@ -63,7 +63,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "2025.11.0"
+version = "2025.11.1"
 tag_format = "v$version"
 version_files = [
     "pyproject.toml:version",

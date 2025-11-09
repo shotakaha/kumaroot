@@ -41,12 +41,12 @@ tasks:
   bump:patch:
     desc: Bump patch version with commitizen
     cmds:
-      - poetry run cz bump --patch
+      - poetry run cz bump --increment PATCH
 
   bump:minor:
     desc: Bump minor version with commitizen
     cmds:
-      - poetry run cz bump --minor
+      - poetry run cz bump --increment MINOR
 
   changelog:
     desc: Generate changelog with commitizen (incremental)
