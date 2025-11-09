@@ -84,6 +84,14 @@ $ git push
 
 ## ライブプレビューする場合
 
+```bash
+task docs
+```
+
+`task docs`は自動的にdocsディレクトリに移動し、ライブリロードでドキュメントのプレビューを開始します。
+
+### 手動でライブプレビューする場合
+
 ```console
 $ cd kumaroot
 $ poetry shell
@@ -97,20 +105,26 @@ $ poetry shell
 ### VS Codeを使ってライブプレビューする場合
 
 ```console
+$ task code
+```
+
+`task code`はVS Codeを起動します。VS Code内でターミナルを開き（``command + j``）、`task docs`を実行してライブプレビューを開始できます。
+
+#### 手動でVS Codeを起動する場合
+
+```console
 $ cd kumaroot
 $ code .
 ```
 
-1. Poetry設定で ``virtualenvs.in-project = true`` が前提
-2. KumaROOTのリポジトリでVS Codeを起動する
-3. VS Code内でターミナルを開く（``command + j``）
+その後、VS Code内でターミナルを開く（``command + j``）
 
 ```console
 (.venv) $ cd docs
 (.venv) $ make livehtml
 ```
 
-3. ``make livehtml``でライブリロードしながら編集する
+ライブリロードしながら編集します。
 
 ## バージョン管理
 
@@ -133,18 +147,21 @@ task bump:patch
 ```
 
 変更がある程度貯まったらパッチバージョンを更新してください。
+バージョンバンプ時に`CHANGELOG.md`が自動的に更新されます。
 
 ```bash
 task bump:minor
 ```
 
 毎月1度、マイナーバージョンを更新してください。
+バージョンバンプ時に`CHANGELOG.md`が自動的に更新されます。
 
 ```bash
 task changelog
 ```
 
-バージョンをバンプしたあとは`CHANGELOG.md`を更新してください。
+必要に応じて、手動で`CHANGELOG.md`を追加更新できます。
+通常は`task bump:*`コマンドで自動更新されるため、この操作は不要です。
 
 ## 依存パッケージの管理
 
@@ -159,7 +176,7 @@ task update
 ```
 
 `task update`で依存パッケージを更新できます。
-Read the Docsでビルドする際に必要な`requirements.txt`を同時に生成されます。
+同時にRead the Docsでビルドする際に必要な`requirements.txt`も自動生成されます。
 更新された`poetry.lock`と`requirements.txt`をGitにコミットしてください。
 
 ## ファイルの命名規則
