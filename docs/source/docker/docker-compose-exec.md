@@ -1,10 +1,13 @@
-# コンテナ内でコマンド実行したい（`compose exec`）
+# コンテナ内でコマンド実行したい（``docker compose exec``）
 
 ```console
 $ docker compose exec <サービス名> <コマンド>
 ```
 
-`docker compose exec`は、`compose.yml`で管理しているコンテナの中でコマンドを実行できるコマンドです。
+`docker compose exec`は、`compose.yaml`で管理しているコンテナの中でコマンドを実行できるコマンドです。
+
+`<サービス名>`は`compose.yaml`の`services:`セクションで定義したコンテナの名前です。
+`<コマンド>`は、コンテナ内で実行したいシェルコマンド（例：`ls`、`bash`、`python script.py`など）です。
 
 :::{note}
 
@@ -39,7 +42,9 @@ $ docker compose exec -T <サービス名> <コマンド> | <ホストPC上で�
 ```
 
 `-T`（`--no-tty`）は、仮想端末（TTY）を割り当てないようにするオプションです。
-コンテナ側の実行結果をホスト側にパイプしたいときに使います。
+
+TTY（teletypewriter）は対話的なターミナルセッションのことで、デフォルトではコンテナに割り当てられます。
+パイプで出力を別のコマンドに渡す場合は、`-T`オプションで TTY を無効にする必要があります。
 
 ```console
 // MySQLコンテナのDBを、ホスト側にダンプする
@@ -69,6 +74,15 @@ $ docker compose exec コンテナ名 pwd
 [DockerfileのWORKDIR](./docker-dockerfile-workdir.md)で変更したり、
 `compose.yaml`の`working_dir`設定で変更できます。
 
+```yaml
+services:
+  app:
+    image: python:3.12
+    working_dir: /app
+```
+
+`working_dir`を設定すると、`docker compose exec`でコマンドを実行する際、その設定されたディレクトリが作業ディレクトリとなります。
+
 ## シェルを起動したい（`bash`）
 
 ```console
@@ -77,7 +91,10 @@ root@ランダム:/作業ディレクトリのパス#
 ```
 
 [bashコマンド](../command/command-bash.md)でコンテナ内のシェルを起動できます。
-リモートサーバーにログインしたときのように、コンテナ内を操作できます。
+リモートサーバーにログインしたときのように、対話的にコンテナ内を操作できます。
+
+シェルを起動した後は、コンテナ内で自由にコマンドを実行できます。
+シェルから抜ける（ホスト側に戻る）には、`exit`コマンドを実行してください。
 
 ## リファレンス
 
