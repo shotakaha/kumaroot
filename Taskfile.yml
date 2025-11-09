@@ -11,7 +11,7 @@ tasks:
       - task --list
     silent: true
 
-  livehtml:
+  docs:
     desc: Start Sphinx livehtml
     dir: docs
     cmds:
