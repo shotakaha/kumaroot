@@ -1,4 +1,4 @@
-# 定番ディレクトリしたい（``platformdirs``）
+# 定番ディレクトリしたい（`platformdirs`）
 
 ```python
 import platformdirs
@@ -42,6 +42,9 @@ platformdirs.user_log_dir("パッケージ名")
 platformdirs.user_log_path("パッケージ名")
 # PosixPath('~/Library/Logs/パッケージ名')
 ```
+
+アプリケーションのログは、カレントディレクトリではなく、
+ユーザーやシステムが探しやすい適切な場所に保存するのがよいとされています。
 
 ## リファレンス
 
