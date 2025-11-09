@@ -1,5 +1,11 @@
 # CHANGELOG.md
 
+## v2025.11.2 (2025-11-09)
+
+### Refactor
+
+- **Taskfile.yml**: Rename livehtml task to docs
+
 ## v2025.11.1 (2025-11-09)
 
 ### Feat
