@@ -1,7 +1,7 @@
 # プロジェクト設定したい（``pyproject.toml``）
 
-`pyproject.toml`は2016年にPEP518で導入されたプロジェクトの定義ファイルです。
-従来の`setup.py`などに代わる新しいPython標準となっています。
+`pyproject.toml`はPythonプロジェクトの定義ファイルです。
+2016年にPEP518で導入され、従来の`setup.py`などに代わる新しいPython標準となっています。
 
 ```{note}
 PEP518が提案されたときは、まだ標準のTOMLパーサーが存在しなかったはずです。
@@ -83,6 +83,11 @@ build-backend = "poetry.core.masonry.api"
 `[build-system]`のセクションにビルドに使うツールを記述します。
 上記サンプルは`poetry`の設定です。
 
+```toml
+[build-system]
+requires = ["setuptools", "wheel"]
+```
+
 ## 外部パッケージしたい（`[tool]`）
 
 ```toml
@@ -98,6 +103,34 @@ version_files = [
     "docs/source/conf.py:version",
     "docs/source/conf.py:release",
 ]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.ruff.isort]
+known-first-party = ["パッケージ名"]
+combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+skip-magic-trailing-comma = false
+docstring-code-format = true
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
 ```
 
 `[tool]`のセクションに、外部パッケージの設定を記述します。

@@ -45,6 +45,67 @@ $ uv tool install ruff
 `ruff`はCLIツールなので`pipx`や`uv tool`なのでグローバルにインストールできます。
 プロジェクトに追加する場合は `--group dev` オプションで追加するとよいです。
 
+## 設定したい（`[tool.ruff]`）
+
+```toml
+# pyproject.toml
+
+[tool.ruff]
+# 対象となるPythonのバージョン
+target-version = "py311"
+
+# 1行あたりの最大文字数
+# デフォルトは88。100くらいにしてもよい説がある
+line-length = 88
+
+# 未使用importの自動削除
+# fix = true
+
+# 並列実行数
+# threads = 4
+
+# ruff check の設定
+[tool.ruff.lint]
+# チェックするルールセット
+select = [
+    "E",    # pycodestyle (PEP8)
+    "F",    # pyflakes（未使用変数・未定義参照など）
+    "I",    # import order（importの順序）
+    "B",    # bugbear（潜在的なバグ）
+    "UP",   # pyupgrade（新しい構文へ自動更新）
+    "N",    # pep8-naming（命名規則）
+    "C4",   # flake8-comprehensions（内包表記の改善）
+    "SIM",  # flake8-simplify（冗長な構文の簡略化）
+    "RUF",  # Ruff独自の拡張
+]
+
+# チェックしないルールセット
+ignore = [
+    "E501",    # 行の長さ
+]
+
+# 自動修正するルールセット
+fixable = ["ALL"]
+unfixable = []
+
+
+# import orderの設定
+[tool.ruff.isort]
+combine-as-imports = true
+known-first-party = ["自作したパッケージ名"]
+
+# ruff formatの設定
+[tool.ruff.format]
+quote-style = "double"    # ["double" | "single"]
+indent-style = "space"    # ["space" | "tab"]
+line-ending = "lf"        # ["lf", "crlf", "native"]
+skip-magic-trailing-comma = false  # 末尾のカンマを残す（false） | 残さない（true）
+docstring-code-format = true  # docstringも整形する（true） | 整形しない（false）
+```
+
+Ruffの設定は`pyproject.toml`の`[tool.ruff]`セクションに記述できます。
+また、`ruff.tomll`、`.ruff.toml`に個別設定として保存することもできます。
+
 ## フォーマットしたい（``ruff format``）
 
 ```console
