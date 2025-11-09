@@ -1,4 +1,4 @@
-# fish
+# fishしたい（``fish``）
 
 ```bash
 $ brew install fish
@@ -7,10 +7,12 @@ $ brew install fish
 Bash や Zsh のようなシェルの仲間です。
 デフォルトでいい感じに表示してくれるので、パソコンを買い替えた場合に便利です。
 
-## ログインシェルを fish にしたい
+:::{note}
+このページの例は主に fish シェルでの操作を想定しています。
+インストール手順（``brew install fish``）は bash/zsh で実行してください。
+:::
 
-1. `/etc/shells` に`fish`を追記する
-2. `chsh -s`コマンドでデフォルトシェルを変更する
+## ログインシェルを fish にしたい
 
 ```bash
 $ which fish
@@ -19,33 +21,37 @@ $ which fish
 $ sudo vi /etc/shells
 $ chsh -s /opt/homebrew/bin/fish
 ```
+上記のコマンドは bash/zsh で実行します。
 
-`fish`のパスを`/etc/shells`に追記すると `chsh -s` できるようになります。
+fishをデフォルトシェルに設定する手順の内容は以下のとおりです。
 
-`fish`のパスは OS で異なることがあるので `which fish` で確認しておきます。
-`/etc/shells`の編集には管理者権限が必要です。
-`chsh -s`を実行すると変更前に管理者パスワードを確認されます。
+1. `/etc/shells` に fish のパスを追記する
+2. `chsh -s` コマンドでデフォルトシェルを変更する
 
-## fishを設定したい
+`fish` のパスは OS やインストール方法で異なるため、`which fish` で確認しておきましょう。
+`/etc/shells` の編集には管理者権限が必要です。
+`chsh -s` を実行する際に管理者パスワードを確認されます。
 
-```bash
+## fishを設定したい（`fish_config`）
+
+```console
 $ fish_config
 ```
 
 ``fish_config``を実行すると、ブラウザが起動します。
 色やプロンプトなど設定できます。
 
-## 変更点を確認したい
+## 変更点を確認したい（`fish_delta`）
 
-```bash
+```console
 $ fish_delta
 ```
 
 fishのデフォルトから変更を加えた箇所を確認できます。
 
-## プロンプトを微修正したい
+## プロンプトを微修正したい（`fish_prompt.fish`）
 
-```bash
+```console
 $ code ~/.config/fish/functions/fish_prompt.fish
 ```
 
@@ -76,7 +82,7 @@ $ set -x PATH $PATH $HOME/.cargo/bin
 
 :::
 
-### パスを確認したい（``fish_user_paths``）
+## パスを確認したい（``fish_user_paths``）
 
 ```console
 $ echo $fish_user_paths
@@ -93,7 +99,7 @@ $ printf '%s\n' $fish_user_paths
 
 ## 変数を設定したい（``set``）
 
-```bash
+```fish
 set 変数名 値
 set -l 変数名 値1 値2
 set -gx 変数名 値    # bash/zshのexportに相当
@@ -112,14 +118,18 @@ set -q 変数名    # 変数名が定義されているかを確認
 
 ## リダイレクトしたい
 
-```
+```console
 $ pbcopy < ~/.gitconfig
 $ echo "hello" > stdout.md
 $ echo "hello" 2> stderr.md
-$ echo "hello" 2>&1 stdout_and_stderr.md
+$ echo "hello" 2>&1 > stdout_and_stderr.md
 ```
 
-## コマンド補完を整理したい
+fish も bash/zsh と同じリダイレクト操作が使えます。
+
+詳しくは「[実行結果をファイルに保存したい（``>``）](command-stdout.md)」を参照してください。
+
+## コマンド補完を整理したい（`fish_update_completions`）
 
 ```console
 $ fish_update_completions
