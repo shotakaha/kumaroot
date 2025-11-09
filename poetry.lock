@@ -4559,4 +4559,4 @@ mystmd = ["mystmd", "nodeenv"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "f2a099d2c4de460f81a4c892944e5cd4a687d9fd6f00a989cf923da2715b5581"
+content-hash = "f6cc75e7d91541a57963896a832d4a0163f5100d6cdb9efe24c3d5cc09b08f6d"
