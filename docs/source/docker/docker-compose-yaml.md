@@ -7,6 +7,31 @@ Docker Compose version v2.29.2-desktop.2
 
 `docker compose`は複数のコンテナを管理するコマンドです。
 
+:::{note}
+
+Docker ComposeにはV1とV2があります。
+
+**Compose V1**は`docker-compose`というコマンドです。
+Pythonで実装された単独ツールで、設定ファイルは`docker-compose.yaml`です。
+
+**Compose V2**は`docker compose`というサブコマンドです。
+Go言語で再実装され、Docker CLIに統合されたことで、より多くの機能を使うことができます。
+設定ファイル名は`docker-compose.yaml`もそのまま使えますが、**`compose.yaml`が推奨**されています。
+
+このページはCompose V2を想定しています。
+
+:::
+
+:::{warning}
+
+**Compose V1のサポートは2023年6月に終了**しています。
+また、**Docker Desktop v4.33.0（2024年7月）で`docker-compose`コマンドが削除**されました。
+V1の記事を見かけた場合は、適宜V2に読み替えてください。
+
+:::
+
+## 基本的な設定例
+
 ```yaml
 # compose.yaml
 
@@ -25,30 +50,6 @@ volumes:
 設定ファイルは`compose.yaml`です。
 `services`の中に利用するコンテナごとの設定、
 `volumes`の中に内部ボリュームの設定を記述できます。
-
-:::{seealso}
-
-Docker ComposeにはV1とV2があります。
-Compose V1は`docker-compose`というコマンドです。Pythonで実装された単独ツールで、設定ファイルは`docker-compose.yaml`です。
-
-Compose V2は`docker compose`というサブコマンドです。
-Go言語で再実装され、Docker CLIに統合されたことで、より多くの機能を使うことができます。
-設定ファイル名は
-`docker-compose.yaml`もそのまま使えますが、
-`compose.yaml`が推奨されています。
-
-ウェブ検索すると、
-V1コマンドの記事もたくさんヒットしますが、
-適宜V2に読み替えるのがよさそうです。
-
-:::
-
-:::{caution}
-
-Compose V1のサポートは2023年6月に終了しています。
-また、Docker Desktop v4.33.0（2024年7月）で`docker-compose`コマンドが削除されました。
-
-:::
 
 ## コンテナ設定したい（`services`）
 
