@@ -37,3 +37,13 @@ tasks:
     cmds:
       - poetry update
       - task: export
+
+  bump:patch:
+    desc: Bump patch version with commitizen
+    cmds:
+      - poetry run cz bump --patch
+
+  bump:minor:
+    desc: Bump minor version with commitizen
+    cmds:
+      - poetry run cz bump --minor
