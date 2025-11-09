@@ -1,72 +1,73 @@
 [project]
 name = "kumaroot"
-description = "KumaROOT"
+version = "2025.11.1"
+description = "KumaROOT - Documentation project"
 readme = "README.md"
 license = "MIT"
-authors = [{name="Shota Takahashi (KMI)", email="<shotakaha@kmi.nagoya-u.ac.jp>"}]
-urls = {"homepage" = "https://kumaroot.readthedocs.io/ja/latest/", "repository" = "https://github.com/shotakaha/kumaroot"}
-version = "2025.11.1"
+authors = [
+    {name = "Shota Takahashi (KMI)", email = "shotakaha@kmi.nagoya-u.ac.jp"}
+]
 requires-python = ">=3.12"
+dependencies = [
+    "sphinx>=8.0.2",
+    "myst-parser>=4.0.0",
+    "sphinx-design>=0.6.0",
+    "sphinx-copybutton>=0.5.2",
+    "sphinx-rtd-theme>=3.0.0",
+    "sphinxcontrib-mermaid>=1.0.0",
+    "sphinx-tags>=0.4",
+    "sphinxext-opengraph>=0.9.1",
+    "sphinxcontrib-googleanalytics>=0.4",
+    "matplotlib>=3.8.3",
+]
 
-[tool.poetry]
-package-mode = false
+[project.urls]
+homepage = "https://kumaroot.readthedocs.io/ja/latest/"
+repository = "https://github.com/shotakaha/kumaroot"
+documentation = "https://kumaroot.readthedocs.io/ja/latest/"
 
-[tool.poetry.dependencies]
-#sphinx = "^6.1.3"
-myst-parser = "^4.0.0"
-sphinx-design = "^0.6.0"
-sphinx-copybutton = "^0.5.2"
-sphinx-rtd-theme = "^3.0.0"
-sphinxcontrib-mermaid = "^1.0.0"
-sphinx-tags = "^0.4"
-sphinxext-opengraph = "^0.9.1"
-matplotlib = "^3.8.3"
-sphinx = "^8.0.2"
-sphinxcontrib-googleanalytics = "^0.4"
-
-[tool.poetry.group.dev.dependencies]
-#ipykernel = "^6.16.0"
-#beautifulsoup4 = "^4.11.1"
-#fake-useragent = "^1.1.1"
-commitizen = "^3.12.0"
-pandas = "^2.1.4"
-pendulum = "^3.0.0"
-sphinx-autobuild = "^2024.2.4"
-japanize-matplotlib = "^1.1.3"
-ipykernel = "^6.29.1"
-scikit-learn = "^1.4.1.post1"
-geopandas = "^1.0.1"
-jupyter-bokeh = "^4.0.4"
-geodatasets = "^2024.7.0"
-cartopy = "^0.24.1"
-geoviews = "^1.12.0"
-tqdm = "^4.66.4"
-uproot = "^5.3.10"
-pydantic = "^2.8.2"
-httpx = "^0.28.1"
-pexpect = "^4.9.0"
-python-dotenv = "^1.0.1"
-hvplot = "^0.11.2"
-
-
-[tool.poetry.group.mystmd.dependencies]
-nodeenv = "^1.8.0"
-mystmd = "^1.3.6"
-
-
-[tool.poetry.requires-plugins]
-poetry-plugin-export = ">=1.8"
+[project.optional-dependencies]
+dev = [
+    "commitizen>=3.12.0",
+    "pandas>=2.1.4",
+    "pendulum>=3.0.0",
+    "sphinx-autobuild>=2024.2.4",
+    "japanize-matplotlib>=1.1.3",
+    "ipykernel>=6.29.1",
+    "scikit-learn>=1.4.1",
+    "geopandas>=1.0.1",
+    "jupyter-bokeh>=4.0.4",
+    "geodatasets>=2024.7.0",
+    "cartopy>=0.24.1",
+    "geoviews>=1.12.0",
+    "tqdm>=4.66.4",
+    "uproot>=5.3.10",
+    "pydantic>=2.8.2",
+    "httpx>=0.28.1",
+    "pexpect>=4.9.0",
+    "python-dotenv>=1.0.1",
+    "hvplot>=0.11.2",
+]
+mystmd = [
+    "nodeenv>=1.8.0",
+    "mystmd>=1.3.6",
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+package-mode = false
+
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "2025.11.1"
+version_provider = "pep621"
 tag_format = "v$version"
 version_files = [
     "pyproject.toml:version",
     "docs/source/conf.py:version",
     "docs/source/conf.py:release",
 ]
+update_changelog_on_bump = true
