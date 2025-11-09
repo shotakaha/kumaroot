@@ -18,30 +18,11 @@ macOSでは、Homebrewを使ってインストールできます。
 ```console
 // Dockerのバージョンを確認
 $ docker --version
-Docker version 27.2.0, build 3ab4256
+Docker version 28.5.1, build e180ab8
 
 // Docker Composeのバージョンを確認
 $ docker compose version
-Docker Compose version v2.29.2-desktop.2
-
-// イメージの状態を確認
-$ docker image ls
-REPOSITORY                 TAG           IMAGE ID       CREATED         SIZE
-python                     3.11-slim     692282a38c50   4 weeks ago     155MB
-httpd                      2.4           a3e79aafef7f   2 months ago    178MB
-docker/welcome-to-docker   latest        648f93a1ba7d   11 months ago   19MB
-
-// コンテナの状態を確認
-$ docker container ls
-CONTAINER ID    IMAGE    COMMAND    CREATED    STATUS    PORTS    NAMES
-
-// ボリュームの状態を確認
-$ docker volume ls
-DRIVER    VOLUME NAME
-
-// Compose状態を確認
-$ docker compose ls
-NAME    STATUS    CONFIG FILES
+Docker Compose version v2.40.3-desktop.1
 ```
 
 ## 起動しない場合
