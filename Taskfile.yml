@@ -47,3 +47,8 @@ tasks:
     desc: Bump minor version with commitizen
     cmds:
       - poetry run cz bump --minor
+
+  changelog:
+    desc: Generate changelog with commitizen (incremental)
+    cmds:
+      - poetry run cz changelog --incremental
