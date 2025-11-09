@@ -149,12 +149,6 @@ tags_extention = ["md"]
 tags_create_badges = True
 # tags_badge_colors = {}
 
-# -*- coding: utf-8 -*-
-#
-# KumaROOT documentation build configuration file, created by
-# sphinx-quickstart on Sat Jul 11 17:44:03 2015.
-#
-
 #################################################
 # Options for sphinx.ext.todo
 ##################################################
