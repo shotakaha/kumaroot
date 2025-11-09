@@ -817,9 +817,9 @@ sphinxcontrib-applehelp==2.0.0 ; python_version >= "3.12" \
 sphinxcontrib-devhelp==2.0.0 ; python_version >= "3.12" \
     --hash=sha256:411f5d96d445d1d73bb5d52133377b4248ec79db5c793ce7dbe59e074b4dd1ad \
     --hash=sha256:aefb8b83854e4b0998877524d1029fd3e6879210422ee3780459e28a1f03a8a2
-sphinxcontrib-googleanalytics==0.4 ; python_version >= "3.12" \
-    --hash=sha256:4b19c1f0fce5df6c7da5633201b64a9e5b0cb3210a14fdb4134942ceee8c5d12 \
-    --hash=sha256:a6574983f9a58e5864ec10d34dc99914c4d647108b22c9249c8f0038b0cb18b3
+sphinxcontrib-googleanalytics==0.5 ; python_version >= "3.12" \
+    --hash=sha256:437e529c33c441bcccceabe3ead1585115e6ba83fe90e23bd42e42521333cc0a \
+    --hash=sha256:a2ac6df9d16b9c124febf6b44e714c1fd9725e692b73ee84ec6b52b377ff5561
 sphinxcontrib-htmlhelp==2.1.0 ; python_version >= "3.12" \
     --hash=sha256:166759820b47002d22914d64a075ce08f4c46818e17cfc9470a9786b759b19f8 \
     --hash=sha256:c9e2916ace8aad64cc13a0d233ee22317f2b9025b9cf3295249fa985cc7082e9
@@ -838,9 +838,9 @@ sphinxcontrib-qthelp==2.0.0 ; python_version >= "3.12" \
 sphinxcontrib-serializinghtml==2.0.0 ; python_version >= "3.12" \
     --hash=sha256:6e2cb0eef194e10c27ec0023bfeb25badbbb5868244cf5bc5bdc04e4464bf331 \
     --hash=sha256:e9d912827f872c029017a53f0ef2180b327c3f7fd23c87229f7a8e8b70031d4d
-sphinxext-opengraph==0.9.1 ; python_version >= "3.12" \
-    --hash=sha256:b3b230cc6a5b5189139df937f0d9c7b23c7c204493b22646273687969dcb760e \
-    --hash=sha256:dd2868a1e7c9497977fbbf44cc0844a42af39ca65fe1bb0272518af225d06fc5
+sphinxext-opengraph==0.13.0 ; python_version >= "3.12" \
+    --hash=sha256:103335d08567ad8468faf1425f575e3b698e9621f9323949a6c8b96d9793e80b \
+    --hash=sha256:936c07828edc9ad9a7b07908b29596dc84ed0b3ceaa77acdf51282d232d4d80e
 urllib3==2.5.0 ; python_version >= "3.12" \
     --hash=sha256:3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760 \
     --hash=sha256:e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc
