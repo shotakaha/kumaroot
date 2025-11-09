@@ -52,3 +52,8 @@ tasks:
     desc: Generate changelog with commitizen (incremental)
     cmds:
       - poetry run cz changelog --incremental
+
+  pre-commit:
+    desc: Run pre-commit hooks on all files
+    cmds:
+      - poetry run pre-commit run --all-files
