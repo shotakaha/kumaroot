@@ -1,9 +1,27 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2025.11.1 (2025-11-09)
+
+### Feat
+
+- **Taskfile.yml**: Add incremental changelog generation task
+
+## v2025.11.0 (2025-11-09)
+
+### Feat
+
+- Switch to calendar-based versioning (YYYY.MM.PATCH)
+- **Taskfile.yml**: Add cz bump commands for patch and minor versions
 
 ### Fix
 
+- **python/python-platformdirs.md**: platformdirsを追記した
+- **command/command-wget.md**: wgetを追記した
+- **command/command-curl.md**: curlの使い方を整理した
+- **python/python-ruff.md**: ruffの設定を追記した
+- **command/command-ansible.md**: ansibleを追加した
+- **typst/typst-with.md**: テンプレートの使い方を追加した
+- **python/python-esptool.md**: esptoolを追加した
 - **python/python-pytest.md**: マーカーなどを追加した
 
 ## v2.0.0 (2025-10-26)
