@@ -94,13 +94,13 @@ task docs
 
 ```console
 $ cd kumaroot
-$ poetry shell
+$ source .venv/bin/activate
 (.venv) $ cd docs
 (.venv) $ make livehtml  # 自動でブラウザが開く
 ```
 
-1. ``poetry shell``で仮想環境を立ち上げる
-2. ``make livehtml``でライブリロードしながら編集内容を確認する
+1. `source .venv/bin/activate`で仮想環境を立ち上げる
+2. `make livehtml`でライブリロードしながら編集内容を確認する
 
 ### VS Codeを使ってライブプレビューする場合
 
@@ -108,16 +108,17 @@ $ poetry shell
 $ task code
 ```
 
-`task code`はVS Codeを起動します。VS Code内でターミナルを開き（``command + j``）、`task docs`を実行してライブプレビューを開始できます。
+`task code`はVS Codeを起動します。
+VS Code内でターミナルを開き（`command + j`）、`task docs`を実行してライブプレビューを開始できます。
 
 #### 手動でVS Codeを起動する場合
 
 ```console
 $ cd kumaroot
-$ code .
+$ poetry run code .
 ```
 
-その後、VS Code内でターミナルを開く（``command + j``）
+その後、VS Code内でターミナルを開く（`command + j`）
 
 ```console
 (.venv) $ cd docs
