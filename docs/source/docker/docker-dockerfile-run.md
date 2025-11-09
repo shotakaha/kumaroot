@@ -47,7 +47,7 @@ Debian/Ubuntuベースのイメージを使っている場合に、パッケー�
 
 複数のコマンドを1つの`RUN`でまとめることで、イメージサイズを削減できます。
 
-## Python環境を構築したい（uv + poetry）
+## Python環境を構築したい（python + uv）
 
 ```dockerfile
 FROM python:3.12-slim
@@ -70,6 +70,58 @@ ENV PATH="/app/.venv/bin:$PATH"
 - `--no-cache-dir`: pipのキャッシュを無効化してイメージサイズを削減
 - `uv sync --frozen`: lockファイルから正確に依存関係をインストール
 - `.venv`は`uv`が自動的に作成します
+
+## Python環境を構築したい（python + poetry）
+
+```dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+
+COPY pyproject.toml poetry.lock ./
+
+# poetryをインストール
+RUN pip install --no-cache-dir poetry \
+    && poetry config virtualenvs.in-project true \
+    && poetry install --no-interaction --no-ansi
+
+# 環境変数を設定
+ENV PATH="/app/.venv/bin:$PATH"
+```
+
+[Poetry](../python/python-poetry.md) を使うことで、依存関係を厳密に管理できます。
+
+**ポイント：**
+
+- `--no-cache-dir`: pipのキャッシュを無効化してイメージサイズを削減
+- `virtualenvs.in-project true`: 仮想環境をプロジェクト内に作成（`.venv`）
+- `--no-interaction --no-ansi`: 対話的な入力を無効化し、ANSIカラーを無効化
+- `poetry.lock`: Poetryのlockファイルから正確に依存関係をインストール
+
+## Python環境を構築したい（python + venv）
+
+```dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+
+COPY requirements.txt ./
+
+# 仮想環境を作成してパッケージをインストール
+RUN python -m venv /app/.venv \
+    && /app/.venv/bin/pip install --no-cache-dir --upgrade pip \
+    && /app/.venv/bin/pip install --no-cache-dir -r requirements.txt
+
+# 環境変数を設定
+ENV PATH="/app/.venv/bin:$PATH"
+```
+
+標準的な`venv`と`requirements.txt`を使うシンプルなPython環境構築です。
+
+**ポイント：**
+
+- `python -m venv /app/.venv`: 仮想環境を作成
+- `/app/.venv/bin/pip install`: 仮想環境内のpipを使用してインストール
+- `--no-cache-dir`: pipのキャッシュを無効化してイメージサイズを削減
+- `--upgrade pip`: pipをアップグレードして最新版を使用
 
 ## シェル形式とexec形式の違い
 
