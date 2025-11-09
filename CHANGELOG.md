@@ -1,5 +1,16 @@
 # CHANGELOG.md
 
+## v2025.11.4 (2025-11-09)
+
+### Fix
+
+- **pandas-usage.md**: correct toctree reference
+- **conf.py**: add unicode-math package for LuaLaTeX \mathscr support
+
+### Refactor
+
+- **conf.py**: improve configuration organization
+
 ## v2025.11.3 (2025-11-09)
 
 ### Feat
