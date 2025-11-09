@@ -132,21 +132,16 @@ sudo apt install code            # Visual Studio Code
 
 ```bash
 sudo apt install python3-pip python3-venv python3-dev
+sudo apt install pipx
+pipx ensurepath
+pipx install uv
 ```
-
-Pythonの基本的な開発ツールをインストール：
 
 - `python3-pip` - パッケージマネージャー
 - `python3-venv` - 仮想環境作成ツール
 - `python3-dev` - Python開発用ヘッダーファイル
-
-**さらに高度な環境構築：**
-
-```bash
-sudo apt install pipx
-```
-
-`pipx`を使うと、Pythonツールをシステム全体に影響を与えずにインストールできます。
+- `pipx` - Pythonのパッケージ管理ツール
+- `uv` - Pythonのパッケージ管理ツール
 
 詳細は[Python環境構築](../python/)を参照してください。
 
