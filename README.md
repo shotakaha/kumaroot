@@ -14,12 +14,12 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 
 想定している読者は、ちょっとだけROOTを使ったことがある学生／研究者です。
 パッケージやクラスの網羅的な説明は公式ドキュメントに任せ、
-こでは「〇〇したい」という目的ベースで整理することで、
+ここでは「〇〇したい」という目的ベースで整理することで、
 「逆引き辞典」として使えるものを目指したいと思います。
 
 ## 公開版（Read the Docs）
 
-- [HTML](https://kumaroot.readthedocs.org)
+- [HTML](https://kumaroot.readthedocs.io/ja/latest/)
 - [PDF](https://readthedocs.org/projects/kumaroot/downloads/)
 - [GitHub Pages](https://shotakaha.github.io/kumaroot/)
 
@@ -44,7 +44,7 @@ $ poetry run bash deploy.sh
 ## このドキュメントについて
 
 このドキュメントは
-[Sphinx](https://sphinx-users.jp)というドキュメト作成ソフトを使っています。
+[Sphinx](https://sphinx-users.jp)というドキュメント作成ソフトを使っています。
 文書本体には``reStructuredText（reST）``と``Markdown（md）``という軽量マークアップ言語を使っています。
 
 ### セットアップ
@@ -178,7 +178,7 @@ docs/source/ツール名/ツール名-内容.md
 ```md
 root/root-usage.md
 sphinx/sphinx-usage.md
-python/pyhton-usage.md
+python/python-usage.md
 pandas/pandas-usage.md
 ```
 
@@ -207,7 +207,7 @@ command/command-find.md
 ### 例：ツールの説明画像
 
 ごくまれにツールの使い方を説明した画像やスクリーンショットを使っています。
-ツールの中に``fig``とう画像用のディレクトリを作成し、その中で管理するようにしています。
+ツールの中に``fig``という画像用のディレクトリを作成し、その中で管理するようにしています。
 
 ```md
 emacs/fig/mac-key01.png
