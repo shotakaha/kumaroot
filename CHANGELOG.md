@@ -1,5 +1,34 @@
 # CHANGELOG.md
 
+## v2025.11.5 (2025-11-09)
+
+### Fix
+
+- **docker-dockerfile-cmd**: expand documentation with comprehensive examples and best practices
+- **docker-dockerfile-run**: add Python + venv environment setup example
+- **docker-dockerfile-run**: expand documentation with comprehensive examples
+- **docker-dockerfile-copy**: clarify .dockerignore placement in build context
+- **docker-dockerfile-copy**: expand documentation with comprehensive examples and best practices
+- **docker-dockerfile**: improve documentation with sample and reorganize toctree order
+- **docker-dockerfile-shell**: improve documentation quality and completeness
+- **docker-dockerfile-workdir**: improve documentation quality and completeness
+- **docker-dockerfile-from**: improve documentation quality and completeness
+- **docker-compose.md**: reorder commands by usage frequency and add introduction
+- **docker-compose-run.md**: expand documentation with practical examples
+- **docker-compose-ps.md**: restructure and expand documentation
+- **docker-compose-ls.md**: improve documentation clarity
+- **docker-compose-logs.md**: improve clarity and documentation
+- **docker-compose-cp.md**: improve clarity and documentation
+- **docker-compose-exec.md**: improve clarity and documentation
+- **docker-compose-down.md**: improve clarity and documentation
+- **docker-compose-up.md**: improve clarity and documentation
+- **docker-compose-yaml.md**: improve clarity with version key note and workflow
+- **docker-compose-yaml.md**: reorganize introduction for clarity
+
+### Refactor
+
+- **docker**: split ls and inspect commands into separate files
+
 ## v2025.11.4 (2025-11-09)
 
 ### Fix
