@@ -149,12 +149,18 @@ task changelog
 ## 依存パッケージの管理
 
 ```bash
-$ poetry export -f requirements.txt --output requirements.txt
+task outdated
 ```
 
-Read the Docsでビルドする際に、``requirements.txt``を使って必要なパッケージを取得しています。
-なので、パッケージを更新したら``requirements.txt``も更新する必要があります。
-``poetry export``のサブコマンドで生成し、Gitにコミットします。
+`task outdated`で更新が利用可能な依存パッケージを確認できます。
+
+```bash
+task update
+```
+
+`task update`で依存パッケージを更新できます。
+Read the Docsでビルドする際に必要な`requirements.txt`を同時に生成されます。
+更新された`poetry.lock`と`requirements.txt`をGitにコミットしてください。
 
 ## ファイルの命名規則
 
