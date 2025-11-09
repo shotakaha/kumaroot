@@ -25,6 +25,7 @@ raspi-timedatectl
 raspi-locale
 raspi-wifi
 raspi-passwd
+raspi-date
 ```
 
 ## リモートアクセス
