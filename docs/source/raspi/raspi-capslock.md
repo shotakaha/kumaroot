@@ -1,4 +1,14 @@
-# CapsLockを置換したい
+# キーボード設定したい（`/etc/default/keyboard`）
+
+Raspberry Piのキーボードレイアウトやキーマッピングは、`/etc/default/keyboard`ファイルで設定できます。
+
+## Caps Lockを Ctrl に置き換えたい
+
+```bash
+sudo vi /etc/default/keyboard
+```
+
+`/etc/default/keyboard`ファイルを編集し、`XKBOPTIONS`行を以下のように変更します。
 
 ```diff
 ## /etc/default/keyboard
@@ -16,54 +26,98 @@ XKBVARIANT=""
 BACKSPACE="guess"
 ```
 
-{guilabel}`CapsLock`キーを{guilabel}`Control`キーに置き換えます。
-{file}`/etc/default/keyboard`を編集し、
-``XKBOPTIONS=ctrl:nocaps``に変更して、リブートします。
-{file}`/etc/default/keyboard`の編集には管理者権限が必要です。
+その後、再起動してください。
 
-```console
-$ sudo vi /etc/default/keyboard
+```bash
+sudo reboot
 ```
 
-## CapsLockを入れ替えたい
+Caps LockキーがControlキーとして機能するようになります。
+
+## CapsLockとCtrlを入れ替えたい
+
+```bash
+sudo vi /etc/default/keyboard
+```
+
+`/etc/default/keyboard`ファイルの`XKBOPTIONS`行を以下のように変更します：
 
 ```diff
-## /etc/default/keyboard
-
-# ..省略
 -XKBOPTIONS=""
 +XKBOPTIONS=ctrl:swapcaps
 ```
 
-{guilabel}`CapsLock`キーと{guilabel}`Control`キーを入れ替えます。
-{file}`/etc/default/keyboard`を編集し、
-``XKBOPTIONS=ctrl:swapcaps``に変更して、リブートします。
+再起動してください。
 
-## XKBの設定項目
+```bash
+sudo reboot
+```
 
-設定項目は``man keyboard``で確認できます。
-以下はその内容の抜粋です。
+CapsLockキーとControlキーの役割が入れ替わります。
 
-XKBMODEL
-: キーボードのモデル名を設定します。デフォルトは``pc105``です。
+## /etc/default/keyboard について
 
-XKBLAYOUT
-: キーボードのレイアウト名です。デフォルトは``us``です。
+`/etc/default/keyboard`ファイルはXKB（X Keyboard Extension）の設定を管理します。
+詳細な設定項目は`man keyboard`で確認できます。
 
-XKBVARIANT
-: キーボードのバリアントです。デフォルトは``""（not set）``です。
+### XKBMODEL
 
-XKBOPTIONS
-: キーボードのオプション設定です。修飾キー（``Shift`` / ``Control`` など）が変更できます。デフォルトは``""（not set）``です。
+キーボードのモデル名を設定します。デフォルトは`pc105`（標準的なPC用キーボード）です。
 
-BACKSPACE
-: {guilabel}`BackSpace`と{guilabel}`Delete`キーの動作の設定です。
-  ``bs`` / ``del`` / ``guess`` が設定できます。
-  ``guess``の場合、現在のターミナルやカーネル設定が適用されます。
-  ``bs``の場合、``VT100-conformant``な動作になります（``BackSpace`` = ``^H（ASCII BS）``、``Delete`` = ``^?（ASCII DEL）``
-  ``del``の場合、``VT220-conformant``な動作になります（``BackSpace`` = ``^?（ASCII DEL）``、``Delete`` = special function sequence）
+例：
 
-KMAP
-: デフォルトでは設定不要です。
-  XKBレイアウトを利用したくない場合に、代替キーマップを設定できます。
-  （詳細は省略）
+- `pc105` - 標準的なPC 105キーボード（推奨）
+- `pc104` - PC 104キーボード
+
+### XKBLAYOUT
+
+キーボードのレイアウト名です。デフォルトは`us`（USキーボード）です。
+
+例：
+
+- `us` - US配列
+- `jp` - 日本語配列
+- `gb` - UK配列
+
+### XKBVARIANT
+
+キーボードレイアウトのバリアント（変種）です。デフォルトは未設定です。
+
+例：
+- 空文字列（未設定）
+- `dvorak` - Dvorakレイアウト
+- `colemak` - Colemakレイアウト
+
+### XKBOPTIONS
+
+キーボードのオプション設定です。修飾キー（Shift、Controlなど）のマッピングを変更できます。
+デフォルトは未設定です。
+
+よく使う設定値：
+
+| オプション | 説明 |
+|----------|------|
+| `ctrl:nocaps` | Caps Lockを Ctrlに置き換え |
+| `ctrl:swapcaps` | Caps Lockと Ctrlを入れ替え |
+| `shift:both_capslock` | 両方の Shiftキーを押して Caps Lockを有効化 |
+| `compose:ralt` | 右 Altキーを Composeキーに設定 |
+
+### BACKSPACE
+
+BackspaceキーとDeleteキーの動作を設定します。
+
+| 値 | 説明 |
+|----|------|
+| `guess` | 現在のターミナルやカーネル設定に基づいて自動判定（デフォルト） |
+| `bs` | VT100準拠（Backspace = `^H` (ASCII BS)、Delete = `^?` (ASCII DEL)） |
+| `del` | VT220準拠（Backspace = `^?` (ASCII DEL)、Delete = special sequence） |
+
+### KMAP
+
+XKBレイアウトの代わりに使用する従来型のキーマップファイルを指定します。
+通常は設定不要です。
+
+## リファレンス
+
+- [man keyboard - Ubuntu Manpages](https://manpages.ubuntu.com/manpages/focal/man5/keyboard.5.html)
+- [XKB - Wikipedia](https://en.wikipedia.org/wiki/X_keyboard_extension)
