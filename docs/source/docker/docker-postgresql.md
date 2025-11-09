@@ -1,155 +1,157 @@
 # PostgreSQLしたい（`postgresql`）
 
+`compose.yaml` ファイル：
+
 ```yaml
 services:
   db:
-    image: postgres:16.4
-    restart: always
-    # 共有メモリのサイズ
-    shm_size: 128mb
+    image: postgres:latest
+    container_name: my-postgres
     environment:
-      # 管理者用パスワード（必須）
-      POSTGRES_PASSWORD: example
-      # 管理者ユーザー名（オプション）
-      POSTGRES_USER: ユーザー名（デフォルトはpostgres）
-      # データベースの初期設定
-      # POSTGRES_DB
-      # POSTGRES_INITDB_ARGS
-      # POSTGRES_INITDB_WALDIR
-      # POSTGRES_HOST_AUTH_METHOD
-      # PGDATA
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_password}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-app_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    shm_size: 128mb
 
   adminer:
-    image: adminer
-    restart: always
+    image: adminer:latest
+    container_name: my-adminer
     ports:
-      - 8083:8080
+      - "8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+    depends_on:
+      - db
+
+volumes:
+  db_data:
 ```
 
-## セットアップしたい
+PostgreSQLをDockerで起動します。
+認証情報は環境変数で設定し、データはnamed volumeで永続化しています。
+環境変数は`.env`で変更します。
+上記サンプルでは、デフォルト値を指定しているため、`.env`ファイルがなくても動作します。
 
-UbuntuコンテナにPostgreSQLをインストールして、操作方法を確認しました。
+Adminerはマルチプラットフォーム対応のデータベース管理ツールで、ブラウザから簡単にPostgreSQLを管理できます。
 
-```yaml
-services:
-  ubuntu:
-    image: ubuntu:24.10
-    tty: true
-```
-
-- 起動
+起動・停止コマンドは以下の通りです。
 
 ```console
 $ docker compose up -d
-[+] Running 2/2
- ✔ Network docker-ubuntu_default     Created        0.0s
- ✔ Container docker-ubuntu-ubuntu-1  Started        0.1s
+$ docker compose down
 ```
 
-- コンテナにログイン
+## 動作確認したい
 
 ```console
-$ docker compose exec ubuntu bash
-root@afb2548c7f89:/#
-```
-
-- PostgreSQLをインストール
-
-```console
-root@afb2548c7f89:/# apt update
-root@afb2548c7f89:/# apt upgrade
-root@afb2548c7f89:/# apt-cache search postgresql
-root@afb2548c7f89:/# apt install postgresql
-Summary:
-  Upgrading: 0, Installing: 85, Removing: 0, Not Upgrading: 0
-  Download size: 88.1 MB
-  Space needed: 365 MB / 29.6 GB available
-root@afb2548c7f89:/# apt install postgresql-contrib
-Summary:
-  Upgrading: 0, Installing: 1, Removing: 0, Not Upgrading: 0
-  Download size: 11.8 kB
-  Space needed: 17.4 kB / 29.2 GB available
-
-root@afb2548c7f89:/# which -a psql
-/usr/bin/psql
-/bin/psql
-
-root@afb2548c7f89:/# psql --version
-psql (PostgreSQL) 16.4 (Ubuntu 16.4-1build1)
-
-root@afb2548c7f89:/# psql
-psql: error: connection to server on socket failed:
-    No such file or directory
-    Is the server running locally and accepting connections on that socket?
-```
-
-- サービスを起動
-
-```console
-root@afb2548c7f89:/# service postgresql status
-16/main (port 5432): down
-
-root@afb2548c7f89:/# service postgresql start
- * Starting PostgreSQL 16 database server
-
-root@afb2548c7f89:/# service postgresql status
-16/main (port 5432): online
-```
-
-- データベースに接続
-
-```console
-// ユーザーを postgres に変更
-root@afb2548c7f89:/# su postgres
-
-// データベースに接続
-postgres@afb2548c7f89:/$ psql
-psql (16.4 (Ubuntu 16.4-1build1))
+$ docker compose exec db psql -U postgres
+psql (16.4 (Debian 16.4-1.pgdg120+1))
+Type "help" for help.
 
 postgres=#
 ```
 
-- データベースを一覧
+コンテナー内のPostgreSQLに接続できます。
 
-```console
-postgres=# \l
-                                                   List of databases
-   Name    |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | ICU Locale | ICU Rules |   Access privileges
------------+----------+----------+-----------------+---------+---------+------------+-----------+-----------------------
- postgres  | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           |
- template0 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
-           |          |          |                 |         |         |            |           | postgres=CTc/postgres
- template1 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
-           |          |          |                 |         |         |            |           | postgres=CTc/postgres
-(3 rows)
+### 動作確認用SQL
+
+```sql
+\l
+CREATE DATABASE test_db;
+\c test_db
+CREATE TABLE hello (id INT PRIMARY KEY, message TEXT);
+INSERT INTO hello VALUES (1, 'Hello PostgreSQL!');
+SELECT * FROM hello;
 ```
 
-- データベースを作成
+## 環境変数を設定したい
 
-```console
-postgres=# CREATE DATABASE new_database;
-CREATE DATABASE
+`.env` ファイルで認証情報を管理することを推奨します：
 
-postgres=# \l
-                                                     List of databases
-     Name     |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | ICU Locale | ICU Rules |   Access privileges
---------------+----------+----------+-----------------+---------+---------+------------+-----------+-----------------------
- new_database | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           |
- postgres     | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           |
- template0    | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
-              |          |          |                 |         |         |            |           | postgres=CTc/postgres
- template1    | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
-              |          |          |                 |         |         |            |           | postgres=CTc/postgres
-(4 rows)
+```env
+POSTGRES_PASSWORD=your_password
+POSTGRES_USER=your_username
+POSTGRES_DB=your_database_name
 ```
 
-- データベースを終了
+認証情報は環境変数で変更できます。
+`.env` ファイルに必要な認証情報を記述し、
+ビルドコンテキストのルートに配置してください。
+
+Gitリポジトリで管理している場合は、
+`.env`は`.gitignore`に追加して、コミットできないようにしてください。
+
+PostgreSQLの公式イメージでは、以下の初期設定時の認証情報を設定できます。
+
+| 環境変数 | 説明 | 必須 | 備考 |
+|---|---|---|---|
+| `POSTGRES_PASSWORD` | postgres ユーザーのパスワード | 必須 | セキュリティ上、必ず設定が必要 |
+| `POSTGRES_USER` | 管理者ユーザー名 | 任意 | デフォルトは postgres |
+| `POSTGRES_DB` | 初期作成するデータベース名 | 任意 | アプリ用DBを自動作成 |
+| `POSTGRES_INITDB_ARGS` | initdb へのコマンドラインオプション | 任意 | エンコーディングなどを指定 |
+
+いったん初期化したコンテナーでは、これらの環境変数を変更しても反映されません。
+変更を反映させたい場合は、ボリュームを削除して再起動してください。
+
+:::{note}
+
+認証情報は`compose.yaml`にベタ書きせず、
+`.env`に保存することが推奨されています。
+
+:::
+
+## ユーザー・パスワードを変更したい
 
 ```console
+$ docker compose exec db psql -U postgres
+postgres=# ALTER USER postgres WITH PASSWORD 'new_password';
+ALTER ROLE
 postgres=# \q
-postgres@afb2548c7f89:/$
 ```
+
+PostgreSQLは最初からpostgresユーザーが存在します。
+パスワードを変更する場合は`ALTER USER`コマンドを使用します。
+
+## データベースを確認したい
+
+### Adminerで確認したい
+
+ブラウザで `http://localhost:8080` にアクセスするとAdminerが起動します。
+
+システムに `PostgreSQL` を選択し、サーバー名に `db` を入力し、
+ユーザー名に `postgres`、パスワードに設定した値を入力してログインできます。
+
+### psql で確認したい
+
+```console
+$ docker compose exec db psql -U postgres
+```
+
+コンテナー内のpsqlを起動し、コマンドラインでデータベースを直接操作できます。
+
+```console
+postgres=# \l
+postgres=# \c app_db
+postgres=# \dt
+postgres=# SELECT * FROM table_name;
+postgres=# \q
+```
+
+よく使う psql コマンド：
+
+| コマンド | 説明 |
+|---------|------|
+| `\l` | データベース一覧を表示 |
+| `\c database_name` | データベースに接続 |
+| `\dt` | テーブル一覧を表示 |
+| `\du` | ユーザー一覧を表示 |
+| `\q` | psql を終了 |
 
 ## リファレンス
 
 - [postgres - DockerHub](https://hub.docker.com/_/postgres/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
