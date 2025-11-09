@@ -112,7 +112,7 @@ pandas-sort_values
 ---
 maxdepth: 1
 ---
-pansas-sum
+pandas-sum
 pandas-mean
 pandas-var
 pandas-std
