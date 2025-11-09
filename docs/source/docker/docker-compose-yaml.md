@@ -30,7 +30,7 @@ V1の記事を見かけた場合は、適宜V2に読み替えてください。
 
 :::
 
-## 基本的な設定例
+## 基本的な設定例（`compose.yaml`）
 
 ```yaml
 # compose.yaml
@@ -50,6 +50,17 @@ volumes:
 設定ファイルは`compose.yaml`です。
 `services`の中に利用するコンテナごとの設定、
 `volumes`の中に内部ボリュームの設定を記述できます。
+
+設定ファイルを作成した後は、以下のコマンドでコンテナを起動・管理します。
+
+```console
+$ docker compose up          # コンテナ起動
+$ docker compose ps          # 稼働中のコンテナ確認
+$ docker compose logs        # ログ確認
+$ docker compose down        # コンテナ停止・削除
+```
+
+詳細は[docker-compose.md](docker-compose.md)の各セクションを参照してください。
 
 ## コンテナ設定したい（`services`）
 
@@ -81,17 +92,19 @@ services:
 コンテナごとに必要な設定を記述します。
 詳細は[Compose Specification](https://docs.docker.jp/compose/compose-file/index.html)を参照してください。
 
-:::{seealso}
+:::{note}
 
-Compose V1の初期には`docker-compose.yaml`の先頭に
-`version: "3"`のようにバージョン指定をしていましたが、
-Docker Compose 1.27.0以降では`version`キーは不要です。
+**`version`キーは不要です**
+
+Compose V1の初期には`docker-compose.yaml`の先頭に`version: "3"`のようにバージョン指定をしていましたが、Docker Compose 1.27.0以降では`version`キーは不要です。
+
+古い設定ファイルで`version`キーが定義されている場合、以下のようなWARNINGが表示されます。
 
 ```console
 WARN[0000] ./docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
 ```
 
-`version`キーを定義している場合は、WARNINGが表示されます。
+新規作成する場合は`version`キーを記述しないようにしましょう。
 
 :::
 
