@@ -1,70 +1,70 @@
-# コンテナの状態を調べたい（``ls``）
+# リソースを一覧したい（``docker ... ls``）
+
+``docker``の管理コマンド（``Management Commands``）の``ls``サブコマンドで、イメージ、コンテナー、ボリューム、ネットワーク、プラグインなどのリソース一覧を表示できます。
+
+## イメージ一覧を確認したい（``docker image ls``）
 
 ```console
 $ docker image ls
+```
+
+ダウンロード済みのイメージ一覧を表示できます。
+
+:::{note}
+
+`docker images`、`docker image list`、`docker image ls`はすべて同じコマンドです。
+
+:::
+
+## コンテナー一覧を確認したい（``docker container ls``）
+
+```console
 $ docker container ls
+```
+
+起動中のコンテナー一覧を表示できます。
+
+```console
+$ docker container ls --all
+```
+
+`--all`オプションで、停止中のコンテナーも含めて表示します。
+
+:::{note}
+
+`docker ps`、`docker container ps`、`docker container list`、`docker container ls`はすべて同じコマンドです。
+
+:::
+
+## ボリューム一覧を確認したい（``docker volume ls``）
+
+```console
 $ docker volume ls
+```
+
+作成済みのボリューム一覧を表示できます。
+
+## ネットワーク一覧を確認したい（``docker network ls``）
+
+```console
 $ docker network ls
+```
+
+作成済みのネットワーク一覧を表示できます。
+
+## プラグイン一覧を確認したい（``docker plugin ls``）
+
+```console
 $ docker plugin ls
 ```
 
-``docker``の管理コマンド（``Management Commands``）は``ls``や``inspect``で詳細を調べることができます。
-管理コマンドは、Dockerコマンドを整理するためにDocker 17.06以降に導入されました（たぶん）。
-
-## イメージを調べたい（``docker image inspect``）
-
-```bash
-$ docker image ls
-$ docker image inspect イメージ名
-```
-
-ダウンロード済みのイメージ一覧を表示して、イメージ名を確認できます。
-``docker images``、
-``docker image list``と
-``docker image ls``は同じです。
-
-## コンテナを調べたい（``docker container inspect``）
-
-```bash
-$ docker container ls
-$ docker container inspect コンテナ名
-```
-
-起動しているコンテナ一覧を表示して、コンテナ名を確認できます。
-``docker container list``、
-``docker container ps``、
-``docker ps``と
-``docker container ls``は同じです。
-
-## ボリュームを調べたい（``docker volume inspect``）
-
-```bash
-$ docker volume ls
-$ docker volume inspect ボリューム名
-```
-
-ボリューム一覧を表示して、ボリューム名を確認できます。
-
-## ネットワークを調べたい（``docker network inspect``）
-
-```bash
-$ docker network ls
-$ docker network inspect ネットワーク名
-```
-
-## プラグインを調べたい（``docker plugin inspect``）
-
-```bash
-$ docker plugin ls
-$ docker plugin inspect プラグイン名
-```
+インストール済みのプラグイン一覧を表示できます。
 
 ## リファレンス
 
 - [Docker CLI reference - docs.docker.com](https://docs.docker.com/reference/cli/docker/)
 - [docker image ls - docs.docker.com](https://docs.docker.com/reference/cli/docker/image/ls/)
 - [docker container ls - docs.docker.com](https://docs.docker.com/reference/cli/docker/container/ls/)
-- [docker container inspect - docs.docker.com](https://docs.docker.com/reference/cli/docker/container/inspect/)
 - [docker volume ls - docs.docker.com](https://docs.docker.com/reference/cli/docker/volume/ls/)
 - [docker network ls - docs.docker.com](https://docs.docker.com/reference/cli/docker/network/ls/)
 - [docker plugin ls - docs.docker.com](https://docs.docker.com/reference/cli/docker/plugin/ls/)
