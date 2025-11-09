@@ -18,25 +18,40 @@
 ---
 maxdepth: 1
 ---
-command-bat
 command-cd
-command-date
+command-pwd
 command-ls
 command-lsd
-command-mdfind
 command-open
-command-pbcopy
-command-pwd
-command-pwgen
-command-ripgrep
-command-tldr
-command-zoxide
-command-mktemp
+command-mdfind
+command-date
 command-df
 command-du
-command-crontab
-command-jq
+command-mktemp
+command-pbcopy
+command-pwgen
 command-screen
+command-crontab
+```
+
+## ファイル検索・テキスト処理したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-bat
+command-find
+command-fd
+command-grep
+command-ripgrep
+command-sed
+command-sd
+command-awk
+command-jq
+command-nkf
+command-tldr
+command-zoxide
 ```
 
 ## エディターしたい
@@ -50,6 +65,8 @@ command-emacs
 command-helix
 command-vim
 command-zed
+command-myst
+command-clang-format
 ```
 
 ## エージェントしたい
@@ -87,6 +104,7 @@ command-poetry
 command-rye
 command-softwareupdate
 command-xcode
+command-arduino-cli
 ```
 
 ## シェルしたい
@@ -95,16 +113,15 @@ command-xcode
 ---
 maxdepth: 1
 ---
-command-awk
-command-chmod
 command-bash
-command-echo
 command-fish
-command-nkf
+command-chmod
 command-ps
+command-which
+command-echo
 command-stdout
 command-tee
-command-which
+command-xargs
 ```
 
 ## ネットワークしたい
@@ -126,8 +143,50 @@ command-ssh
 command-ssh-keygen
 command-tcpdump
 command-wget
-command-xargs
 command-xh
+```
+
+## Git・バージョン管理したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-tig
+command-glab
+command-gitlab
+```
+
+## 圧縮・アーカイブしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-tar
+command-gzip
+```
+
+## システム管理・その他したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+command-uname
+command-launchctl
+command-systemctl
+command-mysql
+command-zellij
+command-1password
+command-mkcert
+command-pandoc
+command-texdoc
+command-fc-list
+command-expect
+command-jsdoc
+command-wp-cli
+command-ansible
 ```
 
 ## 未分類
@@ -136,32 +195,5 @@ command-xh
 ---
 maxdepth: 1
 ---
-command-1password
-command-clang-format
 command-exa
-command-fc-list
-command-fd
-command-find
-command-grep
-command-gzip
-command-launchctl
-command-systemctl
-command-mkcert
-command-myst
-command-pandoc
-command-sd
-command-sed
-command-tar
-command-texdoc
-command-tig
-command-uname
-command-mysql
-command-zellij
-command-glab
-command-gitlab
-command-arduino-cli
-command-expect
-command-jsdoc
-command-wp-cli
-command-ansible
 ```
