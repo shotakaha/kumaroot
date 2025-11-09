@@ -176,6 +176,9 @@ latex_elements = {
 # Loaded before hyperref
 latex_elements["extrapackages"] = r"""
 \usepackage{luatexja}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{unicode-math}
 \usepackage{physics}
 """
 
@@ -184,13 +187,12 @@ latex_elements["preamble"] = r"""
 \setlength{\footskip}{3\zw}
 \hypersetup{bookmarksnumbered=true}
 \hypersetup{bookmarksopen=true}
+\hypersetup{colorlinks=true}
+\hypersetup{bookmarksopenlevel=2}
+\hypersetup{pdfpagemode=UseOutlines}
 """
-# \hypersetup{colorlinks=true}
 
 # latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
-# latex_elements['preamble'] += '\\hypersetup{bookmarksopenlevel=2}\n'
-
-# latex_elements['preamble'] += '\\hypersetup{pdfpagemode=UseOutlines}\n'
 
 # latex_elements['preamble'] += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
 # latex_elements['preamble'] += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
