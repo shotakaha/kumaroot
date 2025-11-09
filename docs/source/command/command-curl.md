@@ -19,14 +19,14 @@ $ brew install curl
 `curl`はmacOSに標準でインストールされています。
 Homebrewで最新版をインストールできます。
 
-## 保存したい（`-o` / `-O`）
+## ダウンロードしたい（`-o` / `-O`）
 
 ```console
 # ファイル名を指定
 $ curl -o example.html https://example.com
 ```
 
-`-o ファイル名`オプションで、指定したURLをファイルとして保存できます。
+`-o ファイル名`オプションで、指定したURLを任意のファイル名で保存できます。
 
 ```console
 # リモートのファイル名を使って保存
