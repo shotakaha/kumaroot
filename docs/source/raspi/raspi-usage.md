@@ -6,6 +6,7 @@ maxdepth: 1
 ---
 raspi-hardware
 raspi-install
+raspi-config
 raspi-packages
 raspi-capslock
 raspi-editor
