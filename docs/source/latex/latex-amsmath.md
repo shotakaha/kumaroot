@@ -117,6 +117,22 @@ z_{2} & = cx + dy
 
 `\mathscr{}`で文字スタイルを花文字（script font）に変更できます。
 
+:::{note}
+
+**LuaLaTeX で `\mathscr` を使う場合の確認事項**
+
+`pdflatex` では `amssymb` パッケージだけで `\mathscr` が使えますが、`lualatex` エンジンを使う場合は **`unicode-math` パッケージ** が必須です。
+
+プリアンブルに以下を追加してください:
+
+```latex
+\usepackage{unicode-math}
+```
+
+この設定がないと、`\mathscr` が未定義の制御シーケンスエラーになります。
+
+:::
+
 ## ドイツ文字したい（`\mathfrak`）
 
 ```latex
