@@ -8,91 +8,6 @@ sudo raspi-config
 
 ホスト名、タイムゾーン、インターフェイス設定など、さまざまな設定をGUIから簡単に変更できます。
 
-## ホスト名を変更したい
-
-```bash
-sudo raspi-config
-# System Options → Hostname を選択
-```
-
-ホスト名を変更することで、ネットワーク上で識別しやすくなります。
-変更後は再起動が必要な場合があります。
-
-**別の方法（コマンドラインのみ）：**
-
-```bash
-sudo hostnamectl set-hostname <新しいホスト名>
-```
-
-## タイムゾーンを設定したい
-
-```bash
-sudo raspi-config
-# Localisation Options → Timezone を選択
-# 地域と都市を選択
-```
-
-タイムゾーンを設定することで、ログのタイムスタンプや自動タスクの実行時刻が正確になります。
-
-**別の方法（コマンドラインのみ）：**
-
-```bash
-sudo timedatectl set-timezone Asia/Tokyo
-```
-
-## ロケールを設定したい
-
-```bash
-sudo raspi-config
-# Localisation Options → Locale を選択
-# デフォルトロケールを選択
-```
-
-ロケールを設定することで、言語や文字エンコーディングが正確に設定されます。
-
-**別の方法（コマンドラインのみ）：**
-
-```bash
-# 利用可能なロケール一覧を表示
-locale -a
-
-# ロケールを設定
-sudo update-locale LANG=ja_JP.UTF-8
-```
-
-## WiFiを設定したい
-
-```bash
-sudo raspi-config
-# System Options → Wireless LAN を選択
-# SSID（ネットワーク名）とパスワードを入力
-```
-
-WiFiを設定することで、イーサネットケーブルなしにRaspberry Piをネットワークに接続できます。
-
-## SSHを有効にしたい
-
-```bash
-sudo raspi-config
-# Interface Options → SSH を選択
-# Yes を選択して有効化
-```
-
-SSHを有効にすることで、リモートからコマンドラインでアクセスできます。
-
-詳細は[SSH設定](raspi-ssh.md)を参照してください。
-
-## VNCを有効にしたい
-
-```bash
-sudo raspi-config
-# Interface Options → VNC を選択
-# Yes を選択して有効化
-```
-
-VNCを有効にすることで、リモートからGUIデスクトップにアクセスできます。
-
-詳細は[VNC設定](raspi-vnc.md)を参照してください。
 
 ## カメラを有効にしたい
 
@@ -190,41 +105,7 @@ sudo raspi-config
 
 ディスプレイの解像度を変更できます。
 
-## Waylandから X11に切り替えたい
 
-```bash
-sudo raspi-config
-# Advanced Options → Wayland を選択
-# X11 を選択
-# 再起動
-```
-
-Raspberry Pi OS BookwormではデフォルトでWaylandが使用されていますが、
-X11ベースのデスクトップ環境に切り替えることができます。
-
-:::{note}
-
-セキュリティ上の理由からWaylandへの移行が推奨されているため、
-特別な理由がない限りX11への切り替えは推奨されません。
-
-:::
-
-## パスワードを変更したい
-
-```bash
-sudo raspi-config
-# System Options → Password を選択
-# 新しいパスワードを入力
-```
-
-Piユーザーのパスワードを変更できます。
-
-**別の方法（コマンドラインのみ）：**
-
-```bash
-passwd
-# 現在のパスワードと新しいパスワードを入力
-```
 
 ## 自動ログインを有効にしたい
 
