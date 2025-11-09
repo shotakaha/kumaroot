@@ -1,5 +1,19 @@
 # CHANGELOG.md
 
+## v2025.11.3 (2025-11-09)
+
+### Feat
+
+- **Taskfile.yml**: add pre-commit task
+
+### Fix
+
+- **README.md**: Correct typos and URLs
+
+### Refactor
+
+- **README.md**: Improve virtual environment activation instructions
+
 ## v2025.11.2 (2025-11-09)
 
 ### Refactor
