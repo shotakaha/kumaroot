@@ -16,33 +16,28 @@ release = "2025.11.3"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.doctest",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.todo",
-    "sphinx.ext.coverage",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.ifconfig",
-    "sphinx.ext.viewcode",
-    "sphinx_rtd_theme",
     "myst_parser",
-    "sphinxext.opengraph",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
     "sphinx_copybutton",
     "sphinx_design",
+    "sphinx_rtd_theme",
     "sphinx_tags",
-    "sphinxcontrib.mermaid",
     "sphinxcontrib.googleanalytics",
+    "sphinxcontrib.mermaid",
+    "sphinxext.opengraph",
 ]
 
 templates_path = ["_templates"]
 exclude_patterns = []
 language = "ja"
 
-# source_suffix = {
-#     '.rst': 'restructuredtext',
-#     '.md': 'markdown',
-#     }
-# source_encoding = 'utf-8-sig'
 nitpicky = True
 
 numfig = True
@@ -153,8 +148,6 @@ tags_create_badges = True
 # Options for sphinx.ext.todo
 ##################################################
 todo_include_todos = True
-
-# htmlhelp_basename = 'KumaROOTdoc'
 
 ##################################################
 # Options for LaTeX output
