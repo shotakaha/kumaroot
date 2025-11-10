@@ -121,102 +121,11 @@ WORDPRESS_DB_PASSWORD=secure_password
 MYSQL_ROOT_PASSWORD=root_password
 ```
 
-## Bitnamiイメージを使った構成
+## Bitnamiイメージを使いたい
 
-### Bitnami + MySQLの構成
+Bitnamiが提供するWordPressイメージを使用する場合は、[WordPressをBitnamiで構築したい](docker-wordpress-bitnami.md)を参照してください。
 
-Bitnamiイメージはセキュリティが強化されており、wp-cliが同梱されているため、本番環境に適しています。
-
-```yaml
-# compose.yaml
-services:
-  wordpress:
-    image: bitnami/wordpress:latest
-    container_name: wordpress-dev
-    ports:
-      - "8080:80"
-      - "8443:443"
-    environment:
-      WORDPRESS_DATABASE_HOST: db
-      WORDPRESS_DATABASE_NAME: ${WORDPRESS_DB_NAME:-wordpress}
-      WORDPRESS_DATABASE_USER: ${WORDPRESS_DB_USER:-wordpress}
-      WORDPRESS_DATABASE_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
-      WORDPRESS_USERNAME: admin
-      WORDPRESS_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD:-admin123}
-      WORDPRESS_EMAIL: admin@example.com
-    volumes:
-      - wordpress_data:/bitnami/wordpress
-    depends_on:
-      - db
-    restart: always
-
-  db:
-    image: bitnami/mysql:8.0
-    container_name: wordpress-db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:-wordpress}
-      MYSQL_USER: ${WORDPRESS_DB_USER:-wordpress}
-      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
-    volumes:
-      - db_data:/bitnami/mysql/data
-    restart: always
-
-volumes:
-  wordpress_data:
-  db_data:
-```
-
-### Bitnamiイメージのメリット
-
-- **セキュリティ強化** - 最小限のユーザー権限で動作
-- **wp-cli同梱** - コマンドラインツールが最初から利用可能
-- **SSL/TLS対応** - HTTPSポート（8443）がデフォルトで開放
-- **初期ユーザー設定** - 環境変数で管理者アカウント作成可能
-
-### 起動と初期設定
-
-```console
-$ docker compose up -d
-
-# ブラウザでアクセス（HTTP）
-$ open http://localhost:8080
-
-# またはHTTPS
-$ open https://localhost:8443
-
-# wp-cliで操作
-$ docker compose exec wordpress wp user list
-```
-
-## Bitnamiイメージ単体での構成
-
-WordPressとPHPをまとめたワンイメージで、データベースは外部に用意する方法：
-
-```yaml
-# compose.yaml
-services:
-  wordpress:
-    image: bitnami/wordpress:latest
-    ports:
-      - "8080:80"
-      - "8443:443"
-    environment:
-      WORDPRESS_DATABASE_HOST: ${DB_HOST:-db}
-      WORDPRESS_DATABASE_NAME: ${WORDPRESS_DB_NAME:-wordpress}
-      WORDPRESS_DATABASE_USER: ${WORDPRESS_DB_USER:-wordpress}
-      WORDPRESS_DATABASE_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
-      WORDPRESS_USERNAME: admin
-      WORDPRESS_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD:-admin123}
-    volumes:
-      - wordpress_data:/bitnami/wordpress
-    restart: always
-
-volumes:
-  wordpress_data:
-```
-
-このパターンはマネージドデータベース（AWS RDS、Azure Databaseなど）を外部で使用する場合に有効です。
+Bitnamiイメージはセキュリティが強化されており、本番環境やセキュリティ重視の場合に推奨されます。
 
 ## よくある使い方
 
