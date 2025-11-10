@@ -12,10 +12,12 @@ services:
     image: mariadb:10.11
     working_dir: /workspace
     environment:
-      MARIADB_ROOT_PASSWORD: root_pass
-      MARIADB_DATABASE: test_db
-      MARIADB_USER: test_user
-      MARIADB_PASSWORD: test_pass
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-root_pass}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-test_db}
+      MARIADB_USER: ${MARIADB_USER:-test_user}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-test_pass}
+    ports:
+      - "3306:3306"
     volumes:
       # 内部ボリューム
       - db_data:/var/lib/mysql
@@ -29,7 +31,11 @@ services:
   adminer:
     image: adminer:latest
     ports:
-      - "8081:80"
+      - "8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+    depends_on:
+      - db
 
 volumes:
   db_data:
