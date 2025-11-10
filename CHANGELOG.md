@@ -1,5 +1,28 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **raspi-config**: create comprehensive reverse lookup reference documentation
+
+### Fix
+
+- **raspi-date**: add NTP synchronization note and improve documentation
+- **raspi-packages**: update Python environment setup to include pipx and uv
+- **raspi-python**: focus on uv tool install for ruff and pre-commit
+- **raspi-capslock**: restructure as reverse lookup reference with improved documentation
+- **raspi-usage**: reorganize table of contents with new configuration files
+- **raspi-packages**: restructure as reverse lookup reference with expanded documentation
+- **raspi-ssh**: restructure to prioritize CLI setup and improve organization
+- **raspi-vnc**: restructure VNC client setup and add macOS compatibility info
+- **raspi-vnc**: update documentation for Raspberry Pi 4/5 with modern VNC setup
+
+### Refactor
+
+- **command-usage**: reorganize items into logical categories
+- **raspi**: split configuration docs into focused files
+
 ## v2025.11.6 (2025-11-09)
 
 ### Feat
