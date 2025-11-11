@@ -38,7 +38,7 @@ tasks:
       - poetry update
       - task: export
 
-  bump:patch:
+  bump:
     desc: Bump patch version with commitizen
     cmds:
       - poetry run cz bump --increment PATCH
