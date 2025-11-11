@@ -1,12 +1,29 @@
-# HTMLしたい（``make html``）
+# HTMLしたい（`sphinx-build`）
 
-```bash
+```console
+# -b html: 標準的なHTML出力（UglyURL形式）
+$ sphinx-build -b html source build/html
+
+# -b dirhtml: ディレクトリベースのHTML出力（PrettyURL形式）
+$ sphinx-build -b dirhtml source build/dirhtml
+
+# -b singlehtml: 単一HTMLファイル出力
+$ sphinx-build -b singlehtml source build/singlehtml
+```
+
+`sphinx-build`コマンドでHTML形式で出力できます。
+
+## HTMLしたい（`make html`）
+
+```console
 $ make html
 $ make dirhtml
 $ make singlehtml
 ```
 
-ウェブページを生成するときは{command}`make html`を実行します。
+[sphinx-quickstart](./sphinx-quickstart.md)で初期化するとドキュメントには`Makefile`が自動生成されます。
+`Makefile`があるディレクトリで`make html`を実行するとHTML形式で出力できます。
+
 生成したファイルは{file}`build/html/`以下に出力されます。
 URLはいわゆる``UglyURL``形式で生成されます。
 
