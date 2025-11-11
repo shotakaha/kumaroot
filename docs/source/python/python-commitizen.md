@@ -6,27 +6,21 @@ $ cz changelog --increment
 $ cz bump
 ```
 
-``commitizen``はGitを使ったバージョン管理をサポートしてくれるパッケージです。
-コマンド名は``cz``です。
-``cz サブコマンド``するだけで、セマンティック・バージョニングを簡単化できます。
+``commitizen``（``cz``）はGitのコミットメッセージをテンプレート化し、セマンティック・バージョニング（semantic versioning）に基づいたバージョン管理を簡単にするツールです。
 
-## インストールしたい
+コミットメッセージを入力するだけで、ルールに沿った変更履歴（CHANGELOG）の生成やバージョンタグの自動作成ができます。
 
-- `pip`でインストール
+## インストールしたい（`commitizen`）
+
+- Poetryでインストール
 
 ```console
-$ pip3 install commitizen
-$ which cz
+$ poetry add commitizen --group dev
 ```
 
-:::{note}
+チームで開発する場合、プロジェクトに開発環境として含めておくと便利です。``commitizen``はツールとして使うだけなので、``dev``グループに追加します。
 
-同じ名前の``npm``パッケージがあります。
-自分がどちらを使っているのか、混乱しないようにしましょう。
-
-:::
-
-- `pipx`でインストール
+- pipxでインストール
 
 ```console
 $ pipx install commitizen
@@ -34,145 +28,192 @@ $ which cz
 ~/.local/bin/cz
 ```
 
-- `poetry`でインストール
+- pipでインストール
 
 ```console
-$ poetry add commitizen --group dev
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install commitizen
+$ which cz
 ```
 
-Poetryを使ってチームで開発している場合は、開発環境にインストールしておくとよいかもしれません。
-``commitizen``はパッケージでは直接使わないため、
-``dev``グループに追加するとよいと思います。
+:::{note}
+
+同じ名前の``npm``パッケージがあります。自分がどちらを使っているのか混乱しないようにしましょう。
+
+:::
 
 ## 初期化したい（``cz init``）
 
-```bash
+```console
 $ cd プロジェクト名
 $ cz init
 ```
 
-`cz init`で`commitizen`が使えるようにプロジェクトを初期化できます。
-ターミナルに表示されるダイアログにしたがって矢印キーで選択すると、設定ファイルが作成されます。
+`cz init`コマンドでプロジェクトを初期化し、`commitizen`の設定ファイルを作成します。
+ターミナルに表示されるダイアログに従い、矢印キーで選択します。
 
-Pythonパッケージを開発している場合は{file}`pyproject.toml`に設定を追加してまとめることができます。
-その他の場合は、自分の好みの形式を選択すればよいと思います。
-僕は{file}`.cz.toml`を選択する場合が多いです。
+### 設定ファイルの配置
 
-生成された設定ファイルは次のようになっていました。
-最近のPythonパッケージは（暗黙の）ルールとして
-``[tool.パッケージ名]``の下に設定を書くようになっています。
-（ただの慣習なのか、それを定義したPEPが存在するかは未確認です）
+Pythonパッケージを開発している場合は、{file}`pyproject.toml`に設定を追加する方法を推奨します。
+その他の場合は、{file}`.cz.toml`など好みの形式を選択できます。
+
+### 初期設定ファイルの例
+
+生成された設定ファイルは以下のようになっています。
 
 ```toml
-[tool]
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.0.1"
 tag_format = "$version"
 ```
 
-## コミットしたい（``cz c``）
+## コミットしたい（``cz commit``）
 
 ```console
-$ git add ステージしたいファイル名
+$ git add ファイル名
 $ cz commit
-$ cz c
 ```
 
-``cz``にステージするためのコマンドはないため``git add``でステージします。
+`cz commit`（短縮形：`cz c`）でコミットを作成します。
+通常の`git commit`の代わりです。
+ファイルのステージングはいつもどおり`git add`してください。
 
-ステージしたファイルがある状態で、``git commit``の代わりに``cz commit``（もしくは`cz c`）でコミットを作成します。
+プロンプトが表示されるので、聞かれた内容に沿って情報を選択・入力すると、セマンティック・バージョニングに対応したコミットメッセージが自動生成されます。
 
-プロンプトが表示されるので、聞かれた内容に沿って情報を選択／入力するとコミットメッセージができあがります。
+### テンプレートの確認
 
-コミットメッセージのテンプレートは``cz info``もしくは``cz schema``、サンプルは``cz example``で確認できます。
+- `cz info` - コミットメッセージのテンプレートを表示
+- `cz schema` - 詳細なスキーマを表示
+- `cz example` - テンプレートの使用例を表示
 
 ## 変更ログしたい（``cz changelog``）
 
 ```console
-// 変更ログを作成（すべてのログ）
 $ cz changelog
-$ cz ch
-
-// 前回からの差分ログ
-$ cz changelog --incremental
-
-// 標準出力で確認
-$ cz changelog --dry-run
 ```
 
-`cz changelog`（もしくは`cz ch`）で、これまでのコミットログを使って変更ログ（changelog）を生成できます。
-デフォルトのファイル名は``CHANGELOG.md``です。
-ファイルがすでに存在する場合は上書きされます。
-`--file-name`オプションで変更できます。
+`cz changelog`（短縮形：`cz ch`）で、コミットログから自動的に変更ログ（CHANGELOG）を生成できます。
 
-`--increment`オプションで、前回からの差分を追記できます。
-このオプションの使用はデフォルトにするとよいと思います。
+デフォルトでは`CHANGELOG.md`というファイル名で作成されます。
+すでに存在する場合は上書きされます。
 
-`--dry-run`オプションで事前確認できます。
-ファイルに保存せず、標準出力に表示されます。
+### 変更ログのオプション
+
+```console
+# 前回からの差分のみを追記
+$ cz changelog --increment
+
+# ファイルに保存せず、標準出力で確認
+$ cz changelog --dry-run
+
+# ファイル名を変更
+$ cz changelog --file-name HISTORY.md
+```
+
+### 推奨される使い方
+
+新しいバージョンをリリースするときは、`--increment`オプションを使って前回からの変更分だけを追記するのが便利です。
 
 ## バージョンアップしたい（``cz bump``）
 
-```bash
+```console
 $ cz bump --changelog --check-consistency
+```
+
+プログラムの開発にひと区切りついたら、`cz bump`でバージョンアップします。
+
+このコマンドは以下の処理を自動で行います：
+
+- コミット履歴をもとに、セマンティック・バージョニング（semver）に従ったバージョン番号を決定
+- 設定ファイル内のバージョン番号を更新
+- Gitタグを作成
+- `CHANGELOG.md`を更新（`--changelog`オプション使用時）
+- 複数ファイルのバージョン番号を一括更新（設定済みの場合）
+
+### よく使うオプション
+
+```console
+# CHANGELOG.md を更新して、バージョン番号の一貫性をチェック
+$ cz bump --changelog --check-consistency
+
+# 短縮形
 $ cz bump -ch -cc
 ```
 
-``cz bump``で、これまでのコミットの内容／種類をベースに
-``semver``に沿ったバージョン番号のタグを作成し、
-設定ファイル内のバージョン番号を更新できます。
-プログラムの開発にひと区切りついたら、タグをつけましょう。
+### バージョンタイプを指定したい
 
-``-ch``オプションを使うと、{file}`CHANGELOG.md`を更新できます。
-バージョンアップしたり、変更履歴をまとたりする作業はなかなか大変ですが、一発でやってくれるのでとても助かります。
+通常、commitizenはコミット履歴から自動的にバージョンを決定しますが、明示的に指定することもできます：
+
+```console
+# パッチ版をリリース（例：1.0.0 -> 1.0.1）
+$ cz bump --increment PATCH
+
+# マイナー版をリリース（例：1.0.0 -> 1.1.0）
+$ cz bump --increment MINOR
+
+# メジャー版をリリース（例：1.0.0 -> 2.0.0）
+$ cz bump --increment MAJOR
+
+# CHANGELOG も同時に更新
+$ cz bump --increment PATCH --changelog
+```
+
+### 詳細なオプション一覧
+
+| オプション | 短縮形 | 説明 |
+|-----------|-------|------|
+| `--changelog` | `-ch` | `CHANGELOG.md`を更新する |
+| `--check-consistency` | `-cc` | バージョン番号の一貫性をチェック |
+| `--increment MAJOR\|MINOR\|PATCH` | | バージョンタイプを指定 |
+| `--dry-run` | | 実際には変更せず、どのような操作を行うか表示 |
+| `--no-verify` | | pre-commitフックをスキップ |
 
 ```{note}
-使い始めてみるとすぐに気が付くと思いますが、
-バージョンアップが先か、CHANGELOGの整理が先か問題があります。
-僕はバージョンアップをしてから、CHANGELOGを整理することにしています。
+バージョンアップとCHANGELOGの管理は、バージョンアップを先に行い、その後CHANGELOGを整理するのが推奨されます。
 ```
 
 ## バージョン番号を一元管理したい
 
+プロジェクトの複数の場所にバージョン番号が散らばっていると、`cz bump`で更新するたびに手動で修正する手間が増えます。
+`version_files`を設定することで、`cz bump`時にすべてのバージョン番号を一括更新できます。
+
+### 設定方法
+
 ```toml
-[tool]
 [tool.commitizen]
-...
-version = "バージョン"
+version = "0.1.0"
 tag_format = "v$version"
 version_files = [
-    # "ファイルのパス:変数名" の形式
     "pyproject.toml:version",
     "src/__init__.py:__version__",
     "docs/conf.py:version",
-    "docs/conf.py:release",
-
 ]
 ```
 
-``[tool.commitizen.version_files]``に
-`"ファイルのパス:変数名"`の形式で設定することで、
-ソースコードの中にあるバージョン番号も
-`cz bump`でまとめて更新できるようになります。
+`version_files`に`ファイルパス:変数名`の形式で設定します。
 
-Pythonの場合、バージョン番号を書くファイルに決まりがありませんが、なんとなく、次のような慣習があります。
+### Pythonプロジェクトでの慣例
 
-- ``src/__init__.py:__version__``
-- ``src/__version__.py``
+バージョン番号を管理するファイル：
 
-また、Sphinxでドキュメントを作成している場合は、
-次のパスを設定すればOKです。
+- `pyproject.toml` - プロジェクト設定ファイル（推奨）
+- `src/__init__.py` - パッケージの`__version__`変数
+- `src/__version__.py` - バージョン専用ファイル
 
-- `docs/conf.py:version`
-- `docs/source/conf.py:version`（`--sep`した場合）
+### ドキュメント設定
 
-せっかく`commitizen`を使って`semver`管理しても、
-ソースコードの中にバージョン番号が散らばっていたら、
-意味がありません。
-初期設定のときに追加しておくとよいと思います。
+Sphinxでドキュメントを作成している場合：
+
+- `docs/conf.py:version` - 通常のSphinx設定
+- `docs/source/conf.py:version` - `--sep`オプション使用時
+
+複数のファイルにバージョン番号を定義している場合は、初期設定のときにまとめて追加しておくことをオススメします。
 
 ## フックしたい（`commitizen`）
+
+[pre-commit](./python-pre-commit.md)フレームワークを使用することで、`commitizen`をGitフックとして自動実行できます。
 
 ```yaml
 repos:
@@ -184,5 +225,5 @@ repos:
     - commit-msg
 ```
 
-`commitizen (cz)`は[pre-commit](./python-pre-commit.md)に組み込むことができます。
-`stages: [commit-msg]`でコミットメッセージを保存したあとにフックがかかるようにしておきます。
+`stages: [commit-msg]`を指定することで、コミットメッセージが保存されたあとに検証が実行されます。
+これにより、セマンティック・バージョニングに従わないコミットメッセージは自動的に拒否されます。
