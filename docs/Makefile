@@ -4,7 +4,7 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
 SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
+SPHINXBUILD   ?= poetry run sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
 
@@ -20,4 +20,4 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 livehtml:
-	sphinx-autobuild --open-browser "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O) --ignore "**/_tags/*"
+	poetry run sphinx-autobuild --open-browser "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O) --ignore "**/_tags/*"
