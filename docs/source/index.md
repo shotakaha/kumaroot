@@ -48,6 +48,8 @@ myst/myst-usage
 typst/typst-usage
 vscode/vscode-usage
 emacs/emacs-usage
+mkdocs/mkdocs-usage
+zensical/zensical-usage
 ```
 
 ```{toctree}
