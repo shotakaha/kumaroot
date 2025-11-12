@@ -29,6 +29,35 @@ Python3.3以降に付属する標準モジュールです。
 
 :::
 
+## バージョンを切り替えたい
+
+```console
+# Python3.11の仮想環境
+$ python3.11 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $ python --version
+Python 3.11
+
+# Python3.11の仮想環境
+$ python3.12 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $ python --version
+Python 3.12
+```
+
+`venv`モジュールを呼び出すときに時に
+`python3.11 -m venv`、
+`python3.12 -m venv`、
+のようにPythonの実行環境のバージョンを指定します。
+
+:::{note}
+
+`venv`モジュール自体には、Python実行環境の切り替え機能はありません。
+
+最近では、これらの機能が統合された
+[uvパッケージ](./python-uv.md)
+を利用するのがオススメです。
+
 ## 他ツールと比較したい
 
 `venv`とその他の仮想環境パッケージとの比較を整理しました。
@@ -40,18 +69,3 @@ Python3.3以降に付属する標準モジュールです。
 | `pipenv` | `pipenv install` | `Pipfile`を使用し、仮想環境と依存関係の管理を統合できるパッケージ |
 | `pyenv` | `pyenv install 3.11.4` | 複数のPython実行環境を管理できるパッケージ |
 | `pyenv-virtualenv` | `pyenv virtualenv 3.11.4 venv` | `pyenv`を拡張子、実行環境ごとの仮想環境を作成できるパッケージ |
-
-:::{tip}
-
-`venv` はPythonの実行環境の切り替えはできません。
-呼び出し時に
-`python3.11 -m venv`、
-`python3.12 -m venv`、
-と実行環境を切り替えるか、
-`pyenv`などと併用する必要があります。
-
-最近では、これらの機能が統合された
-[uvパッケージ](./python-uv.md)
-を利用するのがオススメです。
-
-:::
