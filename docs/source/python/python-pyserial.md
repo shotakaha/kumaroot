@@ -3,111 +3,115 @@
 ```python
 import serial
 
-try:
-    with serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=1) as com:
-        while True:
-            if com.in_waiting > 0:
-                line = com.readline().decode("utf-8").strip()
-                if line:
-                    print(f"Received: {line}")
-except serial.SerialException as e:
-    print(f"Serial error: {e}")
+# ポート名と通信速度を指定して接続
+with serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=1) as device:
+    # デバイスからデータを読み込む
+    line = device.readline().decode("utf-8").strip()
+    print(line)
 ```
 
-`pyserial`パッケージ（`serial`モジュール）でシリアル通信できます。
-`Serial`オブジェクトを生成するときに、ポート番号（`/dev/ttyUSB0`や`COM`など）を指定します。
-また、オプションで通信速度（`baudrate`）やタイムアウト時間（`timeout`）などを設定できます。
+`pyserial`パッケージでパソコンとマイコンなどをUSBで接続して、データをやり取りできます。
+ポート名（`/dev/ttyUSB0`や`COM1`など）と通信速度（`baudrate`）を指定してセッションを開きます。
+`with`構文を使うと、接続や切断が自動で管理されるので安全です。
 
-`Serial`オブジェクトはコンテクストマネージャーに対応しているため`with...as`構文を使って
-安全にポートを開閉できます。
-接続に失敗したときや、通信中にエラーが起きた場合は、`serial.SerialException`で例外を受け取れます。
+## インストールしたい（`pyserial`）
 
-:::{seealso}
-
-シリアル通信は、データを1ビットずつ連続的（＝シリアル）に送る通信方式です。
-身近な例としては、パソコンや周辺機器をつなぐUSBがあります。
-
-IoT機器やマイコンでは、よりシンプルなUART通信がよく利用されます。
-UARTでは、1文字（通常8ビッド＝1バイト）を送る際に、
-スタートビット →
-データビット（通常8ビット） →
-パリティビット（任意） →
-ストップビット
-の順で送信します。
-
-送信側は、クロックのリズムに合わせて流しそうめんのように電気信号を送り出します。
-受信側は、この信号を順番どおりに受け取り、1バイト単位のデータに組み立てます。
-そのため、送信側と受信側で通信速度（ボーレート）をそろえることが重要です。
-
-:::
-
-:::{note}
-
-高速なシリアル通信が普及する以前は、パラレル通信が主流でした。
-パラレル通信は、複数ビットを同時に送る通信方式で、短距離であれば非常に高速です。
-一度に大量のデータを送ることができる反面、
-配線ケーブルが多くなる、
-長距離では信号の到着時がずれて誤動作しやすい、
-といった課題があります。
-
-現在では、こうした制約を避けるために
-高速なシリアル通信を複数本並列に使う方式が一般的です。
-
-:::
-
-## インストールしたい
+- `uv pip`でインストール
 
 ```console
-uv pip install pyserial
+$ uv pip install pyserial
 ```
 
 モジュール名は`serial`ですが、パッケージ名は`pyserial`です。
 
-## 受信したい（`readline`）
+- `pip`でインストール
+
+```console
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install pyserial
+```
+
+## 読み出したい（`readline`）
 
 ```python
 # 受信（パソコン ← デバイス）
 # バイト列から文字列に変換
-line = com.readline().decode("utf-8").strip()
+line = device.readline().decode("utf-8").strip()
 ```
 
-`readline`でデバイスからデータを読み出します。
-データはバイト列で送られてくるので、文字列への変換（デコード）が必要です。
+`readline`メソッドで接続先のデバイスからデータを読み出します。
+データはバイト型で送られてくるので、文字列への変換（デコード）が必要です。
 `strip()`で改行や余白を削除することが多いです。
 
 ```python
-if com.in_waiting > 0:
+if device.in_waiting > 0:
     print("Data available to read")
 ```
 
-`in_waiting`で、現在バッファーに溜まっているデータのバイト数を確認できます。
+`in_waiting`プロパティで、現在バッファーに溜まっているデータのバイト数を確認できます。
 つまり、0より大きいということは受信待ちデータがあるということです。
 
-## 送信したい（`write`）
+## 書き込みたい（`write`）
 
 ```python
 # 送信（パソコン → デバイス）
 # バイト列を送信
-com.write(b"HELLO\n")
+device.write(b"HELLO\n")
 
 # 文字列をバイト列に変換して送信
-com.write("HELLO\n".encode("utf-8"))
+device.write("HELLO\n".encode("utf-8"))
 
 # 送信時のブロッキング
-com.flush()
+device.flush()
 ```
 
-`write`でデバイスにデータを書き込みます。
-書き込むデータはバイト列への変換（エンコード）が必要です。
+`write`メソッドでデバイスにデータを書き込みます。
+書き込むデータはバイト型への変換（エンコード）が必要です。
 改行コード（`\n`や`\r\n`）を区切り文字として利用することが多いです。
 
 ```python
-if com.out_waiting > 0:
+if device.out_waiting > 0:
     print("Still sending data")
 ```
 
-`out_waiting`でバッファーに残っているデータのバイト数を確認できます。
+`out_waiting`プロパティで、現在のバッファーに残っているデータのバイト数を確認できます。
 つまり、0より大きい場合は未送信データが残っているということです。
+
+## 例外処理したい（`serial.SerialException`）
+
+```python
+try:
+    with serial.Serial(port="dev/ttyUSB0") as device:
+        ...
+except serial.SerialException as err:
+    print(err)
+```
+
+`serial.SerialException`でエラーを検出できます。
+
+シリアル通信は、デバイスが接続されていなかったり、
+通信に時間がかかりタイムアウトしたり、など
+物理的な要因でエラーが発生することがあります。
+
+例外処理は必ず実装しましょう。
+
+## 連続で読み出したい
+
+```python
+import serial
+
+# ポート名と通信速度を指定して接続
+with serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=1) as device:
+    while True:
+        # デバイスからデータを読み込む
+        line = device.readline().decode("utf-8").strip()
+        print(line)
+except serial.SerialException as err:
+    print(err)
+except KeyboardInterrupt as err:
+    print(err)
+```
 
 ## ファイルに出力したい
 
@@ -200,88 +204,7 @@ for p in ports:
 `serial.tools.list_ports`で利用可能なポートを確認できます。
 Linuxは`/dev/tty*`、
 Windowsは`COM*`、
-macOSは`/dev/cu.usbserial-*`
-という名前で表示されます。
-
-```python
-from typing import List, Dict, Any
-from serial.tools import list_ports
-
-def find_serial_ports() -> List[Dict[str, Any]]:
-    """List available serial ports with rich metadata."""
-    ports = list_ports.comports()
-
-    if not ports:
-        raise RuntimeError("No ports found.")
-
-    results: List[Dict[str, Any]] = []
-    for p in ports:
-        results.append(
-            {
-                "device": p.device,
-                "name": getattr(p, "name", None),
-                "description": p.description,
-                "hwid": p.hwid,
-                "vid": p.vid,
-                "pid": p.pid,
-                "manufacturer": p.manufacturer,
-                "product": p.product,
-                "serial_number": p.serial_number,
-                "location": p.location,
-                "interface": p.interface,
-            }
-        )
-    return results
-```
-
-このような関数を定義して、ポート情報を辞書型に変換しておくと利便性があがります。
-
-## 自動検出したい
-
-```python
-def auto_detect_serial_port(ports: List[Dict[str, Any]]) -> str:
-    """Return a single 'best guess' serial device path from find_serial_ports() results.
-
-    Preference order (first match wins):
-      1. /dev/ttyACM*         Linux/WSL2: CDC ACM, Arduino-like
-      2. /dev/ttyUSB*         Linux/WSL2: USB-serial adapters
-      3. /dev/cu.usbmodem*    macOS: CDC ACM
-      4. /dev/cu.usbserial*   macOS: USB-serial adapters
-      5. COM*                 Windows: COM ports
-      6. /dev/ttyS*           WSL2: often mapped COM in WLS
-    """
-
-    if not ports:
-        raise RuntimeError("No ports provided to auto-detect from.")
-
-    prefixes = [
-        "/dev/ttyACM",
-        "/dev/ttyUSB",
-        "/dev/cu.usbmodem",
-        "/dev/cu.usbserial",
-        "COM",
-        r"\\.\COM",
-        "/dev/ttyS",
-    ]
-
-    for prefix in prefixes:
-        for p in ports:
-            device = (p.get("device") or "").strip()
-            if not device:
-                continue
-            if device.lower().startswith(prefix.lower()):
-                return device
-
-    # Fallback: return the very first device if present
-    first = (ports[0].get("device") or "").strip()
-    if first:
-        return first
-
-    raise RuntimeError("No available device path found in the provided port list.")
-```
-
-OSごとに使用されているポート名を自動検出できるようにした関数です。
-前述の`find_serial_ports`とセットで利用することを想定しています。
+macOSは`/dev/cu.usbserial-*`という名前で表示されます。
 
 ## 複数デバイスしたい（`threading`）
 
@@ -363,86 +286,3 @@ if __name__ == "__main__":
 その際に、停止フラグ用の`threading.Event()`を作成しておき、
 `KeyboardInterrupt`を検知したときに有効にすることで、
 サブスレッドを順番かつ安全に停止できます。
-
-## 複数デバイスしたい（`concurrent.futures.ThreadPoolExecutor`）
-
-```python
-import time
-import threading
-from concurrent.futures import ThreadPoolExecutor, wait
-import serial
-
-def read_loop(
-    port_name: str,
-    baudrate: int,
-    stop: threading.Event
-    ) -> None:
-    """Continuously read lines from a serial port and print them."""
-    try:
-        with serial.Serial(port_name, baudrate, timeout=1) as com:
-            print(f"[{port_name}] Opened")
-            while not stop.is_set():
-                raw = com.readline()
-                if not raw:
-                    time.sleep(0.01)
-                    continue
-                line = raw.decode("utf-8", errors="replace").strip()
-                if line:
-                    print(f"[{port_name}] {line}")
-    except serial.SerialException as e:
-        print(f"[{port_name}] Serial error: {e}")
-    finally:
-        print(f"[{port_name}] Closed")
-
-def wait_for_interrupt(
-    stop: threading.Event,
-    interval: float = 0.2
-    )-> None:
-    """Block the main thread until Ctrl-C is pressed"""
-    try:
-        print("Press Ctrl-C to stop.")
-        while not stop.is_set():
-            time.sleep(interval)
-    except KeyboardInterrupt:
-        print("\nStopping all readers...")
-        stop.set()
-
-if __name__ == "__main__":
-    # 停止フラグ
-    stop_event = threading.Event()
-
-    # ポートの定義
-    ports = [
-        ("/dev/ttyUSB0", 9600),
-        ("/dev/ttyUSB1", 115200),
-    ]
-
-    # スレッドプールで実行
-    with ThreadPoolExecutor(max_workers=len(ports)) as ex:
-        futures = [ex.submit(read_loop, port, baud, stop_event) for port, baud in ports]
-
-        # 状態確認
-        # for f in futures:
-        #   print(f.done(), f.running())
-
-        try:
-            wait_for_interrupt(stop_event)  # Ctrl-C 待ち
-        finally:
-            stop_event.set()
-            wait(futures)
-
-    print("All readers stopped.")
-```
-
-`ThreadPoolExecutor`を使って、複数デバイスの処理を書き換えてみました。
-`read_loop`関数と`wait_for_interrupt`関数の内容は同じです。
-
-スレッドの生成と管理を`ThreadPoolExecutor`に任せ、
-`ex.submit`でジョブを投入しています。
-`submit(fn, /, *args, **kwargs)`というシグネチャを持つため、
-実行したい関数（`fn`）と
-位置引数（`*args`）、
-キーワード引数（`**kwargs`）を
-そのまま指定すればOKです。
-
-変数`futures`には、非同期処理の結果（`concurrent.futures.Future`オブジェクト）が入っており、実行結果や例外を後で取得できるようになっています。
