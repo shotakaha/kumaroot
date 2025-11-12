@@ -34,6 +34,7 @@ typst-import
 ## 関数したい
 
 ```{toctree}
+typst-func
 typst-with
 typst-where
 ```
