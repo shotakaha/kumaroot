@@ -31,10 +31,11 @@ typst-build
 typst-import
 ```
 
-## テンプレートしたい
+## 関数したい
 
 ```{toctree}
 typst-with
+typst-where
 ```
 
 ## 全体設定したい
