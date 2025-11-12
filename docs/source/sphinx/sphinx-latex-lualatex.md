@@ -26,7 +26,7 @@ latex_elements = {
     # ドキュメントクラスオプションの設定
     "papersize": "a4paper",
     "pointsize": "12pt",
-    "extraclassoptions": "tombow",
+    # "extraclassoptions": "tombow",
 
     # フォントの設定
     "fontpkg": "",
@@ -44,6 +44,10 @@ latex_elements = {
 
 # hyperrefの前に読み込むパッケージを追加する
 latex_elements["extrapackages"] = r"""
+\usepackage{luatexja}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{unicode-math}
 \usepackage{physics}
 """
 
@@ -52,6 +56,9 @@ latex_elements["preamble"] = r"""
 \setlength{\footskip}{3\zw}
 \hypersetup{bookmarksnumbered=true}
 \hypersetup{bookmarksopen=true}
+\hypersetup{colorlinks=true}
+\hypersetup{bookmarksopenlevel=2}
+\hypersetup{pdfpagemode=UseOutlines}
 """
 
 latex_show_pagerefs = True
