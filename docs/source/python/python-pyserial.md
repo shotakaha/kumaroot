@@ -96,23 +96,6 @@ except serial.SerialException as err:
 
 例外処理は必ず実装しましょう。
 
-## 連続で読み出したい
-
-```python
-import serial
-
-# ポート名と通信速度を指定して接続
-with serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=1) as device:
-    while True:
-        # デバイスからデータを読み込む
-        line = device.readline().decode("utf-8").strip()
-        print(line)
-except serial.SerialException as err:
-    print(err)
-except KeyboardInterrupt as err:
-    print(err)
-```
-
 ## ファイルに出力したい
 
 ```python
