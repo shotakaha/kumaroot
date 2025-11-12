@@ -96,6 +96,28 @@ except serial.SerialException as err:
 
 例外処理は必ず実装しましょう。
 
+## 連続で読み出したい
+
+```python
+import serial
+
+try:
+    # ポート名と通信速度を指定して接続
+    with serial.Serial(port="/dev/ttyUSB0") as device:
+        while True:
+            # デバイスからデータを読み込む
+            if device.in_waiting > 0:
+                line = device.readline().decode("utf-8").strip()
+                print(line)
+except serial.SerialException as err:
+    print(f"Serial error: {err}")
+except KeyboardInterrupt:
+    print("Stopped by user")
+```
+
+`while`ループを使って、デバイスから連続でデータを読み出すことができます。`in_waiting`で受信データの有無を確認してから読み込むことで、効率的に処理できます。
+`KeyboardInterrupt`をキャッチして`Ctrl-C`で中断できます。
+
 ## ファイルに出力したい
 
 ```python
