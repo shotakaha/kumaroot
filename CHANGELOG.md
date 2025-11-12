@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2025.11.7 (2025-11-12)
 
 ### Feat
 
@@ -8,6 +8,24 @@
 
 ### Fix
 
+- **python-venv**: update tool comparison with recommendation levels
+- **python-venv**: improve for beginners and add system vs venv explanation
+- **python-pyserial**: add more configuration options and troubleshooting tips
+- **python-pyserial**: add beginner-friendly note about serial communication options
+- **python-pyserial**: fix continuous reading section syntax and improve explanation
+- **python-pyserial**: remove corrupted section added by linter
+- **sphinx-latex-lualatex**: add luatex packages and hyperref settings
+- **python-commitizen**: reorganize for beginners with detailed bump options
+- **docs/Makefile**: correct sphinx-autobuild ignore option syntax
+- **docs/Makefile**: add poetry integration for sphinx-build
+- **command-mkcert**: restructure with reverse lookup style and Docker integration
+- **docker-wordpress-bitnami**: split Bitnami WordPress configuration into separate document
+- **docker-wordpress**: add Bitnami image examples and comparison guide
+- **docker-wordpress**: restructure with compose-first approach and reverse lookup style
+- **docker-mariadb**: add environment variables and adminer configuration
+- **docker-postgresql**: reorganize structure and add Adminer with env variables
+- **docker-mariadb**: reorganize structure and add Adminer with env variables
+- **docker-nginx**: reorganize structure and update to Compose format
 - **raspi-date**: add NTP synchronization note and improve documentation
 - **raspi-packages**: update Python environment setup to include pipx and uv
 - **raspi-python**: focus on uv tool install for ruff and pre-commit
@@ -20,6 +38,7 @@
 
 ### Refactor
 
+- **Taskfile**: simplify bump task name
 - **command-usage**: reorganize items into logical categories
 - **raspi**: split configuration docs into focused files
 
