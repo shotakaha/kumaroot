@@ -8,14 +8,14 @@ $ tyler build
 `tyler`はTypstを公開する手順を（途中まで）自動化してくれるパッケージです。
 `tyler.toml`で設定を変更できます。
 
-## インストール
+## インストールしたい（`@mkpoli/tyler`）
 
 ```console
 $ npm install -g @mkpoli/tyler
 ```
 
 `tyler`はJavaScript/TypeScriptで作成されたCLIツールです。
-`npm`を使ってシステムにインストールしました。
+`npm`を使ってシステムにインストールできます。
 
 ## 設定したい（`tyler.toml`）
 
@@ -57,9 +57,9 @@ $ tyler check --srcdir src
 [Tyler] typst.toml is missing required package.entrypoint
 ```
 
-`tyler check`でビルド設定を事前確認できます。
+`tyler check`コマンドでビルド設定をチェックできます。
 設定が不足している場合は赤字で表示されます。
-上記サンプルでは`package.entrypoint`が`typst.toml`に設定されていないことを教えてくれました。
+上記サンプルでは`typst.toml`に`package.entrypoint`が設定されていないことを教えてくれました。
 
 ```console
 [Tyler] Source directory found in /PATH/TO/PACKAGE/src
@@ -72,7 +72,7 @@ $ tyler check --srcdir src
 修正して再度`tyler check`した結果です。
 Entrypointが確認でき、その後のチェックも進めることができました。
 
-## ローカルビルドしたい（`tyler build --install`）
+## ビルドしたい（`tyler build`）
 
 ```console
 $ tyler build --srcdir src --install
@@ -100,8 +100,31 @@ $ tyler build --srcdir src --install
 ```
 
 `tyler build`でローカルビルドできます。
-ビルド結果は`dist/`に生成されます。
-`--install`オプションを使うと、`@local/PACKAGE:VERSION`できるパスにインストールできます。
+ビルド結果は設定ファイル（`tyler.toml`）の`outdir`で設定したパスに生成されます。
+この実行サンプルでは`dist/`に生成されています。
+
+:::{note}
+
+`typst.toml`の`[packages.entrypoint]`は、
+`dist/`内の構造に合わせたパスに設定する必要があります。
+
+:::
+
+## ローカルインストールしたい（`tyler build --install`）
+
+```console
+$ tyler build --install
+...
+[Tyler] Installed to ~/Library/Application Support/typst/packages/local/PACKAGE/VERSION/
+```
+
+`tyler build --install`でローカルにインストールできます。
+ビルドされたパッケージは（macOSの場合）
+`~/Library/Application Support/typst/packages/local/`にインストールされます。
+
+このパスにあるパッケージは、
+`@local/PACKAGE:VERSION`
+でインポートできるようになります。
 公開前の自作パッケージを、他のパッケージからも使いたい場合に活用できます。
 
 ## パッケージを公開したい（`tyler build --install --publish`）
