@@ -81,6 +81,7 @@ maxdepth: 1
 root-rdataframe
 root-rdataframe-filter
 root-rdataframe-stats
+root-rdataframe-histo1d
 ```
 
 ## ファイル操作したい

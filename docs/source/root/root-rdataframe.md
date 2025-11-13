@@ -60,28 +60,6 @@ df = ROOT.RDataFrame(
 )
 ```
 
-## データを分析したい
-
-
-
-### ヒストグラムを作成したい
-
-データをヒストグラムで可視化します。
-
-```cpp
-#include "ROOT/RDataFrame.hxx"
-
-// ヒストグラムを作成
-auto hist = df.Histo1D({"hist", "Distribution", 100, 0, 10}, "x");
-hist->Draw();
-```
-
-```python
-# ヒストグラムを作成
-hist = df.Histo1D(("hist", "Distribution", 100, 0, 10), "x")
-hist.Draw()
-```
-
 ## 背景情報
 
 :::{note}
