@@ -1,15 +1,13 @@
-# Raspberry Piしたい
+# Raspberry Piしたい（`balenalib`）
 
-DockerコンテナーでRaspberry Pi環境をエミュレートする方法を紹介します。
-自作パッケージがRaspberry Piで動作するかの事前確認に利用できます。
+DockerコンテナーでRaspberry Pi環境をエミュレートして、自作パッケージが実際のハードウェアで動作するかを事前確認できます。
 
-## 概要
+BalenaがDockerHubに公開しているRaspberry Pi OSのイメージを使用します。RPi3/RPi4、Debianバージョン（bullseye/bookworm）などを組み合わせて選択できます。
 
-BalenaがDockerHubに公開しているRaspberry Pi OSのイメージを使用します。
-Raspi3 / Raspi4があり、Debianバージョン（bullseye / bookworm）なども指定できます。
-
+**利用可能なイメージ：**
 - [balenalib/raspberrypi4-64-python](https://hub.docker.com/r/balenalib/raspberrypi4-64-python)
 - [balenalib/raspberrypi4-64-debian](https://hub.docker.com/r/balenalib/raspberrypi4-64-debian)
+- [balenalib/raspberrypi3-64-python](https://hub.docker.com/r/balenalib/raspberrypi3-64-python)
 
 ## 単一バージョンで確認したい
 
