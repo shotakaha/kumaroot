@@ -1,4 +1,4 @@
-# ウェブサーバーしたい（``httpd``）
+# Apacheしたい（``httpd``）
 
 ```yaml
 services:
@@ -9,69 +9,83 @@ services:
       - "8080:80"
 ```
 
-Dockerを使ってApacheサーバーで遊んでみようと思います。
-Apacheコンテナーのイメージ名は[httpd](https://hub.docker.com/_/httpd/)です。
-
-起動・停止コマンドは以下の通りです。
-
 ```console
+// コンテナーを起動
 $ docker compose up -d
+
+// ブラウザーでアクセス
+$ open http://localhost:8080
+
+// コンテナーを終了
 $ docker compose down
 ```
 
-コンテナーが起動したらブラウザで
-``http://localhost:8080``
-を開いて「It works!」と表示されていればOKです。
+[httpd](https://hub.docker.com/_/httpd/)はApacheウェブサーバーのDockerイメージです。
+Docker Composeを使って簡単にApacheサーバーを起動・停止できます。
+起動後、ブラウザで `http://localhost:8080` を開いて「It works!」と表示されればOKです。
 
-## コマンドを追加したい（``apt-get``）
+## パッケージをインストールしたい（``apt-get``）
 
 ```console
 $ docker compose exec web bash
 (my-httpd) $ apt-get update
-
-(my-httpd) $ apt-get install less
-(my-httpd) $ which less
-/usr/bin/less
-
-(my-httpd) $ apt-get install vim
-(my-httpd) $ which vim
-/usr/bin/vim
+(my-httpd) $ apt-get install -y vim less
 ```
 
-公式レジストリから取得したイメージには、（使い慣れた）コマンドが入っていないことがあります。
-コンテナーの中で ``apt-get`` を使って追加できます。
-ここでは ``less`` と ``vim`` をインストールしています。
-
-## 設定ファイルを確認したい（``httpd.conf``）
-
-```bash
-$ docker compose exec web bash
-(my-httpd) $ find . -name httpd.conf
-./conf/original/httpd.conf
-./conf/httpd.conf
-(my-httpd) $ less conf/httpd.conf
-```
-
-Apacheサーバー設定のファイル名は ``httpd.conf`` です。
-ファイルの場所が分からない場合は[findコマンド](../command/command-find.md)で検索できます。
-このコンテナーでは {file}`/usr/local/apache2/conf/httpd.conf` にありました。
+公式イメージには最小限のコマンドしか含まれていないため、必要に応じて `apt-get` でツールを追加します。
+ここでは `vim` と `less` をインストールしています。
 
 ## トップページを変更したい
 
-```bash
+```console
 $ docker compose exec web bash
-(my-httpd) $ grep "DocumentRoot" conf/httpd.conf
-DocumentRoot "/usr/local/apache2/htdocs"
 (my-httpd) $ vi htdocs/index.html
 ```
 
-設定ファイル（{file}`httpd.conf`）の中で、ドキュメントルートとなっているディレクトリを探します。
-[grepコマンド](../command/command-grep.md)で``DocumentRoot`` という文字列を検索すると、{file}`/usr/local/apache2/htdocs/` であることが分かりました。
+Apacheのドキュメントルートはデフォルトで `/usr/local/apache2/htdocs/` です。
+このディレクトリ内の `index.html` を編集すれば、トップページが変わります。
 
-トップページを変更する場合は {file}`htdocs/index.html` を編集すればよいです。
-また、他にもウェブサーバーで公開したいファイルは、このドキュメントルートの下に配置すればOKです。
+新しいHTMLファイルを作成する場合も、同じディレクトリに配置すればウェブサーバーで公開できます。
+
+## ログを確認したい
+
+```console
+$ docker compose exec web bash
+(my-httpd) $ tail -f logs/access_log
+```
+
+Apacheのアクセスログやエラーログは、
+コンテナー内の `/usr/local/apache2/logs/` に保存されています。
+`-f` オプションで、ログをリアルタイム表示できます。
+終了するには `Ctrl+C` を押してください。
+
+## バージョン
+
+| バージョン | リリース日 | サポート終了 | 備考 |
+|----------|-----------|----------|------|
+| 2.6 | 未リリース | - | 開発中（2.5系として開発継続中） |
+| 2.4.65 | 2025年7月23日 | サポート中 | 現在推奨（2.4系の最新版） |
+| 2.4.62 | 2024年10月29日 | サポート中 | 安定版 |
+| 2.4 | 2012年2月21日 | サポート中 | 長期サポート版 |
+| 2.2.34 | 2017年7月11日 | 終了 | レガシー版 |
+
+### 2.4系（推奨）
+
+Apache 2.4系は2012年のリリースから継続的にセキュリティアップデートが提供されています。
+Docker Imageの `httpd:2.4` タグは、最新の安定版2.4.xを自動的にプルします。
+特定のバージョンを使いたい場合は `httpd:2.4.65` のようにバージョンを指定できます。
+
+### 2.2系（レガシー）
+
+Apache 2.2系は2017年7月にサポートが終了しました。セキュリティ脆弱性への対応がされないため、本番環境での使用は推奨されません。
+
+### 2.6系（開発中）
+
+Apache 2.6系は現在開発中であり、正式リリースはまだされていません。
+プロジェクトでは2.4系への継続的な改善に重点を置いています。
 
 ## リファレンス
 
 - [httpd - DockerHub](https://hub.docker.com/_/httpd)
 - [Apache 2.4 ドキュメント](https://httpd.apache.org/docs/2.4/ja/)
+- [Apache HTTP Server - endoflife.date](https://endoflife.date/apache-http-server)
