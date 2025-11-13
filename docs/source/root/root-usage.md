@@ -45,9 +45,12 @@ root-rint
 
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 1
 ---
-root-global
+root-groot
+root-gstyle
+root-gsystem
+root-genv
 ```
 
 ## TTree操作したい
