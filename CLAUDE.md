@@ -44,10 +44,25 @@ task export      # Export requirements.txt
 ### Version Management (Commitizen)
 
 ```bash
-task bump             # Bump PATCH version
-task bump:minor       # Bump MINOR version
+task bump             # Bump PATCH version with commitizen
+task bump:minor       # Bump MINOR version with commitizen
 task changelog        # Generate incremental changelog
 ```
+
+**Custom Versioning Scheme:**
+
+This project uses a **calendar-based semantic versioning** scheme:
+
+- **MAJOR version**: Incremented when the calendar year changes（e.g., 2024.x.x → 2025.x.x）
+- **MINOR version**: Incremented when the calendar month changes（e.g., 2025.11.x → 2025.12.x）
+- **PATCH version**: Incremented for each `fix` or `feat` commit
+
+**Important notes:**
+
+- `task bump` always uses `--increment PATCH`（configured in Taskfile.yml）
+- Automatic increment detection is disabled; all bumping is explicit
+- When a new year/month begins, manually bump MAJOR or MINOR as needed
+- Example version progression: `2025.11.6` → `2025.11.7`（patch）→ `2025.12.0`（new month）→ `2026.1.0`（new year）
 
 ### Code Quality
 
@@ -66,7 +81,7 @@ make html            # Generate HTML in docs/_build/
 
 ### Directory Organization
 
-```
+```text
 docs/source/
 ├── docker/           # Docker containerization examples
 ├── command/          # Command-line tools (git, npm, etc.)
@@ -207,7 +222,7 @@ The repository uses pre-commit hooks for code quality:
 
 **Conventional Commit Format** (enforced by commitizen):
 
-```
+```text
 <type>(<scope>): <subject>
 
 <body (optional)>
@@ -268,6 +283,32 @@ The repository uses pre-commit hooks for code quality:
 - Optional dev dependencies include: pandas, jupyterlab, scipy, scikit-learn, matplotlib
 - Use `task update` to keep dependencies current
 - Maintain both `pyproject.toml` and `requirements.txt`
+
+### Version Management Strategy
+
+This project uses **calendar-based semantic versioning** (YYYY.MM.PATCH):
+
+**When to bump versions:**
+
+- **PATCH**: After each content addition, improvement, or bug fix (`fix` or `feat` commits)
+  - Use: `task bump`
+  - Example: `2025.11.6` → `2025.11.7`
+
+- **MINOR**: When the calendar month changes
+  - Use: `task bump:minor`
+  - Example: `2025.11.x` → `2025.12.0`
+  - Usually done manually on the first commit of a new month
+
+- **MAJOR**: When the calendar year changes
+  - Use: `cz bump --increment MAJOR`
+  - Example: `2025.x.x` → `2026.1.0`
+  - Reset MINOR to 1 and PATCH to 0 when entering a new year
+
+**Important constraints:**
+- Do NOT use automatic increment detection (`cz bump` without `--increment`)
+- All bumping is explicit via configured task commands
+- MAJOR/MINOR bumps must be coordinated with the actual calendar date
+- Each PATCH bump automatically creates a git tag and updates CHANGELOG
 
 ## Tag System
 
