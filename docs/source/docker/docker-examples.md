@@ -4,10 +4,12 @@
 
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 1
 ---
 docker-example-busybox
 docker-example-ubuntu
+docker-example-almalinux
+docker-example-rockylinux
 docker-example-raspi
 docker-example-httpd
 docker-example-nginx
