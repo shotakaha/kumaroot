@@ -153,6 +153,28 @@ $ docker compose down
 
 **推奨環境：RPi4 / bookworm**
 
+## Raspberry PiおよびDebianバージョンについて
+
+### Raspberry Piのバージョン
+
+| モデル | アーキテクチャ | ハードウェア | 特徴 |
+|---|---|---|---|
+| RPi3 (Model B+) | ARMv7 (32/64-bit) | 1.4GHz Cortex-A53 | 古いモデル、制限あり |
+| RPi4 (Model B) | ARMv8 (64-bit) | 1.5GHz Cortex-A72 | 推奨、高い互換性 |
+| RPi5 | ARMv8 (64-bit) | 2.4GHz Cortex-A76 | 最新モデル、高性能 |
+
+### Debianバージョン
+
+| コードネーム | リリース | サポート終了 | 特徴 |
+|---|---|---|---|
+| bullseye (11) | 2021年8月 | 2026年6月 | 旧バージョン、パッケージ不足の場合あり |
+| bookworm (12) | 2023年6月 | 2028年6月 | **推奨**、modern toolchain対応 |
+| trixie (13) | 2024年11月 | 2029年6月以降 | テスト用途 |
+
+**推奨構成：RPi4 + bookworm**
+
+RPi4とDebianの組み合わせがもっとも安定しており、Rustコンパイラやpipパッケージのビルドで問題が少ないため、本番環境での使用をオススメします。
+
 ## トラブルシューティング
 
 ### "Cargo is not installed" エラー
