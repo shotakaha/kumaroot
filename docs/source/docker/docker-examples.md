@@ -6,12 +6,17 @@
 ---
 maxdepth: 2
 ---
-docker-examples-linux
-docker-examples-web
-docker-examples-databases
-docker-examples-cms
-docker-python3
-docker-mystmd
-docker-hugo
-docker-texlive
+docker-example-busybox
+docker-example-ubuntu
+docker-example-raspi
+docker-example-httpd
+docker-example-nginx
+docker-example-mariadb
+docker-example-postgresql
+docker-example-wordpress
+docker-example-wordpress-bitnami
+docker-example-python3
+docker-example-mystmd
+docker-example-hugo
+docker-example-texlive
 ```
