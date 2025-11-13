@@ -62,22 +62,6 @@ df = ROOT.RDataFrame(
 
 ## データを分析したい
 
-### フィルタリング
-
-特定の条件に合うデータだけを抽出します。
-
-```cpp
-#include "ROOT/RDataFrame.hxx"
-
-// 条件に合うデータを抽出
-auto filtered_df = df.Filter("x > 0 && y < 100");
-```
-
-```python
-# 条件に合うデータを抽出
-filtered_df = df.Filter("x > 0 and y < 100")
-```
-
 ### 統計量を計算したい
 
 簡単な統計情報を計算できます。
