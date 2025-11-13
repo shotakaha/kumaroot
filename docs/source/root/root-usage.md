@@ -80,7 +80,7 @@ maxdepth: 1
 ---
 root-rdataframe
 root-rdataframe-filter
-root-rdataframe-statistics
+root-rdataframe-stats
 ```
 
 ## ファイル操作したい
