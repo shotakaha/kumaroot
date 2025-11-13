@@ -135,6 +135,7 @@ command-curl
 command-dig
 command-goaccess
 command-gping
+command-gpg
 command-httpie
 command-openssl
 command-ping

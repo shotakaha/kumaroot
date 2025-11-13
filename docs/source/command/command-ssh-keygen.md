@@ -1,23 +1,29 @@
-# SSH鍵したい（``ssh-keygen``）
+# SSH鍵したい（`ssh-keygen`）
 
 ```console
+// SSH鍵ペアの確認
 $ ssh-keygen -l
 Enter file in which the key is (~/.ssh/id_ed25519):
+
+// SSH鍵ペアの生成
+$ ssh-keygen -t ed25519
 ```
 
-``ssh-keygen``コマンドで、SSH鍵（公開鍵と秘密鍵のペア）を操作できます。
+`ssh-keygen`コマンドでSSH鍵（公開鍵と秘密鍵のペア）を生成できます。
+この鍵はSSH認証の自動化などに利用できます。
+
 ``-l``オプションでSSH鍵のフィンガープリントなどを確認できます。
 すでにSSH鍵を作成したことがあるかどうか、どういう鍵を生成したのか、
 などを確認したいときに、まず使ってみるとよいと思います。
 
-## SSH鍵ペアを作りたい
+## SSH鍵ペアを作りたい（`ssh-keygen`）
 
 ```console
 $ ssh-keygen -t ed25519 -C "コメント"
 $ ssh-keygen -t ed25519 -C "メールアドレス (パソコンの名前)"
 ```
 
-``ssh-keygen``コマンドでSSH鍵ペアを作成できます。
+`ssh-keygen`コマンドでSSH鍵（公開鍵と秘密鍵のペア）を作成できます。
 `-t`オプションで暗号化アルゴリズムを指定、
 `-C`オプションでコメントを指定できます。
 SSH鍵ペアは``~/.ssh/``に生成されます。
