@@ -1,12 +1,5 @@
 # Nginxしたい（``nginx``）
 
-[nginx](https://hub.docker.com/_/nginx)は高速で軽量なウェブサーバーのDockerイメージです。
-Docker Composeを使って簡単にNginxを起動・停止できます。
-
-## セットアップ
-
-まず、`compose.yaml`を作成します。
-
 ```yaml
 services:
   nginx:
@@ -18,13 +11,19 @@ services:
       - ./html:/usr/share/nginx/html
 ```
 
-以下のコマンドで起動・停止できます。
-
 ```console
+// コンテナーを起動
 $ docker compose up -d
+
+// ブラウザーでアクセス
+$ open http://localhost:8080
+
+// コンテナーを終了
 $ docker compose down
 ```
 
+[nginx](https://hub.docker.com/_/nginx)は高速で軽量なウェブサーバーのDockerイメージです。
+Docker Composeを使って簡単にNginxを起動・停止できます。
 起動後、ブラウザで `http://localhost:8080` を開いて「Welcome to nginx!」と表示されればOKです。
 
 ローカルの `./html` ディレクトリがNginxのドキュメントルート（`/usr/share/nginx/html`）にマウントされているため、
