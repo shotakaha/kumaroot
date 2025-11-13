@@ -40,6 +40,20 @@ gStyle.SetLegendFont(62)
 gStyle.SetStatFont(62)
 ```
 
+:::{warning}
+
+CJK（中日韓）フォント非対応
+
+ROOTは日本語、中国語、韓国語などのCJKフォントに対応していません。`SetXXXFont`で指定できるのは欧文フォント（Helvetica、Times New Roman、Courier Newなど）のみです。
+
+グラフのタイトルや軸ラベルに日本語を使用する場合は、以下の対策が必要です。
+
+- グラフのテキストに英語を使用し、図説は別途ドキュメントで日本語表記する
+- PDFに出力後、ImageMagickやInkscapeなどで日本語テキストを追加
+- Pythonパッケージの使用を検討（日本語フォント対応）
+
+:::
+
 ## フォントコードを理解したい
 
 ROOTのフォントは、フォントIDと精度（Precision）の組み合わせで指定されます。
