@@ -1,95 +1,154 @@
 # Ubuntuしたい（`ubuntu`）
 
 ```yaml
-# compose.yaml
+# filename: compose.yaml
 services:
   ubuntu:
     image: ubuntu:24.10
+    container_name: my-ubuntu
     tty: true
+    stdin_open: true
+    command: /bin/bash
 ```
 
-[ubuntu](https://hub.docker.com/_/ubuntu/)イメージでコンテナを起動します。
-さまざまなバリアントがあるので、用途にあったタグを選択します。
+```console
+// コンテナーを起動
+$ docker compose up -d
+```
 
-Ubuntuは半年に1回のリリースされ、そのうち4回に1回が長期サポート版（LTS）というリリースサイクルです。
-Ubuntuをベースにしたイメージの場合、タグ名にコードネームが含まれていることが多いので、
-最近のものについてはある程度覚えておくとよいと思います。
+```console
+// コンテナーにログイン
+$ docker compose exec ubuntu bash
+root#
+```
 
-| バージョン | コードネーム |
-|---|---|
-| 20.04 LTS | Focal Fossa |
-| 22.04 LTS | Jammy Jellyfish
-| 24.04 LTS | Noble Numbat |
-| 24.10 | Oracular Oriole |
+```console
+// コンテナーを終了
+$ docker compose down
+```
 
-## コンテナ操作したい
+Ubuntuのコンテナーを使ってデバッグやテスト、開発環境の構築ができます。
+上記のサンプルのように
+`tty: true`と`stdin_open: true`を指定しておくと
+`docker compose up -d`するだけで対話的にシェルを操作できます。
 
-- 起動
+## パッケージをインストールしたい
+
+```console
+// コンテナーを起動
+$ docker compose up -d
+
+// コンテナーにログイン
+$ docker compose exec ubuntu bash
+
+// パッケージリストを更新
+root# apt update
+
+// パッケージをアップグレード
+root# apt upgrade -y
+
+// 必要なパッケージをインストール（例：curl, git）
+root# apt install -y curl git build-essential
+
+// インストールを確認
+root# curl --version
+root# git --version
+```
+
+Ubuntuコンテナーに`apt`を使ってツールやライブラリをインストールできます。
+
+## 開発環境として使いたい
+
+Python、Node.jsなどの開発環境をセットアップ：
+
+```yaml
+services:
+  dev-ubuntu:
+    image: ubuntu:24.04
+    container_name: my-dev-env
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./project:/workspace
+    working_dir: /workspace
+    command: /bin/bash
+```
 
 ```console
 $ docker compose up -d
-[+] Running 2/2
- ✔ ubuntu Pulled
-   ✔ f29bcb9f3dcd Pull complete
-[+] Running 2/2
- ✔ Network docker-ubuntu_default  Created
- ✔ Container my-ubuntu            Started
+
+$ docker compose exec dev-ubuntu bash
+
+// Python 開発環境のセットアップ
+root# apt update && apt install -y python3 python3-pip
+root# python3 --version
+
+// Node.js 開発環境のセットアップ
+root# apt install -y nodejs npm
+root# node --version
+
+// プロジェクトディレクトリで作業
+root# cd /workspace
+root# ls -la
 ```
 
-- 状態を確認
+## テスト環境として使いたい
 
-```console
-$ docker compose ls
-NAME             STATUS        CONFIG FILES
-docker-ubuntu    running(1)    docker-ubuntu/compose.yaml
+```yaml
+services:
+  ubuntu-focal:
+    image: ubuntu:20.04
+    container_name: test-focal
+    tty: true
+    stdin_open: true
+    command: /bin/bash
 
-$ docker container ls
-CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
-f7539a2ffecf   ubuntu:24.10   "/bin/bash"   4 minutes ago   Up 4 minutes             my-ubuntu
+  ubuntu-jammy:
+    image: ubuntu:22.04
+    container_name: test-jammy
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+
+  ubuntu-noble:
+    image: ubuntu:24.04
+    container_name: test-noble
+    tty: true
+    stdin_open: true
+    command: /bin/bash
 ```
 
-- コンテナにログイン
+`compose.yaml`に複数のUbuntuバージョンを定義し
+一括で起動し、それぞれのバージョンでアプリケーションのテストを実行するサンプルです。
 
 ```console
-$ docker compose exec ubuntu bash
+$ docker compose up -d
+
+$ docker compose exec ubuntu-focal bash
 root# apt update
-root# apt upgrade
+root# apt install -y your-package
+root# your-test-command
+
+// 別ターミナルで他のバージョンもテスト
+$ docker compose exec ubuntu-jammy bash
+$ docker compose exec ubuntu-noble bash
 ```
 
-- 削除
+## Ubuntuのバージョンについて
 
-```console
-$ docker compose down
-docker compose down
-[+] Running 2/1
- ✔ Container my-ubuntu            Removed
- ✔ Network docker-ubuntu_default  Removed
-```
+| バージョン | コードネーム | リリース日 | サポート終了 |
+|---|---|---|---|
+| 20.04 LTS | Focal Fossa | 2020年4月 | 2025年5月 |
+| 22.04 LTS | Jammy Jellyfish | 2022年4月 | 2027年4月 |
+| 24.04 LTS | Noble Numbat | 2024年4月 | 2029年4月 |
+| 24.10 | Oracular Oriole | 2024年10月 | 2025年7月 |
+| 25.04 | Plucky Puffin | 2025年4月 | 2026年1月 |
+| 25.10 | Questing Quokka | 2025年10月 | 2026年7月 |
 
-## コマンドしたい
+**LTS（Long Term Support）**
+バージョンは5年の標準サポート + 5年のESM（Extended Security Maintenance）が提供されます。
 
-```console
-// コンテナを起動
-$ docker container run -d --name my-ubuntu ubuntu
-
-// コンテナの状態を確認
-$ docker container ls
-
-// コンテナ内のBashを起動
-$ docker container exec -it my-ubuntu bash
-
-// コンテナを停止＆削除
-$ docker container stop my-ubuntu
-$ docker container rm my-ubuntu
-```
-
-ちょっとした確認であれば、`docker`コマンドを叩いたほうた早いかもしれません。
-Ubuntuコンテナをバックグラウンドで起動（``-d``）します。
-コンテナ名は``my-ubuntu``（``--name my-ubuntu``）にしました。
-起動したコンテナに接続（``docker exec -it``）し``bash``を起動します。
-使い終わったら、
-`docker container stop`と
-`docker container rm`で片付けておきます。
+暫定版（24.10、25.04など）は9か月間のサポートのみのため、開発・テスト環境での使用に限定し、本番環境では、最新のLTS版である**Ubuntu 24.04 LTS**の使用をオススメします。
 
 ## リファレンス
 
