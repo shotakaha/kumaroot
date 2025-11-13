@@ -121,7 +121,9 @@ Example:
 
 ### Content Organization - "逆引き形式"
 
-Each guide follows purpose-driven organization:
+Each guide follows purpose-driven organization. The structure varies by content type:
+
+#### Docker/Infrastructure Examples
 
 1. **Title**: `<Purpose>したい（`identifier`）` (e.g., "Ubuntuしたい（`ubuntu`）")
 2. **Overview**: Brief explanation of what this tool/service is
@@ -134,6 +136,25 @@ Each guide follows purpose-driven organization:
    - バージョンについて (Version information)
    - 特徴 (Characteristics) - Merits, Demerits, Best use cases
 6. **References**: Links to official documentation
+
+#### Technical Reference (ROOT, gStyle, etc.)
+
+1. **Title**: `<Purpose>したい（`method/identifier`）` (e.g., "ヒストグラムの見た目を変更したい（`gStyle->SetHist*`）")
+2. **Quick Reference**: Code examples (C++ with headers, Python) at the top
+3. **Conceptual Section**: Understanding parameters/bit structures/settings
+   - Examples: "パラメーターの意味を理解したい" or "ビット構造を理解したい"
+   - Include detailed tables explaining each parameter/bit
+   - Show default values and calculations
+4. **Implementation Sections**: How to use different configurations
+   - Subsections for specific use cases: "最小限の表示", "標準的な表示", "詳細な表示"
+   - Multiple practical examples with clear explanations
+5. **Practical Examples**: Use case-specific configurations
+   - "論文用（見やすくシンプル）" - Academic papers
+   - "プレゼンテーション用（視認性重視）" - Presentations
+   - "データ分析用（詳細な確認）" - Data analysis
+6. **Related Methods**: Cross-references to related documentation
+   - Example: SetOptFit references SetOptStat
+7. **References**: Links to official documentation
 
 ### Code Examples
 
@@ -187,6 +208,61 @@ The repository uses pre-commit hooks for code quality:
 - Admonitions: `:::{note}`, `:::{warning}`, etc.
 - Strikethrough: `~~text~~`
 
+## Best Practices for Technical Reference Documentation
+
+### C++ Header Files
+
+- **Always include headers explicitly** in all C++ code examples
+- Common headers for ROOT documentation:
+  - `#include <TStyle.h>` - gStyle-related methods
+  - `#include <TROOT.h>` - gROOT color management
+  - `#include "ROOT/RDataFrame.hxx"` - RDataFrame API
+
+Example:
+
+```cpp
+#include <TStyle.h>
+
+gStyle->SetHistLineWidth(2);
+```
+
+### Parameter/Bit Documentation
+
+When documenting methods with complex parameter structures:
+
+1. **Show default values clearly**: Use a dedicated subsection "デフォルト値（value）の説明"
+2. **Create detailed reference tables**:
+   - For bit structures: Position | Bit Value | Description
+   - For parameters: Parameter Name | Type/Range | Description
+3. **Include calculations**: Show how final values are computed from parameters
+4. **Multiple configuration examples**: Provide 3-4 different real-world configurations
+
+Example structure:
+
+- Minimal configuration
+- Standard/recommended configuration
+- Detailed/full configuration
+- Simplified alternative configuration
+
+### Cross-References
+
+- Link related methods in "Related Methods" or similar section
+- Example: SetOptFit documentation references SetOptStat
+- Use: `[SetOptStat](./root-gstyle-setoptstat.md)`
+
+### Code Examples Organization
+
+For technical reference docs:
+
+```text
+1. Quick reference at top (C++ with headers + Python)
+2. Conceptual section explaining parameters
+3. Multiple configuration examples with subsections
+4. Practical use cases (papers, presentations, analysis)
+5. Cross-references to related methods
+6. Official documentation links
+```
+
 ## Common Workflows
 
 ### Adding a New Docker Example
@@ -198,7 +274,7 @@ The repository uses pre-commit hooks for code quality:
 5. Run `task pre-commit` to validate
 6. Commit with conventional format: `fix(docker-<osname>): add <description>`
 
-### Adding a New Guide
+### Adding a New Guide - General Purpose
 
 1. Create `<category>/<category>-<feature>.md`
 2. Register in toctree of main index file
@@ -206,11 +282,24 @@ The repository uses pre-commit hooks for code quality:
 4. Include code examples before explanations
 5. Ensure JTF style compliance
 
+### Adding a New ROOT/Technical Reference Guide
+
+1. Create `root/<root>-<method>.md` following the pattern
+2. Start with quick reference (C++ with headers + Python)
+3. Add conceptual section explaining how the method works
+4. Provide 3-4 different configuration examples with clear subsections
+5. Include practical use cases（論文用、プレゼンテーション用、データ分析用）
+6. Add cross-references to related methods when applicable
+7. Include official ROOT documentation links
+8. Ensure all code examples have proper language markers (`cpp`, `python`, `text`)
+9. Use full-width Japanese parentheses（）in Japanese text, not half-width ()
+10. Add blank lines around code blocks and lists
+
 ### Updating Version Information
 
 - Check official release schedules
-- Update version tables with: バージョン (Version) | リリース日 (Release date) | サポート終了 (End of support) | 特徴 (Features)
-- Use Japanese date format: YYYY年M月D日 (e.g., 2025年11月13日)
+- Update version tables with: バージョン（Version）| リリース日（Release date）| サポート終了（End of support）| 特徴（Features）
+- Use Japanese date format: YYYY年M月D日（e.g., 2025年11月13日）
 
 ### Building and Deploying
 
@@ -305,6 +394,7 @@ This project uses **calendar-based semantic versioning** (YYYY.MM.PATCH):
   - Reset MINOR to 1 and PATCH to 0 when entering a new year
 
 **Important constraints:**
+
 - Do NOT use automatic increment detection (`cz bump` without `--increment`)
 - All bumping is explicit via configured task commands
 - MAJOR/MINOR bumps must be coordinated with the actual calendar date
