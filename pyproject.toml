@@ -1,6 +1,6 @@
 [project]
 name = "kumaroot"
-version = "2025.11.7"
+version = "2025.11.8"
 description = "KumaROOT - Documentation project"
 readme = "README.md"
 license = "MIT"
@@ -62,7 +62,7 @@ package-mode = false
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "2025.11.7"
+version = "2025.11.8"
 version_provider = "pep621"
 tag_format = "v$version"
 version_files = [

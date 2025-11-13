@@ -1,5 +1,53 @@
 # CHANGELOG.md
 
+## v2025.11.8 (2025-11-14)
+
+### Feat
+
+- **root-rdataframe**: split histogram visualization into separate documentation
+- **root-rdataframe**: split statistics computation into separate documentation
+- **root-rdataframe**: split filtering into separate documentation
+
+### Fix
+
+- **root-rootrc**: reorganize ROOT user configuration documentation with .rootrc and rootlogon.C examples
+- **root-groot-setstyle**: reorganize graphics style documentation with style comparison table and practical examples
+- **root-gstyle-font**: add warning admonition for CJK font limitations
+- **root-gstyle-font**: reorganize font configuration documentation with precision and font family examples
+- **root-gstyle-canvas**: reorganize canvas configuration documentation with size and position examples
+- **root-gstyle-settimedisplay**: reorganize time display documentation with epoch explanation and practical examples
+- **root-gstyle-setpadgrid**: reorganize grid line documentation with practical examples and customization options
+- **root-gstyle-setoptlog**: reorganize logarithmic scale documentation with practical examples and use cases
+- **root-gstyle-setoptstat**: reorganize statistics display documentation with comprehensive bit structure and practical examples
+- **root-gstyle-setoptfit**: reorganize fit result display documentation with detailed bit structure and practical examples
+- **root-gstyle-setndivisions**: reorganize axis division documentation with detailed parameter explanations and practical examples
+- **root-gstyle-sethistlinewidth**: reorganize histogram styling documentation with comprehensive parameter documentation and practical examples
+- **root-groot-setrgb**: reorganize and add recommended color palettes
+- **root-rdataframe**: add headers, restructure, and explain TChain relationship
+- **docker**: auto-format by pre-commit hooks
+- **docker-example-nginx**: improve documentation for beginners and add version information
+- **docker-example-httpd**: improve documentation for beginners and add version information
+- **CLAUDE**: add custom versioning scheme documentation
+- **CLAUDE**: improve formatting and update commit type conventions
+- **CLAUDE**: add CLAUDE.md developer guidance file
+- **docker**: add AlmaLinux and RockyLinux to toctree
+- **docker-example-busybox**: add characteristics section
+- **docker-example-raspi**: add emulation characteristics section
+- **docker-example-rockylinux**: add characteristics section
+- **docker-example-almalinux**: add characteristics section
+- **docker-ubuntu**: add characteristics section
+- **docker-example-rockylinux**: add RockyLinux container documentation
+- **docker-example-almalinux**: add AlmaLinux container documentation
+- **command**: add GPG encryption documentation
+- **typst**: improve tyler documentation by splitting local-build and local-install sections
+
+### Refactor
+
+- **root-rdataframe**: rename statistics documentation and expand content
+- **root**: split global configuration documentation
+- **docker**: update Ubuntu version information with latest releases
+- **docker-example**: reorganize example files with docker-example- prefix
+
 ## v2025.11.7 (2025-11-12)
 
 ### Feat
