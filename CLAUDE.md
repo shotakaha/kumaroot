@@ -18,7 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Setup
 
 ```bash
-poetry install --no-root
+uv sync --all-extras
 source .venv/bin/activate
 ```
 
@@ -27,18 +27,19 @@ source .venv/bin/activate
 ```bash
 task docs
 # Opens http://localhost:8000 with live reload
-# Runs: cd docs && poetry run make livehtml
+# Runs: cd docs && uv run make livehtml
 
 # Or manually:
-cd docs && make livehtml
+cd docs && uv run make livehtml
 ```
 
 ### Dependency Management
 
 ```bash
-task update      # Update all dependencies + export requirements.txt
+task update      # Update all dependencies + regenerate requirements.txt
+task sync        # Sync dependencies from lockfile
 task outdated    # Show outdated packages
-task export      # Export requirements.txt
+task export      # Regenerate requirements.txt for Read the Docs
 ```
 
 ### Version Management (Commitizen)
