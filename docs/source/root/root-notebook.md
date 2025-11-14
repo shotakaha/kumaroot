@@ -34,11 +34,20 @@ TH1F *h = new TH1F("h", "histogram", 100, -5, 5);
 for (int i = 0; i < 10000; i++) {
     h->Fill(gRandom->Gaus(0, 1));
 }
+
+TCanvas *c = new TCanvas("c", "canvas", 800, 600);
 h->Draw();
+c->Draw();
 ```
 
 カーネル選択で「`ROOT C++`」に切り替えます。
 セル内にC++/ROOTの解析コードを記述できます。
+
+:::{note}
+
+`TCanvas::Draw`は明示的に呼び出す必要があります。
+
+:::
 
 ## PyROOTを実行したい（`Python3 (ipykernel) Kernel`）
 
@@ -48,7 +57,10 @@ import ROOT
 h = ROOT.TH1F("h", "histogram", 100, -5, 5)
 for i in range(10000):
     h.Fill(ROOT.gRandom.Gaus(0, 1))
+
+c = ROOT.TCanvas("c", "canvas", 800, 600)
 h.Draw()
+c.Draw()
 ```
 
 カーネル選択で「`Python (ipykernel)`」に切り替えます。
