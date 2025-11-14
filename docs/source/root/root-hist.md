@@ -24,16 +24,16 @@ maxdepth: 1
 ---
 root-th1
 root-th1-title
+root-th1-stats
+root-th1-mean
+root-th1-rms
+root-th1-binerror
+root-th1-sumw2
 root-th2
 ```
 
 
-
 ## タイトルを中心にしたい
-
-
-
-## 値を詰めたい（ ``Fill`` ）
 
 ## 面積でノーマライズしたい
 
