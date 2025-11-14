@@ -54,79 +54,10 @@ TH1D(const char* name,
 
 - `xup`より大きい値は`Overflow`としてカウントされる
 
-### 異なるデータ型での使用例
+## データ型を選択したい
 
-```cpp
-#include <TH1.h>
-
-// TH1D（64bit浮動小数点、最も一般的）
-TH1D *h1 = new TH1D("h1", "Histogram D", 100, 0.0, 10.0);
-
-// TH1F（32bit浮動小数点、メモリ効率重視）
-TH1F *h2 = new TH1F("h2", "Histogram F", 100, 0.0, 10.0);
-
-// TH1I（32bit整数、整数データ向け）
-TH1I *h3 = new TH1I("h3", "Histogram I", 100, 0, 10);
-
-// TH1S（16bit整数、小規模データ向け）
-TH1S *h4 = new TH1S("h4", "Histogram S", 100, 0, 10);
-```
-
-
-
-## クイックリファレンス
-
-### C++
-
-```cpp
-#include <TH1D.h>
-#include <TRandom.h>
-
-// ヒストグラムを作成
-TH1D *h = new TH1D("h1", "Histogram;X axis;Y axis", 200, -2, 2);
-
-// データを入力
-for (Int_t i = 0; i < 100000; i++) {
-    h->Fill(gRandom->Gaus(0, 1));
-}
-
-// 統計情報を取得
-Double_t mean = h->GetMean();
-Double_t rms = h->GetRMS();
-
-// 統計ボックスを表示
-h->SetStats();
-
-// ヒストグラムを描画
-h->Draw();
-```
-
-### Python
-
-```python
-from ROOT import TH1D, TRandom, gRandom
-
-# ヒストグラムを作成
-h = TH1D("h1", "Histogram;X axis;Y axis", 200, -2, 2)
-
-# データを入力
-for i in range(100000):
-    h.Fill(gRandom.Gaus(0, 1))
-
-# 統計情報を取得
-mean = h.GetMean()
-rms = h.GetRMS()
-
-# 統計ボックスを表示
-h.SetStats()
-
-# ヒストグラムを描画
-h.Draw()
-```
-
-## ヒストグラムのデータ型を選択したい
-
-`TH1`には複数の派生クラスがあり、データの特性に合わせて選択できます。
+`TH1`には複数の派生クラスがあります。
+入力するデータの特性に合わせて選択できます。
 
 | クラス名 | データ型 | データ長 | 用途 |
 |---|---|---|---|
@@ -143,28 +74,43 @@ h.Draw()
 - **データサイズが大きい場合**: `TH1F`でメモリ節約
 - **高精度が必要な場合**: `TH1D`を使用
 
-## タイトルと軸ラベルを指定したい（コンストラクターの第2引数）
-
-ヒストグラムを初期化するときに、タイトルと軸ラベルを指定できます。
+## タイトルしたい（`title`）
 
 ```cpp
 #include <TH1D.h>
 
 // タイトルのみ
-TH1D *h1 = new TH1D("h1", "Histogram Title", 100, 0, 10);
-
-// タイトルと軸ラベル
-TH1D *h2 = new TH1D("h2", "Title;X axis;Y axis", 100, 0, 10);
-
-// セミコロン区切り：タイトル;X軸タイトル;Y軸タイトル
-TH1D *h3 = new TH1D("h3", "Gaussian Distribution;Value;Frequency", 100, -5, 5);
+TH1D *h1 = new TH1D(
+    "h1",
+    "Histogram Title",
+    100, 0, 10
+);
 ```
 
+## 軸ラベルしたい（`title;x-axis;y-axis`）
+
+```cpp
+#include <TH1D.h>
+
+// タイトルと軸ラベル
+TH1D *h2 = new TH1D(
+    "h2",
+    "Title;X axis;Y axis",
+    100, 0, 10
+);
+
+// セミコロン区切り：タイトル;X軸タイトル;Y軸タイトル
+TH1D *h3 = new TH1D(
+    "h3",
+    "Gaussian Distribution;Value;Frequency",
+    100, -5, 5
+);
+```
+
+ヒストグラムを初期化するときに、タイトルと軸ラベルを指定できます。
 セミコロン（`;`）で区切ることで、グラフのタイトル、X軸タイトル、Y軸タイトルを同時に指定できます。
 
 ## データを入力したい（`Fill`）
-
-ヒストグラムにデータを入力するには`Fill`メソッドを使用します。
 
 ```cpp
 #include <TH1D.h>
@@ -178,10 +124,29 @@ h->Fill(5.5);
 for (Int_t i = 0; i < 1000; i++) {
     h->Fill(gRandom->Gaus(5, 1));
 }
+```
+
+`Fill`メソッドで、ヒストグラムにデータを入力できます。
+
+## 重み付きデータを入力したい（`Fill`）
+
+```cpp
+#include <TH1D.h>
+
+TH1D *h = new TH1D("h", "Data", 100, 0, 10);
 
 // 重み付きで入力
 h->Fill(7.2, 2.5);  // 値7.2に重み2.5を追加
+
+// ループでデータを入力
+for (Int_t i = 0; i < 1000; i++) {
+    h->Fill(gRandom->Gaus(5, 1), gRandomGaus(2, 1));
+}
 ```
+
+`Fill`メソッドの第2引数に「重み」を指定できます。
+重みを使うことで、1データポイントを複数の回数カウントしたのと同じ効果が得られます。
+たとえば、`Fill(7.2, 2.5)`は値7.2を2.5回分カウントします。
 
 ## 統計情報を取得したい
 
