@@ -112,6 +112,18 @@ root-tfile
 
 ヒストグラム、グラフ、キャンバスなどの可視化機能を使い、データを図表として表現します。
 
+### 関数・フィット
+
+1次元ヒストグラムをフィットするための関数定義とフィット機能を提供します。
+
+```{toctree}
+---
+maxdepth: 1
+---
+root-tf1
+root-tf1-gaus
+```
+
 ### 1次元ヒストグラム
 
 ```{toctree}
@@ -128,6 +140,8 @@ root-th1-mean
 root-th1-rms
 root-th1-binerror
 root-th1-sumw2
+root-th1-fit
+root-th1-draw
 ```
 
 ### 2次元ヒストグラム
