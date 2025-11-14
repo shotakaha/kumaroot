@@ -1,13 +1,17 @@
-# Jupyter Notebookで対話的に実行したい（`--notebook`）
+# Notebookしたい（`--notebook`）
 
 ```console
 $ root --notebook
 ```
 
-`--notebook`オプションを使うことで、ROOTをJupyter Notebook環境で使用できます。
-ブラウザベースのノートブック形式で、コードの実行結果や可視化を対話的に確認できます。
+`--notebook`オプションで、ROOTをJupyter Notebook環境で使用できます。
+このコマンドでJupyter Notebookサーバーが起動し、デフォルトのブラウザが自動的に開きます。
 
-## Notebookの起動
+ブラウザベースでノートブックを操作し、コードの実行結果や可視化を対話的に確認できます。
+ノートブックは`ipynb`形式で保存できます。
+ノートブックは共同研究者に共有して、結果を再現できます。
+
+## Notebookの準備
 
 ```console
 $ python3 -m venv .venv
@@ -15,15 +19,14 @@ $ source .venv/bin/activate
 (.venv) $ python3 --version
 Python 3.14.0
 (.venv) $ pip install notebook
+(.venv) $ pip install metakernel
 (.venv) $ root --notebook
 ```
 
-このコマンドでJupyter Notebookサーバーが起動し、デフォルトブラウザで自動的に開きます。
-新しいノートブックを作成するか、既存のノートブックを開いて編集できます。
+HomebrewでインストールしたROOTの場合、Jupyter Notebook周りのPythonパッケージが不足している可能性があります。
+その場合は、通常のPythonと同じように仮想環境を作成し、必要なパッケージをインストールしてください。
 
-## Notebookでの基本的な使い方
-
-### C++ コードの実行
+## C++を実行したい（`ROOT C++ Kernel`）
 
 ```cpp
 #include <iostream>
@@ -34,9 +37,10 @@ for (int i = 0; i < 10000; i++) {
 h->Draw();
 ```
 
-セル内にC++コードを記述して実行します。
+カーネル選択で「`ROOT C++`」に切り替えます。
+セル内にC++/ROOTの解析コードを記述できます。
 
-### Python コードの実行
+## PyROOTを実行したい（`Python3 (ipykernel) Kernel`）
 
 ```python
 import ROOT
@@ -47,7 +51,8 @@ for i in range(10000):
 h.Draw()
 ```
 
-PyROOTを使ってPythonでコードを記述することもできます。
+カーネル選択で「`Python (ipykernel)`」に切り替えます。
+PyROOTを使ってPythonで解析コードを記述できます。
 
 ## Notebookの利点
 
@@ -56,21 +61,6 @@ PyROOTを使ってPythonでコードを記述することもできます。
 - **ドキュメンテーション**：コード、出力、マークダウンテキストを同一ファイルに記録
 - **再現性**：分析の過程をすべて記録し、あとで再実行可能
 - **共有**：`.ipynb`ファイルを共有して、他のユーザーが再現可能
-
-## Notebookの保存
-
-作成したノートブックは`.ipynb`形式で保存されます。
-このファイルには、コード、実行結果、マークダウンテキストがすべて含まれています。
-
-## Rint（対話型シェル）との違い
-
-| 項目 | Notebook | Rint |
-|------|----------|------|
-| インターフェイス | ブラウザベース | コマンドライン |
-| ドキュメンテーション | 統合可能 | 不可 |
-| 可視化の表示 | 直接表示 | 別ウィンドウ |
-| 保存形式 | `.ipynb` | `.C`マクロファイル |
-| 再現性 | 高い（全操作を記録） | 中程度 |
 
 ## 参考リンク
 
