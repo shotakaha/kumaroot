@@ -140,6 +140,7 @@ root-tcanvas-log
 root-tcanvas-drawcolortable
 root-tcanvas-print
 root-tcanvas-update
+root-tcanvas-draw
 ```
 
 ## 凡例操作したい
