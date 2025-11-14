@@ -25,6 +25,8 @@ maxdepth: 1
 root-th1
 root-th1-title
 root-th1-fill
+root-th1-integral
+root-th1-scale
 root-th1-stats
 root-th1-mean
 root-th1-rms
@@ -33,11 +35,7 @@ root-th1-sumw2
 root-th2
 ```
 
-
 ## タイトルを中心にしたい
-
-## 面積でノーマライズしたい
-
 
 ## ２軸グラフを作成したい
 
