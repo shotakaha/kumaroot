@@ -1,6 +1,6 @@
 # ROOTの使い方
 
-``ROOT``と高エネルギー物理学分野で広く使われている解析フレームワークです。
+``ROOT``は高エネルギー物理学分野で広く使われている解析フレームワークです。
 スイスにあるCERNを中心に開発されています。
 
 **解析フレームワーク**と聞くと敷居が高そうに感じますが
@@ -16,6 +16,8 @@
 
 ## 環境構築したい
 
+ROOTをインストールして、開発環境を準備する方法を説明します。
+
 ```{toctree}
 ---
 maxdepth: 2
@@ -23,10 +25,10 @@ maxdepth: 2
 root-setup
 ```
 
-## チュートリアルしたい
+## 学習リソース
 
-ROOTの使い方を学ぶには、公式のチュートリアルとサンプルコードが最適です。
-実際にコードを動かしながら学ぶことで、ドキュメントだけを読むより効率的に習得できます。
+ROOTの使い方を効率的に学ぶには、公式のチュートリアルとサンプルコードを活用しましょう。
+実際にコードを動かしながら学ぶことで、ドキュメント読解だけより習得が早くなります。
 
 [ROOT公式チュートリアル](https://root.cern/doc/master/group__Tutorials.html)
 :   付属のサンプルコードの説明です。
@@ -51,28 +53,20 @@ root-cling
 root-cint
 ```
 
-## 全体設定したい
+## データ操作したい
 
-表示方法や画面の設定を一括変更する場合は ``TROOTクラス`` 、 ``TStyleクラス`` 、 ``TSystem`` を使います。
-実際に使用するのは ``gROOT`` 、 ``gStyle`` 、 ``gSystem`` というグローバル変数です。
+ROOTでのデータ処理の中核です。様々なデータ源からROOTのデータ構造に変換し、フィルタリングや統計処理を行います。
+
+### TTree・TChain・RNTuple
+
+``TTree``はROOTのデータ構造の基本です。
+CSVなどのテキスト形式で取得したデータをすぐに``TTree``に変換しておくと、ROOTを使ったデータ解析が捗ります。
+複数のTTreeを読み込む場合は``TChain``クラスが便利です。
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
-root-groot
-root-gstyle
-root-gsystem
-root-genv
-```
-
-## TTree操作したい
-
-``TTree``はROOTのデータ構造の基本です。
-CSVなどのテキスト形式で取得したデータをすぐに``TTree``に変換しておくと、ROOTを使ったデータ解析が捗ります。
-また、複数のTTreeを読み込む場合は``TChain``クラスが便利です。
-
-```{toctree}
 root-ttree
 root-ttree-readfile
 root-ttree-entries
@@ -85,7 +79,10 @@ root-tchain
 root-rntuple
 ```
 
-## RDataFrame操作したい
+### RDataFrame
+
+ROOT6で導入された高性能なデータフレーム処理フレームワークです。
+関数型プログラミングスタイルでデータ解析が可能で、複数コアでの並列処理に対応しています。
 
 ```{toctree}
 ---
@@ -100,17 +97,25 @@ root-rdataframe-histo1d
 
 ## ファイル操作したい
 
-```{toctree}
-root-tstring
-root-tfile
-```
-
-## ヒストグラム操作したい
+データファイルの読み書きや文字列処理を行います。
 
 ```{toctree}
 ---
 maxdepth: 1
-caption: 1次元ヒストグラムしたい
+---
+root-tstring
+root-tfile
+```
+
+## 描画したい
+
+ヒストグラム、グラフ、キャンバスなどの可視化機能を使い、データを図表として表現します。
+
+### 1次元ヒストグラム
+
+```{toctree}
+---
+maxdepth: 1
 ---
 root-th1
 root-th1-title
@@ -124,15 +129,16 @@ root-th1-binerror
 root-th1-sumw2
 ```
 
+### 2次元ヒストグラム
+
 ```{toctree}
 ---
 maxdepth: 1
-caption: 2次元ヒストグラムしたい
 ---
 root-th2
 ```
 
-## グラフ操作したい
+### グラフ
 
 ```{toctree}
 ---
@@ -144,9 +150,12 @@ root-tgraph-point
 root-tmultigraph
 ```
 
-## キャンバス操作したい
+### キャンバス・レイアウト
 
 ```{toctree}
+---
+maxdepth: 1
+---
 root-tcanvas
 root-tcanvas-divide
 root-tcanvas-log
@@ -156,13 +165,31 @@ root-tcanvas-update
 root-tcanvas-draw
 ```
 
-## 凡例操作したい
+### 凡例
 
 ```{toctree}
+---
+maxdepth: 1
+---
 root-tlegend
 ```
 
-## その他
+## 設定・カスタマイズしたい
+
+表示方法や画面の設定を一括変更する場合は ``TROOTクラス`` 、 ``TStyleクラス`` 、 ``TSystem`` を使います。
+実際に使用するのは ``gROOT`` 、 ``gStyle`` 、 ``gSystem`` というグローバル変数です。
+
+```{toctree}
+---
+maxdepth: 1
+---
+root-groot
+root-gstyle
+root-gsystem
+root-genv
+```
+
+## その他の話題
 
 ```{toctree}
 ---
