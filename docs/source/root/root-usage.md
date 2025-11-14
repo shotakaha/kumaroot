@@ -31,11 +31,16 @@ root-tutorial
 
 ## 対話モードしたい
 
+ROOTの対話型シェル（Rint）を使って、コンパイルなしにC++コードを実行できます。
+ROOT6ではバックエンドのC++インタプリターが`CINT`から`Cling`に変更され、より詳細なエラーメッセージと高度なC++規格への対応が実現されました。
+
 ```{toctree}
 ---
 maxdepth: 2
 ---
 root-rint
+root-cling
+root-cint
 ```
 
 ## 全体設定したい
