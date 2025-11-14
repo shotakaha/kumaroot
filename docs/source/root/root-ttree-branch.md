@@ -1,12 +1,30 @@
-# 複雑な構造のデータを読み込みたい（ ``TTree::Branch`` ）
+# ブランチを作成したい（`TTree::Branch`）
 
 ```cpp
-tree->Branch("run", &run, "run/I")
+#include <TTree.h>
+
+TTree *tree = new TTree("tree", "Event data");
+Int_t run = 0;
+tree->Branch("run", &run, "run/I");
+
+run = 2025;
+tree->Fill();
 ```
 
-``TTree::Branch``で、複雑なデータ構造を設定＆読み込みできます。
-前述した[TTree::ReadFile](./root-ttree-readfile.md)は、カラムの値がひとつの場合に便利です。
-カラムの値が配列を持つ場合は、Branchを使います。
+`TTree::Branch`メソッドでツリーにブランチを作成し、変数をツリーに関連付けることで、複雑なデータ構造を設定できます。
+
+```python
+import ROOT
+
+tree = ROOT.TTree("tree", "Event data")
+run = ROOT.ctypes.c_int()
+tree.Branch("run", run, "run/I")
+
+run.value = 2025
+tree.Fill()
+```
+
+## メソッドのシグネチャ
 
 ```cpp
 TBranch* Branch(const char* name,
@@ -15,140 +33,130 @@ TBranch* Branch(const char* name,
                 Int_t bufsize = 32000)
 ```
 
-``name``
-:   ブランチ名を指定します。
-    変数名とのひも付けは次の``address``で行います。
+### 引数と戻り値
 
-``address``
-:   変数のアドレスを指定します。
-    変数は事前に宣言をしておきます。
-    変数が実体の場合は{kbd}`&`が先頭に必要です。
-    配列の場合はそのまま（``array``）もしくは配列の最初のアドレス（``&array[0]``）を指定します。
+**引数**:
 
-``leaflist``
-:   変数の型を指定します。
-    ``変数/型``という形式で記述し、``int型``は``i``、``float型`` / ``double型``は``F``など。
+- **name** - ブランチ名を指定します。変数名とのひも付けは`address`で行います
+- **address** - 変数のアドレスを指定します。変数が実体の場合は`&`が先頭に必要です。配列の場合はそのまま指定します
+- **leaflist** - 変数の型を指定します。`変数/型`形式で記述（`int`は`I`、`float`は`F`、`double`は`D`など）
+- **bufsize** - バッファサイズ（デフォルト値は32000）
 
-## サンプルコード
+**戻り値**:
 
+- 作成されたTBranchオブジェクトへのポインター
+
+## 単一の値をブランチに追加したい（`Branch`）
 
 ```cpp
-// data2tree.C
-{
-    // STEP1: データファイルを読み込む
-    TString ifn = "inputfilename"
-    ifstream fin;
-    fin.open(ifn);
+#include <TTree.h>
 
-    // STEP2: データを格納するための変数を定義する
-    int val1, val2, val3, val4;
+TTree *tree = new TTree("tree", "Event data");
+Int_t run = 0;
+Float_t energy = 0.0;
+tree->Branch("run", &run, "run/I");
+tree->Branch("energy", &energy, "energy/F");
 
-    // STEP3: TTreeを作成する
-    TTree *tree = new TTree("name", "title);
-
-    // STEP4: TTree::Branch(...)を使って、各変数のブランチを作成する
-    tree->Branch("val1", &val1, "val1/I");
-    tree->Branch("val2", &val2, "val2/I");
-    tree->Branch("val3", &val3, "val3/I");
-    tree->Branch("val4", &val4, "val4/I");
-
-    // STEP5: cppでファイルを読み込むときの常套手段
-    while (fin >> val1 >> val2 >> val3 >> val4) {
-        // STEP6: データのエントリの区切りで必ずTTree::Fill()する
-        tree->Fill();
-    }
-
-    // STEP7: 作成したTTreeを保存するためのTFileを作成する
-    TString ofn = "outputfilename";
-    TFile *fout = new TFile(ofn, "recreate");
-
-    // STEP8: TFileにTTreeを書き込む
-    tree->Write();  //
-
-    // STEP9: TFileを閉じる
-    // プログラム（やマクロ）終了時に勝手に閉じてくれるらしいが一応
-    fout->Close();
-
-    return;
+for (int evt = 0; evt < 100; evt++) {
+    run = 2025;
+    energy = 100.5 + evt * 0.1;
+    tree->Fill();
 }
 ```
 
+単一の変数をブランチとして追加する場合、変数の型を指定して`Branch()`を呼び出します。
+複数のブランチを定義する場合、各変数ごとに`Branch()`を呼び出します。
 
-[TTree::ReadFileを使った方法](root-ttree-readfile.md)と比べると、
-コードの行数がぐーんと多くなりました。
-
-行数が増えた分（？）、汎用性は高くなっています。
-この方法だと、ブランチに**配列**を設定ができます。
-
-## ブランチに配列を使いたい
-
-```{code-block} cpp
----
-linenos: true
-emphasize-lines: 3
----
-Int_t val1[100];
-TTree *tree = new TTree("tree", "tree using array");
-tree->Branch("val1", val1, "val1[100]/I");
-```
-
-第1引数はブランチの名前なので、任意の文字列を指定します。
-第2引数には**変数のアドレス**が必要とされています。
-配列の変数名は、その先頭アドレスを返すので、そのまま``val1``と書けばよいです。
-第3引数では、変数名に配列の長さをベタ書きします。
-
-
-## ブランチに可変長配列を使いたい
-
-少し手間を加えると可変長配列も扱えます。
-
-1. 配列の大きさ fN を定義する
-1. 配列 val を定義する
-1. fN のブランチを作る
-1. val のブランチを作る
+## 配列をブランチに追加したい（`Branch`）
 
 ```cpp
-Int_t fN;                                 // (1) 設定したい配列の大きさ
-Int_t val[max];                           // (2) val[max]: maxはfNよりも大きな数
-tree->Branch("nch", &fN, "nch/I");        // (3) まずfNをブランチにセットする；fNだと何の変数か分かりづらいので、nch（全チャンネル数の意）に変更した点に注意
-tree->Branch("val", val, "val[nch]/I");   // (4) 次にval[fN]をセットする；maxでも、fNでもなくなく、nchにする点に注意
+#include <TTree.h>
 
-// (4)を以下のようにすると、"Illegal leaf ..." と怒られる
-tree->Branch("val", val, "val[fN]/I");    // fNには、ブランチ名を入れる必要があるらしい（
+Int_t val[100];
+TTree *tree = new TTree("tree", "array branch");
+tree->Branch("val", val, "val[100]/I");
+
+for (int i = 0; i < 100; i++) {
+    val[i] = i;
+    tree->Fill();
+}
 ```
 
+固定長配列をブランチに追加する場合、`leaflist`に配列の長さを明示的に指定します。
+第2引数は配列のアドレスのため、配列名をそのまま指定できます。
 
-### 可変長文字列を使いたい
+## 可変長配列をブランチに追加したい（`Branch`）
 
 ```cpp
-#include <string.h>    // strlen()を使うために必要
+#include <TTree.h>
+
+Int_t fN = 0;
+Int_t val[100];
+TTree *tree = new TTree("tree", "variable-length array");
+tree->Branch("nch", &fN, "nch/I");
+tree->Branch("val", val, "val[nch]/I");
+
+for (int evt = 0; evt < 100; evt++) {
+    fN = 10 + evt % 20;
+    for (int i = 0; i < fN; i++) {
+        val[i] = i;
+    }
+    tree->Fill();
+}
+```
+
+可変長配列を使う場合、配列のサイズを保存するブランチと配列データ用ブランチの両方が必要です。
+重要なのは、`leaflist`に配列名ではなく、サイズを格納するブランチ名（ここでは`nch`）を指定することです。
+
+## 可変長文字列をブランチに追加したい（`Branch`）
+
+```cpp
+#include <TTree.h>
+#include <cstring>
 
 const Int_t NMAX_MOJI = 100;
-char hoge[NMAX_MOJI];
-Int_t nmoji;
+char moji[NMAX_MOJI];
+Int_t nmoji = 0;
+TTree *tree = new TTree("tree", "variable-length string");
 tree->Branch("nmoji", &nmoji, "nmoji/I");
-tree->Branch("moji", hoge, "hoge[nmoji]/C");
+tree->Branch("moji", moji, "moji[nmoji]/C");
 
-sprintf(hoge, "hoge-hoge-fuga-ga");
-nmoji = strlen(hoge)
-tree->Fill()
+strcpy(moji, "Hello ROOT");
+nmoji = strlen(moji);
+tree->Fill();
 ```
 
-### ``std::vector``を使いたい
+文字列をブランチに追加する場合、文字数を管理するブランチと、文字配列用ブランチの両方が必要です。
+`leaflist`の型指定に`C`を使用します。
+
+## std::vectorをブランチに追加したい（`Branch`）
 
 ```cpp
+#include <TTree.h>
 #include <vector>
 
 std::vector<Double_t> vec;
-TTree *tree = new TTree("tree", "tree using vector");
+TTree *tree = new TTree("tree", "vector branch");
 tree->Branch("vec", &vec);
+
+for (int evt = 0; evt < 100; evt++) {
+    vec.clear();
+    for (int i = 0; i < 10; i++) {
+        vec.push_back(i * 0.1);
+    }
+    tree->Fill();
+}
 ```
 
-``<vector>``をincludeする。
-namespaceを定義しない場合は``std::vector<型> 変数名``と宣言すること。
-当たり前のことだけど、結構忘れてしまう。
-ROOT(CINT)を起動させると``vector<型> 変数名``で使えてしまうため、よく忘れる…orz。
-``vector型``の変数は実体であるため、第2引数は先頭に{kbd}`&`が必要。
-``array``と同じようにすると怒られる。
-ROOTが空気を読んでくれるため、第3引数はなくてよいみたい。
-まぁでも一番最後のブランチにするのが無難かもしれない。
+`std::vector`をブランチに追加する場合、第2引数にベクトルのアドレスを指定し、第3引数は省略します。
+ROOTが自動的にベクトルのサイズと型を判定します。ベクトルは通常、ブランチの最後に配置することが推奨されます。
+
+## 関連メソッド
+
+- [Fill](./root-ttree-fill.md) - イベントを追加
+- [Write](./root-ttree-write.md) - ツリーをファイルに保存
+- [GetBranch](./root-ttree-getbranch.md) - ブランチを取得
+
+## 参考リンク
+
+- [ROOT TTree::Branch Documentation](https://root.cern/doc/master/classTTree.html#a9e1c8fb17a98a71c34ef78b86f8f1f4a)
