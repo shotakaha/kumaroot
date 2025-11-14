@@ -10,7 +10,12 @@ $ root --notebook
 ## Notebookの起動
 
 ```console
-$ root --notebook
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $ python3 --version
+Python 3.14.0
+(.venv) $ pip install notebook
+(.venv) $ root --notebook
 ```
 
 このコマンドでJupyter Notebookサーバーが起動し、デフォルトブラウザで自動的に開きます。
