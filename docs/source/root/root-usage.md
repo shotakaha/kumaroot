@@ -134,7 +134,16 @@ root-tmultigraph
 ## キャンバス操作したい
 
 ```{toctree}
-root-canvas
+root-tcanvas
+root-tcanvas-divide
+root-tcanvas-log
+root-tcanvas-drawcolortable
+root-tcanvas-pdf
+```
+
+## 凡例操作したい
+
+```{toctree}
 root-tlegend
 ```
 
