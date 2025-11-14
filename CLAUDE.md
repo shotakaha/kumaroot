@@ -139,22 +139,55 @@ Each guide follows purpose-driven organization. The structure varies by content 
 
 #### Technical Reference (ROOT, gStyle, etc.)
 
-1. **Title**: `<Purpose>したい（`method/identifier`）` (e.g., "ヒストグラムの見た目を変更したい（`gStyle->SetHist*`）")
-2. **Quick Reference**: Code examples (C++ with headers, Python) at the top
-3. **Conceptual Section**: Understanding parameters/bit structures/settings
-   - Examples: "パラメーターの意味を理解したい" or "ビット構造を理解したい"
-   - Include detailed tables explaining each parameter/bit
-   - Show default values and calculations
-4. **Implementation Sections**: How to use different configurations
-   - Subsections for specific use cases: "最小限の表示", "標準的な表示", "詳細な表示"
-   - Multiple practical examples with clear explanations
-5. **Practical Examples**: Use case-specific configurations
-   - "論文用（見やすくシンプル）" - Academic papers
-   - "プレゼンテーション用（視認性重視）" - Presentations
-   - "データ分析用（詳細な確認）" - Data analysis
-6. **Related Methods**: Cross-references to related documentation
-   - Example: SetOptFit references SetOptStat
-7. **References**: Links to official documentation
+This section documents the basic style for ROOT method and feature documentation. The style prioritizes clarity and conciseness over elaborate structure.
+
+**Basic Structure** (based on `root-th1-fill.md` pattern):
+
+1. **Title**: `<Purpose>したい（`method/identifier`）` (e.g., "データを入力したい（`TH1::Fill`）")
+2. **C++ Code Example**: Practical code with `#include` headers
+3. **Brief Explanation**: Concise description of what the method does
+4. **Python Code Example**: Equivalent Python code if applicable
+5. **Conceptual Section**: Understanding the method
+   - **Method Signature**: Include parameter types and return values
+   - **Parameters/Return Values**: Clear, concise explanation
+   - Show relationships between parameters (e.g., weight vs. error in histograms)
+6. **Implementation Sections**: How to use the method for specific purposes
+   - Subsections organized by use case: "単一の値を入力したい" (single value), "データの重みを追加したい" (weighted data), etc.
+   - Include practical code examples for each use case
+7. **Related Methods**: Cross-references to related documentation
+8. **References**: Links to official documentation
+
+**Key Principles:**
+
+- Keep explanations brief and focused on practical use
+- Organize subsections by real-world use cases ("〇〇したい" format)
+- Avoid overly elaborate structures; focus on essential information
+- Include both C++ and Python examples when applicable
+- Method signatures and parameters should be clearly documented but concisely formatted
+
+**Example Subsection Pattern:**
+
+When documenting multiple use cases of a single method, organize as:
+
+```markdown
+## 使用例1（`Method`）
+
+[Brief explanation]
+
+[Code example]
+
+[Short explanation]
+
+## 使用例2（`Method`）
+
+[Brief explanation]
+
+[Code example]
+
+[Short explanation]
+```
+
+This approach keeps documentation focused and prevents verbosity while maintaining clarity and completeness.
 
 ### Code Examples
 
