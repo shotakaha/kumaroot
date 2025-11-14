@@ -79,6 +79,7 @@ root-rntuple
 maxdepth: 1
 ---
 root-rdataframe
+root-rdataframe-csv
 root-rdataframe-filter
 root-rdataframe-stats
 root-rdataframe-histo1d

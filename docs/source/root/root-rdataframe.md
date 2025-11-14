@@ -3,35 +3,47 @@
 ```cpp
 #include "ROOT/RDataFrame.hxx"
 
-// ROOTファイルの読み込み
-ROOT::RDataFrame df(
-    "treeName",
-    {"file1.root", "file2.root", "file3.root"}
-);
+ROOT::RDataFrame df("treeName", "file.root");
 
 // 条件でフィルタリング
 auto filtered_df = df.Filter("x > 0 && y < 100");
 
 // ヒストグラムを作成
-auto filtered_df = df.Histo1D(
+auto hist = filtered_df.Histo1D(
     {"hist", "Distribution", 100, 0, 10},
     "x"
 );
-hist->Draw();
 ```
 
 [RDataFrame](https://root.cern/doc/master/classROOT_1_1RDataFrame.html)は、ROOTにおいて[pandas](../pandas/pandas-usage.md)のような使い勝手を目指した高レベルAPIです。
 2017年ころに導入され、最新のROOTで推奨されているデータ分析フレームワークです。
 
-## ファイルを読み込みたい
+```python
+import ROOT
+
+df = ROOT.RDataFrame("treeName", "file.root")
+
+# 条件でフィルタリング
+filtered_df = df.Filter("x > 0 && y < 100")
+
+# ヒストグラムを作成
+hist = filtered_df.Histo1D(
+    ("hist", "Distribution", 100, 0, 10),
+    "x"
+)
+```
+
+## ROOTファイルを読み込みたい（単一ファイル）
 
 ```cpp
 #include "ROOT/RDataFrame.hxx"
 
-ROOT::RDataFrame df("treeName", "ファイル名.root");
+ROOT::RDataFrame df("treeName", "file.root");
 ```
 
 ROOTファイルのTTreeをRDataFrameで読み込みます。
+
+## 複数のROOTファイルを読み込みたい
 
 ```cpp
 #include "ROOT/RDataFrame.hxx"
@@ -45,20 +57,16 @@ ROOT::RDataFrame df(
 複数のROOTファイルを同時に処理できます。
 内部的にはTChainが使用されています。
 
----
-
 ```python
 import ROOT
-df = ROOT.RDataFrame(
-    "treeName",
-    "ファイル名.root",
-)
 
 df = ROOT.RDataFrame(
     "treeName",
-    ["file1.root", "file2.root", "file3.root"],
+    ["file1.root", "file2.root", "file3.root"]
 )
 ```
+
+複数ファイルの処理も同じインターフェイスで対応できます。
 
 ## 背景情報
 
