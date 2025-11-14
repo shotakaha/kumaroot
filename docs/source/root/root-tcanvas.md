@@ -161,32 +161,6 @@ h->Draw();
 c->SaveAs("histogram.png");
 ```
 
-## キャンバスを分割したい
-
-```cpp
-#include <TCanvas.h>
-#include <TH1D.h>
-#include <TRandom.h>
-
-TCanvas *c = new TCanvas("c", "Divided Canvas", 1200, 800);
-
-// キャンバスを2×2に分割
-c->Divide(2, 2);
-
-// 各領域に異なるヒストグラムを描画
-for (int i = 1; i <= 4; i++) {
-    c->cd(i);  // i番目の領域を選択
-    TH1D *h = new TH1D(Form("h%d", i), Form("Histogram %d", i), 100, -3, 3);
-    for (int j = 0; j < 10000; j++) {
-        h->Fill(gRandom->Gaus(0, 1));
-    }
-    h->Draw();
-}
-```
-
-`Divide(nx, ny)`でキャンバスをnx×nyの領域に分割できます。
-`cd(i)`で描画対象の領域を選択します。
-
 ## キャンバスをファイルに保存したい
 
 ```cpp
