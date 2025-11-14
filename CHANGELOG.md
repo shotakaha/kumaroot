@@ -2,6 +2,8 @@
 
 ## v2025.11.10 (2025-11-14)
 
+Migrated project-wide build system to pyproject-based configuration and unified dependency management from Poetry to uv.
+
 ### Refactor
 
 - **ci**: migrate remaining GitHub Actions workflows from poetry to uv
