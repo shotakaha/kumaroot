@@ -1,4 +1,4 @@
-# ガウス分布でフィットしたい（`TF1::Fit` with `"gaus"`）
+# ガウス関数でフィットしたい（`TF1::Fit` with `"gaus"`）
 
 ```cpp
 #include <TH1D.h>
