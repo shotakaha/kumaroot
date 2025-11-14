@@ -22,11 +22,6 @@ tasks:
     cmds:
       - uv run code .
 
-  export:
-    desc: Export requirements.txt for Read the Docs
-    cmds:
-      - uv pip compile pyproject.toml -o requirements.txt --all-extras
-
   outdated:
     desc: Show outdated packages
     cmds:
@@ -36,7 +31,6 @@ tasks:
     desc: Update dependencies
     cmds:
       - uv sync --upgrade --all-extras
-      - task: export
 
   sync:
     desc: Sync dependencies from lockfile

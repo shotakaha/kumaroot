@@ -36,10 +36,9 @@ cd docs && uv run make livehtml
 ### Dependency Management
 
 ```bash
-task update      # Update all dependencies + regenerate requirements.txt
+task update      # Update all dependencies
 task sync        # Sync dependencies from lockfile
 task outdated    # Show outdated packages
-task export      # Regenerate requirements.txt for Read the Docs
 ```
 
 ### Version Management (Commitizen)
