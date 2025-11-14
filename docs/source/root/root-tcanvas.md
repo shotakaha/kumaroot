@@ -161,26 +161,7 @@ h->Draw();
 c->SaveAs("histogram.png");
 ```
 
-## キャンバスの表示を更新したい
 
-```cpp
-#include <TCanvas.h>
-#include <TGraph.h>
-
-TCanvas *c = new TCanvas("c", "Canvas", 800, 600);
-TGraph *g = new TGraph();
-
-// グラフに点を追加して随時更新
-for (int i = 0; i < 100; i++) {
-    g->SetPoint(i, i, i * i);
-    if (i % 10 == 0) {
-        g->Draw("AL");
-        c->Update();  // キャンバスを更新して表示
-    }
-}
-```
-
-`Update()`メソッドでキャンバスの表示を更新できます。
 
 ## 関連メソッド
 
