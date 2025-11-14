@@ -70,6 +70,7 @@ maxdepth: 1
 root-ttree
 root-ttree-readfile
 root-ttree-entries
+root-ttree-entry
 root-ttree-branch
 root-ttree-fill
 root-ttree-write

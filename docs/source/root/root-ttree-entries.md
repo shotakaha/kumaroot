@@ -1,4 +1,4 @@
-# エントリー数したい（`TTree::GetEntries`）
+# イベント数を取得したい（`TTree::GetEntries`）
 
 ```cpp
 #include <TTree.h>

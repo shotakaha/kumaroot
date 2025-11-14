@@ -18,8 +18,8 @@ $ python3 -m venv .venv
 $ source .venv/bin/activate
 (.venv) $ python3 --version
 Python 3.14.0
-(.venv) $ pip install notebook
-(.venv) $ pip install metakernel
+(.venv) $ pip install jupyter
+(.venv) $ pip install metakernel    # ROOT C++ kernelに必要
 (.venv) $ root --notebook
 ```
 
