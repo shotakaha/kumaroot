@@ -167,18 +167,10 @@ This section documents the basic style for ROOT method and feature documentation
 
 **Example Subsection Pattern:**
 
-When documenting multiple use cases of a single method, organize as:
+When documenting multiple use cases of a single method, organize subsections by purpose-driven use cases. Each subsection should follow this pattern:
 
 ```markdown
-## 使用例1（`Method`）
-
-[Brief explanation]
-
-[Code example]
-
-[Short explanation]
-
-## 使用例2（`Method`）
+## セクションタイトル（`Method`）
 
 [Brief explanation]
 
@@ -187,7 +179,7 @@ When documenting multiple use cases of a single method, organize as:
 [Short explanation]
 ```
 
-This approach keeps documentation focused and prevents verbosity while maintaining clarity and completeness.
+Subsection titles should be purpose-driven using "〇〇したい" format (e.g., "1次元ヒストグラムを描画したい", "フィルター条件付きで描画したい"). This approach keeps documentation focused and prevents verbosity while maintaining clarity and completeness.
 
 ### Code Examples
 
