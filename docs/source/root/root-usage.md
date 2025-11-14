@@ -115,6 +115,7 @@ maxdepth: 1
 ---
 root5-root6
 root-emacs
+root-history
 ```
 
 ## リファレンス
