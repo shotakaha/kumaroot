@@ -24,6 +24,7 @@ maxdepth: 1
 ---
 root-th1
 root-th1-title
+root-th1-fill
 root-th1-stats
 root-th1-mean
 root-th1-rms
