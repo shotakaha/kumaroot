@@ -1,5 +1,20 @@
 # CHANGELOG.md
 
+## v2025.11.10 (2025-11-14)
+
+### Refactor
+
+- **ci**: migrate remaining GitHub Actions workflows from poetry to uv
+- **ci**: migrate GitHub Actions workflow from poetry to uv
+- **readthedocs**: remove requirements.txt dependency
+- **docs/Makefile**: migrate from poetry to uv
+- **pre-commit**: remove poetry-check hook after uv migration
+- **pyproject**: disable package discovery in setuptools
+- **pyproject**: use setuptools as build backend
+- **pyproject**: add hatchling wheel configuration
+- **taskfile**: migrate commands from poetry to uv
+- **pyproject**: migrate build system from poetry-core to hatchling
+
 ## v2025.11.9 (2025-11-14)
 
 ### Feat
