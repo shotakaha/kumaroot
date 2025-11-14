@@ -128,6 +128,7 @@ root-tf1-setparameter
 root-tf1-fixparameter
 root-tf1-gaus
 root-tf1-pol
+root-tf1-crystalball
 root-tf1-integral
 root-tf1-derivative
 ```
