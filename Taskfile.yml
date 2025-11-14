@@ -15,45 +15,50 @@ tasks:
     desc: Start Sphinx livehtml
     dir: docs
     cmds:
-      - poetry run make livehtml
+      - uv run make livehtml
 
   code:
     desc: Start VS Code
     cmds:
-      - poetry run code .
+      - uv run code .
 
   export:
-    desc: Export requirements.txt
+    desc: Export requirements.txt for Read the Docs
     cmds:
-      - poetry export --output requirements.txt
+      - uv pip compile pyproject.toml -o requirements.txt --all-extras
 
   outdated:
     desc: Show outdated packages
     cmds:
-      - poetry show --outdated
+      - uv pip list --outdated
 
   update:
     desc: Update dependencies
     cmds:
-      - poetry update
+      - uv sync --upgrade --all-extras
       - task: export
+
+  sync:
+    desc: Sync dependencies from lockfile
+    cmds:
+      - uv sync --all-extras
 
   bump:
     desc: Bump patch version with commitizen
     cmds:
-      - poetry run cz bump --increment PATCH
+      - uv run cz bump --increment PATCH
 
   bump:minor:
     desc: Bump minor version with commitizen
     cmds:
-      - poetry run cz bump --increment MINOR
+      - uv run cz bump --increment MINOR
 
   changelog:
     desc: Generate changelog with commitizen (incremental)
     cmds:
-      - poetry run cz changelog --incremental
+      - uv run cz changelog --incremental
 
   pre-commit:
     desc: Run pre-commit hooks on all files
     cmds:
-      - poetry run pre-commit run --all-files
+      - uv run pre-commit run --all-files
