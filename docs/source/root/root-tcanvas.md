@@ -161,31 +161,6 @@ h->Draw();
 c->SaveAs("histogram.png");
 ```
 
-## キャンバスをファイルに保存したい
-
-```cpp
-#include <TCanvas.h>
-#include <TH1D.h>
-
-TCanvas *c = new TCanvas("c", "Canvas", 800, 600);
-
-TH1D *h = new TH1D("h", "Histogram", 100, -3, 3);
-for (int i = 0; i < 10000; i++) {
-    h->Fill(gRandom->Gaus(0, 1));
-}
-h->Draw();
-
-// 異なるフォーマットで保存
-c->SaveAs("output.png");   // PNG形式
-c->SaveAs("output.pdf");   // PDF形式
-c->SaveAs("output.eps");   // EPS形式
-c->SaveAs("output.gif");   // GIF形式
-c->SaveAs("output.root");  // ROOT形式
-```
-
-`SaveAs()`メソッドでキャンバスをさまざまなフォーマットで保存できます。
-ファイル名の拡張子で出力形式が決定されます。
-
 ## キャンバスの表示を更新したい
 
 ```cpp
@@ -211,7 +186,7 @@ for (int i = 0; i < 100; i++) {
 
 - [TCanvas::Divide](./root-tcanvas-divide.md) - キャンバスを分割する
 - [TCanvas::Draw](./root-tcanvas-draw.md) - グラフを描画する
-- [TCanvas::SaveAs](./root-tcanvas-pdf.md) - ファイルに保存する
+- [TCanvas::SaveAs](./root-tcanvas-saveas.md) - ファイルに保存する
 - [TCanvas::cd](./root-tcanvas-cd.md) - 領域を選択する
 - [TLegend](./root-tlegend.md) - 凡例を追加する
 
