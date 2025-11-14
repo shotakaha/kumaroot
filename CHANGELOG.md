@@ -1,5 +1,66 @@
 # CHANGELOG.md
 
+## v2025.11.9 (2025-11-14)
+
+### Feat
+
+- **root-th1-stats**: add SetStats method documentation for histogram statistics box display
+- **root-th1-rms**: add GetRMS method documentation for histogram root mean square calculation
+- **root-th1-mean**: add GetMean method documentation for histogram mean value calculation
+- **root-th1-binerror**: add SetBinError method documentation for custom bin error assignment
+- **root-th1-sumw2**: add comprehensive Sumw2 method documentation for weighted histogram error tracking
+- **python-uproot**: add uproot documentation for reading ROOT files in Python
+
+### Fix
+
+- **root-notebook**: add virtual environment setup instructions
+- **root-notebook**: enhance documentation with comprehensive notebook usage guide
+- **root-usage**: update tutorial section with ROOT official resources
+- **root-tutorial**: remove obsolete reStructuredText tutorial files
+- **root-usage**: add Cling and CINT documentation to interactive mode section
+- **root-cling, root-cint**: add C++ interpreter documentation
+- **root-tcanvas**: add DrawColorTable documentation
+- **root-tcanvas**: add SetLogy documentation with comparison to gStyle
+- **root-tcanvas**: add Draw documentation and reorganize canvas guide
+- **root-tcanvas**: add Update documentation and reorganize canvas guide
+- **root-tcanvas**: create TCanvas::Print documentation
+- **root**: reorganize canvas documentation structure
+- **root-tcanvas**: reorganize SaveAs documentation into separate file
+- **root-tcanvas**: reorganize canvas documentation
+- **root-tcanvas**: add section explaining why 'new' should be used for canvas creation
+- **root-tcanvas**: add note about automatic canvas generation
+- **root-tcanvas**: organize and expand Canvas documentation following CLAUDE.md format
+- **root-tgraph**: reorganize and split graph documentation
+- **root-th2**: organize 2D histogram documentation following CLAUDE.md standards
+- **root-usage**: reorganize histogram and graph documentation structure
+- **root-rdataframe**: improve examples and add csv loading reference
+- **root-tfile**: move method signature section to follow opening code examples
+- **root-tfile**: reorganize TFile documentation with comprehensive examples
+- **root-rdataframe-csv**: add comprehensive CSV loading documentation
+- **root-hist**: add integral and scale documentation to index
+- **root-th1-scale**: add comprehensive normalization documentation
+- **root-th1-integral**: add comprehensive integral documentation
+- **root-th1-mean**: reorganize documentation with comprehensive examples
+- **root-hist, root-th1**: update documentation with cross-references to new statistical methods
+- **CLAUDE**: establish concise ROOT method documentation style as basic reference
+- **root-th1-fill**: add comprehensive Fill method documentation
+- **root-th1-title**: reorganize with comprehensive style guidelines
+- **root-th1**: add error management section explaining weights vs errors
+- **root-th1**: add explanation of when and why to use weights in Fill method
+- **root-th1**: add concise explanation for weight parameter in Fill method
+- **root-th1**: add constructor signatures and detailed parameter documentation
+- **root-th1**: reorganize TH1 documentation with comprehensive style guidelines
+- **root-tstring**: enhance TString documentation with benefits and C++ std::string comparison
+- **root-tstring**: reorganize TString documentation with style guidelines
+- **root-ttree**: simplify TTree creation documentation focused on new TTree constructor
+- **root-history**: organize ROOT development history from PAW through modern features including TTree as core design and RDataFrame evolution
+- **root-ttree-entries**: reorganize TTree entry counting documentation with comprehensive examples and practical use cases
+- **root-ttree-readfile**: reorganize text file to TTree conversion documentation with comprehensive examples and practical use cases
+
+### Refactor
+
+- **CHANGELOG**: split changelog by release year for better maintainability
+
 ## v2025.11.8 (2025-11-14)
 
 ### Feat
