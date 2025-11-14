@@ -301,14 +301,14 @@ test = ["coveralls", "pytest (>=5.1.2)", "pytest-cov", "pytest-mpl (>=0.11)", "p
 
 [[package]]
 name = "certifi"
-version = "2025.10.5"
+version = "2025.11.12"
 description = "Python package for providing Mozilla's CA Bundle."
 optional = false
 python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "certifi-2025.10.5-py3-none-any.whl", hash = "sha256:0f212c2744a9bb6de0c56639a6f68afe01ecd92d91f14ae897c4fe7bbeeef0de"},
-    {file = "certifi-2025.10.5.tar.gz", hash = "sha256:47c09d31ccf2acf0be3f701ea53595ee7e0b8fa08801c6624be771df09ae7b43"},
+    {file = "certifi-2025.11.12-py3-none-any.whl", hash = "sha256:97de8790030bbd5c2d96b7ec782fc2f7820ef8dba6db909ccf95449f2d062d4b"},
+    {file = "certifi-2025.11.12.tar.gz", hash = "sha256:d8ab5478f2ecd78af242878415affce761ca6bc54a22a27e026d7c25357c3316"},
 ]
 
 [[package]]
@@ -1138,19 +1138,19 @@ dev = ["codecov", "pre-commit", "pytest (>=3.1.0)", "pytest-cov", "pytest-xdist"
 
 [[package]]
 name = "geoviews"
-version = "1.14.1"
+version = "1.15.0"
 description = "GeoViews is a Python library that makes it easy to explore and visualize geographical, meteorological, and oceanographic datasets, such as those used in weather, climate, and remote sensing research."
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
 markers = "extra == \"dev\""
 files = [
-    {file = "geoviews-1.14.1-py3-none-any.whl", hash = "sha256:a05fa86e96c0bc9da033846c1a6c703fa3cb241fbefe13491041bae516e3124b"},
-    {file = "geoviews-1.14.1.tar.gz", hash = "sha256:7f07f997eb19aedb414d2afe780744321033154a36cb46788913097d9912fff9"},
+    {file = "geoviews-1.15.0-py3-none-any.whl", hash = "sha256:da1252554f86c639a280bb3e7dc6acbd4722e9f4e4a8b0c65f6a9c086ed5f5b2"},
+    {file = "geoviews-1.15.0.tar.gz", hash = "sha256:07481e7346d33416857e1d7a41d6cd6a8261b62314d73c7edc9e45e612fa3ac9"},
 ]
 
 [package.dependencies]
-bokeh = ">=3.6.0"
+bokeh = ">=3.8.0"
 cartopy = ">=0.18.0"
 holoviews = ">=1.16.0"
 numpy = "*"
@@ -1158,12 +1158,11 @@ packaging = "*"
 panel = ">=1.0.0"
 param = ">=1.9.3,<3.0"
 pyproj = "*"
-shapely = "*"
+shapely = ">=1.8.0"
 xyzservices = "*"
 
 [package.extras]
-recommended = ["datashader", "geopandas", "matplotlib (>2.2)", "netcdf4", "pandas", "pooch", "pyct", "scipy", "shapely", "xarray"]
-tests = ["psutil", "pytest", "pytest-xdist"]
+recommended = ["datashader", "geopandas", "matplotlib (>2.2)", "netcdf4", "pandas", "pooch", "pyct", "scipy", "xarray"]
 
 [[package]]
 name = "h11"
@@ -1180,25 +1179,27 @@ files = [
 
 [[package]]
 name = "holoviews"
-version = "1.21.0"
+version = "1.22.0"
 description = "A high-level plotting API for the PyData ecosystem built on HoloViews."
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
 markers = "extra == \"dev\""
 files = [
-    {file = "holoviews-1.21.0-py3-none-any.whl", hash = "sha256:74f3c01f35b9e8e2a8d6eb457a7ef05727de2a2a56509d59d7dc0d0409bc91c0"},
-    {file = "holoviews-1.21.0.tar.gz", hash = "sha256:837885ab2fa376677f21dae0b2a2aeb94ba6db96e9fcb3824cdb899538ee5032"},
+    {file = "holoviews-1.22.0-py3-none-any.whl", hash = "sha256:452f8822c0abb9c8a443d6410d3e6c4c86d8fc7dd5c2ae244ff194a321b1a863"},
+    {file = "holoviews-1.22.0.tar.gz", hash = "sha256:2bd3eb5ef5062b893a56c4c42077a3ed92314a92f378d2bc77c75e017b86edba"},
 ]
 
 [package.dependencies]
 bokeh = ">=3.1"
 colorcet = "*"
+narwhals = ">=2"
 numpy = ">=1.21"
 packaging = "*"
 pandas = ">=1.3"
 panel = ">=1.0"
 param = ">=2.0,<3.0"
+python-dateutil = ">=2.8.2"
 pyviz-comms = ">=2.1"
 
 [package.extras]
@@ -2024,15 +2025,15 @@ execute = ["ipykernel", "jupyter-server"]
 
 [[package]]
 name = "narwhals"
-version = "2.10.2"
+version = "2.11.0"
 description = "Extremely lightweight compatibility layer between dataframe libraries"
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "extra == \"dev\""
 files = [
-    {file = "narwhals-2.10.2-py3-none-any.whl", hash = "sha256:059cd5c6751161b97baedcaf17a514c972af6a70f36a89af17de1a0caf519c43"},
-    {file = "narwhals-2.10.2.tar.gz", hash = "sha256:ff738a08bc993cbb792266bec15346c1d85cc68fdfe82a23283c3713f78bd354"},
+    {file = "narwhals-2.11.0-py3-none-any.whl", hash = "sha256:a9795e1e44aa94e5ba6406ef1c5ee4c172414ced4f1aea4a79e5894f0c7378d4"},
+    {file = "narwhals-2.11.0.tar.gz", hash = "sha256:d23f3ea7efc6b4d0355444a72de6b8fa3011175585246c3400c894a7583964af"},
 ]
 
 [package.extras]
@@ -2269,15 +2270,15 @@ xml = ["lxml (>=4.9.2)"]
 
 [[package]]
 name = "panel"
-version = "1.8.2"
+version = "1.8.3"
 description = "The powerful data exploration & web app framework for Python."
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
 markers = "extra == \"dev\""
 files = [
-    {file = "panel-1.8.2-py3-none-any.whl", hash = "sha256:e9cb26baca4263bf32432328fa6a37b2b09922af99a1a009abe1f12287f39836"},
-    {file = "panel-1.8.2.tar.gz", hash = "sha256:30a522739b8f93512b1d2a739c26f8bd9674b70b73850ad39b942685703f6a62"},
+    {file = "panel-1.8.3-py3-none-any.whl", hash = "sha256:0e435406c608c382dd3378251d16db4d8189ca44ca508c281e1bfd6c80f47689"},
+    {file = "panel-1.8.3.tar.gz", hash = "sha256:192a25fa4afdb25c5d0bf00d3749bb1b3601f25cddb76492e355fa278f91fce8"},
 ]
 
 [package.dependencies]
@@ -2287,6 +2288,7 @@ linkify-it-py = "*"
 markdown = "*"
 markdown-it-py = "*"
 mdit-py-plugins = "*"
+narwhals = ">=2"
 packaging = "*"
 pandas = ">=1.2"
 param = ">=2.1.0,<3.0"
@@ -2297,31 +2299,32 @@ typing-extensions = "*"
 
 [package.extras]
 dev = ["watchfiles"]
-fastapi = ["bokeh-fastapi (>=0.1.2,<0.2.0)", "fastapi[standard]"]
+fastapi = ["bokeh-fastapi (>=0.1.5,<0.2.0)", "fastapi[standard]"]
 mypy = ["mypy", "pandas-stubs", "types-bleach", "types-croniter", "types-markdown", "types-psutil", "types-requests", "types-tqdm", "typing-extensions"]
 recommended = ["holoviews (>=1.18.0)", "jupyterlab", "matplotlib", "pillow", "plotly"]
 tests = ["psutil", "pytest", "pytest-asyncio", "pytest-rerunfailures (<16.0)", "pytest-xdist"]
 
 [[package]]
 name = "param"
-version = "2.2.1"
+version = "2.3.0"
 description = "Make your Python code clearer and more reliable by declaring Parameters."
 optional = true
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 groups = ["main"]
 markers = "extra == \"dev\""
 files = [
-    {file = "param-2.2.1-py3-none-any.whl", hash = "sha256:e3a4ca7f3d7610615129a55dbde2e90eb67d11cef70936487b0a59717dba0bdc"},
-    {file = "param-2.2.1.tar.gz", hash = "sha256:ba1f7cec6455ea8ad96f641f4082759bf1057dcbe629aa79d956b25973252422"},
+    {file = "param-2.3.0-py3-none-any.whl", hash = "sha256:8f44014782cd9028c4bf5e9111869ad9026c764d0a31b3c8aa2b7954a36bc0ea"},
+    {file = "param-2.3.0.tar.gz", hash = "sha256:b7e2b9c1d308d93c641937330990e8254aef479682c930b36ab681c4587d999a"},
 ]
 
 [package.extras]
-all = ["aiohttp", "cloudpickle", "gmpy", "ipython", "jsonschema", "nbval", "nest-asyncio", "numpy", "odfpy", "openpyxl", "pandas", "panel", "pyarrow", "pytest", "pytest-asyncio", "pytest-xdist", "tables", "xlrd"]
+all = ["aiohttp", "cloudpickle", "gmpy2", "ipython", "jsonschema", "nbval", "nest-asyncio", "numpy", "odfpy", "openpyxl", "pandas", "panel", "pyarrow", "pytest", "pytest-asyncio", "pytest-cov", "pytest-xdist", "tables", "xlrd"]
 examples = ["aiohttp", "pandas", "panel"]
-tests = ["pytest", "pytest-asyncio"]
+tests = ["pytest", "pytest-asyncio", "pytest-cov"]
 tests-deser = ["odfpy", "openpyxl", "pyarrow", "tables", "xlrd"]
 tests-examples = ["aiohttp", "nbval", "pandas", "panel", "pytest", "pytest-asyncio", "pytest-xdist"]
-tests-full = ["aiohttp", "cloudpickle", "gmpy", "ipython", "jsonschema", "nbval", "nest-asyncio", "numpy", "odfpy", "openpyxl", "pandas", "panel", "pyarrow", "pytest", "pytest-asyncio", "pytest-xdist", "tables", "xlrd"]
+tests-full = ["aiohttp", "cloudpickle", "gmpy2", "ipython", "jsonschema", "nbval", "nest-asyncio", "numpy", "odfpy", "openpyxl", "pandas", "panel", "pyarrow", "pytest", "pytest-asyncio", "pytest-cov", "pytest-xdist", "tables", "xlrd"]
+tests-pypy = ["cloudpickle", "ipython", "jsonschema", "nest-asyncio", "numpy"]
 
 [[package]]
 name = "parso"
