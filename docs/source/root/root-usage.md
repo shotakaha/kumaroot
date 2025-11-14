@@ -138,7 +138,7 @@ root-tcanvas
 root-tcanvas-divide
 root-tcanvas-log
 root-tcanvas-drawcolortable
-root-tcanvas-pdf
+root-tcanvas-print
 ```
 
 ## 凡例操作したい
