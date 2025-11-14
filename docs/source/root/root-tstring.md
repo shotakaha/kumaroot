@@ -15,7 +15,10 @@ const char* cstr = name.Data();
 ```
 
 `TString`はROOTの文字列クラスです。
+`TString`を使うことで、C文字列ポインターのメモリ管理の煩雑さを排除でき、`printf`と同じようなフォーマット指定子で柔軟に文字列を生成できます。
 C/C++の文字や文字列の扱いの面倒くささを解消してくれます。
+
+さらに`TH1`や`TTree`などのROOTオブジェクトと直接連携可能なため、データ分析のワークフローで非常に便利です。
 
 ```python
 from ROOT import TString
@@ -31,15 +34,33 @@ name.Form("histogram_%d", i)
 cstr = name.Data()
 ```
 
+:::{seealso}
 
-## TStringについて理解したい
+C++標準ライブラリを使う場合
 
-``TString``を使う主な利点：
+```cpp
+#include <string>
+#include <cstdio>
 
-- **動的な文字列管理**: C文字列ポインターのメモリ管理の煩雑さを排除
-- **フォーマット機能**: ``printf``と同じようなフォーマット指定子をサポート
-- **便利なメソッド**: 文字列操作に必要な多くのメソッドを提供
-- **ROOT統合**: ``TH1``、``TTree``などのROOTオブジェクトと直接連携可能
+// 文字列の初期化
+std::string str = "ROOT string";
+
+// フォーマット文字列を作成（C++20以降）
+std::string name = std::format("histogram_{}", i);
+
+// または snprintf を使う場合
+char buffer[256];
+snprintf(buffer, sizeof(buffer), "histogram_%d", i);
+std::string name(buffer);
+
+// 文字列データを取得
+const char* cstr = name.c_str();
+```
+
+C++標準ライブラリでも同様のことができますが、
+`TString`の方が記述が簡潔で、ROOTオブジェクトとの連携がスムーズです。
+
+:::
 
 ## フォーマット文字列したい（`TString::Form`）
 
