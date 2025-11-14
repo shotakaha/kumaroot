@@ -1,44 +1,54 @@
-# TTreeしたい（``TTree``）
+# TTreeしたい（`new TTree`）
 
-```{code-block} cpp
----
-linenos: true
-emphasize-lines: 1
----
-// TTree::TTree("name", "title", splitlevel)
-TTree *tree = new TTree("t1", "test measurement");
-tree->ReadFile("入力ファイル名", "列1/I:列2/I:列3/D", ",");  // CSVを読み込んだ想定
-tree->Draw("列1");  // 列1のヒストグラムを作成
+```cpp
+#include <TTree.h>
+
+// TTree::TTree(name, title)
+TTree *tree = new TTree("mytree", "example tree");
 ```
 
-``TTree::TTree``でTTreeオブジェクトを作成できます。
-第1引数は、TTreeオブジェクトの名前を設定します。
-他のオブジェクトと重複しないようにします。
+`new TTree`でTTreeオブジェクトを作成します。
 
-第2引数は、データの説明などを設定します。
-``TFile``で開いたときに表示される文字列です。
-空欄でも構いませんが、1行くらいの簡単な説明をつけておくとよいです。
-
-第3引数は``splitlevel``です。
-デフォルト値は99です。
-使ったことがないので、デフォルト値のままでよいと思います。
-
-
-```{note}
-「さるROOT」や他のウェブサイトでは
-``TNtuple``をコードサンプルとして紹介している場合がありますが、
-そういった情報はちょっと古いかなと感じます。
-
-``TTree``は``TNtuple``を含んでいるはずなので、
-どんどん読み替えていってよいと思います。
-```
+古いドキュメントやサンプルでは`TNtuple`が紹介されていることがありますが、現在は`TTree`を使用すればOKです。
+`TTree`は`TNtuple`の機能を包含しており、より柔軟で強力です。
 
 ```python
 from ROOT import TTree
 
-t = TTree("tree", "tree description");
+# Pythonでの作成
+tree = TTree("mytree", "example tree")
 ```
+
+## コンストラクターのシグネチャ
+
+```cpp
+TTree(
+    const char *name,
+    const char *title,
+    Int_t splitlevel = 99
+)
+```
+
+### 引数の説明
+
+**name** - TTreeの名前
+
+- ROOTファイル内で一意の名前を指定します
+- 他のTTreeと重複しないようにします
+- ファイルから読み込むときに指定する名前です
+
+**title** - TTreeの説明
+
+- データの簡潔な説明を設定します
+- ROOTファイルを開いたときに表示されます
+- 空文字列でも構いませんが、簡単な説明があると便利です
+
+**splitlevel** -（通常は指定不要）
+
+- デフォルト値: 99
+- ブランチ内でオブジェクトを分割するレベルを指定
+- ほとんどの場合、デフォルト値で問題ありません
 
 ## リファレンス
 
-- [TTree](https://root.cern.ch/doc/master/classTTree.html)
+- [ROOT TTree Documentation](https://root.cern.ch/doc/master/classTTree.html)
