@@ -1,4 +1,4 @@
-# 関数を定義したい（`TF1`）
+# フィット関数を定義したい（`TF1`）
 
 ```cpp
 #include <TF1.h>
@@ -50,7 +50,7 @@ TF1(const char* name,
 
 - TF1オブジェクト
 
-## 数式から関数を定義したい（`TF1`）
+## 数式からフィット関数を定義したい（`TF1`）
 
 ```cpp
 #include <TF1.h>
@@ -74,9 +74,10 @@ c->cd(3);
 f3->Draw();
 ```
 
-数式文字列で関数を定義します。ROOTが提供する数学関数（sin、cos、exp、sqrtなど）が使用できます。
+数式の文字列でフィット関数を定義できます。
+ROOTが提供する数学関数（`sin`、`cos`、`exp`、`sqrt`など）が使用できます。
 
-## C++関数から関数を定義したい（`TF1`）
+## カスタム関数からフィット関数を定義したい（`TF1`）
 
 ```cpp
 #include <TF1.h>
@@ -95,9 +96,10 @@ f->SetParameter(1, 0.0);   // オフセット
 f->Draw();
 ```
 
-複雑な関数はC++関数で定義できます。パラメーターを持つ関数も定義できます。
+カスタム関数で複雑なフィット関数を定義できます。
+パラメーターを持つ関数も定義できます。
 
-## ラムダ式から関数を定義したい（`TF1`）
+## ラムダ式からフィット関数を定義したい（`TF1`）
 
 ```cpp
 #include <TF1.h>
@@ -116,7 +118,7 @@ f->Draw();
 
 ラムダ式を使用して、関数をコンパクトに定義できます。
 
-## パラメーターを持つ関数を定義したい（`SetParameter`）
+## パラメーターを持つフィット関数を定義したい（`SetParameter`）
 
 ```cpp
 #include <TF1.h>
@@ -139,66 +141,8 @@ f->SetParameter(1, 0.5);
 f->DrawCopy("same");
 ```
 
-数式に`[0]`、`[1]`などの記号を使用してパラメーターを指定できます。
-パラメーターは`SetParameter()`で設定します。
-
-## 関数を描画したい（`Draw`）
-
-```cpp
-#include <TF1.h>
-#include <TCanvas.h>
-
-TCanvas *c = new TCanvas("c", "Function Drawing", 600, 400);
-
-TF1 *f1 = new TF1("f1", "sin(x)", 0, 2*M_PI);
-TF1 *f2 = new TF1("f2", "cos(x)", 0, 2*M_PI);
-
-f1->SetLineColor(2);
-f1->SetLineWidth(2);
-f1->Draw();
-
-f2->SetLineColor(4);
-f2->SetLineWidth(2);
-f2->Draw("same");
-
-c->BuildLegend();
-```
-
-`Draw()`で関数をキャンバスに描画します。`Draw("same")`で複数の関数を重ねて描画できます。
-
-## 関数の積分を計算したい（`Integral`）
-
-```cpp
-#include <TF1.h>
-#include <iostream>
-
-TF1 *f = new TF1("f", "x*x", 0, 5);
-
-// x^2をx=0からx=5まで積分
-Double_t integral = f->Integral(0, 5);
-
-std::cout << "Integral from 0 to 5: " << integral << std::endl;
-// 正確な値: 5^3/3 = 41.667
-```
-
-`Integral()`で関数の積分を計算できます。数値積分を使用して計算されます。
-
-## 関数の導関数を求めたい（`Derivative`）
-
-```cpp
-#include <TF1.h>
-#include <iostream>
-
-TF1 *f = new TF1("f", "x*x*x", -2, 2);
-
-// x=1.0での導関数の値を計算
-Double_t deriv = f->Derivative(1.0);
-
-std::cout << "Derivative at x=1.0: " << deriv << std::endl;
-// f'(x) = 3x^2、x=1.0では3.0
-```
-
-`Derivative()`で指定した点での導関数の値を計算できます。
+`"[0]*sin([1]*x+[2])"`のように数式に`[0]`、`[1]`などの記号を使用してパラメーターを指定できます。
+パラメーターの初期値は`SetParameter`メソッドで設定します。
 
 ## 関数の最小値・最大値を求めたい（`GetMinimum`、`GetMaximum`）
 

@@ -121,7 +121,14 @@ root-tfile
 maxdepth: 1
 ---
 root-tf1
+root-tf1-draw
+root-tf1-getparameter
+root-tf1-getchisquare
+root-tf1-setparameter
+root-tf1-fixparameter
 root-tf1-gaus
+root-tf1-integral
+root-tf1-derivative
 ```
 
 ### 1次元ヒストグラム
