@@ -95,7 +95,33 @@ root-tfile
 ## ヒストグラム操作したい
 
 ```{toctree}
-root-hist
+---
+maxdepth: 1
+caption: 1次元ヒストグラムしたい
+---
+root-th1
+root-th1-title
+root-th1-fill
+root-th1-integral
+root-th1-scale
+root-th1-stats
+root-th1-mean
+root-th1-rms
+root-th1-binerror
+root-th1-sumw2
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 2次元ヒストグラムしたい
+---
+root-th2
+```
+
+## グラフ操作したい
+
+```{toctree}
 root-tgraph
 root-tgrapherrors
 root-tmultigraph
