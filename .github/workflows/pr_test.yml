@@ -15,23 +15,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      # Poetry をインストール
-      - name: Install Poetry
-        run: pipx install poetry
+      # uv をインストール
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          version: "latest"
 
       # Python をセットアップ
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
-          cache: "poetry"
+          python-version: "3.12"
 
       # 必要な依存関係をインストール
       - name: Install dependencies
-        run: poetry install --no-root
+        run: uv sync --all-extras
 
       # テストを実行
       - name: Build Sphinx
         run: |
           cd docs
-          poetry run make dirhtml
+          uv run make dirhtml
