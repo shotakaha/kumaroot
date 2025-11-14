@@ -122,8 +122,12 @@ root-th2
 ## グラフ操作したい
 
 ```{toctree}
+---
+maxdepth: 1
+---
 root-tgraph
 root-tgrapherrors
+root-tgraph-point
 root-tmultigraph
 ```
 
