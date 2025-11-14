@@ -33,6 +33,18 @@ tree.GetEntry(0)
 print(f"Entry 0: x = {x}")
 ```
 
+:::{note}
+
+`GetEntry(i)`を呼び出すたびに、
+ファイルから`i`番目のデータが読み込まれ、
+ブランチアドレスで設定した
+メモリアドレスに値が格納されます。
+
+ブランチアドレスを設定しておかないと
+データにアクセスできません。
+
+:::
+
 ## メソッドのシグネチャ
 
 ```cpp
@@ -64,7 +76,7 @@ Float_t energy;
 tree->SetBranchAddress("event_id", &event_id);
 tree->SetBranchAddress("energy", &energy);
 
-// エントリー5を取得
+// 5番目のエントリーを取得
 tree->GetEntry(5);
 
 std::cout << "Event ID: " << event_id << ", Energy: " << energy << std::endl;
@@ -72,9 +84,9 @@ std::cout << "Event ID: " << event_id << ", Energy: " << energy << std::endl;
 file->Close();
 ```
 
-特定のエントリーをメモリに読み込み、ブランチのデータにアクセスできます。
+特定のエントリー番号のイベントをメモリに読み込み、ブランチのデータにアクセスできます。
 
-## ループですべてのエントリーを処理したい（`GetEntry`）
+## ループ処理したい（`GetEntry`）
 
 ```cpp
 #include <TFile.h>
@@ -84,6 +96,7 @@ file->Close();
 TFile *file = TFile::Open("data.root");
 TTree *tree = (TTree *)file->Get("tree");
 
+// すべてのエントリー数を取得
 Long64_t nentries = tree->GetEntries();
 
 Float_t x, y;
@@ -101,9 +114,10 @@ for (Long64_t i = 0; i < nentries; i++) {
 file->Close();
 ```
 
-データ解析の基本となるエントリーループで、各エントリーのデータを順番に処理できます。
+データ解析の基本となるループ処理です。
+`GetEntries`でファイル内のイベント数を取得し、各エントリーのデータを順番に処理できます。
 
-## 特定の条件のエントリーのみ処理したい（`GetEntry` + セレクション）
+## 特定の条件のみ処理したい
 
 ```cpp
 #include <TFile.h>
@@ -117,6 +131,7 @@ Float_t pt, eta;
 tree->SetBranchAddress("pt", &pt);
 tree->SetBranchAddress("eta", &eta);
 
+// すべてのエントリー数を取得
 Long64_t nentries = tree->GetEntries();
 
 for (Long64_t i = 0; i < nentries; i++) {
@@ -132,26 +147,6 @@ file->Close();
 ```
 
 条件フィルタリングを適用して、特定の条件を満たすエントリーのみを処理できます。
-
-## 概念的な理解
-
-### GetEntryの動作
-
-`GetEntry(i)`を呼び出すと：
-
-1. ファイルからエントリーiのデータを読み込む
-2. `SetBranchAddress`で設定されたメモリアドレスに値を格納
-3. 他のエントリーのデータは上書きされる
-
-### ブランチアドレスの重要性
-
-```cpp
-Float_t x = 0;
-tree->SetBranchAddress("x", &x);  // 重要：&xはアドレス
-tree->GetEntry(0);                // xの値が更新される
-```
-
-ブランチアドレスを設定しないと、`GetEntry`で読み込んだデータにアクセスできません。
 
 ## 関連メソッド
 
