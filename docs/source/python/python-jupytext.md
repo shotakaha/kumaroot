@@ -134,6 +134,70 @@ cell_metadata_filter = ""
 それぞれを空文字列（`""`）にすることで、すべてのメタデータを除去できます。
 Gitで管理するときに最適です。
 
+### Markdownフォーマット
+
+- `md`: 標準的なMarkdown形式
+- `md:myst`: MyST Markdown形式。Sphinxとの連携向き
+- `Rmd`: R Markdown形式
+- `qmd`: Quarto形式
+
+### Pythonフォーマット
+
+- `py:percent`: パーセント形式。`# %%`でセルを区切る形式
+- `py:light`: ライト形式
+- `py:hydrogen`: Hydrogen形式
+
+### Notebookフォーマット
+
+- `ipynb`: Jupyter Notebook形式
+
+## メタデータしたい（`notebook_metadata_filter` / `cell_metadata_filter`）
+
+```toml
+# デフォルト値
+notebook_metadata_filter="kernelspec,jupytext"
+cell_metadata_filter="all,-autoscroll,-collapsed,-scrolled,-trusted,-ExecuteTime"
+```
+
+`notebook_metadata_filter`と
+`cell_metadata_filter`で
+メタデータの扱い方を設定できます。
+デフォルト値は上記のように設定されています。
+除外する項目は先頭に`-（マイナス）`をつけます。
+
+:::{note}
+
+メタデータフィルターの設定は、記述する順序の影響を受けません。
+読みやすさを優先して記述して大丈夫です。
+
+:::
+
+```toml
+# Markdownを中心とする推奨設定
+notebook_metadata_filter = "jupytext,-kernelspec,-jupytext.text_representation"
+cell_metadata_filter = "-all"
+```
+
+Markdownを中心にGit管理する場合の推奨設定です。
+メタデータを最小限にすることで、差分を確認しやすくなります。
+
+### Notebookのメタデータ
+
+- `jupytext`: Jupytext固有の設定情報。ファイル形式の同期設定などが含まれます。
+- `kernelspec`: Kernel情報。除外してOK
+- `language_info`: 言語情報
+- `widgets`: Widgetの設定
+- `varInspector`: Variable Inspectorの設定
+
+### Cellのメタデータ
+
+- `ExecuteTime`: 実行時刻（デフォルト除外）
+- `autoscroll`: 自動スクロール（デフォルト除外）
+- `collapsed`: セルの折りたたみ（デフォルト除外）
+- `scrolled`: スクロール状態（デフォルト除外）
+- `trusted`: 信頼状態（デフォルト除外）
+- `hide_input` / `hide_output`: 表示制御
+
 ## コミットフックしたい
 
 ```yaml
