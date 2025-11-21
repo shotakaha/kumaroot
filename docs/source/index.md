@@ -34,6 +34,7 @@ rust/rust-usage
 gas/gas-usage
 html/html-usage
 docker/docker-usage
+arduino/arduino-usage
 ```
 
 ```{toctree}
