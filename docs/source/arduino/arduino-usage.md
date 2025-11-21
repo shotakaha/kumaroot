@@ -29,11 +29,15 @@ arduino-loop
 
 ## UART通信したい
 
+```{toctree}
+---
+maxdepth: 1
+---
 - arduino-serial-begin
 - arduino-serial-available
 - arduino-serial-read
-- arduino-serial-print
-- arduino-serial-println
+arduino-serial-print
+```
 
 ## SPI通信したい
 
