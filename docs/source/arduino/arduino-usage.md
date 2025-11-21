@@ -37,6 +37,7 @@ maxdepth: 1
 - arduino-serial-available
 - arduino-serial-read
 arduino-serial-print
+arduino-json-serialize
 ```
 
 ## SPI通信したい
