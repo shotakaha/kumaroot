@@ -87,4 +87,12 @@ arduino-wifi-begin
 
 ```{toctree}
 arduino-littlefs
+arduino-littlefs-open
+arduino-littlefs-read
+arduino-littlefs-print
+
+- arduino-littlefs-rename
+- arduino-littlefs-remove
+- arduino-littlefs-mkdir
+- arduino-littlefs-rmdir
 ```
