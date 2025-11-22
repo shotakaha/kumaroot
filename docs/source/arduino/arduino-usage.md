@@ -57,9 +57,34 @@ arduino-json-serialize
 - arduino-wire-available
 - arduino-wire-read
 
+## Wi-Fi通信したい
+
+```{toctree}
+arduino-wifi-begin
+- arduino-wifi-mode
+- arduino-wifi-connect
+- arduino-wifi-status
+- arduino-wifi-localip
+```
+
+## Bluetooth通信したい
+
+- arduino-bledevice-init
+- arduino-bledevice-power
+- arduino-bledevice-advertising
+- arduino-bledevice-securityauth
+- arduino-bledevice-securitypasskey
+- arduino-bledevice-createserver
+
 ## BME280センサーしたい
 
 - bme280-begin
 - bme280-readTemperature
 - bme280-readPressure
 - bme280-readHumidity
+
+## ファイル保存したい
+
+```{toctree}
+arduino-littlefs
+```
