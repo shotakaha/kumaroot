@@ -57,6 +57,12 @@ arduino-json-serialize
 - arduino-wire-available
 - arduino-wire-read
 
+## バッファリングしたい
+
+```{toctree}
+arduino-queue
+```
+
 ## Wi-Fi通信したい
 
 ```{toctree}
