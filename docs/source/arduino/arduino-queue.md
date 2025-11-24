@@ -17,15 +17,27 @@ xQueue = xQueueCreate(
 ## キューを作成したい（`xQueueCreate`）
 
 ```c
-QueueHandle_t xQueue;
+static QueueHandle_t xQueue;
 
 void setup() {
     xQueue = xQueueCreate(10, sieof(int));
 }
 ```
 
-キューは`QueueHandle_t`構造体として作成します。
-`xQueueCreate`でキュー用の配列をメモリ上に確保します。
+`QueueHandle_t`でQueueオブジェクトのポインターを作成し、`xQueueCreate`でキュー用の配列をメモリ上に確保します。
+
+`QueueHandle_t`は
+キューを操作するためのハンドルです。
+キュー用メモリは、一度だけ作って使い回すのが基本なので、
+`static`（または`static`グローバル）に定義して、`setup`関数で初期化するの標準的な設計です。
+
+:::{note}
+
+`xQueueCreate`は内部で`malloc`して動的にメモリを確保します。
+メモリ制限がシビアで、完全にユーザー制御したい場合は
+`xQueueCreateStatic`を使います。
+
+:::
 
 ## キューから受け取りたい（`xQueueReceive`）
 
