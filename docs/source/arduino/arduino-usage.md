@@ -1,5 +1,12 @@
 # Arduinoの使い方
 
+Arduinoはマイコン開発を簡単にするための総合的な仕組みです。
+ハードウェアとしてのArduinoもあれば、
+プログミング言語としてのArduinoもあります。
+
+ここでは、小型宇宙線検出器OSECHIで使っている
+Arduino対応のマイコン「ESP32」を使った開発を前提にしています。
+
 ## Arduinoしたい
 
 ```{toctree}
@@ -13,10 +20,12 @@ arduino-loop
 
 ## タイミングしたい
 
+```{toctree}
 - arduino-delay
 - arduino-delayMicroseconds
 - arduino-micros
-- arduino-millis
+arduino-millis
+```
 
 ## デジタル入出力したい
 
