@@ -22,25 +22,29 @@ tasks:
     cmds:
       - uv run code .
 
-  outdated:
-    desc: Show outdated packages
-    cmds:
-      - uv pip list --outdated
-
-  update:
-    desc: Update dependencies
-    cmds:
-      - uv sync --upgrade --all-extras
-
-  sync:
-    desc: Sync dependencies from lockfile
-    cmds:
-      - uv sync --all-extras
-
   pre-commit:
     desc: Run pre-commit hooks on all files
     cmds:
       - uv run pre-commit run --all-files
+
+  # ============================================================================
+  # Dependency management tasks - Update and check dependencies
+  # ============================================================================
+
+  deps:setup:
+    desc: Setup Python environment
+    cmds:
+      - uv sync --all-extras
+
+  deps:check:
+    desc: Check for outdated packages
+    cmds:
+      - uv pip list --outdated
+
+  deps:update:
+    desc: Update dependencies
+    cmds:
+      - uv sync --upgrade --all-extras
 
   # ============================================================================
   # Version management tasks - Manage versions with commitizen

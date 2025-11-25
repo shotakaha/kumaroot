@@ -1025,7 +1025,7 @@ wheels = [
 
 [[package]]
 name = "kumaroot"
-version = "2025.11.10"
+version = "2025.11.11"
 source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },
