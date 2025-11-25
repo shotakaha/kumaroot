@@ -1,5 +1,57 @@
 # CHANGELOG.md
 
+## v2025.11.11 (2025-11-25)
+
+### Feat
+
+- **arduino**: add FreeRTOS Queue documentation
+- **arduino**: add Serial data reception documentation
+- **arduino**: add WiFi connection documentation with mode switching
+- **arduino**: add comprehensive LittleFS documentation
+- **arduino**: add JSON serialization documentation with JSONL format examples
+- **arduino**: add Serial.print documentation with practical examples
+- **arduino**: add Arduino usage documentation with setup and loop guides
+- **root-tf1-crystalball**: add Crystal Ball function fitting documentation
+- **root-tf1-pol**: add polynomial fitting documentation with TGraphErrors examples
+- **root-tf1-draw**: add TF1::Draw documentation
+- **root-tf1-derivative**: add TF1::Derivative documentation
+- **root-tf1-integral**: add TF1::Integral documentation
+- **root-tf1-getchisquare**: add TF1::GetChiSquare documentation
+- **root-tf1-getparameter**: add TF1::GetParameter documentation
+- **root-tf1-fixparameter**: add TF1::FixParameter documentation
+- **root-tf1-setparameter**: add TF1::SetParameter documentation
+- **root-ttree-entry**: add TTree::GetEntry documentation
+
+### Fix
+
+- **arduino**: add millis timing documentation and improve loop documentation
+- **arduino**: add millis timing documentation and improve loop documentation
+- **arduino**: improve Queue documentation with detailed explanations
+- **python-jupytext**: add format and metadata filter documentation
+- **root-ttree-entry**: improve documentation clarity and organization
+- **root-tf1**: reorganize TF1 documentation and update toctree
+- **root-tf1-gaus**: correct Gaussian function formula
+- **root-usage**: add newly reorganized ROOT documentation files to toctree
+- **root-th1-draw**: restructure documentation following root-th1-fill pattern
+- **root-th1-fit**: restructure documentation following root-th1-fill pattern
+- **root-tf1-gaus**: restructure documentation following root-th1-fill pattern
+- **root-tf1**: create comprehensive TF1 documentation with JTF style corrections
+- **root-notebook,root-ttree-entries,root-usage**: update package names and references
+- **root-rntuple**: restructure documentation with practical examples
+- **root-ttree-write**: restructure documentation following root-th1-fill pattern
+- **root-ttree-branch**: restructure documentation following root-th1-fill pattern
+- **root-ttree-fill**: restructure documentation following root-th1-fill pattern
+- **root-ttree-fill**: restructure documentation with purpose-driven subsections
+- **root-notebook**: add TCanvas examples and clarify drawing in Jupyter
+- **root-notebook**: restructure documentation with purpose-driven subsections
+- **CLAUDE**: update subsection pattern documentation to purpose-driven format
+- **root-ttree-draw**: reorganize documentation with purpose-driven subsections
+- **root-usage**: restructure table of contents for better organization
+
+### Refactor
+
+- **arduino**: split LittleFS documentation into focused modules
+
 ## v2025.11.10 (2025-11-14)
 
 Migrated project-wide build system to pyproject-based configuration and unified dependency management from Poetry to uv.
