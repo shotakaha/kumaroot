@@ -42,9 +42,9 @@ tasks:
     cmds:
       - uv run pre-commit run --all-files
 
-  # ============================================================
+  # ============================================================================
   # Version management tasks - Manage versions with commitizen
-  # ============================================================
+  # ============================================================================
 
   bump:check:
     desc: Preview next version bump
@@ -66,3 +66,27 @@ tasks:
     desc: Bump major version. Use once when the year changed.
     cmds:
       - uv run cz bump --check-consistency --changelog --increment major
+
+  # ============================================================================
+  # Git management tasks - Manage Git
+  # ============================================================================
+
+  status:
+    desc: Show git status
+    cmds:
+      - git status
+
+  log:
+    desc: Show recent commits (last 10)
+    cmds:
+      - git log --oneline -10
+
+  push:
+    desc: Push commits to remote (main branch)
+    cmds:
+      - git push origin main
+
+  push:tags:
+    desc: Push commits and tags to remote
+    cmds:
+      - git push origin main --tags
