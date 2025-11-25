@@ -1,21 +1,48 @@
 # バージョン管理用タスク（`task version`）
 
 ```console
-$ task version
-$ task version:bump
+$ task bump:check
+$ task bump:auto
+$ task bump:patch
+$ task bump:minor
+$ task bump:major
 ```
+
+[commitizen](../python/python-commitizen.md)を使ったタスクです。
 
 ## タスク設定
 
 ```yaml
 tasks:
-  version:
-    desc: Preview version bump with changelog
-    cmds:
-      - cz bump --check-consistency --dry-run
 
-  version:bump:
-    desc: Bump version and update changelog
+  # ============================================================================
+  # Version management tasks - Manage versions with commitizen
+  # ============================================================================
+
+  bump:check:s
+    desc: Preview next version bump
     cmds:
-      - cz bump --changelog --check-consistency
+      - echo "Preview of next version bump"
+      - uv run cz bump --check-consistency --changelog --dry-run
+
+  bump:patch:
+    desc: Bump patch version. Use this daily.
+    cmds:
+      - uv run cz bump --check-consistency --changelog --increment patch
+
+  bump:minor:
+    desc: Bump minor version. Use once when the month changed.
+    cmds:
+      - uv run cz bump --check-consistency --changelog --increment minor
+
+  bump:major:
+    desc: Bump major version. Use once when the year changed.
+    cmds:
+      - uv run cz bump --check-consistency --changelog --increment major
 ```
+
+:::{note}
+
+`uv run`の部分は各自の実行環境に置き換えてください。
+
+:::
