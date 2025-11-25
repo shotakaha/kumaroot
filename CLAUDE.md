@@ -44,9 +44,10 @@ task outdated    # Show outdated packages
 ### Version Management (Commitizen)
 
 ```bash
-task bump             # Bump PATCH version with commitizen
+task bump:check       # Preview next version bump (dry-run)
+task bump:patch       # Bump PATCH version with commitizen
 task bump:minor       # Bump MINOR version with commitizen
-task changelog        # Generate incremental changelog
+task bump:major       # Bump MAJOR version with commitizen
 ```
 
 **Custom Versioning Scheme:**
@@ -59,8 +60,10 @@ This project uses a **calendar-based semantic versioning** scheme:
 
 **Important notes:**
 
-- `task bump` always uses `--increment PATCH`（configured in Taskfile.yml）
+- `task bump:patch` always bumps the PATCH version（configured in Taskfile.yml）
+- `task bump:check` previews the next version without making changes
 - Automatic increment detection is disabled; all bumping is explicit
+- All bump tasks include `--check-consistency --changelog` flags
 - When a new year/month begins, manually bump MAJOR or MINOR as needed
 - Example version progression: `2025.11.6` → `2025.11.7`（patch）→ `2025.12.0`（new month）→ `2026.1.0`（new year）
 
@@ -405,7 +408,7 @@ This project uses **calendar-based semantic versioning** (YYYY.MM.PATCH):
 **When to bump versions:**
 
 - **PATCH**: After each content addition, improvement, or bug fix (`fix` or `feat` commits)
-  - Use: `task bump`
+  - Use: `task bump:patch`
   - Example: `2025.11.6` → `2025.11.7`
 
 - **MINOR**: When the calendar month changes
@@ -414,7 +417,7 @@ This project uses **calendar-based semantic versioning** (YYYY.MM.PATCH):
   - Usually done manually on the first commit of a new month
 
 - **MAJOR**: When the calendar year changes
-  - Use: `cz bump --increment MAJOR`
+  - Use: `task bump:major`
   - Example: `2025.x.x` → `2026.1.0`
   - Reset MINOR to 1 and PATCH to 0 when entering a new year
 

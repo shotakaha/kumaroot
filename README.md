@@ -144,6 +144,12 @@ $ poetry run code .
 ### バージョン管理タスク
 
 ```bash
+task bump:check
+```
+
+次のバージョンバンプをプレビューします。実際には変更を行いません。
+
+```bash
 task bump:patch
 ```
 
@@ -158,11 +164,11 @@ task bump:minor
 バージョンバンプ時に`CHANGELOG.md`が自動的に更新されます。
 
 ```bash
-task changelog
+task bump:major
 ```
 
-必要に応じて、手動で`CHANGELOG.md`を追加更新できます。
-通常は`task bump:*`コマンドで自動更新されるため、この操作は不要です。
+毎年、メジャーバージョンを更新してください。
+通常は年が変わるときに実行します。
 
 ## 依存パッケージの管理
 
