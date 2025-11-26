@@ -46,20 +46,30 @@ Successfully installed poetry
 
 $ poetry --version
 Poetry (version 2.2.1)
-
-$ which poetry
-/Users/username/.local/bin/poetry
 ```
 
-公式ドキュメントで推奨されているのは`pipx`を使ったインストールです。
+公式ドキュメントでは`pipx`を使ったインストールが推奨されています。`pipx`は単一のツール用に独立した仮想環境を作るため、他のプロジェクトの依存関係と競合しません。
 
 :::{note}
 
-他のインストール方法：
+**他のインストール方法：**
 
 - **Homebrew（macOS）**：`brew install poetry`
 - **Linux公式インストーラー**：`curl -sSL https://install.python-poetry.org | python3 -`
-- **pip（非推奨）**：`pip install poetry`（他のプロジェクトの依存関係と競合する可能性）
+- **pip（非推奨）**：`pip install poetry`（他のパッケージと競合する可能性）
+
+:::
+
+:::{tip}
+
+`pipx`をまだインストールしていない場合は、以下のコマンドでインストールしてください：
+
+```console
+$ pip install pipx
+Collecting pipx
+...
+Successfully installed pipx
+```
 
 :::
 
@@ -100,62 +110,97 @@ $ poetry init
 これらの設定はすべて{file}`pyproject.toml`の``[tool.poetry]``セクションに保存されます。
 あとから直接編集できるので、間違えてしまっても大丈夫です。
 
-## パッケージを追加したい（``poetry add``）
+## パッケージを追加したい（`poetry add`）
 
 ```console
-$ poetry add パッケージ名
-$ poetry add パッケージ名 -E パッケージ名
-$ poetry add --group=dev パッケージ名
-$ poetry add --group=docs パッケージ名
+$ poetry add requests pandas
+$ poetry add --group dev pytest ruff
+$ poetry add --group docs sphinx
 ```
 
-必要なパッケージ名を{file}`pyproject.toml`に追記して、仮想環境（``.venv``）の中にインストールします。
-``-E / --extra``オプションを使って、追加パッケージも指定できます。
-パッケージは``[tool.poetry.dependencies]``のセクションに追記され、ロックファイル（``poetry.lock``）が生成されます。
+`poetry add`コマンドで、プロジェクトに必要なパッケージを追加します。パッケージを追加すると、{file}`pyproject.toml`に記録され、{file}`poetry.lock`が自動で生成・更新されます。
 
-### 開発環境を追加したい（``--group=dev``）
+:::{tip}
+
+**パッケージの追加先：**
+
+- `poetry add requests` - 本番環境（`[tool.poetry.dependencies]`）に追加
+- `poetry add --group dev pytest` - 開発環境（`[tool.poetry.group.dev.dependencies]`）に追加
+- `poetry add --group docs sphinx` - ドキュメント環境に追加
+
+:::
+
+### 開発環境でのみ使うパッケージを追加したい
 
 ```console
-$ poetry add --group=dev pytests
-$ poetry add --group=dev commitizen
-$ poetry add --group=dev jupyterlab
+$ poetry add --group dev pytest black ruff jupyterlab
 ```
 
-開発に必要なパッケージは``--group=dev``に追加します。
-（たしか）``v1.3.0``からグループ化する機能追加され、``add -D``オプションが非推奨になりました。
+テストやコード整形など、開発時にのみ必要なパッケージは`--group dev`オプションで追加します。本番環境にはインストールされません。
 
-### ドキュメント環境を追加したい（``--group=docs``）
+:::{note}
+
+Poetry v1.3.0以降では、`--group`を使ったグループ化が標準です。以前の`-D`オプションは非推奨になりました。
+
+:::
+
+### ドキュメント環境でのみ使うパッケージを追加したい
 
 ```console
-$ poetry add --group=docs sphinx_book_theme
-$ poetry add --group=docs myst_parser
+$ poetry add --group docs sphinx sphinx_book_theme myst_parser
 ```
 
-ドキュメント作成に必要なパッケージは``--groupd=docs``に追加します。
+Sphinxなどドキュメント作成専用のパッケージは`--group docs`で追加します。これにより、必要な環境だけに必要なパッケージをインストールできます。
 
-## パッケージをインストールしたい（``poetry install``）
+## パッケージをインストールしたい（`poetry install`）
 
 ```console
 $ poetry install
+Creating virtualenv poetry-xx in .venv
+Installing dependencies from lock file
+...
 ```
 
-{file}`poetry.lock`にあるパッケージをインストールします。
-{file}`poetry.lock`がない場合は、{file}`pyproject.toml`にあるパッケージをインストールして、{file}`poetry.lock`を生成します。
+`poetry install`コマンドで、{file}`poetry.lock`に記録されたすべてのパッケージをインストールして、仮想環境をセットアップします。{file}`poetry.lock`がない場合は、{file}`pyproject.toml`から自動で生成されます。
 
-デフォルトでは``{cache-dir}/virtualenvs/``に設定されたパスの仮想環境を作成し、パッケージをインストールします。
-``virtualenvs.in-project = true``に設定した場合は、プロジェクト内の``{project-dir}/.venv/``に仮想環境を作成します。
+:::{tip}
 
-## パッケージ環境を確認したい（``poetry check``）
+**初回セットアップの流れ：**
+
+1. `poetry new`や`poetry init`でプロジェクトを初期化
+2. `poetry add`でパッケージを追加
+3. `poetry install`で仮想環境を構築
+4. `poetry run`でコマンドを実行
+
+:::
+
+デフォルトではPoetryキャッシュ内に仮想環境が作成されます。プロジェクト内に`.venv`を作成したい場合は、[プロジェクト内に仮想環境を作成したい](#プロジェクト内に仮想環境を作成したい)を参照してください。
+
+## スクリプトを実行したい（`poetry run`）
+
+```console
+$ poetry run python main.py
+# スクリプトが実行される
+
+$ poetry run pytest
+# テストが実行される
+
+$ poetry run black .
+# コード整形が実行される
+```
+
+`poetry run`コマンドで、セットアップした仮想環境内でコマンドを実行します。これにより、プロジェクトの依存関係が正確に反映された環境でスクリプトが動作します。
+
+## パッケージ環境を確認したい（`poetry check`）
 
 ```console
 $ poetry check
 All set!
-
-$ poetry check --lock
-All set!
 ```
 
-## パッケージをビルドしたい（``poetry build``）
+`poetry check`でプロジェクトの設定が正しいか確認できます。`--lock`オプションで{file}`poetry.lock`の整合性も検証します。
+
+## パッケージをビルドしたい（`poetry build`）
 
 ```console
 $ poetry build
@@ -168,169 +213,100 @@ Building パッケージ名 (バージョン番号)
 
 `build`コマンドでパッケージをビルドできます。
 
-## パッケージを公開したい（``poetry publish``）
+## パッケージを公開したい（`poetry publish`）
 
 ```console
-// TestPyPIに公開
 $ poetry publish -r testpypi
-Publishing パッケージ名 (バージョン番号) to testpypi
- - Uploading パッケージ名-バージョン番号-py3-none-any.whl
- - Uploading パッケージ名-バージョン番号.tar.gz
-
-// PyPIに公開
-$ poetry publish
-Publishing パッケージ名 (バージョン番号) to pypi
- - Uploading パッケージ名-バージョン番号-py3-none-any.whl
- - Uploading パッケージ名-バージョン番号.tar.gz
+Publishing my_project (0.1.0) to testpypi
+ - Uploading my_project-0.1.0-py3-none-any.whl
+ - Uploading my_project-0.1.0.tar.gz
 ```
 
-パッケージをビルドしてから公開します。
-はじめて公開する場合は必ず``TestPyPI``でテストするのがよいです。
-公開する前にリポジトリとAPIトークンの設定が必要です。
+`poetry publish`でパッケージをPyPIに公開します。はじめて公開する場合は、必ずTestPyPIでテストしてから本番のPyPIに公開してください。事前にリポジトリとAPIトークンの設定が必要です。
 
 :::{seealso}
 
-僕のZennスクラップ「[poetryを使ってpythonパッケージを作成する](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)」に、Poetryを使ってパッケージを新規作成してPyPIで公開するまでの手順を整理しました。
+詳しい公開手順については、僕のZennスクラップ「[poetryを使ってpythonパッケージを作成する](https://zenn.dev/shotakaha/scraps/9416c30cd7745a)」を参照してください。
 
 :::
 
 ### TestPyPI／PyPIを設定したい
 
 ```console
-// testpypi という名前で TestPyPIを追加する
 $ poetry config repositories.testpypi https://test.pypi.org/legacy/
-
-// TestPyPIの個人ページで発行したAPIトークンを登録する
 $ poetry config pypi-token.testpypi <your-token>
-
-// PyPIの個人ページで発行したAPIトークンを登録する
 $ poetry config pypi-token.pypi <your-token>
+# 設定が保存される
 ```
 
-TestPyPI／PyPIに公開するために、APIトークンを設定する必要があります。
-APIトークンは、それぞれのサービスの個人ページで発行したものをコピペしてください。
+TestPyPIとPyPIに公開するために、リポジトリURLとAPIトークンを設定します。APIトークンはそれぞれのサービスの個人ページで発行して、コマンドで登録してください。
 
-他にもさまざまな種類のリポジトリを設定できます。
-詳しくは[Repositories](https://python-poetry.org/docs/repositories/)を参照してください。
+PyPIはデフォルトの公開先なので、リポジトリのURL設定は不要です。TestPyPIのみ設定が必要です。
 
-## 現在の設定を確認したい（``poetry config``）
+他にもプライベートリポジトリなど、さまざまな公開先を設定できます。詳細は[Repositories](https://python-poetry.org/docs/repositories/)を参照してください。
+
+## 設定を管理したい
+
+### 現在の設定を確認したい（`poetry config --list`）
 
 ```console
 $ poetry config --list
 cache-dir = "~/Library/Caches/pypoetry"
-experimental.new-installer = true
-experimental.system-git-client = false
-installer.max-workers = null
-installer.modern-installation = true
-installer.no-binary = null
-installer.parallel = true
 virtualenvs.create = true
 virtualenvs.in-project = null
-virtualenvs.options.always-copy = false
-virtualenvs.options.no-pip = false
-virtualenvs.options.no-setuptools = false
-virtualenvs.options.system-site-packages = false
-virtualenvs.path = "{cache-dir}/virtualenvs"  # ~/Library/Caches/pypoetry/virtualenvs
-virtualenvs.prefer-active-python = false
-virtualenvs.prompt = "{project_name}-py{python_version}"
+virtualenvs.path = "{cache-dir}/virtualenvs"
 ```
 
-現在の設定は``poetry config --list``で確認できます。
-デフォルトの設定は上記のようになっていました。
-全体の設定は{file}`~/Library/Application Support/pypoetry/config.toml`に保存されます。
-`--local`オプションをつけて設定した項目は、プロジェクト内の{file}`poetry.toml`に保存されます。
-
-:::{note}
-
-全体の設定は、以前は{file}`~/Library/Preferences/pypoetry/config.toml`に保存されていました。
-その状態でもまだ使えるようですが、将来的にはパスを変更したほうがよさそうです。
-
-:::
+`poetry config --list`で現在のPoetry設定をすべて表示します。デフォルト設定の詳細は[PoetryドキュメントのAvailable Settings](https://python-poetry.org/docs/configuration/#available-settings)を参照してください。
 
 ### 設定を変更したい
 
 ```console
 $ poetry config キー名 値
 $ poetry config キー名 値 --local
+# 設定が更新される
 ```
 
-変更可能な設定は[PoetryドキュメントのAvailable Settings](https://python-poetry.org/docs/configuration/#available-settings)を参照してください。
-Poetry v1.2.0になって設定できる項目が増えました。
+設定値を変更します。`--local`をつけるとプロジェクト内の{file}`poetry.toml`に保存され、全体設定は{file}`~/Library/Application Support/pypoetry/config.toml`に保存されます。
 
 ### 設定を削除したい
 
 ```console
 $ poetry config キー名 --unset
-$ poetry config キー名 --unset --local
+# 設定が削除される
 ```
 
-追加した設定を削除する場合はキー名に対して``--unset``します。
+追加した設定を削除する場合は`--unset`オプションを使います。
 
 ## プロジェクト内に仮想環境を作成したい
 
 ```console
-# 現在の設定値を確認する
-$ poetry config virtualenvs.in-project
-null
-
-# 設定を有効にする
 $ poetry config virtualenvs.in-project true
-
-# 変更後の設定値を確認する
-$ poetry config virtualenvs.in-project
-true
+$ poetry install
+$ ls -la
+.venv/
 ```
 
-仮想環境は``virtualenvs.path``で設定されたパスに作成されます。
-デフォルトでは{file}``\{cache-dir\}/virtualenvs``に設定されています。
+デフォルトではPoetryキャッシュ内に仮想環境が作成されますが、`virtualenvs.in-project = true`に設定すると、プロジェクト内に{file}`.venv`が作成されます。
 
-[virtualenvs.in-project](https://python-poetry.org/docs/configuration/#virtualenvsin-project)を``true``にすると、その設定をカレントディレクトリの{file}``.venv``に変更できます。
-GitHub/GitLabなどを通じて複数のマシンで作業する場合は、この値を有効にしておくとよいです。
+GitHubやGitLabなどでチーム開発する場合、プロジェクト内に仮想環境があると管理しやすくなります。
 
 :::{caution}
 
-すでに{file}`\{cache-dir\}/virtualenvs/`に仮想環境がある場合は、一度削除（``rm -r``）してから作成しなおしてください。
+すでにキャッシュ内に仮想環境がある場合は、新しい設定で`poetry install`する前に古い環境を削除してください。
 
 :::
 
-## システムのパッケージを使いたい
-
-```bash
-$ poetry config virtualenvs.option.system-site-packages true
-```
-
-[virtualenvs.option.system-site-packages](https://python-poetry.org/docs/configuration/#virtualenvsoptionssystem-site-packages)を``true``にすると、システムのPythonの{file}``site-packages``にインストールが仮想環境から使えるようになります。
-開発環境で使うパッケージ（``pytest`` / ``black`` / ``commitizen`` / ``pysen``）などを使うには、これを有効にしておいてもいいかもしれません。
-
-:::{hint}
-
-複数のPythonプロジェクトを持っていると、それぞれのプロジェクトの{file}`.venv`にパッケージがインストールされます。
-開発環境にだけ必要なパッケージを共通化することで、少しだけでもディスク節約になるかもしれません。
-
-:::
-
-## リポジトリとAPIトークンを設定したい
+## システムのPythonパッケージを使いたい
 
 ```console
-$ poetry config repositories.名前 URL
-$ poetry config pypi-token.名前 "APIトークン"
+$ poetry config virtualenvs.options.system-site-packages true
+# 設定が更新される
 ```
 
-``名前``の部分は任意の文字列で構いません。
-以下に``PyPI``と``TestPyPI``の設定例を挙げておきます。
+`virtualenvs.options.system-site-packages = true`に設定すると、システムのPython（`site-packages`）にインストールされたパッケージを仮想環境から利用できます。
 
-```bash
-# PyPIの設定
-$ poetry config pypi-token.pypi "PyPIのAPIトークン"
-
-# TestPyPIの設定
-$ poetry config repositories.testpypi https://test.pypi.org/legacy/
-$ poetry config pypi-token.testpypi "TestPyPIのAPIトークン"
-```
-
-``PyPI``はデフォルトの公開先になっているため、リポジトリの設定は必要ありません。
-``TestPyPI``に公開する場合は、リポジトリのURLを設定する必要があります。
-公開先のAPIトークンをそれぞれ事前に発行しておく必要があります。
+複数のプロジェクトで共有する開発ツール（`pytest`、`black`など）を節約したい場合に有効です。
 
 ## リファレンス
 
