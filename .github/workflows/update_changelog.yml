@@ -26,13 +26,9 @@ jobs:
         with:
           python-version: "3.12"
 
-      # Commitizen をインストール
-      - name: Install Commitizen
-        run: uv pip install commitizen
-
       # Changelog を更新
       - name: Update Changelog
-        run: uv run cz changelog --incremental
+        run: uvx commitizen changelog --incremental
       - name: Commit Changes
         run: |
           if [ -n "$(git status --porcelain)" ]; then
