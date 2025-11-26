@@ -1,9 +1,15 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2025.11.12 (2025-11-26)
 
 ### Fix
 
+- **python-poetry**: rewrite for beginners with improved structure and clarity
+- **python-poetry**: rewrite for beginners with simplified structure and examples
+- **python-uv**: rewrite for beginners with improved structure and clarity
+- **python-hatch**: add comprehensive hatch guide for beginners
+- **python-pyproject**: expand build tools evolution and add tool adoption rationale
+- **python-pyproject**: update introduction and add specification evolution
 - **update-changelog-workflow**: use cz executable from commitizen
 - **update-changelog-workflow**: use uvx for commitizen installation
 - **command-task-git**: add git management tasks documentation
