@@ -1,42 +1,38 @@
 # パッケージ管理したい（`uv`）
 
 ```console
-// 仮想環境でパッケージ管理
-$ uv venv
-$ source .venv/
-$ uv pip install パッケージ名
+// 新規プロジェクト作成
+$ uv init my-project
+$ cd my-project
 
+// 依存関係の管理
+$ uv add requests
+$ uv add --dev pytest
+$ uv remove requests
 
-// 補助コマンド
-$ uv tool install パッケージ名
-$ uv tool uninstall パッケージ名
-$ uv tool list
+// パッケージの実行とテスト
+$ uv run python main.py
+$ uv run pytest
 
-// パッケージ管理
-$ uv init プロジェクト名 --app --package --vcs git
-$ uv python pin バージョン
-$ uv add パッケージ名
-$ uv add --dev パッケージ名
-$ uv update
+// 環境管理
 $ uv sync
-
-// 開発と検証
-$ uv run コマンド
-$ uv pip compile
-$ uv pip check
+$ uv python pin 3.12
 
 // パッケージ公開
 $ uv build
 $ uv publish
+
+// 外部ツールを一時実行
+$ uvx ruff check .
 ```
 
-`uv`はPython環境の管理とパッケージ管理を一元管理できるツールです。
-`.python-version`でPython環境を管理し、
-`pyproject.toml`と`uv.lock`のファイルを使って依存関係を管理できます。
+`uv`はRustで書かれた超高速なPythonパッケージ＆プロジェクトマネージャーです。
+pip、pip-tools、pipx、poetry、pyenvなど、複数のツールを1つに統合し、
+10～100倍の速度でパッケージを管理できます。
 
 :::{note}
 
-`uv`は`pip`の代替を目指しているツールです。
+`uv`はPEPに準拠した標準的なツールで、`pip`の完全な代替を目指しています。
 
 :::
 
@@ -71,368 +67,449 @@ CI/CDでPythonノベースイメージを使う場合は`pipx install uv`する�
 ## 仮想環境したい（`uv venv`）
 
 ```console
-$ cd PROJECT_NAME
+$ cd my-project
+
 $ uv venv
 Using CPython 3.12.7
 Creating virtual environment at: .venv
-Activate with: source .venv/bin/activate.fish
+Activate with: source .venv/bin/activate
 
-$ source .venv/bin/activate.fish
+$ source .venv/bin/activate
+(.venv) $
 ```
 
 `uv venv`コマンドで仮想環境を作成できます。
 デフォルトで`.venv/`ディレクトリに作成されます。
-仮想環境を有効にするには`.venv/bin/`の中にシェルごとに用意されたスクリプトを実行します。
-`fish`の場合は`source .venv/bin/activate.fish`です。
-
-## パッケージ管理したい（`uv pip`）
-
-```console
-$ uv pip install パッケージ名
-$ uv pip uninstall パッケージ名
-$ uv pip freeze
-$ uv pip list --outdated
-
-$ up pip install -e パッケージのパス
-```
-
-`uv pip`は[pipコマンド](./python-pip.md)の互換モードを提供するコマンドで、`pip`より高速に動作します。
-パッケージは仮想環境（`./.venv`）にインストールされます。
 
 :::{note}
 
-`uv pip install`した場合、
-`pyproject.toml`や`uv.lock`には追加されません。
+実は、`uv init`でプロジェクトを作成すると、`uv sync`や`uv run`を実行する際に
+自動的に仮想環境が作成されるため、手動で`uv venv`を実行する必要はありません。
+
+:::
+
+```console
+// カスタムディレクトリに作成
+$ uv venv myenv
+$ source myenv/bin/activate
+
+// 特定のPythonバージョンを指定
+$ uv venv --python 3.11
+$ uv venv --python python3.12
+```
+
+## パッケージを追加・削除したい（`uv add` / `uv remove`）
+
+```console
+$ uv add requests
+Resolved 1 package in 0.12s
+Created environment
+Installed 1 package in 0.09s
+ + requests==2.31.0
+
+$ uv add --dev pytest
+Resolved 1 package in 0.08s
+Installed 1 package in 0.07s
+ + pytest==7.4.3
+
+$ uv remove requests
+Removed 1 package in 0.05s
+```
+
+`uv add`コマンドで`pyproject.toml`にパッケージを追加し、自動的にインストールします。
+パッケージ情報は`pyproject.toml`と`uv.lock`に記録されます。
+
+`uv add --dev`で開発用の依存関係（テストツールなど）を追加できます。
+
+:::{note}
+
+`uv add`を使うと`pyproject.toml`と`uv.lock`の両方が自動更新されます。
+推移的な依存関係も自動的に削除されるため、pipより安全です。
+
+:::
+
+## パッケージを一時的にインストールしたい（`uv pip install`）
+
+```console
+$ uv pip install pandas
+Resolved 1 package in 0.08s
+Installed 1 package in 0.06s
+ + pandas==2.1.1
+
+$ uv pip list
+Name            Version
+-----------     -------
+pandas          2.1.1
+...
+
+$ uv pip uninstall pandas
+Removed 1 package in 0.02s
+```
+
+`uv pip`は[pipコマンド](./python-pip.md)の互換モードで、より高速に動作します。
+`pyproject.toml`に記録されない一時的なインストールに適しています。
+
+:::{caution}
+
+`uv pip install`した場合、`pyproject.toml`には追加されません。
+プロジェクトの依存関係として記録したい場合は`uv add`を使用してください。
 
 :::
 
 ## 新規プロジェクトしたい（`uv init`）
 
 ```console
-$ uv init --version
-uv-init 0.6.13 (Homebrew 2025-04-07)
+$ uv init my-app
+Created project `my-app` at `/path/to/my-app`
 
-// デフォルト（--app --no-package）
-$ uv init PROJECT_NAME
-
-// ライブラリ作成（--lib --package）
-$ uv init PROJECT_NAME --lib
-
-// CLI&パッケージ（--app --package）
-$ uv init PROJECT_NAME --app --package
-
-// ドキュメントのみ
-$ uv init --bare --no-package PROJECT_DOCS
+$ cd my-app
+$ tree .
+.
+├── README.md
+├── .python-version
+├── pyproject.toml
+├── src/
+│   └── my_app/
+│       └── __init__.py
+└── hello.py
 ```
 
-`init`コマンドでプロジェクトを初期化できます。
-同名のプロジェクトがすでに存在する場合は、エラーになります
-プロジェクト名を省略した場合は、カレントディレクトリが初期化されます。
+`uv init`コマンドで新しいPythonプロジェクトを初期化できます。
+デフォルトでアプリケーションプロジェクトが作成されます。
 
-目的にあったディレクトリ構造を自動で構成できるオプションも用意されています。
-デフォルトは`--app --no-package`に相当し、ローカルで利用するCLIの仕様になっています。
+### プロジェクトタイプの選択
 
-| PyPI | ライブラリ（`--lib`） | アプリ（`--app`） |
+```console
+// アプリケーションプロジェクト（デフォルト）
+$ uv init my-app
+
+// PyPIに公開するパッケージプロジェクト
+$ uv init --package my-library
+
+// 最小限のセットアップ（pyproject.tomlのみ）
+$ uv init --bare
+```
+
+| 目的 | コマンド | 用途 |
 |---|---|---|
-| 公開したい（`--package`） | `--lib` | `--app --package` |
-| 公開しない（`--no-package`） | `--lib --no-package` | `--app` |
+| 個人用スクリプト | `uv init` | ローカルで実行するツール |
+| PyPIで公開 | `uv init --package` | 他のプロジェクトで使用される |
+| 既存プロジェクトに追加 | `uv init --bare` | pyproject.tomlのみ追加 |
 
-:::{caution}
+:::{note}
 
-`--app` / `--lib` / `--script`オプションは同時に使えないようになっています。
+`uv init`でプロジェクトを作成すると、`.python-version`ファイルが自動で作成されます。
+これにより、プロジェクトで使用するPythonバージョンが固定されます。
 
 :::
 
-```console
-// プロジェクト名を指定して初期化する
-$ uv init PROJECT_NAME
-Initialized project `PROJECT_NAME` at `./PROJECT_NAME`
-
-// 初期化後のディレクトリ構造
-$ tree PROJECT_NAME
-PROJECT_NAME
-├── README.md
-├── hello.py
-└── pyproject.toml
-
-// 既存のプロジェクトがあるとエラーになる
-$ uv init PROJECT_NAME
-error: Project is already initialized in `./PROJECT_NAME`
-```
-
-## パッケージを追加したい（`uv add` / `uv remove`）
+## 環境を同期したい（`uv sync` / `uv lock`）
 
 ```console
-$ uv add パッケージ名
-$ uv remove パッケージ名
-
-$ uv add パッケージ名==バージョン
-$ uv add パッケージ名 --extra パッケージ名
-$ uv add --dev パッケージ名s
-```
-
-`uv add`コマンドでパッケージを追加します。
-パッケージの情報は
-`pyproject.toml`の`[dependencies]`セクションと
-`uv.lock`に追加されます。
-
-`uv remove`コマンドで削除できます。
-
-## パッケージをインストールしたい（`uv sync` / `uv lock`）
-
-```console
-$ uv lock
-
 $ uv sync
-$ uv sync --all-extras
+Resolved 5 packages in 0.09s
+Created environment
+Installed 5 packages in 0.14s
+
+$ uv lock --upgrade
+Updated 3 packages
+
 $ uv sync --upgrade
+Updated 3 packages in 0.18s
 ```
 
-`lock`コマンドでロックファイル（`uv.lock`）を更新できます。
+`uv sync`コマンドで`pyproject.toml`と`uv.lock`をプロジェクト環境に同期します。
+不足しているパッケージをインストールし、不要なパッケージを削除します。
 
-`sync`コマンドでロックファイルを元に、プロジェクトに必要なパッケージを追加／更新できます。
-`--all-extras`オプションで、依存パッケージのオプションも追加できます。
+`uv lock`コマンドで`uv.lock`ファイル（ロックファイル）を更新します。
+
+### 依存関係を更新したい場合
+
+```console
+// ロックファイルのみを更新（環境は同期しない）
+$ uv lock --upgrade
+
+// ロックファイルと環境の両方を更新
+$ uv sync --upgrade
+
+// 特定のパッケージのみ更新
+$ uv sync --upgrade-package requests
+```
+
+:::{note}
+
+`uv lock --upgrade`と`uv sync --upgrade`の違い：
+
+- `uv lock --upgrade`：`uv.lock`ファイルのみ更新
+- `uv sync --upgrade`：`uv.lock`と環境の両方を更新
+
+:::
 
 ## パッケージを実行したい（`uv run`）
 
 ```console
-$ uv run コマンド名
+$ uv run python main.py
+Hello, World!
 
-// ユニットテストを実行
 $ uv run pytest
+===== test session starts =====
+tests/test_main.py .                                       [100%]
+1 passed
 
-// フォーマッターを実行
-$ uv run ruff format
+$ uv run ruff check .
+All checks passed!
 
-// 自作ツールを実行
-$ uv run 自作ツール名 [オプション]
+$ uv run ruff format .
+1 file reformatted
 ```
 
-`uv run`で仮想環境に追加したパッケージを実行できます。
-また`pyproject.toml`の`[project.scripts]`で設定した自作ツールも実行できます。
-自作パッケージの開発時にもっとも多く使うコマンドです。
+`uv run`コマンドで、プロジェクトの仮想環境内でコマンドやスクリプトを実行します。
+`pyproject.toml`に記録された依存関係が自動的に利用可能になります。
+
+### スクリプトの実行
+
+```console
+// Pythonスクリプト
+$ uv run python script.py
+
+// スクリプトに引数を渡す
+$ uv run python script.py --arg value
+
+// プロジェクト内のスクリプト
+$ uv run hello.py
+```
+
+:::{note}
+
+`uv run`を使うことで、仮想環境の手動アクティベーション（`source .venv/bin/activate`）が不要になります。
+
+:::
 
 ## パッケージを公開したい（`uv build` / `uv publish`）
 
 ```console
 $ uv build
+Building wheel for my-package
+Successfully built dist/my_package-0.1.0-py3-none-any.whl
+Building sdist for my-package
+Successfully built dist/my_package-0.1.0.tar.gz
 
 $ uv publish
-$ uv publish -r testpypi
+Uploading my_package-0.1.0-py3-none-any.whl to PyPI...
+Uploading my_package-0.1.0.tar.gz to PyPI...
 ```
 
-`build`コマンドでパッケージを作成できます。
-`/dist/`の中に`sdist`形式と`wheel`形式のパッケージが生成されます。
+`uv build`コマンドでパッケージをビルドします。
+`dist/`ディレクトリに以下のファイルが生成されます：
 
-`publish`コマンドでPyPIにパッケージを公開できます。
-`-r testpypi`でTestPyPIにテスト公開できます。
-作成したパッケージをはじめて公開する場合は、TestPyPIにアップできるか試してみるとよいです。
+- `wheel`形式（`.whl`）：バイナリパッケージ
+- `sdist`形式（`.tar.gz`）：ソースパッケージ
+
+### 公開手順
+
+```console
+// 1. パッケージをビルド
+$ uv build
+
+// 2. TestPyPIで動作確認（初回時推奨）
+$ uv publish --publish-url https://test.pypi.org/legacy/
+
+// 3. PyPIに公開
+$ uv publish
+```
+
+`uv publish`コマンドでPyPIにパッケージを公開します。
 
 :::{caution}
 
-同じパッケージ名はPyPIに登録できません。
-パッケージを公開する前に名前の重複がないか確認が必要です。
-
-また、自分のパッケージでも同じバージョンを追加（＝上書き）することはできません。
-軽微な修正であっても、別のバージョンにして公開する必要があります。
+- 同じパッケージ名はPyPIに登録できません。公開前に名前の重複を確認してください
+- 同じバージョンの再アップロード（上書き）はできません。変更内容に応じてバージョンを更新してください
+- PyPIアカウントとAPIトークンが必要です
 
 :::
 
-## Pythonを管理したい（`uv python pin`）
+## Pythonバージョンを管理したい（`uv python`）
 
 ```console
 $ uv python pin 3.12
 Pinned `.python-version` to `3.12`
 
+$ cat .python-version
+3.12
+
 $ uv run python --version
 Python 3.12.7
-
-// HomebrewのPythonは3.13.0
-$ python3 --version
-Python 3.13.0
 ```
 
-`uv python pin`コマンドで、プロジェクトで利用するPythonのバージョンを指定できます。
-ピン留めしたバージョン情報は`.python-version`に保存されます。
+`uv python pin`コマンドで、プロジェクトで使用するPythonバージョンを指定します。
+設定は`.python-version`ファイルに保存され、`uv`や`pyenv`などのツールで共通に使用されます。
 
-:::{note}
-
-`.python-version`は`uv`や`pyenv`などで共通に使われる
-Pythonのバージョンを指定するためのファイルです。
-
-:::
+### Pythonバージョンのインストール
 
 ```console
-// Pythonの実行環境をインストール
+// インストール可能なバージョンを確認
+$ uv python list
+cpython-3.13.0
+cpython-3.12.7
+cpython-3.11.10
+...
+
+// 特定のバージョンをインストール
 $ uv python install 3.12
 Installed Python 3.12.7 in 5.67s
- + cpython-3.12.7-macos-aarch64-none
 
-// 実行環境をアンインストール
-$ uv python uninstall 3.12
+// 複数バージョンをインストール
+$ uv python install 3.11 3.12
 
-// 実行環境がインストールされるパスを確認
-$ uv python dir
-~/.local/share/uv/python
-```
-
-`uv python install`で指定したPython実行環境をインストールできます。
-Pythonは`uv python dir`で表示されるパスにインストールされます。
-
-```console
-$ uv python list
-```
-
-インストール可能なPythonの実行環境は
-`uv python list`で確認できます。
-
-```console
+// インストール済みバージョンを確認
 $ uv python list --only-installed
-cpython-3.13.0-macos-aarch64-none     /opt/homebrew/opt/python@3.13/bin/python3.13 -> ../Frameworks/Python.framework/Versions/3.13/bin/python3.13
-cpython-3.12.7-macos-aarch64-none     /opt/homebrew/opt/python@3.12/bin/python3.12 -> ../Frameworks/Python.framework/Versions/3.12/bin/python3.12
-cpython-3.11.10-macos-aarch64-none    /opt/homebrew/opt/python@3.11/bin/python3.11 -> ../Frameworks/Python.framework/Versions/3.11/bin/python3.11
-cpython-3.11.10-macos-aarch64-none    ~/.local/share/uv/python/cpython-3.11.10-macos-aarch64-none/bin/python3.11
-cpython-3.9.6-macos-aarch64-none      /Library/Developer/CommandLineTools/usr/bin/python3 -> ../../Library/Frameworks/Python3.framework/Versions/3.9/bin/python3
+cpython-3.13.0-macos-aarch64-none     /opt/homebrew/opt/python@3.13/bin/python3.13
+cpython-3.12.7-macos-aarch64-none     ~/.local/share/uv/python/cpython-3.12.7-macos-aarch64-none/bin/python3.12
 ```
 
-`--only-installed`オプションで、現在インストール済みのPython実行環境を確認できます。
-システムのデフォルトとHomebrewでインストールしたパスも表示されます。
-
-## 外部ツールしたい（`uv tool` / `uvx`）
+### Pythonバージョンの削除
 
 ```console
-// CLIパッケージをインストール
-$ uv tool install パッケージ名
-
-// CLIパッケージをアンインストール
-$ uv tool uninstall パッケージ名
-
-// CLIパッケージを実行
-$ uv tool run コマンド名 [オプション]
-$ uvx コマンド名 [オプション]
+$ uv python uninstall 3.12
+Uninstalled Python 3.12.7
 ```
-
-`uv tool`でCLI形式で公開されているパッケージを、ユーザーごとの仮想環境で管理できます。
-`uv tool run`もしくは`uvx`で実行できます。
 
 :::{note}
 
-`uv tool run`と`uvx`は同じことができますが、内部処理が異なります。
-`uvx`は簡単に入力できるので普段使いに適していますが、
-スクリプトから呼び出すときは`uv tool run`を使うほうがよいそうです。
+`uv init`でプロジェクトを作成すると、`.python-version`が自動で作成されます。
+システムにインストールされていないバージョンが指定されている場合、
+`uv`は自動的にそのバージョンをダウンロードしてインストールします。
 
 :::
 
-```console
-// パッケージを確認する
-$ uv tool list
+## 外部ツールを使いたい（`uvx` / `uv tool install`）
 
-$ uv tool dir
-~/.local/share/uv/tools
-
-$ uv tool update-shell
-Executable directory ~/.local/bin is already in PATH
-```
-
-`uv tool`でインストールしたパッケージの一覧を確認できます。
-`uv tool`でインストールしたパッケージ本体は`uv tool dir`ディレクトリに保存されます。
-コマンドは`~/.local/bin`に（エイリアスが）配置されます。
-`uv tool update-shell`を実行してパスを通すことができます。
-
-:::{caution}
-
-`~/.local/bin`は`pipx`でインストールされるコマンドと同じパスです。
-同名のコマンドがある場合はインストールに**失敗**します。
-
-`uv`経由のコマンドに置き換える場合は、まず
-`pipx uninstall`してから
-`uv tool install`してください。
-
-:::
+### 一時的に実行したい場合（`uvx`）
 
 ```console
-// パッケージを更新する
-$ uv tool upgrade パッケージ名
-$ uv tool upgrade --all
+$ uvx ruff check .
+All checks passed!
+
+$ uvx black --version
+black, 23.12.1
+
+$ uvx --with pandas --with matplotlib jupyter notebook
+[notebook starts...]
 ```
 
-`uv tool upgrade`でパッケージを更新できます。
-`--all`オプションで一括更新できます。
+`uvx`コマンドで、ツールをインストールせずに実行できます。
+初回実行時にダウンロードされ、以後キャッシュされるため高速です。
 
-:::{note}
-
-~~`uv tool`でインストールしたコマンドを、
-一括でアップグレードする方法はありません。~~
-現在、[uvのGitHub issue](https://github.com/astral-sh/uv/issues/1419)で議論されているようです。
-→ issueはopenになっていますが、`upgrade --all`オプションが追加されていました（2024/11/29）
-
-:::
-
-## ユニットテストしたい（`uvx pytest`）
-
-```console
-$ uv tool install pytest
-
-$ uvx pytest
-```
-
-## フォーマッター＆リンターしたい（`uvx ruff`）
+### グローバルにインストールしたい場合（`uv tool install`）
 
 ```console
 $ uv tool install ruff
+Installed `ruff` with executable `ruff`
 
-$ uvx ruff format
-$ uvx ruff check
+$ uv tool install black mypy
+Installed `black` and `mypy` with executables `black` and `mypy`
+
+// インストール済みツールを確認
+$ uv tool list
+Tool                Version     Python
+----                -------     ------
+black               23.12.1     3.12.7
+mypy                1.7.0       3.12.7
+ruff                0.1.8       3.12.7
+
+// ツールをアップグレード
+$ uv tool upgrade ruff
+Upgraded `ruff` from 0.1.8 to 0.1.9
+
+// すべてのツールをアップグレード
+$ uv tool upgrade --all
+Upgraded 3 tools
 ```
 
-## 他ツールと比較したい
+頻繁に使用するツール（`ruff`、`black`、`mypy`など）をグローバルにインストールします。
 
-以下の`uv`のコマンドが、他のパッケージ管理ツール（`poetry`、`pip`、`pipx`）の
-どのコマンドに対応しているかを整理しました。
+### uvxとuv tool installの使い分け
+
+| 用途 | コマンド | 例 |
+|---|---|---|
+| 一時的に使用 | `uvx` | `uvx pytest script.py` |
+| 最新版を試したい | `uvx` | `uvx ruff@0.2.0 check .` |
+| 頻繁に使用 | `uv tool install` | `uv tool install ruff` |
+| CI/CD環境 | `uv tool install` | Dockerイメージに含める |
+
+:::{note}
+
+`uv tool run`と`uvx`は同等のコマンドです。
+`uvx`はより簡潔なため、通常は`uvx`を使用してください。
+
+:::
+
+:::{caution}
+
+`~/.local/bin`は他のツール（`pipx`など）と共有されます。
+同名のコマンドがある場合はインストールに失敗します。
+置き換える場合は、まず古いツールをアンインストールしてください。
+
+:::
+
+## 他のツールと比較したい
+
+`uv`は複数のツールの役割を統合しています。以下は機能比較表です：
+
+### プロジェクト管理
 
 | 機能 | `uv` | `poetry` | `pip` | `pipx` |
 |---|---|---|---|---|
 | プロジェクト初期化 | `uv init` | `poetry init` | × | × |
-| 仮想環境作成 | `uv venv`（自動でもOK） | 内部で自動 | `python -m venv` | 内部で自動 |
-| Pythonバージョン固定 | `uv python pin 3.12` | .python-version に依存（pyenv） | × | × |
-| Pythonバージョン取得 | `uv python list` | × | × | × |
-| パッケージ追加 | `uv add パッケージ` | `poetry add` | `pip install` | `pipx install` |
-| 開発用依存追加 | `uv add --dev` | `poetry add --dev` | `pip install` + 手動管理 | × |
-| パッケージ削除 | `uv remove` | `poetry remove` | `pip uninstall` | `pipx uninstall` |
-| 依存ロック生成 | `uv lock / uv pip compile` | `poetry lock` | `pip freeze`（用途が異なる） | × |
-| 依存インストール | `uv sync` | `poetry install` | `pip install -r` | × |
-| パッケージ更新 | `uv update` | `poetry update` | `pip install -U` | `pipx upgrade` |
-| パッケージ実行 | `uv run` | `poetry run` | `python -m`や手動 | `pipx run` |
+| 仮想環境作成 | 自動 | 自動 | `python -m venv` | 自動 |
+
+### 依存関係管理
+
+| 機能 | `uv` | `poetry` | `pip` | `pipx` |
+|---|---|---|---|---|
+| パッケージ追加 | `uv add` | `poetry add` | `pip install` | × |
+| パッケージ削除 | `uv remove` | `poetry remove` | `pip uninstall` | × |
+| 開発用依存 | `uv add --dev` | `poetry add --dev` | 手動管理 | × |
+| ロックファイル | `uv lock` | `poetry lock` | `pip freeze` | × |
+| 環境同期 | `uv sync` | `poetry install` | `pip install -r` | × |
+
+### 実行と開発
+
+| 機能 | `uv` | `poetry` | `pip` | `pipx` |
+|---|---|---|---|---|
+| スクリプト実行 | `uv run` | `poetry run` | 手動 | × |
+
+### Python管理とツール管理
+
+| 機能 | `uv` | `poetry` | `pip` | `pipx` |
+|---|---|---|---|---|
+| バージョン固定 | `uv python pin` | 外部ツール依存 | × | × |
+| バージョンリスト | `uv python list` | × | × | × |
+| 一時実行 | `uvx` | × | × | × |
+| グローバルインストール | `uv tool install` | × | × | グローバル |
+
+### ビルドと公開
+
+| 機能 | `uv` | `poetry` | `pip` | `pipx` |
+|---|---|---|---|---|
 | ビルド | `uv build` | `poetry build` | `python -m build` | × |
-| パッケージ公開 | `uv publish` | `poetry publish` | × (`twine upload`) | × |
-| CLIツールのインストール | `uv tool install` | × | × | `pipx install` |
-| CLIツールの実行 | `uv tool run / uvx` | × | × | `pipx run` |
-| CLIツールの一覧確認 | `uv tool list` | × | × | `pipx list` |
-| 一時的なインストール | `uv pip install` | × | `pip install` | `pipx install` |
+| 公開 | `uv publish` | `poetry publish` | twine | × |
 
-Pythonには標準の`pip`のほかにさまざまなパッケージマネージャーが存在します。
-力不足な`pip`の機能の補うためにさまざまなツールが登場し、
-まるで戦国時代のような混乱がずっと続いていました。
+### uvの優位性
 
-しかし、2024年ころに、それらの役割をひとつに統合し、高速で一貫性のある操作を提供する
-パッケージマネージャーとして`uv`が注目されはじめました。
-
-`uv`はPEPに準拠しており、今後のデファクトスタンダードになっていく可能性が高いため、
-新規プロジェクトは`uv`で作りはじめるのがよいと思います。
+1. **速度**：Rustで実装され、他のツールより10～100倍高速
+2. **統合性**：pip、poetry、pyenvなど複数ツールの機能を1つに統合
+3. **使いやすさ**：直感的なコマンド体系と安定した動作
+4. **再現性**：ロックファイルによる確実な依存関係管理
 
 :::{note}
 
-とても人気の高いプログラミング言語であるPythonですが、
-長い間パッケージの依存性を管理する方法が標準化されていませんでした。
+Pythonには歴史的にさまざまなパッケージマネージャー（pip、poetry、pipx、pyenv）が存在し、
+それぞれ異なる目的で使用されていました。
 
-2018年のPIP518で導入された`pyproject.toml`は、
-それまでの`setup.py`や`requirements.tx`に代わるモダンなパッケージ記述方式です。
+2024年に登場した`uv`は、これらの機能を統一し、
+PEP準拠で今後のデファクトスタンダードになる可能性が高いツールです。
 
-パッケージングに関する詳細を確認したい場合は、
-PEP518（ビルドツールの標準化）、
-PEP517（ビルド手順の標準化）、
-PEP621（メタデータの標準化）、
-PEP508（依存関係の記法）
-の公式ドキュメントを参照してください。
+新規プロジェクトは`uv`で始めることをオススメします。
 
 :::
