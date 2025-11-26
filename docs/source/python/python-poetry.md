@@ -1,103 +1,69 @@
-# パッケージ管理したい（``poetry``）
+# パッケージ管理したい（`poetry`）
 
 ```console
-// プロジェクトの初期化
-$ poetry new プロジェクト名
+// 新規プロジェクト作成
+$ poetry new my-project
+$ cd my-project
 
-// パッケージ管理
-$ poetry add pandas matplotlib
-$ poetry add --group=dev ipykernel pytests commitizen ruff
-$ poetry add --group=docs sphinx_book_theme myst_parser
+// 依存関係の管理
+$ poetry add requests pandas
+$ poetry add --group dev pytest ruff ipykernel
+$ poetry add --group docs sphinx
 
-// poetry.lockにある依存関係をインストール
+// 環境をセットアップ
 $ poetry install
 
-// 仮想環境を起動
-$ poetry shell         # poetry < 2.0.0
-$ poetry env activate  # poetry >= 2.0.0
+// スクリプトを実行
+$ poetry run python main.py
+$ poetry run pytest
 
-// パッケージをビルド
+// パッケージをビルド・公開
 $ poetry build
-
-// パッケージをリポジトリに公開
 $ poetry publish
 ```
 
-`poetry`はPythonのパッケージ管理とパッケージ公開できるツールです。
-`pyproject.toml`と`poetry.lock`の2つのファイルを使って依存関係を管理し、仮想環境も同時に作成できます。
+`poetry`はPythonの依存関係管理、パッケージングを統合したツールです。
+`pyproject.toml`と`poetry.lock`で依存関係を管理し、
+仮想環境の構築、テスト実行、パッケージ公開までがシームレスに行えます。
 
-:::{seealso}
+:::{note}
 
-Pythonのパッケージ管理ツールはいろいろ存在しています。
-おそらく複雑な歴史的経緯もあって、全体像を把握＆理解することはかなり難しそうですが、僕が通ってきた道には次のようなパッケージがありました。
+`poetry`は複数の役割を統合しています：
+- `pip`と`venv`：パッケージ管理と仮想環境
+- `setuptools`：パッケージビルド
+- `twine`：パッケージ公開
 
-:標準モジュール: `pip` / `venv`
-:仮想環境: `virtualenv` / `pyenv` / `pipenv`
-:パッケージ公開: `twine`
-
-これらのパッケージを組み合わせて、開発環境を整える必要がありました。
-多くの先達たちが、その組み合わせのベストプラクティス的なものをブログ記事／Qiita記事などで紹介していました。
-
-このようなPython世界観の中で`poetry`が登場しました。
-2020年ころに使いはじめてみたところ、仮想環境の構築、依存関係の管理、リポジトリへの公開までの一連のステップがオールインワンで完結することがわかり、常用することに決めました。
-
-最近は2024年ころに登場した、より高速だという`uv`も使いはじめてみました。
+すべてが1つのツールで完結するため、環境構築が簡単です。
 
 :::
 
-## インストールしたい（``pipx install poetry``）
+## インストールしたい（`poetry`）
 
 ```console
 $ pipx install poetry
-$ which poetry
-~/.local/bin/poetry
+Installing poetry (version 2.2.1)
+Successfully installed poetry
 
 $ poetry --version
-Poetry (version 1.8.2)
+Poetry (version 2.2.1)
 
-$ pipx inject poetry poetry-plugin-export
+$ which poetry
+/Users/username/.local/bin/poetry
 ```
 
-公式ドキュメントでは``pipx``を使った方法が推奨されています。
-``pip3``のインストールは推奨されてないみたいです。
+公式ドキュメントで推奨されているのは`pipx`を使ったインストールです。
 
-:::{caution}
+:::{note}
 
-Homebrewでもインストールできます。
-このいずれかひとつの方法でインストールしてください。
+他のインストール方法：
+
+- **Homebrew（macOS）**：`brew install poetry`
+- **Linux公式インストーラー**：`curl -sSL https://install.python-poetry.org | python3 -`
+- **pip（非推奨）**：`pip install poetry`（他のプロジェクトの依存関係と競合する可能性）
 
 :::
 
-## シェル補完したい（``poetry completions``）
-
-```console
-$ poetry completions fish > ~/.config/fish/completions/poetry.fish
-```
-
-``poetry``コマンドのシェル補完が使えるようにしておくと便利です。
-``bash``、``zsh``、``fish``のシェルに対応しています。
-
-:::{hint}
-
-``fish``のシェル補完を使うと、シェルセッションで最初に実行したときにエラーが表示されます。
-v1.2.0から存在しているバグ（[poetry#5929](https://github.com/python-poetry/poetry/issues/5929)）ですが、v1.5.0になっても修正されていません。
-そのままでも使うことはできますが、以下のように``sd``コマンドを使って置換して対処できます。
-
-:::{code-block} console
-$ poetry completions fish | sd "'([^']+)''" '"$1"\'' > ~/.config/fish/completions/poetry.fish
-:::
-
-エラーの原因は、以下のように``__fish_seen_subcommand_from``が使われている部分の引数の文字列の囲み方に問題があるようです。
-
-```diff
-- < complete -c poetry -A -n '__fish_seen_subcommand_from 'cache clear'' -l all -d 'Clear all entries in the cache.'
----
-+ > complete -c poetry -A -n '__fish_seen_subcommand_from "cache clear"' -l all -d 'Clear all entries in the cache.'
-```
-
-:::
-
-## 新規プロジェクトしたい（``poetry new``）
+## 新規プロジェクトしたい（`poetry new`）
 
 ```console
 $ poetry new PROJECT_NAME

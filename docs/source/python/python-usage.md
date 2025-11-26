@@ -62,6 +62,7 @@ python-pipx
 python-poetry
 python-rye
 python-uv
+python-hatch
 ```
 
 ## プロジェクトを作成＆管理したい
