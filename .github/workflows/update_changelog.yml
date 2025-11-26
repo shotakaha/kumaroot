@@ -28,7 +28,7 @@ jobs:
 
       # Changelog を更新
       - name: Update Changelog
-        run: uvx commitizen changelog --incremental
+        run: uvx --from commitizen cz changelog --incremental
       - name: Commit Changes
         run: |
           if [ -n "$(git status --porcelain)" ]; then
