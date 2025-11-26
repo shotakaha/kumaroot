@@ -1,5 +1,19 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **update-changelog-workflow**: use cz executable from commitizen
+- **update-changelog-workflow**: use uvx for commitizen installation
+- **command-task-git**: add git management tasks documentation
+- **command-task-version**: update documentation to reflect new task namespace
+- **taskfile**: add git management tasks and improve comment formatting
+
+### Refactor
+
+- **taskfile**: reorganize dependency management tasks with namespace grouping
+
 ## v2025.11.11 (2025-11-25)
 
 ### Feat
