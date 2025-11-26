@@ -1,7 +1,10 @@
-# プロジェクト設定したい（``pyproject.toml``）
+# プロジェクト設定したい（`pyproject.toml`）
 
 `pyproject.toml`はPythonプロジェクトの定義ファイルです。
-2016年にPEP518で導入され、従来の`setup.py`などに代わる新しいPython標準となっています。
+これまでの`setup.py`などに代わる新しいPython標準です。
+
+最近では、ほとんどのツールが`pyproject.toml`を認識できます。
+また、`uv`や`hatch`などPEP621に準拠したビルドツールが普及しはじめています。
 
 ```{note}
 PEP518が提案されたときは、まだ標準のTOMLパーサーが存在しなかったはずです。
@@ -149,3 +152,11 @@ source = ["src"]
 - [PEP517 - A build-system independent format for source trees](https://peps.python.org/pep-0517/)
 - [PEP518 - Specifying Minimum Build System Requirements for Python Projects](https://peps.python.org/pep-0518/)
 - [PEP621 - Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
+
+`pyproject.toml`周りの仕様は
+PEP518（2016年）のあとも段階的に拡張されており、
+PEP517（2017年）でビルドシステムの独立化、
+PEP621（2021年）でプロジェクトメタデータが標準化されました。
+
+現在では、`poetry`や`hatch`などのビルドツールに依らず、
+`pyproject.toml`だけでプロジェクト設定が完結できるようになっています。
