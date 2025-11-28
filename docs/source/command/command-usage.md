@@ -156,6 +156,7 @@ maxdepth: 1
 command-tig
 command-glab
 command-gitlab
+command-dvc
 ```
 
 ## 圧縮・アーカイブしたい
