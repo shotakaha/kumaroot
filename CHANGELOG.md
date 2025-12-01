@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **command-usage**: add DVC documentation to toctree
+- **command-dvc**: add comprehensive DVC documentation with Google Drive support
+
 ## v2025.11.12 (2025-11-26)
 
 ### Fix
