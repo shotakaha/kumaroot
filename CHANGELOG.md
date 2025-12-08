@@ -1,5 +1,16 @@
 # CHANGELOG.md
 
+## v2025.12.0 (2025-12-08)
+
+### Fix
+
+- **mkdocs-site**: add MkDocs site, markdown, and material configuration guides
+- **mkdocs-usage**: add toctree for MkDocs documentation
+- **mkdocs-plugins**: add built-in plugin documentation
+- **mkdocs-theme**: add comprehensive theme configuration guide
+- **command-usage**: add DVC documentation to toctree
+- **command-dvc**: add comprehensive DVC documentation with Google Drive support
+
 ## v2025.11.12 (2025-11-26)
 
 ### Fix
