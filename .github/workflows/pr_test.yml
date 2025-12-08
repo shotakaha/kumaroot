@@ -13,11 +13,11 @@ jobs:
     steps:
       # リポジトリをチェックアウト
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # uv をインストール
       - name: Install uv
-        uses: astral-sh/setup-uv@v2
+        uses: astral-sh/setup-uv@v7
         with:
           version: "latest"
 
