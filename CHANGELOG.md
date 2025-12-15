@@ -1,5 +1,7 @@
 # CHANGELOG.md
 
+## Unreleased
+
 ## v2025.12.0 (2025-12-08)
 
 ### Fix
