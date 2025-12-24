@@ -1,5 +1,11 @@
 # CHANGELOG.md
 
+## v2025.12.1 (2025-12-24)
+
+### Fix
+
+- **python-loguru**: add comprehensive logging examples with platformdirs support
+
 ## v2025.12.0 (2025-12-08)
 
 ### Fix
