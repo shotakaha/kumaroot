@@ -1,6 +1,10 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.0.0 (2026-01-05)
+
+### Feat
+
+- **python-pyproject**: add pyproject.toml configuration guide with examples
 
 ## v2025.12.1 (2025-12-24)
 
