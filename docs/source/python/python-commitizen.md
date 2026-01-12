@@ -12,14 +12,6 @@ $ cz bump
 
 ## インストールしたい（`commitizen`）
 
-- Poetryでインストール
-
-```console
-$ poetry add commitizen --group dev
-```
-
-チームで開発する場合、プロジェクトに開発環境として含めておくと便利です。``commitizen``はツールとして使うだけなので、``dev``グループに追加します。
-
 - pipxでインストール
 
 ```console
@@ -27,6 +19,9 @@ $ pipx install commitizen
 $ which cz
 ~/.local/bin/cz
 ```
+
+`commitizen`はグローバルに使うCLIなので、
+`pipx`で隔離してインストールするとよいです。
 
 - pipでインストール
 
@@ -37,9 +32,26 @@ $ pip install commitizen
 $ which cz
 ```
 
+プロジェクトで使う場合は、[venv](./python-venv.md)で作った仮想環境にインストールする方法でもよいです。
+
+- uvでインストール
+
+```console
+$ uv add commitizen --dev
+```
+
+- Poetryでインストール
+
+```console
+$ poetry add commitizen --group dev
+```
+
+チームで開発する場合、プロジェクトに開発環境として含めておくと便利です。`commitizen`はツールとして使うだけなので、`dev`グループに追加します。
+
 :::{note}
 
-同じ名前の``npm``パッケージがあります。自分がどちらを使っているのか混乱しないようにしましょう。
+同じ名前の`npm`パッケージがありますが、まったく別のプロジェクトです。
+自分がどちらを使っているのか混乱しないようにしましょう。
 
 :::
 
