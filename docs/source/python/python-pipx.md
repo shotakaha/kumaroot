@@ -27,6 +27,15 @@ $ pipx ensurepath
 `pipx`をインストールしたら、初回のみ、パスの設定が必要です。
 `pipx ensurepath`で、シェルによらず、PATHに`$HOME/.local/bin`が追加されます。
 
+:::{note}
+
+`pipx`は「グローバルに使うCLI」なので、Homebrewでインストールすると管理が簡単です。
+また、基本的に`pip`ではインストールしない方がよいと思います。
+
+ただし、GitLab CIなど一時的な実行環境で使う場合は、`pip install pipx`がシンプルでよいです。
+
+:::
+
 ## シェル補完したい
 
 ```console
