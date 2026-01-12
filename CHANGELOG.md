@@ -1,5 +1,11 @@
 # CHANGELOG.md
 
+## v2026.1.0 (2026-01-12)
+
+### Fix
+
+- **python-marimo**: add marimo notebook tool documentation
+
 ## v2026.0.0 (2026-01-05)
 
 ### Feat
