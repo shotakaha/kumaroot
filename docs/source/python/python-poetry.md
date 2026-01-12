@@ -48,30 +48,7 @@ $ poetry --version
 Poetry (version 2.2.1)
 ```
 
-公式ドキュメントでは`pipx`を使ったインストールが推奨されています。`pipx`は単一のツール用に独立した仮想環境を作るため、他のプロジェクトの依存関係と競合しません。
-
-:::{note}
-
-**他のインストール方法：**
-
-- **Homebrew（macOS）**：`brew install poetry`
-- **Linux公式インストーラー**：`curl -sSL https://install.python-poetry.org | python3 -`
-- **pip（非推奨）**：`pip install poetry`（他のパッケージと競合する可能性）
-
-:::
-
-:::{tip}
-
-`pipx`をまだインストールしていない場合は、以下のコマンドでインストールしてください：
-
-```console
-$ pip install pipx
-Collecting pipx
-...
-Successfully installed pipx
-```
-
-:::
+公式ドキュメントでは`pipx`を使ったインストールが推奨されています。
 
 ## 新規プロジェクトしたい（`poetry new`）
 
