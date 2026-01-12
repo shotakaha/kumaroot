@@ -45,6 +45,7 @@ maxdepth: 1
 ---
 python-jupyter
 python-jupytext
+python-marimo
 ```
 
 ## パッケージ管理したい
