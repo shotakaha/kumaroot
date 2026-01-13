@@ -1,4 +1,4 @@
-# Jupyter Lab したい（``jupyter``）
+# Jupyter Lab したい（`jupyter`）
 
 ```console
 $ jupyter --version
@@ -25,7 +25,25 @@ $ jupyter notebook
 $ jupyter lab
 ```
 
-## インストールしたい（`jupyter`）
+## インストールしたい（`jupyterlab` / `jupyter-core`）
+
+- `uv`でインストール
+
+```console
+$ uv tool install jupyterlab
+```
+
+Jupyter関係のツールはサブパッケージに別れていますが、
+`uv tool install`する場合`jupyterlab`パッケージを指定すればよさそうです。
+
+- `uvx`で一時的にインストール
+
+```console
+$ uvx --from jupyter-core jupyter lab
+```
+
+`uvx`で一時的に`jupyter lab`を実行する場合は、
+`jupyter-core`から`jupyter`コマンドをインストールします。
 
 - `pipx`でインストール
 
@@ -33,92 +51,7 @@ $ jupyter lab
 $ pipx install jupyter --include-deps
 ```
 
-- `uv`でインストール
-
-```console
-$ uv tool install jupyter-core
-# - jupyter
-# - jupyter-migrate
-# - jupyter-troubleshoot
-
-$ uv tool install jupyterlab
-# - jlpm
-# - jupyter-lab
-# - jupyter-labextension
-# - jupyter-labhub
-
-$ uv tool install notebook
-# - jupyter-notebook
-
-$ uv tool install jupyter-server
-# - jupyter-server
-
-$ uv tool install jupyter-client
-# - jupyter-kernel
-# - jupyter-kernelspec
-# - jupyter-run
-
-$ uv tool install jupyter-events
-# - jupyter-events
-
-$ uv tool install jsonschema
-# - jsonschema
-
-$ uv tool install jsonpointer
-# - jsonpointer
-
-$ uv tool install nbconvert
-# - jupyter-dejavu
-# - jupyter-nbconvert
-
-$ uv tool install nbclient
-# - jupyter-execute
-
-$ uv tool install nbformat
-# - jupyter-trust
-
-$ uv tool install pygments
-# - pygmentize
-
-$ uv tool install send2trash
-# - send2trash
-
-$ uv tool install websocket-client
-# - wsdump
-
-$ uv tool install babel
-# - pybabel
-
-$ uv tool install json5
-# - pyjson5
-
-$ uv tool install charset-normalizer
-# - normalizer
-
-$ uv tool install httpx
-# - httpx
-
-$ uv tool install debugpy
-# - debugpy
-
-$ uv tool install ipython
-# - ipython
-# - ipython3
-
-$ uv tool install jupyter-console
-# - jupyter-console
-```
-
-Jupyter関係のツールは、サブパッケージに分かれていますが、
-`pipx`の場合、``--include-deps``ですべてインストールできます。
-
-:::{note}
-
-`uv`はそれぞれインストールする必要がありました。
-どれが必要かわからないので、とりあえずすべて追加しました。
-一括アップデートのコマンドもないので、更新も大変そう・・・。
-
-:::
+`pipx`の場合、``--include-deps``で関連パッケージをすべてインストールできます。
 
 ## 拡張機能したい（`labextension`）
 
