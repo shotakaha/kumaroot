@@ -85,22 +85,10 @@ $ git push
 ## ライブプレビューする場合
 
 ```bash
-task docs
+task docs:serve
 ```
 
-`task docs`は自動的にdocsディレクトリに移動し、ライブリロードでドキュメントのプレビューを開始します。
-
-### 手動でライブプレビューする場合
-
-```console
-$ cd kumaroot
-$ source .venv/bin/activate
-(.venv) $ cd docs
-(.venv) $ make livehtml  # 自動でブラウザが開く
-```
-
-1. `source .venv/bin/activate`で仮想環境を立ち上げる
-2. `make livehtml`でライブリロードしながら編集内容を確認する
+`task docs:serve`は自動的にdocsディレクトリに移動し、ライブリロードでドキュメントのプレビューを開始します。
 
 ### VS Codeを使ってライブプレビューする場合
 
@@ -109,23 +97,15 @@ $ task code
 ```
 
 `task code`はVS Codeを起動します。
-VS Code内でターミナルを開き（`command + j`）、`task docs`を実行してライブプレビューを開始できます。
+VS Code内でターミナルを開き（`command + j`）、`task docs:serve`を実行してライブプレビューを開始できます。
 
-#### 手動でVS Codeを起動する場合
+### ドキュメントビルドタスク
 
-```console
-$ cd kumaroot
-$ poetry run code .
+```bash
+task docs:serve      # Preview docs locally with live reload
+task docs:build      # Build docs as static HTML
+task docs:pdf        # Build docs as PDF
 ```
-
-その後、VS Code内でターミナルを開く（`command + j`）
-
-```console
-(.venv) $ cd docs
-(.venv) $ make livehtml
-```
-
-ライブリロードしながら編集します。
 
 ## バージョン管理
 
@@ -170,19 +150,45 @@ task bump:major
 毎年、メジャーバージョンを更新してください。
 通常は年が変わるときに実行します。
 
+## Pre-commitフック
+
+```bash
+task pre-commit:setup
+```
+
+`task pre-commit:setup`でpre-commitフックをインストールします。
+
+```bash
+task pre-commit
+```
+
+`task pre-commit`で全ファイルに対してpre-commitフックを実行します。
+
+```bash
+task pre-commit:update
+```
+
+`task pre-commit:update`でpre-commitフックを最新バージョンに更新できます。
+
 ## 依存パッケージの管理
 
 ```bash
-task outdated
+task deps:setup
 ```
 
-`task outdated`で更新が利用可能な依存パッケージを確認できます。
+`task deps:setup`でPython環境をセットアップできます。
 
 ```bash
-task update
+task deps:check
 ```
 
-`task update`で依存パッケージを更新できます。
+`task deps:check`で更新が利用可能な依存パッケージを確認できます。
+
+```bash
+task deps:update
+```
+
+`task deps:update`で依存パッケージを更新できます。
 同時にRead the Docsでビルドする際に必要な`requirements.txt`も自動生成されます。
 更新された`poetry.lock`と`requirements.txt`をGitにコミットしてください。
 
