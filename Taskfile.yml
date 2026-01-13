@@ -9,23 +9,66 @@ tasks:
   default:
     cmds:
       - task --list
+      - task: status
     silent: true
-
-  docs:
-    desc: Start Sphinx livehtml
-    dir: docs
-    cmds:
-      - uv run make livehtml
 
   code:
     desc: Start VS Code
     cmds:
       - uv run code .
 
+  # ============================================================================
+  # Pre-commit Hooks
+  # ============================================================================
+
+  pre-commit:setup:
+    desc: Install pre-commit hooks
+    cmds:
+      - uv run pre-commit install
+      - echo "Pre-commit hooks installed"
+    silent: true
+
   pre-commit:
     desc: Run pre-commit hooks on all files
     cmds:
       - uv run pre-commit run --all-files
+      - git status
+
+  pre-commit:update:
+    desc: Update pre-commit hooks to latest versions
+    cmds:
+      - uv run pre-commit autoupdate
+      - echo "Pre-commit hooks updated"
+    silent: true
+
+  pre-commit:uninstall:
+    desc: Uninstall pre-commit hooks
+    cmds:
+      - uv run pre-commit uninstall
+      - echo "Pre-commit hooks uninstalled"
+    silent: true
+
+  # ============================================================================
+  # Documentation tasks
+  # ============================================================================
+
+  docs:serve:
+    desc: Preview docs locally (sphinx-autobuild)
+    dir: docs
+    cmds:
+      - uv run make livehtml
+
+  docs:build:
+    desc: Build docs as static HTML
+    dir: docs
+    cmds:
+      - uv run make livehtml
+
+  docs:pdf:
+    desc: Build docs as PDF
+    dir: docs
+    cmds:
+      - uv run make latexpdf
 
   # ============================================================================
   # Dependency management tasks - Update and check dependencies
@@ -50,8 +93,14 @@ tasks:
   # Version management tasks - Manage versions with commitizen
   # ============================================================================
 
+  version:
+    desc: Show current version
+    cmds:
+      - git tag -l | sort -V | tail -n 1
+    silent: true
+
   bump:check:
-    desc: Preview next version bump
+    desc: Preview next version bump (dry-run)
     cmds:
       - echo "Preview of next version bump"
       - uv run cz bump --check-consistency --changelog --dry-run
