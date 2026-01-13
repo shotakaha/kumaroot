@@ -38,7 +38,7 @@ ROOTなどの高エネルギー物理学分野で使っているツールの使�
 - リモートサーバーに``rsync --delete -auvz``でアップロードする
 
 ```console
-$ poetry run bash deploy.sh
+$ uv run bash deploy.sh
 ```
 
 ## このドキュメントについて
@@ -52,12 +52,12 @@ $ poetry run bash deploy.sh
 ```console
 $ git clone git@github.com:shotakaha/kumaroot.git
 $ cd kumaroot
-$ poetry install --no-root
-$ poetry shell
+$ uv sync --all-extras
+$ source .venv/bin/activate
 ```
 
 1. GitHubのリポジトリをクローンする
-2. ``poetry``を使って依存パッケージをインストールする
+2. ``uv``を使って依存パッケージをインストールする
 
 ### 新規にコンテンツを作成する場合
 
@@ -189,8 +189,7 @@ task deps:update
 ```
 
 `task deps:update`で依存パッケージを更新できます。
-同時にRead the Docsでビルドする際に必要な`requirements.txt`も自動生成されます。
-更新された`poetry.lock`と`requirements.txt`をGitにコミットしてください。
+更新された`uv.lock`をGitにコミットしてください。
 
 ## ファイルの命名規則
 
