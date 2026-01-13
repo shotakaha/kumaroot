@@ -1,6 +1,22 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.1.1 (2026-01-13)
+
+### Fix
+
+- **.pre-commit-config**: update hook versions
+- **Taskfile**: reorganize and expand task definitions with better documentation
+- **python-marimo**: add comparison section for Marimo and Jupyter
+- **python-marimo**: update section headers and add check section
+- **python-marimo**: expand export section with more format examples
+- **python-marimo**: add convert and export sections
+- **python-marimo**: expand tutorial section with command examples
+- **python-marimo**: add tutorial section with command examples
+- **python-marimo**: add tutorial section with command examples
+- **python-commitizen**: reorganize installation methods
+- **python-poetry**: simplify installation instructions
+- **python-pipx**: add installation method guidance
+- **python-venv**: improve documentation clarity and formatting
 
 ## v2026.1.0 (2026-01-12)
 
