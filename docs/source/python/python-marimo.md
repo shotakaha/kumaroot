@@ -90,3 +90,33 @@ Do you accept these terms? (y/n)
 スムーズに`uv`を使ってインストールできました。
 
 :::
+
+## 移行したい（`convert`）
+
+```console
+$ marimo convert notebook.ipynb --output marimo.py
+$ marimo convert notebook.md --output marimo.py
+$ marimo convert notebook.py --output marimo.py
+```
+
+`marimo convert`コマンドで、既存のJupyter NotebookをMarimo Notebookに変換できます。
+
+入力にしていできるファイル形式は
+ノートブック形式（`.ipynb`）、
+Markdown形式（`.md`）、
+スクリプト形式（`.py`）がサポートされています。
+
+`--output`オプションで、出力ファイル名を指定できます。
+指定がない場合は標準出力（`stdout`）に変換した結果が表示されます。
+
+:::{note}
+
+Jupyter Notebook -> Marimo Notebookへの一方向変換コマンドです。
+
+:::
+
+## 配布したい（`export`）
+
+```console
+$ marimo export html notebook.py
+```
