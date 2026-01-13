@@ -118,5 +118,20 @@ Jupyter Notebook -> Marimo Notebookへの一方向変換コマンドです。
 ## 配布したい（`export`）
 
 ```console
-$ marimo export html notebook.py
+$ marimo export html marimo_nb.py
+$ marimo export html-wasm marimo_nb.py
+$ marimo export ipynb marimo_nb.py
+$ marimo export md marimo_nb.py
+$ marimo export script marimo_nb.py
 ```
+
+`marimo export`コマンドでMarimoノートブックを配布できる形式に変換できます。
+配布形式は`export`のサブコマンドとして用意されてます。
+
+:::{note}
+
+既存のMarimo Notebookに対して、配布できる形式のスナップショットを作成するコマンドのようです。
+
+`convert`の逆操作ではないようです（要確認）。
+
+:::
