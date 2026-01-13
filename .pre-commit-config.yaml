@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v4.10.0
+  rev: v4.11.2
   hooks:
   - id: commitizen
     stages:
@@ -30,6 +30,6 @@ repos:
   - id: check-yaml
   - id: check-xml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.14.4
+  rev: v0.14.11
   hooks:
   - id: ruff-format
