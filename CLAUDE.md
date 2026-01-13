@@ -25,29 +25,36 @@ source .venv/bin/activate
 ### Documentation Preview
 
 ```bash
-task docs
-# Opens http://localhost:8000 with live reload
-# Runs: cd docs && uv run make livehtml
-
-# Or manually:
-cd docs && uv run make livehtml
+task docs:serve      # Preview docs locally with live reload
+task docs:build      # Build docs as static HTML
+task docs:pdf        # Build docs as PDF
 ```
 
 ### Dependency Management
 
 ```bash
-task update      # Update all dependencies
-task sync        # Sync dependencies from lockfile
-task outdated    # Show outdated packages
+task deps:setup      # Setup Python environment
+task deps:check      # Check for outdated packages
+task deps:update     # Update all dependencies
+```
+
+### Pre-commit Hooks
+
+```bash
+task pre-commit:setup       # Install pre-commit hooks
+task pre-commit             # Run pre-commit hooks on all files
+task pre-commit:update      # Update pre-commit hooks to latest versions
+task pre-commit:uninstall   # Uninstall pre-commit hooks
 ```
 
 ### Version Management (Commitizen)
 
 ```bash
-task bump:check       # Preview next version bump (dry-run)
-task bump:patch       # Bump PATCH version with commitizen
-task bump:minor       # Bump MINOR version with commitizen
-task bump:major       # Bump MAJOR version with commitizen
+task version              # Show current version
+task bump:check          # Preview next version bump (dry-run)
+task bump:patch          # Bump PATCH version with commitizen
+task bump:minor          # Bump MINOR version with commitizen
+task bump:major          # Bump MAJOR version with commitizen
 ```
 
 **Custom Versioning Scheme:**
@@ -66,12 +73,6 @@ This project uses a **calendar-based semantic versioning** scheme:
 - All bump tasks include `--check-consistency --changelog` flags
 - When a new year/month begins, manually bump MAJOR or MINOR as needed
 - Example version progression: `2025.11.6` → `2025.11.7`（patch）→ `2025.12.0`（new month）→ `2026.1.0`（new year）
-
-### Code Quality
-
-```bash
-task pre-commit      # Run all pre-commit hooks on all files
-```
 
 ### Building Distribution
 
