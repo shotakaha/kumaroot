@@ -26,7 +26,10 @@ $ marimo tutorial --help
 `marimo tutorial`コマンドでノートブックの使い方を体験できます。
 ローカルサーバーが起動し、ブラウザーが自動で立ち上がります。
 
-`intro | dataflow | ui | markdown | plots | sql | layout | fileformat | markdown-format | for-jupyter-users`のトピックごとのサブコマンドがあるので、この順番でひととおり確認してみるとよいです。
+`intro | dataflow | ui | markdown | plots | sql | layout | fileformat | markdown-format | for-jupyter-users`のトピックごとのサブコマンドがあります。
+この順番で確認するのが公式でオススメされています。
+
+Jupyter Notebookを使ったことがある場合は`for-jupyter-users`から確認してもいいかもしれません。
 
 ## 編集したい（`marimo edit`）
 
@@ -34,11 +37,18 @@ $ marimo tutorial --help
 $ marimo edit notebook.py
 ```
 
+`marimo edit`コマンドでノートブックを編集できます。
+引数なしで実行するとMarimoのスタート画面が起動します。
+
 ## 実行したい（`marimo run`）
 
 ```console
 $ marimo run notebook.py
+$ marimo run --sandbox notebook.py
 ```
+
+`marimo run`コマンドでノートブックを実行できます。
+`--sandbox`オプションで、`uv`で隔離した環境で実行できます。
 
 ## 新規作成したい（`marimo new`）
 
