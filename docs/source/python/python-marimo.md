@@ -91,7 +91,7 @@ Do you accept these terms? (y/n)
 
 :::
 
-## 移行したい（`convert`）
+## 移行したい（`marimo convert`）
 
 ```console
 $ marimo convert notebook.ipynb --output marimo.py
@@ -115,7 +115,7 @@ Jupyter Notebook -> Marimo Notebookへの一方向変換コマンドです。
 
 :::
 
-## 配布したい（`export`）
+## 配布したい（`marimo export`）
 
 ```console
 $ marimo export html marimo_nb.py
@@ -135,3 +135,15 @@ $ marimo export script marimo_nb.py
 `convert`の逆操作ではないようです（要確認）。
 
 :::
+
+## チェックしたい（`marimo check`）
+
+```console
+$ marimo check .
+$ marimo check marimo_nb.py --fix
+```
+
+`marimo check`コマンドでMarimo Notebookの構文チェックができます。
+`--fix`オプションで自動修正できます。
+`--strict`オプションでwarningもerrorとみなし厳格チェックできます。
+CIなどで使う際に有効かもしれません。
