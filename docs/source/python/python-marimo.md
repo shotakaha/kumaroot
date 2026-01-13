@@ -147,3 +147,13 @@ $ marimo check marimo_nb.py --fix
 `--fix`オプションで自動修正できます。
 `--strict`オプションでwarningもerrorとみなし厳格チェックできます。
 CIなどで使う際に有効かもしれません。
+
+## Marimo or Jupyter
+
+Marimo NotebookとJupyter Notebookは解析のフェーズに合わせて
+使い分けるのがよさそうです。
+
+解析の方向性を模索している段階では、セルの実行順序に依存しないJupyter Notebookのほうが思いつくままに試行錯誤できてよさそうです
+（この段階ではソースコードもGit管理しなくてもいいかも）。
+
+ある程度、方向性が固まってきて、データセットを変更しながら反復処理するような段階でMarimo Notebookに移行して、ソースコードを管理しながら解析を進めるのがよさそうです。
