@@ -1,5 +1,14 @@
 # CHANGELOG.md
 
+## v2026.1.2 (2026-01-14)
+
+### Fix
+
+- **python-jupyter**: improve jupyter command usage and add VS Code integration
+- **python-jupyter**: simplify installation instructions and improve formatting
+- **README**: migrate remaining poetry references to uv
+- **root-notebook**: improve setup instructions and error handling
+
 ## v2026.1.1 (2026-01-13)
 
 ### Fix
