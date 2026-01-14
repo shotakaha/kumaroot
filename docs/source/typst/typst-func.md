@@ -12,38 +12,33 @@
 `#let`キーワードで関数を定義できます。
 定義した関数は`#関数名`で、本文の任意の箇所で呼び出すことができます。
 
-## パラメーターの種類
-
-### 位置引数（順序で指定）
-
-引数は順序で識別されます：
+## 位置引数したい
 
 ```typst
-#let format(title, author, year) = {
-  [*#title* by #author (#year)]
+#let greet(first, last) = {
+    let greeting = "Hello, " + first
+    greeting + " " + last + "!"
 }
 
-#format("My Book", "Jane Doe", 2024)
+#greet("First", "Second")
 ```
 
-### 名前付き引数（デフォルト値付き）
+位置引数は順序で処理されます。
 
-デフォルト値を指定すると、呼び出し時に名前で指定できます：
+## 名前付き引数したい
 
 ```typst
-#let alert(body, fill: red, radius: 4pt) = {
-  rect(
-    fill: fill,
-    radius: radius,
-    inset: 8pt,
-    [*Warning:* #body]
-  )
+#let greet(first: none, last: none) = {
+    let greeting = "Hello, " + first
+    greeting + " " + last + "!"
 }
 
-#alert[Danger!]
-#alert(fill: blue)[Keep clear]
-#alert(fill: orange, radius: 8pt)[Caution]
+#greet(first: "First", last: "Second")
+#greet(last: "First", first: "Second")
+#greet("First", "Second")  // error
 ```
+
+引数にデフォルト値を指定すると、名前付き引数にできます。
 
 ### 可変長引数（任意の数の引数）
 
