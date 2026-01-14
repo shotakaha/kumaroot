@@ -62,6 +62,15 @@ Pythonなど多くのプログラミング言語と同じで、
 
 :::
 
+## コンテンツブロックしたい
+
+```typst
+#greet(hello: [*Hello*])  // => 太字のHello
+#greet(hello: "*Hello*")  // => そのまま *Hello*
+```
+
+角括弧（`[...]`）で囲んだ内容は「コンテンツブロック」と認識され、マークアップしたコンテンツをそのまま渡すことができます。
+
 ### 可変長引数（任意の数の引数）
 
 `..` 演算子で任意の数の引数を受け取れます：
@@ -86,26 +95,6 @@ Pythonなど多くのプログラミング言語と同じで、
 
 - `.pos()`: 位置引数を配列として取得
 - `.named()`: 名前付き引数を辞書として取得
-
-## コンテンツ型の引数
-
-関数の引数としてマークアップコンテンツを受け取れます。これがTypstの強力な機能です：
-
-```typst
-#let box-content(body, bg: white) = {
-  rect(
-    fill: bg,
-    inset: 10pt,
-    radius: 4pt,
-    body
-  )
-}
-
-#box-content(bg: luma(240))[
-  This is inside a box.
-  You can use **markdown** here.
-]
-```
 
 ## 制御フローを含む関数
 
