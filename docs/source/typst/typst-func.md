@@ -144,19 +144,21 @@ Result: #status(-5)
 }
 ```
 
-### ループ制御（break、continue）
+### ループ制御したい（`break` / `continue`）
 
 ```typst
 #let count-to-limit(limit) = {
   for i in range(100) {
     if i == limit { break }
-    if i % 2 == 0 { continue }
+    if calc.rem(i, 2) == 0 { continue }
     [#i ]
   }
 }
 
 #count-to-limit(10)
 ```
+
+`break` / `continue`でループ処理を制御できます。
 
 ## 実践的な関数パターン
 
