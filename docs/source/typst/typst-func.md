@@ -23,7 +23,9 @@
 #greet("First", "Second")
 ```
 
-位置引数は順序で処理されます。
+位置引数（positional arguments）は、
+位置で識別される引数です。
+関数が呼び出された時に、最初から順番に処理されます。
 
 ## 名前付き引数したい
 
@@ -35,10 +37,30 @@
 
 #greet(first: "First", last: "Second")
 #greet(last: "First", first: "Second")
-#greet("First", "Second")  // error
+#greet("First", "Second")  // => エラー
 ```
 
-引数にデフォルト値を指定すると、名前付き引数にできます。
+名前付き引数（named arguments）は
+`変数名: 値`の形式で指定する引数です。
+関数を定義するときにデフォルト値を指定すると、名前付き引数にできます。
+
+:::{note}
+
+```typst
+#let greet(name, hello: "Hello") = {
+    let greeting = hello + ", " + name
+    greeting + "!"
+}
+
+#greet("World")  // => Hello, World!
+#greet("World", hello: "Good morning")  // => Good morning, World!
+```
+
+位置引数と名前付き引数は混在できます。
+Pythonなど多くのプログラミング言語と同じで、
+位置引数を先に定義する必要があります。
+
+:::
 
 ### 可変長引数（任意の数の引数）
 
