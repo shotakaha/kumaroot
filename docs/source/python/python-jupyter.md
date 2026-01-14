@@ -1,14 +1,14 @@
-# Jupyter Lab したい（`jupyter`）
+# Jupyter Lab したい（`jupyter lab`）
 
 ```console
-$ jupyter --version
-jupyter --version
+// jupyter-core から jupyter コマンドを読み込んで実行
+$ uvx --from jupyter-core jupyter --version
 Selected Jupyter core packages...
 IPython          : not installed
 ipykernel        : not installed
 ipywidgets       : not installed
 jupyter_client   : not installed
-jupyter_core     : 5.7.2
+jupyter_core     : 5.9.1
 jupyter_server   : not installed
 jupyterlab       : not installed
 nbclient         : not installed
@@ -18,12 +18,19 @@ notebook         : not installed
 qtconsole        : not installed
 traitlets        : 5.14.3
 
-// Jupyter Notebookを起動
-$ jupyter notebook
-
 // Jupyter Labを起動
-$ jupyter lab
+$ uvx --from jupyter-core jupyter lab
 ```
+
+`jupyter lab`コマンドでJupyter Labを起動できます。
+
+:::{note}
+
+`jupyter`自体はCLIパッケージではありません。
+`uvx`を使って、隔離環境で実行する場合は`--from jupyter-core`を指定し、
+`jupyter-core`パッケージから`jupyter`コマンドを読み込んで実行する必要があります。
+
+:::
 
 ## インストールしたい（`jupyterlab` / `jupyter-core`）
 
@@ -101,3 +108,12 @@ $ jupyter labextension install @axlair/jupyterlab_vim
 // Emacs-likeなキーマップ
 $ jupyter labextension install @jupyterlab/emacs-keymap
 ```
+
+## VS Codeしたい
+
+```console
+$ uv pip install ipykernel
+```
+
+[Jupyter Extension for VS Code](https://github.com/Microsoft/vscode-jupyter)と
+`ipykernel`をインストールすると、VS CodeでJupyter Labできます。
