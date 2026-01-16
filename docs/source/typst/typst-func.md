@@ -335,9 +335,44 @@ Pythonなど多くのプログラミング言語と同じで、
 == Section Title
 ```
 
-## 関数式したい
+## 無名関数したい
 
-（きちんと理解してないことを書いてたので、全体的に書き直し）
+```typst
+#let custom-heading = it => [
+  #upper(it.body)
+]
+
+#show heading: custom-heading
+```
+
+`=>`を使って無名関数（unnamed functions）を定義できます。
+Show rulesと合わせて使うことが多いです。
+
+:::{note}
+
+上記サンプルでは`custom-heading`という変数に無名関数を代入していますが、通常は
+`#show`ルールに直接指定します。
+
+```typst
+#show heading: it => [
+  #upper(it.body)
+]
+```
+
+:::
+
+:::{note}
+
+無名関数を使うときには、慣習で`it`という変数名を使うようです。
+`it`が持つデータは`fields()`メソッドで確認できます。
+
+```typst
+#show heading: it => [
+  #it.fields()
+]
+```
+
+:::
 
 ## 関数内での変数スコープ
 
