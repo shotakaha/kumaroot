@@ -107,7 +107,11 @@ Pythonなど多くのプログラミング言語と同じで、
   ]
 }
 
-#cover("タイトル", "著者1", "著者2", "著者3", date: "2026/01/16")
+#cover(
+  "タイトル",
+  "著者1", "著者2", "著者3",
+  date: "2026/01/16",
+)
 ```
 
 スプレッド演算子（`..`）で可変長引数を定義できます。
@@ -136,8 +140,9 @@ Pythonなど多くのプログラミング言語と同じで、
 }
 
 #cover(
-    "タイトル",
-    authors: ("著者1", "著者2", "著者3"), date: "2026/01/16")
+  "タイトル",
+  authors: ("著者1", "著者2", "著者3"),
+  date: "2026/01/16")
 ```
 
 :::
@@ -146,9 +151,9 @@ Pythonなど多くのプログラミング言語と同じで、
 
 ```typst
 #cover(
-    [*レポートのタイトル*],
-    authors: ("著者1", "著者2", "著者3"),
-    date: "2026/01/16",
+  [*レポートのタイトル*],
+  authors: ("著者1", "著者2", "著者3"),
+  date: "2026/01/16",
 )
 ```
 
@@ -161,23 +166,45 @@ Pythonなど多くのプログラミング言語と同じで、
 
 :::
 
-## 制御フローを含む関数
-
-### 条件分岐（if-else）
+## 条件分岐したい（`if-else`）
 
 ```typst
-#let status(value) = {
-  if value > 0 [
-    Positive
-  ] else if value == 0 [
-    Zero
-  ] else [
-    Negative
-  ]
+#let cover(
+  title: none,
+  authors: (),
+  date: datetime.today().display(),
+) = {
+  if title != none {
+    block()[
+      #title
+    ]
+  }
+
+  if authors.len() > 0 {
+    block() [
+      #authors.jon(", ")
+    ]
+  }
+
+  if date == none {
+    // 日付を非表示
+  } else {
+    block()[
+      #date
+    ]
+  }
 }
 
-Result: #status(-5)
+#cover(
+  title: [*レポートのタイトル*],
+  authors: ("著者1", "著者2"),
+  date: none,  // 非表示
+)
 ```
+
+`if-else`構文で条件分岐できます。
+`#cover`関数のすべての引数を名前付きにして、
+デフォルト動作で表示／非表示を分けてみました。
 
 ### ループ処理（for）
 
