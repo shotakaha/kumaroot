@@ -12,12 +12,10 @@
     paper: "a4",
     margin: (x: 25mm, y: 25mm),
     columns: 1,
-    //fill: 背景色,
+    //fill: luma(99%),  // 全ページの背景色,
     numbering: "1 / 1",
     number-align: center,
-    header: [
-        #set text(8pt)[ヘッダー・左]
-    ]
+    header: [ヘッダー],
 )
 ```
 
