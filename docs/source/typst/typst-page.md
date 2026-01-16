@@ -138,15 +138,21 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
   footer: context {
     if counter(page).get().first() > 1 [
       #align(center)[
-        #counter(page).display() / #counter(page).final()
+        #counter(page).display() / #counter(page).final().at(0)
       ]
     ]
   }
 )
-
 ```
 
 表紙だけノンブルを非表示にしたい場合の設定です。
+
+:::{note}
+
+`counter.final`は`context`内でのみ使用できるメソッドです。
+戻り値は配列になっているので`.at(0)`で総ページ数を取得する必要がありました。
+
+:::
 
 ## ヘッダー／フッターしたい（`header` / `footer`）
 
