@@ -1,5 +1,21 @@
 # CHANGELOG.md
 
+## v2026.1.3 (2026-01-16)
+
+### Fix
+
+- **typst-func**: refactor loop processing section with purpose-driven format
+- **typst-func**: improve code formatting and refactor conditional branching section
+- **typst-func**: use raw() function for code display in content
+- **typst-func**: reorganize variadic and content block sections with improved examples
+- **typst-func**: update code examples with consistent cover function theme
+- **typst-func**: refactor parameter types section with purpose-driven organization
+- **typst-func**: reorganize content blocks section with purpose-driven placement
+- **typst-func**: improve positional and named arguments documentation with examples
+- **typst-func**: refactor parameter types section with purpose-driven organization
+- **typst-func**: simplify function definition section
+- **typst-func**: update loop control section with purpose-driven organization
+
 ## v2026.1.2 (2026-01-14)
 
 ### Fix
