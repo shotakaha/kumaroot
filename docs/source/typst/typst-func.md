@@ -206,32 +206,29 @@ Pythonなど多くのプログラミング言語と同じで、
 `#cover`関数のすべての引数を名前付きにして、
 デフォルト動作で表示／非表示を分けてみました。
 
-### ループ処理（for）
+## ループ処理したい（`for`）
 
 ```typst
-#let enumerate-items(..items) = {
-  let index = 1
-  for item in items.pos() {
-    [#index. #item]
-    index = index + 1
-  }
-}
-
-#enumerate-items("First", "Second", "Third")
-```
-
-複数の値をループで処理する：
-
-```typst
-#let pair-list(..values) = {
-  let pairs = values.pos()
-  for (key, value) in pairs.zip() {
-    [#key → #value]
+#cover(
+  title: none,
+  authors: (),
+  date: datetime.today().display()
+) = {
+  // title表示は省略
+  if authors.len() > 0 {
+    for author in authors {
+      block()[
+        #author
+      ]
+    }
   }
 }
 ```
 
-### ループ制御したい（`break` / `continue`）
+`for`で配列に対してループ処理できます。
+このサンプルでは、著者を別行（別ブロック）で表示するようにしました。
+
+## ループ制御したい（`break` / `continue`）
 
 ```typst
 #let count-to-limit(limit) = {
