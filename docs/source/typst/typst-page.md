@@ -245,27 +245,32 @@ footer-descent(30% + 0pt)
 ```typst
 #let current-chapter = state("chapter", "")
 
+#let custom-header = context {
+  set text(size: 9pt)
+  let page-num = counter(page).get().first()
+  if page-num > 1 {
+    grid(
+      columns: (1fr, 1fr),
+      align: (left, right),
+      [第#counter(heading).display()章: #current-chapter.get()],
+      [全体の文書タイトル]
+    )
+    line(length: 100%, stroke: 0.5pt),
+  }
+}
+
+#let custom-footer context {
+  set text(size: 9pt)
+  set align(center)
+  let page-num = counter(page).get().first()
+  if page-num > 1 {
+    "--- " + counter(page).display() + " ---"
+  }
+}
+
 #set page(
-  header: context [
-    #set text(size: 9pt)
-    #let page-num = counter(page).get().first()
-    #if page-num > 1[
-      #grid(
-        columns: (1fr, 1fr),
-        align: (left, right),
-        [第#counter(heading).display()章: #current-chapter.get()],
-        [全体の文書タイトル]
-      )
-      #line(length: 100%, stroke: 0.5pt),
-    ]
-  ],
-  footer: context [
-    #set text(size: 9pt)
-    #set align(center)
-    #if counter(page).get().first() > 1[
-      - #counter(page).display() -
-    ]
-  ]
+  header: custom-header,
+  footer: custom-footer,
 )
 
 // 見出し（レベル1）が呼ばれるたびに `current-chapter`を更新
@@ -275,11 +280,21 @@ footer-descent(30% + 0pt)
 }
 ```
 
-状態管理機能（`state`）を使って`current-chapter`を定義し、
-レベル1の見出しが呼ばれる更新されるにしています。
+状態管理機能（`state`）を使って、ヘッダーに章タイトルを出力できます。
 
-`context`内で`current-chapter.get()`することで、
-各ページでの章タイトルを取得できます。
+状態管理用の変数`current-chapter`を定義します。
+レベル1の見出しが呼ばれるたびに、この変数を更新し、新しい章タイトルを保存します。
+
+`context`内で`current-chapter.get()`を呼ぶと、各ページでの章タイトルを取得できます。
+
+:::{caution}
+
+このサンプルはうまくいっていそうで、うまくいってないです。
+章が切り替わるページでは、前のページのタイトルがヘッダーに表示されてしまいます。
+修正方法が分からずそのままにしてあります。
+`state`関数による状態管理を、なんとなく理解する参考にしてください。
+
+:::
 
 ## 段組したい（`columns`）
 
