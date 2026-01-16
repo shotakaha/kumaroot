@@ -27,6 +27,7 @@ LaTeXと比べると和文フォントがとても簡単に設定できます。
 - [](../latex/latex-luatexja.md)
 - [](../latex/latex-luatexja-preset.md)
 - [](../latex/latex-luatexja-fontspec.md)
+
 :::
 
 ## フォントサイズしたい（`size`）
@@ -77,6 +78,13 @@ Typstにはさまざまな[色の設定方法](https://typst.app/docs/reference/
 ``lang``オプションで、本文の言語を変更できます。
 言語コードは``ISO639-1/2/3``から選択します。
 デフォルトは``"en"``です。
+
+:::{note}
+
+（Typstのウェブアプリ限定かもしれませんが）
+日本語の文書を作成する場合は`lang: "ja"`に設定することで、スペルチェックによるエラーを抑制できます。
+
+:::
 
 ## フォントしたい（``font``）
 
