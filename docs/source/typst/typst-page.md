@@ -192,26 +192,53 @@ footer-descent(30% + 0pt)
 `%`は余白に対する割合、`pt`はオフセット量です。
 
 ```typst
-#set page(
-  header: [
-    #set text(size: 8pt)
-    #grid(
-      columns: (1fr, 1fr),
-      align: (left, right),
-      [授業名],
-      [学籍番号],
+// レポート用ヘッダーを定義
+#let report-header = {
+    // フォントサイズを変更
+    set text(size: 8pt)
+    // ヘッダーエリアを2分割
+    // 左寄せ: 授業名
+    // 右寄せ: 学籍番号
+    grid(
+        columns: (1fr, 1fr),
+        align: (left, right),
+        [授業名],    // ここを編集
+        [学籍番号],  // ここを編集
     )
-    #line(length: 100%, stroke: 0.5pt)
-  ],
-  footer: [
-    #set text(size: 9pt)
-    #set align(center)
-    - #counter(page).display() -
-  ]
+    // ヘッダーエリアと本文の区切り線
+    line(length: 100%, stroke: 0.5pt)
+}
+
+// レポート用フッターを定義
+#let report-footer = {
+    set text(size: 9pt)
+    set align(center)
+    // "--- ページ番号 ---" と表示
+    // counter は context内で使う必要がある
+    context { "--- " + counter(page).display() + " ---"}
+}
+
+#set page(
+  header: report-header,
+  footer: report-footer,
 )
 ```
 
-講義のレポートなどで使えるシンプルなヘッダーとフッターのサンプルです。
+講義のレポートなどで使うことを想定したシンプルなヘッダーとフッターのサンプルです。
+`report-header`と`report-footer`を変数として定義しておくとよいと思います。
+
+:::{note}
+
+```typst
+#set page(
+  header: [#report-header],
+  footer: [#report-footer],
+)
+```
+
+`page`要素の`header`と`footer`オプションには、コンテンツブロックを明示的に指定してもOKです。
+
+:::
 
 ### 章ごとに変更したい
 
