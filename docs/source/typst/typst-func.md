@@ -1,26 +1,49 @@
 # 関数したい（`#let`）
 
 ```typst
-#let greet(name) = {
-    let greeting = "Hello, " + name
-    greeting + "!"
+// レポートの表紙を出力する関数を定義
+#let cover(
+    title,
+    author,
+    date: datetime.today().display()
+) = {
+  block()[
+    #title
+  ]
+
+  block()[
+    #author
+  ]
+
+  block()[
+    #date
+  ]
 }
 
-#greet("World")
+// 表紙を出力
+#cover("レポートのタイトル", "著者名", date: "2026/01/01")
 ```
 
 `#let`キーワードで関数を定義できます。
+ここではレポートの表紙を出力する関数を作ってみました。
 定義した関数は`#関数名`で、本文の任意の箇所で呼び出すことができます。
 
 ## 位置引数したい
 
 ```typst
-#let greet(first, last) = {
-    let greeting = "Hello, " + first
-    greeting + " " + last + "!"
+#let cover(title, author, date) = {
+  block()[
+    #title
+  ]
+  block()[
+    #author
+  ]
+  block()[
+    #date
+  ]
 }
 
-#greet("First", "Second")
+#cover("レポートのタイトル", "著者名", "日付")
 ```
 
 位置引数（positional arguments）は、
@@ -30,14 +53,20 @@
 ## 名前付き引数したい
 
 ```typst
-#let greet(first: none, last: none) = {
-    let greeting = "Hello, " + first
-    greeting + " " + last + "!"
+#let cover(title: none, author: none, date: none) = {
+  block()[
+    #title
+  ]
+  block()[
+    #author
+  ]
+  block()[
+    #date
+  ]
 }
 
-#greet(first: "First", last: "Second")
-#greet(last: "First", first: "Second")
-#greet("First", "Second")  // => エラー
+#cover(title: "レポートのタイトル", author: "著者", date: "日付")
+#cover("レポートのタイトル", "著者名", "日付")  // => エラー
 ```
 
 名前付き引数（named arguments）は
@@ -47,13 +76,14 @@
 :::{note}
 
 ```typst
-#let greet(name, hello: "Hello") = {
-    let greeting = hello + ", " + name
-    greeting + "!"
-}
+#let cover(
+    title,
+    author,
+    date: datetime.today().display()
+) = {...}
 
-#greet("World")  // => Hello, World!
-#greet("World", hello: "Good morning")  // => Good morning, World!
+#cover("レポートのタイトル", "著者名")  // => 日付は自動取得
+#cover("レポートのタイトル", "著者名", date: "2026/01/16")  // => 日付を固定
 ```
 
 位置引数と名前付き引数は混在できます。
@@ -72,8 +102,6 @@ Pythonなど多くのプログラミング言語と同じで、
 角括弧（`[...]`）で囲んだ内容は「コンテンツブロック」と認識され、マークアップしたコンテンツをそのまま渡すことができます。
 
 ## 可変長引数したい
-
-
 
 ```typst
 #let list(title, ..items) = {
