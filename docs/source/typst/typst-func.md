@@ -249,7 +249,7 @@ Result: #status(-5)
     [
       *#lang*
 
-      `#code`
+      #raw(code)
     ]
   )
 }
