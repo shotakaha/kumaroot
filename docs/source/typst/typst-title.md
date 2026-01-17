@@ -1,34 +1,50 @@
-# タイトルしたい
+# タイトルしたい（`#title`）
 
 ```typst
-#let title = "すごいタイトル"
-#show title: set align(center)
-#show title: set text(weight: "black", size: 2em)
+#set document(
+  title: [すごいタイトル]
+)
 
-#title
+#title()
 ```
 
-タイトルを「タイトル」っぽく表示するコマンドはないので、``#show``ルールを使って設定します。
-
-タイトルっぽい見た目にするために、
-
-1. 中央揃え
-2. ウェイトの変更
-3. フォントサイズの変更
-
-にしてみました。
-
-## 長いタイトルしたい
+`#title()`関数でドキュメントのメインタイトルを表示できます。
+Typst v0.14.0で追加されました。
 
 ```typst
-#let title(content) = {
-    set align(center)
-    set text(weight: "black", size: 2em)
-    [#content]
+#title[カスタムタイトル]
+```
+
+デフォルトは`document.title`で指定したコンテンツになっています。
+コンテンツ引数を使って、任意のタイトルに変更できます。
+
+:::{note}
+
+`#title`は、ドキュメント全体のタイトルを表示する関数です。
+ドキュメントの任意の箇所で複数回呼び出すことができますが、
+ドキュメントの冒頭で1度だけ呼び出すのがセマンティック的に正しいと思います。
+
+:::
+
+## タイトルを大きくしたい
+
+```typst
+#show title: it => {
+  set text(size: 20pt)
+  it.body
 }
-
-#title[改行が必要なくらい \ すごく長いタイトル]
 ```
 
-改行が必要なタイトルの場合、関数にします。
-``[]``の中はTypst記法が使えるため、改行（`\`）も利用できます。
+## 中央寄せしたい
+
+```typst
+#show title: it => {
+  align(center)[
+    #it.body
+  ]
+}
+```
+
+## リファレンス
+
+- [title - Typst](https://typst.app/docs/reference/model/title/)

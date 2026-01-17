@@ -31,14 +31,6 @@ typst-build
 typst-import
 ```
 
-## 関数したい
-
-```{toctree}
-typst-func
-typst-with
-typst-where
-```
-
 ## 全体設定したい
 
 ```{toctree}
@@ -57,14 +49,23 @@ typst-document
 ---
 maxdepth: 1
 ---
-typst-outline
+typst-title
 typst-heading
+typst-outline
 typst-raw
 typst-list
 typst-strong
 typst-lorem
 typst-link
 typst-math
+```
+
+## 関数したい
+
+```{toctree}
+typst-func
+typst-with
+typst-where
 ```
 
 ## カスタマイズしたい
@@ -77,7 +78,6 @@ typst-styling
 typst-set
 typst-show
 typst-let
-typst-title
 typst-logo
 typst-state
 typst-block
