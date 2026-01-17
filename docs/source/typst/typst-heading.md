@@ -70,7 +70,7 @@ LaTeXの`\section*`に相当します。
 #set heading(numbering: "1.")
 
 // 全体設定
-#show heading: set block(inset: 1em)
+#show heading: set block(spacing: 1em)
 
 // 個別設定
 #show heading.where(level: 1): block.with(fill: luma(150), inset: 12pt)
@@ -85,7 +85,7 @@ LaTeXの`\section*`に相当します。
 :::{note}
 
 ```typst
-#show heading: set block(inset: 1em)
+#show heading: set block(spacing: 1em)
 ```
 
 見出しをカスタマイズする際は、[ブロック要素](./typst-block.md)にしておくとよいです。
