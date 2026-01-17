@@ -58,6 +58,7 @@ typst-strong
 typst-lorem
 typst-link
 typst-math
+typst-datetime
 ```
 
 ## 関数したい
