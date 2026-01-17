@@ -1,4 +1,4 @@
-# メタデータしたい（``document``）
+# メタデータしたい（`document`）
 
 ```typst
 #set document(
@@ -74,6 +74,20 @@
 `date`オプションで、文書の作成日を埋め込むことができます。
 デフォルトは`auto`になっていて、ビルド時の日付が適用されます。
 `datetime`オブジェクトを使用して、特定の日付を設定できます。
+
+## 参照したい
+
+```typst
+#context {document.title}
+#context {document.author}
+#context {document.description}
+#context {document.keywords}
+#context {document.date}
+```
+
+`#context`関数を経由して`document`要素の設定値を、本文中で取得できます。
+
+レポートの表紙やヘッダー情報などで、タイトルなどを表示したい場合に再利用できます。
 
 ## リファレンス
 
