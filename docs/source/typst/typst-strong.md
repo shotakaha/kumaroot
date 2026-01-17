@@ -1,19 +1,43 @@
-# 強調したい（``#strong``）
+# 強調したい（`#strong` / `#emph`）
 
-```text
+```typst
 #strong[本文]
 #emph[本文]
 ```
 
 [#strong](https://typst.app/docs/reference/model/strong/)もしくは[#emph](https://typst.app/docs/reference/model/emph/)を使ってテキストを強調できます。
 
-## 文字色したい
+:::{note}
 
-```text
-#show strong: set text(red)
+`#strong`は**太字（ボールド）**、
+`#emph`は __斜体（イタリック）__
+で強調します。
+
+和文の場合は `#strong` を使えばよいと思います。
+
+:::
+
+## ウェイトしたい（`delta`）
+
+```typst
+#strong(delta: 500)[強調したい文章]
 ```
 
-強調したいときに、文字色を変更したり、下線を引いたりしたい場合は表示ルールを設定します。
+`delta`オプションで、ウェイトを変更できます。
+現在のウェイトからの差分で指定します。
+デフォルトは300です。
+
+## 文字色したい
+
+```typst
+#show strong: set text(red)
+
+#show strong: it => {
+  text(red, it.body)
+}
+```
+
+`show`ルールで文字色を変更します。
 
 ## 数字の色を変更したい
 
