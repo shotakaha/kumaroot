@@ -49,36 +49,19 @@ typst-document
 ---
 maxdepth: 1
 ---
+typst-title
 typst-heading
+typst-outline
 typst-list
 typst-strong
 typst-raw
 typst-link
 typst-figure
-```
-
-## テキストしたい
-
-```{toctree}
----
-maxdepth: 1
----
-typst-title
-typst-outline
-typst-lorem
 typst-math
-typst-datetime
+typst-lorem
 ```
 
-## 関数したい
-
-```{toctree}
-typst-func
-typst-with
-typst-where
-```
-
-## カスタマイズしたい
+## スタイルしたい
 
 ```{toctree}
 ---
@@ -87,12 +70,24 @@ maxdepth: 1
 typst-styling
 typst-set
 typst-show
-typst-let
-typst-logo
-typst-state
 typst-block
 typst-box
 typst-color
+typst-logo
+```
+
+## 関数したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-let
+typst-func
+typst-with
+typst-where
+typst-state
+typst-datetime
 ```
 
 ## ツールしたい

@@ -1,12 +1,13 @@
-# ダミーテキストしたい（``lorem``）
+# ダミーテキストしたい（`#lorem`）
 
 ```typ
 #lorem(単語数)
 ```
 
-[lorem関数](https://typst.app/docs/reference/text/lorem/)を使ってダミーテキストを生成できます。
+[lorem関数](https://typst.app/docs/reference/text/lorem/)
+を使ってダミーテキストを生成できます。
 
-## 日本語ダミーテキストしたい（``roremu``）
+## 日本語ダミーテキストしたい（`#roremu`）
 
 ```typ
 #import "@preview/roremu:0.1.0": roremu
