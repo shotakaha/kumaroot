@@ -54,6 +54,7 @@ typst-list
 typst-strong
 typst-raw
 typst-link
+typst-figure
 ```
 
 ## テキストしたい
