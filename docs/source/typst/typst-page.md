@@ -9,13 +9,13 @@
 ```typst
 // #set page(..options)
 #set page(
-    paper: "a4",
-    margin: (x: 25mm, y: 25mm),
-    columns: 1,
-    //fill: luma(99%),  // 全ページの背景色,
-    numbering: "1 / 1",
-    number-align: center,
-    header: [ヘッダー],
+  paper: "a4",
+  margin: (x: 25mm, y: 25mm),
+  columns: 1,
+  //fill: luma(99%),  // 全ページの背景色,
+  numbering: "1 / 1",
+  number-align: center,
+  header: [ヘッダー],
 )
 ```
 
@@ -36,18 +36,24 @@ LaTeXの`geometry`や`fancyhdr`などの機能に相当します。
 ## 用紙サイズしたい（`paper`）
 
 ```typst
-#set page(paper: "a4")  // w210.0 mm x h297.0 mm
-#set page(paper: "a0")  // w841.0 mm x h1189.0 mm
+// A4サイズ: w210.0 mm x h297.0 mm
+#set page(paper: "a4")
+
+// B5サイズ: w182.0 mm x h257.0 mm
+#set page(paper: "jis-b5")
+
+// 20cm四方の印刷物
+#set page(
+  width: 20.0cm,
+  height: 20.0cm
+)
 ```
 
 [page要素のpaperオプション](https://typst.app/docs/reference/layout/page/#parameters-paper)で用紙サイズを変更できます。
 デフォルトは`"a4"`です。
-
-```typst
-#set page(paper: "jis-b5")  // w182.0 mm x h257.0 mm
-```
-
 ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI規格（アメリカ）など多様な規格の用紙サイズが定義されています。
+
+`width`と`height`オプションで長さを直接指定できます。
 
 :::{note}
 
@@ -55,27 +61,36 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 
 :::
 
+### ポスター発表したい
+
 ```typst
-#set page(paper: "presentation-16-9")  // w297.0 mm x h167.0625 mm
-#set page(paper: "presentation-4-3")  // w280.0 mm x h210.0 mm
+// A0サイズ: w841.0 mm x h1189.0 mm
+#set page(paper: "a0")
+// 直接指定
+#set page(width: 841.0mm, height: 1189.0mm)
 ```
 
-発表スライド用のサイズもありました。
+### プレゼンテーションしたい
+
+```typst
+// アスペクト比16:9（w297.0 mm x h167.0625 mm）
+#set page(paper: "presentation-16-9")
+
+// アスペクト比4:3（w280.0 mm x h210.0 mm）
+#set page(paper: "presentation-4-3")
+```
+
+### 名刺したい
 
 ```typst
 // 日本の名刺サイズ
 #set page(paper: "jp-business-card")  // w91.0 mm x h55.0 mm
 #set page(paper: "jp-shiroku-ban-4")  // w264.0 mm x h379.0 mm
-```
-
-日本の名刺サイズ（`jp-business-card`など）もありました。
-
-```typst
-// 横（width）と縦（height）で指定
+// 直接指定
 #set page(width: 91.0mm, height: 55.0mm)
 ```
 
-`width`と`height`オプションで長さを直接指定できます。
+日本の名刺サイズ（`jp-business-card`など）もありました。
 
 ## 余白したい（`margin`）
 
@@ -326,8 +341,6 @@ footer-descent(30% + 0pt)
 
 `#columns(段数)`で、本文中に部分的に段組を適用できます。
 
-
-
 ## 縦置きしたい（``flipped``）
 
 ```typst
@@ -339,6 +352,36 @@ footer-descent(30% + 0pt)
 
 [page要素のflippedオプション](https://typst.app/docs/reference/layout/page/#parameters-flipped)で、用紙の短辺と長辺のサイズを入れ替えできます。
 上のサンプルでは、名刺を縦置きする場合を想定してみました。
+
+## 背景色したい（`fill`）
+
+```typst
+#set page(fill: rgb(blue))
+```
+
+`fill`オプションで文書全体の背景色を変更できます。
+
+## 透かししたい（`background`）
+
+```typst
+#set page(background: [
+  #rotate(-45deg)[
+    #text(size: 2em, fill: luma(90%))[
+      *preliminary*
+    ]
+  ]
+])
+```
+
+`background`オプションで、ドキュメントのすべてのページの背景にコンテンツを設定できます。
+「preliminary」や「confidential」などの透かしを入れたい場合に利用できます。
+
+:::{note}
+
+最前面にコンテンツを表示できる
+`foreground`オプションもあります。
+
+:::
 
 ## リファレンス
 
