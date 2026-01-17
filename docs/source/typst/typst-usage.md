@@ -84,6 +84,7 @@ maxdepth: 1
 ---
 typst-let
 typst-func
+typst-type
 typst-with
 typst-where
 typst-state
