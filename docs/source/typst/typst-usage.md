@@ -43,6 +43,19 @@ typst-text
 typst-document
 ```
 
+## マークアップしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-heading
+typst-list
+typst-strong
+typst-raw
+typst-link
+```
+
 ## テキストしたい
 
 ```{toctree}
@@ -50,13 +63,8 @@ typst-document
 maxdepth: 1
 ---
 typst-title
-typst-heading
 typst-outline
-typst-raw
-typst-list
-typst-strong
 typst-lorem
-typst-link
 typst-math
 typst-datetime
 ```
