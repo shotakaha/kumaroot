@@ -7,13 +7,15 @@
 ==== 見出し4
 ```
 
-Typst記法では`=`で見出しレベルを指定できます。
+Typstのマークアップ記法では`=`で見出しレベルを指定できます。
 
 :::{seealso}
 
 Markdown記法では`#`に相当します。
 
 :::
+
+## 関数記法したい
 
 ```typst
 // #heading(level, numbering, outlined)[content]
@@ -23,7 +25,10 @@ Markdown記法では`#`に相当します。
 #heading(level: 4)[見出し4]  // 見出し4以降は見た目が同じ
 ```
 
-[heading要素](https://typst.app/docs/reference/model/heading/)を使うと、見出しをより細かく設定できます。
+冒頭のマークアップ記法は
+[heading要素](https://typst.app/docs/reference/model/heading/)
+のエイリアスです。
+`#heading`のオプションを使うと、見出しをより細かく設定できます。
 
 :::{seealso}
 

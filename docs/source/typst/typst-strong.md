@@ -1,26 +1,53 @@
 # 強調したい（`#strong` / `#emph`）
 
 ```typst
-#strong[本文]
-#emph[本文]
+*太字で強調* する部分と
+_斜体で強調_ する部分です。
 ```
+`*`で**太字（ボールド）**、
+`_`で__斜体（イタリック）__、
+で強調表示できます。
 
-[#strong](https://typst.app/docs/reference/model/strong/)もしくは[#emph](https://typst.app/docs/reference/model/emph/)を使ってテキストを強調できます。
+:::{caution}
 
-:::{note}
-
-`#strong`は**太字（ボールド）**、
-`#emph`は __斜体（イタリック）__
-で強調します。
-
-和文の場合は `#strong` を使えばよいと思います。
+Markdown記法では、
+太字は`**`、
+斜体は`__`です。
+互換性がないので注意してください。
 
 :::
 
-## ウェイトしたい（`delta`）
+## 太字したい（`#strong`）
 
 ```typst
-#strong(delta: 500)[強調したい文章]
+ここは #strong[太字で強調] できます
+```
+
+[#strong](https://typst.app/docs/reference/model/strong/)関数で、
+指定した文字列を**太字で強調**できます。
+
+## 斜体したい（`#emph`）
+
+```typst
+ここは #emph[斜体で強調] できます。
+```
+
+[#emph](https://typst.app/docs/reference/model/emph/)関数で、
+指定した文字列を__斜体で強調__できます。
+
+:::{note}
+
+和文ドキュメントの場合は
+`#strong`
+を使えばよいです。
+
+:::
+
+## さらに太字したい（`#strong.delta`）
+
+```typst
+ここは #strong[太字にした文字列] です。
+ここは #strong(delta: 900)[さらに太くした文字列] です。
 ```
 
 `delta`オプションで、ウェイトを変更できます。
