@@ -1,4 +1,4 @@
-# セレクターしたい（`#show: ...where`）
+# セレクターしたい（`#show` + `.where`）
 
 ```typst
 #show heading.where(level: 1): it => {...}
