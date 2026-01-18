@@ -60,6 +60,7 @@ typst-link
 typst-figure
 typst-math
 typst-footnote
+typst-ref
 typst-lorem
 ```
 
