@@ -112,7 +112,21 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 上下左右を一括、左右（`x`）と上下（`y`）、
 すべて別々（`top` / `bottom` / `left` / `right`）など柔軟に設定できます。
 
-## ノンブルしたい（`numbering`）
+## ノンブルしたい（`numbering` / `number-align`）
+
+```typst
+// 右上に「現在のページ / 総ページ数」を表示
+#set page(
+  numbering: "1 / 1",
+  number-align: right + top,
+)
+```
+
+`numbering`オプションでノンブル（＝ページ番号）の表示形式を変更できます。
+デフォルトは`none`（＝非表示）です。
+`number-align`で表示位置を変更できます。
+`left | center | right` + `top | bottom` の組み合わせで指定します。
+デフォルトは`center + bottom`です。
 
 ```typst
 #set page(numbering: none)   // 非表示（デフォルト）
@@ -123,28 +137,6 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 #set page(numbering: "1 of 1")   // 現在のページ数 of 総ページ数
 #set page(numbering: "1 / 1")    // 現在のページ数 / 総ページ数
 ```
-
-`numbering`オプションでノンブル（＝ページ番号）を表示できます。
-ノンブルはデフォルトで非表示です。
-ユーザーが`numbering`オプションを明示する必要があります。
-
-```typst
-// 表示内容: "現在のページ数／総ページ数"
-// 表示位置：各ページの下中央
-#set page(
-    numbering: "1 / 1"
-    number-align: center + bottom,
-    )
-
-// 表示内容: "現在のページ数"
-// 表示位置：各ページの右下
-#set page(
-    numbering: "1",
-    number-align: right,
-)
-```
-
-`number-align`オプションでノンブルの表示位置を変更できます。
 
 ```typst
 #set page(
@@ -167,44 +159,57 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 
 :::
 
-## ヘッダー／フッターしたい（`header` / `footer`）
+:::{warning}
+
+`header`オプションや`footer`オプションを設定すると、
+ノンブル（`numbering`オプション）の設定は無視されます。
+ノンブルしたい場合は、それぞれのコンテンツとして自分で再定義する必要があります。
+
+:::
+
+## ヘッダーしたい（`header`）
 
 ```typst
-// 非表示
 #set page(
-    header: none,
-    footer: none,
-)
-
-// auto（ページ番号を表示）
-#set page(
-    numbering: "1"
-    footer: auto,
-    // or
-    // number-align: top,
-    // header: auto,
-)
-
-// カスタム設定
-#set page(
-    header: [ヘッダー],
-    footer: [フッター],
+  header: [ヘッダー],
+  header-ascent: 1em,
 )
 ```
 
-`header`オプションと`footer`オプションで、
-ドキュメント全体に共通のヘッダーやフッターを表示できます。
-デフォルトは`auto`になっていて、`numbering`オプションが有効な場合は、ノンブル（ページ番号）がフッターに表示されます。
-`number-align: top`を指定するとヘッダーに表示できます。
+`header`オプションで、文書のすべてのページにヘッダーを表示できます。
+デフォルトは`auto`です。
+`numbering`オプションが有効になっている場合は、ノンブルが表示されます。
+`header-ascent`で、本文エリアとヘッダーのアキを調整できます。
+
+:::{note}
+
+`ascent`なので、正の長さにすると上方向に移動します。
+負の長さも設定できます。
+
+:::
+
+## フッターしたい（`footer`）
 
 ```typst
-header-ascent(30% + 0pt)
-footer-descent(30% + 0pt)
+#set page(
+  footer: [フッター],
+  footer-descent: 1em,
+)
 ```
 
-ヘッダーとフッターの表示位置は、それぞれ
-天（上の余白）、地（下の余白）からの相対位置で調整できます。
-`%`は余白に対する割合、`pt`はオフセット量です。
+`footer`オプションで、文書のすべてのページにフッターを表示できます。
+デフォルトは`auto`です。
+`numbering`オプションが有効になっている場合は、ノンブルが表示されます。
+`footer-descent`で、本文エリアとフッターのアキを調整できます。
+
+:::{note}
+
+`descent`なので、正の長さにすると下方向に移動します。
+負の長さ設定できます。
+
+:::
+
+### レポート用ヘッダーとフッター
 
 ```typst
 // レポート用ヘッダーを定義
@@ -255,7 +260,7 @@ footer-descent(30% + 0pt)
 
 :::
 
-### 章ごとに変更したい
+### 章タイトルとヘッダー
 
 ```typst
 #let current-chapter = state("chapter", "")
