@@ -77,6 +77,7 @@ typst-show
 typst-block
 typst-box
 typst-color
+typst-align
 typst-logo
 ```
 
