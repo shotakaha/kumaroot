@@ -107,6 +107,33 @@ Typstは文字列が簡単に置換できます。
 
 :::
 
+## 図版したい（`figure` / `figure.caption`）
+
+```typst
+#set figure(gap: 0em)
+#show figure: set block(
+  inset: 0.5em,
+  width: 100%,
+  // stroke: 1pt,  // enable when debug
+)
+#show figure.caption: it => {
+  block(
+    inset: 0.5em,
+    width: 100%,
+  )[
+    #align(left)[
+      #it
+    ]
+  ]
+}
+```
+
+:::{seealso}
+
+- [](./typst-figure.md)
+
+:::
+
 ## 実践的な使い方
 
 ```typst

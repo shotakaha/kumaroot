@@ -145,17 +145,6 @@
 `table`キーで表全体の枠線、罫線、余白などを変更できます。
 `table.cell`キーでセルの設定を変更できます。
 
-## 画像したい（`figure`）
-
-```typst
-#set figure(
-    align: center,
-    caption: above
-)
-```
-
-`figure`キーで、図の配置やキャプションの位置などを変更できます。
-
 ## メタデータしたい（`document`）
 
 ```typst

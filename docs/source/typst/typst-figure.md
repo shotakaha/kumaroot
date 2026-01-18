@@ -56,19 +56,27 @@
 
 ```typst
 // figure全体の設定
-#show figure: set block(spacing: 2em, width: 90%)
+#set figure(gap: 0em)
+#show figure: set block(
+  inset: 0.5em,
+  width: 100%,
+  // stroke: 1tp,  // enable when debug
+)
 
 // figure.captionの設定
 #show figure.caption: it => {
-  block(inset: 1em)[
-    #set align(left)
-    #it
+  block(
+    inset: 0.5em,
+    width: 100%
+  )[
+    #align(left)[
+      #it
+    ]
   ]
 }
 
 #figure(
   [content],
-  gap: 0em,
   caption: [...]
 )
 ```
@@ -81,7 +89,14 @@
 
 :::{note}
 
-キャプションに`1em`のパディングを追加したので、画像とキャプション間の間隔（`#figure.gap`）は`0em`に変更しています。
+まず、図版とキャプションのアキをリセット（`gap: 0em`に設定）したあと、
+コンテンツとキャプションそれぞれに`0.5em`のパディングを追加しています。
+
+結果として、
+図版とキャプションの間に`1em`のアキができます。
+
+`stroke: 1pt`を有効にすると
+それぞれの表示エリアを確認できます。
 
 :::
 
