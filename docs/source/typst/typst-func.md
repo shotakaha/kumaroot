@@ -297,7 +297,7 @@ Pythonなど多くのプログラミング言語と同じで、
     fill: color.lighten(80%),
     stroke: 1pt + color,
     inset: 8pt,
-    [*#severity.upper():* #title]
+    [*#upper(severity):* #title]
   )
 }
 
