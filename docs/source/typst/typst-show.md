@@ -1,14 +1,18 @@
-# 表示方法を変更したい（`#show`）
+# 要素のスタイルを変更したい（`#show`）
 
 ```typst
-#show selector: function
-#show "要素名": set "関数名"("設定": "値")
+// ハイパーリンクの文字を太字に変更
+#show link: set text(weight: "bold")
+// ハイパーリンクに下線を追加
+#show link: it => {
+  underline[#it]
+}
 ```
 
-`#show`関数で、さまざまな要素の表示方法を自由にカスタマイズできます。
+`#show`ルールで、さまざまな要素の表示方法を自由にカスタマイズできます。
 同じ要素に対して、何度も使うことができます。
 
-## 見出しを変更したい
+## 見出しを変更したい（`#show heading.where`）
 
 ```typst
 // #show heading.where(level: 見出しレベル): set 要素(オプション)
