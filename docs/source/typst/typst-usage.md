@@ -49,6 +49,7 @@ typst-document
 ---
 maxdepth: 1
 ---
+typst-syntax
 typst-title
 typst-heading
 typst-outline
