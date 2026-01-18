@@ -1,5 +1,44 @@
 # CHANGELOG.md
 
+## v2026.1.4 (2026-01-18)
+
+### Feat
+
+- **typst-syntax**: add comprehensive guide to Typst's three core modes
+- **typst-type**: add documentation for type checking function
+- **typst-figure**: add comprehensive documentation for figure element
+- **typst-datetime**: add documentation for #datetime() function
+
+### Fix
+
+- **typst-heading**: reorganize heading documentation and add show rule examples
+- **typst-show**: refactor figure styling and reorganize sections
+- **typst-figure**: improve terminology and refine documentation
+- **typst-styling**: add section on markup vs styling separation
+- **typst-show**: improve titles and show rule examples
+- **typst-set**: improve documentation clarity and add cross-references
+- **typst-styling**: expand content with practical examples and clear explanations
+- **typst-page**: reorganize and improve numbering, header, and footer sections
+- **typst-page**: improve formatting and add new sections for fill and background options
+- **typst-let**: simplify variable definition examples and improve formatting
+- **typst**: standardize titles with function notation and reorganize toctree
+- **typst**: reorganize and improve documentation with clearer examples and structure
+- **typst-figure**: fix colbreak syntax and add LaTeX comparison note
+- **typst-strong**: improve documentation with delta option and clearer examples
+- **typst-block**: add comprehensive documentation for block element options
+- **typst-heading**: refactor with improved organization and examples
+- **typst-usage**: reorganize toctree sections for better navigation
+- **typst-document**: add section for referencing document metadata
+- **typst-document**: refactor to document #set document() function
+- **typst-title**: refactor to document built-in #title() function
+- **typst-func**: add anonymous functions section with practical examples
+- **typst-func**: remove incomplete anonymous function section
+- **typst-page**: refactor chapter-based header and footer with improved structure
+- **typst-page**: refactor header and footer example with clearer structure
+- **typst-page**: simplify page function example with clearer defaults
+- **typst-text**: add note about language setting for Japanese documents
+- **typst-page**: fix page counter final() method usage
+
 ## v2026.1.3 (2026-01-16)
 
 ### Fix
