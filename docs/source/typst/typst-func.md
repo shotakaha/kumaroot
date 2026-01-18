@@ -311,7 +311,7 @@ Pythonなど多くのプログラミング言語と同じで、
 #let filter-and-format(..data) = {
   data
     .pos()
-    .filter(x => type(x) == "integer" and x > 0)
+    .filter(x => type(x) == int and x > 0)
     .map(x => [Item: #x])
     .join(", ")
 }
