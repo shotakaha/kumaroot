@@ -3,20 +3,24 @@
 ```typst
 #set text(
   lang: "ja",
+  font: "Harano Aji Gothic",
   size: 12pt,
   weight: "regular",
-  font: (
-    "HackGen",
-    "Noto Sans CJK JP",
-  ),
 )
 ```
 
 [text要素](https://typst.app/docs/reference/text/text/)で、本文のフォント設定などを変更できます。
-ドキュメントの先頭で`#set text`することでページ全体の一括設定ができます。
+ドキュメント全体の設定は`set`ルールで一括設定します。
 
 上記のサンプルは日本語のドキュメント作成のときにコピペで使い回している設定です。
 LaTeXと比べると和文フォントがとても簡単に設定できます。
+
+:::{note}
+
+[TypstApp](https://typst.app/)の場合、
+デフォルトが、よく分からない明朝フォントになっているため、日本語フォントへの変更は必須です。
+
+:::
 
 :::{seealso}
 
@@ -30,7 +34,7 @@ LaTeXと比べると和文フォントがとても簡単に設定できます。
 
 ```typst
 #set text(
-    size: 11pt
+  size: 11pt
 )
 ```
 
@@ -46,43 +50,53 @@ LaTeXと比べると和文フォントがとても簡単に設定できます。
 
 上記のサンプルのように、見出しレベルごとにフォントサイズを変更できます。
 
-## 文字色したい（``fill``）
+## 文字色したい（`fill`）
 
 ```typst
 #set text(
-    fill: luma(80%)
+  fill: luma(80%)
 )
 ```
 
-``fill``オプションで、フォントの色を変更できます。
-デフォルトは``luma(0%)``です。
+`fill`オプションで、フォントの色を変更できます。
+デフォルトは`luma(0%)`です。
 
-Typstにはさまざまな[色の設定方法](https://typst.app/docs/reference/visualize/color/)があります。
+Typstにはさまざまな
+[色の設定方法](https://typst.app/docs/reference/visualize/color/)
+があります。
 
-基本的には[RGB関数](https://typst.app/docs/reference/visualize/color/#definitions-rgb)でRGB値とA値を設定すればよいです。
-グレイスケールを使う場合は[luma関数](https://typst.app/docs/reference/visualize/color/#definitions-luma)があります。
-印刷物を作成する場合は[cymk関数](https://typst.app/docs/reference/visualize/color/#definitions-cmyk)を使うのがよいかもしれません。
+基本的には
+[RGB関数](https://typst.app/docs/reference/visualize/color/#definitions-rgb)
+でRGB値とA値を設定すればよいです。
+グレイスケールを使う場合は
+[luma関数](https://typst.app/docs/reference/visualize/color/#definitions-luma)
+があります。
+印刷物を作成する場合は
+[cymk関数](https://typst.app/docs/reference/visualize/color/#definitions-cmyk)
+を使うのがよいかもしれません。
 
-## 言語したい（``lang``）
+## 言語設定したい（`lang`）
 
 ```typst
 #set text(
-    lang: "ja"
+  lang: "ja"
 )
 ```
 
-``lang``オプションで、本文の言語を変更できます。
-言語コードは``ISO639-1/2/3``から選択します。
-デフォルトは``"en"``です。
+`lang`オプションで、ドキュメントの言語を変更できます。
+言語コードは`ISO639-1/2/3`から選択します。
+デフォルトは`"en"`です。
+日本語の場合は`"ja"`にします。
 
 :::{note}
 
-（Typstのウェブアプリ限定かもしれませんが）
-日本語の文書を作成する場合は`lang: "ja"`に設定することで、スペルチェックによるエラーを抑制できます。
+ウェブアプリ限定かもしれませんが、
+`lang: "ja"`に設定することで、
+スペルチェックによるエラーを抑制できました。
 
 :::
 
-## フォントしたい（``font``）
+## フォントしたい（`font`）
 
 ```typst
 #text(font: "HackGen")[HackGen; 白源]
@@ -248,3 +262,7 @@ Train One
 `* One`フォントはFontWorksが開発したフォントです。
 Google Fontsとして提供されているので無料で利用できます。
 ポップなフォントなので、カジュアルさを出したいときに利用できます。
+
+## リファレンス
+
+- [text | element | Typst](https://typst.app/docs/reference/text/text)
