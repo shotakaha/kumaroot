@@ -1,22 +1,18 @@
-# 本文したい（`#text`）
-
-```typst
-#text(オプション)[コンテキスト]
-```
+# フォントしたい（`#text`）
 
 ```typst
 #set text(
-    size: 12pt,
-    weight: "regular",
-    lang: "ja"
-    font: (
-        "HackGen",
-        "Noto Sans CJK JP",
-    ),
+  lang: "ja",
+  size: 12pt,
+  weight: "regular",
+  font: (
+    "HackGen",
+    "Noto Sans CJK JP",
+  ),
 )
 ```
 
-[text要素](https://typst.app/docs/reference/text/text/)で、本文の設定を変更できます。
+[text要素](https://typst.app/docs/reference/text/text/)で、本文のフォント設定などを変更できます。
 ドキュメントの先頭で`#set text`することでページ全体の一括設定ができます。
 
 上記のサンプルは日本語のドキュメント作成のときにコピペで使い回している設定です。
