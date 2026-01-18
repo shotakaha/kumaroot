@@ -59,6 +59,7 @@ typst-raw
 typst-link
 typst-figure
 typst-math
+typst-footnote
 typst-lorem
 ```
 
