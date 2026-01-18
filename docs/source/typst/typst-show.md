@@ -12,9 +12,24 @@
 `#show`ルールで、さまざまな要素の表示方法を自由にカスタマイズできます。
 同じ要素に対して、何度も使うことができます。
 
-## 見出しを変更したい（`#show heading.where`）
+## 見出ししたい（`#show heading.where`）
 
 ```typst
+// 見出し番号の表示設定
+#set heading(
+  numbering: "1.1."
+)
+// すべての見出しに背景色を追加
+#show heading: it => {
+  block(
+    fill: luma(90%),
+    width: 100%,
+    inset: 1em
+  )[
+    #it
+  ]
+}
+// 見出しレベルごとにフォントサイズを変更
 // #show heading.where(level: 見出しレベル): set 要素(オプション)
 #show heading.where(level: 1): set text(size: 42pt, weight: "bold")
 #show heading.where(level: 2): set text(size: 32pt, weight: "semibold")
@@ -41,6 +56,12 @@
 より複雑な設定のサンプルです。
 `it => {ブロック}`関数を使うことで、複数の要素を指定できます。
 見出しテキストは`[#it.body]`で取得できます。
+
+:::{seealso}
+
+- [](./typst-heading.md)
+
+:::
 
 ## コードブロックを装飾したい
 

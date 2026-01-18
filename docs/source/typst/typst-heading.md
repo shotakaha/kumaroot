@@ -1,23 +1,22 @@
 # 見出ししたい（`#heading`）
 
 ```typst
-= 見出し1
-== 見出し2
-=== 見出し3
-==== 見出し4
-```
+// 見出しレベルの表示設定
+#set heading(
+  numbering: "1.1.",
+)
 
-Typstのマークアップ記法では`=`で見出しレベルを指定できます。
+// 見出しに背景色を設定
+#show heading: it => {
+  block(
+    fill: luma(90%),
+    width: 100%,
+    spacing: 1em,
+  )[
+    #it
+  ]
+}
 
-:::{seealso}
-
-Markdown記法では`#`に相当します。
-
-:::
-
-## 関数記法したい
-
-```typst
 // #heading(level, numbering, outlined)[content]
 #heading[見出し1]  // デフォルトは(level: 1)
 #heading(level: 2)[見出し2]
@@ -25,14 +24,38 @@ Markdown記法では`#`に相当します。
 #heading(level: 4)[見出し4]  // 見出し4以降は見た目が同じ
 ```
 
-冒頭のマークアップ記法は
 [heading要素](https://typst.app/docs/reference/model/heading/)
-のエイリアスです。
-`#heading`のオプションを使うと、見出しをより細かく設定できます。
+で「見出し」をマークアップできます。
+
+`numbering`オプションで見出し番号の表示設定、
+`depth`オプションで、目次に含める見出しレベルを設定できます。
+これらは`set`ルールで全体設定するとよいです。
+また、表示方法は`show`ルールで変更できます。
+
+`#heading`のオプションを使うと、
+個別の見出しをより細かく設定できます。
 
 :::{seealso}
 
 - [](../latex/latex-section.md)
+
+:::
+
+## マークアップしたい（`=`）
+
+```typst
+= 見出し1
+== 見出し2
+=== 見出し3
+==== 見出し4
+```
+
+見出しは`=`でマークアップできます。
+`=`の数が見出しレベルに相当します。
+
+:::{seealso}
+
+Markdown記法では`#`に相当します。
 
 :::
 
@@ -43,15 +66,6 @@ Markdown記法では`#`に相当します。
 ```
 
 `level`オプションで、見出しレベルを変更できます。
-
-## レベル表示を変更したい（`numbering`）
-
-```typst
-#set heading(numbering: "1.")
-#set heading(numbering: "【1.1.1】")
-```
-
-`numbering`オプションで、見出しレベルの表示方法を変更できます。
 
 ## 見出しを非表示にしたい（`outlined`）
 
@@ -64,6 +78,7 @@ Markdown記法では`#`に相当します。
 
 :::{seealso}
 
+`outlined: false`は
 LaTeXの`\section*`に相当します。
 
 :::
@@ -83,22 +98,18 @@ LaTeXの`\section*`に相当します。
 #show heading.where(level: 3): block.with(fill: luma(50), inset: 12pt)
 ```
 
-見出しに背景色を追加して、視覚的に分かりやすくしてみます。
-まず、`#set heading(..options)`で基本設定をします。
-その後、`#show heading`で見出しレベルごとに個別設定します。
+`#heading`には背景色を設定するオプションがありません。
+そのため、`#show`ルールで変更します。
 
-:::{note}
+まず、`#show heading: set block(spacing: 1em)`で、すべての見出し要素をブロック要素に変換して、上下に`1em`のパディングを追加しています。
 
-```typst
-#show heading: set block(spacing: 1em)
-```
-
-見出しをカスタマイズする際は、[ブロック要素](./typst-block.md)にしておくとよいです。
-
-:::
+その後、`#show heading.where(level: ...)`で見出しレベルごとに個別設定しています。
 
 :::{seealso}
 
 - [](./typst-show.md)
+- [](./typst-where.md)
+- [](./typst-block.md)
+- [](./typst-color.md)
 
 :::
