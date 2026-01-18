@@ -1,11 +1,19 @@
-# 数式したい（`#math`）
+# 数式したい（`#math.equation`）
 
 ```typst
-// 数式モード（インライン表示）
-ピラゴラスの定理$a^(2) + b^(2) = c^(2)$は・・・
+#set math.equation(numbering: "(1)")
+#show math.equation: text.with(font: "Noto Sans Math")
 
-// 数式ブロック
-ピタゴラスの定理$ a^(2) + b^(2) = c^(2) $は・・・
+// インライン表示
+$a^(2) + b^(2) = c^(2)$
+
+// ブロック表示
+$ a^(2) + b^(2) = c^(2) $
+
+// ブロック表示（オススメ）
+$
+a^(2) + b^(2) = c^(2)
+$
 ```
 
 デフォルトで[数式モジュール](https://typst.app/docs/reference/math/)が使えます。
@@ -17,6 +25,35 @@
 - [](../latex/latex-amsmath.md)
 
 :::
+
+## 式番号したい（`#math.equation.numbering`）
+
+```typst
+#set math.equation(
+  numbering: "(1)",
+  number-align: end + horizon
+)
+
+#set math.equation(
+  numbering: "(1)",
+  number-align: left  + bottom
+  )
+```
+
+`numbering`オプションで、式番号を設定できます。
+ブロック表示の`#math.equation`に数式番号が自動採番されます。
+
+`number-align`で数式番号を表示する位置を変更できます。
+デフォルトは`end + horizon`です。
+`right | left`もしくは`start | end` + `top | horizon | bottom`の組み合わせで指定します。
+
+## 数式フォントしたい
+
+```typst
+#show math.equation: text.with("Noto Sans Math")
+```
+
+せっかくなので数式に適したフォントに変更しましょう。
 
 ## 数式モードでテキストしたい
 
@@ -36,3 +73,7 @@ $N_{\text{SK}}^{\text{obs}}$
 ```
 
 :::
+
+## リファレンス
+
+- [equation | Element | Typst](https://typst.app/docs/reference/math/equation/)
