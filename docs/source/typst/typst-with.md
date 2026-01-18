@@ -1,4 +1,4 @@
-# テンプレートしたい（`#show...with`）
+# テンプレートしたい（`#show: ...with`）
 
 ```typst
 #import "settings.typ": config
