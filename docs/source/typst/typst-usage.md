@@ -61,6 +61,7 @@ typst-figure
 typst-math
 typst-footnote
 typst-ref
+typst-bibliography
 typst-lorem
 ```
 
