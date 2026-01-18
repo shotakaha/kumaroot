@@ -321,30 +321,26 @@ ISO規格のほかにもJIS規格（日本）、DIN規格（ドイツ）、ANSI�
 ```typst
 // 2段組
 #set page(
-    columns: 2,
-    gutter: 1.5em  // 段間の間隔
+  columns: 2,
 )
 
 // 3段組
 #set page(
-    columns: 3,
-    gutter: 5mm
+  columns: 3,
 )
 ```
 
-`columns`オプションで段組を変更できます。
-デフォルトは1段組（`columns: 1`）です。
+`columns`オプションで段組の数を変更できます。
+デフォルトは1段（`columns: 1`）です。
 
-```typst
-// 本文中
-#columns(2)[
-このコンテンツブロックは2段組
-]
+:::{seealso}
 
-そのあとの本文はページ設定の段組に戻る
-```
+`#page`のオプションでは段間を設定できないようです。
+段間を調整したい場合は、
+[#columns要素](https://typst.app/docs/reference/layout/columns/)
+で本文中で段組するほうがよさそうです。
 
-`#columns(段数)`で、本文中に部分的に段組を適用できます。
+:::
 
 ## 縦置きしたい（``flipped``）
 
