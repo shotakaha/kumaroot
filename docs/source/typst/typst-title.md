@@ -26,23 +26,45 @@ Typst v0.14.0で追加されました。
 
 :::
 
-## タイトルを大きくしたい
+## タイトルを太字にしたい
 
 ```typst
 #show title: it => {
-  set text(size: 20pt)
-  it.body
+  set text(size: 1.5em, weight: "black")
+  [#it]
 }
 ```
 
-## 中央寄せしたい
+```typst
+#show title: text.with(size: 1.5em, weight: "black")
+```
+
+## タイトルを中央寄せしたい
 
 ```typst
 #show title: it => {
-  align(center)[
-    #it.body
-  ]
+  set align(center)
+  [#it]
 }
+```
+
+```typst
+#show title: align.with(center)
+```
+
+## 太字にして中央寄せしたい
+
+```typst
+#show title: it => {
+  set text(size: 1.5em, weight: "black")
+  set align(center)
+  [#it]
+}
+```
+
+```typst
+#show title: text.with(size: 1.5em, weight: "black")
+#show title: align.with(center)
 ```
 
 ## リファレンス
