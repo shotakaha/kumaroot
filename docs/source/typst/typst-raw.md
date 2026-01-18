@@ -1,5 +1,29 @@
 # コードブロックしたい（`#raw`）
 
+```typst
+#show raw: text.with(font: "Noto Sans Mono")
+#show raw.where(block: true): block.with(fill: luma(95%), inset: 1em, radius: 1em)
+#show raw.where(block: false): text.with(fill: olive)
+
+#raw(
+  lang: "python",
+  block: true,
+)[
+def hello():
+    print("hello")
+]
+```
+
+[raw要素](https://typst.app/docs/reference/text/raw/)で、コードブロックを表示できます。
+
+:::{seealso}
+
+- [](../latex/latex-minted.md)
+
+:::
+
+## マークアップしたい
+
 `````typst
 
 インラインで`code`をマークアップ表示できます。
@@ -18,27 +42,6 @@ def hello():
 コードブロックは、Markdown記法と同じように
 `` `（back-tick） ``
 でマークアップできます
-
-## コードブロックしたい
-
-```typst
-#raw(
-    lang: "python",
-    theme: "halcyon.tmTheme",
-    block: true,
-)[
-    コードブロック
-]
-```
-
-[raw要素](https://typst.app/docs/reference/text/raw/)のオプションで、
-コードブロック表示を細かく変更できます。
-
-:::{seealso}
-
-- [](../latex/latex-minted.md)
-
-:::
 
 ## ブロック表示したい（`#raw.block`）
 
@@ -72,43 +75,28 @@ Markdown記法でサポートされている言語名の他に、Typst固有の
 `typm`（Typst math）
 がサポートされているそうです。
 
-## カスタマイズしたい
+## 等幅フォントしたい
 
 ```typst
-// 全体的な設定
-//#set raw(font: "Moralerspace Kryption")
-//#set raw(size: 12pt)
-
-// コードブロック表示
-#show raw.where(block: true): it => {
-  // 文字色を変更
-  set text(fill: rgb("#a2aabc"))
-  // 背景を変更
-  block(
-    fill: rgb("#1d2433"),    // 背景色
-    inset: 2em,
-    radius: 1em,
-    width: 100%,
-  )
-}
-
-// インライン表示
-#show raw.where(block: false): it => {
-  // 文字色を変更
-  set text(fill: rgb("#1f1f1f"))
-  // 背景を変更
-  box(
-    fill: rgb("#afafaf")
-  )[
-    #it
-  ]
-}
+#show raw: text.with(font: "Noto Sans Mono")
 ```
 
-デフォルトのままだと、
-コードブロックであることが視認しづらいため
-`#show`ルールで表示スタイルを変更してみました。
+コードブロックは表示するときは、等幅フォント（モノフォント）を設定するとよいです。
 
-`where`セレクターを使って、
-ブロック表示とインライン表示で
-異なるスタイルを適用しています。
+## 文字色したい
+
+```typst
+#show raw.where(block: false): text.with(fill: olive)
+```
+
+インライン表示するときの文字色を変更するサンプルです。
+`raw.where(block: false)`でインライン表示を選択しています。
+
+## 背景色したい
+
+```typst
+#show raw.where(block: true): block.with(fill: luma(95%), inset: 1em, radius: 1em)
+```
+
+ブロック表示するときの背景色を追加するサンプルです。
+`raw.where(block: true)`でブロック表示を選択しています。
