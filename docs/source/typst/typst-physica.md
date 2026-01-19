@@ -39,6 +39,38 @@ $pdv(U, x, [n])$
 $pdv(U, x, y)$
 ```
 
+## 自由場のラグランジアンしたい
+
+:::{note}
+
+標準の`math.equation`モジュールで作成できました
+
+:::
+
+- スカラー場（スピン0、質量$m$）のラグランジアン（Klein-Gordon Lagrangian）
+
+```typst
+$
+cal(L) = frac(1, 2) partial_(mu) phi partial^(mu) phi - frac(1, 2) ( frac(m c, hbar))^(2) phi^(2)
+$
+```
+
+- スピノル場（スピン1/2、質量$m$）のラグランジアン（Dirac Lagrangian）
+
+```typst
+$
+cal(L) = i ( hbar c) overline(psi) gamma^(mu) partial_(mu) psi - (m c^(2)) overline(psi) psi
+$
+```
+
+- ベクトル場（スピン1、質量$m$）のラグランジアン（Proca Lagrangian）
+
+```typst
+$
+cal(L) = - frac(1, 16 pi) F^(mu nu) F_(mu nu) + frac(1, 8 pi) (frac(m c, hbar))^(2) A^(nu) A_(nu)
+$
+```
+
 ## リファレンス
 
 - [physica - Typst Universe](https://typst.app/universe/package/physica/)
