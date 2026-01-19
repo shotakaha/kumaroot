@@ -1,5 +1,30 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **typst-align**: add documentation for content alignment
+- **typst-bibliography**: add documentation for citations and bibliography
+- **typst-ref**: add comprehensive documentation for cross-referencing
+- **typst-footnote**: add documentation for footnote element
+
+### Fix
+
+- **typst-math**: add examples for time derivatives and mathematical symbols
+- **typst-page**: improve column layout examples and documentation
+- **typst-math**: expand documentation with equation configuration
+- **typst-raw**: restructure with purpose-driven organization
+- **typst-where**: update title syntax to show rule format
+- **typst-with**: update title syntax to show rule format
+- **typst-title**: expand documentation with additional styling examples
+- **typst-figure**: add note about block styling scope
+- **typst-where**: restructure documentation with purpose-driven organization
+- **typst-where**: update title syntax to show rule format
+- **typst-text**: improve documentation clarity and add reference section
+- **typst-func**: correct type comparison to use type value instead of string
+- **typst-func**: correct method syntax to function call syntax
+
 ## v2026.1.4 (2026-01-18)
 
 ### Feat
