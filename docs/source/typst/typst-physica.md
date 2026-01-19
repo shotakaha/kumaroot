@@ -1,11 +1,11 @@
-# 物理記号したい（``physica``）
+# 物理記号したい（`physica`）
 
 ```typ
-#import "@preview/physica:0.9.2": *
+#import "@preview/physica:0.9.8": *
 ```
 
-[physica](https://github.com/typst/packages/tree/main/packages/preview/physica/0.9.2)パッケージを使って、物理記号を簡単に記述できるようになります。
-数式環境（``$$``）で使います。
+`physica`パッケージを使って、物理記号を簡単に記述できるようになります。
+数式モード（`$...$`）で使います。
 
 :::{seealso}
 
@@ -19,6 +19,24 @@
 $va(a)$  // ベクトルを矢印で表現
 $vb(a)$  // ベクトルを太字で表現
 $vu(a)$  // 単位ベクトル（^）
+```
+
+## 微分したい（`dv`）
+
+```typst
+$dv(x, t)$        // dx/dt
+$dv(x, t, n)$     // d^{n}x/dt^{n}
+
+$dv(, t)$         // d     /dt
+$dv(x, t, n)$     // d^{n} /dt^{n}
+```
+
+## 偏微分したい（`pdv`）
+
+```typst
+$pdv(U, x)$
+$pdv(U, x, [n])$
+$pdv(U, x, y)$
 ```
 
 ## リファレンス
