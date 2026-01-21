@@ -1,9 +1,11 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.1.5 (2026-01-22)
 
 ### Feat
 
+- **typst-simple-plot**: add documentation for simple-plot package
+- **typst-import**: add documentation for local packages and Typst Universe packages
 - **typst-align**: add documentation for content alignment
 - **typst-bibliography**: add documentation for citations and bibliography
 - **typst-ref**: add comprehensive documentation for cross-referencing
@@ -11,6 +13,8 @@
 
 ### Fix
 
+- **typst-physica**: add free field Lagrangian examples
+- **typst-physica**: update physica package version and add derivative examples
 - **typst-math**: add examples for time derivatives and mathematical symbols
 - **typst-page**: improve column layout examples and documentation
 - **typst-math**: expand documentation with equation configuration
