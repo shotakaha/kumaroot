@@ -118,6 +118,7 @@ typst-tyler
 maxdepth: 1
 ---
 typst-gentle-clues
+typst-simple-plot
 ```
 
 ## 物理したい
