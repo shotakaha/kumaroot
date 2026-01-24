@@ -174,7 +174,7 @@ $ ssh-keygen -t ed25519 -f ~/.ssh/gitlab_ed25519
 
 :::
 
-## 秘密鍵をキーチェーンに登録したい（`ssh-add`）
+## 秘密鍵を登録したい（`ssh-add`）
 
 ```console
 // 秘密鍵を登録する
@@ -191,7 +191,7 @@ $ ssh-add --apple-use-keychain ~/.ssh/id_ed25519（秘密鍵）
 Identity added: 鍵のパス
 ```
 
-`ssh-add`コマンドを使って、端末の`ssh-agent`に秘密鍵を登録できます。
+`ssh-add`は秘密鍵を`ssh-agent`に登録するためのコマンドです。
 `ssh-add -l`で登録してある鍵の情報を確認できます。
 
 `ssh-agent`は、秘密鍵の情報を専用メモリに記憶して管理するSSH鍵の番人です。
