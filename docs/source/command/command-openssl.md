@@ -8,6 +8,13 @@ OpenSSL 3.4.0 22 Oct 2024 (Library: OpenSSL 3.4.0 22 Oct 2024)
 `openssl`コマンドで、暗号化やSSL/TLS、証明書操作、鍵作成など、
 OpenSSLを使ったさまざまな操作ができます。
 
+:::{seealso}
+
+- [](./command-gpg.md)
+- [](./command-ssh-keygen.md)
+
+:::
+
 ## CSRしたい（`openssl req`）
 
 ```console

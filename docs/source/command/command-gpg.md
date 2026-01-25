@@ -31,3 +31,10 @@ GnuPGはLinuxなどで広く使われており、現在のデファクトスタ�
 つまり、GnuPG（GNU Privacy Guard）を使っておけばOKということです。
 
 :::
+
+:::{seealso}
+
+- [](./command-openssl.md)
+- [](./command-ssh-keygen.md)
+
+:::
