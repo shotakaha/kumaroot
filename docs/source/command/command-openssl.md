@@ -132,7 +132,12 @@ $ openssl req -in 証明書署名要求.csr -noout -text
 
 ```console
 // 自己署名証明書
-$ openssl req -new -x509 -days 365 -nodes -keyout 秘密鍵.key -out 自己署名証明書.crt
+$ openssl req -new -x509 -days 365 -noenc -keyout 秘密鍵.key -out 自己署名証明書.crt
+
+// 手順を分解
+$ openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out server.key
+$ openssl req -new -key server.key -out server.csr
+$ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 
 `-x509`オプションで、CSRを生成せずにX.509形式の自己署名証明書を発行できます。
