@@ -330,17 +330,31 @@ $ ssh-copy-id -i ~/.ssh/id_ed25519.pub アカウント名@リモートサーバ
 ## 公開鍵を外部サービスに登録したい
 
 ```console
-// 公開鍵の内容をコピーする
-$ cat ~/.ssh/id_ed25519.pub（公開鍵） | pbcopy
+// 公開鍵の内容をクリップボードにコピーする
+
+// macOS
+$ cat ~/.ssh/id_ed25519.pub | pbcopy
+
+// 以下は未確認ですが、たぶんできるはず
+// Linux (X11)
+$ cat ~/.ssh/id_ed25519.pub | xclip -selection clipboard
+
+// Linux (Wayland)
+$ cat ~/.ssh/id_ed25519.pub | wl-copy
+
+// WSL2
+$ cat ~/.ssh/id_ed25519.pub | clip.exe
+
+// PowerShell
+$ Get-Content ~/.ssh/id_ed25519.pub | Set-Clipboard
 ```
 
 外部サービスには、SSH鍵ペアの**公開鍵を登録**してユーザー認証できるものがあります。
 その際、手順のどこかで「公開鍵のコピー」が必要です。
-ターミナルに表示して、マウスでドラグしてコピーしてもいいのですが、
-余計な文字（空白や改行など）をうっかり含めてしまわないか心配です。
+ターミナルに表示して、マウスでドラグしてコピーしてもいいのですが、空白や改行などの余計な文字をまでうっかり含めてしまわないか心配です。
 
-そのときは[pbcopy](./command-pbcopy.md)が便利です（macOSのみ）。
-（Linuxでは`xclip`コマンドでできるそうです）
+そのような場合は、[（macOSの）pbcopy](./command-pbcopy.md)コマンドが便利です。
+標準出力をそのままクリップボードにコピーできるため、余計な文字が混ざる心配がありません。
 
 :::{note}
 
