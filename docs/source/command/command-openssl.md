@@ -199,21 +199,24 @@ $ openssl x509 -in 証明書.pem -noout -dates
 ## 秘密鍵を生成したい（`openssl genpkey`）
 
 ```console
-// RSA鍵
-$ openssl genpkey -algorithm rsa -out private.key -pkeyopt rsa_keygen_bits::2048
-
 // ed25519鍵
 $ openssl genpkey -algorithm ed25519 -out private_ed25519.key
+
+// RSA鍵
+$ openssl genpkey -algorithm rsa -out private.key -pkeyopt rsa_keygen_bits:2048
+
+// ECDSA鍵
+$ openssl genpkey -algorithm ec -pkeyopt ec_paramgen_curve:P-256 -out private_ec.key
 
 // 古いコマンド
 $ openssl genrsa -out private.key 2048
 ```
 
 `openssl genpkey`で秘密鍵を生成できます。
-この秘密鍵を使って、CSRファイルやSSL証明書を作成できます。
+この秘密鍵を使って、CSRファイルやサーバー証明書を作成できます。
 
 `-algorithm`で鍵アルゴリズムを指定できます。
-`RSA | RSA-PSS | EC | X25519 | X448 | ED25519 | ED448 | ML-DSA | ML-KEM`から選択できます。
+`RSA | RSA-PSS | EC | X25519 | X448 | ED25519 | ED448`などから選択できます。
 大文字／小文字の区別はありません。
 
 `-pkeyopt`オプションで、鍵アルゴリズムのオプションを指定できます。
