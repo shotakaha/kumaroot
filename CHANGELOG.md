@@ -1,5 +1,34 @@
 # CHANGELOG.md
 
+## v2026.1.6 (2026-01-25)
+
+### Fix
+
+- **command-openssl**: consolidate CSR creation documentation and remove duplication
+- **command-openssl**: move x509 certificate verification earlier in workflow
+- **command-openssl**: reorganize sections for logical workflow order
+- **command-openssl**: reorder key algorithms and add ECDSA example
+- **command-openssl**: add quick reference examples and improve genpkey documentation
+- **command-mkcert**: improve documentation of local CA and HTTPS development
+- **command-openssl**: update self-signed certificate with -noenc and add step-by-step example
+- **command-openssl**: comprehensive CSR and key generation documentation improvements
+- **command-openssl**: update OpenSSL version to 3.6.0
+- **command-***: add cross-references between cryptography tools
+- **command-ssh-keygen**: add seealso section about public key cryptography tools
+- **command-ssh-keygen**: add cross-platform public key copying examples
+- **command-ssh-keygen**: enhance ssh-copy-id documentation with security notes
+- **command-ssh-keygen**: enhance ssh-add workflow and macOS KeyChain documentation
+- **command-ssh-keygen**: improve examples and section organization
+- **command-ssh-keygen**: update key length recommendations and examples
+- **command-ssh-keygen**: update algorithm recommendations for modern OpenSSH
+- **command-ssh-keygen**: enhance security explanations and terminology
+- **command-ssh-keygen**: improve clarity of introductory section
+- **command-ssh-keygen**: refine ssh-add section title and explanation
+- **command-ssh-keygen**: improve ssh-add documentation with passphrase and KeyChain details
+- **command-ssh-keygen**: expand documentation with practical examples and security guidelines
+- **geant4-install**: update Qt version compatibility notes for Geant4
+- **geant4-versions**: add Geant4 11.4.0 version information
+
 ## v2026.1.5 (2026-01-22)
 
 ### Feat
