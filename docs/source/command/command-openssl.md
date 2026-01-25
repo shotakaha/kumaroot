@@ -25,6 +25,88 @@ $ openssl x509 -in server.csr -signkey private.key -out server.crt
 
 :::
 
+## 秘密鍵を生成したい（`openssl genpkey`）
+
+```console
+// ed25519鍵
+$ openssl genpkey -algorithm ed25519 -out private_ed25519.key
+
+// RSA鍵
+$ openssl genpkey -algorithm rsa -out private.key -pkeyopt rsa_keygen_bits:2048
+
+// ECDSA鍵
+$ openssl genpkey -algorithm ec -pkeyopt ec_paramgen_curve:P-256 -out private_ec.key
+
+// 古いコマンド
+$ openssl genrsa -out private.key 2048
+```
+
+`openssl genpkey`で秘密鍵を生成できます。
+この秘密鍵を使って、CSRファイルやサーバー証明書を作成できます。
+
+`-algorithm`で鍵アルゴリズムを指定できます。
+`RSA | RSA-PSS | EC | X25519 | X448 | ED25519 | ED448`などから選択できます。
+大文字／小文字の区別はありません。
+
+`-pkeyopt`オプションで、鍵アルゴリズムのオプションを指定できます。
+上記のサンプルでは、RSA鍵の長さを2048ビットに変更しています。
+
+`-out`オプションで秘密鍵を保存するファイル名を変更できます。
+デフォルトは標準出力に表示されます。
+
+:::{note}
+
+RSA鍵のみを生成する`genrsa`コマンドがあります。
+こちらは古いコマンドで、`genpkey`を使うことが推奨されています。
+
+:::
+
+## 証明書署名要求を作成したい（`openssl req`）
+
+```console
+// CSRを新規作成
+$ openssl req -new -key private.key -out server.csr -subj "/C=JP/ST=都道府県/L=市町村/O=組織/CN=www.example.com"
+
+// CSRを確認
+$ openssl req -in server.csr -text -noout
+```
+
+`openssl req -new`コマンドで、証明書署名要求（CSR）ファイルを作成できます。
+
+**証明書署名要求**（CSR; Certificate Signing Request）は、公開鍵基盤（PKI）において証明書を発行してもらうために必要なデータを含んだファイルです。
+ユーザー側で作成したCSRファイルを認証局に提出し、サーバー証明書を発行してもらいます。
+
+:::{note}
+
+CSRの提出方法は、利用する認証局の手順を確認してください。
+
+大学や研究機関の場合、UPKI（University Public Key Infrastructure）が利用できるかもしれません。
+UPKIは、国立情報学研究所（NII）が運営する
+中間認証局を通じて、X.509証明書を発行してもらえるサービスです。
+
+:::
+
+`-key`に秘密鍵を指定します。
+上記サンプルでは`private.key`を指定しています。
+
+`-out`にCSRを保存するファイル名を変更できます。
+デフォルトは標準出力です。
+上記サンプルでは`server.csr`にしています。
+
+`-subj`オプションは、CSRの設定項目です。
+`-subj`を指定しない場合は対話的に入力できます。
+
+作成したCSRは`openssl req -in server.csr`で展開して確認できます。
+`Subject:...`などが設定した値になっていればOKです。
+内容に間違いがなければ、認証局に提出します。
+
+:::{note}
+
+CSRはPEM形式で保存されたテキストファイルです。
+`less`コマンドなどで開くことはできますが、内容はBase64でエンコードされているため、人間には判別できません。
+
+:::
+
 ## CSRを作成したい（`openssl req -new`）
 
 ```console
@@ -55,19 +137,6 @@ $ openssl req -in server.csr -noout -text
 ```
 
 `openssl req`コマンドで証明書署名要求（CSR）ファイルを操作できます。
-
-**証明書署名要求**（CSR; Certificate Signing Request）は、公開鍵基盤（PKI）において証明書を発行してもらうために必要なデータを含んだファイルです。
-ユーザー側で作成したCSRファイルを認証局に提出し、証明書を発行してもらいます。
-
-:::{note}
-
-CSRの提出方法は、利用する認証局の手順を確認してください。
-
-大学や研究機関の場合、UPKI（University Public Key Infrastructure）が利用できるかもしれません。
-UPKIは、国立情報学研究所（NII）が運営する
-中間認証局を通じて、X.509証明書を発行してもらえるサービスです。
-
-:::
 
 `-new`は、CSRを対話的に新規作成するオプションです。
 DN情報を入力するプロンプトが表示されるので、必要な情報を適宜入力します。
@@ -114,17 +183,6 @@ CSRを`server.csr`としました。
 秘密鍵は平文で保存されるため、アクセス権限の管理には注意してください。
 
 :::
-
-## CSRを確認したい（`openssl req -in`）
-
-```console
-// CSRを確認
-$ openssl req -in 証明書署名要求.csr -noout -text
-```
-
-作成したCSRの内容をテキスト形式で確認します。
-`Subject:...`が設定した値になっていることを確認します。
-内容に間違いがなければ、認証局に提出します。
 
 ## CSRを配置したい
 
@@ -196,41 +254,7 @@ $ openssl x509 -in 証明書.pem -noout -dates
 
 :::
 
-## 秘密鍵を生成したい（`openssl genpkey`）
 
-```console
-// ed25519鍵
-$ openssl genpkey -algorithm ed25519 -out private_ed25519.key
-
-// RSA鍵
-$ openssl genpkey -algorithm rsa -out private.key -pkeyopt rsa_keygen_bits:2048
-
-// ECDSA鍵
-$ openssl genpkey -algorithm ec -pkeyopt ec_paramgen_curve:P-256 -out private_ec.key
-
-// 古いコマンド
-$ openssl genrsa -out private.key 2048
-```
-
-`openssl genpkey`で秘密鍵を生成できます。
-この秘密鍵を使って、CSRファイルやサーバー証明書を作成できます。
-
-`-algorithm`で鍵アルゴリズムを指定できます。
-`RSA | RSA-PSS | EC | X25519 | X448 | ED25519 | ED448`などから選択できます。
-大文字／小文字の区別はありません。
-
-`-pkeyopt`オプションで、鍵アルゴリズムのオプションを指定できます。
-上記のサンプルでは、RSA鍵の長さを2048ビットに変更しています。
-
-`-out`オプションで保存先のファイル名を変更できます。
-デフォルトは標準出力に表示されます。
-
-:::{note}
-
-RSA鍵のみを生成する`genrsa`コマンドがあります。
-こちらは古いコマンドで、`genpkey`を使うことが推奨されています。
-
-:::
 
 ## SSLとTLS
 
