@@ -3,10 +3,20 @@
 ```console
 $ openssl version
 OpenSSL 3.6.0 1 Oct 2025 (Library: OpenSSL 3.6.0 1 Oct 2025)
+
+// 秘密鍵の作成
+$ openssl genpkey -out private.key
+
+// CSRの作成
+$ openssl req -new -key private.key -out server.csr
+
+// 証明書の作成
+$ openssl x509 -in server.csr -signkey private.key -out server.crt
 ```
 
-`openssl`コマンドで、暗号化やSSL/TLS、証明書操作、鍵作成など、
-OpenSSLを使ったさまざまな操作ができます。
+`openssl`は、暗号化や秘密鍵の作成、SSL/TLS証明書の操作など、OpenSSLを使ったさまざまな操作ができるコマンドです。
+
+さまざまなサブコマンドがありますが、ここではSSL証明書の作成に必要なコマンドについて重点的に紹介します。
 
 :::{seealso}
 
@@ -190,29 +200,34 @@ $ openssl x509 -in 証明書.pem -noout -dates
 
 ```console
 // RSA鍵
-$ openssl genpkey -algorithm RSA -out private.key -pkeyopt rsa_keygen_bits::2048
+$ openssl genpkey -algorithm rsa -out private.key -pkeyopt rsa_keygen_bits::2048
 
 // ed25519鍵
-$ openssl genpkey -algorithm ED25519 -out private_ed25519.key
+$ openssl genpkey -algorithm ed25519 -out private_ed25519.key
 
 // 古いコマンド
 $ openssl genrsa -out private.key 2048
 ```
 
 `openssl genpkey`で秘密鍵を生成できます。
+この秘密鍵を使って、CSRファイルやSSL証明書を作成できます。
+
+`-algorithm`で鍵アルゴリズムを指定できます。
+`RSA | RSA-PSS | EC | X25519 | X448 | ED25519 | ED448 | ML-DSA | ML-KEM`から選択できます。
+大文字／小文字の区別はありません。
+
+`-pkeyopt`オプションで、鍵アルゴリズムのオプションを指定できます。
+上記のサンプルでは、RSA鍵の長さを2048ビットに変更しています。
+
+`-out`オプションで保存先のファイル名を変更できます。
+デフォルトは標準出力に表示されます。
 
 :::{note}
 
-RSA鍵のみを生成する`genrsa`コマンドがありますが、
-こちらは古いコマンドだそうで、`genpkey`を使うことが推奨されているそうです。
+RSA鍵のみを生成する`genrsa`コマンドがあります。
+こちらは古いコマンドで、`genpkey`を使うことが推奨されています。
 
 :::
-
-```console
-$ openssl req -new -key private.key -out server.csr
-```
-
-事前に作成した秘密鍵を使って、CSRファイルを生成することもできます。
 
 ## SSLとTLS
 
