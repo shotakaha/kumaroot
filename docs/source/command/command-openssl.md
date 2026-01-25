@@ -65,7 +65,7 @@ RSA鍵のみを生成する`genrsa`コマンドがあります。
 
 ```console
 // CSRを新規作成
-$ openssl req -new -key private.key -out server.csr -subj "/C=JP/ST=都道府県/L=市町村/O=組織/CN=www.example.com"
+$ openssl req -new -noenc -key private.key -out server.csr -subj "/C=JP/ST=都道府県/L=市町村/O=組織/CN=www.example.com"
 
 // CSRを確認
 $ openssl req -in server.csr -text -noout
@@ -86,15 +86,85 @@ UPKIは、国立情報学研究所（NII）が運営する
 
 :::
 
-`-key`に秘密鍵を指定します。
-上記サンプルでは`private.key`を指定しています。
+`-key`は、秘密鍵のパスを指定するオプションです。
+上記サンプルでは`openssl genpkey`で作成した秘密鍵（`private.key`）を想定して、指定しています。
 
-`-out`にCSRを保存するファイル名を変更できます。
-デフォルトは標準出力です。
-上記サンプルでは`server.csr`にしています。
+`-out`は、CSRを保存するパスを変更するオプションです。
+デフォルトは標準出力になっています。
+拡張子は`.csr`とするのが一般的で、上記サンプルでは`server.csr`としました。
+このファイルを認証局に提出します。
 
-`-subj`オプションは、CSRの設定項目です。
-`-subj`を指定しない場合は対話的に入力できます。
+`-subj`は、CSRに必要なDN情報を設定するオプションです。
+1行の文字列で指定します。
+`-subj`を指定しない場合は、DN情報を入力するプロンプトが表示されるので、必要な情報を適宜入力します。
+
+:::{note}
+
+DN情報（Distinguished Name）は、証明書の所有者を一意に識別するための情報です。
+
+```text
+/C=JP       # Country: 国コード（2文字）
+/ST=Aichi   # State/Province: 都道府県名
+/L=Nagoya city     # Locality: 市区町村名
+/O=Nagoya University    # Organization: 組織名
+/OU=[skip]    # Organization Unit: 部署名; スキップ
+/CN=www.example.com    # Common Name: 証明書を設定するFQDN（ホスト名）
+```
+
+大学や研究機関の場合、CN以外は規定値があるかもしれません。
+まず、関連部局の担当者に確認するとよいです。
+
+:::
+
+`-noenc`は、パスフレーズなしの秘密鍵を生成するオプションです。
+パスフレーズありのほうが、セキュリティ的に安全なのですが、ウェブサーバーの再起動時にパスフレーズの手動入力が必要になります。
+ここでは、ウェブサーバーの再起動を自動化するため、あえてパスフレーズなしにしています。
+
+:::{caution}
+
+秘密鍵は平文で保存されるため、アクセス権限の管理には注意してください。
+
+:::
+
+```console
+// CSRを新規作成
+$ openssl req -new -noenc -newkey rsa:2048 -keyout server.key -out server.csr
+// CSRに必要なDN情報を入力する
+// -----
+Country Name (2 letter code) []: JP # 国名を2文字で入力する
+State or Province Name (full name) [Some-State]: Xxxxx # 県名を入力する
+Locality Name (eg, city) []: # 都市名
+Organization Name (eg, company) []: # 機関名
+Organizational Unit Name (eg, section) []: # スキップ
+Common Name (e.g. server FQDN or YOUR name) []: # URLを入力する（一番大事）
+Email Address []: # スキップ
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []: # スキップ
+An optional company name []: # スキップ
+
+// CSRと秘密鍵を確認
+$ ls -l
+server.csr
+server.key
+
+// CSRの中身をテキスト形式で確認
+$ openssl req -in server.csr -noout -text
+```
+
+秘密鍵とCSRを同時に生成したい場合は
+`-key`の代わりに
+`-newkey`と`-keyout`を同時に使用します。
+
+`-newkey rsa:ビット長`は、鍵長を変更するオプションです。
+デフォルトは`rsa:2048`です。
+鍵アルゴリズムと鍵長は、利用する認証局サービスが対応しているかも確認が必要です。
+生成された秘密鍵は`-key`オプションで指定した鍵と同様に扱われ、CSRや証明書の作成に使用されます。
+
+`-keyout`は、`-key`と同じように秘密鍵のパスを指定するオプションです。
+拡張子は`.key`とするのが一般的で、上記では`server.key`としました。
+このファイルは、CSRを作成する秘密鍵として使用され、SSL証明書を設置するサーバーに配置する秘密鍵です。
 
 作成したCSRは`openssl req -in server.csr`で展開して確認できます。
 `Subject:...`などが設定した値になっていればOKです。
@@ -155,83 +225,6 @@ UPKI証明書サービスの場合、
 一般的には`/etc/ssl/certs/`に配置すればよいはずですが、
 具体的なパスはサーバーの設定ファイル（`/etc/httpd.cnf`など）を確認してください。
 正しいパスに証明書を配置したら、サーバーを再起動します。
-
-## CSRを作成したい（`openssl req -new`）
-
-```console
-// CSRを新規作成
-$ openssl req -new -noenc -newkey rsa:2048 -keyout server.key -out server.csr
-// CSRに必要なDN情報を入力する
-// -----
-Country Name (2 letter code) []: JP # 国名を2文字で入力する
-State or Province Name (full name) [Some-State]: Xxxxx # 県名を入力する
-Locality Name (eg, city) []: # 都市名
-Organization Name (eg, company) []: # 機関名
-Organizational Unit Name (eg, section) []: # スキップ
-Common Name (e.g. server FQDN or YOUR name) []: # URLを入力する（一番大事）
-Email Address []: # スキップ
-
-Please enter the following 'extra' attributes
-to be sent with your certificate request
-A challenge password []: # スキップ
-An optional company name []: # スキップ
-
-// CSRと秘密鍵を確認
-$ ls -l
-server.csr
-server.key
-
-// CSRの中身をテキスト形式で確認
-$ openssl req -in server.csr -noout -text
-```
-
-`openssl req`コマンドで証明書署名要求（CSR）ファイルを操作できます。
-
-`-new`は、CSRを対話的に新規作成するオプションです。
-DN情報を入力するプロンプトが表示されるので、必要な情報を適宜入力します。
-
-:::{note}
-
-DN情報（Distinguished Name）は、証明書の所有者を一意に識別するための情報です。
-
-```text
-/C=JP       # Country: 国コード（2文字）
-/ST=Aichi   # State/Province: 都道府県名
-/L=Nagoya city     # Locality: 市区町村名
-/O=Nagoya University    # Organization: 組織名
-/OU=[skip]    # Organization Unit: 部署名; スキップ
-/CN=www.example.com    # Common Name: 証明書を設定するFQDN（ホスト名）
-```
-
-大学や研究機関の場合、CN以外は規定値があるかもしれません。
-まず、関連部局の担当者に確認するとよいです。
-
-:::
-
-`-keyout`は、秘密鍵のファイル名を指定するオプションです。
-拡張子は`.key`とするのが一般的です。
-ここでは秘密鍵を`server.key`としました。
-このファイルは、SSL証明書を設置するサーバーに配置します。
-
-`-out`は、CSRのファイル名を指定するオプションです。
-拡張子は`.csr`とするのが一般的です。
-CSRを`server.csr`としました。
-このファイルを認証局に提出します。
-
-`-newkey rsa:ビット長`は、鍵長を変更するオプションです。
-デフォルトは`rsa:2048`です。
-鍵アルゴリズムと鍵長は、利用する認証局サービスが対応しているかも確認が必要です。
-生成された秘密鍵は`-key`オプションで指定した鍵と同様に扱われ、CSRや証明書の作成に使用されます。
-
-`-noenc`は、パスフレーズなしの秘密鍵を生成するオプションです。
-パスフレーズありのほうが、セキュリティ的に安全なのですが、ウェブサーバーの再起動時にパスフレーズの手動入力が必要になります。
-ここでは、ウェブサーバーの再起動を自動化するため、あえてパスフレーズなしにしています。
-
-:::{caution}
-
-秘密鍵は平文で保存されるため、アクセス権限の管理には注意してください。
-
-:::
 
 ## 自己署名証明書したい（`openssl req -x509`）
 
