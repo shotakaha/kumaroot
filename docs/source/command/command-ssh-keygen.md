@@ -1,4 +1,4 @@
-# SSH鍵したい（`ssh-keygen`）
+# SSH鍵したい（`ssh-keygen` / `ssh-add`）
 
 ```console
 // SSH鍵ペアの確認
@@ -6,7 +6,7 @@ $ ssh-keygen -l
 Enter file in which the key is (~/.ssh/id_ed25519):
 
 // SSH鍵ペアの生成
-$ ssh-keygen -t ed25519
+$ ssh-keygen
 
 // SSH鍵ペアの登録
 $ ssh-add
@@ -123,25 +123,20 @@ ed25519鍵を作成した場合は、デフォルトで
 ## 鍵アルゴリズムを変更したい（`ssh-keygen -t`）
 
 ```console
-// RSA鍵
+// ed25519鍵（デフォルト）
 $ ssh-keygen
-id_rsa
-id_rsa.pub
+id_ed25519
+id_ed25519.pub
 
-// DSA鍵（1024ビット推奨）
-$ ssh-keygen -t dsa
-id_dsa
-id_dsa.pub
-
-// ECDSA鍵（256ビット推奨）
+// ECDSA鍵
 $ ssh-keygen -t ecdsa
 id_ecdsa
 id_ecdsa.pub
 
-// EdCSA鍵（256ビット推奨）
-$ ssh-keygen -t ed25519
-id_ed25519
-id_ed25519.pub
+// RSA鍵
+$ ssh-keygen -t rsa
+id_rsa
+id_rsa.pub
 ```
 
 `-t`オプションで鍵アルゴリズムを変更できます。
@@ -181,25 +176,32 @@ $ ssh-keygen -t ecdsa -b 521
 
 :::
 
-## 鍵の名前を変更したい（`ssh-keygen -f`）
+## サービスごとに鍵を作成したい（`ssh-keygen -f`）
 
 ```console
 // GitHub用
-$ ssh-keygen -t ed25519 -f ~/.ssh/github_ed25519
+$ ssh-keygen -f ~/.ssh/github_ed25519
+
 // GitLab用
-$ ssh-keygen -t ed25519 -f ~/.ssh/gitlab_ed25519
+$ ssh-keygen -f ~/.ssh/gitlab_ed25519
 ```
 
 `-f`オプションで、SSH鍵ぺアのファイル名を変更できます。
-このようにして、サービスごとに鍵を生成できます。
+このようにしてサービスごとに鍵を切り替えることができます。
+
+:::{seealso}
+
+[SSHの設定ファイル](./command-ssh.md)の`IdentityFile`に秘密鍵のパスを設定することで、サービスごとに自動切り替えできます。
+
+:::
 
 :::{hint}
 
-ある秘密鍵が漏洩してしまった場合、その鍵ペアを無効（削除）にする必要があります。
-つまり、関連するすべてのサービスの再設定が必要になります。
+ある秘密鍵が漏洩してしまった場合、その鍵ペアを無効化する必要があります。
+具体的には、関連するすべてのサービスから該当する公開鍵を削除し、必要に応じて新しい鍵ペアを作成・登録しなおす必要があります。
 
-サービスごとに鍵を生成していた場合は、当該鍵ペアを無効にして、再設定すればOKです。
-ただし、サービス数が増えると管理が煩雑になります。
+サービスごとに鍵を生成していた場合は、当該サービスに対応する鍵ペアのみを無効化して、再設定すればOKです。
+ただし、サービス数が増えると鍵の管理は煩雑になります。
 サービスごとに鍵を生成するかどうかは、ユーザー自身の利用形態に合わせて検討してみてください。
 
 :::
