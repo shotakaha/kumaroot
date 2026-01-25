@@ -15,11 +15,11 @@ OpenSSLを使ったさまざまな操作ができます。
 
 :::
 
-## CSRしたい（`openssl req`）
+## CSRを作成したい（`openssl req -new`）
 
 ```console
 // CSRを新規作成
-$ openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr
+$ openssl req -new -noenc -newkey rsa:2048 -keyout server.key -out server.csr
 // CSRに必要なDN情報を入力する
 // -----
 Country Name (2 letter code) []: JP # 国名を2文字で入力する
@@ -34,37 +34,23 @@ Please enter the following 'extra' attributes
 to be sent with your certificate request
 A challenge password []: # スキップ
 An optional company name []: # スキップ
+
+// CSRと秘密鍵を確認
+$ ls -l
+server.csr
+server.key
+
+// CSRの中身をテキスト形式で確認
+$ openssl req -in server.csr -noout -text
 ```
 
 `openssl req`コマンドで証明書署名要求（CSR）ファイルを操作できます。
-`-new`オプションで、秘密鍵（`.key`）と証明書署名要求（`.csr`）を新規に生成できます。
-`-keyout`と`-out`で生成するファイル名を指定できます。
-ここでは秘密鍵を`server.key`、CSRを`server.csr`としました。
-
-:::{note}
-
-`-keyout`も`-out`も指定しない場合、`privkey.pem`が生成され、秘密鍵は保存されません。
-認証の申請に必要なのはCSRファイルだけですが、サーバー設定に秘密鍵が必要です。
-秘密鍵も忘れずに保存しましょう。
-
-:::
-
-`-newkey rsa:ビット長`で鍵の長さを変更できます。
-デフォルトは`rsa:2048`です。
-暗号化アルゴリズムとビット長は、利用する認証局サービスが対応しているかも確認が必要です。
-
-`-nodes`は`No DES`（Data Encryption Standard）のことでパスワードなしで秘密鍵を生成できます。
-パスワードありの秘密鍵のほうが、セキュリティ的に安全なのですが、
-サーバーの再起動を自動化したいため、あえてパスワードなしで生成しています。
-
-コマンドを実行すると、DN（Distinguished Name）を入力するダイアログが表示されます。
-必要な情報を適宜入力します。
-
-:::{note}
 
 **証明書署名要求**（CSR; Certificate Signing Request）は、公開鍵基盤（PKI）において証明書を発行してもらうために必要なデータを含んだファイルです。
+ユーザー側で作成したCSRファイルを認証局に提出し、証明書を発行してもらいます。
 
-認証局にCSRファイルを提出し、証明書を発行してもらいます。
+:::{note}
+
 CSRの提出方法は、利用する認証局の手順を確認してください。
 
 大学や研究機関の場合、UPKI（University Public Key Infrastructure）が利用できるかもしれません。
@@ -73,14 +59,68 @@ UPKIは、国立情報学研究所（NII）が運営する
 
 :::
 
+`-new`は、CSRを対話的に新規作成するオプションです。
+DN情報を入力するプロンプトが表示されるので、必要な情報を適宜入力します。
+
+:::{note}
+
+DN情報（Distinguished Name）は、証明書の所有者を一意に識別するための情報です。
+
+```text
+/C=JP       # Country: 国コード（2文字）
+/ST=Aichi   # State/Province: 都道府県名
+/L=Nagoya city     # Locality: 市区町村名
+/O=Nagoya University    # Organization: 組織名
+/OU=[skip]    # Organization Unit: 部署名; スキップ
+/CN=www.example.com    # Common Name: 証明書を設定するFQDN（ホスト名）
+```
+
+大学や研究機関の場合、CN以外は規定値があるかもしれません。
+まず、関連部局の担当者に確認するとよいです。
+
+:::
+
+`-keyout`は、秘密鍵のファイル名を指定するオプションです。
+拡張子は`.key`とするのが一般的です。
+ここでは秘密鍵を`server.key`としました。
+このファイルは、SSL証明書を設置するサーバーに配置します。
+
+`-out`は、CSRのファイル名を指定するオプションです。
+拡張子は`.csr`とするのが一般的です。
+CSRを`server.csr`としました。
+このファイルを認証局に提出します。
+
+`-newkey rsa:ビット長`は、鍵長を変更するオプションです。
+デフォルトは`rsa:2048`です。
+鍵アルゴリズムと鍵長は、利用する認証局サービスが対応しているかも確認が必要です。
+生成された秘密鍵は`-key`オプションで指定した鍵と同様に扱われ、CSRや証明書の作成に使用されます。
+
+`-noenc`は、パスフレーズなしの秘密鍵を生成するオプションです。
+パスフレーズありのほうが、セキュリティ的に安全なのですが、ウェブサーバーの再起動時にパスフレーズの手動入力が必要になります。
+ここでは、ウェブサーバーの再起動を自動化するため、あえてパスフレーズなしにしています。
+
+:::{caution}
+
+秘密鍵は平文で保存されるため、アクセス権限の管理には注意してください。
+
+:::
+
+## CSRを確認したい（`openssl req -in`）
+
 ```console
 // CSRを確認
 $ openssl req -in 証明書署名要求.csr -noout -text
 ```
 
-CSRが承認されると、証明書が発行されます。
+作成したCSRの内容をテキスト形式で確認します。
+`Subject:...`が設定した値になっていることを確認します。
+内容に間違いがなければ、認証局に提出します。
+
+## CSRを配置したい
+
+提出したCSRが承認されると、証明書が発行されます。
 おそらくサービスのメールなどで通知があると思います。
-通知内容にしたがって`.crt`ファイルを取得します。
+通知内容にしたがって証明書ファイル（`.crt`）を取得します。
 必要であれば、中間証明書も取得します。
 
 これらのファイルを、サーバーの適切なパスにアップロードし、サーバーを設定します。
@@ -88,7 +128,7 @@ CSRが承認されると、証明書が発行されます。
 具体的なパスはサーバーの設定ファイル（`/etc/httpd.cnf`など）を確認してください。
 正しいパスに証明書を配置したら、サーバーを再起動します。
 
-## 自己署名証明書したい（`-x509`）
+## 自己署名証明書したい（`openssl req -x509`）
 
 ```console
 // 自己署名証明書
@@ -141,20 +181,20 @@ $ openssl x509 -in 証明書.pem -noout -dates
 
 :::
 
-## 秘密鍵したい（`genpkey`）
+## 秘密鍵を生成したい（`openssl genpkey`）
 
 ```console
-// RSA鍵（古いコマンド）
-$ openssl genrsa -out private.key 2048
-
-// RSA鍵（新しいコマンド）
+// RSA鍵
 $ openssl genpkey -algorithm RSA -out private.key -pkeyopt rsa_keygen_bits::2048
 
-// ED25519鍵
+// ed25519鍵
 $ openssl genpkey -algorithm ED25519 -out private_ed25519.key
+
+// 古いコマンド
+$ openssl genrsa -out private.key 2048
 ```
 
-`openssl genpkey`で秘密鍵（private key）を生成できます。
+`openssl genpkey`で秘密鍵を生成できます。
 
 :::{note}
 
