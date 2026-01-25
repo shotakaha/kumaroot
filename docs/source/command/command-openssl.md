@@ -2,7 +2,7 @@
 
 ```console
 $ openssl version
-OpenSSL 3.4.0 22 Oct 2024 (Library: OpenSSL 3.4.0 22 Oct 2024)
+OpenSSL 3.6.0 1 Oct 2025 (Library: OpenSSL 3.6.0 1 Oct 2025)
 ```
 
 `openssl`コマンドで、暗号化やSSL/TLS、証明書操作、鍵作成など、
