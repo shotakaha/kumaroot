@@ -56,11 +56,36 @@ upstream  DISABLED
 ## 元のリポジトリの最新状態を取得したい
 
 ```console
+// 作業ブランチをmainに切り替える
 $ git switch main
+
+// upstreamから最新情報を取得する
 $ git fetch upstream
+
+// upstream/main を 自分のmainに取り込む
 $ git merge upstream/main
-$ git push origin
+
+// 自分のリポジトリのmainを更新する
+$ git push origin main
 ```
+
+フォーク開発をしていると、元のリポジトリと、自分のリポジトリの間に差が生じます。
+定期的に`upstream`の変更を取り込み、乖離しすぎないように注意しましょう。
+
+:::{note}
+
+こまめに作業している場合は、とくに問題にならないかもしれませんが、しばらく放っておくとあっという間に乖離します。
+乖離しすぎた場合は、フォークを作り直すのもひとつの選択肢だと思います。
+
+:::
+
+```console
+$ git rebase upstream/main
+```
+
+元のリポジトリの変更を取り込むときには
+`merge`の代わりに`rebase`を使うこともできます。
+どちらを使うかはリポジトリごとの管理ポリシーや開発方針を参考にして判断してください。
 
 ## 元のリポジトリへのプッシュを禁止したい
 
