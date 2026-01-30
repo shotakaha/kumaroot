@@ -67,3 +67,22 @@ Apacheには本体の実行ファイル（`httpd` / `apache`）と、専用の�
 たとえば、上記サンプルにある設定ファイルの文法チェックは`apachectl`のサブコマンドです。
 
 :::
+
+## SSHしたい（`sshd`）
+
+```console
+$ systemctl status sshd
+$ systemctl restart sshd
+```
+
+`sshd`はOpenSSHのサーバー側のデーモンです。
+サーバー側の`sshd`が起動していないと、SSH接続ができません。
+
+```console
+// 設定ファイルの文法チェック
+$ sshd -t
+
+// 設定を確認
+$ sshd -T
+$ sshd -T | grep passwordauthentication
+```
