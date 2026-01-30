@@ -1,11 +1,30 @@
 # フォーク開発したい
 
 ```console
-// GitHub上でフォークしたリポジトリ
+$ gh repo fork OWNER/REPO
+```
+
+「フォーク」とは第三者のリポジトリを自分のアカウントにコピーする作業です。
+これにより、自分のリポジトリを作業スペースとして、元の開発に安全に協力できます。
+
+GitHub上のリポジトリは`gh`コマンドでフォーク＆クローンを作成できます。
+
+:::{note}
+
+GitLabにもフォーク機能はありますが、
+フォークを活用した共同開発は、
+どちらかといえばGitHubに根付いている文化のようです。
+
+:::
+
+## 手動でフォークしたい
+
+```console
+// GitHub上で「自分がフォークした」リポジトリ
 $ git clone https://github.com/YOUR_USERNAME/REPOSITORY_NAME.git
 $ cd REPOSITORY_NAME
 
-// 元のリポジトリをupstreamとして追加
+// 「元のリポジトリ」をupstreamとして登録
 $ git remote add upstream https://github.com/ORIGINAL_OWNER/REPOSITORY_NAME.git
 
 $ git remote --verbose
@@ -14,14 +33,19 @@ origin    https://github.com/YOUR_USERNAME/project.git (push)
 upstream  https://github.com/ORIGINAL_OWNER/project.git (fetch)
 upstream  https://github.com/ORIGINAL_OWNER/project.git (push)
 
-// 事故防止
+// 事故防止：upstreamにpush禁止
 $ git remote set-url --push upstream DISABLED
+
+// 設定を確認
 $ git remote --verbose
 origin    https://github.com/YOUR_USERNAME/project.git (fetch)
 origin    https://github.com/YOUR_USERNAME/project.git (push)
 upstream  https://github.com/ORIGINAL_OWNER/project.git (fetch)
 upstream  DISABLED
 ```
+
+ブラウザなどでフォークしたリポジトリを、手動でクローンしてセットアップする手順です。
+`upstream`として設定したオリジナルのリポジトリに`git push`できないようにすることで、誤操作を防ぎ、安全に管理できるようにしています。
 
 :::{seealso}
 
