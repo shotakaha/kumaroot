@@ -13,7 +13,7 @@
 - **command-openssl**: update self-signed certificate with -noenc and add step-by-step example
 - **command-openssl**: comprehensive CSR and key generation documentation improvements
 - **command-openssl**: update OpenSSL version to 3.6.0
-- **command-***: add cross-references between cryptography tools
+- **command-**: add cross-references between cryptography tools
 - **command-ssh-keygen**: add seealso section about public key cryptography tools
 - **command-ssh-keygen**: add cross-platform public key copying examples
 - **command-ssh-keygen**: enhance ssh-copy-id documentation with security notes
