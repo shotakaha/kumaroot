@@ -1,9 +1,36 @@
 # キーバインドを表示したい（``command+k`` + ``command+s``）
 
-- {kbd}`command + k` + {kbd}`command + s`
-- {kbd}`command + k` + {kbd}`command + r`
+- {kbd}`command+k` + {kbd}`command+s`: `Preferences: Open Keyboard Shortcuts`
+- {kbd}`command+k` + {kbd}`command+r`: `Help: Keyboard Shortcuts Reference`
 
-## キーバインドを削除したい
+## キーバインドを追加したい
+
+```json
+[
+    {
+        "key": "...",
+        "command": "...",
+        "when": "..."
+    },
+]
+```
+
+キーバインド設定は`keybindings.json`に上記のJSON形式で追加できます。
+`key`フィールドにショートカットキー、
+`command`フィールドに実行するコマンド、
+`when`フィールドには実行時の条件（＝コンテクスト）を記述します。
+
+:::{note}
+
+`when`フィールドの設定はオプションですが、
+カスタムのキーバインドを設定する場合には、
+なるべくコンテクストを制限しておくほうが安全です。
+
+:::
+
+## キーバインドを上書きしたい
+
+## キーバインドを無効にしたい
 
 ```json
 {
