@@ -167,6 +167,56 @@ Path.cwd()
 ホームディレクトリとカレントディレクトリを取得する``Path``のクラスメソッドがあります。
 ``Path.home()``と``Path.cwd()``でそれぞれのディレクトリ名を``Path``オブジェクトとして取得できます。
 
+## パスを整理したい
+
+```python
+from pathlib import Path
+import pandas as pd
+from typing import Literal
+
+def resolve_paths(
+    src: Path | Literal["random"],
+    pattern: str = "*.csv"
+) -> Path | Literal["random"] | list[Path]:
+
+    # 1. 特別な値を優先して処理
+    if src == "random":
+        return "random"
+
+    # 2. Pathオブジェクトに正規化
+    path = Path(src)
+
+    # 3. パスを確認
+    if not path.exists():
+        raise FileNotFoundError(path)
+
+    # 4. ファイルの場合
+    if path.is_file():
+        files: list[Path] = [path]
+        return files
+
+    # 5. ディレクトリの場合
+    if path.is_dir():
+        files: list[Path] = sorted(path.glob(pattern))
+        return files
+
+    # 6. 念のため
+    raise RuntimeError(f"Unsupported path type: {path}")
+
+
+resolved = resolve_paths(src)
+if resolved == "random":
+    # pd.DataFrameをランダムな値で生成（別の関数）
+    pass
+else:
+    # 読み込んだファイルをひとつのpd.DataFrameに変換
+    df = pd.concat(pd.read_csv(p) for p in resolved)
+```
+
+データ解析するときに、よく使うファイル読み込みの構成です。
+ファイルまたはディレクトリのどちらを指定しても、ひとつの`pd.DataFrame`に変換できます。
+また、`"random"`などの条件で専用の処理にも分岐できます。
+汎用性が高いため`resolve_paths`という名前のヘルパー関数として使っています。
 
 ## リファレンス
 
