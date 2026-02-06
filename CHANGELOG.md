@@ -1,5 +1,17 @@
 # CHANGELOG.md
 
+## v2026.2.0 (2026-02-07)
+
+### Fix
+
+- **python-pathlib**: fix syntax errors in path resolution example
+- **vscode-keybind**: enhance keyboard shortcuts documentation with setup instructions
+- **command-ssh**: improve SSH documentation with key management and configuration examples
+- **command-systemctl**: add SSH service management documentation
+- **git-fork**: enhance upstream sync documentation and rebase alternatives
+- **git-fork**: improve fork setup documentation with gh command and safety notes
+- **command-systemctl**: improve service management documentation
+
 ## v2026.1.6 (2026-01-25)
 
 ### Fix
