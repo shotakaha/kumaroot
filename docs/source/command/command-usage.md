@@ -92,6 +92,7 @@ command-apt
 command-asdf
 command-brew
 command-cmake
+command-dnf
 command-docker
 command-gem
 command-mise
