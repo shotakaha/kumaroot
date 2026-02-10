@@ -67,6 +67,35 @@ UIや可視化を担当するマネージャーが初期化されます。
 シミュレーションを構成する各要素を組み立て、
 実行を開始する準備を行なっています。
 
+## 検出器したい（`DetectorConstruction`）
+
+検出器の形状や材料は`DetectorConstruction`クラスで定義します。
+`basic/B1`では、
+シミュレーション空間全体を表すWorldボリュームを作成し、
+その内部に検出器となる単純な箱形状のボリュームを配置しています。
+
+また、エネルギー損失を記録するための`Scoring Volume`もここで設定しています。
+
+:::{note}
+
+`basic/B1`はSensitive Detectorを使いません。
+Sensitive Detectorを使ったヒット情報の扱いは、
+`basic/B2`などのサンプルを参照してください。
+
+:::
+
+## 物理リストしたい（`QBBC`）
+
+`basic/B1`では、Geant4標準のモジュール型物理リストにある`QBBC`モデルを使っています。
+`QBBC`は、電磁相互作用、ハドロン相互作用、崩壊過程などを含んだ汎用的で安全な物理リストです。
+
+## 入射粒子したい（`PrimaryGeneratorAction`）
+
+`basic/B1`の入射粒子は、
+`PrimaryGeneratorAction`で`G4ParticleGun`を使って定義されています。
+初期状態では、電子を6 MeVで +Z方向に入射しています。
+この入射粒子はマクロで変更できます。
+
 ``console
 $ tree B1 -L 2
 B1
