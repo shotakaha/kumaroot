@@ -1,11 +1,12 @@
-# B2したい（``examples/basic/B2``）
+# B2したい（`examples/basic/B2`）
 
 ![](./fig/exampleB2.png)
 
-B2の題材は飛跡検出器です。
+`examples/basic/B2`は、固定標的と複数のチェンバーを並べた飛跡検出器です。
 外部磁場を与え、粒子が曲がる様子を観察できます。
+`Sensitive Detector`と`Hit`の扱いを学ぶことができます。
 
-## ビルドしたい（``cmake``）
+## ビルドしたい（`cmake`）
 
 ```console
 $ cd examples/basic/B2/B2a
@@ -16,9 +17,36 @@ $ cd examples/basic/B2/B2a
 (B2a/build) $ ./exampleB2a
 ```
 
-``examples/basic/B2/``の中には``B2a``と``B2b``のディレクトリがあります。
+`examples/basic/B2/`の中には
+`B2a`と`B2b`のディレクトリがあります。
 シミュレーションできることは同じなので、どちらをビルドしてもOKです。
 マクロファイルが用意されているので、適当に実行して遊んでみます。
+
+## メイン（`exampleB2a.cc`）
+
+## 検出器したい（`DetectorConstruction`）
+
+`B2a`の検出器は、固定標的と複数の円筒型トラッカーで構成されています。
+固定標的は入射粒子が最初に衝突する部分で、その材質はマクロで変更できます。
+
+円筒型トラッカーは、ターゲットと同軸に複数枚配置されています。
+それぞれ`Sensitive Detector`に割り当てられ、ヒット情報やエネルギー損失を記録できるようになっています。
+トラッカーの材質もマクロで変更できます。
+
+## 物理リストしたい（`FTFP_BERT`）
+
+`basic/B1`では、Geant4標準のモジュール型物理リストにある`FTFP_BERT`モデルを使っています。
+`FTFP_BERT`は、高エネルギー側で`FTFP`、低エネルギー側で`BERT`に自動で切り替わるようになっている物理モデルです。
+
+## 入射粒子したい（`PrimaryGeneratorAction`）
+
+入射粒子は`PrimaryGeneratorAction`で`G4ParticleGun`を使って生成されます。
+この粒子はマクロで変更できます。
+
+## 一様磁場したい（`G4GlobalMagFieldMessenger`）
+
+`B2a`サンプルでは、飛跡検出器全体に一様な磁場を設定できます。
+磁場は`G4GlobalMagFieldMessenger`で定義され、値を非ゼロにすると、全体に磁場が作用し、荷電粒子の飛跡が曲がるようになります。
 
 ## ``run1.mac``
 
@@ -63,43 +91,7 @@ $ cd examples/basic/B2/B2a
 /run/beamOn 3
 ```
 
-## 測定器はどうなってるの？
 
-- world: 直方体（``G4Box``）、空気（``G4_AIR``）
-- target: 円柱（``G4Tubs``）、鉛（``G4_Pb``）
-- chamber: 円柱（``G4Tubs``）、Xeガス（``G4_Xe``）
-
-```cpp
-for (G4int copy_number=0; copy_number < fNumberOfChambers; copy_number++>){
-    G4double z = first_position + copy_number * chamber_spacing;
-    G4double rmax = rmax_first + copy_number * rmax_increment;
-    auto chamberSolid = new G4Tubs("ChamberSolid", 0, rmax, halfwidth, 0.*deg, 360.*deg);
-    fLogicalChamber[copy_number] = G4Tubs(chamberSolid, "Xe", "chamberLogical");
-    new G4PVPlacement(
-        nullptr,
-        G4ThreeVector(0, 0, z),
-        "ChamberLogical",
-        fLogicalTracker,
-        false,
-        copy_number,
-        fCheckOverlaps);
-}
-```
-
-``fNumberOfChambers``の数だけforループを回して、トラッカー（飛跡検出器）を設置しています。
-``copy_number``をインクリメントして、トラッカーごとに設定しています。
-
-
-```cfg
-# run1.mac
-/B2/det/setTargetMaterial G4_WATER
-/B2/det/setChamberMaterial G4_Ar
-```
-
-マクロで測定器の材質を変更しています。
-どうやってるんだろう？
-
-## 相互作用はどうなってるの？
 
 ## 外部磁場はどうなってるの？
 
