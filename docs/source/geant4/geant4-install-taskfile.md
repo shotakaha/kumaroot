@@ -21,45 +21,50 @@ Geant4のバージョンを指定すればうまく動くはずです。
 ## タスクを分割したい
 
 ```yaml
-# Taskfile.yml
+# ~/geant4/Taskfile.yml
 #
-# 1. Create Workspaces
-# mkdir -p $HOME/geant4/v11.2.1
+# Usage:
+# vi Taskfile.yml  # Edit G4VERSION
+# task download
+# task configure
+# task build
+# task install
+
+# Tasks:
+# Preparation
+# 1. Install Dependencies (once)
+# 2. Create Workspaces (once)
 #
-# 2. Download source code from the repository
-# cd $HOME/geant4
-# wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.2.1/geant4-v11.2.1.zip
-# unzip geant4-v11.2.1.zip
-#
-# 3. Move source code
-# cd $HOME/geant4
-# mv geant4-v11.2.1.zip archives/
-# mv geant4-v11.2.1 v11.2.1/source
-#
+# Main process
+# 1. Download source code from Geant4 repository
+# 2. Unzip source code
 # 3. Configure
-# cd $HOME/geant4/v11.2.1
-# cmake -DCMAKE_INSTALL_PREFIX="$(pwd)/install" -S "$(pwd)/source" -B "$(pwd)/build" --preset プリセット名
+# 4. Build
+# 5. Install
 #
-# 4. Build & Install
-# cd $HOME/geant4/v11.2.1
-# cmake --build build --parallel 8
-# cmake --install build
+# Cleanup
+# 1. Remove install directory
+# 2. Remove build directory
+# 3. Remove build and install directory
+
 
 version: "3"
 
 vars:
-  G4VERSION: "v11.2.1"
-  # home
+  # Edit the version
+  G4VERSION: "v11.4.0"
+  # Home
   G4HOME: "{{.HOME}}/geant4"
   G4WORK: "{{.G4HOME}}/{{.G4VERSION}}"
-  # download
+  # Download
   G4NAME: "geant4-{{.G4VERSION}}"
   G4ZIP: "{{.G4NAME}}.zip"
   G4URL: "https://gitlab.cern.ch/geant4/geant4/-/archive/{{.G4VERSION}}/{{.G4ZIP}}"
   # configure
   GENERATOR: "Ninja"
   QT_PATH:
-    sh: brew --prefix qt@5
+    # sh: brew --prefix qt@5  # enable if G4VERSION < v11.4.0
+    sh: brew --prefix qt      # enable if G4VERSION >= v11.4.0
 
 env:
   G4SOURCE: "{{.G4WORK}}/source"
@@ -74,7 +79,8 @@ tasks:
       - brew install wget
       - brew install cmake
       - brew install --cask xquartz
-      - brew install qt@5
+      # - brew install qt@5  # enable if G4VERSION < v11.4.0
+      - brew install qt      # enable if G4VERSION >= v11.4.0
       - brew install ninja
 
   setup:
@@ -112,7 +118,7 @@ tasks:
     desc: Configure with CMake
     dir: "{{.G4WORK}}"
     cmds:
-      - cmake -G {{.GENERATOR}} -S source -B build -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH={{.QT_PATH}} -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT+ON -DGEANT4_USE_SYSTEM_ZLIB=ON
+      - cmake -G {{.GENERATOR}} -S source -B build -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH={{.QT_PATH}} -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON
 
   build:
     desc: Build Geant4 with CMake
