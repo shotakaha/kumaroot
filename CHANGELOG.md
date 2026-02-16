@@ -1,5 +1,18 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **geant4-install-taskfile**: improve Taskfile.yml documentation and update to v11.4.0
+- **geant4-examples-b1**: add directory structure section and clean up formatting
+- **geant4-examples-b2**: improve documentation structure and add component sections
+- **geant4-examples-b1**: enhance primary generator section explanation
+- **geant4-examples-b1**: add sections for detector, physics list, and particle generation
+- **geant4-examples-b1**: improve documentation structure and explanations
+- **geant4-examples**: improve documentation and formatting
+- **command-dnf**: add dnf package manager documentation
+
 ## v2026.2.0 (2026-02-07)
 
 ### Fix
