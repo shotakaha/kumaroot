@@ -167,6 +167,7 @@ maxdepth: 2
 ---
 geant4-sensor
 geant4-sensor-examples
+geant4-sipm
 ```
 
 ## マテリアル操作したい
