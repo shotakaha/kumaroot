@@ -4,6 +4,7 @@
 
 ### Fix
 
+- **geant4-sipm**: add SiPM photosensor implementation guide
 - **geant4-install-taskfile**: improve Taskfile.yml documentation and update to v11.4.0
 - **geant4-examples-b1**: add directory structure section and clean up formatting
 - **geant4-examples-b2**: improve documentation structure and add component sections
