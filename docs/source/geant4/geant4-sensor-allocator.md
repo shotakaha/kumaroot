@@ -67,7 +67,7 @@ SensorHitAllocator->FreeSingle(型名)
 `FreeSingle`は、`MallocSingle`で割り当てたメモリを再びメモリプールに返す関数です。
 C++標準の`free`に相当します。
 
-通常は、`new`演算子（`operator delete`）をオーバーロードして使います。
+通常は、`delete`演算子（`operator delete`）をオーバーロードして使います。
 
 ```cpp
 void SensorHit::operator delete(void *hit)
@@ -103,11 +103,7 @@ extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
 
 `G4Allocator`はユーザー定義のヒットクラスと同じファイルで宣言します。
 `SensorHitAllocator`のようにグローバルに定義することで、
-どこからでも`MallocSingl()e`、`FreeSingle()`を呼び出して効率的にメモリを管理できます。
-
-```cpp
-extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
-```
+どこからでも`MallocSingle()`、`FreeSingle()`を呼び出して効率的にメモリを管理できます。
 
 Geant4はマルチスレッド環境がデフォルトになっているため、
 各スレッドが独立してアロケーターを保持できるように`G4ThreadLocal`を併用します。
@@ -129,7 +125,7 @@ void* SensorHit::operator new(size_t)
     //     SensorHit *hit = new SensorHit();
     // }
     // 1. SensorHitAllocatorに割り当てられたメモリのポインターを取得する
-    // 2. 初期化されてない場合は、新しくG4Allocator<TrackerHit>オブジェクトを作成
+    // 2. 初期化されてない場合は、新しくG4Allocator<SensorHit>オブジェクトを作成
     if(!SensorHitAllocator) {
         SensorHitAllocator = new G4Allocator<SensorHit>;
     }
@@ -162,7 +158,7 @@ void SensorHit::operator delete(void *hit)
 `SensorHitAllocator->FreeSingle(...)`でメモリプールに返却し、
 再利用できる状態にします。
 
-## 割り当てサイズをしりたい（``GetAllocatedSize``）
+## 割り当てサイズをしりたい（`GetAllocatedSize`）
 
 ```cpp
 // 割り当てられた合計サイズ
@@ -175,7 +171,7 @@ G4int page_size = SensorHitAllocator->GetPageSize();
 G4int n_pages = SensorHitAllocator->GetNoPages();
 ```
 
-``GetAllocatedSize``で、割り当てられたメモリの合計サイズを確認できます。
+`GetAllocatedSize`で、割り当てられたメモリの合計サイズを確認できます。
 
 ## リファレンス
 
