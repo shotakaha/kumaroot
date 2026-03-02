@@ -11,26 +11,27 @@ extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
 G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator = nullptr;
 ```
 
-`G4Allocator<T>`は、テンプレートクラスであり、
-型`T`のオブジェクトに特化した高速なメモリ管理ユーティリティです。
-
-このクラスは、高頻度で生成・破棄されるオブジェクトのメモリ確保・解放の効率を最適化する **メモリプール型のアロケーター** であり、
+`G4Allocator<T>`はGeant4の高速メモリ管理機能です。
+高頻度で生成・破棄されるオブジェクトのメモリ確保と解放の効率を最適化する
+**メモリプール型のアロケーター** であり、
 `G4Step`や`G4Track`の処理などGeant4内部でも利用されています。
+
+ユーザーが明示的に利用する場面は、
+前述した[ユーザー定義のヒットクラス](./geant4-sensor-hit.md)です。
+対象のユーザー定義クラスで
+`operator new()` と `operator delete()` をオーバーロードし、
+その内部で`MallocSingle()` / `FreeSingle()` を呼び出して利用します。
 
 :::{note}
 
-通常の`new` / `delete`演算子は、頻繁なメモリ確保・解放によりオーバーヘッドが大きくなります。
-`G4Allocator`では、あらかじめ確保したメモリブロックを使い回すことで、このオーバーヘッドを大幅に軽減します。
+通常の`new`および`delete`演算子は、動的にメモリを確保・解放するためオーバーヘッドが生じます。
+Geant4のイベント処理では、オブジェクトを大量に生成・削除するため、このオーバーヘッドが大きくなります。
+`G4Allocator`であらかじめ確保したメモリブロックを使い回すことで、このオーバーヘッドを大幅に軽減します。
 
 :::
 
-ユーザーが明示的に利用する場面は、前述した[ユーザー定義のヒットクラス](./geant4-sensor-hit.md)です。
-対象のユーザー定義クラスで
-`operator new()` および `operator delete()` をオーバーロードし、
-その内部で`MallocSingle()` / `FreeSingle()` を呼び出す必要があります。
-
-また、マルチスレッド環境では、`G4Allocator`をスレッドごとに分離するために、
-`G4ThreadLocal`を併用します。
+`G4ThreadLocal`と併用することで、`G4Allocator`をスレッドごとに分離でき、
+マルチスレッド環境でも安全に利用できます。
 
 ## メモリを割り当てたい（`MallocSingle`）
 
@@ -109,7 +110,7 @@ extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
 ```
 
 Geant4はマルチスレッド環境がデフォルトになっているため、
-各スレッドが独立してアロケーターを保持できるよに`G4ThreadLocal`を併用します。
+各スレッドが独立してアロケーターを保持できるように`G4ThreadLocal`を併用します。
 
 また、C++ではグローバル変数を複数のファイルから参照する場合、
 `extern`を使って宣言する必要があります。
@@ -136,7 +137,6 @@ void* SensorHit::operator new(size_t)
 };
 
 
-
 //////////////////////////////////////////////////
 void SensorHit::operator delete(void *hit)
 {
@@ -152,8 +152,15 @@ void SensorHit::operator delete(void *hit)
 };
 ```
 
-`G4Allocator`クラスはGeant4に用意されている高速なメモリアロケーターです。
-C++のメモリ管理に詳しくないひとは、とりあえず使っておけばよいと思います。
+`SensorHitAllocator`は`nullptr`で初期化します。
+
+`new`するときは、`SensorHitAllocator`がまだ確保できていない場合のみ、
+`new G4Allocator<SensorHit>`でアロケーターを生成し、
+`SensorHitAllocator->MallocSingle()`でメモリプールからオブジェクト1つ分の領域を確保します。
+
+`delete`するときは、オブジェクトのメモリをOSに返却せず、
+`SensorHitAllocator->FreeSingle(...)`でメモリプールに返却し、
+再利用できる状態にします。
 
 ## 割り当てサイズをしりたい（``GetAllocatedSize``）
 
