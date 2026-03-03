@@ -1,14 +1,32 @@
 # キーボード設定したい（`/etc/default/keyboard`）
 
-Raspberry Piのキーボードレイアウトやキーマッピングは、`/etc/default/keyboard`ファイルで設定できます。
-
-## Caps Lockを Ctrl に置き換えたい
-
-```bash
-sudo vi /etc/default/keyboard
+```console
+// ファイルを編集する
+$ sudo vi /etc/default/keyboard
+// 再起動する
+$ sudo reboot
 ```
 
-`/etc/default/keyboard`ファイルを編集し、`XKBOPTIONS`行を以下のように変更します。
+`/etc/default/keyboard`を編集して
+Raspberry Piのキーボードレイアウトやキーマッピングを変更できます。
+
+ファイルの編集には管理者権限が必要です。
+また、編集後は再起動が必要です。
+
+## オプションキーしたい（`XKBOPTIONS`）
+
+```bash
+XKBOPTIONS=""
+# XKBOPTIONS="ctrl:nocaps"    # CapsLock -> Ctrlに置き換える
+# XKBOPTIONS="ctrl:swapcaps"  # CapsLock <-> Ctrlを入れ替える
+# XKBOPTIONS="shift:both_capslock"  # 左右のShiftを押してCapsLockを有効化
+# XKBOPTIONS="compose:ralt"  # 右AltキーをComposeキーに置き換える
+```
+
+`XKBOPTIONS`でShift、Control、CapsLockなどの修飾キーのマッピングを変更できます。
+デフォルトは未設定です。
+
+### Caps Lockを Ctrl に置き換えたい（`XKBOPTIONS="ctrl:nocaps"`）
 
 ```diff
 ## /etc/default/keyboard
@@ -21,90 +39,81 @@ XKBMODEL="pc105"
 XKBLAYOUT="us"
 XKBVARIANT=""
 -XKBOPTIONS=""
-+XKBOPTIONS=ctrl:nocaps
++XKBOPTIONS="ctrl:nocaps"
 
 BACKSPACE="guess"
 ```
 
-その後、再起動してください。
+`XKBOPTIONS="ctrl:nocaps"`で、
+Caps LockキーをControlキーに変更できます。
 
-```bash
-sudo reboot
-```
+:::{note}
 
-Caps LockキーがControlキーとして機能するようになります。
+よく使う設定なので、ファイル全体をサンプルとして書いておきます。
 
-## CapsLockとCtrlを入れ替えたい
+:::
 
-```bash
-sudo vi /etc/default/keyboard
-```
-
-`/etc/default/keyboard`ファイルの`XKBOPTIONS`行を以下のように変更します：
+### CapsLockとCtrlを入れ替えたい（`XKBOPTIONS="ctrl:swapcaps"`）
 
 ```diff
 -XKBOPTIONS=""
 +XKBOPTIONS=ctrl:swapcaps
 ```
 
-再起動してください。
+`XKBOPTIONS="ctrl:swapcaps"`で、
+CapsLockキーとControlキーを入れ替えることができます。
 
-```bash
-sudo reboot
+## XKB設定したい
+
+```console
+$ man keyboard
 ```
 
-CapsLockキーとControlキーの役割が入れ替わります。
-
-## /etc/default/keyboard について
-
-`/etc/default/keyboard`ファイルはXKB（X Keyboard Extension）の設定を管理します。
+`/etc/default/keyboard`ファイルはXKB（X Keyboard Extension）の設定を管理するファイルです。
 詳細な設定項目は`man keyboard`で確認できます。
 
-### XKBMODEL
+## キーボードのモデルしたい（`XKBMODEL`）
 
-キーボードのモデル名を設定します。デフォルトは`pc105`（標準的なPC用キーボード）です。
+```bash
+XKBMODEL="pc105"
+# XKBMODEL="pc104"  # PC104キーボード
+```
 
-例：
+`XKBMODEL`でキーボードのモデル名を変更できます。
+デフォルトは`pc105`（標準的なPC用キーボード）です。
 
-- `pc105` - 標準的なPC 105キーボード（推奨）
-- `pc104` - PC 104キーボード
+## キーボードのレイアウトしたい（`XKBLAYOUT`）
 
-### XKBLAYOUT
+```bash
+XKBLAYOUT="us"
+# XKBLAYOUT="jp"  # 日本語配列
+# XKBLAYOUT="gb"  # UK配列
+```
 
-キーボードのレイアウト名です。デフォルトは`us`（USキーボード）です。
+`XKBLAYOUT`でキーボードのレイアウト名です。
+デフォルトは`us`（USキーボード）です。
 
-例：
+## レイアウトのバリアントしたい（`XKBVARIANT`）
 
-- `us` - US配列
-- `jp` - 日本語配列
-- `gb` - UK配列
+```bash
+XKBVARIANT=
+# XKBVARIANT="dvorak"   # Dvorakレイアウト
+# XKBVARIANT="colemak"  # Colemakレイアウト
+```
 
-### XKBVARIANT
-
-キーボードレイアウトのバリアント（変種）です。デフォルトは未設定です。
-
-例：
-- 空文字列（未設定）
-- `dvorak` - Dvorakレイアウト
-- `colemak` - Colemakレイアウト
-
-### XKBOPTIONS
-
-キーボードのオプション設定です。修飾キー（Shift、Controlなど）のマッピングを変更できます。
+`XKBVARIANT`でキーボードレイアウトのバリアント（変種）を変更できます。
 デフォルトは未設定です。
 
-よく使う設定値：
+## 削除キーしたい（`BACKSPACE`）
 
-| オプション | 説明 |
-|----------|------|
-| `ctrl:nocaps` | Caps Lockを Ctrlに置き換え |
-| `ctrl:swapcaps` | Caps Lockと Ctrlを入れ替え |
-| `shift:both_capslock` | 両方の Shiftキーを押して Caps Lockを有効化 |
-| `compose:ralt` | 右 Altキーを Composeキーに設定 |
+```bash
+BACKSPACE="guess"    # 自動判定
+# BACKSPACE="bs"     # VT100準拠
+# BACKSPACE="del"    # VT200準拠
+```
 
-### BACKSPACE
-
-BackspaceキーとDeleteキーの動作を設定します。
+`BACKSPACE`でBackspaceキーとDeleteキーの動作を変更できます。
+デフォルトは`guess`です。
 
 | 値 | 説明 |
 |----|------|
@@ -112,7 +121,7 @@ BackspaceキーとDeleteキーの動作を設定します。
 | `bs` | VT100準拠（Backspace = `^H` (ASCII BS)、Delete = `^?` (ASCII DEL)） |
 | `del` | VT220準拠（Backspace = `^?` (ASCII DEL)、Delete = special sequence） |
 
-### KMAP
+## KMAP
 
 XKBレイアウトの代わりに使用する従来型のキーマップファイルを指定します。
 通常は設定不要です。
