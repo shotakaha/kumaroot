@@ -173,14 +173,15 @@ geant4-sensor-photon
 ## マテリアル操作したい
 
 ```cpp
-auto nm = new G4NistManager::Instance();
-auto air = nm->FindOrBuildMaterial("G4_AIR");
+auto* nm = G4NistManager::Instance();
+auto* air = nm->FindOrBuildMaterial("G4_AIR");
 ```
 
 ```{toctree}
 ---
 maxdepth: 2
 ---
+geant4-material-nistmanager
 geant4-material
 geant4-material-examples
 ```

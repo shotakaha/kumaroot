@@ -1,4 +1,4 @@
-# 元素したい（``G4Material``）
+# 元素したい（`G4Element`）
 
 ```cpp
 #include "G4Material.hh"

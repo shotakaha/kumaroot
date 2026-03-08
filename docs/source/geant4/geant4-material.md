@@ -14,7 +14,6 @@ G4Material *pWater = nm->FindOrBuildMaterial("G4_WATER");
 標準的な素材の場合、``G4NistManager``を使ってNISTのデータベースにある物質や元素を参照して使うのが簡単です。
 
 :::{toctree}
-geant4-material-nistmanager
 geant4-material-table
 geant4-material-material
 geant4-material-element
