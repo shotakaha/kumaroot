@@ -1,15 +1,53 @@
-# OpticalPhysicsしたい（`G4OpticalPhysics`）
+# 光学物理したい（`G4OpticalPhysics`）
 
-`G4OpticalPhysics`は、光子（`G4OpticalPhoton`）などの光学的な相互作用を扱うための物理モジュールです。
-このクラスを`RegisterPhysics`で追加することで、以下のような光に関するプロセスを有効にできます。
+```cpp
+#include "FTFP_BERT.hh"
+#include "G4OpticalPhysics.hh"
+#include "G4OpticalParameters.hh"
 
-- チェレンコフ光（`G4Cerenkov`）
-- シンチレーション光（`G4Scintillation`）
-- 吸収（`G4OpAbsorption`）
-- レイリー散乱（`G4OpRayleigh`）
-- ミー散乱（`G4OpMieHG`）
-- 波長変換（`G4OpWLS``と``G4OpWLS2`）
-- 境界での散乱（`G4OpBoundary`）
+int main()
+{
+    // ベースとなる物理モジュールを指定する
+    auto *physics = FTFP_BERT{};
+    // 光学物理を追加する
+    physics->RegisterPhysics(new G4OpticalPhysics{});
+    // ランマネージャーに登録する
+    rm->SetUserInitialization(physics);
+    // 光学物理のグローバル設定
+    ConfigureOpticalParameters();
+
+    // ランマネージャーを初期化する
+    rm->Initialize()
+}
+```
+
+`G4OpticalPhysics`は、光学光子（`G4OpticalPhoton`）の相互作用を扱うための物理モジュールです。
+`FTFP_BERT`のような物理モジュールには、光学物理のプロセスは含まれていないため、`RegisterPhysics`を使って、ユーザーが「トッピング」することで、光学物理のプロセスを有効にできます。
+
+:::{note}
+
+Geant4では、エネルギー領域や物理プロセスによって「光」のクラスが分かれています。
+`G4Gamma`（ガンマ線）は、keV〜MeV以上の高エネルギー領域の光を「粒子」として扱うクラスです。
+光電効果、コンプトン散乱、対生成などの物理プロセスに対応します。
+`G4OpticalPhoton`（光学光子）は、eV領域（紫外線・可視光・赤外線など）の低エネルギー領域の光を「波」として扱うクラスです。
+反射、屈折、吸収、波長変換などの物理プロセスに対応します。
+また、`G4MaterialPropertiesTable`を使って光学特性を設定が必須です。
+
+:::
+
+## 光学物理のプロセス
+
+
+- 光の発生
+    - チェレンコフ光（`G4Cerenkov`）
+    - シンチレーション光（`G4Scintillation`）
+- 媒質中での輸送
+    - 吸収（`G4OpAbsorption`）
+    - レイリー散乱（`G4OpRayleigh`）
+    - ミー散乱（`G4OpMieHG`）
+    - 波長変換（`G4OpWLS` / `G4OpWLS2`）
+- 境界での散乱
+  - 反射・屈折・全反射（`G4OpBoundary`）
 
 :::{seealso}
 
@@ -21,37 +59,16 @@
 
 :::
 
-## メイン関数（`main`）
+## 光学物理を調整したい（`G4OpticalParameters`）
 
 ```cpp
-int main()
-{
-    // 物理モデルの設定
-    auto* physics = new FTFP_BERT{};
-    physics->RegisterPhysics(new G4OpticalPhysics{});
-    rm->SetUserInitialization(physics);
+#include "G4OpticalParameters.hh"
 
-    // 光学物理のパラメーターを設定（後述）
-    ConfigureOpticalParameters();
-
-    // 実験開始（省略）
-    rm->Initialize();
-    rm->BeamOn();
-
-    delete rm;
-    return 0;
-}
-```
-
-メイン関数で物理モデルを設定する部分を抜粋しました。
-メインの相互作用（`FTFP_BERT`モデル）に
-`OpticalPhysics`を追加し、
-`G4OpticalParameters`のパラメーターを変更しています。
-
-## パラメーターしたい（`G4OpticalParameters`）
-
-```cpp
 void ConfigureOpticalParameters() {
+    // 光学物理のパラメータを管理するための関数
+    // 呼び出すタイミング:
+    // - physics-RegisterPhysics(new G4OpticalPhysics{}) した後
+    // - runManager->Initialize()する前
 
     // OpticalPhysicsのパラメーター設定
     auto* params = G4OpticalParameters::Instance();
@@ -78,8 +95,8 @@ void ConfigureOpticalParameters() {
 }
 ```
 
-`G4OpticalParameters`を使って、光に相互作用パラメーターをグローバルに制御できます。
-`G4OpticalParameters::Instance()`はシングルトンになっているため、どこからでも呼び出すことができます。
+`G4OpticalParameters`を使って、光学物理のパラメーターを変更できます。
+`G4OpticalParameters::Instance()`はシングルトンになっているため、どこからでもグローバルに設定できます。
 
 ## マクロで設定したい（`/process/optical/`）
 
