@@ -1,17 +1,18 @@
-# アクリルを作りたい（``G4_PLEXIGLASS``）
+# アクリルを作りたい（`G4_PLEXIGLASS`）
 
 ```cpp
-G4NistManager *nm = G4NistManager::Instance();
-G4Material *acrylic = nm->FindOrBuildMaterial("G4_PLEXIGLASS");
+auto *nm = G4NistManager::Instance();
+auto *acrylic = nm->FindOrBuildMaterial("G4_PLEXIGLASS");
 ```
 
-``G4_PLEXIGLASS``でアクリル材（アクリル樹脂）を生成できます。
+`G4_PLEXIGLASS`でアクリル材（アクリル樹脂）を生成できます。
+
+アクリル樹脂の化学組成はPMMA（ポリメタクリル酸メチル）ですが、
+Geant4では工業名の「プレキシガラス」で登録されています。
 
 :::{note}
 
-アクリル樹脂で作ったガラスのことを「プレキシガラス」（商標名）と呼ぶそうです。
-この呼び方を知らなかったのでデータシートから検索できず、自分で作るしかないと思っていました。
-構成する元素も密度も同じなので、代用してOKと思います。
+プレキシガラスという呼び方を知らなかったため、データシートなどからアクリル材を検索できず、自分で作るしかないと思っていました。
 
 :::
 
@@ -20,67 +21,84 @@ G4Material *acrylic = nm->FindOrBuildMaterial("G4_PLEXIGLASS");
 ```cpp
 // 名称: ポリメタクリル酸メチル樹脂（polymethyl methacrylate)
 // 略称: PMMA
-// 化学式: C5H8O2
-G4NistManager *nist = G4NistManager::Instance();
-G4Element H = nist->FindOrBuildElement("G4_H");
-G4Element C = nist->FindOrBuildElement("G4_C");
-G4Element O = nist->FindOrBuildElement("G4_O");
+// 化学式: (C5 H8 O2)n
+auto* nm = G4NistManager::Instance();
 
-G4Material *fAcrylic = new G4Material("Acrylic", density=1.19*g/cm3, nelements=3);
-fAcrylic->AddElement(C, 5);
-fAcrylic->AddElement(H, 8);
-fAcrylic->AddElement(O, 2);
+// 元素を取得
+auto* H = nm->FindOrBuildElement("G4_H");
+auto* C = nm->FindOrBuildElement("G4_C");
+auto* O = nm->FindOrBuildElement("G4_O");
+
+// 密度を設定
+G4double density = 1.19 * g/cm3;
+auto* pmma = new G4Material("PMMA", density, 3);
+
+// 原子数比を設定
+pmma->AddElement(C, 5);
+pmma->AddElement(H, 8);
+pmma->AddElement(O, 2);
 ```
 
-プレキシガラスという呼び方を知らなかったので、自分で作ってみました。
-構成する元素の情報はNISTデータを参照しています。
-
-:::{note}
-
-``G4Element``オブジェクトを取得する場合は``FindOrBuildElement``を使います。
-
-:::
+プレキシガラスという呼び方を知らなかったころに、自分で作ってみたサンプルです。
+PMMAの化学式は`(C5 H8 O2)n`で、密度は`1.19 g/cm3`として作成しています。
 
 ## 光学特性したい
 
 ```cpp
-const G4int entries = 17;
+#include "G4PhysicalConstants.hh"
+#include "G4SystemOfUnits.hh"
+#include "G4MaterialPropertiesTable.hh"
+
+#include <vector>
 
 // 光子の波長 [nm]
-G4double photon_wavelength[entries] = {
+// 降順で定義
+std::vector<G4double> wavelengths = {
+    620.*nm,
+    400.*nm, 390.*nm, 380.*nm, 370.*nm, 360.*nm,
+    350.*nm, 340.*nm, 330.*nm, 320.*nm, 310.*nm,
+    300.*nm, 290.*nm, 280.*nm, 270.*nm, 260.*nm,
     200.*nm,
-    260.*nm, 270.*nm, 280.*nm, 290.*nm, 300.*nm,
-    310.*nm, 320.*nm, 330.*nm, 340.*nm, 350.*nm,
-    360.*nm, 370.*nm, 380.*nm, 390.*nm, 400.*nm,
-    620.*nm
-};
+}
 
 // 吸収長
-G4double absorption_length[entries] = {
+std::vector<G4double> absorption_lengths = {
+    9.27*m,
+    9.27*m, 3.86*m, 81.1*cm, 39.4*cm, 21.2*cm,
+    15.7*cm, 13.6*cm, 11.58*cm, 9.81*cm, 7.71*cm,
+    3.48*cm, 1.10*cm, 3.94*mm, 1.46*mm, 0.867*mm,
     0.867*mm,
-    0.867*mm, 1.46*mm, 3.94*mm, 1.10*cm, 3.48*cm,
-    7.71*cm, 9.81*cm, 11.58*cm, 13.6*cm, 15.7*cm,
-    21.2*cm, 39.4*cm, 81.1*cm, 3.86*m, 9.27*m,
-    9.27*m
-    };
+}
 
-// 波長[nm]をエネルギー[eV]に変換
-// E[J] = hv[m] = hc/L[m]
-// E[eV] ~ 1240./L[nm]
-G4double photon_energy[entries];
-for(int i = 0; i<entries; i++) {
-    photon_energy[i] = 1240./photon_wavelength[i] * eV;
+// 波長をエネルギー [eV] に変換
+std::vector<G4double> photon_energies;
+photon_energies.reserve(wavelengths.size());  // メモリを先に確保
+
+for (const auto& length : wavelengths) {
+    // E = (2 * pi * hbar * c) / lambda
+    photon_energies.push_back((CLHEP::twopi * CLHEP::hbarc) / length);
 }
 
 // 光学特性を定義
-G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
+auto* mpt = new G4MaterialPropertiesTable();
+
+// 波長によらない屈折率を設定
 mpt->AddConstProperty("RINDEX", 1.49);
-mpt->AddPropertry("ABSLENGTH", photon_energy, absorption_length, entries);
+// 波長に依存する吸収長を設定
+mpt->AddProperty(
+    "ABSLENGTH",
+    photon_energies.data(),
+    absorption_lengths.data(),
+    wavelengths.size(),
+);
 
 // 光学特性を追加
-fAcrylic->SetMaterialPropertiesTable(mpt);
+pmma->SetMaterialPropertiesTable(mpt);
 ```
 
-アクリルの光学特性を追加しました。
-屈折率は``AddConstProperty``を使って、波長によらず1.49にしました。
-吸収長は``AddProperty``を使って、波長ごとに値が変わるようにしました。
+アクリル材の光学特性を設定するサンプルです。
+波長に依らない特性は`AddConstProperty`、
+波長に依存する特性は`AddProperty`で設定できます。
+
+屈折率は波長によらず1.49、
+吸収長は波長ごとに値が変わるようにしました。
