@@ -1,42 +1,40 @@
-# 定義済みのマテリアルを使いたい（``G4NistManager::Instance``）
+# マテリアル管理したい（`G4NistManager`）
 
 ```cpp
 #include "G4NistManager.hh"
 
-G4NistManager *nm = new G4NistManager::Instance();
-
-G4Element *H = nm->FindOrBuildElement("G4_H")
-G4Element *O = nm->FindOrBuildElement("G4_O")
-
-G4Material *H2O = nm->FindOrBuildMaterial("G4_WATER")
-G4Material *Air = nm->FindOrBuildMaterial("G4_AIR")
+auto* nm = G4NistManager::Instance();
+auto* air = nm->FindOrBuildMaterial("G4_AIR");
 ```
 
-`G4NistManager`は、NIST（National Institute of Standards and Technology）に
-準拠した元素や物質を簡単に取得・生成できるシングルトンです。
+`G4NistManager`で、
+NIST（National Institute of Standards and Technology）のデータベースにある元素や物質を取得できます。
 
-## 物質を取り寄せたい（``G4NistManager::FindOrBuildMaterial``）
+## 物質を取得したい（`G4NistManager::FindOrBuildMaterial`）
 
-``FindOrBuildMaterial``で物質（``G4Material``）を取得できます。
+```cpp
+auto* air = nm->FindOrBuildMaterial("G4_AIR");
+auto* water = nm->FindOrBuildMaterial("G4_WATER");
+auto* vacuum = nm->FindOrBuildMaterial("G4_Galactic");
+```
+
+`G4NistManager::FindOrBuildMaterial`メソッドで
+物質（`G4Material`）を取得できます。
+
 利用可能なマテリアル名は[Geant4 Material Database](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html)を参照してください。
-
-水（``G4_WATER``）、
-空気（``G4_AIR``）、
-素粒子・原子核実験でよく利用するような材料（``G4_lXe``、``G4_PbWO4``、``G4_STAINLESS-STEEL``、``G4_Galactic``（＝真空））なども定義されています。
 
 一般的な物質が欲しい場合は、まずこのデータベースから探すのがよいと思います。
 
-## 元素を取り寄せたい（``G4NistManager::FindOrBuildElement``）
+## 元素を取得したい（`G4NistManager::FindOrBuildElement`）
 
 ```cpp
-G4NistManager *nm = new G4NistManager::GetInstance();
-G4Element *H = nm->FindOrBuildElement("G4_H")
-G4Element *O = nm->FindOrBuildElement("G4_O")
+auto* H = nm->FindOrBuildElement("G4_H")
+auto* O = nm->FindOrBuildElement("G4_O")
 ```
 
-``FindOrBuildElement``メソッドで
-元素（``G4Element``）を取得できます。
-水素（``G4_H``）からカリフォルニウムまでの元素が登録されています。
+`G4NistManager::FindOrBuildElement`メソッドで
+元素（`G4Element`）を取得できます。
+NISTデータベースには水素（`G4_H`）からカリフォルニウムまでの元素が登録されています。
 
 ## 特殊な材料を調達したい（``G4NistManager::BuildMaterialWithNewDensity``）
 
