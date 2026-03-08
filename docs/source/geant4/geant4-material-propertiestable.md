@@ -1,17 +1,23 @@
-# マテリアルのプロパティしたい（``G4MaterialPropertiesTable``）
+# 光学特性したい（`G4MaterialPropertiesTable`）
 
 ```cpp
 // 素材：水（G4_WATER）
-G4NistManager *nm = new G4NistManager::GetInstance();
-G4Material *material = nm->FindOrBuildMaterial("G4_WATER");
+auto* nm = G4NistManager::GetInstance();
+auto* water = nm->FindOrBuildMaterial("G4_WATER");
 
 // プロパティを設定（水のpre-defined値を使用）
-G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
+auto* mpt = new G4MaterialPropertiesTable();
 mpt->AddProperty("RINDEX", "Water");
+mpt->AddProperty("ABSLENGTH", ...);
+mpt->AddProperty("RAYLEIGH", ...);
+mpt->AddProperty("MIEHG", ...);
 
-// マテリアルにプロパティを設定
-material->SetMaterialPropertiesTable(table);
+// 水に屈折率を設定
+water->SetMaterialPropertiesTable(mpt);
 ```
+
+`G4MaterialPropertiesTable`でマテリアルの光学特性を設定できます。
+[光学物理](./geant4-physics-opticalphysics.md)の物理モジュールを利用する場合は必須です。
 
 OpticalPhysicsの物理プロセスを使う場合、
 素材の屈折率（``RINDEX``）や

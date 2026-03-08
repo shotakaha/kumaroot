@@ -183,6 +183,7 @@ maxdepth: 2
 ---
 geant4-material-nistmanager
 geant4-material
+geant4-material-propertiestable
 geant4-material-examples
 ```
 
