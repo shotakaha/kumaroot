@@ -1,9 +1,21 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.3.0 (2026-03-08)
 
 ### Fix
 
+- **geant4-material-propertiestable**: improve optical properties docs
+- **geant4-material-acrylic**: modernize code examples and clarify explanations
+- **geant4-material**: fix class name, toctree, and code snippet
+- **geant4-material-nistmanager**: improve clarity and modernize code examples
+- **geant4-physics-opticalphoton**: rewrite with ProcessHits example for optical sensor
+- **geant4-physics-opticalphysics**: restructure guide with quick reference and clearer sections
+- **geant4-physics-ftfp_bert**: correct terminology from 物理リスト to 物理モジュール
+- **geant4-physics-ftfp_bert**: improve description and add context
+- **geant4-physics**: add introductory description of physics list selection
+- **raspi-capslock**: restructure keyboard config guide with purpose-driven sections
+- **geant4-sensor-allocator**: fix typos and remove duplicate code block
+- **geant4-sensor-allocator**: improve G4Allocator explanation and clarity
 - **geant4-sipm**: add SiPM photosensor implementation guide
 - **geant4-install-taskfile**: improve Taskfile.yml documentation and update to v11.4.0
 - **geant4-examples-b1**: add directory structure section and clean up formatting
@@ -13,6 +25,10 @@
 - **geant4-examples-b1**: improve documentation structure and explanations
 - **geant4-examples**: improve documentation and formatting
 - **command-dnf**: add dnf package manager documentation
+
+### Refactor
+
+- **geant4**: rename geant4-sipm.md to geant4-sensor-photon.md
 
 ## v2026.2.0 (2026-02-07)
 
