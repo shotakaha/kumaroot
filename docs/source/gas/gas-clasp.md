@@ -29,6 +29,30 @@ $ npm install -g @google/clasp
 
 :::
 
+## スクリプト設定したい（`package.json`）
+
+```json
+{
+    "name": "...",
+    "...": "...",
+    "scripts": {
+        "push": "clasp push",
+        "pull": "clasp pull",
+        "...": "..."
+    }
+}
+```
+
+`npm scripts`の`push`と`pull`を設定シタサンプルです。
+
+```console
+$ npm run push
+$ npm run pull
+```
+
+それぞれ`npm run push`と`npm run pull`で実行できます。
+
+
 ## ログインしたい（``clasp login``）
 
 ```console
