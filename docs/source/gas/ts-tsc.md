@@ -1,17 +1,25 @@
 # トランスパイルしたい（`tsc`）
 
 ```console
-$ npm install --save-dev typescript
-
-// すべてのファイルを変換（tsconfig.json）
 $ npx tsc
-
-// 単一ファイルを変換
-$ npx tsc example.ts
+$ npx tsc src/main.ts
+$ npx tsc --watch
 ```
 
-`tsc`はTypeScriptをJavaScriptに変換するコマンドです。
-この変換作業はトランスパイルと呼ばれます。
+`tsc`コマンドで、TypeScriptファイル（`.tx`）をトランスパイルできます。
+設定ファイル（`tsconfig.json`）がある場合は、自動でよみこまれます。
+
+`npx`で実行することが多いです。
+
+## インストールしたい（`typescript`）
+
+```console
+$ npm install --save-dev typescript @types/google-apps-script
+```
+
+`typescript`パッケージを`devDependencies`として追加します。
+
+`@types/google-apps-script`はGASの型チェックができるようになるパッケージです。
 
 ## 型をつけたい
 
