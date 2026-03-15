@@ -37,20 +37,46 @@ function 関数名(引数名: 型名): 戻り値の型名 {...}
 ```json
 {
     "compilerOptions": {
-        "target": "ES2020",
-        "module": "CommonJS",
-        "outDir": "dist",
-        "rootDir": "src",
-        "strict": true
+        "target": "ES2015",    // GAS V8対応
+        "module": "ESNext",    // rollupでバンドル前提
+        "moduleResolution": "bundler",
+        "noUnusedLocals": true,    // 未使用の変数でエラー
+        "noUnusedParameters": true,    // 未使用の引数でエラー
+        "strict": true,    // 厳格な型チェック
+        "outDir": "dist",    // 出力先ディレクトリ
+        "rootDir": "src",    // ソースコードのルート
+        "sourceMap": true,    // デバッグ用にソースマップを生成
+        "removeComments": true    // コメントを除去
     },
     "include": [
+        // トランスパイル対象
         "src/**/*"
     ],
     "exclude": [
+        // トランスパイル対象外
         "node_modules",
         "coverage",
     ]
 }
 ```
 
-トランスパイル時の設定は`tsconfig.json`に保存します。
+`tsconfig.json`でTypeScriptのトランスパイルの設定ができます。
+GASのV8ランタイムはECMAScript2015（ES6 / ES2015）相当の機能しかサポートしていないため、それに合わせた設定が必要です。
+ここでは`rollup`でモジュールをバンドルし、
+`clasp`でデプロイする前提でサンプルを作成しました。
+
+`target`は、トランスパイルして出力されるJavaScriptのECMAScriptバージョンを指定するオプションです。
+GAS V8の場合は`"ES2015"`もしくは以降のバージョンを指定します。
+
+`module`は、トランスパイルするときに利用するモジュール形式を指定するオプションです。
+`rollup`などでバンドルする場合は`"ESNext"`を指定しておけばよさそうです。
+
+:::{note}
+
+モダンブラウザ向けにESModuleを使う場合は、`"ES2015"`や`"ES2020"`などを指定します。
+Node.jsを使う場合は`"CommonJS"`を指定します。GASでは非対応です。
+
+:::
+
+`moduleResolution`は、`import`や`require`で指定されたモジュールの探し方を指定するオプションです。
+`rollup`などのバンドラーを使う場合は`"bundler"`を指定します。
