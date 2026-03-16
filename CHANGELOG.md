@@ -1,5 +1,17 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **gas-ts-tsc**: add npm scripts example for tsc, rollup, and clasp workflow
+- **gas-ts-tsc**: improve tsc usage and installation instructions
+- **gas-ts-tsc**: update tsconfig.json example for GAS with rollup
+- **gas-clasp**: add npm scripts section for push and pull
+- **gas-ts**: add rollup bundler documentation
+- **gas-clasp**: update clasp 3.x info and reorganize content
+- **gas-triggers**: add setupTriggers example
+
 ## v2026.3.0 (2026-03-08)
 
 ### Fix
