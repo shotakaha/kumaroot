@@ -54,30 +54,22 @@ $ find . -name httpd.conf
 `.htaccess`を使ってアクセス制御したい場合、
 該当ディレクトリに対して`AllowOverride`ディレクティブが有効になっている必要があります。
 
-## アクセス制御したい（`Required`）
+## IPアドレス／ドメイン制御したい（`Require ip` / `Require host`）
 
 ```apache
-# 一括許可／一括拒否
-Require all granted    # Allow from all に相当
-Require all denied     # Deny from all に相当
-
 # IPアドレス／ドメインを指定して許可
 Require ip 許可IPアドレス    # Allow from 許可IPアドレスに相当
 Require host 許可ドメイン名  # Allow from 許可IPドメイン名に相当
-
-# IPアドレス／ドメインを指定して拒否
-Require not ip 拒否IPアドレス    # Deny from 拒否IPアドレスに相当
-Require not host 拒否ドメイン名  # Deny from 拒否IPアドレスに相当
 ```
 
-`Require`ディレクティブを使って、アクセス制限を設定しています。
+`Require`ディレクティブでIPアドレスやドメイン名によるアクセス制限を設定できます。
+繰り返し宣言することで複数のIPアドレス／ドメインを設定できます。
 
 :::{note}
 
-`Require`ディレクティブはApache2.4で追加（改善？）されたディレクティブです。
-Apache 2.4からは`Require`ディレクティブを使うことが推奨されています。
-Apache 2.2までは`Order`、`Allow`、`Deny`ディレクティブが使われていましたが、
-将来的に廃止される予定だそうです。
+`Require`ディレクティブはApache2.4で新規追加されたディレクティブです。
+Apache 2.4以降では`Require`ディレクティブを使うことが推奨されています。
+Apache 2.2で使われていた`Order`、`Allow`、`Deny`ディレクティブは非推奨です（`mod_access_compat`モジュールで互換性は維持できます）。
 
 :::
 
@@ -102,6 +94,22 @@ IPアドレス（IPv4）を**ネットワーク部**と**ホスト部**に分け
 がそのネットワーク内で利用できることを表しています。
 
 :::
+
+```apache
+# 一括許可／一括拒否
+Require all granted    # Allow from all に相当
+Require all denied     # Deny from all に相当
+```
+
+`Require all`で一括設定できます。
+
+```apache
+# IPアドレス／ドメインを指定して拒否
+Require not ip 拒否IPアドレス    # Deny from 拒否IPアドレスに相当
+Require not host 拒否ドメイン名  # Deny from 拒否ドメインに相当
+```
+
+`Require not`でブラックリスト形式で指定できます。
 
 ## 複数条件したい（`RequireAny`）
 
