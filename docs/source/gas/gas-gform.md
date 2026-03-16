@@ -1,4 +1,120 @@
-# フォームしたい（``FormApp``）
+# フォームしたい（`FormApp`）
+
+```ts
+// IDで取得
+const form: GoogleAppsScript.Forms.Form = FormApp.openById("FORM_ID");
+
+// 編集URL or 回答URLで取得
+const form: GoogleAppsScript.Forms.Form = FormApp.openByUrl("FORM_URL");
+```
+
+`FormApp`でGoogleフォームを操作できます。
+スプレッドシートなどと同じようにIDとURLを指定して、既存のフォームを取得できます。
+
+```ts
+const FORM_ID = PropertiesService.getScriptProperties().getProperty("FORM_ID") ?? ""
+const form = FormApp.openById(FORM_ID);
+```
+
+フォームのIDをハードコードしたくない場合は、
+GASのScriptPropertiesを利用するとよいです。
+
+## フィールドを取得したい（`FormApp.getItems()`）
+
+```ts
+const form = FormApp.openById(FORM_ID);
+const items: GoogleAppsScript.Forms.Item[] = form.getItems();
+
+for (const item of items) {
+    Logger.log("%s: %s", item.getId(), item.getTitle());
+}
+```
+
+`getItems`でフォームのすべてのフィールドを取得できます。
+戻り値は`Item[]`で、
+セクション（`PAGE_BREAK`）や説明文（`SECTION_HEADER`）も含まれます。
+
+```ts
+// テキスト形式のフィールド
+const textItems = form.getItems(FormApp.ItemType.TEXT);
+
+// ラジオボタン形式のフィールド
+const mcItems = form.getItems(FormApp.ItemType.MULTIPLE_CHOICE);
+
+// TEXT: 記述式（1行）
+// PARAGRAPH_TEXT: 段落（複数行）
+// MULTIPLE_CHOICE: ラジオボタン
+// CHECKBOX: チェックボックス
+// LIST: プルダウン
+// SCALE: 均等目盛
+// PAGE_BREAK: セクション区切り
+// SECTION_HEADER: セクションの説明文
+```
+
+`getItems`の引数に`FormApp.ItemType`を渡すことで、
+指定した種類のフィールドだけを取得できます。
+
+## フィールドのプロパティを取得したい
+
+```ts
+const form = FormApp.openById(FORM_ID);
+const items = form.getItems();
+
+for (const item of items) {
+    // フィールドID（フォーム内で一意）
+    const id: number = item.getId();
+    // 表示順
+    const index: number = item.getIndex();
+    // 質問のタイトル
+    const title: string = item.getTitle();
+    // 質問の説明文
+    const description: string = item.getHelpText();
+    // フィールドの種類
+    const type = item.getType();
+}
+```
+
+## フィールドの種類を取得したい（`item.getType`）
+
+```ts
+const form = FormApp.openById(FORM_ID);
+const items = form.getItems();
+
+for (const item of items){
+    const type = item.getType();
+    Logger.log("%s: %s", item.getTitle(), type.toString());
+}
+```
+
+## フィールドIDを取得したい（`item.getId`）
+
+```ts
+const form = FormApp.openById(FORM_ID);
+const items = form.getItems();
+
+for (const item of items) {
+    Logger.log("id=%s  title=%s", item.getId(), item.getTitle());
+}
+```
+
+`Item.getId`で、フォーム内で一意な整数IDを取得できます。
+タイトルや表示順と異なり、フィールドを編集・移動しても変わりません。
+
+```ts
+const item = form.getItemById(ITEM_ID);
+if (!item) {
+    Logger.log("item not found");
+    return;
+}
+Logger.log(item.getTitle());
+```
+
+`Form.getItemById`で、指定したIDのフィールドを取得できます。
+既存のフォームの構造をスプレッドシートに書き出すときに、フィールドIDを取得しておくと、全体のリストアはもちろん、必要なフィールドの更新が簡単になります。
+
+
+---
+
 
 ```js
 function onFormSubmit(e) {
