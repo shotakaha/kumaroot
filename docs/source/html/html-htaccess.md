@@ -114,31 +114,53 @@ Require not host 拒否ドメイン名  # Deny from 拒否ドメインに相当
 ## 複数条件したい（`RequireAny`）
 
 ```apache
-<Files "wp-login.php">
-  <RequireAny>
-    Require all denied
-    Require ip 許可IPアドレス1/サブネットマスク
-    Require ip 許可IPアドレス2/サブネットマスク
-  </RequireAny>
-</Files>
+# Basic認証の設定
+
+<RequireAny>
+Require ip 許可IPアドレス1/サブネットマスク
+Require valid-user
+</RequireAny>
 ```
 
 `RequiredAny`ディレクティブで、複数の条件を設定できます。
+
 上記のサンプルは、WordPressの管理画面へのアクセスを制御しています。
 `Files`ディレクティブを使って`wp-login.php`を指定し、
 指定したIPアドレスからのアクセスを許可しています。
 
-## パスワード保護したい（Basic認証）
+## Basic認証したい（`AuthType Basic`）
 
 ```apache
 AuthType Basic
-AuthName "Restricted Area"
-AuthUserFile /path/to/htpasswd
+AuthName "Please enter your ID and password"    # ダイアログに表示する説明
+AuthUserFile /abspath/to/htpasswd  # e.g. /var/www/etc/.htpasswd
+# AuthGroupFile /dev/null    # 省略化
 Require valid-user
 ```
 
-特定のディレクトリに設置して、パスワード保護できます。
+`AuthType Basic`ディレクティブを使って、Basic認証によるパスワード保護を設定できます。
+
+```apache
+# 複数のアクセス条件
+<RequireAny>
+  # 指定したIPアドレス範囲を許可
+  Require ip 許可IPアドレス/サブネットマスク
+  # 外部からの場合はBasic認証を要求
+  Require valid-user
+</RequireAny>
+```
+
+複数のアクセス条件を設定する場合は
+`RequireAny`ディレクティブを使います。
+上記のサンプルは、
+IP制限により内部からのアクセスは素通りさせ、
+外部からアクセスにはBasic認証を課す設定です。
+
+:::{note}
+
 HTTPSが有効なウェブサイトであれば、Basic認証でよいそうです。
+
+:::
 
 ```console
 // .htpasswdが存在しない場合
