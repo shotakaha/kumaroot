@@ -14,10 +14,10 @@ GASはV8ランタイムを採用しているため、
 
 ```{toctree}
 gas-primitives
-js-array
-js-object
-js-map
-js-set
+gas-array
+gas-object
+gas-map
+gas-set
 ```
 
 ## 日付したい（`Date`）
