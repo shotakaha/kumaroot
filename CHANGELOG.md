@@ -1,9 +1,12 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.3.1 (2026-03-17)
 
 ### Fix
 
+- **gas-gform**: add FormApp documentation with getItems and getId examples
+- **html-htaccess**: improve Basic authentication and RequireAny documentation
+- **html-htaccess**: reorganize Require directive documentation for clarity
 - **gas-ts-tsc**: add npm scripts example for tsc, rollup, and clasp workflow
 - **gas-ts-tsc**: improve tsc usage and installation instructions
 - **gas-ts-tsc**: update tsconfig.json example for GAS with rollup
