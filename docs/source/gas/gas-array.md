@@ -22,15 +22,37 @@ const array = new Array("a1", "a2", "a3");
 ## 2次元配列したい（`[][]`）
 
 ```ts
+// セル用の型を定義
 type Cell = string | number | boolean | Date | null;
 const values: Cell[][] = sheet.getDataRange().getValues();
+```
 
+スプレッドシートにあるデータを取得すると、2次元配列（行x列）として返ってきます。
+`Cell`型を定義することで型安全を保つことができます。
+
+```ts
 // ヘッダー（header）とデータ（rows）に分割
 // ヘッダー = 1行目：文字列に変換（Cell[] -> string[]）
 // データ = 2行目以降：型はそのまま（Cell[]）
 const header = values[0].map(String);
-const rows = values.slice(1);
+const rows = values
+  .slice(1)
+  .filter(row => row.some(cell => cell !== null && cell !== ""));
+```
 
+さらに、1行目がヘッダー、2行目以降がデータ領域となっていることが多いです。
+ヘッダー（`header`）とデータ（`rows`）に分割しておくとよいです。
+
+:::{hint}
+
+スプレッドシートから取得したデータは `Cell[][]`型となっています。
+ヘッダーに相当する1行目も`Cell[]`になっているため、
+上記のサンプルでは`string[]`に変換しています。
+また、データ領域からは、`["", ""]` や `["", null]`、`[null, null]`のようなどのカラムにも値が入っていない空行を除外しています。
+
+:::
+
+```ts
 // 配列として取得
 for (const row of rows) {
     const col0 = row[0];
@@ -51,9 +73,8 @@ const maps: Map<string, Cell>[] = rows.map(row =>
 );
 ```
 
-スプレッドシートからデータを2次元配列（行x列）として取得する場合が多いです。
-そのまま2次元のリストとして扱う場合もありますが、
-ヘッダー名をキーとしたオブジェクトやMap型に変換すると便利です。
+データ（`rows`）をそのまま2次元配列（`Cell[][]`）として扱ってもよいですが、ヘッダー名をキーとしたオブジェクトやMap型に変換すると便利です。
+
 
 ## 値を追加したい（`Array.push`）
 
