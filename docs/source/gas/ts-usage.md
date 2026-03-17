@@ -11,5 +11,4 @@ $ tsc
 maxdepth:1
 ---
 ts-typedoc
-ts-rollup
 ```
