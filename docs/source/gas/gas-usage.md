@@ -64,7 +64,6 @@ gas-exports
 maxdepth: 2
 ---
 js-usage
-ts-usage
 ```
 
 ## リファレンス
