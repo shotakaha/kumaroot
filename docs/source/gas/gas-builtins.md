@@ -9,7 +9,11 @@ const set = new Set();
 const date = new Date();
 ```
 
+GASはV8ランタイムを採用しているため、
+基本的には最新のJavaScript（=ES2020以降）のビルトイン型（標準オブジェクト）が使えます。
+
 ```{toctree}
+gas-primitives
 js-array
 js-object
 js-map
