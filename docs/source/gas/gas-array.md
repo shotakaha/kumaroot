@@ -1,17 +1,59 @@
-# 配列したい（`Array`）
+# 配列したい（`[]` / `Array`）
 
 ```js
-// 配列リテラル
+// JavaScript
 const array = ["a1", "a2", "a3"];
+
+// TypeScript
+const array: string[] = ["a1", "a2", "a3"];
+const array: Array<string> = ["a1", "a2", "a3"];
 ```
 
 `[]`リテラルで配列を初期化できます。
+TypeScriptでは、配列の要素の型名も指定する必要があります。
 
 ```js
 const array = new Array("a1", "a2", "a3");
 ```
 
-`new Array()`コンストラクタでも配列を初期化できます。
+`new Array()`コンストラクターでも配列を初期化できます。
+ただし、引数の扱いに注意が必要なため、通常はリテラル記法で記述すれば問題ありません。
+
+## 2次元配列したい（`[][]`）
+
+```ts
+type Cell = string | number | boolean | Date | null;
+const values: Cell[][] = sheet.getDataRange().getValues();
+
+// ヘッダー（header）とデータ（rows）に分割
+// ヘッダー = 1行目：文字列に変換（Cell[] -> string[]）
+// データ = 2行目以降：型はそのまま（Cell[]）
+const header = values[0].map(String);
+const rows = values.slice(1);
+
+// 配列として取得
+for (const row of rows) {
+    const col0 = row[0];
+    const col1 = row[1];
+}
+
+// オブジェクトとして取り出す
+// ヘッダー名をキーとして利用
+const data = rows.map(row =>
+  Object.fromEntries(
+    header.map( (key, i) => [key, row[i]] )
+  )
+);
+
+// Mapとして取り出す
+const maps: Map<string, Cell>[] = rows.map(row =>
+  new Map(header.map((key, i) => [key, row[i]]))
+);
+```
+
+スプレッドシートからデータを2次元配列（行x列）として取得する場合が多いです。
+そのまま2次元のリストとして扱う場合もありますが、
+ヘッダー名をキーとしたオブジェクトやMap型に変換すると便利です。
 
 ## 値を追加したい（`Array.push`）
 
