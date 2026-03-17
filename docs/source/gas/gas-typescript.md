@@ -6,10 +6,10 @@ $ npx tsc src/main.ts
 $ npx tsc --watch
 ```
 
-`tsc`コマンドで、TypeScriptファイル（`.tx`）をトランスパイルできます。
-設定ファイル（`tsconfig.json`）がある場合は、自動でよみこまれます。
+`tsc`コマンドで、TypeScript（`.ts`）をJavaScript（`.js`）に変換するコマンドです。
+`npx`経由で実行することが多いです。
 
-`npx`で実行することが多いです。
+設定ファイル（`tsconfig.json`）がある場合は、自動で読み込まれます。
 
 ## インストールしたい（`typescript`）
 
@@ -19,7 +19,14 @@ $ npm install --save-dev typescript @types/google-apps-script
 
 `typescript`パッケージを`devDependencies`として追加します。
 
-`@types/google-apps-script`はGASの型チェックができるようになるパッケージです。
+`@types/google-apps-script`は、GASの型情報を使うための型定義パッケージです。
+明示的なインポートは必要ありません（というか不可です）。
+
+:::{note}
+
+`devDependencies`にある`@types`パッケージはVS Codeが自動で認識して、補完／チェックしてくれるようです。
+
+:::
 
 ## 型をつけたい
 
