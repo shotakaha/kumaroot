@@ -10,15 +10,11 @@ Logger.log("シート名: " + sheetName);
 Logger.log(`シート名: ${sheetName}`)
 ```
 
-`Logger.log`はGAS専用のログ機能です。
-実行結果画面でログを確認できます。
+`Logger`はGAS専用のログクラスです。
+出力結果は管理画面の「実行ログ」で確認できます。
+Cloud Loggingと連携しており、自動で記録されます。
 
-機能はシンプルなため、デバッグ用途に最適です。
-より複雑なログを取得したい場合は、
-スプレッドシートに書き出すなど、
-別の方法を検討したほうがよいです。
-
-# ロギングしたい（`console` / `Logger.log`）
+## ログしたい（`console`）
 
 ```js
 console.log("一般的なログ");
@@ -26,47 +22,25 @@ console.debug("デバッグのためのログ出力");
 console.info("情報のためのログ出力");
 console.warn("警告のためのログ出力");
 console.error("エラーのためのログ出力");
-```
-
-`console`オブジェクトでロギングできます。
-よくあるロガーのように、状況に合わせて使い分けるとよいです。
-
-## GASのコンソール出力したい（`Logger.log`）
-
-```js
-Logger.log("オブジェクトも含めていろいろ出力");
-console.log("一般的なログ");
-console.info("情報のためのログ出力");
-console.warn("警告のためのログ出力");
-console.error("エラーのためのログ出力");
 console.time();
 console.timeEnd();
 ```
 
-GASでは利用できる`console`メソッドが上記に限定されています。
-また独自の`Logger`クラスも用意されています。
+`console`はJS標準のログ機能です。
+GASでも利用でき、`Logger`クラスと同じようにCloud Logging連携にも対応しています。
 
-# ログしたい（`Logger.log`）
+`console.info`、
+`console.warn`、
+`console.error`、
+のようにログレベル別に表示を変更できるのが特徴です。
 
-```js
-Logger.log("シートを取得");
-
-// 文字列連結
-Logger.log("シート名: " + sheetName);
-
-// テンプレートリテラル
-Logger.log(`シート名: ${sheetName}`)
-```
-
-`Logger.log`はGAS専用のログ機能です。
-実行結果画面でログを確認できます。
-
-機能はシンプルなため、デバッグ用途に最適です。
-より複雑なログを取得したい場合は、
-スプレッドシートに書き出すなど、
-別の方法を検討したほうがよいです。
-
+また、実行時間を測定して出力できる
+`console.time`、
+`console.timeEnd`
+もあります。
 
 ## リファレンス
 
 - [console - Web API | MDN](https://developer.mozilla.org/ja/docs/Web/API/console)
+- [Class Logger](https://developers.google.com/apps-script/reference/base/logger)
+- [Class console](https://developers.google.com/apps-script/reference/base/console)
