@@ -46,6 +46,7 @@ js-biome
 ---
 maxdepth: 1
 ---
+gas-builtins
 gas-variables
 gas-namespace
 gas-class
