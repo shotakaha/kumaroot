@@ -47,10 +47,11 @@ js-biome
 maxdepth: 1
 ---
 gas-builtins
-gas-logger
 gas-variables
-gas-namespace
+gas-function
 gas-class
+gas-namespace
+gas-logger
 gas-date
 gas-filter
 gas-id
@@ -68,15 +69,6 @@ gas-properties
 gas-quota
 gas-version
 gas-exports
-```
-
-## JavaScript / TypeScriptしたい
-
-```{toctree}
----
-maxdepth: 2
----
-js-usage
 ```
 
 ## リファレンス
