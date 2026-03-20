@@ -83,16 +83,17 @@ myst_html_meta = {
 }
 
 myst_number_code_blocks = [
+    "apache",
     "bash",
     "cpp",
     "dockerfile",
+    "js",
     "md",
     "python",
     "rst",
     "toml",
+    "ts",
     "typst",
-    "js",
-    "apache",
 ]
 
 # -- Options for Math -------------------------------------------------
