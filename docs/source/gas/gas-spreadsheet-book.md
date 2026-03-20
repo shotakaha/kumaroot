@@ -15,7 +15,7 @@ const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 const book = SpreadsheetApp.getActiveSpreadsheet();
 Logger.log(`name: ${book.getName()}`);
 Logger.log(`ID: ${book.getId()}`);
-Logger.log(`URL: ${book.getURL}`);
+Logger.log(`URL: ${book.getUrl()}`);
 ```
 
 `SpreadsheetApp.getActiveSpreadsheet()`で、
@@ -36,6 +36,15 @@ const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 非常によく使うメソッドのひとつです。
 
 また、`SpreadsheetApp.openByUrl`でURLを直接指定してスプレッドシートを取得できます。
+
+:::{hint}
+
+URL: `https://docs.google.com/spreadsheets/d/【ID】/edit`
+
+スプレッドシートのURLの書式は上記のとおりです。
+`【ID】`のランダムな文字列がIDです。
+
+:::
 
 ## シートを取得したい（`getSheetByName`）
 
