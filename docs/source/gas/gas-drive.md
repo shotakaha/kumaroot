@@ -1,10 +1,10 @@
 # ドライブしたい（`DriveApp`）
 
 ```js
-const folder = DriveApp.getFolderById("フォルダーID");
-const files = folder.getFiles();        // FileIterator
-const subFolders = folder.getFolders();    // FolderIterator
-const parent = folder.getParents()
+const folder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById("フォルダーID");
+const files: GoogleAppsScript.Drive.FileIterator = folder.getFiles();        // FileIterator
+const subFolders: GoogleAppsScript.Drive.FolderIterator = folder.getFolders();    // FolderIterator
+const parent: GoogleAppsScript.Drive.FolderIterator = folder.getParents()
 
 ```
 
@@ -13,39 +13,54 @@ const parent = folder.getParents()
 `getFiles()`と`getFolders()`で取得できます
 また、親ディレクトリは`getParents()`で取得できます。
 
+:::{hint}
+
+型名は
+`@types/google-apps-script`の
+`GoogleAppsScript.Drive`です。
+
+:::
+
 ## フォルダ内のファイルを取得したい（`getFiles`）
 
-```js
-function listAllFiles(folder) {
-    const files = folder.getFiles();    // フォルダ内のファイルを FileIterator としてを取得
-    while (files.hasNext()) {
-        const file = files.nex();
-        Logger.log(file.getName());
-    }
+```ts
+function listAllFiles(
+  folder: GoogleAppsScript.Drive.Folder
+): void {
+  const files: GoogleAppsScript.Drive.FileIterator = folder.getFiles();    // フォルダ内のファイルを FileIterator としてを取得
+  while (files.hasNext()) {
+    const file: GoogleAppsScript.Drive.File = files.next();
+    Logger.log(file.getName());
+  }
 }
 
-const folderId = "フォルダのID";
-const folder = DriveApp.getFolderById(folderId);
+const folderId: string = "フォルダのID";
+const folder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(folderId);
+
 listAllFiles(folder);
 ```
 
 `getFiles()`で、その中にあるすべてのファイルを取得できます。
 ただし、戻り値が`FileIterator`となっているため、`hasNext()`と`next()`を使って、1件ずつ取り出す必要があります。
 
-```js
-function getFilesAsArray(folder) {
-    const iterators = folder.getFiles();
+```ts
+function getFilesAsArray(
+  folder: GoogleAppsScript.Drive.Folder
+): GoogleAppsScript.Drive.File[] {
 
-    const files = []
-    while (iterator.hasNext) {
-        files.push(iterator.next());
-    }
-    return files;
+  const iterator: GoogleAppsScript.Drive.FileIterator = folder.getFiles();
+
+  const files: GoogleAppsScript.Drive.File[] = [];
+
+  while (iterator.hasNext()) {
+    files.push(iterator.next());
+  }
+  return files;
 }
 
-const folderId = "フォルダのID";
-const folder = DriveApp.getFolderById(folderId);
-const files = getAllFilesAsArray(folder);
+const folderId: string = "フォルダのID";
+const folder: GoogleAppsScript.Drive.Folder = DriveApp.getFolderById(folderId);
+const files: GoogleAppsScript.Drive.File[] = getAllFilesAsArray(folder);
 ```
 
 上記のサンプルでは`FileItereator`を配列に詰め替えています。

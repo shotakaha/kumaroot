@@ -69,6 +69,7 @@ gas-properties
 gas-quota
 gas-version
 gas-exports
+gas-iterator
 ```
 
 ## リファレンス
