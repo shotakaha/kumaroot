@@ -30,12 +30,156 @@ sheet.appendRow(data);
 
 `appendRow`で既存のシート末尾にデータを追加できます。
 
-:::{note}
+```ts
+type Cell = string | number | boolean | Date | null;
+type Row = Cell[];
 
-`appendRow`の処理は時間がかかるので、大量のデータを追加する場合は、
-配列で作成し`setValues`で書き出すほうがよいです。
+function appendRow(
+  sheet: GoogleAppsScript.Spreadsheet.Sheet,
+  row: Row
+) {
+  const width = sheet.getLastColumn();
+  if (width !== 0 && row.length !== width) {
+    throw new Error("列数が一致していません");
+  }
+
+  sheet.appendRow(row);
+}
+
+const row: Row = ["A", 123, true, new Date(), null];
+appendRow(sheet, row);
+```
+
+スタンドアロンなスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`appendRow`のラッパーを作成しておくと便利です。
+
+:::{hint}
+
+`openById`などでシートを取得する処理は時間がかかります。
+ラッパー関数の中で毎回呼び出すのではなく、
+あらかじめ取得したシートを引数として渡すとよいです。
 
 :::
+
+```ts
+type Cell = string | number | boolean | Date | null;
+type Row = Cell[];
+
+function appendRows(
+  sheet: GoogleAppsScript.Spreadsheet.Sheet,
+  rows: Row[]
+) {
+  if (rows.length === 0) return;
+
+  const width = rows[0].length;
+
+  // すべての行のカラム数をチェック
+  if (!rows.every(row => row.length === width)) {
+    throw new Error("すべての行の列数が一致していません");
+  }
+
+  sheet
+    .getRange(sheet.getLastRow() + 1, 1, rows.length, width.length)
+    .setValues(rows);
+}
+
+const rows: Row[] = [
+  ["A", "B"],
+  [1, 2],
+];
+appendRows(sheet, rows);
+```
+
+`appendRow`の処理は時間がかかります。
+大量のデータを追加する場合は、
+2次元配列を作成し`setValues`で書き出すほうがよいです。
+
+## カラム番号を取得したい
+
+```ts
+function getHeaders(
+  sheet: GoogleAppsScript.Spreadsheet.Sheet
+): Map<string, number> {
+  const headers = sheet
+    .getRange(1, 1, 1, sheet.getLastColumn())
+    .getValues()[0];
+
+  const map = new Map<string, number>();
+
+  headers.forEach((h, i) => {
+    const key = String(h).trim();
+    if (key) {
+      map.set(key, i + 1);
+    }
+  });
+  return map;
+}
+
+function getColumnIndex(
+  headers: Map<string, number>,
+  name: string
+): number {
+  const index = headers.get(name.trim());
+  if (!index) {
+    throw new Error(`Column "${name}" not found`);
+  }
+  return index;
+}
+
+// Usage
+const headers = getHeaders(sheet);
+const nameColIndex = getColumnIndex(headers, "名前");
+```
+
+スプレッドシート操作は、基本的にカラム番号（1はじまり）が前提となっていますが、カラム追加や順番の変更に弱いです。
+
+このサンプルでは、ヘッダー行をMap型（`Map<string, number>`）に変換することで、カラム名から安全かつ可読性の高い形でカラム番号を取得できるようにしています。
+カラム名で操作できるようになるので、
+シートのカラム構成の変更にも強くなります。
+
+## データの重複を探したい（`findDuplicateRows`）
+
+```ts
+type Cell = string | number | boolean | Date | null;
+type Row = Cell[];
+
+function toKey(v: Cell): string {
+  if (v instanceof Date) return String(v.getTime());
+  if (v === null) return "null";
+  return String(v);
+}
+
+function findDuplicateRow(
+  sheet: GoogleAppsScript.Spreadsheet.Sheet,
+  colIndices: number[],
+  values: Cell[],
+  excludeRowIndex?: number
+): number {
+  if (colIndices.length != values.length) {
+    throw new Error("Length doesn't match: colIndices and values")
+  }
+
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return -1;
+
+  const maxCol = Math.max(...colIndices);
+
+  const rows = sheet
+    .getRange(2, 1, lastRow - 1, maxCol)
+    .getValues() as Cell[][];
+
+  for (let i = 0; i < row.length; i++) {
+    const rowIndex = i + 2;
+    if (rowIndex === excludeRowIndex) continue;
+
+    const row = rows[i];
+
+    const isMatch = colIndices.every((col, j) => toKey(row[col - 1] === toKey(values[j]))
+    );
+    if (isMatch) return rowIndex;
+  }
+  return -1
+}
+```
 
 ## データを削除したい（`deleteRow`）
 
