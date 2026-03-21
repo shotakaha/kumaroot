@@ -1,5 +1,47 @@
 # CHANGELOG.md
 
+## v2026.3.2 (2026-03-21)
+
+### Fix
+
+- **geant4-singleton**: expand singleton pattern documentation with detailed examples
+- **geant4-drivers**: reorganize and improve visualization driver documentation
+- **geant4-overview**: remove outdated Manager class descriptions
+- **geant4-overview**: rewrite overview and replace flowchart with sequence diagram
+- **gas-map**: convert to TypeScript syntax and add JSON serialization note
+- **gas-object**: add section for converting Object to Map type
+- **gas-object**: convert to TypeScript and reorganize Object.keys/values/entries section
+- **gas-function**: add note about arrow function and this binding behavior in GAS
+- **gas-function**: improve explanations for function expression and arrow function sections
+- **gas-function**: convert code examples to TypeScript with type annotations
+- **gas-globalthis**: add globalThis documentation for GAS TypeScript bundling
+- **gas-clasp**: update commands for clasp v3 and simplify Git management section
+- **gas-spreadsheet-sheet**: add TypeScript examples for appendRow, column index, and duplicate row detection
+- **gas-spreadsheet-book**: fix getUrl() call and add hint for spreadsheet URL format
+- **gas-drive**: convert code examples to TypeScript with type annotations and fix bugs
+- **gas-iterator**: add new page for GoogleAppsScript iterator utilities
+- **conf**: sort myst_number_code_blocks list alphabetically
+- **gas-date**: convert code examples to TypeScript and fix table formatting
+- **gas-variables**: reorganize sections and improve initialization examples with TypeScript types
+- **gas-version**: add Node.js column to table and notes about ECMAScript implementations and runtimes
+- **gas-variables**: reorder declarations to prefer const/let and add note about V8 runtime
+- **gas-function**: rename js-function.md to gas-function.md, remove js-usage.md, and update toctree
+- **gas-logger**: reorganize and improve Logger and console documentation
+- **gas-typescript**: improve descriptions and add note about @types auto-recognition
+- **gas-logger**: merge gas-console.md content into gas-logger.md and delete gas-console.md
+- **gas-console**: rename js-console.md to gas-console.md and update toctree
+- **gas-array**: improve 2D array documentation with hints and empty row filtering
+- **gas-array**: add TypeScript types and 2D array examples for spreadsheet data
+- **gas-builtins**: rename js-array/object/map/set.md to gas-* and update toctree
+- **gas-primitives**: add primitive types documentation for GAS/TypeScript
+- **gas-builtins**: rename js-builtins.md to gas-builtins.md and move to gas section
+- **gas-usage**: reorganize toctree into 環境構築 and GAS操作 sections
+- **gas-usage**: remove ts-usage.md and its toctree entry
+- **gas-typedoc**: rename ts-typedoc.md to gas-typedoc.md and move to gas section
+- **gas-rollup**: rename ts-rollup.md to gas-rollup.md and move to gas section
+- **gas-typescript**: rename ts-tsc.md to gas-typescript.md and move to gas section
+- **gas-usage**: rewrite introduction to describe local development workflow with TypeScript, rollup, and clasp
+
 ## v2026.3.1 (2026-03-17)
 
 ### Fix
