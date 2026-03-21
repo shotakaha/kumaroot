@@ -11,10 +11,10 @@ Geant4のシミュレーションは、
 シミュレーション進行を担当する4種類のManagerクラスが用意されており、
 それぞれが隣接するクラスに処理を依頼したり、結果を受け取ったりする体制になっています。
 
-1. ``G4RunManager``:
+1. [G4RunManager](./geant4-run-manager.md):
 **G4Run**を管理するクラス。
 G4**Event**Managerにイベント処理ををお願いする。
-2. ``G4EventManager``:
+2. [G4EventManager](./geant4-event-manager.md):
 **G4Event**を管理するクラス。
 G4**Tracking**Managerにトラッキング処理をお願いする。
 イベント処理が終了したらG4**Run**Managerに報告する。
@@ -112,49 +112,6 @@ sequenceDiagram
 :::{hint}
 
 このシーケンス図は、Geant4をはじめるときに一番欲しかった情報かもしれないです。
-
-:::
-
-## ランの管理者（``G4RunManager``）
-
-- [](./geant4-run-manager.md)
-
-## イベントの管理者（``G4EventManager``）
-
-- [](./geant4-event-manager.md)
-
-## トラックの管理者（``G4TrackingManager``）
-
-トラッキングの進行管理を担当します。
-トラッキング（``G4Tracking``）は飛跡の基本単位です。
-飛跡には始点と終点があり、その間の移動の様子（``G4Track``）を管理してくれます。
-
-また、イベントによっては途中で二次粒子（や、さらにその二次粒子）が発生することもあります。
-トラッキング処理の順番を整理してくれる担当者（``G4StackingManager``）と協力して、
-1イベントの中で発生したすべての粒子の飛跡情報を測定してくれます。
-
-## ステップの管理者（``G4SteppingManager``）
-
-``G4SteppingManager``は、シミュレーションの中で粒子が進む最小距離であるステップ（``G4Step``）の進行管理を担当します。
-ステップは、移動前、移動中、移動後の3つの状態で管理されます。
-
-## 測定の基本はステップ（``G4Step``）
-
-```cpp
-// G4Step *aStep は事前に定義済み
-G4double energy_deposit = aStep->GetTotalEnergyDeposit();
-```
-
-測定の基本単位はステップ（``G4Step``）です。
-[G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)や
-[G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)の
-リファレンスを確認し、できること（得られる物理量など）を把握しておくと、
-自分のアプリケーション作成に役立つはずです。
-
-:::{seealso}
-
-- [](./geant4-step.md)
-- [](./geant4-sensor-sensitivedetector.md)
 
 :::
 
