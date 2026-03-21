@@ -1,7 +1,15 @@
 # シミュレーションの流れ
 
-Geant4にはシミュレーション進行を担当する4種類のManagerクラスがあります。
-それぞれが隣り合ったManagerクラスに処理をお願いしたり、結果を受けたりする体制が組まれています。
+Geant4のシミュレーションは、
+検出器の構築、
+物理プロセスの設定、
+初期粒子の生成、
+シミュレーションの実行、
+そして検出器応答の取得という要素で構成されています。
+
+これらの処理を効率的に管理するため、
+シミュレーション進行を担当する4種類のManagerクラスが用意されており、
+それぞれが隣接するクラスに処理を依頼したり、結果を受け取ったりする体制になっています。
 
 1. ``G4RunManager``:
 **G4Run**を管理するクラス。
@@ -21,94 +29,80 @@ G4**Stepping**Managerにステッピング処理をお願いする。
 
 この中で、ユーザーが直接指示するのは``G4RunManager``だけでOKです。
 
-## メイン関数のフローチャート
+## メイン関数のシーケンス図
 
-``main()``関数で``G4RunManager``がどのように処理を進めるかを、
-フローチャートに整理しました。
+`main`関数で`G4RunManager`がどのように処理を進めるかを確認し、
+シーケンス図に整理しました。
 
-```console
-main
-|-- RunManager
-|    |-- Geometry::Geometry()
-|    |-- Physics::Physics()
-|    \-- ActionInitialization::ActionInitialization()
-|        \-- ActionInitialization::Build()
-|            |-- PrimaryGenerator::PrimaryGenerator()
-|            |-- RunAction::RunAction()
-|            |-- EventAction::EventAction()
-|            |-- TrackingAction::TrackingAction()
-|            \-- SteppingAction::SteppingAction()
-|
-|   // RunManagerを初期化
-|   // 1. 測定器の設定
-|   // 2. 有感検検出器の設定
-|   // 3. ジオメトリのロック
-|-- RunManager::Initialize()
-|    |-- Geometry::Construct()
-|    |   \-- Geometry::SetupVolumes()
-|    \-- Geometry::ConstructSDandField()
-|        |-- Sensor::Sensor{}
-|        |-- SDManager::GetSDMpointer()
-|        \-- Geometry::SetSensitiveDetector()
-|
-|   // ビームを入射
-|   // 1. ラン開始時のアクションを処理
-|   // 2. 入射粒子を設定
-|   // 3. イベント開始時のアクションを処理
-|   // 4. トラッキング開始前のアクションを処理
-|   // 5. 有感検出器にヒットがあったときの処理
-|   // 6. ステッピング中の処理
-|   // 7. トラッキング終了後のアクションを処理
-|   // 8. イベント終了時のアクションを処理
-|   // 9. ラン終了時のアクションを処理
-|-- RunManager::BeamOn()
-|    |-- RunAction::BeginOfRunAction()
-|    |-- PrimaryGenerator::GeneratePrimaries()
-|    |   |-- ParticleGun{}
-|    |   |    |-- SetParticleDefinition()
-|    |   |    |-- SetParticleMomentumDirection()
-|    |   |    |-- SetParticleEnergy()
-|    |   |    \-- SetParticlePosition()
-|    |   \-- GeneratePrimaryVertex()
-|    |-- EventAction::BeginOfEventAction()
-|    |-- TrackingAction::PreUserTrackingAction()
-|    |
-|    |   // ステップが有感検出器にある場合
-|    |   // 1. ProcessHitsの処理
-|    |   // 2. UserSteppingActionの処理
-|    |-- SensorHit::ProcessHits()
-|    |   \-- SensorHit{}
-|    |-- SteppingAction::UserSteppingAction()
-|    |-- SensorHit::ProcessHits()
-|    |   \-- SensorHit{}
-|    |-- SteppingAction::UserSteppingAction()
-|    |
-|    |   // ステップが有感検出器にない場合
-|    |   // 1. UserSteppingActionの処理
-|    |-- SteppingAction::UserSteppingAction()
-|    |-- SteppingAction::UserSteppingAction()
-|    |-- TrackingAction::PostUserTrackingAction()
-|    |
-|    |-- // 複数のトラックがある場合
-|    |-- //   PreUserTrackingAction
-|    |-- //   PreSteppingAction or ProcessHits
-|    |-- //   PostUserTrackingAction
-|    |-- // 上記の処理を繰り返す
-|    |
-|    |-- EventAction::EndOfEventAction()
-|    \-- RunAction::EndOfRunAction()
-|
-|-- delete RunManager
-|    |-- Geometry::~Geometry()
-|    |-- ActionInitialization::~ActionInitialization()
-|    |-- PrimaryGenerator::~PrimaryGenerator()
-|    |-- SteppingAction::~SteppingAction()
-|    |-- TrackingAction::~TrackingAction()
-|    |-- EventAction::~EventAction()
-|    \-- RunAction::~RunAction()
-|
-exit
-```
+:::{mermaid}
+
+sequenceDiagram
+    autonumber
+    participant Main as main()
+    participant RM as G4RunManager
+    participant Geo as Geometry
+    participant Phys as Physics
+    participant AI as ActionInitialization
+    participant PG as PrimaryGenerator
+    participant RA as RunAction
+    participant EA as EventAction
+    participant TA as TrackingAction
+    participant SA as SteppingAction
+    participant Hit as SensorHit
+    participant Gun as ParticleGun
+
+    Main ->> RM: new G4RunManager()
+    RM ->> Geo: Geometry()
+    RM ->> Phys: Physics()
+    RM ->> AI: ActionInitialization()
+    AI ->> PG: Build()
+    AI ->> RA: Build()
+    AI ->> EA: Build()
+    AI ->> TA: Build()
+    AI ->> SA: Build()
+
+    RM ->> RM: Initialize()
+    RM ->> Geo: Construct()
+    Geo ->> Geo: SetupVolumes()
+    RM ->> Geo: ConstructSDandField()
+    Geo ->> Hit: SetSensitiveDetector()
+
+    RM ->> RM: BeamOn()
+    RM ->> RA: BeginOfRunAction()
+    RM ->> PG: GeneratePrimaries()
+    PG ->> Gun: ParticleGun{}
+    Gun ->> Gun: SetParticleDefinition()
+    Gun ->> Gun: SetParticleMomentumDirection()
+    Gun ->> Gun: SetParticleEnergy()
+    Gun ->> Gun: SetParticlePosition()
+    PG ->> PG: GeneratePrimaryVertex()
+
+    RM ->> EA: BeginOfEventAction()
+    RM ->> TA: PreUserTrackingAction()
+
+    loop StepLoop
+        alt Step in Sensitive Detector
+            RM ->> Hit: ProcessHits()
+            RM ->> SA: UserSteppingAction()
+        else Step not in Sensitive Detector
+            RM ->> SA: UserSteppingAction()
+        end
+    end
+
+    RM ->> TA: PostUserTrackingAction()
+    RM ->> EA: EndOfEventAction()
+    RM ->> RA: EndOfRunAction()
+
+    Main ->> RM: delete RunManager
+    RM ->> Geo: ~Geometry()
+    RM ->> AI: ~ActionInitialization()
+    RM ->> PG: ~PrimaryGenerator()
+    RM ->> SA: ~SteppingAction()
+    RM ->> TA: ~TrackingAction()
+    RM ->> EA: ~EventAction()
+    RM ->> RA: ~RunAction()
+
+:::
 
 必須クラスの他に、各種ユーザーアクションや有感検出器を設定し、
 それらがどのタイミングで処理されるのかを確認しました。
@@ -117,7 +111,7 @@ exit
 
 :::{hint}
 
-このフローチャートは、Geant4をはじめるときに一番欲しかった情報かもしれないです。
+このシーケンス図は、Geant4をはじめるときに一番欲しかった情報かもしれないです。
 
 :::
 
