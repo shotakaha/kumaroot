@@ -4,16 +4,29 @@
 $ cmake \
 -DGEANT4_USE_OPENGL_X11=ON \
 -DGEANT4_USE_QT=ON \
--DGEANT4_USE_RAYTRACER_X11=ON \
+-DGEANT4_USE_RAYTRACER_X11=ON \    # 必要に応じて
 ```
 
-現状では、`OpenGL`と`Qt`は必須、
-`RayTracer`はオプションで有効にしておけばOKです。
+現状では、`OpenGL`と`Qt`の組み合わせが標準的かつ推奨です。
+OpenGLは3D描画を担当し、
+QtはGUIやウィンドウ管理を可能にするため、
+インタラクティブなシミュレーションやデバッグに最適です。
+
+`RayTracer`は高品質レンダリング用ドライバーです。
+影や反射を含む静止画の生成やプレゼン資料の作成に最適です。
+オプションで有効にしておけばOKです。
 
 :::{note}
 
-大学院生で使っていたときは、オプションの組み合わせをいくつか順番に試して、
-うまくビルドできたものを使っていた気がします。
+大学院生で使っていたときは、可視化ドライバーの組み合わせをいくつか順番に試して、うまくビルドできたものを使っていた気がします。
+
+:::
+
+:::{note}
+
+MotifやOpenInventor、DAWNなどのドライバーは、
+メンテナンスやドキュメントが十分でないため、
+これからわざわざ使う必要はないと思います。
 
 :::
 
@@ -28,16 +41,16 @@ Pythonのライブラリ（``Altair``、``Plotly``、``Streamlit``など）で
 ## 可視化ドライバーの選び方
 
 Geant4は9種類の可視化ドライバーに対応しています。
-ただし、この可視化ドライバーの選択は初心者にとって鬼門のひとつです。
-なぜなら、初見のドライバー名が多く、自分の用途に適したものがよく分からないのと、
-OSなどの環境によって動いたり動かなかったりすることもあるからです。
+しかし、初心者にとってドライバー選びは鬼門のひとつです。
+理由として、ドライバー名が多く用途が分かりにくいことや、
+OSや環境によって動作が不安定になることが挙げられます。
 
-2022年の講習会スライドに、ドライバーの選び方が整理されていました。
+2022年の講習会スライドでは、用途に応じたドライバーの選び方が整理されていました。
 
 | 利用目的 | オススメのドライバー |
-|---|---|
+| --- | --- |
 | 実行／描画ウィンドウをまとめたい | Qt |
-| リアルタイムでグリグリしたい | Qt, OpenGL|
+| リアルタイムでグリグリしたい | Qt, OpenGL |
 | 複雑な構造体を描画したい | RayTracer |
 | 描画した要素をピッキングしたい | Qt、HepRep |
 | ブラウザでグリグリ表示したい | VRML |
@@ -50,6 +63,9 @@ OSなどの環境によって動いたり動かなかったりすることもあ
 開発やメンテナンスも停滞しているようなので、積極的に選択する理由はないです。
 
 ## 利用可能なドライバー
+
+Geant4ノアプリケーションを実行すると、現在の環境で利用可能な可視化ドライバーを確認できます。
+たとえば、`exampleB1`を実行した場合は次のようになっています。
 
 ```console
 $ ./exampleB1  # Geant4アプリケーションを実行
@@ -82,16 +98,8 @@ Default window size hint is: 600x600-0+0 (based on G4VisManager initialisation).
 ...（省略）...
 ```
 
-ユーザーアプリを実行したあとの画面出力で、現在の環境で利用できるドライバーの一覧を確認できます。
-
-```console
-...（省略）...
-Default graphics system is: OGL (based on build flags).
-Default window size hint is: 600x600-0+0 (based on G4VisManager initialisation).
-...（省略）...
-```
-
-`exampleB1`では、`/vis/open OGL 600x600-0+0`に設定されているため、`OpenGLStoredQt`が起動します。
+この場合、デフォルトは`OGL`（OpenGLStoredQtに対応）、
+ウィンドウサイズは`600x600`となっています。
 
 ## ドライバーを変更したい（`/vis/open`）
 
@@ -100,7 +108,7 @@ Default window size hint is: 600x600-0+0 (based on G4VisManager initialisation).
 以下は表示設定（`/vis/open ドライバー名`）を変更して`exampleB1`を実行した記録です。
 
 | ドライバーの種類 | `/vis/open`の設定値 | 実行結果 |
-|---|---|---|
+| --- | --- | --- |
 | デフォルト値 | `OGL` | Qtが起動した |
 | OpenGLStoredQt | `OGL` / `OGLS` / `OGLSQt` | Qtが起動した |
 | OpenGLImmediateQt | `OGLI` / `OGLIQt` | Qtが起動した |
@@ -110,7 +118,7 @@ Default window size hint is: 600x600-0+0 (based on G4VisManager initialisation).
 | HepRep | `HepRepFile` | `G4Data{N}.heprep`が作成された |
 | RayTracer | `RayTracer` | - |
 | RayTracerX | `RayTracerX` | Xが起動した |
-| VRML | `VRML2FILE` | `g4_{NN}.wrl`が作成された|
+| VRML | `VRML2FILE` | `g4_{NN}.wrl`が作成された |
 | DAWN | `DAWNFILE` | `g4_{NNNN}.prim`が作成された |
 | gMocren | `gMocrenFile` | `g4_{NN}.wrl`作成された |
 | ASCIITree | `ATree` | - |
