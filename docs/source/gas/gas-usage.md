@@ -48,6 +48,7 @@ maxdepth: 1
 ---
 gas-builtins
 gas-variables
+gas-globalthis
 gas-function
 gas-class
 gas-namespace
