@@ -1,16 +1,19 @@
 # オブジェクトしたい（`Object`）
 
-```js
-const object = {
-    key1: "a1",
-    key2: "b1",
-    key3: "c1",
+```ts
+const object: Record<string, string> = {
+  key1: "a1",
+  key2: "b1",
+  key3: "c1",
 }
 ```
 
-`Object`（オブジェクト型）はJavaScriptにビルトインされている型のひとつで、
+`Object`（オブジェクト型）はJavaScriptのビルトイン型のひとつで、
 **キー**と**値**の組み合わせ（Key-Value Pair）を持つデータ構造です。
 キーに文字列またはシンボルを使用できます。
+TypeScriptで型付する場合は
+`Record<string, T>`もしくは
+`Record<symbol, T>`とします。
 
 ## 値を追加したい
 
@@ -28,22 +31,7 @@ object.key1;  // -> "a1";
 Objectのプロパティは`.`（ドット記法）もしくは`[]`（ブラケット記法）でアクセスできます。
 存在しないプロパティにアクセスした場合は`undefined`になります。
 
-```js
-Object.keys(object);
-// -> ["key1", "key2", "key3"]
-```
 
-```js
-Object.values(object);
-// -> ["a1", "b1", "c1"]
-```
-
-```js
-Object.entries(object);
-// ["key1", "a1"]
-// ["key2", "b1"]
-// ["key3", "c1"]
-```
 
 ```js
 // キーの確認
@@ -51,6 +39,26 @@ if ("name" in person) {
     // キーが存在するときの処理
 }
 ```
+
+## 配列にしたい（`Object.keys` / `Object.values` / `Object.entries`）
+
+```ts
+// オブジェクト型のキーを配列に変換
+const keys = Object.keys(object);
+// -> ["key1", "key2", "key3"]
+
+// オブジェクト型の値を配列に変換
+const values = Object.values(object);
+// -> ["a1", "b1", "c1"]
+
+// オブジェクト型のアイテムを2次元配列に変換
+const entries = Object.entries(object);
+Object.entries(object);
+// [["key1", "a1"], ["key2", "b1"], ["key3", "c1"]]
+```
+
+`Object.keys`、`Object.values`、`Object.entries`でオブジェクト型の変数を配列に変換できます。
+TypeScriptの場合`as`で型アサーションすると型安全にできます。
 
 ## ループしたい
 
