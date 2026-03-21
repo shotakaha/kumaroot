@@ -60,6 +60,14 @@ Object.entries(object);
 `Object.keys`、`Object.values`、`Object.entries`でオブジェクト型の変数を配列に変換できます。
 TypeScriptの場合`as`で型アサーションすると型安全にできます。
 
+## Map型にしたい
+
+```ts
+const map = new Map(Object.entries(object));
+```
+
+`Object.entries`からMap型に変換できます。
+
 ## ループしたい
 
 ```js
