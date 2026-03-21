@@ -1,7 +1,8 @@
 # シングルトン・パターン
 
-Geant4の主要クラスには「シングルトン・パターン」が採用されています。
-このため、ユーザーはどこからでも同一のインスタンスにアクセスできます。
+シングルトン・パターンとは、あるクラスのインスタンスをプログラム全体で1つだけに制限し、どこからでも同じインスタンスにアクセスできるしくみです。
+Geant4の主要クラスでは、このシングルトン・パターンが採用されており、
+ユーザーはプログラムのどこからでも同じインスタンスにアクセスできます。
 
 ## G4RunManager
 
@@ -10,10 +11,10 @@ auto rm = G4RunManager::GetRunManager();
 ```
 
 `G4RunManager`はGeant4シミュレーション全体を統括する中核的なシングルトンです。
-ジオメトリ構築（`G4VUserDetectorConstruction`）、
+ジオメトリの構築（`G4VUserDetectorConstruction`）、
 物理プロセスの定義（`G4VUserPhysicsList`）、および
 ユーザーアクション（`G4UserRunAction`など）を登録し、
-初期化、実行、終了までの一連の流れを管理します。
+シミュレーションの初期化、実行、終了までの一連の流れを管理します。
 
 :::{seealso}
 
@@ -28,6 +29,7 @@ auto nm = G4NistManager::Instance();
 ```
 
 `G4NistManager`は、NISTに準拠した元素や物質を簡単に取得・生成できるシングルトンです。
+これにより、どこからでも同じ物質データにアクセスできます。
 
 :::{seealso}
 
@@ -42,11 +44,14 @@ auto nm = G4NistManager::Instance();
 ```cpp
 auto table = G4MaterialTable::GetMaterialTable();
 for (auto* material: *table) {
-    G4cout << material->GetName() << " rho= " << material->GetDensity()/(g/cm3) << " g/cm3" << G4endl;
+    G4cout << material->GetName()
+    << " rho= " << material->GetDensity()/(g/cm3)
+    << " g/cm3" << G4endl;
 }
 ```
 
-`G4MaterialTable`は、すべての物質（`G4Material`など）のインスタンスの一覧を保持する静的テーブルです。
+`G4MaterialTable`は、すべての物質（`G4Material`など）のインスタンスを一覧で保持する静的テーブルです。
+このテーブルを使うことで、登録済みのすべての物質に簡単にアクセスできます。
 
 :::{seealso}
 
@@ -78,6 +83,9 @@ auto pt = G4ProcessTable::GetProcessTable();
 ```cpp
 auto sm = G4SDManager::GetSDMpointer();
 ```
+
+`G4SDManager`はGeant4のSensitive Detectorを管理するシングルトンです。
+このマネージャーを通じて、Sensitive Detectorの登録や取得、ヒットの管理を行うことができます。
 
 ## G4UIManager
 
@@ -177,3 +185,73 @@ ROOT、CSV、XMLなど複数の形式に出力できます。
 に整理しました。
 
 :::
+
+## SingletonManager
+
+```cpp
+// SingletonManager.hh
+#pragma once
+
+#include "G4RunManager.hh"
+#include "G4NistManager.hh"
+#include "G4SDManager.hh"
+#include "G4ParticleTable.hh"
+#include "G4MaterialTable.hh"
+#include "G4AnalysisManager.hh"
+
+class SingletonManager {
+public:
+    // RunManager
+    static G4RunManager* RunManager() {
+        return G4RunManager::GetRunManager();
+    }
+
+    // NIST Manager
+    static G4NistManager* NistManager() {
+        return G4NistManager::Instance();
+    }
+
+    // SD Manager
+    static G4SDManager* SDManager() {
+        return G4SDManager::GetSDMpointer();
+    }
+
+    // Particle Table
+    static G4ParticleTable* ParticleTable() {
+        return G4ParticleTable::GetParticleTable();
+    }
+
+    // Material Table
+    static G4MaterialTable* MaterialTable() {
+        return G4MaterialTable::GetMaterialTable();
+    }
+
+    // Analysis Manager
+    static G4AnalysisManager* AnalysisManager() {
+        return G4AnalysisManager::Instance();
+    }
+
+    // ここに必要なシングルトンを追加可能
+};
+```
+
+シングルトンを取得するメソッドは、命名規則が統一されておらずクラスごとに若干違いがあります。
+上記のサンプルは、メソッドの違いを気にせず、統一的にアクセスできるようにしました。
+
+```cpp
+#include "SingletonManager.hh"
+
+void Example() {
+    auto rm = SingletonManager::RunManager();
+    auto nm = SingletonManager::NistManager();
+    auto sm = SingletonManager::SDManager();
+    auto pt = SingletonManager::ParticleTable();
+    auto mt = SingletonManager::MaterialTable();
+    auto am = SingletonManager::AnalysisManager();
+
+    // 例えば NIST から材料を取得
+    G4Material* water = nm->FindOrBuildMaterial("G4_WATER");
+}
+```
+
+`SingletonManager.hh`を読み込み、必要なシングルトンを生成＆取得します。
