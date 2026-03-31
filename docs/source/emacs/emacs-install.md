@@ -3,14 +3,17 @@
     pair: Emacs; install
 ```
 
-# インストール
+# インストールしたい（`emacs`）
 
-``Homebre``でインストールします。
-GUI版を使いたい場合は必ず``--cask``をつけてください。
+```console
+// formula
+brew install emacs
 
-```bash
+// Emacs.app（配布バイナリ）
 brew install --cask emacs-app
 ```
+
+EmacsはHomebrewでインストールできます。
 
 macOSにインストールする場合は
 [Emacs for MacOSX](https://emacsformacosx.com)から
