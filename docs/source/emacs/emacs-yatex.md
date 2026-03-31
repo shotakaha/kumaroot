@@ -1,45 +1,60 @@
-# YaTeXの使い方
-
-YaTeX（野鳥）はEmacsでLaTeX文書を作成するためのパッケージです。
-``MELPA`` からインストールできます。
-
-## インストール
-
-```emacs
-M-x package-install RET yatex RET
-```
-
-## 設定
+# YaTeXしたい（`yatex`）
 
 ```lisp
 (use-package yatex
-    :ensure t
-    :mode (("\\.tex$" . yatex-mode))
-    :bind (("C-c C-t" . YaTeX-typeset-menu))
-    :config
-    ;; automatically selected according to current language
-    ;; (setq YaTeX-japan t)
+  :ensure t
+  :mode (("\\.tex$" . yatex-mode))
+  :bind (("C-c C-t" . YaTeX-typeset-menu))
 
-    ;; change default kanji-code from 2:JIS to 4:UTF-8
-    ;; (setq latex-message-kanji-code 4)
-    ;; (setq YaTeX-kanji-code 4)
-    ;; (setq YaTeX-coding-system 4)
+  :custom
+  ;; --- TeX engine
+  (tex-command "latexmk -lualatex -synctex=1 -file-line-error")
+  (bibtex-command "biber")
+  ;; viewer (macOS)
+  (dvi2-command "open -a Preview")
+  (tex-pdfview-command "open -a Preview")
 
-    ;; declared in yatexlib.el
-    (setq YaTeX-inhibit-prefix-letter t)
-    ;; local dictionary is NOT needed
-    (setq YaTeX-nervous nil)
+  ;; --- YaTeX behavior
+  (YaTeX-inhibit-prefix-letter t)
+  (YaTeX-nervous nil)
+  (YaTeX-simple-message t)
+  (YaTeX-skip-default-reader t)
+  )
+)
+```
 
-    ;; declared in yatex.el
-    (setq tex-command "ptex2pdf -l -ot -synctex=1 -file-line-error")
-    (setq bibtex-command "pbibtex")
-    (setq dvi2-command "open -a Preview")    ;; use Preview.app
-    (setq tex-pdfview-command "open -a Preview")
-    (setq dviprint-command-format "dvipdfmx %s")
-    (setq YaTeX-skip-default-reader t)
-    (setq YaTeX-simple-messages t)
-    ;; (setq YaTeX-template-file "...")
-    )
+YaTeX（野鳥）はEmacsでLaTeX文書を作成するためのパッケージです。
+
+## pLaTeXしたい
+
+```lisp
+(use-package yatex
+  :ensure t
+  :mode (("\\.tex$" . yatex-mode))
+  :bind (("C-c C-t" . YaTeX-typeset-menu))
+  :custom
+  ;; declared in yatex.el
+  (tex-command "ptex2pdf -l -ot -synctex=1 -file-line-error")
+  (bibtex-command "pbibtex")
+  (dvi2-command "open -a Preview")    ;; use Preview.app
+  (tex-pdfview-command "open -a Preview")
+  (dviprint-command-format "dvipdfmx %s")
+  ;; declared in yatexlib.el
+  (YaTeX-inhibit-prefix-letter t)
+  ;; local dictionary is NOT needed
+  (YaTeX-nervous nil)
+  (YaTeX-skip-default-reader t)
+  (YaTeX-simple-messages t)
+  ;; (YaTeX-template-file "...")
+
+  :config
+  ;; Legacy settings from mixed JIS/UTF-8 encodings around 2010s
+  ;; (setq YaTeX-japan t)
+  ;; change default kanji-code from 2:JIS to 4:UTF-8
+  ;; (setq latex-message-kanji-code 4)
+  ;; (setq YaTeX-kanji-code 4)
+  ;; (setq YaTeX-coding-system 4)
+)
 ```
 
 ## 拡張子が.texのファイルをyatex-modeで開く
