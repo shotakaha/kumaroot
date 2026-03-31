@@ -34,6 +34,14 @@
 (use-package emacs
   :custom
   (inhibit-startup-screen t)
+  (make-backup-files nil)
+  (auto-save-default nil)
+  (create-lockfiles nil)
+  :init
+  (set-locale-environment "en_US.UTF-8")
+  (show-paren-mode)
+  :bind
+  (("C-h" . delete-backward-char))
 )
 
 ;; --------------------------------
@@ -43,17 +51,22 @@
 ;; which-key
 (use-package which-key
   :config
-  (which-key-mode 1))
+  (which-key-mode 1)
+)
 
 ;; vertico
 (use-package vertico
   :init
-  (vertico-mode))
+  (vertico-mode)
+  :custom
+  (vertico-cycle t)
+)
 
 ;; orderless
 (use-package orderless
   :custom
-  (completion-styles '(orderless)))
+  (completion-styles '(orderless))
+)
 
 ;; consult
 (use-package consult)
@@ -61,7 +74,20 @@
 ;; marginalia
 (use-package marginalia
   :init
-  (marginalia-mode))
+  (marginalia-mode)
+)
+
+;; embark
+(use-package embark
+  :bind
+  (("C-." . embark-act))
+)
+
+;; savehist
+(use-package savehist
+  :init
+  (savehist-mode 1)
+)
 
 ;;; init.el ends here
 ```

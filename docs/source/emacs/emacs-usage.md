@@ -68,6 +68,7 @@ emacs-vertico
 emacs-magit
 emacs-yatex
 emacs-vterm
+emacs-corfu
 ```
 
 To be Added
@@ -78,7 +79,7 @@ To be Added
 - emacs-embark
 - emacs-savehist
 - emacs-projectile
-- emacs-corfu
+
 - emacs-cape
 - emacs-flycheck
 - emacs-eglot
