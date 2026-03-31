@@ -40,6 +40,8 @@ emacs-word
 maxdepth: 1
 ---
 emacs-prelude
+emacs-spacemacs
+emacs-doom
 ```
 
 ## リファレンス
