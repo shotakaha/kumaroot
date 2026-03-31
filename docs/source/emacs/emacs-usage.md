@@ -36,6 +36,7 @@ maxdepth: 1
 ---
 emacs-package
 emacs-org
+emacs-eshell
 ```
 
 To be added
@@ -64,6 +65,7 @@ emacs-which-key
 emacs-vertico
 emacs-magit
 emacs-yatex
+emacs-vterm
 ```
 
 To be Added
@@ -78,7 +80,6 @@ To be Added
 - emacs-cape
 - emacs-flycheck
 - emacs-eglot
-- emacs-vterm
 
 ## フレームワークしたい
 
