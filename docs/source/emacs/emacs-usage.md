@@ -24,16 +24,61 @@ maxdepth: 1
 emacs-install
 emacs-keyboard
 emacs-keybind
-emacs-package
-emacs-use-package
-emacs-which-key
-emacs-vertico
-emacs-org
-emacs-yatex
-emacs-magit
 emacs-twitter
 emacs-word
 ```
+
+## 標準パッケージしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+emacs-package
+emacs-org
+```
+
+To be added
+
+- emacs-show-paren-mode
+- emacs-column-number-mode
+- emacs-save-place-mode
+- emacs-delete-selection-mode
+- emacs-recentf-mode
+- emacs-savef-mode
+- emacs-icomplete-mode / fido-vertical-mode
+- emacs-dired-x
+- emacs-auto-revert-mode
+- emacs-flymake
+- emacs-project
+- emacs-dired
+
+## 拡張パッケージしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+emacs-use-package
+emacs-which-key
+emacs-vertico
+emacs-magit
+emacs-yatex
+```
+
+To be Added
+
+- emacs-orderless
+- emacs-marginalia
+- emacs-consult
+- emacs-embark
+- emacs-savehist
+- emacs-projectile
+- emacs-corfu
+- emacs-cape
+- emacs-flycheck
+- emacs-eglot
+- emacs-vterm
 
 ## フレームワークしたい
 
