@@ -69,17 +69,16 @@ emacs-magit
 emacs-yatex
 emacs-vterm
 emacs-corfu
+emacs-orderless
 ```
 
 To be Added
 
-- emacs-orderless
 - emacs-marginalia
 - emacs-consult
 - emacs-embark
 - emacs-savehist
 - emacs-projectile
-
 - emacs-cape
 - emacs-flycheck
 - emacs-eglot
