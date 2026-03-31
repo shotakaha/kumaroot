@@ -27,6 +27,7 @@ emacs-keybind
 emacs-package
 emacs-use-package
 emacs-which-key
+emacs-vertico
 emacs-org
 emacs-yatex
 emacs-magit
