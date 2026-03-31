@@ -24,7 +24,6 @@ maxdepth: 1
 emacs-install
 emacs-keyboard
 emacs-keybind
-emacs-prelude
 emacs-package
 emacs-use-package
 emacs-org
@@ -32,6 +31,15 @@ emacs-yatex
 emacs-magit
 emacs-twitter
 emacs-word
+```
+
+## フレームワークしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+emacs-prelude
 ```
 
 ## リファレンス
