@@ -1,4 +1,4 @@
-# ミニバッファー補完したい（`vertico`）
+# バッファー補完したい（`vertico`）
 
 ```emacs
 (use-package vertico

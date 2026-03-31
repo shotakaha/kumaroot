@@ -41,6 +41,7 @@ emacs-package
 emacs-dired
 emacs-org
 emacs-eshell
+emacs-icomplete
 ```
 
 To be added
@@ -51,7 +52,6 @@ To be added
 - emacs-delete-selection-mode
 - emacs-recentf-mode
 - emacs-savef-mode
-- emacs-icomplete-mode / fido-vertical-mode
 - emacs-auto-revert-mode
 - emacs-flymake
 - emacs-project
