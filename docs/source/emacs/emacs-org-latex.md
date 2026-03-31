@@ -1,8 +1,33 @@
-# org-latex
+# Org + LaTeXしたい（`ox-latex`）
 
-``Org-mode`` で作成した文書を LaTeX 文書に変換する方法です。
+```emacs
+(use-package ox-latex
+  :ensure nil
+  :after org
 
+  :custom
+  ;; PDF生成コマンド: LuaLaTeX + latexmk
+    (org-latex-pdf-process
+    '("latexmk -lualatex -interaction=nonstopmode -output-directory=%o %f")
+  )
 
+  :config
+  (add-to-list 'org-latex-classes
+    '("ltjsarticle"
+      "
+      \\documentclass{ltjsarticle}
+      \\usepackage{graphicx}
+      \\usepackage{hyperref}
+      "
+      ("\\section{%s}" . "\\section*{%s}")
+      ("\\subsection{%s}" . "\\subsection*{%s}")
+      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+    )
+  )
+)
+```
+
+`ox-latex`で、`Org-mode`で作成した文書をLaTeX文書に変換できます。
 
 ## ワークフロー
 
@@ -59,71 +84,122 @@ Original value was
     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 ```
 
-
-# ドキュメントクラスの追加（``org-latex-classes``）
-
-``alist`` になっているので``add-to-list``を使って自分で設定を追加できます。
-``jsarticle``などの日本語ドキュメントクラスは各自で追加しておきましょう。
+## ドキュメントクラスを追加したい（`org-latex-classes`）
 
 ```lisp
 (add-to-list 'org-latex-classes
-            '("jsarticle"
-                "\\documentclass[dvipdfmx,12pt]{jsarticle}"
-                ("\\section{%s}" . "\\section*{%s}")
-                ("\\subsection{%s}" . "\\subsection*{%s}")
-                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-            )
-)
-(add-to-list 'org-latex-classes
-            '("jsreport"
-                "\\documentclass[dvipdfmx,12pt,report]{jsbook}"
-                ("\\chapter{%s}" . "\\chapter*{%s}")
-                ("\\section{%s}" . "\\section*{%s}")
-                ("\\subsection{%s}" . "\\subsection*{%s}")
-                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                ("\\paragraph{%s}" . "\\paragraph*{%s}")
-            )
-)
-(add-to-list 'org-latex-classes
-            '("jsbook"
-                "\\documentclass[dvipdfmx,12pt]{jsbook}"
-                ("\\part{%s}" . "\\part*{%s}")
-                ("\\chapter{%s}" . "\\chapter*{%s}")
-                ("\\section{%s}" . "\\section*{%s}")
-                ("\\subsection{%s}" . "\\subsection*{%s}")
-                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-            )
-)
-(add-to-list 'org-latex-classes
-            '("bxjsarticle"
-                "\\documentclass[pdflatex,jadriver=standard,12pt]{bxjsarticle}"
-                ("\\section{%s}" . "\\section*{%s}")
-                ("\\subsection{%s}" . "\\subsection*{%s}")
-                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-            )
-)
-(add-to-list 'org-latex-classes
-            '("beamer"
-                "\\documentclass[dvipdfmx,12pt]{beamer}"
-                ("\\section{%s}" . "\\section*{%s}")
-                ("\\subsection{%s}" . "\\subsection*{%s}")
-                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-            )
+  '(
+    ;; 設定ファイル内での名前
+    "クラス名"
+    ;; 使用するドキュメントクラス
+    "\\documentclass{ドキュメントクラス}"
+    ;; 見出し変換のルール
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  )
 )
 ```
 
+`org-latex-classes`には、利用可能なドキュメントクラスがリスト形式で格納されています。
+`add-to-list`でカスタムしたドキュメントクラスを追加できます。
+日本語のドキュメントクラスの設定も、各自で定義して追加が必要です。
 
-## パッケージの追加（``org-latex-packages-alist``）
+### 日本語ドキュメントしたい（`ltjsarticle`）
 
+```lisp
+(add-to-list 'org-latex-classes
+  '("ltjsarticle"
+    "\\documentclass{ltjsarticle}"
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+   )
+)
+```
 
-LaTeXエクスポートした時に、ヘッダーに挿入されるパッケージ群です。
-``org-latex-default-packages-alist`` の後に追記されます。
+### 日本語ドキュメントしたい（`jsarticle` / `jsreport` / `jsbook`）
+
+```lisp
+(add-to-list 'org-latex-classes
+  '("jsarticle"
+    "\\documentclass[dvipdfmx,12pt]{jsarticle}"
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+   )
+)
+
+(add-to-list 'org-latex-classes
+  '("jsreport"
+    "\\documentclass[dvipdfmx,12pt,report]{jsbook}"
+    ("\\chapter{%s}" . "\\chapter*{%s}")
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+   )
+)
+
+(add-to-list 'org-latex-classes
+  '("jsbook"
+    "\\documentclass[dvipdfmx,12pt]{jsbook}"
+    ("\\part{%s}" . "\\part*{%s}")
+    ("\\chapter{%s}" . "\\chapter*{%s}")
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+   )
+)
+```
+
+### スライドしたい（`beamer`）
+
+```lisp
+(add-to-list 'org-latex-classes
+  '("beamer"
+    "\\documentclass[presentation]{beamer}
+     \\usetheme{metropolis}
+     \\usepackage{fontspec}
+     \\setsansfont{Fira Sans}
+     \\setmonofont{Fira Mono}
+     \\usepackage{amsmath, amssymb}
+     \\usepackage{graphicx}
+     \\usepackage{booktabs}
+    "
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  )
+)
+```
+
+## パッケージを追加したい（`org-latex-packages-alist`）
+
+```lisp
+// 書式
+// usepackage[オプション]{パッケージ名}
+// (add-to-list 'org-latex-packages-alist '(()"オプション" "パッケージ名" t))
+
+(add-to-list 'org-latex-packages-alist
+  '(
+    ("" "amsmath" t)
+    ("" "amssymb" t)
+    ("" "graphicx" t)
+    ("" "booktabs" t)
+    ("" "xcolor" t)
+    ("" "microtype" t)
+  )
+)
+```
+
+`org-latex-packages-alist`で、
+LaTeXエクスポートした時に使用するパッケージを設定できます。
+`org-latex-default-packages-alist`の後に追加されます。
 
 これも``alist``になっているので``add-to-list``を使って自分で設定を追加できます。
 ``hyperref``パッページを使ったときのしおりの文字化け対策として
