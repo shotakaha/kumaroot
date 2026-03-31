@@ -69,7 +69,10 @@
 )
 
 ;; consult
-(use-package consult)
+(use-package consult
+  :bind
+  (("C-x C-r" . consult-recent-file))
+)
 
 ;; marginalia
 (use-package marginalia
@@ -87,6 +90,17 @@
 (use-package savehist
   :init
   (savehist-mode 1)
+)
+
+;; recentf
+(use-package recentf
+  :init
+  (recentf-mode 1)
+  :custom
+  (recentf-max-saved-items 200)
+  (recentf-auto-cleanup 'mode)
+  ;; :bind -- consultでバインドを設定
+  ;; (("C-x C-r" . recentf-open-files))
 )
 
 ;;; init.el ends here
