@@ -25,6 +25,8 @@ emacs-install
 emacs-init
 emacs-keyboard
 emacs-keybind
+emacs-builtins
+emacs-font
 emacs-twitter
 emacs-word
 ```

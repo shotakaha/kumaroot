@@ -26,11 +26,15 @@
 ;; --------------------------------
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
+(setq straight-vc-git-default-clone-depth 1)
 
 ;; --------------------------------
 ;; 基本設定
 ;; --------------------------------
-(setq inhibit-startup-screen t)
+(use-package emacs
+  :custom
+  (inhibit-startup-screen t)
+)
 
 ;; --------------------------------
 ;; パッケージ例
