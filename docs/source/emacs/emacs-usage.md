@@ -72,6 +72,7 @@ emacs-yatex
 emacs-vterm
 emacs-corfu
 emacs-orderless
+emacs-anything
 ```
 
 To be Added
