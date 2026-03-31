@@ -38,6 +38,7 @@ emacs-word
 maxdepth: 1
 ---
 emacs-package
+emacs-dired
 emacs-org
 emacs-eshell
 ```
@@ -51,11 +52,9 @@ To be added
 - emacs-recentf-mode
 - emacs-savef-mode
 - emacs-icomplete-mode / fido-vertical-mode
-- emacs-dired-x
 - emacs-auto-revert-mode
 - emacs-flymake
 - emacs-project
-- emacs-dired
 
 ## 拡張パッケージしたい
 
