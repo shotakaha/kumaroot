@@ -42,6 +42,7 @@ emacs-dired
 emacs-org
 emacs-eshell
 emacs-icomplete
+emacs-ido
 ```
 
 To be added
