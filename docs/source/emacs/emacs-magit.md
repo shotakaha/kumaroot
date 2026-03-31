@@ -1,24 +1,17 @@
 # Magitの使い方
 
-[Magit](https://magit.vc/)はEmacsのGitインターフェースです。
-Emacsを使ってGitするひとはぜひ使いましょう！
-
-
-## インストール
-
-```lisp
-M-x package-install RET magit RET
-```
-
-## 設定
-```lisp
+```emacs
 (use-package magit
-    :ensure t
-    :bind (("C-x g" . magit-status)
-            ("C-x M-g" . magit-dispatch-popup)
-            )
-    )
+  :ensure t
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch))
+  :custom
+  (magit-auto-revert-mode nil)    ;; 自動更新をOFF
+)
 ```
+
+[Magit](https://magit.vc/)はEmacsのGitインターフェースです。
+Git操作が楽しくなるので、Emacsを使ってGitするひとはぜひ使いましょう！
 
 ## 使い方
 
