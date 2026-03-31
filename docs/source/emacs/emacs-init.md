@@ -45,46 +45,8 @@
 )
 
 ;; --------------------------------
-;; パッケージ例
+;; 標準パッケージ
 ;; --------------------------------
-
-;; which-key
-(use-package which-key
-  :config
-  (which-key-mode 1)
-)
-
-;; vertico
-(use-package vertico
-  :init
-  (vertico-mode)
-  :custom
-  (vertico-cycle t)
-)
-
-;; orderless
-(use-package orderless
-  :custom
-  (completion-styles '(orderless))
-)
-
-;; consult
-(use-package consult
-  :bind
-  (("C-x C-r" . consult-recent-file))
-)
-
-;; marginalia
-(use-package marginalia
-  :init
-  (marginalia-mode)
-)
-
-;; embark
-(use-package embark
-  :bind
-  (("C-." . embark-act))
-)
 
 ;; savehist
 (use-package savehist
@@ -101,6 +63,71 @@
   (recentf-auto-cleanup 'mode)
   ;; :bind -- consultでバインドを設定
   ;; (("C-x C-r" . recentf-open-files))
+)
+
+;; --------------------------------
+;; 拡張パッケージ
+;; --------------------------------
+
+;; 検索ルール
+;; orderless
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides
+    '((file (styles partial-completion)))
+  )
+)
+
+;; UI強化
+;; vertico
+(use-package vertico
+  :init
+  (vertico-mode)
+  :custom
+  (vertico-cycle t)
+)
+
+;; marginalia
+(use-package marginalia
+  :init
+  (marginalia-mode)
+)
+
+;; which-key
+(use-package which-key
+  :init
+  (which-key-mode)
+)
+
+;; バッファー操作
+
+;; consult
+(use-package consult
+  :bind
+  (("C-x C-r" . consult-recent-file))
+)
+
+;; embark
+(use-package embark
+  :bind
+  (("C-." . embark-act))
+)
+
+(use-package embark-consult
+  :after (embark consult)
+)
+
+;; 入力補完
+
+;; corfu
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
 )
 
 ;;; init.el ends here

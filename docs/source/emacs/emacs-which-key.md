@@ -2,7 +2,7 @@
 
 ```emacs
 (use-package which-key
-  :config
+  :init
   (which-key-mode)
 )
 ```
