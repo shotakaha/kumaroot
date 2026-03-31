@@ -6,18 +6,16 @@
 # インストールしたい（`emacs`）
 
 ```console
-// formula
-brew install emacs
+// CLI: formula
+$ brew install emacs
 
-// Emacs.app（配布バイナリ）
-brew install --cask emacs-app
+// GUI: Emacs.app
+$ brew install --cask emacs-app
 ```
 
 EmacsはHomebrewでインストールできます。
-
-macOSにインストールする場合は
-[Emacs for MacOSX](https://emacsformacosx.com)から
-すでにビルドされたバイナリをダウンロードする方法もあります。
+CLIだけでよい場合はフォーミュラ版（`emacs`）、
+GUIを使う場合はCask版（`emacs-app`）を指定します。
 
 :::{note}
 
@@ -25,3 +23,7 @@ macOSにインストールする場合は
 2025年6月にCaskのほうが`emacs-app`にリネームされました。
 
 :::
+
+GUI版は、Homebrewを使わずに
+[Emacs for MacOSX](https://emacsformacosx.com)
+からビルド済みのバイナリをダウンロードできます。

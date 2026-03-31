@@ -22,6 +22,7 @@ Emacsの簡単な使い方と便利なパッケージなどを紹介します。
 maxdepth: 1
 ---
 emacs-install
+emacs-init
 emacs-keyboard
 emacs-keybind
 emacs-twitter

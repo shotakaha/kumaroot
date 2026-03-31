@@ -103,6 +103,29 @@ Emacs24から利用がはじまり、Emacs27あたりから、標準的なパッ
 `:bind`オプションで、パッケージごとにキーバインドを設定できます。
 これは`global-set-key`と`kbd`関数の置き換えです。
 
+## リポジトリ指定したい（`:straight`）
+
+```emacs
+(use-package some-package
+  :straight (some-package
+             :type git
+             :host github
+             :repo "user/repo"
+             :branch "main"
+             )
+)
+```
+
+`:straight`オプションで、パッケージのリポジトリを設定できます。
+ブランチやタグも指定できるので、バージョンを細かく管理できます。
+
+:::{note}
+
+`:straight`を使うには`straight.el`と`use-package`の連携の設定が必要です。
+`straight.el`は`package.el`のようなパッケージ管理ツールです。
+
+:::
+
 ## よく使うパッケージしたい
 
 ```emacs
