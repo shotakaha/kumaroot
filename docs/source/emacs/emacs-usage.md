@@ -43,6 +43,7 @@ emacs-org
 emacs-eshell
 emacs-icomplete
 emacs-ido
+emacs-ivy
 ```
 
 To be added
