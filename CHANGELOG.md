@@ -1,5 +1,7 @@
 # CHANGELOG.md
 
+## Unreleased
+
 ## v2026.3.2 (2026-03-21)
 
 ### Fix
