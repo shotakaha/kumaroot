@@ -46,6 +46,7 @@ emacs-ido
 emacs-ivy
 emacs-eval
 emacs-modeline
+emacs-doom-modeline
 ```
 
 To be added
