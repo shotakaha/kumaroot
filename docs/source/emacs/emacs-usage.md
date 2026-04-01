@@ -76,6 +76,7 @@ emacs-vterm
 emacs-corfu
 emacs-orderless
 emacs-anything
+emacs-guru
 ```
 
 To be Added
