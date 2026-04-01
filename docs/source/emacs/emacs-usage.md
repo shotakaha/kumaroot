@@ -44,6 +44,7 @@ emacs-eshell
 emacs-icomplete
 emacs-ido
 emacs-ivy
+emacs-eval
 ```
 
 To be added
