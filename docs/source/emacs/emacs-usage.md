@@ -77,6 +77,7 @@ emacs-corfu
 emacs-orderless
 emacs-anything
 emacs-guru
+emacs-evil
 ```
 
 To be Added
