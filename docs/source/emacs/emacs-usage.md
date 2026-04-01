@@ -45,6 +45,7 @@ emacs-icomplete
 emacs-ido
 emacs-ivy
 emacs-eval
+emacs-modeline
 ```
 
 To be added
