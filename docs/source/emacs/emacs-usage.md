@@ -79,11 +79,11 @@ emacs-anything
 emacs-guru
 emacs-evil
 emacs-marginalia
+emacs-consult
 ```
 
 To be Added
 
-- emacs-consult
 - emacs-embark
 - emacs-savehist
 - emacs-projectile
