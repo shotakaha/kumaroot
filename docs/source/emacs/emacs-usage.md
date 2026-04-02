@@ -5,17 +5,64 @@
 
 # Emacsの使い方
 
-世の中にはたくさんの種類のエディタがあります。
-エディタはプログラミングや文書作成を楽にするための道具なので、
-自分に合ったものを選ぶとよいと思います。
-ここでは、少しでも参考になるように、
-Emacsの簡単な使い方と便利なパッケージなどを紹介します。
+Emacsは1970年代に誕生し、半世紀近くに渡って使われ続けているテキストエディターです。
+初期状態ではシンプルな構成となっており、必ずしも使いやすいとは言えませんが、
+Emacs Lisp（Elisp）によって無限にカスタマイズできます。
 
-```{note}
-2020年くらいから[VS Code](../vscode/vscode-usage.md)をメインで使っています。
-キーバインドは[Awesome Emacs Keymap](https://marketplace.visualstudio.com/items?itemName=tuttieee.emacs-mcx)を使い、Git操作は[Edamagit](https://marketplace.visualstudio.com/items?itemName=kahole.magit)を使っています。
-また、全体の環境を[VSpaceCode](https://marketplace.visualstudio.com/items?itemName=VSpaceCode.vspacecode)にして、少しずつ``vim``バインドの習得も目指しています。
-```
+その結果、テキスト編集だけでなく、メールやカレンダー、タスク管理などにも利用でき、
+統合開発環境（IDE）を含む作業環境そのものをEmacs上に構築することも可能です。
+この拡張性の高さこそが、長年にわたって多くのユーザーに支持されてきた理由のひとつです。
+
+僕が本格的にEmacsを使いはじめたのは2009年ころです。
+Emacs23でパッケージ管理システム（[package.el](./emacs-package.md)）が導入され、
+[use-package](./emacs-use-package.md)も登場し、
+パッケージの追加と設定がぐっと便利になったタイミングでした。
+
+るびきちさんの本を読みながら設定を真似し、
+[Prelude](./emacs-prelude.md)もこの頃から使いはじめました。
+Elispを使った簡単なカスタマイズにどハマりし、ありとあらゆることをEmacsで完結できないかと、
+設定の魔改造に没頭した思い出もあります
+（結局、UTF-8でない日本語環境に関する情報に限りがあり断念）。
+
+エディターはプログラミングや文書作成などの編集作業に欠かせないツールです。
+デスクワークの多くの時間を、エディターとともに過ごしているといっても過言ではありません。
+自分に合ったエディターを選ぶことで、日々の編集作業はより快適で、効率的で、そして楽しいものになります。
+
+Emacsは「カスタマイズ性」に優れた、とても育て甲斐のあるエディターです。
+使い込むほどに自分の手に馴染み、作業環境そのものを形作っていくことができます。
+このドキュメントでは、その一助となることを目指して
+Emacsの簡単な使い方と、日常的に役立つ便利なパッケージを紹介していきます。
+
+:::{note}
+
+パソコンを買い替えるたびにイチから設定するめんどくさくなり
+（設定の見直しも兼ねていて、それはそれで楽しい作業ではあるのですが）、
+2020年くらいから[VS Code](../vscode/vscode-usage.md)をメインで使うようになりました。
+
+ただ、Emacs操作体系が身体に深く染み付いているため、
+キーバインドには[Awesome Emacs Keymap](https://marketplace.visualstudio.com/items?itemName=tuttieee.emacs-mcx)を導入し、
+Git操作には[Edamagit](https://marketplace.visualstudio.com/items?itemName=kahole.magit)を利用しています。
+また、全体の操作体系として[VSpaceCode](https://marketplace.visualstudio.com/items?itemName=VSpaceCode.vspacecode)を採用することで、
+`Emacs`と`vim`のいいとこどりな環境を構築しています。
+
+`Emacs` vs `vim`はエディター界隈の宗教戦争と揶揄されますが、
+`vim`のモード切り替えと、片手でスクロール操作できるのはすばらしいと思います。
+
+:::
+
+:::{note}
+
+Emacsのバッファー／ミニバッファーや[dired](./emacs-dired.md)のような操作体験が、
+VS Codeではなかなか得られず、2026年にひさびさにEmacsに戻ってきました。
+
+この数年でまさに隔世の感がありました。
+以前は「手間暇かけて使えるようにするエディター」という印象でしたが、
+現在では標準機能や周辺パッケージが大きく進化し、かなり使い勝手が向上しているように感じます。
+
+昔の設定を見直し、ChatGPTなども活用しながら、
+モダンなEmacs環境の構築を目指して、ドキュメント更新をリブートしてみようと思います。
+
+:::
 
 ```{toctree}
 ---
