@@ -47,6 +47,7 @@ emacs-ivy
 emacs-eval
 emacs-modeline
 emacs-doom-modeline
+emacs-flymake
 ```
 
 To be added
@@ -58,7 +59,6 @@ To be added
 - emacs-recentf-mode
 - emacs-savef-mode
 - emacs-auto-revert-mode
-- emacs-flymake
 - emacs-project
 
 ## 拡張パッケージしたい
