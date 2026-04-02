@@ -78,11 +78,11 @@ emacs-orderless
 emacs-anything
 emacs-guru
 emacs-evil
+emacs-marginalia
 ```
 
 To be Added
 
-- emacs-marginalia
 - emacs-consult
 - emacs-embark
 - emacs-savehist
