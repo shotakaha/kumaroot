@@ -72,10 +72,19 @@ emacs-install
 emacs-init
 emacs-keyboard
 emacs-keybind
-emacs-builtins
-emacs-font
 emacs-twitter
 emacs-word
+```
+
+## 基本設定したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+emacs-builtins
+emacs-font
+emacs-frame
 ```
 
 ## 標準パッケージしたい
