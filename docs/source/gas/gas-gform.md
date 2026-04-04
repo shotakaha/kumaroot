@@ -9,7 +9,8 @@ const form: GoogleAppsScript.Forms.Form = FormApp.openByUrl("FORM_URL");
 ```
 
 `FormApp`でGoogleフォームを操作できます。
-スプレッドシートなどと同じようにIDとURLを指定して、既存のフォームを取得できます。
+`openById`と`openByUrl`で、スプレッドシートなどと同じように
+フォームのIDもしくはURLを指定して、既存のフォームを取得できます。
 
 ```ts
 const FORM_ID = PropertiesService.getScriptProperties().getProperty("FORM_ID") ?? ""
@@ -18,6 +19,64 @@ const form = FormApp.openById(FORM_ID);
 
 フォームのIDをハードコードしたくない場合は、
 GASのScriptPropertiesを利用するとよいです。
+
+## フォームを作成したい（`FormApp.create`）
+
+```ts
+function createForm() {
+  const form: GoogleAppsScript.Forms.Form = FormApp.create("アンケートフォーム");
+  Logger.log(form.getEditUrl());
+}
+```
+
+`create`メソッドで、フォームを新規作成できます。
+
+## フォームを設定したい
+
+```ts
+function settings(form: GoogleAppsScript.Forms.Form) {
+  form.setDescription("これはフォームの説明です");
+  form.setCollectEmail(true);    // メールアドレスを収集
+  form.setLimitOneResponsePerUser(true);    // 1人1回答に制限
+}
+```
+
+## 回答を取得したい（`FormApp.getResponses`）
+
+```ts
+function getResponses(
+  form: GoogleAppsScript.Forms.Form
+): void {
+  // すべての回答を取得
+  const responses: GoogleAppsScript.Forms.FormResponse[] = form.getResponses();
+  Logger.log(`回答数: ${responses.length}`);
+
+  // 1件ずつ確認
+  responses.forEach( (response: GoogleAppsScript.Forms.FormResponse) => {
+    // すべての質問に対する回答を取得
+    const items: GoogleAppsScript.Forms.ItemResponse[] = response.getItemResponses();
+    // 質問ごとの回答を確認
+    items.forEach((item: GoogleAppsScript.Forms.ItemResponse) => {
+      // 記述式: string
+      // チェックボックス: string[]
+      const answer: string | string[] = item.getResponse();
+      Logger.log(answer);
+    });
+  });
+}
+```
+
+既存のフォームから回答を取得して表示するサンプルです。
+型名を確認するとわかるように、
+フォーム全体の回答は`FormResponse[]`、
+個別の回答は`ItemResponse[]`として取得できます。
+
+`FormResponse`は「1人分の回答全体」を表し、
+`ItemResponse`は「各質問に対する回答」を表します。
+
+また、質問の種類によって`ItemResponse`は、
+`string`（記述式など）や
+`string[]`（チェックボックスなど）になります。
 
 ## フィールドを取得したい（`FormApp.getItems()`）
 
