@@ -136,6 +136,7 @@ emacs-guru
 emacs-evil
 emacs-marginalia
 emacs-consult
+emacs-web
 ```
 
 To be Added
