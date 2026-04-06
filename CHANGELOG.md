@@ -2,6 +2,53 @@
 
 ## Unreleased
 
+### Feat
+
+- **emacs-frame**: add frame size operation
+- **zensical-readthedocs**: add zensical readthedocs support
+- **emacs-consult**: add consult package
+- **emacs-marginalia**: add marginalia package
+- **emacs-flymake**: add flymake package
+- **emacs-evil**: add evil-mode
+- **emacs-guru**: add guru-mode usage
+- **emacs-doom-modeline**: add doom-modeline config
+- **emacs-modeline**: add modeline customization
+- **emacs-eval**: add eval commands
+- **emacs-recentf**: add recentf package
+- **emacs-anything**: add anything as legacy package
+- **emacs-ivy**: add ivy usage
+- **emacs-ido**: add ido usage
+- **emacs-orderless**: add oderless usage
+- **emacs-corfu**: add corfu usage
+- **emacs-dired**: add dired, dired-x, wdired packages
+- **emacs-straight**: add straight package manager
+- **emacs-init**: add emacs init/early-init usage
+- **emacs-shell**: add eshell and vterm usage
+- **emacs-vertico**: add vertico package
+- **emacs-which-key**: add which-key package
+
+### Fix
+
+- **gas**: clarify Date format table and timezone usage
+- **gas-form**: update FormApp.getResponses
+- **emacs-builtins**: updated builtins config
+- **emacs-twitter**: add deprecation message
+- **emacs-usage**: update introduction
+- **emacs-init**: update init config
+- **emacs-icomplete**: add icomplete package
+- **emacsclient**: add emacsclient usage
+- **emacs-usage**: add placeholders for Spacemacs and Doom Emacs
+- **emacs-prelude**: removed outdated description
+- **emacs-yatex**: update YaTeX config
+- **emacs-org**: updated org-mode config
+- **emacs-magit**: updated Magit config
+- **emacs-use-package**: update use-package usage
+- **emacs-install**: update Emacs install methods
+- **emacs-package**: update Emacs package examples
+- **gas-properties**: add user/document property sections and improve code examples
+- **gas-exports**: add TypeScript export pattern with entry point example
+- **gitignore**: ignore auto-generated sphinx-tags output directory
+
 ## v2026.3.2 (2026-03-21)
 
 ### Fix
