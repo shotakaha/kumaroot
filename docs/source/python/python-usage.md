@@ -27,6 +27,7 @@ python-requests
 python-httpx
 python-string
 python-subprocess
+python-time
 python-tomllib
 python-tqdm
 python-typer
