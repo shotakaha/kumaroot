@@ -1,9 +1,11 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.4.0 (2026-04-07)
 
 ### Feat
 
+- **python-time**: add time module
+- **emacs-web**: add web-mode config
 - **emacs-frame**: add frame size operation
 - **zensical-readthedocs**: add zensical readthedocs support
 - **emacs-consult**: add consult package
@@ -29,6 +31,7 @@
 
 ### Fix
 
+- **python-time**: updated timeout detection
 - **gas**: clarify Date format table and timezone usage
 - **gas-form**: update FormApp.getResponses
 - **emacs-builtins**: updated builtins config
