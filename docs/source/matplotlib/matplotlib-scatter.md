@@ -1,8 +1,8 @@
-# 散布図したい（``matplotlib.pyplot.scatter``）
+# 散布図したい（`matplotlib.pyplot.scatter`）
 
 ```python
+import numpy as np
 import matplotlib.pyplot as plt
-fig, ax = plt.subplots()
 
 # データを準備する
 xdata = data["x"]
@@ -10,28 +10,32 @@ ydata = data["y"]
 sizes = data["sizes"]
 colors = data["colors"]
 
-# 散布図を描画する
-ax.scatter(
+# Figureエリアを作成
+fig, ax = plt.subplots()
+
+# 散布図
+sc = ax.scatter(
     x=xdata,
     y=ydata,
-    s=sizes,
+    s=sizez,
     c=colors,
     cmap="viridis",
     vmin=0,
     vmax=10,
     label="凡例に使う名前",
-    )
+)
 
-# 図を整える
+# axesの設定
 ax.set(
     xlim=(0, 8),
     xticks=np.arange(1, 8),
     ylim=(0, 8),
-    ytics=np.arange(1, 8)
+    ytics=np.arange(1, 8),
 )
-
-ax.legend()
 ax.grid(True)
+
+fig.colorbar(sc, ax=ax)
+ax.legend()
 
 plt.show()
 ```

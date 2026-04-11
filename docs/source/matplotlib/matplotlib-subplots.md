@@ -1,7 +1,8 @@
-# キャンバスを分割したい（``matplotlib.pyplot.subplots``）
+# キャンバスを分割したい（`matplotlib.pyplot.subplots`）
 
 ```python
 import matplotlib.pyplot as plt
+
 fig, axs = plt.subplots(1, figsize=(4, 4))
 
 data.plot.scatter(x="time", y="v1", ax=axs, c="blue")
@@ -9,11 +10,11 @@ data.plot.scatter(x="time", y="v2", ax=axs, c="red")
 ```
 
 [plt.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)でキャンバスを作成できます。
-返り値は``Figure``オブジェクトと``Axes``オブジェクトです。
+返り値は`Figure`オブジェクトと`Axes`オブジェクトです。
 
 ``squeeze=False``オプションで、返ってくる``Axes``オブジェクト（``axs``）を常に2次元配列にできます。
 
-``width_ratios``と``height_rations``オプションで
+``width_ratios``と``height_ratios``オプションで
 列幅の比、行高の比を変更できます。
 
 ## 複数に分割したい
