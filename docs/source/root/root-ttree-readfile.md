@@ -1,4 +1,4 @@
-# テキストファイルをTTreeに変換したい（`TTree::ReadFile`）
+# TTreeしたい（`TTree::ReadFile`）
 
 ```cpp
 #include <TTree.h>
@@ -9,13 +9,21 @@
 TTree *tree = new TTree("tree", "tree from text file");
 
 // テキストファイルを読み込み
-tree->ReadFile("input.csv", "col1/I:col2/I:col3/D", ",");
+tree->ReadFile(
+    "input.csv",    // filename
+    "col1/I:col2/I:col3/D",  // branchDescriptor
+    ","  // delimiter
+);
 
 // ヒストグラムを作成
 tree->Draw("col1");
 ```
 
-`TTree::ReadFile`メソッドで、テキスト形式のファイル（CSV、タブ区切り等）を直接TTreeオブジェクトに読み込むことができます。
+`TTree::ReadFile`メソッドで、テキスト形式のファイル（CSV、タブ区切り等）を`TTree`に変換できます。
+`filename`に読み込むファイルのパスを指定し、`branchDescriptor`でブランチの構造を定義します。
+
+`delimiter`で区切り文字を変更できます。
+デフォルトはスペースになっています。
 
 ```python
 from ROOT import TTree, TFile
@@ -29,39 +37,6 @@ tree.ReadFile("input.csv", "col1/I:col2/I:col3/D", ",")
 # ヒストグラムを作成
 tree.Draw("col1")
 ```
-
-## メソッドのシグネチャ
-
-```cpp
-Long64_t ReadFile(
-    const char *filename,
-    const char *branchDescriptor,
-    char delimiter = ' '
-)
-```
-
-`TTree::ReadFile`は、テキスト形式のデータファイルをROOTのTTreeオブジェクトに直接読み込む便利なメソッドです。
-
-### 引数の説明
-
-**filename** - 読み込むファイルパス
-
-- テキスト形式のデータファイルを指定します
-- 絶対パスまたは相対パスで指定可能です
-- 複数ファイルを読み込む場合は`TString`を使って動的に指定することも可能です
-
-**branchDescriptor** - ブランチ構造定義
-
-- ブランチ名と型を指定します
-- 複数のブランチは`:`（コロン）で区切ります
-- 型は以下の形式で指定します：`branchname/type`
-
-**delimiter** - 区切り文字
-
-- データの区切り文字を指定します
-- デフォルトは`" "`（スペース）です
-- CSVファイルの場合は`","`を指定します
-- タブ区切りの場合は`"\t"`を指定します
 
 ### データ型一覧
 
