@@ -1,58 +1,75 @@
-# グラフしたい（``pandas.DataFrame.plot``）
+# グラフしたい（`pandas.DataFrame.plot`）
 
 ```python
 import pandas
 import matplotlib.pyplot as plt
+
+# 日本語フォントの設定
 import japanize_matplotlib
+# or
+# from matplotlib import rcParams
+# rcParams["font.family"] = "IPAexGothic"
 
 fig, axs = plt.subplots()
 data.plot(ax=axs)
 fig.savefig("ファイル名")
 ```
 
-[pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)を使って、データフレームからグラフを作成できます。
-デフォルトで、数値データのみのカラムがすべて折れ線グラフで表示されます。
+`pd.DataFrame.plot`でグラフを作成できます。
+デフォルトでは、数値データのみのカラムがすべて折れ線グラフで表示されます。
 
 このメソッドは``matplotlib``のラッパー的なものなので、``matplotlib``のインポートが必要です。
-また、日本語を表示したい場合は``japanize_matplotlib``をインポートするとよいです。
+また、日本語を表示したい場合は`japanize_matplotlib`をインポートするか、[matplotlib.rcParams](../matplotlib/matplotlib-rcparams.md)で日本語フォントの設定が必要です。
 
-:::{note}
+:::{seealso}
 
-検索すると``matplotlib``（``matplotlib.pyplot``）を使ってグラフを作成する記事が多くヒットします。
-せっかくPandasを使っているので、ここではできるだけPandasを使った方法を試してみようと思います。
+- [](../matplotlib/matplotlib-plot.md)
 
 :::
 
-## 種類を変更したい（``kind``）
+## グラフの種類を変更したい（`kind`）
 
 ```python
+# ヒストグラム
 data.plot(kind="hist")
-data.plot(kind="scatter", x="x軸のカラム名", y="Y軸のカラム名")
+
+# 散布図
+data.plot(
+  kind="scatter",
+  x="x軸のカラム名",
+  y="Y軸のカラム名"
+)
 ```
 
-``kind``オプションでグラフの種類を変更できます。
-指定できるグラフの種類はヒストグラム（``hist``）、散布図（``scatter``）、棒グラフ（``bar``）、箱ひげ図（``box``）など全11種類あります。
+`kind`オプションでグラフの種類を変更できます。
+指定できるグラフの種類は
+ヒストグラム（`hist`）、
+散布図（`scatter`）、
+棒グラフ（`bar` / `barh`）、
+箱ひげ図（`box`）など全11種類あります。
 
-散布図（``scatter``）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
+散布図（`scatter`）など、一部のグラフ種類ではX軸、Y軸の指定が必要です。
 
-## タイトルしたい（``title`` / ``xlabel`` / ``ylabel``）
+## タイトルしたい（`title` / `xlabel` / `ylabel`）
 
 ```python
 data.plot(
-    title="グラフのタイトル",
-    xlabel="X軸のタイトル",
-    ylabel="Y軸のタイトル",
-    )
+  title="グラフのタイトル",
+  xlabel="X軸のタイトル",
+  ylabel="Y軸のタイトル",
+)
+
+# matplotlibで設定する場合
+ax = data.plot()
+ax.set_title("グラフのタイトル")
+ax.set_xlabel("X軸のタイトル")
+ax.set_ylabel("Y軸のタイトル")
 ```
 
-``title``、``xlabel``、``ylabel``オプションで、グラフのタイトルや軸タイトルを表示できます。
-``japanize_matplotlib``をインポートするだけで、日本語フォントを扱えるようになります。
+`title`、`xlabel`、`ylabel`オプションで、グラフのタイトルや軸タイトルを表示できます。
 
-:::{important}
 
-軸タイトルは単位も含めて設定しておくとよいです。
-
-:::
+上記の設定はこの設定と等価です。
 
 ## サブプロットしたい（``subplots``）
 
@@ -60,54 +77,87 @@ data.plot(
 data.plot(subplots=True)
 
 data.plot(
-    subplots=True,
-    figsize=(横サイズ, 縦サイズ),
-    layout=(行数, 列数),
-    )
+  subplots=True,
+  figsize=(横サイズ, 縦サイズ),
+  layout=(行数, 列数),
+)
+
+# matplotlibで設定する場合
+fig, axs = plt.subplots(
+    figsize=(8, 12),
+    nrows=2,
+    ncols=3,
+)
+data.plot(
+    ax=axs[0, 0],  # 1行目1列目
+)
+data.plot(
+    ax=axs[0, 1],  # 1行目2列目
+)
+# ... (以下、必要な分だけ繰り返す)
 ```
 
-``subplots=True``オプションで、複数のカラムのデータをそれぞれのサブプロットに表示できます。
-``figsize``オプションで図の全体サイズを変更できます。横サイズ／縦サイズの単位は``inch``です（``dpi=72``）。
-``layout``オプションでサブプロットの行数と列数を変更できます。デフォルトは縦配置です。
+`subplots=True`オプションで、複数のカラムのデータをそれぞれのサブプロットに表示できます。
+`figsize`オプションで図の全体サイズを変更できます。横サイズ／縦サイズの単位はインチです。
+`layout`オプションでサブプロットの行数と列数を変更できます。
+デフォルトは縦配置です。
 サブプロットの詳細は[matplotlib.pyplot.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)も参照してください。
 
-## 目盛りしたい（``grid``）
+## 目盛りしたい（`grid`）
 
 ```python
 data.plot(grid=True)
 
 data.plot(
-    grid=True,
-    xticks=range(0, 1000, 50),
-    yticks=range(-5, 15, 1)
-    )
+  grid=True,
+  xticks=range(0, 1000, 50),
+  yticks=range(-5, 15, 1)
+)
+
+# matplotlibで設定する場合
+ax = data.plot()
+ax.grid(True)
+ax.set_xticks(range(0, 1000, 50))
+ax.set_yticks(range(-5, 15, 1))
 ```
 
-``grid=True``オプションで、目盛り（補助目盛り）を表示できます。
-``xticks``、``yticks``オプションで目盛り間隔を変更できます。
+`grid=True`オプションで、目盛り（補助目盛り）を表示できます。
+`xticks`、`yticks`オプションで目盛り間隔を変更できます。
 目盛りの詳細は[matplotlib.pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)も参照してください。
 
 ## 表示範囲したい（``xlim`` / ``ylim``）
 
 ```python
 data.plot(
-    xlim=(x軸の下限値, x軸の上限値),
-    ylim=(y軸の下限値, y軸の上限値)
-    )
+  xlim=(x軸の下限値, x軸の上限値),
+  ylim=(y軸の下限値, y軸の上限値)
+)
+
+# matplotlibで設定する場合
+ax = data.plot()
+ax.set_xlim(x軸の下限値, x軸の上限値)
+ax.set_ylim(y軸の下限値, y軸の上限値)
 ```
 
-``xlim``、``ylim``オプションで、X軸とY軸それぞれの下限値と上限値を変更できます。
+`xlim`、`ylim`オプションで、X軸とY軸それぞれの下限値と上限値を変更できます。
 
-## 対数グラフしたい（``logx`` / ``logy`` / ``loglog``）
+## 対数グラフしたい（`logx` / `logy` / `loglog`）
 
 ```python
 data.plot(logx=True)
 data.plot(logy=True)
 data.plot(loglog=True)
+
+# matplotlibで設定する場合
+ax = data.plot()
+ax.set_xscale("log")
+ax.set_yscale("log")
 ```
 
-``logx=True``、``logy=true``、``loglog=True``オプションで片対数グラフや両対数グラフに変更できます。
-``loglog=True``は``logx=True, logy=True``と同等です。
+`logx=True`、`logy=true`オプションで、片対数グラフに変更できます。
+`loglog=True`オプションで、両対数グラフに変更できます。
+
+`loglog=True`は、`logx=True, logy=True`と同等です。
 
 ## 詳細設定したい（``ax``）
 
@@ -130,7 +180,7 @@ data.plot(
     )
 ```
 
-``ax``オプションで``matplotlib``の``Axes``オブジェクトを指定できます。
+`ax`オプションで`matplotlib`の`Axes`オブジェクトを指定できます。
 グラフをより詳細に設定したい場合は、[matplotlib.pyplot.axes](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axes.html)に対して変更を加えます。
 
 :::{seealso}
