@@ -1,179 +1,120 @@
-# ROOTファイルを操作したい（`TFile`）
+# ファイル操作したい（`TFile`）
 
 ```cpp
 #include <TFile.h>
 
+// ファイルを開く
+TFile *fin = new TFile(
+    "input.root",  // fname
+    "read",        // option: read | update | recreate | create
+    "Input ROOT file",  // ftitle (optional)
+    505            // compress (optional)
+);
+
+// オブジェクトを取得
+TH1D *h1 = (TH1D*)fin->Get("histogram_name");
+
+// ファイルを閉じる
+fin->Close();
+```
+
+`TFile`クラスで、ROOTファイルの読み書きができます。
+ファイルを開いてオブジェクトを取得し、最後にファイルを閉じるのが基本的な流れです。
+
+`fname`はファイル名を指定します。
+ファイル名は相対パスや絶対パスで指定できます。
+ただし、`~`を使用したホームディレクトリの指定はサポートされていません。
+
+`option`はファイルアクセスモードを指定します。
+読み込み専用（`read` / `r`）、
+更新・追記（`update` / `u`）、
+新規作成（存在する場合はエラー）（`create` / `c`）
+新規作成（存在する場合は上書き）（`recreate`）
+のいずれかを指定します。
+デフォルトは`read`です。
+
+`ftitle`はファイルのタイトル説明を設定できます。
+`compress`は圧縮レベルを指定できます。デフォルトは505です。
+
+```python
+import ROOT
+
+# ファイルを開く
+fin = ROOT.TFile("input.root", "read")
+
+# オブジェクトを取得
+h1 = fin.Get("histogram_name")
+
+# ファイルを閉じる
+fin.Close()
+```
+
+## ファイルに保存したい（`TFile`）
+
+```cpp
+#include <TFile.h>
+
+TFile *fout = new TFile(
+    "output.root",
+    "recreate"
+);
+
+// オブジェクトをファイルに書き込む
+tree->Write();
+hist->Write();
+canvas->Write();
+
+fout->Close();
+```
+
+`TFile`を`recreate`モードで作成してから、各オブジェクトの`Write()`メソッドを呼び出して保存します。
+最後に`Close()`でファイルを閉じます。
+
+ファイルに追記する場合は`update`モードを使用します。
+
+## オブジェクトを取得したい（`TFile::Get`）
+
+```cpp
+#include <TFile.h>
 TFile *fin = new TFile("input.root", "read");
 TH1D *h1 = (TH1D*)fin->Get("histogram_name");
 fin->Close();
 ```
 
-`TFile`はROOTファイル（`.root`）の読み込みと書き込みを行うクラスです。
-オブジェクト（ヒストグラム、TTree、キャンバスなど）を保存・復元できます。
+`TFile::Get`で、ファイルからオブジェクトを取得できます。
+オブジェクトの名前を指定して、正しい型にキャストすることが重要です。
 
-```python
-import ROOT
+:::{note}
 
-fin = ROOT.TFile("input.root", "read")
-h1 = fin.Get("histogram_name")
-fin.Close()
-```
+`auto`を使用して型推論することもできますが、明示的な型指定の方が安全です。
 
-## メソッドのシグネチャ
+:::
 
-```cpp
-TFile(
-    const char *fname,
-    Option_t *option = "",
-    const char *ftitle = "",
-    Int_t compress = 505
-)
-```
-
-### 引数と戻り値
-
-**引数**:
-
-- **fname** - ファイル名
-- **option** - ファイルアクセスモード（read, update, recreate, create）
-- **ftitle** - ファイルのタイトル説明（オプション）
-- **compress** - 圧縮レベル（デフォルト: 505）
-
-**戻り値**:
-
-- TFileオブジェクト
-
-### ファイルアクセスモード
-
-| モード | 説明 |
-|-------|------|
-| `"read"` または `"r"` | 読み込みモード（ファイルが存在する必要があります） |
-| `"update"` または `"u"` | 既存ファイルを更新モード |
-| `"recreate"` または `"w"` | 新規作成（既存ファイルは上書き） |
-| `"create"` または `"c"` | 新規作成（既存ファイルはエラー） |
-
-### 主要なメソッド
-
-- **`Get(const char *namecycle)`** - 名前を指定してオブジェクトを取得
-- **`Write()`** - 現在のディレクトリに含まれるすべてのオブジェクトを書き込み
-- **`Close()`** - ファイルを閉じる
-- **`cd(const char *path = "")`** - ROOTのディレクトリを変更
-- **`cd(Int_t slot)`** - スロット番号を指定してディレクトリを変更
-- **`Flush()`** - バッファーをディスクに書き込み（ファイルは開いたまま）
-
-## ファイルを読み込みたい（`TFile`）
+## ディレクトリを変更したい（`TFile::cd`）
 
 ```cpp
 #include <TFile.h>
-
-TFile *fin = new TFile("input.root", "read");
-TH1D *h1 = (TH1D*)fin->Get("h1");
-fin->Close();
-```
-
-ROOTファイルから名前を指定してオブジェクトを取得します。
-キャストして正しい型を指定することが重要です。
-
-```python
-import ROOT
-
-fin = ROOT.TFile("input.root", "read")
-h1 = fin.Get("h1")
-fin.Close()
-```
-
-## ファイルに書き込みたい（`TFile`）
-
-```cpp
-#include <TFile.h>
-
 TFile *fout = new TFile("output.root", "recreate");
-tree->Write();
-hist->Write();
-canvas->Write();
+fout->cd("subdir");  // "subdir"ディレクトリに移動
+tree->Write();  // "subdir"に書き込まれる
 fout->Close();
 ```
 
-`TFile`を作成してから、各オブジェクトの`Write()`メソッドを呼び出して保存します。
-最後に`Close()`でファイルを閉じます。
+`TFile::cd`で、ファイル内のディレクトリを変更できます。
+ROOTファイルにはディレクトリ構造を持たせることができます。
+`cd()`でそのディレクトリに移動してから`Write()`を呼び出すことで、指定したディレクトリにオブジェクトを保存できます。
 
-```python
-import ROOT
-
-fout = ROOT.TFile("output.root", "recreate")
-tree.Write()
-hist.Write()
-canvas.Write()
-fout.Close()
-```
-
-## ファイルの有無を確認したい（`TFile`）
+## 上書き確認したい（`TFile`）
 
 ```cpp
 #include <TFile.h>
 #include <TSystem.h>
+#include <TString.h>
 
-TString ifn = "input.root";
+TString ofn = "output.root";
 FileStat_t info;
 
-if (gSystem->GetPathInfo(ifn.Data(), info) != 0) {
-    printf("File '%s' does not exist.\n", ifn.Data());
-} else {
-    printf("File exists. Size: %lld bytes\n", info.fSize);
-    TFile *fin = new TFile(ifn.Data(), "read");
-}
-```
 
-`gSystem->GetPathInfo()`を使用してファイルの存在確認とメタ情報取得ができます。
-戻り値が0の場合はファイルが存在します。
-
-### FileStat_tの主要な要素
-
-- **fSize** - ファイルサイズ（バイト）
-- **fMtime** - 最終変更時刻（Unix timestamp）
-- **fIsLink** - シンボリックリンクかどうか（`kTRUE`または`kFALSE`）
-- **fDev** - デバイスID
-- **fUid** - ユーザID
-- **fGid** - グループID
-
-## 複数のファイルに書き込みたい（`TFile`）
-
-```cpp
-#include <TFile.h>
-
-TFile *fout1 = new TFile("output1.root", "recreate");
-TFile *fout2 = new TFile("output2.root", "recreate");
-
-// fout2が現在のディレクトリ
-tree1->Write();  // fout2に書き込まれる
-
-// fout1に切り替え
-fout1->cd();
-tree2->Write();  // fout1に書き込まれる
-
-fout1->Close();
-fout2->Close();
-```
-
-複数のTFileを開いている場合、`cd()`メソッドで対象ファイルを切り替えてから`Write()`を実行します。
-ROOTの内部にはディレクトリ構造があり、`cd()`でそのディレクトリに移動します。
-
-```python
-import ROOT
-
-fout1 = ROOT.TFile("output1.root", "recreate")
-fout2 = ROOT.TFile("output2.root", "recreate")
-
-tree1.Write()  # fout2に書き込まれる
-
-fout1.cd()
-tree2.Write()  # fout1に書き込まれる
-
-fout1.Close()
-fout2.Close()
-```
-
-## ファイルの上書き確認をしたい（`TFile`）
 
 ```cpp
 #include <TFile.h>
@@ -182,60 +123,25 @@ fout2.Close()
 
 TString ofn = "output.root";
 FileStat_t info;
-
-if (gSystem->GetPathInfo(ofn.Data(), info) == 0) {
-    fprintf(stderr, "Error: File '%s' already exists.\n", ofn.Data());
-    fprintf(stderr, "Overwrite? [y/n] > ");
-
-    int readch = getchar();
-    while (readch != '\n' && readch != EOF) readch = getchar();
-
-    if (readch == 'y' || readch == 'Y') {
-        fprintf(stderr, "Overwriting '%s'.\n", ofn.Data());
-        TFile *fout = new TFile(ofn.Data(), "recreate");
-    } else {
-        fprintf(stderr, "Aborted.\n");
-        return 1;
+if (gSystem->GetPathInfo(ofn, info) == 0) {
+    printf("File %s already exists. Do you want to overwrite it? (y/n): ", ofn.Data());
+    char response;
+    std::cin >> response;
+    if (response != 'y' && response != 'Y') {
+        printf("Aborting file write.\n");
+        return;
     }
-} else {
-    TFile *fout = new TFile(ofn.Data(), "recreate");
 }
+
+TFile *fout = new TFile(ofn, "recreate");
+// ...オブジェクトの書き込み...
+fout->Close();
 ```
 
-ファイルがすでに存在する場合、ユーザーに上書き確認を促します。
+ファイルが存在する場合に、ユーザーに上書き確認を促すサンプルです。
+`TSystem::GetPathInfo`でファイルの存在を確認しています。
 
-## ファイルパスの指定方法
+## リファレンス
 
-相対パスと絶対パスが使用できます。
-
-**相対パス**:
-
-```cpp
-TFile *f = new TFile("data/input.root", "read");
-```
-
-**絶対パス**（推奨）:
-
-```cpp
-TFile *f = new TFile("/home/user/data/input.root", "read");
-```
-
-**ホームディレクトリの指定（非推奨）**:
-
-```cpp
-// ~ はサポートされていません
-// 代わりに絶対パスを使用してください
-```
-
-## 関連するクラス
-
-- [TTree](./root-ttree.md) - ROOT形式のデータツリー
-- [TH1](./root-th1-fill.md) - ヒストグラムクラス
-- [TCanvas](./root-tcanvas.md) - 描画キャンバス
-- [RDataFrame](./root-rdataframe.md) - 現代的なデータ分析フレームワーク
-
-## 参考資料
-
-- [ROOT::TFile クラスリファレンス](https://root.cern/doc/master/classTFile.html)
-- [ROOT ファイルフォーマット](https://root.cern/doc/master/classTFile.html)
-- [TSystem クラスリファレンス](https://root.cern/doc/master/classTSystem.html)
+- [TFile - ROOT Documentation](https://root.cern/doc/master/classTFile.html)
+- [TSystem - ROOT Documentation](https://root.cern/doc/master/classTSystem.html)
