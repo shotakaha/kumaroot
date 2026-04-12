@@ -49,10 +49,10 @@ X軸（`x`）とY軸（`y`）の値を配列で指定します。
 
 :::{seealso}
 
-- [](../altair/altair-scatter.md)
-- [](../hvplot/hvplot-scatter.md)
 - [](../pandas/pandas-plot-scatter.md)
+- [](../altair/altair-scatter.md)
 - [](../plotly/plotly-scatter.md)
+- [](../hvplot/hvplot-scatter.md)
 
 :::
 
