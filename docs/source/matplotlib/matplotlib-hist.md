@@ -36,6 +36,7 @@ plt.show()
 - [](../altair/altair-histogram.md)
 - [](../plotly/plotly-histogram.md)
 - [](../hvplot/hvplot-hist.md)
+- [](../root/root-th1.md)
 
 :::
 
