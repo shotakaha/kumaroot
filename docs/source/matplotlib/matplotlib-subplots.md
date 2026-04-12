@@ -1,63 +1,89 @@
-# キャンバスを分割したい（`matplotlib.pyplot.subplots`）
+# キャンバスしたい（`matplotlib.pyplot.subplots`）
 
 ```python
 import matplotlib.pyplot as plt
 
-fig, axs = plt.subplots(1, figsize=(4, 4))
+# キャンバスを作成
+fig, ax = plt.subplots()
 
-data.plot.scatter(x="time", y="v1", ax=axs, c="blue")
-data.plot.scatter(x="time", y="v2", ax=axs, c="red")
+sc1 = ax.scatter(x=xdata, y=ydata)
+sc2 = ax.scatter(x=xdata, y=ydata2)
+
+# グラフのタイトルと軸ラベルを設定
+ax.set_title("散布図の例")
+ax.set_xlabel("X軸")
+ax.set_ylabel("Y軸")
+
+plt.show()
 ```
 
-[plt.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)でキャンバスを作成できます。
+`pyplot.subplots`でキャンバスを作成できます。
 返り値は`Figure`オブジェクトと`Axes`オブジェクトです。
+`Axes`オブジェクトを使ってグラフを描画します。
 
-``squeeze=False``オプションで、返ってくる``Axes``オブジェクト（``axs``）を常に2次元配列にできます。
+## キャンバスサイズしたい（`figsize`）
 
-``width_ratios``と``height_ratios``オプションで
-列幅の比、行高の比を変更できます。
+```python
+fig, ax = plt.subplots(
+    figsize=(8, 6)  # 幅8インチ、高さ6インチのキャンバスを作成
+)
+```
 
-## 複数に分割したい
+`figsize`オプションで、キャンバスのサイズをインチ単位で指定できます。
+
+## 複数に分割したい（`nrows` / `ncols`）
 
 ```python
 import matplotlib.pyplot as plt
 
-fig, axs = plt.subplots(2, 3, figsize=(8, 12))
-canvas = axs.ravel()  # 1次元配列に変換
+fig, axs = plt.subplots(
+    figsize=(8, 12),
+    nrows=2,
+    ncols=3,
 
-data.plot.scatter(x="time", y="v1", ax=canvas[0])
-data.plot.scatter(x="time", y="v2", ax=canvas[1])
-data.plot.scatter(x="time", y="v3", ax=canvas[2])
-data.plot.scatter(x="time", y="v4", ax=canvas[3])
-data.plot.scatter(x="time", y="v5", ax=canvas[4])
-data.plot.scatter(x="time", y="v6", ax=canvas[5])
-
-fig.savefig("ファイルに保存.png")
+)
 ```
 
-[plt.subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)の引数を指定してキャンパスを分割できます。
+`nrows`と`ncols`オプションで、キャンバスを複数に分割できます。
+分割したキャンバスの戻り値は、行数と列数に応じた2次元配列になります。
 
-上のサンプルは[pandasの散布図](../pandas/pandas-plot-scatter.md)と組み合わせたものにしてみました。
-**2x3**の6分割にし、6種類の散布図をそれぞれのキャンパスに描いています。
-
-``axs``は**2x3**の2次元配列になっていますが、
-``axs.ravel``を使って1次元配列に変換しています。
-順番にループ処理して描画する場合は1次元配列に変換しておくと便利です。
-
-:::{note}
-
-``axs``を2次元配列のまま使ったサンプルです。
+## ループ処理したい（`ravel`）
 
 ```python
-data.plot.scatter(x="time", y="v1", ax=axs[0][0])
-data.plot.scatter(x="time", y="v2", ax=axs[0][1])
-data.plot.scatter(x="time", y="v3", ax=axs[0][2])
-data.plot.scatter(x="time", y="v4", ax=axs[1][0])
-data.plot.scatter(x="time", y="v5", ax=axs[1][1])
-data.plot.scatter(x="time", y="v6", ax=axs[1][2])
+# データを準備する
+# 次のカラムを持つpd.DataFrameを想定
+# time | v1 | v2 | v3 | v4 | v5 | v6
+data = pd.DataFrame(...)
+
+# キャンバスを分割
+fig, axs = plt.subplots(
+    nrows=2,
+    ncols=3,
+    figsize=(8, 12),
+)
+
+# 2次元配列のキャンバスを1次元配列に変換
+canvas = axs.ravel()
+
+# 反復処理でグラフを描く
+for i, ax in enumerate(canvas):
+    data.plot.scatter(
+        x="time",
+        y=f"v{i+1}",
+        ax=ax
+    )
+
+# キャンバスを保存
+fig.savefig("waveforms.png")
 ```
 
-:::
+複数のグラフをループ処理で描くサンプルです。
+分割したキャンバスの戻り値は2次元配列になっています。
+このままでは、アクセスが面倒なので、`ravel`メソッドで1次元配列に変換しています。
+
+上のサンプルでは、[pandasの散布図](../pandas/pandas-plot-scatter.md)と組み合わせたものにしてみました。
+
+分割数が分からなくても、グラフが描けるようになっています。
 
 ## リファレンス
 
