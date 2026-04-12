@@ -1,6 +1,6 @@
 # Read The Docs したい
 
-```yml
+```yaml
 # .readthedocs.yml
 version: 2
 
@@ -19,7 +19,8 @@ build:
       - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
 ```
 
-Read the Docsで`zensical`を使えます。
+Read the Docsでも`zensical`を使えるようです。
+`.readthedocs.yml`の`build.jobs.build.html`に`zensical build`を指定するだけで、ビルドコマンドとして`zensical build`が実行されます。
 
 ```toml
 # zensical.toml
@@ -29,7 +30,15 @@ site_url = "https://PROJECT_NAME.readthedocs.io/"
 
 `zensical.toml`の設定で、canonical URLを明記する必要があるようです。
 
+:::{note}
+
+Read the Docsへの適用はまだですが、ローカル環境でビルドできることは確認しました。
+`mkdocs.yml`はそのままで、
+`mkdocs`から`zensical`に置き換えるだけでOKでした。
+Read the Docsでのビルドが成功したら、追記します。
+:::
+
 ## リファレンス
 
 - [Adding documentation project](https://docs.readthedocs.com/platform/stable/intro/add-project.html)
-- [Deploying Zensical on Reat the Docs](https://docs.readthedocs.com/platform/stable/intro/zensical.html)
+- [Deploying Zensical on Read the Docs](https://docs.readthedocs.com/platform/stable/intro/zensical.html)
