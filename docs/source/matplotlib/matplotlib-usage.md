@@ -37,6 +37,7 @@ matplotlib-boxplot
 matplotlib-violinplot
 matplotlib-pie
 matplotlib-funcanimation
+matplotlib-pandas
 ```
 
 ## Axes and Figure
