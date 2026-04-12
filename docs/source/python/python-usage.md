@@ -36,6 +36,7 @@ python-webbrowser
 python-pexpect
 python-pyserial
 python-esptool
+python-audit
 ```
 
 ## Jupyterしたい
