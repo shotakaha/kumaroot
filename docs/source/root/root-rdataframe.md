@@ -15,8 +15,10 @@ auto hist = filtered_df.Histo1D(
 );
 ```
 
-[RDataFrame](https://root.cern/doc/master/classROOT_1_1RDataFrame.html)は、ROOTにおいて[pandas](../pandas/pandas-usage.md)のような使い勝手を目指した高レベルAPIです。
+`RDataFrame`は、ROOTにおいて[pandas](../pandas/pandas-usage.md)のような使い勝手を目指した高レベルAPIです。
 2017年ころに導入され、最新のROOTで推奨されているデータ分析フレームワークです。
+`RDataFrame`を使うと、TTreeのデータを簡単にフィルタリングしたり、ヒストグラムを作成したりできます。
+内部的にはTTreeやTChainを使用しているため、従来のROOTファイルとの互換性も保たれています。
 
 ```python
 import ROOT
@@ -70,8 +72,6 @@ df = ROOT.RDataFrame(
 
 ## 背景情報
 
-:::{note}
-
 ROOTは1995年にリリースされたときから`TTree`というデータ構造を軸にしていました。
 しかし、LHC Run4の開始に合わせて、`RDataFrame`や`RNTuple`といった
 よりモダンなフレームワークへと置き換えるというロードマップを描いています。
@@ -84,7 +84,8 @@ RDataFrameは従来のTTreeに比べて：
 
 を特徴としています。
 
-:::
+RDataFrameはTTreeを置き換えるものではなく、TTreeの上に構築された解析用の高レベルAPIです。
+RDataFrameを使用することで、従来のTTreeベースのコードよりも簡潔で効率的なデータ分析が可能になります。
 
 ## リファレンス
 
