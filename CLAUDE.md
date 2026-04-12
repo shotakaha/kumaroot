@@ -59,10 +59,10 @@ task bump:major          # Bump MAJOR version with commitizen
 
 **Custom Versioning Scheme:**
 
-This project uses a **calendar-based semantic versioning** scheme:
+This project uses a **calendar-based semantic versioning** scheme (YYYY.MM.PATCH):
 
-- **MAJOR version**: Incremented when the calendar year changes（e.g., 2024.x.x → 2025.x.x）
-- **MINOR version**: Incremented when the calendar month changes（e.g., 2025.11.x → 2025.12.x）
+- **MAJOR version**: Incremented when the calendar year changes（e.g., 2025.x.x → 2026.x.x）
+- **MINOR version**: Incremented when the calendar month changes（e.g., 2026.3.x → 2026.4.x）
 - **PATCH version**: Incremented for each `fix` or `feat` commit
 
 **Important notes:**
@@ -72,7 +72,8 @@ This project uses a **calendar-based semantic versioning** scheme:
 - Automatic increment detection is disabled; all bumping is explicit
 - All bump tasks include `--check-consistency --changelog` flags
 - When a new year/month begins, manually bump MAJOR or MINOR as needed
-- Example version progression: `2025.11.6` → `2025.11.7`（patch）→ `2025.12.0`（new month）→ `2026.1.0`（new year）
+- Current version: `2026.4.0` (April 2026)
+- Example version progression: `2026.3.x` → `2026.4.0`（new month）→ `2027.1.0`（new year）
 
 ### Building Distribution
 
@@ -87,17 +88,40 @@ make html            # Generate HTML in docs/_build/
 
 ```text
 docs/source/
-├── docker/           # Docker containerization examples
+├── altair/           # Altair visualization library
+├── arduino/          # Arduino hardware platform
 ├── command/          # Command-line tools (git, npm, etc.)
-├── python-*/         # Python library guides
+├── docker/           # Docker containerization examples
+├── dvr/              # DVR/video recording topics
+├── emacs/            # Emacs editor
+├── gadget/           # Hardware gadgets and tools
+├── gas/              # Google Apps Script
 ├── geant4/           # GEANT4 simulation framework
-├── root/             # ROOT data analysis framework
 ├── git/              # Git version control
 ├── html/             # HTML/CSS topics
-├── typst/            # Typst document preparation
-├── gas/              # Google Apps Script
-├── emacs/            # Emacs editor
 ├── hugo/             # Hugo static site generator
+├── hvplot/           # hvPlot interactive visualization
+├── latex/            # LaTeX document preparation
+├── matplotlib/       # Matplotlib plotting library
+├── mkdocs/           # MkDocs documentation tool
+├── myst/             # MyST Markdown parser
+├── numpy/            # NumPy array library
+├── pandas/           # Pandas data manipulation
+├── plotly/           # Plotly interactive plots
+├── polars/           # Polars data processing
+├── preface/          # Project preface and introduction
+├── python/           # General Python library guides
+├── raspi/            # Raspberry Pi platform
+├── redpitaya/        # Red Pitaya FPGA platform
+├── root/             # ROOT data analysis framework
+├── rust/             # Rust programming language
+├── sphinx/           # Sphinx documentation tool
+├── streaming/        # Data streaming topics
+├── streamlit/        # Streamlit web framework
+├── typst/            # Typst document preparation
+├── vscode/           # Visual Studio Code editor
+├── windows/          # Windows OS topics
+├── zensical/         # Zensical project
 └── conf.py           # Sphinx configuration
 ```
 
@@ -107,11 +131,13 @@ docs/source/
 - **Features/examples**: `<category>/<category>-<feature>.md`
 - **Docker examples**: `docker/docker-example-<osname>.md`
 
-Example:
+Examples:
 
-- `docker/docker-examples.md` - Main index with toctree
+- `docker/docker-usage.md` - Main Docker index with toctree
 - `docker/docker-example-ubuntu.md` - Ubuntu Docker guide
 - `docker/docker-example-almalinux.md` - AlmaLinux Docker guide
+- `matplotlib/matplotlib-usage.md` - Matplotlib main index
+- `matplotlib/matplotlib-rcparams.md` - Matplotlib rcParams documentation
 
 ## Documentation Style Guidelines
 
@@ -333,8 +359,8 @@ For technical reference docs:
 ### Building and Deploying
 
 - **Read the Docs (automatic)**: Push to main → RTD builds automatically
-- **Local preview**: `task docs` or `cd docs && make livehtml`
-- **PDF generation**: `make latexpdf` (output: `docs/_build/latex/`)
+- **Local preview**: `task docs:serve` (live reload), or `cd docs && make html`
+- **PDF generation**: `task docs:pdf` or `make latexpdf` (output: `docs/_build/latex/`)
 
 ## Git Workflow
 
