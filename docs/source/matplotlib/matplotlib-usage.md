@@ -3,6 +3,18 @@
 `matplotlib`はPythonでグラフを描くための基本ライブラリです。
 標準ライブラリでははいですが、2010年ころからデファクトスタンダードとして広く使われています。
 
+`matplotlib`には
+MATLAB的な記述スタイル（`pyplot-style`）と
+オブジェクト指向的な記述スタイル（`OO-style`）があります。
+このドキュメントでは公式で推奨されている`OO-style`を中心に紹介します。
+
+:::{note}
+
+MATLABユーザーでないかぎり`OO-style`を使えばよいと思います。
+また、`OO-style`と`pyplot-style`を意図せずに混ぜて使うのは避けた方がよいと思います。
+
+:::
+
 ```{toctree}
 ---
 maxdepth: 1
@@ -15,18 +27,6 @@ matplotlib-subplot_mosaic
 matplotlib-scatter
 matplotlib-errorbar
 ```
-
-## Explicit vs Implicit Interfaces
-
-``Explicit interface``はオブジェクト指向的な使い方（``OO-style``）で、``axes.Axes``オブジェクトに対して設定する方法です。
-``Implicit interface``はMATLAB的な使い方（``pyplot-style``）で、``pyplot``モジュールのグローバルなオブジェクト（？）に対して設定する方法です。
-
-:::{note}
-
-公式で推奨しているように、MATLABユーザーでないかぎり、``OO-style``を使えばよいと思います。
-また、意図せずに混合して使うのは避けた方がよいと思います。
-
-:::
 
 ## Axes and Figure
 
