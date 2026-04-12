@@ -165,8 +165,6 @@ data.plot.hist(
 ## 統計情報を自動計算したい
 
 ```python
-# ROOTのTH1クラスの真似をしてヒストグラムを作成する際に、統計情報を自動計算する関数を作成してください
-
 def hbar(
     data: pd.DataFrame,
     header: str,
@@ -227,13 +225,45 @@ def hbar(
     return ax, stats
 ```
 
-ROOTの``TH1クラス``を真似してヒストグラムを作ってみました。
+ROOTの`TH1クラス`を真似してヒストグラムを作ってみました。
+ヒストグラムの統計情報を自動的に計算して、辞書で返す関数です。
+この関数を使うと、ヒストグラムの統計情報を簡単に取得できます。
 
-      "overflow": of,
-    }
+```python
+# Usage
+ax, stats = hbar(
+    data,
+    header="ヒストグラムにしたいカラム名",
+    bins=ビン数,
+    xmin=ヒストグラムの下限値,
+    xmax=ヒストグラムの上限値,
+    color="blue",
+    alpha=0.7,
+    title="ヒストグラム",
+    xlabel="X軸のタイトル",
+    ylabel="Y軸のタイトル",
+)
 
-    return ax, stats
+# 統計情報を表示
+print(stats)
 
+# 統計情報を凡例に追加
+ax.legend([
+    f"Entries: {stats['total_entries']}",
+    f"Valid Entries: {stats['valid_entries']}",
+    f"Underflow: {stats['underflow']}",
+    f"Overflow: {stats['overflow']}",
+    f"Mean: {stats['mean']:.2f}",
+    f"RMS: {stats['rms']:.2f}",
+])
+
+# グラフを表示
+plt.show()
 ```
 
-ROOTの``TH1クラス``を真似してヒストグラムを作ってみました。
+## リファレンス
+
+- [pandas.DataFrame.plot.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html)
+- [matplotlib.pyplot.hist](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html)
+- [matplotlib.axes.Axes.hist](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.hist.html)
+- [TH1 Class Reference - ROOT Documentation](https://root.cern/doc/master/classTH1.html)
