@@ -1,4 +1,4 @@
-# キャンバスしたい（``matplotlib.pyplot.figure``）
+# キャンバスしたい（`matplotlib.figure.Figure`）
 
 ```python
 import matplotlib.pyplot as plt
@@ -9,14 +9,48 @@ fig = plt.figure(
   layout="constrained",
   facecolor="white",
 )
+```
+
+`figure.Figure`（=`pyplot.figure`）でキャンバスを作成できます。
+`figure`は、グラフ全体を表すオブジェクトで、複数のグラフを描くときの土台になります。
+
+:::{hint}
+
+不正確な部分がありますが、`matplotlib`の構成要素は以下のようになっています。
+
+```tree
+Figure: キャンバス全体
+|-- Axes: グラフ領域
+    |-- Axis: 軸
+    |   |-- Tick: 目盛り
+    |   |   |-- Line2D: 目盛り線
+    |   |   |-- Line2D: グリッド線
+    |   |   |-- Text: 目盛りラベル
+    |   |-- Label: 軸ラベル
+    |-- Line2D: 線
+    |-- PathCollection: 散布図の点
+    |-- Patch: 図形
+    |-- Text: テキスト
+    |   |-- Title: タイトル
+    |-- Legend: 凡例
+```
+
+`Figure`と`Axes`の関係を理解することが重要です。
+
+:::
+
+## 分割したい（`add_subplot`）
+
+```python
+# キャンバスを作成
+fig = plt.figure(figsize=(8, 6))
 
 ax1 = fig.add_subplot(2, 3, 1)    # index=1
 ax4 = fig.add_subplot(nrows=2, ncols=3, index=4)
 ax6 = fig.add_subplot(pos=236)    # index=6
 ```
 
-[pyplot.figure](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html)で`Figure`オブジェクトを作成し、
-[pyplot.add_subplot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot.html)で分割キャンバス（`Axes`オブジェクト）を追加します。
+`add_subplot`メソッドで、キャンバスを分割して複数のグラフを描くことができます。
 
 位置引数には`(行の数, 列の数, 場所)`を`tuple`で指定したり、
 それをまとめて`pos`で指定したりできます。
