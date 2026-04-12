@@ -1,4 +1,4 @@
-# TTreeしたい（`new TTree`）
+# TTreeしたい（`TTree`）
 
 ```cpp
 #include <TTree.h>
@@ -19,36 +19,39 @@ from ROOT import TTree
 tree = TTree("mytree", "example tree")
 ```
 
-## コンストラクターのシグネチャ
+## ファイルに保存したい（`TTree::Write`）
 
 ```cpp
-TTree(
-    const char *name,
-    const char *title,
-    Int_t splitlevel = 99
-)
+#include <TFile.h>
+
+// TTreeを作成
+// ...（前のコードと同様）
+
+// TTreeをファイルに保存
+TFile *file = new TFile("tree.root", "RECREATE");
+tree->Write();  // TTreeをファイルに書き込む
+file->Close();  // ファイルを閉じる
 ```
 
-### 引数の説明
+`TTree`は`TFile`に保存できます。
+`TTree::Write`メソッドでTTreeを書き込みます。
+複数の`TTree`を作成した場合は、`TTree`ごとに`Write`することで、同じファイルに保存できます。
 
-**name** - TTreeの名前
+## ファイルから読み込みたい
 
-- ROOTファイル内で一意の名前を指定します
-- 他のTTreeと重複しないようにします
-- ファイルから読み込むときに指定する名前です
+```cpp
+#include <TFile.h>
+#include <TTree.h>
 
-**title** - TTreeの説明
+// ファイルからTTreeを読み込む
+TFile *file = new TFile("tree.root", "READ");
+TTree *tree = (TTree*)file->Get("mytree");  // "mytree"はTTreeの名前
+```
 
-- データの簡潔な説明を設定します
-- ROOTファイルを開いたときに表示されます
-- 空文字列でも構いませんが、簡単な説明があると便利です
-
-**splitlevel** -（通常は指定不要）
-
-- デフォルト値: 99
-- ブランチ内でオブジェクトを分割するレベルを指定
-- ほとんどの場合、デフォルト値で問題ありません
+`TFile::Get`メソッドで、ファイルからTTreeを読み込むことができます。
+読み込んだTTreeは、元のTTreeと同じ名前でアクセスできます。
 
 ## リファレンス
 
-- [ROOT TTree Documentation](https://root.cern.ch/doc/master/classTTree.html)
+- [TTree - ROOT Documentation](https://root.cern.ch/doc/master/classTTree.html)
+- [TFile - ROOT Documentation](https://root.cern.ch/doc/master/classTFile.html)
