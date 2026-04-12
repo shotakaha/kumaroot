@@ -1,17 +1,23 @@
-# ヒストグラムしたい（``hvplot.hist``）
+# ヒストグラムしたい（`hvplot.hist`）
 
 ```python
 import pandas as pd
 import hvplot.pandas
 
-# data : pd.DataFrame
+# データを準備する
+data = pd.DataFrame(...)
+
+# ヒストグラムを描く
 data.hvplot.hist(
-    y = "energy_deposit",
-    xlabel="Energy Deposit [MeV]")
+    y="ヒストグラムに使うカラム名",
+    bins=10,
+    bin_range=(0, 100),
+)
 ```
 
-``hvplot.hist``でヒストグラムを作成できます。
-``y``に連続値をとるカラムを指定します。
+`hvplot.hist`でヒストグラムを作成できます。
+`y`に連続値をとるカラムを指定します。
+`bins`でビンの数を、`bin_range`でビンの範囲を指定できます。
 
 :::{hint}
 
@@ -29,6 +35,72 @@ Altairと比べて直感的に記述できるため、とても簡単です。
 - [](../plotly/plotly-histogram.md)
 
 :::
+
+## 重みをつけたい（`weights`）
+
+```python
+data.hvplot.hist(
+    y=...,
+    bins=10,
+    bin_range=(0, 100),
+    weights="重みを使うカラム名"
+)
+```
+
+`weights`オプションで、各データポイントに重みをつけることができます。
+
+## ログ表示したい（`logx` / `logy` / `loglog`）
+
+```python
+data.hvplot.hist(
+    y=...,
+    bins=10,
+    bin_range=(0, 100),
+    logy=True
+)
+```
+
+`logy=True`オプションで、Y軸をログ表示にできます。
+頻度の値が大きく異なる場合に、ログ表示にすることで全体の傾向を見やすくできます。
+
+## 正規化したい（`normed`）
+
+```python
+data.hvplot.hist(
+    y=...,
+    bins=10,
+    bin_range=(0, 100),
+    normed=True
+)
+```
+
+`normed=True`オプションで、ヒストグラムを正規化できます。
+
+## 累積したい（`cumulative`）
+
+```python
+data.hvplot.hist(
+    y=...,
+    bins=10,
+    bin_range=(0, 100),
+    cumulative=True
+)
+```
+
+`cumulative=True`オプションで、ヒストグラムを累積表示にできます。
+
+## グループ化したい（`by`）
+
+```python
+data.hvplot.hist(
+    y=...,
+    by="グループ化するカラム名",
+    bins=10,
+    bin_range=(0, 100),
+)
+```
+
+`by`オプションで、指定したカラムの値ごとにグループ化してヒストグラムを作成できます。
 
 ## 引数
 
