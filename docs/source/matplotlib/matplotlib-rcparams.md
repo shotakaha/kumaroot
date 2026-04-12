@@ -137,13 +137,14 @@ mpl.rcParams["axes.facecolor"] = "lightgray"   # default: "white" | "lightgray" 
 ## グリッド設定したい（`rcParams.axes.grid.*`）
 
 ```python
-# グリッド線の設定
+# グリッド線の表示
 mpl.rcParams["axes.grid"] = True             # default: False | True
+# グリッド線の詳細
 mpl.rcParams["axes.grid.which"] = "both"      # default: "major" | "minor" | "both"
 mpl.rcParams["axes.grid.axis"] = "x"        # default: "both" | "x" | "y"
 mpl.rcParams["axes.grid.linestyle"] = ":"     # default: "--" | "-" | ":" | "-."
 mpl.rcParams["axes.grid.linewidth"] = 1.0      # default: 0.5 | 1.0
-mpl.rcParams["axes.grid.color"] = "balck"      # default: "gray" | "black"
+mpl.rcParams["axes.grid.color"] = "black"      # default: "gray" | "black"
 ```
 
 `axes.grid.*`オプションで、グリッド線の表示を変更できます。
@@ -155,7 +156,6 @@ mpl.rcParams["axes.grid.color"] = "balck"      # default: "gray" | "black"
 # 線の設定
 mpl.rcParams["lines.linewidth"] = 2
 mpl.rcParams["lines.linestyle"] = "-"  # default: "-" | "--" | "-." | ":"
-mpl.rcParams["lines.linecolor"] = "black"  # default: "black"
 
 # マーカーの設定
 mpl.rcParams["lines.markersize"] = 6
@@ -188,6 +188,68 @@ mpl.rcParams["legend.title_color"] = "blue"  # default: "black" | "blue" | "red"
 ```
 
 `legend.*`オプションで、凡例の設定を変更できます。
+
+## 論文したい
+
+```python
+import matplotlib as mpl
+
+mpl.rcParams["axes.unicode_minus"] = False
+mpl.rcParams["figure.figsize"] = (3.5, 2.5)  # 2カラムの論文に適したサイズ
+mpl.rcParams["figure.dpi"] = 300             # 論文用の高解像度
+mpl.rcParams["font.family"] = ["Noto Serif CJK JP", "serif"]  # 論文に適したセリフ体
+mpl.rcParams["font.size"] = 10               # 論文に適したフォントサイズ
+mpl.rcParams["axes.titlesize"] = 12          # 論文に適した軸タイトルサイズ
+mpl.rcParams["axes.labelsize"] = 10          # 論文に適した軸ラベルサイズ
+mpl.rcParams["axes.grid"] = False                # 論文ではグリッド線を非表示にすることが多い
+mpl.rcParams["lines.linewidth"] = 1.0           # 論文に適した線の太さ
+mpl.rcParams["lines.markersize"] = 4.0           # 論文に適したマーカーの大きさ
+mpl.rcParams["legend.fontsize"] = 8            # 論文に適した凡例のフォントサイズ
+```
+
+2カラムの論文に適したサイズや、解像度、フォントなどを設定する例です。
+フォントは明朝体（セリフ体）にして、グリッド線は非表示にしています。
+
+## プレゼンしたい
+
+```python
+import matplotlib as mpl
+
+mpl.rcParams["axes.unicode_minus"] = False
+# mpl.rcParams["figure.figsize"] = (8, 6)  # 4:3スライド
+mpl.rcParams["figure.figsize"] = (8, 4.5)  # 16:9スライド
+mpl.rcParams["figure.dpi"] = 150           # プレゼン用の解像度
+mpl.rcParams["font.family"] = ["Noto Sans CJK JP", "sans-serif"]  # プレゼンに適したサンセリフ体
+mpl.rcParams["font.size"] = 18             # プレゼンに適したフォントサイズ
+mpl.rcParams["axes.titlesize"] = 20        # プレゼンに適した軸タイトルサイズ
+mpl.rcParams["axes.labelsize"] = 18        # プレゼンに適した軸ラベルサイズ
+mpl.rcParams["axes.grid"] = True                # プレゼンではグリッド線を表示することが多い
+mpl.rcParams["lines.linewidth"] = 3.0           # プレゼンに適した線の太さ
+mpl.rcParams["lines.markersize"] = 8.0           # プレゼンに適したマーカーの大きさ
+mpl.rcParams["legend.fontsize"] = 14            # プレゼンに適した凡例のフォントサイズ
+```
+
+プレゼン資料に適したサイズや、解像度、フォントなどを設定する例です。
+スライドのアスペクト比に合わせて、キャンバスのサイズを変更しています。
+フォントはゴシック体（サンセリフ体）にして、グリッド線は表示するようにしています。
+
+## ダッシュボードしたい
+
+```python
+import matplotlib as mpl
+
+mpl.rcParams["axes.unicode_minus"] = False
+mpl.rcParams["figure.figsize"] = (8, 4)  # 少し横長
+mpl.rcParams["figure.dpi"] = 150         # ダッシュボード用の解像度
+mpl.rcParams["font.family"] = ["Noto Sans CJK JP", "sans-serif"]  # サンセリフ体
+mpl.rcParams["font.size"] = 11
+mpl.rcParams["axes.grid"] = True         # グリッド線を表示
+mpl.rcParams["axes.linestyle"] = ":"     # グリッド線を点線
+mpl.rcParams["legend.frameon"] = False   # 凡例の枠線を消す
+```
+
+ダッシュボード用のスタイルの例です。
+ウェブ埋め込みに適したサイズや、解像度、フォントなどを設定します。
 
 ## リファレンス
 
