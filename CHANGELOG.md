@@ -1,5 +1,46 @@
 # CHANGELOG.md
 
+## v2026.4.1 (2026-04-12)
+
+### Feat
+
+- **pandas-plot-box**: add box plot documentation
+
+### Fix
+
+- **pandas-plot-area**: add area plot documentation
+- **pandas-plot-errorbars**: add comprehensive example with errorbar usage
+- **pandas-plot-scatter**: improve documentation with colormap and bubble plot sections
+- **pandas-plot-hist**: remove duplicate code and add hbar usage example
+- **pandas-plot-hist**: expand with cumulative, normalization, and grouping options
+- **pandas-plot-hist**: improve histogram documentation with better examples and explanations
+- **pandas-plot**: improve documentation with better formatting and matplotlib equivalents
+- **matplotlib-pandas**: add pandas integration guide with multi-panel layouts
+- **python-rich**: add Rich library documentation for styled console output
+- **python-audit**: add pip-audit security vulnerability checking guide
+- **matplotlib-funcanimation**: add note about alternative frameworks for dashboards
+- **matplotlib-funcanimation**: add real-time monitor example with threading
+- **matplotlib**: add FuncAnimation documentation and improve subplot_mosaic guide
+- **matplotlib-subplots**: restructure documentation with better examples
+- **matplotlib-figure**: improve documentation with structure and hierarchy explanation
+- **matplotlib-legend**: add legend documentation
+- **matplotlib-pie**: add pie chart documentation
+- **matplotlib-boxplot, matplotlib-violinplot**: add statistical distribution plot documentation
+- **matplotlib-bar**: add bar chart documentation
+- **matplotlib-plot**: add line plot documentation
+- **matplotlib-contour**: add contour plot documentation
+- **matplotlib-hist**: add comprehensive histogram documentation
+- **matplotlib-errorbar**: improve code example and add asymmetric error documentation
+- **matplotlib-imshow**: add image display documentation
+- **matplotlib-scatter**: improve title, fix typos, and add marker/colormap sections
+- **matplotlib-rcparams**: add colormap configuration section
+- **matplotlib-rcparams**: add use-case examples for papers, presentations, and dashboards
+- **altair-usage**: refine introduction and improve clarity
+- **matplotlib**: add matplotlib-rcparams doc and update usage
+- **matplotlib**: reorganize usage documentation with clearer introduction
+- **matplotlib**: update scatter and subplots documentation
+- **matplotlib**: update documentation for figure, import, install, and usage
+
 ## v2026.4.0 (2026-04-07)
 
 ### Feat
