@@ -1,27 +1,43 @@
-# ヒストグラムしたい（``pandas.DataFrame.plot.hist``）
+# ヒストグラムしたい（`pandas.DataFrame.plot.hist`）
 
 ```python
-data.plot(kind="hist", bins=ビン数, title="ヒストグラム")
-data.plot(kind="hist", bins=ビン数, stacked=True, title="積み上げヒストグラム")
-data.plot.hist(by=["カラム名"], bins=ビン数)
+import pandas as pd
+
+# データを準備する
+data = pd.DataFrame(...)
+
+# ヒストグラムを描く
+data.plot.hist(
+  bins=ビン数,
+  xmin=ヒストグラムの下限値,
+  xmax=ヒストグラムの上限値,
+  title="ヒストグラム",
+  xlabel="X軸のタイトル",
+  ylabel="Y軸のタイトル"
+)
 ```
 
-[pandas.DataFrame.plot.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.hist.html)を使って数値データをヒストグラムにできます。
-``by``オプションにグループ化に使うカラム名を指定します。
-``bins``オプションでビン数を変更できます。デフォルトは``10``になっています。
-その他に[pandas.DataFrame.hist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.hist.html)と[matplotlib.pyplot.hist](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html#matplotlib.pyplot.hist)のオプションも利用できます。
+`pd.DataFrame.plot.hist`でヒストグラムを作成できます。
+オプションでビン数やヒストグラムの範囲、タイトルや軸のタイトルを変更できます。
 
-:::{note}
-
-カラム内のデータが``str型``の場合、このメソッドは使えません（たぶん）。
-あらかじめデータフレームを集計して、棒グラフ（``pandas.DataFrame.plot.bar``）を使う必要があります（たぶん）。
-
-:::
+`bins`オプションでビン数を変更できます。デフォルトは``10``になっています。
+`xmin`、`xmax`オプションでヒストグラムの下限値と上限値を変更できます。
+設定しない場合は、データの最小値と最大値が自動的に設定されます。
 
 :::{important}
 
-ヒストグラムはいろんなことを教えてくれます。
-実験で測定したデータは、まずヒストグラムにしてその分布を確認しましょう。
+データ分析するときは、まずヒストグラムを作ってデータの分布を確認しましょう。
+ヒストグラムは、データの分布を視覚的に理解するための基本的なツールです。
+データの分布を理解することで、適切な統計手法を選択したり、データの特徴を把握したりできます。
+
+:::
+
+:::{caution}
+
+ヒストグラムは、連続的な数値データをビンに分割して、その頻度を表示するグラフです。
+カラム内のデータに文字列（`str`）が含まれている場合、このメソッドは使えません（たぶん）。
+
+カテゴリカルデータをヒストグラムで表現したい場合は、あらかじめデータフレームを集計して、棒グラフ（``pandas.DataFrame.plot.bar``）を使う必要があります。
 
 :::
 
@@ -33,16 +49,27 @@ data.plot.hist(by=["カラム名"], bins=ビン数)
 
 :::
 
-## ビニングしたい（``bins``）
+## ビニングしたい（`bins` / `xmin` / `xmax`）
 
 ```python
-bins = [0, 10, 20, 30, 40, 50, 60, 70, 80]
-data.plot.hist(bins=bins)
+# 任意のビニング
+bins = [0, 10, 30, 50, 70, 80]
+
+data.plot.hist(
+    bins=bins,
+    xmin=0,
+    xmax=100
+)
 ```
 
-``bins``オプションを使ってビニングを変更できます。
-デフォルトは``bins=10``となっていて、均等に10分割されます。
-リストを指定して、任意の間隔でビニングできます。
+`bins`オプションでビン数を変更できます。デフォルトは`10`になっています。
+リストを指定すれば、任意の間隔でビニングできます。
+
+`xmin`、`xmax`オプションでヒストグラムの下限値と上限値を変更できます。
+設定しない場合は、データの最小値と最大値が自動的に設定されます。
+
+`xmin`を下回るビンはアンダーフロー、`xmax`を上回るビンはオーバーフロー
+として、ヒストグラムの外側に表示されます。
 
 ## 統計情報を自動計算したい
 
