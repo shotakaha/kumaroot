@@ -25,6 +25,7 @@ matplotlib-rcparams
 matplotlib-figure
 matplotlib-subplots
 matplotlib-subplot_mosaic
+matplotlib-legend
 matplotlib-hist
 matplotlib-bar
 matplotlib-plot
