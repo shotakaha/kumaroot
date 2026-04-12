@@ -3,16 +3,39 @@
 ```python
 import matplotlib.pyplot as plt
 
+# キャンバスを作成
 fig = plt.figure(
   figsize=(6, 4),
   dpi=150,
   layout="constrained",
   facecolor="white",
 )
+
+# グラフを描く
+ax = fig.add_subplot(1, 1, 1)
+ax.plot([1, 2, 3], [4, 5, 6])
+
+# グラフを表示
+plt.show()
+
+# キャンバスを保存
+fig.savefig("figure.png")
 ```
 
 `figure.Figure`（=`pyplot.figure`）でキャンバスを作成できます。
-`figure`は、グラフ全体を表すオブジェクトで、複数のグラフを描くときの土台になります。
+`figure`は、グラフ全体を表すオブジェクトで、グラフ（`Axes`）を描くときの土台になります。
+
+:::{seealso}
+
+`figure` + `add_subplot`でグラフを描く方法のほかに、`pyplot.subplots`などでグラフを描く方法もあります。
+
+- [](./matplotlib-subplots.md)
+- [](./matplotlib-subplot_mosaic.md)
+
+個人的にはこちらの`subplots`、`subplot_mosaic`を使う方法がオススメです。
+`figure`のオプションは`subplots`でも使えます。
+
+:::
 
 :::{hint}
 
@@ -55,15 +78,7 @@ ax6 = fig.add_subplot(pos=236)    # index=6
 位置引数には`(行の数, 列の数, 場所)`を`tuple`で指定したり、
 それをまとめて`pos`で指定したりできます。
 
-:::{seealso}
 
-- [](./matplotlib-subplots.md)
-- [](./matplotlib-subplot_mosaic.md)
-
-個人的には`figure`より`subplots`を使う方法がオススメです。
-`figure`のオプションは`subplots`でも使えます。
-
-:::
 
 ## 保存したい（`savefig`）
 
