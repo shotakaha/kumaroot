@@ -25,6 +25,7 @@ matplotlib-rcparams
 matplotlib-figure
 matplotlib-subplots
 matplotlib-subplot_mosaic
+matplotlib-hist
 matplotlib-scatter
 matplotlib-imshow
 matplotlib-errorbar
