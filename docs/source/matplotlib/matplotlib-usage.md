@@ -34,6 +34,7 @@ matplotlib-errorbar
 matplotlib-contour
 matplotlib-boxplot
 matplotlib-violinplot
+matplotlib-pie
 ```
 
 ## Axes and Figure
