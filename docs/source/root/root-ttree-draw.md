@@ -26,14 +26,24 @@ tree->Draw(
 ```python
 import ROOT
 
-file = ROOT.TFile("data.root")
-tree = file.Get("tree")
+# TTreeを作成・取得
+tree = ROOT.TTree("tree", "Event data")
 
-# 基本的な描画
-tree.Draw("energy_deposit")
+# 1次元プロット
+tree.Draw(
+    "energy_deposit",
+    "parent_id==0",
+    "HIST",
+    1000,
+    0
+)
 
-# フィルター条件付き描画
-tree.Draw("energy_deposit", "parent_id==0")
+# 2次元プロット
+tree.Draw(
+    "energy_deposit:position_x",
+    "parent_id==0",
+    "COLZ"
+)
 ```
 
 ## リダイレクトしたい（`TTree::Draw`)
