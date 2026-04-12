@@ -26,6 +26,7 @@ matplotlib-figure
 matplotlib-subplots
 matplotlib-subplot_mosaic
 matplotlib-hist
+matplotlib-plot
 matplotlib-scatter
 matplotlib-imshow
 matplotlib-errorbar
