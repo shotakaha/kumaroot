@@ -29,6 +29,7 @@ matplotlib-hist
 matplotlib-scatter
 matplotlib-imshow
 matplotlib-errorbar
+matplotlib-contour
 ```
 
 ## Axes and Figure
