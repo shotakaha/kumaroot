@@ -110,6 +110,27 @@ import japanize_matplotlib
 `japanize_matplotlib`をインポートすると、日本語設定がお手軽に完了できます。
 フォントは`IPAexGothic`が使われます。
 
+## カラーマップ設定したい（`rcParams.image.*`）
+
+```python# カラーマップの設定
+mpl.rcParams["image.cmap"] = "viridis"  # default: "viridis"
+mpl.rcParams["image.interpolation"] = "nearest"  # default: "antialiased" | "nearest"
+mpl.rcParams["image.aspect"] = "equal"  # default: "equal" | "auto"
+```
+
+`image.*`オプションで、カラーマップの設定を変更できます。
+カラーマップの種類は[colormap reference](https://matplotlib.org/stable/gallery/color/colormap_reference.html)を参照してください。
+色覚多様性に配慮する場合は、`viridis`や`plasma`などのカラーマップを選択するとよいと思います。
+
+:::{caution}
+
+`image.cmap`の設定は、`imshow`や`pcolormesh`などのカラーマップを前提とした描画に影響します。`scatter`でも`c`オプションを指定した場合に適用されます。
+
+一方で、`plot`や`bar`などの描画では`axes.prop_cycle`の設定が優先されます。
+うまく色が変わらない場合は、明示的に`cmap`オプションを指定してみてください。
+
+:::
+
 ## 軸設定したい（`rcParams.axes.*`）
 
 ```python
