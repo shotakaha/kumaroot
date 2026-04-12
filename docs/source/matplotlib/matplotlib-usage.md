@@ -32,6 +32,8 @@ matplotlib-scatter
 matplotlib-imshow
 matplotlib-errorbar
 matplotlib-contour
+matplotlib-boxplot
+matplotlib-violinplot
 ```
 
 ## Axes and Figure
