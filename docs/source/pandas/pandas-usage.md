@@ -161,6 +161,7 @@ pandas-plot-hist
 pandas-plot-scatter
 pandas-plot-errorbars
 pandas-plot-box
+pandas-plot-area
 ```
 
 ``pandas.DataFrame``と連携できる可視化ツールもいろいろあります。
