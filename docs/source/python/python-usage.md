@@ -37,6 +37,7 @@ python-pexpect
 python-pyserial
 python-esptool
 python-audit
+python-rich
 ```
 
 ## Jupyterしたい
