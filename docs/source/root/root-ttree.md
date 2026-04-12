@@ -4,13 +4,37 @@
 #include <TTree.h>
 
 // TTree::TTree(name, title)
-TTree *tree = new TTree("mytree", "example tree");
+TTree *tree = new TTree(
+    "mytree",       // name
+    "example tree"  // title
+);
 ```
 
-`new TTree`でTTreeオブジェクトを作成します。
+`TTree`はROOTでイベントデータを管理するためのクラスです。
+`TTree::TTree`コンストラクターで`TTree`オブジェクトを作成できます。
+`name`はTTreeの識別子で、プログラム内でTTreeを参照する際に使用します。
+`title`はTTreeの説明やタイトルを設定するための文字列です。
+
+`TTree`は高エネルギー物理実験のデータ保存・解析に広く使用されている形式です。
+イベントごとにデータを効率的に保存し、あとから高速にアクセスできるように設計されています。
+
+:::{note}
 
 古いドキュメントやサンプルでは`TNtuple`が紹介されていることがありますが、現在は`TTree`を使用すればOKです。
-`TTree`は`TNtuple`の機能を包含しており、より柔軟で強力です。
+
+:::
+
+:::{hint}
+
+さらに歴史をさかのぼると、Fortranで書かれたHBOOKの時代から`Ntuple`という概念が存在していました。
+ROOTの`TNtuple`はその名残で、単純な構造のTreeを提供していました。
+`TTree`は`TNtuple`の機能を内包をしており、より柔軟で高機能なデータ構造を提供しています。
+
+ROOT6.34以降では、
+`TTree`の機能がさらに強化され、
+`RDataFrame`などの新しいデータ分析フレームワークも登場しています。
+
+:::
 
 ```python
 from ROOT import TTree
