@@ -24,13 +24,21 @@ std::cout << "RMS: " << h->GetRMS() << std::endl;
 std::cout << "Entries: " << h->GetEntries() << std::endl;
 
 // ヒストグラムを描画
+h->SetStats();  // 統計ボックスを表示
 h->Draw();
 ```
 
-`TH1`は1次元ヒストグラムの基本クラスです。
-扱う値の精度に合わせて
+`TH1`はROOTで1次元ヒストグラムを扱う基底クラスです。
+分布の精度に合わせて
 `TH1D`（倍精度浮動小数点）や
 `TH1F`（単精度浮動小数点）などの派生クラスを使用します。
+
+`name`はヒストグラムの識別子です。
+プログラム内でヒストグラムを参照する際に使用します。
+他のオブジェクトと重複しないように、ユニークな名前を付けることが推奨されます。
+
+`title`でグラフのタイトルを設定できます。
+セミコロン（`;`）で区切ることでX軸とY軸のタイトルを同時に設定できます。
 
 `nbinsx`でビンの数を指定し、`xlow`と`xup`でX軸の範囲を指定します。
 ヒストグラムにデータを入力するには、`Fill`メソッドを使用します。
@@ -42,99 +50,23 @@ h->Draw();
 データを解析する際に、データの分布を視覚化して分析するために使用します。
 データ型に応じた派生クラスを選択することで、メモリ使用量と精度のバランスを最適化できます。
 
-## コンストラクターのシグネチャ
+## 保存したい（`TH1::Write`）
 
 ```cpp
-TH1D(const char* name,
-     const char* title,
-     Int_t nbinsx,
-     Double_t xlow,
-     Double_t xup);
+#include <TFile.h>
+
+// ヒストグラムを作成
+// ...（前のコードと同様）
+
+// ヒストグラムをファイルに保存
+TFile *file = new TFile("histogram.root", "RECREATE");
+h->Write();  // ヒストグラムをファイルに書き込む
+file->Close();  // ファイルを閉じる
 ```
 
-### 引数の説明
-
-**name** - ヒストグラムの名前
-
-- オブジェクト識別用
-- ROOTファイルでの保存
-- 同じディレクトリ内では一意
-
-**title** - ヒストグラムのタイトル
-
-- TCanvasに描画するときにキャンバス内に表示
-- `"タイトル;X軸;Y軸"`のようにセミコロン区切りの形式で軸ラベルも指定可能
-
-**nbinsx** - X軸のビン数
-
-- ビン幅は `(xup - xlow) / nbinsx` で計算
-- `nbinsx`はヒストグラムのメモリ使用量に影響するため、適切な値を選択
-
-**xlow** - X軸の最小値
-
-- `xlow`より小さい値は`Undeflow`としてカウントされる
-
-**xup** - X軸の最大値
-
-- `xup`より大きい値は`Overflow`としてカウントされる
-
-## データ型を選択したい
-
-`TH1`には複数の派生クラスがあります。
-入力するデータの特性に合わせて選択できます。
-
-| クラス名 | データ型 | データ長 | 用途 |
-|---|---|---|---|
-| `TH1C` | `char` | 8bit 整数 | 非常に小さいカウント値（0-256） |
-| `TH1S` | `short` | 16bit 整数 | 小〜中程度のカウント値（0-65536） |
-| `TH1I` | `int` | 32bit 整数 | 整数値データ |
-| `TH1F` | `float` | 32bit 浮動小数点 | 連続値データ（標準） |
-| `TH1D` | `double` | 64bit 浮動小数点 | 高精度が必要な連続値データ |
-
-**選択のガイドライン：**
-
-- **整数値データ**: `TH1I`を使用
-- **連続値データ**: `TH1F`（メモリ効率）または`TH1D`（高精度）を使用
-- **データサイズが大きい場合**: `TH1F`でメモリ節約
-- **高精度が必要な場合**: `TH1D`を使用
-
-## タイトルしたい（`title`）
-
-```cpp
-#include <TH1D.h>
-
-// タイトルのみ
-TH1D *h1 = new TH1D(
-    "h1",
-    "Histogram Title",
-    100, 0, 10
-);
-```
-
-## 軸ラベルしたい（`title;x-axis;y-axis`）
-
-```cpp
-#include <TH1D.h>
-
-// タイトルと軸ラベル
-TH1D *h2 = new TH1D(
-    "h2",
-    "Title;X axis;Y axis",
-    100, 0, 10
-);
-
-// セミコロン区切り：タイトル;X軸タイトル;Y軸タイトル
-TH1D *h3 = new TH1D(
-    "h3",
-    "Gaussian Distribution;Value;Frequency",
-    100, -5, 5
-);
-```
-
-ヒストグラムを初期化するときに、タイトルと軸ラベルを指定できます。
-セミコロン（`;`）で区切ることで、グラフのタイトル、X軸タイトル、Y軸タイトルを同時に指定できます。
-
-
+ROOTのヒストグラムは`TFile`に保存します。
+`TH1->Write`メソッドでヒストグラムを書き込みます。
+複数のヒストグラムを作成した場合は、ヒストグラムごとに`Write`することで、同じファイルに保存できます。
 
 ## エラー（統計誤差）を管理したい
 
@@ -186,7 +118,9 @@ h->Draw();
 - [TH1::Integral](https://root.cern/doc/master/classTH1.html#ae49a9a1d996e4f8f30b2d12a09e6e034) - ヒストグラムの積分値を計算
 - [TH1::Fit](https://root.cern/doc/master/classTH1.html#a5bc5a5f4f48285d8d41ce37d82e7a8ea) - 関数をフィットする
 
-## 参考資料
+## リファレンス
 
-- [ROOT Documentation - TH1](https://root.cern/doc/master/classTH1.html)
-- [ROOT Documentation - TH1D](https://root.cern/doc/master/classTH1D.html)
+- [TH1 - ROOT Documentation](https://root.cern/doc/master/classTH1.html)
+- [TH1D - ROOT Documentation](https://root.cern/doc/master/classTH1D.html)
+- [TH1F - ROOT Documentation](https://root.cern/doc/master/classTH1F.html)
+- [TH1I - ROOT Documentation](https://root.cern/doc/master/classTH1I.html)
