@@ -1,11 +1,18 @@
 # Altairの使い方
 
-[Altair](https://altair-viz.github.io/)は``Pandas`` で作成したデータフレームを描画するパッケージのひとつです。
-[Vega](https://vega.github.io/vega/)と[Vega-Lite](https://vega.github.io/vega-lite/)という（たぶん）JavaScriptベースの描画パッケージを、Pythonでも使えるようにしたものです。
+[Altair](https://altair-viz.github.io/)はPythonでグラフを描くためのライブラリのひとつです。
+`Pandas`で作成したデータフレームも描画できます。
 
-データフレームを読み込んだ``alt.Chart``オブジェクトに対して、``.mark_*``でプロットの種類、``.encode``でデータ点、``.properties``でプロットのタイトルなどを設定するという感じで作業が抽象化されています。
+データフレームを`alt.Chart`オブジェクトに変換して、プロットの種類（`.mark_*`）やデータ点（`.encode`）、タイトルなどを設定（`.properties`）するという構成になっています。
+`matplotlib`に比べて作業が抽象化されていて、宣言的に記述できるのが特徴です。
 
-Altairにもデータを集計する機能がありますが、基本は``Pandas``で前処理は完了させておくのがよいと思います。
+`Altair`本体にもデータを集計する機能がありますが、基本は`Pandas`で前処理は完了させておくのがよいと思います。
+
+:::{note}
+
+`Altair`は、[Vega-Lite](https://vega.github.io/vega-lite/)というJavaScriptでグラフを描くためのパッケージを、Pythonでも使えるようにしたものです。
+
+:::
 
 ```{toctree}
 ---
