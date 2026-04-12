@@ -9,8 +9,7 @@ data = pd.DataFrame(...)
 # ヒストグラムを描く
 data.plot.hist(
   bins=ビン数,
-  xmin=ヒストグラムの下限値,
-  xmax=ヒストグラムの上限値,
+  range=(ヒストグラムの下限値, ヒストグラムの上限値),
   title="ヒストグラム",
   xlabel="X軸のタイトル",
   ylabel="Y軸のタイトル"
@@ -21,8 +20,8 @@ data.plot.hist(
 オプションでビン数やヒストグラムの範囲、タイトルや軸のタイトルを変更できます。
 
 `bins`オプションでビン数を変更できます。デフォルトは``10``になっています。
-`xmin`、`xmax`オプションでヒストグラムの下限値と上限値を変更できます。
-設定しない場合は、データの最小値と最大値が自動的に設定されます。
+`range`オプションでヒストグラムの範囲を変更できます。
+デフォルトは、データの最小値と最大値が自動的に設定されます。
 
 :::{important}
 
@@ -49,7 +48,7 @@ data.plot.hist(
 
 :::
 
-## ビニングしたい（`bins` / `xmin` / `xmax`）
+## ビニングしたい（`bins` / `range`）
 
 ```python
 # 任意のビニング
@@ -57,55 +56,184 @@ bins = [0, 10, 30, 50, 70, 80]
 
 data.plot.hist(
     bins=bins,
-    xmin=0,
-    xmax=100
+    range=(0, 100),
 )
 ```
 
 `bins`オプションでビン数を変更できます。デフォルトは`10`になっています。
 リストを指定すれば、任意の間隔でビニングできます。
 
-`xmin`、`xmax`オプションでヒストグラムの下限値と上限値を変更できます。
-設定しない場合は、データの最小値と最大値が自動的に設定されます。
+`range`オプションでヒストグラムの範囲を変更できます。
+デフォルトは、データの最小値と最大値が自動的に設定されます。
 
-`xmin`を下回るビンはアンダーフロー、`xmax`を上回るビンはオーバーフロー
-として、ヒストグラムの外側に表示されます。
+:::{caution}
+
+`range`はヒストグラムに使用するデータの範囲を制限するオプションです。
+範囲外のデータは集計対象から除除されます。
+
+アンダーフローやオーバーフローとして集計されないので注意してください。
+
+:::
+
+## 累積したい（`cumulative`）
+
+```python
+data.plot.hist(
+    cumulative=True,
+    bins=ビン数,
+    range=(xmin, xmax)
+)
+
+# matplotlibで設定する場合
+fig, ax = plt.subplots()
+ax.hist(
+    data,
+    bins=ビン数,
+    range=(xmin, xmax),
+    cumulative=True
+)
+```
+
+`cumulative=True`オプションで、累積ヒストグラムを作成できます。
+
+## 規格化したい（`density`）
+
+```python
+data.plot.hist(
+    density=True,
+    bins=ビン数,
+    range=(xmin, xmax)
+)
+```
+
+`density=True`オプションで、ヒストグラムを規格化できます。
+規格化すると、ヒストグラムの面積が1になるように調整されます。
+
+## ログ表示したい（`log`）
+
+```python
+data.plot.hist(
+    log=True,
+    bins=ビン数,
+    range=(xmin, xmax)
+)
+```
+
+`log=True`オプションで、Y軸をログ表示にできます。
+頻度の値が大きく異なる場合に、ログ表示にすることで全体の傾向を見やすくできます。
+
+## グループ化したい（`by`）
+
+```python
+data.plot.hist(
+    by="グループ化したいカラム名",
+    bins=ビン数,
+    range=(xmin, xmax)
+)
+
+# data.groupbyした場合
+grouped = data.groupby("グループ化したいカラム名")
+grouped.plot.hist(
+    bins=ビン数,
+    range=(xmin, xmax)
+)
+```
+
+`by`オプションで、指定したカラムの値ごとにグループ化してヒストグラムを作成できます。
+グループ化されたヒストグラムは、同じグラフ内に重ねて表示されます。
+グループごとに色分けされるので、グループごとの分布の違いを視覚的に比較できます。
+
+:::{note}
+
+`by`オプションは、内部的には`groupby`してからヒストグラムを作成しているだけなので、あらかじめ`groupby`してからヒストグラムを作成することもできます。
+
+:::
+
+## 積み上げたい（`stacked`）
+
+```python
+data.plot.hist(
+    by="グループ化したいカラム名",
+    bins=ビン数,
+    range=(xmin, xmax),
+    stacked=True
+)
+```
+
+`stacked=True`オプションで、グループ化したヒストグラムを積み上げて表示できます。
 
 ## 統計情報を自動計算したい
 
 ```python
-def hbar(data, x, bins, xmin, xmax, **kwargs):
+# ROOTのTH1クラスの真似をしてヒストグラムを作成する際に、統計情報を自動計算する関数を作成してください
 
-    # x で指定したカラムのコピーを作成
-    copied = data[[x]].copy()
+def hbar(
+    data: pd.DataFrame,
+    header: str,
+    *,
+    bins: int = 50,
+    xmin: float = 0,
+    xmax: float = 100,
+    ax: plt.Axes | None = None,
+    **kwargs
+) -> tuple[plt.Axes, dict]:
+    """
+    ROOTのTH1風ヒストグラム関数
+    """
+    # データを抽出
+    d = data[header]
 
-    # Entries
-    entries = len(copied)
+    # Axesを作成
+    if ax is None:
+        fig, ax = plt.subplots()
 
-    # Underflow
-    q = f"{x} < {xmin}"
-    uf = copied.query(q).count().iloc[0]
+    # underflow data: d < xmin
+    uf = (d < xmin).sum()
 
-    # Overflow
-    q = f"{x} > {xmax}"
-    of = copied.query(q).count().iloc[0]
+    # overflow data: d > xmax
+    of = (d > xmax).sum()
 
-    # Valid
-    q = f"{xmin} <= {x} <= {xmax}"
-    v = copied.query(q)
-    n = len(v)
-    mean = v.mean().iloc[0]
-    rms = v.std().iloc[0]
+    # valid data: within the range
+    valid = d[(d >= xmin) & (d <= xmax)]
+
+    # histogram
+    h = ax.hist(
+      valid,
+      bins=bins,
+      range=(xmin, xmax),
+      **kwargs
+    )
+
+    # statistics: ROOT-like
+    total_entries = int(len(d))
+    valid_entries = int(len(valid))
+    underflow = int(uf)
+    overflow = int(of)
+    mean = float(valid.mean()) if valid_entries > 0 else np.nan
+    stddev = float(valid.std()) if valid_entries > 0 else np.nan
 
     stats = {
-        "entries": int(entries),
-        "underflow": int(uf),
-        "overflow": int(of),
-        "mean": mean,
-        "rms": rms
-        }
-    plot = v.plot.hist(bins=bins, **kwargs)
-    return plot, stats
+      "total_entries": total_entries,
+      "valid_entries": valid_entries,
+      "underflow": underflow,
+      "overflow": overflow,
+      "mean": mean,
+      "rms": stddev,
+      "xmin": xmin,
+      "xmax": xmax,
+      "bins": bins,
+    }
+
+    return ax, stats
+```
+
+ROOTの``TH1クラス``を真似してヒストグラムを作ってみました。
+
+      "overflow": of,
+    }
+
+    return ax, stats
+
 ```
 
 ROOTの``TH1クラス``を真似してヒストグラムを作ってみました。
