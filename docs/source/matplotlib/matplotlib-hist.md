@@ -30,6 +30,15 @@ plt.show()
 `Axes.hist`でヒストグラムを作成できます。
 データを配列で指定し、オプションでビンの数や範囲を変更できます。
 
+:::{seealso}
+
+- [](../pandas/pandas-plot-hist.md)
+- [](../altair/altair-histogram.md)
+- [](../plotly/plotly-histogram.md)
+- [](../hvplot/hvplot-hist.md)
+
+:::
+
 ## 重みをつけたい（`weights`）
 
 ```python
