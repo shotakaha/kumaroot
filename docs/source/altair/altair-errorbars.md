@@ -1,4 +1,37 @@
-# エラーバーしたい（``mark_errorbar``）
+# エラーバーしたい（`.mark_errorbar`）
+
+```python
+import altair as alt
+import pandas as pd
+
+# データを準備する
+data = pd.DataFrame(...)
+
+# ベースとなるチャートを作成する
+base = alt.Chart(data).encode(
+    alt.X("X軸のカラム名")
+)
+
+# Y軸のカラム名をプロットする
+marks = base.mark_point().encode(
+    alt.Y("Y軸のカラム名")
+)
+
+# エラーバーをプロットする
+errors = base.mark_errorbar().encode(
+    alt.Y("エラーバーの下限を表すカラム名"),
+    alt.Y2("エラーバーの上限を表すカラム名"),
+)
+
+# ベースチャートにマーカーとエラーバーを重ねる
+marks + errors
+```
+
+`.mark_errorbar`でエラーバーを作成できます。
+エラーバーの下限と上限を表すカラム名を、`alt.Y`と`alt.Y2`に指定します。
+
+ただし、「エラーバー」しか表示されないため、その下地となるグラフ（＝マーカー付きの散布図など）も同時に作成して、重ねて表示する必要があります。
+
 
 ```python
 # tmp（気温の平均値）とtmp_std（気温の標準偏差）
@@ -23,20 +56,25 @@ marks + errors
 エラーバー付きの散布図を作成する場合は、
 ``mark_point``と``mark_errorbar``を組み合わせて使います。
 
-``mark_point``では、プロットしたい値を設定します。
-``mark_errorbar`では、`alt.Y`と`alt.Y2`にエラーバーの範囲を設定します。
-エラーバーの取りうる範囲は、あらかじめ計算しておきます。
-
 :::{seealso}
 
+- [](../matplotlib/matplotlib-errorbars.md)
 - [](../pandas/pandas-plot-errorbars.md)
 - [](../plotly/plotly-errorbars.md)
 - [](../hvplot/hvplot-errorbars.md)
 
 :::
 
+## 気温の変化を記録したい
+
 ```python
-def errorbars(data: pd.DataFrame, x: str, y: str, e: str):
+def errorbars(
+    data: pd.DataFrame,
+    x: str,
+    y: str,
+    e: str
+) -> dict[str, alt.Chart]:
+
     copied = data.copy()
     copied["min"] = copied[y] - copied[e]
     copied["max"] = copied[y] + copied[e]
@@ -53,6 +91,10 @@ def errorbars(data: pd.DataFrame, x: str, y: str, e: str):
     charts["errors"] = errors
     return charts
 ```
+
+``mark_point``では、プロットしたい値を設定します。
+``mark_errorbar`では、`alt.Y`と`alt.Y2`にエラーバーの範囲を設定します。
+エラーバーの取りうる範囲は、あらかじめ計算しておきます。
 
 ## リファレンス
 
