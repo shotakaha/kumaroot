@@ -36,6 +36,7 @@ matplotlib-contour
 matplotlib-boxplot
 matplotlib-violinplot
 matplotlib-pie
+matplotlib-funcanimation
 ```
 
 ## Axes and Figure
