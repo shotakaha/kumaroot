@@ -25,6 +25,12 @@ tree->Draw("col1");
 `delimiter`で区切り文字を変更できます。
 デフォルトはスペースになっています。
 
+:::{note}
+
+`std::file`や`std::ifstream`を使用してテキストファイルを読み込む方法もありますが、`TTree::ReadFile`はROOTのデータ構造に直接変換できるため、解析に便利です。
+
+:::
+
 ```python
 from ROOT import TTree, TFile
 
