@@ -8,26 +8,23 @@ $ cd my-project
 // 依存関係の管理
 $ uv add requests
 $ uv add --dev pytest
+$ uv add --group docs zensical
 $ uv remove requests
 
-// パッケージの実行とテスト
-$ uv run python main.py
-$ uv run pytest
-
-// 環境管理
+// 依存関係のインストール
 $ uv sync
-$ uv python pin 3.12
+
+// パッケージの実行とテスト
+$ uv run main_script.py
+$ uv run pytest
 
 // パッケージ公開
 $ uv build
 $ uv publish
-
-// 外部ツールを一時実行
-$ uvx ruff check .
 ```
 
 `uv`はRustで書かれた超高速なPythonパッケージ＆プロジェクト管理ツールです。
-`uv`を使うと、依存関係の管理、仮想環境の作成、スクリプトの実行、パッケージのビルドと公開など、Pythonプロジェクトに必要な機能をすべて統一されたコマンドで実行できます。
+`uv`を使って、依存関係の管理、仮想環境の作成、スクリプトの実行、パッケージのビルドと公開など、Pythonプロジェクトのあらゆる側面を効率的に管理できます。
 
 :::{hint}
 
@@ -35,7 +32,7 @@ $ uvx ruff check .
 プロジェクト管理ツールとしての側面と、
 pip alternativeとしてパッケージ管理ツール（`uv pip`）としての側面があります。
 
-どちらの文脈で使われているかを把握すると、使い方がより理解しやすくなると思います。
+どちらの文脈で使われているかを把握すると、　使い方がより理解しやすくなると思います。
 
 :::
 
@@ -83,105 +80,48 @@ $ source .venv/bin/activate
 ```
 
 `uv venv`コマンドで仮想環境を作成できます。
-デフォルトで`.venv/`ディレクトリに作成されます。
-
-:::{note}
-
-`uv init`でプロジェクトを作成した場合、
-`uv sync`や`uv run`を実行する際に自動的に仮想環境が作成されるため、
-手動で`uv venv`を実行する必要はありません。
-
-:::
+仮想環境のある`activate`スクリプトを実行して、仮想環境を有効化します。
 
 ```console
-// カスタムディレクトリに作成
-$ uv venv myenv
-$ source myenv/bin/activate
+// 任意のパスに仮想環境を作成
+$ uv venv /tmp/test-uv/
+$ source /tmp/test-uv/bin/activate
+```
 
+仮想環境を作成するパスを変更できます。
+デフォルトで`.venv`です。
+
+```console
 // 特定のPythonバージョンを指定
 $ uv venv --python 3.11
 $ uv venv --python python3.12
 ```
 
-## パッケージを追加・削除したい（`uv add` / `uv remove`）
+`--python`オプションで、仮想環境に使用するPythonバージョンを指定できます。
+
+## パッケージを追加したい（`uv pip install`）
 
 ```console
-$ uv add requests
-Resolved 1 package in 0.12s
-Created environment
-Installed 1 package in 0.09s
- + requests==2.31.0
+// 仮想環境を作成
+$ uv venv
 
-// dev-dependencyとして追加
-$ uv add --dev pytest
-Resolved 1 package in 0.08s
-Installed 1 package in 0.07s
- + pytest==7.4.3
-
-// --groupでグループ化
-// --devは --group dev のエイリアス
-$ uv add --group dev pre-commit
-$ uv add --group dev commitizen
-$ uv add --group dev ruff
-$ uv add --group docs sphinx
+// パッケージを追加
+$ uv pip install pandas
 
 // パッケージを削除
-$ uv remove requests
-Removed 1 package in 0.05s
-
-// 依存関係をロックファイルに記録
-$ uv lock
-// パッケージをインストール
-$ uv sync
+$ uv pip uninstall pandas
 ```
 
-`uv add`と`uv remove`コマンドで`pyproject.toml`にパッケージを追加したり、削除したりできます。
-
-`--dev`オプションで、テストツールなど開発時にのみ必要なパッケージを追加できます。
-また`--group`オプションでパッケージの用途に合わせてグループ化できます。
-`--dev`は`--group dev`と同じです。
-
-:::{note}
-
-`uv add`を使うと`pyproject.toml`と`uv.lock`の両方が自動更新されます。
-推移的な依存関係も自動的に削除されるため、pipより安全です。
-
-:::
-
-## パッケージを一時的にインストールしたい（`uv pip install`）
+`uv pip install`コマンドで仮想環境にパッケージを追加できます。
 
 ```console
+// 仮想環境が存在しない場合はエラー
 $ uv pip install pandas
-Resolved 1 package in 0.08s
-Installed 1 package in 0.06s
- + pandas==2.1.1
-
-$ uv pip list
-Name            Version
------------     -------
-pandas          2.1.1
-...
-
-$ uv pip uninstall pandas
-Removed 1 package in 0.02s
+error: No virtual environment found; run `uv venv` to create an environment, or pass `--system` to install into a non-virtual environment
 ```
 
-`uv pip`は[pipコマンド](./python-pip.md)の互換モードで、より高速に動作します。
-`pyproject.toml`に記録されない一時的なインストールに適しています。
-
-:::{note}
-
-`uv pip`は
-`pip`の完全な代替を目指しているツールです。
-
-:::
-
-:::{caution}
-
-`uv pip install`した場合、`pyproject.toml`には追加されません。
-プロジェクトの依存関係として記録したい場合は`uv add`を使用してください。
-
-:::
+仮想環境が存在しない場合はエラーになります。
+エラーメッセージにしたがって仮想環境を作成すればOKです。
 
 ## 新規プロジェクトしたい（`uv init`）
 
@@ -193,13 +133,40 @@ Initialized project `test-uv` at `/tmp/test-uv`
 
 `uv init`コマンドでプロジェクトを初期化できます。
 
-指定したパスにプロジェクトが作成され、
-`pyproject.toml`ファイルや
-`src/`ディレクトリなど、必要な構成が自動生成されます。
-また、デフォルトでGitリポジトリとして初期化されます。
+```console
+$ ls -1a /tmp/test-uv
+.git/
+.gitignore
+.python-version
+README.md
+main.py
+project.toml
+src/
+```
 
-上記では`--lib`と`--package`オプションを指定し、PyPIに公開するパッケージを作成する想定です。
-プロジェクトの形態を迷っている場合は、とりあえずこのオプションで作成しておくのが無難だと思います。
+指定したパスに`pyproject.toml`ファイルや`src/`ディレクトリ、
+`.python-version`ファイルなどが自動生成されます。
+また、Gitリポジトリとして設定されます。
+
+```console
+$ uv init --bare /tmp/test-uv-bare    // 最小構成のプロジェクトを作成
+$ uv init --app /tmp/test-uv-app      // CLI中心のプロジェクトを作成
+$ uv init --lib /tmp/test-uv-lib      // ライブラリ中心のプロジェクトを作成
+```
+
+作成するプロジェクトの形態に合わせて`--lib`、`--app`、`--bare`オプションから選択します。
+PyPIでパッケージとして公開する予定であれば`--package`オプションを追加します。
+利用形態を迷っている場合は、とりあえず`--lib --package`オプションで作成しておくのが無難です。
+
+```console
+$ uv init /tmp/test-uv
+error: Project is already initialized in `/tmp/test-uv` (`pyproject.toml` file exists)
+```
+
+すでにプロジェクトが存在する場合はエラーになります。
+プロジェクトをリセットしたい場合は、`pyproject.toml`ファイルを削除してから
+再度`uv init`を実行してください。
+
 
 ```console
 $ cat /tmp/test-uv/pyproject.toml
@@ -214,38 +181,62 @@ dependencies = []
 
 `pyproject.toml`のメタデータは、基本的にユーザーが直接編集します。
 
-```console
-$ ls -1a /tmp/test-uv
-.git/
-.gitignore
-.python-version
-README.md
-main.py
-project.toml
-src/
-```
 
-また、プロジェクトは自動的にGitリポジトリとして初期化され、`.python-version`ファイルも作成されます。
+
+## パッケージを追加・削除したい（`uv add` / `uv remove`）
 
 ```console
-$ uv init /tmp/test-uv
-error: Project is already initialized in `/tmp/test-uv` (`pyproject.toml` file exists)
+// dependenciesに追加
+$ uv add requests
+Resolved 1 package in 0.12s
+Created environment
+Installed 1 package in 0.09s
+ + requests==2.31.0
+
+// パッケージを削除
+$ uv remove requests
+Removed 1 package in 0.05s
+
+// パッケージをインストール
+$ uv sync
 ```
 
-すでにプロジェクトが存在する場合はエラーになります。
-プロジェクトをリセットしたい場合は、`pyproject.toml`ファイルを削除してから
-再度`uv init`を実行してください。
+`uv add`でパッケージを追加できます。
+`pyproject.toml`の`[dependencies]`セクションにパッケージ情報が追加され、
+`uv.lock`ファイルも自動で更新されます。
+`uv remove`でパッケージを削除できます。
 
 ```console
-$ uv init --bare /tmp/test-uv-bare    // 最小構成のプロジェクトを作成
-$ uv init --app /tmp/test-uv-app      // CLI中心のプロジェクトを作成
-$ uv init --lib /tmp/test-uv-lib      // ライブラリ中心のプロジェクトを作成
+// dependency-groups.devに追加
+$ uv add --dev pytest
+$ uv add --group dev pre-commit
+$ uv add --group dev commitizen
+$ uv add --group dev ruff
+// dependency-groups.docsに追加
+$ uv add --group docs sphinx
 ```
 
-プロジェクトの形態に合わせて適切なオプションを選択してください。
-パッケージとして公開する場合は`--package`オプションを追加してください。
+`--group`オプションで、パッケージの用途に合わせてグループ化できます。
+`pyproject.toml`の`[dependency-groups]`セクションにグループ情報が追加されます。
+`--dev`オプションは`--group dev`と同じです。
 
-## 環境を同期したい（`uv sync` / `uv lock`）
+```console
+$ uv add pandas
+error: No `pyproject.toml` found in current directory or any parent directory
+```
+
+`pyproject.toml`がない場合はエラーになります。
+`uv init`コマンドでプロジェクトを初期化してから、`uv add`を実行してください。
+
+:::{note}
+
+`uv add`や`uv remove`では`pyproject.toml`と`uv.lock`が更新されますが、
+仮想環境内のパッケージは自動で更新（インストールやアンインストール）されません。
+`uv sync`コマンドで`uv.lock`を仮想環境に同期してください。
+
+:::
+
+## パッケージをインストールしたい（`uv sync`）
 
 ```console
 $ uv sync
@@ -260,37 +251,33 @@ $ uv sync --upgrade
 Updated 3 packages in 0.18s
 ```
 
-`uv sync`コマンドで`pyproject.toml`と`uv.lock`をプロジェクト環境に同期します。
-不足しているパッケージをインストールし、不要なパッケージを削除します。
+`uv sync`コマンドでパッケージを仮想環境にインストールできます。
+このコマンドは`uv.lock`ファイルにしたがって環境を揃えるため、
+「同期（sync）」というコマンド名になっています。
 
-`uv lock`コマンドで`uv.lock`ファイル（ロックファイル）を更新します。
-
-### 依存関係を更新したい場合
+## パッケージを更新したい（`uv lock`）
 
 ```console
-// ロックファイルのみを更新（環境は同期しない）
+// パッケージの更新を確認
+$ uv lock --upgrade --dry-run
+
+// ロックファイ更新
 $ uv lock --upgrade
-
-// ロックファイルと環境の両方を更新
-$ uv sync --upgrade
-
-// 特定のパッケージのみ更新
-$ uv sync --upgrade-package requests
+$ uv sync
 ```
 
-:::{note}
+`uv lock --upgrade`コマンドで、`uv.lock`ファイルを最新の状態に更新できます。
 
-`uv lock --upgrade`と`uv sync --upgrade`の違い：
+```console
+$ uv sync --upgrade
+```
 
-- `uv lock --upgrade`：`uv.lock`ファイルのみ更新
-- `uv sync --upgrade`：`uv.lock`と環境の両方を更新
-
-:::
+`uv sync --upgrade`コマンドで、`uv.lock`ファイルと環境の両方を最新の状態に更新できます。
 
 ## パッケージを実行したい（`uv run`）
 
 ```console
-$ uv run python main.py
+$ uv run path/to/script.py
 Hello, World!
 
 $ uv run pytest
@@ -305,27 +292,15 @@ $ uv run ruff format .
 1 file reformatted
 ```
 
-`uv run`コマンドで、プロジェクトの仮想環境内でコマンドやスクリプトを実行します。
-`pyproject.toml`に記録された依存関係が自動的に利用可能になります。
-
-### スクリプトの実行
+`uv run`コマンドで、プロジェクトの仮想環境を使って外部コマンドやスクリプトを実行できます。
+仮想環境の手動アクティベーションは不要です。
 
 ```console
-// Pythonスクリプト
-$ uv run python script.py
-
-// スクリプトに引数を渡す
-$ uv run python script.py --arg value
-
-// プロジェクト内のスクリプト
-$ uv run hello.py
+$ .venv/bin/activate
+(.venv) $ python path/to/script.py
 ```
 
-:::{note}
-
-`uv run`を使うことで、仮想環境の手動アクティベーション（`source .venv/bin/activate`）が不要になります。
-
-:::
+`uv run`を使わない場合は、仮想環境を手動でアクティベートしてからコマンドを実行する必要があります。
 
 ## パッケージを公開したい（`uv build` / `uv publish`）
 
