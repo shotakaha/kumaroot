@@ -42,6 +42,7 @@ pip alternativeとしてパッケージ管理ツール（`uv pip`）としての
 ## インストールしたい（`uv`）
 
 ```console
+// Homebrewでインストール
 $ brew install uv
 
 $ which -a uv
@@ -86,8 +87,9 @@ $ source .venv/bin/activate
 
 :::{note}
 
-実は、`uv init`でプロジェクトを作成すると、`uv sync`や`uv run`を実行する際に
-自動的に仮想環境が作成されるため、手動で`uv venv`を実行する必要はありません。
+`uv init`でプロジェクトを作成した場合、
+`uv sync`や`uv run`を実行する際に自動的に仮想環境が作成されるため、
+手動で`uv venv`を実行する必要はありません。
 
 :::
 
@@ -110,19 +112,34 @@ Created environment
 Installed 1 package in 0.09s
  + requests==2.31.0
 
+// dev-dependencyとして追加
 $ uv add --dev pytest
 Resolved 1 package in 0.08s
 Installed 1 package in 0.07s
  + pytest==7.4.3
 
+// --groupでグループ化
+// --devは --group dev のエイリアス
+$ uv add --group dev pre-commit
+$ uv add --group dev commitizen
+$ uv add --group dev ruff
+$ uv add --group docs sphinx
+
+// パッケージを削除
 $ uv remove requests
 Removed 1 package in 0.05s
+
+// 依存関係をロックファイルに記録
+$ uv lock
+// パッケージをインストール
+$ uv sync
 ```
 
-`uv add`コマンドで`pyproject.toml`にパッケージを追加し、自動的にインストールします。
-パッケージ情報は`pyproject.toml`と`uv.lock`に記録されます。
+`uv add`と`uv remove`コマンドで`pyproject.toml`にパッケージを追加したり、削除したりできます。
 
-`uv add --dev`で開発用の依存関係（テストツールなど）を追加できます。
+`--dev`オプションで、テストツールなど開発時にのみ必要なパッケージを追加できます。
+また`--group`オプションでパッケージの用途に合わせてグループ化できます。
+`--dev`は`--group dev`と同じです。
 
 :::{note}
 
@@ -169,49 +186,64 @@ Removed 1 package in 0.02s
 ## 新規プロジェクトしたい（`uv init`）
 
 ```console
-$ uv init my-app
-Created project `my-app` at `/path/to/my-app`
-
-$ cd my-app
-$ tree .
-.
-├── README.md
-├── .python-version
-├── pyproject.toml
-├── src/
-│   └── my_app/
-│       └── __init__.py
-└── hello.py
+// 作業用ディレクトリに移動
+$ uv init --lib --package /tmp/test-uv
+Initialized project `test-uv` at `/tmp/test-uv`
 ```
 
-`uv init`コマンドで新しいPythonプロジェクトを初期化できます。
-デフォルトでアプリケーションプロジェクトが作成されます。
+`uv init`コマンドでプロジェクトを初期化できます。
 
-### プロジェクトタイプの選択
+指定したパスにプロジェクトが作成され、
+`pyproject.toml`ファイルや
+`src/`ディレクトリなど、必要な構成が自動生成されます。
+また、デフォルトでGitリポジトリとして初期化されます。
+
+上記では`--lib`と`--package`オプションを指定し、PyPIに公開するパッケージを作成する想定です。
+プロジェクトの形態を迷っている場合は、とりあえずこのオプションで作成しておくのが無難だと思います。
 
 ```console
-// アプリケーションプロジェクト（デフォルト）
-$ uv init my-app
-
-// PyPIに公開するパッケージプロジェクト
-$ uv init --package my-library
-
-// 最小限のセットアップ（pyproject.tomlのみ）
-$ uv init --bare
+$ cat /tmp/test-uv/pyproject.toml
+[project]
+name = "test-uv"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
 ```
 
-| 目的 | コマンド | 用途 |
-|---|---|---|
-| 個人用スクリプト | `uv init` | ローカルで実行するツール |
-| PyPIで公開 | `uv init --package` | 他のプロジェクトで使用される |
-| 既存プロジェクトに追加 | `uv init --bare` | pyproject.tomlのみ追加 |
+`pyproject.toml`のメタデータは、基本的にユーザーが直接編集します。
 
-:::{note}
+```console
+$ ls -1a /tmp/test-uv
+.git/
+.gitignore
+.python-version
+README.md
+main.py
+project.toml
+src/
+```
 
-`uv init`でプロジェクトを作成すると、`.python-version`ファイルが自動で作成されます。
-これにより、プロジェクトで使用するPythonバージョンが固定されます。
+また、プロジェクトは自動的にGitリポジトリとして初期化され、`.python-version`ファイルも作成されます。
 
-:::
+```console
+$ uv init /tmp/test-uv
+error: Project is already initialized in `/tmp/test-uv` (`pyproject.toml` file exists)
+```
+
+すでにプロジェクトが存在する場合はエラーになります。
+プロジェクトをリセットしたい場合は、`pyproject.toml`ファイルを削除してから
+再度`uv init`を実行してください。
+
+```console
+$ uv init --bare /tmp/test-uv-bare    // 最小構成のプロジェクトを作成
+$ uv init --app /tmp/test-uv-app      // CLI中心のプロジェクトを作成
+$ uv init --lib /tmp/test-uv-lib      // ライブラリ中心のプロジェクトを作成
+```
+
+プロジェクトの形態に合わせて適切なオプションを選択してください。
+パッケージとして公開する場合は`--package`オプションを追加してください。
 
 ## 環境を同期したい（`uv sync` / `uv lock`）
 
