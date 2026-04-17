@@ -8,7 +8,7 @@
 
 project = "KumaROOT"
 author = "Shota TAKAHASHI"
-copyright = "2015 - 2025, Shota TAKAHASHI"
+copyright = "2015 - 2026, Shota TAKAHASHI"
 version = "2026.4.1"
 release = "2026.4.1"
 

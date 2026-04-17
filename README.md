@@ -3,8 +3,12 @@
 **くまのためのROOT入門 ／ ROOT for Bearginner**
 
 ROOTなどの高エネルギー物理学分野で使っているツールの使い方をまとめているドキュメントです。
-もともとは古巣の研究室に設置した[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)（アクセス不可）でまとめていた内容で、
-現在は[KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開&更新しています。
+もともとは古巣の研究室に設置した
+[ShotakahaDokuWiki](https://www-he.scphys.kyoto-u.ac.jp/member/shotakaha/dokuwiki/doku.php)（アクセス不可）
+でまとめていた内容で、
+現在は
+[KumaROOT - Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)
+で公開&更新しています。
 
 ## 「くまROOT」：プロジェクト名の由来？
 
@@ -52,8 +56,9 @@ $ task docs:serve
 
 ### セットアップの詳細
 
-このドキュメントは[Sphinx](https://sphinx-users.jp)というドキュメント作成ソフトを使用しており、
-文書本体には`reStructuredText（reST）`と`Markdown（md）`という軽量マークアップ言語を使用しています。
+このドキュメントは[Sphinx](https://www.sphinx-doc.org/en/master/)という
+Python製のドキュメントビルダーを使用しています。
+文書ファイルは`reStructuredText（reST）`と`Markdown（md）`という軽量マークアップ言語を使用しています。
 
 #### 必要な環境
 
@@ -64,16 +69,18 @@ $ task docs:serve
 #### セットアップコマンド
 
 1. リポジトリをクローン
-   ```console
-   $ git clone git@github.com:shotakaha/kumaroot.git
-   ```
+
+```console
+$ git clone git@github.com:shotakaha/kumaroot.git
+```
 
 2. 依存パッケージをインストール
-   ```console
-   $ cd kumaroot
-   $ uv sync --all-extras
-   $ source .venv/bin/activate
-   ```
+
+```console
+$ cd kumaroot
+$ uv sync --all-extras
+$ source .venv/bin/activate
+```
 
 ---
 
@@ -85,7 +92,7 @@ $ task docs:serve
 $ git switch main
 $ git pull
 $ git switch -c feature/add-new-guide  # 新規ブランチを作成
-$ code .  # VS Codeを開く
+$ task code  # VS Codeを開く
 ```
 
 1. ``docs/source/ツール名/ツール名-usage.md``にコンテンツの説明を追加
@@ -123,7 +130,7 @@ task docs:serve
 ```
 
 自動的にdocsディレクトリに移動し、ライブリロード機能でドキュメントをプレビュー開始します。
-http://localhost:8000 でアクセスできます。
+`http://localhost:8000`でアクセスできます。
 
 #### VS Codeで開きながらプレビュー
 
@@ -198,8 +205,8 @@ Pre-commitフックは以下の検査を実行します：
 
 - Commitizen：コミットメッセージの形式チェック
 - Ruff：Pythonコードの形式チェック
-- JSON/TOML/YAML/XML の妥当性チェック
-- 末尾の空白・マージコンフリクト の検出
+- JSON/TOML/YAML/XMLの妥当性チェック
+- 末尾の空白・マージコンフリクトの検出
 
 #### 依存パッケージの管理
 
@@ -225,7 +232,7 @@ $ task push      # mainブランチをプッシュ
 詳しい執筆ガイドラインと技術仕様については、[CLAUDE.md](CLAUDE.md)を参照してください。
 そこには以下の内容が記載されています：
 
-- **ドキュメント構造**：`逆引き形式`（目的ベースの整理）の説明
+- **ドキュメント構造**：**逆引き形式**（目的ベースの整理）の説明
 - **日本語スタイル**：JTF（Japan Typesetting Foundation）スタイルガイドへの準拠
 - **Sphinx設定**：MyST Parser、タグシステム、etc.
 - **REST/Markdown 記法**：コード例、数式、アドモニション（注釈）の書き方
@@ -239,4 +246,6 @@ MIT License
 
 ## 📧 お問い合わせ
 
-質問やフィードバックは[GitHub Issues](https://github.com/shotakaha/kumaroot/issues)でお願いします。
+質問やフィードバックは
+[GitHub Issues](https://github.com/shotakaha/kumaroot/issues)
+でお願いします。

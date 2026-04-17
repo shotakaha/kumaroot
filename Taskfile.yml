@@ -62,7 +62,7 @@ tasks:
     desc: Build docs as static HTML
     dir: docs
     cmds:
-      - uv run make livehtml
+      - uv run make html
 
   docs:pdf:
     desc: Build docs as PDF
