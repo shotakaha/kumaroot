@@ -202,7 +202,7 @@ $ task setup G4VERSION=v11.2.1
 maxdepth: 1
 ---
 command-task-default
-command-task-doc
+command-task-docs
 command-task-test
 command-task-lint
 command-task-version
