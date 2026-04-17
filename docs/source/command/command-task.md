@@ -205,7 +205,7 @@ command-task-default
 command-task-docs
 command-task-test
 command-task-lint
-command-task-version
+command-task-bump
 command-task-release
 command-task-publish
 ```
