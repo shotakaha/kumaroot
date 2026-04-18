@@ -41,7 +41,7 @@ tasks:
     cmds:
       - uv run cz bump --check-consistency --changelog
 
-bump:patch:
+  bump:patch:
     desc: Bump patch version (--increment patch)
     cmds:
       - uv run cz bump --check-consistency --changelog --increment patch
