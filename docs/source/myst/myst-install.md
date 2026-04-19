@@ -3,20 +3,26 @@
     pair: MyST; install
 ```
 
-# インストールしたい（``npm install -g mystmd``）
+# インストールしたい（`mystmd`）
 
 ```console
-$ npm install -g mystmd
+// uv toolを使ってシステム全体にインストール
+$ uv tool install mystmd
+
+// uvを使ってプロジェクトに追加
+$ uv add --group docs mystmd
 
 $ myst --version
-v1.1.12
+v1.3.25
 
-$ which myst
+$ which -a myst
 /opt/homebrew/bin/myst
+/Users/shotakaha/.local/bin/myst
 ```
 
-``npm``を使って``mystmd``をインストールします。
-とりあえずシステム全体にインストールしてOKです。
+MySTは`uv`でインストールできます。
+パッケージ名は`mystmd`です。
+インストールした後は、`myst`コマンドが使えるようになります。
 
 :::{note}
 
@@ -24,46 +30,9 @@ $ which myst
 
 :::
 
-## インストールしたい（``pipx install mystmd``）
-
-```console
-$ pipx install mystmd
-Installing to existing venv 'mystmd'
-  installed package mystmd 1.1.28, installed using Python 3.12.0
-  These apps are now globally available
-    - myst
-done! ✨ 🌟 ✨
-
-$ which myst
-~/.local/bin/myst
-
-$ myst --version
-MyST requires node 16, 18, or 20; you are running node 21.
-```
+:::{note}
 
 [v1.1.7のリリース](https://github.com/executablebooks/mystmd/releases/tag/myst-cli%401.1.7)からPyPIにデプロイされるようになりました。
 [pipx](../python/python-pipx.md)でもインストールできますが、Nodeのバージョンが合っていないと使えないみたいです。
 
-## インストールしたい（``poetry add mystmd``）
-
-```console
-$ poetry add mystmd
-$ poetry add nodeenv
-```
-
-``poetry``でパッケージ管理している場合は、``nodeenv``を使ってNode環境を追加できます。
-GitLab CIなどのCI環境で構築する場合に便利です。
-
-:::{note}
-
-コンテナのベースにはPythonのイメージを指定し、``pip``や``poetry``を使って、必要なパッケージをインストールします。
-``apk``などを使って``node``をインストールする必要がなくなり、とても便利です。
-
 :::
-
-## アップデートしたい
-
-```console
-$ npm update -g mystmd
-$ pipx upgrade mystmd
-```
