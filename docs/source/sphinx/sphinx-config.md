@@ -3,11 +3,14 @@
     pair: Sphinx; 設定したい
 ```
 
+# 全体設定したい（`conf.py`）
 
-# 基本設定したい（``conf.py``）
+Sphinxの全体設定は、ドキュメントのルートディレクトリ（`docs`）に配置した`conf.py`ファイルに記述します。
 
-Sphinxドキュメントの全体設定は``conf.py``（または``source/conf.py``）で管理します。
-``sphinx-quickstart`` したあとは、まず、基本設定しておきます。
+[sphinx-quickstart](./sphinx-quickstart.md)でドキュメントを作成すると、`conf.py`ファイルも自動生成されます。
+
+デフォルトは`docs/conf.py`、
+ソースとビルドを分離した場合は`source/conf.py`になります。
 
 ```{note}
 Sphinxは活発に開発されています。
