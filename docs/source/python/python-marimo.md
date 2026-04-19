@@ -1,18 +1,22 @@
 # ノートブックしたい（`marimo`）
 
 ```console
-$ pip install marimo
-```
-
-```console
-$ poetry add marimo --group dev
-```
-
-```console
-$ uv pip install marimo
+// uv toolを使ってシステム全体にインストール
 $ uv tool install marimo
-$ uv add marimo --dev
+
+$ marimo --version
+0.23.1
+
+$ which -a marimo
+/Users/shotakaha/.local/bin/marimo
+
+
+// uvを使ってプロジェクトに追加
+$ uv add --group dev marimo
 ```
+
+Marimoは`uv`でインストールできます。
+インストールした後は、`marimo`コマンドが使えるようになります。
 
 ## チュートリアルしたい（`marimo tutorial`）
 

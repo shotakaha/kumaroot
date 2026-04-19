@@ -4,14 +4,14 @@
 // uv toolを使ってシステム全体にインストール
 $ uv tool install streamlit
 
-// uvを使ってプロジェクトに追加
-$ uv add --group dev streamlit
-
 $ streamlit --version
 Streamlit, version 1.56.0
 
 $ which -a streamlit
 /Users/shotakaha/.local/bin/streamlit
+
+// uvを使ってプロジェクトに追加
+$ uv add --group dev streamlit
 ```
 
 Steamlitは`uv`でインストールできます。
