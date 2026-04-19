@@ -1,7 +1,7 @@
 # 監査したい（`pip-audit`）
 
 ```console
-$ pip-audit
+$ uv add --group dev pip-audit
 $ uv run pip-audit
 ```
 
