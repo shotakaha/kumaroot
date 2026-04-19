@@ -25,13 +25,13 @@ PDF（やLaTeX）のテンプレートはさまざまなジャーナルに対応
 maxdepth: 1
 ---
 myst-install
+myst-config
 myst-quickstart
 myst-init
 myst-toc
 myst-templates
 ```
 
-% myst-config
 % myst-theme
 % myst-css
 

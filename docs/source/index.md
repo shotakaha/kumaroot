@@ -72,6 +72,7 @@ mkdocs/mkdocs-usage
 zensical/zensical-usage
 vscode/vscode-usage
 emacs/emacs-usage
+quarto/quarto-usage
 ```
 
 ```{toctree}
