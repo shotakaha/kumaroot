@@ -3,7 +3,7 @@
     pair: Sphinx; install
 ```
 
-# インストールしたい
+# インストールしたい（`sphinx`）
 
 ```console
 // uv toolを使ってシステム全体にインストール
