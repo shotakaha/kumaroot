@@ -51,6 +51,7 @@ vscode/vscode-usage
 emacs/emacs-usage
 mkdocs/mkdocs-usage
 zensical/zensical-usage
+quarto/quarto-usage
 ```
 
 ```{toctree}
