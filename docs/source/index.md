@@ -15,12 +15,17 @@ preface/index
 ```{toctree}
 ---
 maxdepth: 1
-caption: プログラミングしたい
+caption: 高エネルギー物理学ツール
 ---
-command/command-usage
-git/git-usage
 root/root-usage
 geant4/geant4-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: データ解析・可視化
+---
 python/python-usage
 numpy/numpy-usage
 pandas/pandas-usage
@@ -30,11 +35,27 @@ altair/altair-usage
 plotly/plotly-usage
 hvplot/hvplot-usage
 streamlit/streamlit-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: プログラミング言語・ツール
+---
 rust/rust-usage
 gas/gas-usage
 html/html-usage
-docker/docker-usage
 arduino/arduino-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: コマンドライン・開発環境
+---
+command/command-usage
+git/git-usage
+docker/docker-usage
 ```
 
 ```{toctree}
@@ -47,23 +68,30 @@ sphinx/sphinx-usage
 hugo/hugo-usage
 myst/myst-usage
 typst/typst-usage
-vscode/vscode-usage
-emacs/emacs-usage
 mkdocs/mkdocs-usage
 zensical/zensical-usage
+vscode/vscode-usage
+emacs/emacs-usage
 ```
 
 ```{toctree}
 ---
 maxdepth: 1
-caption: 未分類
+caption: ハードウェア・システム
+---
+raspi/raspi-usage
+redpitaya/redpitaya-usage
+windows/windows-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: 配信・機材
 ---
 streaming/streaming-usage
 gadget/gadget-usage
 dvr/dvr-usage
-raspi/raspi-usage
-redpitaya/redpitaya-usage
-windows/windows-usage
 ```
 
 ```{toctree}
