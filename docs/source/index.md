@@ -15,7 +15,7 @@ preface/index
 ```{toctree}
 ---
 maxdepth: 1
-caption: 高エネルギー物理学ツール
+caption: 高エネルギー物理学したい
 ---
 root/root-usage
 geant4/geant4-usage
@@ -24,7 +24,7 @@ geant4/geant4-usage
 ```{toctree}
 ---
 maxdepth: 1
-caption: データ解析・可視化
+caption: データ解析・可視化したい
 ---
 python/python-usage
 numpy/numpy-usage
@@ -40,7 +40,7 @@ streamlit/streamlit-usage
 ```{toctree}
 ---
 maxdepth: 1
-caption: プログラミング言語・ツール
+caption: プログラミング言語したい
 ---
 rust/rust-usage
 gas/gas-usage
@@ -51,7 +51,7 @@ arduino/arduino-usage
 ```{toctree}
 ---
 maxdepth: 1
-caption: コマンドライン・開発環境
+caption: コマンドライン・開発環境したい
 ---
 command/command-usage
 git/git-usage
@@ -78,7 +78,7 @@ quarto/quarto-usage
 ```{toctree}
 ---
 maxdepth: 1
-caption: ハードウェア・システム
+caption: ハードウェアしたい
 ---
 raspi/raspi-usage
 redpitaya/redpitaya-usage
@@ -88,7 +88,7 @@ windows/windows-usage
 ```{toctree}
 ---
 maxdepth: 1
-caption: 配信・機材
+caption: 配信・機材したい
 ---
 streaming/streaming-usage
 gadget/gadget-usage
