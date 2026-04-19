@@ -23,9 +23,9 @@ maxdepth: 1
 ---
 sphinx-install
 sphinx-quickstart
-sphinx-conf
-sphinx-conf-numfig
-sphinx-conf-today-fmt
+sphinx-config
+sphinx-config-numfig
+sphinx-config-today-fmt
 sphinx-extensions
 ```
 
