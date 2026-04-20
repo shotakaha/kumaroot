@@ -3,13 +3,28 @@
     single: ビルドしたい; Sphinx
 ```
 
-# ドキュメントを生成したい（``sphinx-build``）
+# ビルドしたい（`sphinx-build`）
 
-```bash
-$ make help
+```console
+$ sphinx-build --builder html SOURCE_DIR BUILD_DIR
+$ sphinx-build --builder dirhtml SOURCE_DIR BUILD_DIR
+$ sphinx-build --builder latex SOURCE_DIR BUILD_DIR
 ```
 
-ドキュメントの生成には[sphinx-build](https://www.sphinx-doc.org/ja/master/man/sphinx-build.html)を使うのですが、その簡易ラッパーとして{file}`Makefile`が用意されているので``make``コマンドを使うことをオススメします。
+`sphinx-build`コマンドで、Sphinxドキュメントをビルドできます。
+`--builder`オプションで、ビルド形式を変更できます。
+
+```console
+// 利用可能なビルダーを確認する
+$ make help
+$ make html
+$ make dirhtml
+$ make latexpdf
+```
+
+`sphinx-quickstart`コマンドでプロジェクトを作成した場合は、
+`Makefile`が自動生成されます。
+`make help`コマンドで、利用可能なビルダーを確認できます。
 
 :::{important}
 
@@ -18,51 +33,35 @@ $ make help
 
 :::
 
-``make help``コマンドで、利用可能なビルダーを確認できます。
-それぞれのビルダーの基本設定はすべて{file}`conf.py`にまとめて記述します。
+## KumaROOTをビルドしたい
 
-```bash
-# Makefileがあるディレクトリに移動する
-$ cd $MyPROJECT/docs/
-
-# ヘルプを表示する
-$ make
-
-# HTMLを作成する
-$ make html
-
-# PDFを作成する
-$ make latexpdf
-
-# リンクを確認する
-$ make linkcheck
-```
-
-## 例：KumaROOTをビルドする
-
-```bash
-# GitHubにあるリポジトリをクローンする
+```console
+// GitHubにあるリポジトリをクローンする
 $ git clone https://github.com/shotakaha/kumaroot.git
 $ cd kumaroot
+$ uv sync
 
-# 仮想環境を立ち上げる
-$ poetry shell
-
-# 必要なパッケージをインストールする
-(.venv) $ poetry install
-(.venv) $ cd docs/
-
-# HTMLの生成
-(.venv) $ make html
-
-# PDFの生成
-(.venv) $ make latexpdf
+$ cd docs
+$ uv run make html
+$ uv run make latexpdf
 ```
 
-例として、この``KumaROOT``のドキュメントをビルドする方法を書いておきます。
+`KumaROOT`のドキュメントをビルドする手順です。
 
 ```{note}
-開発環境を整えるのに``poetry``を使っています。
-あらかじめインストールが必要です。
-詳しくは[](../python/python-poetry.md)を参照してください。
+Python開発環境の構築に`uv`を使っています。
+詳しくは[](../python/python-uv.md)を参照してください。
 ```
+
+```console
+$ git clone https://github.com/shotakaha/kumaroot.git
+$ cd kumaroot
+$ uv sync
+
+$ task docs:build    // uv run make html
+$ task docs:pdf      // uv run make latexpdf
+$ task docs:serve    // uv run make livehtml
+```
+
+現在は[taskコマンド](../command/command-task.md)を使って、
+より簡単にビルドできるようにしています。
