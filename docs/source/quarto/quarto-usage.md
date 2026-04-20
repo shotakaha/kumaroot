@@ -10,6 +10,7 @@ maxdepth: 1
 quarto-install
 quarto-config
 quarto-frontmatter
+quarto-create
 quarto-preview
 quarto-render
 ```
