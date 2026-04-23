@@ -25,73 +25,20 @@ maxdepth: 1
 root-setup
 ```
 
-## 対話モードしたい
+## はじめての一歩
 
 ROOTの対話型シェル（Rint）を使って、コンパイルなしにC++コードを実行できます。
-ROOT6ではバックエンドのC++インタプリターが`CINT`から`Cling`に変更され、より詳細なエラーメッセージと高度なC++規格への対応が実現されました。
+まずはRintで簡単な計算やマクロを試してみましょう。
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-rint
+root-rint-calculator
+root-rint-macro
+root-rint-quit
 root-cling
-root-cint
-```
-
-## データ操作したい
-
-ROOTでのデータ処理の中核です。様々なデータ源からROOTのデータ構造に変換し、フィルタリングや統計処理を行います。
-
-### TTree・TChain・RNTuple
-
-``TTree``はROOTのデータ構造の基本です。
-CSVなどのテキスト形式で取得したデータをすぐに``TTree``に変換しておくと、ROOTを使ったデータ解析が捗ります。
-複数のTTreeを読み込む場合は``TChain``クラスが便利です。
-
-```{toctree}
----
-maxdepth: 1
----
-root-ttree
-root-ttree-readfile
-root-ttree-entries
-root-ttree-entry
-root-ttree-branch
-root-ttree-fill
-root-ttree-write
-root-ttree-print
-root-ttree-draw
-root-tchain
-root-rntuple
-```
-
-### RDataFrame
-
-ROOT6で導入された高性能なデータフレーム処理フレームワークです。
-関数型プログラミングスタイルでデータ解析が可能で、複数コアでの並列処理に対応しています。
-
-```{toctree}
----
-maxdepth: 1
----
-root-rdataframe
-root-rdataframe-csv
-root-rdataframe-filter
-root-rdataframe-stats
-root-rdataframe-histo1d
-```
-
-## ファイル操作したい
-
-データファイルの読み書きや文字列処理を行います。
-
-```{toctree}
----
-maxdepth: 1
----
-root-tfile
-root-tstring
 ```
 
 ## 描画したい
@@ -177,6 +124,61 @@ root-tf1-integral
 root-tf1-derivative
 ```
 
+## データ操作したい
+
+ROOTでのデータ処理の中核です。さまざまなデータ源からROOTのデータ構造に変換し、フィルタリングや統計処理を行います。
+
+### TTree・TChain・RNTuple
+
+``TTree``はROOTのデータ構造の基本です。
+CSVなどのテキスト形式で取得したデータをすぐに``TTree``に変換しておくと、ROOTを使ったデータ解析が捗ります。
+複数のTTreeを読み込む場合は``TChain``クラスが便利です。
+
+```{toctree}
+---
+maxdepth: 1
+---
+root-ttree
+root-ttree-readfile
+root-ttree-entries
+root-ttree-entry
+root-ttree-branch
+root-ttree-fill
+root-ttree-write
+root-ttree-print
+root-ttree-draw
+root-tchain
+root-rntuple
+```
+
+### RDataFrame
+
+ROOT6で導入された高性能なデータフレーム処理フレームワークです。
+関数型プログラミングスタイルでデータ解析が可能で、複数コアでの並列処理に対応しています。
+
+```{toctree}
+---
+maxdepth: 1
+---
+root-rdataframe
+root-rdataframe-csv
+root-rdataframe-filter
+root-rdataframe-stats
+root-rdataframe-histo1d
+```
+
+## ファイル操作したい
+
+データファイルの読み書きや文字列処理を行います。
+
+```{toctree}
+---
+maxdepth: 1
+---
+root-tfile
+root-tstring
+```
+
 ## 設定・カスタマイズしたい
 
 表示方法や画面の設定を一括変更する場合は ``TROOTクラス`` 、 ``TStyleクラス`` 、 ``TSystem`` を使います。
@@ -199,6 +201,7 @@ root-genv
 maxdepth: 1
 ---
 root5-root6
+root-cint
 root-emacs
 root-history
 ```
