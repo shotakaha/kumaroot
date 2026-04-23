@@ -312,7 +312,7 @@ TH1D *h = new TH1D("h", "Data Starting from Small Value", 50, 0.1, 10);
 
 ## 関連メソッド
 
-- [グラフを描画したい（`TCanvas::Draw`）](./root-tcanvas-draw.md)
+- [ヒストグラムを描画したい（`TH1::Draw`）](./root-th1-draw.md)
 - [キャンバスを分割したい（`TCanvas::Divide`）](./root-tcanvas-divide.md)
 - [キャンバスを作成したい（`TCanvas`）](./root-tcanvas.md)
 

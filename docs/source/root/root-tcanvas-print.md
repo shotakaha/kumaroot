@@ -267,7 +267,7 @@ for (Int_t file = 0; file < 3; file++) {
 
 - [キャンバスを保存したい（`TCanvas::SaveAs`）](./root-tcanvas-saveas.md)
 - [キャンバスを作成したい（`TCanvas`）](./root-tcanvas.md)
-- [キャンバスを描画したい（`TCanvas::Draw`）](./root-tcanvas-draw.md)
+- [ヒストグラムを描画したい（`TH1::Draw`）](./root-th1-draw.md)
 
 ## 参考資料
 

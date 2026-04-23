@@ -330,7 +330,7 @@ c->Update();
 ## 関連メソッド
 
 - [キャンバスを作成したい（`TCanvas`）](./root-tcanvas.md)
-- [キャンバスを描画したい（`TCanvas::Draw`）](./root-tcanvas-draw.md)
+- [ヒストグラムを描画したい（`TH1::Draw`）](./root-th1-draw.md)
 - [キャンバスを分割したい（`TCanvas::Divide`）](./root-tcanvas-divide.md)
 - [複数のキャンバスをPDFに保存したい（`TCanvas::Print`）](./root-tcanvas-pdf.md)
 

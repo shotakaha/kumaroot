@@ -49,7 +49,6 @@ maxdepth: 1
 ---
 root-tcanvas
 root-tcanvas-divide
-root-tcanvas-draw
 root-tcanvas-saveas
 root-tcanvas-print
 root-tcanvas-update

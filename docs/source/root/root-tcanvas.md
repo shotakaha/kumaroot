@@ -111,7 +111,7 @@ c = TCanvas("c1", "My Canvas", 800, 600)
 ## 関連メソッド
 
 - [TCanvas::Divide](./root-tcanvas-divide.md) - キャンバスを分割する
-- [TCanvas::Draw](./root-tcanvas-draw.md) - キャンバスの内容を再描画する
+- [TH1::Draw](./root-th1-draw.md) - ヒストグラムを描画する
 - [TCanvas::SaveAs](./root-tcanvas-saveas.md) - ファイルに保存する
 - [TCanvas::Update](./root-tcanvas-update.md) - キャンバスを更新する
 - [TLegend](./root-tlegend.md) - 凡例を追加する
