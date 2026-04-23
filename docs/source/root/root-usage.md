@@ -113,6 +113,7 @@ root-trandom-binomial
 root-trandom-landau
 root-trandom-exp
 root-trandom-breitwigner
+root-trandom-event
 ```
 
 ## フィットしたい
