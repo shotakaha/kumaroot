@@ -106,6 +106,13 @@ root-tlegend
 maxdepth: 1
 ---
 root-trandom
+root-trandom-uniform
+root-trandom-gauss
+root-trandom-poisson
+root-trandom-binomial
+root-trandom-landau
+root-trandom-exp
+root-trandom-breitwigner
 ```
 
 ## フィットしたい
