@@ -99,6 +99,15 @@ maxdepth: 1
 root-tlegend
 ```
 
+## 乱数したい
+
+```{toctree}
+---
+maxdepth: 1
+---
+root-trandom
+```
+
 ## フィットしたい
 
 ```{toctree}
