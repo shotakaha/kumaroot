@@ -43,6 +43,46 @@ TCanvas *c = new TCanvas("c1", "My Canvas", 1200, 800);
 引数はそれぞれ、識別名・タイトル・幅（ピクセル）・高さ（ピクセル）です。
 引数なしで作成した場合はデフォルトサイズになります。
 
+## キャンバスの名前を変えたい
+
+```cpp
+#include <TCanvas.h>
+
+TCanvas *c = new TCanvas("c1", "My Canvas", 800, 600);
+c->SetName("new_name");
+```
+
+`SetName`でキャンバスの識別名を変更できます。
+識別名はROOTファイルに保存するときのキーになります。
+
+```python
+from ROOT import TCanvas
+
+c = TCanvas("c1", "My Canvas", 800, 600)
+c.SetName("new_name")
+```
+
+## キャンバスのタイトルを変えたい
+
+```cpp
+#include <TCanvas.h>
+
+TCanvas *c = new TCanvas("c1", "My Canvas", 800, 600);
+c->SetTitle("New Title");
+c->Update();
+```
+
+`SetTitle`でウィンドウのタイトルバーに表示される文字列を変更できます。
+変更後に`Update`を呼ぶと即座に反映されます。
+
+```python
+from ROOT import TCanvas
+
+c = TCanvas("c1", "My Canvas", 800, 600)
+c.SetTitle("New Title")
+c.Update()
+```
+
 ## バッチモードで使いたい
 
 ```cpp
