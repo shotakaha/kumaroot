@@ -65,15 +65,18 @@ root-tcanvas-log
 root-tcanvas-drawcolortable
 ```
 
-## 1次元ヒストグラムしたい
+## ヒストグラムしたい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-th1
-root-th1-title
+root-th2
 root-th1-fill
+root-th1-draw
+root-th1-fit
+root-th1-title
 root-th1-integral
 root-th1-scale
 root-th1-stats
@@ -81,17 +84,6 @@ root-th1-mean
 root-th1-rms
 root-th1-binerror
 root-th1-sumw2
-root-th1-fit
-root-th1-draw
-```
-
-## 2次元ヒストグラムしたい
-
-```{toctree}
----
-maxdepth: 1
----
-root-th2
 ```
 
 ## グラフしたい
