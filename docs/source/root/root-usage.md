@@ -41,21 +41,13 @@ root-rint-quit
 root-cling
 ```
 
-## TBrowserしたい
+## 表示したい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-tbrowser
-```
-
-## TCanvasしたい
-
-```{toctree}
----
-maxdepth: 1
----
 root-tcanvas
 root-tcanvas-divide
 root-tcanvas-saveas
@@ -96,6 +88,14 @@ root-tgraph
 root-tgrapherrors
 root-tgraph-point
 root-tmultigraph
+```
+
+## 凡例したい
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-tlegend
 ```
 

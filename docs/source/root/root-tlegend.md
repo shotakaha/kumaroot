@@ -1,4 +1,4 @@
-# TLegend編
+# TLegendしたい
 
 TLegendやTTextとかも含めて、凡例表示に関して
 
