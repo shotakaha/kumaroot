@@ -25,34 +25,6 @@ c.Divide(2, 3)
 c.cd(5)
 ```
 
-## 複数のヒストグラムを描画したい（`TCanvas::cd`）
-
-```cpp
-#include <TCanvas.h>
-#include <TH1D.h>
-#include <TRandom.h>
-
-TCanvas *c = new TCanvas("c", "Divided Canvas", 1200, 800);
-c->Divide(2, 2);
-
-for (int i = 1; i <= 4; i++) {
-    c->cd(i);
-    TH1D *h = new TH1D(Form("h%d", i), Form("Histogram %d", i), 100, -3, 3);
-    for (int j = 0; j < 10000; j++) h->Fill(gRandom->Gaus(0, 1));
-    h->Draw();
-}
-```
-
-領域番号は左上が1で、左から右、上から下の順に増加します。
-`Divide(2, 2)`の場合の領域番号は以下のとおりです。
-
-```text
-1  2
-3  4
-```
-
-0を指定するとメインキャンバスが選択されます。
-
 ## マージンを調整したい
 
 ```cpp
@@ -72,7 +44,10 @@ for (int i = 1; i <= 6; i++) {
 }
 ```
 
-## グラフを描画したい（`TCanvas::cd`）
+`TCanvas::Divide`の第3引数と第4引数でXマージンとYマージンを指定できます。
+マージンは領域の端から描画領域までのスペースで、デフォルトは0.01（1%）です。
+
+## 描画領域を切り替えたい（`TCanvas::cd`）
 
 ```cpp
 #include <TCanvas.h>
@@ -95,24 +70,54 @@ g2->SetTitle("Lower Area");
 g2->Draw("APL");
 ```
 
-## メインキャンバスに戻したい
+`TCanvas::cd`で描画領域を切り替えて、
+複数のヒストグラムやグラフを同じキャンバスに描画できます。
+
+```cpp
+// 2列×2行に分割
+c->Divide(2, 2);
+// +---+---+
+// | 1 | 2 |
+// +---+---+
+// | 3 | 4 |
+// +---+---+
+
+// 2列x3行の分割
+c->Divide(2, 3);
+// +---+---+
+// | 1 | 2 |
+// +---+---+
+// | 3 | 4 |
+// +---+---+
+// | 5 | 6 |
+// +---+---+
+```
+
+領域番号は左上が1で、左から右、上から下の順に増加します。
 
 ```cpp
 #include <TCanvas.h>
+#include <TH1D.h>
+#include <TRandom.h>
 
-TCanvas *c = new TCanvas("c", "Canvas", 1200, 800);
+TCanvas *c = new TCanvas("c", "Divided Canvas", 1200, 800);
 c->Divide(2, 2);
 
 for (int i = 1; i <= 4; i++) {
     c->cd(i);
-    // ... 描画処理 ...
+    TH1D *h = new TH1D(Form("h%d", i), Form("Histogram %d", i), 100, -3, 3);
+    for (int j = 0; j < 10000; j++) h->Fill(gRandom->Gaus(0, 1));
+    h->Draw();
 }
+```
 
-// メインキャンバスに戻す
+ループ処理と組み合わせて、複数のヒストグラムを効率的に描画できます。
+
+```cpp
 c->cd(0);
 ```
 
-`cd(0)`でメインキャンバスに戻ります。
+0を指定するとメインキャンバスが選択されます。
 
 ## 関連メソッド
 
