@@ -1,4 +1,4 @@
-# キャンバスを作成したい（`TCanvas`）
+# キャンバスしたい（`TCanvas`）
 
 ```cpp
 #include <TCanvas.h>
@@ -43,7 +43,7 @@ TCanvas *c = new TCanvas("c1", "My Canvas", 1200, 800);
 引数はそれぞれ、識別名・タイトル・幅（ピクセル）・高さ（ピクセル）です。
 引数なしで作成した場合はデフォルトサイズになります。
 
-## キャンバスの名前を変えたい
+## 名前を変えたい（`TCanvas::SetName`）
 
 ```cpp
 #include <TCanvas.h>
@@ -62,7 +62,7 @@ c = TCanvas("c1", "My Canvas", 800, 600)
 c.SetName("new_name")
 ```
 
-## キャンバスのタイトルを変えたい
+## タイトルを変えたい（`TCanvas::SetTitle`）
 
 ```cpp
 #include <TCanvas.h>
@@ -83,7 +83,7 @@ c.SetTitle("New Title")
 c.Update()
 ```
 
-## バッチモードで使いたい
+## バッチモードしたい（`gROOT::SetBatch`）
 
 ```cpp
 #include <TCanvas.h>
