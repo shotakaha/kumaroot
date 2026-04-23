@@ -41,11 +41,7 @@ root-rint-quit
 root-cling
 ```
 
-## 描画したい
-
-ヒストグラム、グラフ、キャンバスなどの可視化機能を使い、データを図表として表現します。
-
-### キャンバス・レイアウト
+## キャンバスしたい
 
 ```{toctree}
 ---
@@ -61,7 +57,7 @@ root-tcanvas-log
 root-tcanvas-drawcolortable
 ```
 
-### 1次元ヒストグラム
+## 1次元ヒストグラムしたい
 
 ```{toctree}
 ---
@@ -81,7 +77,7 @@ root-th1-fit
 root-th1-draw
 ```
 
-### 2次元ヒストグラム
+## 2次元ヒストグラムしたい
 
 ```{toctree}
 ---
@@ -90,7 +86,7 @@ maxdepth: 1
 root-th2
 ```
 
-### グラフ
+## グラフしたい
 
 ```{toctree}
 ---
@@ -103,9 +99,7 @@ root-tmultigraph
 root-tlegend
 ```
 
-### 関数・フィット
-
-1次元ヒストグラムをフィットするための関数定義とフィット機能を提供します。
+## フィットしたい
 
 ```{toctree}
 ---
@@ -124,11 +118,7 @@ root-tf1-integral
 root-tf1-derivative
 ```
 
-## データ操作したい
-
-ROOTでのデータ処理の中核です。さまざまなデータ源からROOTのデータ構造に変換し、フィルタリングや統計処理を行います。
-
-### TTree・TChain・RNTuple
+## TTreeしたい
 
 ``TTree``はROOTのデータ構造の基本です。
 CSVなどのテキスト形式で取得したデータをすぐに``TTree``に変換しておくと、ROOTを使ったデータ解析が捗ります。
@@ -147,14 +137,27 @@ root-ttree-fill
 root-ttree-write
 root-ttree-print
 root-ttree-draw
+```
+
+## TChainしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-tchain
+```
+
+## RNTupleしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-rntuple
 ```
 
-### RDataFrame
-
-ROOT6で導入された高性能なデータフレーム処理フレームワークです。
-関数型プログラミングスタイルでデータ解析が可能で、複数コアでの並列処理に対応しています。
+## RDataFrameしたい
 
 ```{toctree}
 ---
@@ -167,30 +170,57 @@ root-rdataframe-stats
 root-rdataframe-histo1d
 ```
 
-## ファイル操作したい
-
-データファイルの読み書きや文字列処理を行います。
+## TFileしたい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-tfile
+```
+
+## TStringしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-tstring
 ```
 
-## 設定・カスタマイズしたい
-
-表示方法や画面の設定を一括変更する場合は ``TROOTクラス`` 、 ``TStyleクラス`` 、 ``TSystem`` を使います。
-実際に使用するのは ``gROOT`` 、 ``gStyle`` 、 ``gSystem`` というグローバル変数です。
+## gROOTしたい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
 root-groot
+```
+
+## gStyleしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-gstyle
+```
+
+## gSystemしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-gsystem
+```
+
+## gEnvしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 root-genv
 ```
 
