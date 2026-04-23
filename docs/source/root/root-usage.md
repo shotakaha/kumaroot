@@ -41,7 +41,16 @@ root-rint-quit
 root-cling
 ```
 
-## キャンバスしたい
+## TBrowserしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+root-tbrowser
+```
+
+## TCanvasしたい
 
 ```{toctree}
 ---
