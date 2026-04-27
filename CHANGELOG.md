@@ -1,5 +1,97 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **typst-heading**: improve heading documentation and decoration examples
+- **typst-text**: improve text element documentation and font sections
+- **typst-par**: improve par element documentation with examples
+- **typst-page**: improve margin, numbering, and background sections
+- **typst-page**: improve page layout documentation
+- **root-trandom**: add TRandom event generation documentation
+- **root-grandom**: add gRandom documentation
+- **root-trandom**: add TRandom distribution documentation
+- **root-trandom**: add TRandom documentation
+- **root-tcanvas-log**: simplify SetLogy documentation for first-year students
+- **root-tlegend**: update TLegend documentation
+- **root-th2**: update TH1/TH2 histogram documentation
+- **root-tbrowser**: add TBrowser/RBrowser documentation
+- **root-tcanvas-update**: simplify for first-year students
+- **root-tcanvas-print**: simplify for first-year students
+- **root-th1-draw**: merge root-tcanvas-draw into root-th1-draw
+- **root-tcanvas-saveas**: simplify for first-year students
+- **root-tcanvas-divide**: improve section structure and pad numbering diagrams
+- **root-tcanvas-divide**: simplify for first-year students
+- **root-tcanvas**: update section titles to 「〇〇したい（method）」 format
+- **root-tcanvas**: add 「名前を変えたい」 and 「タイトルを変えたい」 sections
+- **root-tcanvas**: simplify for first-year students
+- **root-usage**: flatten sections to 「〇〇したい」 format per class/topic
+- **root-usage**: reorder sections for first-year students
+- **root-usage**: reorganize root-usage.md
+- **quarto-create**: add quarto create command documentation
+- **sphinx-build**: update sphinx-build doc to use uv and task commands
+- **index**: update toctree captions to use したい format
+- **python**: update python-audit to use uv
+- **python**: update marimo and streamlit install docs to use uv
+- **streamlit**: update streamlit-install to use uv
+- **sphinx**: update sphinx-install title to include package name
+- **sphinx**: update sphinx-config and sphinx-install to use uv
+- **sphinx**: rename sphinx-conf files to sphinx-config and update toctree
+- **hugo**: update hugo-install to mention uv and remove npm section
+- **myst**: update myst-install to use uv instead of npm/pipx
+- **myst**: add myst-config page and update toctree
+- **zensical**: add zensical-install and zensical-config pages and update toctree
+- **quarto**: add quarto-config page and update toctree
+- **quarto**: add Quarto documentation section
+- **command-task-bump**: fix indentation in bump:patch task example
+- **command-task-bump**: update bump task documentation with version task and improved examples
+- **command-task**: rename command-task-version to command-task-bump and update toctree
+- **command-task**: rename command-task-doc to command-task-docs and update toctree
+- **command-task-doc**: update task docs with Sphinx, MkDocs, and Zensical examples
+- **deploy**: replace poetry with uv for build commands
+- update README formatting, Taskfile docs:build command, and copyright year
+- **index**: restructure toctree into 8 focused sections
+- **python-uv**: reorganize uv python and uv tool sections
+- **python-uv**: add venv activation examples and package management notes
+- **python-uv**: reorganize uv documentation structure and improve clarity
+- **python-uv**: update uv documentation with improved examples and explanations
+- **pandas**: add overview description for Pandas, NumPy, and SciPy
+- **ci**: add git config and tag list diagnostic for changelog workflow
+- **ci**: add fetch-tags option to checkout action for commitizen changelog generation
+- **pandas-dataframe**: enhance documentation with practical examples and clearer explanations
+- **matplotlib-figure-subplots**: enhance documentation with practical examples and improved explanations
+- **python-uv**: clarify uv tool capabilities and add distinction between project and pip modes
+- **python-install**: improve documentation title and add package management section
+- **zensical-readthedocs**: update documentation with local build confirmation and typo fix
+- **root-tfile**: add comprehensive TTree data saving example
+- **root-tfile**: remove duplicate code block
+- **root-tfile**: simplify and reorganize TFile documentation
+- **root-tchain**: reorganize and improve TChain documentation
+- **root-ttree-draw**: improve Python example with complete usage patterns
+- **root-ttree-draw**: simplify and reorganize Draw documentation
+- **root-rdataframe**: improve documentation with better explanations and context
+- **root-ttree**: enhance documentation with better explanations and historical context
+- **root-ttree-branch**: simplify and consolidate Branch documentation
+- **root-ttree-readfile**: add note about TTree::ReadFile advantages
+- **root-ttree-readfile**: simplify and improve ReadFile documentation
+- **root-ttree**: improve documentation with file I/O examples
+- **root-th1-stats**: simplify and improve SetStats documentation
+- **root-th1-scale**: simplify and improve Scale documentation
+- **root-th1-integral**: add note about bin numbers vs X-axis values
+- **root-th1-integral**: simplify and improve Integral documentation
+- **root-th1-fill**: simplify and improve Fill method documentation
+- **root-th1**: improve TH1 histogram documentation with comprehensive examples
+- **altair-errorbars**: improve documentation with comprehensive examples and better organization
+- **matplotlib-scatter**: reorganize seealso references
+- **plotly-scatter**: expand documentation with marker and colormap sections
+- **plotly-histogram**: improve documentation with code examples and better references
+- **hvplot-hist**: expand documentation with advanced histogram options
+- **matplotlib-hist**: add seealso section with cross-references
+- **hvplot-scatter**: improve documentation with marker and colormap sections
+- **plotly-scatter**: improve documentation with better examples and references
+- **altair-scatter**: improve documentation with code examples and better references
+
 ## v2026.4.1 (2026-04-12)
 
 ### Feat
