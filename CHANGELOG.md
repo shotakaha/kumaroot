@@ -1,9 +1,12 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.4.2 (2026-04-27)
 
 ### Fix
 
+- **typst-with**: improve template documentation with with method details
+- **typst-heading**: improve heading documentation and decoration examples
+- **typst-with**: improve template documentation with with method details
 - **typst-heading**: improve heading documentation and decoration examples
 - **typst-text**: improve text element documentation and font sections
 - **typst-par**: improve par element documentation with examples
