@@ -1,36 +1,38 @@
 # 見出ししたい（`#heading`）
 
 ```typst
-// 見出しの設定
-#set heading(
-  depth: 3,
-  numbering: "1.1.1",
-)
-
-// #heading(level, numbering, outlined)[content]
-#heading[見出し1]  // デフォルトは(level: 1)
-#heading(level: 2)[見出し2]
-#heading(level: 3)[見出し3]
-#heading(level: 4)[見出し4]  // 見出し4以降は見た目が同じ
-
 // 簡易マークアップ
 = 見出し1
 == 見出し2
 === 見出し3
 ==== 見出し4
+
+// 関数でのマークアップ
+#heading[見出し1]  // デフォルトは(level: 1)
+#heading(level: 2)[見出し2]
+#heading(level: 3)[見出し3]
+#heading(level: 4)[見出し4]  // 見出し4以降は見た目が同じ
 ```
 
 [heading要素](https://typst.app/docs/reference/model/heading/)
-で見出しを表示できます。
+で見出しをマークアップできます。
+また`=`を使った簡易マークアップも利用できます。
 
-`#set`ルールで見出し全体の設定を変更できます。
+## 見出しを設置したい（`#set heading`）
+
+```typst
+// 見出しの設定
+#set heading(
+  depth: 3,
+  numbering: "1.1.1",
+)
+```
+
+`#set`ルールで、ドキュメント全体の見出し設定を変更できます。
 `depth`オプションで、目次に含める見出しレベルを設定できます。
 デフォルトは`1`です。
 `numbering`オプションで、見出し番号の表示方法を変更できます。
 デフォルトは`none`です。レベルに応じて`1.1.`、`1.1.1.`のように表示されます。
-
-`#heading`関数で見出しを個別設定できます。
-また`=`を使った簡易マークアップも利用できます。
 
 :::{seealso}
 
