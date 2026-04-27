@@ -1,109 +1,62 @@
-# 全体のスタイルを変更したい（`#set`）
+# setしたい（`#set`）
 
 ```typst
+// ページ全体の設定
 #set page(
   paper: "presentation-16-9",
   margin: 10mm,
+  numbering: "1 / 1",
 )
 
+// 本文の設定
 #set text(
   lang: "ja",
   font: ("Noto Sans CJK JP"),
 )
-```
 
-`#set`ルールを使って、文書全体のスタイルを変更できます。
-この設定は、ファイルの先頭に一度だけ設定するのが一般的です。
-
-## フォント設定したい（`text`）
-
-```typst
-#set text(
-  lang: "ja",
-  size: 11pt,
-  font: "Noto Sans CJK JP",
-  line-spacing: 1.5,
-  color: navy
-)
-```
-
-`text`要素の設定で、本文のフォントや行間などを変更できます。
-
-:::{seealso}
-
-- [](./typst-text.md)
-
-:::
-
-## ページ設定したい（`page`）
-
-```typst
-#set page(
-  paper: "a4"
-  margin: (x: 2cm, y:3cm),
-  header: rect[inset: 4pt][ヘッダー],
-  footer: rect[inset: 4pt][フッター],
-  number-align: center,
-  numbering: "1 of 1",
-  columns: 2
-)
-```
-
-`page`キーの設定で、サイズや余白、ヘッダー／フッターなどを変更できます。
-
-:::{note}
-
-- [](./typst-page.md)
-
-:::
-
-## 段落したい（`par`）
-
-```typst
+// 段落の設定
 #set par(
   justify: true,
-  leading: 0.5cm
+  leading: 0.5cm,
 )
-```
 
-`par`キーで、段落の整形や字下げなどを変更できます。
-
-:::{seealso}
-
-- [](./typst-par.md)
-
-:::
-
-## 見出ししたい（`heading`）
-
-```typst
+// 見出しの設定
 #set heading(
-  numbering: "I. ",
+  numbering: "1. ",
 )
-```
 
-`heading`キーで見出しのスタイルを変更できます。
-
-:::{seealso}
-
-- [](./typst-heading.md)
-
-:::
-
-## 箇条書きしたい（`list`）
-
-```typst
+// 箇条書きの設定
 #set list(
   marker: "→",
-  indent: 1.5em
+  indent: 1.5em,
+)
+
+#set document(
+  title: "レポートのタイトル",
+  author: ("著者1", "著者2"),
+  date: datetime(year: 2025, month: 7, day: 13)
 )
 ```
 
-`list`キーの設定で、箇条書きのスタイルを変更できます。
+`#set`ルールで、関数や要素の設定を変更できます。
+変更の影響範囲はスコープに依存します。
+`#set`した場所から、同じスコープ内のすべての関数や要素に影響を与えます。
+
+スコープは、関数の引数や`#let`ルールのブロック、`#show`ルールのブロックなどで区切られます。
+スコープの外側にある関数や要素には影響を与えません。
 
 :::{seealso}
 
+- [](./typst-page.md)
+- [](./typst-text.md)
+- [](./typst-par.md)
+- [](./typst-heading.md)
 - [](./typst-list.md)
+- [](./typst-quote.md)
+- [](./typst-note.md)
+- [](./typst-table.md)
+- [](./typst-document.md)
+
 :::
 
 ## 引用したい（`quote`）
@@ -144,21 +97,3 @@
 
 `table`キーで表全体の枠線、罫線、余白などを変更できます。
 `table.cell`キーでセルの設定を変更できます。
-
-## メタデータしたい（`document`）
-
-```typst
-#set document(
-  title: "レポートのタイトル",
-  author: ("著者1", "著者2"),
-  date: datetime(year: 2025, month: 7, day: 13)
-)
-```
-
-`document`キーで、ドキュメントのPDFに埋め込むメタデータを設定できます。
-
-:::{seealso}
-
-- [](./typst-document.md)
-
-:::
