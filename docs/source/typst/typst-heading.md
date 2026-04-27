@@ -69,21 +69,18 @@ LaTeXの`\section*`に相当します。
 // 基本設定
 #set heading(numbering: "1.")
 
-// 共通の装飾
+// 共通の装飾を設定
 #show heading: block.with(
+  fill: luma(90%),  // 背景色を追加
+  inset: 1em,       // 内側のスペースを追加
   above: 1em,  // 見出しの上にスペースを追加
   below: 1em,  // 見出しの下にスペースを追加
-  fill: none,  // 背景なし
-  stroke: none,  // 枠線なし
-  radius: 0,  // 角丸なし
-  inset: 0,  // パディングなし
-  outset: 0,  // マージンなし
 )
 
-// レベルごとの装飾
-#show heading.where(level: 1): block.with(fill: luma(150), inset: 12pt)
-#show heading.where(level: 2): block.with(fill: luma(100), inset: 12pt)
-#show heading.where(level: 3): block.with(fill: luma(50), inset: 12pt)
+// レベルごとの装飾を追加
+#show heading.where(level: 1): block.with(fill: luma(150), inset: 1em)
+#show heading.where(level: 2): block.with(fill: luma(100), inset: 1em)
+#show heading.where(level: 3): block.with(fill: luma(50), inset: 1em)
 ```
 
 見出しの装飾は`#show`ルールで設定できます。
@@ -94,6 +91,29 @@ LaTeXの`\section*`に相当します。
 デフォルトでは見出しの上下は窮屈なので、これは必須の設定だと思います。
 また、レベルごとに背景色を変えて、見出しの階層が分かりやすくなるようにしています。
 このあたりはお好みです。いろいろ試してみてください。
+
+```typst
+// 共通の装飾を定義
+#let h = block.with(
+  fill: luma(90%),  // 背景色を追加
+  inset: 1em,       // 内側のスペースを追加
+  above: 1em,  // 見出しの上にスペースを追加
+  below: 1em,  // 見出しの下にスペースを追加
+)
+
+// レベルごとの装飾を再定義
+#let h1 = h.with(fill: luma(150))
+#let h2 = h.with(fill: luma(100))
+#let h3 = h.with(fill: luma(50))
+
+// レベルごとの装飾を適用
+#show heading.where(level: 1): h1
+#show heading.where(level: 2): h2
+#show heading.where(level: 3): h3
+```
+
+冒頭のサンプルが設定を「追加」する方法だったのに対して、こちらは設定を「上書き」する方法です。
+こちらの方が、設定しやすいかもしれません。
 
 :::{seealso}
 
