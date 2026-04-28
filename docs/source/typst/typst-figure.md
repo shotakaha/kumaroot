@@ -121,20 +121,52 @@
 
 また、前述の`figure`の設定に、この`caption`の設定を追加すると、結果的に図版と本文の間に`1em`のアキができます。
 
-## 複数の図版を並べたい（`#columns`）
+## プレースホルダーしたい
+
+```typst
+#let placeholder(width: 100%, height: 6cm, label: [placeholder]) = rect(
+  width: width,
+  height: height,
+  fill: gray.lighten(80%),
+  stroke: gray,
+)[
+  align(center + horizon )[
+    text(size: 12pt, color: gray)[label]
+  ]
+]
+
+// プレースホルダーを作成
+#figure(
+  placeholder(),
+  caption: [図版のキャプション],
+)
+
+// 大きさなどを変更したプレースホルダーを作成
+#figure(
+  placeholder.with(width: 80%, height: 4cm, label: [幅80%のプレースホルダー]),
+  caption: [図版のキャプション],
+)
+```
+
+図版がまだ用意できないときは、プレースホルダーを挿入しておくと便利です。
+上記のサンプルでは、`placeholder`関数を定義して、矩形とテキストを組み合わせたプレースホルダーを作成しています。
+`with`メソッドで、プレースホルダーの大きさやラベルを変更した新しいプレースホルダーを作成できます。
+
+## 複数の図版を並べたい
 
 ```typst
 // +----------+----------+
 // | image1   | image2   |
 // | caption1 | caption2 |
 // +----------+----------+
-#columns(2)[
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1em,
+)[
   #figure(
     [content],
     caption: [左図のキャプションです。],
   )<fig-left>
-
-  #colbreak()
 
   #figure(
     [content],
@@ -143,8 +175,9 @@
 ]
 ```
 
-図版を横に並べたい場合は
-`#columns`関数で段組みしたところに、図版（`#figure`）を挿入します。
+複数の図版を横に並べたい場合は、`#grid`関数で段組みしたところに、図版（`#figure`）を挿入します。
+上記のサンプルでは、2列のグリッドを作成して、各列に図版を挿入しています。
+グリッドの`gutter`オプションで、図版同士のスペースを調整できます。
 
 ## 複数の図版をまとめたい
 
@@ -155,11 +188,14 @@
 // |      caption      |
 // +---------+---------+
 
-#let images = #columns(2)[
+#let images = grid(
+  columns: (1fr, 1fr),
+  gutter: 1em,
+)[
   [左図],
-  #colbreak(),
   [右図]
 ]
+
 #figure(
   images,
   caption: [2つの図を説明する1つのキャプションです。]
@@ -167,8 +203,9 @@
 ```
 
 複数の図版を横にならべて、キャプションを1つにまとめたい場合は、
-あらかじめ`#columns`で段組みしたコンテンツブロックを
-`#figure`の第一引数に渡します。
+あらかじめ`#grid`で段組みしたコンテンツブロックを`#figure`の第一引数に渡します。
+上記のサンプルでは、2列のグリッドに図を並べて、
+そのグリッド全体に対してキャプションを設定しています。
 
 :::{note}
 
