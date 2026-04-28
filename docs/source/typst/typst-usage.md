@@ -38,12 +38,14 @@ typst-import
 maxdepth: 1
 ---
 typst-page
-typst-par
 typst-text
 typst-document
 ```
 
 ## マークアップしたい
+
+ドキュメントを作成するときは、文章の構造に合わせて適切にマークアップすることが重要です。
+Typstでは、文章の構造をマークアップするための関数が用意されています。
 
 ```{toctree}
 ---
@@ -52,18 +54,44 @@ maxdepth: 1
 typst-syntax
 typst-title
 typst-heading
+typst-par
 typst-outline
 typst-list
 typst-strong
-typst-raw
 typst-link
-typst-figure
-typst-table
-typst-math
 typst-footnote
 typst-ref
 typst-bibliography
 typst-lorem
+```
+
+## 図版したい
+
+図版に関するマークアップを整理しました。
+`figure`関数は、図、表、数式、コードブロックなどの「図版」とキャプションをまとめるための関数です。
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-figure
+typst-image
+typst-table
+typst-math
+typst-raw
+```
+
+## レイアウトしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
+typst-align
+typst-box
+typst-block
+typst-grid
+typst-columns
 ```
 
 ## スタイルしたい
@@ -74,11 +102,10 @@ maxdepth: 1
 ---
 typst-styling
 typst-set
+typst-with
 typst-show
-typst-block
-typst-box
+typst-where
 typst-color
-typst-align
 typst-logo
 ```
 
@@ -91,8 +118,6 @@ maxdepth: 1
 typst-let
 typst-func
 typst-type
-typst-with
-typst-where
 typst-state
 typst-datetime
 ```

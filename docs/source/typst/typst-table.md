@@ -1,4 +1,4 @@
-# 表したい（`table` / `table.cell`）
+# 表したい（`#table`）
 
 ```typst
 
