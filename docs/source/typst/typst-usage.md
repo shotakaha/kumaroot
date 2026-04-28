@@ -58,6 +58,7 @@ typst-strong
 typst-raw
 typst-link
 typst-figure
+typst-table
 typst-math
 typst-footnote
 typst-ref
