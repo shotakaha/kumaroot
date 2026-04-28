@@ -1,47 +1,30 @@
 # コードブロックしたい（`#raw`）
 
-```typst
-#show raw: text.with(font: "Noto Sans Mono")
-#show raw.where(block: true): block.with(fill: luma(95%), inset: 1em, radius: 1em)
-#show raw.where(block: false): text.with(fill: olive)
+`````typst
+// 簡易マークアップ
+
+これは `inline code` です。
+
+
+
+```python
+# これはコードブロックです。
+def hello():
+    print("hello")
+```
+
+// 関数マークアップ
+これは #raw[inline code]です。
 
 #raw(
   lang: "python",
   block: true,
 )[
+# これはコードブロックです。
 def hello():
     print("hello")
 ]
-```
-
-[raw要素](https://typst.app/docs/reference/text/raw/)で、コードブロックを表示できます。
-
-:::{seealso}
-
-- [](../latex/latex-minted.md)
-
-:::
-
-## マークアップしたい
-
-`````typst
-
-インラインで`code`をマークアップ表示できます。
-
-ブロックで
-
-```python
-def hello():
-    print("hello")
-```
-
-を表示できます。
-
 `````
-
-コードブロックは、Markdown記法と同じように
-`` `（back-tick） ``
-でマークアップできます
 
 ## ブロック表示したい（`#raw.block`）
 
@@ -75,13 +58,47 @@ Markdown記法でサポートされている言語名の他に、Typst固有の
 `typm`（Typst math）
 がサポートされているそうです。
 
+## コードブロックを設定したい（`set raw`）
+
+```typst
+// フォント設定
+#show raw: text.with(font: "Noto Sans Mono")
+// ブロックの設定
+#show raw.where(block: true): it => {
+    block(
+        fill: luma(95%),
+        inset: 1em,
+        radius: 1em
+    )
+    it
+}
+// インライン設定
+#show raw.where(block: false): text.with(fill: olive)
+
+#raw(
+  lang: "python",
+  block: true,
+)[
+def hello():
+    print("hello")
+]
+```
+
+[raw要素](https://typst.app/docs/reference/text/raw/)で、コードブロックを表示できます。
+
+:::{seealso}
+
+- [](../latex/latex-minted.md)
+
+:::
+
 ## 等幅フォントしたい
 
 ```typst
-#show raw: text.with(font: "Noto Sans Mono")
+#show raw: text.with(font: ("HackGen", "Noto Sans Mono")
 ```
 
-コードブロックは表示するときは、等幅フォント（モノフォント）を設定するとよいです。
+コードブロックを表示するときは、等幅フォント（モノフォント）を設定するとよいです。
 
 ## 文字色したい
 
