@@ -10,7 +10,7 @@
 )
 ```
 
-[document要素](https://typst.app/docs/reference/model/document/)は、文書の全体のメタデータを設定できます。
+`document`関数で、文書全体のメタデータを設定できます。
 このメタデータはPDFファイルなどに埋め込まれる情報で、本文には表示されません。
 
 ユーザーが独自の`document`要素を作ることはできず、setルール（`#set document`）の形でのみ設定できます。
@@ -24,13 +24,8 @@
 ```
 
 `title`オプションで、文書のタイトルを埋め込むことができます。
-コンテンツブロックで指定できるので、マークアップしたタイトルや改行付きのタイトルも設定できます。
-
-:::{note}
-
-マークアップしたタイトルがPDFにどのように埋め込まれるのかは気になります（ただ調べてないだけ）。
-
-:::
+デフォルトは`none`です。
+コンテンツブロックを指定できますが、マークアップしたタイトルや改行付きのタイトルは無視されるようです。
 
 ## 著者したい（`author`）
 
@@ -41,6 +36,7 @@
 ```
 
 `author`オプションで、文書の著者情報を埋め込むことができます。
+デフォルトは`()`です。
 配列で指定できるので、複数の著者を設定できます。
 
 ## 説明したい（`description`）
@@ -52,6 +48,7 @@
 ```
 
 `description`オプションで文書の説明を埋め込むことができます。
+デフォルトは`none`です。
 
 ## キーワードしたい（`keywords`）
 
@@ -62,6 +59,8 @@
 ```
 
 `keywords`オプションで、文書のキーワードを埋め込むことができます。
+デフォルトは`()`です。
+配列で指定できるので、複数のキーワードを設定できます。
 
 ## 日付したい（`date`）
 
@@ -85,8 +84,36 @@
 #context {document.date}
 ```
 
-`#context`関数を経由して`document`要素の設定値を、本文中で取得できます。
+`#context`関数を経由して`document`要素の設定値を取得できます。
 
+```typst
+// 文書情報を設定
+#set document(
+  title: [すごいタイトル],
+  author: ("すごい著者"),
+  description: [すごい説明],
+)
+
+// 文書情報を参照
+#let title = #context{ document.title }
+#let authors = #context{ document.author }
+#let description = #context{ document.description }
+
+// 著者リストを文字列に変換
+#let author-csv = authors.join(", ")
+
+// カバーページを生成
+#align(center)[
+  #text(size: 24pt)[#title]
+  v(5em)
+  #text(size: 16pt)[#author-csv]
+  v(5em)
+  #text(size: 12pt)[#description]
+  v(5em)
+]
+```
+
+このサンプルでは、`document`要素の`title`、`author`、`description`を取得して、カバーページを生成しています。
 レポートの表紙やヘッダー情報などで、タイトルなどを表示したい場合に再利用できます。
 
 ## リファレンス
