@@ -60,7 +60,9 @@ typst-list
 typst-strong
 typst-link
 typst-footnote
+typst-label
 typst-ref
+typst-cite
 typst-bibliography
 typst-lorem
 ```
@@ -68,17 +70,21 @@ typst-lorem
 ## 図版したい
 
 図版に関するマークアップを整理しました。
-`figure`関数は、図、表、数式、コードブロックなどの「図版」とキャプションをまとめるための関数です。
+図（`#image`）、
+表（`#table`）、
+数式（`#math`）、
+コードブロック（`#raw`）などの要素があります。
+これらの要素は、`#figure`関数でキャプションとまとめて扱うことができます。
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
-typst-figure
 typst-image
 typst-table
 typst-math
 typst-raw
+typst-figure
 ```
 
 ## レイアウトしたい

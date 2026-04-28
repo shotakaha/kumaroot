@@ -1,4 +1,4 @@
-# 参考文献したい（`#bibliography` / `#cite`）
+# 参考文献したい（`#bibliography`）
 
 ```typst
 // 参考文献を読み込む
@@ -21,18 +21,13 @@ Hayagrivaは、Typst用に開発された参考文献パッケージのようで
 
 :::
 
-## 引用したい（`#cite`）
+:::{seealso}
 
-```typst
-@文献キー
-#cite(<文献キー>, form: "year")
-```
+- [](./typst-ref.md)
+- [](./typst-cite.md)
 
-`@文献キー`で引用のマークアップができます。
-表示する文字や引用スタイルを変更する場合は
-`#cite`要素を使います。
+:::
 
 ## リファレンス
 
 - [bibliography | Element | Typst](https://typst.app/docs/reference/model/bibliography/)
-- [cite | Element | Typst](https://typst.app/docs/reference/model/cite/)
