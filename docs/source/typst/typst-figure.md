@@ -67,7 +67,7 @@
 // figureの設定
 #set figure(gap: 0em)
 
-#show figure: set block(
+#show figure: block.with(
   width: 100%,
   inset: 0.5em,
   // stroke: 1tp,  // enable when debug
@@ -80,35 +80,41 @@
 :::{hint}
 
 図版の設定を調整するときは、
-`stroke: 1pt`を有効にすると
-それぞれの表示エリアを確認できます。
+`stroke: 1pt`を有効にして、表示エリアを確認しながら調整するのがオススメです。
 
 :::
 
 :::{note}
 
-`figure`要素を`set block(...)`でブロック要素に設定しているため、オプションの設定が、子要素にも適用されます。
-そのため`stroke`がデバッグ的に使えます。
+```typst
+#show figure: set block(
+  width: 100%,
+  inset: 0.5em,
+  stroke: 1pt,
+)
+```
 
-本来であれば、`block.with(...)`を使って、オプション設定が適用されるスコープを限定するほうが正しいやり方かもしれません。
-（ひとまずこのまま）
+`block.with`の代わりに`set block`を使うと、この設定が子要素（`figure.caption`など）にも引き継がれてしまいます。
 
 :::
 
 ## 図版のキャプションを設定したい（`#show figure.caption`）
 
 ```typst
-// figure.captionの設定
+// キャプションの設定
+#show figure.caption: block.with(
+  inset: 0.5em,
+  width: 100%,
+  // stroke: 1pt,  // enable when debug
+)
+
+// テキストを左寄せ
 #show figure.caption: it => {
-  block(
-    inset: 0.5em,
-    width: 100%
-  )[
-    #align(left)[
-      #it
-    ]
+  align(left)[
+    #it
   ]
 }
+
 
 #figure(
   [content],
@@ -159,10 +165,7 @@
 // | image1   | image2   |
 // | caption1 | caption2 |
 // +----------+----------+
-#grid(
-  columns: (1fr, 1fr),
-  gutter: 1em,
-)[
+#columns(2, gutter: 0em)[
   #figure(
     [content],
     caption: [左図のキャプションです。],
@@ -188,11 +191,9 @@
 // |      caption      |
 // +---------+---------+
 
-#let images = grid(
-  columns: (1fr, 1fr),
-  gutter: 1em,
-)[
-  [左図],
+#let images = columns(2, gutter: 1em)[
+  [左図]
+  #colbreak()
   [右図]
 ]
 
