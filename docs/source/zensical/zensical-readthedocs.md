@@ -42,3 +42,4 @@ Read the Docsでのビルドが成功したら、追記します。
 
 - [Adding documentation project](https://docs.readthedocs.com/platform/stable/intro/add-project.html)
 - [Deploying Zensical on Read the Docs](https://docs.readthedocs.com/platform/stable/intro/zensical.html)
+- [uv is now supported natively - Read the Docs Blog](https://about.readthedocs.com/blog/2026/04/uv-native-support/)
