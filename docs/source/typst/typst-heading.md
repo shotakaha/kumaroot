@@ -124,3 +124,14 @@ LaTeXの`\section*`に相当します。
 - [](./typst-color.md)
 
 :::
+
+## 見出しで改ページしたい
+
+```typst
+#show heading.where(level: 1): it => { pagebreak(weak: true) + it }
+```
+
+見出しごとに改ページすることもできます。
+上記のサンプルでは、レベル1の見出しに対して改ページ（`pagebreak`）を適用しています。
+`weak: true`を指定することで、改ページが連続しないようにしています。
+スライド資料を作成するときに便利です。
