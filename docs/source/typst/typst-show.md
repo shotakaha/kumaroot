@@ -6,11 +6,7 @@
 for (i, size) in sizes.enumerate() [
   #show heading.where(level: i + 1): set text(size: size)
 ]
-#show heading: set text(
-  font: ("Harano Aji Gothic", "Noto Sans CJK JP", "Yu Gothic Medium"),
-  weight: "bold",
-  fill: luma(20%),
-)
+
 #show heading: set block(
   above: 1em,
   below: 1em,
@@ -19,10 +15,9 @@ for (i, size) in sizes.enumerate() [
 
 `#show`ルールで要素の表示方法をカスタマイズできます。
 
-見た目を装飾する場合、`show 要素名: set 装飾`の形で適用するのが基本です。
+`#show 要素: set 装飾`の形で、要素の**見た目を装飾**できます。
 上記のサンプルでは、
 見出しレベルごとにフォントサイズを変更し、
-テキスト装飾を設定し、
 見出しの上下にスペースを追加しています。
 
 ```typst
@@ -62,8 +57,8 @@ for (i, size) in sizes.enumerate() [
 
 :::{caution}
 
-`#show 要素: set 装飾`の形は（後勝ちなことを利用して）ユーザーが後から上書きできるのに対して、
-`#show 要素: it => {装飾}[#it]`の形は、ユーザーが上書きできません。
+`#show 要素: set 装飾`の形で書かれたルールは、ユーザーが後から上書きできます。
+一方で、`#show 要素: it => {装飾}[#it]`の形は、ユーザーが上書きできません。
 
 :::
 

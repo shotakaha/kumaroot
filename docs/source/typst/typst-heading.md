@@ -42,21 +42,56 @@ LaTeXの`\section*`に相当します。
 
 :::
 
-## 見出しを設定したい（`#set heading`）
+## 見出し番号したい（`numbering`）
 
 ```typst
-// 見出しの設定
-#set heading(
-  depth: 3,
-  numbering: "1.1.1",
-)
+#heading(numbering: "1.")[算用数字]       // -> 1. 見出し1
+#heading(numbering: "a.")[アルファベット]  // -> a. 見出し2
 ```
 
-`#set`ルールで、ドキュメント全体の見出し設定を変更できます。
-`depth`オプションで、目次に含める見出しレベルを設定できます。
-デフォルトは`1`です。
 `numbering`オプションで、見出し番号の表示方法を変更できます。
-デフォルトは`none`です。レベルに応じて`1.1.`、`1.1.1.`のように表示されます。
+デフォルトは`none`で、見出し番号は表示されません。
+
+```typst
+// 全体設定
+#set heading(numbering: "1.")
+```
+
+`#set heading`ルールで、ドキュメント全体の見出し設定を変更できます。
+通常はこの方法で、見出し番号を表示するのがオススメです。
+
+```typst
+#set heading(numbering: "1.")  // -> 1., 1.1., 1.1.1.,
+
+// ローマ数字
+#set heading(numbering: "I.")  // -> I., I.I., I.I.I.,
+#set heading(numbering: "i.")  // -> i., i.i., i.i.i.,
+
+// アルファベット
+#set heading(numbering: "A.")  // -> A., A.B., A.B.C.,
+#set heading(numbering: "a.")  // -> a., a.b., a.b.c.,
+```
+
+見出しレベルの番号はアルファベットやローマ数字に変更できます。
+
+```typst
+#set heading(numbering: "あ.")  // -> あ., あ.い., あ.い.う.,
+#set heading(numbering: "ア.")  // -> ア., ア.イ., ア.イ.ウ.,
+#set heading(numbering: "い.")  // -> い., い.ろ., い.ろ.は.,
+#set heading(numbering: "イ.")  // -> イ., イ.ロ., イ.ロ.ハ.,
+```
+
+五十音やいろは順も利用できます。
+ただし、見出しレベルが深くなるとわかりにくくなるので、あまりオススメしません。
+
+```typst
+#set heading(numbering: "1.1")   // -> 1 , 1.1 , 1.1.1 ,
+#set heading(numbering: "1.1.")  // -> 1., 1.1., 1.1.1.,
+#set heading(numbering: "1.1)"   // -> 1), 1.1), 1.1.1),
+```
+
+番号の区切り文字も変更できます。
+その場合、`1.)` ではなく`1.1.)`のように、レベル2まで番号を指定する必要があります。
 
 :::{seealso}
 
@@ -69,6 +104,14 @@ LaTeXの`\section*`に相当します。
 ```typst
 // 基本設定
 #set heading(numbering: "1.")
+
+#show heading: set block(
+  width: 100%,  // 見出しを行幅に広げる
+  // inset: 1em  // パディングを追加
+  above: 1em,  // 見出しの上にスペースを追加
+  below: 1em,  // 見出しの下にスペースを追加
+  // stroke: luma(50%) + 2pt,  // ボーダーを追加
+)
 
 // 共通の装飾を設定
 #show heading: block.with(
