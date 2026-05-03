@@ -1,59 +1,102 @@
 # showしたい（`#show`）
 
 ```typst
-// 見出しレベルのフォントサイズ
-#let sizes = (1.5em, 1.4em, 1.3em, 1.2em, 1.1em, 1em,)
-for (i, size) in sizes.enumerate() [
-  #show heading.where(level: i + 1): set text(size: size)
-]
+// シグネチャ
+#show TARGET: RULES
 
+// 文字列の置換
+#show "文字列": "置換文字列"
+
+// スタイル変更
+#show SELECTOR: set ELEMENT(..options)
+
+// 自由変形
+#show SELECTOR: it => {...}[#it]
+```
+
+`#show`ルールで、要素の表示方法をカスタマイズできます。
+文字列の置換から完全なカスタマイズまで、幅広い表現が可能です。
+
+:::{note}
+
+`show`ルールの本質は「指定した要素を**変換する**」操作です。
+
+:::
+
+## 文字列を置換したい
+
+```typst
+#show "TY": "Typst"
+```
+
+`#show "文字列": "置換文字列"`の形で、特定の文字列を別の文字列に置換できます。
+上記サンプルでは、`TY`という文字列を`Typst`に置換しています。
+
+```typst
+#show "pi0": $pi^(0)$
+#show "pi+": $pi^(+)$
+#show "pi-": $pi^(-)$
+```
+
+文字列を数式に置換することもできます。
+上記サンプルではπ中間子の記号を数式に置換しています。
+
+## スタイルを変更したい（`#show 要素: set 装飾`）
+
+```typst
+#show heading: set block(
+  above: 1em,
+  below: 1em,
+  // fill: luma(20%),
+)
+```
+
+`#show 要素: set 装飾`の形で、要素のスタイルを変更できます。
+Typstではスタイルを追加・変更するための基本的な形式です。
+
+上記のサンプルでは、すべての見出しを対象に、上と下にスペースを追加しています。
+具体的には、`heading`要素を`block`要素に変換して「スタイル」を追加しています。
+`heading`要素の構造自体には変更を加えていないため、見出しのレベルや文字列などはそのまま保持されます。
+
+```typst
+#show heading: set text(size: 1.5em, weight: "bold")
 #show heading: set block(
   above: 1em,
   below: 1em,
 )
 ```
 
-`#show`ルールで要素の表示方法をカスタマイズできます。
+指定した要素の構造を変更しないため、複数回`#show`ルールを定義して、装飾を重ね書きすることもできます。
 
-`#show 要素: set 装飾`の形で、要素の**見た目を装飾**できます。
-上記のサンプルでは、
-見出しレベルごとにフォントサイズを変更し、
-見出しの上下にスペースを追加しています。
+## 自由変形したい（`#show 要素: it => {...}[#it]`）
 
 ```typst
-#show heading: set block(above: 1em, below: 1em)
-#show heading: set text(size: 1.5em, weight: "bold")
-#show heading: set block(above: 2em, fill: luma(20%))
-```
+// 見出しを太字にする
+#show heading: set text(weight: "bold")
+#show heading: set block(
+  width: 100%,
+  above: 1em,
+  below: 1em,
+)
 
-`#show`ルールは、複数回適用することもできます。
-ルールは上から順番に重ね書きされます。
-同じオプションを複数回指定した場合は、後から指定した方が優先されます。
-
-:::{note}
-
-`show`ルールは指定した要素を**変換する**操作です。
-上記のサンプルでは
-`heading.where(level: 1)` = `text`の変換に、
-`heading` = `text` + `block`の組み合わせが追加されているイメージです。
-
-:::
-
-## クロージャーしたい（`#show ...: it => {...}`）
-
-```typst
-// ハイパーリンクの文字を太字に変更
-#show link: set text(weight: "bold")
-
-// ハイパーリンクに下線を追加
-#show link: it => {
-  underline[#it]
+// クロージャ形式
+#show heading: it => {
+  block(
+    above: 1em,
+    below: 1em,
+  )[
+    #text(weight: "bold")[
+      #it
+    ]
+  ]
 }
 ```
 
-`#show 要素: it => {装飾}[#it]`の形で、要素をクロージャーして装飾することもできます。
-要素の構造全体を書き換え、複数の装飾を組み合わせることができるのが特徴です。
-こちらの形式は、毎回新しい関数を定義しているイメージです。
+`#show 要素: it => {装飾}[#it]`の形で、
+要素の構造全体を書き換えることができます。
+この形式は、指定した要素に適用する変換関数を定義するイメージです。
+変換関数の中で、複数の装飾やラップ処理を組み合わせることができいます。
+`it`を元にした新しい構造が生成されます。
 
 :::{caution}
 
@@ -82,25 +125,6 @@ Typstにおける`it`は「それ（it）」を指す変数で特別な意味は
 
 :::
 
-## 文字列を置換したい
-
-```typst
-#show "文字列": "置換文字列"
-
-#show "pi0": $pi^(0)$
-#show "pi+": $pi^(+)$
-#show "pi-": $pi^(-)$
-```
-
-`#show "文字列": "置換文字列"`の形で、特定の文字列を別の文字列に置換できます。
-上記サンプルではπ中間子の文字列を数式に置換しています。
-
-:::{note}
-
-`#show`ルールの基本が**変換操作**であることが分かります。
-文字列を置換して表示するように、要素を置き換えて表示しています。
-
-:::
 
 :::{seealso}
 
@@ -108,21 +132,214 @@ Typstにおける`it`は「それ（it）」を指す変数で特別な意味は
 
 :::
 
-## 実践的な使い方
+## ページの設定
 
 ```typst
-// setでベーススタイルを設定
-#set text(font: "フォント名", size: "サイズ")
-#set par(justify: true)
-#set page(margin: 2.5cm)
-
-// showで特定要素をカスタマイズ
-#show heading: set block(..options)
-#show heading.where(level: 1): set block(..options)
-#show raw: it=> set text(..options)
-#show raw.where(block: true): set block(..options)
-#show raw.where(block: false): set box(..options)
+#set page(
+  paper: "a4",  // 用紙サイズ
+  fill: white,  //  背景色
+)
 ```
 
-ドキュメント全体に関する基本設定は`#set`で設定し、
-個別要素は`#show`で変更するのが推奨されています。
+## テキストの設定
+
+```typst
+#set text(
+  font: "Noto Serif CJK JP",  // フォント
+  lang: "ja",  // 言語
+  size: 12pt,
+  fill: rgb(0, 0, 0),  // 文字色
+)
+```
+
+## 段落の設定
+
+```typst
+#set par(
+  justify: true,   // 両端揃え
+  leading: 1.5em,  // 行間
+  spacing: 0.5em,  // 段落間
+)
+```
+
+## 見出しの設定
+
+```typst
+#show heading: set text(
+  font: "Noto Serif CJK JP",
+  weight: "bold",
+)
+
+#show heading: set block(
+  above: 1em,
+  below: 1em,
+)
+```
+
+## 目次の設定
+
+```typst
+#set outline(indent: 1em)
+#show outline.entry: set block(
+  spacing: 1em,
+)
+```
+
+## リストの設定
+
+```typst
+#set list(
+  spacing: 1em,
+  indent: 1em,
+  body-indent: 0.5em,
+  // marker: ([•], [‣], [–]),
+)
+```
+
+```typst
+#set enum(
+  spacing: 1em,
+  indent: 1em,
+  body-indent: 0.5em,
+  // numbering: "1. ",
+)
+```
+
+```typst
+#set term(
+  spacing: 1em,
+  indent: 1em,
+  body-indent: 0.5em,
+  // separator: ": ",
+)
+```
+
+## 数式の設定
+
+```typst
+#show math.equation: set text(
+  font: "Fira Math",
+)
+```
+
+## 表の設定
+
+```typst
+#set table(
+  stroke: (x, y) => {
+    let thick: 2pt
+    let thin: 0.5pt
+    (
+      top: if y == 0 or y == 1 { thick } else { thin },
+      bottom: thick,
+      left: none,
+      right: none,
+    )
+  },
+  inset: 1em,
+)
+
+#show table.header: set text(
+  weight: bold,
+)
+```
+
+## コードブロックの設定
+
+```typst
+#show raw: set text(
+  font: "Fira Code",
+)
+
+#show raw.where(block: true): set block(
+  width: 100%,
+  fill: luma(95%),
+  inset: 1em,
+  radius: 1em,
+  stroke: luma(50%) + 0.5pt,
+)
+
+#show raw.where(block: false): set text(
+  fill: olive,
+)
+```
+
+## 図版の設定
+
+```typst
+#show figure: set block(
+  width: 100%,
+  above: 1em,
+  below: 1em,
+)
+
+#show figure.caption: set text(
+  fill: luma(50%),
+)
+```
+
+## インライン要素の設定
+
+```typst
+#show strong: set text(
+  fill: red,
+)
+```
+
+```typst
+#show emph: set text(
+  fill: red,
+)
+```
+
+```typst
+#show highlight: set text(
+  fill: yellow,
+)
+```
+
+## リンクの設定
+
+```typst
+#show link: set text(
+  fill: blue,
+)
+```
+
+## 脚注の設定
+
+```typst
+#show footnote.entry: set text(
+    size: 0.8em,
+    fill: luma(50%),
+)
+```
+
+## 引用文献の設定
+
+```typst
+#show bibliography.entry: set text(
+  size: 0.8em,
+  fill: luma(50%),
+)
+```
+
+```typst
+#show cite: set text(
+  size: 0.8em,
+  fill: luma(50%),
+)
+```
+
+## 引用の設定
+
+```typst
+#show quote: set block(
+  width: 100%,
+  above: 1em,
+  below: 1em,
+  fill: luma(95%),
+  inset: 1em,
+  stroke: luma(50%) + 0.5pt,
+)
+```
