@@ -98,6 +98,7 @@ typst-box
 typst-block
 typst-grid
 typst-columns
+typst-measure
 ```
 
 ## スタイルしたい
