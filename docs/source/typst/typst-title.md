@@ -61,6 +61,20 @@ Typst v0.14.0で追加されました。
 `set block`を使って、タイトルに枠線や背景を追加できます。
 デフォルトだと文字数の幅なので`width: 100%`で行幅いっぱいに広げるのがオススメです。
 
+## 外部パッケージしたい
+
+Typstには、いい感じのタイトルページを作成する機能がまだありません。
+Typst Universeにある
+`pubmatter`や
+`beautitled`などの外部パッケージを利用するとよいかもしれません。
+
+:::{seealso}
+
+- [pubmatter - Typst Universe](https://typst.app/universe/package/pubmatter)
+- [beautitled - Typst Universe](https://typst.app/universe/package/beautitled)
+
+:::
+
 ## リファレンス
 
 - [title - Typst](https://typst.app/docs/reference/model/title/)
