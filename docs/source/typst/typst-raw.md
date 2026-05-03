@@ -117,21 +117,17 @@ def hello():
 
 ```typst
 #show raw.where(block: true): it => {
+  let lang-block = block.with(stroke: none)
+  let code-block = block.with(stroke: luma(50%))
+
+  // 全体を包むブロック
   block(
     stroke: luma(90%),
   )[
     // 言語名を表示するブロック
-    block[
-      #align(right)[
-        #it.lang
-      ]
-    ]
+    #lang-block[#align(right)[#it.lang]]
     // コードをそのまま表示するブロック
-    block(
-      stroke: luma(80%),
-    )[
-      #it
-    ]
+    #code-block[#it]
   ]
 }
 ```
