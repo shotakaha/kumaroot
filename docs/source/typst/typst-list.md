@@ -57,6 +57,7 @@
   body-indent: 0.5em,
   indent: 1em,
   spacing: 1em,
+  // marker: ([•], [‣], [–]),
 )
 ```
 
@@ -86,7 +87,8 @@
 #set enum(
   body-indent: 0.5em,
   indent: 1em,
-  spacing: 1em
+  spacing: 1em,
+  // numbering: "1.",
 )
 ```
 
@@ -119,7 +121,8 @@
 #set terms(
   body-indent: 0.5em,
   indent: 1em,
-  spacing: 1em
+  spacing: 1em,
+  // separator: h(amount: 0.6em, weak: true),
 )
 
 #terms.item[単語][説明]
