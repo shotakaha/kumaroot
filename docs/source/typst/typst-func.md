@@ -24,14 +24,25 @@
 #cover("レポートのタイトル", "著者名", date: "2026/01/01")
 ```
 
-`#let`キーワードで関数を定義できます。
-ここではレポートの表紙を出力する関数を作ってみました。
-定義した関数は`#関数名`で、本文の任意の箇所で呼び出すことができます。
+`#let`コマンドを使って、関数を定義できます。
+定義した関数は、同じファイル内の任意の箇所で呼び出すことができます。
+この値は再代入できない定数的な値です。
+
+上記のサンプルでは`#cover`関数を定義しています。
+この関数は、レポートの表紙を出力するための関数で、
+タイトル（`title`）、
+著者（`author`）、
+日付（`date`）を引数として受け取ります。
+関数の中では、それぞれの引数をブロック要素（`block`）で囲んで表示しています。
 
 ## 位置引数したい
 
 ```typst
-#let cover(title, author, date) = {
+#let cover(
+  title,
+  author,
+  date
+) = {
   block()[
     #title
   ]
@@ -43,17 +54,25 @@
   ]
 }
 
-#cover("レポートのタイトル", "著者名", "日付")
+#cover(
+  "レポートのタイトル",
+  "著者名",
+  "日付"
+)
 ```
 
-位置引数（positional arguments）は、
-位置で識別される引数です。
-関数が呼び出された時に、最初から順番に処理されます。
+位置引数（positional arguments）は、位置で識別される引数です。
+初期値がない引数は、位置引数になります。
+関数を呼び出すときは、引数の位置に対応する値を指定します。
 
 ## 名前付き引数したい
 
 ```typst
-#let cover(title: none, author: none, date: none) = {
+#let cover(
+  title: none,
+  author: none,
+  date: none
+) = {
   block()[
     #title
   ]
@@ -69,33 +88,19 @@
 #cover("レポートのタイトル", "著者名", "日付")  // => エラー
 ```
 
-名前付き引数（named arguments）は
-`変数名: 値`の形式で指定する引数です。
-関数を定義するときにデフォルト値を指定すると、名前付き引数にできます。
-
-:::{note}
-
-```typst
-#let cover(
-    title,
-    author,
-    date: datetime.today().display()
-) = {...}
-
-#cover("レポートのタイトル", "著者名")  // => 日付は自動取得
-#cover("レポートのタイトル", "著者名", date: "2026/01/16")  // => 日付を固定
-```
-
-位置引数と名前付き引数は混在できます。
-Pythonなど多くのプログラミング言語と同じで、
-位置引数を先に定義する必要があります。
-
-:::
+名前付き引数（named arguments）は、引数名で識別される引数です。
+初期値がある引数は、名前付き引数になります。
+関数を呼び出すときは、引数名と値を`引数名: 値`の形式で指定します。
+位置引数と名前付き引数は混在できますが、位置引数を先に定義する必要があります。
 
 ## 可変長引数したい
 
 ```typst
-#let cover(title, ..authors, date: datetime.today().display()) = {
+#let cover(
+  title,
+  ..authors,
+  date: datetime.today().display()
+) = {
   block()[
     #title
   ]
@@ -114,7 +119,8 @@ Pythonなど多くのプログラミング言語と同じで、
 )
 ```
 
-スプレッド演算子（`..`）で可変長引数を定義できます。
+可変長引数（variadic arguments）は、引数の数が不定な場合に使用します。
+スプレッド演算子（`..`）を使って定義します。
 位置引数を配列にする場合は`.pos()`、
 名前付き引数を辞書型にする場合は`.named()`で変換できます。
 
@@ -160,9 +166,15 @@ Pythonなど多くのプログラミング言語と同じで、
 角括弧（`[...]`）で囲んだ内容は「コンテンツブロック」と認識され、マークアップしたコンテンツをそのまま渡すことができます。
 関数の引数にコンテンツブロックをそのまま渡すことができます。
 
+Typstのコンテンツブロックは、とても柔軟な機能です。
+引数の内容をユーザーに任せることができるため、関数の再利用性が高まります。
+
 :::{note}
 
-コンテンツブロックを渡すサンプルとして、**太字にしたレポートタイトル**を引数として渡しましたが、このようなタイトル装飾は関数で定義するほうが実用的です。
+引数の自由度と制限の設計は毎回の悩みです。
+自由度を高くしすぎると、Typstの標準機能の薄いラッパーになってしまう可能性があります。
+制限を強くしすぎると、ユーザーが関数を使いにくくなってしまう可能性があります。
+関数の目的や利用シーンに応じて、適切な自由度と制限のバランスを見つけることが重要です。
 
 :::
 
@@ -244,97 +256,6 @@ Pythonなど多くのプログラミング言語と同じで、
 
 `break` / `continue`でループ処理を制御できます。
 
-## 実践的な関数パターン
-
-### パターン1: スタイル設定の再利用
-
-```typst
-#let heading-style = (
-  size: 16pt,
-  weight: "bold",
-  fill: navy
-)
-
-#let custom-heading(body) = {
-  text(..heading-style, body)
-}
-
-#custom-heading[Chapter 1]
-```
-
-### パターン2: 複数の処理を組み合わせる
-
-```typst
-#let code-box(code, lang: "typst") = {
-  block(
-    fill: luma(240),
-    inset: 10pt,
-    radius: 4pt,
-    [
-      *#lang*
-
-      #raw(code)
-    ]
-  )
-}
-
-#code-box("let x = 5", lang: "rust")
-```
-
-### パターン3: 条件に応じた異なる出力
-
-```typst
-#let note(title, severity: "info") = {
-  let color = if severity == "warning" {
-    orange
-  } else if severity == "error" {
-    red
-  } else {
-    blue
-  }
-
-  rect(
-    fill: color.lighten(80%),
-    stroke: 1pt + color,
-    inset: 8pt,
-    [*#upper(severity):* #title]
-  )
-}
-
-#note("All is well", severity: "info")
-#note("Watch out!", severity: "warning")
-```
-
-### パターン4: データの変換と集約
-
-```typst
-#let filter-and-format(..data) = {
-  data
-    .pos()
-    .filter(x => type(x) == int and x > 0)
-    .map(x => [Item: #x])
-    .join(", ")
-}
-
-#filter-and-format(1, -2, 3, "text", 5)
-// 結果: Item: 1, Item: 3, Item: 5
-```
-
-## show-setルールで関数を使う
-
-`.where` セレクターと組み合わせて、特定の要素に関数を適用：
-
-```typst
-// 見出しにカスタム装飾を適用
-#let decorated-heading(it) = {
-  [✦ #it.body ✦]
-}
-
-#show heading.where(level: 2): it => decorated-heading(it)
-
-== Section Title
-```
-
 ## 無名関数したい
 
 ```typst
@@ -345,21 +266,12 @@ Pythonなど多くのプログラミング言語と同じで、
 #show heading: custom-heading
 ```
 
-`=>`を使って無名関数（unnamed functions）を定義できます。
-Show rulesと合わせて使うことが多いです。
+無名関数（unnamed functions）は、関数定義の一種で、名前を持たない関数です。
+`=>`を使って定義します。
+引数は1つだけで、関数の本体は`[...]`で囲まれたコンテンツブロックになります。
+このサンプルでは、`custom-heading`という変数に、引数`it`を大文字に変換する無名関数を代入しています。
 
-:::{note}
-
-上記サンプルでは`custom-heading`という変数に無名関数を代入していますが、通常は
-`#show`ルールに直接指定します。
-
-```typst
-#show heading: it => [
-  #upper(it.body)
-]
-```
-
-:::
+この関数は、`#show heading`ルールで使用され、見出しのテキストを大文字に変換します。
 
 :::{note}
 
@@ -390,19 +302,3 @@ Show rulesと合わせて使うことが多いです。
 #temp = "これは外側の変数"
 #temp  ← OK
 ```
-
-## ベストプラクティス
-
-1. **デフォルト引数を活用する** - 柔軟で使いやすい関数を作成
-2. **名前付き引数を使う** - 引数が3つ以上の場合は名前付きにする
-3. **コンテンツ型を活用する** - マークアップを関数で装飾・加工
-4. **引数の展開を使う** - 設定を再利用可能な辞書として管理
-5. **単一責任** - 1つの関数は1つのことに集中させる
-6. **わかりやすい名前** - 関数の役割が名前から明確にわかるように
-
-## 関連ドキュメント
-
-関数の応用例については、以下も参照してください：
-
-- [テンプレートしたい（`#show...with`）](typst-with.md) - `.with` メソッドで引数を事前設定
-- [セレクターしたい（`.where`）](typst-where.md) - `.where` メソッドで特定の要素を選択
