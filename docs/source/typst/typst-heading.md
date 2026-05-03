@@ -107,34 +107,78 @@ LaTeXの`\section*`に相当します。
 
 #show heading: set block(
   width: 100%,  // 見出しを行幅に広げる
-  // inset: 1em  // パディングを追加
   above: 1em,  // 見出しの上にスペースを追加
   below: 1em,  // 見出しの下にスペースを追加
   // stroke: luma(50%) + 2pt,  // ボーダーを追加
+  // fill: luma(90%),  // 背景色を追加
 )
+```
 
+`#show heading`ルールで、見出しの装飾を設定できます。
+見出しの装飾は、`set block`で`block`要素に変換して、スペースや背景色を追加するのが簡単です。
+
+上記のサンプルでは、すべて見出しを`block`要素に変換して、
+上（`above`）と下（`below`）にスペースを追加しています。
+デフォルトでは見出しの周りが窮屈なので、こうしています。
+また、コメントアウトしている部分を有効にすることで、ボーダーや背景色を追加できます。
+このあたりはお好みです。いろいろ試してみてください。
+
+:::{note}
+
+`inset: 1em`オプションでパディングを追加すると、見出し文字列の周囲にもスペースが追加されてしまします。
+`above`と`below`でスペースを追加するか、
+`inset: (top: 1em, bottom: 1em)`で上下のパディングのみ追加するのがよさそうです。
+
+どちらも見た目は同じになりますが、微妙に違うようです。
+それぞれの違いは、`fill: red`などで背景色を追加してみるとわかりやすいと思います。
+
+:::
+
+```typst
 // 共通の装飾を設定
 #show heading: block.with(
-  fill: luma(90%),  // 背景色を追加
-  inset: 1em,       // 内側のスペースを追加
+  width: 100%,  // 見出しを行幅に広げる
+  // inset: 1em,  パディングを追加
   above: 1em,  // 見出しの上にスペースを追加
   below: 1em,  // 見出しの下にスペースを追加
+  // stroke: luma(50%) + 2pt,  // ボーダーを追加
+  // fill: luma(90%),  // 背景色を追加
 )
+```
 
+`block.with`で、見出し（`heading`要素）を`block`要素で囲うこともできます。
+この方法の方が、装飾の設定がわかりやすいかもしれません。
+
+:::{note}
+
+`#show heading: set block(...)`は、`heading`を`block`要素に変換します。
+一方で、`#show heading: block.with(...)`は、`heading`を`block`要素で囲います。
+
+```typst
+#heading(level: 1)[見出し1]
+
+#show heading: set block(...)
+// ↓
+// block(...)[見出し1]
+
+
+#show heading: block.with(...)
+// ↓
+// block(...)[
+//   heading(...)[見出し1]
+// ]
+```
+
+:::
+
+
+```typst
 // レベルごとの装飾を追加
 #show heading.where(level: 1): block.with(fill: luma(150), inset: 1em)
 #show heading.where(level: 2): block.with(fill: luma(100), inset: 1em)
 #show heading.where(level: 3): block.with(fill: luma(50), inset: 1em)
 ```
 
-見出しの装飾は`#show`ルールで設定できます。
-全体の共通設定と、レベルごとの個別設定を組み合わせて設定するのがオススメです。
-基本的には`block`要素に変換して、スペースや背景色を追加するのが簡単です。
-
-上記のサンプルでは、すべて見出しを`block`要素に変換して、上下にスペースを追加しています。
-デフォルトでは見出しの上下は窮屈なので、これは必須の設定だと思います。
-また、レベルごとに背景色を変えて、見出しの階層が分かりやすくなるようにしています。
-このあたりはお好みです。いろいろ試してみてください。
 
 ```typst
 // 共通の装飾を定義
@@ -165,6 +209,38 @@ LaTeXの`\section*`に相当します。
 - [](./typst-where.md)
 - [](./typst-block.md)
 - [](./typst-color.md)
+
+:::
+
+## 見出しサイズを揃えたい
+
+```typst
+// 基準サイズを指定 -> 1.2倍
+#show: heading: set text(size: 10pt)
+#show: heading: set text(size: 1.2em)
+```
+
+デフォルトでは見出しレベルごとにフォントサイズが異なります。
+これはウェブページでは一般的ですが、
+印刷物では同じサイズにしたいこともあると思います。
+
+:::{note}
+
+`#show: heading: set text(size: 1.2em)`だけでは、
+`レベルごとのサイズ * 1.2`になるだけで、すべての見出しのサイズが揃うわけではありません。
+`#show heading: set text(size: 10pt)`のように、絶対サイズで基準サイズの指定が必要です。
+
+:::
+
+:::{caution}
+
+```typst
+#show: heading: set text(size: 1.2em)
+#show: heading: set text(size: 10pt)
+```
+
+`#show`ルールは上から順番に重ね書きされるため、同じオプションを設定する場合は、定義する順番に注意が必要がです。
+上記の順番で定義すると、すべての見出しレベルが`10pt`になります。
 
 :::
 
