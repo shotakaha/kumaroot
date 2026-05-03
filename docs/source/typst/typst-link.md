@@ -5,8 +5,7 @@
 #link("https://kumaroot.readthedocs.io/ja/latest/")[KumaROOT]
 ```
 
-[#link](https://typst.app/docs/reference/model/link/)
-要素でハイパーリンクを作成できます。
+`link`要素で要素でハイパーリンクを作成できます。
 リンク先は、ドキュメント内のラベルや外部URLなどを指定できます。
 
 `[表示名]`は省略可能で、

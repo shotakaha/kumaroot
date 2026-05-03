@@ -7,14 +7,17 @@
 
 `#footnote`要素で脚注を作成できます。
 
-## 文字色したい
+## 脚注を装飾したい
 
 ```typst
-#show footnote.entry: set text(red)
+#show footnote.entry: set text(
+  size: 0.8em,
+  fill: luma(50%),
+)
 ```
 
-脚注のスタイルを変更する場合は
-`#footnote.entry`に`show`ルールを適用します。
+`footnote.entry`要素に対して`#show`ルールを定義することで、脚注のスタイルを変更できます。
+上記のサンプルでは、脚注の文字サイズを小さくし、文字色を薄くしています。
 
 また、本文中の脚注番号は`#super`要素でマークアップされるため、`#super`に対して`show`ルールを適用すればよいそうです。
 
