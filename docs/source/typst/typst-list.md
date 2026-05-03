@@ -54,9 +54,9 @@
 ```typst
 // ページ全体で設定
 #set list(
-  indent: 1.2em,
   body-indent: 0.5em,
-  spacing: 1em
+  indent: 1em,
+  spacing: 1em,
 )
 ```
 
@@ -84,8 +84,8 @@
 ```typst
 // ページ全体で設定
 #set enum(
-  indent: 1.2em,
   body-indent: 0.5em,
+  indent: 1em,
   spacing: 1em
 )
 ```
@@ -117,9 +117,10 @@
 
 ```typst
 #set terms(
-  indent: 1.2em,
   body-indent: 0.5em,
-  spacing: 1em)
+  indent: 1em,
+  spacing: 1em
+)
 
 #terms.item[単語][説明]
 #terms.item[りんご][あか]
