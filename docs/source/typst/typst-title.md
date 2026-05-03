@@ -29,15 +29,12 @@ Typst v0.14.0で追加されました。
 ## タイトルを太字にしたい
 
 ```typst
-#show title: it => {
-  set text(size: 1.5em, weight: "black")
-  [#it]
-}
+#show title: set text(size: 1.5em, weight: "black")
+
+#title[太字にしたタイトル]
 ```
 
-```typst
-#show title: text.with(size: 1.5em, weight: "black")
-```
+`#show title`ルールで、タイトルを装飾できます。
 
 ## タイトルを中央寄せしたい
 
@@ -55,17 +52,27 @@ Typst v0.14.0で追加されました。
 ## 太字にして中央寄せしたい
 
 ```typst
-#show title: it => {
-  set text(size: 1.5em, weight: "black")
-  set align(center)
-  [#it]
-}
+#show title: set text(size: 1.5em, weight: "black")
+#show title: set align(center)
 ```
 
+`set align`でタイトルの表示位置を変更できます。
+`#show`ルールは順番に重ね書きできるため、太字にする設定と、中央寄せする設定を、分けて定義しればOKです。
+
+## 枠線をつけたい
+
 ```typst
-#show title: text.with(size: 1.5em, weight: "black")
-#show title: align.with(center)
+#show title: set text(size: 1.5em, weight: "black")
+#show title: block(
+  width: 100%,
+  stroke: luma(50%) + 2pt,
+  fill: luma(90%),
+  inset: 1em,
+)
 ```
+
+`set block`を使って、タイトルに枠線や背景を追加できます。
+デフォルトだと文字数の幅なので`width: 100%`で行幅いっぱいに広げるのがオススメです。
 
 ## リファレンス
 
