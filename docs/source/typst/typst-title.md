@@ -36,20 +36,7 @@ Typst v0.14.0で追加されました。
 
 `#show title`ルールで、タイトルを装飾できます。
 
-## タイトルを中央寄せしたい
-
-```typst
-#show title: it => {
-  set align(center)
-  [#it]
-}
-```
-
-```typst
-#show title: align.with(center)
-```
-
-## 太字にして中央寄せしたい
+## タイトルを中央寄せにしたい
 
 ```typst
 #show title: set text(size: 1.5em, weight: "black")
@@ -59,7 +46,7 @@ Typst v0.14.0で追加されました。
 `set align`でタイトルの表示位置を変更できます。
 `#show`ルールは順番に重ね書きできるため、太字にする設定と、中央寄せする設定を、分けて定義しればOKです。
 
-## 枠線をつけたい
+## タイトルに枠線をつけたい
 
 ```typst
 #show title: set text(size: 1.5em, weight: "black")
