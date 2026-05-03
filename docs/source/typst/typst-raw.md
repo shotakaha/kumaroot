@@ -5,8 +5,6 @@
 
 これは `inline code` です。
 
-
-
 ```python
 # これはコードブロックです。
 def hello():
@@ -26,6 +24,14 @@ def hello():
 ]
 `````
 
+`raw`要素で、コードブロックを表示できます。
+`lang`オプションでシンタックスハイライトする言語を設定できます。
+`block`オプションで、インライン表示とブロック表示を変更できます。
+
+backtickを使った簡易マークアップの場合、
+1つの場合はインライン表示、
+3つの場合はブロック表示、となります。
+
 ## ブロック表示したい（`#raw.block`）
 
 ```typst
@@ -37,10 +43,6 @@ def hello():
 
 `block`オプションで、
 インライン表示とブロック表示を変更できます。
-
-backtickを使ったマークアップの場合、
-1つの場合はインライン表示、
-3つの場合はブロック表示、となります。
 
 ## シンタックスしたい（`#raw.lang`）
 
@@ -58,22 +60,28 @@ Markdown記法でサポートされている言語名の他に、Typst固有の
 `typm`（Typst math）
 がサポートされているそうです。
 
-## コードブロックを設定したい（`set raw`）
+## 等幅フォントしたい
+
+```typst
+#show raw: set text(font: ("Moralerspace Krypton", "HackGen35Console NF"))
+```
+
+コードブロックを表示するときは、等幅フォント（モノフォント）を設定するとよいです。
+上記のサンプルでは、コード用フォントとして
+`Moralerspace Krypton`と
+`HackGen35Console NF`を指定しています。
+
+## コードブロックを設定したい（`raw.where(block: true)`）
 
 ```typst
 // フォント設定
-#show raw: text.with(font: "Noto Sans Mono")
+#show raw: set text(font: "Noto Sans Mono")
 // ブロックの設定
-#show raw.where(block: true): it => {
-    block(
-        fill: luma(95%),
-        inset: 1em,
-        radius: 1em
-    )
-    it
-}
-// インライン設定
-#show raw.where(block: false): text.with(fill: olive)
+#show raw.where(block: true): set block(
+  fill: luma(95%),
+  inset: 1em,
+  radius: 1em
+)
 
 #raw(
   lang: "python",
@@ -84,7 +92,11 @@ def hello():
 ]
 ```
 
-[raw要素](https://typst.app/docs/reference/text/raw/)で、コードブロックを表示できます。
+`raw.where(block: true)`で、ブロック表示のコードブロックを選択できます。
+上記のサンプルでは、すべてのコードブロックを対象に、
+背景色（`fill: luma(95%)`）、
+パディング（`inset: 1em`）を追加し、
+角を丸く（`radius: 1em`）しています。
 
 :::{seealso}
 
@@ -92,28 +104,39 @@ def hello():
 
 :::
 
-## 等幅フォントしたい
+## インラインコードを設定したい（`raw.where(block: false)`）
 
 ```typst
-#show raw: text.with(font: ("HackGen", "Noto Sans Mono")
+#show raw.where(block: false): set text(fill: olive)
 ```
 
-コードブロックを表示するときは、等幅フォント（モノフォント）を設定するとよいです。
+`raw.where(block: false)`で、インライン表示のコードブロックを選択できます。
+上記のサンプルでは、すべてのインラインコードを対象に、文字色をオリーブ（`fill: olive`）にしています。
 
-## 文字色したい
+## 言語名を表示したい
 
 ```typst
-#show raw.where(block: false): text.with(fill: olive)
+#show raw.where(block: true): it => {
+  block(
+    stroke: luma(90%),
+  )[
+    // 言語名を表示するブロック
+    block[
+      #align(right)[
+        #it.lang
+      ]
+    ]
+    // コードをそのまま表示するブロック
+    block(
+      stroke: luma(80%),
+    )[
+      #it
+    ]
+  ]
+}
 ```
 
-インライン表示するときの文字色を変更するサンプルです。
-`raw.where(block: false)`でインライン表示を選択しています。
+コードブロックの言語名を表示することもできます。
+デフォルトでは表示されていないため、`#show raw.where(block: true): it => {...}`の形で、コードブロック全体をクロージャーして装飾する必要があります。
 
-## 背景色したい
-
-```typst
-#show raw.where(block: true): block.with(fill: luma(95%), inset: 1em, radius: 1em)
-```
-
-ブロック表示するときの背景色を追加するサンプルです。
-`raw.where(block: true)`でブロック表示を選択しています。
+上記のサンプルでは、コードブロック全体を`block`要素に変換して、言語名を表示するブロックとコードを表示するブロックの2つを組み合わせています。
