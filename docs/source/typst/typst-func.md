@@ -178,6 +178,44 @@ Typstのコンテンツブロックは、とても柔軟な機能です。
 
 :::
 
+## 無名関数したい
+
+```typst
+#show heading: it => [
+  #upper(it.body)
+]
+```
+
+無名関数（unnamed functions）は、関数定義の一種で、名前を持たない関数です。
+文字通り「無名」の関数で、処理の途中で一時的に使用するための関数です。
+プログラミング言語によっては、ラムダ式（lambda expressions）やラムダ関数（lambda functions）とも呼ばれます。
+
+Typstでは`it => {処理}`の形式で無名関数を定義でき、`show`ルールと組み合わせて使用することが多いです。
+
+```typst
+#let custom-heading = it => [
+  #upper(it.body)
+]
+
+#show heading: custom-heading
+```
+
+「無名」ですが、変数に代入して名前をつけることもできます。
+上記のサンプルでは、`custom-heading`という変数に無名関数を代入しています。
+
+:::{note}
+
+無名関数を使うときには、慣習で`it`という変数名を使うようです。
+`it`が持つデータは`fields()`メソッドで確認できます。
+
+```typst
+#show heading: it => [
+  #it.fields()
+]
+```
+
+:::
+
 ## 条件分岐したい（`if-else`）
 
 ```typst
@@ -239,66 +277,3 @@ Typstのコンテンツブロックは、とても柔軟な機能です。
 
 `for`で配列に対してループ処理できます。
 このサンプルでは、著者を別行（別ブロック）で表示するようにしました。
-
-## ループ制御したい（`break` / `continue`）
-
-```typst
-#let count-to-limit(limit) = {
-  for i in range(100) {
-    if i == limit { break }
-    if calc.rem(i, 2) == 0 { continue }
-    [#i ]
-  }
-}
-
-#count-to-limit(10)
-```
-
-`break` / `continue`でループ処理を制御できます。
-
-## 無名関数したい
-
-```typst
-#let custom-heading = it => [
-  #upper(it.body)
-]
-
-#show heading: custom-heading
-```
-
-無名関数（unnamed functions）は、関数定義の一種で、名前を持たない関数です。
-`=>`を使って定義します。
-引数は1つだけで、関数の本体は`[...]`で囲まれたコンテンツブロックになります。
-このサンプルでは、`custom-heading`という変数に、引数`it`を大文字に変換する無名関数を代入しています。
-
-この関数は、`#show heading`ルールで使用され、見出しのテキストを大文字に変換します。
-
-:::{note}
-
-無名関数を使うときには、慣習で`it`という変数名を使うようです。
-`it`が持つデータは`fields()`メソッドで確認できます。
-
-```typst
-#show heading: it => [
-  #it.fields()
-]
-```
-
-:::
-
-## 関数内での変数スコープ
-
-変数は定義されたブロック内でのみアクセス可能です：
-
-```typst
-#let process() = {
-  let temp = "temporary value"
-  [#temp]
-}
-
-#process()
-// #temp  ← エラー: scope外
-
-#temp = "これは外側の変数"
-#temp  ← OK
-```
