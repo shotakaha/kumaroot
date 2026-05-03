@@ -17,7 +17,7 @@
 // 段落の設定
 #set par(
   justify: true,
-  leading: 0.5cm,
+  leading: 1em,
 )
 
 // 見出しの設定
@@ -26,9 +26,29 @@
 )
 
 // 箇条書きの設定
+#let indent = 1em
+#let spacing = 1em
+#let body-indent = 0.5em
+
 #set list(
-  marker: "→",
-  indent: 1.5em,
+  indent: indent,
+  spacing: spacing,
+  body-indent: body-indent,
+  // marker: ([•], [‣], [–]),
+)
+
+#set enum(
+  indent: indent,
+  spacing: spacing,
+  body-indent: body-indent,
+  // numbering: "1. ",
+)
+
+#set term(
+  indent: indent,
+  spacing: spacing,
+  body-indent: body-indent,
+  // separator: ": ",
 )
 
 #set document(
