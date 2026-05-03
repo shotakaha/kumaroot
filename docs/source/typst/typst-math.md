@@ -2,7 +2,9 @@
 
 ```typst
 #set math.equation(numbering: "(1)")
-#show math.equation: text.with(font: "Noto Sans Math")
+#show math.equation: set text(
+  font: "Noto Sans Math"
+)
 
 // インライン表示
 $a^(2) + b^(2) = c^(2)$
@@ -50,7 +52,9 @@ $
 ## 数式フォントしたい
 
 ```typst
-#show math.equation: text.with("Noto Sans Math")
+#show math.equation: set text(
+  font: "Noto Sans Math"
+)
 ```
 
 せっかくなので数式に適したフォントに変更しましょう。
