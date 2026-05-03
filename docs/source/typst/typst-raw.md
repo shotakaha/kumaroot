@@ -115,7 +115,7 @@ def hello():
 
 ## 言語名を表示したい
 
-```typst
+`````typst
 #show raw.where(block: true): it => {
   let lang-block = block.with(stroke: none)
   let code-block = block.with(stroke: luma(50%))
@@ -130,7 +130,18 @@ def hello():
     #code-block[#it]
   ]
 }
+
+// usage
+#figure(
+  [
+```python
+def hello():
+  print("Hello World")
 ```
+  ],
+  caption: "コードブロックのサンプル",
+)
+`````
 
 コードブロックの言語名を表示することもできます。
 デフォルトでは表示されていないため、`#show raw.where(block: true): it => {...}`の形で、コードブロック全体をクロージャーして装飾する必要があります。
