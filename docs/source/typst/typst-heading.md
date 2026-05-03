@@ -105,6 +105,7 @@ LaTeXの`\section*`に相当します。
 // 基本設定
 #set heading(numbering: "1.")
 
+#show heading: set text(weight: "bold")
 #show heading: set block(
   width: 100%,  // 見出しを行幅に広げる
   above: 1em,  // 見出しの上にスペースを追加
@@ -117,9 +118,11 @@ LaTeXの`\section*`に相当します。
 `#show heading`ルールで、見出しの装飾を設定できます。
 見出しの装飾は、`set block`で`block`要素に変換して、スペースや背景色を追加するのが簡単です。
 
-上記のサンプルでは、すべて見出しを`block`要素に変換して、
-上（`above`）と下（`below`）にスペースを追加しています。
+上記のサンプルでは、すべての見出しを対象に、
+フォントを太字（`weight: "bold"`）にし、
+上（`above: 1em`）と下（`below: 1em`）にスペースを追加しています。
 デフォルトでは見出しの周りが窮屈なので、こうしています。
+
 また、コメントアウトしている部分を有効にすることで、ボーダーや背景色を追加できます。
 このあたりはお好みです。いろいろ試してみてください。
 
@@ -134,85 +137,7 @@ LaTeXの`\section*`に相当します。
 
 :::
 
-```typst
-// 共通の装飾を設定
-#show heading: block.with(
-  width: 100%,  // 見出しを行幅に広げる
-  // inset: 1em,  パディングを追加
-  above: 1em,  // 見出しの上にスペースを追加
-  below: 1em,  // 見出しの下にスペースを追加
-  // stroke: luma(50%) + 2pt,  // ボーダーを追加
-  // fill: luma(90%),  // 背景色を追加
-)
-```
-
-`block.with`で、見出し（`heading`要素）を`block`要素で囲うこともできます。
-この方法の方が、装飾の設定がわかりやすいかもしれません。
-
-:::{note}
-
-`#show heading: set block(...)`は、`heading`を`block`要素に変換します。
-一方で、`#show heading: block.with(...)`は、`heading`を`block`要素で囲います。
-
-```typst
-#heading(level: 1)[見出し1]
-
-#show heading: set block(...)
-// ↓
-// block(...)[見出し1]
-
-
-#show heading: block.with(...)
-// ↓
-// block(...)[
-//   heading(...)[見出し1]
-// ]
-```
-
-:::
-
-
-```typst
-// レベルごとの装飾を追加
-#show heading.where(level: 1): block.with(fill: luma(150), inset: 1em)
-#show heading.where(level: 2): block.with(fill: luma(100), inset: 1em)
-#show heading.where(level: 3): block.with(fill: luma(50), inset: 1em)
-```
-
-
-```typst
-// 共通の装飾を定義
-#let h = block.with(
-  fill: luma(90%),  // 背景色を追加
-  inset: 1em,       // 内側のスペースを追加
-  above: 1em,  // 見出しの上にスペースを追加
-  below: 1em,  // 見出しの下にスペースを追加
-)
-
-// レベルごとの装飾を再定義
-#let h1 = h.with(fill: luma(150))
-#let h2 = h.with(fill: luma(100))
-#let h3 = h.with(fill: luma(50))
-
-// レベルごとの装飾を適用
-#show heading.where(level: 1): h1
-#show heading.where(level: 2): h2
-#show heading.where(level: 3): h3
-```
-
-冒頭のサンプルが設定を「追加」する方法だったのに対して、こちらは設定を「上書き」する方法です。
-こちらの方が、設定しやすいかもしれません。
-
-:::{seealso}
-
-- [](./typst-show.md)
-- [](./typst-where.md)
-- [](./typst-block.md)
-- [](./typst-color.md)
-
-:::
-
-## 見出しサイズを揃えたい
+## 見出しのサイズを揃えたい
 
 ```typst
 // 基準サイズを指定 -> 1.2倍
@@ -241,6 +166,27 @@ LaTeXの`\section*`に相当します。
 
 `#show`ルールは上から順番に重ね書きされるため、同じオプションを設定する場合は、定義する順番に注意が必要がです。
 上記の順番で定義すると、すべての見出しレベルが`10pt`になります。
+
+:::
+
+## 見出しレベルごとに装飾したい
+
+```typst
+#show heading.where(level: 1): set text(size: 1.5em, weight: "bold")
+#show heading.where(level: 2): set text(size: 1.3em, weight: "bold")
+#show heading.where(level: 3): set text(size: 1.1em, weight: "bold")
+```
+
+`#show heading.where(level: n)`で、見出しレベルごとに装飾を設定できます。
+上記のサンプルでは、レベル1から3までの見出しに対して、サイズと太字を設定しています。
+レベル4以降は、デフォルトのままにしています。
+
+:::{seealso}
+
+- [](./typst-show.md)
+- [](./typst-where.md)
+- [](./typst-block.md)
+- [](./typst-color.md)
 
 :::
 
