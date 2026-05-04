@@ -18,7 +18,6 @@ dependencies = [
     "sphinx-tags>=0.4",
     "sphinxext-opengraph>=0.9.1",
     "sphinxcontrib-googleanalytics>=0.4",
-    "matplotlib>=3.8.3",
 ]
 
 [project.urls]
@@ -29,6 +28,7 @@ documentation = "https://kumaroot.readthedocs.io/ja/latest/"
 [project.optional-dependencies]
 dev = [
     "commitizen>=3.12.0",
+    "matplotlib>=3.8.3",
     "pandas>=2.1.4",
     "pendulum>=3.0.0",
     "sphinx-autobuild>=2025.8.25",
