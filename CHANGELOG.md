@@ -1,5 +1,57 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **typst-show**: rewrite with clearer structure and add comprehensive set/show examples
+- **typst-label**: clarify note on label markup recommendation
+- **typst-label**: remove extra blank line
+- **typst-link**: add link decoration section with show rule example
+- **typst**: improve footnote decoration example and fix link description
+- **typst-math**: update show rule syntax from text.with to set text
+- **typst-table**: expand header bold section and fix figure label syntax
+- **typst-set**: expand list settings with shared variables and add enum and term configs
+- **typst-title**: add external package section for title page alternatives
+- **typst-func**: move unnamed function section earlier and expand with inline example
+- **typst-func**: simplify explanations and remove boilerplate sections
+- **typst-let**: add explanations for array and dictionary usage
+- **typst-align**: expand alignment explanation with direction and note blocks
+- **typst-list**: improve code block comments for clarity
+- **typst-raw**: add figure usage example to language label section
+- **typst-raw**: simplify language label show rule using named block variables
+- **typst-raw**: reorganize sections and add monospace font and language label examples
+- **typst-list**: add explanations for marker, numbering, and separator options
+- **typst-list**: add commented-out optional parameters for list, enum, and terms
+- **typst-list**: normalize indent values and fix trailing commas
+- **typst-heading**: simplify show rule examples and add level-specific decoration section
+- **typst-title**: improve section title clarity and conciseness
+- **typst-title**: simplify show rule examples and add border section
+- **typst-heading**: expand show rule examples and add font size section
+- **typst-heading**: expand numbering options and add show rule examples
+- **typst-show**: update show rule documentation with closure section
+- **typst-color**: Update color documentation
+- **zensical-readthedocs**: Update documentation links and add new blog post
+- **typst-heading**: update heading syntax
+- **typst-figure**: correct syntax based on TypstApp testing
+- **typst-figure**: refactor grid layout examples and add placeholder section
+- **typst**: refactor reference and bibliography documentation
+- **typst-figure**: refactor structure and add cross-references
+- **typst**: add label and citation documentation
+- **typst-usage**: reorganize toctree structure and add typst-image documentation
+- **typst-raw**: add simple markup examples alongside function markup
+- **typst-strong**: add simple markup examples alongside function markup
+- **typst-usage**: add typst-table to toctree and create table documentation
+- **typst-list**: add simple markup examples alongside function markup
+- **typst-heading**: add section header and improve set heading explanation
+- **typst-document**: improve document metadata documentation with context example
+- **typst-text**: reorganize text documentation with set text section
+- **typst-heading**: reorganize heading documentation structure
+- **typst-show**: simplify show documentation with focused examples
+- **typst-with**: restructure with method documentation with practical examples
+- **typst-set**: simplify set documentation with consolidated examples
+- **deps**: update dependencies to latest versions
+
 ## v2026.4.2 (2026-04-27)
 
 ### Fix
