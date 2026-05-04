@@ -1057,7 +1057,6 @@ name = "kumaroot"
 version = "2026.5.0"
 source = { editable = "." }
 dependencies = [
-    { name = "matplotlib" },
     { name = "myst-parser" },
     { name = "sphinx" },
     { name = "sphinx-copybutton" },
@@ -1081,15 +1080,18 @@ dev = [
     { name = "ipykernel" },
     { name = "japanize-matplotlib" },
     { name = "jupyter-bokeh" },
+    { name = "matplotlib" },
     { name = "pandas" },
     { name = "pendulum" },
     { name = "pexpect" },
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "scikit-learn" },
-    { name = "sphinx-autobuild" },
     { name = "tqdm" },
     { name = "uproot" },
+]
+docs = [
+    { name = "sphinx-autobuild" },
 ]
 mystmd = [
     { name = "mystmd" },
@@ -1108,7 +1110,7 @@ requires-dist = [
     { name = "ipykernel", marker = "extra == 'dev'", specifier = ">=6.29.1" },
     { name = "japanize-matplotlib", marker = "extra == 'dev'", specifier = ">=1.1.3" },
     { name = "jupyter-bokeh", marker = "extra == 'dev'", specifier = ">=4.0.4" },
-    { name = "matplotlib", specifier = ">=3.8.3" },
+    { name = "matplotlib", marker = "extra == 'dev'", specifier = ">=3.8.3" },
     { name = "myst-parser", specifier = ">=4.0.0" },
     { name = "mystmd", marker = "extra == 'mystmd'", specifier = ">=1.3.6" },
     { name = "nodeenv", marker = "extra == 'mystmd'", specifier = ">=1.8.0" },
@@ -1119,18 +1121,18 @@ requires-dist = [
     { name = "python-dotenv", marker = "extra == 'dev'", specifier = ">=1.0.1" },
     { name = "scikit-learn", marker = "extra == 'dev'", specifier = ">=1.4.1" },
     { name = "sphinx", specifier = ">=8.0.2" },
-    { name = "sphinx-autobuild", marker = "extra == 'dev'", specifier = ">=2025.8.25" },
+    { name = "sphinx-autobuild", marker = "extra == 'docs'", specifier = ">=2025.8.25" },
     { name = "sphinx-copybutton", specifier = ">=0.5.2" },
     { name = "sphinx-design", specifier = ">=0.6.0" },
     { name = "sphinx-rtd-theme", specifier = ">=3.0.0" },
-    { name = "sphinx-tags", specifier = ">=0.4" },
+    { name = "sphinx-tags", specifier = ">=0.4.0" },
     { name = "sphinxcontrib-googleanalytics", specifier = ">=0.4" },
     { name = "sphinxcontrib-mermaid", specifier = ">=1.0.0" },
     { name = "sphinxext-opengraph", specifier = ">=0.9.1" },
     { name = "tqdm", marker = "extra == 'dev'", specifier = ">=4.66.4" },
     { name = "uproot", marker = "extra == 'dev'", specifier = ">=5.3.10" },
 ]
-provides-extras = ["dev", "mystmd"]
+provides-extras = ["dev", "docs", "mystmd"]
 
 [[package]]
 name = "linkify-it-py"
