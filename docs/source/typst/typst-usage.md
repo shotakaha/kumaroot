@@ -152,6 +152,7 @@ maxdepth: 1
 ---
 typst-gentle-clues
 typst-simple-plot
+typst-tidy
 ```
 
 ## 物理したい
