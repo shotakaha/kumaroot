@@ -1,9 +1,15 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.5.0 (2026-05-04)
 
 ### Fix
 
+- **typst-tidy**: add typst-tidy package for API documentation
+- **typst-usage**: add typst-measure to toctree and add measure documentation
+- **typst-columns**: add columns layout documentation
+- **typst-grid**: add grid layout documentation
+- **typst-page**: add custom header example using grid function
+- **typst-page**: add caution note about columns affecting title layout
 - **typst-show**: rewrite with clearer structure and add comprehensive set/show examples
 - **typst-label**: clarify note on label markup recommendation
 - **typst-label**: remove extra blank line
