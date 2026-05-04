@@ -65,22 +65,24 @@
 
 ```typst
 // figureの設定
-#set figure(gap: 0em)
+#set figure(gap: 1em)
 
 #show figure: block.with(
   width: 100%,
-  inset: 0.5em,
-  // stroke: 1tp,  // enable when debug
+  inset: (top: 1em, bottom: 1em),
+  // stroke: 1pt,  // enable when debug
+  // fill: luma(90%)
 )
 ```
 
 デフォルトだと図版と本文のアキが窮屈に感じたので、微調整したサンプルです。
-まず、図版とキャプションのアキをリセット（`gap: 0em`に設定）したあと、コンテンツの余白（パディング）を`0.5em`に設定しています。
+`figure`要素の上（`top: 1em`）と下（`bottom: 1em`）に余白（パディング）を追加しました。
+また、図版とキャプションのアキも`gap: 1em`に変更しています。
 
 :::{hint}
 
 図版の設定を調整するときは、
-`stroke: 1pt`を有効にして、表示エリアを確認しながら調整するのがオススメです。
+`stroke: 1pt`や`fill: luma(90%)`を有効にして、表示エリアを確認しながら調整するのがオススメです。
 
 :::
 
@@ -91,10 +93,12 @@
   width: 100%,
   inset: 0.5em,
   stroke: 1pt,
+  fill: luma(90%),
 )
 ```
 
-`block.with`の代わりに`set block`を使うと、この設定が子要素（`figure.caption`など）にも引き継がれてしまいます。
+`block.with`の代わりに`set block`を使うこともできます。
+ただし、設定が子要素（`figure.caption`など）にも引き継がれてしまうため、`block.with`の方がオススメです。
 
 :::
 
@@ -102,19 +106,13 @@
 
 ```typst
 // キャプションの設定
+#show figure.caption: set align(left)
 #show figure.caption: block.with(
-  inset: 0.5em,
+  inset: (left: 1em, right: 1em),
   width: 100%,
   // stroke: 1pt,  // enable when debug
+  // fill: luma(80%),  // enable when debug
 )
-
-// テキストを左寄せ
-#show figure.caption: it => {
-  align(left)[
-    #it
-  ]
-}
-
 
 #figure(
   [content],
@@ -123,9 +121,8 @@
 ```
 
 図版のキャプション設定は`show`ルールで変更できます。
-キャプションはデフォルトで図版に対して中央寄せで表示されるため、このサンプルでは、キャプション全体の幅を図版と同じにして、キャプションテキストを左寄せにしています。
-
-また、前述の`figure`の設定に、この`caption`の設定を追加すると、結果的に図版と本文の間に`1em`のアキができます。
+デフォルトで、キャプションは図版に対して中央寄せで表示されます。
+このサンプルでは、キャプション全体の幅を図版と同じにして、テキストを左寄せにしています。
 
 ## プレースホルダーしたい
 
