@@ -3,7 +3,7 @@
 version: '3'
 
 vars:
-  GREETING: Hello, World!
+  GREETING: KumaROOT!
 
 tasks:
   default:
@@ -70,6 +70,12 @@ tasks:
     cmds:
       - uv run make latexpdf
 
+  docs:clean:
+    desc: Clean docs build artifacts
+    dir: docs
+    cmds:
+      - uv run make clean
+
   # ============================================================================
   # Dependency management tasks - Update and check dependencies
   # ============================================================================
@@ -82,12 +88,17 @@ tasks:
   deps:check:
     desc: Check for outdated packages
     cmds:
-      - uv pip list --outdated
+      - uv lock --upgrade --dry-run
+
+  deps:audit:
+    desc: Audit dependencies for vulnerabilities
+    cmds:
+      - uv run pip-audit
 
   deps:update:
     desc: Update dependencies
     cmds:
-      - uv sync --upgrade --all-extras
+      - uv lock --upgrade
 
   # ============================================================================
   # Version management tasks - Manage versions with commitizen
