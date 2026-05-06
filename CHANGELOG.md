@@ -1,5 +1,25 @@
 # CHANGELOG.md
 
+## v2026.5.1 (2026-05-06)
+
+### Fix
+
+- **copilot**: remove outdated dirhtml references and add deps:audit command
+- **CLAUDE**: remove outdated directions and fix deps:setup command
+- **README**: update setup command to use --all-groups
+- **CLAUDE**: update setup command and deps section for dependency-groups migration
+- **Taskfile**: add docs:clean task and improve deps tasks
+- **quarto-format**: add output format guide for html, typst, revealjs, pptx, and docx
+- **typst-let**: add alias section with hr and pagebreak examples
+- **typst-build**: add --root option and /tmp output directory examples
+- **typst-figure**: update figure and caption spacing settings
+- **pyproject**: restore `[tool.setuptools]` py-modules = []
+
+### Refactor
+
+- **deps**: remove build-system config to treat project as virtual
+- **deps**: migrate optional-dependencies to dependency-groups
+
 ## v2026.5.0 (2026-05-04)
 
 ### Fix
