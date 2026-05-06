@@ -72,3 +72,8 @@ version_files = [
     "docs/source/conf.py:release",
 ]
 update_changelog_on_bump = true
+
+[dependency-groups]
+dev = [
+    "pip-audit>=2.10.0",
+]
