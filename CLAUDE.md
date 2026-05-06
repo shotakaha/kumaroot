@@ -18,7 +18,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Setup
 
 ```bash
-uv sync --all-extras
+uv sync --all-groups
 source .venv/bin/activate
 ```
 
@@ -72,7 +72,7 @@ This project uses a **calendar-based semantic versioning** scheme (YYYY.MM.PATCH
 - Automatic increment detection is disabled; all bumping is explicit
 - All bump tasks include `--check-consistency --changelog` flags
 - When a new year/month begins, manually bump MAJOR or MINOR as needed
-- Current version: `2026.4.0` (April 2026)
+- Current version: `2026.5.0` (May 2026)
 - Example version progression: `2026.3.x` → `2026.4.0`（new month）→ `2027.1.0`（new year）
 
 ### Building Distribution
@@ -225,7 +225,6 @@ The repository uses pre-commit hooks for code quality:
 ```yaml
 # .pre-commit-config.yaml
 - Commitizen: Validates commit messages (conventional commits)
-- Poetry: Validates pyproject.toml and poetry.lock
 - Standard hooks: Trailing whitespace, merge conflicts, case conflicts
 - JSON/TOML/YAML/XML validation
 - Ruff: Python code formatting
@@ -234,7 +233,6 @@ The repository uses pre-commit hooks for code quality:
 **Important notes:**
 
 - All commits must follow conventional commit format (enforced by commitizen)
-- The repository uses `poetry check --lock` (strict mode)
 - Pre-commit hook may auto-format markdown/Python code
 - If formatting changes occur after commit, the commit will be retried with amended changes
 
@@ -421,12 +419,13 @@ For technical reference docs:
 - Links to files: `[filename.ts](src/filename.ts)` markdown format
 - Code blocks specify language: ` ```python`
 
-### Poetry & Dependencies
+### Dependencies
 
 - Project requires Python ≥ 3.12
-- Optional dev dependencies include: pandas, jupyterlab, scipy, scikit-learn, matplotlib
-- Use `task update` to keep dependencies current
-- Maintain both `pyproject.toml` and `requirements.txt`
+- Dev dependencies are managed via `[dependency-groups]` in `pyproject.toml` (PEP 735, uv)
+- Groups: `dev` (analysis/dev tools), `docs` (sphinx-autobuild), `mystmd` (MyST toolchain)
+- Use `uv sync --all-groups` to install all groups
+- Use `task deps:update` to keep dependencies current
 
 ### Version Management Strategy
 

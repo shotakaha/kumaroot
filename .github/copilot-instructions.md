@@ -6,7 +6,7 @@ This repository is a documentation project. The main automated validation is Sph
 
 | Purpose | Command |
 | --- | --- |
-| Install dependencies | `uv sync --all-extras` |
+| Install dependencies | `uv sync --all-groups` |
 | Live preview | `task docs:serve` |
 | Full lint/format validation | `uv run pre-commit run --all-files` |
 | CI-equivalent docs build | `cd docs && uv run make dirhtml` |
