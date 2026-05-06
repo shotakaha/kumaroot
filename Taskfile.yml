@@ -83,7 +83,7 @@ tasks:
   deps:setup:
     desc: Setup Python environment
     cmds:
-      - uv sync --all-extras
+      - uv sync --all-groups
 
   deps:check:
     desc: Check for outdated packages

@@ -33,8 +33,9 @@ task docs:pdf        # Build docs as PDF
 ### Dependency Management
 
 ```bash
-task deps:setup      # Setup Python environment
+task deps:setup      # Setup Python environment (uv sync --all-groups)
 task deps:check      # Check for outdated packages
+task deps:audit      # Audit dependencies for vulnerabilities
 task deps:update     # Update all dependencies
 ```
 
@@ -74,13 +75,6 @@ This project uses a **calendar-based semantic versioning** scheme (YYYY.MM.PATCH
 - When a new year/month begins, manually bump MAJOR or MINOR as needed
 - Current version: `2026.5.0` (May 2026)
 - Example version progression: `2026.3.x` → `2026.4.0`（new month）→ `2027.1.0`（new year）
-
-### Building Distribution
-
-```bash
-make latexpdf        # Generate PDF in docs/
-make html            # Generate HTML in docs/_build/
-```
 
 ## Documentation Structure
 
