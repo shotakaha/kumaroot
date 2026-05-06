@@ -1116,7 +1116,7 @@ wheels = [
 [[package]]
 name = "kumaroot"
 version = "2026.5.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "myst-parser" },
     { name = "sphinx" },
@@ -1129,7 +1129,7 @@ dependencies = [
     { name = "sphinxext-opengraph" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "cartopy" },
     { name = "commitizen" },
@@ -1145,6 +1145,7 @@ dev = [
     { name = "pandas" },
     { name = "pendulum" },
     { name = "pexpect" },
+    { name = "pip-audit" },
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "scikit-learn" },
@@ -1159,35 +1160,10 @@ mystmd = [
     { name = "nodeenv" },
 ]
 
-[package.dev-dependencies]
-dev = [
-    { name = "pip-audit" },
-]
-
 [package.metadata]
 requires-dist = [
-    { name = "cartopy", marker = "extra == 'dev'", specifier = ">=0.24.1" },
-    { name = "commitizen", marker = "extra == 'dev'", specifier = ">=3.12.0" },
-    { name = "geodatasets", marker = "extra == 'dev'", specifier = ">=2024.7.0" },
-    { name = "geopandas", marker = "extra == 'dev'", specifier = ">=1.0.1" },
-    { name = "geoviews", marker = "extra == 'dev'", specifier = ">=1.12.0" },
-    { name = "httpx", marker = "extra == 'dev'", specifier = ">=0.28.1" },
-    { name = "hvplot", marker = "extra == 'dev'", specifier = ">=0.11.2" },
-    { name = "ipykernel", marker = "extra == 'dev'", specifier = ">=6.29.1" },
-    { name = "japanize-matplotlib", marker = "extra == 'dev'", specifier = ">=1.1.3" },
-    { name = "jupyter-bokeh", marker = "extra == 'dev'", specifier = ">=4.0.4" },
-    { name = "matplotlib", marker = "extra == 'dev'", specifier = ">=3.8.3" },
     { name = "myst-parser", specifier = ">=4.0.0" },
-    { name = "mystmd", marker = "extra == 'mystmd'", specifier = ">=1.3.6" },
-    { name = "nodeenv", marker = "extra == 'mystmd'", specifier = ">=1.8.0" },
-    { name = "pandas", marker = "extra == 'dev'", specifier = ">=2.1.4" },
-    { name = "pendulum", marker = "extra == 'dev'", specifier = ">=3.0.0" },
-    { name = "pexpect", marker = "extra == 'dev'", specifier = ">=4.9.0" },
-    { name = "pydantic", marker = "extra == 'dev'", specifier = ">=2.8.2" },
-    { name = "python-dotenv", marker = "extra == 'dev'", specifier = ">=1.0.1" },
-    { name = "scikit-learn", marker = "extra == 'dev'", specifier = ">=1.4.1" },
     { name = "sphinx", specifier = ">=8.0.2" },
-    { name = "sphinx-autobuild", marker = "extra == 'docs'", specifier = ">=2025.8.25" },
     { name = "sphinx-copybutton", specifier = ">=0.5.2" },
     { name = "sphinx-design", specifier = ">=0.6.0" },
     { name = "sphinx-rtd-theme", specifier = ">=3.0.0" },
@@ -1195,13 +1171,36 @@ requires-dist = [
     { name = "sphinxcontrib-googleanalytics", specifier = ">=0.4" },
     { name = "sphinxcontrib-mermaid", specifier = ">=1.0.0" },
     { name = "sphinxext-opengraph", specifier = ">=0.9.1" },
-    { name = "tqdm", marker = "extra == 'dev'", specifier = ">=4.66.4" },
-    { name = "uproot", marker = "extra == 'dev'", specifier = ">=5.3.10" },
 ]
-provides-extras = ["dev", "docs", "mystmd"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pip-audit", specifier = ">=2.10.0" }]
+dev = [
+    { name = "cartopy", specifier = ">=0.24.1" },
+    { name = "commitizen", specifier = ">=3.12.0" },
+    { name = "geodatasets", specifier = ">=2024.7.0" },
+    { name = "geopandas", specifier = ">=1.0.1" },
+    { name = "geoviews", specifier = ">=1.12.0" },
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "hvplot", specifier = ">=0.11.2" },
+    { name = "ipykernel", specifier = ">=6.29.1" },
+    { name = "japanize-matplotlib", specifier = ">=1.1.3" },
+    { name = "jupyter-bokeh", specifier = ">=4.0.4" },
+    { name = "matplotlib", specifier = ">=3.8.3" },
+    { name = "pandas", specifier = ">=2.1.4" },
+    { name = "pendulum", specifier = ">=3.0.0" },
+    { name = "pexpect", specifier = ">=4.9.0" },
+    { name = "pip-audit", specifier = ">=2.10.0" },
+    { name = "pydantic", specifier = ">=2.8.2" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
+    { name = "scikit-learn", specifier = ">=1.4.1" },
+    { name = "tqdm", specifier = ">=4.66.4" },
+    { name = "uproot", specifier = ">=5.3.10" },
+]
+docs = [{ name = "sphinx-autobuild", specifier = ">=2025.8.25" }]
+mystmd = [
+    { name = "mystmd", specifier = ">=1.3.6" },
+    { name = "nodeenv", specifier = ">=1.8.0" },
+]
 
 [[package]]
 name = "license-expression"

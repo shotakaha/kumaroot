@@ -56,13 +56,6 @@ mystmd = [
     "mystmd>=1.3.6",
 ]
 
-[build-system]
-requires = ["setuptools>=61"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-py-modules = []
-
 [tool.commitizen]
 name = "cz_conventional_commits"
 version_provider = "pep621"
