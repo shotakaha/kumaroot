@@ -9,12 +9,10 @@ This repository is a documentation project. The main automated validation is Sph
 | Install dependencies | `uv sync --all-groups` |
 | Live preview | `task docs:serve` |
 | Full lint/format validation | `uv run pre-commit run --all-files` |
-| CI-equivalent docs build | `cd docs && uv run make dirhtml` |
-| Static HTML build | `cd docs && uv run make html` |
-| PDF build | `cd docs && uv run make latexpdf` |
-| Build one page while editing | `cd docs && uv run sphinx-build -b dirhtml source build/dirhtml-single source/<section>/<page>.md` |
-
-`task docs:build` currently invokes the live-preview target, so use `make dirhtml` or `make html` for non-interactive builds.
+| Static HTML build | `task docs:build` |
+| PDF build | `task docs:pdf` |
+| Audit dependencies | `task deps:audit` |
+| Build one page while editing | `cd docs && uv run sphinx-build -b html source build/html source/<section>/<page>.md` |
 
 There is no separate unit-test suite in the repository; the narrowest scoped validation is building the affected page with `sphinx-build`.
 
