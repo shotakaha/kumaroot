@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **deps**: update uv.lock
+- **latex-amsmath**: reorder align section and add mathrm/units section
+
 ## v2026.5.1 (2026-05-06)
 
 ### Fix
