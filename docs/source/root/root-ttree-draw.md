@@ -46,27 +46,42 @@ tree.Draw(
 )
 ```
 
-## リダイレクトしたい（`TTree::Draw`)
+## 1Dヒストグラムしたい（`TTree::Draw`)
 
 ```cpp
+TH1D *h1 = new TH1D(
+    "h1",
+    "Energy Deposit;Energy [MeV];Entries",
+    100, 0, 1000
+);
 tree->Draw(
-    "energy_deposit >> h1(100, 0, 1000)",  // varexp with histogram definition
+    "energy_deposit >> h1",  // varexp with histogram definition
     "parent_id==0",
     "HIST",);
 ```
 
-`varexp`にヒストグラム定義を含めることで、描画結果を新しいヒストグラムオブジェクトにリダイレクトできます。
-この例では、`energy_deposit`のヒストグラムが`h1`という名前で作成されます。
+`varexp`にヒストグラムを含めることができます。
+事前にTH1オブジェクトを作成することで、
+タイトルやビン数などを制御できます。
+
+## 2Dヒストグラムしたい（`TTree::Draw`）
 
 ```cpp
+TH2D *h2 = new TH2D(
+    "h2",
+    "Energy Deposit vs Position;Position X [mm];Energy Deposit [MeV]",
+    100, 0, 1000,
+    100, -500, 500
+);
 tree->Draw(
-    "energy_deposit:position_x >> h2(100, 0, 1000, 100, -500, 500)",  // 2D histogram definition
+    "energy_deposit:position_x >> h2",  // 2D histogram definition
     "parent_id==0",
     "COLZ",
 )
 ```
 
-2次元プロットも同様にヒストグラム定義を含めることができます。
+2次元ヒストグラムも1次元ヒストグラムと同様に
+`varexp`に含めることができます。
 
 ## 複数条件したい（`TTree::Draw`）
 
@@ -77,8 +92,8 @@ tree->Draw(
 );
 ```
 
-`selection`に複数の条件を指定することもできます。
-論理演算子（&&、||、!）を使用して条件を組み合わせることができます。
+`selection`に複数の条件を指定できます。
+論理演算子（`&&`、`||`、`!`）を使用して条件を組み合わせることができます。
 
 ## リファレンス
 
