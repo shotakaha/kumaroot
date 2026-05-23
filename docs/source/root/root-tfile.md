@@ -3,17 +3,14 @@
 ```cpp
 #include <TFile.h>
 
-TString source_filename = "source.root";
-TString source_treename = "events";
-
-TFile* source_file = TFile::Open(source_filename);
-if (!source_file || source_file->IsZombie()) {
-    std::cerr << "Error opening file: " << source_filename << std::endl;
+TFile* f = TFile::Open("source.root");
+if (!f || f->IsZombie()) {
+    std::cerr << "Error opening file: " << "source.root" << std::endl;
     return;
 }
 
-TTree* source_tree = (TTree*)source_file->Get(source_treename);
-source_file->Close();
+TTree* tree = (TTree*)f->Get("events");
+f->Close();
 ```
 
 `TFile`はROOTファイルを操作するためのクラスです。
@@ -36,14 +33,14 @@ source_file->Close();
 import ROOT
 
 # ファイルを開く
-source_file = ROOT.TFile.Open("source.root")
+f = ROOT.TFile.Open("source.root")
 
 # TTreeを取得
-source_tree = source_file.Get("events")
-source_tree.Print()
+tree = f.Get("events")
+tree.Print()
 
 # ファイルを閉じる
-source_file.Close()
+f.Close()
 ```
 
 ## ファイルを作成したい（`TFile`）
