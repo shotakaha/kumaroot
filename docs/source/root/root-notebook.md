@@ -20,23 +20,18 @@ Error starting ROOT notebook -- please check that Jupyter is installed
 
 HomebrewでインストールしたROOTでは、Jupyter Notebook周りPythonパッケージが不足している場合に上記エラーが表示されます。
 
-その場合は、通常のPythonと同じように仮想環境を作成し、必要なパッケージをインストールしてください。
+その場合は、通常のPythonと同じように`uv`で仮想環境を作成し、必要なパッケージを追加する必要があります。
 
 ```console
 // ROOTと紐づいたPythonのバージョンを確認
-$ ls -1 $(brew --prefix root)/lib
-cmake
-Python3.14/
-root/
+$ root-config --python-version
+3.14.5
 
 // 確認したバージョンで仮想環境を作成
-$ python3.14 -m venv .venv
-$ source .venv/bin/activate
-(.venv) $ python3 --version
-Python 3.14.0
-(.venv) $ pip install jupyter
-(.venv) $ pip install metakernel    # ROOT C++ kernelに必要
-(.venv) $ root --notebook
+$ uv venv --python 3.14 --system-site-packages
+$ uv pip install jupyter
+$ uv pip install metakernel    # ROOT C++ kernelに必要
+$ uv run root --notebook
 ```
 
 ## C++を実行したい（`ROOT C++ Kernel`）

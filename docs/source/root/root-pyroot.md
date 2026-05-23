@@ -32,6 +32,29 @@ VS Code上のJupyter（``ipykernel``）を使っている場合などで、
 
 :::
 
+## 仮想環境したい（`uv venv`）
+
+```console
+// PyROOTがビルドされたPythonのバージョンを確認
+$ root-config --python-version
+3.14.5
+
+// uv venvで仮想環境を作成
+$ uv venv --python 3.14 --system-site-packages
+
+// PyROOTの動作確認
+$ uv run python3 -c "import ROOT; print(ROOT.__version__)"
+
+// ROOT Notebookを使う場合
+$ uv pip install jupyter
+$ uv pip install metakernel    # ROOT C++ kernelに必要
+$ uv run root --notebook
+```
+
+プロジェクトでPyROOTを使う場合は、
+仮想環境からシステムパッケージを参照できるようにするのが簡単です。
+このサンプルは`uv venv`を使ったときのコマンド例です。
+
 ## （削除予定）MacPortsしたい
 
 > この段落の内容は古くなっています。
