@@ -3,50 +3,45 @@
 ```cpp
 #include <TFile.h>
 
-// ファイルを開く
-TFile *fin = new TFile(
-    "input.root",  // fname
-    "read",        // option: read | update | recreate | create
-    "Input ROOT file",  // ftitle (optional)
-    505            // compress (optional)
-);
+TString source_filename = "source.root";
+TString source_treename = "events";
 
-// オブジェクトを取得
-TH1D *h1 = (TH1D*)fin->Get("histogram_name");
+TFile* source_file = TFile::Open(source_filename);
+if (!source_file || source_file->IsZombie()) {
+    std::cerr << "Error opening file: " << source_filename << std::endl;
+    return;
+}
 
-// ファイルを閉じる
-fin->Close();
+TTree* source_tree = (TTree*)source_file->Get(source_treename);
+source_file->Close();
 ```
 
-`TFile`クラスで、ROOTファイルの読み書きができます。
-ファイルを開いてオブジェクトを取得し、最後にファイルを閉じるのが基本的な流れです。
-
-`fname`はファイル名を指定します。
+`TFile`はROOTファイルを操作するためのクラスです。
+`TFile::Open`は静的メソッドで、ファイルを読み取り専用で開きます。
+第一引数にファイル名を指定します。
 ファイル名は相対パスや絶対パスで指定できます。
 ただし、`~`を使用したホームディレクトリの指定はサポートされていません。
+ファイルが正常に開けない場合は、`nullptr`を返すか、`IsZombie()`が`true`になります。
 
-`option`はファイルアクセスモードを指定します。
-読み込み専用（`read` / `r`）、
-更新・追記（`update` / `u`）、
-新規作成（存在する場合はエラー）（`create` / `c`）
-新規作成（存在する場合は上書き）（`recreate`）
-のいずれかを指定します。
-デフォルトは`read`です。
+`TFile::Get`で、ファイル内のオブジェクトを名前で取得できます。
+`TObject*`型のポインターが返されるため、適切な型にキャストする必要があります。
+このサンプルでは`TTree*`型にキャストしています。
 
-`ftitle`はファイルのタイトル説明を設定できます。
-`compress`は圧縮レベルを指定できます。デフォルトは505です。
+`TFile::Close`でファイルを閉じることができます。
+マクロや関数のスコープを抜けるとファイルは自動的に閉じられますが、安全のため明示的に閉じる習慣をつけておくとよいです。
 
 ```python
 import ROOT
 
 # ファイルを開く
-fin = ROOT.TFile("input.root", "read")
+source_file = ROOT.TFile.Open("source.root")
 
-# オブジェクトを取得
-h1 = fin.Get("histogram_name")
+# TTreeを取得
+source_tree = source_file.Get("events")
+source_tree.Print()
 
 # ファイルを閉じる
-fin.Close()
+source_file.Close()
 ```
 
 ## ファイルに保存したい（`TFile`）
@@ -54,17 +49,16 @@ fin.Close()
 ```cpp
 #include <TFile.h>
 
-TFile *fout = new TFile(
-    "output.root",
-    "recreate"
-);
+TString target_filename = "target.root";
+
+TFile* target_file = new TFile(target_filename, "recreate");
 
 // オブジェクトをファイルに書き込む
 tree->Write();
 hist->Write();
 canvas->Write();
 
-fout->Close();
+target_file->Close();
 ```
 
 `TFile`を`recreate`モードで作成してから、各オブジェクトの`Write()`メソッドを呼び出して保存します。
@@ -82,11 +76,13 @@ fin->Close();
 ```
 
 `TFile::Get`で、ファイルからオブジェクトを取得できます。
-オブジェクトの名前を指定して、正しい型にキャストすることが重要です。
+`TObject*`型のポインターが返されるため、適切な型にキャストする必要があります。
+このサンプルでは、`TH1D*`型にキャストしています。
 
 :::{note}
 
-`auto`を使用して型推論することもできますが、明示的な型指定の方が安全です。
+`auto`キーワードで型推論に任せることもできますが、
+この場合は型指定を明示したほうが安全です。
 
 :::
 
