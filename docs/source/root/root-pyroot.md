@@ -3,14 +3,15 @@
 ```python3
 >>> import ROOT
 >>> ROOT.__version__
-'6.32.02'
+'6.40.00'
 
 >>> ROOT.__file__
-'/opt/homebrew/Cellar/root/6.32.02_1/lib/root/ROOT/__init__.py'
+'/opt/homebrew/Cellar/root/6.40.00/lib/root/ROOT/__init__.py'
 ```
 
-``import ROOT``でPyROOTパッケージを読み込むと、PythonからROOTを操作できるようになります。
-PyROOTパッケージはROOTをインストールしたパスにあります。
+`PyROOT`は、PythonからROOTを操作できるパッケージです。
+`import ROOT`でパッケージを読み込み、
+バージョンやライブラリのパスを確認しています。
 
 ## パス設定（``$PYTHONPATH``）
 
