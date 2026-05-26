@@ -41,6 +41,7 @@ root [0] .qqqqqqq  # プロセスをアボート
 ---
 maxdepth: 1
 ---
+root-command
 root-macro
 root-rint-calculator
 root-notebook
