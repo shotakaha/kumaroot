@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.5.2 (2026-05-26)
 
 ### Feat
 
@@ -8,6 +8,9 @@
 
 ### Fix
 
+- **root-groot-setstyle**: simplify and improve style documentation
+- **root-groot**: update title and add gROOT class explanation
+- **root-pyroot**: add PyROOT virtual environment setup with uv venv
 - **root-tfile**: simplify variable names in file open examples
 - **root-tfile**: split file creation modes into separate sections and use std::filesystem
 - **root-tfile**: use TFile::Open with error check and improve explanations
