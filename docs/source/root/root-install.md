@@ -1,4 +1,4 @@
-# インストールしたい
+# インストールしたい（`brew install root`）
 
 ```console
 $ brew install root
@@ -22,11 +22,10 @@ $ which root
 ## バージョンを確認したい（`--version`）
 
 ```console
-
 $ root --version
-ROOT Version: 6.32.08
-Built for macosxarm64 on Nov 14 2024, 09:27:26
-From tags/6-32-08@v6-32-08
+ROOT Version: 6.40.00
+Built for macosxarm64 on May 20 2026, 03:46:43
+From tags/6-40-00@6-40-00
 ```
 
 `root --version`でROOTのバージョンを確認できます。
