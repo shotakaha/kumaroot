@@ -2,8 +2,16 @@
 
 ## Unreleased
 
+### Feat
+
+- **AGENTS**: add agent and Claude Code guidance for developers
+
 ### Fix
 
+- **root-tfile**: simplify variable names in file open examples
+- **root-tfile**: split file creation modes into separate sections and use std::filesystem
+- **root-tfile**: use TFile::Open with error check and improve explanations
+- **root-ttree-draw**: separate 1D/2D histogram sections and pre-create TH1/TH2 objects
 - **deps**: update uv.lock
 - **latex-amsmath**: reorder align section and add mathrm/units section
 
