@@ -1,24 +1,17 @@
-# 起動したい（``$ root``）
+# 起動したい（`$ root`）
 
 ```console
 $ root
    ------------------------------------------------------------------
-  | Welcome to ROOT 6.32.02                        https://root.cern |
-  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
-  | Built for macosxarm64 on Jun 18 2024, 03:44:55                   |
-  | From heads/master@tags/v6-32-02                                  |
-  | With Apple clang version 15.0.0 (clang-1500.3.9.4)               |
+  | Welcome to ROOT 6.40.00                        https://root.cern |
+  | (c) 1995-2025, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosxarm64 on May 20 2026, 03:46:43                   |
+  | From tags/6-40-00@6-40-00                                        |
+  | With Apple clang version 17.0.0 (clang-1700.6.4.2) std201703     |
   | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
    ------------------------------------------------------------------
 
-// 正規分布のヒストグラムを作成
-root [0] TH1F *h = new TH1F("h", "histogram", 100, -5, 5);
-root [1] for (int i = 0; i < 10000; i++) {
-root (cont'ed, cancel with .@) [2] h->Fill(gRandom->Gaus(0, 1));
-root (cont'ed, cancel with .@) [3] }
-root [4] h->Draw();
-Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
-root [5]
+root [0]
 ```
 
 `root`コマンドでROOTの対話型シェル（Rint）を起動できます。
