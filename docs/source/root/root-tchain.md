@@ -2,14 +2,19 @@
 
 ```cpp
 TChain *chain = new TChain(
-    "tree",        // name: 読み込むTTreeの名前
-    "tree title",  // title: TChainのタイトルや説明。空欄でもOK
+    "events",      // name
+    "Event data",  // title
 );
 ```
 
-`TChain`クラスは、同じ構造の`TTree`を複数連結して、
-ひとつの`TTree`に変換できます。
-連結後の`TChain`は、通常の`TTree`と同じように使用できます。
+`TChain`は、同じ構造の`TTree`を複数連結して、ひとつの`TTree`として扱えるようにするクラスです。
+
+第一引数（`name`）には、連結する`TTree`の名前を指定します。
+連結するすべての`TTree`は、同じ名前でなければなりません。
+第二引数（`title`）は、`TChain`のタイトルや説明を指定します。
+空欄でも問題ありません。
+
+`TChain`クラスは`TTree`クラスを継承しているため、`TTree`と同じように`GetEntry`や`SetBranchAddress`などのメソッドを使用できます。
 
 ## TTreeを追加したい（`TChain::Add`）
 
@@ -20,39 +25,9 @@ chain->Add("../anadata/CALIB_RUN11.root");
 chain->Add("../anadata/CALIB_RUN12.root");
 ```
 
-`TChain::Add`で、ファイルパスを指定して`TTree`を連結できます。
-ファイルパスはワイルドカード（`*.root`）でも指定できます。
-
-## イベント数を知りたい（`TChain::GetEntries`）
-
-```cpp
-Long64_t nentries = chain->GetEntries();
-```
-
-`TChain::GetEntries`で、連結したすべてのイベント数を取得できます。
-
-## ブランチを取得したい（`TChain::SetBranchAddress`）
-
-```cpp
-Float_t energy_deposit;
-chain->SetBranchAddress("energy_deposit", &energy_deposit);
-```
-
-`TChain::SetBranchAddress`で、ブランチを取得できます。
-連結したすべての`TTree`のブランチにアクセスできます。
-
-## ループ処理したい（`TChain::GetEntry`）
-
-```cpp
-Long64_t nentries = chain->GetEntries();
-for (Long64_t i = 0; i < nentries; ++i) {
-    chain->GetEntry(i);
-    // energy_depositを使用した処理
-}
-```
-
-`TChain::GetEntry`で、イベントごとにデータを取得できます。
-連結したすべての`TTree`のイベントを順番に処理できます。
+`TChain::Add`はファイルを連結するメソッドです。
+第一引数にファイルパスを指定してします。
+ファイルパスはワイルドカード（`*.root`）で指定できます。
 
 ## ファイル数を知りたい（`TChain::GetNfiles`）
 
