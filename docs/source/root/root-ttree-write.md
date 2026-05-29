@@ -4,36 +4,36 @@
 #include <TTree.h>
 #include <TFile.h>
 
-TFile *file = new TFile("output.root", "recreate");
+void macro() {
+    TFile *file = new TFile("output.root", "recreate");
 
-TTree *tree = new TTree("tree", "Event data");
-Int_t run = 0;
-tree->Branch("run", &run, "run/I");
+    TTree *tree = new TTree("tree", "Event data");
+    Int_t run = 0;
+    tree->Branch("run", &run, "run/I");
 
-run = 2025;
-tree->Fill();
+    run = 2025;
+    tree->Fill();
 
-tree->Write();
-file->Close();
+    tree->Write();
+    file->Close();
 ```
 
-`TTree::Write`メソッドでツリーをROOTファイルに保存します。
+`TTree::Write`メソッドでツリーをROOTファイルに保存できます。
 ツリーを保存するには、`TFile`を作成してからツリーを書き込む必要があります。
 
 ```python
 import ROOT
 
-file = ROOT.TFile("output.root", "recreate")
+def macro():
+    with ROOT.TFile("output.root", "recreate") as file:
+        tree = ROOT.TTree("tree", "Event data")
+        run = ROOT.ctypes.c_int()
+        tree.Branch("run", run, "run/I")
 
-tree = ROOT.TTree("tree", "Event data")
-run = ROOT.ctypes.c_int()
-tree.Branch("run", run, "run/I")
+        run.value = 2025
+        tree.Fill()
 
-run.value = 2025
-tree.Fill()
-
-tree.Write()
-file.Close()
+        tree.Write()
 ```
 
 ## メソッドのシグネチャ

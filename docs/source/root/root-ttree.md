@@ -3,63 +3,30 @@
 ```cpp
 #include <TTree.h>
 
-// TTree::TTree(name, title)
-TTree *tree = new TTree(
-    "mytree",       // name
-    "example tree"  // title
-);
+void macro() {
+    TTree *tree = new TTree(
+        "events",       // name
+        "event data"  // title
+    );
+}
 ```
 
-`TTree`はROOTでイベントデータを管理するためのクラスです。
-`TTree::TTree`コンストラクターで`TTree`オブジェクトを作成できます。
-`name`はTTreeの識別子で、プログラム内でTTreeを参照する際に使用します。
-`title`はTTreeの説明やタイトルを設定するための文字列です。
+`TTree`はROOTのデータ構造の中核となるクラスです。
+イベントごとにデータを効率的に管理できるのが特徴で、物理実験のデータ保存・解析に広く使用されています。
+`TTree`の列をブランチと呼び、行をエントリーと呼びます。
 
-`TTree`は高エネルギー物理実験のデータ保存・解析に広く使用されている形式です。
-イベントごとにデータを効率的に保存し、あとから高速にアクセスできるように設計されています。
+第一引数（`name`）はTTreeの識別子です。
+マクロ内や`TFile`内で一意となる名前を指定します。
 
-:::{note}
-
-古いドキュメントやサンプルでは`TNtuple`が紹介されていることがありますが、現在は`TTree`を使用すればOKです。
-
-:::
-
-:::{hint}
-
-さらに歴史をさかのぼると、Fortranで書かれたHBOOKの時代から`Ntuple`という概念が存在していました。
-ROOTの`TNtuple`はその名残で、単純な構造のTreeを提供していました。
-`TTree`は`TNtuple`の機能を内包をしており、より柔軟で高機能なデータ構造を提供しています。
-
-ROOT6.34以降では、
-`TTree`の機能がさらに強化され、
-`RDataFrame`などの新しいデータ分析フレームワークも登場しています。
-
-:::
+第二引数（`title`）はTTreeを説明する文字列です。
+文字数の上限は255文字で、TTreeの内容を簡潔に説明するために使用されます。
 
 ```python
 from ROOT import TTree
 
-# Pythonでの作成
-tree = TTree("mytree", "example tree")
+def macro():
+    tree = TTree("events", "event data")
 ```
-
-## ファイルに保存したい（`TTree::Write`）
-
-```cpp
-#include <TFile.h>
-
-// TTreeを作成
-// ...（前のコードと同様）
-
-// TTreeをファイルに保存
-TFile *file = new TFile("tree.root", "RECREATE");
-tree->Write();  // TTreeをファイルに書き込む
-file->Close();  // ファイルを閉じる
-```
-
-`TTree`は`TFile`に保存できます。
-`TTree::Write`メソッドでTTreeを書き込みます。
-複数の`TTree`を作成した場合は、`TTree`ごとに`Write`することで、同じファイルに保存できます。
 
 ## ファイルから読み込みたい
 
