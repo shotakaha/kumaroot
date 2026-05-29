@@ -1,159 +1,37 @@
-# イベントを処理したい（`TTree::GetEntry`）
+# イベントを取得したい（`TTree::GetEntry`）
 
 ```cpp
-#include <TTree.h>
-#include <TFile.h>
-#include <iostream>
-
-TFile *file = TFile::Open("data.root");
-TTree *tree = (TTree *)file->Get("tree");
-
-Float_t x;
-tree->SetBranchAddress("x", &x);
-
-// エントリー0を取得
-tree->GetEntry(0);
-std::cout << "Entry 0: x = " << x << std::endl;
+// 100番目のイベント情報を取得
+tree->GetEntry(100);
 ```
 
-`TTree::GetEntry`メソッドで指定したエントリーのデータをメモリに読み込みます。
-ブランチに設定されたアドレスの変数にデータが格納されます。
-
-```python
-from ROOT import TFile
-
-file = TFile("data.root")
-tree = file.Get("tree")
-
-x = 0
-tree.SetBranchAddress("x", x)
-
-# エントリー0を取得
-tree.GetEntry(0)
-print(f"Entry 0: x = {x}")
-```
-
-:::{note}
-
-`GetEntry(i)`を呼び出すたびに、
-ファイルから`i`番目のデータが読み込まれ、
-ブランチアドレスで設定した
-メモリアドレスに値が格納されます。
-
-ブランチアドレスを設定しておかないと
-データにアクセスできません。
-
-:::
-
-## メソッドのシグネチャ
+`TTree::GetEntry`メソッドで $i$ 番目のイベントを取得できます。
+イベントはブランチに設定されたアドレスの変数に格納されます。
 
 ```cpp
-Int_t GetEntry(Long64_t entry)
-```
+void macro() {
+    TFile *file = TFile::Open("data.root");
+    TTree *tree = (TTree *)file->Get("tree");
 
-### 引数と戻り値
+    Int_t event_id;
+    Float_t energy;
+    tree->SetBranchAddress("event_id", &event_id);
+    tree->SetBranchAddress("energy", &energy);
 
-**引数**:
+    long long n_entries = tree->GetEntries();
+    std::cout << "エントリー数: " << n_entries << std::endl;
 
-- **entry** - 取得するエントリー番号（0から開始）
-
-**戻り値**:
-
-- **Int_t**: 読み込んだバイト数。エラーの場合は負の値
-
-## 単一のエントリーを取得したい（`GetEntry`）
-
-```cpp
-#include <TFile.h>
-#include <TTree.h>
-#include <iostream>
-
-TFile *file = TFile::Open("data.root");
-TTree *tree = (TTree *)file->Get("tree");
-
-Int_t event_id;
-Float_t energy;
-tree->SetBranchAddress("event_id", &event_id);
-tree->SetBranchAddress("energy", &energy);
-
-// 5番目のエントリーを取得
-tree->GetEntry(5);
-
-std::cout << "Event ID: " << event_id << ", Energy: " << energy << std::endl;
-
-file->Close();
-```
-
-特定のエントリー番号のイベントをメモリに読み込み、ブランチのデータにアクセスできます。
-
-## ループ処理したい（`GetEntry`）
-
-```cpp
-#include <TFile.h>
-#include <TTree.h>
-#include <iostream>
-
-TFile *file = TFile::Open("data.root");
-TTree *tree = (TTree *)file->Get("tree");
-
-// すべてのエントリー数を取得
-Long64_t nentries = tree->GetEntries();
-
-Float_t x, y;
-tree->SetBranchAddress("x", &x);
-tree->SetBranchAddress("y", &y);
-
-for (Long64_t i = 0; i < nentries; i++) {
-    tree->GetEntry(i);
-
-    if (x > 100) {
-        std::cout << "Entry " << i << ": x=" << x << ", y=" << y << std::endl;
+    for (long long i = 0; i < n_entries; ++i) {
+        tree->GetEntry(i);
+        // エントリーiのデータにアクセス
+        std::cout << "Entry " << i << ": event_id=" << event_id << ", energy=" << energy << std::endl;
     }
+    file->Close();
 }
-
-file->Close();
 ```
 
-データ解析の基本となるループ処理です。
-`GetEntries`でファイル内のイベント数を取得し、各エントリーのデータを順番に処理できます。
-
-## 特定の条件のみ処理したい
-
-```cpp
-#include <TFile.h>
-#include <TTree.h>
-#include <iostream>
-
-TFile *file = TFile::Open("data.root");
-TTree *tree = (TTree *)file->Get("tree");
-
-Float_t pt, eta;
-tree->SetBranchAddress("pt", &pt);
-tree->SetBranchAddress("eta", &eta);
-
-// すべてのエントリー数を取得
-Long64_t nentries = tree->GetEntries();
-
-for (Long64_t i = 0; i < nentries; i++) {
-    tree->GetEntry(i);
-
-    // 条件を満たすエントリーのみ処理
-    if (pt > 20.0 && std::abs(eta) < 2.5) {
-        std::cout << "Entry " << i << ": pt=" << pt << ", eta=" << eta << std::endl;
-    }
-}
-
-file->Close();
-```
-
-条件フィルタリングを適用して、特定の条件を満たすエントリーのみを処理できます。
-
-## 関連メソッド
-
-- [SetBranchAddress](./root-ttree-setbranchaddress.md) - ブランチアドレスを設定
-- [GetEntries](./root-ttree-getentries.md) - エントリー数を取得
-- [Branch](./root-ttree-branch.md) - ブランチを作成
-- [Fill](./root-ttree-fill.md) - イベントを追加
+$i$ 番目のイベントを単一で取得することもできますが、
+通常は全イベント数（`TTree::GetEntries`）に対するループの中で、イベント情報を取得・選択して利用します。
 
 ## 参考リンク
 
