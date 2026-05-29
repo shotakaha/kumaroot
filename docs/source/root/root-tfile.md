@@ -53,73 +53,12 @@ tree.Print()
 f.Close()
 ```
 
-## ファイルを作成したい（`TFile`）
-
-```cpp
-TFile* f = new TFile("output.root", "recreate");
-if (!f || f->IsZombie()) {
-    std::cerr << "Error creating file: output.root" << std::endl;
-    return;
-}
+```{toctree}
+---
+maxdepth: 1
+---
+root-tfile-open
 ```
-
-`recreate`モードを指定してファイルを新規作成できます。
-同名のファイルが存在する場合は上書きされます。
-
-## ファイルを上書き防止したい（`TFile`）
-
-```cpp
-TFile *f = new TFile("output.root", "create");
-if (!f || f->IsZombie()) {
-    std::cerr << "Error: File already exists. Use 'recreate' mode to overwrite." << std::endl;
-    return;
-}
-```
-
-`create`もしくは`new`モードを指定してファイルを作成できます。
-同名のファイルが存在する場合はエラーになります。
-
-## ファイルを追記したい（`TFile`）
-
-```cpp
-TFile* f = new TFile("output.root", "update");
-if (!f || f->IsZombie()) {
-    std::cerr << "Error opening file for update: output.root" << std::endl;
-    return;
-}
-```
-
-`update`モードを指定してファイルを開くと、既存のファイルに追記できます。
-ファイルが存在しない場合は新規作成されます。
-
-## 上書き確認したい（`TFile`）
-
-```cpp
-#include <TFile.h>
-#include <filesystem>
-#include <iostream>
-
-std::string filename = "output.root";
-if (std::filesystem::exists(filename)) {
-    std::cout << "File " << filename << " already exists. Do you want to overwrite it? (y/n): ";
-    char response;
-    std::cin >> response;
-    if (response != 'y' && response != 'Y') {
-        std::cerr << "Aborted." << std::endl;
-        return;
-    }
-}
-
-TFile* f = new TFile(filename.c_str(), "recreate");
-```
-
-ファイルを作成するときに、同名のファイルが存在した場合にユーザーに上書き確認するサンプルです。
-C++17以降の`std::filesystem`を使用して、ファイルの存在を確認しています。
-ユーザーが上書きを拒否した場合は、処理を中断します。
-
-:::{note}
-`FileStat_t`と`TSystem::GetPathInfo`を使ってファイルの存在を確認する方法もありますが、C++17以降は`std::filesystem`を使う方が簡単なようです。
-:::
 
 ## オブジェクトを取得したい（`TFile::Get`）
 
