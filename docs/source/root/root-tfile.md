@@ -10,7 +10,7 @@ void macro() {
         return;
     }
     // ファイル操作のコード
-    TTree *tree = (TTree*)file->Get("tree");
+    TTree *tree = file->Get<TTree>("tree");
 
     // ファイルを閉じる
     file->Close();
