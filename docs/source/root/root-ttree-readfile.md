@@ -1,48 +1,21 @@
-# TTreeしたい（`TTree::ReadFile`）
+# テキストファイルを読み込みたい（`TTree::ReadFile`）
 
 ```cpp
-#include <TTree.h>
-#include <TFile.h>
-#include <TString.h>
-
-// TTreeオブジェクトを作成
-TTree *tree = new TTree("tree", "tree from text file");
-
-// テキストファイルを読み込み
-tree->ReadFile(
-    "input.csv",    // filename
-    "col1/I:col2/I:col3/D",  // branchDescriptor
-    ","  // delimiter
-);
-
-// ヒストグラムを作成
-tree->Draw("col1");
+tree->ReadFile("source.csv", "col1/I:col2/I:col3/D", ",");
 ```
 
-`TTree::ReadFile`メソッドで、テキスト形式のファイル（CSV、タブ区切り等）を`TTree`に変換できます。
-`filename`に読み込むファイルのパスを指定し、`branchDescriptor`でブランチの構造を定義します。
+`TTree::ReadFile`メソッドでテキスト形式のファイルを読み込み`TTree`に変換できます。
 
-`delimiter`で区切り文字を変更できます。
+第一引数（`filename`）に読み込むファイルのパスを指定します。
+第二引数（`branchDescriptor`）でブランチの構造を定義します。
+第三引数（`delimiter`）で区切り文字を変更できます。
 デフォルトはスペースになっています。
 
-:::{note}
+:::{hint}
 
-`std::file`や`std::ifstream`を使用してテキストファイルを読み込む方法もありますが、`TTree::ReadFile`はROOTのデータ構造に直接変換できるため、解析に便利です。
+`std::file`や`std::ifstream`を使用してテキストファイルを読み込む方法もありますが、`TTree::ReadFile`でROOTファイルに変換するのがもっともお手軽です。
 
 :::
-
-```python
-from ROOT import TTree, TFile
-
-# TTreeオブジェクトを作成
-tree = TTree("tree", "tree from text file")
-
-# テキストファイルを読み込み
-tree.ReadFile("input.csv", "col1/I:col2/I:col3/D", ",")
-
-# ヒストグラムを作成
-tree.Draw("col1")
-```
 
 ### データ型一覧
 
