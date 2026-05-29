@@ -17,13 +17,14 @@ tree->Write();
 
 ```cpp
 TFile *file1 = TFile::Open("file1.root", "recreate");
+// ここでは gDirectory が file1
 
 TFile *file2 = TFile::Open("file2.root", "recreate");
-
-// この時点で gDirectory = file2 になっているため
+// ここでは gDirectory = file2
 // tree->Writeするとfile2に保存される
 
-// file1をアクティブにする
+// gDirectoryをfile1に変更する
+// file1をアクティブにしてからWriteする
 file1->cd();
 tree->Write();
 ```
