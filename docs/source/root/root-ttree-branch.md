@@ -23,14 +23,16 @@ void macro() {
         run = i;
         energy = 1.0 + i * 0.01;
         n_hits = i % 10;
+        // エントリーを記録する
         tree->Fill();
     }
+    // ファイルに書き込む
     tree->Write();
     file->Close();
 }
 ```
 
-`TTree::Branch`メソッドで`TTree`にブランチを作成できます。
+`TTree::Branch`は`TTree`にブランチを作成するメソッドです。
 ブランチは変数を格納するための構造で、イベントごとに異なる値を保存できます。
 
 第一引数（`name`）にはブランチの名前を指定します。
