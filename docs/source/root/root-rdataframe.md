@@ -1,91 +1,53 @@
 # データフレームしたい（`RDataFrame`）
 
 ```cpp
-#include "ROOT/RDataFrame.hxx"
-
-ROOT::RDataFrame df("treeName", "file.root");
-
-// 条件でフィルタリング
-auto filtered_df = df.Filter("x > 0 && y < 100");
-
-// ヒストグラムを作成
-auto hist = filtered_df.Histo1D(
-    {"hist", "Distribution", 100, 0, 10},
-    "x"
-);
+// イベント数を指定してRDataFrameを作成
+auto df = ROOT::RDataFrame(100)
+    .Define("x", "gRandom->Gaus(0, 1)")
+    .Define("y", "gRandom->Gaus(0, 1)");
+df.Describe();
 ```
 
-`RDataFrame`は、ROOTにおいて[pandas](../pandas/pandas-usage.md)のような使い勝手を目指した高レベルAPIです。
-2017年ころに導入され、最新のROOTで推奨されているデータ分析フレームワークです。
-`RDataFrame`を使うと、TTreeのデータを簡単にフィルタリングしたり、ヒストグラムを作成したりできます。
-内部的にはTTreeやTChainを使用しているため、従来のROOTファイルとの互換性も保たれています。
+`RDataFrame`は、ROOTにおいて[pandas](../pandas/pandas-usage.md)のような宣言的なデータフレーム操作を提供するクラスです。
 
-```python
-import ROOT
+`TTree`の上に構築された解析専用の高レベルAPIで、従来の`TTree`のイベントループをベースとしたコードよりも簡潔で効率的なデータ分析が可能になります。
 
-df = ROOT.RDataFrame("treeName", "file.root")
-
-# 条件でフィルタリング
-filtered_df = df.Filter("x > 0 && y < 100")
-
-# ヒストグラムを作成
-hist = filtered_df.Histo1D(
-    ("hist", "Distribution", 100, 0, 10),
-    "x"
-)
-```
-
-## ROOTファイルを読み込みたい（単一ファイル）
+## ファイルから読み込みたい
 
 ```cpp
-#include "ROOT/RDataFrame.hxx"
-
-ROOT::RDataFrame df("treeName", "file.root");
+auto df = ROOT::RDataFrame("events", "source.root");
 ```
 
-ROOTファイルのTTreeをRDataFrameで読み込みます。
-
-## 複数のROOTファイルを読み込みたい
+`RDataFrame`はROOTファイルの`TTree`を直接読み込むことができます。
+第一引数（`name`）には`TTree`の名前、
+第二引数（`files`）にはファイル名を指定します。
 
 ```cpp
-#include "ROOT/RDataFrame.hxx"
-
-ROOT::RDataFrame df(
-    "treeName",
+auto df = ROOT::RDataFrame(
+    "events",
     {"file1.root", "file2.root", "file3.root"}
 );
 ```
 
-複数のROOTファイルを同時に処理できます。
-内部的にはTChainが使用されています。
+複数のファイルを同時に読み込むことができます。
 
-```python
-import ROOT
+:::{notes}
+`TTree`のブランチ構造を自動的にに認識して、データフレームの列として扱います。
+`TTree::SetBranchAddress`でブランチを設定する必要はありません。
 
-df = ROOT.RDataFrame(
-    "treeName",
-    ["file1.root", "file2.root", "file3.root"]
-)
+:::
+
+## `TTree`を読み込みたい
+
+```cpp
+TFile *source_file = TFile::Open("source.root");
+TTree *tree = source_file->Get<TTree>("events");
+
+auto df = ROOT::RDataFrame(tree);
 ```
 
-複数ファイルの処理も同じインターフェイスで対応できます。
-
-## 背景情報
-
-ROOTは1995年にリリースされたときから`TTree`というデータ構造を軸にしていました。
-しかし、LHC Run4の開始に合わせて、`RDataFrame`や`RNTuple`といった
-よりモダンなフレームワークへと置き換えるというロードマップを描いています。
-
-RDataFrameは従来のTTreeに比べて：
-
-- 直感的なAPI設計
-- より効率的なメモリ管理
-- 並列処理の容易さ
-
-を特徴としています。
-
-RDataFrameはTTreeを置き換えるものではなく、TTreeの上に構築された解析用の高レベルAPIです。
-RDataFrameを使用することで、従来のTTreeベースのコードよりも簡潔で効率的なデータ分析が可能になります。
+`RDataFrame`は、すでに読み込んだ`TTree`を引数にして作成することもできます。
+この方法は、`TTree`を読み込む際に特別な設定が必要な場合に便利です。
 
 ## リファレンス
 
