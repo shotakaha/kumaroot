@@ -4,14 +4,21 @@
 TCanvas *c1 = new TCanvas(
     "c1",         // name
     "My Canvas",  // title
-    800,          // width: default 800
-    600           // height: default 600
+    1200,         // ww: default 800
+    800           // wh: default 600
 );
 ```
 
 `TCanvas`はキャンバスを管理するクラスです。
-ヒストグラムやグラフは`TCanvas`上に描画されます。
-内部的には`TPad`を親クラスとしており、複数のパッドを持つことができます。
+アクティブな描画領域は`gPad`というグローバルポインターで参照できます。
+ヒストグラムやグラフは`gPad`に描画されます。
+
+第一引数（`name`）にオブジェクト名、
+第二引数（`title`）にウィンドウのタイトルを指定できます。
+
+キャンバス作成時に、キャンバスのサイズを変更できます。
+幅（`ww`）と高さ（`wh`）を調整できます。
+デフォルトは幅800ピクセル、高さ600ピクセルです。
 
 ```cpp
 #include <TCanvas.h>
@@ -27,9 +34,6 @@ h->Draw();
 c->SaveAs("output.png");
 ```
 
-`TCanvas`はROOTの描画領域を提供するクラスです。
-ヒストグラムやグラフは`TCanvas`上に描画されます。
-
 ```python
 from ROOT import TCanvas, TH1D, TRandom3
 
@@ -42,58 +46,6 @@ for i in range(10000):
 h.Draw()
 
 c.SaveAs("output.png")
-```
-
-## キャンバスのサイズを変えたい
-
-```cpp
-#include <TCanvas.h>
-
-// TCanvas(name, title, width, height)
-TCanvas *c = new TCanvas("c1", "My Canvas", 1200, 800);
-```
-
-引数はそれぞれ、識別名・タイトル・幅（ピクセル）・高さ（ピクセル）です。
-引数なしで作成した場合はデフォルトサイズになります。
-
-## 名前を変えたい（`TCanvas::SetName`）
-
-```cpp
-#include <TCanvas.h>
-
-TCanvas *c = new TCanvas("c1", "My Canvas", 800, 600);
-c->SetName("new_name");
-```
-
-`SetName`でキャンバスの識別名を変更できます。
-識別名はROOTファイルに保存するときのキーになります。
-
-```python
-from ROOT import TCanvas
-
-c = TCanvas("c1", "My Canvas", 800, 600)
-c.SetName("new_name")
-```
-
-## タイトルを変えたい（`TCanvas::SetTitle`）
-
-```cpp
-#include <TCanvas.h>
-
-TCanvas *c = new TCanvas("c1", "My Canvas", 800, 600);
-c->SetTitle("New Title");
-c->Update();
-```
-
-`SetTitle`でウィンドウのタイトルバーに表示される文字列を変更できます。
-変更後に`Update`を呼ぶと即座に反映されます。
-
-```python
-from ROOT import TCanvas
-
-c = TCanvas("c1", "My Canvas", 800, 600)
-c.SetTitle("New Title")
-c.Update()
 ```
 
 ## バッチモードしたい（`gROOT::SetBatch`）
