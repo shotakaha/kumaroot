@@ -177,7 +177,7 @@ root-rdataframe-histo1d
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 root-tfile
 ```
