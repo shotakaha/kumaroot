@@ -2,7 +2,7 @@
 
 ```cpp
 void macro() {
-    TFile *file = new TFile("output.root", "recreate");
+    TFile *file = new TFile::Open("output.root", "RECREATE");
     TTree *tree = new TTree("events", "Event data");
 
     // ブランチ変数を定義する
