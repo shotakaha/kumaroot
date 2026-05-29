@@ -59,21 +59,8 @@ maxdepth: 1
 ---
 root-tfile-open
 root-tfile-get
+root-tfile-cd
 ```
-
-## ディレクトリを変更したい（`TFile::cd`）
-
-```cpp
-#include <TFile.h>
-TFile *fout = new TFile("output.root", "recreate");
-fout->cd("subdir");  // "subdir"ディレクトリに移動
-tree->Write();  // "subdir"に書き込まれる
-fout->Close();
-```
-
-`TFile::cd`で、ファイル内のディレクトリを変更できます。
-ROOTファイルにはディレクトリ構造を持たせることができます。
-`cd()`でそのディレクトリに移動してから`Write()`を呼び出すことで、指定したディレクトリにオブジェクトを保存できます。
 
 ## イベント取得したい
 
