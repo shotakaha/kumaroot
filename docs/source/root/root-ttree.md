@@ -5,7 +5,7 @@
 #include <TTree.h>
 
 void macro() {
-    TFile *file = new TFile("output.root", "recreate");
+    TFile *file = TFile::Open("output.root", "recreate");
     TTree *tree = new TTree("events", "Event Data");
 
     tree->Branch("run", &run, "run/I");

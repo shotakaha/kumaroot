@@ -16,9 +16,9 @@ tree->Write();
 ## 保存先を変更したい
 
 ```cpp
-TFile *file1 = new TFile("file1.root", "recreate");
+TFile *file1 = TFile::Open("file1.root", "recreate");
 
-TFile *file2 = new TFile("file2.root", "recreate");
+TFile *file2 = TFile::Open("file2.root", "recreate");
 
 // この時点で gDirectory = file2 になっているため
 // tree->Writeするとfile2に保存される

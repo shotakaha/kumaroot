@@ -87,7 +87,7 @@ tree->Branch("hit_energy", hit_energy, "hit_energy[n_hits]/F");
 
 ```cpp
 void macro() {
-    TFile* file = new TFile::Open("output_vector.root", "RECREATE");
+    TFile* file = TFile::Open("output_vector.root", "RECREATE");
     TTree *tree = new TTree("events", "Event data");
 
     std::vector<double> hit_energy;
