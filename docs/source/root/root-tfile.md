@@ -58,27 +58,8 @@ f.Close()
 maxdepth: 1
 ---
 root-tfile-open
+root-tfile-get
 ```
-
-## オブジェクトを取得したい（`TFile::Get`）
-
-```cpp
-#include <TFile.h>
-TFile *fin = new TFile("input.root", "read");
-TH1D *h1 = (TH1D*)fin->Get("histogram_name");
-fin->Close();
-```
-
-`TFile::Get`で、ファイルからオブジェクトを取得できます。
-`TObject*`型のポインターが返されるため、適切な型にキャストする必要があります。
-このサンプルでは、`TH1D*`型にキャストしています。
-
-:::{note}
-
-`auto`キーワードで型推論に任せることもできますが、
-この場合は型指定を明示したほうが安全です。
-
-:::
 
 ## ディレクトリを変更したい（`TFile::cd`）
 
