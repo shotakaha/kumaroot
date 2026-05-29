@@ -1,51 +1,57 @@
 # キャンバスを分割したい（`TCanvas::Divide`）
 
 ```cpp
-#include <TCanvas.h>
-#include <TH1D.h>
-
-TCanvas *c = new TCanvas("c", "Divided Canvas", 1200, 800);
-
-// 2列×3行に分割（6つの領域）
-c->Divide(2, 3);
-
-// 5番目の領域に描画
-c->cd(5);
+c->Divide(
+    1,  // nx: 列数
+    1,  // ny: 行数
+    0.01,  // xmargin: Xマージン（0.0-1.0）
+    0.01   // ymargin: Yマージン（0.0-1.0）
+    0,     // color: パッドの背景色（オプション）
+)
 ```
 
-`TCanvas::Divide`でキャンバスを複数の領域に分割できます。
-`TCanvas::cd`で描画対象の領域を選択します。
+`TCanvas::Divide`でキャンパスを複数のパッド領域（`TPad`）に分割できます。
 
-```python
-from ROOT import TCanvas
-
-c = TCanvas("c", "Divided Canvas", 1200, 800)
-
-c.Divide(2, 3)
-c.cd(5)
-```
-
-## マージンを調整したい
+第一引数（`nx`）と第二引数（`ny`）で列数と行数を指定します。
+第三引数（`xmargin`）と第四引数（`ymargin`）でパッド間のマージンを変更できます。
+第五引数（`color`）でパッド領域の背景色を変更できます。
 
 ```cpp
-#include <TCanvas.h>
-#include <TH1D.h>
+// +---+---+
+// | 1 | 2 |
+// +---+---+
+// | 3 | 4 |
+// +---+---+
+// | 5 | 6 |
+// +---+---+
 
-TCanvas *c = new TCanvas("c", "Canvas", 1200, 800);
+c->Divide(2, 3);
 
-// X・Yマージンを5%に設定（デフォルトは1%）
-c->Divide(2, 3, 0.05, 0.05);
+// 5番目のパッドを選択
+c->cd(5);
 
-for (int i = 1; i <= 6; i++) {
-    c->cd(i);
-    TH1D *h = new TH1D(Form("h%d", i), Form("Histo %d", i), 50, -3, 3);
-    h->FillRandom("gaus", 1000);
-    h->Draw();
-}
+// 全体を選択
+c->cd(0);
 ```
 
-`TCanvas::Divide`の第3引数と第4引数でXマージンとYマージンを指定できます。
+上記のサンプルは、キャンバスを2列3行に分割しています。
+`TCanvas::cd`で描画対象のパッドを選択できます。
+このサンプルでは5番目のパッドが選択しています。
+`cd(0)`でキャンバス全体を選択できます。
+
+## マージンを調整したい（`TPad::SetLeftMargin`）
+
+```cpp
+gPad->SetLeftMargin(0.15);  // 左マージンを15%に設定（default: 0.10）
+gPad->SetBottomMargin(0.12); // 下マージンを12%に設定（default: 0.10）
+gPad->SetRightMargin(0.05); // 右マージンを5%に設定（default: 0.05）
+gPad->SetTopMargin(0.05);   // 上マージンを5%に設定（default: 0.05）
+```
+
+`TPad::SetLeftMargin`や`TPad::SetBottomMargin`などのメソッドで、
+キャンバスの余白を調整できます。
 マージンは領域の端から描画領域までのスペースで、デフォルトは0.01（1%）です。
+軸ラベルが切れないように左と下のマージンを広めに設定するとよいです。
 
 ## 描画領域を切り替えたい（`TCanvas::cd`）
 

@@ -1,6 +1,19 @@
 # キャンバスしたい（`TCanvas`）
 
 ```cpp
+TCanvas *c1 = new TCanvas(
+    "c1",         // name
+    "My Canvas",  // title
+    800,          // width: default 800
+    600           // height: default 600
+);
+```
+
+`TCanvas`はキャンバスを管理するクラスです。
+ヒストグラムやグラフは`TCanvas`上に描画されます。
+内部的には`TPad`を親クラスとしており、複数のパッドを持つことができます。
+
+```cpp
 #include <TCanvas.h>
 #include <TH1D.h>
 #include <TRandom.h>
