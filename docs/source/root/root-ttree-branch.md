@@ -4,7 +4,7 @@
 #include <TFile.h>
 #include <TTree.h>
 
-void macros() {
+void macro() {
     TFile* file = new TFile::Open("output.root", "RECREATE");
     TTree *tree = new TTree("events", "Event data");
 
@@ -52,13 +52,32 @@ void macros() {
 
 ```python
 import ROOT
+import numpy as np
 
-tree = ROOT.TTree("events", "Event data")
-run = ROOT.ctypes.c_int()
-tree.Branch("run", run, "run/I")
+def macro():
 
-run.value = 2025
-tree.Fill()
+    with ROOT.TFile("output.root", "RECREATE") as f:
+        tree = ROOT.TTree("events", "Event data")
+
+        # ブランチ変数を定義する（arrayもしくはnumpy.array）
+        run = np.zeros(1, dtype=np.int32)  # イベント番号
+        energy = np.zeros(1, dtype=np.float64)  # エネルギー
+        n_hits = np.zeros(1, dtype=np.int32)  # ヒット数
+        fadc = np.zeros(100, dtype=np.int32)  # FADCの波形データ（最大100サンプル）
+
+        # ブランチを作成する
+        tree.Branch("run", run, "run/I")
+        tree.Branch("energy", energy, "energy/D")
+        tree.Branch("n_hits", n_hits, "n_hits/I")
+        tree.Branch("fadc", fadc, "fadc[100]/I")
+
+        # イベントループ
+        for i in range(1000):
+            run[0] = i
+            energy[0] = 1.0 + i * 0.01
+            n_hits[0] = i % 10
+            tree.Fill()
+        tree.Write()
 ```
 
 ## 可変長配列したい（`TTree::Branch`）
@@ -86,7 +105,7 @@ tree->Branch("hit_energy", hit_energy, "hit_energy[n_hits]/F");
 ## 可変長配列したい（`std::vector`）
 
 ```cpp
-void macros() {
+void macro() {
     TFile* file = new TFile::Open("output_vector.root", "RECREATE");
     TTree *tree = new TTree("events", "Event data");
 
