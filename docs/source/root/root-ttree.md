@@ -1,13 +1,23 @@
 # TTreeしたい（`TTree`）
 
 ```cpp
+#include <TFile.h>
 #include <TTree.h>
 
 void macro() {
-    TTree *tree = new TTree(
-        "events",       // name
-        "event data"  // title
-    );
+    TFile *file = new TFile("output.root", "recreate");
+    TTree *tree = new TTree("events", "Event Data");
+
+    tree->Branch("run", &run, "run/I");
+    tree->Branch("energy", &energy, "energy/D");
+
+    for (int i = 0; i < 1000; ++i) {
+        run = i;
+        energy = 1.0 + i * 0.01;
+        tree->Fill();
+    }
+    tree->Write();
+    file->Close();
 }
 ```
 
@@ -28,19 +38,19 @@ def macro():
     tree = TTree("events", "event data")
 ```
 
-## ファイルから読み込みたい
-
-```cpp
-#include <TFile.h>
-#include <TTree.h>
-
-// ファイルからTTreeを読み込む
-TFile *file = new TFile("tree.root", "READ");
-TTree *tree = (TTree*)file->Get("mytree");  // "mytree"はTTreeの名前
+```{toctree}
+---
+maxdepth: 1
+---
+root-ttree-branch
+root-ttree-draw
+root-ttree-entries
+root-ttree-entry
+root-ttree-fill
+root-ttree-print
+root-ttree-readfile
+root-ttree-write
 ```
-
-`TFile::Get`メソッドで、ファイルからTTreeを読み込むことができます。
-読み込んだTTreeは、元のTTreeと同じ名前でアクセスできます。
 
 ## リファレンス
 
