@@ -1,4 +1,4 @@
-# TTreeを描画したい（`TTree::Draw`）
+# ブランチの分布を確認したい（`TTree::Draw`）
 
 ```cpp
 tree->Draw(
@@ -10,9 +10,12 @@ tree->Draw(
 );
 ```
 
-`TTree::Draw`でTTreeの変数を描画できます。
-`varexp`に描画したい軸を設定します。
-`selection`にフィルター条件を設定できます。
+`TTree::Draw`でブランチの分布をクイックチェックできます。
+第一引数（`varexp`）に確認したいブランチ名を指定します。
+第二引数（`selection`）にフィルター条件を指定できます。
+第三引数（`option`）で描画オプションを指定できます。
+第四引数（`nentries`）で描画するエントリー数を制限できます。
+第五引数（`firstentry`）で描画開始エントリーを指定できます。
 
 ```cpp
 tree->Draw(
