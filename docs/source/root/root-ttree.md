@@ -43,6 +43,7 @@ def macro():
 maxdepth: 1
 ---
 root-ttree-branch
+root-ttree-setbranchaddress
 root-ttree-print
 root-ttree-draw
 root-ttree-entries
