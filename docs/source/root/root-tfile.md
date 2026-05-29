@@ -3,24 +3,34 @@
 ```cpp
 #include <TFile.h>
 
-TFile* f = TFile::Open("source.root");
-if (!f || f->IsZombie()) {
-    std::cerr << "Error opening file: " << "source.root" << std::endl;
-    return;
-}
+void macro() {
+    TFile *file = TFile::Open("output.root", "recreate");
+    if (!file || file->IsZombie()) {
+        std::cerr << "Error creating file: output.root" << std::endl;
+        return;
+    }
+    // ファイル操作のコード
+    TTree *tree = (TTree*)file->Get("tree");
 
-TTree* tree = (TTree*)f->Get("events");
-f->Close();
+    // ファイルを閉じる
+    file->Close();
+}
 ```
 
 `TFile`はROOTファイルを操作するためのクラスです。
-`TFile::Open`は静的メソッドで、ファイルを読み取り専用で開きます。
-`TFile`の`read`モードに相当します。
+`TFile::Open`はファイルを開くための静的メソッドです。
 
-第一引数にはファイル名を指定します。
-ファイル名は相対パスや絶対パスで指定できまが、
-`~`を使用したホームディレクトリの指定はサポートされていません。
-ファイルが正常に開けない場合は、`nullptr`を返すか、`IsZombie()`が`true`になります。
+第一引数（`name`）にはファイル名を指定します。
+ファイルが正常に開けない場合は`nullptr`を返すか、`IsZombie()`が`true`になります。
+
+:::{note}
+
+`TFile::Open`は、リモートにあるファイルや、ROOTの仮想ファイルシステムを利用したファイルアクセスもサポートしています。
+
+ローカルにあるファイルを開くだけであれば
+`new TFile`でも問題ありません。
+
+:::
 
 `TFile::Get`で、ファイル内のオブジェクトを名前で取得できます。
 `TObject*`型のポインターが返されるため、適切な型にキャストする必要があります。
