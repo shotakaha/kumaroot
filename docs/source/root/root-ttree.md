@@ -43,11 +43,11 @@ def macro():
 maxdepth: 1
 ---
 root-ttree-branch
+root-ttree-print
 root-ttree-draw
 root-ttree-entries
 root-ttree-entry
 root-ttree-fill
-root-ttree-print
 root-ttree-readfile
 root-ttree-write
 ```
