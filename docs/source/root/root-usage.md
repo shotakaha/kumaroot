@@ -168,6 +168,7 @@ maxdepth: 1
 ---
 root-rdataframe
 root-rdataframe-csv
+root-rdataframe-define
 root-rdataframe-filter
 root-rdataframe-stats
 root-rdataframe-histo1d
