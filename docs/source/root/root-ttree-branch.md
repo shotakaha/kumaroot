@@ -1,35 +1,14 @@
 # ブランチを作成したい（`TTree::Branch`）
 
 ```cpp
-#include <TFile.h>
-#include <TTree.h>
+// Define branch variables
+int run{0};          // イベント番号
+double energy{0.0};  // エネルギー
 
-void macro() {
-    TFile* file = new TFile::Open("output.root", "RECREATE");
-    TTree *tree = new TTree("events", "Event data");
-
-    int run{0};          // イベント番号
-    double energy{0.0};  // エネルギー
-    int n_hits{0};       // ヒット数
-    int fadc[100]{0};    // FADCの波形データ（最大100サンプル）
-
-    // Branch("name", address, "leaflist")
-    tree->Branch("run", &run, "run/I");
-    tree->Branch("energy", &energy, "energy/D");
-    tree->Branch("n_hits", &n_hits, "n_hits/I");
-    tree->Branch("fadc", fadc, "fadc[100]/I");
-
-    for (int i = 0; i < 1000; ++i) {
-        run = i;
-        energy = 1.0 + i * 0.01;
-        n_hits = i % 10;
-        // エントリーを記録する
-        tree->Fill();
-    }
-    // ファイルに書き込む
-    tree->Write();
-    file->Close();
-}
+// Create branches and associate them with the variables
+TTree *tree = new TTree("events", "Event data");
+tree->Branch("run", &run, "run/I");
+tree->Branch("energy", &energy, "energy/D");
 ```
 
 `TTree::Branch`は`TTree`にブランチを作成するメソッドです。
