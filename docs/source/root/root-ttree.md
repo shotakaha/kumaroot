@@ -51,6 +51,7 @@ root-ttree-entry
 root-ttree-fill
 root-ttree-readfile
 root-ttree-write
+root-tchain
 ```
 
 ## リファレンス

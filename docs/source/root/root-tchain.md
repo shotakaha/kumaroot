@@ -16,6 +16,13 @@ TChain *chain = new TChain(
 
 `TChain`クラスは`TTree`クラスを継承しているため、`TTree`と同じように`GetEntry`や`SetBranchAddress`などのメソッドを使用できます。
 
+:::{note}
+
+`TChain`は読み取り専用です。
+`Tree::Branch`や`Tree::Fill`などの書き込み用のメソッドは使用できません。
+
+:::
+
 ## TTreeを追加したい（`TChain::Add`）
 
 ```cpp

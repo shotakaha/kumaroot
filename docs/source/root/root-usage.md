@@ -151,15 +151,6 @@ maxdepth: 2
 root-ttree
 ```
 
-## TChainしたい
-
-```{toctree}
----
-maxdepth: 1
----
-root-tchain
-```
-
 ## RNTupleしたい
 
 ```{toctree}
