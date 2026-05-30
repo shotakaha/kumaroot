@@ -1,0 +1,7 @@
+services:
+  almalinux:
+    image: almalinux:9
+    container_name: my-almalinux
+    tty: true
+    stdin_open: true
+    command: /bin/bash

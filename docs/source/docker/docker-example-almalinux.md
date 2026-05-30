@@ -1,14 +1,9 @@
 # AlmaLinuxしたい（`almalinux`）
 
-```yaml
-# filename: compose.yaml
-services:
-  almalinux:
-    image: almalinux:9
-    container_name: my-almalinux
-    tty: true
-    stdin_open: true
-    command: /bin/bash
+```{literalinclude} ../../examples/docker/almalinux.yaml
+---
+language: yaml
+---
 ```
 
 ```console
