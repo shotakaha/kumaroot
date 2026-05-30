@@ -35,6 +35,16 @@ ROOT 6.36で安定版としてリリースされました。
 `RNTuple`では、書き込み専用の`RNTupleWriter`と読み込み専用の`RNTupleReader`に分かれています。
 これにより責務が明確となり、現代のストレージ技術に最適化できるようになっています。
 
+```{toctree}
+---
+maxdepth: 1
+---
+root-rntuple-model
+root-rntuple-writer
+root-rntuple-reader
+root-rntuple-importer
+```
+
 :::{note}
 C++の`std::tuple`やPythonの`tuple`（タプル）のように、`tuple`は「1組のデータ」を表す概念です。
 そして、`Ntuple`は任意の`tuple`を格納できるデータ構造です。
@@ -50,150 +60,10 @@ PAWの`HBOOK NTuple`、ROOTの`TTree`と新しい`RNTuple`のどれも、
 
 :::
 
-## スキーマを定義したい（`RNTupleModel::Create`）
+## リファレンス
 
-```cpp
-auto model = ROOT::RNTupleModel::Create();
-auto event_id = model->MakeField<int>("event_id");
-auto energy = model->MakeField<float>("energy");
-```
-
-`RNTupleModel::Create`でスキーマを定義します。
-スキーマのフィールドは、`MakeField<T>()`で追加します。
-`T`にフィールドのデータ型を指定し、引数にフィールド名を文字列で指定します。
-戻り値のポインター名は任意ですが、フィールド名と同
-じにするとわかりやすいです。
-
-:::{note}
-スキーマの作成は、`TTree::Branch`の設定に相当する作業です。
-`TTree::Branch`では、文字列でフィールドの型と名前を指定していましたが、
-`MakeField<T>()`ではテンプレートメソッドで型を明示することで、より安全にスキーマを定義できます。
-:::
-
-## ファイルを作成したい（`RNTupleWriter::Recreate`）
-
-```cpp
-auto writer = ROOT::RNTupleWriter::Recreate(
-    std::move(model),
-    "events",
-    "output.root"
-);
-```
-
-`RNTupleWriter::Recreate()`で`NTuple`を新規作成します。
-第一引数（`model`）にスキーマ（`RNTupleModel`）を渡します。
-`std::move(model)`で、スキーマの所有権を`NTupleWriter`に移しています。
-第二引数は`RNTuple`の名前、第三引数は出力ファイル名です。
-
-`RNTupleWriter`は内部で`TFile`を使っています。
-スコープを抜けると自動的に`Commit()`と`Close()`が呼ばれます。
-
-:::{note}
-
-「所有権」は、そのオブジェクトを削除する権限のことです。
-`std::move`は、C++のムーブセマンティクスを利用して、オブジェクトの所有権を移すための関数です。
-これにより、スキーマをコピーすることなく、効率的に
-`RNTupleModel`から`RNTupleWriter`へ所有権を移すことができます。
-`RNTupleWriter`がスキーマの所有権を持っているため、`RNTupleWriter`の寿命が終わると、スキーマも自動的にクリーンアップされます。
-
-:::
-
-## データを書き込みたい（`RNTupleWriter::Fill`）
-
-```cpp
-for (int i = 0; i < 100; i++) {
-    *event_id = i;
-    *energy = 100.0f + i;
-    writer->Fill();
-}
-```
-
-`RNTupleWriter::Fill()`でデータを追加します。
-`Fill()`を呼ぶと、現在のフィールドの値が`Ntuple`に追加されます。
-
-このサンプルでは、
-`event_id`に0から99までの整数（`int`）を、
-`energy`に100.0から199.0までの浮動小数点数（`float`）をセットしています
-
-:::{note}
-`MakeField<T>()`で作成したフィールドは、ポインターとして値をセットできます。
-ポインターなので、`*event_id`のように先頭に`*`をつけて値を代入します。
-:::
-
-## ファイルを読み込みたい（`RNTupleReader::Open`）
-
-```cpp
-auto reader = ROOT::RNTupleReader::Open("events", "output.root");
-```
-
-`RNTupleReader::Open()`で`NTuple`を読み込みます。
-第一引数は`RNTuple`の名前、第二引数は入力ファイル名です。
-
-## データを読み込みたい（`RNTupleReader::GetView`）
-
-```cpp
-void macro() {
-    // Open RNTupleReader
-    auto reader = ROOT::RNTupleReader::Open("output.root");
-
-    // Get field views
-    auto view_event_id = reader->GetView<int>("event_id");
-    auto view_energy = reader->GetView<float>("energy");
-
-    // Loop over entries
-    for (auto entryIndex : *reader) {
-        int event_id = view_event_id[entryIndex];
-        float energy = view_energy[entryIndex];
-
-        // Process data...
-        std::cout << "Event ID: " << event_id << ", Energy: " << energy << std::endl;
-    }
-}
-```
-
-`RNTupleReader::GetView<T>()`はカラム単位の遅延ロードをするためのメソッドです。
-`T`にフィールドのデータ型を指定し、引数にフィールド名を文字列で指定します。
-戻り値は、指定したフィールドのビュー（`RNTupleView<T>`）です。
-
-イベントループは、`RNTupleReader`自体をイテレーターとして呼び出します。
-ループ内で、`view_event_id[entryIndex]`のように、ビューからエントリーごとに値を取得できます。
-
-:::{note}
-`GetView`しなかったカラムは、アクセスの対象外となります。
-これは`TTree::SetBranchStatus`のような機能に相当します。
-:::
-
-## TTreeをRNTupleに変換したい（`RNTupleImporter`）
-
-```cpp
-void macro() {
-    // Define importer
-    auto importer = ROOT::RNTupleImporter::Create(
-        "source.root",
-        "events",
-        "target.root"
-    );
-    importer->Import();
-}
-```
-
-`RNTupleImporter`は、既存の`TTree`を`RNTuple`に変換するためのクラスです。
-`RNTupleImporter::Create()`でインポーターを作成し、`Import()`で変換を実行します。
-第一引数は入力ファイル名、第二引数は`TTree`の名前、第三引数は出力ファイル名です。
-
-:::{note}
-すべてのブランチを、自動的に対応するフィールドに変換します。
-`TTree`の構造が複雑な場合や、特殊なデータ型を使用している場合は、専用の変換マクロを作成する必要があります。
-:::
-
-## 関連メソッド
-
-- [TTree::Branch](./root-ttree-branch.md) - TTreeでのブランチ作成
-- [TTree::Fill](./root-ttree-fill.md) - TTreeでのデータ追加
-- [TTree::Write](./root-ttree-write.md) - TTreeでのファイル保存
-
-## 参考リンク
-
-- [ROOT RNTuple Documentation](https://root.cern/doc/master/namespacesROOT_1_1Experimental.html)
+- [RNTuple Introduction](https://root.cern.ch/doc/master/group__NTuple.html)
+- [ROOT::RNTuple Class Reference](https://root.cern.ch/doc/master/classROOT_1_1RNTuple.html)
+- [ROOT::RNTupleReader Class Reference](https://root.cern.ch/doc/master/classROOT_1_1RNTupleReader.html)
+- [ROOT::RNTupleWriter Class Reference](https://root.cern.ch/doc/master/classROOT_1_1RNTupleWriter.html)
 - [RNTuple: Where are we now and what's next](https://root.cern/blog/rntuple-update/)
-- [ROOT Release Notes](https://root.cern/release-notes/)
