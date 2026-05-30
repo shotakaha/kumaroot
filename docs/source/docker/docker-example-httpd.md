@@ -1,12 +1,9 @@
 # Apacheしたい（``httpd``）
 
-```yaml
-services:
-  web:
-    image: httpd:2.4
-    container_name: my-httpd
-    ports:
-      - "8080:80"
+```{literalinclude} ../../examples/docker/httpd.yaml
+---
+language: yaml
+---
 ```
 
 ```console

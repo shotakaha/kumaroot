@@ -501,15 +501,10 @@ $ docker build -t my-python-app .
 
 ## docker-compose.yml
 
-```yaml
-version: "3"
-services:
-  python-app:
-    image: python:3.12-slim
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: python app.py
+```{literalinclude} ../../examples/docker/python3.yaml
+---
+language: yaml
+---
 ```
 
 ```console
