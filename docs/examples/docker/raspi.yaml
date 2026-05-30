@@ -1,0 +1,9 @@
+# compose.yaml
+services:
+  raspi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: raspi-dev
+    stdin_open: true
+    tty: true

@@ -38,16 +38,10 @@ ENTRYPOINT ["/bin/bash"]
 
 ### compose.yaml を作成
 
-```yaml
-# compose.yaml
-services:
-  raspi:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: raspi-dev
-    stdin_open: true
-    tty: true
+```{literalinclude} ../../examples/docker/raspi.yaml
+---
+language: yaml
+---
 ```
 
 ### 起動と実行
