@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -15,7 +15,7 @@ kernelspec:
 
 - https://docs.pydantic.dev/latest/
 
-```{code-cell} ipython3
+```{code-cell}
 from pydantic import BaseModel
 
 
@@ -31,11 +31,11 @@ us = UserSettings(settings="設定ファイル名")
 us
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 us.model_dump()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 us.model_dump_json()
 ```
 
@@ -45,7 +45,7 @@ us.model_dump_json()
 - モデルの設定の変更が必要
 - ``arbitrary_types_allowed=True``すると、該当のフィールドでバリデーションが効かなくなる
 
-```{code-cell} ipython3
+```{code-cell}
 from pydantic import BaseModel, ConfigDict
 import pandas as pd
 
@@ -68,7 +68,7 @@ us.model_dump()
 
 ``model_dump()``でシリアライズできる
 
-```{code-cell} ipython3
+```{code-cell}
 us.drive = 1
 us.model_dump()
 ```
@@ -76,7 +76,7 @@ us.model_dump()
 - ``model_dump_json()``はできない
 - ``PydanticSerializationError: Unable to serialize unknown type: <class 'pandas.core.frame.DataFrame'>``
 
-```{code-cell} ipython3
+```{code-cell}
 # us.model_dump_json()
 ```
 
@@ -84,7 +84,7 @@ us.model_dump()
 
 - ``pd.DataFrame``に対するバリデーションを自分で定義できる
 
-```{code-cell} ipython3
+```{code-cell}
 from pydantic import BaseModel, field_validator
 import pandas as pd
 from typing import Any
@@ -108,16 +108,16 @@ class UserSettings(BaseModel):
         return field_value
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 us = UserSettings(settings="設定ファイル名", drive=".")
 # us = UserSettings(settings="設定ファイル名", drive=".", data=pd.DataFrame({"time": []}))
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 us.model_dump()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # us.model_dump_json()
 ```
 
@@ -127,7 +127,7 @@ us.model_dump()
 - ``tomllib``で読み込み辞書型に変換
 - ``**dict``で展開して、クラスを初期化
 
-```{code-cell} ipython3
+```{code-cell}
 import tomllib
 from pydantic import BaseModel
 
@@ -148,7 +148,7 @@ UserSettings(**sd)
 
 階層構造（セクション）を持つ設定
 
-```{code-cell} ipython3
+```{code-cell}
 import tomllib
 import datetime
 from pydantic import BaseModel

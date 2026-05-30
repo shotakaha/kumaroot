@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -17,7 +17,7 @@ kernelspec:
 - `rsync`でリモートサーバーからローカルにデータを同期する
 - `ssh`ログインしてサーバー情報をファイルに出力する
 
-```{code-cell} ipython3
+```{code-cell}
 import os
 
 import pexpect
@@ -27,13 +27,13 @@ print(f"{pexpect.__version__=}")
 
 環境変数を読み込む
 
-```{code-cell} ipython3
+```{code-cell}
 import dotenv
 
 dotenv.load_dotenv()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 hostname = os.environ.get("HOST")
 username = os.environ.get("USER")
 password = os.environ.get("PASSWORD")
@@ -42,7 +42,7 @@ password = os.environ.get("PASSWORD")
 - `pexect.spwan`で`rsync`コマンドを実行する
 - ホストに接続すると表示される`password:`という文字列を`expect`する
 
-```{code-cell} ipython3
+```{code-cell}
 options = ["-auvz", "--dry-run", '--rsync-path="~/.local/bin/rsync"']
 src = f"{username}@{hostname}:~/README.md"
 dest = "."
@@ -50,7 +50,7 @@ cmd = (" ").join(["rsync", *options, src, dest])
 # cmd
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 child = pexpect.spawn(cmd)
 child.expect(["password:"])
 ```
@@ -59,7 +59,7 @@ child.expect(["password:"])
 - パスワード認証に成功すると`rsync`でファイル転送が開始する
 - 転送終了の判断のために`pexpect.EOF`を`expect`
 
-```{code-cell} ipython3
+```{code-cell}
 child.sendline(password)
 child.expect(pexpect.EOF)
 child.terminate()
@@ -68,7 +68,7 @@ child.terminate()
 - 転送時に標準出力に表示された内容は、`expect`でマッチした文字列の前（`before`）で確認できる
 - `before`はバイナリー文字列になっているため`.decode("utf-8")`でテキスト文字列に変換する
 
-```{code-cell} ipython3
+```{code-cell}
 print(child.before.decode("utf-8"))
 # print(child.after.decode("utf-8"))
 ```
@@ -76,14 +76,14 @@ print(child.before.decode("utf-8"))
 - `pexpect.pxssh`モジュールを使ってSSH接続する
 - `ssh`接続してファイルを作成する
 
-```{code-cell} ipython3
+```{code-cell}
 from pexpect import pxssh
 ```
 
 - ログインに必要な情報を準備する
 - パスワードはソースコードにベタ書きせず、環境変数などから読み込む
 
-```{code-cell} ipython3
+```{code-cell}
 hostname = os.environ.get("HOST")
 username = os.environ.get("USER")
 password = os.environ.get("PASSWORD")
@@ -98,7 +98,7 @@ password = os.environ.get("PASSWORD")
 - 接続できないと`ExceptionPxssh`クラスを送出する
   - `Could not establish connection to host`
 
-```{code-cell} ipython3
+```{code-cell}
 ssh = pxssh.pxssh(encoding="utf-8")
 connected = ssh.login(hostname, username, password)
 ```
@@ -109,7 +109,7 @@ connected = ssh.login(hostname, username, password)
   - `.expect("[\\$\\#]")`と同等
 - 実行結果は`.before`で確認できる
 
-```{code-cell} ipython3
+```{code-cell}
 ssh.sendline("uptime")
 ssh.prompt()
 print(ssh.before)
@@ -117,7 +117,7 @@ print(ssh.before)
 
 - `touch`コマンドで空のファイルを作成する
 
-```{code-cell} ipython3
+```{code-cell}
 ssh.sendline("netstat")
 ssh.prompt()
 print(ssh.before)
@@ -125,7 +125,7 @@ print(ssh.before)
 
 - 終わったらログアウトする
 
-```{code-cell} ipython3
+```{code-cell}
 ssh.logout()
 ```
 
@@ -141,42 +141,42 @@ ssh.logout()
 
 - `pxssh`をまねして、`pexpect.spawn`でSSH接続する
 
-```{code-cell} ipython3
+```{code-cell}
 hostname = os.environ.get("HOST")
 username = os.environ.get("USER")
 password = os.environ.get("PASSWORD")
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 cmd = (" ").join(["ssh", f"{username}@{hostname}"])
 # PROMPT = "[\\$\\#] "
 PROMPT = ["\\$", "\\#"]
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 child = pexpect.spawn(cmd)
 child.expect("password:")
 print(child.before.decode("utf-8"))
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 child.sendline(password)
 child.expect(PROMPT)
 print(child.before.decode("utf-8"))
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 child.sendline("uptime")
 child.expect(PROMPT)
 print(child.before.decode("utf-8"))
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 child.sendline("last")
 child.expect(PROMPT)
 print(child.before.decode("utf-8"))
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 child.terminate(force=True)
 ```

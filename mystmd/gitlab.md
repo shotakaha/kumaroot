@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -13,7 +13,7 @@ kernelspec:
 
 # GitLab APIの確認
 
-```{code-cell} ipython3
+```{code-cell}
 import os
 import requests
 import time
@@ -23,7 +23,7 @@ import time
 
 - https://gitlab.com/jacst/api-test
 
-```{code-cell} ipython3
+```{code-cell}
 PROJECT_ID = "62069387"
 ENDPOINT = "https://gitlab.com/api/v4"
 TOKEN = os.environ["GITLAB_TOKEN"]
@@ -36,7 +36,7 @@ TOKEN = os.environ["GITLAB_TOKEN"]
 - `GET`
 - `https://gitlab.com/api/v4/projects/{プロジェクトID}`
 
-```{code-cell} ipython3
+```{code-cell}
 url = f"{ENDPOINT}projects/{PROJECT_ID}/"
 url
 ```
@@ -71,7 +71,7 @@ $ curl
   - ブランチがある: 200
   - ブランチがない: 404 `{'message': '404 Branch Not Found'}`
 
-```{code-cell} ipython3
+```{code-cell}
 # 必要な引数
 project_id = PROJECT_ID
 branch_name = "main"
@@ -125,7 +125,7 @@ $ curl
 - 成功: 201
 - 失敗: 400 `{'message': 'Branch already exists'}`
 
-```{code-cell} ipython3
+```{code-cell}
 # 必要な引数
 project_id = PROJECT_ID
 new_branch = "test_branch8"
@@ -183,7 +183,7 @@ $ curl
 - 削除した: 204
 - 失敗した: 404 `{'message': '404 Branch Not Found'}`
 
-```{code-cell} ipython3
+```{code-cell}
 project_id = PROJECT_ID
 branch_name = "test_branch5"
 
@@ -235,7 +235,7 @@ $ curl
 - `path` = ファイルパス
 - `author` = コミット作成者
 
-```{code-cell} ipython3
+```{code-cell}
 # 引数
 project_id = PROJECT_ID
 
@@ -324,7 +324,7 @@ $ curl
 - `last_commit_id`: 最後コミットID。`update` / `move` / `delete` で考慮
 - `execute_filemode`: `true` or `false`。`chmode`で考慮
 
-```{code-cell} ipython3
+```{code-cell}
 # 引数
 project_id = PROJECT_ID
 branch_name = "test_branch"
@@ -363,11 +363,11 @@ print(response.status_code)
 response.json()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 response.text
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 branch_name = "test_branch2"
 actions = {
     "action": "create",

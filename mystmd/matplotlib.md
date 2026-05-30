@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -31,7 +31,7 @@ kernelspec:
 
  利用するモジュールのバージョンを確認します。
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib as mpl
 import pandas as pd
 
@@ -44,7 +44,7 @@ print(f"Matplotlib: {mpl.__version__}")
 - 利用可能なカラーマップ名は``matplotlib.colormaps``で確認できます。
 - カラーマップ名は170種類あります。
 
-```{code-cell} ipython3
+```{code-cell}
 # mpl.colormaps()
 # len(mpl.colormaps()) # 170
 ```
@@ -61,7 +61,7 @@ print(f"Matplotlib: {mpl.__version__}")
 - プロットに日本語フォントを利用するため``japanize_matplotlib``をインポートしています。
 - オプジェクト指向スタイル（``OO-style``）でプロットを作成しています。
 
-```{code-cell} ipython3
+```{code-cell}
 from sklearn import datasets
 import matplotlib.pyplot as plt
 import japanize_matplotlib  # noqa: F401
@@ -97,7 +97,7 @@ _ = ax.legend(
 - ひとつのプロットを作成する場合``plt.subplots()``は不要です。
 - オプションを利用して、プロットの見た目も一括で設定できます。
 
-```{code-cell} ipython3
+```{code-cell}
 from sklearn import datasets
 import matplotlib.pyplot as plt
 
@@ -125,7 +125,7 @@ iris.frame.plot(
 - ``plt.subplots``を使って、キャンバスを（2行1列に）分割しています。
 - ``pandas.DataFrame.plot``の``ax``オプションを使って、どの場所に描画するか指定しています。
 
-```{code-cell} ipython3
+```{code-cell}
 from sklearn import datasets
 import matplotlib.pyplot as plt
 
@@ -158,7 +158,7 @@ iris.frame.plot(
 - [matplotlib.pyplot.subplot_mosaic](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot_mosaic.html)
 - 散布図と、その投影ヒストグラムを作成したい（でもできてない）
 
-```{code-cell} ipython3
+```{code-cell}
 from sklearn import datasets
 import matplotlib.pyplot as plt
 

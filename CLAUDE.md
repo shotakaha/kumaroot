@@ -460,13 +460,15 @@ The repository uses `sphinx_tags` for categorizing content:
 
 ### Directory Structure
 
-All code examples are managed centrally in `docs/examples/`:
+Code examples and Jupyter notebooks are managed centrally in `docs/examples/` and `docs/notebooks/`:
 
 ```text
-docs/examples/
-├── root/                 ← C++/Python examples for ROOT
-├── docker/               ← Docker Compose configurations
-└── python/               ← Jupiter notebook examples (jupytext format)
+docs/
+├── examples/
+│   ├── root/             ← C++/Python examples for ROOT
+│   ├── docker/           ← Docker Compose configurations
+│   └── python/           ← Python scripts (jupytext source format)
+└── notebooks/            ← Generated Jupyter notebooks (auto-generated, .ipynb)
 ```
 
 ### Using literalinclude in Documentation
@@ -488,28 +490,46 @@ language: yaml
 - Options are specified between `---` delimiters (YAML frontmatter style)
 - All code examples in `docs/examples/` are automatically available for `literalinclude`
 
-### Jupyter Notebook Examples (jupytext)
+### Python Examples (jupytext with Jupyter Notebooks)
 
-Python examples in `docs/examples/python/` are managed using jupytext format:
+Python examples are managed as a Single Source of Truth using jupytext:
 
-- **Primary format**: `.py` (light format) - text-based, Git-friendly
-- **Secondary format**: `.md` (auto-generated) - readable Markdown version
-- **Notebook format**: `.ipynb` (auto-generated, NOT tracked in Git)
+- **Source format**: `.py` files in `docs/examples/python/` (jupytext light format with YAML header)
+  - Git-friendly, text-based, version-controlled
+  - Can be embedded in documentation or used standalone
+- **Generated Markdown**: `.md` files in `mystmd/` (auto-generated from `.py`)
+- **Generated Notebooks**: `.ipynb` files in `docs/notebooks/` (auto-generated from `.py`)
+  - Executable Jupyter notebooks for testing/exploration
+  - NOT tracked in Git (`.gitignore`)
+  - Can be accessed locally or through documentation
 
 **Workflow:**
 
-- Edit `.py` files directly (jupytext light format with YAML header)
-- Run `jupytext --sync` to keep `.md` and `.ipynb` in sync
-- `.ipynb` files are generated on-demand and excluded from Git (`.gitignore`)
+1. Create or edit `.py` files in `docs/examples/python/` (jupytext light format)
+2. Run `jupytext --sync` to synchronize all formats
+3. `.ipynb` files are automatically generated in `docs/notebooks/`
+4. Notebooks are available for local testing and can be linked in documentation
+
+**Configuration** (in `jupytext.toml`):
+
+```toml
+[formats]
+"docs/examples/python/" = "py:light"    # Source files (Git-tracked)
+"docs/notebooks/" = "ipynb"             # Generated notebooks (auto-generated)
+"mystmd/" = "md:myst"                   # Generated Markdown (auto-generated)
+```
 
 ### Adding New Code Examples
 
 1. **For Docker/Root examples**: Add `.yaml`, `.cpp`, `.py` files to `docs/examples/root/` or `docs/examples/docker/`
-2. **For Jupyter examples**: Add `.py` files (jupytext format) to `docs/examples/python/`
-3. Update documentation to reference examples using `literalinclude`
+2. **For Python Jupyter examples**: Add `.py` files (jupytext format) to `docs/examples/python/`
+   - Run `jupytext --sync` after adding new files to generate `.ipynb` in `docs/notebooks/`
+3. Update documentation to reference examples using `literalinclude` or link to notebooks
 4. Pre-commit hooks automatically validate code syntax
 
 ### Configuration Files
 
-- **jupytext.toml**: Manages jupytext synchronization for `docs/examples/python/`
-- **.gitignore**: Excludes generated `.ipynb` files (`docs/examples/**/*.ipynb`)
+- **jupytext.toml**: Manages jupytext synchronization across three formats (`.py`, `.ipynb`, `.md`)
+- **.gitignore**: Excludes generated files
+  - `docs/notebooks/**/*.ipynb` - Generated Jupyter notebooks
+  - `docs/examples/**/*.ipynb` - Legacy notebook location (deprecated)

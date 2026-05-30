@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -15,7 +15,7 @@ kernelspec:
 title: 擬似乱数したい（random / secrets）
 ---
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 import secrets
 import numpy as np
@@ -27,12 +27,12 @@ print(f"SciPy: {sp.__version__}")
 
 # 乱数シードしたい
 
-```{code-cell} ipython3
+```{code-cell}
 random.seed(511)
 random.random()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 rng = np.random.default_rng(511)
 rng.random()
 rng.random(5)  # size=5
@@ -42,13 +42,13 @@ rng.random(5)  # size=5
 
 0.0以上1.0未満の範囲の浮動小数点で一様分布する乱数を生成します。
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 
 random.random()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 
 rng = np.random.default_rng()
@@ -59,13 +59,13 @@ rng.random()
 
 `a`以上`b`以下の範囲の浮動小数点で一様分布する乱数を生成します。
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 
 random.uniform(1, 5)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 
 rng = np.random.default_rng()
@@ -77,13 +77,13 @@ rng.uniform(1, 5, 5)
 
 `a`以上`b`以下の範囲の整数で一様分布する乱数を生成します。
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 
 random.randint(1, 100)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 
 rng = np.random.default_rng()
@@ -93,14 +93,14 @@ rng.integers(1, 100, 5)
 
 # ガウス分布したい
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 
 random.gauss()  # mu=0.0, sigma=1.0
 # random.gauss(100, 10)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 
 rng = np.random.default_rng()
@@ -111,14 +111,14 @@ rng.normal(100, 10, 5)
 
 # リストしたい
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 
 seq = ["いち", "に", "さん"]
 random.choice(seq)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 
 seq = ["いち", "に", "さん"]
@@ -127,7 +127,7 @@ rng.choice(seq)
 rng.choice(seq, 5)  # size=5
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 from pathlib import Path
 
 p = Path("/usr/share/dict/words")
@@ -141,7 +141,7 @@ with p.open() as f:
 
 推測しにくいトークンを生成
 
-```{code-cell} ipython3
+```{code-cell}
 print(secrets.token_bytes())
 print(secrets.token_bytes(32))
 print(secrets.token_bytes(10))
@@ -150,7 +150,7 @@ print(secrets.token_bytes(30))
 print(secrets.token_bytes(40))
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # 16進数
 print(secrets.token_hex())
 print(secrets.token_hex(32))
@@ -160,7 +160,7 @@ print(secrets.token_hex(30))
 print(secrets.token_hex(40))
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 print(secrets.token_urlsafe())
 print(secrets.token_urlsafe(32))
 print(secrets.token_urlsafe(10))

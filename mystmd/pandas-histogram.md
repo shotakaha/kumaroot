@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -21,7 +21,7 @@ exports:
   - format: pdf
 ---
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 import numpy as np
 import pandas as pd
@@ -37,7 +37,7 @@ print(f"Pandas: {pd.__version__}")
 18 - 60歳の100人を対象に実施したアンケートの、年齢分布を作成したいと思います。
 まず、``random.randint``を使って、アンケート結果をエミュレートします。
 
-```{code-cell} ipython3
+```{code-cell}
 ages = [random.randint(18, 60) for i in range(100)]
 data = pd.DataFrame({"age": ages})
 data
@@ -46,7 +46,7 @@ data
 ``pandas.DataFrame.hist``もしくは``pandas.DataFrame.plot.hist``でヒストグラムを作成します。
 階級（ビン）のサイズは、``bins``オプションで変更できます。
 
-```{code-cell} ipython3
+```{code-cell}
 bins = range(0, 100, 5)
 data.plot.hist(
     bins=bins,
@@ -59,7 +59,7 @@ data.plot.hist(
 
 それぞれの階級の度数を確認したい場合は、``pandas.cut``と``pandas.value_counts``を組み合わせて使います。
 
-```{code-cell} ipython3
+```{code-cell}
 bins = range(0, 100, 10)
 # listを渡すと、Categorical型で返ってくる
 # c = pd.cut(ages, bins=bins)
@@ -75,6 +75,6 @@ c = (
 c
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 np.histogram(data["age"])
 ```

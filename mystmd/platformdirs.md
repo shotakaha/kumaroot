@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -17,11 +17,11 @@ kernelspec:
 - https://pypi.org/project/platformdirs/
 - https://github.com/platformdirs/platformdirs
 
-```{code-cell} ipython3
+```{code-cell}
 import platformdirs
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 appauthor = "アプリの作者"
 appname = "アプリ名"
 version = "バージョン番号"
@@ -44,18 +44,18 @@ user_data_dir(
 )
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # 引数なし
 
 platformdirs.user_data_dir()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # アプリ名を指定
 platformdirs.user_data_dir(appname="アプリ名")
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # アプリ名、バージョンを指定
 platformdirs.user_data_dir(appname="アプリ名", version="メジャー番号.マイナー番号")
 ```

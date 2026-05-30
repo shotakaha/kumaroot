@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -17,7 +17,7 @@ kernelspec:
 - ``sys``
 - ``os``
 
-```{code-cell} ipython3
+```{code-cell}
 import platform
 import sys
 import os
@@ -29,11 +29,11 @@ import os
   - ``os.uname``と``platform.uname``がある
   - ``platform.uname``を使えばよさそう
 
-```{code-cell} ipython3
+```{code-cell}
 os.uname()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.uname()
 ```
 
@@ -42,55 +42,55 @@ platform.uname()
   - ``platform.system``を使えばよさそう
 - macOSの場合`Darwin`になる
 
-```{code-cell} ipython3
+```{code-cell}
 sys.platform
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.system()
 ```
 
 - ホスト名を確認できる
 
-```{code-cell} ipython3
+```{code-cell}
 platform.node()
 ```
 
 - リリース番号を確認できる
 
-```{code-cell} ipython3
+```{code-cell}
 platform.release()
 ```
 
 - OS情報の詳細を確認できる
 
-```{code-cell} ipython3
+```{code-cell}
 platform.version()
 ```
 
 ## アーキテクチャー
 
-```{code-cell} ipython3
+```{code-cell}
 platform.platform()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.mac_ver()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.machine()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.processor()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.architecture()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 os.cpu_count()
 ```
 
@@ -101,46 +101,46 @@ os.cpu_count()
 - 実行時のPythonパスを確認できる
   - ``sys``しかない
 
-```{code-cell} ipython3
+```{code-cell}
 sys.executable
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.sys.executable
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 sys.implementation
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 sys.version
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.python_version()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.python_version_tuple()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.python_build()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.python_branch()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.python_compiler()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.python_implementation()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 platform.python_revision()
 ```

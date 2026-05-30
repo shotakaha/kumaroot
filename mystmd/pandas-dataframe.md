@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: .venv
   language: python
@@ -21,7 +21,7 @@ exports:
   - format: pdf
 ---
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 import numpy as np
 import pandas as pd
@@ -39,7 +39,7 @@ print(f"Pandas: {pd.__version__}")
 - ``y``: `(4, 8)`の一様分布
 - ``z``: `(0, 10)`の整数の一様分布
 
-```{code-cell} ipython3
+```{code-cell}
 rng = np.random.default_rng(511)  # シードを固定
 n = 1000
 
@@ -60,7 +60,7 @@ samples = {
 
 - リスト型の値をもつ辞書型オブジェクトは、そのまま``pd.DataFrame`` に食べさせることができます。
 
-```{code-cell} ipython3
+```{code-cell}
 rng = np.random.default_rng()
 n = 1000
 
@@ -74,7 +74,7 @@ data = pd.DataFrame(samples)
 data
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 fig, axs = plt.subplots(1, 2, figsize=(10, 5))
 canvas = axs.ravel()
 data.plot.scatter("x", "y", ax=canvas[0])
@@ -95,7 +95,7 @@ samples = (
 - 辞書型リスト（``list[dict[str, Any]]``）、辞書型タプル（``tuple[dict[str, Any]]``）をデータフレームに変換できます
 - 辞書のキーがカラム名になります
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 
 samples = (
@@ -120,7 +120,7 @@ samples = [
 - リスト型リスト（``list[list]``）、タプル型リスト（``list[tuple]``）、リスト型タプル（``tuple[list]``）、タプル型タプル（``tuple[tuple]``）をデータフレームに変換します
 - ``columns``オプションを使ってカラム名を変更できます
 
-```{code-cell} ipython3
+```{code-cell}
 import random
 
 samples = [

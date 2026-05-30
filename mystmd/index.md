@@ -4,7 +4,8 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.4
+    jupytext_version: 1.19.3
+  main_language: python
 ---
 
 # Sandbox of KumaROOT

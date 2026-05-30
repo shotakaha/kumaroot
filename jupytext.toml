@@ -1,6 +1,9 @@
 [formats]
-# docs/examples/python/ に移行
+# ソース管理: docs/examples/python/ で .py を管理
 "docs/examples/python/" = "py:light"
+
+# ノートブック生成: docs/notebooks/ に .ipynb を生成
+"docs/notebooks/" = "ipynb"
 
 # MyST Markdown（Node.js処理対応）
 "mystmd/" = "md:myst"
