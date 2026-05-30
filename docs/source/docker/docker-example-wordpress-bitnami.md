@@ -45,44 +45,10 @@ Bitnamiイメージの特徴：
 
 ### compose.yaml を作成
 
-```yaml
-# compose.yaml
-services:
-  wordpress:
-    image: bitnami/wordpress:latest
-    container_name: wordpress-dev
-    ports:
-      - "8080:80"
-      - "8443:443"
-    environment:
-      WORDPRESS_DATABASE_HOST: db
-      WORDPRESS_DATABASE_NAME: ${WORDPRESS_DB_NAME:-wordpress}
-      WORDPRESS_DATABASE_USER: ${WORDPRESS_DB_USER:-wordpress}
-      WORDPRESS_DATABASE_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
-      WORDPRESS_USERNAME: admin
-      WORDPRESS_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD:-admin123}
-      WORDPRESS_EMAIL: admin@example.com
-    volumes:
-      - wordpress_data:/bitnami/wordpress
-    depends_on:
-      - db
-    restart: always
-
-  db:
-    image: bitnami/mysql:8.0
-    container_name: wordpress-db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:-wordpress}
-      MYSQL_USER: ${WORDPRESS_DB_USER:-wordpress}
-      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
-    volumes:
-      - db_data:/bitnami/mysql/data
-    restart: always
-
-volumes:
-  wordpress_data:
-  db_data:
+```{literalinclude} ../../examples/docker/wordpress-bitnami.yaml
+---
+language: yaml
+---
 ```
 
 ### 起動と初期設定
