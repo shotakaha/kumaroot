@@ -473,16 +473,19 @@ docs/examples/
 
 To reference code examples in documentation files, use MyST's `literalinclude` directive:
 
-```markdown
-::::literalinclude ../examples/docker/ubuntu.yaml
-:language: yaml
-::::
+````markdown
+```{literalinclude} ../../examples/docker/ubuntu.yaml
+---
+language: yaml
+---
 ```
+````
 
 **Important notes:**
 
 - Paths are relative to `docs/source/`
-- Use `../examples/` to reference `docs/examples/` from within `docs/source/`
+- Use `../../examples/` to reference `docs/examples/` from within `docs/source/`
+- Options are specified between `---` delimiters (YAML frontmatter style)
 - All code examples in `docs/examples/` are automatically available for `literalinclude`
 
 ### Jupyter Notebook Examples (jupytext)
