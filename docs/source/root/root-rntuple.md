@@ -70,7 +70,7 @@ auto energy = model->MakeField<float>("energy");
 `MakeField<T>()`ではテンプレートメソッドで型を明示することで、より安全にスキーマを定義できます。
 :::
 
-## RNTupleを作成したい（`RNTupleWriter::Recreate`）
+## ファイルを作成したい（`RNTupleWriter::Recreate`）
 
 ```cpp
 auto writer = ROOT::RNTupleWriter::Recreate(
@@ -120,38 +120,48 @@ for (int i = 0; i < 100; i++) {
 ポインターなので、`*event_id`のように先頭に`*`をつけて値を代入します。
 :::
 
-## データを読み込みたい（`RNTupleReader::Open`）
+## ファイルを読み込みたい（`RNTupleReader::Open`）
 
 ```cpp
-#include <ROOT/RNTuple.hxx>
+auto reader = ROOT::RNTupleReader::Open("events", "output.root");
+```
 
-using RNTupleReader = ROOT::Experimental::RNTupleReader;
+`RNTupleReader::Open()`で`NTuple`を読み込みます。
+第一引数は`RNTuple`の名前、第二引数は入力ファイル名です。
 
-auto reader = RNTupleReader::Open("events", "data.root");
-auto view = reader->GetView<int, float, float>({"event_id", "pt", "eta"});
+## データを読み込みたい（`RNTupleReader::GetView`）
 
-for (auto entry : view) {
-    int event_id = std::get<0>(entry);
-    float pt = std::get<1>(entry);
-    float eta = std::get<2>(entry);
-    std::cout << "Event: " << event_id << ", pt: " << pt << ", eta: " << eta << std::endl;
+```cpp
+void macro() {
+    // Open RNTupleReader
+    auto reader = ROOT::RNTupleReader::Open("output.root");
+
+    // Get field views
+    auto view_event_id = reader->GetView<int>("event_id");
+    auto view_energy = reader->GetView<float>("energy");
+
+    // Loop over entries
+    for (auto entryIndex : *reader) {
+        int event_id = view_event_id[entryIndex];
+        float energy = view_energy[entryIndex];
+
+        // Process data...
+        std::cout << "Event ID: " << event_id << ", Energy: " << energy << std::endl;
+    }
 }
 ```
 
-`RNTupleReader::Open()`でNTupleから読み込みます。`GetView()`でフィールドを指定してアクセスできます。
+`RNTupleReader::GetView<T>()`はカラム単位の遅延ロードをするためのメソッドです。
+`T`にフィールドのデータ型を指定し、引数にフィールド名を文字列で指定します。
+戻り値は、指定したフィールドのビュー（`RNTupleView<T>`）です。
 
-## 参考情報
+イベントループは、`RNTupleReader`自体をイテレーターとして呼び出します。
+ループ内で、`view_event_id[entryIndex]`のように、ビューからエントリーごとに値を取得できます。
 
-### RNTupleの特徴
-
-- **高速な読み書き**: 最適化されたバイナリ形式
-- **デフォルト圧縮**: ディスク容量を効率的に利用
-- **スケーラビリティ**: 大規模データセットに対応
-- **モダン設計**: 並列処理に最適化
-
-### 実験的ステータス
-
-RNTupleはまだ実験的なクラスです。本番環境での使用は、ROOT開発チームの最新情報を確認してから判断してください。
+:::{note}
+`GetView`しなかったカラムは、アクセスの対象外となります。
+これは`TTree::SetBranchStatus`のような機能に相当します。
+:::
 
 ## 関連メソッド
 
