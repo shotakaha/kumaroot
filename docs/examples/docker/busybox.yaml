@@ -1,0 +1,28 @@
+services:
+  app:
+    image: myapp:latest
+    depends_on:
+      init-check:
+        condition: service_completed_successfully
+    ports:
+      - "8080:8080"
+
+  # データベース起動待ち用コンテナー
+  init-check:
+    image: busybox
+    command: >
+      sh -c "
+        echo 'Waiting for database...'
+        until wget -q -O- http://db:5432 > /dev/null 2>&1; do
+          echo 'Database not ready, waiting...'
+          sleep 2
+        done
+        echo 'Database is ready!'
+      "
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: password

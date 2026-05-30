@@ -25,6 +25,17 @@ BusyBoxには以下のようなコマンドが含まれています。
 
 ## composeしたい
 
+```{literalinclude} ../../examples/docker/busybox.yaml
+---
+language: yaml
+---
+```
+
+BusyBoxはスタンドアロンで動作させるより、`docker compose`などのマルチコンテナー環境と
+組み合わせて補助的なサービスとして活用するとよいツールです。
+
+上記の例の詳細については以下をご覧ください：
+
 ```yaml
 services:
   app:
