@@ -1,34 +1,9 @@
 # PostgreSQLしたい（`postgresql`）
 
-`compose.yaml` ファイル：
-
-```yaml
-services:
-  db:
-    image: postgres:latest
-    container_name: my-postgres
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_password}
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-app_db}
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    shm_size: 128mb
-
-  adminer:
-    image: adminer:latest
-    container_name: my-adminer
-    ports:
-      - "8080:8080"
-    environment:
-      - ADMINER_DEFAULT_SERVER=db
-    depends_on:
-      - db
-
-volumes:
-  db_data:
+```{literalinclude} ../../examples/docker/postgresql.yaml
+---
+language: yaml
+---
 ```
 
 PostgreSQLをDockerで起動します。
