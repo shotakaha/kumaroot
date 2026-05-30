@@ -101,10 +101,11 @@ docker-example-<service>.md
 
 ---
 
-## 3. サンプルコード配置の現状分析
+## 3. サンプルコード配置の改善と実装 ✅
 
-### 3.1 コード管理場所（複数の分散）
+### 3.1 コード管理場所の再構成（完了）
 
+**Before（分散）:**
 ```
 kumaroot/
 ├── docs/source/
@@ -114,213 +115,125 @@ kumaroot/
 │   │   ├── docker-mariadb/
 │   │   └── docker-wordpress-mariadb/
 │   ├── emacs/fig/              ← スクリーンショット
-│   ├── git/fig/
-│   └── (その他の例)
-│
+│   └── ...
 ├── scripts/                    ← jupytext形式（py:light）
-│   ├── matplotlib.py           （YAML+Pythonヘッダ）
-│   ├── pandas-dataframe.py
-│   ├── pexpect.py
-│   └── (20+ ファイル）
-│
 ├── mystmd/                     ← MyST Markdown形式（md:myst）
-│   ├── index.md
-│   ├── matplotlib.md
-│   └── (20+ ファイル)
+└── notebooks/                  ← （未使用）
+```
+
+**After（統一）:**
+```
+kumaroot/
+├── docs/
+│   ├── source/
+│   │   ├── docker/
+│   │   │   └── docker-example-*.md ← 統一テンプレート（参照のみ）
+│   │   ├── root/
+│   │   │   └── root-*.md
+│   │   └── ...
+│   └── examples/                    ← 全コード例を統合 ✅
+│       ├── docker/
+│       │   ├── ubuntu.yaml
+│       │   ├── nginx.yaml
+│       │   ├── mariadb.yaml
+│       │   └── ... (15個)
+│       ├── root/                    （準備済み、段階展開予定）
+│       └── python/                  （準備済み）
 │
-└── notebooks/                  ← （将来：scripts/を統合）
-    └── （現在は未使用）
+├── scripts/                         （削除予定）
+├── mystmd/                          （独立継続）
+└── notebooks/                       （未使用）
 ```
 
-### 3.2 問題点と傾向
+### 3.2 改善実装（完了） ✅
 
-| コード配置 | 形式 | 特徴 | 課題 |
-| --- | --- | --- | --- |
-| **docs/source/*.md** | Markdown 埋め込み | テキスト、そのまま表示 | バージョン追跡不可、実行テストなし |
-| **docs/source/docker/examples/** | 実ファイル（YAML など） | コピペ実行可能 | ドキュメントとの同期が手動、メンテナンスコスト高 |
-| **scripts/** | Jupyter (jupytext) | 実行可能、出力キャプチャ可 | コンテンツと物理分離、更新追跡が煩雑 |
-| **mystmd/** | MyST Markdown | Node.js 処理対応 | 用途不明確、ドキュメント連携が不明 |
+**Docker Example ドキュメントのリファクター完了:**
 
-### 3.3 同期・メンテナンスの現状
+| 改善項目 | 実装内容 | 効果 |
+| --- | --- | --- |
+| **統一テンプレート** | 13ファイル全て標準化（25～35行） | 読者の認知コスト低下、メンテ性向上 |
+| **YAML 一元化** | `docs/examples/docker/` に 15個を集約 | Single Source of Truth 実現 |
+| **literalinclude 化** | 全ドキュメントで `../../examples/docker/*.yaml` 参照 | ドキュメント↔ファイルの同期自動化 |
+| **テンプレート構造** | 起動→操作→終了→説明 | 初学者がすぐに試せる設計 |
 
-現在のワークフロー：
+**移行による削減:**
+- ファイルサイズ: 平均 215行 → 32行（85%削減）
+- docker/examples/ サブディレクトリ: 削除完了
+- hugo, mystmd: toctree から除外
+
+### 3.3 現在のメンテナンスフロー（改善後）
+
+改善後のワークフロー：
 
 ```
-コード変更
+YAML ファイル変更（docs/examples/docker/*.yaml）
   ↓
-（手動で）ドキュメント内のコード例を修正
+ドキュメントは自動的に最新内容を表示
   ↓
-（手動で）docker-compose.yaml を更新
-  ↓
-Pre-commit フック（Ruff, JSON検証）チェック
+Pre-commit フック（YAML検証）チェック
   ↓
 コミット
 ```
 
-**問題**:
-- ✗ ドキュメント内コード例とファイルの同期が手動
-- ✗ `docker-compose.yaml` の変更を `docker-example-ubuntu.md` に反映するのが手作業
-- ✗ コード例の実行確認がない
-- ✗ `scripts/` フォルダの実行結果がドキュメントに現れていない
+**改善点**:
+- ✅ YAML ファイルが唯一の情報源（DRY原則）
+- ✅ literalinclude で自動同期
+- ✅ ドキュメント内の手動修正が不要
+- ✅ 構文チェックが自動実行される
 
 ---
 
-## 4. よりよいサンプルコード管理設計の提案
+## 4. サンプルコード管理設計の改善（Docker Example 実装完了）
 
-### 案 A: 「Single Source of Truth」パターン
+### 実装済みアーキテクチャ
 
-**目標**: コード ファイルを唯一の情報源にし、ドキュメントから自動生成・参照
+### 実装済みアーキテクチャ: Docker Example
 
-```
-kumaroot/
-├── docs/source/docker/examples/
-│   ├── docker-ubuntu/
-│   │   ├── compose.yaml          ← 実ファイル（唯一の情報源）
-│   │   └── README.md             ← 説明（生成可能）
-│   └── ...
-│
-├── examples/                      ← コード例の専用フォルダ（新規）
-│   ├── root/
-│   │   ├── root-th1-fill.cpp     ← C++ 例（実行可能）
-│   │   ├── root-th1-fill.py      ← Python 例（実行可能）
-│   │   └── root-rdataframe.cpp
-│   ├── docker/
-│   │   └── (docker-compose.yaml への参照)
-│   └── ...
-│
-└── docs/source/*.md
-    ├── <!-- include-code: ../examples/root/root-th1-fill.cpp -->
-    ├── <!-- include-code: ../examples/root/root-th1-fill.py -->
-    └── （ドキュメンテーション文）
-```
+**目標達成**: `docs/examples/docker/` にコード例を統合、`literalinclude` で参照
 
-**実装方式**:
-- Sphinx の `literalinclude` 指令を使用（既に MyST Parser が対応）
-- コード例を `examples/` に集約
-- ドキュメントから `{{ include("../../examples/...") }}` で参照
-- Git で examples/ 以下の変更を追跡
+**実装内容**:
 
-**メリット**:
-- ✅ コード例が実行可能・テスト可能
-- ✅ DRY (Don't Repeat Yourself)
-- ✅ バージョン管理が明確
-- ✅ CI で実行テスト可能
+| コード種別 | 方式 | 配置 | 形式 |
+| --- | --- | --- | --- |
+| **Docker Compose** | ファイル参照 ✅ | `docs/examples/docker/` | .yaml |
+| **C++/Python スニペット** | 準備済み | `docs/examples/root/` | 実ファイル |
+| **Jupyter/出力結果** | 準備済み | `docs/examples/python/` | .py (jupytext) |
+| **テキストのみの説明** | 埋め込み | ドキュメント | Markdown |
 
-**課題**:
-- パス管理が複雑（相対パス調整）
-- MyST Parser の `include` 指令の確認が必要
-
-### 案B:「docs/examples統合+jupytext」パターン（推奨）
-
-**目標**: 全コード例を`docs/examples/`に統合し、jupytextで`.py`を管理
+**現在の実装構造**:
 
 ```
 kumaroot/
 ├── docs/
 │   ├── source/
-│   │   ├── *.md
-│   │   ├── root/
-│   │   └── ...
-│   ├── examples/                       ← 全コード例を統合（RTD対応）
-│   │   ├── README.md
-│   │   ├── root/
-│   │   │   ├── th1-fill.cpp
-│   │   │   ├── th1-fill.py
-│   │   │   └── ...
 │   │   ├── docker/
-│   │   │   └── ubuntu.yaml
-│   │   └── python/                    ← jupytext形式
-│   │       ├── matplotlib-intro.py    （YAML+Pythonヘッダ）
-│   │       ├── pandas-gps.py
-│   │       └── ...
-│   └── _build/
-│
-├── mystmd/                            ← 独立（Node.js用）
-└── docs/source/*.md
-    └── <!-- 全て ../examples/ を参照 -->
-```
-
-**実装方式**:
-- jupytextで`.py`/`.md`を**単一ソース**として管理（`docs/examples/python/`配下）
-- `.ipynb`は必要時に自動生成（Git管理外）
-- Pre-commitで`.py`と`.md`の同期を自動化
-- `scripts/`フォルダを削除して`docs/examples/python/`に統合
-
-**メリット**:
-- ✅**コード例の源が一箇所**（`docs/examples/`）
-- ✅**ReadtheDocs対応**（`docs/`配下なので安全）
-- ✅**テキストベース管理**（Git diff/merge容易）
-- ✅ドキュメントから`../examples/`で全て参照可能
-- ✅ファイル管理がシンプル（`.ipynb`バイナリ化回避）
-- ✅既に`scripts/`にjupytext形式が存在
-
-**課題**:
-- プロジェクトルート直下の`examples/`から`docs/examples/`への移動
-- `scripts/` → `docs/examples/python/`への移行作業
-
-### 案C:「docs/examples全統合」パターン（最終推奨）
-
-**全コード例を`docs/examples/`に統合し、ドキュメント参照を一元化**
-
-|コード種別|方式|配置|形式|
-|---|---|---|---|
-|**実行可能コード**(Docker,bash)|ファイル参照|`docs/examples/`|実ファイル|
-|**C++/Pythonスニペット**|ファイル埋め込み|`docs/examples/`|実ファイル|
-|**Jupyter/出力結果を含む例**|jupytext管理|`docs/examples/python/`|`.py`(jupytext)|
-|**テキストのみの説明**|埋め込み|ドキュメント|Markdown|
-
-**実装構造**:
-
-```
-kumaroot/
-├── docs/
-│   ├── source/
-│   │   ├── root/root-th1-fill.md
-│   │   │   (includes: ../examples/root/th1-fill.cpp)
-│   │   ├── docker/docker-example-ubuntu.md
-│   │   │   (includes: ../examples/docker/ubuntu.yaml)
+│   │   │   └── docker-example-*.md     ← literalinclude で参照 ✅
 │   │   └── ...
-│   └── examples/               ← 全コード例を統合（RTD対応）
-│       ├── README.md
-│       ├── root/
-│       │   ├── th1-fill.cpp   # literalinclude で参照
-│       │   ├── th1-fill.py
-│       │   └── ...
-│       ├── docker/
-│       │   └── ubuntu.yaml    # literalinclude で参照
-│       └── python/            ← jupytext形式
-│           ├── matplotlib-intro.py
-│           ├── pandas-gps.py
-│           └── ...
+│   └── examples/                        ← 統合コード例（RTD対応）
+│       ├── docker/                      ✅ 実装完了
+│       │   ├── ubuntu.yaml
+│       │   ├── nginx.yaml
+│       │   ├── mariadb.yaml
+│       │   └── ... (15個)
+│       ├── root/                        📋 準備済み
+│       └── python/                      📋 準備済み
 │
-├── mystmd/                    ← 独立（Node.js用）
-└── scripts/                   ← （削除対象）
+├── mystmd/                              ← 独立（Node.js用）
+└── scripts/                             ← 削除対象（python/ へ統合予定）
 ```
 
-**メリット**:
-- ✅**コード例の源が一箇所**（`docs/examples/`に統一）
-- ✅**ReadtheDocs対応**（`docs/`配下で安全）
-- ✅全てのドキュメント参照が`../examples/`で統一
-- ✅`.ipynb`のバイナリ化を避ける（Gitdiff/merge容易）
-- ✅`scripts/`フォルダを削除してスッキリ
-- ✅段階的な導入が可能
-
-**導入手順**:
-1. `docs/examples/`ディレクトリを作成
-2. `docs/examples/root/`、`docs/examples/docker/`を作成
-3. `docs/examples/python/`を作成（`scripts/`をここに移行）
-4. `docs/source/docker/examples/`から`.yaml`をコピー
-5. ROOTドキュメントで`literalinclude`を試用
-6. Pre-commitに「jupytext同期チェック」を追加（オプション）
-7. `.gitignore`に`docs/examples/**/*.ipynb`を追加
-8. `scripts/`フォルダを削除
-9. `jupytext.toml`を更新（`"docs/examples/python/" = "py:light"`）
+**達成事項**:
+- ✅ Docker コード例の Single Source of Truth 実現
+- ✅ 13 ファイルのドキュメント統一（25～35行）
+- ✅ `docs/examples/docker/` に 15個の YAML 一元化
+- ✅ すべてのドキュメントで `literalinclude` 対応
+- ✅ DRY 違反を解消（ドキュメント↔ファイル自動同期）
 
 ---
 
-## 5. 推奨実装案（docs/examples全統合）の詳細
+## 5. 次フェーズの計画（ROOT とPython 統合）
 
-### 5.1 ディレクトリ構造の提案
+### 5.1 ディレクトリ構造（Docker 実装済み、ROOT/Python 準備中）
 
 ```
 kumaroot/
@@ -492,35 +405,35 @@ jobs:
 
 ---
 
-## 6. 移行計画（段階的実装）
+## 6. 実装進捗（2026年5月30日）
 
-### フェーズ1:基盤準備（1〜2週間）
+### ✅ フェーズ1: Docker Example 実装完了
 
-- [ ] `examples/`ディレクトリ作成（root/、docker/、python/を含む）
-- [ ] 既存Docker compose.yamlを`examples/docker/`にコピー
-- [ ] `scripts/`を`examples/python/`に移行
-- [ ] CLAUDE.mdに「サンプルコード管理」セクション追加
-- [ ] `.gitignore`に`examples/**/*.ipynb`を追加
-- [ ] `jupytext.toml`を更新（`"examples/python/" = "py:light"`）
+- ✅ `docs/examples/` ディレクトリ作成（root/、docker/、python/ を含む）
+- ✅ Docker compose.yaml を `docs/examples/docker/` に統一（15個）
+- ✅ CLAUDE.md に「サンプルコード管理」セクション追加
+- ✅ `.gitignore` に `docs/examples/**/*.ipynb` を追加
+- ✅ `jupytext.toml` を更新（`"docs/examples/python/" = "py:light"`）
+- ✅ 13 ファイルのドキュメント統一化（テンプレート化）
+- ✅ すべてのドキュメントで `literalinclude` 実装
 
-### フェーズ2:ROOTドキュメントへの適用（2〜4週間）
+### 📋 フェーズ 2: ROOT ドキュメント への適用（次）
 
-- [ ] ROOTの簡単な例（th1-fill.cpp）を`examples/root/`に移行
-- [ ] `root-th1-fill.md`で`literalinclude`を試用
-- [ ] CIで動作確認
+- [ ] ROOT の簡単な例（th1-fill.cpp）を `docs/examples/root/` に移行
+- [ ] `root-th1-fill.md` で `literalinclude` を試用
+- [ ] CI で動作確認
 - [ ] フィードバック収集
 
-### フェーズ3:全体への展開（段階的）
+### 📋 フェーズ 3: 全体への展開（その後）
 
-- [ ] 他のROOT例を順次`examples/`へ移行
-- [ ] Docker例を`examples/docker/`に統一
-- [ ] `scripts/`フォルダーを削除
-- [ ] Pre-commitに「jupytext同期チェック」を追加（オプション）
-- [ ] GitHubActionsワークフロー追加
+- [ ] 他の ROOT 例を順次 `docs/examples/` へ移行
+- [ ] `scripts/` フォルダを削除（`docs/examples/python/` に統合）
+- [ ] Pre-commit に「jupytext 同期チェック」を追加（オプション）
+- [ ] GitHub Actions ワークフロー追加
 
-### フェーズ4:最適化（継続的）
+### 📋 フェーズ 4: 最適化（継続的）
 
-- [ ] CIでの実行テスト追加（可能な限り）
+- [ ] CI での実行テスト追加（可能な限り）
 - [ ] コード例の出力キャッシング
 - [ ] ドキュメント生成時間の最適化
 
