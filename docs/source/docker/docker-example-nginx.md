@@ -1,14 +1,9 @@
 # Nginxしたい（``nginx``）
 
-```yaml
-services:
-  nginx:
-    image: nginx
-    container_name: my-nginx
-    ports:
-      - "8080:80"
-    volumes:
-      - ./html:/usr/share/nginx/html
+```{literalinclude} ../../examples/docker/nginx.yaml
+---
+language: yaml
+---
 ```
 
 ```console
