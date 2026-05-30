@@ -88,6 +88,38 @@ auto writer = ROOT::RNTupleWriter::Recreate(
 `RNTupleWriter`は内部で`TFile`を使っています。
 スコープを抜けると自動的に`Commit()`と`Close()`が呼ばれます。
 
+:::{note}
+
+「所有権」は、そのオブジェクトを削除する権限のことです。
+`std::move`は、C++のムーブセマンティクスを利用して、オブジェクトの所有権を移すための関数です。
+これにより、スキーマをコピーすることなく、効率的に
+`RNTupleModel`から`RNTupleWriter`へ所有権を移すことができます。
+`RNTupleWriter`がスキーマの所有権を持っているため、`RNTupleWriter`の寿命が終わると、スキーマも自動的にクリーンアップされます。
+
+:::
+
+## データを書き込みたい（`RNTupleWriter::Fill`）
+
+```cpp
+for (int i = 0; i < 100; i++) {
+    *event_id = i;
+    *energy = 100.0f + i;
+    writer->Fill();
+}
+```
+
+`RNTupleWriter::Fill()`でデータを追加します。
+`Fill()`を呼ぶと、現在のフィールドの値が`Ntuple`に追加されます。
+
+このサンプルでは、
+`event_id`に0から99までの整数（`int`）を、
+`energy`に100.0から199.0までの浮動小数点数（`float`）をセットしています
+
+:::{note}
+`MakeField<T>()`で作成したフィールドは、ポインターとして値をセットできます。
+ポインターなので、`*event_id`のように先頭に`*`をつけて値を代入します。
+:::
+
 ## データを読み込みたい（`RNTupleReader::Open`）
 
 ```cpp
@@ -107,33 +139,6 @@ for (auto entry : view) {
 ```
 
 `RNTupleReader::Open()`でNTupleから読み込みます。`GetView()`でフィールドを指定してアクセスできます。
-
-## 複数のフィールドを定義したい（`MakeField`）
-
-```cpp
-#include <ROOT/RNTuple.hxx>
-
-using RNTupleWriter = ROOT::Experimental::RNTupleWriter;
-
-auto writer = RNTupleWriter::Recreate("events", "output.root");
-
-auto run_number = writer->MakeField<int>("run");
-auto event_number = writer->MakeField<int>("event");
-auto energy = writer->MakeField<double>("energy");
-auto charge = writer->MakeField<int>("charge");
-
-for (int i = 0; i < 100; i++) {
-    *run_number = 2025;
-    *event_number = i;
-    *energy = 100.0 + i;
-    *charge = (i % 2 == 0) ? 1 : -1;
-    writer->Fill();
-}
-
-writer->Commit();
-```
-
-各データ型に応じて`MakeField<T>()`でフィールドを定義します。複数のフィールドを定義して、`Fill()`で全フィールドを同時に記録します。
 
 ## 参考情報
 
