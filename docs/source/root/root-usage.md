@@ -155,7 +155,7 @@ root-ttree
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 ---
 root-rntuple
 ```
