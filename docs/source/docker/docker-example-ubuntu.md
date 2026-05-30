@@ -1,14 +1,9 @@
 # Ubuntuしたい（`ubuntu`）
 
-```yaml
-# filename: compose.yaml
-services:
-  ubuntu:
-    image: ubuntu:24.10
-    container_name: my-ubuntu
-    tty: true
-    stdin_open: true
-    command: /bin/bash
+```{literalinclude} ../../examples/docker/ubuntu.yaml
+---
+language: yaml
+---
 ```
 
 ```console
