@@ -1,32 +1,7 @@
 # MariaDBしたい（`mariadb`）
 
-```yaml
-services:
-  db:
-    image: mariadb:latest
-    container_name: my-mariadb
-    environment:
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-root_password}
-      MARIADB_DATABASE: ${MARIADB_DATABASE:-app_db}
-      MARIADB_USER: ${MARIADB_USER:-app_user}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-app_password}
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-
-  adminer:
-    image: adminer:latest
-    container_name: my-adminer
-    ports:
-      - "8080:8080"
-    environment:
-      - ADMINER_DEFAULT_SERVER=db
-    depends_on:
-      - db
-
-volumes:
-  db_data:
+```{literalinclude} ../../examples/docker/mariadb.yaml
+language: yaml
 ```
 
 MariaDBをDockerで起動します。
