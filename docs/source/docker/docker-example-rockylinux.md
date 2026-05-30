@@ -1,14 +1,9 @@
 # RockyLinuxしたい（`rockylinux`）
 
-```yaml
-# filename: compose.yaml
-services:
-  rockylinux:
-    image: rockylinux:9
-    container_name: my-rockylinux
-    tty: true
-    stdin_open: true
-    command: /bin/bash
+```{literalinclude} ../../examples/docker/rockylinux.yaml
+---
+language: yaml
+---
 ```
 
 ```console

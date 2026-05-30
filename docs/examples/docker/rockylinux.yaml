@@ -1,0 +1,8 @@
+# filename: compose.yaml
+services:
+  rockylinux:
+    image: rockylinux:9
+    container_name: my-rockylinux
+    tty: true
+    stdin_open: true
+    command: /bin/bash
