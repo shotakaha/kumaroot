@@ -417,14 +417,37 @@ jobs:
 - ✅ 13 ファイルのドキュメント統一化（テンプレート化）
 - ✅ すべてのドキュメントで `literalinclude` 実装
 
-### 📋 フェーズ 2: ROOT ドキュメント への適用（次）
+### ✅ フェーズ2: Pythonサンプル・Jupyterノートブック統合完了
+
+**完成内容**:
+
+- ✅ `docs/examples/python/`に21個のPythonスクリプト統合（jupytext ライト形式）
+- ✅ `docs/notebooks/`に21個のJupyterノートブックを自動生成（`.ipynb`）
+- ✅ `jupytext.toml`を更新:
+  - `"docs/examples/python/" = "py:light"` - ソース管理
+  - `"docs/notebooks/" = "ipynb"` - ノートブック生成
+- ✅ `.gitignore`に `docs/notebooks/**/*.ipynb`を追加（生成ファイル除外）
+- ✅ `CLAUDE.md`に Python サンプルセクション追加
+  - Single Source of Truth パターン説明
+  - Jupyter ノートブック生成ワークフロー説明
+  - 配置構造と管理方式を明記
+
+**達成事項**:
+
+- 21個のノートブックが `docs/notebooks/`に生成完了
+- Python スクリプトはテキストベース（Git 管理）
+- Jupyter ノートブックは自動生成（実行テスト用）
+- 完全な Single Source of Truth（`.py`が唯一の情報源）
+- Read the Docs 互換性確保（`docs/`配下）
+
+### 📋 フェーズ 3: ROOT ドキュメント への適用（次）
 
 - [ ] ROOT の簡単な例（th1-fill.cpp）を `docs/examples/root/` に移行
 - [ ] `root-th1-fill.md` で `literalinclude` を試用
 - [ ] CI で動作確認
 - [ ] フィードバック収集
 
-### 📋 フェーズ 3: 全体への展開（その後）
+### 📋 フェーズ 4: 全体への展開（その後）
 
 - [ ] 他の ROOT 例を順次 `docs/examples/` へ移行
 - [ ] `scripts/` フォルダを削除（`docs/examples/python/` に統合）
