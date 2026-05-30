@@ -1,7 +1,9 @@
 # MariaDBしたい（`mariadb`）
 
 ```{literalinclude} ../../examples/docker/mariadb.yaml
+---
 language: yaml
+---
 ```
 
 MariaDBをDockerで起動します。
