@@ -14,15 +14,10 @@ $ docker container run --rm -v "$(pwd)":/workdir -w /workdir texlive/texlive:lat
 
 ## Docker Composeしたい
 
-```yaml
-# compose.yaml
-services:
-  tex:
-    image: texlive/texlive:latest-full
-    volumes:
-      - .:/workdir
-    working_dir: /workdir
-    command: ["latexmk", "main.tex"]
+```{literalinclude} ../../examples/docker/texlive.yaml
+---
+language: yaml
+---
 ```
 
 サービス名を`tex`としました。

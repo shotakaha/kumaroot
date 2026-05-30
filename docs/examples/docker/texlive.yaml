@@ -1,0 +1,8 @@
+# compose.yaml
+services:
+  tex:
+    image: texlive/texlive:latest-full
+    volumes:
+      - .:/workdir
+    working_dir: /workdir
+    command: ["latexmk", "main.tex"]
