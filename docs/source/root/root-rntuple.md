@@ -1,81 +1,85 @@
-# RNTupleしたい
+# RNTupleしたい（`ROOT::RNTupleModel` / `ROOT::RNTupleWriter` / `ROOT::RNTupleReader`）
 
 ```cpp
-#include <ROOT/RNTuple.hxx>
-#include <memory>
+void macro() {
+    // Define schema
+    auto model = ROOT::RNTupleModel::Create();
+    // Define fields (= alternatives for TBranch)
+    auto event_id = model->MakeField<int>("event_id");
+    auto energy = model->MakeField<float>("energy");
 
-using RNTupleWriter = ROOT::Experimental::RNTupleWriter;
-using RNTupleReader = ROOT::Experimental::RNTupleReader;
+    // Create RNTupleWriter
+    auto writer = ROOT::RNTupleWriter::Recreate(
+        std::move(model),
+        "events",
+        "output.root"
+    );
 
-// データを書き込む
-auto writer = RNTupleWriter::Recreate("ntuple", "output.root");
-auto pt = writer->MakeField<float>("pt");
-auto eta = writer->MakeField<float>("eta");
+    // Fill data
+    for (int i = 0; i < 100; i++) {
+        *event_id = i;
+        *energy = 100.0f + i;
+        writer->Fill();
+    }
 
-for (int i = 0; i < 100; i++) {
-    *pt = 10.0 + i * 0.1;
-    *eta = -2.5 + i * 0.05;
-    writer->Fill();
+    // Commit and Close will be called automatically when writer goes out of scope
 }
-writer->Commit();
 ```
 
-`RNTuple`は`TTree`の後継となるクラスです。ただし、互換性はありません。
+`RNTuple`は、ROOTのイベントデータI/Oシステムです。
+25年以上の運用経験がある`TTree`の後継となるクラスです。
+2018年ころから実験的な機能（`ROOT::Experimental`）として開発がはじまり、
+ROOT 6.36で安定版としてリリースされました。
 
-`TTree`は1995年にROOTがリリースされたときから、フレームワークの主要クラスでした。しかし、30年前と比べて、データ解析周辺の環境は様変わりしています。それに対応するために、これまでの高エネルギー物理学での知見を活かしつつ、新しいクラスの開発が行われています。
+`TTree`が読み書き兼用の単一クラスであるのに対し、
+`RNTuple`では、書き込み専用の`RNTupleWriter`と読み込み専用の`RNTupleReader`に分かれています。
+これにより責務が明確となり、現代のストレージ技術に最適化できるようになっています。
 
-```python
-import ROOT
-from ROOT.Experimental import RNTupleWriter, RNTupleReader
+:::{note}
+C++の`std::tuple`やPythonの`tuple`（タプル）のように、`tuple`は「1組のデータ」を表す概念です。
+そして、`Ntuple`は任意の`tuple`を格納できるデータ構造です。
 
-# データを書き込む
-writer = RNTupleWriter.Recreate("ntuple", "output.root")
-pt = writer.MakeField("pt", "float")
-eta = writer.MakeField("eta", "float")
+素粒子実験の場合、
+`tuple`は「1イベントのデータ」、
+`Ntuple`は「ランの中のすべてのイベントのデータ」を
+イメージするとわかりやすいと思います。
 
-for i in range(100):
-    pt[0] = 10.0 + i * 0.1
-    eta[0] = -2.5 + i * 0.05
-    writer.Fill()
-writer.Commit()
-```
+実は、このデータ構造の概念、PAWの時代から変わっていません。
+PAWの`HBOOK NTuple`、ROOTの`TTree`と新しい`RNTuple`のどれも、
+それぞれの世代の計算機環境に合わせて最適化された`Ntuple`の実装です。
 
-## RNTupleについて
+:::
 
-### TTreeとの比較
-
-| 項目 | TTree | RNTuple |
-|------|-------|---------|
-| リリース年 | 1995年 | 2018年（実験的） |
-| バージョン | 安定 | 実験的 |
-| パフォーマンス | 良好 | 最適化済み |
-| 互換性 | あり | なし |
-| 圧縮 | オプション | デフォルト |
-| 並列読み書き | 限定的 | 高速 |
-
-## データを書き込みたい（`RNTupleWriter::Recreate`）
+## スキーマを定義したい（`RNTupleModel::Create`）
 
 ```cpp
-#include <ROOT/RNTuple.hxx>
-
-using RNTupleWriter = ROOT::Experimental::RNTupleWriter;
-
-auto writer = RNTupleWriter::Recreate("ntuple", "data.root");
-auto event_id = writer->MakeField<int>("event_id");
-auto pt = writer->MakeField<float>("pt");
-auto eta = writer->MakeField<float>("eta");
-
-for (int i = 0; i < 1000; i++) {
-    *event_id = i;
-    *pt = 10.0 + i * 0.01;
-    *eta = -2.5 + i * 0.005;
-    writer->Fill();
-}
-
-writer->Commit();
+auto model = ROOT::RNTupleModel::Create();
+auto event_id = model->MakeField<int>("event_id");
+auto energy = model->MakeField<float>("energy");
 ```
 
-`RNTupleWriter::Recreate()`でNTupleを新規作成します。フィールドを定義してから`Fill()`でデータを記録します。
+`RNTupleModel::Create`でスキーマを定義します。
+フィールドは`TTree::Branch`に相当する概念で、`MakeField<T>`で定義します。
+`T`にフィールドのデータ型を指定し、引数にフィールド名を文字列で指定します。
+戻り値のポインター名は任意ですが、フィールド名と同じにするとわかりやすいです。
+
+## RNTupleを作成したい（`RNTupleWriter::Recreate`）
+
+```cpp
+auto writer = ROOT::RNTupleWriter::Recreate(
+    std::move(model),
+    "events",
+    "output.root"
+);
+```
+
+`RNTupleWriter::Recreate()`で`NTuple`を新規作成します。
+第一引数（`model`）にスキーマ（`RNTupleModel`）を渡します。
+`std::move(model)`で、スキーマの所有権を`NTupleWriter`に移しています。
+第二引数は`RNTuple`の名前、第三引数は出力ファイル名です。
+
+`RNTupleWriter`は内部で`TFile`を使っています。
+スコープを抜けると自動的に`Commit()`と`Close()`が呼ばれます。
 
 ## データを読み込みたい（`RNTupleReader::Open`）
 
@@ -84,7 +88,7 @@ writer->Commit();
 
 using RNTupleReader = ROOT::Experimental::RNTupleReader;
 
-auto reader = RNTupleReader::Open("ntuple", "data.root");
+auto reader = RNTupleReader::Open("events", "data.root");
 auto view = reader->GetView<int, float, float>({"event_id", "pt", "eta"});
 
 for (auto entry : view) {
