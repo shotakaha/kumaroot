@@ -1,0 +1,25 @@
+# https://hub.docker.com/_/nginx
+# Tags:
+# - nginx:latest
+# - nginx:stable-bookworm-perl
+# - nginx:1.27
+# - nginx:1.27-perl
+# - nginx:1.27-bookworm
+# - nginx:1.27-bookworm-perl
+# - nginx:1.27-alpine
+# - nginx:1.27-alpine-pel
+# - nginx:1.27-alpine-otel
+# - nginx:apline-slim
+#
+# $ docker compose up --detach
+# $ open http://localhost:8082
+# $ docker compose down --volumes
+
+services:
+  nginx:
+    image: nginx:1.27
+    ports:
+      - 8082:80
+    #volumes:
+    #  - ./html:/usr/share/nginx/html:ro
+    #  - ./conf:/etc/nginx:ro

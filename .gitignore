@@ -2,6 +2,7 @@
 # Project
 ##################################################
 
+docs/examples/**/*.ipynb
 docs/source/_static/kumaroot.pdf
 docs/source/_tags/
 _build

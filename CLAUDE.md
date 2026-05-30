@@ -455,3 +455,58 @@ The repository uses `sphinx_tags` for categorizing content:
 - Tags are assigned in front matter (YAML)
 - Automatic tag index generation in `docs/source/_tags/`
 - Useful for grouping related documentation across categories
+
+## Sample Code Management
+
+### Directory Structure
+
+All code examples are managed centrally in `docs/examples/`:
+
+```text
+docs/examples/
+├── root/                 ← C++/Python examples for ROOT
+├── docker/               ← Docker Compose configurations
+└── python/               ← Jupiter notebook examples (jupytext format)
+```
+
+### Using literalinclude in Documentation
+
+To reference code examples in documentation files, use MyST's `literalinclude` directive:
+
+```markdown
+::::literalinclude ../examples/docker/ubuntu.yaml
+:language: yaml
+::::
+```
+
+**Important notes:**
+
+- Paths are relative to `docs/source/`
+- Use `../examples/` to reference `docs/examples/` from within `docs/source/`
+- All code examples in `docs/examples/` are automatically available for `literalinclude`
+
+### Jupyter Notebook Examples (jupytext)
+
+Python examples in `docs/examples/python/` are managed using jupytext format:
+
+- **Primary format**: `.py` (light format) - text-based, Git-friendly
+- **Secondary format**: `.md` (auto-generated) - readable Markdown version
+- **Notebook format**: `.ipynb` (auto-generated, NOT tracked in Git)
+
+**Workflow:**
+
+- Edit `.py` files directly (jupytext light format with YAML header)
+- Run `jupytext --sync` to keep `.md` and `.ipynb` in sync
+- `.ipynb` files are generated on-demand and excluded from Git (`.gitignore`)
+
+### Adding New Code Examples
+
+1. **For Docker/Root examples**: Add `.yaml`, `.cpp`, `.py` files to `docs/examples/root/` or `docs/examples/docker/`
+2. **For Jupyter examples**: Add `.py` files (jupytext format) to `docs/examples/python/`
+3. Update documentation to reference examples using `literalinclude`
+4. Pre-commit hooks automatically validate code syntax
+
+### Configuration Files
+
+- **jupytext.toml**: Manages jupytext synchronization for `docs/examples/python/`
+- **.gitignore**: Excludes generated `.ipynb` files (`docs/examples/**/*.ipynb`)

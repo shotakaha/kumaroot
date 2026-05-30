@@ -1,4 +1,6 @@
 [formats]
-"notebooks/" = "ipynb"
+# docs/examples/python/ に移行
+"docs/examples/python/" = "py:light"
+
+# MyST Markdown（Node.js処理対応）
 "mystmd/" = "md:myst"
-"scripts/" = "py:light"

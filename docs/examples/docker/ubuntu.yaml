@@ -1,0 +1,9 @@
+# https://hub.docker.com/_/ubuntu
+#
+# $ docker compose up -d
+# $ docker compose exec ubuntu bash
+# $ docker compose down -v
+services:
+  ubuntu:
+    image: ubuntu:24.10
+    tty: true

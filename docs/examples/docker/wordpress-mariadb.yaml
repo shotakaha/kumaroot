@@ -1,0 +1,42 @@
+services:
+  # MariaDBコンテナ
+  db:
+    image: mariadb:11.5.2-noble
+    # 環境変数の設定（.envで設定）
+    environment:
+      # MariaDBのマスターパスワード
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      # MariaDBのデータベース名
+      MARIADB_DATABASE: ${DB_NAME}
+      # MariaDBのユーザー名
+      MARIADB_USER: ${DB_USER}
+      # MariaDBのパスワード
+      MARIADB_PASSWORD: ${DB_USER_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+
+  # WordPressコンテナ
+  wordpress:
+    image: wordpress:6.6
+    # 依存コンテナの設定
+    depends_on:
+      - db
+    # 環境変数の設定（.envで設定）
+    environment:
+      # MariaDBのコンテナ名
+      WORDPRESS_DB_HOST: db
+      # MariaDBのデータベース名
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      # MariaDBのユーザー名
+      WORDPRESS_DB_USER: ${DB_USER}
+      # MariaDBのパスワード
+      WORDPRESS_DB_PASSWORD: ${DB_USER_PASSWORD}
+    # ポートフォワーディングの設定
+    ports:
+      - "8080:80"
+    volumes:
+      - wp-data:/var/www/html
+
+volumes:
+  db-data:
+  wp-data:
