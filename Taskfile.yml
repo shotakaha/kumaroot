@@ -77,6 +77,15 @@ tasks:
       - uv run make clean
 
   # ============================================================================
+  # Code example management tasks
+  # ============================================================================
+
+  examples:sync:
+    desc: Synchronize Python examples with jupytext (py -> ipynb -> md)
+    cmds:
+      - uv run jupytext --sync docs/examples/python/*.py
+
+  # ============================================================================
   # Dependency management tasks - Update and check dependencies
   # ============================================================================
 
