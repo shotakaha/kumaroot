@@ -28,7 +28,7 @@ root-config
 root-pyroot
 ```
 
-## はじめての一歩
+## はじめの一歩
 
 ROOTの対話型シェル（Rint）を使って、コンパイルなしにC++コードを実行できます。
 まずはRintで簡単な計算やマクロを試してみましょう。
@@ -38,10 +38,12 @@ ROOTの対話型シェル（Rint）を使って、コンパイルなしにC++コ
 maxdepth: 1
 ---
 root-rint
-root-rint-calculator
-root-rint-macro
-root-rint-quit
 root-cling
+root-cint
+root-macro
+root-command
+root-notebook
+root-rint-calculator
 ```
 
 ## 表示したい

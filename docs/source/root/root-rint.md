@@ -1,4 +1,14 @@
-# 起動したい（`$ root`）
+# 対話型プロンプトしたい（`Rint`）
+
+`Rint`はROOTの対話型プロンプトのインターフェイスを管理するクラスです。
+ターミナルで`root`コマンドを実行すると、
+`Rint`が起動して、C++コードを対話的に実行できるようになります。
+
+`Rint`のバックエンドは
+ROOT5までは`CINT`でしたが、
+ROOT6からは`Cling`に変更されました。
+
+## 起動したい（`$ root`）
 
 ```console
 $ root
@@ -36,16 +46,6 @@ root [0] .qqqqqqq  # プロセスをアボート
 プロセスがハングしてしまった場合は、`.qqq`のように`q`の数を増やしてみるとよいです。
 それでも終了できない場合は、ターミナルのタブを強制的に閉じるか、
 [`kill`コマンド](../command/command-ps.md)でプロセスを終了させてください。
-
-```{toctree}
----
-maxdepth: 1
----
-root-command
-root-macro
-root-rint-calculator
-root-notebook
-```
 
 ## 起動時の設定したい（``rootlogon.C``）
 
