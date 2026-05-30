@@ -1,6 +1,9 @@
-# 実践例したい
+# Dockerコンテナーを試したい
 
-`docker`や`docker-compose`を使って、実際にコンテナで遊んでみました。
+Docker Composeを使ってすぐにコンテナーを起動・操作できるように、各ツールやサービスの基本的な使い方を整理しました。
+各ページの冒頭にある`compose.yaml`をコピーして、
+`docker compose up -d` で起動し、
+`docker compose exec`でコンテナー内にログインして操作できます。
 
 ```{toctree}
 ---
