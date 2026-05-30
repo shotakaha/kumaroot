@@ -6,19 +6,17 @@
 ---
 maxdepth: 1
 ---
-docker-example-busybox
 docker-example-ubuntu
 docker-example-almalinux
 docker-example-rockylinux
-docker-example-raspi
-docker-example-httpd
 docker-example-nginx
+docker-example-httpd
 docker-example-mariadb
 docker-example-postgresql
+docker-example-busybox
 docker-example-wordpress
 docker-example-wordpress-bitnami
 docker-example-python3
-docker-example-mystmd
-docker-example-hugo
+docker-example-raspi
 docker-example-texlive
 ```
