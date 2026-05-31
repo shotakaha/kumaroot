@@ -1,4 +1,4 @@
-# RNTupleしたい（`ROOT::RNTupleModel` / `ROOT::RNTupleWriter` / `ROOT::RNTupleReader`）
+# RNTupleしたい
 
 ```cpp
 void macro() {
