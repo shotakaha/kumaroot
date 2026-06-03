@@ -23,16 +23,23 @@ $ uv build
 $ uv publish
 ```
 
-`uv`はRustで書かれた超高速なPythonパッケージ＆プロジェクト管理ツールです。
-`uv`を使って、依存関係の管理、仮想環境の作成、スクリプトの実行、パッケージのビルドと公開など、Pythonプロジェクトのあらゆる側面を効率的に管理できます。
+`uv`は、Pythonのパッケージ管理とプロジェクト管理を統合したツールです。
+プロジェクトの初期化、依存関係の管理、仮想環境の作成、スクリプトの実行、パッケージのビルドと公開など、Pythonプロジェクトのあらゆる側面を効率的に管理できます。
 
-:::{hint}
+Rustで書かれていて超高速に動作するのが特徴です。
+`uv.lock`を軸とすることで、依存関係の再現性も高いです。
+また、PEP 621やPEP 660などの最新のPythonパッケージ管理の標準に準拠しています。
 
-`uv`には
-プロジェクト管理ツールとしての側面と、
-pip alternativeとしてパッケージ管理ツール（`uv pip`）としての側面があります。
+:::{note}
+Pythonでは、
+パッケージ管理には`pip`、
+バージョン管理には`pyenv`、
+プロジェクト管理には`poetry`
+のように、
+複数のツールがまるで戦国時代のように群雄割拠しています。
 
-どちらの文脈で使われているかを把握すると、　使い方がより理解しやすくなると思います。
+`uv`は、これらのツールの機能を統合して提供することで、
+この戦いを終わらせようとしています（たぶん）。
 
 :::
 
@@ -46,23 +53,21 @@ $ which -a uv
 /opt/homebrew/bin/uv
 
 $ uv --version
-uv 0.6.13 (Homebrew 2025-04-07)
+uv 0.11.18 (Homebrew 2026-06-01 aarch64-apple-darwin)
 
 $ which -a uvx
 /opt/homebrew/bin/uvx
 
 $ uvx --version
-uv-tool-uvx 0.6.13 (Homebrew 2025-04-07)
+uvx 0.11.18 (Homebrew 2026-06-01 aarch64-apple-darwin)
 ```
 
 `uv`はHomebrewでインストールできます。
-`pipx`と同じような思想の`uvx`コマンドも使えるようになります。
+一時的に仮想環境を作成してツールを実行する`uvx`コマンドも同時にインストールされます。
 
 :::{note}
-
-`pip`や`pipx`、`poetry`でもインストールできます。
-CI/CDでPythonノベースイメージを使う場合は`pipx install uv`するのがよいと思います。
-
+`uv`は基本的にシステム全体に1つインストールすれば十分ですが、`pip`や`pipx`、`poetry`などの他のパッケージ管理ツールを使ってプロジェクトごとにインストールすることもできます。
+CI/CDでPythonイメージを使う場合は`pipx install uv`するのがよいと思います。
 :::
 
 ## 仮想環境したい（`uv venv`）
@@ -107,6 +112,15 @@ $ uv venv --python python3.12  // 実行コマンドを指定
 `--python`オプションで、仮想環境に使用するPythonを指定できます。
 指定したPythonがシステムにインストールされていない場合は、`uv`が自動的にダウンロードしてインストールします。
 
+```console
+$ uv venv --system-site-packages
+$ uv venv --python 3.14 --system-site-packages
+```
+
+`--system-site-packages`オプションで、
+作成した仮想環境からシステムのPython環境にアクセスできるようにできます。
+[PyROOT](../root/root-pyroot.md)のように、システムのPython環境にインストールされてしまうパッケージを仮想環境から利用したい場合に必要です。
+
 :::{note}
 
 Pythonの仮想環境については、
@@ -131,6 +145,8 @@ $ uv pip uninstall pandas
 ```
 
 `uv pip install`コマンドで仮想環境にパッケージを追加できます。
+パッケージは`.venv`の中にインストールされます。
+`uv pip uninstall`コマンドで仮想環境からパッケージを削除できます。
 
 ```console
 // 仮想環境が存在しない場合はエラー
@@ -159,6 +175,7 @@ Initialized project `test-uv` at `/tmp/test-uv`
 ```
 
 `uv init`コマンドでプロジェクトを初期化できます。
+オプションで、プロジェクトの形態やパッケージ化の有無を選択できます。
 
 ```console
 $ ls -1a /tmp/test-uv
@@ -550,22 +567,3 @@ Upgraded 3 tools
 |---|---|---|---|---|
 | ビルド | `uv build` | `poetry build` | `python -m build` | × |
 | 公開 | `uv publish` | `poetry publish` | twine | × |
-
-### uvの優位性
-
-1. **速度**：Rustで実装され、他のツールより10～100倍高速
-2. **統合性**：pip、poetry、pyenvなど複数ツールの機能を1つに統合
-3. **使いやすさ**：直感的なコマンド体系と安定した動作
-4. **再現性**：ロックファイルによる確実な依存関係管理
-
-:::{note}
-
-Pythonには歴史的にさまざまなパッケージマネージャー（pip、poetry、pipx、pyenv）が存在し、
-それぞれ異なる目的で使用されていました。
-
-2024年に登場した`uv`は、これらの機能を統一し、
-PEP準拠で今後のデファクトスタンダードになる可能性が高いツールです。
-
-新規プロジェクトは`uv`で始めることをオススメします。
-
-:::
