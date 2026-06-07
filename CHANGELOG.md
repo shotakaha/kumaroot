@@ -1,5 +1,114 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **root-th1-sumw2**: add detailed C++ examples and error propagation explanation
+- **root-th1-draw**: simplify documentation and remove verbose sections
+- **root-ttree**: add TTree reader documentation and update RNTuple reference
+- **root-rint**: update RInt documentation and toctree
+- **root-ttree**: add AutoSave documentation and update TFile/TTree references
+- **deps**: update uv.lock
+- **root-usage**: increase RNTuple toctree maxdepth for better navigation
+- **root-rntuple**: add comprehensive RNTuple documentation pages for importer, model, reader, and writer
+- **pyproject**: correct Python version requirement to match tooling
+- **root-rntuple**: add RNTupleImporter documentation for TTree conversion
+- **root-rntuple**: improve reader documentation with GetView pattern and clearer structure
+- **root-rntuple**: add Fill() method documentation and ownership explanation
+- **root-rntuple**: clarify RNTupleModel schema definition and TTree comparison
+- **root-rntuple**: improve RNTuple documentation with modern API examples
+- **taskfile**: add examples:sync task for jupytext synchronization
+- **project-review**: update Phase 2 completion - Python examples & Jupyter notebooks
+- **docs-notebooks**: setup Jupyter notebook generation in docs/notebooks/
+- **docker-examples**: update title and description to focus on getting started
+- **docker-examples**: remove hugo and mystmd from toctree, reorder by template
+- **docker**: remove wordpress-mariadb example from old examples directory
+- **docker**: remove ubuntu example from old examples directory
+- **docker**: remove ssh example from old examples directory
+- **docker**: remove python3 example from old examples directory
+- **docker**: remove nginx example from old examples directory
+- **docker**: remove mariadb example from old examples directory
+- **docker**: remove httpd example from old examples directory
+- **docker**: remove debian example from old examples directory
+- **docker-example-mariadb**: correct literalinclude format with --- delimiters
+- **docker-example-wordpress**: use literalinclude for compose.yaml
+- **docker-example-wordpress-bitnami**: use literalinclude for compose.yaml
+- **docker-example-texlive**: use literalinclude for compose.yaml
+- **docker-example-rockylinux**: use literalinclude for compose.yaml
+- **docker-example-raspi**: use literalinclude for compose.yaml
+- **docker-example-busybox**: use literalinclude for compose.yaml
+- **docker-example-almalinux**: use literalinclude for compose.yaml
+- **docker**: update httpd and python3 examples to use literalinclude
+- **docker-example-postgresql**: use literalinclude for YAML config
+- **docker-example-nginx**: use literalinclude for YAML config
+- **docker-example-mariadb**: use literalinclude for YAML config
+- **docker-example-ubuntu**: use literalinclude for YAML config
+- **deps**: update ipython to v9.14.0
+- **pyproject**: update Python version requirement to >=3.14
+- **root-rdataframe-define**: add documentation for RDataFrame::Define
+- **root-rdataframe**: restructure documentation with clearer examples
+- **root-usage**: increase TFile toctree depth to show subpages
+- **root-usage,root-ttree,root-tchain**: reorganize TChain documentation placement
+- **root-tchain**: improve documentation and remove redundant sections
+- **root-ttree-write**: improve comments explaining gDirectory behavior
+- **root-tfile**: update example to use modern Get<T> template method
+- **root-tfile-get**: expand with template method and casting examples
+- **root-tfile-cd**: extract directory operations documentation to dedicated guide
+- **root-tfile-get**: extract TFile::Get documentation to dedicated guide
+- **root-tfile-open**: extract TFile::Open documentation to dedicated guide
+- **root-tfile**: improve documentation with better examples and clarity
+- **root-ttree**: use TFile::Open static method consistently
+- **root-ttree-fill**: use TFile::Open with proper capitalization
+- **root-ttree-fill**: expand with complete example showing event loop
+- **root-ttree-branch**: simplify code example to focus on Branch method
+- **root-ttree-setbranchaddress**: add documentation for reading branches
+- **root-ttree-branch**: add clarifying comments and improve description
+- **root-ttree**: reorganize documentation and improve clarity
+- **root-tcanvas**: restructure documentation and improve clarity
+- **root-tcanvas-update**: add real-time update patterns and sampling example
+- **root-tcanvas**: improve documentation structure and clarity
+- **root-usage**: improve ROOT TTree section structure
+- **root-ttree**: improve documentation structure and code examples
+- **root-ttree-readfile**: improve documentation clarity
+- **root-ttree-draw**: improve documentation clarity
+- **root-ttree-write**: improve documentation structure
+- **root-ttree-print**: add basic documentation
+- **root-ttree-fill**: improve documentation structure
+- **root-ttree-entry**: improve documentation structure
+- **root-ttree-entries**: improve documentation structure
+- **root-ttree**: improve documentation structure and code examples
+- **root-ttree-branch**: improve Python examples and fix function naming
+- **root-ttree-branch**: improve documentation with clearer examples and explanations
+- **deps**: update dependencies
+- **build**: configure setuptools to prevent package auto-discovery
+- **root-command**: add documentation for rootls and rootbrowse commands
+- **root-macro**: improve documentation with clearer examples and explanations
+- **root-macro**: rename from root-rint-macro to clarify scope
+- **root-rint**: consolidate quit section into main RINT documentation
+- **root-rint**: update version and simplify example
+- **root-pyroot**: update version and improve description
+- **root-config**: update version and features information
+- **root-install**: update title and version information
+- **root-usage**: reorganize ROOT setup documentation
+
+### Refactor
+
+- **docker-example-wordpress-bitnami**: simplify to unified template structure
+- **docker-example-wordpress**: simplify to unified template structure
+- **docker-example-python3**: simplify to unified template structure
+- **docker-example-busybox**: simplify to unified template structure
+- **docker-example-raspi**: simplify to unified template structure
+- **docker-example-texlive**: simplify to unified template structure
+- **docker-example-postgresql**: simplify to unified template structure
+- **docker-example-mariadb**: simplify to unified template structure
+- **docker-example-rockylinux**: simplify to unified template structure
+- **docker-example-almalinux**: simplify to unified template structure
+- **docker-example-httpd**: simplify to unified template structure
+- **docker-example-nginx**: simplify to unified template structure
+- **docker-example-ubuntu**: simplify to unified template structure
+- **examples**: consolidate code examples into docs/examples/
+
 ## v2026.5.2 (2026-05-26)
 
 ### Feat
