@@ -4,6 +4,9 @@
 
 ### Fix
 
+- **root-groot-setrgb**: replace raw color indices with TColor enum constants
+- **root-groot-setrgb**: add TColor enum table and color vision accessibility section
+- **python-uv**: update uv documentation with version info and new options
 - **root-th1-sumw2**: add detailed C++ examples and error propagation explanation
 - **root-th1-draw**: simplify documentation and remove verbose sections
 - **root-ttree**: add TTree reader documentation and update RNTuple reference
