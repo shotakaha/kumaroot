@@ -2,9 +2,6 @@
 
 version: '3'
 
-vars:
-  GREETING: KumaROOT!
-
 tasks:
   default:
     cmds:
@@ -83,7 +80,7 @@ tasks:
   examples:sync:
     desc: Synchronize Python examples with jupytext (py -> ipynb -> md)
     cmds:
-      - uv run jupytext --sync docs/examples/python/*.py
+      - uv run jupytext --sync
 
   # ============================================================================
   # Dependency management tasks - Update and check dependencies
@@ -155,9 +152,9 @@ tasks:
       - git log --oneline -10
 
   push:
-    desc: Push commits to remote (main branch)
+    desc: Push commits and tags to remote (main branch)
     cmds:
-      - git push origin main
+      - git push origin main --follow-tags
 
   push:tags:
     desc: Push commits and tags to remote
