@@ -1,9 +1,10 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.6.0 (2026-06-24)
 
 ### Fix
 
+- **root-th1-sumw2**: clarify Sumw2 behavior difference between ROOT5 and ROOT6
 - **root-groot-setrgb**: replace raw color indices with TColor enum constants
 - **root-groot-setrgb**: add TColor enum table and color vision accessibility section
 - **python-uv**: update uv documentation with version info and new options
