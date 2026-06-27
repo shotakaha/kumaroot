@@ -1,5 +1,14 @@
 # CHANGELOG.md
 
+## v2026.6.1 (2026-06-27)
+
+### Fix
+
+- **python-uv**: update uv documentation and improve descriptions
+- **docs**: use --group docs to run sphinx-autobuild in project venv
+- **Taskfile**: update task definitions and descriptions
+- **taskfile**: remove dead var, fix jupytext sync, add --follow-tags to push
+
 ## v2026.6.0 (2026-06-24)
 
 ### Fix
