@@ -4,9 +4,10 @@ version: '3'
 
 tasks:
   default:
+    desc: List available tasks
     cmds:
+      - echo "Available tasks:"
       - task --list
-      - task: status
     silent: true
 
   code:
@@ -18,32 +19,26 @@ tasks:
   # Pre-commit Hooks
   # ============================================================================
 
-  pre-commit:setup:
-    desc: Install pre-commit hooks
-    cmds:
-      - uv run pre-commit install
-      - echo "Pre-commit hooks installed"
-    silent: true
-
   pre-commit:
     desc: Run pre-commit hooks on all files
     cmds:
       - uv run pre-commit run --all-files
       - git status
 
+  pre-commit:setup:
+    desc: Install pre-commit hooks
+    cmds:
+      - uv run pre-commit install
+
   pre-commit:update:
     desc: Update pre-commit hooks to latest versions
     cmds:
       - uv run pre-commit autoupdate
-      - echo "Pre-commit hooks updated"
-    silent: true
 
   pre-commit:uninstall:
     desc: Uninstall pre-commit hooks
     cmds:
       - uv run pre-commit uninstall
-      - echo "Pre-commit hooks uninstalled"
-    silent: true
 
   # ============================================================================
   # Documentation tasks
@@ -87,24 +82,24 @@ tasks:
   # ============================================================================
 
   deps:setup:
-    desc: Setup Python environment
+    desc: Install dependencies
     cmds:
       - uv sync --all-groups
 
-  deps:check:
-    desc: Check for outdated packages
+  deps:outdated:
+    desc: List outdated dependencies
     cmds:
-      - uv lock --upgrade --dry-run
-
-  deps:audit:
-    desc: Audit dependencies for vulnerabilities
-    cmds:
-      - uv run pip-audit
+      - uv pip list --outdated
 
   deps:update:
     desc: Update dependencies
     cmds:
-      - uv lock --upgrade
+      - uv sync --upgrade --all-groups
+
+  deps:audit:
+    desc: Check for security vulnerabilities in dependencies
+    cmds:
+      - uv run pip-audit
 
   # ============================================================================
   # Version management tasks - Manage versions with commitizen
@@ -144,19 +139,20 @@ tasks:
   status:
     desc: Show git status
     cmds:
-      - git status
+      - git status --short --branch
+    silent: true
 
   log:
-    desc: Show recent commits (last 10)
+    desc: Show commit history (last 20 commits)
     cmds:
-      - git log --oneline -10
+      - git log --oneline --graph --decorate -n 20
 
   push:
-    desc: Push commits and tags to remote (main branch)
+    desc: Push commits and tags to remote
     cmds:
-      - git push origin main --follow-tags
+      - git push origin HEAD --follow-tags
 
   push:tags:
     desc: Push commits and tags to remote
     cmds:
-      - git push origin main --tags
+      - git push origin HEAD --tags
