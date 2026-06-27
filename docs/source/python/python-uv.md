@@ -13,10 +13,15 @@ $ uv remove requests
 
 // 依存関係のインストール
 $ uv sync
+$ uv audit --preview-features audit-command
 
 // パッケージの実行とテスト
 $ uv run main_script.py
 $ uv run pytest
+
+// フォーマット
+$ uv format --preview-features format-command
+$ uv check --preview-features check-command
 
 // パッケージ公開
 $ uv build
@@ -131,7 +136,7 @@ Pythonの仮想環境については、
 
 :::
 
-## パッケージを追加したい（`uv pip install`）
+## パッケージを追加・削除したい（`uv pip install` / `uv pip uninstall`）
 
 ```console
 // 仮想環境を作成
@@ -140,12 +145,17 @@ $ uv venv
 // パッケージを追加
 $ uv pip install pandas
 
+// 更新できるパッケージを確認
+$ uv pip list --outdated
+
 // パッケージを削除
 $ uv pip uninstall pandas
 ```
 
 `uv pip install`コマンドで仮想環境にパッケージを追加できます。
 パッケージは`.venv`の中にインストールされます。
+`uv pip list`コマンドで、インストール済みのパッケージを確認できます。
+さらに`--outdated`オプションで、更新できるパッケージを確認できます。
 `uv pip uninstall`コマンドで仮想環境からパッケージを削除できます。
 
 ```console
@@ -226,7 +236,7 @@ dependencies = []
 このファイルはユーザーが直接編集することを想定しています。
 `uv init`コマンドで初期化した後は、必要に応じて直接編集してください。
 
-## パッケージを追加・削除したい（`uv add` / `uv remove`）
+## パッケージ依存を追加・削除したい（`uv add` / `uv remove`）
 
 ```console
 // dependenciesに追加
@@ -244,10 +254,10 @@ Removed 1 package in 0.05s
 $ uv sync
 ```
 
-`uv add`でパッケージを追加できます。
+`uv add`でパッケージ依存を追加できます。
 `pyproject.toml`の`[dependencies]`セクションにパッケージ情報が追加され、
 `uv.lock`ファイルも自動で更新されます。
-`uv remove`でパッケージを削除できます。
+`uv remove`でパッケージ依存を削除できます。
 
 ```console
 // dependency-groups.devに追加
@@ -259,7 +269,7 @@ $ uv add --group dev ruff
 $ uv add --group docs sphinx
 ```
 
-`--group`オプションで、パッケージの用途に合わせてグループ化できます。
+`--group`オプションで、パッケージ依存をグループ化できます。
 `pyproject.toml`の`[dependency-groups]`セクションにグループ情報が追加されます。
 `--dev`オプションは`--group dev`と同じです。
 
@@ -320,19 +330,14 @@ $ uv sync --upgrade
 $ uv run path/to/script.py
 Hello, World!
 
-$ uv run pytest
+$ uv run --group dev pytest
 ===== test session starts =====
 tests/test_main.py .                                       [100%]
 1 passed
-
-$ uv run ruff check .
-All checks passed!
-
-$ uv run ruff format .
-1 file reformatted
 ```
 
 `uv run`コマンドで、プロジェクトの仮想環境を使って外部コマンドやスクリプトを実行できます。
+`--group`オプションで、依存グループを指定できます。
 仮想環境の手動アクティベーションは不要です。
 
 ```console
@@ -504,7 +509,7 @@ Upgraded 3 tools
 ### uvxとuv tool installの使い分け
 
 | 用途 | コマンド | 例 |
-|---|---|---|
+| --- | --- | --- |
 | 一時的に使用 | `uvx` | `uvx pytest script.py` |
 | 最新版を試したい | `uvx` | `uvx ruff@0.2.0 check .` |
 | 頻繁に使用 | `uv tool install` | `uv tool install ruff` |
@@ -532,14 +537,14 @@ Upgraded 3 tools
 ### プロジェクト管理
 
 | 機能 | `uv` | `poetry` | `pip` | `pipx` |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | プロジェクト初期化 | `uv init` | `poetry init` | × | × |
 | 仮想環境作成 | 自動 | 自動 | `python -m venv` | 自動 |
 
 ### 依存関係管理
 
 | 機能 | `uv` | `poetry` | `pip` | `pipx` |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | パッケージ追加 | `uv add` | `poetry add` | `pip install` | × |
 | パッケージ削除 | `uv remove` | `poetry remove` | `pip uninstall` | × |
 | 開発用依存 | `uv add --dev` | `poetry add --dev` | 手動管理 | × |
@@ -549,13 +554,13 @@ Upgraded 3 tools
 ### 実行と開発
 
 | 機能 | `uv` | `poetry` | `pip` | `pipx` |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | スクリプト実行 | `uv run` | `poetry run` | 手動 | × |
 
 ### Python管理とツール管理
 
 | 機能 | `uv` | `poetry` | `pip` | `pipx` |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | バージョン固定 | `uv python pin` | 外部ツール依存 | × | × |
 | バージョンリスト | `uv python list` | × | × | × |
 | 一時実行 | `uvx` | × | × | × |
@@ -564,6 +569,6 @@ Upgraded 3 tools
 ### ビルドと公開
 
 | 機能 | `uv` | `poetry` | `pip` | `pipx` |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | ビルド | `uv build` | `poetry build` | `python -m build` | × |
 | 公開 | `uv publish` | `poetry publish` | twine | × |
