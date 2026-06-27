@@ -20,4 +20,4 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 livehtml:
-	uv run sphinx-autobuild --open-browser "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O) --ignore="**/_tags/*" --ignore=".*"
+	uv run --group docs sphinx-autobuild --open-browser "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O) --ignore="**/_tags/*" --ignore=".*"
