@@ -3,8 +3,8 @@
 ```cpp
 #include "G4NistManager.hh"
 
-auto* nm = G4NistManager::Instance();
-auto* air = nm->FindOrBuildMaterial("G4_AIR");
+auto nm = G4NistManager::Instance();
+auto air = nm->FindOrBuildMaterial("G4_AIR");
 ```
 
 `G4NistManager`で、
@@ -13,9 +13,9 @@ NIST（National Institute of Standards and Technology）のデータベースに
 ## 物質を取得したい（`G4NistManager::FindOrBuildMaterial`）
 
 ```cpp
-auto* air = nm->FindOrBuildMaterial("G4_AIR");
-auto* water = nm->FindOrBuildMaterial("G4_WATER");
-auto* vacuum = nm->FindOrBuildMaterial("G4_Galactic");
+auto air = nm->FindOrBuildMaterial("G4_AIR");
+auto water = nm->FindOrBuildMaterial("G4_WATER");
+auto vacuum = nm->FindOrBuildMaterial("G4_Galactic");
 ```
 
 `G4NistManager::FindOrBuildMaterial`メソッドで
@@ -28,8 +28,8 @@ auto* vacuum = nm->FindOrBuildMaterial("G4_Galactic");
 ## 元素を取得したい（`G4NistManager::FindOrBuildElement`）
 
 ```cpp
-auto* H = nm->FindOrBuildElement("G4_H")
-auto* O = nm->FindOrBuildElement("G4_O")
+auto H = nm->FindOrBuildElement("G4_H");
+auto O = nm->FindOrBuildElement("G4_O");
 ```
 
 `G4NistManager::FindOrBuildElement`メソッドで
@@ -68,9 +68,9 @@ namespace プロジェクト名
     class DetectorConstruction : public G4VUserDetectorConstruction
     {
         public:
-            G4PhysicalVolume* Construct() override;
+            G4VPhysicalVolume* Construct() override;
             void ConstructMaterials();
-    }
+    };
 }
 
 #endif
