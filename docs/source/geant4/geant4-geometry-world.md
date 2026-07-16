@@ -23,8 +23,8 @@ G4LogicalVolume* BuildWorld(){
     };
 
     // 実験室の素材を決める
-    auto* nm = G4NistManager::Instance();
-    G4Material* material = nm->FindOrBuildMaterial(material_name);
+    auto nm = G4NistManager::Instance();
+    auto material = nm->FindOrBuildMaterial(material_name);
 
     // 実験室
     auto logical = new G4LogicalVolume{
@@ -60,12 +60,12 @@ G4VPhysicalVolume* SetupVolumes()
     auto world = BuildWorld();
 
     // 実験室の置き場所を決める
-    G4RotationMatrix rotation = G4RotationMatrix{};      // 回転 : なし
-    G4ThreeVector position = G4ThreeVector{0., 0., 0.};  // 方向 :  (0, 0, 0)
-    G4Transform3D origin = G4Transform3D{rotation, position};  // 座標
+    auto rotation = G4RotationMatrix{};      // 回転 : なし
+    auto position = G4ThreeVector{0., 0., 0.};  // 方向 :  (0, 0, 0)
+    auto origin = G4Transform3D{rotation, position};  // 座標
 
     // 実験室を配置する
-    G4VPhysicalVolume *theWorld = new G4PVPlacement(
+    auto theWorld = new G4PVPlacement(
         origin,      // G4Transform3D : 論理ボリュームを配置する座標
         world,       // G4LogicalVolume : 配置する論理ボリューム
         "theWorld",  // G4String : この物理ボリュームの名前
