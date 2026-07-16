@@ -53,10 +53,10 @@ dt.format("YYYY-MM-DDTHH[h]mm[m]ss[s]SSSSSS[us]Z")
 
 ```python
 dt.to_iso8601_string()
-# => '2022-09-26T06:05:11+09:00'
+# => '2026-07-16T22:34:08.405761+09:00'
 ```
 
-日付オブジェクトをISO8601形式の文字列に変換したい場合は、``to_iso8601_string`が便利です。
+日付オブジェクトをISO8601形式の文字列に変換したい場合は、``to_iso8601_string``が便利です。
 また、その他の一般的な出力形式は[Common Formats](https://pendulum.eustace.io/docs/#common-formats)を参照してください。
 
 ## 文字列から日付にしたい（`pendulum.parse`）
