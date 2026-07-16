@@ -1,9 +1,5 @@
 # CLIしたい（``typer``）
 
-```console
-$ pip3 install typer[all]
-```
-
 ```python
 # パッケージ/cli.py
 import typer
@@ -33,6 +29,49 @@ if __name__ == "__main__":
 これまで、CLIを作るときの引数／オプション解析は、定番のPython標準``argparse``パッケージを使っていましたが、サブコマンドを作るのはちょっと大変な印象でした。
 （やってみようと思って調べたことはありますが実際に作ったことはない・・・）
 ``Typer``は、引数とオプション、コマンドの説明も、いつもの関数を作る作業の延長ででき、非常に簡単だと感じました。
+
+## インストールしたい（`typer`）
+
+- pipでインストール
+
+```console
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install typer
+```
+
+- pipxでインストール
+
+```console
+$ pipx install typer
+```
+
+- uv toolでインストール
+
+```console
+$ uv tool install typer
+```
+
+- uvでプロジェクトに追加
+
+```console
+$ uv add typer
+```
+
+- poetryでプロジェクトに追加
+
+```console
+$ poetry add typer
+```
+
+:::{note}
+
+以前は``rich``などの拡張機能を含めるために``typer[all]``という書き方が必要でしたが、
+現在のバージョンでは``rich``が標準の依存関係に含まれているため、
+``typer``だけでインストールすればOKです。
+
+:::
+
 
 ## 位置引数したい（``typer.Argument``）
 
