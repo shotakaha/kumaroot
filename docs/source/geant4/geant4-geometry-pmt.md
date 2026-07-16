@@ -109,25 +109,32 @@ G4bool PMTSD::ProcessHits(G4Step* step, G4TouchableHistory*)
 ``PMTSD``は``ProcessHits()``内でトラックが``G4OpticalPhoton``かどうかを判定し、
 該当する場合のみ``fNumPhotons``をインクリメントします。
 
-``BuildPMT()``の中で、入射窓の論理ボリュームにセンシティブディテクターを登録します。
+:::{note}
+
+センシティブディテクターの登録は、``BuildPMT()``（ジオメトリ構築側）ではなく、
+``DetectorConstruction::ConstructSDandField()``で行うのがおすすめです。
+
+マルチスレッド版のGeant4では、``Construct()``（および``BuildPMT()``のような配下の関数）は
+マスタースレッドで1回だけ呼ばれてジオメトリを構築します。
+一方、センシティブディテクターは各ワーカースレッドごとに個別のインスタンスが必要なため、
+``Construct()``側で登録しても実際にイベント処理を行うワーカースレッドには反映されません。
+``ConstructSDandField()``はワーカースレッドごとに呼ばれるため、
+SDの登録はかならずここで行ってください。
+
+:::
+
+センシティブディテクターの登録は、``DetectorConstruction::ConstructSDandField()``でおこないます。
+``BuildPMT()``はジオメトリの構築のみをおこない、SDの登録はおこないません。
 
 ```cpp
-G4LogicalVolume *BuildPMT()
+void DetectorConstruction::ConstructSDandField()
 {
-    // ...（形状・材料の定義は省略）
-
-    auto logical = new G4LogicalVolume(
-        solid,        // G4VSolid
-        material,     // G4Material
-        logical_name  // 名前
-    );
-
-    // センシティブディテクターを登録
     auto sd = new PMTSD("PMTSD");
     G4SDManager::GetSDMpointer()->AddNewDetector(sd);
-    logical->SetSensitiveDetector(sd);
 
-    return logical;
+    // 名前でジオメトリ構築時の論理ボリュームを検索して登録する
+    auto logical = G4LogicalVolumeStore::GetInstance()->GetVolume("PMTWindow");
+    logical->SetSensitiveDetector(sd);
 }
 ```
 
