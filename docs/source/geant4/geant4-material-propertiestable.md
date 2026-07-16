@@ -41,6 +41,32 @@ mpt->AddProperty("RINDEX", photon_energy, refractive_index, n_entries);
 mpt->AddProperty("ABSLENGTH", photon_energy, absorption, n_entries);
 ```
 
+チェレンコフ光の生成には屈折率（`RINDEX`）の設定が必須です。
+他の光学特性（`ABSLENGTH`など）は省略可能ですが、
+`RINDEX`が設定されていないと`G4Cerenkov`プロセスは光子を生成しません。
+
+:::{note}
+
+`photon_energy`の範囲が狭すぎると、その範囲外の波長のチェレンコフ光が生成されません。
+可視光〜紫外域まで含めておくのが一般的です。
+
+:::
+
+`G4MaterialPropertiesTable`の設定だけでは不十分で、
+物理リストに`G4Cerenkov`プロセスを登録する必要があります。
+詳細は[](./geant4-physics-opticalphysics.md)を参照してください。
+
+また、以下のようなメソッドで光子の生成量やトラッキング順序を制御できます。
+
+```cpp
+auto cerenkovProcess = new G4Cerenkov{};
+cerenkovProcess->SetMaxNumPhotonsPerStep(100);   // 1ステップあたりの光子数の上限
+cerenkovProcess->SetTrackSecondariesFirst(true); // 光子を親粒子より先にトラッキング
+```
+
+`SetMaxNumPhotonsPerStep`を設定しないと、
+荷電粒子の数が多い場合にシミュレーションが極端に遅くなることがあります。
+
 ## シンチレーション光したい
 
 ```cpp
