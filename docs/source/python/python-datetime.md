@@ -16,6 +16,15 @@ Python3.6から`astimezone`を引数なしで呼び出せるようになった�
 タイムゾーン情報を含む（`tz-aware`な）日時オブジェクトが簡単に取得できるようになっています
 （それ以前は引数でタイムゾーンを明示的に指定する必要がありました）。
 
+:::{note}
+
+`tz-naive`と`tz-aware`が混在した`datetime`オブジェクト同士は、
+比較や引き算をすると`TypeError`になります。
+異なるタイムゾーンをまたぐ処理や、他のシステムと日時をやり取りする場合は、
+`tz-aware`なオブジェクトに統一しておくと事故を防げます。
+
+:::
+
 ## 現在時刻したい（`datetime.datetime.now`）
 
 ```python
@@ -121,6 +130,16 @@ from datetime import timedelta  # datatime.timedeltaオブジェクト
 `datetime`モジュールの中にはいろいろなサブモジュールがはいっています。
 `import datetime`ですべてをインポートしてもよいですが、
 自分が必要なモジュールを選んでおくと、コードが読みやすくなります。
+
+`timedelta`を使うと、日付の加減算ができます。
+
+```python
+from datetime import datetime, timedelta
+
+now = datetime.now()
+tomorrow = now + timedelta(days=1)
+one_hour_ago = now - timedelta(hours=1)
+```
 
 ## リファレンス
 
