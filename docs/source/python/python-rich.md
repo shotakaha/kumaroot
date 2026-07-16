@@ -7,6 +7,35 @@ print("Hello, [bold magenta]Rich[/bold magenta]!")
 
 `rich`は、Pythonの標準出力を装飾するためのライブラリです。
 
+## インストールしたい（`rich`）
+
+- pipでインストール
+
+```console
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install rich
+```
+
+- uvでプロジェクトに追加
+
+```console
+$ uv add rich
+```
+
+- poetryでプロジェクトに追加
+
+```console
+$ poetry add rich
+```
+
+:::{note}
+
+`rich`はCLIツールではなくライブラリなので、
+`pipx`や`uv tool`ではなく、プロジェクトの依存関係として追加します。
+
+:::
+
 `rich.print`関数に置き換えるだけで、テキストの色やスタイルを指定して、見やすく、わかりやすい出力を実現できます。
 
 :::{note}
