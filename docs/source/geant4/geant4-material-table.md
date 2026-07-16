@@ -15,6 +15,13 @@ G4cout << *(G4Material::GetMaterialTable()) << G4endl;
 
 材料名に加えて、構成している元素の種類も確認できます。
 
+:::{note}
+
+``GetMaterialTable()``は、呼び出した時点までに生成された材料だけを返します。
+``FindOrBuildMaterial()``などで材料を生成した**あと**に呼び出す必要があります。
+
+:::
+
 ```console
 ***** Table : Nb of materials = 4 *****
 
@@ -104,6 +111,31 @@ Material: G4_PLASTIC_SC_VINYLTOLUENE
     --->  Isotope:    H2   Z =  1   N =   2   A =   2.01 g/mole   abundance:  0.011 %
     ElmMassFraction:   8.53 %  ElmAbundance  52.63 %
 ```
+
+出力に含まれる主要な項目は以下のとおりです。
+
+| 項目 | 意味 |
+| --- | --- |
+| `RadL` | 放射長（Radiation Length）。電子・光子が物質中でエネルギーを失う特徴的な距離 |
+| `Nucl.Int.Length` | 核相互作用長（Nuclear Interaction Length）。ハドロンが核反応を起こすまでの特徴的な距離 |
+| `Imean` | 平均励起エネルギー（Mean Excitation Energy）。電離損失（dE/dx）の計算に使われる |
+
+## 特定の材料だけを取得したい（``G4Material::GetMaterial``）
+
+テーブル全体ではなく特定の材料だけを取得したい場合は、
+``G4Material::GetMaterial()``に材料名を渡します。
+
+```cpp
+G4Material *air = G4Material::GetMaterial("G4_AIR");
+```
+
+:::{seealso}
+
+``G4NistManager``による材料の生成方法は
+[](./geant4-material-nistmanager.md)
+に整理しました。
+
+:::
 
 ## リファレンス
 
