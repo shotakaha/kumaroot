@@ -146,12 +146,12 @@ G4double energy = 1.0 * GeV;  // double に相当
 
 ## 入出力ストリーム（`G4cout` / `G4cerr` / `G4debug` / `G4endl`）
 
-Geant4では、C++標準の`std:cout`や`std:cerr`の代わりに、
+Geant4では、C++標準の`std::cout`や`std::cerr`の代わりに、
 専用の出力ストリームを使うことが推奨されています。
 
 ```cpp
 G4cout << "標準出力" << G4endl;
-G4err << "標準エラー出力" << G4endl;
+G4cerr << "標準エラー出力" << G4endl;
 G4debug << "デバッグ用出力" << G4endl;
 ```
 
