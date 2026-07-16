@@ -75,5 +75,10 @@ params->SetScintVerboseLevel(1);
 ## シンチレーション光の数をしりたい（``GetNumPhotons``）
 
 ```cpp
+auto sc = new G4Scintillation();
 G4int n_photons = sc->GetNumPhotons();
 ```
+
+`GetNumPhotons`で、直近のステップで生成されたシンチレーション光子の数を取得できます。
+`PostStepDoIt`が呼ばれたあとに取得でき、
+`SteppingAction`などでシンチレーション光子数を集計・診断する用途で使われます。
