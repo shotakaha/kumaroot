@@ -45,7 +45,7 @@ Geant4のクラス名には`PascalCase`が使われています。
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
     // 自作クラスの実装
-}
+};
 ```
 
 ユーザー定義クラスについては、
@@ -60,7 +60,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
 ## 変数名の命名規則
 
-Geant4の変数名には、基本的に`camelCase`が基本的に使われています。
+Geant4の変数名には、基本的に`camelCase`が使われています。
 また、ゆるめのシステム・ハンガリアン記法が一部で採用されており、
 変数の種類や役割が名前からわかるようになっています。
 
@@ -98,7 +98,7 @@ G4VPhysicalVolume *fpWorld;
 
 ### 引数
 
-関数の引数には、`aValue`や`anEvent`のように、接頭辞として不定冠詞の`a`や`an`が使われる傾向があります
+関数の引数には、`aValue`や`anEvent`のように、接頭辞として不定冠詞の`a`や`an`が使われる傾向があります。
 参照型では`&aValue`、
 ポインター型では`&apValue`のように使われます。
 
@@ -111,7 +111,7 @@ G4Track::SetTouchableHandle(const G4TouchableHandle &apValue)
 
 ### 定数
 
-定数（`const`な変数）や`enum`定数には、接頭辞として`k*`（constantの意味）使われます。
+定数（`const`な変数）や`enum`定数には、接頭辞として`k*`（constantの意味）が使われます。
 
 ```cpp
 const G4double kMaxStepLength = 10.0 * mm;
