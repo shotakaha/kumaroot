@@ -6,12 +6,12 @@ import platform
 # OS情報
 platform.version()
 
-# アーキテクチャ情報
+# プラットフォーム情報（OS名・バージョン・アーキテクチャなど）
 platform.platform()
 
 # Python情報
-platform.sys.version()
-platform.sys.executable()
+platform.sys.version
+platform.sys.executable
 ```
 
 `platform`モジュールで、実行環境のバージョンを確認できます。
