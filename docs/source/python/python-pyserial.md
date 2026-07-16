@@ -106,7 +106,7 @@ if device.out_waiting > 0:
 
 ```python
 try:
-    with serial.Serial(port="dev/ttyUSB0") as device:
+    with serial.Serial(port="/dev/ttyUSB0") as device:
         ...
 except serial.SerialException as err:
     print(err)
@@ -150,14 +150,14 @@ import csv
 import time
 from pathlib import Path
 from datetime import datetime
-from typing import Optional, List
+from typing import Any, Optional
 
 # 設定
 port_name = "/dev/ttyUSB0"
 baud = 9600
 
 # 保存先
-now =datetime.now()
+now = datetime.now()
 ymd = now.strftime("%Y%m%d")
 default_filename = now.strftime("%Y%m%d_%Hh%Mm%Ss.csv")
 csv_path = Path.cwd() / "data" / ymd / default_filename
@@ -177,9 +177,9 @@ def read_line(
     return line or None
 
 def write_row(
-    writer: csv.writer,
+    writer: Any,  # csv.writer()の戻り値は型ヒントとして直接書けないためAny
     line: str
-    ) -> List[str]:
+    ) -> list:
     """Write a CSV row to the file."""
     parts = line.split()
     timestamp = datetime.now().isoformat(timespec="seconds")
@@ -211,7 +211,7 @@ try:
 except serial.SerialException as e:
     print(f"Serial error: {e}")
 except KeyboardInterrupt:
-    print(f"Stopped by user.")
+    print("Stopped by user.")
 ```
 
 シリアル通信で取得したデータをCSV形式で保存するサンプルコードです。
