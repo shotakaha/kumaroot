@@ -2,7 +2,7 @@
 
 ```console
 $ pytest --version
-pytest 8.3.3
+pytest 9.1.1
 
 $ pytest
 $ pytest --verbose
@@ -47,10 +47,10 @@ $ uv tool install pytest-html
 - `poetry`でインストール
 
 ```console
-$ poetry add pytest --group=test
-$ poetry add pytest-mock --group=test
-$ poetry add pytest-cov --group=test
-$ poetry add pytest-html --group=test
+$ poetry add pytest --group test
+$ poetry add pytest-mock --group test
+$ poetry add pytest-cov --group test
+$ poetry add pytest-html --group test
 ```
 
 - `uv`でインストール
@@ -65,7 +65,7 @@ $ uv add pytest-html --group test
 `pipx`や`uv tool`を使ってシステム（の仮想環境）にインストールできます。
 `poetry`や`uv`で管理している場合は`--group test`に分類するとよいと思います。
 
-テスト結果をHTMLファイルに出力する場合は`pytest-html`のが必要です。
+テスト結果をHTMLファイルに出力する場合は`pytest-html`が必要です。
 
 [unittest.mock](./python-unittest-mock.md)を使う場合は、
 `pytest-mock`もインストールしておくとよいです。
@@ -99,6 +99,8 @@ $ pytest --markers
 
 ```toml
 [tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
 markers = [
     "local: tests that should only run locally",
     "slow: tests that take more than 1 second to run"
@@ -106,10 +108,70 @@ markers = [
 addopts = [
     "-m", "not local",
 ]
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning",
+]
 ```
+
+`minversion`で、このプロジェクトが要求する`pytest`の最低バージョンを指定できます。
+`testpaths`で、引数なしで`pytest`を実行したときに検索するディレクトリを指定できます。
+`filterwarnings`で、警告（`Warning`）の扱いを設定できます。
+上記の例では、想定外の警告は`error`として失敗させつつ、`DeprecationWarning`だけは無視しています。
 
 マーカー名に`not`をつけることで除外できます。
 このサンプルでは、時間のかかるテストなどに`@pytest.mark.local`とマークし、デフォルトでスキップするようにしています。
+
+## テスト名で絞り込みたい（`-k`）
+
+```console
+$ pytest -k "download"
+$ pytest -k "download and not slow"
+```
+
+`-k "式"`で、テスト関数名やクラス名の一部にマッチするテストだけを実行できます。
+`and`・`or`・`not`を組み合わせた式も使えます。
+`-m`（マーカー）と違い、事前にマークしておく必要がないため、手早く絞り込みたいときに便利です。
+
+## 失敗したら止めたい（`-x` / `--maxfail`）
+
+```console
+$ pytest -x
+$ pytest --maxfail=3
+```
+
+`-x`（`--exitfirst`）で、最初に失敗したテストの時点で実行を打ち切れます。
+`--maxfail=数`で、指定した数だけ失敗した時点で打ち切れます。
+テストが大量にある場合、全部の結果を待たずに早めに気づけるので便利です。
+
+## 前回失敗したテストだけ実行したい（`--lf` / `--ff`）
+
+```console
+# 前回失敗したテストだけ再実行
+$ pytest --lf
+
+# 前回失敗したテストを先に、残りもすべて実行
+$ pytest --ff
+```
+
+`--lf`（`--last-failed`）で、前回失敗したテストだけを再実行できます。
+`--ff`（`--failed-first`）で、前回失敗したテストを先頭に並べつつ、すべてのテストを実行できます。
+修正がうまくいったかをすぐに確認したいときに便利です。
+
+## 並列実行したい（`pytest-xdist`）
+
+```console
+$ uv add pytest-xdist --group test
+```
+
+```console
+$ pytest -n auto
+$ pytest -n 4
+```
+
+`pytest-xdist`をインストールすると、`-n`オプションでテストを並列実行できるようになります。
+`-n auto`でCPUコア数に応じて自動的に並列数を決定します。
+テストの数が増えてきて実行時間が気になってきたら、導入を検討するとよいです。
 
 ## 詳細表示したい（`--verbose`）
 
