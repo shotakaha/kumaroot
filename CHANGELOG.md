@@ -1,6 +1,14 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.7.0 (2026-07-16)
+
+### Fix
+
+- **README**: update task name and reference to AGENTS.md
+
+### Refactor
+
+- **CLAUDE**: make AGENTS.md canonical, CLAUDE.md references it
 
 ## v2026.6.1 (2026-06-27)
 
