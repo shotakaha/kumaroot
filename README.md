@@ -212,7 +212,7 @@ Pre-commitフックは以下の検査を実行します：
 
 ```bash
 $ task deps:setup      # Python環境をセットアップ
-$ task deps:check      # 更新可能なパッケージを確認
+$ task deps:outdated   # 更新可能なパッケージを確認
 $ task deps:update     # パッケージを更新（uv.lockも更新）
 ```
 
@@ -229,7 +229,7 @@ $ task push      # mainブランチをプッシュ
 
 ### コンテンツの標準化と規則
 
-詳しい執筆ガイドラインと技術仕様については、[CLAUDE.md](CLAUDE.md)を参照してください。
+詳しい執筆ガイドラインと技術仕様については、[AGENTS.md](AGENTS.md)を参照してください。
 そこには以下の内容が記載されています：
 
 - **ドキュメント構造**：**逆引き形式**（目的ベースの整理）の説明
