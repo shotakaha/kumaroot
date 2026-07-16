@@ -54,6 +54,15 @@ elapsed = stopped - started
 `time.monotonic`は、単調増加する時間カウンターです。
 絶対に後戻りすることがないため、経過時間の計測に適しています。
 
+`time.monotonic_ns`は、同じ性質をもつナノ秒精度の整数版です。
+浮動小数点の誤差を避けたい場合や、より高い精度が必要な場合に使います。
+
+```python
+started = time.monotonic_ns()
+# ...
+elapsed_ns = time.monotonic_ns() - started
+```
+
 :::{note}
 
 `time.time`で取得できる時刻情報は、パソコンのシステム時刻に依存します。
@@ -118,3 +127,12 @@ elapsed = stopped - started
 ```
 
 `time.perf_counter`で精度が高い時刻を取得できます。
+`time.monotonic`と同様、ナノ秒精度の整数を返す`time.perf_counter_ns`もあります。
+
+:::{note}
+
+`time.perf_counter`は、スリープ中の時間も含めた「実時間（wall clock time）」を計測します。
+CPUが実際に処理に使った時間（スリープ中を除く）だけを知りたい場合は、
+`time.process_time`を使ってください。
+
+:::
