@@ -15,7 +15,7 @@ from functools import wraps
 
 def decorator_name(f):
     @wraps(f)
-    def wrapper(*args, **kwargs)
+    def wrapper(*args, **kwargs):
         ...前処理
         result = f(*args, **kwargs)  # 元の関数を実行
         ...処理
@@ -68,7 +68,7 @@ def timer(f):
     return wrapper
 
 @timer
-def some_function(...):
+def some_function(引数):
     ...
     return ...
 ```
@@ -100,7 +100,7 @@ def retry(max_retries=3, delay=1):
         return wrapper
     return decorator
 
-@retry
+@retry()
 def some_function(引数):
     ...
     return
