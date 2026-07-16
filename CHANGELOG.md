@@ -1,5 +1,32 @@
 # CHANGELOG.md
 
+## v2026.7.1 (2026-07-16)
+
+### Fix
+
+- **geant4-cpp-google**: explain when to use forward declaration vs #include
+- **geant4-cpp-google**: add missing context on include guards and forward declarations
+- **geant4-cpp-google**: fix missing return type and misleading comment
+- **geant4-geometry-pmt**: add note on more advanced PMT designs
+- **geant4-geometry-pmt**: move SD registration to ConstructSDandField
+- **geant4-geometry-pmt**: add PMTSD sensitive detector example
+- **geant4-geometry-pmt**: fix syntax errors and unify naming
+- **geant4-geometry-tank**: fix syntax errors and unify naming
+- **geant4-geometry-world**: unify variable declarations to auto
+- **geant4-geometry-world**: fix syntax errors and inconsistencies
+- **geant4-physics-scintillation**: fix undefined variable and add GetNumPhotons description
+- **geant4-material-propertiestable**: add explanation for scintillation light setup
+- **geant4-material-propertiestable**: add explanation for Cherenkov light setup
+- **geant4-material-propertiestable**: fix API errors and unify code style
+- **geant4-material-nistmanager**: fix syntax errors and unify auto style
+- **geant4-material-table**: add missing context and explanations
+- **geant4-material-table**: fix GetMaterial -> G4Material class name
+- **geant4-singleton**: fix G4MaterialTable API and add G4UIManager description
+- **geant4-drivers**: revert RayTracer and ASCIITree result to -
+- **geant4-drivers**: fix typos and improve driver descriptions
+- **geant4-cpp-geant4**: fix grammar and C++ syntax errors
+- **geant4-cpp-geant4**: fix typos in stream names and std namespace
+
 ## v2026.7.0 (2026-07-16)
 
 ### Fix
