@@ -2,6 +2,7 @@
 
 ```python
 import tomllib
+from pathlib import Path
 
 fname = Path("設定ファイル.toml")
 with fname.open("rb") as f:
@@ -43,12 +44,12 @@ mixed = [1, "two", 3.0]
 }
 ```
 
-## インライン・テーブルしたい
+## 配列テーブルしたい（`[[table]]`）
 
 ```toml
 [[record]]
 run_id = 1
-distance = 10.0}
+distance = 10.0
 
 [[record]]
 run_id = 2
