@@ -1,9 +1,9 @@
-# 水タンクを作りたい（``SetupTankVolume``）
+# 水タンクを作りたい（``BuildWaterTank``）
 
 スーパーカミオカンデ（直径39.3m、高さ41.4m）サイズの水タンクを配置します。
 
 ```cpp
-G4LogicalVolume *SetupWaterTank()
+G4LogicalVolume *BuildWaterTank()
 {
     // パラメーター設定
     G4String logical_name{"Tank"};
@@ -28,14 +28,14 @@ G4LogicalVolume *SetupWaterTank()
 
     // 材料を定義
     auto nm = G4NistManager::Instance();
-    auto material = nm->FindOrBuild(material_name);
+    auto material = nm->FindOrBuildMaterial(material_name);
 
     // 論理ボリュームを定義
     auto logical = new G4LogicalVolume(
         solid,        // G4VSolid
         material,     // G4Material
-        logical_name, // 名前
-    )
+        logical_name  // 名前
+    );
 
     // （オプション）ワイヤーフレームを着色
     auto color = new G4VisAttributes(true, G4Colour(0., 0.5, 1.)); // 青系
@@ -55,17 +55,17 @@ G4LogicalVolume *SetupWaterTank()
 G4VPhysicalVolume* SetupVolumes()
 {
     // Worldを準備する
-    auto world = SetupWorldVolume();
+    auto world = BuildWorld();
     // Worldを配置する
     auto theWorld = new G4PVPlacement{...};
 
     // WaterTankを準備する
-    auto tank = SetupWaterTankVolume();
+    auto tank = BuildWaterTank();
 
     // タンクは縦置きにしたい
-    G4RotationMatrix rotation = G4RotationMatrix(0., 90.*deg, 0.);
-    G4ThreeVector direction = G4ThreeVector(0., 0., 0.);
-    G4Transform3D origin = G4Transform3D(rotation, direction);
+    auto rotation = G4RotationMatrix(0., 90.*deg, 0.);
+    auto direction = G4ThreeVector(0., 0., 0.);
+    auto origin = G4Transform3D(rotation, direction);
 
     new G4PVPlacement(
         origin,          // 子ボリュームの位置
@@ -74,7 +74,7 @@ G4VPhysicalVolume* SetupVolumes()
         theWorld,        // 親ボリューム
         false,           // no boolean operation
         0,               // G4int : copy number
-        true,
+        true             // check overlaps
     );
 
     return theWorld;
