@@ -2,7 +2,7 @@
 
 ```console
 $ ruff --version
-ruff 0.6.1
+ruff 0.15.21
 
 $ ruff format
 $ ruff check
@@ -60,9 +60,6 @@ line-length = 88
 
 # 未使用importの自動削除
 # fix = true
-
-# 並列実行数
-# threads = 4
 
 # ruff check の設定
 [tool.ruff.lint]
@@ -149,7 +146,7 @@ $ ruff check --fix
 ```console
 $ ruff check ファイル名 --select カテゴリ記号
 $ ruff check . --select ALL
-$ ruff check . --select E F W I D
+$ ruff check . --select E,F,W,I,D
 ```
 
 `--select`オプションを使って、チェックしたいカテゴリーやエラー番号などを指定できます。
