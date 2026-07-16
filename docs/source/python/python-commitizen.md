@@ -2,7 +2,7 @@
 
 ```console
 $ cz commit
-$ cz changelog --increment
+$ cz changelog --incremental
 $ cz bump
 ```
 
@@ -12,41 +12,37 @@ $ cz bump
 
 ## インストールしたい（`commitizen`）
 
-- pipxでインストール
-
-```console
-$ pipx install commitizen
-$ which cz
-~/.local/bin/cz
-```
-
-`commitizen`はグローバルに使うCLIなので、
-`pipx`で隔離してインストールするとよいです。
-
 - pipでインストール
 
 ```console
 $ python3 -m venv .venv
 $ source .venv/bin/activate
 $ pip install commitizen
-$ which cz
 ```
 
-プロジェクトで使う場合は、[venv](./python-venv.md)で作った仮想環境にインストールする方法でもよいです。
-
-- uvでインストール
+- pipxでインストール
 
 ```console
-$ uv add commitizen --dev
+$ pipx install commitizen
 ```
 
-- Poetryでインストール
+- uv toolでインストール
+
+```console
+$ uv tool install commitizen
+```
+
+- uvでプロジェクトに追加
+
+```console
+$ uv add commitizen --group dev
+```
+
+- poetryでプロジェクトに追加
 
 ```console
 $ poetry add commitizen --group dev
 ```
-
-チームで開発する場合、プロジェクトに開発環境として含めておくと便利です。`commitizen`はツールとして使うだけなので、`dev`グループに追加します。
 
 :::{note}
 
@@ -55,7 +51,7 @@ $ poetry add commitizen --group dev
 
 :::
 
-## 初期化したい（``cz init``）
+## 初期化したい（`cz init`）
 
 ```console
 $ cd プロジェクト名
@@ -115,7 +111,7 @@ $ cz changelog
 
 ```console
 # 前回からの差分のみを追記
-$ cz changelog --increment
+$ cz changelog --incremental
 
 # ファイルに保存せず、標準出力で確認
 $ cz changelog --dry-run
@@ -126,7 +122,7 @@ $ cz changelog --file-name HISTORY.md
 
 ### 推奨される使い方
 
-新しいバージョンをリリースするときは、`--increment`オプションを使って前回からの変更分だけを追記するのが便利です。
+新しいバージョンをリリースするときは、`--incremental`オプションを使って前回からの変更分だけを追記するのが便利です。
 
 ## バージョンアップしたい（``cz bump``）
 
