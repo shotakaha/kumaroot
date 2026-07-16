@@ -12,6 +12,14 @@ now = pendulum.now()
 
 `pendulum`はデフォルトでタイムゾーン情報を含む（`tz-aware`な）日付モジュールです。
 
+:::{note}
+
+`pendulum.DateTime`は標準ライブラリの`datetime.datetime`のサブクラスです。
+そのため、`datetime`オブジェクトを受け取る関数や引数にも
+`pendulum`のオブジェクトをそのまま渡せます。
+
+:::
+
 ## 現在時刻を取得したい（`pendulum.now`）
 
 ```python
@@ -113,6 +121,18 @@ UNIX時間は`time`モジュールを使って取得できます。
 dt = pendulum.date(2018, 12, 1)
 dt.add(months=1)
 # => Date(2019, 1, 1)
+```
+
+`add`には`months`のほかに、`years`、`weeks`、`days`、`hours`、`minutes`、`seconds`など、
+さまざまな単位を指定できます。
+複数の単位を同時に指定することもできます（例：`dt.add(months=1, days=3)`）。
+
+日付を減算したい場合は、`subtract`メソッドを使います。
+
+```python
+dt = pendulum.date(2019, 1, 1)
+dt.subtract(months=1)
+# => Date(2018, 12, 1)
 ```
 
 日付の足し算や引き算もできます。
