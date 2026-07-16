@@ -3,13 +3,13 @@
 ```python
 import time
 
-# Get unixtime (since epoch 1970-01-01)
+# UNIX時間を取得（1970-01-01からの経過秒数）
 ut = time.time()
 
-# Convert to unixtime to local time (struct_time)
+# UNIX時間をローカル時刻（struct_time）に変換
 now = time.localtime(ut)
 
-# Convert struct_time to string
+# struct_timeを文字列に変換
 timestamp = time.strftime("%Y-%m-%d %H:%M:%S", now)
 ```
 
@@ -28,7 +28,7 @@ timestamp = time.strftime("%Y-%m-%d %H:%M:%S", now)
 ## 一時停止したい（`time.sleep`）
 
 ```python
-# sleep for 0.5 seconds
+# 0.5秒待機
 time.sleep(0.5)
 ```
 
@@ -38,15 +38,15 @@ time.sleep(0.5)
 ## 経過時間したい（`time.monotonic` / `time.monotonic_ns`）
 
 ```python
-# Get start time position
+# 計測開始
 started = time.monotonic()
 
-# Run main process
+# メイン処理を実行
 for i in range(100):
-    # something to do
-    time.sleep(0.1)  # simulate worklaod
+    # なんらかの処理
+    time.sleep(0.1)  # workloadを模擬
 
-# Get stopped time position
+# 計測終了
 stopped = time.monotonic()
 elapsed = stopped - started
 ```
@@ -78,13 +78,13 @@ while True:
 
     if now >= deadline:
         print("timeout")
-        # handle timeout (break / raise / retry)
+        # タイムアウト時の処理（break / raise / retryなど）
         break
 
-    # something todo
+    # なんらかの処理
 
-    # avoid busy loop (reduce CPU usage)
-    # sleep up to interval, but not beyond the deadline
+    # ビジーループを避ける（CPU使用率を下げる）
+    # 〆切を超えない範囲でintervalだけ待機する
     remaining = deadline - now
     time.sleep(min(interval, remaining))
 ```
@@ -105,14 +105,14 @@ while True:
 ## 高精度で計測したい（`time.perf_counter`）
 
 ```python
-# Get started time position
+# 計測開始
 started = time.perf_counter()
 
-# Run main process
-for i in range(10000000000):
+# メイン処理を実行
+for i in range(1000000):
     pass
 
-# Get stopped time position
+# 計測終了
 stopped = time.perf_counter()
 elapsed = stopped - started
 ```
