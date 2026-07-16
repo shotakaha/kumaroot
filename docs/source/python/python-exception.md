@@ -40,7 +40,7 @@ def main():
     except Exception as e:
         基本的な例外が発生したときの処理
     except BaseException as e:
-        KeyboardInteruptなどExceptionで捕捉できない例外が発生したときの処理
+        KeyboardInterruptなどExceptionで捕捉できない例外が発生したときの処理
 ```
 
 例外処理は、基本的に`main`関数に実装します。
@@ -178,7 +178,7 @@ except KeyboardInterrupt as e:
 try:
     response = requests.get("https://httpbin.org/status/404")
     response.raise_for_status()
-except requests.exception.RequestException as e:
+except requests.exceptions.RequestException as e:
     print(f"Error: {e}")
 ```
 
@@ -195,11 +195,11 @@ class CustomError(Exception):
     """CustomError: 最小構成（何もしない）"""
     pass
 
-def CustomFunction(...):
+def CustomFunction(引数):
     if 条件:
         正常処理
     else:
-        raise CustomError("エラー発生!"):
+        raise CustomError("エラー発生!")
 ```
 
 `Exception`クラスを継承して、例外クラスをカスタムできます。
@@ -234,7 +234,7 @@ class CustomError(Exception):
             str: [エラーコード] エラーメッセージ
         """
         if self.error_code is not None:
-            return f"{[{self.error_code}] {self.message}}"
+            return f"[{self.error_code}] {self.message}"
         return self.message
 ```
 
@@ -272,7 +272,7 @@ class CustomError(Exception):
 ```python
 from .exceptions import CustomError
 
-def custom_function(...):
+def custom_function(引数):
     if 条件:
         正常処理
     else:
