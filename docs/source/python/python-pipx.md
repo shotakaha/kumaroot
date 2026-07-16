@@ -103,8 +103,15 @@ $ pipx install ruff
 $ pipx install sphinx
 $ pipx install sphinx-autobuild
 $ pipx install streamlit
-
 ```
+
+:::{note}
+
+このプロジェクトでは現在、上記のCLIツールはいずれも`pipx`ではなく
+[uv tool](./python-uv.md)（`uv tool install`）で管理しています。
+`pipx`と`uv tool`は役割が似ているため、どちらか一方に統一しておくと管理がシンプルになります。
+
+:::
 
 ``jupyter``は、いろいろなサブパッケージに分割されているようです。
 必要なサブパッケージがわかっていたら、そちらを直接指定すればよいです。
@@ -117,12 +124,19 @@ $ pipx environment
 Environment variables (set by user):
 
 PIPX_HOME=
+PIPX_GLOBAL_HOME=
 PIPX_BIN_DIR=
+PIPX_GLOBAL_BIN_DIR=
 PIPX_MAN_DIR=
+PIPX_GLOBAL_MAN_DIR=
 PIPX_SHARED_LIBS=
 PIPX_DEFAULT_PYTHON=
+PIPX_DEFAULT_BACKEND=
 PIPX_FETCH_MISSING_PYTHON=
-USE_EMOJI=
+PIPX_FETCH_PYTHON=
+PIPX_DISABLE_SHARED_LIBS_AUTO_UPGRADE=
+PIPX_USE_EMOJI=
+PIPX_HOME_ALLOW_SPACE=
 
 Derived values (computed by pipx):
 
@@ -136,7 +150,13 @@ PIPX_TRASH_DIR=~/.local/pipx/trash
 PIPX_VENV_CACHEDIR=~/.local/pipx/.cache
 PIPX_STANDALONE_PYTHON_CACHEDIR=~/.local/pipx/py
 PIPX_DEFAULT_PYTHON=/opt/homebrew/opt/python@3.12/libexec/bin/python
-USE_EMOJI=true
+PIPX_RESOLVED_BACKEND=uv
+PIPX_BACKEND_SOURCE=auto-path
+PIPX_UV_BINARY=/opt/homebrew/bin/uv
+UV_CACHE_DIR=
+PIPX_DISABLE_SHARED_LIBS_AUTO_UPGRADE=false
+PIPX_USE_EMOJI=true
+PIPX_HOME_ALLOW_SPACE=false
 ```
 
 ``environment``コマンドで、``pipx``で有効な環境変数を確認できます。
