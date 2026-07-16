@@ -71,7 +71,7 @@ Destination ./PROJECT_NAME exists and is not empty
 
 `new`コマンドでプロジェクトを初期化できます。
 テスト関係のファイルも自動で生成されます。
-同名のプロジェクトがすでに存在する場合は、エラーになります
+同名のプロジェクトがすでに存在する場合は、エラーになります。
 プロジェクト名を省略した場合は、エラーになります。
 
 ## 既存プロジェクトを使いたい（``poetry init``）
@@ -117,7 +117,8 @@ $ poetry add --group dev pytest black ruff jupyterlab
 
 :::{note}
 
-Poetry v1.3.0以降では、`--group`を使ったグループ化が標準です。以前の`-D`オプションは非推奨になりました。
+Poetry v1.3.0以降では、`--group`を使ったグループ化が標準です。
+以前の`--dev`（短縮形`-D`）オプションは非推奨になりました。
 
 :::
 
@@ -175,7 +176,7 @@ $ poetry check
 All set!
 ```
 
-`poetry check`でプロジェクトの設定が正しいか確認できます。`--lock`オプションで{file}`poetry.lock`の整合性も検証します。
+`poetry check`でプロジェクトの設定が正しいか確認できます。`--lock`オプションで、現在の{file}`pyproject.toml`に対応する{file}`poetry.lock`が存在するかを確認します。
 
 ## パッケージをビルドしたい（`poetry build`）
 
@@ -283,7 +284,9 @@ $ poetry config virtualenvs.options.system-site-packages true
 
 `virtualenvs.options.system-site-packages = true`に設定すると、システムのPython（`site-packages`）にインストールされたパッケージを仮想環境から利用できます。
 
-複数のプロジェクトで共有する開発ツール（`pytest`、`black`など）を節約したい場合に有効です。
+[PyROOT](../root/root-pyroot.md)のように、通常の`pip install`では入手できず、
+システムのパッケージマネージャー経由でしかインストールできないパッケージを、
+仮想環境からそのまま利用したい場合に有効です。
 
 ## リファレンス
 
