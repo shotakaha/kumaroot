@@ -2,12 +2,12 @@
 
 ```cpp
 // 素材：水（G4_WATER）
-auto* nm = G4NistManager::GetInstance();
-auto* water = nm->FindOrBuildMaterial("G4_WATER");
+auto nm = G4NistManager::Instance();
+auto water = nm->FindOrBuildMaterial("G4_WATER");
 
 // プロパティを設定（水のpre-defined値を使用）
-auto* mpt = new G4MaterialPropertiesTable();
-mpt->AddProperty("RINDEX", "Water");
+auto mpt = new G4MaterialPropertiesTable{};
+mpt->AddProperty("RINDEX", water);  // pre-defined値（マテリアルのポインタを渡す）
 mpt->AddProperty("ABSLENGTH", ...);
 mpt->AddProperty("RAYLEIGH", ...);
 mpt->AddProperty("MIEHG", ...);
@@ -44,7 +44,7 @@ mpt->AddProperty("ABSLENGTH", photon_energy, absorption, n_entries);
 ## シンチレーション光したい
 
 ```cpp
-G4Material *material = new G4Material{
+auto material = new G4Material{
     "LXe",
     54.,                // z
     131.29 * g / mole,  // a
@@ -56,7 +56,7 @@ std::vector<G4double> scintillation = { 0.1, 1.0, 0.1 };
 std::vector<G4double> refractive_index  = { 1.59, 1.57, 1.54 };
 std::vector<G4double> absorption_length  = { 35. * cm, 35. * cm, 35. * cm };
 
-G4MaterialPropertiesTable *property = new G4MaterialPropertiesTable();
+auto property = new G4MaterialPropertiesTable{};
 // 波長に依存するプロパティ
 property->AddProperty("RINDEX", photon_energy, refractive_index);
 property->AddProperty("ABSLENGTH", photon_energy, absorption_length);
@@ -84,11 +84,14 @@ material->SetMaterialPropertiesTable(property);
 ## OpticalSurfaceしたい
 
 ```cpp
-G4OpticalSurface surface = new G4OpticalSurface("Surface");
+auto surface = new G4OpticalSurface{"Surface"};
 surface->SetType(dielectric_dielectric);
 surface->SetFinish(ground);  // rough surface
 surface->SetModel(unified);  // UNIFIED model
-surface->SetMaterialPropertiesTable(表面のプロパティ);
+
+auto surfaceProperty = new G4MaterialPropertiesTable{};
+// surfaceProperty->AddProperty(...); // 表面の光学特性を設定
+surface->SetMaterialPropertiesTable(surfaceProperty);
 ```
 
 ## リファレンス
