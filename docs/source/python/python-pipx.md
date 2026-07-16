@@ -1,4 +1,4 @@
-# パッケージ管理したい（``pipx``）
+# パッケージ管理したい（`pipx`）
 
 ```console
 $ pipx install パッケージ名
@@ -67,7 +67,7 @@ manual pages are exposed at ~/.local/share/man
 インストールに使ったPythonのバージョン、
 一緒にインストールされた依存パッケージの名前なども確認できます。
 
-## 一括で更新したい（``upgrade-all``）
+## 一括で更新したい（`upgrade-all`）
 
 ```console
 $ pipx upgrade-all
@@ -78,17 +78,17 @@ upgraded package mypy from 1.6.1 to 1.7.0 (location: ~/.local/pipx/venvs/mypy)
 upgraded package pyright from 1.1.335 to 1.1.336 (location: ~/.local/pipx/venvs/pyright)
 ```
 
-``upgrade-all``オプションを使って、すべてのパッケージを更新できます。
+`upgrade-all`オプションを使って、すべてのパッケージを更新できます。
 定期的に実行しておくとよいと思います。
 
-## 一括で再インストールしたい（``reinstall-all``）
+## 一括で再インストールしたい（`reinstall-all`）
 
 ```console
 $ pipx reinstall-all
 ```
 
 Python本体を更新した場合、パッケージの再インストールが必要です。
-``reinstall-all``を使って、すべてのパッケージを再インストールできます。
+`reinstall-all`を使って、すべてのパッケージを再インストールできます。
 
 ## インストールしたパッケージ
 
@@ -159,6 +159,6 @@ PIPX_USE_EMOJI=true
 PIPX_HOME_ALLOW_SPACE=false
 ```
 
-``environment``コマンドで、``pipx``で有効な環境変数を確認できます。
+`environment`コマンドで、`pipx`で有効な環境変数を確認できます。
 Python環境は、マシンによって異なる場合があります。
 ツールがうまく動かない場合の確認作業に役立つかもしれません。
