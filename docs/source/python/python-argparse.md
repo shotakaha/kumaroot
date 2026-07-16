@@ -1,4 +1,4 @@
-# オプション解析したい（``argparse``）
+# オプション解析したい（`argparse`）
 
 ```python
 import argparse
@@ -13,7 +13,7 @@ def main() -> None:
 
     # オプション引数を追加
     parser.add_argument("--config", help="設定")
-    parser.add_argument("--debug", help="デバッグ")
+    parser.add_argument("--debug", action="store_true", help="デバッグ")
 
     # 引数／オプション設定を取得
     args = parser.parse_args()
@@ -22,7 +22,7 @@ def main() -> None:
     # args.debug
 
     if args.debug:
-        # デバッグ設定
+        print("デバッグモードで実行します")
 
     return
 
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     main()
 ```
 
-``argparse``はPython標準のオプション解析モジュールです。
+`argparse`はPython標準のオプション解析モジュールです。
 簡単かつ高機能にオプションを追加できます。
 
 ヘルプドキュメントを書く代わりに、
