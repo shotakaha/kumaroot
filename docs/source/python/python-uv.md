@@ -347,6 +347,34 @@ $ .venv/bin/activate
 
 `uv run`を使わない場合は、仮想環境を手動でアクティベートしてからコマンドを実行してください。
 
+## コードをフォーマットしたい（`uv format`）
+
+```console
+$ uv format --preview-features format-command
+```
+
+`uv format`は、プロジェクト内のPythonコードを整形（フォーマット）するコマンドです。
+内部では[Ruff](https://docs.astral.sh/ruff/)を利用しています。
+
+## 型チェックしたい（`uv check`）
+
+```console
+$ uv check --preview-features check-command
+```
+
+`uv check`は、プロジェクトの型チェックを実行するコマンドです。
+
+:::
+
+## 依存関係を監査したい（`uv audit`）
+
+```console
+$ uv audit --preview-features audit-command
+```
+
+`uv audit`は、プロジェクトの依存関係に既知の脆弱性がないかを監査するコマンドです。
+`pip-audit`と同様の役割を、`uv`単体で完結できます。
+
 ## パッケージをビルドしたい（`uv build`）
 
 ```console
