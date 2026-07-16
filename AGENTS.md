@@ -34,7 +34,7 @@ task docs:pdf        # Build docs as PDF
 
 ```bash
 task deps:setup      # Setup Python environment (uv sync --all-groups)
-task deps:check      # Check for outdated packages
+task deps:outdated   # List outdated packages
 task deps:audit      # Audit dependencies for vulnerabilities
 task deps:update     # Update all dependencies
 ```
@@ -73,7 +73,7 @@ This project uses a **calendar-based semantic versioning** scheme (YYYY.MM.PATCH
 - Automatic increment detection is disabled; all bumping is explicit
 - All bump tasks include `--check-consistency --changelog` flags
 - When a new year/month begins, manually bump MAJOR or MINOR as needed
-- Current version: `2026.5.0` (May 2026)
+- Current version: `2026.6.1` (July 2026)
 - Example version progression: `2026.3.x` → `2026.4.0`（new month）→ `2027.1.0`（new year）
 
 ## Documentation Structure
@@ -455,3 +455,81 @@ The repository uses `sphinx_tags` for categorizing content:
 - Tags are assigned in front matter (YAML)
 - Automatic tag index generation in `docs/source/_tags/`
 - Useful for grouping related documentation across categories
+
+## Sample Code Management
+
+### Directory Structure
+
+Code examples and Jupyter notebooks are managed centrally in `docs/examples/` and `docs/notebooks/`:
+
+```text
+docs/
+├── examples/
+│   ├── root/             ← C++/Python examples for ROOT
+│   ├── docker/           ← Docker Compose configurations
+│   └── python/           ← Python scripts (jupytext source format)
+└── notebooks/            ← Generated Jupyter notebooks (auto-generated, .ipynb)
+```
+
+### Using literalinclude in Documentation
+
+To reference code examples in documentation files, use MyST's `literalinclude` directive:
+
+````markdown
+```{literalinclude} ../../examples/docker/ubuntu.yaml
+---
+language: yaml
+---
+```
+````
+
+**Important notes:**
+
+- Paths are relative to `docs/source/`
+- Use `../../examples/` to reference `docs/examples/` from within `docs/source/`
+- Options are specified between `---` delimiters (YAML frontmatter style)
+- All code examples in `docs/examples/` are automatically available for `literalinclude`
+
+### Python Examples (jupytext with Jupyter Notebooks)
+
+Python examples are managed as a Single Source of Truth using jupytext:
+
+- **Source format**: `.py` files in `docs/examples/python/` (jupytext light format with YAML header)
+  - Git-friendly, text-based, version-controlled
+  - Can be embedded in documentation or used standalone
+- **Generated Markdown**: `.md` files in `mystmd/` (auto-generated from `.py`)
+- **Generated Notebooks**: `.ipynb` files in `docs/notebooks/` (auto-generated from `.py`)
+  - Executable Jupyter notebooks for testing/exploration
+  - NOT tracked in Git (`.gitignore`)
+  - Can be accessed locally or through documentation
+
+**Workflow:**
+
+1. Create or edit `.py` files in `docs/examples/python/` (jupytext light format)
+2. Run `jupytext --sync` to synchronize all formats
+3. `.ipynb` files are automatically generated in `docs/notebooks/`
+4. Notebooks are available for local testing and can be linked in documentation
+
+**Configuration** (in `jupytext.toml`):
+
+```toml
+[formats]
+"docs/examples/python/" = "py:light"    # Source files (Git-tracked)
+"docs/notebooks/" = "ipynb"             # Generated notebooks (auto-generated)
+"mystmd/" = "md:myst"                   # Generated Markdown (auto-generated)
+```
+
+### Adding New Code Examples
+
+1. **For Docker/Root examples**: Add `.yaml`, `.cpp`, `.py` files to `docs/examples/root/` or `docs/examples/docker/`
+2. **For Python Jupyter examples**: Add `.py` files (jupytext format) to `docs/examples/python/`
+   - Run `jupytext --sync` after adding new files to generate `.ipynb` in `docs/notebooks/`
+3. Update documentation to reference examples using `literalinclude` or link to notebooks
+4. Pre-commit hooks automatically validate code syntax
+
+### Configuration Files
+
+- **jupytext.toml**: Manages jupytext synchronization across three formats (`.py`, `.ipynb`, `.md`)
+- **.gitignore**: Excludes generated files
+  - `docs/notebooks/**/*.ipynb` - Generated Jupyter notebooks
+  - `docs/examples/**/*.ipynb` - Legacy notebook location (deprecated)
