@@ -35,10 +35,16 @@ $ pipx install jupytext
 - `poetry`でインストール
 
 ```console
-$ poetry add jupytext --group=dev
+$ poetry add jupytext --group dev
 ```
 
 - `uv`でインストール
+
+```console
+$ uv add jupytext --group dev
+```
+
+- `uv tool`でインストール
 
 ```console
 $ uv tool install jupytext
