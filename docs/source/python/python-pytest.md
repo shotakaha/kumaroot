@@ -13,36 +13,60 @@ $ pytest ファイル名
 プロジェクトのルートディレクトリで実行すればテストをまとめて実行できます。
 ``--verbose``オプションで、それぞれのテストごとに結果を表示できます。
 
-## インストールしたい（``pytest``）
+## インストールしたい（`pytest`）
+
+- `pip`でインストール
+
+```console
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install pytest
+$ pip install pytest-mock  # モックを使ったユニットテスト
+$ pip install pytest-cov   # カバレッジの計測
+$ pip install pytest-html  # テスト結果をHTMLファイルに出力
+```
 
 - `pipx`でインストール
 
 ```console
 $ pipx install pytest
+$ pipx install pytest-mock
+$ pipx install pytest-cov
+$ pipx install pytest-html
+```
+
+- `uv tool`でインストール
+
+```console
+$ uv tool install pytest
+$ uv tool install pytest-mock
+$ uv tool install pytest-cov
+$ uv tool install pytest-html
 ```
 
 - `poetry`でインストール
 
 ```console
 $ poetry add pytest --group=test
-$ poetry add pytest-mock --group=test  # モックを使ったユニットテスト
-$ poetry add pytest-cov --group=test   # カバレッジの計測
-$ poetry add pytest-html --group=test  # テスト結果をHTMLファイルに出力
+$ poetry add pytest-mock --group=test
+$ poetry add pytest-cov --group=test
+$ poetry add pytest-html --group=test
 ```
-
-`poetry`で管理している場合は``--group=test``に分類するとよいと思います。
 
 - `uv`でインストール
 
 ```console
-$ uv tool install pytest
-$ uv tool install pytest-mock
-$ uv tool install pytest-cov
+$ uv add pytest --group test
+$ uv add pytest-mock --group test
+$ uv add pytest-cov --group test
+$ uv add pytest-html --group test
 ```
 
-`pipx`や`uv`を使ってシステム（の仮想環境）にインストールできます。
+`pipx`や`uv tool`を使ってシステム（の仮想環境）にインストールできます。
+`poetry`や`uv`で管理している場合は`--group test`に分類するとよいと思います。
 
 テスト結果をHTMLファイルに出力する場合は`pytest-html`のが必要です。
+
 [unittest.mock](./python-unittest-mock.md)を使う場合は、
 `pytest-mock`もインストールしておくとよいです。
 カバレッジを計測した場合は`pytest-cov`が必要です。
