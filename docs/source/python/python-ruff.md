@@ -24,22 +24,36 @@ Pythonのリンター＆フォーマッタの変遷は闇が深そうです。
 
 ## インストールしたい（`ruff`）
 
+- pipでインストール
+
 ```console
-// グローバルに追加
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install ruff
+```
+
+- pipxでインストール
+
+```console
 $ pipx install ruff
 ```
 
+- uv toolでインストール
+
 ```console
-// プロジェクトに追加（dev）
+$ uv tool install ruff
+```
+
+- poetryでプロジェクトに追加
+
+```console
 $ poetry add ruff --group=dev
 ```
 
-```console
-// プロジェクトに追加する場合（dev）
-$ uv add ruff --group dev
+- uvでプロジェクトに追加
 
-// グローバルに追加
-$ uv tool install ruff
+```console
+$ uv add ruff --group dev
 ```
 
 `ruff`はCLIツールなので、`pipx`や`uv tool`でグローバルにインストールできます。
