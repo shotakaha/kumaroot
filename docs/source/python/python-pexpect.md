@@ -74,7 +74,7 @@ connected = child.expect([*ok, *ng])
 
 # 接続失敗
 if connected > 0:
-    child.terminate(force=True)
+    child.terminate(force=True)  # SIGKILLで強制終了
     sys.exit()
 
 # 接続成功
@@ -88,6 +88,14 @@ rsyncやSSH接続ではパスワード入力を要求されます。
 上のサンプルでは`ok`と`ng`のリストを定義し、
 マッチしたときに返ってくる文字列のインデックスを利用して
 簡単な成功／失敗の判断をしています。
+
+:::{note}
+
+`terminate()`はまずSIGHUPやSIGINTなど穏やかなシグナルで終了を試み、
+`terminate(force=True)`はそれでも終了しない場合にSIGKILLで強制終了します。
+接続に失敗したプロセスを確実に終了させたい場合は`force=True`を指定します。
+
+:::
 
 ## パスワード送信したい（`sendline`）
 
@@ -206,6 +214,16 @@ ssh.logout()
 `pexpect.pxssh`モジュールで簡単にSSH接続できます。
 `pexpect.spawn`で書いた場合と比べると、
 ログイン処理（`.login`）とプロンプト待ち（`.prompt`）が簡単に書けるようになっています。
+
+:::{note}
+
+`pxssh.pxssh(encoding="utf-8")`のように`encoding`を指定すると、
+`before` / `after`が最初から文字列（`str`）型で返ってくるようになります。
+`.decode("utf-8")`が不要なのはこのためです。
+`encoding`を指定しない場合（下の`pexpect.spawn`のサンプルなど）は、
+バイナリ文字列（`bytes`）で返ってくるため、`.decode`が必要です。
+
+:::
 
 ```python
 import pexpect
