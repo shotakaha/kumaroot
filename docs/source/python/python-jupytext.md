@@ -203,9 +203,8 @@ Markdownを中心にGit管理する場合の推奨設定です。
 ```yaml
 # .pre-commit-config.yaml
 repos:
-- repo: ...
 - repo: https://github.com/mwouts/jupytext
-  rev: v1.16.4b
+  rev: v1.16.4
   hooks:
   - id: jupytext
     args: [--sync]
