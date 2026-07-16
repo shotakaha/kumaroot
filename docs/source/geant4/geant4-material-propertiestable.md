@@ -103,7 +103,31 @@ material->SetMaterialPropertiesTable(property);
 
 ``examples/extended/optical/LXe/``のサンプルを参照しました。
 屈折率と吸収長の他に、シンチレーション光のプロパティ（光量や時定数）をいくつか設定しています。
-シンチレーション光は2種類設定できるようです。
+
+`SCINTILLATIONYIELD`は「1 MeVあたりの光子数」で指定します。
+`SCINTILLATIONCOMPONENT1`と`SCINTILLATIONCOMPONENT2`は、
+速い成分（Fast）と遅い成分（Slow）の相対発光スペクトル（絶対強度ではない）です。
+それぞれの減衰時定数が`SCINTILLATIONTIMECONSTANT1`と`SCINTILLATIONTIMECONSTANT2`、
+全体に対する割合が`SCINTILLATIONYIELD1`と`SCINTILLATIONYIELD2`（合計が1.0になるように設定）です。
+
+`RESOLUTIONSCALE`は光子数の統計ゆらぎを制御します。
+1.0でポアソン統計相当のゆらぎ、0にすると光子数が決定論的（ゆらぎなし）になります。
+
+:::{note}
+
+チェレンコフ光と同様、`G4MaterialPropertiesTable`の設定だけでは不十分で、
+物理リストに`G4Scintillation`プロセスを登録する必要があります。
+
+:::
+
+:::{note}
+
+重粒子（陽子やアルファ線）ではエネルギー損失に対して発光量が非線形になる
+（Birksの消光則）ため、
+`G4EmSaturation`と`AddSaturation`で補正することがあります。
+省略すると重粒子の発光量が過大評価されることがあります。
+
+:::
 
 - [](./geant4-physics-scintillation.md)
 
