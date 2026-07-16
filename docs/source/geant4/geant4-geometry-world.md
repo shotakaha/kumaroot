@@ -1,14 +1,14 @@
-# 実験室を作りたい（`MakeWorld`）
+# 実験室を作りたい（`BuildWorld`）
 
 ```cpp
-G4LogicalVolume* MakeWorld(){
+G4LogicalVolume* BuildWorld(){
 
     // パラメーターの設定
     G4String logical_name = "World";
     G4String material_name = "G4_AIR";
-    G4double length_x = 1. * m;
-    G4double length_y = 1. * m;
-    G4double length_z = 1. * m;
+    G4double length_x = 50. * m;
+    G4double length_y = 50. * m;
+    G4double length_z = 50. * m;
 
     // 形状を定義
     G4double halfX = 0.5 * length_x;
@@ -57,23 +57,23 @@ Geant4で通常**World**（ワールド）と呼ばれるシミュレーショ�
 G4VPhysicalVolume* SetupVolumes()
 {
     // 実験室の論理物体を取得する
-    auto world = SetupWorldVolume();
+    auto world = BuildWorld();
 
     // 実験室の置き場所を決める
-    G4RotationMatrix rotation = G4RotationMatrix{};       // 回転 : なし
+    G4RotationMatrix rotation = G4RotationMatrix{};      // 回転 : なし
     G4ThreeVector position = G4ThreeVector{0., 0., 0.};  // 方向 :  (0, 0, 0)
-    G4Transform3D origin = G4Transform3D{rotation, position}  // 座標
+    G4Transform3D origin = G4Transform3D{rotation, position};  // 座標
 
     // 実験室を配置する
     G4VPhysicalVolume *theWorld = new G4PVPlacement(
-        location,    // G4Transform3D : 論理ボリュームを配置する座標
+        origin,      // G4Transform3D : 論理ボリュームを配置する座標
         world,       // G4LogicalVolume : 配置する論理ボリューム
         "theWorld",  // G4String : この物理ボリュームの名前
         0,           // G4LogicalVolume: 親ボリュームはなし
         false,       // G4bool pMany（廃止）
         0,           // G4int pCopyNo : コピー番号
         true         // G4bool check overlaps
-    )
+    );
 
     return theWorld;
 }
@@ -103,5 +103,5 @@ Geant4では生成された粒子が「実験室の外側に飛び出す」か�
 ## 非表示にしたい
 
 ```cpp
-pWorldLogical->SetVisAttributes(G4VisAttributes::GetInvisible());
+world->SetVisAttributes(G4VisAttributes::GetInvisible());
 ```
