@@ -38,17 +38,16 @@ class G4Event;
 class EventAction : public G4UserEventAction
 {
   public:
-    BeginOfEventAction(G4Event* aEvent);
-    EndOfEventAction(G4Event* aEvent);
-    // 引数に G4Event型 を指定しているため
-    // G4Eventクラスが読み込まれていないと
-    // コンパイルエラーになる。
-    // 前方宣言してあるとエラーを回避できる。
+    void BeginOfEventAction(G4Event* aEvent);
+    void EndOfEventAction(G4Event* aEvent);
+    // 引数はG4Eventへのポインタ型なので
+    // クラスの完全な定義がなくても
+    // 前方宣言だけでコンパイルできる。
 };
 ```
 
 ヘッダーファイルをインクルードする代わりに``class クラス名;``と書くことを前方宣言と呼びます。
 「こういう名前のクラスがあるよ」ということをあらかじめお知らせすることで、コンパイルエラーを避けることができます。
 
-Geant4では多用されていますが、Googleスタイリングガイドでは、できるかぎり使わないことが推奨されていります。
+Geant4では多用されていますが、Googleスタイリングガイドでは、できるかぎり使わないことが推奨されています。
 なので、僕はあまり使わないようにしています。
