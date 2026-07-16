@@ -54,12 +54,110 @@ p1          # Point(x=1, y=2)      <- 対話モードでは__repr__が呼ばれ�
 
 :::
 
-このほかにも、`__eq__`（`==`で比較するとき）、
-`__add__`（`+`で加算するとき）、
-`__len__`（`len()`で長さを取得するとき）など、
-Python標準の演算子や組み込み関数に対応する特殊メソッドが数多くあります。
-「◯◯という組み込み関数・演算子を呼んだときに、実際にはこの特殊メソッドが呼ばれている」
-という対応関係になっています。
+## 比較演算子したい（`__eq__` / `__lt__` / `__gt__`）
+
+```python
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __eq__(self, other):
+        return (self.x, self.y) == (other.x, other.y)
+
+    def __lt__(self, other):
+        return (self.x, self.y) < (other.x, other.y)
+
+p1 = Point(1, 2)
+p2 = Point(1, 2)
+p3 = Point(3, 4)
+
+print(p1 == p2)   # True   <- __eq__が呼ばれる
+print(p1 < p3)     # True   <- __lt__が呼ばれる
+```
+
+比較演算子にも、それぞれ対応する特殊メソッドがあります。
+
+| 演算子 | 特殊メソッド |
+| --- | --- |
+| `==` | `__eq__` |
+| `!=` | `__ne__` |
+| `<` | `__lt__` |
+| `<=` | `__le__` |
+| `>` | `__gt__` |
+| `>=` | `__ge__` |
+
+:::{note}
+
+`__eq__`を定義すると、デフォルトのハッシュ値が使えなくなり、
+そのままでは`set`や辞書のキーとして使えなくなります（``TypeError: unhashable type``）。
+必要であれば`__hash__`も一緒に定義してください。
+
+:::
+
+## 四則演算したい（`__add__` / `__sub__`）
+
+```python
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
+
+    def __sub__(self, other):
+        return Point(self.x - other.x, self.y - other.y)
+
+    def __mul__(self, scalar):
+        return Point(self.x * scalar, self.y * scalar)
+
+    def __str__(self):
+        return f"Point({self.x}, {self.y})"
+
+p1 = Point(1, 2)
+p2 = Point(3, 4)
+
+print(p1 + p2)   # Point(4, 6)   <- __add__が呼ばれる
+print(p1 - p2)   # Point(-2, -2) <- __sub__が呼ばれる
+print(p1 * 2)     # Point(2, 4)   <- __mul__が呼ばれる
+```
+
+四則演算にも、それぞれ対応する特殊メソッドがあります。
+
+| 演算子 | 特殊メソッド |
+| --- | --- |
+| `+` | `__add__` |
+| `-` | `__sub__` |
+| `*` | `__mul__` |
+| `/` | `__truediv__` |
+| `//` | `__floordiv__` |
+| `%` | `__mod__` |
+
+## 長さしたい（`__len__`）
+
+```python
+class Group:
+    def __init__(self, members):
+        self.members = members
+
+    def __len__(self):
+        return len(self.members)
+
+group = Group(["Alice", "Bob", "Carol"])
+print(len(group))   # 3   <- __len__が呼ばれる
+```
+
+`__len__`を実装すると、`len()`で自作クラスの「長さ」を取得できるようになります。
+戻り値は0以上の整数（`int`）である必要があります。
+
+:::{hint}
+
+`__len__`を実装すると、そのクラスのインスタンスは`bool()`や`if`文で
+`len() == 0`のときに`False`と判定されるようになります
+（``__bool__``が定義されていない場合）。
+
+:::
 
 ## プライベート変数したい（`_変数名` / `_関数名()`）
 
