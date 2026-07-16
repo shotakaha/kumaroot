@@ -42,7 +42,7 @@ $ uv add ruff --group dev
 $ uv tool install ruff
 ```
 
-`ruff`はCLIツールなので`pipx`や`uv tool`なのでグローバルにインストールできます。
+`ruff`はCLIツールなので、`pipx`や`uv tool`でグローバルにインストールできます。
 プロジェクトに追加する場合は `--group dev` オプションで追加するとよいです。
 
 ## 設定したい（`[tool.ruff]`）
@@ -90,7 +90,7 @@ unfixable = []
 
 
 # import orderの設定
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 combine-as-imports = true
 known-first-party = ["自作したパッケージ名"]
 
@@ -104,7 +104,7 @@ docstring-code-format = true  # docstringも整形する（true） | 整形し�
 ```
 
 Ruffの設定は`pyproject.toml`の`[tool.ruff]`セクションに記述できます。
-また、`ruff.tomll`、`.ruff.toml`に個別設定として保存することもできます。
+また、`ruff.toml`、`.ruff.toml`に個別設定として保存することもできます。
 
 ## フォーマットしたい（``ruff format``）
 
@@ -184,7 +184,7 @@ $ ruff rule ルールID
 11. ``TRIO``: ``flake8-trio``
 12. ``S``: ``flake8-bandit``
 13. ``BLE``: ``flake8-blind-except``
-14. ``FBT``: ``flake8-boolean-tra``
+14. ``FBT``: ``flake8-boolean-trap``
 15. ``B``: ``flake8-bugbear``
 16. ``A``: ``flake8-builtins``
 17. ``COM``: ``flake8-commas``
