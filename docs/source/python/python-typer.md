@@ -49,7 +49,7 @@ name: Annotated[int, typer.Argument(help="名前")] = 0 # 位置引数（optiona
 引数のヘルプなど詳細設定したい場合は``typing_extensions.Annotated``を利用します。
 
 デフォルトでは関数の``docstring``がコマンドの説明になりますが、
-``type.Argument``の``help``で引数ごとにヘルプを追加できます。
+``typer.Argument``の``help``で引数ごとにヘルプを追加できます。
 
 簡単設定では required な位置引数のみ設定できます。
 詳細設定では optional な位置引数も設定できます。
@@ -69,7 +69,7 @@ name: Annotated[int, typer.Option(help="名前")]     # オプション引数（
 引数のヘルプなど詳細設定したい場合は``typing_extensions.Annotated``を利用します。
 
 デフォルトでは関数の``docstring``がコマンドの説明になりますが、
-``type.Option``の``help``でオプションごとにヘルプを追加できます。
+``typer.Option``の``help``でオプションごとにヘルプを追加できます。
 
 簡単設定では optional なオプション引数のみ設定できます。
 詳細設定では required なオプション引数も設定できます。
@@ -111,14 +111,14 @@ app = typer.Typer()
 
 @app.command()
 def vth(
+    ch: Annotated[int, typer.Argument(help="チャンネル番号")],
+    threshold: Annotated[int, typer.Argument(help="スレッショルド値")],
+    max_retry: Annotated[int, typer.Argument(help="リトライ数")] = 3,
+    load_from: Annotated[str, typer.Argument(help="設定ファイル名")] = "daq.toml"
+    ):
     """
     コマンドの説明
     """
-    ch Annotated[int, typer.Argument(help="チャンネル番号")],
-    vth: Annotated[int, typer.argument(help="スレッショルド値")],
-    max_retry: Annotated[int, typer.argument(help="リトライ数")] = 3,
-    load_from: Annotated[str, typer.argument(help="設定ファイル名")] = "daq.toml"
-    ):
     pass
 
 if __name__ == "__main__":
@@ -148,10 +148,10 @@ from rich import print
 import typer
 
 @app.command()
-def コマンド名(is_debug: bool = False):
+def some_command(is_debug: bool = False):
     if is_debug:
-        logger.error(f"DEBUG mode : {is_debug}")
-        typer.Exit()
+        print(f"DEBUG mode : {is_debug}")
+        raise typer.Exit()
 ```
 
 ``Typer``を使うと、引数のバリデーションを柔軟に書くことができます。
