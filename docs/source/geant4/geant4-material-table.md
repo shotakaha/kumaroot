@@ -7,11 +7,11 @@ nm->FindOrBuildMaterial("G4_Pb");
 nm->FindOrBuildMaterial("G4_Xe");
 nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
 
-G4cout << *(GetMaterial::GetMaterialTable()) << G4endl;
+G4cout << *(G4Material::GetMaterialTable()) << G4endl;
 ```
 
 アプリケーションの中で``G4NistManager``で定義した材料は、
-``GetMaterial::GetMaterialTable()``で確認できます。
+``G4Material::GetMaterialTable()``で確認できます。
 
 材料名に加えて、構成している元素の種類も確認できます。
 
