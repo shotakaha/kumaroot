@@ -60,6 +60,8 @@ child.expect(PROMPT)
 ## パスワード待ちしたい
 
 ```python
+import sys
+
 # 接続成功したとき
 ok = ["password:"]
 
@@ -183,6 +185,10 @@ SSH接続して、いくつかのコマンドを実行したときに内容の�
 ```python
 from pexpect import pxssh
 
+hostname = "ホスト名"
+username = "ユーザー名"
+password = "パスワード"
+
 ssh = pxssh.pxssh(encoding="utf-8")
 ssh.login(hostname, username, password)
 
@@ -208,7 +214,7 @@ import pexpect
 PROMPT = ["\\$", "\\#", pexpect.EOF]
 
 # SSH接続を開始する
-child = pexpect.spawn("ssh ユーザー名@ホスト名")
+child = pexpect.spawn("ssh USERNAME@HOSTNAME")
 child.expect("password:")
 
 # パスワードを送信してログインする
