@@ -119,12 +119,12 @@ Default window size hint is: 600x600-0+0 (based on G4VisManager initialisation).
 | OpenGLImmediateX | `OGLIX` | （起動しなかった） |
 | Qt3D | `Qt3D` | Qtが起動した |
 | HepRep | `HepRepFile` | `G4Data{N}.heprep`が作成された |
-| RayTracer | `RayTracer` | ファイルは生成されなかった |
+| RayTracer | `RayTracer` | - |
 | RayTracerX | `RayTracerX` | Xが起動した |
 | VRML | `VRML2FILE` | `g4_{NN}.wrl`が作成された |
 | DAWN | `DAWNFILE` | `g4_{NNNN}.prim`が作成された |
 | gMocren | `gMocrenFile` | `g4_{NN}.gmc`が作成された |
-| ASCIITree | `ATree` | ファイルは生成されなかった |
+| ASCIITree | `ATree` | - |
 
 とりあえずデフォルトの`OGL`（=`OpenGLStoredQt`）を使っておけば大丈夫なことが確認できました。
 
