@@ -63,7 +63,7 @@ $ uv pip install commitizen
 $ uv add pandas
 $ uv add --dev commitizen
 $ uv add --dev pytest
-$ uv add --docs zensical
+$ uv add --group docs zensical
 $ uv sync
 ```
 
