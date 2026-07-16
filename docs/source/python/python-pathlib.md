@@ -63,7 +63,7 @@ p.read_text(encoding="utf-8")  # mode="r"
 p.read_bytes()    # mode="rb"
 ```
 
-`reat_text`メソッドで、ファイルからテキストデータを読み込めます。
+`read_text`メソッドで、ファイルからテキストデータを読み込めます。
 エンコーディングはデフォルトでUTF-8ですが、`encoding`オプションで変更できます。
 バイナリーデータを読み込む場合は`read_bytes`を使います。
 これらのメソッドの内部処理では
@@ -83,7 +83,7 @@ with p.open(mode="r", encoding="utf-8") as f:
 ```python
 p = Path("ファイル名")
 p.write_text("テキストデータ", encoding="utf-8")  # mode="w"
-p.write_bytes("バイナリーデータ")   # mode="wb"
+p.write_bytes(b"バイナリーデータ")   # mode="wb"
 ```
 
 `write_text`メソッドで、ファイルにテキストデータを書き込めます。
@@ -128,7 +128,7 @@ except FileExistsError as e:
     print("ディレクトリはすでに存在します")
 ```
 
-上書きを防止したい場合は、、`try ... except:`でこのエラーをキャッチすればOKです。
+上書きを防止したい場合は、`try ... except:`でこのエラーをキャッチすればOKです。
 
 ```python
 p = Path("ディレクトリ名/サブディレクトリ名/ファイル名.csv")
@@ -147,7 +147,7 @@ p.write_text("テキストデータ")
 fname = Path("../data", "data.csv")
 
 dname = Path("../data/")
-fname = data_dir / "data.csv"
+fname = dname / "data.csv"
 ```
 
 複数の引数を指定すると、それらを連結した`Path`オブジェクトが生成できます。
@@ -204,6 +204,7 @@ def resolve_paths(
     raise RuntimeError(f"Unsupported path type: {path}")
 
 
+src = Path("data")  # またはsrc = "random"
 resolved = resolve_paths(src)
 if resolved == "random":
     # pd.DataFrameをランダムな値で生成（別の関数）
