@@ -1,6 +1,7 @@
 # AGENTS.md
 
-This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
+This is the canonical developer guidance file for this repository.
+It is referenced by `CLAUDE.md` (Claude Code) and used directly by other AI agents (e.g. Codex).
 
 ## Project Overview
 
