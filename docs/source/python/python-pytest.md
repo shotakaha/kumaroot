@@ -74,7 +74,7 @@ $ pytest --markers
 プロジェクト固有のマーカーは`pyproject.toml`で定義できます。
 
 ```toml
-[tool.pytest.init_options]
+[tool.pytest.ini_options]
 markers = [
     "local: tests that should only run locally",
     "slow: tests that take more than 1 second to run"
@@ -240,7 +240,7 @@ wgetを実行していないため、`filename="output.csv"`に設定したフ�
 ```python
 def 関数名(引数):
     p = Path("ファイル名")
-    p.write_text("ファイルの内容", encoding="utf-8")
+    p.write_text("ファイル内容", encoding="utf-8")
 ```
 
 `pathlib.Path.write_text`を使っている関数のユニットテストを作成したときのサンプルです。
@@ -249,7 +249,7 @@ def 関数名(引数):
 ```python
 from unittest.mock import patch
 
-@path("pathlib.Path.write_text")
+@patch("pathlib.Path.write_text")
 def test_関数名(mock_write):
     # test strings
     text = "ファイル内容"
@@ -278,11 +278,11 @@ def test_関数名(mock_write):
 import pytest
 
 def test_関数名():
-    with pytest.raise(例外名):
+    with pytest.raises(例外名):
         関数(...)  # <- 例外を発生させる
 ```
 
-`pytest.raise`で例外をテストできます。s
+`pytest.raises`で例外をテストできます。
 
 ## 繰り返しテストしたい（`@pytest.mark.parametrize`）
 
@@ -302,7 +302,7 @@ def test_関数名(a, b, expected):
 ## テスト用の設定したい（`@pytest.fixture`）
 
 ```python
-@pytext.fixture
+@pytest.fixture
 def sample_data():
     return [1, 2, 3]
 
