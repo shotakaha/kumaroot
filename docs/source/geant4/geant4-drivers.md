@@ -58,13 +58,16 @@ OSや環境によって動作が不安定になることが挙げられます。
 | 放射線治療などで使いたい | gMocren |
 | 素早く構造体を点検したい | ASCIITree |
 
+`TOOLSSG_QT_GLES`（`TSG`）など`TOOLSSG`系のドライバーはGeant4 v11以降で追加された新世代のドライバーです。
+将来的にOpenGLの後継として位置づけられているようですが、まだ試していません。
+
 `DAWN`、`VRML`、`HepRep`は形式はGeant4のデフォルトで出力できるようなのですが、
 それらの形式を開くことができる外部ビューワーが見つかりませんでした。
 開発やメンテナンスも停滞しているようなので、積極的に選択する理由はないです。
 
 ## 利用可能なドライバー
 
-Geant4ノアプリケーションを実行すると、現在の環境で利用可能な可視化ドライバーを確認できます。
+Geant4のアプリケーションを実行すると、現在の環境で利用可能な可視化ドライバーを確認できます。
 たとえば、`exampleB1`を実行した場合は次のようになっています。
 
 ```console
@@ -116,12 +119,12 @@ Default window size hint is: 600x600-0+0 (based on G4VisManager initialisation).
 | OpenGLImmediateX | `OGLIX` | （起動しなかった） |
 | Qt3D | `Qt3D` | Qtが起動した |
 | HepRep | `HepRepFile` | `G4Data{N}.heprep`が作成された |
-| RayTracer | `RayTracer` | - |
+| RayTracer | `RayTracer` | ファイルは生成されなかった |
 | RayTracerX | `RayTracerX` | Xが起動した |
 | VRML | `VRML2FILE` | `g4_{NN}.wrl`が作成された |
 | DAWN | `DAWNFILE` | `g4_{NNNN}.prim`が作成された |
-| gMocren | `gMocrenFile` | `g4_{NN}.wrl`作成された |
-| ASCIITree | `ATree` | - |
+| gMocren | `gMocrenFile` | `g4_{NN}.gmc`が作成された |
+| ASCIITree | `ATree` | ファイルは生成されなかった |
 
 とりあえずデフォルトの`OGL`（=`OpenGLStoredQt`）を使っておけば大丈夫なことが確認できました。
 
