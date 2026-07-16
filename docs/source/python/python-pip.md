@@ -34,7 +34,7 @@ Python2系から3系の移行期には、`pip`（＝2系）と`pip3`（＝3系�
 $ python3 -m venv .venv
 
 // 仮想環境を有効化
-$ source .venv/bin/acitivate
+$ source .venv/bin/activate
 
 // PyPIリポジトリにあるパッケージをインストール
 (.venv) $ pip install パッケージ名
@@ -196,7 +196,7 @@ CLIツールとしての利用であれば`pipx`が手軽です。
   │         │     └─ いいえ
   │         │         ├── 依存の自動管理や公開もしたい？
   │         │         │     └─ はい → uv
-  │         │         │     └─ poetry（GUIや柔軟な機能がほしい場合）
+  │         │         │     └─ poetry（柔軟な設定機能がほしい場合）
   │         │         └─ その他 → pipenv（古いが一体型）
   │         └─（補足：Pythonバージョンも自動で管理したい → uv / pyenv）
   │
@@ -226,7 +226,7 @@ flowchart TD
     q3 -- いいえ --> q4
 
     q4 -- はい --> uv[uv を使う]
-    q4 -- いいえ --> poetry[poetry を使う（GUI/柔軟な機能）]
+    q4 -- いいえ --> poetry[poetry を使う（柔軟な設定機能）]
     q4 -- その他 --> pipenv[pipenv（古いが一体型）]
 
     uv --> note1[Python バージョンも自動で管理したいなら uv または pyenv も検討]
