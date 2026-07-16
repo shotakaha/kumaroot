@@ -42,7 +42,7 @@ auto nm = G4NistManager::Instance();
 ## G4MaterialTable
 
 ```cpp
-auto table = G4MaterialTable::GetMaterialTable();
+auto table = G4Material::GetMaterialTable();
 for (auto* material: *table) {
     G4cout << material->GetName()
     << " rho= " << material->GetDensity()/(g/cm3)
@@ -50,7 +50,10 @@ for (auto* material: *table) {
 }
 ```
 
-`G4MaterialTable`は、すべての物質（`G4Material`など）のインスタンスを一覧で保持する静的テーブルです。
+`G4MaterialTable`は、すべての物質（`G4Material`）の一覧を保存するシングルトンです。
+
+`G4Material::GetMaterialTable()`でテーブルにアクセスできます。
+テーブルは`std::vector<G4Material*>`の`typedef`になっています。
 このテーブルを使うことで、登録済みのすべての物質に簡単にアクセスできます。
 
 :::{seealso}
@@ -91,7 +94,12 @@ auto sm = G4SDManager::GetSDMpointer();
 
 ```cpp
 auto um = G4UIManager::GetUIpointer();
+um->ApplyCommand("/run/initialize");
+um->ApplyCommand("/run/beamOn 100");
 ```
+
+`G4UIManager`はGeant4のUIコマンドを管理するシングルトンです。
+マクロファイルの実行やUIコマンドの発行に使います。
 
 ## G4GeometryManager
 
@@ -196,7 +204,7 @@ ROOT、CSV、XMLなど複数の形式に出力できます。
 #include "G4NistManager.hh"
 #include "G4SDManager.hh"
 #include "G4ParticleTable.hh"
-#include "G4MaterialTable.hh"
+#include "G4Material.hh"
 #include "G4AnalysisManager.hh"
 
 class SingletonManager {
@@ -223,7 +231,7 @@ public:
 
     // Material Table
     static G4MaterialTable* MaterialTable() {
-        return G4MaterialTable::GetMaterialTable();
+        return G4Material::GetMaterialTable();
     }
 
     // Analysis Manager
