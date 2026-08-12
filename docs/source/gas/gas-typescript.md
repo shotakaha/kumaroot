@@ -28,6 +28,32 @@ $ npm install --save-dev typescript @types/google-apps-script
 
 :::
 
+`@types/google-apps-script`の中身は、`DriveApp`や`SpreadsheetApp`などのサービスごとに分かれた`.d.ts`ファイルの集まりです。
+それぞれのファイルの中では、`GoogleAppsScript.Drive`や`GoogleAppsScript.Spreadsheet`のように、
+サービス名の名前空間（`namespace`）の中に`File`や`Sheet`といった型が定義されています。
+
+```ts
+// GoogleAppsScript.Drive.File 型が返る
+const files: GoogleAppsScript.Drive.FileIterator = DriveApp.getFiles();
+
+// 変数に型注釈をつけたいときは GoogleAppsScript.<サービス名>.<型名> の形式で書く
+function processFile(file: GoogleAppsScript.Drive.File): void {
+  Logger.log(file.getName());
+}
+```
+
+`DriveApp`や`SpreadsheetApp`のようなグローバル変数自体も、
+`declare var DriveApp: GoogleAppsScript.Drive.DriveApp;`のように、
+この名前空間の型を指す形でグローバルに宣言されています。
+そのため`import`しなくても、`DriveApp.createFile(...)`のように直接呼び出すだけで型補完が効きます。
+
+:::{hint}
+
+具体的な型名がわからないときは、VS Codeで`DriveApp.getFiles()`のような呼び出しにカーソルを合わせ、
+「定義へ移動」（Go to Definition）を使うと、対応する`.d.ts`ファイルと型名を直接確認できます。
+
+:::
+
 ## 型をつけたい
 
 ```ts
