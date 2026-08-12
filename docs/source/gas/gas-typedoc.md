@@ -1,7 +1,6 @@
 # APIドキュメントしたい（`typedoc`）
 
 ```console
-$ npm install --save-dev typedoc
 $ npx typedoc
 ```
 
@@ -21,6 +20,34 @@ TypeDocと組み合わせてAPIドキュメントを生成するのが、
 デファクトスタンダードになっています。
 
 :::
+
+## インストールしたい（`typedoc`）
+
+```console
+$ npm install --save-dev typedoc
+```
+
+`typedoc`パッケージを`devDependencies`として追加します。
+
+## スクリプト設定したい（`package.json`）
+
+```json
+{
+    "name": "...",
+    "scripts": {
+        "docs:api": "typedoc",
+        "...": "..."
+    }
+}
+```
+
+```console
+$ npm run docs:api
+```
+
+`npm scripts`に`docs:api`を登録しておくと、
+`npx typedoc`を直接打たなくても`npm run docs:api`だけで実行できます。
+他のビルドタスク（`build`や`bundle`）と並べて管理しやすくなります。
 
 ## 設定したい（`typedoc.json`）
 
@@ -44,26 +71,6 @@ TypeDocと組み合わせてAPIドキュメントを生成するのが、
 公開APIだけをドキュメント化したい場合に指定します。
 
 その他のオプションはお好みで設定してください。
-
-## スクリプト設定したい（`package.json`）
-
-```json
-{
-    "name": "...",
-    "scripts": {
-        "docs:api": "typedoc",
-        "...": "..."
-    }
-}
-```
-
-```console
-$ npm run docs:api
-```
-
-`npm scripts`に`docs:api`を登録しておくと、
-`npx typedoc`を直接打たなくても`npm run docs:api`だけで実行できます。
-他のビルドタスク（`build`や`bundle`）と並べて管理しやすくなります。
 
 ## ホットリロードしたい
 
