@@ -2,17 +2,18 @@
 
 ```js
 // ES2015で追加
-const c = 再代入できないオブジェクト
-let b = 再代入できるオブジェクト
+const c = 1;    // 再代入できない
+let b = 1;      // 再代入できる
+b = 2;
 
 // ES2015以前（非推奨）
-var a = 任意のオブジェクト
+var a = 1;
 ```
 
 `const`、`let`、`var`で変数を宣言できます。
 `const`は再代入ができない変数、
 `let`は再代入してもよい変数に使います。
-`var`はどのような変数にも使うことができます。
+`var`はどのような変数にも使うことができますが、非推奨です。
 
 :::{note}
 
@@ -23,8 +24,8 @@ var a = 任意のオブジェクト
 
 :::{hint}
 
-``const``は「定数」というイメージがあったため、**あとから書き換えることができない**ように変数を宣言するときに使うものだと思っていましたが、大きく間違っていました。
-あくまで**再代入を禁止**する宣言なので、オプジェクトのプロパティは変更できます。
+`const`は「定数」というイメージがあったため、**あとから書き換えることができない**ように変数を宣言するときに使うものだと思っていましたが、大きく間違っていました。
+あくまで**再代入を禁止**する宣言なので、オブジェクトのプロパティは変更できます。
 
 :::
 
@@ -39,7 +40,6 @@ var a = 任意のオブジェクト
 let name: string = "";
 let count: number = 0;
 let items: string[] = [];
-let items: [] as string[];
 ```
 
 変数を宣言するときに初期値を設定できます。
@@ -61,24 +61,24 @@ let user: User | null = null;
 ```ts
 // nullを判定したい場合
 if (name === null) {
-    console.log("名前の設定が null です")
-};
+    console.log("名前の設定が null です");
+}
 
 // undefinedを判定したい場合
 if (name === undefined) {
     console.log("名前の設定が undefined です");
-};
+}
 
 // 同時に判定したい場合（例外処理）
 if (name == null) {
-    throw new Error("Error: 名前が設定されていません")
-};
+    throw new Error("Error: 名前が設定されていません");
+}
 
 // 除外したい場合
 if (name) {
-    console.log(`名前が ${name} に設定されています`)
+    console.log(`名前が ${name} に設定されています`);
 } else {
-    console.log("名前の設定が null もしくは undefined です")
+    console.log("名前の設定が null もしくは undefined です");
 }
 ```
 
@@ -92,27 +92,34 @@ if (name) {
 const person = {
     "name": "John Doe",
     "age": 999,
-}
+};
 
 // オブジェクトを分割代入
 // - 変数名はプロパティと同じにしなければならない
-const {name, age} = person;
-
-// 新しい変数名に分割代入
-// - オブジェクトのキーはプロパティと同じにする
-// - 値を新しい変数名で受け取ることができる
-const {name: anotherName, age: anotherAge} = person;
-
-// 配列に分割代入
-// - オブジェクトを配列で受け取ることはできない
-const [name, age] = person;  // これはエラーになる
+const { name, age } = person;
 ```
 
 複数のプロパティを持つオブジェクトを、アンパックした状態で受け取ることができます。
 上のサンプルだとありがたみが分かりづらいですが、
 オブジェクトを返り値に持つ関数を受け取るときに便利です。
 
+```js
+// 新しい変数名に分割代入
+// - オブジェクトのキーはプロパティと同じにする
+// - 値を新しい変数名で受け取ることができる
+const { name: anotherName, age: anotherAge } = person;
+```
 
+`プロパティ名: 新しい変数名`の形式で、受け取る変数名を変更できます。
+同じオブジェクトから複数回分割代入する場合、
+2回目以降は変数名が重複しないようにこの書き方が必要です。
+
+:::{caution}
+
+オブジェクトを配列のように`const [name, age] = person;`と分割代入することはできません。
+`person`は配列ではなくオブジェクトなので、`TypeError: person is not iterable`になります。
+
+:::
 
 ## 型変換したい
 
@@ -126,12 +133,22 @@ Number(false);     // -> 0
 // 文字列から数値を抽出
 parseInt("42px");      // -> 42
 parseFloat("3.14em");  // -> 3.14
+```
 
+`Number`は文字列全体を数値に変換しようとし、変換できない場合は`NaN`になります。
+`parseInt`・`parseFloat`は、文字列の先頭から数値として読める部分だけを取り出します。
+
+```js
 // 文字列に変換
 String(456);        // -> "456"（文字列）
-String(true):       // -> "true"
+String(true);       // -> "true"
 String([1, 2, 3]);  // -> "1,2,3"
+```
 
+`String`でほとんどの値を文字列に変換できます。
+配列は`,`区切りの文字列になります。
+
+```js
 // 真偽値に変換
 Boolean(1);        // true
 Boolean(0);        // false
@@ -139,11 +156,13 @@ Boolean("");       // false（空の文字列はfalse）
 Boolean("hello");  // true
 Boolean([]);       // true（空の配列はtrue）
 Boolean({});       // true（空のオブジェクトはtrue）
+```
 
-// JSON形式の文字列に変換
-const data = {...};
-JSON.stringify(data);
+`Boolean`で真偽値に変換できます。
+数値の`0`や空文字列`""`は`false`になりますが、
+空の配列`[]`や空のオブジェクト`{}`は`true`になる点に注意してください。
 
+```js
 // 等価演算子／厳密等価演算子
 5 == "5";     // true（暗黙の型変換）
 5 === "5";    // false（暗黙の型変換されない）
