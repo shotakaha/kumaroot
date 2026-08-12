@@ -11,6 +11,12 @@ $ clasp pull    # GAS -> ローカル
 これによりGitによるバージョン管理と組み合わせることが
 できるようになります。
 
+TypeScriptで書いたコードをGASにアップロードする場合は、
+[`tsc`](./gas-typescript.md)で型チェックし、
+[`rollup`](./gas-rollup.md)でバンドルしてから`clasp push`する、
+という3段階のワークフローになります。
+本ページでは、そのワークフローの最後を担う`clasp`の使い方を説明します。
+
 ## インストールしたい（`clasp`）
 
 ```console
@@ -37,31 +43,7 @@ $ npm install -g @google/clasp
 
 :::
 
-## スクリプト設定したい（`package.json`）
-
-```json
-{
-    "name": "...",
-    "...": "...",
-    "scripts": {
-        "push": "clasp push",
-        "pull": "clasp pull",
-        "...": "..."
-    }
-}
-```
-
-`npm scripts`の`push`と`pull`を設定シタサンプルです。
-
-```console
-$ npm run push
-$ npm run pull
-```
-
-それぞれ`npm run push`と`npm run pull`で実行できます。
-
-
-## ログインしたい（``clasp login``）
+## ログインしたい（`clasp login`）
 
 ```console
 $ clasp login
@@ -88,6 +70,65 @@ GASを操作するために、Googleアカウントへのログインが必要�
 
 :::
 
+## プロジェクトを更新したい（`clasp pull` / `clasp push`）
+
+```console
+// ウェブからプロジェクトを取得
+$ clasp pull
+$ clasp pull --versionNumber バージョン    # バージョン指定
+$ clasp pull -d    # --deleteUnusedFiles: リモートにないローカルファイルを削除
+
+// プロジェクトを更新
+$ clasp push
+$ clasp push -w    # --watch: ファイル変更を監視して自動push
+$ clasp push -f    # --force: マニフェスト（appsscript.json）を強制上書き
+```
+
+`pull`と`push`を使って、ローカルとリモートのプロジェクトをやりとりします。
+`clasp pull -d, --deleteUnusedFiles`は、リモートに存在しないファイルをローカルからも削除するので注意して使ってください。
+
+:::{note}
+
+`clasp` 3系では、TypeScriptからJavaScriptへの自動変換（トランスパイル）が廃止されました。
+そのため`clasp push`する前に、自分でJavaScriptへの変換を済ませておく必要があります。
+
+:::
+
+:::{hint}
+
+TypeScriptを使う場合は、[`tsc --noEmit`](./gas-typescript.md)で型チェックだけ行い、
+実際のトランスパイル・バンドルは[`rollup`](./gas-rollup.md)（`@rollup/plugin-typescript`）に任せる構成がオススメです。
+`npm run bundle && clasp push`のように、バンドルしてから`push`する流れにしておくとよいです。
+
+:::
+
+## スクリプト設定したい（`package.json`）
+
+```json
+{
+    "name": "...",
+    "scripts": {
+        "build": "tsc --noEmit",
+        "bundle": "rollup -c",
+        "bundle:watch": "rollup -c --watch",
+        "push": "clasp push",
+        "pull": "clasp pull",
+        "deploy": "npm run build && npm run bundle && npm run push",
+        "...": "..."
+    }
+}
+```
+
+`build`（型チェック）→`bundle`（バンドル）→`push`（アップロード）という順番で、
+`tsc` → `rollup` → `clasp`のワークフローをそのまま`npm scripts`に落とし込んでいます。
+`deploy`を実行すれば、この3段階を一度にまとめて実行できます。
+
+```console
+$ npm run push
+$ npm run pull
+$ npm run deploy
+```
+
 ## 新規プロジェクトしたい（`clasp create-script`）
 
 ```console
@@ -110,15 +151,9 @@ GASには、Google Sheetなどのアプリに紐づいた状態のものと、�
 `--rootDir`でGASにアップロードするファイルのパスを設定できます。
 デフォルトは、`.`です。
 
-:::{note}
-
-`clasp` 3系では、TypeScriptからJavaScriptへ自動変換（トランスパイル）されなくなりました。
-代わりに`rollup`などのバンドラーツールを併用する必要があります。
-
 `--rootDir`には、`rollup`でバンドルしたあとのファイルを置くディレクトリを指定します。
 `gas`や`dist`など、好きな名前のディレクトリにバンドル済みファイルと`.clasp.json`をまとめる構成にできます。
-
-:::
+このディレクトリ構成については、後述の「Git管理したい」で詳しく説明します。
 
 `.clasp.json`にスクリプトID（プロジェクトID）と、
 `rootDir`の情報が保存されます。
@@ -165,8 +200,8 @@ testDoGet.js     # ウェブ上で作成済みのスクリプト
 
 :::{note}
 
-スクリプトIDがよくわからない、もしくは、
-URLからわざわざ抜き出すのがめんどくさい、という場合は、
+スクリプトIDがよくわからない場合や、
+URLからわざわざ抜き出すのがめんどくさい場合は、
 コピペしたURLをそのまま貼り付けてもOKみたいです。
 
 :::
@@ -183,38 +218,6 @@ $ clasp open-script スクリプトID
 
 `clasp open-script`で、ブラウザでGASエディターを開くことができます。
 `.clasp.json`がある場合はスクリプトIDが自動で補完されます。
-
-## プロジェクトを更新したい（`clasp pull` / `clasp push`）
-
-```console
-// ウェブからプロジェクトを取得
-$ clasp pull
-$ clasp pull --versionNumber バージョン    # バージョン指定
-$ clasp pull -d    # --deleteUnusedFiles: リモートにないローカルファイルを削除
-
-// プロジェクトを更新
-$ clasp push
-$ clasp push -w    # --watch: ファイル変更を監視して自動push
-$ clasp push -f    # --force: マニフェスト（appsscript.json）を強制上書き
-```
-
-`pull`と`push`を使って、ローカルとリモートのプロジェクトをやりとりします。
-`clasp pull -d, --deleteUnusedFiles`は、リモートに存在しないファイルをローカルからも削除するので注意して使ってください。
-
-:::{note}
-
-`clasp` 3系では、TypeScriptからJavaScriptへの自動変換（トランスパイル）が廃止されました。
-そのため`clasp push`する前に、自分でJavaScriptへの変換を済ませておく必要があります。
-
-:::
-
-:::{hint}
-
-TypeScriptを使う場合は、[`tsc --noEmit`](./gas-typescript.md)で型チェックだけ行い、
-実際のトランスパイル・バンドルは[`rollup`](./gas-rollup.md)（`@rollup/plugin-typescript`）に任せる構成がオススメです。
-`npm run bundle && clasp push`のように、バンドルしてから`push`する流れにしておくとよいです。
-
-:::
 
 ## バージョン管理したい（`clasp create-version` / `clasp list-versions`）
 
@@ -289,6 +292,62 @@ $ clasp update-deployment AKfycb...LH8l3z --versionNumber 2
 
 :::
 
+## Git管理したい
+
+```tree
+リポジトリ名
+|-- CHANGELOG.md
+|-- README.md
+|-- gas/                # clasp pushの対象ディレクトリ
+|   |-- .clasp.json     # スクリプトID（Gitには含めない）
+|   |-- .claspignore
+|   |-- appsscript.json
+|   |-- code.bundle.js  # rollupでバンドルしたファイル（.gitignoreに追加）
+|   |-- code.bundle.js.map
+|-- node_modules/       # .gitignoreに追加
+|-- package.json
+|-- rollup.config.js    # rollupの設定
+|-- tsconfig.json       # tscの設定
+|-- src/                # TypeScriptファイル
+|   |-- index.ts        # 自作モジュールのエントリーポイント
+|   |-- config.ts       # 自作モジュールの設定用モジュール
+|   |-- ...
+|
+|-- pyproject.toml  # commitizen, mkdocs など
+|-- mkdocs.yml
+|-- docs/           # ドキュメント用（オプション）
+```
+
+`tsc` + `rollup` + `clasp`を組み合わせたディレクトリ構成のサンプルです。
+`src`の中にTypeScriptファイルを作成し、
+`rollup`で`gas/code.bundle.js`にバンドルします。
+`.clasp.json`は`gas/`の中に置き、
+`gas`ディレクトリで`clasp push`を実行する構成にしています。
+
+:::{hint}
+
+`.clasp.json`を出力先ディレクトリの中に置いておくと、
+`cd gas && clasp push`のようにディレクトリを移動してから`push`できます。
+複数のGASプロジェクト（例：本番用・開発用）を1つのリポジトリで管理したい場合は、
+`gas/`のようなディレクトリをプロジェクトごとに分けて用意すると管理しやすくなります。
+
+:::
+
+:::{hint}
+
+ドキュメント関係のファイルはオプションです。
+コード内にTSDoc形式でコメントしておくと、`typedoc`でAPIドキュメントをMarkdown形式で出力できます。
+
+:::
+
+:::{note}
+
+`pyproject.toml`があるのは、
+僕がPython周りのツールのほうが使い慣れているためです。
+`commitizen`、`pre-commit`、`mkdocs`などを使っています。
+
+:::
+
 ## pushされるファイルを確認したい（`clasp show-file-status`）
 
 ```console
@@ -321,62 +380,6 @@ $ clasp run-function 関数名
 
 `clasp run-function`で、GASエディターを開かずにローカルから関数を実行できます。
 初回実行時は`--use-project-scopes`付きで`clasp login`をやり直し、プロジェクトに必要な権限を認可する必要がある場合があります。
-
-## Git管理したい
-
-```tree
-リポジトリ名
-|-- CHANGELOG.md
-|-- README.md
-|-- gas/                # clasp pushの対象ディレクトリ
-|   |-- .clasp.json     # スクリプトID（Gitには含めない）
-|   |-- .claspignore
-|   |-- appsscript.json
-|   |-- code.bundle.js  # rollupでバンドルしたファイル（.gitignoreに追加）
-|   |-- code.bundle.js.map
-|-- node_modules/       # .gitignoreに追加
-|-- package.json
-|-- rollup.config.js    # rollupの設定
-|-- tsconfig.json       # tscの設定
-|-- src/                # TypeScriptファイル
-|   |-- index.ts        # 自作モジュールのエントリーポイント
-|   |-- config.ts       # 自作モジュールの設定用モジュール
-|   |-- ...
-|
-|-- pyproject.toml  # commitizen, mkdocs など
-|-- mkdocs.yml
-|-- docs/           # ドキュメント用（オプション）
-```
-
-ディレクトリ構成のサンプルです。
-`src`の中にTypeScriptファイルを作成し、
-`rollup`で`gas/code.bundle.js`にバンドルします。
-`.clasp.json`は`gas/`の中に置き、
-`gas`ディレクトリで`clasp push`を実行する構成にしています。
-
-:::{hint}
-
-`.clasp.json`を出力先ディレクトリの中に置いておくと、
-`cd gas && clasp push`のようにディレクトリを移動してから`push`できます。
-複数のGASプロジェクト（例：本番用・開発用）を1つのリポジトリで管理したい場合は、
-`gas/`のようなディレクトリをプロジェクトごとに分けて用意すると管理しやすくなります。
-
-:::
-
-:::{hint}
-
-ドキュメント関係のファイルはオプションです。
-コード内にTSDoc形式でコメントしておくと、`typedoc`でAPIドキュメントをMarkdown形式で出力できます。
-
-:::
-
-:::{note}
-
-`pyproject.toml`があるのは、
-僕がPython周りのツールのほうが使い慣れているためです。
-`commitizen`、`pre-commit`、`mkdocs`などを使っています。
-
-:::
 
 ## コマンド名の新旧対応表
 
