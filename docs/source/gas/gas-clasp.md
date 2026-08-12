@@ -95,13 +95,8 @@ $ npm run deploy
 
 :::
 
-:::{hint}
-
 `rootDir`には、`rollup`でバンドルしたあとのファイルを置くディレクトリを指定します。
-`gas`や`dist`など、好きな名前のディレクトリにバンドル済みファイルと`.clasp.json`をまとめる構成にできます。
-このディレクトリ構成については、後述の「Git管理したい」で詳しく説明します。
-
-:::
+具体的なディレクトリ構成は、後述の「Git管理したい」を参照してください。
 
 ## ログインしたい（`clasp login`）
 
@@ -147,18 +142,10 @@ $ clasp push -f    # --force: マニフェスト（appsscript.json）を強制�
 `pull`と`push`を使って、ローカルとリモートのプロジェクトをやりとりします。
 `clasp pull -d, --deleteUnusedFiles`は、リモートに存在しないファイルをローカルからも削除するので注意して使ってください。
 
-:::{note}
-
-`clasp` 3系では、TypeScriptからJavaScriptへの自動変換（トランスパイル）が廃止されました。
-そのため`clasp push`する前に、自分でJavaScriptへの変換を済ませておく必要があります。
-
-:::
-
 :::{hint}
 
-TypeScriptを使う場合は、[`tsc --noEmit`](./gas-typescript.md)で型チェックだけ行い、
-実際のトランスパイル・バンドルは[`rollup`](./gas-rollup.md)（`@rollup/plugin-typescript`）に任せる構成がオススメです。
-`npm run bundle && clasp push`のように、バンドルしてから`push`する流れにしておくとよいです。
+`clasp push`する前に、`npm run build && npm run bundle`（または`npm run deploy`）を実行して、
+TypeScriptの変換を済ませておくのを忘れないようにしてください。
 
 :::
 
@@ -181,9 +168,7 @@ GASには、Google Sheetなどのアプリに紐づいた状態のものと、�
 
 :::
 
-`--rootDir`でGASにアップロードするファイルのパスを設定できます。
-デフォルトは、`.`です。
-実行すると、前述の`.clasp.json`がこのディレクトリに生成されます。
+`--rootDir`（省略時は`.`）で指定したディレクトリに、前述の`.clasp.json`が生成されます。
 
 ```console
 $ clasp create-script --title PROJECT_NAME --rootDir .
@@ -352,8 +337,6 @@ $ clasp update-deployment AKfycb...LH8l3z --versionNumber 2
 
 :::{hint}
 
-`.clasp.json`を出力先ディレクトリの中に置いておくと、
-`cd gas && clasp push`のようにディレクトリを移動してから`push`できます。
 複数のGASプロジェクト（例：本番用・開発用）を1つのリポジトリで管理したい場合は、
 `gas/`のようなディレクトリをプロジェクトごとに分けて用意すると管理しやすくなります。
 
