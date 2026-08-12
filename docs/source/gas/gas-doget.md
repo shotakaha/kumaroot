@@ -1,4 +1,4 @@
-# GETリクエストしたい（`doGet`）
+# GETリクエストを処理したい（`doGet`）
 
 ```js
 function doGet(e) {
@@ -13,7 +13,7 @@ function doGet(e) {
 
     // レスポンスを返す
     return ContentService.createTextOutput(message).setMimeType(ContentService.MimeType.TEXT);
-};
+}
 ```
 
 `doGet`関数は、GASでGETリクエストを処理するための関数です。
@@ -27,7 +27,7 @@ GETリクエストは
 `e.parameter.name`で`John`という値を取得できます。
 
 また`name`を使って`message`の文字列を作成しています。
-そして``ContentService.createTextOutput``を使ってレスポンスを作成しています。
+そして`ContentService.createTextOutput`を使ってレスポンスを作成しています。
 今回はただのテキスト情報なので、MIMEタイプをTEXTにしています。
 
 クエリを`?name=Smith`に変更すると、レスポンスも変わることが想像できると思います。
@@ -53,23 +53,23 @@ function testDoGetParameters() {
     };
     const response = doGet(e);
     const content = response.getContent();
-    Logger.log(`content: ${content}`)
+    Logger.log(`content: ${content}`);
 }
 
 function testDoGetURL() {
-    const base_url = ScriptApp.getService().getUrl();
-    Logger.log(`Base URL: ${base_url}`)
-    const query = "?name=John"
-    Logger.log(`Query: ${query}`)
+    const baseUrl = ScriptApp.getService().getUrl();
+    Logger.log(`Base URL: ${baseUrl}`);
+    const query = "?name=John";
+    Logger.log(`Query: ${query}`);
 
-    const url = base_url + query
+    const url = baseUrl + query;
 
     const options = {
         "method": "GET",
         "followRedirects": true,
     };
-    const response = UrlFetchApp.fetch(url, options)
-    Logger.log(`response: ${response}`)
+    const response = UrlFetchApp.fetch(url, options);
+    Logger.log(`response: ${response}`);
 }
 ```
 
@@ -85,7 +85,7 @@ function doGet(e) {
 
     // クエリが見つからない場合
     if (!sheetName) {
-        msg = "シート名が指定されていません"
+        const msg = "シート名が指定されていません";
         return ContentService.createTextOutput(msg).setMimeType(ContentService.MimeType.TEXT);
     }
 
@@ -95,16 +95,24 @@ function doGet(e) {
 
     // シート名が見つからない場合
     if (!sheet) {
-        msg = `指定されたシートが存在しません: ${sheetName}`
+        const msg = `指定されたシートが存在しません: ${sheetName}`;
         return ContentService.createTextOutput(msg).setMimeType(ContentService.MimeType.TEXT);
     }
 
-    // シートの内容をJSON形式に変換する処理
-    // ...
+    // シートの内容をJSON形式に変換する
+    const values = sheet.getDataRange().getValues();
+    const headers = values[0];
+    const rows = values.slice(1);
+    const records = rows.map(row =>
+        Object.fromEntries(headers.map((h, i) => [h, row[i]]))
+    );
+
+    return ContentService.createTextOutput(JSON.stringify(records))
+        .setMimeType(ContentService.MimeType.JSON);
 }
 ```
 
-`doGet`関数の実用的な（？）サンプルです。
+`doGet`関数の実用的なサンプルです。
 ここでは、あるスプレッドシートに複数のシートがある場合を想定しています。
 そして、シートごとに内容をJSON形式で公開し、外部からデータ処理できるようにしたいと考えています。
 
@@ -113,23 +121,31 @@ GASで公開したウェブアプリは
 でアクセスできるようになります。
 クエリに`?sheetName=シート名`とすることで、該当するシートのコンテンツにアクセスできます。
 
-## 複数GETしたい
+## 複数の処理を切り替えたい
 
 ```js
-DOGET = {
+const actionMap = {
     "action1": doGetOne,
     "action2": doGetTwo,
     "action3": doGetThree,
-}
+};
 
 function doGet(e) {
-    const action = e.parameter.action
-    return DOGET[action](e)
+    const action = e.parameter.action;
+    return actionMap[action](e);
 }
 
-function doGetOne(e){ ... }
-function doGetTwo(e){ ... }
-function doGetThree(e){ ... }
+function doGetOne(e) {
+    return ContentService.createTextOutput("action1です");
+}
+
+function doGetTwo(e) {
+    return ContentService.createTextOutput("action2です");
+}
+
+function doGetThree(e) {
+    return ContentService.createTextOutput("action3です");
+}
 ```
 
 `doGet`関数は、ひとつのプロジェクトで、ひとつしか定義できない、特殊な関数です。
