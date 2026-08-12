@@ -70,6 +70,10 @@ GAS開発でよく使う`typescript`、`rollup`、`clasp`などのツールは�
     "version": "0.0.1",
     "private": true,
     "type": "module",
+    "engines": {
+        "node": ">=20"
+    },
+    "packageManager": "npm@10.2.5",
     "devDependencies": {
         "typescript": "^5.4.0",
         "@types/google-apps-script": "^1.0.0"
@@ -98,6 +102,25 @@ GAS用のプロジェクトは公開する必要がないので、基本的に`t
 `package.json`は手で編集してもよいですが、
 `npm install`・`npm uninstall`のようなコマンド経由で更新していくほうが、
 書き間違いも減り安全です。
+
+:::
+
+`engines`は、動作確認済みのNode.jsバージョンを示すための項目です。
+
+:::{caution}
+
+`engines`はデフォルトでは警告が出るだけで、インストール自体は止まりません。
+バージョン違反時に`npm install`を失敗させたい場合は、`.npmrc`に`engine-strict=true`を追加する必要があります。
+
+:::
+
+`packageManager`は、`npm`（や`yarn`/`pnpm`）自体のバージョンを固定するための項目です。
+`corepack enable`を実行しておくと、`corepack`がこのバージョンを見て自動的にダウンロード・切り替えしてくれます。
+
+:::{note}
+
+`corepack`はNode.js 20/22 LTSには同梱されていますが、
+Node.js 25以降は同梱されなくなる予定のため、`npm install -g corepack`で別途インストールが必要になる場合があります。
 
 :::
 
