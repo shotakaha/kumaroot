@@ -1,10 +1,11 @@
 # パッケージ管理したい（`npm`）
 
 ```console
-$ npm run test
-$ npm run build
-$ npm run bundle
-$ npm run push
+$ npm run test    // npx vitest run
+$ npm run lint    // npx biome lint .
+$ npm run build   // npx tsc --noEmit
+$ npm run bundle  // npx rollup -c
+$ npm run push    // npx clasp push
 ```
 
 GAS開発も`npm`を使ってパッケージ管理できます。
