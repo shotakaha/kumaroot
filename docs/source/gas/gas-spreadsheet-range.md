@@ -1,4 +1,4 @@
-# セル操作したい（`Range`）
+# セルを操作したい（`Range`）
 
 ```js
 const range = sheet.getDataRange();
@@ -18,7 +18,7 @@ const range = sheet.getRange("A1:C3");
 const range = sheet.getRange("A1");
 
 // A1セルからB3までの範囲を選択
-const range sheet.getRange("A1:B3");
+const range = sheet.getRange("A1:B3");
 ```
 
 `getRange`でセル（やセル範囲）を指定して選択できます。
@@ -39,7 +39,7 @@ const range = sheet.getRange(2, 3, 2, 2);
 
 `getRange`はR1C1表記にも対応しています。
 
-## データを列選択したい
+## 列（や行）を選択したい
 
 ```js
 // B列を全選択
@@ -61,7 +61,7 @@ const range = sheet.getRange("B");
 
 ```js
 // すべてのデータの範囲
-const range = sheet.getDataRange()
+const range = sheet.getDataRange();
 ```
 
 `getDataRange`で、シートにあるデータを全選択できます。
@@ -69,29 +69,22 @@ const range = sheet.getDataRange()
 
 ```js
 // 見出しを除外したデータの範囲
-const range = sheet.getDataRange.slice(1);
-```
-
-シートの1行目は、見出しに設定している場合があります。
-見出しを含みたくない場合は`.slice(1)`するとよいです。
-
-```js
-// 別の選択方法
-const nrows = sheet.getLastRow();
-const ncols = sheet.getLastColumns();
+const nrows = sheet.getLastRow() - 1;
+const ncols = sheet.getLastColumn();
 const range = sheet.getRange(2, 1, nrows, ncols);
 ```
 
-シートにあるデータの行数、列数を取得して、`getRange`して範囲選択することもできます。
+シートの1行目は、見出しに設定している場合があります。
+見出しを含みたくない場合は、2行目から選択するとよいです。
 
 ```js
 const lastRow = sheet.getLastRow();
-const newRange = sheet.getRange(lastRow+1, 1);
+const newRange = sheet.getRange(lastRow + 1, 1);
 ```
 
 データを読み込むときより、既存のデータを追記したいときに利用します。
 
-## セル選択したい（`getRange`）
+## 選択範囲を確認したい（`activate`）
 
 ```js
 // 選択範囲を確認
@@ -112,20 +105,24 @@ const values = range.getValues();
 ## 値を書き込みたい（`setValues`）
 
 ```js
-const arrays = [[二次元配列]];
-const rows = dataTable.length;   // 行の数
-const cols = dataTable[0].length;  // 見出しの数＝列の数
+const arrays = [
+  ["名前", "年齢"],
+  ["田中", 20],
+  ["鈴木", 30],
+];
+const rows = arrays.length;      // 行の数
+const cols = arrays[0].length;   // 列の数
 sheet.getRange(1, 1, rows, cols).setValues(arrays);
 ```
 
 `setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
 書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`rows`と`cols`を2次元配列から取得しています。
 
-## 組み込み関数したい（`setFormula`）
+## 組み込み関数を使いたい（`setFormula`）
 
 ```js
-const cell = sheet.getRange("セル名");
-cell.setFormula("=SUM(セル名:セル名)");
+const cell = sheet.getRange("D1");
+cell.setFormula("=SUM(A1:C1)");
 ```
 
 `setFormula`でスプレッドシートの組み込み関数を利用できます。
@@ -133,14 +130,14 @@ cell.setFormula("=SUM(セル名:セル名)");
 ## セルの書式を変更したい
 
 ```js
-const range = sheet.getRange(範囲); // 開始行, 開始列, 行数, 列数
-range.setFontSize(整数);
-range.setFontFamily("フォント名");
-range.setFontWeight("ウェイト名"); // "normal", "bold"
-range.setFontStyle("スタイル名");  // "normal", "italic"
-range.setFontLine("ライン名");    // "none", "underline", "line-through"
-range.setFontColors("色");
-range.setBackgrounds("色");
+const range = sheet.getRange(1, 1, 3, 2); // 開始行, 開始列, 行数, 列数
+range.setFontSize(12);
+range.setFontFamily("Arial");
+range.setFontWeight("bold");   // "normal", "bold"
+range.setFontStyle("italic");  // "normal", "italic"
+range.setFontLine("underline"); // "none", "underline", "line-through"
+range.setFontColor("red");
+range.setBackground("yellow");
 ```
 
 選択したセルに対して、フォントやスタイル、文字色などを設定できます。
