@@ -41,28 +41,27 @@ function showProjectTriggers() {
 
 ```js
 function addTrigger(fnName) {
-    // 同じ関数・同じ種類のトリガーがすでに登録されていないか確認する
-    const isRegistered = ScriptApp.getProjectTriggers().some(trigger =>
-        trigger.getHandlerFunction() === fnName &&
-        trigger.getTriggerSource() === ScriptApp.TriggerSource.CLOCK
-    );
+    // 同じ関数・同じ種類の既存トリガーを削除する
+    ScriptApp.getProjectTriggers()
+        .filter(trigger =>
+            trigger.getHandlerFunction() === fnName &&
+            trigger.getTriggerSource() === ScriptApp.TriggerSource.CLOCK
+        )
+        .forEach(trigger => ScriptApp.deleteTrigger(trigger));
 
-    if (isRegistered) {
-        Logger.log("トリガーはすでに登録済みです");
-        return;
-    }
-
+    // 新しいトリガーを追加する
     ScriptApp.newTrigger(fnName)
         .timeBased()
         .atHour(9)
         .everyDays(1)
         .create();
-    Logger.log("新しいトリガーを追加しました");
+    Logger.log("トリガーを追加しました");
 }
 ```
 
 トリガーを追加するサンプルです。
-設定済みのトリガーがないことを確認してから追加しています。
+同じ関数に対するトリガーがすでに存在する場合は、いったん削除してから追加し直しています。
+こうしておくと、`addTrigger`を何度実行してもトリガーが重複登録される心配がありません。
 
 :::{note}
 
