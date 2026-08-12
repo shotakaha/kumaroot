@@ -1,4 +1,4 @@
-# ピボットテーブル操作したい（`PivotTable`）
+# ピボットテーブルを操作したい（`PivotTable`）
 
 スプレッドシートのデータを整理するとき、ピボットテーブルはとても便利です。
 
@@ -19,7 +19,7 @@
 
 ```js
 // ピボットテーブルに使用する範囲
-const readRange = readSheet.getRange(...);
+const readRange = readSheet.getRange("A1:D10");
 
 // ピボットテーブルを出力するセルを選択
 const pivotRange = writeSheet.getRange("A1");
@@ -27,17 +27,19 @@ const pivotRange = writeSheet.getRange("A1");
 // （空の）ピボットテーブルを作成
 const pivotTable = pivotRange.createPivotTable(readRange);
 
-// 行グループを追加
-pivotTable.addRowGroup(カラムのインデックス);
+// 行グループを追加（1列目）
+pivotTable.addRowGroup(1);
 
-// 列グループを追加
-pivotTable.addColumnGroup(カラムのインデックス);
+// 列グループを追加（2列目）
+pivotTable.addColumnGroup(2);
 
-// ピボット値を追加
-pivotTable.addPivotValue(カラムのインデックス, 集計方法);
+// ピボット値を追加（3列目をCOUNTAで集計）
+const method = SpreadsheetApp.PivotTableSummarizeFunction.COUNTA;
+pivotTable.addPivotValue(3, method);
 
-// フィルターを追加
-pivotTable.addFilter(カラムのインデックス, フィルター)
+// フィルターを追加（4列目が空でない行のみ表示）
+const criteria = SpreadsheetApp.newFilterCriteria().whenCellNotEmpty().build();
+pivotTable.addFilter(4, criteria);
 ```
 
 `createPivotTable`メソッドで、ピボットテーブルを作成できます。
@@ -52,15 +54,15 @@ pivotTable.addFilter(カラムのインデックス, フィルター)
 const readRange = readSheet.getRange("A1:D10");
 
 // 行方向に作成する場合
-const lastRow = readRange.getLastRow();
+const lastRow = readSheet.getLastRow();
 const pivotRange = readSheet.getRange(lastRow + 2, 1);
 
 // 列方向に作成する場合
-const lastCol = readRange.getLastColumn();
+const lastCol = readSheet.getLastColumn();
 const pivotRange = readSheet.getRange(1, lastCol + 2);
 ```
 
-`Range.getLastRow`や`Range.getLastColumn`を使って、
+`Sheet.getLastRow`や`Sheet.getLastColumn`を使って、
 出力範囲の選択を自動化できます。
 
 :::
@@ -68,14 +70,14 @@ const pivotRange = readSheet.getRange(1, lastCol + 2);
 ## 行や列を追加したい（`addRowGroup` / `addColumnGroup`）
 
 ```js
-const pivotGroup = pivotTable.addRowGroup(インデックス);
-const pivotGroup = pivotTable.addColumnGroup(インデックス);
+const rowGroup = pivotTable.addRowGroup(1);
+const colGroup = pivotTable.addColumnGroup(2);
 ```
 
 `PivotTable.addRowGroup`で行グループ、
 `PivotTable.addColumnGroup`で列グループを追加できます。
 
-引数にカラム名のインデックスが必要です。
+引数には対象カラムの列番号（1はじまり）を渡します。
 ひとつの`PivotTable`に対して複数の行グループ／列グループを追加できます。
 
 返り値は`PivotGroup`オブジェクトが新規作成されます。
@@ -96,7 +98,7 @@ pivotTable.addPivotValue(index, method);
 ```js
 const headers = ["カラム1", "カラム2", "カラム3", "カラム4"];
 const col = "カラム3";
-const index = headers.indexOf(col);
+const index = headers.indexOf(col) + 1;
 const criteria = SpreadsheetApp.newFilterCriteria().whenCellNotEmpty().build();
 pivotTable.addFilter(index, criteria);
 ```
@@ -104,29 +106,29 @@ pivotTable.addFilter(index, criteria);
 `addFilter`でフィルターを追加できます。
 フィルター条件は[](./gas-spreadsheet-filter.md)を参考に`FilterCriteria`オブジェクトを作成します。
 
-## 行グループ／列グループの詳細設定したい（`PivotGroup`）
+## 行グループ／列グループの表示順や名前を変更したい（`PivotGroup`）
 
 ```js
-// 表示順
-pivotGroup.sortAscending();
-pivotGroup.sortDescending();
-pivotGroup.sortBy(value, oppositeGroupValues);
+const rowGroup = pivotTable.addRowGroup(1);
+
+// 降順に並び替え
+rowGroup.sortDescending();
 
 // 表内に合計値を表示
-pivotGroup.showTotals(showTotals);
+rowGroup.showTotals(true);
 
-// その他
-pivotGroup.setDisplayName(name);
-pivotGroup.setDateTimeGroupingRule(dateTimeGroupingRuleType);
-pivotGroup.setHistogramGroupingRule(min, max, bins);
+// 表示名を変更
+rowGroup.setDisplayName("集計項目");
 ```
 
-行グループ、列グループに対応した`PivotGroup`オブジェクトを操作して、表示順などの設定できます。
+`addRowGroup` / `addColumnGroup`が返す`PivotGroup`オブジェクトを操作して、
+表示順や合計表示、表示名などを設定できます。
 
 ## 日時を集計したい（`PivotGroup.setDateTimeGroupingRule`）
 
 ```js
-const index = 見出し.indexOf("タイムスタンプ") + 1;
+const headers = ["タイムスタンプ", "カラム2", "カラム3"];
+const index = headers.indexOf("タイムスタンプ") + 1;
 
 const pivotRow = pivotTable.addRowGroup(index);
 const byHour = SpreadsheetApp.DateTimeGroupingRuleType.HOUR;
@@ -138,7 +140,7 @@ const byDay = SpreadsheetApp.DateTimeGroupingRuleType.DAY_OF_WEEK;
 pivotCol.setDateTimeGroupingRule(byDay);
 pivotCol.setDisplayName("曜日");
 
-const method = SpreadsheetApp.PivotTableSummarizeFunction.COUNTA
+const method = SpreadsheetApp.PivotTableSummarizeFunction.COUNTA;
 const pivotVal = pivotTable.addPivotValue(index, method);
 ```
 
@@ -151,11 +153,12 @@ const pivotVal = pivotTable.addPivotValue(index, method);
 
 :::
 
-## ヒストグラムしたい（`PivotGroup.setHistogramGroupingRule`）
+## ヒストグラムにしたい（`PivotGroup.setHistogramGroupingRule`）
 
 ```js
-const pivotRow = pivotTable.addRowGroup(index);
-pivotRow.setHistogramGroupingRule(min, max, bins);
+// 3列目の値を、0〜100の範囲で10刻みのビンに分ける
+const pivotRow = pivotTable.addRowGroup(3);
+pivotRow.setHistogramGroupingRule(0, 100, 10);
 ```
 
 `PivotGroup.setHistogramGroupingRule`で行グループ／列グループを、任意のビン数でヒストグラム（度数分布）にできます。
