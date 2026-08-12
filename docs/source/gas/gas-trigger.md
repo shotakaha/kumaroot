@@ -70,6 +70,18 @@ function addTrigger(fnName) {
 
 :::
 
+## 複数のトリガーをまとめて追加したい
+
+```js
+function setupTriggers() {
+    ["onFormSubmit", "onEdit", "onDaily"].forEach(fnName => addTrigger(fnName));
+}
+```
+
+`addTrigger`は1つの関数につき1つのトリガーを登録する関数なので、
+登録したい関数名を配列にして`forEach`で呼び出すだけで、複数のトリガーをまとめて追加できます。
+プロジェクトの初回実行時に、この`setupTriggers`をエントリーポイントとして呼び出しておくと便利です。
+
 ## トリガーを削除したい（`deleteTrigger`）
 
 ```js
