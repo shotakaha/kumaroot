@@ -54,6 +54,17 @@ function processFile(file: GoogleAppsScript.Drive.File): void {
 
 :::
 
+## 型チェックだけしたい（`tsc --noEmit`）
+
+```console
+$ npx tsc --noEmit
+```
+
+[`rollup`](./gas-rollup.md)を使う構成では、実際のトランスパイル・バンドルは`@rollup/plugin-typescript`が担当するため、
+`tsc`単体でファイルを出力する必要はありません。
+`--noEmit`を付けると、ファイル出力をせずに型チェックだけを実行できます。
+`rollup`実行前のCIやコミット前のチェックとして使うと便利です。
+
 ## 型をつけたい
 
 ```ts
@@ -72,6 +83,27 @@ function 関数名(引数名: 型名): 戻り値の型名 {...}
 トランスパイルしたあとのJavaScriptには型の情報は残りません。
 
 :::
+
+## スクリプト設定したい（`package.json`）
+
+```json
+{
+    "name": "...",
+    "scripts": {
+        "build": "tsc --noEmit",
+        "bundle": "rollup -c",
+        "bundle:watch": "rollup -c --watch",
+        "push": "clasp push",
+        "pull": "clasp pull",
+        "deploy": "npm run build && npm run bundle && npm run push",
+        "...": "..."
+    }
+}
+```
+
+`build`で型チェックのみ、`bundle`で実際のトランスパイル・バンドルを行います。
+紛らわしいですが、GASの世界では「ビルド＝型チェック」「バンドル＝1ファイルへのまとめ」と役割を分けるのが定番のようです。
+`deploy`では、型チェック→バンドル→GASへのアップロードの順に実行しています。
 
 ## 設定したい（`tsconfig.json`）
 
@@ -128,42 +160,10 @@ Node.jsを使う場合は`"CommonJS"`を指定します。GASでは非対応で�
 慣習的に`outDir`には`dist`がよく使われますが、
 本ページでは`clasp`の`.clasp.json`を置くディレクトリと合わせる意図で、あえて`gas`という名前にしています。
 
-`rollup`でバンドルする構成では`tsc`自体はファイルを出力しない（後述の`tsc --noEmit`）ので、
+`rollup`でバンドルする構成では`tsc`自体はファイルを出力しない（前述の`tsc --noEmit`）ので、
 `outDir`はほとんど意味を持ちません。
 
 :::
 
 `skipLibCheck`は、`node_modules`にある型定義ファイル（`.d.ts`）の型チェックを省略するオプションです。
 `@types/google-apps-script`など、サードパーティの型定義に問題があっても自分のコードのチェックを止めないために有効にしておくと安心です。
-
-## 型チェックだけしたい（`tsc --noEmit`）
-
-```console
-$ npx tsc --noEmit
-```
-
-[`rollup`](./gas-rollup.md)を使う構成では、実際のトランスパイル・バンドルは`@rollup/plugin-typescript`が担当するため、
-`tsc`単体でファイルを出力する必要はありません。
-`--noEmit`を付けると、ファイル出力をせずに型チェックだけを実行できます。
-`rollup`実行前のCIやコミット前のチェックとして使うと便利です。
-
-## スクリプト設定したい（`package.json`）
-
-```json
-{
-    "name": "...",
-    "scripts": {
-        "build": "tsc --noEmit",
-        "bundle": "rollup -c",
-        "bundle:watch": "rollup -c --watch",
-        "push": "clasp push",
-        "pull": "clasp pull",
-        "deploy": "npm run build && npm run bundle && npm run push",
-        "...": "..."
-    }
-}
-```
-
-`build`で型チェックのみ、`bundle`で実際のトランスパイル・バンドルを行います。
-紛らわしいですが、GASの世界では「ビルド＝型チェック」「バンドル＝1ファイルへのまとめ」と役割を分けるのが定番のようです。
-`deploy`では、型チェック→バンドル→GASへのアップロードの順に実行しています。
