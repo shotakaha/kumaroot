@@ -200,6 +200,22 @@ $ clasp push -f    # --force: マニフェスト（appsscript.json）を強制�
 `pull`と`push`を使って、ローカルとリモートのプロジェクトをやりとりします。
 `clasp pull -d, --deleteUnusedFiles`は、リモートに存在しないファイルをローカルからも削除するので注意して使ってください。
 
+:::{note}
+
+`clasp` 3系では、TypeScriptからJavaScriptへの自動変換（トランスパイル）が廃止されました。
+そのため`clasp push`する前に、自分でJavaScriptへの変換を済ませておく必要があります。
+
+:::
+
+:::{hint}
+
+TypeScriptを使う場合は、[`tsc --noEmit`](./gas-typescript.md)で型チェックだけ行い、
+実際のトランスパイル・バンドルは[`rollup`](./gas-rollup.md)（`@rollup/plugin-typescript`）に任せる構成がオススメです。
+`tsc`単体でファイルを出力すると、`rollup`の出力と重複・競合する原因になります。
+`npm run build && clasp push`のように、ビルドしてから`push`する流れにしておくとよいです。
+
+:::
+
 ## バージョン管理したい（`clasp create-version` / `clasp list-versions`）
 
 ```console
