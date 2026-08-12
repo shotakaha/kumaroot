@@ -43,6 +43,66 @@ $ npm install -g @google/clasp
 
 :::
 
+## スクリプト設定したい（`package.json`）
+
+```json
+{
+    "name": "...",
+    "scripts": {
+        "build": "tsc --noEmit",
+        "bundle": "rollup -c",
+        "bundle:watch": "rollup -c --watch",
+        "push": "clasp push",
+        "pull": "clasp pull",
+        "deploy": "npm run build && npm run bundle && npm run push",
+        "...": "..."
+    }
+}
+```
+
+`build`（型チェック）→`bundle`（バンドル）→`push`（アップロード）という順番で、
+`tsc` → `rollup` → `clasp`のワークフローをそのまま`npm scripts`に落とし込んでいます。
+`deploy`を実行すれば、この3段階を一度にまとめて実行できます。
+
+```console
+$ npm run push
+$ npm run pull
+$ npm run deploy
+```
+
+## プロジェクト設定したい（`.clasp.json`）
+
+```json
+{
+    "scriptId": "スクリプトID",
+    "rootDir": "gas"
+}
+```
+
+`.clasp.json`は、ローカルのディレクトリとGAS上のプロジェクトを結びつける設定ファイルです。
+後述の`clasp create-script`や`clasp clone-script`を実行すると自動生成され、
+以降の`clasp push`・`clasp pull`・`clasp open-script`などはこのファイルを見て動作します。
+
+`scriptId`には対象のGASプロジェクトのスクリプトIDが、
+`rootDir`には`clasp push`の対象にするディレクトリが記録されます。
+基本的に1つのプロジェクトに1つの`.clasp.json`が対応します。
+
+:::{caution}
+
+`.clasp.json`にはスクリプトIDが含まれますが、認証情報そのものではありません。
+とはいえ、プロジェクトごとに固有の情報なのでGitには含めず、
+`.gitignore`で管理するのが無難です。
+
+:::
+
+:::{hint}
+
+`rootDir`には、`rollup`でバンドルしたあとのファイルを置くディレクトリを指定します。
+`gas`や`dist`など、好きな名前のディレクトリにバンドル済みファイルと`.clasp.json`をまとめる構成にできます。
+このディレクトリ構成については、後述の「Git管理したい」で詳しく説明します。
+
+:::
+
 ## ログインしたい（`clasp login`）
 
 ```console
@@ -102,33 +162,6 @@ TypeScriptを使う場合は、[`tsc --noEmit`](./gas-typescript.md)で型チェ
 
 :::
 
-## スクリプト設定したい（`package.json`）
-
-```json
-{
-    "name": "...",
-    "scripts": {
-        "build": "tsc --noEmit",
-        "bundle": "rollup -c",
-        "bundle:watch": "rollup -c --watch",
-        "push": "clasp push",
-        "pull": "clasp pull",
-        "deploy": "npm run build && npm run bundle && npm run push",
-        "...": "..."
-    }
-}
-```
-
-`build`（型チェック）→`bundle`（バンドル）→`push`（アップロード）という順番で、
-`tsc` → `rollup` → `clasp`のワークフローをそのまま`npm scripts`に落とし込んでいます。
-`deploy`を実行すれば、この3段階を一度にまとめて実行できます。
-
-```console
-$ npm run push
-$ npm run pull
-$ npm run deploy
-```
-
 ## 新規プロジェクトしたい（`clasp create-script`）
 
 ```console
@@ -150,14 +183,7 @@ GASには、Google Sheetなどのアプリに紐づいた状態のものと、�
 
 `--rootDir`でGASにアップロードするファイルのパスを設定できます。
 デフォルトは、`.`です。
-
-`--rootDir`には、`rollup`でバンドルしたあとのファイルを置くディレクトリを指定します。
-`gas`や`dist`など、好きな名前のディレクトリにバンドル済みファイルと`.clasp.json`をまとめる構成にできます。
-このディレクトリ構成については、後述の「Git管理したい」で詳しく説明します。
-
-`.clasp.json`にスクリプトID（プロジェクトID）と、
-`rootDir`の情報が保存されます。
-基本的に1つのプロジェクトに1つの`.clasp.json`が対応します。
+実行すると、前述の`.clasp.json`がこのディレクトリに生成されます。
 
 ```console
 $ clasp create-script --title PROJECT_NAME --rootDir .
