@@ -116,9 +116,32 @@ sheet.insertChart(histogramChart);
 `asHistogramChart`でヒストグラムを作成できます。
 データの分布（度数分布）を確認したいときによく使います。
 
+## バブル図にしたい（`Charts.ChartType.BUBBLE`）
+
+```js
+// 1列目: ID（ラベル）, 2列目: X, 3列目: Y, 4列目: サイズ（省略可）
+const range = sheet.getRange("A1:D10");
+
+const bubbleChart = sheet.newChart()
+    .setChartType(Charts.ChartType.BUBBLE)
+    .addRange(range)
+    .setNumHeaders(1)
+    .setOption("title", "バブル図")
+    .build();
+sheet.insertChart(bubbleChart);
+```
+
+`EmbeddedChartBuilder`（`sheet.newChart()`）に`asBubbleChart`のような専用メソッドはありませんが、
+`setChartType`に`Charts.ChartType.BUBBLE`を渡すことでバブル図を作成できます。
+
+データの列構成は、1列目からID（ラベル）・X値・Y値の順で、
+4列目に大きさ（バブルのサイズ）、5列目に系列や色を指定できます。
+X値・Y値の2列は必須で、それ以外は省略可能です。
+
 ## リファレンス
 
 - [Class EmbeddedChart](https://developers.google.com/apps-script/reference/spreadsheet/embedded-chart)
 - [Class EmbeddedChartBuilder](https://developers.google.com/apps-script/reference/spreadsheet/embedded-chart-builder)
+- [グラフのオプション: Bubble Chart](https://developers.google.com/chart/interactive/docs/gallery/bubblechart)
 - [Enum ChartType](https://developers.google.com/apps-script/reference/charts/chart-type.html)
 - [グラフのオプション](https://developers.google.com/apps-script/chart-configuration-options)
