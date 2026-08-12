@@ -348,6 +348,38 @@ $ clasp run-function 関数名    # エイリアス: clasp run
 
 :::
 
+## コマンド名の新旧対応表
+
+`clasp` 2系から3系でコマンド名が大きく変わりました。
+2系の書き方が残っている記事も多いので、対応表としてまとめておきます。
+
+| 2系 | 3系（正式名） | 3系（エイリアス） |
+| --- | --- | --- |
+| `clasp create` | `clasp create-script` | `clasp create` |
+| `clasp clone` | `clasp clone-script` | `clasp clone` |
+| `clasp open` | `clasp open-script` | - |
+| `clasp deploy` | `clasp create-deployment` | `clasp deploy` |
+| `clasp deployments` | `clasp list-deployments` | `clasp deployments` |
+| `clasp undeploy` | `clasp delete-deployment` | `clasp undeploy` |
+| （なし） | `clasp update-deployment` | `clasp redeploy` |
+| `clasp version` | `clasp create-version` | `clasp version` |
+| `clasp versions` | `clasp list-versions` | `clasp versions` |
+| `clasp status` | `clasp show-file-status` | `clasp status` |
+| `clasp logs` | `clasp tail-logs` | `clasp logs` |
+| `clasp run` | `clasp run-function` | `clasp run` |
+| `clasp login` | `clasp login` | - |
+| `clasp logout` | `clasp logout` | - |
+| `clasp push` | `clasp push` | - |
+| `clasp pull` | `clasp pull` | - |
+
+:::{note}
+
+`clasp delete`（プロジェクト削除）は3系で`clasp delete-script`に対応しています。
+また`clasp apis`（有効化されているAPI一覧）や`clasp mcp`（MCPサーバー起動）など、
+2系になかった新しいコマンドも追加されています。
+
+:::
+
 ## リファレンス
 
 - [google/clasp - GitHub](https://github.com/google/clasp)
