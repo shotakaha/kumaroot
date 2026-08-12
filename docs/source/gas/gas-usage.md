@@ -48,10 +48,9 @@ js-biome
 gas-typedoc
 ```
 
-## GAS操作したい
+## JS/TSしたい
 
-`Logger`や`SpreadsheetApp`など、GASでよく使うクラス・APIの使い方をまとめています。
-基本的なJS/TSの文法（変数・関数・クラスなど）もここに含みます。
+変数・関数・クラスなど、GASに限らないJavaScript/TypeScriptの基本文法をまとめています。
 
 ```{toctree}
 ---
@@ -63,9 +62,21 @@ gas-globalthis
 gas-function
 gas-class
 gas-namespace
-gas-logger
+gas-exports
+gas-version
 gas-date
 gas-filter
+```
+
+## GAS操作したい
+
+`Logger`や`SpreadsheetApp`など、GAS固有のクラス・サービスAPIの使い方をまとめています。
+
+```{toctree}
+---
+maxdepth: 1
+---
+gas-logger
 gas-id
 gas-drive
 gas-spreadsheet
@@ -79,8 +90,6 @@ gas-doget
 gas-trigger
 gas-properties
 gas-quota
-gas-version
-gas-exports
 gas-iterator
 ```
 
