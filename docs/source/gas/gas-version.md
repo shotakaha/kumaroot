@@ -29,22 +29,22 @@ JavaScriptは、ECMAScriptの実装例のひとつです。
 
 :::
 
+## V8エンジンしたい
+
 V8エンジンはGoogleが中心となって開発しているJavaScript／WebAssemblyのランタイム環境です。
 ECMAScriptの最新版に追随する形で、随時機能追加されているようです。
+
+## Node.jsしたい
+
+Node.jsはV8を搭載したサーバー向けランタイムです。
+GAS環境と比べて、こちらがよく使われます。
+他にも、DenoやBunなど、Node.jsと同様にサーバー向けに使えるECMASCriptランタイムがあります。
 
 :::{note}
 
 [GASのV8ランタイム](./gas-typescript.md)は、この表でいうとES2020相当までの機能をサポートしています。
 `Set`の集合演算（[`union`など](./gas-set.md)）のような、ES2023以降で追加された新しい機能は、
 GAS環境で実際に使えるかどうか事前に確認したほうがよいです。
-
-:::
-
-:::{note}
-
-Node.jsはV8を搭載したサーバー向けランタイムです。
-GAS環境と比べて、こちらがよく使われます。
-他にも、DenoやBunなど、Node.jsと同様にサーバー向けに使えるECMASCriptランタイムがあります。
 
 :::
 
