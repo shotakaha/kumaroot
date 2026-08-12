@@ -58,25 +58,27 @@ if (map.has("key3")) {
 `has`メソッドで、キーが存在するか確認できます。
 
 ```js
-map.size();  // -> 3
+map.size;  // -> 3
 ```
 
-`size`メソッドで、Mapオブジェクトの要素数を取得できます。
+`size`はプロパティ（メソッドではない）で、Mapオブジェクトの要素数を取得できます。
 
 ## 値を確認したい
 
 ```js
-console.log(map);  // -> {}
-// Arrayに変換すると確認しやすい
+console.log(map);
+// -> Map(3) { 'key1' => 'a1', 'key2' => 'b1', 'key3' => 'c1' }
+
 Array.from(map);  // -> [[キー, 値]]
 Array.from(map.entries()); // -> [[キー, 値]]
 Array.from(map.keys());  // -> [キー]
 Array.from(map.values());  // -> [値]
 ```
 
+`console.log`でそのまま出力すると`Map(要素数) { ... }`の形式で確認できます。
 `.keys`、`.values`、`.entries`で`Map`オブジェクトのプロパティを取得できます。
-ただし、そのまま出力しても`{}`と表示されるだけです。
-`Array.from`で配列に変換すると確認しやすいです。
+ただし、そのまま出力しても`Map(...) {}`という表示になるだけなので、
+配列として中身を確認したい場合は`Array.from`で変換すると見やすいです。
 
 ## キー名を変更したい
 
@@ -95,10 +97,13 @@ if (map.has("oldKey")) {
 ```js
 const sorted = [...sourceMap.entries()].sort((a, b) => {
     // キーを文字列として比較
-    return a[0].localCompare(b[0]);
-    })
+    return a[0].localeCompare(b[0]);
+});
 const sortedMap = new Map(sorted);
 ```
+
+`entries()`をスプレッド演算子で配列に変換し、`sort`で並び替えてから、
+`new Map()`に渡すとキーの順番をソートし直せます。
 
 ## ループしたい
 
@@ -109,12 +114,26 @@ for (const [key, value] of map) {
 }
 ```
 
+`Map`はそれ自体が反復可能（iterable）なので、`Object`と違い`for...of`にそのまま渡せます。
+
 ## グループ化したい（`Map.groupBy`）
 
 ```js
-Map.groupBy(反復可能なオブジェクト, 条件を定義した関数)
-// -> それぞれのグループのキーを持つMapオブジェクト
+const people = [
+    { name: "Alice", age: 20 },
+    { name: "Bob", age: 30 },
+    { name: "Carol", age: 20 },
+];
+
+const grouped = Map.groupBy(people, (person) => person.age);
+// -> Map(2) {
+//      20 => [{ name: "Alice", age: 20 }, { name: "Carol", age: 20 }],
+//      30 => [{ name: "Bob", age: 30 }]
+//    }
 ```
+
+`Map.groupBy(反復可能なオブジェクト, 条件を定義した関数)`で、
+関数の戻り値ごとにグループ化されたMapオブジェクトを作れます。
 
 ## 配列にしたい
 
@@ -129,12 +148,13 @@ const values = Array.from(map.values());
 ## オブジェクトにしたい
 
 ```js
-const object = Object.from(map.entries());
+const object = Object.fromEntries(map);
 console.log(JSON.stringify(object));
 ```
 
-`Object.from`でオブジェクトに変換できます。
-JSON形式にする場合、Map型からObject型への変換が必要です。
+`Object.fromEntries`でオブジェクトに変換できます。
+`Map`自体が反復可能なので`.entries()`は省略できますが、
+明示的に書きたい場合は`Object.fromEntries(map.entries())`としても同じ結果になります。
 
 ## 特定のキーを取得したい
 
@@ -143,11 +163,11 @@ JSON形式にする場合、Map型からObject型への変換が必要です。
 const filterKeys = new Set(["key1", "key2"]);
 
 // 中間処理
-const filtered = Array.from(sourceMap.entries()).filter(([key, value])) => filterKeys.has(key);
-// -> [ [key1, value1], [key3, value3] ]
+const filtered = Array.from(map.entries()).filter(([key]) => filterKeys.has(key));
+// -> [["key1", "a1"], ["key2", "b1"]]
 
 const filteredMap = new Map(filtered);
-// -> Map { "key1": value1, "key3": value3 }
+// -> Map(2) { "key1" => "a1", "key2" => "b1" }
 ```
 
 `Map.entries`で配列に変換し、`filter`メソッドを使うことで、
