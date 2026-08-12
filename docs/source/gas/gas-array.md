@@ -75,6 +75,69 @@ const maps: Map<string, Cell>[] = rows.map(row =>
 
 データ（`rows`）をそのまま2次元配列（`Cell[][]`）として扱ってもよいですが、ヘッダー名をキーとしたオブジェクトやMap型に変換すると便利です。
 
+### 列インデックスでアクセスしたい
+
+```ts
+// age列（インデックス1）だけを取り出す
+const ageColumn: Cell[] = rows.map(row => row[1]);
+```
+
+`row[列インデックス]`で特定の列だけを取り出せます。
+ただし列の並び順が変わるとインデックスもズレるため、
+次の「カラム名でアクセスしたい」のほうが安全です。
+
+### カラム名でアクセスしたい
+
+```ts
+function getColumn(rows: Cell[][], header: string[], columnName: string): Cell[] {
+  const index = header.indexOf(columnName);
+  if (index === -1) {
+    throw new Error(`列が見つかりません: ${columnName}`);
+  }
+  return rows.map(row => row[index]);
+}
+
+const ageColumn = getColumn(rows, header, "age");
+```
+
+`header.indexOf(カラム名)`で列インデックスを求めてからアクセスすると、
+列の並び順が変わってもコードを修正せずに済みます。
+存在しないカラム名を指定したときにすぐ気づけるよう、`-1`（見つからない）はエラーにしています。
+
+### 特定のカラムのデータ型をチェックしたい
+
+```ts
+function isNumberColumn(rows: Cell[][], header: string[], columnName: string): boolean {
+  return getColumn(rows, header, columnName).every(value => typeof value === "number");
+}
+
+const ok = isNumberColumn(rows, header, "age");
+```
+
+`typeof`と`Array.every`を組み合わせて、列内のすべての値が期待する型かチェックできます。
+`getValues()`が返す`Cell[][]`は型が混在しうるため、
+集計処理の前にこうしたチェックを挟んでおくと、
+数値のつもりが文字列だった、といった事故を早期に検出できます。
+
+### 特定のカラムのデータ内容でフィルタリングしたい
+
+```ts
+const ageIndex = header.indexOf("age");
+const adults = rows.filter(
+  row => typeof row[ageIndex] === "number" && (row[ageIndex] as number) >= 30
+);
+```
+
+`Array.filter`で、特定カラムの値が条件を満たす行だけを抽出できます。
+`Cell`型は`number`以外の型も含むため、
+比較演算子を使う前に`typeof`で数値であることを確認しておくと安全です。
+
+:::{hint}
+
+シートへの書き込み（`setValues`）は、
+[セル操作したい（`Range`）](./gas-spreadsheet-range.md)で扱います。
+
+:::
 
 ## 値を追加したい（`Array.push`）
 
