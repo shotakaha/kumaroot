@@ -100,44 +100,6 @@ ScriptApp.newTrigger("関数名")
 `ClockTriggerBuilder`の`onWeekDay`で、トリガーを発行する曜日を指定できます。
 `atHour`や`everyDays`のかわりに使うことで「毎週日曜日」のような設定ができます。
 
-## トリガーを一括設定したい（TypeScriptの場合）
-
-```ts
-// （前提）トリガーごとにモジュール化
-import { onFormSubmit } from "./onFormSubmit";
-import { onEdit } from "./onEdit";
-
-function setupTriggers(): void {
-  // 設定されているトリガーをすべて削除する
-  ScriptApp.getProjectTriggers().forEach((t) => ScriptApp.deleteTrigger(t));
-
-  // onFormSubmit: フォーム送信時にトリガー
-  ScriptApp.newTrigger("onFormSubmit")
-    .forSpreadsheet("シートID")
-    .onFormSubmit()
-    .create();
-
-  // onEdit: シート編集時にトリガー
-  ScriptApp.newTrigger("onEdit")
-    .forSpreadsheet("シートID")
-    .onEdit()
-    .create();
-}
-```
-
-GASトリガーは、プロジェクトの初回実行時に設定する場合がほとんどです。
-トリガーごとにモジュール化し、
-エントリーポイント（`src/index.ts`）に
-`setupTriggers`関数を作成して、
-一括設定できるようにしておくと便利です。
-
-:::{note}
-
-トリガーを追加するときの重複確認機能がないため、
-安全のため`setupTriggers`の実行時にすべて削除しています。
-
-:::
-
 ## リファレンス
 
 - [Class ScriptApp](https://developers.google.com/apps-script/reference/script/script-app)
