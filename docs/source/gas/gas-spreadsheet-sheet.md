@@ -1,4 +1,4 @@
-# シート操作したい（`Sheet`）
+# シートを操作したい（`Sheet`）
 
 ```js
 const book = SpreadsheetApp.getActiveSpreadsheet();
@@ -78,7 +78,7 @@ function appendRows(
   }
 
   sheet
-    .getRange(sheet.getLastRow() + 1, 1, rows.length, width.length)
+    .getRange(sheet.getLastRow() + 1, 1, rows.length, width)
     .setValues(rows);
 }
 
@@ -93,7 +93,7 @@ appendRows(sheet, rows);
 大量のデータを追加する場合は、
 2次元配列を作成し`setValues`で書き出すほうがよいです。
 
-## カラム番号を取得したい
+## カラム番号を取得したい（`getHeaders` / `getColumnIndex`）
 
 ```ts
 function getHeaders(
@@ -119,7 +119,7 @@ function getColumnIndex(
   name: string
 ): number {
   const index = headers.get(name.trim());
-  if (!index) {
+  if (index === undefined) {
     throw new Error(`Column "${name}" not found`);
   }
   return index;
@@ -136,7 +136,7 @@ const nameColIndex = getColumnIndex(headers, "名前");
 カラム名で操作できるようになるので、
 シートのカラム構成の変更にも強くなります。
 
-## データの重複を探したい（`findDuplicateRows`）
+## データの重複を探したい（`findDuplicateRow`）
 
 ```ts
 type Cell = string | number | boolean | Date | null;
@@ -155,7 +155,7 @@ function findDuplicateRow(
   excludeRowIndex?: number
 ): number {
   if (colIndices.length != values.length) {
-    throw new Error("Length doesn't match: colIndices and values")
+    throw new Error("Length doesn't match: colIndices and values");
   }
 
   const lastRow = sheet.getLastRow();
@@ -167,17 +167,18 @@ function findDuplicateRow(
     .getRange(2, 1, lastRow - 1, maxCol)
     .getValues() as Cell[][];
 
-  for (let i = 0; i < row.length; i++) {
+  for (let i = 0; i < rows.length; i++) {
     const rowIndex = i + 2;
     if (rowIndex === excludeRowIndex) continue;
 
     const row = rows[i];
 
-    const isMatch = colIndices.every((col, j) => toKey(row[col - 1] === toKey(values[j]))
+    const isMatch = colIndices.every(
+      (col, j) => toKey(row[col - 1]) === toKey(values[j])
     );
     if (isMatch) return rowIndex;
   }
-  return -1
+  return -1;
 }
 ```
 
@@ -200,7 +201,7 @@ range.clearContent();
 
 `clearContent`で指定したセル範囲のデータを削除できます。
 
-## シート名を変更したい（``setName``）
+## シート名を変更したい（`setName`）
 
 ```js
 sheet.setName("変更後のシート名");
@@ -209,18 +210,18 @@ sheet.setName("変更後のシート名");
 `setName`でシート名を変更できます。
 同じ名前のシートは作れません。
 
-## シートを保護したい（``protect``）
+## シートを保護したい（`protect`）
 
 ```js
 // シート全体を保護
-const protection = sheet.protect()
+const protection = sheet.protect();
 
 // セル範囲を保護
 const range = sheet.getRange("A2:D6");
-const protection = range.protect()
+const protection = range.protect();
 
 // 保護の理由を追加
-protection.setDescription("説明")
+protection.setDescription("説明");
 ```
 
 `protect`でシートや選択したセルを保護できます。
