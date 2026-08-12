@@ -102,6 +102,14 @@ const values = range.getValues();
 
 `getValues`メソッドで、選択した範囲の値を2次元配列として取得できます。
 
+```js
+const values = sheet.getDataRange().getValues();
+const headers = values[0];
+const rows = values.slice(1);
+```
+
+1行目を見出しとして扱っている場合は、上のように`headers`と`rows`に分けて取得すると扱いやすいです。
+
 ## 値を書き込みたい（`setValues`）
 
 ```js
