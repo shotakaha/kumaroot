@@ -1,10 +1,10 @@
-# トリガーしたい（`ScriptApp.newTrigger`）
+# トリガーを作成したい（`ScriptApp.newTrigger`）
 
 ```js
 const triggerBuilder = ScriptApp.newTrigger("関数名")
     .timeBased()     // トリガーの種類
     .atHour(9)       // 午前9時
-    .everyDays(1)    // 毎日
+    .everyDays(1);   // 毎日
 triggerBuilder.create();
 ```
 
@@ -17,8 +17,8 @@ triggerBuilder.create();
 function getProjectTriggers() {
     const triggers = ScriptApp.getProjectTriggers();
     const n = triggers.length;
-    Logger.log(`Found {$n} triggers`);
-    if (n === 0) return []
+    Logger.log(`Found ${n} triggers`);
+    if (n === 0) return [];
 
     const triggerList = triggers.map(trigger => ({
         functionName: trigger.getHandlerFunction(),
@@ -26,7 +26,8 @@ function getProjectTriggers() {
         triggerSource: trigger.getTriggerSource(),
         triggerSourceId: trigger.getTriggerSourceId(),  // ソースの固有ID。クロックイベントはnull
         uniqueId: trigger.getUniqueId(),
-    }))
+    }));
+    return triggerList;
 }
 
 function logProjectTriggers(triggerList) {
@@ -41,8 +42,8 @@ function logProjectTriggers(triggerList) {
         Logger.log(`ソース: ${trigger.triggerSource}`);
         Logger.log(`ソースID: ${trigger.triggerSourceId}`);
         Logger.log(`ユニークID: ${trigger.uniqueId}`);
-        logger.log("-----");
-    })
+        Logger.log("-----");
+    });
 }
 
 function showProjectTriggers() {
@@ -107,14 +108,14 @@ function deleteTriggerByFnName(fnName) {
             ScriptApp.deleteTrigger(trigger);
             Logger.log(`トリガーを削除しました: ${fnName}`);
         }
-    })
+    });
 }
 ```
 
 `deleteTrigger`で指定したトリガーを削除できます。
 関数名で削除できるようにしておくと便利です。
 
-## 時間主導型したい（`ClockTriggerBuilder`）
+## 時間主導型トリガーを作成したい（`ClockTriggerBuilder`）
 
 ```js
 ScriptApp.newTrigger("関数名")
@@ -129,10 +130,9 @@ ScriptApp.newTrigger("関数名")
 ## トリガーを一括設定したい
 
 ```ts
-
 // （前提）トリガーごとにモジュール化
 import { onFormSubmit } from "./onFormSubmit";
-import { onEdit } from "./onEdit"
+import { onEdit } from "./onEdit";
 
 function setupTriggers(): void {
   // 設定されているトリガーをすべて削除する
