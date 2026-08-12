@@ -40,46 +40,51 @@ function showProjectTriggers() {
 ## トリガーを追加したい
 
 ```js
-function addTrigger(fnName) {
-    // 同じ関数・同じ種類の既存トリガーを削除する
+function addTrigger(fnName, configure) {
+    // 同じ関数に対する既存トリガーを削除する
     ScriptApp.getProjectTriggers()
-        .filter(trigger =>
-            trigger.getHandlerFunction() === fnName &&
-            trigger.getTriggerSource() === ScriptApp.TriggerSource.CLOCK
-        )
+        .filter(trigger => trigger.getHandlerFunction() === fnName)
         .forEach(trigger => ScriptApp.deleteTrigger(trigger));
 
     // 新しいトリガーを追加する
-    ScriptApp.newTrigger(fnName)
-        .timeBased()
-        .atHour(9)
-        .everyDays(1)
-        .create();
-    Logger.log("トリガーを追加しました");
+    // configureで、ビルダーの設定（timeBased/onEdit/onFormSubmitなど）を行う
+    configure(ScriptApp.newTrigger(fnName)).create();
+    Logger.log(`トリガーを追加しました: ${fnName}`);
 }
 ```
 
-トリガーを追加するサンプルです。
+トリガーを追加する関数です。
+`configure`に、`TriggerBuilder`を受け取って設定する関数を渡すことで、
+「毎日午前9時」に限らず、任意の種類・任意の設定のトリガーを追加できます。
+
+```js
+// 毎日午前9時に実行する時間主導型トリガー
+addTrigger("onDaily", builder => builder.timeBased().atHour(9).everyDays(1));
+
+// 毎週日曜日に実行する時間主導型トリガー
+addTrigger("onWeekly", builder => builder.timeBased().onWeekDay(ScriptApp.WeekDay.SUNDAY));
+
+// フォーム送信時に実行するトリガー
+addTrigger("onFormSubmit", builder => builder.forSpreadsheet("シートID").onFormSubmit());
+
+// シート編集時に実行するトリガー
+addTrigger("onEdit", builder => builder.forSpreadsheet("シートID").onEdit());
+```
+
 同じ関数に対するトリガーがすでに存在する場合は、いったん削除してから追加し直しています。
 こうしておくと、`addTrigger`を何度実行してもトリガーが重複登録される心配がありません。
-
-:::{note}
-
-このサンプルは、ひとつの関数に対してひとつの時間帯だけ登録するようにしてあります。
-ひとつの関数を異なる複数の時間帯に登録したい場合は、改良が必要です。
-
-:::
 
 ## 複数のトリガーをまとめて追加したい
 
 ```js
 function setupTriggers() {
-    ["onFormSubmit", "onEdit", "onDaily"].forEach(fnName => addTrigger(fnName));
+    addTrigger("onDaily", builder => builder.timeBased().atHour(9).everyDays(1));
+    addTrigger("onFormSubmit", builder => builder.forSpreadsheet("シートID").onFormSubmit());
+    addTrigger("onEdit", builder => builder.forSpreadsheet("シートID").onEdit());
 }
 ```
 
-`addTrigger`は1つの関数につき1つのトリガーを登録する関数なので、
-登録したい関数名を配列にして`forEach`で呼び出すだけで、複数のトリガーをまとめて追加できます。
+登録したいトリガーの分だけ`addTrigger`を呼び出すだけで、複数のトリガーをまとめて追加できます。
 プロジェクトの初回実行時に、この`setupTriggers`をエントリーポイントとして呼び出しておくと便利です。
 
 ## トリガーを削除したい（`deleteTrigger`）
