@@ -62,6 +62,45 @@ $ npm install --save-dev typedoc
 GAS開発でよく使う`typescript`、`rollup`、`clasp`などのツールは、ローカルにインストールすればOKです。
 :::
 
+## パッケージ設定したい（`package.json`）
+
+```json
+{
+    "name": "my-gas-project",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "devDependencies": {
+        "typescript": "^5.4.0",
+        "@types/google-apps-script": "^1.0.0"
+    }
+}
+```
+
+`package.json`は、プロジェクトの設定と依存パッケージをまとめて管理するファイルです。
+`npm install`（`npx create...`系のコマンドを含む）を実行すると自動生成され、
+以降の`npm install パッケージ名`はこのファイルを更新します。
+
+`name`と`version`はプロジェクトの名前とバージョンです。
+GASスクリプトをnpmパッケージとして公開する予定がなければ、あまり気にしなくてよい項目です。
+
+`private: true`は、誤って`npm publish`で公開してしまわないようにするための安全装置です。
+GAS用のプロジェクトは公開する必要がないので、基本的に`true`にしておきます。
+
+`type: "module"`は、`.js`ファイルをESModule（`import`/`export`）として扱う指定です。
+`rollup.config.js`のように、設定ファイル自体がESModule形式で書かれている場合に必要になります。
+
+`devDependencies`には、`npm install --save-dev`でインストールしたパッケージとバージョンが記録されます。
+`npm install`だけを実行すると、この一覧をもとに`node_modules`が再現されます。
+
+:::{hint}
+
+`package.json`は手で編集してもよいですが、
+`npm install`・`npm uninstall`のようなコマンド経由で更新していくほうが、
+書き間違いも減り安全です。
+
+:::
+
 ## スクリプト設定したい（`package.json`）
 
 ```json
