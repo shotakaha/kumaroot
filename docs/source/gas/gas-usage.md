@@ -44,6 +44,7 @@ gas-typescript
 gas-rollup
 gas-clasp
 gas-jest
+gas-vitest
 gas-biome
 gas-typedoc
 ```
