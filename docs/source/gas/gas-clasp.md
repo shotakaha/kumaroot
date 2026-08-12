@@ -32,7 +32,8 @@ $ npm install -g @google/clasp
 
 3系ではコマンドに`〇〇-script`や`〇〇-deployment`のような正式名と、
 `clasp create`や`clasp deploy`のような短いエイリアスの両方が用意されています。
-本ページでは正式名（エイリアス）の形式で表記します。
+本ページでは正式コマンド名で表記します。
+エイリアスとの対応はページ末尾の「コマンド名の新旧対応表」を参照してください。
 
 :::
 
@@ -93,7 +94,7 @@ GASを操作するために、Googleアカウントへのログインが必要�
 $ clasp create-script --title PROJECT_NAME --type standalone --rootDir dist
 ```
 
-`clasp create-script（create）`でプロジェクトを新規作成できます。
+`clasp create-script`でプロジェクトを新規作成できます。
 `--title`でプロジェクトのタイトルを設定できます。
 このオプションは、新しいディレクトリを作成するものではなく、ブラウザの編集ページのタイトルです。
 
@@ -158,7 +159,7 @@ appsscript.json
 testDoGet.js     # ウェブ上で作成済みのスクリプト
 ```
 
-`clasp clone-script（clone）`でGAS上にある既存のプロジェクト（スクリプト）をローカルにクローンできます。
+`clasp clone-script`でGAS上にある既存のプロジェクト（スクリプト）をローカルにクローンできます。
 スクリプトIDはURLに含まれているランダムな文字列です。
 
 :::{note}
@@ -203,7 +204,7 @@ $ clasp push -f    # --force: マニフェスト（appsscript.json）を強制�
 
 ```console
 // バージョンを確認
-$ clasp list-versions    # エイリアス: clasp versions
+$ clasp list-versions
 ~ 4 Versions ~
 1 - v0.1.1
 2 - v0.1.2
@@ -211,7 +212,7 @@ $ clasp list-versions    # エイリアス: clasp versions
 4 - v0.1.4
 
 // アノテーションをつけてバージョン管理
-$ clasp create-version "v0.1.5"    # エイリアス: clasp version
+$ clasp create-version "v0.1.5"
 
 $ clasp list-versions
 ~ 5 Versions ~
@@ -222,23 +223,23 @@ $ clasp list-versions
 5 - v0.1.5
 ```
 
-`clasp create-version（version）"アノテーション"`でバージョン管理できます。
+`clasp create-version "アノテーション"`でバージョン管理できます。
 GAS内のバージョン番号は自動でインクリメントされます。
 あとで確認しやすいようにアノテーションにGitのタグ番号を含めておくとよさそうです。
 
-`clasp list-versions（versions）`で、これまでに作成したバージョンを確認できます。
+`clasp list-versions`で、これまでに作成したバージョンを確認できます。
 一度作成したバージョンは削除できません。
 
 ## デプロイ管理したい（`clasp create-deployment` / `clasp list-deployments`）
 
 ```console
 // デプロイIDを確認
-$ clasp list-deployments    # エイリアス: clasp deployments
+$ clasp list-deployments
 1 Deployments.
 - AKfycb...9Qm8gE @HEAD
 
 // 作成済みバージョン番号を指定してデプロイ
-$ clasp create-deployment --versionNumber 1 --description "v0.1.1"    # エイリアス: clasp deploy
+$ clasp create-deployment --versionNumber 1 --description "v0.1.1"
 
 // デプロイIDを確認
 $ clasp list-deployments
@@ -247,22 +248,22 @@ $ clasp list-deployments
 - AKfycb...LH8l3z @1 - v0.1.1
 
 // デプロイを削除
-$ clasp delete-deployment AKfycb...LH8l3z    # エイリアス: clasp undeploy
+$ clasp delete-deployment AKfycb...LH8l3z
 
 // 既存のデプロイを新しいバージョンに更新
-$ clasp update-deployment AKfycb...LH8l3z --versionNumber 2    # エイリアス: clasp redeploy
+$ clasp update-deployment AKfycb...LH8l3z --versionNumber 2
 ```
 
-`clasp create-deployment（deploy）`でデプロイするバージョンを管理できます。
+`clasp create-deployment`でデプロイするバージョンを管理できます。
 `-V, --versionNumber`には、`clasp create-version`で作成したバージョン番号を指定します。
 `-d, --description`でアノテーションを追加できます。
 
-`clasp list-deployments（deployments）`でデプロイIDを確認できます。
-またバージョン管理と異なり`clasp delete-deployment（undeploy）`でデプロイを削除できます。
+`clasp list-deployments`でデプロイIDを確認できます。
+またバージョン管理と異なり`clasp delete-deployment`でデプロイを削除できます。
 `-a, --all`を付けるとすべてのデプロイを一括削除できます。
 
 既存のデプロイをそのままに紐づくバージョンだけ差し替えたい場合は、
-`clasp update-deployment（redeploy）`が使えます。
+`clasp update-deployment`が使えます。
 
 :::{note}
 
@@ -275,34 +276,34 @@ $ clasp update-deployment AKfycb...LH8l3z --versionNumber 2    # エイリアス
 ## pushされるファイルを確認したい（`clasp show-file-status`）
 
 ```console
-$ clasp show-file-status    # エイリアス: clasp status
+$ clasp show-file-status
 └─ appsscript.json
 └─ dist/code.js
 ```
 
-`clasp show-file-status（status）`で、`clasp push`の対象になっているファイル一覧を確認できます。
+`clasp show-file-status`で、`clasp push`の対象になっているファイル一覧を確認できます。
 `.claspignore`で除外したファイルは表示されないので、意図しないファイルが混ざっていないか事前にチェックできます。
 
 ## ログを確認したい（`clasp tail-logs`）
 
 ```console
 // 直近のログを表示
-$ clasp tail-logs    # エイリアス: clasp logs
+$ clasp tail-logs
 
 // Cloud Loggingへの出力を有効化
 $ clasp setup-logs
 ```
 
-`clasp tail-logs（logs）`で、GAS実行時のログ（`Logger.log`や`console.log`の出力）を確認できます。
+`clasp tail-logs`で、GAS実行時のログ（`Logger.log`や`console.log`の出力）を確認できます。
 初回は`clasp setup-logs`でCloud Loggingとの連携設定が必要な場合があります。
 
 ## 関数を実行したい（`clasp run-function`）
 
 ```console
-$ clasp run-function 関数名    # エイリアス: clasp run
+$ clasp run-function 関数名
 ```
 
-`clasp run-function（run）`で、GASエディターを開かずにローカルから関数を実行できます。
+`clasp run-function`で、GASエディターを開かずにローカルから関数を実行できます。
 初回実行時は`--use-project-scopes`付きで`clasp login`をやり直し、プロジェクトに必要な権限を認可する必要がある場合があります。
 
 ## Git管理したい
