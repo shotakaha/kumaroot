@@ -201,6 +201,17 @@ range.clearContent();
 
 `clearContent`で指定したセル範囲のデータを削除できます。
 
+## シートを複製したい（`copyTo`）
+
+```js
+const source = SpreadsheetApp.openById("コピー元のID");
+const target = SpreadsheetApp.openById("コピー先のID");
+const sheet = source.getSheetByName("複製したいシート名");
+const copied = sheet.copyTo(target);
+```
+
+`copyTo`で指定したシートを複製できます。
+
 ## シート名を変更したい（`setName`）
 
 ```js

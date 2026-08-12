@@ -107,3 +107,13 @@ book.removeEditor("someone@example.com");
 
 `addEditor`でアクセス権を付与できます。
 `removeEditor`でアクセス権を削除できます。
+
+## スプレッドシート全体を複製したい（`copy`）
+
+```js
+const book = SpreadsheetApp.openById("コピー元のID");
+const copied = book.copy("コピー先のファイル名");
+```
+
+`copy`メソッドでスプレッドシート全体を複製できます。
+新しいブックが作成されるため、URLも新規発行されます。
