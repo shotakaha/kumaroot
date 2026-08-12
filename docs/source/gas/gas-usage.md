@@ -43,8 +43,8 @@ maxdepth: 1
 gas-typescript
 gas-rollup
 gas-clasp
-js-jest
-js-biome
+gas-jest
+gas-biome
 gas-typedoc
 ```
 
