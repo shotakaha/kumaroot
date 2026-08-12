@@ -11,8 +11,7 @@ Logger.log(`シート名: ${sheetName}`)
 ```
 
 `Logger`はGAS専用のログクラスです。
-出力結果は管理画面の「実行ログ」で確認できます。
-Cloud Loggingと連携しており、自動で記録されます。
+出力結果はスクリプトエディターの「実行ログ」で確認できます。
 
 ## ログしたい（`console`）
 
@@ -27,7 +26,8 @@ console.timeEnd();
 ```
 
 `console`はJS標準のログ機能です。
-GASでも利用でき、`Logger`クラスと同じようにCloud Logging連携にも対応しています。
+GASでも利用でき、スクリプトエディターの「実行ログ」に加えて、
+Cloud Loggingとの連携にも対応しています。
 
 `console.info`、
 `console.warn`、
@@ -38,6 +38,15 @@ GASでも利用でき、`Logger`クラスと同じようにCloud Logging連携�
 `console.time`、
 `console.timeEnd`
 もあります。
+
+:::{note}
+
+[GAS公式ドキュメント](https://developers.google.com/apps-script/guides/logging)では、
+複数ユーザーが使う本番環境ではCloud Loggingとの連携を前提に、
+`Logger`より`console`を使うことがオススメされています。
+個人的なスクリプトの動作確認には、手軽な`Logger.log`でも十分です。
+
+:::
 
 ## リファレンス
 
