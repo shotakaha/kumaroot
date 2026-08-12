@@ -206,6 +206,28 @@ When documenting multiple use cases of a single method, organize subsections by 
 
 Subsection titles should be purpose-driven using "〇〇したい" format (e.g., "1次元ヒストグラムを描画したい", "フィルター条件付きで描画したい"). This approach keeps documentation focused and prevents verbosity while maintaining clarity and completeness.
 
+#### CLI Tool Chains (tsc, rollup, clasp, etc.)
+
+This pattern applies to command-line tools that form a build/deploy chain (e.g. `docs/source/gas/gas-typescript.md`, `docs/source/gas/gas-rollup.md`), where readers need to go from "install" to "run the command that matters" quickly, then read reference/config details afterward.
+
+**Basic Structure**:
+
+1. **Title**: `<Purpose>したい（`command`）` (e.g., "トランスパイルしたい（`tsc`）", "バンドルしたい（`rollup`）")
+2. **Quick example**: A minimal `console` block showing the bare command (no output needed) right under the title, before any explanation
+3. **インストールしたい（`package-name`）**: `npm install --save-dev ...` and what the package(s) do
+4. **The command readers actually run day-to-day**: e.g. "型チェックだけしたい（`tsc --noEmit`）" — put this right after install, ahead of deeper reference material
+5. **Supporting concepts**: e.g. "型をつけたい" (language feature primer), only as deep as needed to use the tool
+6. **スクリプト設定したい（`package.json`）**: `npm scripts` wiring, showing how this tool composes with the others in the chain (`build`/`bundle`/`push`/`deploy`)
+7. **設定したい（`config-file`）**: the detailed config file (`tsconfig.json`, `rollup.config.js`), documented option-by-option, last
+
+**Key Principles:**
+
+- Order sections by how a reader would actually use the tool, not by document completeness — install and the command they'll run most often come before the detailed config file walkthrough
+- Keep multi-tool workflows (TypeScript → rollup → clasp) consistent across pages: same npm script names (`build` = typecheck, `bundle` = rollup, `push`/`pull`/`deploy` = clasp), same directory layout (e.g. a single output directory holding both the bundle and `.clasp.json`)
+- Cross-link sibling pages in the chain with plain Markdown links (`[`rollup`](./gas-rollup.md)`) rather than in-page anchors — anchors on Japanese headings don't resolve reliably with this Sphinx/MyST setup
+- Verify config file examples actually run (watch for missing commas, wrong plugin import names, etc.) rather than trusting hand-written samples
+- Base config examples on a real working project when one is available, not just official docs, since defaults and plugin option quirks (e.g. `@rollup/plugin-typescript`'s `outDir`/`declaration` options) are easy to get subtly wrong from memory
+
 ### Code Examples
 
 - Lead with practical code (YAML, config) before explanations
@@ -342,6 +364,16 @@ For technical reference docs:
 8. Ensure all code examples have proper language markers (`cpp`, `python`, `text`)
 9. Use full-width Japanese parentheses（）in Japanese text, not half-width ()
 10. Add blank lines around code blocks and lists
+
+### Adding a New CLI Tool Chain Guide
+
+1. Create `<category>/<category>-<tool>.md` following the CLI Tool Chains pattern
+2. Order sections: quick example → install → the command used most often → supporting concepts → `package.json` scripts → detailed config file
+3. If the tool is part of a multi-step chain (e.g. TypeScript → rollup → clasp), align npm script names and directory layout with the sibling pages already in the repo
+4. Verify every command and config sample actually runs — install the real packages in a scratch directory and execute them rather than trusting hand-written examples
+5. Prefer basing examples on a real working project's config when one is available
+6. Cross-link sibling pages with plain Markdown links, not in-page anchors
+7. Run `task pre-commit` and `task docs:build` to validate
 
 ### Updating Version Information
 
