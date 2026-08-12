@@ -96,6 +96,17 @@ Node.jsを使う場合は`"CommonJS"`を指定します。GASでは非対応で�
 `moduleResolution`は、`import`や`require`で指定されたモジュールの探し方を指定するオプションです。
 `rollup`などのバンドラーを使う場合は`"bundler"`を指定します。
 
+:::{note}
+
+`outDir`を省略すると、`.js`は各`.ts`ファイルと同じ場所に出力されます。
+慣習的に`outDir`には`dist`がよく使われますが、
+本ページでは`clasp`の`.clasp.json`を置くディレクトリと合わせる意図で、あえて`gas`という名前にしています。
+
+`rollup`でバンドルする構成では`tsc`自体はファイルを出力しない（後述の`tsc --noEmit`）ので、
+`outDir`はほとんど意味を持ちません。
+
+:::
+
 `skipLibCheck`は、`node_modules`にある型定義ファイル（`.d.ts`）の型チェックを省略するオプションです。
 `@types/google-apps-script`など、サードパーティの型定義に問題があっても自分のコードのチェックを止めないために有効にしておくと安心です。
 
