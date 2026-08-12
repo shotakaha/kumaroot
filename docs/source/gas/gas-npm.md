@@ -44,17 +44,17 @@ $ npm -g install npm-check-updates
 
 ```console
 // ローカルにインストール
-$ npm install --save-dev typescript
+$ npm install --save-dev typescript @types/google-apps-script
 $ npm install --save-dev rollup @rollup/plugin-node-resolve @rollup/plugin-typescript
 $ npm install --save-dev @google/clasp
-$ npm install --save-dev vitest
+$ npm install --save-dev vitest @vitest/coverage-v8
 $ npm install --save-dev @biomejs/biome
 $ npm install --save-dev typedoc
 ```
 
 `npm install`で、プロジェクトごとにパッケージをインストールできます。
 インストールしたパッケージは`package.json`に記録されます。
-`--save-dev`オプションをつけると、開発用の依存パッケージとして記録されます。
+`--save-dev`（`-D`）オプションをつけると、開発用の依存パッケージとして記録されます。
 ローカルにインストールしたコマンドは、`npm run`や`npx`経由で実行できます。
 
 :::{note}
@@ -66,20 +66,33 @@ GAS開発でよく使う`typescript`、`rollup`、`clasp`などのツールは�
 
 ```json
 {
-  "scripts": {
-    "build": "npx tsc --noEmit",
-    "bundle": "npx rollup -c",
-    "bundle:watch": "npx rollup -c --watch",
-    "push": "npx clasp push",
-    "pull": "npx clasp pull",
-    "deploy": "npm run build && npm run bundle && npm run push",
-    "test": "npx vitest run",
-    "test:watch": "npx vitest watch",
-    "lint": "npx biome check",
-    "lint:fix": "npx biome check --write",
-    "docs:api": "npx typedoc"
-  }
+    "name": "...",
+    "scripts": {
+        "build": "tsc --noEmit",
+        "bundle": "rollup -c",
+        "bundle:watch": "rollup -c --watch",
+        "push": "clasp push",
+        "pull": "clasp pull",
+        "deploy": "npm run build && npm run bundle && npm run push",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage",
+        "format:check": "biome format .",
+        "format:write": "biome format --write .",
+        "lint:check": "biome lint .",
+        "lint:fix": "biome lint --fix .",
+        "docs:api": "typedoc"
+    }
 }
+```
+
+`npm scripts`に登録しておくと、`npx`や個別のコマンド名を直接打たなくても、
+`npm run <スクリプト名>`（または`npm <スクリプト名>`）だけで実行できます。
+
+```console
+$ npm run deploy
+$ npm test
+$ npm run lint:fix
 ```
 
 ## リファレンス
