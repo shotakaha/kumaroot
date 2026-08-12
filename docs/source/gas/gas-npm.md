@@ -4,10 +4,13 @@
 $ brew install node
 
 $ node --version
-v20.9.0
+v26.7.0
 
 $ npm --version
-10.2.5
+11.19.0
+
+$ npx --version
+11.19.0
 ```
 
 `npm`はNodeパッケージの管理ツールです。
@@ -120,7 +123,7 @@ GAS用のプロジェクトは公開する必要がないので、基本的に`t
 :::{note}
 
 `corepack`はNode.js 20/22 LTSには同梱されていますが、
-Node.js 25以降は同梱されなくなる予定のため、`npm install -g corepack`で別途インストールが必要になる場合があります。
+Node.js 25以降は同梱されなくなったため、`npm install -g corepack`で別途インストールが必要になる場合があります。
 
 :::
 
