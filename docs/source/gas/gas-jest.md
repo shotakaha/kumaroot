@@ -10,11 +10,8 @@ $ npx jest --watch
 
 :::{note}
 
-以前は本サイトの作例プロジェクト（`gaslamp`）でも`jest`（＋`ts-jest`）を使っていましたが、
-現在は[`vitest`](./gas-vitest.md)に移行しています。
 新しくTypeScriptのGASプロジェクトを始める場合は、
-`vitest`のほうがTypeScriptにネイティブ対応していて設定も少なく済むためオススメです。
-`jest`はまだ広く使われているツールなので、参考として本ページも残しています。
+[`vitest`](./gas-vitest.md)のほうがTypeScriptにネイティブ対応していて設定も少なく済むためオススメです。
 
 :::
 
