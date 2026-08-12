@@ -8,6 +8,8 @@ $ npx typedoc
 `TypeDoc`は、TypeScriptのソースコードに書かれたコメントを
 使ってAPIドキュメントを生成するツールです。
 TSDoc形式とJSDoc形式に対応しています。
+デフォルトではHTML形式のドキュメントが生成され、
+これだけでブラウザで閲覧できるAPIリファレンスとして完結します。
 
 :::{note}
 
@@ -20,26 +22,66 @@ TypeDocと組み合わせてAPIドキュメントを生成するのが、
 
 :::
 
-## Markdownしたい（`typedoc-plugin-markdown`）
+## 設定したい（`typedoc.json`）
+
+```json
+{
+    "entryPoints": ["src/index.ts"],
+    "out": "docs/api",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": true,
+    "excludeInternal": true
+}
+```
+
+設定ファイルは`typedoc.json`です。
+エントリーポイント（`entryPoints`）と出力先（`out`）を指定すればOKです。
+
+`excludePrivate`・`excludeProtected`・`excludeExternals`・`excludeInternal`は、
+外部に公開したくないメンバー（`private`/`protected`や`@internal`が付いたもの）を
+出力から除外するオプションです。
+公開APIだけをドキュメント化したい場合に指定します。
+
+その他のオプションはお好みで設定してください。
+
+## スクリプト設定したい（`package.json`）
+
+```json
+{
+    "name": "...",
+    "scripts": {
+        "docs:api": "typedoc",
+        "...": "..."
+    }
+}
+```
+
+```console
+$ npm run docs:api
+```
+
+`npm scripts`に`docs:api`を登録しておくと、
+`npx typedoc`を直接打たなくても`npm run docs:api`だけで実行できます。
+他のビルドタスク（`build`や`bundle`）と並べて管理しやすくなります。
+
+## ホットリロードしたい
+
+```console
+$ npx typedoc --watch
+```
+
+`--watch`オプションでホットリロードできます。
+ドキュメントを整理しているときに、自動で再生成してくれるので便利です。
+
+## Markdownで出力したい（`typedoc-plugin-markdown`）
+
+ここから先はオプションです。
+TypeDoc単体で完結させたい場合は、ここまでの設定で十分です。
 
 ```console
 $ npm install --save-dev typedoc-plugin-markdown
 ```
-
-`TypeDoc`が生成するファイルはHTML形式です。
-Markdown形式で生成するためには`typedoc-plugin-markdown`プラグインが必要です。
-
-:::{hint}
-
-Markdown形式で出力しておくと、Sphinx（本サイト）やMkDocs、
-Python製の[Zensical](../zensical/zensical-usage.md)のような、
-TypeScript以外のドキュメントツールにもそのまま取り込めます。
-API部分だけTypeDocに任せ、それ以外のドキュメント本体は
-好きなツールで書く、という構成にできます。
-
-:::
-
-## 設定したい（`typedoc.json`）
 
 ```json
 {
@@ -57,31 +99,22 @@ API部分だけTypeDocに任せ、それ以外のドキュメント本体は
 }
 ```
 
-設定ファイルは`typedoc.json`です。
-エントリーポイント（`entryPoints`）、
-出力先（`out`）、
-利用するプラグイン（`plugin`）
-を指定すればOKです。
-
-`excludePrivate`・`excludeProtected`・`excludeExternals`・`excludeInternal`は、
-外部に公開したくないメンバー（`private`/`protected`や`@internal`が付いたもの）を
-出力から除外するオプションです。
-公開APIだけをドキュメント化したい場合に指定します。
+`TypeDoc`が生成するファイルはデフォルトでHTML形式ですが、
+`plugin`に`typedoc-plugin-markdown`を追加すると、Markdown形式で生成できます。
 
 `disableSources`は、各項目にソースファイルへのリンクを付けないオプションです。
 `hideGenerator`は、生成されたページ末尾のTypeDocへのリンクを非表示にします。
 どちらも、他のツールで作ったドキュメントサイトに違和感なく溶け込ませたいときに便利です。
 
-その他のオプションはお好みで設定してください。
+:::{hint}
 
-## ホットリロードしたい
+Markdown形式で出力しておくと、Sphinx（本サイト）やMkDocs、
+Python製の[Zensical](../zensical/zensical-usage.md)のような、
+TypeScript以外のドキュメントツールにもそのまま取り込めます。
+API部分だけTypeDocに任せ、それ以外のドキュメント本体は
+好きなツールで書く、という構成にできます。
 
-```console
-$ npx typedoc --watch
-```
-
-`--watch`オプションでホットリロードできます。
-ドキュメントを整理しているときに、自動で再生成してくれるので便利です。
+:::
 
 ## ドキュメントサイトに組み込みたい
 
@@ -105,8 +138,6 @@ TypeDocが生成したAPIリファレンスをドキュメントサイトの一�
 
 `out`をドキュメントツールのソースディレクトリ配下（例：`docs/api`）に指定しておくと、
 `npx typedoc`を実行するだけでドキュメントサイトのビルド対象にそのまま含められます。
-`npm run docs:api`のような`npm scripts`にしておくと、
-他のビルドタスクと合わせて実行しやすくなります。
 
 :::
 
