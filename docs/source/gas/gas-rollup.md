@@ -26,7 +26,7 @@ export default defineConfig({
     output: {
         file: "dist/code.js",
         format: "iife",
-    }
+    },
     plugins: [resolve(), typescript()],
 });
 ```
