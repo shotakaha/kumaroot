@@ -55,6 +55,55 @@ const targeted = people.filter(person => targetNames.includes(person.name));
 特定の値のリストに含まれる要素だけを抽出できます。
 スプレッドシートで選択したIDや名前の一覧を元に絞り込みたい場合などに便利です。
 
+## `Object`をフィルタリングしたい
+
+```js
+const scores = {
+    Alice: 85,
+    Bob: 42,
+    Charlie: 91,
+    David: 38,
+};
+
+// 60点以上の人だけ残す
+const passed = Object.fromEntries(
+    Object.entries(scores).filter(([name, score]) => score >= 60)
+);
+// -> { Alice: 85, Charlie: 91 }
+```
+
+`Object`自体には`filter`メソッドがありません。
+[`Object.entries`](./gas-object.md)で`[キー, 値]`の配列に変換してから`filter`を使い、
+`Object.fromEntries`で`Object`に戻す、という流れになります。
+
+## `Map`をフィルタリングしたい
+
+```js
+const scores = new Map([
+    ["Alice", 85],
+    ["Bob", 42],
+    ["Charlie", 91],
+    ["David", 38],
+]);
+
+// 60点以上の人だけ残す
+const passed = new Map(
+    [...scores].filter(([name, score]) => score >= 60)
+);
+// -> Map(2) { "Alice" => 85, "Charlie" => 91 }
+```
+
+`Map`も`Object`と同様に、直接`filter`を使うことはできません。
+スプレッド演算子（`[...map]`）で`[キー, 値]`の配列に変換してから`filter`し、
+`new Map(...)`で`Map`に戻します。
+
+:::{hint}
+
+特定のキーの一覧で`Map`を絞り込みたい場合は、
+[Map型したい（特定のキーを取得したい）](./gas-map.md)により実践的な例があります。
+
+:::
+
 ## リファレンス
 
 - [Array.prototype.filter() - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
