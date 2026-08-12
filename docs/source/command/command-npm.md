@@ -109,3 +109,114 @@ $ npm install
 ```
 
 これらのパッケージは、グローバルに追加しておくとよいです。
+
+## パッケージ設定したい（`package.json`）
+
+```json
+{
+    "name": "my-project",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "engines": {
+        "node": ">=20"
+    },
+    "packageManager": "npm@11.19.0",
+    "dependencies": {},
+    "devDependencies": {}
+}
+```
+
+`package.json`は、プロジェクトの設定と依存パッケージをまとめて管理するファイルです。
+`npm init`を実行すると自動生成され、以降の`npm install`はこのファイルを更新します。
+
+`name`と`version`はプロジェクトの名前とバージョンです。
+npmパッケージとして公開する予定がなければ、あまり気にしなくてよい項目です。
+
+`private: true`は、誤って`npm publish`で公開してしまわないようにするための安全装置です。
+
+`type: "module"`は、`.js`ファイルをESModule（`import`/`export`）として扱う指定です。
+省略した場合はCommonJS（`require`）として扱われます。
+
+`dependencies`には`npm install`（オプションなし）でインストールしたパッケージ、
+`devDependencies`には`npm install --save-dev`でインストールしたパッケージが記録されます。
+`npm install`だけを実行すると、これらの一覧をもとに`node_modules`が再現されます。
+
+`engines`は、動作確認済みのNode.jsバージョンを示すための項目です。
+
+:::{caution}
+
+`engines`はデフォルトでは警告が出るだけで、インストール自体は止まりません。
+バージョン違反時に`npm install`を失敗させたい場合は、`.npmrc`に`engine-strict=true`を追加する必要があります。
+
+:::
+
+`packageManager`は、`npm`（や`yarn`/`pnpm`）自体のバージョンを固定するための項目です。
+`corepack enable`を実行しておくと、`corepack`がこのバージョンを見て自動的にダウンロード・切り替えしてくれます。
+
+:::{note}
+
+`corepack`はNode.js 20/22 LTSには同梱されていますが、
+Node.js 25以降は同梱されなくなったため、`npm install -g corepack`で別途インストールが必要になる場合があります。
+
+:::
+
+:::{hint}
+
+`package.json`は手で編集してもよいですが、
+`npm install`・`npm uninstall`のようなコマンド経由で更新していくほうが、
+書き間違いも減り安全です。
+
+:::
+
+## スクリプト設定したい（`package.json`）
+
+```json
+{
+    "name": "my-project",
+    "scripts": {
+        "build": "tsc",
+        "test": "vitest run",
+        "lint": "eslint .",
+        "start": "node index.js"
+    }
+}
+```
+
+`scripts`フィールドに、よく使うコマンドを短い名前で登録しておけます。
+登録したスクリプトは`npm run <スクリプト名>`で実行できます。
+
+```console
+$ npm run build
+$ npm run test
+$ npm run lint
+```
+
+:::{note}
+
+`test`、`start`、`stop`、`restart`の4つは特別扱いされていて、
+`npm run`を省略して`npm test`、`npm start`のように実行できます。
+それ以外のスクリプト名は`npm run`が必須です。
+
+:::
+
+`&&`でつなげると、複数のスクリプトを順番に実行するスクリプトも作れます。
+
+```json
+{
+    "scripts": {
+        "build": "tsc",
+        "test": "vitest run",
+        "ci": "npm run build && npm run test"
+    }
+}
+```
+
+:::{hint}
+
+同じコマンドを何度も打つより、目的ごとに`scripts`へ登録しておくと、
+チームメンバー間でも実行方法を揃えやすくなります。
+プロジェクトによって内部の実装（`tsc`か`babel`か、`jest`か`vitest`か）が違っても、
+`npm run build`・`npm test`という呼び出し方だけ覚えておけば済むようになります。
+
+:::
