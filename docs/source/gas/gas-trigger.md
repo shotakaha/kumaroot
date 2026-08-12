@@ -1,70 +1,49 @@
 # トリガーを作成したい（`ScriptApp.newTrigger`）
 
 ```js
-const triggerBuilder = ScriptApp.newTrigger("関数名")
-    .timeBased()     // トリガーの種類
+ScriptApp.newTrigger("関数名")
+    .timeBased()     // 時間主導型トリガー（ClockTriggerBuilder）
     .atHour(9)       // 午前9時
-    .everyDays(1);   // 毎日
-triggerBuilder.create();
+    .everyDays(1)    // 毎日
+    .create();
 ```
 
 `ScriptApp.newTrigger`でトリガーを作成できます。
 トリガーの種類ごとに`TriggerBuilder`が用意されているので、目的にあったビルダーを呼び出して設定し、`create`します。
+上のサンプルでは`timeBased`で時間主導型の`ClockTriggerBuilder`を作成し、`atHour`と`everyDays`で「毎日午前9時」を設定しています。
 
 ## トリガーを確認したい
 
 ```js
-function getProjectTriggers() {
+function showProjectTriggers() {
     const triggers = ScriptApp.getProjectTriggers();
-    const n = triggers.length;
-    Logger.log(`Found ${n} triggers`);
-    if (n === 0) return [];
 
-    const triggerList = triggers.map(trigger => ({
-        functionName: trigger.getHandlerFunction(),
-        eventType: trigger.getEventType(),
-        triggerSource: trigger.getTriggerSource(),
-        triggerSourceId: trigger.getTriggerSourceId(),  // ソースの固有ID。クロックイベントはnull
-        uniqueId: trigger.getUniqueId(),
-    }));
-    return triggerList;
-}
-
-function logProjectTriggers(triggerList) {
-    if (triggerList.length == 0) {
+    if (triggers.length === 0) {
         Logger.log("現在設定されているトリガーはありません");
         return;
     }
 
-    triggerList.forEach(trigger => {
-        Logger.log(`関数名: ${trigger.functionName}`);
-        Logger.log(`種類  : ${trigger.eventType}`);
-        Logger.log(`ソース: ${trigger.triggerSource}`);
-        Logger.log(`ソースID: ${trigger.triggerSourceId}`);
-        Logger.log(`ユニークID: ${trigger.uniqueId}`);
+    triggers.forEach(trigger => {
+        Logger.log(`関数名: ${trigger.getHandlerFunction()}`);
+        Logger.log(`種類  : ${trigger.getEventType()}`);
+        Logger.log(`ソース: ${trigger.getTriggerSource()}`);
+        Logger.log(`ソースID: ${trigger.getTriggerSourceId()}`);  // クロックイベントはnull
+        Logger.log(`ユニークID: ${trigger.getUniqueId()}`);
         Logger.log("-----");
     });
 }
-
-function showProjectTriggers() {
-    const triggers = getProjectTriggers();
-    logProjectTriggers(triggers);
-}
 ```
 
-`getProjectTriggers`で、現在のプロジェクトに設定されているすべてのトリガーを取得できます。
-`get...`、`log...`、`show...`のように、
-用途を意識したコンポーネントに分離しておくと、便利です。
+`ScriptApp.getProjectTriggers`で、現在のプロジェクトに設定されているすべてのトリガーを取得できます。
+`Trigger`オブジェクトの`get...`系メソッドで、関数名や種類などの詳細を確認できます。
 
 ## トリガーを追加したい
 
 ```js
-function addTriggerOnce(triggerBuilder, eventType) {
-    const fnName = triggerBuilder.getHandlerFunction();
-
+function addTrigger(fnName) {
+    // 同じ関数・同じ種類のトリガーがすでに登録されていないか確認する
     const isRegistered = ScriptApp.getProjectTriggers().some(trigger =>
         trigger.getHandlerFunction() === fnName &&
-        trigger.getEventType() === eventType &&
         trigger.getTriggerSource() === ScriptApp.TriggerSource.CLOCK
     );
 
@@ -73,17 +52,12 @@ function addTriggerOnce(triggerBuilder, eventType) {
         return;
     }
 
-    triggerBuilder.create();
-    Logger.log("新しいトリガーを追加しました");
-}
-
-function addTrigger(fnName) {
-    const triggerBuilder = ScriptApp.newTrigger(fnName)
+    ScriptApp.newTrigger(fnName)
         .timeBased()
         .atHour(9)
-        .everyDays(1);
-
-    addTriggerOnce(triggerBuilder, ScriptApp.EventType.CLOCK);
+        .everyDays(1)
+        .create();
+    Logger.log("新しいトリガーを追加しました");
 }
 ```
 
@@ -115,19 +89,19 @@ function deleteTriggerByFnName(fnName) {
 `deleteTrigger`で指定したトリガーを削除できます。
 関数名で削除できるようにしておくと便利です。
 
-## 時間主導型トリガーを作成したい（`ClockTriggerBuilder`）
+## 曜日を指定してトリガーを作成したい（`onWeekDay`）
 
 ```js
 ScriptApp.newTrigger("関数名")
-  .timeBased()
-  .onWeekDay(ScriptApp.WeekDay.SUNDAY)
-  .create();
+    .timeBased()
+    .onWeekDay(ScriptApp.WeekDay.SUNDAY)
+    .create();
 ```
 
-`timeBased`で時間主導型の`ClockTriggerBuilder`を作成できます。
-ここでは`onWeekDay`でトリガーを発行する曜日を設定しています。
+`ClockTriggerBuilder`の`onWeekDay`で、トリガーを発行する曜日を指定できます。
+`atHour`や`everyDays`のかわりに使うことで「毎週日曜日」のような設定ができます。
 
-## トリガーを一括設定したい
+## トリガーを一括設定したい（TypeScriptの場合）
 
 ```ts
 // （前提）トリガーごとにモジュール化
