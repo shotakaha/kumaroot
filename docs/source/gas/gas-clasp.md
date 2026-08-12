@@ -357,6 +357,7 @@ $ clasp run-function 関数名    # エイリアス: clasp run
 | --- | --- | --- |
 | `clasp create` | `clasp create-script` | `clasp create` |
 | `clasp clone` | `clasp clone-script` | `clasp clone` |
+| `clasp delete` | `clasp delete-script` | `clasp delete` |
 | `clasp open` | `clasp open-script` | - |
 | `clasp deploy` | `clasp create-deployment` | `clasp deploy` |
 | `clasp deployments` | `clasp list-deployments` | `clasp deployments` |
@@ -372,11 +373,29 @@ $ clasp run-function 関数名    # エイリアス: clasp run
 | `clasp push` | `clasp push` | - |
 | `clasp pull` | `clasp pull` | - |
 
+### 3系で追加された新しいコマンド
+
+2系にはなかった、3系から追加されたコマンドです。
+
+| コマンド（正式名） | エイリアス | 内容 |
+| --- | --- | --- |
+| `clasp open-credentials-setup` | - | スクリプトのGCPプロジェクトの認証情報ページを開く |
+| `clasp enable-api <api>` | - | 指定したAPIを有効化する |
+| `clasp disable-api <api>` | - | 指定したAPIを無効化する |
+| `clasp list-apis` | `clasp apis` | 有効化されているAPI一覧を表示する |
+| `clasp open-api-console` | - | GCPプロジェクトのAPIコンソールを開く |
+| `clasp show-authorized-user` | - | 現在の認証状態を表示する |
+| `clasp open-logs` | - | ブラウザでログ（開発者コンソール）を開く |
+| `clasp setup-logs` | - | Cloud Loggingとの連携を設定する |
+| `clasp open-container` | - | 紐づいたアプリ（Sheetsなど）のGASエディターを開く |
+| `clasp open-web-app` | - | デプロイ済みのウェブアプリをブラウザで開く |
+| `clasp list-scripts` | `clasp list` | Apps Scriptプロジェクトの一覧を表示する |
+| `clasp start-mcp-server` | `clasp mcp` | Apps Script操作用のMCPサーバーを起動する |
+
 :::{note}
 
-`clasp delete`（プロジェクト削除）は3系で`clasp delete-script`に対応しています。
-また`clasp apis`（有効化されているAPI一覧）や`clasp mcp`（MCPサーバー起動）など、
-2系になかった新しいコマンドも追加されています。
+これらは`clasp --help`で確認できるコマンドの一部です。
+今後もバージョンアップで追加・変更される可能性があるので、迷ったら`clasp --help`で最新の一覧を確認してください。
 
 :::
 
