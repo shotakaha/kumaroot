@@ -11,10 +11,15 @@
 
 このページでは、GASエディターを直接編集するのではなく、
 ローカルで開発・ビルドしてからGASにデプロイするという開発スタイルを紹介します。
-具体的には、
-`TypeScript`で型安全にコードを記述し、
-`rollup`でバンドルし、
-`clasp`でGAS環境にデプロイします。
+具体的には、次の3段階のワークフローになります。
+
+1. `TypeScript`（`tsc --noEmit`）で型チェックする
+2. `rollup`で1つのファイルにバンドルする
+3. `clasp push`でGAS環境にアップロードする
+
+このワークフローに加えて、テスト（`jest`）やフォーマッター／リンター（`biome`）、
+APIドキュメント生成（`typedoc`）といった補助ツールも組み合わせることで、
+GASプロジェクトを通常のTypeScriptプロジェクトと同じように開発・保守できるようになります。
 
 :::{note}
 
@@ -28,19 +33,25 @@ GASの情報を検索すると、新しい書き方と古い書き方が混在�
 
 ## 環境構築したい
 
+`TypeScript` → `rollup` → `clasp`という開発チェーンと、
+それを支える補助ツールの使い方をまとめています。
+
 ```{toctree}
 ---
 maxdepth: 1
 ---
 gas-typescript
 gas-rollup
-gas-typedoc
 gas-clasp
 js-jest
 js-biome
+gas-typedoc
 ```
 
 ## GAS操作したい
+
+`Logger`や`SpreadsheetApp`など、GASでよく使うクラス・APIの使い方をまとめています。
+基本的なJS/TSの文法（変数・関数・クラスなど）もここに含みます。
 
 ```{toctree}
 ---
