@@ -1,4 +1,4 @@
-# fishしたい（``fish``）
+# fishしたい（`fish`）
 
 ```bash
 $ brew install fish
@@ -9,7 +9,7 @@ Bash や Zsh のようなシェルの仲間です。
 
 :::{note}
 このページの例は主に fish シェルでの操作を想定しています。
-インストール手順（``brew install fish``）は bash/zsh で実行してください。
+インストール手順（`brew install fish`）は bash/zsh で実行してください。
 :::
 
 ## ログインシェルを fish にしたい
@@ -38,7 +38,7 @@ fishをデフォルトシェルに設定する手順の内容は以下のとお�
 $ fish_config
 ```
 
-``fish_config``を実行すると、ブラウザが起動します。
+`fish_config`を実行すると、ブラウザが起動します。
 色やプロンプトなど設定できます。
 
 ## 変更点を確認したい（`fish_delta`）
@@ -55,10 +55,9 @@ fishのデフォルトから変更を加えた箇所を確認できます。
 $ code ~/.config/fish/functions/fish_prompt.fish
 ```
 
-上記の``fish_config``で選んだプロンプトを少しだけ修正したい場合は、``fish_prompt.fish``を直接編集してしまいましょう。
-僕は``Astronaut``の2段組のプロンプトを選んだのですが、作業中のディレクトリ名は省略形に変更したいです。
+上記の`fish_config`で選んだプロンプトを少しだけ修正したい場合は、`fish_prompt.fish`を直接編集してしまいましょう。
 
-## パスを設定したい（``fish_add_path``）
+## パスを設定したい（`fish_add_path`）
 
 ```fish
 # Homebrew
@@ -71,10 +70,10 @@ fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.cargo/bin
 ```
 
-``fish_add_path``を使ってパスを追加できます。
+`fish_add_path`を使ってパスを追加できます。
 
 :::{note}
-これまでは以下の方法``set -x``を使った方法でよかったのですが、v3.2から非推奨になりました。
+これまでは以下の方法`set -x`を使った方法でよかったのですが、v3.2から非推奨になりました。
 
 ```console
 $ set -x PATH $PATH $HOME/.cargo/bin
@@ -82,11 +81,10 @@ $ set -x PATH $PATH $HOME/.cargo/bin
 
 :::
 
-## パスを確認したい（``fish_user_paths``）
+## パスを確認したい（`fish_user_paths`）
 
 ```console
 $ echo $fish_user_paths
-echo $fish_user_paths
 ~/.cargo/bin ~/.local/bin /usr/local/bin
 
 $ printf '%s\n' $fish_user_paths
@@ -95,26 +93,20 @@ $ printf '%s\n' $fish_user_paths
 /usr/local/bin
 ```
 
-パスは``fish_user_paths``で確認できます。
+パスは`fish_user_paths`で確認できます。
 
-## 変数を設定したい（``set``）
+## 変数を設定したい（`set`）
 
 ```fish
 set 変数名 値
 set -l 変数名 値1 値2
 set -gx 変数名 値    # bash/zshのexportに相当
-set 変数名    # ""に初期化
+set 変数名    # 空リストにする（未定義とは異なる）
 set -q 変数名    # 変数名が定義されているかを確認
 ```
 
-``bash`` / ``zsh``では``export``コマンドを使って変数を定義しますが、``fish``では``set``コマンドを使います。
-
-``set``には変数のスコープを指定できるオプション（``-l / --local``、``-g / --global``、``-u / --universal``）が3種類あります。
-また、変数を外部変数にするかを指定できるオプション（``-x / --export``、``-u / --unexport``）があります。
-外部変数にすると、別のプログラムから変数が参照できるようになります。
-
-``set -q``で変数が定義されているか確認できます。
-``if``文と組み合わせて条件分岐に使えます。
+`bash` / `zsh`では`export`コマンドを使って変数を定義しますが、`fish`では`set`コマンドを使います。
+スコープ（`-l / -g / -u`）と外部変数化（`-x / -u`）はオプションで指定し、`set -q`は`if`文と組み合わせて変数の定義確認に使えます。
 
 ## リダイレクトしたい
 
@@ -127,7 +119,55 @@ $ echo "hello" 2>&1 > stdout_and_stderr.md
 
 fish も bash/zsh と同じリダイレクト操作が使えます。
 
-詳しくは「[実行結果をファイルに保存したい（``>``）](command-stdout.md)」を参照してください。
+詳しくは「[実行結果をファイルに保存したい（`>`）](command-stdout.md)」を参照してください。
+
+## 実行結果で処理を分岐したい（`and` / `or` / `not`）
+
+```fish
+コマンドを実行; and echo "成功"
+コマンドを実行; or echo "失敗"
+
+if not test -e ファイルパス
+    echo "ファイルが存在しません"
+end
+```
+
+fishでは`bash`/`zsh`の`&&` / `||`に相当する処理を`and` / `or`で書きます。
+直前のコマンドが成功（終了ステータス0）した場合は`and`以降、失敗した場合は`or`以降が実行されます。
+`not`は終了ステータスを反転させるので、`if`文と組み合わせて「存在しない場合」のような条件分岐にも使えます。
+
+:::{note}
+fishは`POSIX`シェルではありません。
+`and` / `or` / `not`のように、`sh`系（`bash`/`zsh`含む）とは異なる独自の構文を採用しています。
+`&&` / `||`はv3.0以降`and` / `or`のエイリアスとして使えますが、それ以外の文法（変数展開、配列、関数定義など）はPOSIXと互換性がないため、`sh`向けに書かれたスクリプトをfishでそのまま実行することはできません。
+:::
+
+## ワイルドカードでファイルを指定したい（`*` / `**`）
+
+```console
+$ ls *.txt
+$ ls **.txt
+```
+
+fishのワイルドカードは`bash`/`zsh`と少し異なります。
+
+- `*`：カレントディレクトリ直下のファイルにマッチ（サブディレクトリは対象外）
+- `**`：カレントディレクトリ以下を再帰的に探索してマッチ
+
+`bash`でおなじみの`?`（任意の1文字にマッチ）はfishには存在しないので注意してください。
+
+:::{warning}
+fishはワイルドカードが1件もマッチしないとエラーになり、コマンドは実行されません。
+
+```console
+$ ls hoge**.txt
+fish: No matches for wildcard 'hoge**.txt'. See `help language#wildcards-globbing`.
+ls hoge**.txt
+   ^~~~~~~~~~^
+```
+
+`bash`/`zsh`ではマッチしない場合ワイルドカードの文字列がそのままコマンドに渡りますが、fishではこの挙動がなく必ずエラーになります。
+:::
 
 ## コマンド補完を整理したい（`fish_update_completions`）
 
@@ -137,8 +177,8 @@ Parsing man pages and writing completions to ~/.local/share/fish/generated_compl
   7148 / 7148 : zic.8
 ```
 
-``fish_update_completions``でコマンド補完の候補を更新できます。
-有効になったコマンド補完は``~/.local/share/fish/generated_completions/``で確認できます。
+`fish_update_completions`でコマンド補完の候補を更新できます。
+有効になったコマンド補完は`~/.local/share/fish/generated_completions/`で確認できます。
 
 ## コマンド履歴を整理したい
 
@@ -171,7 +211,7 @@ $ tail -n 30 ~/.local/share/fish/fish_history
 
 Fishはコマンド履歴からも補完してくれます。
 しかし、打ち間違えてしまったコマンドを覚えてしまっていることもあります。
-そのときは履歴ファイル（``~/.local/share/fish/fish_history``）を直接開き、
+そのときは履歴ファイル（`~/.local/share/fish/fish_history`）を直接開き、
 該当するコマンド履歴を削除します。
 
 コマンド履歴の構造は、以下のようになっていました。
