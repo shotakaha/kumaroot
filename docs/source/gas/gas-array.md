@@ -209,14 +209,10 @@ const arrays = [
     [7, 8, 9]
 ];
 const result = arrays.reduce((left, right) => addLists(left, right));
-// step1. arrays[0] を初期値として使用
-// step2. left=arrays[0], right=arrays[1] を計算
-//    -> [5, 7, 9]
-// step3. left=直前の結果, right=arrays[2] を計算
-//    -> [12, 15, 18]
+console.log(result);  // -> [12, 15, 18]
 ```
 
-複数の配列を処理する場合`reduce`メソッドを利用すると簡潔にかけます。
+3つ以上の配列をまとめて処理したい場合は、前述の`reduce`と組み合わせると簡潔に書けます。
 
 ## 2次元配列したい（`[][]`）
 
@@ -319,7 +315,7 @@ const adults = rows.filter(
 );
 ```
 
-`Array.filter`で、特定カラムの値が条件を満たす行だけを抽出できます。
+前述の`filter`と`indexOf`を組み合わせると、特定カラムの値で行を絞り込めます。
 `Cell`型は`number`以外の型も含むため、
 比較演算子を使う前に`typeof`で数値であることを確認しておくと安全です。
 
