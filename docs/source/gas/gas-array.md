@@ -19,145 +19,6 @@ const array = new Array("a1", "a2", "a3");
 `new Array()`コンストラクターでも配列を初期化できます。
 ただし、引数の扱いに注意が必要なため、通常はリテラル記法で記述すれば問題ありません。
 
-## 2次元配列したい（`[][]`）
-
-```ts
-// セル用の型を定義
-type Cell = string | number | boolean | Date | null;
-const values: Cell[][] = sheet.getDataRange().getValues();
-```
-
-スプレッドシートにあるデータを取得すると、2次元配列（行x列）として返ってきます。
-`Cell`型を定義することで型安全を保つことができます。
-
-```ts
-// ヘッダー（header）とデータ（rows）に分割
-// ヘッダー = 1行目：文字列に変換（Cell[] -> string[]）
-// データ = 2行目以降：型はそのまま（Cell[]）
-const header = values[0].map(String);
-const rows = values
-  .slice(1)
-  .filter(row => row.some(cell => cell !== null && cell !== ""));
-```
-
-さらに、1行目がヘッダー、2行目以降がデータ領域となっていることが多いです。
-ヘッダー（`header`）とデータ（`rows`）に分割しておくとよいです。
-
-:::{hint}
-
-スプレッドシートから取得したデータは `Cell[][]`型となっています。
-ヘッダーに相当する1行目も`Cell[]`になっているため、
-上記のサンプルでは`string[]`に変換しています。
-また、データ領域からは、`["", ""]` や `["", null]`、`[null, null]`のようなどのカラムにも値が入っていない空行を除外しています。
-
-:::
-
-データ（`rows`）は、そのまま2次元配列（`Cell[][]`）として扱えます。
-用途に応じて、行アクセス、列アクセス、オブジェクト・Map型への変換などができます。
-
-### 行インデックスでアクセスしたい
-
-```ts
-for (const row of rows) {
-    const col0 = row[0];
-    const col1 = row[1];
-}
-```
-
-`for...of`で1行（`Cell[]`）ずつ取り出せます。
-行の中の値には、さらに列インデックスでアクセスします。
-
-### 列インデックスでアクセスしたい
-
-```ts
-// age列（インデックス1）だけを取り出す
-const ageColumn: Cell[] = rows.map(row => row[1]);
-```
-
-`row[列インデックス]`で特定の列だけを取り出せます。
-ただし列の並び順が変わるとインデックスもズレるため、
-次の「カラム名でアクセスしたい」のほうが安全です。
-
-### カラム名でアクセスしたい
-
-```ts
-function getColumn(rows: Cell[][], header: string[], columnName: string): Cell[] {
-  const index = header.indexOf(columnName);
-  if (index === -1) {
-    throw new Error(`列が見つかりません: ${columnName}`);
-  }
-  return rows.map(row => row[index]);
-}
-
-const ageColumn = getColumn(rows, header, "age");
-```
-
-`header.indexOf(カラム名)`で列インデックスを求めてからアクセスすると、
-列の並び順が変わってもコードを修正せずに済みます。
-存在しないカラム名を指定したときにすぐ気づけるよう、`-1`（見つからない）はエラーにしています。
-
-### 特定のカラムのデータ型をチェックしたい
-
-```ts
-function isNumberColumn(rows: Cell[][], header: string[], columnName: string): boolean {
-  return getColumn(rows, header, columnName).every(value => typeof value === "number");
-}
-
-const ok = isNumberColumn(rows, header, "age");
-```
-
-`typeof`と`Array.every`を組み合わせて、列内のすべての値が期待する型かチェックできます。
-`getValues()`が返す`Cell[][]`は型が混在しうるため、
-集計処理の前にこうしたチェックを挟んでおくと、
-数値のつもりが文字列だった、といった事故を早期に検出できます。
-
-### 特定のカラムのデータ内容でフィルタリングしたい
-
-```ts
-const ageIndex = header.indexOf("age");
-const adults = rows.filter(
-  row => typeof row[ageIndex] === "number" && (row[ageIndex] as number) >= 30
-);
-```
-
-`Array.filter`で、特定カラムの値が条件を満たす行だけを抽出できます。
-`Cell`型は`number`以外の型も含むため、
-比較演算子を使う前に`typeof`で数値であることを確認しておくと安全です。
-
-### オブジェクトに変換したい
-
-```ts
-// ヘッダー名をキーとして利用
-const data = rows.map(row =>
-  Object.fromEntries(
-    header.map( (key, i) => [key, row[i]] )
-  )
-);
-```
-
-`Object.fromEntries`と`header`を組み合わせると、
-1行を「カラム名: 値」のオブジェクトに変換できます。
-`data[0].age`のようにプロパティ名でアクセスできるようになるので、
-列インデックスやカラム名を毎回指定するより読みやすくなります。
-
-### Mapに変換したい
-
-```ts
-const maps: Map<string, Cell>[] = rows.map(row =>
-  new Map(header.map((key, i) => [key, row[i]]))
-);
-```
-
-オブジェクトの代わりに`Map`型に変換することもできます。
-キーの並び順を保証したい場合や、キーが動的に変わる場合は`Map`のほうが扱いやすいです。
-
-:::{hint}
-
-シートへの書き込み（`setValues`）は、
-[セル操作したい（`Range`）](./gas-spreadsheet-range.md)で扱います。
-
-:::
-
 ## 値を追加したい（`Array.push`）
 
 ```js
@@ -356,6 +217,145 @@ const result = arrays.reduce((left, right) => addLists(left, right));
 ```
 
 複数の配列を処理する場合`reduce`メソッドを利用すると簡潔にかけます。
+
+## 2次元配列したい（`[][]`）
+
+```ts
+// セル用の型を定義
+type Cell = string | number | boolean | Date | null;
+const values: Cell[][] = sheet.getDataRange().getValues();
+```
+
+スプレッドシートにあるデータを取得すると、2次元配列（行x列）として返ってきます。
+`Cell`型を定義することで型安全を保つことができます。
+
+```ts
+// ヘッダー（header）とデータ（rows）に分割
+// ヘッダー = 1行目：文字列に変換（Cell[] -> string[]）
+// データ = 2行目以降：型はそのまま（Cell[]）
+const header = values[0].map(String);
+const rows = values
+  .slice(1)
+  .filter(row => row.some(cell => cell !== null && cell !== ""));
+```
+
+さらに、1行目がヘッダー、2行目以降がデータ領域となっていることが多いです。
+ヘッダー（`header`）とデータ（`rows`）に分割しておくとよいです。
+
+:::{hint}
+
+スプレッドシートから取得したデータは `Cell[][]`型となっています。
+ヘッダーに相当する1行目も`Cell[]`になっているため、
+上記のサンプルでは`string[]`に変換しています。
+また、データ領域からは、`["", ""]` や `["", null]`、`[null, null]`のようなどのカラムにも値が入っていない空行を除外しています。
+
+:::
+
+データ（`rows`）は、そのまま2次元配列（`Cell[][]`）として扱えます。
+用途に応じて、行アクセス、列アクセス、オブジェクト・Map型への変換などができます。
+
+### 行インデックスでアクセスしたい
+
+```ts
+for (const row of rows) {
+    const col0 = row[0];
+    const col1 = row[1];
+}
+```
+
+`for...of`で1行（`Cell[]`）ずつ取り出せます。
+行の中の値には、さらに列インデックスでアクセスします。
+
+### 列インデックスでアクセスしたい
+
+```ts
+// age列（インデックス1）だけを取り出す
+const ageColumn: Cell[] = rows.map(row => row[1]);
+```
+
+`row[列インデックス]`で特定の列だけを取り出せます。
+ただし列の並び順が変わるとインデックスもズレるため、
+次の「カラム名でアクセスしたい」のほうが安全です。
+
+### カラム名でアクセスしたい
+
+```ts
+function getColumn(rows: Cell[][], header: string[], columnName: string): Cell[] {
+  const index = header.indexOf(columnName);
+  if (index === -1) {
+    throw new Error(`列が見つかりません: ${columnName}`);
+  }
+  return rows.map(row => row[index]);
+}
+
+const ageColumn = getColumn(rows, header, "age");
+```
+
+`header.indexOf(カラム名)`で列インデックスを求めてからアクセスすると、
+列の並び順が変わってもコードを修正せずに済みます。
+存在しないカラム名を指定したときにすぐ気づけるよう、`-1`（見つからない）はエラーにしています。
+
+### 特定のカラムのデータ型をチェックしたい
+
+```ts
+function isNumberColumn(rows: Cell[][], header: string[], columnName: string): boolean {
+  return getColumn(rows, header, columnName).every(value => typeof value === "number");
+}
+
+const ok = isNumberColumn(rows, header, "age");
+```
+
+`typeof`と`Array.every`を組み合わせて、列内のすべての値が期待する型かチェックできます。
+`getValues()`が返す`Cell[][]`は型が混在しうるため、
+集計処理の前にこうしたチェックを挟んでおくと、
+数値のつもりが文字列だった、といった事故を早期に検出できます。
+
+### 特定のカラムのデータ内容でフィルタリングしたい
+
+```ts
+const ageIndex = header.indexOf("age");
+const adults = rows.filter(
+  row => typeof row[ageIndex] === "number" && (row[ageIndex] as number) >= 30
+);
+```
+
+`Array.filter`で、特定カラムの値が条件を満たす行だけを抽出できます。
+`Cell`型は`number`以外の型も含むため、
+比較演算子を使う前に`typeof`で数値であることを確認しておくと安全です。
+
+### オブジェクトに変換したい
+
+```ts
+// ヘッダー名をキーとして利用
+const data = rows.map(row =>
+  Object.fromEntries(
+    header.map( (key, i) => [key, row[i]] )
+  )
+);
+```
+
+`Object.fromEntries`と`header`を組み合わせると、
+1行を「カラム名: 値」のオブジェクトに変換できます。
+`data[0].age`のようにプロパティ名でアクセスできるようになるので、
+列インデックスやカラム名を毎回指定するより読みやすくなります。
+
+### Mapに変換したい
+
+```ts
+const maps: Map<string, Cell>[] = rows.map(row =>
+  new Map(header.map((key, i) => [key, row[i]]))
+);
+```
+
+オブジェクトの代わりに`Map`型に変換することもできます。
+キーの並び順を保証したい場合や、キーが動的に変わる場合は`Map`のほうが扱いやすいです。
+
+:::{hint}
+
+シートへの書き込み（`setValues`）は、
+[セル操作したい（`Range`）](./gas-spreadsheet-range.md)で扱います。
+
+:::
 
 ## リファレンス
 
