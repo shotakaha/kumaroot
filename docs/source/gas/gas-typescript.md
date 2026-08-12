@@ -96,18 +96,33 @@ Node.jsを使う場合は`"CommonJS"`を指定します。GASでは非対応で�
 `moduleResolution`は、`import`や`require`で指定されたモジュールの探し方を指定するオプションです。
 `rollup`などのバンドラーを使う場合は`"bundler"`を指定します。
 
+## 型チェックだけしたい（`tsc --noEmit`）
+
+```console
+$ npx tsc --noEmit
+```
+
+[`rollup`](./gas-rollup.md)を使う構成では、実際のトランスパイル・バンドルは`@rollup/plugin-typescript`が担当するため、
+`tsc`単体でファイルを出力する必要はありません。
+`--noEmit`を付けると、ファイル出力をせずに型チェックだけを実行できます。
+`rollup`実行前のCIやコミット前のチェックとして使うと便利です。
+
 ## スクリプト設定したい（`package.json`）
 
 ```json
 {
     "name": "...",
     "scripts": {
-        "build": "tsc && rollup -c",
-        "watch": "tsc --watch",
+        "typecheck": "tsc --noEmit",
+        "build": "rollup -c",
+        "watch": "rollup -c --watch",
         "push": "clasp push",
         "pull": "clasp pull",
-        "deploy": "npm run build && npm run push",
+        "deploy": "npm run typecheck && npm run build && npm run push",
         "...": "..."
     }
 }
 ```
+
+`typecheck`で型チェックのみ、`build`で実際のトランスパイル・バンドルを行います。
+`deploy`では、型チェック→ビルド→GASへのアップロードの順に実行しています。
