@@ -1,5 +1,120 @@
 # CHANGELOG.md
 
+## v2026.8.0 (2026-08-12)
+
+### Fix
+
+- **gas-trigger**: fix missing return in getProjectTriggers, template literal syntax, logger typo
+- **gas-request**: fix syntax errors, undefined variables, and typos across examples
+- **gas-doget**: fix missing const declarations, broken placeholder functions, complete JSON example
+- **gas-spreadsheet-chart**: add histogram section
+- **gas-spreadsheet-chart**: add bar chart and scatter chart sections
+- **gas-spreadsheet-chart**: replace placeholders with runnable examples, fix sheet.newChart() calls
+- **gas-spreadsheet-pivottable**: replace placeholders with runnable examples, fix Sheet/Range mixup and off-by-one index
+- **gas-spreadsheet-filter**: fix broken examples, add createFilter/getFilter section
+- **gas-spreadsheet-create**: fix Sheet vs Spreadsheet method mixup, dedupe const book
+- **gas-spreadsheet-range**: fix syntax errors and wrong API method names
+- **gas-spreadsheet-sheet**: fix broken findDuplicateRow example and other bugs
+- **gas-spreadsheet-book**: fix typos, dedupe getSheetByName/insertSheet pattern
+- **gas-logger**: correct Logger/console Cloud Logging claim, note official guidance
+- **gas-filter**: add Object and Map filtering sections
+- **gas-filter**: fix broken age-filter example, refocus on object-array patterns
+- **gas-date**: fix month-end example that actually computed next-month-start
+- **gas-version**: split V8/Node.js explanations into their own sections
+- **gas-version**: fix broken table, add ES2023-ES2025 rows
+- **gas-namespace**: frame the page as a GAS-editor-only workaround
+- **gas-namespace**: fix ReferenceError in ns3 example, add TS namespace syntax
+- **gas-class**: rewrite around gaslamp's DataFrame class pattern
+- **gas-function**: trim closing section that repeated the page's intro
+- **gas-variables**: fix broken examples, break up the type-conversion block
+- **gas-exports**: separate local TS export/import from GAS-editor-direct style
+- **gas-globalthis**: add type-safe registration and trigger/stub patterns
+- **gas-jest**: drop gaslamp-specific mention from the intro note
+- **gas-jest**: update to current jest APIs, restructure JS-first with TS as an add-on
+- **gas**: add gas-vitest.md documenting the actual vitest setup
+- **gas**: rename js-jest.md and js-biome.md to gas-jest.md / gas-biome.md
+- **js-biome**: update biome.json to 2.x schema, add package.json section
+- **gas-typedoc**: align section order with gas-typescript/gas-rollup
+- **gas-typedoc**: lead with the standalone HTML setup, mark Markdown as optional
+- **gas-typedoc**: expand config example, add docs-site integration
+- **gas-primitives**: add explanatory text to each primitive type
+- **gas-set**: flesh out gas-set.md to match sibling pages' depth
+- **gas-map**: fix runtime/syntax errors across nearly every section
+- **gas-object**: fix for...of loop that doesn't work on plain objects
+- **gas-array**: trim duplicated method explanations
+- **gas-array**: move 1D array operations before the 2D array section
+- **gas-array**: split object/Map conversion into their own sections
+- **gas-array**: add sheet-oriented 2D array operations
+- **gas-array**: fix case-mismatched function call in reduce example
+- **gas-usage**: split GAS操作したい into JS/TSしたい and GAS操作したい
+- **gas-usage**: describe the actual tsc + rollup + clasp workflow
+- **gas-clasp**: remove duplicated explanations
+- **gas-clasp**: preview .clasp.json's structure before the commands that create it
+- **gas-clasp**: restructure around the tsc + rollup + clasp workflow
+- **AGENTS**: document CLI Tool Chains page pattern (tsc/rollup/clasp)
+- **gas-rollup**: reorder sections to match gas-typescript.md's flow
+- **gas-typescript**: reorder sections toward practical-first flow
+- **gas-typescript**: explain GoogleAppsScript namespace structure
+- **gas-typescript**: note outDir's default and why this page uses gas
+- **gas**: align ts+rollup+clasp docs with a real working example
+- **gas-rollup**: fix missing comma in rollup.config.js sample
+- **gas-clasp**: note TypeScript auto-transpile removal near push workflow
+- **gas-typescript**: fix build script conflicting with rollup, add tsc --noEmit
+- **gas-clasp**: use canonical command names only in body text
+- **gas-clasp**: add clasp 3.x-only commands to the mapping table
+- **gas-clasp**: add command name mapping table for clasp 2.x to 3.x
+- **gas-clasp**: update clasp usage to current 3.x command set
+- **python-pytest**: fix stale info and add newer commands/config options
+- **python-pytest**: fix uv install command and add pip/pipx/uv tool sections
+- **python-pytest**: fix typos and TOML section name
+- **python-rich**: add installation section
+- **python-typer**: add structured installation section
+- **python-pipx**: normalize double backticks to single backticks
+- **python-pipx**: update pipx environment output and note migration to uv tool
+- **python-ruff**: expand installation section with pip/pipx/uv tool/poetry/uv options
+- **python-uv**: fix inaccurate options and add missing uv tool install
+- **python-ruff**: update version output and fix verified command errors
+- **python-ruff**: fix typos and incorrect config section path
+- **python-poetry**: fix punctuation, clarify -D option, and correct check/system-site-packages descriptions
+- **python-jupytext**: add uv add --group dev installation option
+- **python-jupytext**: fix invalid YAML entry and suspicious version tag
+- **python-pip**: fix typo and inaccurate poetry description
+- **python-uv**: add missing sections for format, check, and audit commands
+- **python-rich**: add table and progress bar sections
+- **python-rich**: add missing context on markup syntax and other features
+- **python-pyserial**: explain decode() errors option (ignore vs replace)
+- **python-pyserial**: fix typos and inaccurate type hints
+- **python-pexpect**: add missing context on terminate(force=True) and encoding
+- **python-pexpect**: fix missing imports and undefined variables
+- **python-typer**: fix syntax errors and typos in CLI examples
+- **python-tomllib**: add missing context on writing, tables, and inline tables
+- **python-tomllib**: fix missing import, TOML syntax error, and wrong heading
+- **python-time**: add missing context on _ns variants and process_time
+- **python-time**: fix typo, reduce loop count, and localize comments
+- **python-subprocess**: add missing context on shell=True, input, timeout, and text
+- **python-platformdirs**: add missing context on _dir/_path, appauthor, and user_config_dir
+- **python-platform**: add missing context on common functions and platform.sys caveat
+- **python-platform**: fix incorrect attribute calls and misleading comment
+- **python-pendulum**: add missing context on datetime compatibility and add/subtract
+- **python-pendulum**: fix backtick mismatch and stale example date
+- **python-pathlib**: add missing context on glob/rglob and path checks
+- **python-pathlib**: fix typos and undefined variables
+- **python-exception**: fix typos and syntax errors
+- **python-dunder**: add comparison, arithmetic, and length dunder sections
+- **python-dunder**: add dunder method sections matching page title
+- **python-dunder**: fix syntax and misleading access-control description
+- **python-decorator**: fix syntax errors in decorator examples
+- **python-datetime**: add missing context on tz-aware/naive and timedelta
+- **python-datetime**: fix inaccurate descriptions
+- **python-argparse**: fix empty if block and non-flag debug option
+- **python-install**: add section on managing Python versions with uv
+- **python-install**: fix uv add --docs to --group docs
+
+### Refactor
+
+- **gas-trigger**: consolidate duplicated create/confirm examples, clarify section roles
+- **gas-spreadsheet**: move copy/copyTo to book/sheet subpages, fix hub page issues
+
 ## v2026.7.1 (2026-07-16)
 
 ### Fix
