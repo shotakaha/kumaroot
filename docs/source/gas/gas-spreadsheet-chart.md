@@ -99,6 +99,23 @@ sheet.insertChart(scatterChart);
 `asScatterChart`で散布図を作成できます。
 2つの数値データの相関関係を確認したいときによく使います。
 
+## ヒストグラムにしたい（`asHistogramChart`）
+
+```js
+const range = sheet.getRange("A1:A10");
+
+const histogramChart = sheet.newChart()
+    .asHistogramChart()
+    .addRange(range)
+    .setNumHeaders(1)
+    .setOption("title", "ヒストグラム")
+    .build();
+sheet.insertChart(histogramChart);
+```
+
+`asHistogramChart`でヒストグラムを作成できます。
+データの分布（度数分布）を確認したいときによく使います。
+
 ## リファレンス
 
 - [Class EmbeddedChart](https://developers.google.com/apps-script/reference/spreadsheet/embedded-chart)
