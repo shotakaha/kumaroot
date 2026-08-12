@@ -21,7 +21,8 @@ JavaScriptの`Date`クラスで日付オブジェクトを操作できます。
 :::{note}
 
 タイムゾーンはGASのプロジェクト設定（全般設定）で変更できます。
-GASではIANAタイムゾーン名（例: `Asia/Tokyo`）を用いることを推奨します`JST` のような略称は環境によって解釈が異なる場合があります。
+GASではIANAタイムゾーン名（例: `Asia/Tokyo`）を用いることを推奨します。
+`JST`のような略称は環境によって解釈が異なる場合があります。
 
 :::
 
@@ -131,7 +132,7 @@ GASの`Utilities.formatDate`メソッドで、任意の表示形式に変更で�
 // 週末かどうか判定する
 //
 // @param {Date} date - 日付オブジェクト
-function isHoliday(date) {
+function isWeekend(date) {
     // 曜日を取得
     const day = date.getDay();
 
@@ -145,29 +146,26 @@ function isHoliday(date) {
 ```
 
 `getDay`で曜日を取得できます。
+祝日（土日以外の休日）を判定したい場合は、
+別途祝日のリストと照合するなどの処理が必要です。
 
 ## 月初／月末したい
 
 ```js
-const d1 = new Date();
-d1.setDate(1);
-d1.setHours(0);
-d1.setMinutes(0);
-d1.setSeconds(0);
+const now = new Date();
 //     2024-11-13 12:34:56
-// ==> 2024-11-01 00:00:00
 
-const d2 = new Date();
-d2.setMonth(d2.getMonth() + 1);
-d2.setDate(1);
-d2.setHours(0);
-d2.setMinutes(0);
-d2.setSeconds(0);
-//     2024-11-13 12:34:56
-// ==> 2024-12-01 00:00:00
+const firstDay = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0);
+// -> 2024-11-01 00:00:00
+
+const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+// -> 2024-11-30 23:59:59
 ```
 
 現在日時を基準に、月初と月末を取得できます。
+月の日数（28〜31日）を意識しなくても、
+`new Date(年, 月+1, 0)`のように「翌月の0日目」を指定すると、
+自動的に今月の最終日になります。
 カレンダーから毎月のイベントを取得したい場合に使えます。
 
 ## リファレンス
