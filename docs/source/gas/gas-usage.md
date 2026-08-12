@@ -40,6 +40,7 @@ GASの情報を検索すると、新しい書き方と古い書き方が混在�
 ---
 maxdepth: 1
 ---
+gas-npm
 gas-typescript
 gas-rollup
 gas-clasp
