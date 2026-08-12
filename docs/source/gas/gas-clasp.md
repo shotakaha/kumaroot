@@ -91,7 +91,7 @@ GASを操作するために、Googleアカウントへのログインが必要�
 ## 新規プロジェクトしたい（`clasp create-script`）
 
 ```console
-$ clasp create-script --title PROJECT_NAME --type standalone --rootDir dist
+$ clasp create-script --title PROJECT_NAME --type standalone --rootDir gas
 ```
 
 `clasp create-script`でプロジェクトを新規作成できます。
@@ -114,8 +114,9 @@ GASには、Google Sheetなどのアプリに紐づいた状態のものと、�
 
 `clasp` 3系では、TypeScriptからJavaScriptへ自動変換（トランスパイル）されなくなりました。
 代わりに`rollup`などのバンドラーツールを併用する必要があります。
-バンドルされたファイルは`dist`に生成するのが慣例となっているようなので、
-`--rootDir dist`を指定しています。
+
+`--rootDir`には、`rollup`でバンドルしたあとのファイルを置くディレクトリを指定します。
+`gas`や`dist`など、好きな名前のディレクトリにバンドル済みファイルと`.clasp.json`をまとめる構成にできます。
 
 :::
 
@@ -211,8 +212,7 @@ $ clasp push -f    # --force: マニフェスト（appsscript.json）を強制�
 
 TypeScriptを使う場合は、[`tsc --noEmit`](./gas-typescript.md)で型チェックだけ行い、
 実際のトランスパイル・バンドルは[`rollup`](./gas-rollup.md)（`@rollup/plugin-typescript`）に任せる構成がオススメです。
-`tsc`単体でファイルを出力すると、`rollup`の出力と重複・競合する原因になります。
-`npm run build && clasp push`のように、ビルドしてから`push`する流れにしておくとよいです。
+`npm run bundle && clasp push`のように、バンドルしてから`push`する流れにしておくとよいです。
 
 :::
 
@@ -294,7 +294,7 @@ $ clasp update-deployment AKfycb...LH8l3z --versionNumber 2
 ```console
 $ clasp show-file-status
 └─ appsscript.json
-└─ dist/code.js
+└─ code.bundle.js
 ```
 
 `clasp show-file-status`で、`clasp push`の対象になっているファイル一覧を確認できます。
@@ -328,16 +328,19 @@ $ clasp run-function 関数名
 リポジトリ名
 |-- CHANGELOG.md
 |-- README.md
-|-- dist/           # .gitignoreに追加
+|-- gas/                # clasp pushの対象ディレクトリ
+|   |-- .clasp.json     # スクリプトID（Gitには含めない）
+|   |-- .claspignore
 |   |-- appsscript.json
-|   |-- code.js     # rollupでバンドルしたファイル
-|-- node_modules/   # .gitignoreに追加
+|   |-- code.bundle.js  # rollupでバンドルしたファイル（.gitignoreに追加）
+|   |-- code.bundle.js.map
+|-- node_modules/       # .gitignoreに追加
 |-- package.json
 |-- rollup.config.js    # rollupの設定
 |-- tsconfig.json       # tscの設定
-|-- src/            # TypeScriptファイル
-|   |-- index.ts    # 自作モジュールのエントリーポイント
-|   |-- config.ts   # 自作モジュールの設定用モジュール
+|-- src/                # TypeScriptファイル
+|   |-- index.ts        # 自作モジュールのエントリーポイント
+|   |-- config.ts       # 自作モジュールの設定用モジュール
 |   |-- ...
 |
 |-- pyproject.toml  # commitizen, mkdocs など
@@ -347,8 +350,18 @@ $ clasp run-function 関数名
 
 ディレクトリ構成のサンプルです。
 `src`の中にTypeScriptファイルを作成し、
-`rollup`でバンドルして`dist/code.js`に出力します。
-`clasp push`されるのは`dist/`にあるファイルです。
+`rollup`で`gas/code.bundle.js`にバンドルします。
+`.clasp.json`は`gas/`の中に置き、
+`gas`ディレクトリで`clasp push`を実行する構成にしています。
+
+:::{hint}
+
+`.clasp.json`を出力先ディレクトリの中に置いておくと、
+`cd gas && clasp push`のようにディレクトリを移動してから`push`できます。
+複数のGASプロジェクト（例：本番用・開発用）を1つのリポジトリで管理したい場合は、
+`gas/`のようなディレクトリをプロジェクトごとに分けて用意すると管理しやすくなります。
+
+:::
 
 :::{hint}
 

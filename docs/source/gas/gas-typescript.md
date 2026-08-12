@@ -52,16 +52,16 @@ function 関数名(引数名: 型名): 戻り値の型名 {...}
 ```json
 {
     "compilerOptions": {
-        "target": "ES2015",    // GAS V8対応
+        "target": "ES2020",    // GAS V8対応
         "module": "ESNext",    // rollupでバンドル前提
         "moduleResolution": "bundler",
-        "noUnusedLocals": true,    // 未使用の変数でエラー
-        "noUnusedParameters": true,    // 未使用の引数でエラー
-        "strict": true,    // 厳格な型チェック
-        "outDir": "dist",    // 出力先ディレクトリ
+        "lib": ["ES2020"],
         "rootDir": "src",    // ソースコードのルート
-        "sourceMap": true,    // デバッグ用にソースマップを生成
-        "removeComments": true    // コメントを除去
+        "outDir": "gas",    // 出力先ディレクトリ（型チェックのみなら未使用）
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,    // 厳格な型チェック
+        "skipLibCheck": true    // 依存パッケージの型チェックをスキップ
     },
     "include": [
         // トランスパイル対象
@@ -70,18 +70,18 @@ function 関数名(引数名: 型名): 戻り値の型名 {...}
     "exclude": [
         // トランスパイル対象外
         "node_modules",
-        "coverage",
+        "gas"
     ]
 }
 ```
 
 `tsconfig.json`でTypeScriptのトランスパイルの設定ができます。
-GASのV8ランタイムはECMAScript2015（ES6 / ES2015）相当の機能しかサポートしていないため、それに合わせた設定が必要です。
+GASのV8ランタイムはECMAScript2020相当の機能までサポートしているため、それに合わせた設定にしています。
 ここでは`rollup`でモジュールをバンドルし、
 `clasp`でデプロイする前提でサンプルを作成しました。
 
 `target`は、トランスパイルして出力されるJavaScriptのECMAScriptバージョンを指定するオプションです。
-GAS V8の場合は`"ES2015"`もしくは以降のバージョンを指定します。
+GAS V8ランタイムでは`"ES2020"`程度まで指定できます。
 
 `module`は、トランスパイルするときに利用するモジュール形式を指定するオプションです。
 `rollup`などでバンドルする場合は`"ESNext"`を指定しておけばよさそうです。
@@ -95,6 +95,9 @@ Node.jsを使う場合は`"CommonJS"`を指定します。GASでは非対応で�
 
 `moduleResolution`は、`import`や`require`で指定されたモジュールの探し方を指定するオプションです。
 `rollup`などのバンドラーを使う場合は`"bundler"`を指定します。
+
+`skipLibCheck`は、`node_modules`にある型定義ファイル（`.d.ts`）の型チェックを省略するオプションです。
+`@types/google-apps-script`など、サードパーティの型定義に問題があっても自分のコードのチェックを止めないために有効にしておくと安心です。
 
 ## 型チェックだけしたい（`tsc --noEmit`）
 
@@ -113,16 +116,17 @@ $ npx tsc --noEmit
 {
     "name": "...",
     "scripts": {
-        "typecheck": "tsc --noEmit",
-        "build": "rollup -c",
-        "watch": "rollup -c --watch",
+        "build": "tsc --noEmit",
+        "bundle": "rollup -c",
+        "bundle:watch": "rollup -c --watch",
         "push": "clasp push",
         "pull": "clasp pull",
-        "deploy": "npm run typecheck && npm run build && npm run push",
+        "deploy": "npm run build && npm run bundle && npm run push",
         "...": "..."
     }
 }
 ```
 
-`typecheck`で型チェックのみ、`build`で実際のトランスパイル・バンドルを行います。
-`deploy`では、型チェック→ビルド→GASへのアップロードの順に実行しています。
+`build`で型チェックのみ、`bundle`で実際のトランスパイル・バンドルを行います。
+紛らわしいですが、GASの世界では「ビルド＝型チェック」「バンドル＝1ファイルへのまとめ」と役割を分けるのが定番のようです。
+`deploy`では、型チェック→バンドル→GASへのアップロードの順に実行しています。
