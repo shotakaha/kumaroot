@@ -52,28 +52,20 @@ const rows = values
 
 :::
 
+データ（`rows`）は、そのまま2次元配列（`Cell[][]`）として扱えます。
+用途に応じて、行アクセス、列アクセス、オブジェクト・Map型への変換などができます。
+
+### 行インデックスでアクセスしたい
+
 ```ts
-// 配列として取得
 for (const row of rows) {
     const col0 = row[0];
     const col1 = row[1];
 }
-
-// オブジェクトとして取り出す
-// ヘッダー名をキーとして利用
-const data = rows.map(row =>
-  Object.fromEntries(
-    header.map( (key, i) => [key, row[i]] )
-  )
-);
-
-// Mapとして取り出す
-const maps: Map<string, Cell>[] = rows.map(row =>
-  new Map(header.map((key, i) => [key, row[i]]))
-);
 ```
 
-データ（`rows`）をそのまま2次元配列（`Cell[][]`）として扱ってもよいですが、ヘッダー名をキーとしたオブジェクトやMap型に変換すると便利です。
+`for...of`で1行（`Cell[]`）ずつ取り出せます。
+行の中の値には、さらに列インデックスでアクセスします。
 
 ### 列インデックスでアクセスしたい
 
@@ -131,6 +123,33 @@ const adults = rows.filter(
 `Array.filter`で、特定カラムの値が条件を満たす行だけを抽出できます。
 `Cell`型は`number`以外の型も含むため、
 比較演算子を使う前に`typeof`で数値であることを確認しておくと安全です。
+
+### オブジェクトに変換したい
+
+```ts
+// ヘッダー名をキーとして利用
+const data = rows.map(row =>
+  Object.fromEntries(
+    header.map( (key, i) => [key, row[i]] )
+  )
+);
+```
+
+`Object.fromEntries`と`header`を組み合わせると、
+1行を「カラム名: 値」のオブジェクトに変換できます。
+`data[0].age`のようにプロパティ名でアクセスできるようになるので、
+列インデックスやカラム名を毎回指定するより読みやすくなります。
+
+### Mapに変換したい
+
+```ts
+const maps: Map<string, Cell>[] = rows.map(row =>
+  new Map(header.map((key, i) => [key, row[i]]))
+);
+```
+
+オブジェクトの代わりに`Map`型に変換することもできます。
+キーの並び順を保証したい場合や、キーが動的に変わる場合は`Map`のほうが扱いやすいです。
 
 :::{hint}
 
