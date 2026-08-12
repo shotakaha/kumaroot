@@ -265,7 +265,7 @@ const arrays = [
     [4, 5, 6],
     [7, 8, 9]
 ];
-const result = arrays.reduce((left, right) => AddLists(left, right));
+const result = arrays.reduce((left, right) => addLists(left, right));
 // step1. arrays[0] を初期値として使用
 // step2. left=arrays[0], right=arrays[1] を計算
 //    -> [5, 7, 9]
