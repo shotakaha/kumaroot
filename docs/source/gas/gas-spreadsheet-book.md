@@ -1,4 +1,4 @@
-# ブック操作したい（`Spreadsheet`）
+# ブックを操作したい（`Spreadsheet`）
 
 ```js
 const book = SpreadsheetApp.getActiveSpreadsheet();
@@ -49,10 +49,11 @@ URL: `https://docs.google.com/spreadsheets/d/【ID】/edit`
 ## シートを取得したい（`getSheetByName`）
 
 ```js
-const sheet = book.getSheetByName("シート名") || book.insertSheet("シート名");
+const sheet = book.getSheetByName("シート名");
 ```
 
 `getSheetByName`でシート名を指定してシートを取得できます。
+指定した名前のシートが存在しない場合は`null`が返ります。
 
 ## シートを追加したい（`insertSheet`）
 
@@ -63,17 +64,18 @@ const newSheet = book.insertSheet("新しいシート名");
 `insertSheet`で新しいシートを作成できます。
 
 ```js
-const sheetName = "シート名"
+const sheetName = "シート名";
 const sheet = book.getSheetByName(sheetName) || book.insertSheet(sheetName);
 ```
 
-上のように、シートが存在しない場合に新しく作る、というパターンでよく使います。
+`getSheetByName`と組み合わせて、シートが存在しない場合だけ新しく作る、
+というパターンでよく使います。
 
 ## すべてのシートを取得したい（`getSheets`）
 
 ```js
 const sheets = book.getSheets();
-const nSheets = sheets.length
+const nSheets = sheets.length;
 Logger.log("シートの数: " + nSheets);
 sheets.forEach(sheet => {
     Logger.log(sheet.getName());
@@ -93,7 +95,7 @@ book.deleteSheet(sheetToDelete);
 ```
 
 `deleteSheet`でシートを削除できます。
-引数な`Sheet`オブジェクトです。
+引数は`Sheet`オブジェクトです。
 名前（`String`）ではない点に気をつけてください。
 
 ## 共同編集したい（`addEditor` / `removeEditor`）
