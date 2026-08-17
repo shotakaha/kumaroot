@@ -31,7 +31,7 @@ function createForm() {
 
 `create`メソッドで、フォームを新規作成できます。
 
-## フォームを設定したい
+## フォーム全体の動作を設定したい（`setDescription`など）
 
 ```ts
 function settings(form: GoogleAppsScript.Forms.Form) {
@@ -171,9 +171,7 @@ Logger.log(item.getTitle());
 `Form.getItemById`で、指定したIDのフィールドを取得できます。
 既存のフォームの構造をスプレッドシートに書き出すときに、フィールドIDを取得しておくと、全体のリストアはもちろん、必要なフィールドの更新が簡単になります。
 
-
----
-
+## フォーム送信時に処理したい（`onFormSubmit`）
 
 ```js
 function onFormSubmit(e) {
@@ -297,7 +295,7 @@ URL情報などを含む長文のため、メッセージの本文はドキュ�
 それを読み込んで適用しています。
 メッセージ内容を変更した場合は、再度`[実行]`して読み込ませる必要があります。
 
-## フォームを作成したい（`create`）
+## 質問付きのフォームを作成したい（`addTextItem`）
 
 ```js
 const form = FormApp.create("新規作成するフォーム名");
@@ -345,7 +343,7 @@ function createForm() {
 }
 ```
 
-`addMultipleChoiceItem`で、ラジオボタン形式（複数の選択肢から1つの回答を選択）の設問を作成できます
+`addMultipleChoiceItem`で、ラジオボタン形式（複数の選択肢から1つの回答を選択）の設問を作成できます。
 選択肢に区切り文字（この場合は`:`）を入れておくと、スプレッドシートで集計するときに点数を抽出しやすくなります。
 
 :::{note}
@@ -356,7 +354,7 @@ function createForm() {
 
 :::
 
-## 大量の質問を作成したい（動作確認中）
+## 大量の質問を作成したい
 
 ```js
 function createFormFromSheet() {
@@ -387,21 +385,26 @@ function createFormFromSheet() {
             item.setHelpText(description);
         }
 
-        // 選択肢が必要なメソッドのみ設定する
+        // 選択肢が必要なメソッドの場合は、item.setChoiceValues(choices)などで設定する
         // - addMultipleChoiceItem
         // - addCheckboxItem
         // - addListItem
         // - addGridItem
         // - addCheckboxGridItem
-
-
     };
 };
 ```
 
 スプレッドシートからアンケート項目を読み込み、フォームを生成するサンプルです。
-スプレッドーシートで項目を整理することで、抜け漏れの確認や修正が簡単になります。
+スプレッドシートで項目を整理することで、抜け漏れの確認や修正が簡単になります。
 大量の設問を用意する場合、とても力になると思います。
+
+:::{caution}
+
+上記のサンプルは骨格のみで、選択肢（`choices`）を使う質問タイプ（`addMultipleChoiceItem`など）に対して、実際に`setChoiceValues`を呼び出す処理は未実装です。
+そのまま使う場合は、質問タイプに応じて選択肢を設定する分岐を追加してください。
+
+:::
 
 - `addCheckboxGridItem()`: チェックボックス。複数回答可。グリッド。
 - `addCheckboxItem()`: チェックボックス。複数回答可。
@@ -415,3 +418,11 @@ function createFormFromSheet() {
 - `addScaleItem()`: ラジオボタン。番号付き選択肢。
 - `addTextItem()`: テキスト。短文回答。
 - `addTimeItem()`: 時間帯
+
+## リファレンス
+
+- [Class FormApp](https://developers.google.com/apps-script/reference/forms/form-app)
+- [Class Form](https://developers.google.com/apps-script/reference/forms/form)
+- [Class Item](https://developers.google.com/apps-script/reference/forms/item)
+- [Class FormResponse](https://developers.google.com/apps-script/reference/forms/form-response)
+- [Class ItemResponse](https://developers.google.com/apps-script/reference/forms/item-response)
