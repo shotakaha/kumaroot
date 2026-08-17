@@ -6,10 +6,11 @@ const book = SpreadsheetApp.openById("スプレッドシートのID");
 const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 ```
 
-`Spreadsheet`はスプレッドシート全体を管理するオブジェクトです。
-サンプルコードでは`ss`が使われますが、僕は`book`という変数名を使います。
+`Spreadsheet`はブック全体を管理するオブジェクトです。
+公式リファレンスやサンプルコードでは変数名に`ss`が使われますが、
+このドキュメントでは`book`という変数名を使います。
 
-## 現在のスプレッドシートを開きたい（`getActiveSpreadsheet`）
+## 現在のブックを開きたい（`getActiveSpreadsheet`）
 
 ```js
 const book = SpreadsheetApp.getActiveSpreadsheet();
@@ -19,9 +20,17 @@ Logger.log(`URL: ${book.getUrl()}`);
 ```
 
 `SpreadsheetApp.getActiveSpreadsheet()`で、
-スクリプトがバインドされているスプレッドシートを取得できます。
+スクリプトがバインドされているブックを取得できます。
 
-## スプレッドシートを開きたい（`openById` / `openByUrl`）
+:::{caution}
+
+[コンテナバインドスクリプト](./gas-clasp.md)からしか使えません。
+スタンドアロンスクリプトで実行すると`null`が返るので、
+`openById`か`openByUrl`でブックを指定してください。
+
+:::
+
+## ブックを開きたい（`openById` / `openByUrl`）
 
 ```js
 // IDを指定する
@@ -31,17 +40,17 @@ const book = SpreadsheetApp.openById("スプレッドシートのID");
 const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 ```
 
-`SpreadsheetApp.openById`でIDを指定してスプレッドシートを取得できます。
-スタンドアロンなスクリプトや、他のスクリプトからも開くことができるため、
+`SpreadsheetApp.openById`でIDを指定してブックを取得できます。
+スタンドアロンスクリプトや、他のスクリプトからも開くことができるため、
 非常によく使うメソッドのひとつです。
 
-また、`SpreadsheetApp.openByUrl`でURLを直接指定してスプレッドシートを取得できます。
+また、`SpreadsheetApp.openByUrl`でURLを直接指定してブックを取得できます。
 
 :::{hint}
 
 URL: `https://docs.google.com/spreadsheets/d/【ID】/edit`
 
-スプレッドシートのURLの書式は上記のとおりです。
+ブックのURLの書式は上記のとおりです。
 `【ID】`のランダムな文字列がIDです。
 
 :::
@@ -83,7 +92,7 @@ sheets.forEach(sheet => {
 })
 ```
 
-`getSheets`でスプレッドシートにあるすべてのシートの配列を取得できます。
+`getSheets`でブックにあるすべてのシートの配列を取得できます。
 この配列の要素数（`.length`）でシートの数を確認できます。
 また、この配列に対して`forEach`でループ処理できます。
 
@@ -108,12 +117,19 @@ book.removeEditor("someone@example.com");
 `addEditor`でアクセス権を付与できます。
 `removeEditor`でアクセス権を削除できます。
 
-## スプレッドシート全体を複製したい（`copy`）
+## ブック全体を複製したい（`copy`）
 
 ```js
 const book = SpreadsheetApp.openById("コピー元のID");
 const copied = book.copy("コピー先のファイル名");
 ```
 
-`copy`メソッドでスプレッドシート全体を複製できます。
+`copy`メソッドでブック全体を複製できます。
 新しいブックが作成されるため、URLも新規発行されます。
+
+## リファレンス
+
+- [Class Spreadsheet](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)
+- [SpreadsheetApp.getActiveSpreadsheet](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app#getactivespreadsheet)
+- [SpreadsheetApp.openById](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app#openbyidid)
+- [SpreadsheetApp.openByUrl](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app#openbyurlurl)
