@@ -205,7 +205,7 @@ function onFormSubmit(e) {
     const parsed = parseResponses(responses);
 
     // 通知メールする
-    notifyToGroup(e.response);
+    notifyToGroup(timestamp, mail, parsed);
 };
 
 // @params {ItemResponse[]} responses - フォームの回答
@@ -226,6 +226,13 @@ function parseResponses(responses) {
     // """
     return parsed;
 }
+
+function notifyToGroup(timestamp, mail, parsed) {
+    const to = "group@example.com";
+    const subject = "【フォーム回答通知】新しい回答がありました";
+    const body = `送信日時: ${timestamp}\n回答者: ${mail}\n\n${parsed}`;
+    MailApp.sendEmail(to, subject, body);
+}
 ```
 
 `onFormSubmit`は、回答者がフォームを送信したときにトリガーされる関数です。
@@ -239,6 +246,9 @@ GASのトリガーを使わないと実現できない処理で、フォーム�
 `onFormSubmit`の中に、すべての処理を書いてもよいのですが、
 `e.response.getItemResponses()`を取得して、別の関数に渡すようにしておくことで、
 ユニットテストが書きやすくなります。
+
+`notifyToGroup`では`MailApp.sendEmail`でメール通知しています。
+送信オプション（CCやHTML形式など）については[メールしたい](./gas-gmail.md)を参照してください。
 
 :::{hint}
 
