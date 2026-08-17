@@ -1,6 +1,10 @@
 # セルを操作したい（`Range`）
 
 ```js
+// シートの全データを取得
+const range = sheet.getDataRange();
+
+// シートのセルを範囲選択して取得
 const range = sheet.getRange("A1:C3");
 ```
 
@@ -14,14 +18,7 @@ const values = range.getValues();
 ```
 
 `Range.getValues`メソッドで、選択した範囲の値を2次元配列として取得できます。
-
-```js
-const values = sheet.getDataRange().getValues();
-const headers = values[0];
-const rows = values.slice(1);
-```
-
-1行目を見出しとして扱っている場合は、上のように`headers`と`rows`に分けて取得すると扱いやすいです。
+見出し行を含むデータの扱い方は[シートを操作したい](./gas-spreadsheet-sheet.md)を参照してください。
 
 ## 値を書き込みたい（`setValues`）
 
@@ -31,19 +28,15 @@ const arrays = [
   ["田中", 20],
   ["鈴木", 30],
 ];
-const rows = arrays.length;      // 行の数
-const cols = arrays[0].length;   // 列の数
-sheet.getRange(1, 1, rows, cols).setValues(arrays);
+range.setValues(arrays);
 ```
 
 `Range.setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
-書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`rows`と`cols`を2次元配列から取得しています。
+書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があります。
 
 ## セル範囲のデータを削除したい（`clearContent`）
 
 ```js
-// 範囲を指定して削除
-const range = sheet.getRange("A2:D6");
 range.clearContent();
 ```
 
@@ -52,7 +45,6 @@ range.clearContent();
 ## 選択範囲を確認したい（`activate`）
 
 ```js
-// 選択範囲を確認
 range.activate();
 ```
 
@@ -62,8 +54,7 @@ range.activate();
 ## スプレッドシートの関数を使いたい（`setFormula`）
 
 ```js
-const cell = sheet.getRange("D1");
-cell.setFormula("=SUM(A1:C1)");
+range.setFormula("=SUM(A1:C1)");
 ```
 
 `Range.setFormula`で`SUM`などのスプレッドシートの関数を設定できます。
@@ -71,7 +62,6 @@ cell.setFormula("=SUM(A1:C1)");
 ## セルの書式を変更したい
 
 ```js
-const range = sheet.getRange(1, 1, 3, 2); // 開始行, 開始列, 行数, 列数
 range.setFontSize(12);
 range.setFontFamily("Arial");
 range.setFontWeight("bold");   // "normal", "bold"
@@ -86,7 +76,6 @@ range.setBackground("yellow");
 ## セル範囲を保護したい（`protect`）
 
 ```js
-const range = sheet.getRange("A2:D6");
 const protection = range.protect();
 
 // 保護の理由を追加
