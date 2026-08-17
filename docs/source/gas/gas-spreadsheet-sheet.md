@@ -168,16 +168,13 @@ sheet.setName("変更後のシート名");
 // シート全体を保護
 const protection = sheet.protect();
 
-// セル範囲を保護
-const range = sheet.getRange("A2:D6");
-const protection = range.protect();
-
 // 保護の理由を追加
 protection.setDescription("説明");
 ```
 
-`Sheet.protect`（または`Range.protect`）でシートや選択したセルを保護できます。
+`Sheet.protect`でシート全体を保護できます。
 `Protection.setDescription`で保護の理由を追加できます。
+セル範囲だけを保護したい場合は[セルを操作したい](./gas-spreadsheet-range.md)を参照してください。
 
 ## カラム番号を取得したい（`getHeaders` / `getColumnIndex`）
 

@@ -83,6 +83,20 @@ range.setBackground("yellow");
 
 `Range.setFontSize`などで、選択したセルに対してフォントやスタイル、文字色などを設定できます。
 
+## セル範囲を保護したい（`protect`）
+
+```js
+const range = sheet.getRange("A2:D6");
+const protection = range.protect();
+
+// 保護の理由を追加
+protection.setDescription("説明");
+```
+
+`Range.protect`で、選択したセル範囲だけを保護できます。
+`Protection.setDescription`で保護の理由を追加できます。
+シート全体を保護したい場合は[シートを操作したい](./gas-spreadsheet-sheet.md)を参照してください。
+
 ## リファレンス
 
 - [Class Range](https://developers.google.com/apps-script/reference/spreadsheet/range)
@@ -92,3 +106,4 @@ range.setBackground("yellow");
 - [Range.activate](https://developers.google.com/apps-script/reference/spreadsheet/range#activate)
 - [Range.setFormula](https://developers.google.com/apps-script/reference/spreadsheet/range#setformulaformula)
 - [Range.setFontSize](https://developers.google.com/apps-script/reference/spreadsheet/range#setfontsizesize)
+- [Range.protect](https://developers.google.com/apps-script/reference/spreadsheet/range#protect)
