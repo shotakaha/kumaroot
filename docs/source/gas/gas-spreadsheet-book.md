@@ -1,34 +1,14 @@
 # ブックを操作したい（`Spreadsheet`）
 
 ```js
-const book = SpreadsheetApp.getActiveSpreadsheet();
 const book = SpreadsheetApp.openById("スプレッドシートのID");
 const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
+const book = SpreadsheetApp.getActiveSpreadsheet();
 ```
 
 `Spreadsheet`はブック全体を管理するオブジェクトです。
 公式リファレンスやサンプルコードでは変数名に`ss`が使われますが、
 このドキュメントでは`book`という変数名を使います。
-
-## 現在のブックを開きたい（`getActiveSpreadsheet`）
-
-```js
-const book = SpreadsheetApp.getActiveSpreadsheet();
-Logger.log(`name: ${book.getName()}`);
-Logger.log(`ID: ${book.getId()}`);
-Logger.log(`URL: ${book.getUrl()}`);
-```
-
-`SpreadsheetApp.getActiveSpreadsheet()`で、
-スクリプトがバインドされているブックを取得できます。
-
-:::{caution}
-
-[コンテナバインドスクリプト](./gas-clasp.md)からしか使えません。
-スタンドアロンスクリプトで実行すると`null`が返るので、
-`openById`か`openByUrl`でブックを指定してください。
-
-:::
 
 ## ブックを開きたい（`openById` / `openByUrl`）
 
@@ -54,6 +34,46 @@ URL: `https://docs.google.com/spreadsheets/d/【ID】/edit`
 `【ID】`のランダムな文字列がIDです。
 
 :::
+
+## 現在のブックを開きたい（`getActiveSpreadsheet`）
+
+```js
+const book = SpreadsheetApp.getActiveSpreadsheet();
+Logger.log(`name: ${book.getName()}`);
+Logger.log(`ID: ${book.getId()}`);
+Logger.log(`URL: ${book.getUrl()}`);
+```
+
+`SpreadsheetApp.getActiveSpreadsheet()`で、
+スクリプトがバインドされているブックを取得できます。
+
+:::{caution}
+
+[コンテナバインドスクリプト](./gas-clasp.md)からしか使えません。
+スタンドアロンスクリプトで実行すると`null`が返るので、
+`openById`か`openByUrl`でブックを指定してください。
+
+:::
+
+## ブックを共同編集したい（`addEditor` / `removeEditor`）
+
+```js
+book.addEditor("someone@example.com");
+book.removeEditor("someone@example.com");
+```
+
+`addEditor`でアクセス権を付与できます。
+`removeEditor`でアクセス権を削除できます。
+
+## ブック全体を複製したい（`copy`）
+
+```js
+const book = SpreadsheetApp.openById("コピー元のID");
+const copied = book.copy("コピー先のファイル名");
+```
+
+`copy`メソッドでブック全体を複製できます。
+新しいブックが作成されるため、URLも新規発行されます。
 
 ## シートを取得したい（`getSheetByName`）
 
@@ -106,26 +126,6 @@ book.deleteSheet(sheetToDelete);
 `deleteSheet`でシートを削除できます。
 引数は`Sheet`オブジェクトです。
 名前（`String`）ではない点に気をつけてください。
-
-## 共同編集したい（`addEditor` / `removeEditor`）
-
-```js
-book.addEditor("someone@example.com");
-book.removeEditor("someone@example.com");
-```
-
-`addEditor`でアクセス権を付与できます。
-`removeEditor`でアクセス権を削除できます。
-
-## ブック全体を複製したい（`copy`）
-
-```js
-const book = SpreadsheetApp.openById("コピー元のID");
-const copied = book.copy("コピー先のファイル名");
-```
-
-`copy`メソッドでブック全体を複製できます。
-新しいブックが作成されるため、URLも新規発行されます。
 
 ## リファレンス
 
