@@ -21,7 +21,7 @@ const range = sheet.getRange("A1");
 const range = sheet.getRange("A1:B3");
 ```
 
-`getRange`でセル（やセル範囲）を指定して選択できます。
+`Sheet.getRange`でセル（やセル範囲）を指定して選択できます。
 セル番地は大文字でも小文字でもOKです。
 
 ```js
@@ -37,7 +37,7 @@ const range = sheet.getRange(2, 3);
 const range = sheet.getRange(2, 3, 2, 2);
 ```
 
-`getRange`はR1C1表記にも対応しています。
+`Sheet.getRange`はR1C1表記にも対応しています。
 
 ## 列（や行）を選択したい
 
@@ -53,9 +53,9 @@ const range = sheet.getRange("B");
 // -> Exception: Range not found
 ```
 
-列全体は`getRange(開始セル:列番号)`、
-行全体は`getRange(開始セル:行番号)`で選択できます。
-`getRange(列番号 or 行番号)`だけだとエラーになります。
+列全体は`Sheet.getRange(開始セル:列番号)`、
+行全体は`Sheet.getRange(開始セル:行番号)`で選択できます。
+`Sheet.getRange(列番号 or 行番号)`だけだとエラーになります。
 
 ## データを全選択したい（`getDataRange`）
 
@@ -64,7 +64,7 @@ const range = sheet.getRange("B");
 const range = sheet.getDataRange();
 ```
 
-`getDataRange`で、シートにあるデータを全選択できます。
+`Sheet.getDataRange`で、シートにあるデータを全選択できます。
 余計な空行・空列は含まれないので、シート全体でデータを管理している場合によく使います。
 
 ```js
@@ -84,23 +84,13 @@ const newRange = sheet.getRange(lastRow + 1, 1);
 
 データを読み込むときより、既存のデータを追記したいときに利用します。
 
-## 選択範囲を確認したい（`activate`）
-
-```js
-// 選択範囲を確認
-range.activate();
-```
-
-`activate`メソッドで、実際に選択された範囲をシート上で確認できます。
-デバッグ時など、選択範囲が正しいか確認するときに便利です。
-
 ## 値を読み込みたい（`getValues`）
 
 ```js
 const values = range.getValues();
 ```
 
-`getValues`メソッドで、選択した範囲の値を2次元配列として取得できます。
+`Range.getValues`メソッドで、選択した範囲の値を2次元配列として取得できます。
 
 ```js
 const values = sheet.getDataRange().getValues();
@@ -123,17 +113,27 @@ const cols = arrays[0].length;   // 列の数
 sheet.getRange(1, 1, rows, cols).setValues(arrays);
 ```
 
-`setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
+`Range.setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
 書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`rows`と`cols`を2次元配列から取得しています。
 
-## 組み込み関数を使いたい（`setFormula`）
+## 選択範囲を確認したい（`activate`）
+
+```js
+// 選択範囲を確認
+range.activate();
+```
+
+`Range.activate`メソッドで、実際に選択された範囲をシート上で確認できます。
+デバッグ時など、選択範囲が正しいか確認するときに便利です。
+
+## スプレッドシートの関数を使いたい（`setFormula`）
 
 ```js
 const cell = sheet.getRange("D1");
 cell.setFormula("=SUM(A1:C1)");
 ```
 
-`setFormula`でスプレッドシートの組み込み関数を利用できます。
+`Range.setFormula`で`SUM`などのスプレッドシートの関数を設定できます。
 
 ## セルの書式を変更したい
 
@@ -148,9 +148,15 @@ range.setFontColor("red");
 range.setBackground("yellow");
 ```
 
-選択したセルに対して、フォントやスタイル、文字色などを設定できます。
+`Range.setFontSize`などで、選択したセルに対してフォントやスタイル、文字色などを設定できます。
 
 ## リファレンス
 
-- [Sheet.getDataRange](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getdatarange)
+- [Class Range](https://developers.google.com/apps-script/reference/spreadsheet/range)
 - [Sheet.getRange](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getrangerow,-column)
+- [Sheet.getDataRange](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getdatarange)
+- [Range.getValues](https://developers.google.com/apps-script/reference/spreadsheet/range#getvalues)
+- [Range.setValues](https://developers.google.com/apps-script/reference/spreadsheet/range#setvaluesvalues)
+- [Range.activate](https://developers.google.com/apps-script/reference/spreadsheet/range#activate)
+- [Range.setFormula](https://developers.google.com/apps-script/reference/spreadsheet/range#setformulaformula)
+- [Range.setFontSize](https://developers.google.com/apps-script/reference/spreadsheet/range#setfontsizesize)
