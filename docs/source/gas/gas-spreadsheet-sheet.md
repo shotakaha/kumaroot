@@ -94,6 +94,62 @@ appendRows(sheet, rows);
 大量のデータを追加する場合は、
 2次元配列を作成し`Range.setValues`で書き出すほうがよいです。
 
+## 行を削除したい（`deleteRow`）
+
+```js
+// 2行目を削除
+sheet.deleteRow(2);
+```
+
+`Sheet.deleteRow`で行番号を指定して行ごと削除できます。
+
+## シートを複製したい（`copyTo`）
+
+```js
+const source = SpreadsheetApp.openById("コピー元のID");
+const target = SpreadsheetApp.openById("コピー先のID");
+const sheet = source.getSheetByName("複製したいシート名");
+const copied = sheet.copyTo(target);
+```
+
+`Sheet.copyTo`で指定したシートを複製できます。
+
+## シート名を変更したい（`setName`）
+
+```js
+sheet.setName("変更後のシート名");
+```
+
+`Sheet.setName`でシート名を変更できます。
+同じ名前のシートは作れません。
+
+## シートを保護したい（`protect`）
+
+```js
+// シート全体を保護
+const protection = sheet.protect();
+
+// セル範囲を保護
+const range = sheet.getRange("A2:D6");
+const protection = range.protect();
+
+// 保護の理由を追加
+protection.setDescription("説明");
+```
+
+`Sheet.protect`（または`Range.protect`）でシートや選択したセルを保護できます。
+`Protection.setDescription`で保護の理由を追加できます。
+
+## セル範囲のデータを削除したい（`clearContent`）
+
+```js
+// 範囲を指定して削除
+const range = sheet.getRange("A2:D6");
+range.clearContent();
+```
+
+`Range.clearContent`で指定したセル範囲のデータを削除できます。
+
 ## カラム番号を取得したい（`getHeaders` / `getColumnIndex`）
 
 ```ts
@@ -182,62 +238,6 @@ function findDuplicateRow(
   return -1;
 }
 ```
-
-## 行を削除したい（`deleteRow`）
-
-```js
-// 2行目を削除
-sheet.deleteRow(2);
-```
-
-`Sheet.deleteRow`で行番号を指定して行ごと削除できます。
-
-## セル範囲のデータを削除したい（`clearContent`）
-
-```js
-// 範囲を指定して削除
-const range = sheet.getRange("A2:D6");
-range.clearContent();
-```
-
-`Range.clearContent`で指定したセル範囲のデータを削除できます。
-
-## シートを複製したい（`copyTo`）
-
-```js
-const source = SpreadsheetApp.openById("コピー元のID");
-const target = SpreadsheetApp.openById("コピー先のID");
-const sheet = source.getSheetByName("複製したいシート名");
-const copied = sheet.copyTo(target);
-```
-
-`Sheet.copyTo`で指定したシートを複製できます。
-
-## シート名を変更したい（`setName`）
-
-```js
-sheet.setName("変更後のシート名");
-```
-
-`Sheet.setName`でシート名を変更できます。
-同じ名前のシートは作れません。
-
-## シートを保護したい（`protect`）
-
-```js
-// シート全体を保護
-const protection = sheet.protect();
-
-// セル範囲を保護
-const range = sheet.getRange("A2:D6");
-const protection = range.protect();
-
-// 保護の理由を追加
-protection.setDescription("説明");
-```
-
-`Sheet.protect`（または`Range.protect`）でシートや選択したセルを保護できます。
-`Protection.setDescription`で保護の理由を追加できます。
 
 ## リファレンス
 
