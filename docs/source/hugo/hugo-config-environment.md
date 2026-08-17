@@ -9,94 +9,68 @@ config
 │   ├── menus.en.toml
 │   ├── menus.ja.toml
 │   └── params.toml
-├── production
-│   ├── hugo.toml
-│   └── params.toml
-└── gitlab
-     ├── hugo.toml
-     └── params.toml
+└── production
+    └── hugo.toml
 ```
 
-[前ページの設定ファイルの分割機能](./hugo-config-environment.md)を使って、
-ステージング用やプロダクション用など
+[前ページの設定ファイルの分割機能](./hugo-config-sections.md)を使って、
 環境ごとにディレクトリを分けることができます。
+すべての環境に共通する設定は`config/_default/`に作成し、
+環境ごとに異なる差分だけを`config/環境名/`に作成します。
 
-すべての環境に共通する設定は
-デフォルト環境は`config/_default/`に作成します。
-そして環境ごとに異なる差分を`config/環境名/`に作成します。
-
-多言語サイトにしたい場合も、そのセクションの言語別ファイルを作成するだけで簡単に対応できます。
-
-## ビルド環境を変更したい（`hugo --environment`）
-
-```console
-$ hugo -e 環境名
-
-// _default + GitLab Pagesの設定
-$ hugo -e gitlab
-
-// _default + 公開設定
-$ hugo -e production
-```
-
-``--environment``オプションで、用途別に設定を切り替えることができます。
-設定ファイルは``/config/環境名/``ディレクトリの以下に配置します。
-デフォルトは``/config/_default/``ディレクトリです。
-
-ローカルでの開発（やステージング環境）では``/config/_default/``、
-GitLab Pagesでの構築時は``/config/gitlab/``、
-本番環境に公開する場合は``/config/production/``の設定ファイルに切り替えて適用されるようにしています。
-
-``production``環境は``hugo build``（``hugo``のみの実行を含む）のデフォルトでもあります。
-一方``hugo server``のデフォルトは``development``です。
-環境変数``HUGO_ENVIRONMENT``で明示的に指定することもできます。
-
-CIで単に``hugo``を実行するだけでも、自動的に``/config/production/``が``/config/_default/``の上にマージされます。
+## デフォルトとproductionを分けたい
 
 ```toml
-# /config/production/hugo.toml
+# config/_default/hugo.toml
+buildDrafts = true
+buildFuture = true
+```
+
+```toml
+# config/production/hugo.toml
 buildDrafts = false
+buildFuture = true
 ```
 
-環境ごとの設定ファイルは、``_default``の内容をまるごと書き直す必要はありません。
-上記のように、変更したいキーだけを書けば``_default``の設定に**上書き（マージ）**されます。
-たとえば「開発中は下書き記事も表示したいが、本番公開時は隠したい」という場合、``production``環境では``buildDrafts = false``の1行だけを追加すれば十分です。
+もっとも単純な例として、下書き記事の扱いを環境ごとに変える設定です。
+`config/_default/hugo.toml`では`buildDrafts = true`にして、
+`hugo server`でのローカル開発中は下書きも確認できるようにします。
 
-## テーマごとに設定したい
+`config/production/hugo.toml`では`buildDrafts`だけを`false`に上書きします。
+書き直す必要があるのはこの1行だけで、他の設定は`_default`のものがそのまま引き継がれます。
 
-この機能を使うと、テーマごとの設定を共存させることができます。
-Hugoのテーマ作成はとても自由度が高く、テーマ間の互換性はほぼありません。
+`production`環境は`hugo build`（`hugo`のみの実行を含む）のデフォルトです。
+一方`hugo server`のデフォルトは`development`環境なので、
+明示的に指定しない限りは`config/_default/`の設定のまま動きます。
 
 ```console
-// 実行: hugo server
-/config/_default/hugo.toml
+$ hugo server
+# ==> development環境（_defaultのみ適用、buildDrafts = true）
 
-// Blowfishテーマ
-// 実行: hugo -e blowfish server
-/config/blowfish/[...].toml
-
-// Anankeテーマ
-// 実行: hugo -e ananke server
-/config/ananke/[...].toml
+$ hugo
+$ hugo build
+# ==> production環境（_default + productionが適用、buildDrafts = false）
 ```
 
-お気に入りのテーマを探す過程で、設定ファイルを毎回書き換えるのは面倒です。
-このように、テーマごとに設定ファイル環境を作成すると、その手間がぐっと抑えられます。
+## カスタム環境を追加したい（`baseURL`の切り替え）
 
-## Blowfishの場合
+```toml
+# config/gitlab/hugo.toml
+baseURL = "https://ユーザー名.gitlab.io/リポジトリ名/"
+```
 
-[Blowfishテーマの設定ファイル](https://blowfish.page/docs/configuration/)のセクションでは、次のように設定ファイルを分割しています。
+`_default`と`production`以外にも、好きな名前で環境を追加できます。
+GitLab Pagesにデプロイする場合など、本番用とは異なる`baseURL`を使いたいときに便利です。
 
 ```console
-/config/_default/config.toml
-/config/_default/languages.ja.toml # 言語関係の設定
-/config/_default/menus.ja.toml     # ナビゲーションの設定
-/config/_default/params.toml       # テーマ独自の設定
+$ hugo -e gitlab
+# ==> _default + gitlabが適用される
 ```
 
-多言語サイトにする場合、設定ファイル名も言語ごとに作成できます。
-
+`-e`（`--environment`）オプションで環境名を指定して実行します。
+`config/gitlab/`ディレクトリに置いたファイルが`config/_default/`の設定に上書きされます。
 
 ## リファレンス
 
 - [Configuration directory](https://gohugo.io/getting-started/configuration/#configuration-directory)
+- [Configure Build](https://gohugo.io/getting-started/configuration/#configure-build)
