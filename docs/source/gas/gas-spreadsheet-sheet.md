@@ -264,6 +264,8 @@ appendRowSafe(sheet, row);
 
 :::
 
+## 複数行を安全に追加したい（`appendRowsSafe`）
+
 ```ts
 type Cell = string | number | boolean | Date | null;
 type Row = Cell[];
