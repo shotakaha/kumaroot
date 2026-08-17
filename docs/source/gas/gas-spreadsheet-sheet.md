@@ -60,69 +60,6 @@ sheet.deleteRow(2);
 `Sheet.appendRow`で既存のシート末尾にデータを追加できます。
 `Sheet.deleteRow`で行番号を指定して行ごと削除できます。
 
-```ts
-type Cell = string | number | boolean | Date | null;
-type Row = Cell[];
-
-function appendRow(
-  sheet: GoogleAppsScript.Spreadsheet.Sheet,
-  row: Row
-) {
-  const width = sheet.getLastColumn();
-  if (width !== 0 && row.length !== width) {
-    throw new Error("列数が一致していません");
-  }
-
-  sheet.appendRow(row);
-}
-
-const row: Row = ["A", 123, true, new Date(), null];
-appendRow(sheet, row);
-```
-
-スタンドアロンスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`Sheet.appendRow`のラッパーを作成しておくと便利です。
-
-:::{hint}
-
-`SpreadsheetApp.openById`などでシートを取得する処理は時間がかかります。
-ラッパー関数の中で毎回呼び出すのではなく、
-あらかじめ取得したシートを引数として渡すとよいです。
-
-:::
-
-```ts
-type Cell = string | number | boolean | Date | null;
-type Row = Cell[];
-
-function appendRows(
-  sheet: GoogleAppsScript.Spreadsheet.Sheet,
-  rows: Row[]
-) {
-  if (rows.length === 0) return;
-
-  const width = rows[0].length;
-
-  // すべての行のカラム数をチェック
-  if (!rows.every(row => row.length === width)) {
-    throw new Error("すべての行の列数が一致していません");
-  }
-
-  sheet
-    .getRange(sheet.getLastRow() + 1, 1, rows.length, width)
-    .setValues(rows);
-}
-
-const rows: Row[] = [
-  ["A", "B"],
-  [1, 2],
-];
-appendRows(sheet, rows);
-```
-
-`Sheet.appendRow`の処理は時間がかかります。
-大量のデータを追加する場合は、
-2次元配列を作成し`Range.setValues`で書き出すほうがよいです。
-
 ## 列を操作したい（`insertColumnBefore` / `insertColumnAfter` / `deleteColumn`）
 
 ```js
@@ -235,6 +172,71 @@ const nameColIndex = getColumnIndex(headers, "名前");
 このサンプルでは、ヘッダー行をMap型（`Map<string, number>`）に変換することで、カラム名から安全かつ可読性の高い形でカラム番号を取得できるようにしています。
 カラム名で操作できるようになるので、
 シートのカラム構成の変更にも強くなります。
+
+## 行を安全に追加したい（`appendRow`のラッパー）
+
+```ts
+type Cell = string | number | boolean | Date | null;
+type Row = Cell[];
+
+function appendRow(
+  sheet: GoogleAppsScript.Spreadsheet.Sheet,
+  row: Row
+) {
+  const width = sheet.getLastColumn();
+  if (width !== 0 && row.length !== width) {
+    throw new Error("列数が一致していません");
+  }
+
+  sheet.appendRow(row);
+}
+
+const row: Row = ["A", 123, true, new Date(), null];
+appendRow(sheet, row);
+```
+
+スタンドアロンスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`Sheet.appendRow`のラッパーを作成しておくと便利です。
+
+:::{hint}
+
+`SpreadsheetApp.openById`などでシートを取得する処理は時間がかかります。
+ラッパー関数の中で毎回呼び出すのではなく、
+あらかじめ取得したシートを引数として渡すとよいです。
+
+:::
+
+```ts
+type Cell = string | number | boolean | Date | null;
+type Row = Cell[];
+
+function appendRows(
+  sheet: GoogleAppsScript.Spreadsheet.Sheet,
+  rows: Row[]
+) {
+  if (rows.length === 0) return;
+
+  const width = rows[0].length;
+
+  // すべての行のカラム数をチェック
+  if (!rows.every(row => row.length === width)) {
+    throw new Error("すべての行の列数が一致していません");
+  }
+
+  sheet
+    .getRange(sheet.getLastRow() + 1, 1, rows.length, width)
+    .setValues(rows);
+}
+
+const rows: Row[] = [
+  ["A", "B"],
+  [1, 2],
+];
+appendRows(sheet, rows);
+```
+
+`Sheet.appendRow`の処理は時間がかかります。
+大量のデータを追加する場合は、
+2次元配列を作成し`Range.setValues`で書き出すほうがよいです。
 
 ## データの重複を探したい（`findDuplicateRow`）
 
