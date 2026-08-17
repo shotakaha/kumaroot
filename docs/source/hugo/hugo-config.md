@@ -12,10 +12,11 @@ hugo-config-menu
 hugo-config-permalinks
 hugo-config-taxonomies
 hugo-config-pagination
+hugo-config-markup
+hugo-config-params
 hugo-config-googleAnalytics
 hugo-config-copyright
 hugo-config-format
-hugo-config-markup
 ```
 
 ## 設定ファイルを変更したい（`hugo --config`）
