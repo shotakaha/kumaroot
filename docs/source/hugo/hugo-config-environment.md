@@ -1,28 +1,14 @@
-# ビルド環境別に設定したい（オススメ）
-
-```txt
-config
-├── _default
-│   ├── hugo.toml
-│   ├── languages.en.toml
-│   ├── languages.ja.toml
-│   ├── menus.en.toml
-│   ├── menus.ja.toml
-│   └── params.toml
-└── production
-    └── hugo.toml
-```
-
-[前ページの設定ファイルの分割機能](./hugo-config-sections.md)を使って、
-環境ごとにディレクトリを分けることができます。
-すべての環境に共通する設定は`config/_default/`に作成し、
-環境ごとに異なる差分だけを`config/環境名/`に作成します。
-
-## デフォルトとproductionを分けたい
+# ビルド設定したい（`development` / `production`）
 
 ```toml
 # config/_default/hugo.toml
 buildDrafts = true
+buildFuture = true
+```
+
+```toml
+# config/[環境名]/hugo.toml
+buildDrafts = false
 buildFuture = true
 ```
 
@@ -32,43 +18,71 @@ buildDrafts = false
 buildFuture = true
 ```
 
-もっとも単純な例として、下書き記事の扱いを環境ごとに変える設定です。
-`config/_default/hugo.toml`では`buildDrafts = true`にして、
-`hugo server`でのローカル開発中は下書きも確認できるようにします。
-
-`config/production/hugo.toml`では`buildDrafts`だけを`false`に上書きします。
-書き直す必要があるのはこの1行だけで、他の設定は`_default`のものがそのまま引き継がれます。
-
-`production`環境は`hugo build`（`hugo`のみの実行を含む）のデフォルトです。
-一方`hugo server`のデフォルトは`development`環境なので、
-明示的に指定しない限りは`config/_default/`の設定のまま動きます。
-
 ```console
-$ hugo server
-# ==> development環境（_defaultのみ適用、buildDrafts = true）
-
-$ hugo
-$ hugo build
-# ==> production環境（_default + productionが適用、buildDrafts = false）
+$ hugo server --openBrowser    # 開発環境（`_default`）で起動
+$ hugo server -e 環境名   # 指定した環境（`[環境名]`）で起動
+$ hugo server -e production   # 本番環境（`production`）で起動
 ```
 
-## カスタム環境を追加したい（`baseURL`の切り替え）
+`--environment`で、Hugoのビルド環境を変更できます。
+デフォルトは開発環境（`development`）で、`config/_default/`の設定が読み込まれます。
+`--environment`で指定した環境（`[環境名]`）の設定は、`_default`の設定を上書きします。
+
+## 開発環境したい（`_default` / `development`）
+
+```toml
+# config/_default/hugo.toml
+buildDrafts = true
+buildFuture = true
+```
+
+```console
+$ hugo server --openBrowser
+```
+
+`config/_default/`は、デフォルトの設定を配置するディレクトリです。
+いわゆる「開発環境」の設定で、`hugo server`を実行すると、この設定が読み込まれます。
+
+## 本番環境したい（`production`）
+
+```toml
+# config/production/hugo.toml
+buildDrafts = false
+buildFuture = true
+```
+
+```console
+$ hugo build
+```
+
+`config/production/`は、本番環境の設定を配置するディレクトリです。
+`hugo build`を実行すると、デフォルトの設定に加えて、この設定が読み込まれます。
+
+```console
+$ hugo server --environment production --openBrowser
+```
+
+ローカルで本番環境の設定を確認したい場合は、`--environment`オプションで環境名を指定して実行します。
+
+## GitLab Pagesにデプロイしたい
+
+```toml
+# config/_default/hugo.toml
+baseURL = "https://www.example.com/custom/"
+```
 
 ```toml
 # config/gitlab/hugo.toml
-baseURL = "https://ユーザー名.gitlab.io/リポジトリ名/"
+baseURL = "https://qumasan.gitlab.io/custom/"
 ```
-
-`_default`と`production`以外にも、好きな名前で環境を追加できます。
-GitLab Pagesにデプロイする場合など、本番用とは異なる`baseURL`を使いたいときに便利です。
 
 ```console
-$ hugo -e gitlab
-# ==> _default + gitlabが適用される
+$ hugo build  # URL = https://www.example.com/custom/
+$ hugo -e gitlab  # URL = https://qumasan.gitlab.io/custom/
 ```
 
-`-e`（`--environment`）オプションで環境名を指定して実行します。
-`config/gitlab/`ディレクトリに置いたファイルが`config/_default/`の設定に上書きされます。
+GitLab Pagesは、リポジトリ名によってURLが自動で割り当てられます。
+`config/gitlab/`に置いた設定は、`config/_default/`の設定を上書きします。
 
 ## リファレンス
 
