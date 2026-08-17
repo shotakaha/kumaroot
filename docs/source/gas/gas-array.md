@@ -224,6 +224,7 @@ const values: Cell[][] = sheet.getDataRange().getValues();
 
 スプレッドシートにあるデータを取得すると、2次元配列（行x列）として返ってきます。
 `Cell`型を定義することで型安全を保つことができます。
+`getDataRange` / `getValues`によるデータの取得方法については[シートを操作したい](./gas-spreadsheet-sheet.md)を参照してください。
 
 ```ts
 // ヘッダー（header）とデータ（rows）に分割
