@@ -1,7 +1,7 @@
 # スプレッドシートを操作したい（`SpreadsheetApp`）
 
 ```js
-// アクティブなスプレッドシート（＝ブック）を取得する
+// アクティブなブックを取得する
 const book = SpreadsheetApp.getActiveSpreadsheet();
 // アクティブなシートを取得する
 const sheet = book.getActiveSheet();
@@ -28,12 +28,26 @@ sheetToWrite.getRange(1, 1, rows, cols).setValues(arraysToWrite);
 
 [SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスで、Googleスプレッドシートを操作できます。
 
-スプレッドシートには`ブック（スプレッドシート）` > `シート` > `セル`という構造があります。
+スプレッドシートには`ブック` > `シート` > `セル`という構造があります。
 それぞれ
 [Spreadsheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)、
 [Sheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/sheet)、
 [Rangeクラス](https://developers.google.com/apps-script/reference/spreadsheet/range)
 のオブジェクトが対応しています。
+
+:::{note}
+
+このドキュメントでは、Excelでの呼び方を参考に、
+`Spreadsheet`オブジェクトを「ブック」、
+`Sheet`オブジェクトを「シート」、
+`Range`オブジェクトを「セル」と呼ぶことにします。
+
+公式リファレンスやサンプルコードでは`Spreadsheet`オブジェクトも「スプレッドシート」と呼ばれることが多く、
+ファイル全体（ブック）を指すのか、単一の表（シート）を指すのか紛らわしいためです。
+
+変数名もこれにあわせて`book`、`sheet`を使います。
+
+:::
 
 上記のコードサンプルでは、取得したシートにある値を`getDataRange`ですべて選択し、`getValues`することで2次元配列のデータにしています。
 
