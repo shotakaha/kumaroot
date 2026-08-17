@@ -1,11 +1,12 @@
 # シートを操作したい（`Sheet`）
 
 ```js
-const book = SpreadsheetApp.getActiveSpreadsheet();
-const sheet = book.getActiveSheet();
+const book = SpreadsheetApp.openById("スプレッドシートのID");
+const sheet = book.getSheetByName("シート名");
 ```
 
 `Sheet`オブジェクトで単一のシートを操作できます。
+ブックの取得方法については[ブックを操作したい](./gas-spreadsheet-book.md)を参照してください。
 
 ## シートの情報を確認したい
 
@@ -50,7 +51,7 @@ const row: Row = ["A", 123, true, new Date(), null];
 appendRow(sheet, row);
 ```
 
-スタンドアロンなスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`appendRow`のラッパーを作成しておくと便利です。
+スタンドアロンスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`appendRow`のラッパーを作成しておくと便利です。
 
 :::{hint}
 
@@ -130,7 +131,7 @@ const headers = getHeaders(sheet);
 const nameColIndex = getColumnIndex(headers, "名前");
 ```
 
-スプレッドシート操作は、基本的にカラム番号（1はじまり）が前提となっていますが、カラム追加や順番の変更に弱いです。
+シート操作は、基本的にカラム番号（1はじまり）が前提となっていますが、カラム追加や順番の変更に弱いです。
 
 このサンプルでは、ヘッダー行をMap型（`Map<string, number>`）に変換することで、カラム名から安全かつ可読性の高い形でカラム番号を取得できるようにしています。
 カラム名で操作できるようになるので、
@@ -182,16 +183,16 @@ function findDuplicateRow(
 }
 ```
 
-## データを削除したい（`deleteRow`）
+## 行を削除したい（`deleteRow`）
 
 ```js
 // 2行目を削除
 sheet.deleteRow(2);
 ```
 
-`deleteRow`で行番号を指定してデータを削除できます。
+`deleteRow`で行番号を指定して行ごと削除できます。
 
-## データを削除したい（`clearContent`）
+## セル範囲のデータを削除したい（`clearContent`）
 
 ```js
 // 範囲を指定して削除
@@ -240,7 +241,9 @@ protection.setDescription("説明");
 
 ## リファレンス
 
-- [Class Spreadsheet](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)
-- [Spreadsheet.getSheetByName](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet#getsheetbynamename)
-- [Spreadsheet.insertSheet](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet#insertsheetsheetname)
-- [Spreadsheet.getSheets](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet#getsheets)
+- [Class Sheet](https://developers.google.com/apps-script/reference/spreadsheet/sheet)
+- [Sheet.appendRow](https://developers.google.com/apps-script/reference/spreadsheet/sheet#appendrowrowcontents)
+- [Sheet.deleteRow](https://developers.google.com/apps-script/reference/spreadsheet/sheet#deleterowrowposition)
+- [Sheet.copyTo](https://developers.google.com/apps-script/reference/spreadsheet/sheet#copytospreadsheet)
+- [Sheet.setName](https://developers.google.com/apps-script/reference/spreadsheet/sheet#setnamename)
+- [Sheet.protect](https://developers.google.com/apps-script/reference/spreadsheet/sheet#protect)
