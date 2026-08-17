@@ -93,6 +93,10 @@ const method = SpreadsheetApp.PivotTableSummarizeFunction.COUNTA;
 pivotTable.addPivotValue(index, method);
 ```
 
+`PivotTable.addPivotValue`で、集計対象の値（第1引数の列番号）と集計方法（第2引数）を指定して、
+ピボットテーブルに集計列を追加できます。
+集計方法は`SpreadsheetApp.PivotTableSummarizeFunction`の中で定義されている値（`SUM`・`COUNTA`・`AVERAGE`など）から選択します。
+
 ## フィルターを追加したい（`addFilter`）
 
 ```js
@@ -103,8 +107,9 @@ const criteria = SpreadsheetApp.newFilterCriteria().whenCellNotEmpty().build();
 pivotTable.addFilter(index, criteria);
 ```
 
-`addFilter`でフィルターを追加できます。
-フィルター条件は[](./gas-spreadsheet-filter.md)を参考に`FilterCriteria`オブジェクトを作成します。
+`PivotTable.addFilter`で、対象の列番号（第1引数）とフィルター条件（第2引数）を指定して、
+ピボットテーブルの元データにフィルターを追加できます。
+フィルター条件は[フィルターを操作したい](./gas-spreadsheet-filter.md)を参考に`FilterCriteria`オブジェクトを作成します。
 
 ## 行グループ／列グループの表示順や名前を変更したい（`PivotGroup`）
 
