@@ -164,7 +164,14 @@ $ clasp create-script --title PROJECT_NAME --type standalone --rootDir gas
 
 :::{note}
 
-GASには、Google Sheetなどのアプリに紐づいた状態のものと、どのアプリとも紐づいていない`standalone`のものがあります。（それぞれ呼び方があった気がするので、あとで確認する）
+GASのプロジェクトには、大きく分けて「スタンドアロンスクリプト」と「コンテナバインドスクリプト」の2種類があります。
+
+- **スタンドアロンスクリプト**（`standalone`）：どのアプリにも紐づかない独立したプロジェクト。[script.google.com](https://script.google.com/)から新規作成した場合はこちら。
+- **コンテナバインドスクリプト**：Google Sheet・Doc・Form・Slideなどに紐づいたプロジェクト。各アプリの「拡張機能」メニューから作成した場合はこちら。紐づいた親ファイル（コンテナー）の`SpreadsheetApp.getActiveSpreadsheet()`のようなAPIを、認可なしで呼び出せるのが特徴です。
+
+`--type`には`standalone`のほかに`docs`・`sheets`・`slides`・`forms`なども指定できますが、
+`clasp create-script`でコンテナバインドスクリプトを作るには`--parentId`で親ファイルのIDを指定する必要があります。
+既存のSheetなどに紐づけたい場合は、そのファイルの「拡張機能」→「Apps Script」から作成するほうが手軽です。
 
 :::
 

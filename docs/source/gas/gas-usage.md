@@ -5,6 +5,10 @@
 現在は[V8ランタイムに対応（2020年3月17日）](https://cloud.google.com/blog/ja/products/g-suite/data-processing-just-got-easier-apps-scripts-new-v8-runtime)していて、モダンなJavaScript環境のひとつとして使うことができます。
 ブラウザだけで開発・実行できるのが大きな特徴です。
 
+GASのプロジェクトには、どのアプリにも紐づかない「スタンドアロンスクリプト」と、
+Sheet・Doc・Formなどに紐づいた「コンテナバインドスクリプト」の2種類があります。
+詳しくは[`clasp`](./gas-clasp.md)の「新規プロジェクトしたい」を参照してください。
+
 一方で、GAS特有の制約として、モジュール分割（ESModule）や`import/export`文がそのままでは利用できません。
 そのため、コード量が増えてくるにつれて構造化が難しくなり、
 保守性の低下といった課題に直面しやすくなります。
