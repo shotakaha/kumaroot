@@ -45,16 +45,20 @@ const lastCol = sheet.getLastColumn();
 `Sheet.getLastColumn`でデータが入っている最終列の列番号を取得できます。
 どちらもデータが1件もない場合は`0`が返ります。
 
-## 行データを追加したい（`appendRow`）
+## 行を操作したい（`appendRow` / `deleteRow`）
 
 ```js
 // データのカラム数と同じ要素の配列を作成
 const data = ["A", "B", "C", "D"];
 // データをシート末尾に追記
 sheet.appendRow(data);
+
+// 2行目を削除
+sheet.deleteRow(2);
 ```
 
 `Sheet.appendRow`で既存のシート末尾にデータを追加できます。
+`Sheet.deleteRow`で行番号を指定して行ごと削除できます。
 
 ```ts
 type Cell = string | number | boolean | Date | null;
@@ -119,14 +123,28 @@ appendRows(sheet, rows);
 大量のデータを追加する場合は、
 2次元配列を作成し`Range.setValues`で書き出すほうがよいです。
 
-## 行を削除したい（`deleteRow`）
+## 列を操作したい（`insertColumnBefore` / `insertColumnAfter` / `deleteColumn`）
 
 ```js
-// 2行目を削除
-sheet.deleteRow(2);
+// 3列目の前に列を追加
+sheet.insertColumnBefore(3);
+
+// 3列目の後に列を追加
+sheet.insertColumnAfter(3);
+
+// 3列目を削除
+sheet.deleteColumn(3);
 ```
 
-`Sheet.deleteRow`で行番号を指定して行ごと削除できます。
+`Sheet.insertColumnBefore`、`Sheet.insertColumnAfter`で、指定した列番号の前後に新しい列を追加できます。
+`Sheet.deleteColumn`で、指定した列番号の列を削除できます。
+
+```js
+const values = sheet.getDataRange().getValues();
+const headers = values[0];
+const columnIdx = headers.indexOf("名前") + 1;
+sheet.insertColumnBefore(columnIdx);
+```
 
 ## シートを複製したい（`copyTo`）
 
@@ -274,6 +292,9 @@ function findDuplicateRow(
 - [Sheet.getLastColumn](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getlastcolumn)
 - [Sheet.appendRow](https://developers.google.com/apps-script/reference/spreadsheet/sheet#appendrowrowcontents)
 - [Sheet.deleteRow](https://developers.google.com/apps-script/reference/spreadsheet/sheet#deleterowrowposition)
+- [Sheet.insertColumnBefore](https://developers.google.com/apps-script/reference/spreadsheet/sheet#insertcolumnbeforecolumnposition)
+- [Sheet.insertColumnAfter](https://developers.google.com/apps-script/reference/spreadsheet/sheet#insertcolumnaftercolumnposition)
+- [Sheet.deleteColumn](https://developers.google.com/apps-script/reference/spreadsheet/sheet#deletecolumncolumnposition)
 - [Sheet.copyTo](https://developers.google.com/apps-script/reference/spreadsheet/sheet#copytospreadsheet)
 - [Sheet.setName](https://developers.google.com/apps-script/reference/spreadsheet/sheet#setnamename)
 - [Sheet.protect](https://developers.google.com/apps-script/reference/spreadsheet/sheet#protect)
