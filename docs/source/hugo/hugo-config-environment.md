@@ -47,6 +47,21 @@ $ hugo -e production
 GitLab Pagesでの構築時は``/config/gitlab/``、
 本番環境に公開する場合は``/config/production/``の設定ファイルに切り替えて適用されるようにしています。
 
+``production``環境は``hugo build``（``hugo``のみの実行を含む）のデフォルトでもあります。
+一方``hugo server``のデフォルトは``development``です。
+環境変数``HUGO_ENVIRONMENT``で明示的に指定することもできます。
+
+CIで単に``hugo``を実行するだけでも、自動的に``/config/production/``が``/config/_default/``の上にマージされます。
+
+```toml
+# /config/production/hugo.toml
+buildDrafts = false
+```
+
+環境ごとの設定ファイルは、``_default``の内容をまるごと書き直す必要はありません。
+上記のように、変更したいキーだけを書けば``_default``の設定に**上書き（マージ）**されます。
+たとえば「開発中は下書き記事も表示したいが、本番公開時は隠したい」という場合、``production``環境では``buildDrafts = false``の1行だけを追加すれば十分です。
+
 ## テーマごとに設定したい
 
 この機能を使うと、テーマごとの設定を共存させることができます。
