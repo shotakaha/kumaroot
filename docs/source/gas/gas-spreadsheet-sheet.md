@@ -180,7 +180,11 @@ protection.setDescription("説明");
 `Protection.setDescription`で保護の理由を追加できます。
 セル範囲だけを保護したい場合は[セルを操作したい](./gas-spreadsheet-range.md)を参照してください。
 
-## カラム番号を取得したい（`getHeaders` / `getColumnIndex`）
+## ヘッダー行を取得したい（`getHeaders`）
+
+シート操作は、基本的にカラム番号（1はじまり）が前提となっていますが、カラム追加や順番の変更に弱いです。
+ヘッダー行をMap型（`Map<string, number>`）に変換しておくことで、
+カラム名から安全かつ可読性の高い形でカラム番号を取得できるようにします。
 
 ```ts
 function getHeaders(
@@ -201,6 +205,14 @@ function getHeaders(
   return map;
 }
 
+const headers = getHeaders(sheet);
+```
+
+`getHeaders`で、1行目（見出し行）を`カラム名 -> カラム番号`のMapに変換します。
+
+## カラム名からカラム番号を取得したい（`getColumnIndex`）
+
+```ts
 function getColumnIndex(
   headers: Map<string, number>,
   name: string
@@ -217,11 +229,8 @@ const headers = getHeaders(sheet);
 const nameColIndex = getColumnIndex(headers, "名前");
 ```
 
-シート操作は、基本的にカラム番号（1はじまり）が前提となっていますが、カラム追加や順番の変更に弱いです。
-
-このサンプルでは、ヘッダー行をMap型（`Map<string, number>`）に変換することで、カラム名から安全かつ可読性の高い形でカラム番号を取得できるようにしています。
-カラム名で操作できるようになるので、
-シートのカラム構成の変更にも強くなります。
+`getColumnIndex`で、`getHeaders`が返したMapからカラム名を指定してカラム番号を取得します。
+カラム名で操作できるようになるので、シートのカラム構成の変更にも強くなります。
 
 ## 行を安全に追加したい（`appendRow`のラッパー）
 
