@@ -11,6 +11,7 @@ const form: GoogleAppsScript.Forms.Form = FormApp.openByUrl("FORM_URL");
 `FormApp`でGoogleフォームを操作できます。
 `openById`と`openByUrl`で、スプレッドシートなどと同じように
 フォームのIDもしくはURLを指定して、既存のフォームを取得できます。
+フォームそのものは、あらかじめブラウザのUIで作成しておく前提です。
 
 ```ts
 const FORM_ID = PropertiesService.getScriptProperties().getProperty("FORM_ID") ?? ""
@@ -19,27 +20,6 @@ const form = FormApp.openById(FORM_ID);
 
 フォームのIDをハードコードしたくない場合は、
 GASの`ScriptProperties`を利用するとよいです。
-
-## フォームを作成したい（`FormApp.create`）
-
-```ts
-function createForm() {
-  const form: GoogleAppsScript.Forms.Form = FormApp.create("アンケートフォーム");
-  Logger.log(form.getEditUrl());
-}
-```
-
-`create`メソッドで、フォームを新規作成できます。
-
-## フォーム全体の動作を設定したい（`setDescription`など）
-
-```ts
-function settings(form: GoogleAppsScript.Forms.Form) {
-  form.setDescription("これはフォームの説明です");
-  form.setCollectEmail(true);    // メールアドレスを収集
-  form.setLimitOneResponsePerUser(true);    // 1人1回答に制限
-}
-```
 
 ## 回答を取得したい（`FormApp.getResponses`）
 
@@ -211,6 +191,7 @@ function parseResponses(responses) {
 ```
 
 `onFormSubmit`は、回答者がフォームを送信したときにトリガーされる関数です。
+GASのトリガーを使わないと実現できない処理で、フォームのUI設定だけでは実現できません。
 引数`e`にはイベントオブジェクトが自動的に渡されます。
 `e.response`は`FormResponse`オブジェクトで、この中にフォーム全般の情報がはいっています。
 
@@ -262,6 +243,7 @@ function onFormSubmit(e) {
 
 フォームに入力があった場合の見落としを回避するため、
 関係者にメールやSlackなどで通知したいことが多いと思います。
+フォームのUI設定にある通知機能では、共同編集者へのメール通知程度しかできません。
 `onFormSubmit`と連動させることで、任意のアドレスやサービスにカスタム通知できます。
 
 ::: {seealso}
@@ -285,7 +267,7 @@ function set_confirmation_message() {
 
 フォーム回答後に、アンケート協力のお礼などを表示できます。
 簡単なメッセージであれば、フォームの設定から編集すればOKです。
-ただし、メッセージ内で改行できないため、長文には不向きです。
+ただし、UIで設定できるメッセージは改行を含められないため、長文には不向きです。
 `setConfirmationMessage`を使うと改行を含む任意のメッセージを設定できます。
 
 このサンプルは、
@@ -294,6 +276,38 @@ function set_confirmation_message() {
 URL情報などを含む長文のため、メッセージの本文はドキュメントに作成し、
 それを読み込んで適用しています。
 メッセージ内容を変更した場合は、再度`[実行]`して読み込ませる必要があります。
+
+## フォーム全体の動作を設定したい（`setDescription`など）
+
+```ts
+function settings(form: GoogleAppsScript.Forms.Form) {
+  form.setDescription("これはフォームの説明です");
+  form.setCollectEmail(true);    // メールアドレスを収集
+  form.setLimitOneResponsePerUser(true);    // 1人1回答に制限
+}
+```
+
+これらの設定はフォームのUI（`[設定]`タブなど）からも変更できます。
+複数のフォームに同じ設定をまとめて適用したい場合など、
+一括操作したいときにGASから設定すると便利です。
+
+:::{note}
+
+以下はGASでフォームを新規作成する方法です。
+フォームはUIで作成する前提のため、優先度の低い内容として末尾にまとめています。
+
+:::
+
+## フォームを作成したい（`FormApp.create`）
+
+```ts
+function createForm() {
+  const form: GoogleAppsScript.Forms.Form = FormApp.create("アンケートフォーム");
+  Logger.log(form.getEditUrl());
+}
+```
+
+`create`メソッドで、フォームを新規作成できます。
 
 ## 質問付きのフォームを作成したい（`addTextItem`）
 
