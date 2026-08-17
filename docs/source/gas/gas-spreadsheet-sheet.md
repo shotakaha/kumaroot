@@ -8,17 +8,42 @@ const sheet = book.getSheetByName("シート名");
 `Sheet`オブジェクトで単一のシートを操作できます。
 ブックの取得方法については[ブックを操作したい](./gas-spreadsheet-book.md)を参照してください。
 
-## シートの情報を確認したい
+## シートのIDと名前を確認したい（`getId` / `getName`）
 
 ```js
 const id = sheet.getId();
 const name = sheet.getName();
-const sheetName = sheet.getSheetName();
+```
 
+`Sheet.getId`でシートのID（ブック内でシートを一意に識別する数値）を、
+`Sheet.getName`でシート名を取得できます。
+
+:::{hint}
+
+`Sheet.getSheetName`という同名のメソッドもありますが、
+`getName`と同じ値を返す旧API互換のためのエイリアスです。
+新しく書く場合は`getName`を使えばよいです。
+
+:::
+
+## シートの位置を確認したい（`getIndex`）
+
+```js
 const index = sheet.getIndex();
+```
+
+`Sheet.getIndex`で、ブック内でのシートの位置（1はじまり）を取得できます。
+
+## 最終行・最終列を確認したい（`getLastRow` / `getLastColumn`）
+
+```js
 const lastRow = sheet.getLastRow();
 const lastCol = sheet.getLastColumn();
 ```
+
+`Sheet.getLastRow`でデータが入っている最終行の行番号を、
+`Sheet.getLastColumn`でデータが入っている最終列の列番号を取得できます。
+どちらもデータが1件もない場合は`0`が返ります。
 
 ## 行データを追加したい（`appendRow`）
 
@@ -242,6 +267,11 @@ function findDuplicateRow(
 ## リファレンス
 
 - [Class Sheet](https://developers.google.com/apps-script/reference/spreadsheet/sheet)
+- [Sheet.getId](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getid)
+- [Sheet.getName](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getname)
+- [Sheet.getIndex](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getindex)
+- [Sheet.getLastRow](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getlastrow)
+- [Sheet.getLastColumn](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getlastcolumn)
 - [Sheet.appendRow](https://developers.google.com/apps-script/reference/spreadsheet/sheet#appendrowrowcontents)
 - [Sheet.deleteRow](https://developers.google.com/apps-script/reference/spreadsheet/sheet#deleterowrowposition)
 - [Sheet.copyTo](https://developers.google.com/apps-script/reference/spreadsheet/sheet#copytospreadsheet)
