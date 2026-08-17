@@ -269,6 +269,8 @@ appendRowSafe(sheet, row);
 
 ## 複数行を安全に追加したい（`appendRowsSafe`）
 
+`appendRowsSafe`は、複数行の列数がすべて揃っているかをチェックしたうえで、1回のAPI呼び出しでまとめて追加する自作関数です。
+
 ```ts
 type Cell = string | number | boolean | Date | null;
 type Row = Cell[];
@@ -298,9 +300,8 @@ const rows: Row[] = [
 appendRowsSafe(sheet, rows);
 ```
 
-`Sheet.appendRow`の処理は時間がかかります。
-大量のデータを追加する場合は、
-2次元配列を作成し`Range.setValues`で書き出すほうがよいです。
+`Sheet.appendRow`を行数分ループで呼び出すと、その都度APIが呼ばれるため時間がかかります。
+大量のデータを追加する場合は、2次元配列にまとめてから`Range.setValues`で一括書き込みしたほうが高速です。
 
 ## データの重複を探したい（`findDuplicateRow`）
 
