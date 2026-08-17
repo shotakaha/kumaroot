@@ -268,6 +268,69 @@ responses = [itemResponse.getResponse() for itemResponse in itemResponses]
 
 :::
 
+## 回答数の上限を設定したい（`setAcceptingResponses`）
+
+```js
+function stopAcceptingResponsesIfFull(e) {
+    const form = e.source;
+    const maxResponses = 50;
+
+    if (form.getResponses().length >= maxResponses) {
+        form.setAcceptingResponses(false);
+        form.setCustomClosedFormMessage("定員に達したため、受付を終了しました。");
+    }
+}
+```
+
+Googleフォームには、回答数の上限（N件で自動締切）を直接指定するUI設定やメソッドはありません。
+かわりに、`onFormSubmit`トリガーの中で`Form.getResponses().length`を確認し、
+上限に達していたら`Form.setAcceptingResponses(false)`でフォームを締め切る、という形で実現します。
+`Form.setCustomClosedFormMessage`で、締め切り後に表示するメッセージも設定できます。
+
+:::{hint}
+
+`onFormSubmit`のイベントオブジェクト`e`には`e.source`でフォーム本体（`Form`オブジェクト）が含まれています。
+すでに取得済みの`form`変数があるならそれを使ってもかまいません。
+
+:::
+
+## 回答期限を設定したい（`ScriptApp.newTrigger`）
+
+```js
+function closeForm() {
+    const form = FormApp.openById("FORM_ID");
+    form.setAcceptingResponses(false);
+    form.setCustomClosedFormMessage("受付期間が終了しました。");
+}
+
+function scheduleFormClose() {
+    const deadline = new Date("2026-12-31T23:59:00+09:00");
+    ScriptApp.newTrigger("closeForm")
+        .timeBased()
+        .at(deadline)
+        .create();
+}
+```
+
+Googleフォームには、回答期限（日時指定での自動締切）を直接指定するUI設定やメソッドはありません。
+回答数の上限と同様に、指定した日時に`Form.setAcceptingResponses(false)`を呼ぶ関数を用意し、
+`ScriptApp.newTrigger`の時間主導型トリガーで実行タイミングを予約する形で実現します。
+トリガーの作成方法については[トリガーを作成したい](./gas-trigger.md)を参照してください。
+
+:::{note}
+
+時間主導型トリガーの実行タイミングには、数分程度のズレが生じることがあります。
+厳密な秒単位での締切が必要な場合には向いていません。
+
+:::
+
+:::{caution}
+
+`at(date)`で作成した時間主導型トリガーは、実行後も自動では削除されません。
+不要になったトリガーは[トリガーを作成したい](./gas-trigger.md)の「トリガーを削除したい」を参考に削除してください。
+
+:::
+
 ## カスタム通知したい
 
 ```js
@@ -437,6 +500,8 @@ function createFormFromSheet() {
 
 - [Class FormApp](https://developers.google.com/apps-script/reference/forms/form-app)
 - [Class Form](https://developers.google.com/apps-script/reference/forms/form)
+- [Form.setAcceptingResponses](https://developers.google.com/apps-script/reference/forms/form#setacceptingresponsesenabled)
+- [Form.setCustomClosedFormMessage](https://developers.google.com/apps-script/reference/forms/form#setcustomclosedformmessagemessage)
 - [Class Item](https://developers.google.com/apps-script/reference/forms/item)
 - [Class FormResponse](https://developers.google.com/apps-script/reference/forms/form-response)
 - [Class ItemResponse](https://developers.google.com/apps-script/reference/forms/item-response)
