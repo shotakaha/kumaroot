@@ -14,28 +14,18 @@ const data = arrays.slice(1);
 
 Logger.log(`見出し: ${headers}`);
 Logger.log(`データ数: ${data.length}`);
-
-// 書き込むシートを取得する（なければ作成する）
-const name = "writeSheet";
-const sheetToWrite = book.getSheetByName(name) || book.insertSheet(name);
-
-// 範囲を指定してデータを書き込む
-const arraysToWrite = [headers, ...data];
-const rows = arraysToWrite.length;
-const cols = arraysToWrite[0].length;
-sheetToWrite.getRange(1, 1, rows, cols).setValues(arraysToWrite);
 ```
 
 [SpreadsheetApp](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app)クラスで、Googleスプレッドシートを操作できます。
 
-スプレッドシートには`ブック` > `シート` > `セル`という構造があります。
-それぞれ
-[Spreadsheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)、
-[Sheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/sheet)、
-[Rangeクラス](https://developers.google.com/apps-script/reference/spreadsheet/range)
-のオブジェクトが対応しています。
+上記のコードサンプルでは、取得したシートにある値を`getDataRange`ですべて選択し、`getValues`することで2次元配列のデータにしています。
+
+最後に中身を確認するために`Logger.log`しています。
+ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
 :::{note}
+
+スプレッドシートには`ブック` > `シート` > `セル`という構造があります。
 
 このドキュメントでは、Excelでの呼び方を参考に、
 `Spreadsheet`オブジェクトを「ブック」、
@@ -48,11 +38,6 @@ sheetToWrite.getRange(1, 1, rows, cols).setValues(arraysToWrite);
 変数名もこれにあわせて`book`、`sheet`を使います。
 
 :::
-
-上記のコードサンプルでは、取得したシートにある値を`getDataRange`ですべて選択し、`getValues`することで2次元配列のデータにしています。
-
-最後に中身を確認するために`Logger.log`しています。
-ここに処理を追加してCSVにしたり、JSONにしたり、ウェブAPIっぽくしたりもできます。
 
 ```{toctree}
 ---
@@ -83,3 +68,9 @@ function onOpen() {
 
 スプレッドシートにカスタムメニューを追加できます。
 シートを開いたときに、メニューに追加するため`onOpen`関数の中で定義します。
+
+## リファレンス
+
+- [Spreadsheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)
+- [Sheetクラス](https://developers.google.com/apps-script/reference/spreadsheet/sheet)
+- [Rangeクラス](https://developers.google.com/apps-script/reference/spreadsheet/range)
