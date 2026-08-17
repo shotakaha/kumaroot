@@ -1,88 +1,11 @@
 # セルを操作したい（`Range`）
 
 ```js
-const range = sheet.getDataRange();
 const range = sheet.getRange("A1:C3");
 ```
 
 `Range`オブジェクトは、シート上の選択した範囲を操作できます。
-
-## データを選択したい（`getRange`）
-
-```js
-// A1表記で指定
-// sheet.getRange("セル番地");
-// sheet.getRange("セル番地:セル番地");
-
-// A1セルを選択
-const range = sheet.getRange("A1");
-
-// A1セルからB3までの範囲を選択
-const range = sheet.getRange("A1:B3");
-```
-
-`Sheet.getRange`でセル（やセル範囲）を指定して選択できます。
-セル番地は大文字でも小文字でもOKです。
-
-```js
-// 行番号／列番号で指定
-// sheet.getRange("行番号", "列番号");
-// sheet.getRange("行番号", "列番号", "行数");
-// sheet.getRange("行番号", "列番号", "行数", "列数");
-
-// 2行目3列目（=C2セル）を選択
-const range = sheet.getRange(2, 3);
-
-// 2行目3列目（=C2）から2行目2列目（=D3）の範囲を取得
-const range = sheet.getRange(2, 3, 2, 2);
-```
-
-`Sheet.getRange`はR1C1表記にも対応しています。
-
-## 列（や行）を選択したい
-
-```js
-// B列を全選択
-const range = sheet.getRange("B1:B");
-
-// 2行目を全選択
-const range = sheet.getRange("A2:2");
-
-// これはエラー
-const range = sheet.getRange("B");
-// -> Exception: Range not found
-```
-
-列全体は`Sheet.getRange(開始セル:列番号)`、
-行全体は`Sheet.getRange(開始セル:行番号)`で選択できます。
-`Sheet.getRange(列番号 or 行番号)`だけだとエラーになります。
-
-## データを全選択したい（`getDataRange`）
-
-```js
-// すべてのデータの範囲
-const range = sheet.getDataRange();
-```
-
-`Sheet.getDataRange`で、シートにあるデータを全選択できます。
-余計な空行・空列は含まれないので、シート全体でデータを管理している場合によく使います。
-
-```js
-// 見出しを除外したデータの範囲
-const nrows = sheet.getLastRow() - 1;
-const ncols = sheet.getLastColumn();
-const range = sheet.getRange(2, 1, nrows, ncols);
-```
-
-シートの1行目は、見出しに設定している場合があります。
-見出しを含みたくない場合は、2行目から選択するとよいです。
-
-```js
-const lastRow = sheet.getLastRow();
-const newRange = sheet.getRange(lastRow + 1, 1);
-```
-
-データを読み込むときより、既存のデータを追記したいときに利用します。
+`Range`の取得方法（`getRange` / `getDataRange`）については[シートを操作したい](./gas-spreadsheet-sheet.md)を参照してください。
 
 ## 値を読み込みたい（`getValues`）
 
@@ -153,8 +76,6 @@ range.setBackground("yellow");
 ## リファレンス
 
 - [Class Range](https://developers.google.com/apps-script/reference/spreadsheet/range)
-- [Sheet.getRange](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getrangerow,-column)
-- [Sheet.getDataRange](https://developers.google.com/apps-script/reference/spreadsheet/sheet#getdatarange)
 - [Range.getValues](https://developers.google.com/apps-script/reference/spreadsheet/range#getvalues)
 - [Range.setValues](https://developers.google.com/apps-script/reference/spreadsheet/range#setvaluesvalues)
 - [Range.activate](https://developers.google.com/apps-script/reference/spreadsheet/range#activate)
