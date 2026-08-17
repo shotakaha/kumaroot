@@ -21,6 +21,20 @@ const form = FormApp.openById(FORM_ID);
 フォームのIDをハードコードしたくない場合は、
 GASの`ScriptProperties`を利用するとよいです。
 
+## フォーム全体の動作を設定したい（`setDescription`など）
+
+```ts
+function applySettings(form: GoogleAppsScript.Forms.Form) {
+  form.setDescription("これはフォームの説明です");
+  form.setCollectEmail(true);    // メールアドレスを収集
+  form.setLimitOneResponsePerUser(true);    // 1人1回答に制限
+}
+```
+
+これらの設定はフォームのUI（`[設定]`タブなど）からも変更できます。
+複数のフォームに同じ設定をまとめて適用したい場合など、
+一括操作したいときにGASから設定すると便利です。
+
 ## カスタムありがとうしたい（`setConfirmationMessage`）
 
 ```js
@@ -276,20 +290,6 @@ Googleフォームの共同編集者にアサインしたアカウントであ�
 また、回答者には回答内容のコピーを自動で返信する機能もあります。
 
 :::
-
-## フォーム全体の動作を設定したい（`setDescription`など）
-
-```ts
-function settings(form: GoogleAppsScript.Forms.Form) {
-  form.setDescription("これはフォームの説明です");
-  form.setCollectEmail(true);    // メールアドレスを収集
-  form.setLimitOneResponsePerUser(true);    // 1人1回答に制限
-}
-```
-
-これらの設定はフォームのUI（`[設定]`タブなど）からも変更できます。
-複数のフォームに同じ設定をまとめて適用したい場合など、
-一括操作したいときにGASから設定すると便利です。
 
 :::{note}
 
