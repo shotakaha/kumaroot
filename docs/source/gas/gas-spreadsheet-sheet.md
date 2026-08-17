@@ -305,6 +305,9 @@ appendRowsSafe(sheet, rows);
 
 ## データの重複を探したい（`findDuplicateRow`）
 
+`findDuplicateRow`は、指定したカラムの値の組み合わせが一致する行を探し、見つかった行番号（見つからなければ`-1`）を返す自作関数です。
+「名前」と「メールアドレス」の組み合わせで重複を確認する、といった用途に使えます。
+
 ```ts
 type Cell = string | number | boolean | Date | null;
 type Row = Cell[];
@@ -347,7 +350,16 @@ function findDuplicateRow(
   }
   return -1;
 }
+
+// Usage
+// 2列目（名前）と3列目（メールアドレス）の組み合わせが
+// ["田中", "tanaka@example.com"]と一致する行を探す
+const rowIndex = findDuplicateRow(sheet, [2, 3], ["田中", "tanaka@example.com"]);
 ```
+
+`colIndices`と`values`は同じ順番で対応させます（`colIndices[i]`列目の値が`values[i]`と一致するか、をすべての`i`について確認します）。
+`Date`型はそのまま比較できないため、`toKey`で文字列に変換してから比較しています。
+更新時など、自分自身の行を重複判定から除外したい場合は`excludeRowIndex`に行番号を渡してください。
 
 ## リファレンス
 
