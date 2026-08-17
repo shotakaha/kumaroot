@@ -29,7 +29,7 @@ const data = ["A", "B", "C", "D"];
 sheet.appendRow(data);
 ```
 
-`appendRow`で既存のシート末尾にデータを追加できます。
+`Sheet.appendRow`で既存のシート末尾にデータを追加できます。
 
 ```ts
 type Cell = string | number | boolean | Date | null;
@@ -51,11 +51,11 @@ const row: Row = ["A", 123, true, new Date(), null];
 appendRow(sheet, row);
 ```
 
-スタンドアロンスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`appendRow`のラッパーを作成しておくと便利です。
+スタンドアロンスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`Sheet.appendRow`のラッパーを作成しておくと便利です。
 
 :::{hint}
 
-`openById`などでシートを取得する処理は時間がかかります。
+`SpreadsheetApp.openById`などでシートを取得する処理は時間がかかります。
 ラッパー関数の中で毎回呼び出すのではなく、
 あらかじめ取得したシートを引数として渡すとよいです。
 
@@ -90,9 +90,9 @@ const rows: Row[] = [
 appendRows(sheet, rows);
 ```
 
-`appendRow`の処理は時間がかかります。
+`Sheet.appendRow`の処理は時間がかかります。
 大量のデータを追加する場合は、
-2次元配列を作成し`setValues`で書き出すほうがよいです。
+2次元配列を作成し`Range.setValues`で書き出すほうがよいです。
 
 ## カラム番号を取得したい（`getHeaders` / `getColumnIndex`）
 
@@ -190,7 +190,7 @@ function findDuplicateRow(
 sheet.deleteRow(2);
 ```
 
-`deleteRow`で行番号を指定して行ごと削除できます。
+`Sheet.deleteRow`で行番号を指定して行ごと削除できます。
 
 ## セル範囲のデータを削除したい（`clearContent`）
 
@@ -200,7 +200,7 @@ const range = sheet.getRange("A2:D6");
 range.clearContent();
 ```
 
-`clearContent`で指定したセル範囲のデータを削除できます。
+`Range.clearContent`で指定したセル範囲のデータを削除できます。
 
 ## シートを複製したい（`copyTo`）
 
@@ -211,7 +211,7 @@ const sheet = source.getSheetByName("複製したいシート名");
 const copied = sheet.copyTo(target);
 ```
 
-`copyTo`で指定したシートを複製できます。
+`Sheet.copyTo`で指定したシートを複製できます。
 
 ## シート名を変更したい（`setName`）
 
@@ -219,7 +219,7 @@ const copied = sheet.copyTo(target);
 sheet.setName("変更後のシート名");
 ```
 
-`setName`でシート名を変更できます。
+`Sheet.setName`でシート名を変更できます。
 同じ名前のシートは作れません。
 
 ## シートを保護したい（`protect`）
@@ -236,8 +236,8 @@ const protection = range.protect();
 protection.setDescription("説明");
 ```
 
-`protect`でシートや選択したセルを保護できます。
-`setDescription`で保護の理由を追加できます。
+`Sheet.protect`（または`Range.protect`）でシートや選択したセルを保護できます。
+`Protection.setDescription`で保護の理由を追加できます。
 
 ## リファレンス
 
