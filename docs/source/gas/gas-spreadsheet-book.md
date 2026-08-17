@@ -3,6 +3,8 @@
 ```js
 const book = SpreadsheetApp.openById("スプレッドシートのID");
 const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
+
+// アクティブなブックを取得（バインドスクリプトの場合）
 const book = SpreadsheetApp.getActiveSpreadsheet();
 ```
 
@@ -21,10 +23,10 @@ const book = SpreadsheetApp.openByUrl("スプレッドシートのURL");
 ```
 
 `SpreadsheetApp.openById`でIDを指定してブックを取得できます。
+また、`SpreadsheetApp.openByUrl`でURLを直接指定してブックを取得できます。
+
 スタンドアロンスクリプトや、他のスクリプトからも開くことができるため、
 非常によく使うメソッドのひとつです。
-
-また、`SpreadsheetApp.openByUrl`でURLを直接指定してブックを取得できます。
 
 :::{hint}
 
@@ -38,22 +40,16 @@ URL: `https://docs.google.com/spreadsheets/d/【ID】/edit`
 ## 現在のブックを開きたい（`getActiveSpreadsheet`）
 
 ```js
+// バインドスクリプトの場合
 const book = SpreadsheetApp.getActiveSpreadsheet();
 Logger.log(`name: ${book.getName()}`);
 Logger.log(`ID: ${book.getId()}`);
 Logger.log(`URL: ${book.getUrl()}`);
 ```
 
-`SpreadsheetApp.getActiveSpreadsheet()`で、
-スクリプトがバインドされているブックを取得できます。
-
-:::{caution}
-
-[コンテナバインドスクリプト](./gas-clasp.md)からしか使えません。
-スタンドアロンスクリプトで実行すると`null`が返るので、
-`openById`か`openByUrl`でブックを指定してください。
-
-:::
+`SpreadsheetApp.getActiveSpreadsheet()`で、現在アクティブになっているブックを取得できます。
+ただし、コンテナバインドスクリプトからしか使えません。
+スタンドアロンスクリプトの場合は、`openById`や`openByUrl`を使ってください。
 
 ## ブックを共同編集したい（`addEditor` / `removeEditor`）
 
@@ -62,8 +58,8 @@ book.addEditor("someone@example.com");
 book.removeEditor("someone@example.com");
 ```
 
-`addEditor`でアクセス権を付与できます。
-`removeEditor`でアクセス権を削除できます。
+`SpreadsheetApp.addEditor`で、ブックに対するアクセス権を付与できます。
+反対に`SpreadsheetApp.removeEditor`でアクセス権を削除できます。
 
 ## ブック全体を複製したい（`copy`）
 
@@ -72,7 +68,7 @@ const book = SpreadsheetApp.openById("コピー元のID");
 const copied = book.copy("コピー先のファイル名");
 ```
 
-`copy`メソッドでブック全体を複製できます。
+`SpreadsheetApp.copy`メソッドでブック全体を複製できます。
 新しいブックが作成されるため、URLも新規発行されます。
 
 ## シートを取得したい（`getSheetByName`）
@@ -90,7 +86,7 @@ const sheet = book.getSheetByName("シート名");
 const newSheet = book.insertSheet("新しいシート名");
 ```
 
-`insertSheet`で新しいシートを作成できます。
+`SpreadsheetApp.insertSheet`で新しいシートを作成できます。
 
 ```js
 const sheetName = "シート名";
@@ -123,9 +119,9 @@ const sheetToDelete = book.getSheetByName("不要なシート名");
 book.deleteSheet(sheetToDelete);
 ```
 
-`deleteSheet`でシートを削除できます。
+`SpreadsheetApp.deleteSheet`でシートを削除できます。
 引数は`Sheet`オブジェクトです。
-名前（`String`）ではない点に気をつけてください。
+シート名（`String`）ではない点に気をつけてください。
 
 ## リファレンス
 
