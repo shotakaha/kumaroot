@@ -21,6 +21,30 @@ const form = FormApp.openById(FORM_ID);
 フォームのIDをハードコードしたくない場合は、
 GASの`ScriptProperties`を利用するとよいです。
 
+## カスタムありがとうしたい（`setConfirmationMessage`）
+
+```js
+function applyConfirmationMessage() {
+    const form = FormApp.getActive();
+    const doc = DocumentApp.openById("ドキュメントID");
+    const text = doc.getBody().getText();
+    Logger.info(text);
+    form.setConfirmationMessage(text)
+}
+```
+
+フォーム回答後に、アンケート協力のお礼などを表示できます。
+簡単なメッセージであれば、フォームの設定から編集すればOKです。
+ただし、UIで設定できるメッセージは改行を含められないため、長文には不向きです。
+`setConfirmationMessage`を使うと改行を含む任意のメッセージを設定できます。
+
+このサンプルは、
+オンライン講演会の申込フォームの回答後に、
+接続情報などの案内を表示したい場合に使ったものです。
+URL情報などを含む長文のため、メッセージの本文はドキュメントに作成し、
+それを読み込んで適用しています。
+メッセージ内容を変更した場合は、再度`[実行]`して読み込ませる必要があります。
+
 ## 回答を取得したい（`FormApp.getResponses`）
 
 ```ts
@@ -252,30 +276,6 @@ Googleフォームの共同編集者にアサインしたアカウントであ�
 また、回答者には回答内容のコピーを自動で返信する機能もあります。
 
 :::
-
-## カスタムありがとうしたい（`setConfirmationMessage`）
-
-```js
-function set_confirmation_message() {
-    const form = FormApp.getActive();
-    const doc = DocumentApp.openById("ドキュメントID");
-    const text = doc.getBody().getText();
-    Logger.info(text);
-    form.setConfirmationMessage(text)
-}
-```
-
-フォーム回答後に、アンケート協力のお礼などを表示できます。
-簡単なメッセージであれば、フォームの設定から編集すればOKです。
-ただし、UIで設定できるメッセージは改行を含められないため、長文には不向きです。
-`setConfirmationMessage`を使うと改行を含む任意のメッセージを設定できます。
-
-このサンプルは、
-オンライン講演会の申込フォームの回答後に、
-接続情報などの案内を表示したい場合に使ったものです。
-URL情報などを含む長文のため、メッセージの本文はドキュメントに作成し、
-それを読み込んで適用しています。
-メッセージ内容を変更した場合は、再度`[実行]`して読み込ませる必要があります。
 
 ## フォーム全体の動作を設定したい（`setDescription`など）
 
