@@ -131,13 +131,27 @@ const values = range.getValues();
 ## シートを複製したい（`copyTo`）
 
 ```js
-const source = SpreadsheetApp.openById("コピー元のID");
-const target = SpreadsheetApp.openById("コピー先のID");
-const sheet = source.getSheetByName("複製したいシート名");
-const copied = sheet.copyTo(target);
+// 同一ブック内で複製
+const sourceBook = SpreadsheetApp.openById("コピー元のID");
+const sourceSheet = sourceBook.getSheetByName("複製したいシート名");
+const copiedSheet = sourceSheet.copyTo(sourceBook);
 ```
 
-`Sheet.copyTo`で指定したシートを複製できます。
+`Sheet.copyTo`で、指定した`Spreadsheet`（ブック）にシートを複製できます。
+コピー元と同じブックを渡せば、同一ブック内での複製になります。
+
+複製されたシートの名前は「シート名のコピー」のように自動で付けられるため、
+必要であれば次の`Sheet.setName`で変更してください。
+
+```js
+// 別のブックにコピー
+const sourceBook = SpreadsheetApp.openById("コピー元のID");
+const sourceSheet = sourceBook.getSheetByName("複製したいシート名");
+const targetBook = SpreadsheetApp.openById("コピー先のID");
+const copiedSheet = sourceSheet.copyTo(targetBook);
+```
+
+コピー先の`Spreadsheet`（ブック）を指定すれば、別のブックにシートをコピーすることもできます。
 
 ## シート名を変更したい（`setName`）
 
@@ -164,16 +178,6 @@ protection.setDescription("説明");
 
 `Sheet.protect`（または`Range.protect`）でシートや選択したセルを保護できます。
 `Protection.setDescription`で保護の理由を追加できます。
-
-## セル範囲のデータを削除したい（`clearContent`）
-
-```js
-// 範囲を指定して削除
-const range = sheet.getRange("A2:D6");
-range.clearContent();
-```
-
-`Range.clearContent`で指定したセル範囲のデータを削除できます。
 
 ## カラム番号を取得したい（`getHeaders` / `getColumnIndex`）
 

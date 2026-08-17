@@ -39,6 +39,16 @@ sheet.getRange(1, 1, rows, cols).setValues(arrays);
 `Range.setValues`メソッドで、選択した範囲に2次元配列の値を書き込めます。
 書き込みたい2次元配列のシェイプ（＝行数と列数）と、選択範囲のサイズは揃っている必要があるため、`rows`と`cols`を2次元配列から取得しています。
 
+## セル範囲のデータを削除したい（`clearContent`）
+
+```js
+// 範囲を指定して削除
+const range = sheet.getRange("A2:D6");
+range.clearContent();
+```
+
+`Range.clearContent`で指定したセル範囲のデータを削除できます。
+
 ## 選択範囲を確認したい（`activate`）
 
 ```js
@@ -78,6 +88,7 @@ range.setBackground("yellow");
 - [Class Range](https://developers.google.com/apps-script/reference/spreadsheet/range)
 - [Range.getValues](https://developers.google.com/apps-script/reference/spreadsheet/range#getvalues)
 - [Range.setValues](https://developers.google.com/apps-script/reference/spreadsheet/range#setvaluesvalues)
+- [Range.clearContent](https://developers.google.com/apps-script/reference/spreadsheet/range#clearcontent)
 - [Range.activate](https://developers.google.com/apps-script/reference/spreadsheet/range#activate)
 - [Range.setFormula](https://developers.google.com/apps-script/reference/spreadsheet/range#setformulaformula)
 - [Range.setFontSize](https://developers.google.com/apps-script/reference/spreadsheet/range#setfontsizesize)
