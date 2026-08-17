@@ -1,5 +1,16 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **gas-npm**: annotate intro command example with what each script runs
+- **gas-npm**: trim general npm explanations now covered by command-npm.md
+- **command-npm**: add package.json and scripts configuration sections
+- **command-npm**: normalize backticks, update versions, add missing basic commands
+- **gas-npm**: align install commands and package.json with each subpage
+- **gas-npm**: add npm usage page for GAS dev workflow, link from hub toctree
+
 ## v2026.8.0 (2026-08-12)
 
 ### Fix
