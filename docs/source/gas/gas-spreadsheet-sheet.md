@@ -234,6 +234,8 @@ const nameColIndex = getColumnIndex(headers, "名前");
 
 ## 行を安全に追加したい（`appendRowSafe`）
 
+`appendRowSafe`は、追加する行のカラム数がシートの列数とズレていないかをチェックする自作関数です。
+
 ```ts
 type Cell = string | number | boolean | Date | null;
 type Row = Cell[];
@@ -254,7 +256,8 @@ const row: Row = ["A", 123, true, new Date(), null];
 appendRowSafe(sheet, row);
 ```
 
-スタンドアロンスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`Sheet.appendRow`のラッパーを作成しておくと便利です。
+`Sheet.appendRow`をそのまま呼ぶだけでは、渡した配列の要素数がシートの列数とズレていてもエラーにならず、ズレたままデータが書き込まれてしまいます。
+列数が一致しない場合に`throw`する`appendRowSafe`でラップしておくと、このミスに早い段階で気づけます。
 
 :::{hint}
 
