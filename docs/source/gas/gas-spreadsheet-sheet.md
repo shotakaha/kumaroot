@@ -232,13 +232,13 @@ const nameColIndex = getColumnIndex(headers, "名前");
 `getColumnIndex`で、`getHeaders`が返したMapからカラム名を指定してカラム番号を取得します。
 カラム名で操作できるようになるので、シートのカラム構成の変更にも強くなります。
 
-## 行を安全に追加したい（`appendRow`のラッパー）
+## 行を安全に追加したい（`appendRowSafe`）
 
 ```ts
 type Cell = string | number | boolean | Date | null;
 type Row = Cell[];
 
-function appendRow(
+function appendRowSafe(
   sheet: GoogleAppsScript.Spreadsheet.Sheet,
   row: Row
 ) {
@@ -251,7 +251,7 @@ function appendRow(
 }
 
 const row: Row = ["A", 123, true, new Date(), null];
-appendRow(sheet, row);
+appendRowSafe(sheet, row);
 ```
 
 スタンドアロンスクリプトで、複数のシートを扱う場合、列数のチェックを追加した`Sheet.appendRow`のラッパーを作成しておくと便利です。
@@ -268,7 +268,7 @@ appendRow(sheet, row);
 type Cell = string | number | boolean | Date | null;
 type Row = Cell[];
 
-function appendRows(
+function appendRowsSafe(
   sheet: GoogleAppsScript.Spreadsheet.Sheet,
   rows: Row[]
 ) {
@@ -290,7 +290,7 @@ const rows: Row[] = [
   ["A", "B"],
   [1, 2],
 ];
-appendRows(sheet, rows);
+appendRowsSafe(sheet, rows);
 ```
 
 `Sheet.appendRow`の処理は時間がかかります。
