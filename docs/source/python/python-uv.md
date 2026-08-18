@@ -353,6 +353,8 @@ Uninstalled 6 packages in 0.01s
 `uv.lock`ファイルも自動で更新されます。
 `uv remove`でパッケージ依存を削除できます。
 
+### 開発依存パッケージを追加したい（`--group`）
+
 ```console
 // dependency-groups.devに追加
 $ uv add --dev pytest
@@ -366,6 +368,8 @@ $ uv add --group docs sphinx
 `--group`オプションで、パッケージ依存をグループ化できます。
 `pyproject.toml`の`[dependency-groups]`セクションにグループ情報が追加されます。
 `--dev`オプションは`--group dev`と同じです。
+
+### オプション依存パッケージを追加したい（`--optional`）
 
 ```console
 // project.optional-dependencies.vizに追加
