@@ -364,8 +364,6 @@ $ uv check --preview-features check-command
 
 `uv check`は、プロジェクトの型チェックを実行するコマンドです。
 
-:::
-
 ## 依存関係を監査したい（`uv audit`）
 
 ```console
