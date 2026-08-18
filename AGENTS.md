@@ -454,6 +454,15 @@ For technical reference docs:
 - Use `uv sync --all-groups` to install all groups
 - Use `task deps:update` to keep dependencies current
 
+### Update procedure
+
+1. `task deps:outdated` — lists the dependency tree (`uv tree --outdated --all-groups`), annotating each package that has a newer version available
+2. `task deps:update` — runs `uv sync --upgrade --all-groups`, upgrading every package within the version constraints in `pyproject.toml`
+3. `task deps:audit` — runs `uv audit --preview-features audit-command` to check the updated lock for known vulnerabilities
+4. Review `git diff uv.lock` (or `git status`) — direct dependencies with `>=` constraints usually leave `pyproject.toml` unchanged; only `uv.lock` is updated
+5. Commit `uv.lock` with a message listing each bumped package and its old → new version, e.g. `chore(deps): update dependencies` with a body of `- package X.Y.Z -> X.Y.Z+1` lines
+6. Packages that don't move even after `deps:update` are usually pinned indirectly by another dependency's constraints (not a bug) — re-check with `task deps:outdated` after the next update cycle
+
 ### Version Management Strategy
 
 This project uses **calendar-based semantic versioning** (YYYY.MM.PATCH):
