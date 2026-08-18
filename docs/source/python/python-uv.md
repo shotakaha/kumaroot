@@ -356,6 +356,18 @@ $ uv format --preview-features format-command
 `uv format`は、プロジェクト内のPythonコードを整形（フォーマット）するコマンドです。
 内部では[Ruff](https://docs.astral.sh/ruff/)を利用しています。
 
+```console
+// フォーマットを適用せず、崩れがないか確認（CI向け）
+$ uv format --preview-features format-command --check
+
+// フォーマット差分を表示
+$ uv format --preview-features format-command --diff
+```
+
+`--check`オプションで、ファイルを書き換えずにフォーマット崩れの有無だけを確認できます。
+フォーマットが必要なファイルがある場合は非ゼロで終了するため、CIでの利用に向いています。
+`--diff`オプションで、実際に適用される変更内容を確認できます。
+
 ## 型チェックしたい（`uv check`）
 
 ```console
