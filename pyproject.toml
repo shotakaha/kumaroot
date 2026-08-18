@@ -46,7 +46,6 @@ dev = [
     "pexpect>=4.9.0",
     "python-dotenv>=1.2.2",
     "hvplot>=0.12.2",
-    "pip-audit>=2.10.1",
 ]
 docs = [
     "sphinx-autobuild>=2025.8.25",

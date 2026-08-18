@@ -99,7 +99,7 @@ tasks:
   deps:audit:
     desc: Check for security vulnerabilities in dependencies
     cmds:
-      - uv run pip-audit
+      - uv audit --preview-features audit-command
 
   # ============================================================================
   # Version management tasks - Manage versions with commitizen
