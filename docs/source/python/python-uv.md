@@ -58,13 +58,13 @@ $ which -a uv
 /opt/homebrew/bin/uv
 
 $ uv --version
-uv 0.11.18 (Homebrew 2026-06-01 aarch64-apple-darwin)
+uv 0.12.5 (Homebrew 2026-08-14 aarch64-apple-darwin)
 
 $ which -a uvx
 /opt/homebrew/bin/uvx
 
 $ uvx --version
-uvx 0.11.18 (Homebrew 2026-06-01 aarch64-apple-darwin)
+uvx 0.12.5 (Homebrew 2026-08-14 aarch64-apple-darwin)
 ```
 
 `uv`はHomebrewでインストールできます。
