@@ -190,43 +190,44 @@ Pythonのパッケージ管理については、
 ## 新規プロジェクトしたい（`uv init`）
 
 ```console
-// 作業用ディレクトリに移動
-$ uv init --lib --package /tmp/test-uv
-Initialized project `test-uv` at `/tmp/test-uv`
-```
-
-`uv init`コマンドでプロジェクトを初期化できます。
-オプションで、プロジェクトの形態やパッケージ化の有無を選択できます。
-
-```console
-$ ls -1a /tmp/test-uv
-.git/
-.gitignore
-.python-version
-README.md
-pyproject.toml
-src/
-
-$ find /tmp/test-uv/src -type f
-/tmp/test-uv/src/test_uv/__init__.py
-/tmp/test-uv/src/test_uv/py.typed
-```
-
-指定したパスに`pyproject.toml`ファイルや`src/<パッケージ名>/__init__.py`、
-`.python-version`ファイルなどが自動生成されます。
-また、Gitリポジトリとして設定されます。
-
-```console
 $ uv init --app /tmp/test-uv-app            // スクリプト中心のプロジェクトを作成
 $ uv init --app --package /tmp/test-uv-cli  // CLIツールとして配布するプロジェクトを作成
 $ uv init --lib /tmp/test-uv-lib            // ライブラリ中心のプロジェクトを作成
 $ uv init --bare /tmp/test-uv-bare          // 最小構成のプロジェクトを作成
 ```
 
-作成するプロジェクトの形態に合わせて`--lib`、`--app`、`--bare`オプションから選択します。
+`uv init`コマンドでプロジェクトを初期化できます。
+プロジェクトの目的に合わせて、`--app`、`--lib`、`--bare`オプションから選択します。
+指定したパスに`pyproject.toml`ファイルや`src/<パッケージ名>/__init__.py`、
+`.python-version`ファイルなどが自動生成されます。
+また、Gitリポジトリとして設定されます。
+
 デフォルトは`--app`です。
 PyPIでパッケージとして公開する予定であれば`--package`オプションを追加します。
 利用形態を迷っている場合は、とりあえず`--app --package`オプションで作成しておくとよいです。
+
+```console
+$ cat /tmp/test-uv/pyproject.toml
+[project]
+name = "test-uv"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+```
+
+プロジェクトのメタデータは`pyproject.toml`の`[project]`セクションに保存されます。
+このファイルはユーザーが直接編集することを想定しています。
+`uv init`コマンドで初期化した後は、必要に応じて直接編集してください。
+
+```console
+$ uv init /tmp/test-uv
+error: Project is already initialized in `/tmp/test-uv` (`pyproject.toml` file exists)
+```
+
+`pyproject.toml`がすでに存在する場合はエラーになります。
+プロジェクトをリセットしたい場合は、`pyproject.toml`ファイルを削除してから再度`uv init`を実行してください。
 
 ### スクリプトしたい（`uv init --app`）
 
@@ -295,29 +296,6 @@ $ find /tmp/test-uv-bare -type f | grep -v .git
 `--bare`は、`pyproject.toml`のみの最小構成用のオプションです。
 `README.md`や`.python-version`、Gitリポジトリの初期化も行われません。
 既存のプロジェクトに、後から`pyproject.toml`だけ追加したい場合に向いています。
-
-```console
-$ uv init /tmp/test-uv
-error: Project is already initialized in `/tmp/test-uv` (`pyproject.toml` file exists)
-```
-
-`pyproject.toml`がすでに存在する場合はエラーになります。
-プロジェクトをリセットしたい場合は、`pyproject.toml`ファイルを削除してから再度`uv init`を実行してください。
-
-```console
-$ cat /tmp/test-uv/pyproject.toml
-[project]
-name = "test-uv"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
-```
-
-プロジェクトのメタデータは`pyproject.toml`の`[project]`セクションに保存されます。
-このファイルはユーザーが直接編集することを想定しています。
-`uv init`コマンドで初期化した後は、必要に応じて直接編集してください。
 
 ## 依存パッケージを追加・削除したい（`uv add` / `uv remove`）
 
