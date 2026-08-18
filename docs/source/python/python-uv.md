@@ -373,6 +373,21 @@ $ uv audit --preview-features audit-command
 `uv audit`は、プロジェクトの依存関係に既知の脆弱性がないかを監査するコマンドです。
 `pip-audit`と同様の役割を、`uv`単体で完結できます。
 
+```console
+// 開発用依存グループを除外して監査
+$ uv audit --preview-features audit-command --no-dev
+
+// JSON形式で出力（CI連携などに）
+$ uv audit --preview-features audit-command --preview-features json-output --output-format json
+
+// 特定の脆弱性IDを無視
+$ uv audit --preview-features audit-command --ignore GHSA-xxxx-xxxx-xxxx
+```
+
+`--no-dev`オプションで、開発用依存グループを監査対象から除外できます。
+`--output-format`オプションで、`json`や`sarif`形式での出力に切り替えられます（`json`形式の利用には`--preview-features json-output`も必要です）。
+`--ignore`オプションで、対応が難しい特定の脆弱性IDを一時的に無視できます。
+
 ## パッケージをビルドしたい（`uv build`）
 
 ```console
