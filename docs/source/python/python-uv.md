@@ -324,21 +324,32 @@ dependencies = []
 ```console
 // dependenciesに追加
 $ uv add requests
-Resolved 1 package in 0.12s
-Created environment
-Installed 1 package in 0.09s
- + requests==2.31.0
+Resolved 6 packages in 0.10s
+   Building my-project @ file:///path/to/my-project
+      Built my-project @ file:///path/to/my-project
+Prepared 1 package in 0.02s
+Installed 6 packages in 0.01s
+ + certifi==2026.7.22
+ + charset-normalizer==3.5.1
+ + idna==3.19
+ + my-project==0.1.0 (from file:///path/to/my-project)
+ + requests==2.34.2
+ + urllib3==2.7.0
 
 // パッケージを削除
 $ uv remove requests
-Removed 1 package in 0.05s
-
-// パッケージをインストール
-$ uv sync
+Resolved 1 package in 0.01s
+Uninstalled 6 packages in 0.01s
+ - certifi==2026.7.22
+ - charset-normalizer==3.5.1
+ - idna==3.19
+ - requests==2.34.2
+ ~ my-project==0.1.0 (from file:///path/to/my-project)
+ - urllib3==2.7.0
 ```
 
 `uv add`でパッケージ依存を追加できます。
-`pyproject.toml`の`[dependencies]`セクションにパッケージ情報が追加され、
+`pyproject.toml`の`[project]`セクションにある`dependencies`にパッケージ情報が追加され、
 `uv.lock`ファイルも自動で更新されます。
 `uv remove`でパッケージ依存を削除できます。
 
