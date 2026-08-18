@@ -319,7 +319,7 @@ dependencies = []
 このファイルはユーザーが直接編集することを想定しています。
 `uv init`コマンドで初期化した後は、必要に応じて直接編集してください。
 
-## パッケージ依存を追加・削除したい（`uv add` / `uv remove`）
+## 依存パッケージを追加・削除したい（`uv add` / `uv remove`）
 
 ```console
 // dependenciesに追加
