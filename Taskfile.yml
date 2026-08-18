@@ -89,7 +89,7 @@ tasks:
   deps:outdated:
     desc: List outdated dependencies
     cmds:
-      - uv pip list --outdated
+      - uv tree --outdated --all-groups
 
   deps:update:
     desc: Update dependencies
