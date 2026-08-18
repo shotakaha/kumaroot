@@ -292,7 +292,7 @@ $ find /tmp/test-uv-bare -type f | grep -v .git
 /tmp/test-uv-bare/pyproject.toml
 ```
 
-`--bare`は、`pyproject.toml`のみの最小構成用のプションです。
+`--bare`は、`pyproject.toml`のみの最小構成用のオプションです。
 `README.md`や`.python-version`、Gitリポジトリの初期化も行われません。
 既存のプロジェクトに、後から`pyproject.toml`だけ追加したい場合に向いています。
 
