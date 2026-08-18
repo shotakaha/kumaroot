@@ -368,6 +368,23 @@ $ uv add --group docs sphinx
 `--dev`オプションは`--group dev`と同じです。
 
 ```console
+// project.optional-dependencies.vizに追加
+$ uv add --optional viz matplotlib
+```
+
+`--optional <extra名>`オプションで、パッケージのオプション機能として依存を追加できます。
+`pyproject.toml`の`[project.optional-dependencies]`セクションに、指定したextra名で追加されます。
+利用者は`pip install my-project[viz]`のように、extra名を指定してインストールできます。
+
+:::{note}
+
+`--group`と`--optional`は似ていますが、目的が異なります。
+`--group`（`[dependency-groups]`）は開発・CI用の内部的な依存分類で、パッケージには含まれません。
+`--optional`（`[project.optional-dependencies]`）は、利用者が選択してインストールできる公開機能で、パッケージのextrasとして配布されます。
+
+:::
+
+```console
 $ uv add pandas
 error: No `pyproject.toml` found in current directory or any parent directory
 ```
