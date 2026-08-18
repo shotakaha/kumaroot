@@ -412,6 +412,28 @@ Installed 5 packages in 0.14s
 
 :::
 
+```console
+// project.optional-dependencies.vizを同期に含める
+$ uv sync --extra viz
+
+// すべてのextraを同期に含める
+$ uv sync --all-extras
+```
+
+`--extra`オプションで、`uv add --optional`で定義したextraを同期対象に含められます。
+デフォルトの`uv sync`ではextraは含まれないため、`--extra <extra名>`で明示的に指定する必要があります。
+`--all-extras`オプションで、定義されているすべてのextraをまとめて含められます。
+
+:::{note}
+
+`uv add --extra <extra名>`とは意味が異なります。
+`uv add --optional`は、このプロジェクトの`pyproject.toml`にextraを**定義**するオプションです。
+`uv sync --extra`（や`uv run --extra`）は、定義済みのextraを**同期・実行時に取り込む**オプションです。
+一方、`uv add --extra`は、追加する依存先パッケージ自身が持つextraを有効にするオプションで、
+`uv add "requests[socks]"`と書くのとほぼ同じ意味になります。
+
+:::
+
 ## パッケージを更新したい（`uv lock`）
 
 ```console
