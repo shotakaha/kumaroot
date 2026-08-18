@@ -204,12 +204,15 @@ $ ls -1a /tmp/test-uv
 .gitignore
 .python-version
 README.md
-main.py
 pyproject.toml
 src/
+
+$ find /tmp/test-uv/src -type f
+/tmp/test-uv/src/test_uv/__init__.py
+/tmp/test-uv/src/test_uv/py.typed
 ```
 
-指定したパスに`pyproject.toml`ファイルや`src/`ディレクトリ、
+指定したパスに`pyproject.toml`ファイルや`src/<パッケージ名>/__init__.py`、
 `.python-version`ファイルなどが自動生成されます。
 また、Gitリポジトリとして設定されます。
 
