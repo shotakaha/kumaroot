@@ -348,10 +348,19 @@ Uninstalled 6 packages in 0.01s
  - urllib3==2.7.0
 ```
 
-`uv add`でパッケージ依存を追加できます。
-`pyproject.toml`の`[project]`セクションにある`dependencies`にパッケージ情報が追加され、
+`uv add`で依存パッケージを追加、
+`uv remove`で依存パッケージを削除できます。
+
+`pyproject.toml`の`[project]`セクションにある`dependencies`にパッケージ情報が記録され、
 `uv.lock`ファイルも自動で更新されます。
-`uv remove`でパッケージ依存を削除できます。
+
+```console
+$ uv add pandas
+error: No `pyproject.toml` found in current directory or any parent directory
+```
+
+`pyproject.toml`がない場合はエラーになります。
+`uv init`コマンドでプロジェクトを初期化してから、`uv add`を実行してください。
 
 ### 開発依存パッケージを追加したい（`--group`）
 
@@ -365,8 +374,10 @@ $ uv add --group dev ruff
 $ uv add --group docs sphinx
 ```
 
-`--group`オプションで、パッケージ依存をグループ化できます。
+`--group`オプションで、依存パッケージをグループ化できます。
 `pyproject.toml`の`[dependency-groups]`セクションにグループ情報が追加されます。
+
+開発のみに必要なツールは`--group dev`でまとめておくと便利です。
 `--dev`オプションは`--group dev`と同じです。
 
 ### オプション依存パッケージを追加したい（`--optional`）
@@ -387,14 +398,6 @@ $ uv add --optional viz matplotlib
 `--optional`（`[project.optional-dependencies]`）は、利用者が選択してインストールできる公開機能で、パッケージのextrasとして配布されます。
 
 :::
-
-```console
-$ uv add pandas
-error: No `pyproject.toml` found in current directory or any parent directory
-```
-
-`pyproject.toml`がない場合はエラーになります。
-`uv init`コマンドでプロジェクトを初期化してから、`uv add`を実行してください。
 
 ## パッケージを同期したい（`uv sync`）
 
