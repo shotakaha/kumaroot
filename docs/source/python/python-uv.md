@@ -375,6 +375,15 @@ $ uv check --preview-features check-command
 ```
 
 `uv check`は、プロジェクトの型チェックを実行するコマンドです。
+内部では[ty](https://docs.astral.sh/ty/)を利用しています。
+
+```console
+// 安全に修正できるエラーを自動修正
+$ uv check --preview-features check-command --fix
+```
+
+`--fix`オプションで、自動修正が可能な型エラーを書き換えてくれます。
+未解決のimportなど、自動修正できないエラーはそのまま報告されます。
 
 ## 依存関係を監査したい（`uv audit`）
 
