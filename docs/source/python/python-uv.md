@@ -169,6 +169,17 @@ error: No virtual environment found; run `uv venv` to create an environment, or 
 
 :::{note}
 
+`uv pip`コマンドは、カレントディレクトリの`.venv`よりも先に、
+環境変数`VIRTUAL_ENV`が指す仮想環境を優先して使用します。
+別プロジェクトの仮想環境を`activate`したままのシェルで
+`uv pip install`を実行すると、意図せずそちらにインストールしてしまうことがあります。
+`echo $VIRTUAL_ENV`で有効化中の仮想環境を確認するか、
+一度`deactivate`してから実行するのが安全です。
+
+:::
+
+:::{note}
+
 Pythonのパッケージ管理については、
 標準ライブラリの[pip](./python-pip.md)があります。
 `uv pip`コマンドは、`pip`コマンドを高速化した実装です。
