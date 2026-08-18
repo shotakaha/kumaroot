@@ -217,23 +217,92 @@ $ find /tmp/test-uv/src -type f
 また、Gitリポジトリとして設定されます。
 
 ```console
-$ uv init --bare /tmp/test-uv-bare    // 最小構成のプロジェクトを作成
-$ uv init --app /tmp/test-uv-app      // CLI中心のプロジェクトを作成
-$ uv init --lib /tmp/test-uv-lib      // ライブラリ中心のプロジェクトを作成
+$ uv init --app /tmp/test-uv-app            // スクリプト中心のプロジェクトを作成
+$ uv init --app --package /tmp/test-uv-cli  // CLIツールとして配布するプロジェクトを作成
+$ uv init --lib /tmp/test-uv-lib            // ライブラリ中心のプロジェクトを作成
+$ uv init --bare /tmp/test-uv-bare          // 最小構成のプロジェクトを作成
 ```
 
 作成するプロジェクトの形態に合わせて`--lib`、`--app`、`--bare`オプションから選択します。
+デフォルトは`--app`です。
 PyPIでパッケージとして公開する予定であれば`--package`オプションを追加します。
-利用形態を迷っている場合は、とりあえず`--lib --package`オプションで作成しておくのが無難です。
+利用形態を迷っている場合は、とりあえず`--app --package`オプションで作成しておくとよいです。
+
+### スクリプトしたい（`uv init --app`）
+
+```console
+$ uv init --app /tmp/test-uv-app
+Initialized project `test-uv-app` at `/tmp/test-uv-app`
+
+$ find /tmp/test-uv-app -type f | grep -v .git
+/tmp/test-uv-app/pyproject.toml
+/tmp/test-uv-app/README.md
+/tmp/test-uv-app/.python-version
+/tmp/test-uv-app/main.py
+```
+
+`--app`は、スクリプトの作成に適したオプションです。
+`uv init`のデフォルトで、トップレベルに`main.py`が生成されるシンプルな構成です。
+`uv run main.py`で直接実行できるため、使い捨てスクリプトや小規模なアプリに向いています。
+
+### CLIしたい（`uv init --app --package`）
+
+```console
+$ uv init --app --package /tmp/test-uv-cli
+Initialized project `test-uv-cli` at `/tmp/test-uv-cli`
+
+$ find /tmp/test-uv-cli -type f | grep -v .git
+/tmp/test-uv-cli/pyproject.toml
+/tmp/test-uv-cli/README.md
+/tmp/test-uv-cli/.python-version
+/tmp/test-uv-cli/src/test_uv_cli/__init__.py
+```
+
+`--app --package`は、CLIツールの作成に適したオプションです。
+`main.py`ではなく、`src/<パッケージ名>/__init__.py`に`main()`関数が生成されます。
+CLIのエントリーポイントは、`pyproject.toml`の`[project.scripts]`に自動登録されます。
+`uv run test-uv-cli`のようにコマンド名で実行できます。
+
+### ライブラリしたい（`uv init --lib`）
+
+```console
+$ uv init --lib /tmp/test-uv-lib
+Initialized project `test-uv-lib` at `/tmp/test-uv-lib`
+
+$ find /tmp/test-uv-lib -type f | grep -v .git
+/tmp/test-uv-lib/pyproject.toml
+/tmp/test-uv-lib/README.md
+/tmp/test-uv-lib/.python-version
+/tmp/test-uv-lib/src/test_uv_lib/__init__.py
+/tmp/test-uv-lib/src/test_uv_lib/py.typed
+```
+
+`--lib`は、ライブラリの作成に適したオプションです。
+`src/<パッケージ名>/`レイアウトで生成されます。
+`py.typed`ファイルも同時に生成され、型情報を配布するライブラリであることを示します。
+`--no-package`とは併用できません（エラーになります）。
+
+### 最小構成したい（`uv init --bare`）
+
+```console
+$ uv init --bare /tmp/test-uv-bare
+Initialized project `test-uv-bare` at `/tmp/test-uv-bare`
+
+$ find /tmp/test-uv-bare -type f | grep -v .git
+/tmp/test-uv-bare/pyproject.toml
+```
+
+`--bare`は、`pyproject.toml`のみの最小構成用のプションです。
+`README.md`や`.python-version`、Gitリポジトリの初期化も行われません。
+既存のプロジェクトに、後から`pyproject.toml`だけ追加したい場合に向いています。
 
 ```console
 $ uv init /tmp/test-uv
 error: Project is already initialized in `/tmp/test-uv` (`pyproject.toml` file exists)
 ```
 
-すでにプロジェクトが存在する場合はエラーになります。
-プロジェクトをリセットしたい場合は、`pyproject.toml`ファイルを削除してから
-再度`uv init`を実行してください。
+`pyproject.toml`がすでに存在する場合はエラーになります。
+プロジェクトをリセットしたい場合は、`pyproject.toml`ファイルを削除してから再度`uv init`を実行してください。
 
 ```console
 $ cat /tmp/test-uv/pyproject.toml
