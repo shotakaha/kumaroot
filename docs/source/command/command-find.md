@@ -213,8 +213,8 @@ $ find 検索パス -type d -empty -delete
 ## xargsしたい
 
 ```console
-$ find 検索パス 検索パターン -print0 | xargs -0 コマンド
-$ find 検索パス 検索パターン -X | xargs コマンド
+$ find 検索パス 検索条件 -print0 | xargs -0 コマンド
+$ find -X 検索パス 検索条件 | xargs コマンド
 ```
 
 `-print0`もしくは`-X`オプションで、安全な検索結果を[xargs](./command-xargs.md)に渡すことができます。
