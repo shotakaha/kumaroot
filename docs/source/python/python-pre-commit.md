@@ -251,11 +251,15 @@ repos:
 - repo: ...
 - repo: ...
 - repo: https://github.com/PyCQA/bandit
-  rev: 1.7.4
+  rev: 1.9.4
   hooks:
   - id: bandit
     args: ["-r", "ディレクトリ名"]
 ```
+
+`Bandit`はPythonコードの潜在的なセキュリティ上の問題を検出するリンターです。
+`shell=True`を使った`subprocess`呼び出しなど、脆弱性につながりやすいパターンを警告してくれます。
+`-r`オプションで、指定したディレクトリを再帰的にスキャンします。
 
 ## nbstripoutしたい
 
