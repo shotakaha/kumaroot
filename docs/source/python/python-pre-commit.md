@@ -269,7 +269,7 @@ repos:
   hooks:
   - id: pytest
     name: pytest
-    entry: pytest --verbose
+    entry: uv run pytest --verbose
     language: system
     pass_filenames: false
     always_run: true
@@ -281,15 +281,17 @@ repos:
 プッシュ時（`pre-push`）にテストを走らせるとよいと思います。
 
 `entry`に実行するコマンドを指定します。
-`pass_filenames: false`がないと、変更されたファイル名がそのまま`pytest`の引数として渡されてしまい、
-うまく動かないので注意してください。
+`uv`でプロジェクトの依存関係を管理している場合、
+`pytest`は仮想環境（`.venv`）の中にインストールされているはずなので、
+`entry: pytest`ではなく`entry: uv run pytest`のように指定してください。
+
+`pass_filenames: false`がないと、変更されたファイル名がそのまま`pytest`の引数として渡されてしまい、うまく動かないので注意してください。
 `always_run: true`で、対象ファイルの変更有無にかかわらず毎回実行します。
 
 :::{note}
 
 テストはCI/CDでも実行しているかもしれません。
-ローカルからのプッシュ前に確認を追加することで、
-パイプライン時間の無駄遣いを減らすことができます。
+ローカルからのプッシュ前に確認を追加することで、パイプライン時間の無駄遣いを減らすことができます。
 
 :::
 
