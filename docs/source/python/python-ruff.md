@@ -208,20 +208,27 @@ repos:
   rev: v0.15.12
   hooks:
   # ruff check
-  - id: ruff
+  - id: ruff-check
   # ruff format
   - id: ruff-format
 ```
 
 `ruff`用のフックがあるので、[pre-commit](./python-pre-commit.md)と連携させることができます。
 
-`id: ruff`を有効にすると
+`id: ruff-check`を有効にすると
 `ruff check .`が実行されます。
 ファイルは修正されません。
 
 `id: ruff-format`を有効にすると
 `ruff format .`が実行されます。
 ファイルは修正されます。
+
+:::{note}
+
+以前は`id: ruff`という名前でしたが、現在はレガシーな別名として扱われています。
+新しく設定する場合は`ruff-check`を使ってください。
+
+:::
 
 ## リファレンス
 
