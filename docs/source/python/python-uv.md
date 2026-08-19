@@ -669,29 +669,34 @@ Python 3.12.7
 ```console
 // 特定のバージョンをインストール
 $ uv python install 3.12
-Installed Python 3.12.7 in 5.67s
+Downloading cpython-3.12.14-macos-aarch64-none (download) (25.1MiB)
+ Downloaded cpython-3.12.14-macos-aarch64-none (download)
+Installed Python 3.12.14 in 2.27s
+ + cpython-3.12.14-macos-aarch64-none (python3.12)
 
 // 複数バージョンをインストール
 $ uv python install 3.11 3.12
 
 $ uv python uninstall 3.12
-Uninstalled Python 3.12.7
+Searching for Python versions matching: Python 3.12
+Uninstalled Python 3.12.14 in 201ms
+ - cpython-3.12.14-macos-aarch64-none (python3.12)
 ```
 
 `uv python install`コマンドで、特定のPythonバージョンをインストールできます。
 
 ```console
-// 利用可能なバージョンを確認
+// 利用可能なバージョンを確認（インストール済みはパス、未インストールは<download available>と表示）
 $ uv python list
-cpython-3.13.0
-cpython-3.12.7
-cpython-3.11.10
+cpython-3.14.7-macos-aarch64-none     /opt/homebrew/bin/python3.14 -> ../Cellar/python@3.14/3.14.7/bin/python3.14
+cpython-3.13.15-macos-aarch64-none    <download available>
+cpython-3.12.14-macos-aarch64-none    /opt/homebrew/bin/python3.12 -> ../Cellar/python@3.12/3.12.14/bin/python3.12
 ...
 
-// インストール済みバージョンを確認
+// インストール済みバージョンのみ確認
 $ uv python list --only-installed
-cpython-3.13.0-macos-aarch64-none     /opt/homebrew/opt/python@3.13/bin/python3.13
-cpython-3.12.7-macos-aarch64-none     ~/.local/share/uv/python/cpython-3.12.7-macos-aarch64-none/bin/python3.12
+cpython-3.14.7-macos-aarch64-none     /opt/homebrew/bin/python3.14 -> ../Cellar/python@3.14/3.14.7/bin/python3.14
+cpython-3.12.14-macos-aarch64-none    /opt/homebrew/bin/python3.12 -> ../Cellar/python@3.12/3.12.14/bin/python3.12
 ```
 
 `uv python list`コマンドで、利用可能なPythonバージョンやインストール済みのバージョンを確認できます。
