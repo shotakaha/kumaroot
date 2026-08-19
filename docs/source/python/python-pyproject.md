@@ -141,13 +141,65 @@ CI/CD専用など、パッケージの利用者に見せる必要のない依存
 
 ## ビルド環境（`[build-system]`）
 
+`[build-system]`で、パッケージをビルドするためのツール（ビルドバックエンド）を指定できます。
+`requires`に必要なパッケージ、`build-backend`にビルド処理を担うモジュールを書きます（PEP 517、PEP 518）。
+使っているプロジェクト管理ツールに合わせて選びます。
+
+### hatchしたい（`hatchling`）
+
 ```toml
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
 
-`[build-system]`で、パッケージをビルドするためのツールを指定できます。
+[hatch](./python-hatch.md)のビルドバックエンドです。
+`hatch new`で作成したプロジェクトでは、デフォルトでこの設定になります。
+
+### poetryしたい（`poetry-core`）
+
+```toml
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+```
+
+[poetry](./python-poetry.md)のビルドバックエンドです。
+`poetry new`や`poetry init`で作成したプロジェクトでは、デフォルトでこの設定になります。
+
+### uvしたい（`uv_build`）
+
+```toml
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+```
+
+[uv](./python-uv.md)のビルドバックエンドです。
+`uv init`で作成したプロジェクトでは、デフォルトでこの設定になります。
+`requires`のバージョン範囲は、インストールされている`uv`のバージョンに合わせて自動で設定されます。
+
+### flitしたい（`flit_core`）
+
+```toml
+[build-system]
+requires = ["flit_core>=3.11,<5"]
+build-backend = "flit_core.buildapi"
+```
+
+シンプルな単一パッケージの配布に特化した[flit](https://flit.pypa.io/)のビルドバックエンドです。
+複雑な設定を必要としない、小規模なプロジェクトに向いています。
+
+### setuptoolsしたい（`setuptools`）
+
+```toml
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+```
+
+古くから使われている[setuptools](https://setuptools.pypa.io/)のビルドバックエンドです。
+`[build-system]`テーブル自体を省略した場合も、フォールバックとしてsetuptoolsが使われます。
 
 ## パッケージ名とディレクトリ構造を変えたい
 
