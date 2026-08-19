@@ -77,11 +77,6 @@ version_files = [
 `version`で現在のバージョン番号、`tag_format`でGitタグの命名規則を指定します。
 `$version`の部分がバージョン番号に置き換わります。
 
-`version_scheme`でバージョン番号のスキーム（`semver`・`semver2`・`pep440`）を指定できます。
-`version_provider`で、バージョン番号の読み書き先を切り替えられます。
-`"uv"`を指定すると`uv`が管理する`[project]`の`version`と連動し、
-`version`キー自体は省略できます（`"pep621"`を指定した場合も同様です）。
-
 `update_changelog_on_bump = true`にすると、
 `cz bump`実行時に`--changelog`オプションを付けなくても、
 自動的に`CHANGELOG.md`が更新されます。
@@ -105,6 +100,48 @@ Pythonプロジェクトでよく指定されるファイルの例：
 - `docs/source/conf.py:version` - `sphinx-quickstart --sep`でソースとビルドを分けた場合
 
 複数のファイルにバージョン番号を定義している場合は、初期設定のときにまとめて追加しておくことをオススメします。
+
+### スキーマしたい（`version_scheme`）
+
+```toml
+[tool.commitizen]
+version_scheme = "semver2"
+```
+
+`version_scheme`で、バージョン番号の表記形式を指定できます。
+
+- `semver` - [Semantic Versioning](https://semver.org/)（例：`1.0.0-beta.1`）
+- `semver2` - `semver`と互換性のある形式（デフォルト、例：`1.0.0-beta.1`）
+- `pep440` - Pythonパッケージング標準の[PEP 440](https://peps.python.org/pep-0440/)形式（例：`1.0.0b1`）
+
+同じプレリリースバージョンでも、スキームによって表記が変わります。
+`semver2`では`1.0.0-beta.1`のままですが、`pep440`では`1.0.0b1`に正規化されます。
+PyPIに公開するPythonパッケージであれば`pep440`が適しています。
+
+### プロバイダーしたい（`version_provider`）
+
+```toml
+[tool.commitizen]
+version_provider = "pep621"
+```
+
+`version_provider`で、バージョン番号の読み書き先を指定できます。
+指定すると、`[tool.commitizen]`の`version`キー自体は省略できます。
+
+| 値 | 読み書き先 |
+| --- | --- |
+| `commitizen`（デフォルト） | `[tool.commitizen]`の`version` |
+| `pep621` | `pyproject.toml`の`[project]`の`version` |
+| `uv` | `pyproject.toml`の`[project]`の`version`と`uv.lock` |
+| `poetry` | `pyproject.toml`の`[tool.poetry]`の`version` |
+| `cargo` | `Cargo.toml`の`[project]`の`version` |
+| `npm` | `package.json`の`version` |
+| `composer` | `composer.json`の`version` |
+| `scm` | Gitから取得（バージョンの書き戻しはしない） |
+
+`uv`でプロジェクトを管理している場合は`"uv"`、
+それ以外のPythonプロジェクトでは`"pep621"`を指定するのがオススメです。
+`cz init`実行時のダイアログでも`pep621`が推奨として案内されます。
 
 ## 初期化したい（`cz init`）
 
