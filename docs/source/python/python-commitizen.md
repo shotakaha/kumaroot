@@ -323,12 +323,20 @@ $ cz bump --increment PATCH --changelog
 ```yaml
 repos:
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v4.15.1
+  rev: v4.17.1
   hooks:
   - id: commitizen
+  - id: commitizen-branch
     stages:
-    - commit-msg
+    - pre-push
 ```
 
-`stages: [commit-msg]`を指定することで、コミットメッセージが保存されたあとに検証が実行されます。
+`id: commitizen`は、デフォルトで`commit-msg`ステージで実行され、
+コミットメッセージが保存されたあとに検証します。
 これにより、セマンティック・バージョニングに従わないコミットメッセージは自動的に拒否されます。
+
+`id: commitizen-branch`は、デフォルトで`pre-push`ステージで実行され、
+現在のブランチにある（デフォルトブランチにはまだない）すべてのコミットメッセージをまとめて検証します。
+コミット時ではなく、プッシュ時やCIなど、あとからまとめてチェックしたい場合に使います。
+`cz init`実行時の「What types of pre-commit hook you want to install?」の質問で、
+両方選択すると上記の設定が生成されます。
