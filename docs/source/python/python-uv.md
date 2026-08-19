@@ -504,6 +504,15 @@ $ uv run --with rich --with httpx python script.py
 ちょっとしたパッケージを試したいときや、使い捨てスクリプトの実行に便利です。
 
 ```console
+// PyPIに公開していない、Gitリポジトリのパッケージを直接指定
+$ uv run --with "osechi-kazunoko @ git+https://gitlab.com/osechi/kazunoko" python -c "import kazunoko"
+```
+
+`--with`には、`パッケージ名 @ git+<リポジトリURL>`の形式でGitリポジトリを直接指定できます。
+PyPIに公開していない自作パッケージや、フォーク版を一時的に試したい場合に使えます。
+パッケージ名は`pyproject.toml`の`name`（配布名）を指定し、`import`するモジュール名とは異なる場合がある点に注意してください。
+
+```console
 $ source .venv/bin/activate
 (.venv) $ python path/to/script.py
 ```
