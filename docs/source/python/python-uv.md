@@ -847,6 +847,15 @@ Uninstalled 1 executable: mkdocs
 
 :::
 
+:::{note}
+
+`poetry`には`install`と`sync`の2つのコマンドがあります。
+`poetry install`はロックファイルの内容をインストールしますが、環境に残っている余分なパッケージは削除しません。
+`poetry sync`（`poetry install --sync`と同等）は、ロックファイルの内容と環境を完全に一致させ、余分なパッケージを削除します。
+`uv sync`は後者の挙動（完全一致）に対応するため、比較表では`poetry sync`を挙げています。
+
+:::
+
 ### 一時的なツール実行（`uvx` / `pipx`）
 
 | 機能 | `uvx` | `pipx` |
