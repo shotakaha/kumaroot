@@ -1,281 +1,382 @@
 # パッケージ管理したい（`hatch`）
 
 ```console
-// プロジェクト初期化
-$ hatch new プロジェクト名
+// 新規プロジェクト作成
+$ hatch new my-project
 
-// 環境管理
-$ hatch shell
-$ hatch env show
-$ hatch env remove 環境名
+// 依存関係のインストール（pyproject.tomlの内容を反映）
+$ hatch env create
 
-// パッケージ実行と開発
-$ hatch run コマンド
-$ hatch run pytest
-
-// テスト実行
+// パッケージの実行とテスト
+$ hatch run python main.py
 $ hatch test
+
+// コードチェック
+$ hatch check
+
+// バージョン管理
+$ hatch version patch
 
 // パッケージ公開
 $ hatch build
 $ hatch publish
 ```
 
-`hatch`はPythonプロジェクトの開発から公開まで、統合的に管理できるツールです。
-`pyproject.toml`で依存関係を管理し、
-複数のPythonバージョン環境を自動で構築・テストできます。
+`hatch`は、PyPA（Python Packaging Authority）傘下のプロジェクト管理ツールです。
+プロジェクトの初期化、仮想環境の管理、テスト、コードチェック、パッケージのビルドと公開まで、Pythonプロジェクトのライフサイクル全体をカバーします。
+
+`pyproject.toml`を軸に設定し、複数のPython環境を自動で構築・管理できます。
+バージョン管理コマンド（`hatch version`）を内蔵している点が、他のツールにはない特徴です。
 
 :::{note}
+Pythonでは、
+パッケージ管理には`pip`、
+バージョン管理には`pyenv`、
+プロジェクト管理には`poetry`
+のように、
+複数のツールがまるで戦国時代のように群雄割拠しています。
 
-`hatch`はパッケージ開発に特化しており、テストやビルド、公開までのワークフローが統合されています。
+`hatch`は、PyPAが管理する公式寄りのツールという立ち位置で、
+とくにパッケージのビルド・公開まわり（`hatchling`ビルドバックエンド）で存在感があります。
+[uv](./python-uv.md)や[poetry](./python-poetry.md)と比べると、
+依存パッケージの追加・削除は`pyproject.toml`を直接編集する運用が前提になっている点が特徴的です。
 
 :::
 
 ## インストールしたい（`hatch`）
 
 ```console
+// Homebrewでインストール
 $ brew install hatch
 
 $ which -a hatch
 /opt/homebrew/bin/hatch
 
 $ hatch --version
-hatch, version 1.13.0
+Hatch, version 1.18.0
 ```
 
 `hatch`はHomebrewでインストールできます。
-`pipx`を使ったインストール方法もあります。
+`pipx install hatch`や`uv tool install hatch`でもインストールできます。
 
 :::{note}
-
-`pip`や`pipx`でもインストールできます。
-推奨されるインストール方法は`pipx install hatch`です。
-
-:::
-
-## 仮想環境したい（`hatch env`）
-
-```console
-$ cd PROJECT_NAME
-$ hatch shell
-Creating environment: default
-Python 3.12.7
-
-(default) $
-```
-
-`hatch shell`コマンドで仮想環境を作成・アクティブ化できます。
-デフォルトで`default`という名前の環境が作成されます。
-環境はプロジェクトディレクトリの`.venv`（または他の場所）に保存されます。
-
-:::{note}
-
-`hatch env create`で環境を明示的に作成することもできますが、
-通常は`hatch shell`や`hatch run`で自動的に作成されます。
-
-:::
-
-## 依存関係を管理したい（`pyproject.toml`）
-
-hatchでは`pyproject.toml`を直接編集して依存関係を管理します。
-`hatch`にはコマンドで依存関係を追加・削除する機能がありません。
-
-```toml
-# プロジェクトの依存関係
-[project]
-dependencies = [
-  "requests>=2.28.0",
-  "click>=8.0.0",
-]
-
-# 開発用の依存関係
-[project.optional-dependencies]
-dev = [
-  "pytest>=8.0",
-  "pytest-cov>=4.0",
-]
-
-# テスト環境の依存関係
-[tool.hatch.envs.test]
-dependencies = [
-  "pytest>=8.0",
-  "pytest-cov>=4.0",
-]
-```
-
-`pyproject.toml`を編集した後、以下のコマンドで環境を更新できます：
-
-```console
-$ hatch env create
-Creating environment: default
-
-$ hatch run pytest
-Running tests in default environment...
-```
-
-`hatch`は自動的に依存関係を解決してインストールします。
-
-:::{note}
-
-`pyproject.toml`を編集したら、`hatch shell`や`hatch run`で環境を再作成すると自動的に依存関係が更新されます。
-
+公式ドキュメントでは`pipx`を使ったインストールが推奨されています。
+挙動はどの方法でもほぼ同じで、専用の仮想環境を作ってから実行コマンドを`PATH`の通った場所にリンクします。
 :::
 
 ## 新規プロジェクトしたい（`hatch new`）
 
 ```console
-$ hatch --version
-hatch, version 1.13.0
-
-$ hatch new PROJECT_NAME
-Created project `PROJECT_NAME` at `/path/to/PROJECT_NAME`
+$ hatch new my-project
+my-project
+├── src
+│   └── my_project
+│       ├── __about__.py
+│       └── __init__.py
+├── tests
+│   └── __init__.py
+├── LICENSE.txt
+├── README.md
+└── pyproject.toml
 ```
 
 `hatch new`コマンドでプロジェクトを初期化できます。
-同名のプロジェクトがすでに存在する場合は、エラーになります。
-
-hatchで作成されるプロジェクト構造は、Pythonパッケージ開発に最適化されています：
+`src/<パッケージ名>/`レイアウトが自動生成され、`__about__.py`にバージョン情報が保存されます。
+`author`や`license`などのメタデータは、Gitの設定（`user.name`、`user.email`）から自動で入力されます。
 
 ```console
-$ tree PROJECT_NAME
-PROJECT_NAME
-├── README.md
-├── LICENSE.txt
-├── pyproject.toml
-├── src/
-│   └── project_name/
-│       ├── __about__.py
-│       └── __init__.py
-└── tests/
-    ├── __init__.py
-    └── test_example.py
+$ cat my-project/pyproject.toml
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-project"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+...
+dependencies = []
+
+[tool.hatch.version]
+path = "src/my_project/__about__.py"
 ```
 
-`src/`レイアウトを使用することで、パッケージの依存関係の問題を回避できます。
-`__about__.py`にバージョン情報が集約されており、バージョン管理が簡単です。
+プロジェクトのメタデータは`pyproject.toml`の`[project]`セクションに保存されます。
+このファイルはユーザーが直接編集することを想定しています。
 
 :::{note}
 
-`hatch new`は対話形式で詳細情報を入力することもできます。
-`hatch new -i`で対話モードを起動できます。
+`requires-python`のデフォルトは`>=3.8`と古めです。
+実際に使うPythonバージョンに合わせて、作成後に書き換えておくとよいです。
+
+:::
+
+### 対話形式で作りたい（`hatch new -i`）
+
+```console
+$ hatch new -i
+Project name: my-project
+Description []: サンプルプロジェクト
+```
+
+`-i`（`--interactive`）オプションで、プロジェクト名や説明などを対話的に入力しながら作成できます。
+`hatch new my-project`のように名前を直接指定する方法との違いは、対話中に説明文などの追加項目を入力できる点だけです。
+
+### 既存ディレクトリに追加したい（`hatch new --init`）
+
+```console
+$ cd my-project
+$ hatch new --init
+Project name: my-project
+Description []:
+Wrote: pyproject.toml
+```
+
+`--init`オプションで、既存のディレクトリに`pyproject.toml`を追加できます。
+プロジェクト名の入力を求められるので、ディレクトリ名などを入力してください。
+`hatch new`と違って、`src/`レイアウトや`README.md`、`LICENSE.txt`は生成されず、`pyproject.toml`のみが追加されます。
+
+### CLIツールを作りたい（`hatch new --cli`）
+
+```console
+$ hatch new --cli my-cli-tool
+```
+
+`--cli`オプションで、コマンドラインインターフェイスを持つプロジェクトとして作成できます。
+`pyproject.toml`の`[project.scripts]`にエントリーポイントが自動登録されます。
+
+## 仮想環境したい（`hatch env`）
+
+```console
+$ cd my-project
+
+// 仮想環境を作成
+$ hatch env create
+Creating environment: default
+Installing project in development mode
+Checking dependencies
+
+// 環境一覧を確認
+$ hatch env show
+       Standalone
+┏━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Name    ┃ Type    ┃ Dependencies ┃ Scripts ┃
+┡━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━┩
+│ default │ virtual │              │         │
+└─────────┴─────────┴──────────────┴─────────┘
+
+// 環境の保存先を確認
+$ hatch env find
+~/.local/share/hatch/env/virtual/my-project/xxxxxxxx/my-project
+```
+
+`hatch env create`コマンドで仮想環境を明示的に作成できます。
+`hatch shell`や`hatch run`を実行したときにも、環境がなければ自動的に作成されます。
+`hatch env show`で作成済みの環境一覧、`hatch env find`で環境の実際の保存先を確認できます。
+
+デフォルトの保存先はプロジェクトディレクトリの外（`~/.local/share/hatch/env/`配下）です。
+`.venv`のようにプロジェクト内に作られる`uv venv`や`poetry env`（`virtualenvs.in-project`設定時）とは異なる点に注意してください。
+
+```console
+// 仮想環境の中に入る
+$ hatch shell
+You are about to enter a new shell, exit as you usually would e.g. by typing `exit` or pressing `ctrl+d`...
+(my-project) $ exit
+```
+
+`hatch shell`コマンドで、仮想環境をアクティブ化したサブシェルに入れます。
+`uv venv`や`poetry env activate`と違って、`source`コマンドを使わずに直接シェルへ入れる点が特徴です。
+抜けるときは`exit`か`Ctrl+D`を使います。
+
+```console
+// 環境を削除
+$ hatch env remove
+Removing environment: default
+
+// すべての環境を削除
+$ hatch env prune
+```
+
+`hatch env remove`コマンドで、現在の環境を削除できます。
+`hatch env prune`コマンドで、プロジェクトに紐づくすべての環境（テスト用・ビルド用なども含む）を一括削除できます。
+
+:::{note}
+
+`hatch env show`はデフォルトで、ユーザーが`pyproject.toml`の`[tool.hatch.envs.*]`で定義した環境のみを表示します。
+`hatch test`や`hatch build`が内部的に使う環境（`hatch-test`、`hatch-build`など）も見たい場合は、`-i`（`--internal`）オプションを付けます。
+
+:::
+
+## 依存関係を管理したい（`pyproject.toml`）
+
+```toml
+[project]
+dependencies = [
+  "requests>=2.28.0",
+]
+```
+
+`hatch`には、`uv add`や`poetry add`に相当する「パッケージ追加」専用コマンドがありません。
+`pyproject.toml`の`dependencies`を直接編集してから、`hatch env create`（や`hatch run`）で環境に反映する運用が前提です。
+
+```console
+// 現在の依存関係を確認
+$ hatch dep show requirements
+requests>=2.28.0
+```
+
+`hatch dep show requirements`コマンドで、現在定義されている依存関係を`requirements.txt`形式で確認できます。
+
+:::{note}
+
+`[project]`セクションの`dependencies`はプロジェクト全体の依存関係です。
+`[tool.hatch.envs.<環境名>]`セクションに`dependencies`を追加すると、その環境だけに依存パッケージを追加できます。
+テスト専用のパッケージなどは、後者で環境ごとに分けておくと管理しやすいです。
+
+:::
+
+### ロックファイルを使いたい（`hatch dep lock`）
+
+```toml
+[tool.hatch.envs.default]
+locked = true
+installer = "uv"
+```
+
+`hatch dep lock`コマンドで、PEP 751形式のロックファイル（`pylock.toml`）を生成できます。
+`uv.lock`や`poetry.lock`と違って、環境ごとに`locked = true`を明示しないと有効になりません。
+また`hatch dep sync`（ロックファイルの内容を環境に反映するコマンド）を使うには、`installer = "uv"`の指定も必要です（デフォルトの`pip`インストーラーは未対応）。
+
+```console
+$ hatch dep lock
+Locking environment: default
+
+$ hatch dep sync
+Syncing from lockfile
+Synced environment `default` from `pylock.toml`
+```
+
+:::{note}
+
+この機能は2026年時点でもまだ実験的な位置づけです。
+`uv`や`poetry`のように「デフォルトでロックファイルを使う」運用ではなく、`hatch`はオプトインの機能として提供しています。
+再現性を重視しないプロジェクトでは、ロック機能を使わずに`dependencies`の直接編集だけで運用しても問題ありません。
 
 :::
 
 ## パッケージを実行したい（`hatch run`）
 
 ```console
-$ hatch run コマンド名
+$ hatch run python main.py
+Hello, World!
 
-// ユニットテストを実行
 $ hatch run pytest
-
-// フォーマッターを実行
-$ hatch run ruff format
-
-// 自作スクリプトを実行
-$ hatch run python src/my_script.py [オプション]
+===== test session starts =====
+tests/test_example.py .                                       [100%]
+1 passed
 ```
 
-`hatch run`で仮想環境内のパッケージを実行できます。
-また`pyproject.toml`の`[project.scripts]`で設定したスクリプトエントリーポイントも実行できます。
-
-`pyproject.toml`に環境別のスクリプトを定義することもできます：
+`hatch run`コマンドで、プロジェクトの仮想環境を使って外部コマンドやスクリプトを実行できます。
+仮想環境の手動アクティベーションは不要です。
 
 ```toml
 [tool.hatch.envs.default.scripts]
 format = "ruff format ."
 lint = "ruff check ."
-test = "pytest"
 ```
 
-定義したスクリプトは以下のように実行できます：
+`pyproject.toml`の`[tool.hatch.envs.<環境名>.scripts]`に、よく使うコマンドをエイリアスとして登録できます。
 
 ```console
 $ hatch run format
 $ hatch run lint
-$ hatch run test
 ```
+
+登録したエイリアスは、`hatch run <エイリアス名>`で実行できます。
+
+```console
+// 環境名を指定して実行
+$ hatch run types:check
+```
+
+`環境名:コマンド`の形式で、`default`以外の環境を指定して実行できます。
+環境を省略した場合は、`-e`オプション（や`HATCH_ENV`環境変数）で指定した環境、それもなければ`default`環境が使われます。
+
+## コードをチェックしたい（`hatch check`）
+
+```console
+$ hatch check
+```
+
+`hatch check`コマンドで、静的解析（lint）・フォーマット確認・型チェックをまとめて実行できます。
+内部では[Ruff](https://docs.astral.sh/ruff/)や型チェッカーを利用しています。
+
+```console
+// 自動修正を適用
+$ hatch check --fix
+
+// リンターのみ実行
+$ hatch check code
+
+// フォーマット確認のみ実行
+$ hatch check fmt
+
+// 型チェックのみ実行
+$ hatch check types
+```
+
+`--fix`オプションで、自動修正できる問題を書き換えられます。
+`code`（静的解析）、`fmt`（フォーマット確認）、`types`（型チェック）のサブコマンドで、個別に実行することもできます。
 
 :::{note}
 
-`hatch run`は指定した環境内でコマンドを実行します。
-環境を指定しない場合はデフォルト環境で実行されます。
+過去バージョンにあった`hatch fmt`コマンドは、`hatch 1.18.0`時点では非推奨になっています。
+実行すると`hatch check code --fix`と`hatch check fmt --fix`を使うよう案内されます。
+既存のドキュメントや記事で`hatch fmt`を見かけたら、`hatch check --fix`に読み替えてください。
 
 :::
 
-## パッケージを公開したい（`hatch build` / `hatch publish`）
-
-```console
-$ hatch build
-Building `wheel` wheel (src/project_name)
-Successfully built dist/project_name-0.0.1-py3-none-any.whl
-Building `sdist` sdist (src/project_name)
-Successfully built dist/project_name-0.0.1.tar.gz
-
-$ hatch publish
-Publishing to PyPI with token
-```
-
-`hatch build`コマンドでパッケージを作成できます。
-`dist/`ディレクトリ内に`sdist`形式（`.tar.gz`）と`wheel`形式（`.whl`）のパッケージが生成されます。
-
-`hatch publish`コマンドでPyPIにパッケージを公開できます。
-初回公開時はTestPyPIにテスト公開することをオススメします：
-
-```console
-$ hatch publish -r testpypi
-Publishing to https://test.pypi.org/legacy/
-```
-
-PyPIへのアップロード前に、PyPIアカウントとAPIトークンを用意する必要があります。
-
-:::{caution}
-
-同じパッケージ名はPyPIに登録できません。
-パッケージを公開する前に名前の重複がないか確認が必要です。
-
-また、同じバージョンの再アップロード（上書き）はできません。
-変更内容に応じてバージョンを更新する必要があります。
-
-:::
-
-## 複数のPythonバージョンでテストしたい（`hatch test`）
+## テストしたい（`hatch test`）
 
 ```console
 $ hatch test
-Running tests for multiple Python versions...
-3.10: PASSED
-3.11: PASSED
-3.12: PASSED
+============================= test session starts ==============================
+platform darwin -- Python 3.12.7, pytest-9.1.1, pluggy-1.6.0
+...
+tests/test_example.py .                                                  [100%]
+============================== 1 passed in 0.01s ===============================
 ```
 
-`hatch test`コマンドで複数のPythonバージョンを使用してテストを実行できます。
-hatchは必要なPythonディストリビューションを自動的にダウンロードするため、事前インストールが不要です。
+`hatch test`コマンドで、専用の`hatch-test`環境を使ってテストを実行できます。
+`pytest`や`coverage`などのテスト用パッケージがあらかじめ含まれており、手動でのインストールは不要です。
 
-テスト対象のPythonバージョンは`pyproject.toml`で指定します：
+デフォルトでは、現在使用中のインタープリターに一致する環境1つだけでテストが実行されます。
+複数のPythonバージョンでテストしたい場合は、`pyproject.toml`でマトリクスを定義します。
 
 ```toml
-[tool.hatch.envs.test]
-python = ["3.10", "3.11", "3.12"]
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.11", "3.12", "3.13"]
 ```
-
-テスト実行時のオプション：
 
 ```console
-$ hatch test --parallel
+// マトリクスに定義したすべてのバージョンでテスト
+$ hatch test --all
+
+// 特定のバージョンだけテスト
+$ hatch test --python 3.12
+
+// カバレッジを測定
 $ hatch test --cover
-$ hatch test 3.12
+
+// 並列実行
+$ hatch test --parallel
 ```
 
-`--parallel`オプションで複数バージョンのテストを並列実行できます。
-`--cover`オプションでコードカバレッジを測定できます。
-
-:::{note}
-
-hatchは複数のPythonバージョン環境を自動的に管理し、
-各バージョンで同じテストスイートを実行します。
-
-:::
+`--all`オプションで、マトリクスに定義したすべてのバージョンでテストを実行できます。
+指定しない場合は、現在の環境に合う1つのバージョンのみが対象になる点に注意してください。
 
 ## バージョンを管理したい（`hatch version`）
 
@@ -284,64 +385,119 @@ $ hatch version
 0.0.1
 
 $ hatch version patch
-Bumped version from 0.0.1 to 0.0.2
+Old: 0.0.1
+New: 0.0.2
 
 $ hatch version minor
-Bumped version from 0.0.2 to 0.1.0
+Old: 0.0.2
+New: 0.1.0
 
 $ hatch version major
-Bumped version from 0.1.0 to 1.0.0
+Old: 0.1.0
+New: 1.0.0
 ```
 
-`hatch version`でプロジェクトのバージョンを管理できます。
-バージョン情報は`src/project_name/__about__.py`に保存されます。
+`hatch version`コマンドで、プロジェクトのバージョンを確認・更新できます。
+バージョン情報は`hatch new`で生成される`src/<パッケージ名>/__about__.py`に保存され、`pyproject.toml`の`[tool.hatch.version]`がその参照先を指定しています。
 
-バージョンバンプコマンド：
-
-- `hatch version patch`：パッチバージョンをアップ（バグ修正）
-- `hatch version minor`：マイナーバージョンをアップ（新機能）
-- `hatch version major`：メジャーバージョンをアップ（大きな変更）
+- `hatch version patch`：パッチバージョンを上げる（バグ修正）
+- `hatch version minor`：マイナーバージョンを上げる（新機能）
+- `hatch version major`：メジャーバージョンを上げる（大きな変更）
 
 :::{note}
 
-`hatch`は`src/`レイアウトを採用しており、
-バージョン情報は`__about__.py`で一元管理されます。
+`uv`や`poetry`には、これに相当するバージョン管理コマンドがありません（`uv version`はサブコマンドとして未提供、`poetry version`は別途存在しますが`hatch`ほど`__about__.py`との連携は強くありません）。
+バージョンを頻繁にバンプする運用であれば、`hatch`ならではの利点になります。
 
 :::
 
-## hatchとpytestの統合
-
-hatchで作成したプロジェクトには、デフォルトで`pytest`がテスト環境に含まれています。
-以下のコマンドでテストを実行できます：
+## パッケージをビルドしたい（`hatch build`）
 
 ```console
-$ hatch run test
-Running tests...
-tests/test_example.py .                                    [100%]
-1 passed
-
-$ hatch run pytest tests/
-Running tests...
-tests/test_example.py .                                    [100%]
-1 passed
-
-$ hatch run pytest tests/ -v
-Running tests...
-tests/test_example.py::test_example PASSED              [100%]
-1 passed
+$ hatch build
+sdist
+dist/my_project-0.0.2.tar.gz
+wheel
+dist/my_project-0.0.2-py3-none-any.whl
 ```
 
-hatchは複数のPythonバージョンでテストを実行する機能が統合されているため、
-CI/CDパイプラインの設定も簡単です。
+`hatch build`コマンドでパッケージをビルドできます。
+`dist/`ディレクトリの中に、`wheel`形式（`.whl`）と`sdist`形式（`.tar.gz`）のファイルが生成されます。
 
-## hatchとpyprojectの関係
+```console
+$ hatch build --target wheel
+Inspecting build dependencies
+──────────────────────────────────── wheel ─────────────────────────────────────
+dist/my_project-0.0.2-py3-none-any.whl
 
-hatchはPEP 517/518に完全準拠しており、`pyproject.toml`は標準的なPythonパッケージング仕様にしたがっています。
-これにより、他のツール（`pip`、`build`など）との互換性が保証されています。
+$ hatch build --target sdist
+Inspecting build dependencies
+──────────────────────────────────── sdist ─────────────────────────────────────
+dist/my_project-0.0.2.tar.gz
+```
+
+`-t`（`--target`）オプションで、どちらか片方の形式だけをビルドできます。
 
 :::{note}
 
-`pyproject.toml`はPythonパッケージの標準メタデータ形式です。
-hatchはこの仕様に準拠した最新のパッケージマネージャーです。
+`uv build`や`poetry build`にある`--dry-run`のようなオプションは、`hatch build`にはありません。
+実際に手を動かす前に内容を確認したい場合は、`-c`（`--clean`）オプションを付けずに実行し、生成された`dist/`の中身を確認するのが実用的です。
 
 :::
+
+## パッケージを公開したい（`hatch publish`）
+
+```console
+$ hatch publish
+Enter your username: __token__
+Enter your credentials:
+```
+
+`hatch publish`コマンドで、PyPIにパッケージを公開できます。
+認証情報が未設定の場合は、初回実行時にユーザー名（`__token__`固定）とAPIトークンの入力を求められます。
+一度入力すると、`~/.config/hatch/config.toml`（プラットフォームによって異なる）に保存され、以降は再入力不要です。
+
+```console
+// TestPyPIに公開
+$ hatch publish -r test
+```
+
+`-r`（`--repo`）オプションで、公開先を切り替えられます。
+`test`は組み込みのエイリアスで、TestPyPIを指します（`main`がデフォルトのPyPI）。
+はじめて公開するパッケージは、まずTestPyPIに公開して動作テストしてからPyPIに本番公開することをオススメします。
+
+```console
+// ユーザー名・トークンをオプションで直接指定
+$ hatch publish -u __token__ -a <your-token>
+```
+
+`-u`（`--user`）・`-a`（`--auth`）オプションで、認証情報をコマンドラインから直接渡せます。
+CI環境では、`HATCH_INDEX_USER`・`HATCH_INDEX_AUTH`環境変数で渡すほうが安全です。
+
+:::{note}
+
+`uv publish`や`poetry publish`にある`--dry-run`のようなオプションは、`hatch publish`にもありません。
+公開前の確認は、`hatch build`で生成した`dist/`の中身を目視するか、TestPyPIへの公開で代用してください。
+
+:::
+
+:::{note}
+
+PyPIとTestPyPIは、サービスとしては別物です。
+それぞれのサービスでアカウントを作成してください。
+また、プロジェクトごとにAPIトークンを発行してください。
+
+:::
+
+:::{caution}
+
+PyPIとTestPyPIには、同じ名前のパッケージは登録できません。
+プロジェクトを作成する段階で、パッケージ名の重複がないか確認してください。
+また、同じバージョンの再アップロード（上書き）もできません。
+変更内容に応じてバージョンを更新してください。
+
+:::
+
+## リファレンス
+
+- [Hatch](https://hatch.pypa.io/latest/)
