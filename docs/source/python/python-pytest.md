@@ -30,18 +30,13 @@ $ pip install pytest-html  # テスト結果をHTMLファイルに出力
 
 ```console
 $ pipx install pytest
-$ pipx install pytest-mock
-$ pipx install pytest-cov
-$ pipx install pytest-html
+$ pipx inject pytest pytest-mock pytest-cov pytest-html
 ```
 
 - `uv tool`でインストール
 
 ```console
-$ uv tool install pytest
-$ uv tool install pytest-mock
-$ uv tool install pytest-cov
-$ uv tool install pytest-html
+$ uv tool install pytest --with pytest-mock --with pytest-cov --with pytest-html
 ```
 
 - `poetry`でインストール
@@ -63,6 +58,8 @@ $ uv add pytest-html --group test
 ```
 
 `pipx`や`uv tool`を使ってシステム（の仮想環境）にインストールできます。
+`pytest-mock`などのプラグインは、それ自体にコマンドがないため単体ではインストールできません。
+`pipx inject`や`uv tool install ... --with ...`のように、`pytest`本体と同じ環境に追加する必要があります。
 `poetry`や`uv`で管理している場合は`--group test`に分類するとよいと思います。
 
 テスト結果をHTMLファイルに出力する場合は`pytest-html`が必要です。
@@ -88,7 +85,7 @@ $ pytest --markers
 // @pytest.mark.filterwarnings(warning)
 // @pytest.mark.skip(reason=None)
 // @pytest.mark.skipif(condition, ..., *, reason=...)
-// @pytest.mark.xfail(condition, ..., *, reason=..., run=True, raises=None, strict=xfail_strict)
+// @pytest.mark.xfail(condition, ..., *, reason=..., run=True, raises=None, strict=strict_xfail)
 // @pytest.mark.parametrize(argnames, argvalues)
 // @pytest.mark.usefixtures(fixturename1, fixturename2, ...)
 ```
@@ -199,7 +196,6 @@ $ pytest テストのパス --verbose --durations=10  # TOP10件
 ```
 
 `--durations`オプションで、各テストの実行時間を表示できます。
-
 
 ## テスト用ディレクトリ（`tests`）
 
@@ -318,8 +314,6 @@ def test_download(mock_subprocess_run):
 
 wgetを実行していないため、`filename="output.csv"`に設定したファイルは作成されません。
 そのため、``assert_called_with``を使って、指定した引数で関数が呼ばれたかどうかで、動作確認しています。
-
-
 
 ## ファイル書き込みをモックしたい（`pathlib.Path.write_text`）
 
