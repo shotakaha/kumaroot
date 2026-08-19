@@ -179,7 +179,7 @@ repos:
 `pre-commit-hooks`のフックから、
 使うとよさそうなものを選んでみました。
 
-## ruff-pre-commitしたい
+## ruffしたい（`ruff-pre-commit`）
 
 `ruff`は、Pythonプロジェクトの
 リンター＆フォーマッターです。
@@ -187,7 +187,7 @@ repos:
 
 フックの設定方法は[](./python-ruff.md)に整理しました。
 
-## commitizenしたい
+## commitizenしたい（`commitizen`）
 
 `commitizen (cz)`はコミットメッセージの形式を守るためのツールです。
 `stages: [commit-msg]`でコミットメッセージを保存したあとにフックがかかるようにしておきます。
