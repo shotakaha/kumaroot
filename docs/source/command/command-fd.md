@@ -28,6 +28,8 @@ globパターンを使いたい場合は`--glob`オプションを付けます�
 
 ```console
 $ brew install fd
+$ fd --version
+fd 10.4.2
 ```
 
 ## 拡張子で探したい（`-e` / `--extension`）
