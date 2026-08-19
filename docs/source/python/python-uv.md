@@ -741,6 +741,9 @@ $ uvx --with pandas --with matplotlib jupyter notebook
 ### 永続的に使いたい（`uv tool install`）
 
 ```console
+// 初回のみ実行
+$ uv tool update-shell
+
 $ uv tool install ruff
 Resolved 1 package in 1ms
 Installed 1 package in 2ms
@@ -782,6 +785,8 @@ Uninstalled 1 executable: mkdocs
 `uv tool install`は、CLIツールをグローバルにインストールするコマンドです。
 `uvx`でお試ししたツールで、日常的に使うようになったものを、`uv tool install`でインストールしておくと便利です。
 
+はじめて使う場合は、
+`uv tool update-shell`コマンドを実行して`PATH`の設定が必要です。
 `uv tool list`コマンドで、インストール済みのツールを確認できます。
 `uv tool upgrade`コマンドで、インストールされたツールをアップグレードできます。
 使わなくなったツールは`uv tool uninstall`コマンドで削除できます。
@@ -792,9 +797,9 @@ Uninstalled 1 executable: mkdocs
 `~/.local/share/uv/tools/<ツール名>/`にツール本体が配置されます。
 実行コマンドへのリンクは、`~/.local/bin/`に作成されます。
 
-`~/.local/bin/`がPATHに含まれていれば、インストールしたツールは`uvx`を使わずに直接コマンドとして実行できます。
-PATHに含まれていない場合は、`uv tool install`実行時に警告が表示されます。
-`uv tool update-shell`コマンドを実行するか、シェルの設定ファイルに`~/.local/bin/`をPATHとして追加してください。
+`~/.local/bin/`は`pipx`など他のツールとも共有されます。
+同名のコマンドがすでに存在する場合はインストールに失敗するため、
+置き換える場合はまず古いツールをアンインストールしてください。
 
 :::
 
@@ -811,14 +816,6 @@ PATHに含まれていない場合は、`uv tool install`実行時に警告が�
 
 `uvx`は`uv tool run`のエイリアスです。
 `uvx`（4文字）は`uv tool run`（11文字）よりタイプ数が少なく簡潔なため、通常は`uvx`を使用すればOKです。
-
-:::
-
-:::{caution}
-
-`~/.local/bin`は他のツール（`pipx`など）と共有されます。
-同名のコマンドがある場合はインストールに失敗します。
-置き換える場合は、まず古いツールをアンインストールしてください。
 
 :::
 
