@@ -60,9 +60,9 @@ $ awk '{ print $1 $3 $2}' ファイル名
 $ awk '{ print $0 }' ファイル名
 ```
 
-`$N`でフールド（＝列番号）を抽出して表示できます。
+`$N`でフィールド（＝列番号）を抽出して表示できます。
 
-## 変数したい（`awk -v`）
+## 変数を渡したい（`awk -v`）
 
 ```console
 $ awk -v date=$(date +%Y-%m-%d) '{ print date "," $0}' ファイル名
@@ -76,7 +76,7 @@ $ awk -v date=$(date +%Y-%m-%d) '{ print date "," $0}' ファイル名
 $ awk '{ print $1 "," $2 "," $3 }' ファイル名 > 変換後のファイル名.csv
 
 // 空白は詰めてもOK
-$ awk '{print $1","$2","$3}'
+$ awk '{print $1","$2","$3}' ファイル名 > 変換後のファイル名.csv
 ```
 
 スペース区切り（もしくはタブ区切り）のファイルを、カンマ区切りに変換できます。
@@ -86,12 +86,12 @@ $ awk '{print $1","$2","$3}'
 ## ディスク容量をしりたい
 
 ```bash
-#!/usr/bin/env
+#!/usr/bin/env bash
 
 set -euo pipefail
 
 ISO8601=$(date +%Y-%m-%dT%H:%M:%S%z)
-df --output | awk -v date="${ISO8601}" '{ print $1 "," $2 "," $5 }' > disk_usage.csv
+df --output | awk -v date="${ISO8601}" '{ print date "," $1 "," $2 "," $5 }' > disk_usage.csv
 
 exit 0
 ```
@@ -101,7 +101,7 @@ exit 0
 ## 空白とカンマで区切りたい（`-F`）
 
 ```console
-$ awk -F'[ ,]+' '{ print $1, $2, $3, ...}'
+$ awk -F'[ ,]+' '{ print $1, $2, $3 }' ファイル名
 ```
 
 `-F`オプションで区切り文字を変更できます。
