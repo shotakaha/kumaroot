@@ -382,15 +382,18 @@ $ uv add --optional viz matplotlib
 ## パッケージを同期したい（`uv sync`）
 
 ```console
-$ uv sync
-Resolved 5 packages in 0.09s
-Created environment
-Installed 5 packages in 0.14s
+$ uv sync               // dependenciesのみ同期
+$ uv sync --dry-run     // 変更内容を確認するだけ
+$ uv sync --all-groups  // dependency-groupsも同期
+$ uv sync --all-extras  // optional-dependenciesも同期
+$ uv sync --all-groups --all-extras  // すべて同期
 ```
 
 `uv sync`は、仮想環境を`uv.lock`の内容に一致させるコマンドです。
 ロックファイルにあるパッケージはインストールされ、
 ロックファイルにないパッケージはアンインストールされます。
+
+`--dry-run`オプションは、実際に同期せず、追加・削除されるパッケージを事前に確認できます。
 
 :::{note}
 
@@ -400,39 +403,22 @@ Installed 5 packages in 0.14s
 :::
 
 ```console
-// project.optional-dependencies.vizを同期に含める
-$ uv sync --extra viz
+$ uv sync --group dev
+$ uv sync --group docs
+$ uv sync --all-groups
+```
 
-// すべてのextraを同期に含める
+`--all-groups`オプションで、`[dependency-groups]`に定義されているすべてのグループを同期の対象にできます。
+デフォルトの`uv sync`では`dependencies`と`dev`グループが同期の対象になりますが、
+`docs`など`dev`以外のグループは含まれません。
+
+```console
+$ uv sync --extra viz
 $ uv sync --all-extras
 ```
 
-`--extra`オプションで、`uv add --optional`で定義したextraを同期対象に含められます。
-デフォルトの`uv sync`ではextraは含まれないため、`--extra <extra名>`で明示的に指定する必要があります。
-`--all-extras`オプションで、定義されているすべてのextraをまとめて含められます。
-
-```console
-// すべての依存グループを同期に含める
-$ uv sync --all-groups
-
-// 変更内容を確認するだけで、実際には同期しない
-$ uv sync --dry-run
-```
-
-デフォルトの`uv sync`では`dev`グループのみが同期対象になり、
-`docs`など他のグループは含まれません。
-`--all-groups`オプションで、`[dependency-groups]`に定義されているすべてのグループを同期対象にできます。
-`--dry-run`オプションで、実際に同期を行わず、追加・削除されるパッケージを事前に確認できます。
-
-:::{note}
-
-`uv add --extra <extra名>`とは意味が異なります。
-`uv add --optional`は、このプロジェクトの`pyproject.toml`にextraを**定義**するオプションです。
-`uv sync --extra`（や`uv run --extra`）は、定義済みのextraを**同期・実行時に取り込む**オプションです。
-一方、`uv add --extra`は、追加する依存先パッケージ自身が持つextraを有効にするオプションで、
-`uv add "requests[socks]"`と書くのとほぼ同じ意味になります。
-
-:::
+`--all-extras`オプションで、`[project.optional-dependencies]`に定義されているすべてのextraを同期の対象にできます。
+デフォルトの`uv sync`には含まれないため、`--extra <extra名>`もしくは、`--all-extras`で明示的に指定する必要があります。
 
 ## パッケージを更新したい（`uv lock`）
 
