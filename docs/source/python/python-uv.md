@@ -493,6 +493,17 @@ tests/test_main.py .                                       [100%]
 仮想環境の手動アクティベーションは不要です。
 
 ```console
+// pyproject.tomlを変更せず、一時的にパッケージを追加して実行
+$ uv run --with rich python script.py
+$ uv run --with rich --with httpx python script.py
+```
+
+`--with`オプションで、`pyproject.toml`に依存として追加せず、
+一時的にパッケージを追加した状態でコマンドを実行できます。
+複数回指定することで、複数のパッケージを一時的に追加できます。
+ちょっとしたパッケージを試したいときや、使い捨てスクリプトの実行に便利です。
+
+```console
 $ source .venv/bin/activate
 (.venv) $ python path/to/script.py
 ```
