@@ -35,20 +35,26 @@ $ poetry add pyright --group test
 $ uv tool install pyright
 ```
 
-## 設定したい（`pyrightconfig.json`）
+## 設定したい（`[tool.pyright]`）
 
-```json
-{
-    "include": ["src"],
-    "exclude": ["tests/helpers"],
-    "reportMissingImports": true,
-    "reportUnusedImport": "warning",
-    "typeCheckingMode": "strict"
-}
+```toml
+[tool.pyright]
+include = ["src"]
+exclude = ["tests/helpers"]
+reportMissingImports = true
+reportUnusedImport = "warning"
+typeCheckingMode = "strict"
 ```
 
-`pyrightconfig.json`で設定を変更できます。
-プロジェクトルートに配置します。
+`pyright`の設定は、`pyproject.toml`の`[tool.pyright]`セクションで変更できます。
+キー名はJSON版の`pyrightconfig.json`と同じですが、TOMLの書式（`キー = 値`）で書きます。
+
+:::{note}
+
+独立した`pyrightconfig.json`ファイルでも同じ内容を設定できます。
+`pyrightconfig.json`が存在する場合は、そちらが優先されます。
+
+:::
 
 ## VS Codeで使いたい（`Pylance`）
 
