@@ -13,6 +13,8 @@ $ uv remove requests
 
 // 依存関係のインストール
 $ uv sync
+$ uv sync --all-groups --all-extras
+$ uv sync --dry-run
 $ uv audit --preview-features audit-command
 
 // パッケージの実行とテスト
@@ -408,6 +410,19 @@ $ uv sync --all-extras
 `--extra`オプションで、`uv add --optional`で定義したextraを同期対象に含められます。
 デフォルトの`uv sync`ではextraは含まれないため、`--extra <extra名>`で明示的に指定する必要があります。
 `--all-extras`オプションで、定義されているすべてのextraをまとめて含められます。
+
+```console
+// すべての依存グループを同期に含める
+$ uv sync --all-groups
+
+// 変更内容を確認するだけで、実際には同期しない
+$ uv sync --dry-run
+```
+
+デフォルトの`uv sync`では`dev`グループのみが同期対象になり、
+`docs`など他のグループは含まれません。
+`--all-groups`オプションで、`[dependency-groups]`に定義されているすべてのグループを同期対象にできます。
+`--dry-run`オプションで、実際に同期を行わず、追加・削除されるパッケージを事前に確認できます。
 
 :::{note}
 
