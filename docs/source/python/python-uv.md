@@ -792,7 +792,9 @@ Uninstalled 1 executable: mkdocs
 `~/.local/share/uv/tools/<ツール名>/`にツール本体が配置されます。
 実行コマンドへのリンクは、`~/.local/bin/`に作成されます。
 
-`~/.local/bin/`はPATHが通っている場所なので、インストールしたツールは、`uv tool install`を使わずに直接コマンドとして実行できます。
+`~/.local/bin/`がPATHに含まれていれば、インストールしたツールは`uvx`を使わずに直接コマンドとして実行できます。
+PATHに含まれていない場合は、`uv tool install`実行時に警告が表示されます。
+`uv tool update-shell`コマンドを実行するか、シェルの設定ファイルに`~/.local/bin/`をPATHとして追加してください。
 
 :::
 
