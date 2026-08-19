@@ -716,12 +716,6 @@ cpython-3.12.14-macos-aarch64-none    /opt/homebrew/bin/python3.12 -> ../Cellar/
 一度だけ試したい、CIで使い捨てたい、最新版を試したいなど、その場限りの利用には`uvx`が向いています。
 `commitizen`や`hugo`のように日常的に何度も使うツールは、`uv tool install`で環境にインストールしておくと便利です。
 
-インストール先も異なります。
-`uv tool install`は`~/.local/share/uv/tools/<ツール名>/`にツール本体を配置し、
-実行コマンドへのリンクを`~/.local/bin/`（PATHが通る場所）に作成します。
-一方`uvx`は、共有のキャッシュディレクトリ（`uv cache dir`で確認できる場所）を使って、
-実行のたびにキャッシュを再利用するだけで、`~/.local/bin/`には何も置きません。
-
 ### 一時的に実行したい（`uvx`）
 
 ```console
@@ -739,10 +733,12 @@ $ uvx --with pandas --with matplotlib jupyter notebook
 [notebook starts...]
 ```
 
-`uvx`コマンドで、ツールをインストールせずに実行できます。
-初回実行時にダウンロードされ、以後キャッシュされるため高速です。
+`uvx`は、CLIツールを一時的に実行するコマンドです。
 
-### インストールして使いたい（`uv tool install`）
+実行対象のコマンドは、永続インストールされず、共有キャッシュ（`uv cache dir`）に保存されます。
+キャッシュに存在しない場合は、初回実行時のダウンロードが必要ですが、以後はキャッシュが再利用されます。
+
+### 永続的に使いたい（`uv tool install`）
 
 ```console
 $ uv tool install ruff
@@ -783,10 +779,22 @@ $ uv tool uninstall mkdocs
 Uninstalled 1 executable: mkdocs
 ```
 
-`uv tool install`コマンドで、頻繁に使用するツールをグローバルにインストールできます。
-インストールされたツールは、`uv tool list`コマンドで確認できます。
+`uv tool install`は、CLIツールをグローバルにインストールするコマンドです。
+`uvx`でお試ししたツールで、日常的に使うようになったものを、`uv tool install`でインストールしておくと便利です。
+
+`uv tool list`コマンドで、インストール済みのツールを確認できます。
 `uv tool upgrade`コマンドで、インストールされたツールをアップグレードできます。
 使わなくなったツールは`uv tool uninstall`コマンドで削除できます。
+
+:::{note}
+
+インストールしたツールは、
+`~/.local/share/uv/tools/<ツール名>/`にツール本体が配置されます。
+実行コマンドへのリンクは、`~/.local/bin/`に作成されます。
+
+`~/.local/bin/`はPATHが通っている場所なので、インストールしたツールは、`uv tool install`を使わずに直接コマンドとして実行できます。
+
+:::
 
 ### uvxとuv tool installの使い分け
 
