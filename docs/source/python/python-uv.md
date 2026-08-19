@@ -821,43 +821,42 @@ Uninstalled 1 executable: mkdocs
 
 ## 他のツールと比較したい
 
-`uv`は複数のツールの役割を統合しています。以下は機能比較表です：
+`uv`は複数のツールの役割を統合しています。
+プロジェクト管理は`poetry`、`hatch`、`pip`と、一時的なツール実行は`pipx`と比較すると違いが分かりやすいです。
 
-### プロジェクト管理
+### プロジェクト管理（`uv` / `poetry` / `hatch` / `pip`）
 
-| 機能 | `uv` | `poetry` | `pip` | `pipx` |
+| 機能 | `uv` | `poetry` | `hatch` | `pip` |
 | --- | --- | --- | --- | --- |
-| プロジェクト初期化 | `uv init` | `poetry init` | × | × |
-| 仮想環境作成 | 自動 | 自動 | `python -m venv` | 自動 |
+| プロジェクト初期化 | `uv init` | `poetry init` | `hatch new` | × |
+| 仮想環境作成 | 自動 | 自動 | 自動（`hatch env`） | `python -m venv` |
+| パッケージ追加 | `uv add` | `poetry add` | ×（`pyproject.toml`を手動編集） | `pip install` |
+| パッケージ削除 | `uv remove` | `poetry remove` | ×（`pyproject.toml`を手動編集） | `pip uninstall` |
+| 開発用依存 | `uv add --dev` | `poetry add --dev` | `[tool.hatch.envs.*]`で環境ごとに定義 | 手動管理 |
+| ロックファイル | `uv lock` | `poetry lock` | `hatch dep lock` | `pip freeze` |
+| 環境同期 | `uv sync` | `poetry sync` | `hatch dep sync` | `pip install -r` |
+| スクリプト実行 | `uv run` | `poetry run` | `hatch run` | 手動 |
+| バージョン固定 | `uv python pin` | 外部ツール依存 | ×（環境ごとに指定） | × |
+| ビルド | `uv build` | `poetry build` | `hatch build` | `python -m build` |
+| 公開 | `uv publish` | `poetry publish` | `hatch publish` | twine |
 
-### 依存関係管理
+:::{note}
 
-| 機能 | `uv` | `poetry` | `pip` | `pipx` |
-| --- | --- | --- | --- | --- |
-| パッケージ追加 | `uv add` | `poetry add` | `pip install` | × |
-| パッケージ削除 | `uv remove` | `poetry remove` | `pip uninstall` | × |
-| 開発用依存 | `uv add --dev` | `poetry add --dev` | 手動管理 | × |
-| ロックファイル | `uv lock` | `poetry lock` | `pip freeze` | × |
-| 環境同期 | `uv sync` | `poetry install` | `pip install -r` | × |
+`hatch`には`uv add`/`poetry add`に相当する「パッケージ追加」専用コマンドがありません。
+`pyproject.toml`の`dependencies`を直接編集してから、`hatch dep sync`（や`hatch lock`）で反映する運用が前提です。
 
-### 実行と開発
+:::
 
-| 機能 | `uv` | `poetry` | `pip` | `pipx` |
-| --- | --- | --- | --- | --- |
-| スクリプト実行 | `uv run` | `poetry run` | 手動 | × |
+### 一時的なツール実行（`uvx` / `pipx`）
 
-### Python管理とツール管理
+| 機能 | `uvx` | `pipx` |
+| --- | --- | --- |
+| 一時実行（インストールせず実行） | `uvx ruff check .` | `pipx run ruff check .` |
+| グローバルインストール | `uv tool install ruff` | `pipx install ruff` |
+| インストール済み一覧 | `uv tool list` | `pipx list` |
+| アップグレード | `uv tool upgrade ruff` | `pipx upgrade ruff` |
+| アンインストール | `uv tool uninstall ruff` | `pipx uninstall ruff` |
 
-| 機能 | `uv` | `poetry` | `pip` | `pipx` |
-| --- | --- | --- | --- | --- |
-| バージョン固定 | `uv python pin` | 外部ツール依存 | × | × |
-| バージョンリスト | `uv python list` | × | × | × |
-| 一時実行 | `uvx` | × | × | × |
-| グローバルインストール | `uv tool install` | × | × | グローバル |
-
-### ビルドと公開
-
-| 機能 | `uv` | `poetry` | `pip` | `pipx` |
-| --- | --- | --- | --- | --- |
-| ビルド | `uv build` | `poetry build` | `python -m build` | × |
-| 公開 | `uv publish` | `poetry publish` | twine | × |
+`uvx`は`pipx run`、`uv tool install`は`pipx install`とほぼ同じ役割です。
+インストール先も似ていて、`pipx`も専用の仮想環境を作ってから`~/.local/bin/`にリンクを作成します。
+すでに`pipx`を使っている場合、乗り換えの障壁は低いです。
