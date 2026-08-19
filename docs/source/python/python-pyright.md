@@ -2,7 +2,7 @@
 
 ```console
 $ pyright --version
-pyright 1.1.383
+pyright 1.1.411
 
 $ pyright ファイル名 or ディレクトリ名
 ```
@@ -26,7 +26,7 @@ $ pipx install pyright
 - `poetry`でインストール
 
 ```console
-$ poetry add pyright --dev test
+$ poetry add pyright --group test
 ```
 
 - `uv`でインストール
@@ -42,7 +42,7 @@ $ uv tool install pyright
     "include": ["src"],
     "exclude": ["tests/helpers"],
     "reportMissingImports": true,
-    "reportUnusedImports": "warning",
+    "reportUnusedImport": "warning",
     "typeCheckingMode": "strict"
 }
 ```
@@ -60,8 +60,8 @@ $ uv tool install pyright
     "python.languageServer": "Pylance",
 
     // 型チェックのモード
-    // "off" | "basic" | "strict"
-    "python.analysis.typeCheckingMode": "basic",
+    // "off" | "basic" | "standard" | "strict"
+    "python.analysis.typeCheckingMode": "standard",
 
     // 解析対象のパスを追加
     "python.analysis.extraPaths": [
