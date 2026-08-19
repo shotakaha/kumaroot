@@ -148,6 +148,31 @@ version_provider = "pep621"
 ```console
 $ cd プロジェクト名
 $ cz init
+Welcome to commitizen!
+
+Answer the following questions to configure your project.
+For further configuration, visit:
+
+https://commitizen-tools.github.io/commitizen/config/
+
+? Please choose a supported config file:  pyproject.toml
+? Please choose a cz (commit rule): (default: cz_conventional_commits) cz_conventional_commits
+? Choose the source of the version: uv: Get and set version from pyproject.toml and uv.lock
+No Existing Tag. Set tag to v0.0.1
+? Choose version scheme:  semver2
+? Please enter the correct version format: (default: "$version")
+? Create changelog automatically on bump Yes
+? Keep major version zero (0.x) during breaking changes Yes
+? What types of pre-commit hook you want to install? (Leave blank if you don't want to install) done (2 selections)
+commitizen already in pre-commit config
+commitizen pre-commit hook is now installed in your '.git'
+
+
+You can bump the version running:
+
+	cz bump
+
+Configuration complete 🚀
 ```
 
 `cz init`コマンドでプロジェクトを初期化し、`commitizen`の設定ファイルを作成します。
@@ -155,6 +180,13 @@ $ cz init
 
 Pythonパッケージを開発している場合は、{file}`pyproject.toml`に設定を追加する方法を推奨します。
 その他の場合は、{file}`.cz.toml`など好みの形式を選択できます。
+
+質問の内容は、これまで紹介してきた設定項目にそのまま対応しています。
+「Choose the source of the version」が`version_provider`、
+「Choose version scheme」が`version_scheme`、
+「Create changelog automatically on bump」が`update_changelog_on_bump`、
+「Keep major version zero」が`major_version_zero`です。
+最後の質問では、[pre-commit](./python-pre-commit.md)フックを一緒にインストールするか選べます。
 
 ## コミットしたい（``cz commit``）
 
