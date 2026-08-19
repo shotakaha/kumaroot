@@ -76,15 +76,8 @@ version_files = [
 `name`でコミットメッセージのルール（テンプレート）を指定します。
 `version`で現在のバージョン番号、`tag_format`でGitタグの命名規則を指定します。
 `$version`の部分がバージョン番号に置き換わります。
-
-`update_changelog_on_bump = true`にすると、
-`cz bump`実行時に`--changelog`オプションを付けなくても、
-自動的に`CHANGELOG.md`が更新されます。
-
-`major_version_zero = true`にすると、
-破壊的変更（`feat!:`など）をコミットしても、
-メジャーバージョンが`0`のまま上がらず、マイナーバージョンとして扱われます。
-まだ安定版としてリリースしていないプロジェクトで使います。
+`update_changelog_on_bump`と`major_version_zero`については、
+このあとの「初期化したい」のダイアログとあわせて後述します。
 
 `version_files`で、バージョン番号を書き換えたい他のファイルを指定できます。
 `ファイルパス:変数名`の形式で書きます。
@@ -178,15 +171,45 @@ Configuration complete 🚀
 `cz init`コマンドでプロジェクトを初期化し、`commitizen`の設定ファイルを作成します。
 ターミナルに表示されるダイアログに従い、矢印キーで選択します。
 
+### 設定ファイルの選択
+
 Pythonパッケージを開発している場合は、{file}`pyproject.toml`に設定を追加する方法を推奨します。
 その他の場合は、{file}`.cz.toml`など好みの形式を選択できます。
 
-質問の内容は、これまで紹介してきた設定項目にそのまま対応しています。
-「Choose the source of the version」が`version_provider`、
-「Choose version scheme」が`version_scheme`、
-「Create changelog automatically on bump」が`update_changelog_on_bump`、
-「Keep major version zero」が`major_version_zero`です。
-最後の質問では、[pre-commit](./python-pre-commit.md)フックを一緒にインストールするか選べます。
+### ルールの選択
+
+`cz_conventional_commits`は、[Conventional Commits](https://www.conventionalcommits.org/)のルールに従ったコミットメッセージを生成します。
+
+### プロバイダーの選択
+
+バージョン番号を参照する先を選択します。
+選択肢の詳細は、前述の「プロバイダーしたい（`version_provider`）」を参照してください。
+`uv`でプロジェクトを管理している場合は`uv`を、
+それ以外のPythonプロジェクトでは`pep621`を選ぶのがオススメです。
+
+### スキーマの選択
+
+バージョン番号の表記形式を選択します。
+選択肢の詳細は、前述の「スキーマしたい（`version_scheme`）」を参照してください。
+迷ったらデフォルトの`semver2`のままでよいです。
+
+### CHANGELOG自動生成の選択
+
+`cz bump`実行時に`--changelog`オプションを付けなくても、
+自動的に`CHANGELOG.md`が更新されるようにするか選択します。
+`Yes`を選ぶと、`update_changelog_on_bump = true`が設定されます。
+
+### バージョン0の選択
+
+破壊的変更（`feat!:`など）をコミットしたときに、
+メジャーバージョンを`0`のまま維持するか選択します。
+`Yes`を選ぶと、`major_version_zero = true`が設定され、
+メジャーバージョンが上がらずマイナーバージョンとして扱われます。
+まだ安定版としてリリースしていないプロジェクトでは`Yes`を選ぶとよいです。
+
+### フックの選択
+
+[pre-commit](./python-pre-commit.md)フックを一緒にインストールするか選べます。
 
 ## コミットしたい（``cz commit``）
 
