@@ -602,18 +602,27 @@ $ uv build --sdist
 ## パッケージを公開したい（`uv publish`）
 
 ```console
-// TestPyPIに公開
-$ uv publish --publish-url https://test.pypi.org/legacy/
-
-// PyPIに公開
+// 実際にはアップロードせず、動作を確認する
+$ uv publish --dry-run
 $ uv publish
-Uploading my_package-0.1.0-py3-none-any.whl to PyPI...
-Uploading my_package-0.1.0.tar.gz to PyPI...
+Checking dist/my_package-0.1.0-py3-none-any.whl (12.3KiB)
+Uploading my_package-0.1.0-py3-none-any.whl (12.3KiB)
+Checking dist/my_package-0.1.0.tar.gz (8.1KiB)
+Uploading my_package-0.1.0.tar.gz (8.1KiB)
 ```
 
-`uv publish`コマンドでPyPIにパッケージを公開します。
-`--publish-url`オプションで公開先を変更できます。
-はじめて公開する場合は、TestPyPIでテスト公開してからPyPIに本番公開することをオススメします。
+`uv publish`で、PyPIにパッケージを公開できます。
+`--dry-run`オプションで、実際にアップロードせずに、公開の流れ（認証やファイルチェック）だけを確認できます。
+はじめて公開する前の動作確認に便利です。
+
+```console
+// TestPyPIに公開
+$ uv publish --publish-url https://test.pypi.org/legacy/
+```
+
+`--publish-url`オプションで、公開先を変更できます。
+PyPIには、テスト用のTestPyPIというサービスがあります。
+はじめて公開するパッケージはは、まずTestPyPIに公開して動作テストしてからPyPIに本番公開することをオススメします。
 
 :::{note}
 
