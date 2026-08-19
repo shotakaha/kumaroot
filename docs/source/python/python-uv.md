@@ -716,6 +716,12 @@ cpython-3.12.14-macos-aarch64-none    /opt/homebrew/bin/python3.12 -> ../Cellar/
 一度だけ試したい、CIで使い捨てたい、最新版を試したいなど、その場限りの利用には`uvx`が向いています。
 `commitizen`や`hugo`のように日常的に何度も使うツールは、`uv tool install`で環境にインストールしておくと便利です。
 
+インストール先も異なります。
+`uv tool install`は`~/.local/share/uv/tools/<ツール名>/`にツール本体を配置し、
+実行コマンドへのリンクを`~/.local/bin/`（PATHが通る場所）に作成します。
+一方`uvx`は、共有のキャッシュディレクトリ（`uv cache dir`で確認できる場所）を使って、
+実行のたびにキャッシュを再利用するだけで、`~/.local/bin/`には何も置きません。
+
 ### 一時的に実行したい（`uvx`）
 
 ```console
