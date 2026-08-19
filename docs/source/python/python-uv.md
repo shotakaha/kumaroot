@@ -493,7 +493,7 @@ tests/test_main.py .                                       [100%]
 仮想環境の手動アクティベーションは不要です。
 
 ```console
-$ .venv/bin/activate
+$ source .venv/bin/activate
 (.venv) $ python path/to/script.py
 ```
 
