@@ -154,12 +154,12 @@ $ find .git/hooks -type f ! -name "*.sample" -perm -u+x
 
 `find`コマンドを使う場合、`-perm -u+x`のようにハイフンを付けることで、実行可能なファイルだけに絞り込めます
 
-## pre-commit-hooksしたい
+## 事前チェックしたい（`pre-commit-hooks`）
 
 ```yaml
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
+  rev: v6.0.0
   hooks:
   - id: detect-private-key
   - id: trailing-whitespace
