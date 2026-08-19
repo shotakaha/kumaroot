@@ -77,9 +77,67 @@ PEP518、PEP621、PEP517などにより標準化されました。
 
 ## プロジェクト設定（`[project]`）
 
-## 依存パッケージ（`[project.dependencies]`）
+```toml
+[project]
+name = "PyPIに公開するプロジェクト名"
+version = "..."
+description = "..."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "qumasan", email = "..."}
+]
+license = { text = "MIT" }
+keywords = ["...", "..."]
+```
+
+`[project]`テーブルに、プロジェクトのメタデータを書きます。
+PEP 621で必須とされているのは`name`だけです。
+`version`も必須ですが、`dynamic = ["version"]`と書けば、
+ビルドツール側に動的に決定させることもできます（`commitizen`や`hatch version`などと組み合わせる場合に便利です）。
+それ以外の`description`、`readme`、`authors`、`license`、`keywords`はすべて任意です。
+
+## 依存パッケージ（`[project]`の`dependencies`）
+
+```toml
+[project]
+dependencies = [
+    "pydantic",
+    "typer",
+    "loguru",
+]
+```
+
+プロジェクトの実行に必要な依存パッケージは、`[project]`テーブルの`dependencies`キーに書きます。
+`[project.dependencies]`のような独立したテーブルではなく、`[project]`直下の配列である点に注意してください。
+バージョンを指定したい場合は`"pydantic>=2.0"`のように、PEP 508形式の文字列で書きます。
 
 ## 依存パッケージ（オプション）（`[project.optional-dependencies]`）
+
+```toml
+[project.optional-dependencies]
+docs = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+]
+
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "commitizen",
+]
+```
+
+インストール時に選択できる、追加の依存パッケージ群を定義します。
+キーがextra名（`docs`、`dev`など）、値がその依存パッケージの配列です。
+利用者は`pip install my-project[docs]`のように、extra名を指定してインストールできます。
+
+`dev`のように開発専用のツールをここに置くこともできますが、
+配布先（PyPIなど）にextraとして公開される点に注意してください。
+CI/CD専用など、パッケージの利用者に見せる必要のない依存は、
+`uv`や`poetry`が対応する`[dependency-groups]`（PEP 735）で管理する方が適切です。
 
 ## ビルド環境（`[build-system]`）
 
