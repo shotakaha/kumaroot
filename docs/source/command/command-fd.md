@@ -34,9 +34,11 @@ $ brew install fd
 
 ```console
 // HTMLファイルを探したい
+$ fd --extension html 検索パス
 $ fd -e html 検索パス
 
 // ZIPファイルを探したい
+$ fd --extension zip 検索パス
 $ fd -e zip 検索パス
 ```
 
@@ -47,24 +49,29 @@ $ fd -e zip 検索パス
 
 ```console
 // ファイルを探したい; find 検索パス -type f
+$ fd --type file 検索パス
 $ fd -t f 検索パス
 
 // ディレクトリを探したい; find 検索パス -type d
+$ fd --type directory 検索パス
 $ fd -t d 検索パス
 
 // シンボリックリンクを探したい; find 検索パス -type l
+$ fd --type symlink 検索パス
 $ fd -t l 検索パス
 
 // 空のディレクトリを探したい; find 検索パス -type d -empty
+$ fd --type directory --type empty 検索パス
 $ fd -t d -t empty 検索パス
 
 // 実行可能なファイルを探したい
+$ fd --type executable 検索パス
 $ fd -t x 検索パス
 ```
 
 `--type`オプションを使ってファイルの種類で検索できます。
-`--type`オプションは重ねがけできるので`-t d -t empty`で空のディレクトリを検索できます。
-`-t x`（`executable`）で実行可能なファイルを検索できます。
+`--type`オプションは重ねがけできるので`--type directory --type empty`で空のディレクトリを検索できます。
+`--type executable`で実行可能なファイルを検索できます。
 
 ## タイムスタンプで探したい（`--changed-within` / `--changed-before`）
 
@@ -84,12 +91,15 @@ $ fd --changed-before 28d 検索パス
 
 ```console
 // 100kB以上のファイルを探したい
+$ fd --size +100k 検索パス
 $ fd -S +100k 検索パス
 
 // 10MB以上のファイルを探したい
+$ fd --size +10M 検索パス
 $ fd -S +10M 検索パス
 
 // 10MB - 50MBのファイルを探したい
+$ fd --size +10M --size -50M 検索パス
 $ fd -S +10M -S -50M 検索パス
 ```
 
@@ -99,9 +109,11 @@ $ fd -S +10M -S -50M 検索パス
 
 ```console
 // 2階層目まで探したい
+$ fd --max-depth 2 検索パターン 検索パス
 $ fd -d 2 検索パターン 検索パス
 
 // 4階層目まで探したい
+$ fd --max-depth 4 検索パターン 検索パス
 $ fd -d 4 検索パターン 検索パス
 ```
 
@@ -121,6 +133,7 @@ globパターンを使いたい場合は`--glob`オプションを付けます�
 
 ```console
 // 検索結果を ls -l 形式で書きだす
+$ fd 検索パターン 検索パス --exec-batch ls -l
 $ fd 検索パターン 検索パス -X ls -l
 ```
 
@@ -130,16 +143,20 @@ $ fd 検索パターン 検索パス -X ls -l
 ## 空のディレクトリを削除したい
 
 ```console
+$ fd --type directory --type empty 検索パス --exec-batch rmdir
 $ fd -t d -t empty 検索パス -X rmdir
 ```
 
-`-t d -t empty`で空のディレクトリを検索し、
+`--type directory --type empty`で空のディレクトリを検索し、
 `-X`/`--exec-batch`オプションで`rmdir`を呼び出すと一括削除できます。
 
 ## パイプ処理したい（`-x` / `-X`）
 
 ```console
+$ fd 検索条件 検索パス --exec コマンド
 $ fd 検索条件 検索パス -x コマンド
+
+$ fd 検索条件 検索パス --exec-batch コマンド
 $ fd 検索条件 検索パス -X コマンド
 ```
 
