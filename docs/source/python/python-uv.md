@@ -717,7 +717,11 @@ $ uvx ruff check .
 All checks passed!
 
 $ uvx black --version
-black, 23.12.1
+Downloading black (1.7MiB)
+ Downloaded black
+Installed 7 packages in 6ms
+black, 26.5.1 (compiled: yes)
+Python (CPython) 3.12.7
 
 $ uvx --with pandas --with matplotlib jupyter notebook
 [notebook starts...]
@@ -728,26 +732,35 @@ $ uvx --with pandas --with matplotlib jupyter notebook
 
 ```console
 $ uv tool install ruff
-Installed `ruff` with executable `ruff`
+Resolved 1 package in 1ms
+Installed 1 package in 2ms
+ + ruff==0.16.3
+Installed 1 executable: ruff
 
-$ uv tool install black mypy
-Installed `black` and `mypy` with executables `black` and `mypy`
+$ uv tool install mypy
+Resolved 6 packages in 4ms
+Installed 6 packages in 5ms
+ + mypy==2.3.1
+Installed 5 executables: dmypy, mypy, mypyc, stubgen, stubtest
 
-// インストール済みツールを確認
+// インストール済みツールを確認（コマンドはツール名ごとにハイフン付きで列挙される）
 $ uv tool list
-Tool                Version     Python
-----                -------     ------
-black               23.12.1     3.12.7
-mypy                1.7.0       3.12.7
-ruff                0.1.8       3.12.7
+mypy v2.3.1
+- dmypy
+- mypy
+- mypyc
+- stubgen
+- stubtest
+ruff v0.16.3
+- ruff
 
 // ツールをアップグレード
 $ uv tool upgrade ruff
-Upgraded `ruff` from 0.1.8 to 0.1.9
+Resolved 1 package in 1ms
+Nothing to upgrade
 
 // すべてのツールをアップグレード
 $ uv tool upgrade --all
-Upgraded 3 tools
 ```
 
 `uv tool install`コマンドで、頻繁に使用するツールをグローバルにインストールできます。
