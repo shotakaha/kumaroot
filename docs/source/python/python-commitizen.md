@@ -61,6 +61,10 @@ $ poetry add commitizen --group dev
 name = "cz_conventional_commits"
 version = "0.1.0"
 tag_format = "v$version"
+version_scheme = "semver2"
+version_provider = "uv"
+update_changelog_on_bump = true
+major_version_zero = true
 version_files = [
     "pyproject.toml:version",
     "src/__init__.py:__version__",
@@ -72,6 +76,20 @@ version_files = [
 `name`でコミットメッセージのルール（テンプレート）を指定します。
 `version`で現在のバージョン番号、`tag_format`でGitタグの命名規則を指定します。
 `$version`の部分がバージョン番号に置き換わります。
+
+`version_scheme`でバージョン番号のスキーム（`semver`・`semver2`・`pep440`）を指定できます。
+`version_provider`で、バージョン番号の読み書き先を切り替えられます。
+`"uv"`を指定すると`uv`が管理する`[project]`の`version`と連動し、
+`version`キー自体は省略できます（`"pep621"`を指定した場合も同様です）。
+
+`update_changelog_on_bump = true`にすると、
+`cz bump`実行時に`--changelog`オプションを付けなくても、
+自動的に`CHANGELOG.md`が更新されます。
+
+`major_version_zero = true`にすると、
+破壊的変更（`feat!:`など）をコミットしても、
+メジャーバージョンが`0`のまま上がらず、マイナーバージョンとして扱われます。
+まだ安定版としてリリースしていないプロジェクトで使います。
 
 `version_files`で、バージョン番号を書き換えたい他のファイルを指定できます。
 `ファイルパス:変数名`の形式で書きます。
