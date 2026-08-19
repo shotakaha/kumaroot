@@ -1,6 +1,9 @@
 # セマンティック・バージョニングしたい（``commitizen``）
 
 ```console
+$ cz version
+4.17.1
+
 $ cz commit
 $ cz changelog --incremental
 $ cz bump
@@ -51,6 +54,20 @@ $ poetry add commitizen --group dev
 
 :::
 
+## 設定したい（`[tool.commitizen]`）
+
+```toml
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "v$version"
+```
+
+`commitizen`の設定は、`pyproject.toml`の`[tool.commitizen]`セクションに書きます。
+`name`でコミットメッセージのルール（テンプレート）を指定します。
+`version`で現在のバージョン番号、`tag_format`でGitタグの命名規則を指定します。
+`$version`の部分がバージョン番号に置き換わります。
+
 ## 初期化したい（`cz init`）
 
 ```console
@@ -61,21 +78,8 @@ $ cz init
 `cz init`コマンドでプロジェクトを初期化し、`commitizen`の設定ファイルを作成します。
 ターミナルに表示されるダイアログに従い、矢印キーで選択します。
 
-### 設定ファイルの配置
-
 Pythonパッケージを開発している場合は、{file}`pyproject.toml`に設定を追加する方法を推奨します。
 その他の場合は、{file}`.cz.toml`など好みの形式を選択できます。
-
-### 初期設定ファイルの例
-
-生成された設定ファイルは以下のようになっています。
-
-```toml
-[tool.commitizen]
-name = "cz_conventional_commits"
-version = "0.0.1"
-tag_format = "$version"
-```
 
 ## コミットしたい（``cz commit``）
 
@@ -176,7 +180,7 @@ $ cz bump --increment PATCH --changelog
 | `--check-consistency` | `-cc` | バージョン番号の一貫性をチェック |
 | `--increment MAJOR\|MINOR\|PATCH` | | バージョンタイプを指定 |
 | `--dry-run` | | 実際には変更せず、どのような操作を行うか表示 |
-| `--no-verify` | | pre-commitフックをスキップ |
+| `--no-verify` | | `pre-commit`と`commit-msg`フックをスキップ |
 
 ```{note}
 バージョンアップとCHANGELOGの管理は、バージョンアップを先に行い、その後CHANGELOGを整理するのが推奨されます。
@@ -226,7 +230,7 @@ Sphinxでドキュメントを作成している場合：
 ```yaml
 repos:
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.29.0
+  rev: v4.15.1
   hooks:
   - id: commitizen
     stages:
