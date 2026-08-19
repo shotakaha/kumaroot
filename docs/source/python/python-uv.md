@@ -423,6 +423,10 @@ $ uv sync --all-extras
 ## パッケージを更新したい（`uv lock`）
 
 ```console
+$ uv lock
+$ uv lock --check
+$ uv lock --dry-run
+
 // 更新できるパッケージを確認
 $ uv lock --upgrade --dry-run
 
@@ -434,6 +438,17 @@ $ uv sync
 `uv lock`は、`pyproject.toml`の内容をもとに、`uv.lock`ファイルを更新するコマンドです。
 `--upgrade`オプションで、パッケージを最新バージョンに更新できます。
 `--dry-run`オプションで、更新されるパッケージを確認できます。
+
+:::{note}
+
+`uv lock`（オプションなし）は、`pyproject.toml`の依存範囲を守りつつ、
+すでにロックされているバージョンをできるだけ変更しません（再現性を優先）。
+一方`uv lock --upgrade`は、依存範囲内であっても既存のロック内容を無視し、
+それぞれのパッケージを解決可能な最新バージョンまで引き上げます。
+`pyproject.toml`を編集した直後の反映には`uv lock`、
+定期的な依存の最新化には`uv lock --upgrade`を使い分けます。
+
+:::
 
 ```console
 // パッケージを更新してから同期
