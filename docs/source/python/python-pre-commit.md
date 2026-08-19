@@ -269,15 +269,21 @@ repos:
   hooks:
   - id: pytest
     name: pytest
-    entrypoint: pytest --verbose
-    stages:
-      - [pre-push]
+    entry: pytest --verbose
     language: system
+    pass_filenames: false
+    always_run: true
+    stages: [pre-push]
 ```
 
-[pytest](./python-pytest.md)用のフックはGitHub上にはないようです。
+[pytest](./python-pytest.md)用の公式フックはありません。
 `pre-commit`はローカル（`local`）にインストールされているコマンドを使うことができます。
 プッシュ時（`pre-push`）にテストを走らせるとよいと思います。
+
+`entry`に実行するコマンドを指定します。
+`pass_filenames: false`がないと、変更されたファイル名がそのまま`pytest`の引数として渡されてしまい、
+うまく動かないので注意してください。
+`always_run: true`で、対象ファイルの変更有無にかかわらず毎回実行します。
 
 :::{note}
 
