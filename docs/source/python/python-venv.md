@@ -39,16 +39,16 @@ Pythonのパッケージは、プロジェクトごとに異なるバージョ�
 $ python3.11 -m venv .venv
 $ source .venv/bin/activate
 (.venv) $ python --version
-Python 3.11
+Python 3.11.16
 
-// Python3.11の仮想環境
+// Python3.12の仮想環境
 $ python3.12 -m venv .venv
 $ source .venv/bin/activate
 (.venv) $ python --version
-Python 3.12
+Python 3.12.7
 ```
 
-`venv`モジュールを呼び出すときに時に
+`venv`モジュールを呼び出すときに
 `python3.11 -m venv`、
 `python3.12 -m venv`、
 のようにPythonの実行環境のバージョンを指定します。
@@ -89,9 +89,11 @@ Python 3.12
 :::{note}
 
 `virtualenv`はPython2系とPython3系が混在する時期に活躍したようですが、
-現在は`venv`で十分なようです。
-`pipenv`は2018年ころに人気がありましたが、最近は開発・メンテナンスが停滞気味のようなので、
-`poetry`や`uv`を使うことをオススメします。
+現在は`venv`で十分なようです（`virtualenv`自体は今もメンテナンスが続いており、`venv`より高速という特長もあります）。
+`pipenv`は2017年ころに人気がありました。
+2018年末から2020年にかけて開発が停滞した時期もありましたが、
+現在はメンテナンスが再開されています。
+とはいえ、モダンなプロジェクト管理をしたい場合は`poetry`や`uv`を使うことをオススメします。
 
 また、`pyenv`でPythonのバージョンを管理して、
 `venv`で仮想環境を作成する組み合わせもあるようですが、
