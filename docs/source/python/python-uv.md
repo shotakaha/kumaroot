@@ -712,6 +712,8 @@ cpython-3.12.14-macos-aarch64-none    /opt/homebrew/bin/python3.12 -> ../Cellar/
 
 ## 外部ツールを使いたい（`uvx` / `uv tool install`）
 
+### 一時的に実行したい（`uvx`）
+
 ```console
 $ uvx ruff check .
 All checks passed!
@@ -729,6 +731,8 @@ $ uvx --with pandas --with matplotlib jupyter notebook
 
 `uvx`コマンドで、ツールをインストールせずに実行できます。
 初回実行時にダウンロードされ、以後キャッシュされるため高速です。
+
+### インストールして使いたい（`uv tool install`）
 
 ```console
 $ uv tool install ruff
