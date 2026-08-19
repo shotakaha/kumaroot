@@ -443,6 +443,25 @@ $ uv sync --upgrade
 `uv sync --upgrade`コマンドは、
 `uv lock --upgrade`と`uv sync`を組み合わせたコマンドです。
 
+```console
+// 特定のパッケージだけを更新
+$ uv lock --upgrade-package requests
+```
+
+`--upgrade-package`（`-P`）オプションで、指定したパッケージだけを更新できます。
+プロジェクト全体を一括更新せず、特定のパッケージのみを上げたい場合に使います。
+
+```console
+// ロックファイルがpyproject.tomlと整合しているか確認（更新はしない）
+$ uv lock --check
+error: The lockfile at `uv.lock` needs to be updated, but `--check` was provided.
+
+hint: To update the lockfile, run `uv lock`.
+```
+
+`--check`オプションで、`uv.lock`が`pyproject.toml`の内容と整合しているかを確認できます。
+不整合がある場合はエラーで終了するため、CIでロックファイルの更新忘れを検知するのに向いています。
+
 ## パッケージを実行したい（`uv run`）
 
 ```console
