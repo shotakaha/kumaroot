@@ -36,7 +36,16 @@ $ pipx ensurepath
 
 :::
 
-## シェル補完したい
+## シェル補完したい（`completions`）
+
+```console
+$ pipx completions
+```
+
+`pipx completions`コマンドで、使っているシェルに応じたシェル補完の設定方法を確認できます。
+案内された通りにコマンドを実行するか、シェルの設定ファイルに追記します。
+
+fishの場合は、次のコマンドを一度だけ実行すればOKです。
 
 ```console
 $ register-python-argcomplete --shell fish pipx >~/.config/fish/completions/pipx.fish
@@ -52,6 +61,7 @@ $ pipx list
 venvs are in ~/.local/pipx/venvs
 apps are exposed on your $PATH at ~/.local/bin
 manual pages are exposed at ~/.local/share/man
+shell completions are exposed at ~/.local/share
    package commitizen 3.29.0, installed using Python 3.12.2
     - cz
     - git-cz
@@ -59,7 +69,6 @@ manual pages are exposed at ~/.local/share/man
     - myst
    package poetry 1.8.3, installed using Python 3.12.3
     - poetry
-
 ```
 
 `pipx list`でインストールしたパッケージを一覧できます。
@@ -128,7 +137,9 @@ PIPX_GLOBAL_HOME=
 PIPX_BIN_DIR=
 PIPX_GLOBAL_BIN_DIR=
 PIPX_MAN_DIR=
+PIPX_COMPLETION_DIR=
 PIPX_GLOBAL_MAN_DIR=
+PIPX_GLOBAL_COMPLETION_DIR=
 PIPX_SHARED_LIBS=
 PIPX_DEFAULT_PYTHON=
 PIPX_DEFAULT_BACKEND=
@@ -136,18 +147,18 @@ PIPX_FETCH_MISSING_PYTHON=
 PIPX_FETCH_PYTHON=
 PIPX_DISABLE_SHARED_LIBS_AUTO_UPGRADE=
 PIPX_USE_EMOJI=
-PIPX_HOME_ALLOW_SPACE=
 
 Derived values (computed by pipx):
 
 PIPX_HOME=~/.local/pipx
 PIPX_BIN_DIR=~/.local/bin
 PIPX_MAN_DIR=~/.local/share/man
+PIPX_COMPLETION_DIR=~/.local/share
 PIPX_SHARED_LIBS=~/.local/pipx/shared
 PIPX_LOCAL_VENVS=~/.local/pipx/venvs
-PIPX_LOG_DIR=~/.local/pipx/logs
-PIPX_TRASH_DIR=~/.local/pipx/trash
-PIPX_VENV_CACHEDIR=~/.local/pipx/.cache
+PIPX_LOG_DIR=~/Library/Logs/pipx
+PIPX_TRASH_DIR=~/.local/pipx/.trash
+PIPX_VENV_CACHEDIR=~/.cache/pipx
 PIPX_STANDALONE_PYTHON_CACHEDIR=~/.local/pipx/py
 PIPX_DEFAULT_PYTHON=/opt/homebrew/opt/python@3.12/libexec/bin/python
 PIPX_RESOLVED_BACKEND=uv
@@ -156,7 +167,6 @@ PIPX_UV_BINARY=/opt/homebrew/bin/uv
 UV_CACHE_DIR=
 PIPX_DISABLE_SHARED_LIBS_AUTO_UPGRADE=false
 PIPX_USE_EMOJI=true
-PIPX_HOME_ALLOW_SPACE=false
 ```
 
 `environment`コマンドで、`pipx`で有効な環境変数を確認できます。
