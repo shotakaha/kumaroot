@@ -712,6 +712,10 @@ cpython-3.12.14-macos-aarch64-none    /opt/homebrew/bin/python3.12 -> ../Cellar/
 
 ## 外部ツールを使いたい（`uvx` / `uv tool install`）
 
+`ruff`のようなCLIツールをプロジェクトの外で使いたい場合は、`uvx`と`uv tool install`の2つの方法があります。
+一度だけ試したい、CIで使い捨てたい、最新版を試したいなど、その場限りの利用には`uvx`が向いています。
+`commitizen`や`hugo`のように日常的に何度も使うツールは、`uv tool install`で環境にインストールしておくと便利です。
+
 ### 一時的に実行したい（`uvx`）
 
 ```console
