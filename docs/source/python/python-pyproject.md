@@ -15,14 +15,13 @@ keywords = ["...", "..."]
 dependencies = [
     "pydantic",
     "typer",
+    "rich",
     "loguru",
 ]
 
 [project.optional-dependencies]
 docs = [
-    "mkdocs",
-    "mkdocs-material",
-    "mkdocstrings[python]",
+    "zensical",
 ]
 
 dev = [
@@ -30,6 +29,7 @@ dev = [
     "pytest-cov",
     "ruff",
     "commitizen",
+    "pre-commit",
 ]
 
 [project.scripts]
@@ -104,6 +104,7 @@ PEP 621で必須とされているのは`name`だけです。
 dependencies = [
     "pydantic",
     "typer",
+    "rich",
     "loguru",
 ]
 ```
@@ -117,9 +118,7 @@ dependencies = [
 ```toml
 [project.optional-dependencies]
 docs = [
-    "mkdocs",
-    "mkdocs-material",
-    "mkdocstrings[python]",
+    "zensical",
 ]
 
 dev = [
@@ -127,6 +126,7 @@ dev = [
     "pytest-cov",
     "ruff",
     "commitizen",
+    "pre-commit",
 ]
 ```
 
