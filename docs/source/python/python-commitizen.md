@@ -61,12 +61,32 @@ $ poetry add commitizen --group dev
 name = "cz_conventional_commits"
 version = "0.1.0"
 tag_format = "v$version"
+version_files = [
+    "pyproject.toml:version",
+    "src/__init__.py:__version__",
+    "docs/conf.py:version",
+]
 ```
 
 `commitizen`の設定は、`pyproject.toml`の`[tool.commitizen]`セクションに書きます。
 `name`でコミットメッセージのルール（テンプレート）を指定します。
 `version`で現在のバージョン番号、`tag_format`でGitタグの命名規則を指定します。
 `$version`の部分がバージョン番号に置き換わります。
+
+`version_files`で、バージョン番号を書き換えたい他のファイルを指定できます。
+`ファイルパス:変数名`の形式で書きます。
+プロジェクトの複数の場所にバージョン番号が散らばっていると、
+更新するたびに手動で修正する手間が増えますが、
+`version_files`を設定しておけば、`cz bump`実行時にまとめて一括更新できます。
+
+Pythonプロジェクトでよく指定されるファイルの例：
+
+- `pyproject.toml:version` - プロジェクト設定ファイル（推奨）
+- `src/__init__.py:__version__` - パッケージの`__version__`変数
+- `docs/conf.py:version` - Sphinxドキュメントの設定ファイル
+- `docs/source/conf.py:version` - `sphinx-quickstart --sep`でソースとビルドを分けた場合
+
+複数のファイルにバージョン番号を定義している場合は、初期設定のときにまとめて追加しておくことをオススメします。
 
 ## 初期化したい（`cz init`）
 
@@ -185,43 +205,6 @@ $ cz bump --increment PATCH --changelog
 ```{note}
 バージョンアップとCHANGELOGの管理は、バージョンアップを先に行い、その後CHANGELOGを整理するのが推奨されます。
 ```
-
-## バージョン番号を一元管理したい
-
-プロジェクトの複数の場所にバージョン番号が散らばっていると、`cz bump`で更新するたびに手動で修正する手間が増えます。
-`version_files`を設定することで、`cz bump`時にすべてのバージョン番号を一括更新できます。
-
-### 設定方法
-
-```toml
-[tool.commitizen]
-version = "0.1.0"
-tag_format = "v$version"
-version_files = [
-    "pyproject.toml:version",
-    "src/__init__.py:__version__",
-    "docs/conf.py:version",
-]
-```
-
-`version_files`に`ファイルパス:変数名`の形式で設定します。
-
-### Pythonプロジェクトでの慣例
-
-バージョン番号を管理するファイル：
-
-- `pyproject.toml` - プロジェクト設定ファイル（推奨）
-- `src/__init__.py` - パッケージの`__version__`変数
-- `src/__version__.py` - バージョン専用ファイル
-
-### ドキュメント設定
-
-Sphinxでドキュメントを作成している場合：
-
-- `docs/conf.py:version` - 通常のSphinx設定
-- `docs/source/conf.py:version` - `--sep`オプション使用時
-
-複数のファイルにバージョン番号を定義している場合は、初期設定のときにまとめて追加しておくことをオススメします。
 
 ## フックしたい（`commitizen`）
 
