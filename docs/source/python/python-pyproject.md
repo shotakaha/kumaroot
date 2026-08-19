@@ -97,7 +97,44 @@ PEP 621で必須とされているのは`name`だけです。
 ビルドツール側に動的に決定させることもできます（`commitizen`や`hatch version`などと組み合わせる場合に便利です）。
 それ以外の`description`、`readme`、`authors`、`license`、`keywords`はすべて任意です。
 
-## 依存パッケージ（`[project]`の`dependencies`）
+## 関連リンクを設定したい（`[project.urls]`）
+
+```toml
+[project.urls]
+Repository = "https://gitlab.com/osechi/kazunoko"
+Documentation = "https://kazunoko.readthedocs.io"
+Issues = "https://gitlab.com/osechi/kazunoko/-/issues"
+```
+
+`[project.urls]`テーブルに、プロジェクト関連のリンクをまとめて書けます。
+キーは自由に決められますが、
+`Repository`（ソースコード）、
+`Documentation`（ドキュメント）、
+`Homepage`（公式サイト）、
+`Issues`（課題管理）
+あたりがよく使われます。
+PyPIのプロジェクトページに、サイドバーのリンクとして表示されます。
+
+## カテゴリーを設定したい（`classifiers`）
+
+```toml
+[project]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+```
+
+`[project]`テーブルの`classifiers`に、PyPIで規定されている定型のカテゴリー文字列（Trove classifiers）を書けます。
+開発状況、対象ユーザー、ライセンス、対応Pythonバージョンなどを、PyPIのプロジェクトページで検索・絞り込みできるようにする分類です。
+書式が自由な`keywords`と違い、
+[公式の一覧](https://pypi.org/classifiers/)
+から選んで書く必要があります。
+
+## 依存パッケージ（dependencies`）
 
 ```toml
 [project]
@@ -109,9 +146,10 @@ dependencies = [
 ]
 ```
 
-プロジェクトの実行に必要な依存パッケージは、`[project]`テーブルの`dependencies`キーに書きます。
-`[project.dependencies]`のような独立したテーブルではなく、`[project]`直下の配列である点に注意してください。
-バージョンを指定したい場合は`"pydantic>=2.0"`のように、PEP 508形式の文字列で書きます。
+`[project]`テーブルの`dependencies`キーに、プロジェクトの実行に必要な依存パッケージを書きます。
+バージョン指定する場合は
+`"pydantic>=2.0"`
+のように、PEP 508形式の文字列で書きます。
 
 ## 依存パッケージ（オプション）（`[project.optional-dependencies]`）
 
