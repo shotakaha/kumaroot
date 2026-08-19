@@ -75,7 +75,7 @@ PEP518、PEP621、PEP517などにより標準化されました。
 
 :::
 
-## プロジェクト設定（`[project]`）
+## プロジェクト設定したい（`[project]`）
 
 ```toml
 [project]
@@ -97,25 +97,7 @@ PEP 621で必須とされているのは`name`だけです。
 ビルドツール側に動的に決定させることもできます（`commitizen`や`hatch version`などと組み合わせる場合に便利です）。
 それ以外の`description`、`readme`、`authors`、`license`、`keywords`はすべて任意です。
 
-## 関連リンクを設定したい（`[project.urls]`）
-
-```toml
-[project.urls]
-Repository = "https://gitlab.com/osechi/kazunoko"
-Documentation = "https://kazunoko.readthedocs.io"
-Issues = "https://gitlab.com/osechi/kazunoko/-/issues"
-```
-
-`[project.urls]`テーブルに、プロジェクト関連のリンクをまとめて書けます。
-キーは自由に決められますが、
-`Repository`（ソースコード）、
-`Documentation`（ドキュメント）、
-`Homepage`（公式サイト）、
-`Issues`（課題管理）
-あたりがよく使われます。
-PyPIのプロジェクトページに、サイドバーのリンクとして表示されます。
-
-## カテゴリーを設定したい（`classifiers`）
+## カテゴリーしたい（`classifiers`）
 
 ```toml
 [project]
@@ -134,7 +116,7 @@ classifiers = [
 [公式の一覧](https://pypi.org/classifiers/)
 から選んで書く必要があります。
 
-## 依存パッケージ（dependencies`）
+## 依存パッケージしたい（`dependencies`）
 
 ```toml
 [project]
@@ -151,7 +133,7 @@ dependencies = [
 `"pydantic>=2.0"`
 のように、PEP 508形式の文字列で書きます。
 
-## 依存パッケージ（オプション）（`[project.optional-dependencies]`）
+## オプション依存パッケージしたい（`[project.optional-dependencies]`）
 
 ```toml
 [project.optional-dependencies]
@@ -177,7 +159,38 @@ dev = [
 CI/CD専用など、パッケージの利用者に見せる必要のない依存は、
 `uv`や`poetry`が対応する`[dependency-groups]`（PEP 735）で管理する方が適切です。
 
-## ビルド環境（`[build-system]`）
+## 関連リンクしたい（`[project.urls]`）
+
+```toml
+[project.urls]
+Repository = "https://gitlab.com/osechi/kazunoko"
+Documentation = "https://kazunoko.readthedocs.io"
+Issues = "https://gitlab.com/osechi/kazunoko/-/issues"
+```
+
+`[project.urls]`テーブルに、プロジェクト関連のリンクをまとめて書けます。
+キーは自由に決められますが、
+`Repository`（ソースコード）、
+`Documentation`（ドキュメント）、
+`Homepage`（公式サイト）、
+`Issues`（課題管理）
+あたりがよく使われます。
+PyPIのプロジェクトページに、サイドバーのリンクとして表示されます。
+
+## コマンド名したい（`[project.scripts]`）
+
+```toml
+[project.scripts]
+cli-name = "module.path:variable"  # src/module/path.pyのvariable関数
+```
+
+`[project.scripts]`で、コマンド名を設定できます。
+左辺（`cli-name`）がコマンド名、
+右辺（`module.path:variable`）が実行する関数（や変数名）です。
+モジュールまでのパスは`.`で区切り、
+モジュール内の関数や変数は`:`で区切ります。
+
+## ビルド環境したい（`[build-system]`）
 
 `[build-system]`で、パッケージをビルドするためのツール（ビルドバックエンド）を指定できます。
 `requires`に必要なパッケージ、`build-backend`にビルド処理を担うモジュールを書きます（PEP 517、PEP 518）。
@@ -265,7 +278,7 @@ build-backend = "setuptools.build_meta"
 C拡張やCythonなど、コンパイルが必要なパッケージを作る場合は`setuptools`を選ぶのが無難です。
 それ以外の純粋なPythonパッケージであれば、使っているプロジェクト管理ツール純正のバックエンドを選ぶと摩擦が少ないです。
 
-## ツールの設定したい（`tool.ツール名`）
+## ツール設定したい（`tool.ツール名`）
 
 ```toml
 [tool.uv]
@@ -304,11 +317,14 @@ tag_format = "v$version"
 
 :::
 
-## パッケージ名とディレクトリ構造を変えたい
+## パッケージ名とコマンド名を別々にしたい
 
 ```toml
 [project]
 name = "osechi-kazunoko"
+
+[project.scripts]
+kazunoko = "kazunoko.cli:app"  # src/kazunoko/cli.pyのapp関数
 
 [build-system]
 requires = ["hatchling"]
@@ -318,31 +334,25 @@ build-backend = "hatchling.build"
 packages = ["src/kazunoko"]
 ```
 
-`pyserial`パッケージを`import serial`でインポートできるように、
-Pythonのパッケージ名とモジュール名は別々に設定できます。
-しかし、いざ、自分で設定してみようとしたら、少し躓いたので紹介します。
+パッケージ名とコマンド名を別々に設定することで、
+PyPIで配布するパッケージ名の衝突を避けつつ、
+ユーザーが実行するコマンド名を短く設定できます。
 
-`[build-system]`に`hatchling`を指定し、
-`[tool.hatch.build.targets.wheel.packages]`を設定する必要がありました。
-`src/<パッケージ名>`のディレクトリ名（この例では`kazunoko`）が、
-そのまま`import`するモジュール名になります。
+しかし、実際に設定してみようとしたら、少し躓いたので整理しました。
 
-### CLIコマンド名を変えたい（`[project.scripts]`）
+上記は、
+パッケージ名を`osechi-kazunoko`として、
+コマンド名を`kazunoko`として設定した例です。
 
-```toml
-[project]
-name = "osechi-kazunoko"
+`[project]`の`name`にパッケージ名を、
+`[project.scripts]`のキーにコマンド名を設定します。
 
-[project.scripts]
-kazunoko = "kazunoko.cli:app"
-```
+躓いたのは`[build-system]`の設定でした。
+`uv_build`ではうまくいかず、`hatchling`を指定し、
+さらに
+`[tool.hatch.build.targets.wheel]`の`packages`に、パッケージのソースが入っているディレクトリ名
+（この例では`src/kazunoko`）の設定が必要でした。
 
-`[project.scripts]`で、インストール後に使えるコマンド名を設定できます。
-左辺（`kazunoko`）がコマンド名、右辺（`kazunoko.cli:app`）が実行するモジュールと変数（または関数）です。
-パッケージ名は`osechi-kazunoko`のままでも、
-`uvx osechi-kazunoko`ではなく`uvx --from osechi-kazunoko kazunoko`のように、
-コマンド名だけを短く保てます。
-
-PyPIでの配布名（`osechi-kazunoko`）と、
-importするモジュール名・コマンド名（`kazunoko`）を分けたい場合に使います。
-名前空間の衝突を避けつつ、利用者には短いコマンド名を提供できます。
+コマンドを一時的に実行する場合は
+`uvx --from osechi-kazunoko kazunoko`
+と打てばOKです。
