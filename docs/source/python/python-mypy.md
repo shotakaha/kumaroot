@@ -31,12 +31,25 @@ $ poetry add mypy --group test
 ```console
 $ uv tool install mypy
 $ mypy --version
-mypy 1.17.1 (compiled: yes)
+mypy 2.3.1 (compiled: yes)
 ```
 
 ## 設定ファイルしたい（`pyproject.toml`）
 
-`mypy`の設定は`pyproject.toml`の`[mypy]`セクションで変更できます。
+`mypy`の設定は`pyproject.toml`の`[tool.mypy]`セクションで変更できます。
+
+```toml
+[tool.mypy]
+strict = true
+```
+
+:::{caution}
+
+`mypy.ini`などの独立した設定ファイルでは`[mypy]`セクションを使いますが、
+`pyproject.toml`にまとめる場合は`[tool.mypy]`にする必要があります。
+`[mypy]`と書いてしまうと、設定が無視されたまま静かに動いてしまうので注意してください。
+
+:::
 
 :::{note}
 
@@ -49,25 +62,26 @@ mypy 1.17.1 (compiled: yes)
 
 ```console
 $ mypy --strict ファイル名
-
-$ mypy
-  --warn-unused-configs \
-  --disallow-any-generics \
-  --warn-unused-configs \
-  --disallow-any-generics \
-  --disallow-subclassing-any \
-  --disallow-untyped-calls \
-  --disallow-untyped-defs \
-  --disallow-incomplete-defs \
-  --check-untyped-defs \
-  --disallow-untyped-decorators \
-  --warn-redundant-casts \
-  --warn-unused-
-    ignores, --warn-return-any, --no-implicit-reexport, --strict-equality,
---strict-bytes, --extra-checks
-
-
 ```
+
+`--strict`オプションは、以下のオプションをまとめて有効にするショートカットです。
+
+- `--disallow-any-generics`
+- `--disallow-subclassing-any`
+- `--disallow-untyped-calls`
+- `--disallow-untyped-defs`
+- `--disallow-incomplete-defs`
+- `--check-untyped-defs`
+- `--disallow-untyped-decorators`
+- `--warn-redundant-casts`
+- `--warn-unused-ignores`
+- `--warn-return-any`
+- `--no-implicit-reexport`
+- `--strict-equality`
+- `--extra-checks`
+
+厳密チェックを通過させるのはとても難しいので、
+`--strict`をベースに、必要なオプションだけを`[tool.mypy]`で無効化して調整するのが現実的です。
 
 ## `py.typed`したい
 
@@ -78,8 +92,9 @@ $ mypy
 
 :::{note}
 
-パッケージの一部が型対応している場合は
-`py.typed`の中身に`partial`と書いておきます。
+`partial`と書く`py.typed`は、自作パッケージ全般ではなく、
+型スタブだけを別配布する「スタブオンリーパッケージ」向けの規則です。
+一部の型情報が欠けているスタブパッケージであることを示すために使います。
 
 :::
 
