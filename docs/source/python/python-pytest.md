@@ -68,6 +68,34 @@ $ uv add pytest-html --group test
 `pytest-mock`もインストールしておくとよいです。
 カバレッジを計測した場合は`pytest-cov`が必要です。
 
+## 設定したい（`[tool.pytest.ini_options]`）
+
+```toml
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+markers = [
+    "local: tests that should only run locally",
+    "slow: tests that take more than 1 second to run"
+]
+addopts = [
+    "-m", "not local",
+]
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning",
+]
+```
+
+`pytest`の設定は、`pyproject.toml`の`[tool.pytest.ini_options]`にまとめて書けます。
+
+`minversion`で、このプロジェクトが要求する`pytest`の最低バージョンを指定できます。
+`testpaths`で、引数なしで`pytest`を実行したときに検索するディレクトリを指定できます。
+`markers`で、プロジェクト固有のマーカーを定義できます（詳しくは次の「マーカーしたい」を参照）。
+`addopts`で、`pytest`実行時に毎回付けたいオプションを指定できます。
+`filterwarnings`で、警告（`Warning`）の扱いを設定できます。
+上記の例では、想定外の警告は`error`として失敗させつつ、`DeprecationWarning`だけは無視しています。
+
 ## マーカーしたい（`-m`）
 
 ```console
@@ -92,32 +120,11 @@ $ pytest --markers
 
 `--markers`オプションでマーカー名を確認できます。
 いくつかのマーカーはpytestにプリセットがあります。
-プロジェクト固有のマーカーは`pyproject.toml`で定義できます。
-
-```toml
-[tool.pytest.ini_options]
-minversion = "8.0"
-testpaths = ["tests"]
-markers = [
-    "local: tests that should only run locally",
-    "slow: tests that take more than 1 second to run"
-]
-addopts = [
-    "-m", "not local",
-]
-filterwarnings = [
-    "error",
-    "ignore::DeprecationWarning",
-]
-```
-
-`minversion`で、このプロジェクトが要求する`pytest`の最低バージョンを指定できます。
-`testpaths`で、引数なしで`pytest`を実行したときに検索するディレクトリを指定できます。
-`filterwarnings`で、警告（`Warning`）の扱いを設定できます。
-上記の例では、想定外の警告は`error`として失敗させつつ、`DeprecationWarning`だけは無視しています。
+プロジェクト固有のマーカーは、前述の`[tool.pytest.ini_options]`の`markers`で定義できます。
 
 マーカー名に`not`をつけることで除外できます。
-このサンプルでは、時間のかかるテストなどに`@pytest.mark.local`とマークし、デフォルトでスキップするようにしています。
+前述の設定例では、時間のかかるテストなどに`@pytest.mark.local`とマークし、
+`addopts`の`-m "not local"`で、デフォルトでスキップするようにしています。
 
 ## テスト名で絞り込みたい（`-k`）
 
