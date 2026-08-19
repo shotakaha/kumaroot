@@ -576,19 +576,19 @@ $ uv audit --preview-features audit-command --ignore GHSA-xxxx-xxxx-xxxx
 
 ```console
 $ uv build
-Building wheel for my-package
-Successfully built dist/my_package-0.1.0-py3-none-any.whl
-Building sdist for my-package
+Building source distribution...
+Building wheel from source distribution...
 Successfully built dist/my_package-0.1.0.tar.gz
+Successfully built dist/my_package-0.1.0-py3-none-any.whl
 
-$ uv build --format wheel
-$ uv build --format sdist
+$ uv build --wheel
+$ uv build --sdist
 ```
 
 `uv build`コマンドでパッケージをビルドできます。
 ビルドすると、`dist/`ディレクトリの中に、
 `wheel`形式（`.whl`）と`sdist`形式（`.tar.gz`）のファイルが生成されます。
-`--format`オプションで、ビルドするパッケージの形式を指定できます。
+`--wheel`オプションで`wheel`形式のみ、`--sdist`オプションで`sdist`形式のみをビルドできます。
 
 :::{note}
 
