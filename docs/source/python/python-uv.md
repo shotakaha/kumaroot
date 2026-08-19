@@ -829,7 +829,7 @@ Uninstalled 1 executable: mkdocs
 | 機能 | `uv` | `poetry` | `hatch` | `pip` |
 | --- | --- | --- | --- | --- |
 | プロジェクト初期化 | `uv init` | `poetry init` | `hatch new` | × |
-| 仮想環境作成 | 自動 | 自動 | 自動（`hatch env`） | `python -m venv` |
+| 仮想環境作成 | 自動（明示は`uv venv`） | 自動（明示は`poetry env use`） | 自動（明示は`hatch env create`） | `python -m venv` |
 | パッケージ追加 | `uv add` | `poetry add` | ×（`pyproject.toml`を手動編集） | `pip install` |
 | パッケージ削除 | `uv remove` | `poetry remove` | ×（`pyproject.toml`を手動編集） | `pip uninstall` |
 | 開発用依存 | `uv add --dev` | `poetry add --dev` | `[tool.hatch.envs.*]`で環境ごとに定義 | 手動管理 |
