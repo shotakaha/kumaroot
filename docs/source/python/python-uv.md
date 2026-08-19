@@ -420,51 +420,24 @@ $ uv sync --all-extras
 `--all-extras`オプションで、`[project.optional-dependencies]`に定義されているすべてのextraを同期の対象にできます。
 デフォルトの`uv sync`には含まれないため、`--extra <extra名>`もしくは、`--all-extras`で明示的に指定する必要があります。
 
-## パッケージを更新したい（`uv lock`）
-
-```console
-$ uv lock
-$ uv lock --check
-$ uv lock --dry-run
-
-// 更新できるパッケージを確認
-$ uv lock --upgrade --dry-run
-
-// パッケージを更新
-$ uv lock --upgrade
-$ uv sync
-```
-
-`uv lock`は、`pyproject.toml`の内容をもとに、`uv.lock`ファイルを更新するコマンドです。
-`--upgrade`オプションで、パッケージを最新バージョンに更新できます。
-`--dry-run`オプションで、更新されるパッケージを確認できます。
-
-:::{note}
-
-`uv lock`（オプションなし）は、`pyproject.toml`の依存範囲を守りつつ、
-すでにロックされているバージョンをできるだけ変更しません（再現性を優先）。
-一方`uv lock --upgrade`は、依存範囲内であっても既存のロック内容を無視し、
-それぞれのパッケージを解決可能な最新バージョンまで引き上げます。
-`pyproject.toml`を編集した直後の反映には`uv lock`、
-定期的な依存の最新化には`uv lock --upgrade`を使い分けます。
-
-:::
-
 ```console
 // パッケージを更新してから同期
 $ uv sync --upgrade
 ```
 
-`uv sync --upgrade`コマンドは、
-`uv lock --upgrade`と`uv sync`を組み合わせたコマンドです。
+`--upgrade`オプションで、依存パッケージを最新バージョンに更新してから同期できます。
+このオプションは、後述する`uv lock --upgrade`と`uv sync`を組み合わせた動作です。
+
+## パッケージを更新したい（`uv lock`）
 
 ```console
-// 特定のパッケージだけを更新
-$ uv lock --upgrade-package requests
+$ uv lock
+$ uv lock --dry-run
+$ uv lock --check
 ```
 
-`--upgrade-package`（`-P`）オプションで、指定したパッケージだけを更新できます。
-プロジェクト全体を一括更新せず、特定のパッケージのみを上げたい場合に使います。
+`uv lock`は、`pyproject.toml`の内容をもとに、`uv.lock`ファイルを更新するコマンドです。
+`--dry-run`オプションで、実際に更新せず、更新されるパッケージを事前に確認できます。
 
 ```console
 // ロックファイルがpyproject.tomlと整合しているか確認（更新はしない）
@@ -476,6 +449,32 @@ hint: To update the lockfile, run `uv lock`.
 
 `--check`オプションで、`uv.lock`が`pyproject.toml`の内容と整合しているかを確認できます。
 不整合がある場合はエラーで終了するため、CIでロックファイルの更新忘れを検知するのに向いています。
+
+```console
+// 更新できるパッケージを確認
+$ uv lock --upgrade --dry-run
+
+// パッケージを一括で更新
+$ uv lock --upgrade
+
+// 特定のパッケージだけを更新
+$ uv lock --upgrade-package requests
+```
+
+`--upgrade`は、積極的にバージョン解決するオプションで、パッケージを最新バージョンに更新できます。
+`--upgrade-package`オプションで、指定したパッケージだけを更新できます。
+プロジェクト全体を一括更新せず、特定のパッケージのみを上げたい場合に使います。
+
+:::{note}
+
+`uv lock`は、プロジェクトの再現性を優先するコマンドです。
+なので、ロックファイル（`uv.lock`）に書かれたバージョンを優先して解決します。
+一方で、`--upgrade`オプションは、依存の範囲内であれば既存のロック内容を無視して、それぞれのパッケージを解決可能な最新バージョンまで引き上げます。
+
+`pyproject.toml`を編集した直後は`uv lock`で反映し、
+定期的な更新には`uv lock --upgrade`を使います。
+
+:::
 
 ## パッケージを実行したい（`uv run`）
 
