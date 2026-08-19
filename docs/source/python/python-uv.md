@@ -793,8 +793,8 @@ Uninstalled 1 executable: mkdocs
 
 :::{note}
 
-`uv tool run`と`uvx`は同等のコマンドです。
-`uvx`はより簡潔なため、通常は`uvx`を使用してください。
+`uvx`は`uv tool run`のエイリアスです。
+`uvx`（4文字）は`uv tool run`（11文字）よりタイプ数が少なく簡潔なため、通常は`uvx`を使用すればOKです。
 
 :::
 
