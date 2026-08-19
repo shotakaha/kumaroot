@@ -2,7 +2,7 @@
 
 ```console
 $ pre-commit --version
-pre-commit 4.4.0
+pre-commit 4.6.2
 
 $ pre-commit install
 $ pre-commit run --all-files
@@ -53,12 +53,19 @@ $ uv tool install pre-commit
 $ uv tool upgrade pre-commit
 ```
 
-## 設定ファイルを作成したい（`.pre-commit-config.yaml`）
+## 設定したい（`.pre-commit-config.yaml`）
+
+```console
+$ pre-commit sample-config > .pre-commit-config.yaml
+```
+
+`pre-commit sample-config`コマンドで、雛形となる`.pre-commit-config.yaml`を出力できます。
+出力される`rev`は固定の古いバージョンなので、次のように書き換えて使うのがオススメです。
 
 ```yaml
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0  # 最新バージョンにする
+  rev: v6.0.0  # 最新バージョンにする
   hooks:
   - id: trailing-whitespace
   - id: end-of-file-fixer
@@ -85,9 +92,10 @@ $ pre-commit install
 
 ```console
 $ pre-commit run --all-files
+$ pre-commit run -a  # 短縮形
 ```
 
-`pre-commit run --all-files`で
+`pre-commit run --all-files`（短縮形`-a`）で
 すべてのファイルに対してチェックを実行します。
 
 `trailing-whitespace`や`end-of-file-fixer`などのフックは自動でファイルを修正します。
@@ -100,11 +108,17 @@ $ pre-commit run --all-files
 | Git Hook | タイミング | 設定例 |
 |---|---|---|
 | `pre-commit` | コミットの直前 | `stages: [pre-commit]` |
+| `pre-merge-commit` | マージコミットの直前 | `stages: [pre-merge-commit]` |
 | `commit-msg` | コミットメッセージ作成の直後 | `stages: [commit-msg]` |
+| `prepare-commit-msg` | コミットメッセージ作成の直前 | `stages: [prepare-commit-msg]` |
 | `pre-push` | プッシュの直前 | `stages: [pre-push]` |
+| `pre-rebase` | リベースの直前 | `stages: [pre-rebase]` |
 | `post-checkout` | ブランチ切り替え後 | `stages: [post-checkout]` |
 | `post-commit` | コミット後 | `stages: [post-commit]` |
 | `post-merge` | マージ後 | `stages: [post-merge]` |
+| `post-rewrite` | コミット書き換え後（`commit --amend`や`rebase`） | `stages: [post-rewrite]` |
+
+`pre-commit install --help`の`--hook-type`で、実際にサポートされているタイミングの一覧を確認できます。
 
 設定ファイルでタイミングを指定する例：
 
@@ -112,7 +126,7 @@ $ pre-commit run --all-files
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: detect-private-key
         stages: [pre-push]  # プッシュの直前に実行
@@ -139,10 +153,12 @@ default_install_hook_types:
 ## フックを確認したい
 
 ```console
-$ find .git/hooks -type f ! -name "*.sample" -perm u+x
+$ find .git/hooks -type f ! -name "*.sample" -perm -u+x
 ```
 
 `.git/hooks/`でフックを確認できます。
+`-perm -u+x`のようにハイフンを付けることで、実行可能なファイルだけに絞り込めます
+（ハイフンなしの`-perm u+x`は権限の完全一致を意味するため、意図通りに動きません）。
 
 ## pre-commit-hooksしたい
 
