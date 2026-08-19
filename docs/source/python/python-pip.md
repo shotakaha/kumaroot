@@ -1,6 +1,9 @@
 # パッケージ管理したい（`pip`）
 
 ```console
+$ pip3 --version
+pip 26.2.1 from /opt/homebrew/lib/python3.14/site-packages/pip (python 3.14)
+
 $ pip3 install パッケージ名
 $ pip3 install -U パッケージ名
 $ pip3 uninstall パッケージ名
@@ -81,7 +84,11 @@ $ pip3 list --outdated | awk 'NR>2{print $1}' | xargs pip3 install -U pip
 
 1. `pip3 list --outdated`で更新が必要なパッケージをリストします
 2. その出力結果に対して`awk`を使ってパッケージ名（＝2行目以降の1列目）を抽出します
-3. その出力結果を`xargs`に渡して`pip3 install -U 更新が必要なパッケージ名たち`を実行します
+3. その出力結果を`xargs`に渡して`pip3 install -U 更新が必要なパッケージ名たち pip`を実行します
+
+末尾に固定で書いてある`pip`は、`xargs`が受け取った動的なパッケージ名リストの後ろに追加される引数です。
+つまり実行されるのは`pip3 install -U パッケージ名1 パッケージ名2 ... pip`のような形になり、
+`pip`自身が`--outdated`の一覧に含まれていなくても、ついでに最新化しておく狙いがあります。
 
 ## パッケージを一括で追加したい（`--requirements`）
 
@@ -164,6 +171,8 @@ $ ls -1 /opt/homebrew/bin/python*
 /opt/homebrew/bin/python3.12-config
 /opt/homebrew/bin/python3.13
 /opt/homebrew/bin/python3.13-config
+/opt/homebrew/bin/python3.14
+/opt/homebrew/bin/python3.14-config
 ```
 
 :::{note}
