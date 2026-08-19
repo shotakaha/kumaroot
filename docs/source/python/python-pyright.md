@@ -50,9 +50,12 @@ $ uv tool install pyright
 `pyrightconfig.json`で設定を変更できます。
 プロジェクトルートに配置します。
 
-:::{note}
+## VS Codeで使いたい（`Pylance`）
 
-`Pylance`の場合は、その他のVS Code拡張と同様に`settings.json`で設定できます。
+`Pylance`は、内部で`pyright`を使っているVS Code拡張です。
+CLIやCIでは`pyrightconfig.json`を使いますが、
+VS Code上でリアルタイムに解析させる場合は、
+その他のVS Code拡張と同様に`settings.json`で設定します。
 
 ```json
 {
@@ -85,8 +88,17 @@ $ uv tool install pyright
 }
 ```
 
+:::{note}
+
+`pyrightconfig.json`と`settings.json`は、どちらも同じ`pyright`エンジンを設定するものですが、
+キー名の書式が異なります（例：`typeCheckingMode`と`python.analysis.typeCheckingMode`）。
+両方を用意している場合、`pyrightconfig.json`（や`pyproject.toml`の`[tool.pyright]`）の設定が優先されます。
+`pyrightconfig.json`が存在するフォルダーは、開発者ごとに設定がバラつかず、
+誰が開いても同じエラーセットになることを意図した設計です。
+
 :::
 
 ## リファレンス
 
 - [Pyright](https://microsoft.github.io/pyright/#/)
+- [Pylance - VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
