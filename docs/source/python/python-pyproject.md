@@ -272,12 +272,12 @@ tag_format = "v$version"
 [project]
 name = "osechi-kazunoko"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/kazunoko"]
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kazunoko"]
 ```
 
 `pyserial`パッケージを`import serial`でインポートできるように、
@@ -286,3 +286,25 @@ Pythonのパッケージ名とモジュール名は別々に設定できます�
 
 `[build-system]`に`hatchling`を指定し、
 `[tool.hatch.build.targets.wheel.packages]`を設定する必要がありました。
+`src/<パッケージ名>`のディレクトリ名（この例では`kazunoko`）が、
+そのまま`import`するモジュール名になります。
+
+### CLIコマンド名を変えたい（`[project.scripts]`）
+
+```toml
+[project]
+name = "osechi-kazunoko"
+
+[project.scripts]
+kazunoko = "kazunoko.cli:app"
+```
+
+`[project.scripts]`で、インストール後に使えるコマンド名を設定できます。
+左辺（`kazunoko`）がコマンド名、右辺（`kazunoko.cli:app`）が実行するモジュールと変数（または関数）です。
+パッケージ名は`osechi-kazunoko`のままでも、
+`uvx osechi-kazunoko`ではなく`uvx --from osechi-kazunoko kazunoko`のように、
+コマンド名だけを短く保てます。
+
+PyPIでの配布名（`osechi-kazunoko`）と、
+importするモジュール名・コマンド名（`kazunoko`）を分けたい場合に使います。
+名前空間の衝突を避けつつ、利用者には短いコマンド名を提供できます。
