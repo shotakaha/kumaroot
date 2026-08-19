@@ -5,7 +5,7 @@
     single: Rust Alternatives; sd
 ```
 
-# 置換したい（``sd``）
+# テキストを置換したい（`sd`）
 
 ```bash
 $ brew install sd

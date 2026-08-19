@@ -1,4 +1,4 @@
-# JSONしたい（`jq`）
+# JSONを処理したい（`jq`）
 
 ```console
 $ brew install jq

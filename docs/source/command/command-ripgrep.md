@@ -1,4 +1,4 @@
-# 検索したい（``ripgrep``）
+# テキストを検索したい（`ripgrep`）
 
 ```console
 $ brew install ripgrep

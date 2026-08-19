@@ -1,4 +1,4 @@
-# nkf
+# エンコーディングを変換したい（`nkf`）
 
 ```bash
 brew install nkf

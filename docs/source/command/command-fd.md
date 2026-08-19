@@ -5,7 +5,7 @@
     single: Rust Alternatives; fd
 ```
 
-# ファイルを探したい（``fd``）
+# ファイルを検索したい（`fd`）
 
 ```console
 $ fd 検索パターン 検索パス
