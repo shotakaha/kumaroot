@@ -100,13 +100,24 @@ $ pre-commit run -a  # 短縮形
 
 `trailing-whitespace`や`end-of-file-fixer`などのフックは自動でファイルを修正します。
 
-### フックしたい（`stages`）
+## フックを追加したい
+
+```console
+$ pre-commit install --install-hooks
+$ pre-commit install --install-hooks --hook-type pre-commit
+$ pre-commit install --install-hooks --hook-type commit-msg
+```
+
+`--install-hooks`で、`.pre-commit-config.yaml`に書かれたフックをインストールできます。
+`--hook-type フックタイプ`で、フックのタイミングを追加できます。
+
+### フックのタイミング
 
 フックのタイミングは`[stages]`で変更できます。
 デフォルトでは`pre-commit`（コミットの直前）に実行されます。
 
 | Git Hook | タイミング | 設定例 |
-|---|---|---|
+| --- | --- | --- |
 | `pre-commit` | コミットの直前 | `stages: [pre-commit]` |
 | `pre-merge-commit` | マージコミットの直前 | `stages: [pre-merge-commit]` |
 | `commit-msg` | コミットメッセージ作成の直後 | `stages: [commit-msg]` |
@@ -132,33 +143,16 @@ repos:
         stages: [pre-push]  # プッシュの直前に実行
 ```
 
-### 複数のフックをインストールしたい
-
-```console
-$ pre-commit install --install-hooks --hook-type pre-commit --hook-type commit-msg
-```
-
-`--install-hooks --hook-type フックタイプ`でフックのタイミングを追加できます。
-
-```yaml
-# .pre-commit-config.yaml
-default_install_hook_types:
-  - pre-commit
-  - commit-msg
-  - pre-push
-```
-
-`.pre-commit-config.yaml`で有効にするフックタイプを指定できます。
-
 ## フックを確認したい
 
 ```console
 $ find .git/hooks -type f ! -name "*.sample" -perm -u+x
 ```
 
-`.git/hooks/`でフックを確認できます。
-`-perm -u+x`のようにハイフンを付けることで、実行可能なファイルだけに絞り込めます
-（ハイフンなしの`-perm u+x`は権限の完全一致を意味するため、意図通りに動きません）。
+`pre-commit`自身に、フックを一覧する機能はありません。
+`.git/hooks/`を直接確認して、フックが追加されているかを確認します。
+
+`find`コマンドを使う場合、`-perm -u+x`のようにハイフンを付けることで、実行可能なファイルだけに絞り込めます
 
 ## pre-commit-hooksしたい
 
