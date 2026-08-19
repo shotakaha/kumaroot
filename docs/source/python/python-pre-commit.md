@@ -200,16 +200,19 @@ repos:
 repos:
 - repo: ...
 - repo: https://github.com/python-poetry/poetry
-  rev: 1.8.0
+  rev: 2.4.1
   hooks:
   - id: poetry-check
     args: [--lock]
     stages: [pre-push]
   #- id: poetry-lock
+  #- id: poetry-install
+- repo: https://github.com/python-poetry/poetry-plugin-export
+  rev: 1.10.0
+  hooks:
   - id: poetry-export
     args: [--format, requirements.txt, --output, requirements.txt]
     stages: [pre-push]
-  #- id: poetry-install
 ```
 
 Pythonプロジェクトを`poetry`で管理している場合は、
@@ -222,10 +225,21 @@ Pythonプロジェクトを`poetry`で管理している場合は、
 それぞれに適切な`args`を設定して使うとよいと思います。
 また、コミット時ではなくプッシュ時（`pre-push`）に設定するとよいと思います。
 
+:::{caution}
+
+`poetry-export`フックは、`poetry`本体（`python-poetry/poetry`）ではなく、
+`poetry-plugin-export`という別リポジトリに移動しました。
+`poetry`本体の`repo`を指定すると、
+`is not present in repository`エラーになります。
+`poetry export`コマンド自体も、`poetry`本体からは削除されており、
+別途プラグインとしてインストールしないと使えません。
+
+:::
+
 :::{note}
 
 Read the Docsに公開するために`requirements.txt`が必要です。
-このリポジトリも、も`poetry-export`フックを使って、
+このリポジトリも、`poetry-export`フックを使って、
 `requirements.txt`を生成できるようにしてあります。
 
 :::
