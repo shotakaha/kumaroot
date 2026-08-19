@@ -113,6 +113,7 @@ python-unittest-mock
 python-mypy
 python-pyright
 python-tox
+python-ty
 ```
 
 ```bash

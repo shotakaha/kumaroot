@@ -98,6 +98,12 @@ $ mypy --strict ファイル名
 
 :::
 
+:::{seealso}
+
+Astral（`uv`や`ruff`と同じ開発元）製の型チェッカー[ty](./python-ty.md)もあります。
+
+:::
+
 ## リファレンス
 
 - [mypy](https://mypy.readthedocs.io/en/stable/index.html)
