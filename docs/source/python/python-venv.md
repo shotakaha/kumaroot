@@ -63,6 +63,28 @@ Python 3.12.7
 
 :::
 
+## システムパッケージを使いたい（`--system-site-packages`）
+
+```console
+$ python3 -m venv --system-site-packages .venv
+```
+
+`--system-site-packages`オプションで、
+作成した仮想環境からシステムのPython環境にアクセスできるようにできます。
+[PyROOT](../root/root-pyroot.md)のように、システムのPython環境にインストールされてしまうパッケージを仮想環境から利用したい場合に必要です。
+
+## 表示名を変更したい（`--prompt`）
+
+```console
+$ python3 -m venv --prompt myproj .venv
+$ source .venv/bin/activate
+(myproj) $
+```
+
+`--prompt`オプションで、仮想環境を有効化したときのプロンプト表示を変更できます。
+デフォルトではディレクトリ名（`.venv`の場合は親ディレクトリ名）が使われますが、
+複数のプロジェクトを並行して開いているときに、区別しやすくなります。
+
 ## 他ツールと比較したい
 
 `venv`とその他の仮想環境・パッケージ管理ツールを比較してみました。
