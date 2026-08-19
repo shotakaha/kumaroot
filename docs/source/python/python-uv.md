@@ -737,22 +737,24 @@ Installed 1 package in 2ms
  + ruff==0.16.3
 Installed 1 executable: ruff
 
-$ uv tool install mypy
-Resolved 6 packages in 4ms
-Installed 6 packages in 5ms
- + mypy==2.3.1
-Installed 5 executables: dmypy, mypy, mypyc, stubgen, stubtest
+$ uv tool install commitizen
+$ uv tool install hugo
+$ uv tool install marimo
+$ uv tool install zensical
 
 // インストール済みツールを確認（コマンドはツール名ごとにハイフン付きで列挙される）
 $ uv tool list
-mypy v2.3.1
-- dmypy
-- mypy
-- mypyc
-- stubgen
-- stubtest
+commitizen v4.17.1
+- cz
+- git-cz
+hugo v0.165.0
+- hugo
+marimo v0.24.0
+- marimo
 ruff v0.16.3
 - ruff
+zensical v0.0.56
+- zensical
 
 // ツールをアップグレード
 $ uv tool upgrade ruff
@@ -761,11 +763,16 @@ Nothing to upgrade
 
 // すべてのツールをアップグレード
 $ uv tool upgrade --all
+
+// 使わなくなったツールを削除
+$ uv tool uninstall mkdocs
+Uninstalled 1 executable: mkdocs
 ```
 
 `uv tool install`コマンドで、頻繁に使用するツールをグローバルにインストールできます。
 インストールされたツールは、`uv tool list`コマンドで確認できます。
 `uv tool upgrade`コマンドで、インストールされたツールをアップグレードできます。
+使わなくなったツールは`uv tool uninstall`コマンドで削除できます。
 
 ### uvxとuv tool installの使い分け
 
