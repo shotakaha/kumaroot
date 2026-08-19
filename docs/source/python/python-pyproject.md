@@ -227,6 +227,45 @@ build-backend = "setuptools.build_meta"
 C拡張やCythonなど、コンパイルが必要なパッケージを作る場合は`setuptools`を選ぶのが無難です。
 それ以外の純粋なPythonパッケージであれば、使っているプロジェクト管理ツール純正のバックエンドを選ぶと摩擦が少ないです。
 
+## ツールの設定したい（`tool.ツール名`）
+
+```toml
+[tool.uv]
+managed = true
+```
+
+`[tool.ツール名]`テーブルに、各ツール独自の設定を書きます。
+`[project]`や`[build-system]`と違って標準化されておらず、書式や項目はツールごとに異なります。
+`[tool.uv]`は[uv](./python-uv.md)の設定です。
+`managed = true`（デフォルト）で、このプロジェクトを`uv`が管理していることを明示します。
+
+```toml
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+```
+
+`[tool.ruff]`は[Ruff](https://docs.astral.sh/ruff/)の設定です。
+`line-length`で1行の最大文字数、`target-version`で対象のPythonバージョンを指定できます。
+
+```toml
+[tool.commitizen]
+name = "cz_conventional_commits"
+version_provider = "pep621"
+tag_format = "v$version"
+```
+
+`[tool.commitizen]`は[commitizen](https://commitizen-tools.github.io/commitizen/)の設定です。
+`version_provider`で、バージョン番号をどこから読み書きするか指定します。
+`"pep621"`を指定すると、`[project]`の`version`キーと連動します。
+
+:::{note}
+
+`[tool.hatch.build.targets.wheel]`のように、ツール名の下にさらに階層を作ることもできます。
+どんなキーが使えるかは、それぞれのツールの公式ドキュメントを参照してください。
+
+:::
+
 ## パッケージ名とディレクトリ構造を変えたい
 
 ```toml
