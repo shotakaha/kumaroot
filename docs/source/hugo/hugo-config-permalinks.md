@@ -15,7 +15,10 @@ directory_name = "パーマリンクのフォーマット"
 [permalinks]
 post = "/blog/:filename"
 # ==> /blog/記事1/
+```
 
+```toml
+[permalinks]
 post = "/:section/:filename"
 # ==> /post/記事1/
 ```
@@ -37,7 +40,10 @@ post = "/:section/:filename"
 [permalinks]
 post = "/:section/:year/:month/:day"
 # ==> /post/2023/10/23/
+```
 
+```toml
+[permalinks]
 post = "/:section/:year/:yearday"
 # ==> /post/2023/123
 ```
@@ -51,7 +57,7 @@ post = "/:section/:year/:yearday"
 - `:day`: 日（01 - 31）
 - `:weekday`: 曜日（0 - 6）
 - `:weekdayname`: 曜日名
-- `:yearday`: 日数（001 - 365）
+- `:yearday`: 年始からの通算日数。ゼロパディングなし（1 - 365）
 
 個人的に`:year/:yearday`を使うのが好きです。
 
