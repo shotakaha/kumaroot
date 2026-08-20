@@ -108,6 +108,8 @@ Hugoでは、ファイル名を基準にした方法と、サブディレクト�
 ## リファレンス
 
 - [Multilingual Mode - gohugo.io](https://gohugo.io/content-management/multilingual/)
+- [Language configuration - gohugo.io](https://gohugo.io/configuration/languages/)
 - [.Translations - gohugo.io](https://gohugo.io/methods/page/translations/)
+- [.AllTranslations - gohugo.io](https://gohugo.io/methods/page/alltranslations/)
 - [.IsTranslated - gohugo.io](https://gohugo.io/methods/page/istranslated/)
 - [hugo.Sites - gohugo.io](https://gohugo.io/functions/hugo/sites/)
