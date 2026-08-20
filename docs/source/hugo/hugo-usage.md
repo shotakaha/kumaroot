@@ -40,6 +40,7 @@ hugo-data
 hugo-assets
 hugo-static
 hugo-themes
+hugo-modules
 hugo-i18n
 ```
 
