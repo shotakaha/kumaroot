@@ -37,3 +37,12 @@
 `.ByLastmod.Reverse`で更新日時の新しい順に並び替えています。
 `{{ partial "article-card" . }}`は`/layouts/partials/article-card.html`を呼び出す部分テンプレートです。
 記事1件分の表示を部分テンプレート側に切り出しておくと、一覧ページと関連記事など複数箇所で使い回せます。
+
+## リファレンス
+
+- [.Pages](https://gohugo.io/methods/page/pages/)
+- [.RegularPages](https://gohugo.io/methods/page/regularpages/)
+- [Pagination](https://gohugo.io/templates/pagination/)
+- [.Paginate](https://gohugo.io/methods/page/paginate/)
+- [.ByLastmod](https://gohugo.io/methods/pages/bylastmod/)
+- [partial](https://gohugo.io/functions/partials/include/)
