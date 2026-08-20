@@ -35,14 +35,14 @@ date_format = "2006-01-02"
 ## コピーライト表示したい
 
 /config/_default/params.toml
-:   ```html
+:   ```toml
     [footer]
     showCopyright = true
     ```
 
 /layouts/partials/copyright.html
 :   ```html
-    {{ if .Site.Params.footer.showCopyright | defaut true }}
+    {{ if .Site.Params.footer.showCopyright | default true }}
     <div class="copyright">
         <span>&copy; {{ now.Format "2006" }}</span>
     </div>
