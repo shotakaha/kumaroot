@@ -51,7 +51,6 @@ hugo-i18n
 maxdepth: 1
 ---
 hugo-demo
-hugo-page-variables
 hugo-scratch
 hugo-printf
 ```

@@ -1,6 +1,7 @@
 # テンプレートしたい（`/layouts/`）
 
 ```{toctree}
+hugo-page-variables
 hugo-layouts-baseof
 hugo-layouts-single
 hugo-layouts-list
