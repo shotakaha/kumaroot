@@ -1,9 +1,161 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.8.1 (2026-08-20)
+
+### Feat
+
+- **gas-gform**: document response-limit and deadline patterns
+- **hugo-config-params**: add theme params configuration page
 
 ### Fix
 
+- **hugo-config-permalinks**: fix duplicate TOML key errors, wrong yearday padding
+- **hugo-config-menu**: fix invalid array table syntax, add per-language menus
+- **hugo-config-languages**: fix deprecated config keys, broken examples, dead link
+- **hugo-config-format**: fix undefined "defaut" function typo
+- **hugo-partials-head**: fix template syntax errors preventing build
+- **hugo-layouts-list**: fix unterminated quote, split into sections with explanations
+- **hugo-layouts-single**: fix broken date example, fill in unfinished sections
+- **hugo-layouts-baseof**: fix invalid define syntax and deprecated language fields
+- **hugo-printf**: fix range over .Page which errors, normalize backticks
+- **hugo-layouts**: close unterminated bold markdown syntax
+- **latex-siunitx**: fix broken commands and examples, split base/derived units
+- **command-awk**: fix typo, unused variable, and incomplete examples
+- **command-grep**: restructure into per-option sections
+- **command-fd**: fix -e/--d errors and mirror command-find structure
+- **command-find**: reorder sections by usage frequency
+- **command-find**: split option list into per-condition sections
+- **command-find**: correct inaccurate examples and clarify options
+- **command**: update command descriptions
+- **python-nodeenv**: document deactivate_node, -n, and -p options
+- **python-pip**: clarify xargs trailing pip arg, add 3.14, add --version
+- **python-pipx**: update list/environment output, add completions subcommand
+- **python-pre-commit**: use uv run pytest in the local hook entry
+- **python-pre-commit**: fix broken pytest local hook config
+- **python-pre-commit**: remove nbstripoutしたい section
+- **python-pre-commit**: bump bandit rev, add missing explanation
+- **python-pre-commit**: fix poetry-export hook repo, bump poetry rev
+- **python-pre-commit**: unify heading style with command name in parens
+- **python-ruff**: use ruff-check instead of legacy ruff hook id
+- **python-pre-commit**: update pre-commit-hooks rev in 事前チェックしたい
+- **python-pre-commit**: fix typo in フックを確認したい section
+- **python-pre-commit**: update basic commands to current pre-commit
+- **python-commitizen**: add commitizen-branch hook, bump rev to v4.17.1
+- **python-commitizen**: fill in cz init dialog subsections
+- **python-commitizen**: show real cz init dialog transcript
+- **python-commitizen**: split scheme/provider into dedicated subsections
+- **python-commitizen**: document version_scheme/provider/changelog/zero options
+- **python-commitizen**: fold version_files into 設定したい, fix --sep mixup
+- **python-commitizen**: add 設定したい section, fix stale version/flag info
+- **python-tox**: add 複数の自動テストを組み合わせたい section
+- **python-tox**: update version, add 設定したい (tox.toml) section
+- **python-pyright**: rewrite 設定したい section around [tool.pyright]
+- **python-pyright**: split Pylance config into its own VS Code section
+- **python-pyright**: fix version, poetry add syntax, config key, and modes
+- **python-ty**: add standalone ty guide, link from mypy page
+- **python-mypy**: fix [mypy] vs [tool.mypy], broken --strict list, version
+- **python-venv**: document --system-site-packages and --prompt
+- **python-venv**: fix version output, copy-paste comment, and pipenv history
+- **python-ruff**: update version, simplify rule list, fix pre-commit rev
+- **python-pytest**: add 設定したい section, separate config from markers
+- **python-pytest**: fix plugin install commands and xfail marker typo
+- **python-pyproject**: add note on TOML tooling gap before Python 3.11
+- **python-pyproject**: fix typo 同情 -> 登場
+- **python-pyproject**: correct pyproject.toml adoption history
+- **python-pyproject**: unify headings to したい form, reorganize sections
+- **python-pyproject**: add [project.urls] and classifiers sections
+- **python-pyproject**: add CLI command name subsection, fix table order
+- **python-pyproject**: add ツールの設定したい（tool.ツール名）section
+- **python-pyproject**: add それぞれの特徴 subsection comparing build backends
+- **python-pyproject**: note that uv works with non-default build backends
+- **python-pyproject**: split build-system section into per-backend subsections
+- **python-pyproject**: update sample dependencies to current daily tools
+- **python-pyproject**: fill in empty [project]/dependencies sections
+- **python-hatch**: rewrite to match python-uv.md structure and verify against Hatch 1.18.0
+- **python-poetry**: rewrite to match python-uv.md structure and verify against Poetry 2.4.1
+- **python-uv**: add explicit venv-creation commands to comparison table
+- **python-uv**: note poetry install vs poetry sync distinction
+- **python-uv**: rework comparison tables around uv/poetry/hatch/pip and uvx/pipx
+- **python-uv**: consolidate duplicate pipx PATH-conflict warning
+- **python-uv**: correct PATH claim in uv tool install note
+- **python-uv**: move install-location note into uv tool install subsection
+- **python-uv**: note install locations in uvx/uv tool lead-in
+- **python-uv**: note character-count difference between uvx and uv tool run
+- **python-uv**: add lead-in explaining uvx vs uv tool install
+- **python-uv**: split uvx and uv tool install into subsections
+- **python-uv**: use actually-used tools in uv tool install example
+- **python-uv**: correct uvx/uv tool install/list/upgrade output
+- **python-uv**: correct uv python install/uninstall/list output
+- **python-uv**: document uv run --with with a Git repository
+- **python-uv**: correct uv publish output and add --dry-run
+- **python-uv**: correct uv build flags and output order
+- **python-uv**: document uv run --with
+- **python-uv**: fix missing source in venv activate example
+- **python-uv**: reorganize uv sync/uv lock sections
+- **python-uv**: clarify uv lock vs uv lock --upgrade
+- **python-uv**: document uv lock --upgrade-package and --check
+- **python-uv**: reorganize uv sync section and fix default-group claim
+- **python-uv**: document uv sync --all-groups and --dry-run
+- **python-uv**: reorganize uv init section structure
+- **python-uv**: reorganize uv add/remove section structure
+- **python-uv**: split --group and --optional into subsections
+- **python-uv**: rename section to 依存パッケージを追加・削除したい
+- **python-uv**: document uv sync --extra / --all-extras
+- **python-uv**: document uv add --optional
+- **python-uv**: correct uv add/remove output and pyproject.toml section
+- **python-uv**: fix typo in --bare description
+- **python-uv**: add subsections for uv init option combinations
+- **python-uv**: correct uv init generated file layout
+- **python-uv**: note VIRTUAL_ENV precedence for uv pip
+- **python-uv**: document uv check internals and --fix option
+- **python-uv**: document uv format options
+- **python-uv**: document uv audit options
+- **python-uv**: update uv version in install example
+- **python-uv**: remove stray closing directive
+- **AGENTS**: document deps:update procedure
+- **taskfile**: use built-in uv audit instead of pip-audit
+- **taskfile**: use uv tree --outdated for deps:outdated
+- **gas-gform**: implement notifyToGroup with MailApp.sendEmail
+- **gas-gform**: promote form settings section, rename to applySettings
+- **gas-gform**: promote setConfirmationMessage section, fix naming
+- **gas-gform**: reorder around GAS-only/useful operations vs UI-doable ones
+- **gas-gform**: fix duplicate/missing headings, note incomplete sample
+- **gas-spreadsheet-pivottable**: fix empty link, add missing explanations
+- **gas-spreadsheet-create**: align structure with sibling Spreadsheet pages
+- **gas-spreadsheet-sheet**: add explanation and usage example to findDuplicateRow
+- **gas-spreadsheet-sheet**: clarify why appendRowsSafe batches writes
+- **gas-spreadsheet-sheet**: add one-line summary before appendRowSafe code
+- **gas-spreadsheet-sheet**: split appendRowSafe into single/multi-row sections
+- **gas-spreadsheet-sheet**: rename append wrapper functions to avoid shadowing
+- **gas-spreadsheet-sheet**: split column-index helpers into two sections
+- **gas-spreadsheet-range**: make Range the consistent subject across sections
+- **gas**: cross-link getDataRange/getValues basics with 2D array page
+- **gas-spreadsheet**: move Range.protect example to Range page
+- **gas-spreadsheet**: move clearContent to Range page, expand copyTo example
+- **gas-spreadsheet-sheet**: consolidate getRange sections, drop header-skip note
+- **gas-spreadsheet**: move getRange/getDataRange sections to Sheet page
+- **gas-spreadsheet-sheet**: move appendRow wrapper functions to page end
+- **gas-spreadsheet-sheet**: add column operation section, indexOf lookup example
+- **gas-spreadsheet-sheet**: split info-check section into three
+- **gas-spreadsheet-range**: prefix methods, expand references, reorder activate
+- **gas-spreadsheet-sheet**: reorder sections by class and usage frequency
+- **gas-spreadsheet-sheet**: prefix method references with class name
+- **gas-spreadsheet-sheet**: fix mismatched reference links, split duplicate headings
+- **gas-spreadsheet-book**: tighten prose and add SpreadsheetApp prefixes
+- **gas-spreadsheet-book**: reorder sections, book ops before sheet ops
+- **gas-spreadsheet-book**: unify terminology to book, note standalone caveat
+- **gas-spreadsheet**: simplify intro sample and add reference section
+- **gas-spreadsheet**: define book/sheet/cell terminology
+- **gas**: document standalone vs container-bound script types
+- **hugo-config-environment**: dedupe code blocks, add googleAnalytics diff example
+- **hugo-config-environment**: restructure around development/production/GitLab Pages sections
+- **hugo-config-environment**: rewrite around minimal buildDrafts and baseURL examples
+- **hugo-config-markup**: add highlight and goldmark extensions sections
+- **hugo-config-environment**: document production default and env override
+- **hugo-config-hugo**: trim duplicated sections, add outputFormats section
+- **hugo-config**: fix heading typo, add params page to toctree
+- **command-fish**: add bash/zsh comparison section
+- **command-fish**: normalize backticks, add and/or/not and wildcard sections
 - **gas-npm**: annotate intro command example with what each script runs
 - **gas-npm**: trim general npm explanations now covered by command-npm.md
 - **command-npm**: add package.json and scripts configuration sections
