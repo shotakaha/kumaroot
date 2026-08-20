@@ -48,3 +48,9 @@ Hugoは`/content/`以下のファイル構成から、ページの「種類（Ki
 ## リファレンス
 
 - [Page Variables](https://gohugo.io/variables/page/)
+- [.Kind](https://gohugo.io/methods/page/kind/)
+- [.IsHome](https://gohugo.io/methods/page/ishome/)
+- [.IsNode](https://gohugo.io/methods/page/isnode/)
+- [.IsSection](https://gohugo.io/methods/page/issection/)
+- [.IsPage](https://gohugo.io/methods/page/ispage/)
+- [Glossary: page kind](https://gohugo.io/quick-reference/glossary/#page-kind)
