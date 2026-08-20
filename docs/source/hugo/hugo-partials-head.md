@@ -71,3 +71,12 @@
 
 シンプルに``{{ .Title }}``を呼ぶだけでもOKですが、検索結果などに使われるため、サイト名も併記している場合が多いです。
 トップページでは``サイト名``、その他のページでは``ページのタイトル | サイト名``などとする場合は、条件分岐させます。
+
+## リファレンス
+
+- [.Description](https://gohugo.io/methods/page/description/)
+- [.Summary](https://gohugo.io/methods/page/summary/)
+- [hugo.Generator](https://gohugo.io/functions/hugo/generator/)
+- [.Permalink](https://gohugo.io/methods/page/permalink/)
+- [block](https://gohugo.io/functions/go-template/block/)
+- [Embedded templates](https://gohugo.io/templates/internal/)
