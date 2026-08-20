@@ -77,3 +77,6 @@ HTMLタグはセマンティックに沿って並べるのがよいと思いま�
 ## リファレンス
 
 - [Base templates](https://gohugo.io/templates/base/)
+- [block](https://gohugo.io/functions/go-template/block/)
+- [define](https://gohugo.io/functions/go-template/define/)
+- [.Language (Site)](https://gohugo.io/methods/site/language/)
