@@ -74,7 +74,7 @@ This project uses a **calendar-based semantic versioning** scheme (YYYY.MM.PATCH
 - Automatic increment detection is disabled; all bumping is explicit
 - All bump tasks include `--check-consistency --changelog` flags
 - When a new year/month begins, manually bump MAJOR or MINOR as needed
-- Current version: `2026.6.1` (July 2026)
+- Current version: see `version` in `pyproject.toml` (or run `task version`)
 - Example version progression: `2026.3.x` → `2026.4.0`（new month）→ `2027.1.0`（new year）
 
 ## Documentation Structure
