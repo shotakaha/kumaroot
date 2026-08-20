@@ -10,7 +10,7 @@ hugo-layouts-404
 
 ## 部分テンプレートしたい（`/layouts/partials/`）
 
-すべてのページに共通するパーツは**[部分テンプレート機能](https://gohugo.io/templates/partials/)を使うことで、テンプレート制作にかかる手間を削減できます。
+すべてのページに共通するパーツは**[部分テンプレート機能](https://gohugo.io/templates/partials/)**を使うことで、テンプレート制作にかかる手間を削減できます。
 
 ```{toctree}
 hugo-partials
