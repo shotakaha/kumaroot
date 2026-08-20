@@ -1,18 +1,21 @@
 # 仮想ターミナルしたい（`screen`）
 
 ```console
-# 起動している screen を確認
+// 起動している screen を確認
 $ screen -ls
 
-# 新しいセッション
+// 新しいセッション
 $ screen -S <セッション名>
 
-# 再アタッチ
+// 再アタッチ
 $ screen -r <セッション名 or セッションID>
 $ screen -R
 ```
 
-## インストールしたい
+`screen`コマンドで、仮想ターミナルを作成できます。
+リモート接続したサーバーで、長時間実行するコマンドを実行したい場合に便利です。
+
+## インストールしたい（`screen`）
 
 ```console
 $ sudo apt install screen
@@ -47,7 +50,7 @@ hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
 ## セッション内操作したい
 
 | キーバインド | 内容 |
-|---|---|
+| --- | --- |
 | `C-o d` | デタッチ |
 | `C-o c` | 新しいウィンドウを作成 |
 | `C-o n` | 次のウィンドウ |
@@ -63,13 +66,13 @@ hardstatus on
 
 ## 画面最下部にウィンドウ一覧を"常に"表示
 hardstatus alwayslastline
-hardstatus string "%{= wk}%-Lw%{= bw}%n%f* %t%{= wk}%+Lw %{= wk}%=%{= gk} %Y/%m/%d %c
+hardstatus string "%{= wk}%-Lw%{= bw}%n%f* %t%{= wk}%+Lw %{= wk}%=%{= gk} %Y/%m/%d %c"
 
 # %{= wk}  ## 文字:白（w）、背景：黒（k）に変更（=）
 # %-Lw     ## 新しくウィンドウを作ったときに、画面下部のリストに追加する
 # %{= bw}  ## 文字:青（b）、背景：白（w）に変更（=）
 # %n       ## ウィンドウ番号
-# %f       ## （不明）
+# %f       ## ウィンドウのフラグ（バックグラウンド動作中、監視中など）
 # *        ## カレントウィンドウに * マーク
 # %t       ## ウィンドウのタイトル; C-o A で変更できる
 # %{= wk}  ## 文字:白（w）、背景：黒（k）に変更（=）
@@ -77,5 +80,9 @@ hardstatus string "%{= wk}%-Lw%{= bw}%n%f* %t%{= wk}%+Lw %{= wk}%=%{= gk} %Y/%m/
 # %{= wk}  ## 文字:白（w）、背景：黒（k）に変更（=）
 # %=       ## 変更（=）
 # %{= gk}  ## 文字:緑（g）、背景：黒（k）に変更（=）
-# %Y/%m%d  %c ## 現在日時（yyyy/mm/dd 時刻（24h表示）
+# %Y/%m%d  %c ## 現在日時（yyyy/mm/dd 時刻（24h表示））
 ```
+
+## リファレンス
+
+- [GNU Screen - Manual](https://www.gnu.org/software/screen/manual/screen.html)
