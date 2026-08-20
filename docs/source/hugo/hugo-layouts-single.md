@@ -175,3 +175,14 @@ Hugoのタクソノミー機能には「ひとつだけ」に制限する機能�
 `.Content`で本文を表示します。
 [Leaf Bundle](https://gohugo.io/content-management/page-bundles/#leaf-bundles)（同じディレクトリに複数のMarkdownファイルをまとめたページ構成）を使っている場合は、
 `.Page.Resources`で同じバンドル内の他のページリソースも合わせて表示できます。
+
+## リファレンス
+
+- [.Title](https://gohugo.io/methods/page/title/)
+- [.Date](https://gohugo.io/methods/page/date/)
+- [.Draft](https://gohugo.io/methods/page/draft/)
+- [.Section](https://gohugo.io/methods/page/section/)
+- [.Params](https://gohugo.io/methods/page/params/)
+- [.Content](https://gohugo.io/methods/page/content/)
+- [.Resources](https://gohugo.io/methods/page/resources/)
+- [Page Bundles](https://gohugo.io/content-management/page-bundles/)
