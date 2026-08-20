@@ -10,9 +10,9 @@
     {{- $title = printf "%s | %s" .Title .Site.Title -}}
 {{- end -}}
 
-{{- if .Description - }}
+{{- if .Description -}}
     {{- $description = .Description -}}
-{{- else .IsPage - }}
+{{- else if .IsPage -}}
     {{- $description = .Summary -}}
 {{- else -}}
     {{- $description = .Site.Params.description -}}
