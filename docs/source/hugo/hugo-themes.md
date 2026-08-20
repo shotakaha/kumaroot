@@ -1,6 +1,17 @@
 # テーマしたい（`/themes/`）
 
-[Hugo Themes](https://themes.gohugo.io/)からテーマを選択できます。
+```toml
+# hugo.toml
+theme = ["blowfish"]
+```
+
+`theme`キーで、テーマを変更できます。
+テーマは
+[Hugo Themes](https://themes.gohugo.io/)
+から選択できます。
+ここでは、
+[blowfish](https://themes.gohugo.io/blowfish/)
+テーマを例に説明します。
 
 ## テーマを追加したい
 
@@ -8,22 +19,9 @@
 $ git submodule add https://github.com/nunocoracao/blowfish.git themes/blowfish
 ```
 
-ほとんどのテーマはGitHubで公開されているため、サブモジュールとして追加できます。
+ほとんどのテーマはGitHubで公開されています。
+`git submodule add`でサブモジュールとして追加します。
 サブモジュールは`themes/テーマ名`に追加します。
-
-```toml
-# hugo.toml
-theme = ["blowfish"]
-```
-
-設定ファイル（`hugo.toml`）で`theme`の変数にテーマ名（`blowfish`）を指定します。
-
-:::{note}
-
-Hugoの設定ファイルやテンプレートファイルはとくに決まりごとがありません。
-テーマは複数インストールできますが、お互いに切り替えることが難しい場合もあります。
-
-:::
 
 ## テーマを固定したい
 
