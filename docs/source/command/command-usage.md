@@ -116,6 +116,7 @@ maxdepth: 1
 ---
 command-bash
 command-fish
+command-nushell
 command-chmod
 command-ps
 command-which
