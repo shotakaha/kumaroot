@@ -10,6 +10,9 @@ $ nu
 Version: 0.115.0 (aarch64-apple-darwin)
 ```
 
+`nushell`は、Rust製のモダンなシェルです。
+Unix系のシェルのように、テキストを扱うのではなく、構造化されたデータを扱うことができるのが特徴です。
+
 ## インストールしたい（`nushell`）
 
 ```console
