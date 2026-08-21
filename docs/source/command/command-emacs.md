@@ -1,13 +1,11 @@
-# Emacsしたい（``emacs``）
+# Emacsしたい（`emacs`）
 
 ```console
-$ brew intall --cask emacs
+$ emacs
+$ emacsclient
 ```
 
-GUI版Emacsを使う場合はCaskをインストールします。
-大学生のときの親友が「Emacsは環境だよ」と教えてくれました。
-最初はなにを言っているのかさっぱりわかりませんでしたが、使い込んでいたらその意味が分かってきました。
-一度Emacsを起動するとテキスト編集だけでなく、ブラウジングやメール操作も含めて、すべてそこで簡潔させたくなるのです。
+`emacs`は、Emacsエディターを操作するコマンドです。
 キーバインドがクセつよですが、カスタマイズすればするほど、手に馴染んできます。
 Emacs24からパッケージ管理システムに対応してパッケージの導入も簡単になりました。
 
@@ -15,6 +13,26 @@ Emacs24からパッケージ管理システムに対応してパッケージの�
 [Emacs Prelude](https://prelude.emacsredux.com/en/latest/)や
 [Spacemacs](https://www.spacemacs.org/)など、好みのディストリビューションを導入するのがよいと思います。
 細かいことは[](../emacs/emacs-usage.md)に整理しました。
+
+:::{note}
+
+大学の時の親友が「Emacsは環境だよ」と教えてくれました。
+最初はなにを言っているのかさっぱりわかりませんでしたが、使い続けているうちにその意味が分かってきました。
+一度Emacsを起動するとテキスト編集だけでなく、ブラウジングやメール操作も含めて、すべてそこで簡潔させたくなるのです。
+
+:::
+
+## インストールしたい（`emacs`）
+
+```console
+$ brew info emacs-app
+$ brew install --cask emacs-app
+$ brew upgrade emacs-app
+```
+
+`emacs`はHomebrewでインストールできます。
+フォーミュラ名は`emacs`、カスク名は`emacs-app`です。
+GUI版Emacsを使う場合は`emacs-app`をインストールします。
 
 :::{note}
 
