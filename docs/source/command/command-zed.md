@@ -1,11 +1,24 @@
-# Zedしたい（``zed``）
+# Zedしたい（`zed`）
 
 ```console
+$ zed ファイル名
+$ zed ディレクトリ名
+```
+
+`zed`は、Rust製のモダンなエディターです。
+
+## インストールしたい（`zed`）
+
+```console
+$ brew search zed
 $ brew install --cask zed
+$ brew upgrade zed
 
 $ zed --version
-Zed 0.201.8 – /Applications/Zed.app
+Zed 1.16.1 – /Applications/Zed.app
 ```
+
+`zed`はHomebrewでインストールできます。
 
 ## エディターを開きたい
 
