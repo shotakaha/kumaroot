@@ -64,6 +64,7 @@ Successfully created seed config file here: ~/Library/Application Support/tealde
 
 `[updates]`セクションでキャッシュ更新の自動化を設定できます。
 
-## リポジトリ
+## リファレンス
 
-- https://github.com/dbrgn/tealdeer
+- [tealdeer - GitHub](https://github.com/dbrgn/tealdeer)
+- [tldr-pages - GitHub](https://github.com/tldr-pages/tldr)
