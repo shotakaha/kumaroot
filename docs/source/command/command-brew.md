@@ -1,4 +1,4 @@
-# パッケージ管理したい（``brew``）
+# パッケージ管理したい（`brew`）
 
 ```console
 $ brew install フォーミュラ名
@@ -6,6 +6,21 @@ $ brew update
 $ brew outdated
 $ brew upgrade
 ```
+
+Homebrewは、macOSやLinuxで使えるパッケージ管理ツールです。
+
+## インストールしたい（`brew`）
+
+```console
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+$ brew --version
+Homebrew 6.0.18-113-gecbeb2e
+Homebrew/homebrew-cask (git revision c856cc02d26; last commit 2026-08-21)
+```
+
+https://brew.sh/ に書かれているコマンドをコピペして実行すると、Homebrewをインストールできます。
+コマンド名は`brew`です。
 
 ## パスを知りたい（``brew --prefix``）
 
