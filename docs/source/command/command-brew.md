@@ -22,39 +22,6 @@ Homebrew/homebrew-cask (git revision c856cc02d26; last commit 2026-08-21)
 https://brew.sh/ に書かれているコマンドをコピペして実行すると、Homebrewをインストールできます。
 コマンド名は`brew`です。
 
-## パスを知りたい（`brew --prefix`）
-
-```console
-$ brew --prefix
-/opt/homebrew
-```
-
-`brew --prefix`で、Homebrewがインストールされているパスを確認できます。
-デフォルトで
-macOS ARM（Apple Silicon）の場合は`/opt/homebrew/`、
-macOS Intelの場合は`/usr/local/`、
-Linuxの場合は`/home/linuxbrew/.linuxbrew/`になっています。
-
-```console
-$ brew --prefix python3
-/opt/homebrew/opt/python@3.14
-
-$ brew --prefix fish
-/opt/homebrew/opt/fish
-```
-
-`brew --prefix フォーミュラ名`で、指定したフォーミュラがインストールされているパスを確認できます。
-単体で使うことはあまりなく、シェルスクリプトを組み合わせて使うと便利です。
-
-```bash
-cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
-# ARMの場合: cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/qt@5
-# Intelの場合: cmake -DCMAKE_PREFIX_PATH=/usr/local/qt@5
-```
-
-上のサンプルでは、`cmake`でビルドするときにリンクする`qt@5`のパスを追加しています。
-OSの違いを気にせずに同じコマンドを使いまわすことができます。
-
 ## パッケージを探したい（``brew search``）
 
 ```console
@@ -133,15 +100,6 @@ $ brew cleanup
 `--dry-run`オプションを付けると、削除対象を確認するだけで実際には削除しません。
 キャッシュが数百MB〜数GB溜まっていることも多いので、定期的に実行しておくとよいです。
 
-## 環境を診断したい（`brew doctor`）
-
-```console
-$ brew doctor
-```
-
-`doctor`コマンドで、Homebrewの設定に問題がないか診断できます。
-インストールがうまくいかないときなど、トラブルシューティングの入口として使います。
-
 ## 依存されていないパッケージを確認したい（`brew leaves`）
 
 ```console
@@ -158,6 +116,48 @@ $ brew deps フォーミュラ名
 ```
 
 `deps`コマンドで、指定したフォーミュラが依存しているパッケージを確認できます。
+
+## 環境を診断したい（`brew doctor`）
+
+```console
+$ brew doctor
+```
+
+`doctor`コマンドで、Homebrewの設定に問題がないか診断できます。
+インストールがうまくいかないときなど、トラブルシューティングの入口として使います。
+
+## パスを知りたい（`brew --prefix`）
+
+```console
+$ brew --prefix
+/opt/homebrew
+```
+
+`brew --prefix`で、Homebrewがインストールされているパスを確認できます。
+デフォルトで
+macOS ARM（Apple Silicon）の場合は`/opt/homebrew/`、
+macOS Intelの場合は`/usr/local/`、
+Linuxの場合は`/home/linuxbrew/.linuxbrew/`になっています。
+
+```console
+$ brew --prefix python3
+/opt/homebrew/opt/python@3.14
+
+$ brew --prefix fish
+/opt/homebrew/opt/fish
+```
+
+`brew --prefix フォーミュラ名`で、指定したフォーミュラがインストールされているパスを確認できます。
+単体で使うことはあまりなく、シェルスクリプトを組み合わせて使うと便利です。
+
+```bash
+cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
+# ARMの場合: cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/qt@5
+# Intelの場合: cmake -DCMAKE_PREFIX_PATH=/usr/local/qt@5
+```
+
+上のサンプルでは、`cmake`でビルドするときにリンクする`qt@5`のパスを追加しています。
+OSの違いを気にせずに同じコマンドを使いまわすことができます。
 
 ## フォントを追加したい
 
