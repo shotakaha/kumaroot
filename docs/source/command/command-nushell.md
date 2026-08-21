@@ -80,3 +80,8 @@ $ nu --no-newline -c "1 + 1"
 
 `--no-newline`オプションで、`-c`で実行した式の戻り値を末尾の改行なしで出力できます。
 他のコマンドの引数としてそのまま渡したいときに便利です。
+
+## リファレンス
+
+- [Nushell](https://www.nushell.sh/)
+- [nushell - GitHub](https://github.com/nushell/nushell)
