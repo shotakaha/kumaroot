@@ -22,20 +22,29 @@ Homebrew/homebrew-cask (git revision c856cc02d26; last commit 2026-08-21)
 https://brew.sh/ に書かれているコマンドをコピペして実行すると、Homebrewをインストールできます。
 コマンド名は`brew`です。
 
-## パスを知りたい（``brew --prefix``）
+## パスを知りたい（`brew --prefix`）
 
 ```console
-$ brew --prefix フォーミュラ名
-$ brew --prefix fish
-$ brew --prefix qt@5
+$ brew --prefix
+/opt/homebrew
 ```
 
-``--prefix``オプションで、フォーミュラがインストールされたパスを確認できます。
+`brew --prefix`で、Homebrewがインストールされているパスを確認できます。
+デフォルトで
+macOS ARM（Apple Silicon）の場合は`/opt/homebrew/`、
+macOS Intelの場合は`/usr/local/`、
+Linuxの場合は`/home/linuxbrew/.linuxbrew/`になっています。
 
-macOS ARM（Apple Silicon）の場合は``/opt/homebrew/``の下、
-macOS Intelの場合は``/usr/local/``の下、
-Linuxの場合は``/home/linuxbrew/.linuxbrew/``に
-フォーミュラがインストールされています。
+```console
+$ brew --prefix python3
+/opt/homebrew/opt/python@3.14
+
+$ brew --prefix fish
+/opt/homebrew/opt/fish
+```
+
+`brew --prefix フォーミュラ名`で、指定したフォーミュラがインストールされているパスを確認できます。
+単体で使うことはあまりなく、シェルスクリプトを組み合わせて使うと便利です。
 
 ```bash
 cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
@@ -43,9 +52,8 @@ cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
 # Intelの場合: cmake -DCMAKE_PREFIX_PATH=/usr/local/qt@5
 ```
 
-単体で使うことはほぼないかもしれませんが、シェルスクリプトを組み合わせて使うと便利なときがあります。
-上のサンプルでは、``cmake``でビルドするときにリンクする``qt@5``のパスを追加しています。
-環境の違いを気にせずに同じコマンドを使いまわすことができます。
+上のサンプルでは、`cmake`でビルドするときにリンクする`qt@5`のパスを追加しています。
+OSの違いを気にせずに同じコマンドを使いまわすことができます。
 
 ## パッケージを探したい（``brew search``）
 
