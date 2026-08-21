@@ -74,6 +74,16 @@ $ zed --diff ファイル名1 ファイル名2
 `--diff`オプションで、2つのファイルの差分をZed上で比較表示できます。
 ディレクトリを指定すると、配下の変更されたファイルをまとめて比較表示できます。
 
+## シェル補完したい（`--completions`）
+
+```console
+$ zed --completions fish > ~/.config/fish/completions/zed.fish
+```
+
+`--completions`オプションで、指定したシェル用の補完スクリプトを生成できます。
+`bash`、`elvish`、`fish`、`nushell`、`powershell`、`zsh`に対応しています。
+生成したスクリプトをシェルの補完ディレクトリに保存すると、オプション名をタブ補完できるようになります。
+
 ## 設定したい（`settings.json`）
 
 ```json
@@ -112,3 +122,7 @@ ZedにはGitコマンドが組み込まれています。
 コマンドパレットを起動し、`git:`コマンドを入力するとGitコマンドを実行できます。
 
 ## リファレンス
+
+- [Zed](https://zed.dev/)
+- [Getting Started - Zed](https://zed.dev/docs/getting-started)
+- [Configuring Zed](https://zed.dev/docs/configuring-zed)
