@@ -10,8 +10,9 @@ $ code ディレクトリ名
 ## インストールしたい（`code`）
 
 ```console
+$ brew info visual-studio-code
 $ brew install --cask visual-studio-code
-$ brew upgrade code
+$ brew upgrade visual-studio-code
 
 $ code --version
 1.134.0
