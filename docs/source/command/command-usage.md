@@ -61,12 +61,12 @@ command-zoxide
 maxdepth: 1
 ---
 command-code
+command-vim
 command-emacs
 command-helix
-command-vim
 command-zed
-command-myst
 command-clang-format
+command-myst
 ```
 
 ## エージェントしたい
@@ -180,17 +180,17 @@ maxdepth: 1
 command-uname
 command-launchctl
 command-systemctl
-command-mysql
 command-zellij
 command-1password
 command-mkcert
+command-mysql
 command-pandoc
 command-texdoc
 command-fc-list
 command-expect
+command-ansible
 command-jsdoc
 command-wp-cli
-command-ansible
 ```
 
 ## 未分類
