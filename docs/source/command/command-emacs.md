@@ -81,8 +81,17 @@ $ emacs --batch --eval '(princ (+ 1 2))'
 `--batch`オプションで、GUIを使わずにEmacs Lispを実行できます。
 設定ファイルの検証や、簡単な処理の自動化に使います。
 
-## デーモンとして常駐させたい
+## デーモンしたい（`--daemon`）
 
-Emacsはデーモンとして常駐させ、`emacsclient`から接続する運用もできます。
-起動コストを省略できるので、Emacsを使い込むほど便利さを感じられます。
+```console
+// デーモンを起動（1度だけ）
+$ emacs --daemon
+
+// emacsclientで接続
+$ emacsclient ファイル名
+```
+
+`emacs --daemon`でEmacsをデーモンとして常駐させることができます。
+このデーモンに対して、`emacsclient`から接続する運用もできます。
+Emacsのデメリットである起動コストを省略できるので、長時間使うほど便利さを感じられます。
 詳しくは[Emacsクライアントしたい](../emacs/emacs-emacsclient.md)を参照してください。
