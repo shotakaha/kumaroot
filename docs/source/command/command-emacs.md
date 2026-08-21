@@ -28,6 +28,12 @@ Emacs24からパッケージ管理システムに対応してパッケージの�
 $ brew info emacs-app
 $ brew install --cask emacs-app
 $ brew upgrade emacs-app
+
+$ emacs --version
+GNU Emacs 30.2
+
+$ emacsclient --version
+emacsclient 30.2
 ```
 
 `emacs`はHomebrewでインストールできます。
@@ -95,3 +101,8 @@ $ emacsclient ファイル名
 このデーモンに対して、`emacsclient`から接続する運用もできます。
 Emacsのデメリットである起動コストを省略できるので、長時間使うほど便利さを感じられます。
 詳しくは[Emacsクライアントしたい](../emacs/emacs-emacsclient.md)を参照してください。
+
+## リファレンス
+
+- [GNU Emacs](https://www.gnu.org/software/emacs/)
+- [Emacs for macOS](https://emacsformacos.com/)
