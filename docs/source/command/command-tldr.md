@@ -5,10 +5,19 @@
     single: Rust Alternatives; tldr
 ```
 
-# ヘルプしたい（``tldr``）
+# ヘルプしたい（`tldr`）
 
-`man`ページやコマンドのヘルプをさっと確認するためのコマンドです。
-`TL;DR`（Too Long; Don't Read）という英語圏のミームをもじったコマンド名です。
+```console
+// tldr [コマンド名]
+$ tldr git
+$ tldr uv
+
+// tldr自身も確認できる
+$ tldr tldr
+```
+
+`tldr`は、コマンドの典型的な使い方を簡単に確認できるコマンドです。
+"Too Long; Don't Read"という英語圏のミームをもじったコマンド名です。
 
 ほぼすべてのコマンドの使い方は{command}`man`コマンドで確認できますが、
 詳細に書かれているため、目的にあった使い方をさっと調べるのはなかなかコツが必要です。
@@ -16,40 +25,32 @@
 すぐに使い方を知りたい場合にとても重宝しています。
 
 ```{note}
-``TL;DR``は
+`TL;DR`は
 開発者側は "Too Long; Don't Read"（ドキュメントの肝はここだよ！）、
 ユーザー側は"Too Long; Didn't Read"（簡単に説明してよ！）
 という意味で使うことができるみたいです。
 ```
 
-## インストール
+## インストールしたい（`tldr`）
 
 ```console
 $ brew install tealdeer
+$ tldr --version
+tealdeer 1.8.1
 ```
 
-{command}`brew`を使ってインストールします。
+`tldr`はHomebrewでインストールできます。
+フォーミュラ名は`tealdeer`です。
 
-## 使い方
-
-```console
-$ tldr コマンド名
-```
-
-`tldr`自身の使い方も{command}`tldr`コマンドで確認できます。
-
-```console
-$ tldr tldr
-```
-
-## キャッシュを更新したい
+## キャッシュを更新したい（`--update`）
 
 ```console
 $ tldr --update
 $ tldr -u
 ```
 
-初回とキャッシュが古くなっている場合は、更新を促す警告（warning）が表示されます。
+`--update`オプションで、キャッシュを更新できます。
+初回実行時とキャッシュが古くなっている場合は、更新を促す警告（warning）が表示されるので、更新しておくとよいです。
 
 ## 設定ファイルを作成したい
 
@@ -58,8 +59,11 @@ $ tldr --seed-config
 Successfully created seed config file here: ~/Library/Application Support/tealdeer/config.toml
 ```
 
-設定ファイルでキャッシュの更新を自動化できます。
+`--seed-config`オプションで、設定ファイルを作成できます。
+デフォルトでは、`~/Library/Application Support/tealdeer/config.toml`に作成されます。
+
+`[updates]`セクションでキャッシュ更新の自動化を設定できます。
 
 ## リポジトリ
 
--   https://github.com/dbrgn/tealdeer
+- https://github.com/dbrgn/tealdeer
