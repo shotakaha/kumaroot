@@ -1,9 +1,9 @@
 # アクセス解析したい（`goaccess`）
 
 ```console
-$ goaccess ログファイル
-$ goaccess ログファイル1 ログファイル2
-$ goaccess ログファイル -o 出力ファイル名.html
+$ goaccess --log-format COMMON ログファイル
+$ goaccess --log-format COMMON ログファイル1 ログファイル2
+$ goaccess --log-format COMMON ログファイル -o 出力ファイル名.html
 ```
 
 `goaccess`は、ウェブサイトのアクセスログを解析できるコマンドです。
