@@ -152,6 +152,14 @@ npmパッケージとして公開する予定がなければ、あまり気に�
 `type: "module"`は、`.js`ファイルをESModule（`import`/`export`）として扱う指定です。
 省略した場合はCommonJS（`require`）として扱われます。
 
+:::{note}
+
+比較的新しいNode.jsでは、`type`を省略していても`.js`ファイルの中身が`import`/`export`構文であれば、
+警告を出しつつ自動的にESModuleとして解釈し直してくれる場合があります（`require`構文のファイルはそのままCommonJSとして動きます）。
+ただし、この自動判定には実行時のオーバーヘッドがあるため、警告にしたがって`type: "module"`を明示しておくのが安全です。
+
+:::
+
 `dependencies`には`npm install`（オプションなし）でインストールしたパッケージ、
 `devDependencies`には`npm install --save-dev`でインストールしたパッケージが記録されます。
 `npm install`だけを実行すると、これらの一覧をもとに`node_modules`が再現されます。
