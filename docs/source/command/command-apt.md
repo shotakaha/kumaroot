@@ -129,6 +129,32 @@ $ dpkg -r ripgrep
 `-r`オプションで、パッケージを削除できます。
 設定ファイルは残るので、完全に削除したい場合は`apt purge`（もしくは`dpkg --purge`）を使います。
 
+## リポジトリを追加したい
+
+```console
+$ install -m 0755 -d /etc/apt/keyrings
+$ curl -fsSL リポジトリのGPG鍵のURL -o /etc/apt/keyrings/リポジトリ名.asc
+```
+
+標準リポジトリにないパッケージを使いたい場合は、リポジトリを追加します。
+まず、リポジトリが提供するGPG鍵をダウンロードして`/etc/apt/keyrings/`に保存します。
+
+```console
+$ echo 'deb [arch=アーキテクチャ signed-by=/etc/apt/keyrings/リポジトリ名.asc] リポジトリのURL コードネーム stable' > /etc/apt/sources.list.d/リポジトリ名.list
+
+$ apt update
+```
+
+`/etc/apt/sources.list.d/`に`.list`ファイルを追加し、`signed-by`で先ほどのGPG鍵を紐付けます。
+`apt update`を実行すると、追加したリポジトリのパッケージも検索・インストールできるようになります。
+
+:::{note}
+
+以前は`apt-key`コマンドでGPG鍵を登録する方法が主流でしたが、非推奨になりました。
+GPG鍵をファイルとして`/etc/apt/keyrings/`に保存し、`sources.list`（または`.list`ファイル）側で`signed-by`を指定する方法が現在推奨されています。
+
+:::
+
 ## オススメのパッケージ
 
 ```console
