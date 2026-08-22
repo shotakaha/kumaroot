@@ -169,6 +169,7 @@ maxdepth: 1
 ---
 command-tar
 command-gzip
+command-zcat
 ```
 
 ## システム管理・その他したい
