@@ -266,7 +266,7 @@ $ npx vitest --version
 $ npx biome --version
 ```
 
-上記はGoogle Apps Scriptの開発でよく使うツールです。
+上記はGoogle Apps Scriptの開発で実際に使っているパッケージをサンプルにしました。
 ローカルにインストールしたパッケージは`npx`経由で実行できます。
 
 ## パッケージを削除したい（`npm uninstall`）
