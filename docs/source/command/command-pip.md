@@ -14,6 +14,31 @@ Pythonの標準パッケージに含まれているので、追加のインス�
 
 詳細は[](../python/python-pip.md)を参照してください。
 
+## インストールしたい（`python3`）
+
+```console
+$ brew install python3
+
+$ python3 --version
+Python 3.14.7
+
+pip3 --version
+pip 26.2.1 from /opt/homebrew/lib/python3.14/site-packages/pip (python 3.14)
+```
+
+`pip`はHomebrewでインストールできます。
+フォーミュラ名は`python3`です。
+
+```console
+$ /usr/bin/python3 --version
+Python 3.9.6
+
+$ /usr/bin/pip3 --version
+pip 24.2 from /Users/shotakaha/Library/Python/3.9/lib/python/site-packages/pip (python 3.9)
+```
+
+macOSにはデフォルトで`pip`がインストールされていますが、Homebrewを使って最新版を取得しておきます。
+
 ## パッケージを検索したい（`pip search`）
 
 ```console
@@ -25,6 +50,22 @@ RuntimeError: PyPI no longer supports 'pip search' (or XML-RPC search). Please u
 `pip search`で、PyPIに登録されているパッケージを検索できました。
 しかし、2023年4月にPyPIのXML-RPC APIが廃止されたため、`pip search`は使えなくなりました。
 現在は、ブラウザで[https://pypi.org/search](https://pypi.org/search)を開いて検索する必要があります。
+
+## パッケージの詳細を確認したい（`pip show`）
+
+```console
+(.venv) $ pip show パッケージ名
+Name: requests
+Version: 2.34.2
+Summary: Python HTTP for Humans.
+License: Apache-2.0
+Location: .venv/lib/python3.12/site-packages
+Requires: certifi, charset_normalizer, idna, urllib3
+Required-by:
+```
+
+`show`コマンドで、パッケージのバージョンや依存関係（`Requires`）、
+逆にそのパッケージに依存しているパッケージ（`Required-by`）を確認できます。
 
 ## パッケージを追加したい（`pip install`）
 
@@ -81,21 +122,12 @@ requests 2.29.0  2.34.2 wheel
 `--outdated`オプションで、新しいバージョンがあるパッケージだけを確認できます。
 `Version`が現在のバージョン、`Latest`が最新バージョンです。
 
-## パッケージの詳細を確認したい（`pip show`）
-
 ```console
-(.venv) $ pip show パッケージ名
-Name: requests
-Version: 2.34.2
-Summary: Python HTTP for Humans.
-License: Apache-2.0
-Location: .venv/lib/python3.12/site-packages
-Requires: certifi, charset_normalizer, idna, urllib3
-Required-by:
+(.venv) $ pip3 list --outdated | awk 'NR>2{print $1}' | xargs pip3 install -U pip
 ```
 
-`show`コマンドで、パッケージのバージョンや依存関係（`Requires`）、
-逆にそのパッケージに依存しているパッケージ（`Required-by`）を確認できます。
+更新が必要なパッケージを一括で更新するコマンドやオプションはありません。
+僕は上のワンライナーで一括更新しています。
 
 ## 依存パッケージを一括管理したい（`requirements.txt`）
 
