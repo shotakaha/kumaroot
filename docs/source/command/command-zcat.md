@@ -21,3 +21,34 @@ macOSの`zcat`は、`.Z`形式の拡張子を期待するため、`.gz`ファイ
 `-f`（`--force`）オプションを付けるか、`gzcat`を使いましょう。
 
 :::
+
+## Apacheログを集計したい
+
+```console
+// ステータスコード別に集計する（全期間まとめて）
+$ zcat -f access_log.*.gz | grep -oE '" [0-9]{3} ' | tr -d '" ' | sort | uniq -c | sort -rn
+
+// アクセス数の多いIP TOP10（1ファイル分）
+$ zcat -f access_log.2026-08-01.gz | awk '{print $1}' | sort | uniq -c | sort -rn | head -10
+
+// アクセスの多いURL TOP10（1ファイル分）
+$ zcat -f access_log.2026-08-01.gz | awk -F'"' '{print $2}' | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
+
+// 404になっているURLだけ抽出する（全期間まとめて）
+$ zcat -f access_log.*.gz | awk '$9 == 404 {print $7}' | sort | uniq -c | sort -rn | head -20
+
+// 月別アクセス数の推移
+$ for f in access_log.2026-*.gz; do
+    n=$(zcat -f "$f" | wc -l)
+    echo "$f: $n"
+  done
+```
+
+`zcat -f`で複数の圧縮済みログをまとめて展開しつつ、`awk`・`grep`・`sort`にパイプで渡して集計できます。
+ステータスコードの抽出は`awk '{print $9}'`でも取れますが、リクエスト行やUser-Agentにスペースが含まれていると列がずれるため、`"`とステータスコードの並びを正規表現で狙う方が確実です。
+
+:::{seealso}
+
+- [](./command-tar.md)
+
+:::
