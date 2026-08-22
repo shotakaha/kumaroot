@@ -18,22 +18,25 @@ CI/CDやDockerfileなど、対話的でないシェルスクリプトでは、�
 ## パッケージを検索したい（`apt search`）
 
 ```console
-# apt-cache search パッケージ名
 $ apt search パッケージ名
 $ apt search ripgrep
+
+# apt-cache search パッケージ名
 ```
+
+`apt search`で、指定したパッケージ名を検索できます。
 
 ## パッケージをインストールしたい（`apt install`）
 
 ```console
-# apt-get install パッケージ名
 $ apt install パッケージ名
-
 $ apt install ripgrep
+
+# apt-get install パッケージ名
 $ apt-get install -y --no-install-recommends git    // Dockerfile
 ```
 
-`install`コマンドでパッケージをインストールできます。
+`apt install`で、パッケージをインストールできます。
 複数のパッケージ名を一度に指定できます。
 インストール済みパッケージは`dpkg -l`や`/var/lib/dpkg/status`で確認できます。
 
@@ -42,11 +45,12 @@ Dockerfileなどでは、`-y / --yes`や`--no-install-recommends`などのオプ
 ## パッケージリストを更新したい（`apt update`）
 
 ```console
-# apt-get update
 $ apt update
+
+# apt-get update
 ```
 
-`update`コマンドで、パッケージの更新を確認できます。
+`apt update`で、パッケージの更新を確認できます。
 更新確認用のリストは`/etc/apt/sources.list.d/`（DEB822形式では`debian.sources`など）に保存されます。
 
 ## aptitudeしたい（`aptitude`）
