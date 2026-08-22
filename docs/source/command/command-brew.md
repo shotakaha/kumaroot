@@ -242,7 +242,22 @@ Untapped (263 files, 24.9MB).
 - ``brew install font-yomogi``
 - ``brew install font-yusei-magic`` [Yusei Magic](https://fonts.google.com/specimen/Yusei+Magic)
 
-## zsh のパスを設定したい
+## シェル設定したい（`brew shellenv`）
+
+```console
+$ brew shellenv
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+...
+```
+
+`brew shellenv`で、`PATH`などのHomebrewに関する環境変数の設定コマンドを表示できます。
+実行しているシェルに合わせて、出力される構文が自動的に変わります。
+
+`eval`と組み合わせて、シェルの起動スクリプトに追記しておくことで、`brew`コマンドや、Homebrewでインストールしたコマンドにパスが通るようになります。
+
+### zshの場合
 
 ```zsh
 # ~/.zprofile を編集する
@@ -250,12 +265,10 @@ Untapped (263 files, 24.9MB).
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-``brew shellenv``を実行すると、シェルごとのHomebrew設定が出力されます。
-その中身をシェル起動時のスクリプトで``eval``しています。
-ZSHの場合は{file}`~/.zprofile`に追記します。
+{file}`~/.zprofile`に追記します。
 Homebrewをインストールした末尾に表示されるスクリプトを実行してもOKです。
 
-## fish のパスを設定したい
+### fishの場合
 
 ```fish
 # ~/.config/fish/config.fish
@@ -266,8 +279,9 @@ if status is-interactive
 end
 ```
 
-Fishの場合は{file}`~/.config/fish/config.fish`に追記します。
-Zsh用の設定と微妙に異なる（`$`や`"`がいらない）ので注意が必要です。
+{file}`~/.config/fish/config.fish`に追記します。
+zsh用の設定と微妙に異なる（`$`や`"`がいらない）ので注意が必要です。
+`brew shellenv fish`のようにシェル名を明示すると、`eval`せずに`brew shellenv fish | source`のように使うこともできます。
 
 ## エラー：xcrun
 
