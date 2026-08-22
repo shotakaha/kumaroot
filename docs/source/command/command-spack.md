@@ -140,7 +140,7 @@ For fish:
 ```console
 $ spack info パッケージ名
 $ spack info geant4
-$ spack info --variants-by-name geant4
+$ spack info --by-name geant4
 ```
 
 `info`コマンドでパッケージ情報の詳細を確認できます。
@@ -151,7 +151,7 @@ $ spack info --variants-by-name geant4
 など確認できます。
 
 ビルド時のオプションは、デフォルトで条件ごと（`when 条件`）で表示されます。
-`--variants-by-name`オプションをつけると、オプション名で表示されます。
+`--by-name`オプションをつけると、オプション名で表示されます。
 
 :::{note}
 
@@ -171,7 +171,7 @@ Variants:
 ```
 
 ```console
-$ spack info --variants-by-name geant4
+$ spack info --by-name geant4
 ...
 Variants:
     ...
@@ -187,6 +187,13 @@ Variants:
         the build system generator to use
 ...
 ```
+
+:::
+
+:::{note}
+
+`--variants-by-name`は旧オプション名です。
+現行バージョンでは非推奨（deprecated）になっており、実行すると`--by-name`への切り替えを促す警告が表示されます。
 
 :::
 
@@ -257,27 +264,31 @@ $ spack gc geant4
 
 ```console
 $ spack compilers
-==> Available compilers
--- apple-clang ventura-aarch64 ----------------------------------
-apple-clang@15.0.0
-
--- gcc ventura-aarch64 ------------------------------------------
-gcc@13.2.0
+apple-clang@17.0.0
+gcc@16.2.0
 ```
 
 `compilers`コマンドで利用可能なコンパイラーを確認できます。
 
 ```console
 $ spack compiler info apple-clang
-apple-clang@15.0.0:
-	paths:
-		cc = /usr/bin/clang
-		cxx = /usr/bin/clang++
-		f77 = None
-		fc = None
-	modules  = []
-	operating system  = ventura
+[e]  apple-clang@=17.0.0 build_system=bundle platform=darwin os=tahoe target=aarch64
+
+  prefix: /usr
+  compilers:
+    cc: /usr/bin/clang
+    cxx: /usr/bin/clang++
+    fortran: None
 ```
 
 `compiler info`でコンパイラーの詳細を確認できます。
+`[e]`は外部（external）ツールとして検出されたことを示すマーカーです。
 コンパイラーの詳細は`~/.spack/darwin/compilers.yaml`にも書いてありました。
+
+:::{note}
+
+`spack compilers`／`spack compiler info`の出力形式はバージョンによってたびたび変わっています。
+古いバージョンでは`-- apple-clang ventura-aarch64 --------`のようなセクション区切り表示でしたが、
+現行バージョンではよりシンプルな一覧・キーバリュー形式になっています。
+
+:::
