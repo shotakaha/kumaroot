@@ -1,6 +1,19 @@
 # パッケージ管理したい（`npm`）
 
 ```console
+$ npm list
+$ npm install
+$ npm uninstall
+$ npm test
+$ npm run
+```
+
+`npm`は、Node.jsのパッケージ管理ツールです。
+プロジェクトの`package.json`をもとに、依存パッケージのインストールや削除、スクリプトの実行などを行えます。
+
+## インストールしたい（`node`）
+
+```console
 $ brew install node
 
 $ node --version
@@ -13,8 +26,9 @@ $ npx --version
 11.19.0
 ```
 
-`npm`コマンドを使ってNodeパッケージを管理できます。
-一時的にパッケージを利用するための`npx`コマンドもあります。
+`npm`はHomebrewでインストールできます。
+フォーミュラ名は`node`です。
+`node`をインストールすると、`npm`と`npx`も同時にインストールされます。
 
 :::{note}
 
