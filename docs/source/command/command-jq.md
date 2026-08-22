@@ -26,10 +26,10 @@ $ jq . ファイル名.json
 {
   "name": "test",
   "version": "1.0.0",
-  "tags": [
-    "a",
-    "b",
-    "c"
+  "fruits": [
+    "apple",
+    "banana",
+    "cherry"
   ],
   "config": {
     "debug": true,
@@ -96,17 +96,17 @@ test.txt
 ## 配列の要素を展開したい（`[]`）
 
 ```console
-$ jq '.tags' ファイル名.json
-["a", "b", "c"]
+$ jq '.fruits' ファイル名.json
+["apple", "banana", "cherry"]
 
-$ jq '.tags[]' ファイル名.json
-"a"
-"b"
-"c"
+$ jq '.fruits[]' ファイル名.json
+"apple"
+"banana"
+"cherry"
 ```
 
-`.tags`は配列をひとつの値としてそのまま返しますが、`.tags[]`のように`[]`をつけると配列の中身を1個ずつバラして返します。
-後続のフィルターを配列の各要素に適用したい場合は、`.tags[]`のように展開しておく必要があります。
+`.fruits`は配列をひとつの値としてそのまま返しますが、`.fruits[]`のように`[]`をつけると配列の中身を1個ずつバラして返します。
+後続のフィルターを配列の各要素に適用したい場合は、`.fruits[]`のように展開しておく必要があります。
 
 ## 最上位のオブジェクトを表示したい（`keys`）
 
@@ -114,8 +114,8 @@ $ jq '.tags[]' ファイル名.json
 $ jq 'keys' ファイル名.json
 [
   "config",
+  "fruits",
   "name",
-  "tags",
   "version"
 ]
 ```
@@ -132,21 +132,21 @@ $ jq '.[0] | keys' ファイル名.json
 ## 配列を絞り込みたい（`select`）
 
 ```console
-$ jq '.tags[] | select(. == "b")' ファイル名.json
-"b"
+$ jq '.fruits[] | select(. == "banana")' ファイル名.json
+"banana"
 ```
 
-`.tags[]`で配列の要素を1つずつ取り出し、`select(条件式)`で条件に合う要素だけに絞り込めます。
+`.fruits[]`で配列の要素を1つずつ取り出し、`select(条件式)`で条件に合う要素だけに絞り込めます。
 オブジェクトの配列から特定の条件を満たすものだけ抜き出したいときにも使います。
 
 ## 配列の値を変換したい（`map`）
 
 ```console
-$ jq '.tags | map(. + "!")' ファイル名.json
+$ jq '.fruits | map(. + "!")' ファイル名.json
 [
-  "a!",
-  "b!",
-  "c!"
+  "apple!",
+  "banana!",
+  "cherry!"
 ]
 ```
 
@@ -156,7 +156,7 @@ $ jq '.tags | map(. + "!")' ファイル名.json
 
 ```console
 $ jq -c '.' ファイル名.json
-{"name":"test","version":"1.0.0","tags":["a","b","c"],"config":{"debug":true,"count":3}}
+{"name":"test","version":"1.0.0","fruits":["apple","banana","cherry"],"config":{"debug":true,"count":3}}
 ```
 
 `-c`（`--compact-output`）オプションで、改行やインデントなしの1行で出力できます。
@@ -171,12 +171,12 @@ $ jq -S '.' ファイル名.json
     "count": 3,
     "debug": true
   },
-  "name": "test",
-  "tags": [
-    "a",
-    "b",
-    "c"
+  "fruits": [
+    "apple",
+    "banana",
+    "cherry"
   ],
+  "name": "test",
   "version": "1.0.0"
 }
 ```
