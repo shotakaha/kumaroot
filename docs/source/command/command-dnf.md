@@ -10,6 +10,26 @@ $ dnf upgrade
 `dnf`はRHEL系OS（RHEL / Rocky Linux / AlmaLinux / CentOS Stream / Fedora）のパッケージ管理コマンドです。
 `yum`の後継で、依存関係の解決やパフォーマンスなどが改善されています。
 
+## リポジトリを追加したい
+
+```console
+$ dnf install epel-release
+$ dnf repolist
+```
+
+`epel-release`は、
+EPEL（Extra Packages for Enterprise Linux）という、標準リポジトリを拡張するパッケージです。
+他にも、主要な拡張リポジトリは`〇〇-release`という名前で提供されています。
+標準リポジトリにないパッケージを使いたい場合は、まず追加しておくとよいです。
+
+```console
+$ dnf install 'dnf-command(config-manager)'
+$ dnf config-manager --add-repo リポジトリのURL
+```
+
+`〇〇-release`パッケージが提供されていない場合、`config-manager`コマンドで`.repo`ファイルを直接追加する必要があります。
+`config-manager`もデフォルトでは入っていないプラグインなので、`dnf install 'dnf-command(config-manager)'`で、先にインストールが必要です。
+
 ## パッケージを検索したい（`dnf search`）
 
 ```console
