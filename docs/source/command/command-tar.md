@@ -93,10 +93,22 @@ $ tar xf アーカイブファイル.tar
 ```console
 // bzip2形式で圧縮
 $ tar cjvf 圧縮ファイル.tar.bz2 ファイル1 ファイル2
+$ tar --bzip2 -cvf 圧縮ファイル.tar.bz2 ファイル1 ファイル2
 
 // xz形式で圧縮
 $ tar cJvf 圧縮ファイル.tar.xz ファイル1 ファイル2
+$ tar --xz -cvf 圧縮ファイル.tar.xz ファイル1 ファイル2
+
+// zstd形式で圧縮
+$ tar --zstd -cvf 圧縮ファイル.tar.zst ファイル1 ファイル2
 ```
 
-`z`でgzip形式、`j`でbzip2形式、`J`でxz形式の圧縮ファイルを作成できます。
-展開するときも同様です。
+`z`（`--gzip`）でgzip形式、
+`j`（`--bzip2`）でbzip2形式、
+`J`（`--xz`）でxz形式の圧縮ファイルを作成できます。
+
+`--zstd`でzsdt形式、
+`--lzip`でlzip形式、
+`--lzma`でlzma形式の圧縮ファイルを作成できます。
+
+展開時（`xvf`）は、圧縮形式を指定しなくても拡張子や中身から自動判別されます。
