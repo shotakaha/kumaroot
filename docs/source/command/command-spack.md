@@ -23,6 +23,100 @@ $ spack --version
 [System Prerequisites](https://spack.readthedocs.io/en/latest/getting_started.html#system-prerequisites)
 を参照してください。
 
+## 利用可能なパッケージを確認したい（`spack list`）
+
+```console
+$ spack list
+$ spack list | grep パッケージ名（の一部）
+```
+
+```console
+$ spack list | grep geant4
+geant4
+geant4-data
+geant4-vmc
+```
+
+`list`コマンドで利用可能なパッケージ一覧を確認できます。
+数が多いので`grep`や`ripgrep`などの検索コマンドでパッケージ名を指定するとよいです。
+
+:::{note}
+
+僕もまず、Geant4に関係したパッケージ名を確認するところからはじめました。
+関連しそうなパッケージとして`geant4`、`geant4-data`、`geant4-vmc`が見つかりました。
+それぞれのパッケージ詳細は`info`コマンドを使って確認ました。
+
+`geant4`パッケージが本体です。これをインストールします。
+
+`geant4-data`パッケージはGeant4本体の依存パッケージのひとつなので、直接インストールする必要はありません。
+
+`geant4-vmc`パッケージは今回は必要なさそうなのでスキップしました。
+今後、必要になったときにインストールします。
+
+:::
+
+## パッケージの詳細を確認したい（`spack info`）
+
+```console
+$ spack info パッケージ名
+$ spack info geant4
+$ spack info --by-name geant4
+```
+
+`info`コマンドでパッケージ情報の詳細を確認できます。
+ウェブサイトのURL（`Homepage`）、
+利用可能なバージョン（`Preferred version`／`Safe versions`）、
+ビルド時のオプション（`Variants`）、
+依存パッケージ（`Build Dependencies`／`Link Dependencies`／`Run Dependencies`）
+など確認できます。
+
+ビルド時のオプションは、デフォルトで条件ごと（`when 条件`）で表示されます。
+`--by-name`オプションをつけると、オプション名で表示されます。
+
+:::{note}
+
+具体的な表示の違いは以下のようになります。
+
+```console
+$ spack info geant4
+...
+Variants:
+    ...
+    when build_system=cmake
+      build_type [Release]      Debug, MinSizeRel, RelWithDebInfo, Release
+          CMake build type
+      generator [make]          none
+          the build system generator to use
+...
+```
+
+```console
+$ spack info --by-name geant4
+...
+Variants:
+    ...
+     build_system [cmake]        cmake
+        Build systems supported by the package
+
+    build_type [Release]        Debug, MinSizeRel, RelWithDebInfo, Release
+      when build_system=cmake
+        CMake build type
+
+    generator [make]            none
+      when build_system=cmake
+        the build system generator to use
+...
+```
+
+:::
+
+:::{note}
+
+`--variants-by-name`は旧オプション名です。
+現行バージョンでは非推奨（deprecated）になっており、実行すると`--by-name`への切り替えを促す警告が表示されます。
+
+:::
+
 ## パッケージをインストールしたい（`spack install`）
 
 ```console
@@ -132,102 +226,6 @@ $ spack load geant4
 For fish:
     source /opt/homebrew/Cellar/spack/0.21.1/share/spack/setup-env.fish
 ```
-
-:::
-
-## パッケージの詳細を確認したい（`spack info`）
-
-```console
-$ spack info パッケージ名
-$ spack info geant4
-$ spack info --by-name geant4
-```
-
-`info`コマンドでパッケージ情報の詳細を確認できます。
-ウェブサイトのURL（`Homepage`）、
-利用可能なバージョン（`Preferred version`／`Safe versions`）、
-ビルド時のオプション（`Variants`）、
-依存パッケージ（`Build Dependencies`／`Link Dependencies`／`Run Dependencies`）
-など確認できます。
-
-ビルド時のオプションは、デフォルトで条件ごと（`when 条件`）で表示されます。
-`--by-name`オプションをつけると、オプション名で表示されます。
-
-:::{note}
-
-具体的な表示の違いは以下のようになります。
-
-```console
-$ spack info geant4
-...
-Variants:
-    ...
-    when build_system=cmake
-      build_type [Release]      Debug, MinSizeRel, RelWithDebInfo, Release
-          CMake build type
-      generator [make]          none
-          the build system generator to use
-...
-```
-
-```console
-$ spack info --by-name geant4
-...
-Variants:
-    ...
-     build_system [cmake]        cmake
-        Build systems supported by the package
-
-    build_type [Release]        Debug, MinSizeRel, RelWithDebInfo, Release
-      when build_system=cmake
-        CMake build type
-
-    generator [make]            none
-      when build_system=cmake
-        the build system generator to use
-...
-```
-
-:::
-
-:::{note}
-
-`--variants-by-name`は旧オプション名です。
-現行バージョンでは非推奨（deprecated）になっており、実行すると`--by-name`への切り替えを促す警告が表示されます。
-
-:::
-
-## 利用可能なパッケージを確認したい（`spack list`）
-
-```console
-$ spack list
-$ spack list | grep パッケージ名（の一部）
-```
-
-```console
-$ spack list | grep geant4
-geant4
-geant4-data
-geant4-vmc
-```
-
-`list`コマンドで利用可能なパッケージ一覧を確認できます。
-数が多いので`grep`や`ripgrep`などの検索コマンドでパッケージ名を指定するとよいです。
-
-:::{note}
-
-ページ構成の都合で順番が後回しになってしまってますが、おそらく一番最初に使うコマンドはこれです。
-
-僕もまず、Geant4に関係したパッケージ名を確認するところからはじめました。
-関連しそうなパッケージとして`geant4`、`geant4-data`、`geant4-vmc`が見つかりました。
-それぞれのパッケージ詳細は`info`コマンドを使って確認ました。
-
-`geant4`パッケージが本体です。これをインストールします。
-
-`geant4-data`パッケージはGeant4本体の依存パッケージのひとつなので、直接インストールする必要はありません。
-
-`geant4-vmc`パッケージは今回は必要なさそうなのでスキップしました。
-今後、必要になったときにインストールします。
 
 :::
 
