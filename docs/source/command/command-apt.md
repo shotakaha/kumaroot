@@ -7,7 +7,13 @@ $ apt
 `apt`は、`.deb`形式のパッケージを管理するコマンドです。
 Debian系のLinuxで利用されます。
 
-昔は`apt-get`と`apt-cache`使っていた記憶がありますが、いまは`apt`を使うみたいです。
+`apt-get`と`apt-cache`の機能を統合したコマンドで、対話シェルでの利用が推奨されています。
+
+:::{note}
+
+CI/CDやDockerfileなど、対話的でないシェルスクリプトでは、まだ`apt-get`や`apt-cache`を使うほうがよいみたいです。
+
+:::
 
 ## パッケージを検索したい（`apt search`）
 
@@ -42,14 +48,6 @@ $ apt update
 
 `update`コマンドで、パッケージの更新を確認できます。
 更新確認用のリストは`/etc/apt/sources.list.d/`（DEB822形式では`debian.sources`など）に保存されます。
-
-:::{note}
-
-`apt-get`は昔からあるコマンドで、`apt`は2016年ころに導入されたコマンド体系です。
-できることはほぼ同じで、対話シェルでは`apt`の利用が推奨されています。
-ただし、シェルスクリプトやDockerではまだ`apt-get`を使うほうがよいみたいです。
-
-:::
 
 ## aptitudeしたい（`aptitude`）
 
