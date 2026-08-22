@@ -118,6 +118,7 @@ command-bash
 command-fish
 command-nushell
 command-chmod
+command-stat
 command-ps
 command-which
 command-echo
