@@ -1,0 +1,29 @@
+name: Release
+
+# v から始まるタグが push されたときにトリガー
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # すべての履歴を取得
+          fetch-tags: true  # タグを取得
+
+      # GitHub Release を作成（本文は CHANGELOG.md へのリンクのみ）
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "$GITHUB_REF_NAME" \
+            --notes "See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
