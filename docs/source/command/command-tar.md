@@ -1,4 +1,4 @@
-# 圧縮／解凍したい（``tar``）
+# 圧縮／解凍したい（`tar`）
 
 ```console
 // 複数のファイルをまとめて圧縮
@@ -26,3 +26,21 @@ $ tar xzvf 圧縮ファイル.tar.gz
 ひとつのファイルを圧縮するだけであれば、gzipやcompressというコマンドもあります。
 
 :::
+
+## 圧縮したい（`tar czvf`）
+
+```console
+// [C]reate g[Z]ip [F]iles
+$ tar czvf 圧縮ファイル.tar.gz ファイル1 ファイル2
+```
+
+`czvf`で、gzip形式の圧縮ファイルを作成できます。
+
+## 解凍したい（`tar xzvf`）
+
+```console
+// e[X]tract g[Z]ip [F]ile
+$ tar xzvf 圧縮ファイル.tar.gz
+```
+
+`xzvf`で、gzip形式の圧縮ファイルを解凍できます。
