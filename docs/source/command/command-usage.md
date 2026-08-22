@@ -95,6 +95,7 @@ command-asdf
 command-mise
 command-npm
 command-gem
+command-pip
 command-cmake
 command-spack
 command-tlmgr
