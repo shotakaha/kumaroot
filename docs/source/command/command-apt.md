@@ -51,6 +51,32 @@ $ apt update
 
 :::
 
+## aptitudeしたい（`aptitude`）
+
+```console
+$ apt install aptitude
+$ aptitude --version
+aptitude 0.8.13
+```
+
+`aptitude`は、`apt`とは別系統の高機能なパッケージ管理コマンドです。
+デフォルトではインストールされていないので、使いたい場合は別途インストールします。
+
+引数なしで実行すると`ncurses`ベースの画面が起動します。
+矢印キーでパッケージを選んでインストール・削除できます。
+依存関係の解決アルゴリズムも`apt`より賢いと言われています。
+
+```console
+$ aptitude search ripgrep
+p  ripgrep - Recursively searches directories for a regex pattern
+
+$ aptitude install ripgrep
+$ aptitude show ripgrep
+```
+
+`search`、`install`、`show`などのサブコマンドも利用できます。
+サブコマンドは`apt`とほぼ同じ感覚で使えます。
+
 ## dpkgしたい（`dpkg`）
 
 ```console
@@ -58,9 +84,11 @@ $ dpkg -l
 $ dpkg -l ripgrep
 ```
 
-`apt`は、内部で`dpkg`というより低レベルなパッケージ管理コマンドを使っています。
-`apt`がリポジトリからのダウンロードや依存関係の解決までまとめて面倒を見てくれるのに対して、
-`dpkg`は手元にある`.deb`パッケージファイルを直接操作するコマンドです。
+`dpkg`は、Debian系Linuxのパッケージ管理の低レベルコマンドです。
+`apt`も内部で`dpkg`を使っています。
+
+手元にある`.deb`パッケージファイルを直接操作するコマンドです。
+日常的に使うことはほぼありませんが、トラブルシュートしたいときに覚えておくとよいかもしれません。
 
 `-l`オプションで、インストール済みパッケージを一覧できます。
 パッケージ名を指定すると、そのパッケージだけに絞り込めます。
@@ -98,32 +126,6 @@ $ dpkg -r ripgrep
 
 `-r`オプションで、パッケージを削除できます。
 設定ファイルは残るので、完全に削除したい場合は`apt purge`（もしくは`dpkg --purge`）を使います。
-
-## aptitudeしたい（`aptitude`）
-
-```console
-$ apt install aptitude
-$ aptitude --version
-aptitude 0.8.13
-```
-
-`aptitude`は、`apt`とは別系統の高機能なパッケージ管理コマンドです。
-デフォルトではインストールされていないので、使いたい場合は別途インストールします。
-
-引数なしで実行すると`ncurses`ベースの画面が起動します。
-矢印キーでパッケージを選んでインストール・削除できます。
-依存関係の解決アルゴリズムも`apt`より賢いと言われています。
-
-```console
-$ aptitude search ripgrep
-p  ripgrep - Recursively searches directories for a regex pattern
-
-$ aptitude install ripgrep
-$ aptitude show ripgrep
-```
-
-`search`、`install`、`show`などのサブコマンドも利用できます。
-サブコマンドは`apt`とほぼ同じ感覚で使えます。
 
 ## オススメのパッケージ
 
