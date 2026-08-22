@@ -23,6 +23,19 @@ jq-1.8.2
 
 ```console
 $ jq . ファイル名.json
+{
+  "name": "test",
+  "version": "1.0.0",
+  "tags": [
+    "a",
+    "b",
+    "c"
+  ],
+  "config": {
+    "debug": true,
+    "count": 3
+  }
+}
 ```
 
 `.`フィルターで、JSONファイルの内容をすべて表示できます。
@@ -31,7 +44,10 @@ $ jq . ファイル名.json
 
 ```console
 $ jq '.name' ファイル名.json
+"test"
+
 $ jq '.config.debug' ファイル名.json
+true
 ```
 
 `.key`フィルターで、指定したキーの値だけを取り出せます。
@@ -97,9 +113,10 @@ $ jq '.tags[]' ファイル名.json
 ```console
 $ jq 'keys' ファイル名.json
 [
-    "key 1",
-    "key 2",
-    "key3 "
+  "config",
+  "name",
+  "tags",
+  "version"
 ]
 ```
 
@@ -116,6 +133,7 @@ $ jq '.[0] | keys' ファイル名.json
 
 ```console
 $ jq '.tags[] | select(. == "b")' ファイル名.json
+"b"
 ```
 
 `.tags[]`で配列の要素を1つずつ取り出し、`select(条件式)`で条件に合う要素だけに絞り込めます。
@@ -124,7 +142,12 @@ $ jq '.tags[] | select(. == "b")' ファイル名.json
 ## 配列の値を変換したい（`map`）
 
 ```console
-$ jq 'map(. + "!")' ファイル名.json
+$ jq '.tags | map(. + "!")' ファイル名.json
+[
+  "a!",
+  "b!",
+  "c!"
+]
 ```
 
 `map(フィルター)`で、配列の各要素に同じ処理を適用できます。
@@ -133,6 +156,7 @@ $ jq 'map(. + "!")' ファイル名.json
 
 ```console
 $ jq -c '.' ファイル名.json
+{"name":"test","version":"1.0.0","tags":["a","b","c"],"config":{"debug":true,"count":3}}
 ```
 
 `-c`（`--compact-output`）オプションで、改行やインデントなしの1行で出力できます。
@@ -142,6 +166,19 @@ $ jq -c '.' ファイル名.json
 
 ```console
 $ jq -S '.' ファイル名.json
+{
+  "config": {
+    "count": 3,
+    "debug": true
+  },
+  "name": "test",
+  "tags": [
+    "a",
+    "b",
+    "c"
+  ],
+  "version": "1.0.0"
+}
 ```
 
 `-S`（`--sort-keys`）オプションで、オブジェクトのキーをアルファベット順に並べ替えて表示できます。
@@ -211,6 +248,7 @@ jq -r 'paths(scalars) as $p | "\($p | join(".")) = \(getpath($p))"' ファイル
 ```console
 $ NAME="test"
 $ jq --arg n "$NAME" '.name == $n' ファイル名.json
+true
 ```
 
 `--arg 変数名 値`で、シェル変数を`jq`のフィルター内で`$変数名`として使えます。
@@ -220,7 +258,10 @@ $ jq --arg n "$NAME" '.name == $n' ファイル名.json
 
 ```console
 $ jq -e '.name == "test"' ファイル名.json
+true
+
 $ echo $?
+0
 ```
 
 `-e`（`--exit-status`）オプションで、結果が`false`または`null`のときに終了コード1、それ以外は0を返すようになります。
