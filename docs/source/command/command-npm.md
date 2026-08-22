@@ -248,12 +248,26 @@ $ npm install -g パッケージ名
 ## 開発用としてインストールしたい（`--save-dev`）
 
 ```console
-$ npm install --save-dev パッケージ名
-$ npm install -D パッケージ名
+$ npm install --save-dev typescript
+$ npm install --save-dev rollup
+$ npm install --save-dev vitest
+$ npm install --save-dev @biomejs/biome
 ```
 
-`--save-dev`（`-D`）オプションを付けると、`package.json`の`devDependencies`にパッケージが記録されます。
+`--save-dev`（`-D`）で、開発用の依存パッケージとしてインストールできます。
+パッケージ名は`package.json`の`devDependencies`に記録されます。
+
 テストツールやビルドツールなど、開発時にだけ必要でプロジェクトの実行には不要なパッケージに使います。
+
+```console
+$ npx tsc --version
+$ npx rollup --version
+$ npx vitest --version
+$ npx biome --version
+```
+
+上記はGoogle Apps Scriptの開発でよく使うツールです。
+ローカルにインストールしたパッケージは`npx`経由で実行できます。
 
 ## パッケージを削除したい（`npm uninstall`）
 
