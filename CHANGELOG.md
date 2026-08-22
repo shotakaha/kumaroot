@@ -1,5 +1,11 @@
 # CHANGELOG.md
 
+## v2026.8.3 (2026-08-22)
+
+### Feat
+
+- **ci**: add release workflow to create GitHub Release on tag push
+
 ## v2026.8.2 (2026-08-22)
 
 ### Feat
