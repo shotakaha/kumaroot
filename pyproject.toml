@@ -1,6 +1,6 @@
 [project]
 name = "kumaroot"
-version = "2026.8.1"
+version = "2026.8.2"
 description = "KumaROOT - Documentation project"
 readme = "README.md"
 license = "MIT"

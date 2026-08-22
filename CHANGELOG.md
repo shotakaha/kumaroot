@@ -1,5 +1,84 @@
 # CHANGELOG.md
 
+## v2026.8.2 (2026-08-22)
+
+### Feat
+
+- **command-zcat**: add page for viewing gzip contents without extracting
+- **command-uv**: add uv package management page, register in toctree
+- **command-pip**: add pip package management page, register in toctree
+
+### Fix
+
+- **command-tee**: reframe as a redirect-splitting tool, link to command-stdout
+- **command-stdout**: add stdin section with heredoc and herestring
+- **command-stdout**: add seealso note on stdout/stderr design rationale
+- **command-stdout**: restructure around 1>/2> and clarify /dev/null usage
+- **command-zcat**: add ripgrep variant for status code aggregation
+- **command-zcat**: note streaming memory behavior, split examples per block
+- **command-zcat**: add Apache log aggregation examples
+- **command-tar**: switch comparison table to reduction rate
+- **command-tar**: pair long/short compression flags, add zstd
+- **command-tar**: add section on switching compression formats
+- **command-gzip**: restructure into separate compress/decompress sections
+- **command-tar**: add -C directory option and plain cf/xf archiving
+- **command-tar**: use czvf/xzvf option order convention
+- **command-tar**: switch to console code blocks and unify markup style
+- **command-sd**: lead section headings with long option names
+- **command-sd**: consolidate preview/overwrite guidance into one section
+- **command-sd**: document default regex mode and -F fixed-strings
+- **command-sd**: clarify default overwrite behavior and safe usage
+- **command-sed**: add substitution, -i, line-targeting, and backreference sections
+- **command-sed**: clarify description, add note on the s/// idiom
+- **command-pip**: align section order with npm/tlmgr
+- **command-tlmgr**: dedupe sections, verify search/info/option commands
+- **command-spack**: update --variants-by-name and compiler output to current spack
+- **command-poetry**: remove page, no longer used (migrated to uv)
+- **command-rye**: remove page, no longer used (migrated to uv)
+- **command-npm**: add search/view sections, caution about supply-chain attacks
+- **command-npm**: move package.json/scripts sections before command sections
+- **command-jq**: rename sample array key from tags to fruits
+- **command-jq**: add key access, -r/-c/-S, select, map, --arg, -e sections
+- **command-jq**: add install section, unify フィルタ to フィルター
+- **command-mdfind**: add -onlyin/-name/-count sections
+- **command-dnf**: expand to match command-apt.md structure
+- **command-apt**: lead each example with apt, show apt-get/apt-cache as comments
+- **command-apt**: dedupe repeated apt vs apt-get note, tighten intro wording
+- **command-apt**: add aptitudeしたい section
+- **command-apt**: fix stale sources.list path, wrong install-record path, reorder by frequency
+- **command-brew**: consolidate zsh/fish sections into シェル設定したい (brew shellenv)
+- **command-brew**: reorder sections by expected usage frequency
+- **command-brew**: rewrite パスを知りたい around brew --prefix, verify version output
+- **command-ps**: add grep/-o/-c/-r-m/-p sections
+- **command-ps**: add title, fix inaccurate {command} role on aux
+- **command-usage**: reorder エディターしたい and システム管理・その他したい
+- **command-usage**: reorder ネットワークしたい by functional category
+- **command-usage**: reorder 環境構築したい by functional category
+- **command-brew**: add list/uninstall/cleanup/doctor/leaves/deps sections
+- **command-brew**: add intro description and install section
+- **command-nushell**: add reference links
+- **command-nushell**: add commands/stdin/no-config/table-mode/no-newline sections
+- **command-nushell**: add intro description
+- **command-zed**: add --completions section and reference links
+- **command-zed**: add path:line/wait/existing/diff sections
+- **command-zed**: add intro example, install section, update version
+- **command-vim**: add intro example, install section
+- **command-helix**: restructure intro/install sections, normalize table separators
+- **command-emacs**: add version check commands and reference links
+- **command-emacs**: add minimal daemon start/connect example, fix typo
+- **command-emacs**: fix brew install typo, restructure, dedupe repeated anecdote
+- **command-code**: add wait/goto/diff/install-extension sections, reference link
+- **command-code**: fix brew upgrade cask name
+- **command-code**: restructure sections, update version output, normalize backticks
+- **command-zoxide**: restructure sections, add version output, reference link
+- **command-tldr**: restructure sections, add version output, fix typo
+- **command-nkf**: restructure sections, add install and guess/overwrite examples
+- **command-ripgrep**: update version, clarify -n default is tty-only
+- **command-screen**: fix unterminated hardstatus string, clarify %f, add reference
+- **command-pwgen**: add install section, normalize backticks, trim blank lines
+- **command-pwd**: restructure into per-option sections, clarify logical vs physical path
+- **AGENTS**: replace stale hardcoded version with a live reference
+
 ## v2026.8.1 (2026-08-20)
 
 ### Feat
