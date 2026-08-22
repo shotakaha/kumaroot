@@ -84,6 +84,37 @@ $ find . -type f -name "*.html" -print0 | xargs -0 chmod 664
 ファイルの種類を限定したい場合は`-name "*.拡張子"`のようにファイル名の一部を指定します。
 ここでは`-name "*.html"`を指定子、HTMLファイルに限定しています。
 
+```console
+// 変更前のパーミッションを記録
+$ find . -type f -ls > before.txt
+
+// パーミッションを一括変更
+$ find . -type f -print0 | xargs -0 chmod 664
+
+// 変更後のパーミッションを記録して差分を確認
+$ find . -type f -ls > after.txt
+$ diff before.txt after.txt
+```
+
+変更前後で`find -ls`の結果をファイルに保存しておくと、`diff`でパーミッションがどう変化したかを確認できます。
+意図しないファイルまで変更していないか、実行後に見直したい場合に便利です。
+
+```console
+// 変更前のパーミッションを記録（macOS/BSD版）
+$ find . -type f -print0 | xargs -0 stat -f "%Lp %N" > before.txt
+
+// パーミッションを一括変更
+$ find . -type f -print0 | xargs -0 chmod 664
+
+// 変更後のパーミッションを記録して差分を確認
+$ find . -type f -print0 | xargs -0 stat -f "%Lp %N" > after.txt
+$ diff before.txt after.txt
+```
+
+`stat`を使うと、パーミッションとファイル名だけに絞って記録できます。
+`find -ls`は所有者やサイズなど他の情報も含まれるため差分にノイズが混ざりやすいですが、
+`stat`のフォーマット文字列（`-f`はBSD版、GNU版は`-c`）で出力項目を絞れば、パーミッションの変化だけを見やすく確認できます。
+
 ## 一括削除したい
 
 ```console
