@@ -101,6 +101,18 @@ $ zcat -f access_log.*.gz | awk '$9 == 404 {print $7}' | sort | uniq -c | sort -
 ```
 
 ```console
+// 攻撃的・不審なパスへのアクセスを検出する（全期間まとめて）
+$ zcat -f access_log.*.gz | awk -F'"' '{print $2}' | awk '{print $2}' | \
+    grep -iE '\.(env|git|sql|bak)|wp-login|wp-admin|xmlrpc|phpmyadmin|\.\./|<script|union.*select|/etc/passwd|phpinfo' | \
+    sort | uniq -c | sort -rn | head -20
+
+// 不審なパスにアクセスしているIP TOP10
+$ zcat -f access_log.*.gz | \
+    grep -iE '\.(env|git|sql|bak)|wp-login|wp-admin|xmlrpc|phpmyadmin|\.\./|<script|union.*select|/etc/passwd|phpinfo' | \
+    awk '{print $1}' | sort | uniq -c | sort -rn | head -10
+```
+
+```console
 // 月別アクセス数の推移
 $ for f in access_log.2026-*.gz; do
     n=$(zcat -f "$f" | wc -l)
@@ -114,6 +126,10 @@ $ for f in access_log.2026-*.gz; do
 アクセスの多いURLをそのまま集計すると、`.js`や`.css`などの静的アセットや、`/wp-login.php`のような脆弱性スキャン・bot系のアクセスが上位を占めてしまいがちです。
 `grep -v`で拡張子・パスのパターンを除外していくと、実際に読まれているページに近いランキングになります。
 除外パターンはサイトの構成やアクセス傾向によって変わるので、自分のログを見ながら調整するとよいです。
+
+逆に、`.env`や`.git/config`の探索、`wp-login`・`wp-admin`への総当たり、SQLインジェクションやパストラバーサルの試みといった攻撃的なパスだけを`grep`で拾うこともできます。
+アクセス元IPで集計すれば、しつこくスキャンしてくるIPを特定できます。
+検出パターンは網羅的ではないので、実際のログに出てくる不審なアクセスを見ながら育てていくとよいです。
 
 :::{seealso}
 
