@@ -22,7 +22,7 @@ Homebrew/homebrew-cask (git revision c856cc02d26; last commit 2026-08-21)
 https://brew.sh/ に書かれているコマンドをコピペして実行すると、Homebrewをインストールできます。
 コマンド名は`brew`です。
 
-## パッケージを探したい（``brew search``）
+## パッケージを探したい（`brew search`）
 
 ```console
 $ brew search 検索パターン
@@ -31,12 +31,12 @@ $ brew search 検索パターン
 $ brew search browser
 ```
 
-``search``コマンドを使って、パッケージ名（＝フォーミュラ）を検索できます。
+`brew search`で、Homebrewで管理されているパッケージを検索できます。
 検索パターンは曖昧マッチに（おそらく）対応しているので、思いついたパターンをそのまま入力すればOKです。
 
 ヒットした検索名が多すぎる場合は、検索コマンド（[grep](./command-grep.md)）などで絞り込むか、検索パターンを考え直すか、してください。
 
-## パッケージの詳細を調べたい（``brew info``）
+## パッケージの詳細を調べたい（`brew info`）
 
 ```console
 $ brew info フォーミュラ名
@@ -46,14 +46,17 @@ $ brew info brave-browser
 $ brew home brave-browser
 ```
 
-``search``コマンドでパッケージ名を探したら``info``コマンドを使って詳細を表示します。
+`brew info`で、指定したパッケージの詳細情報を表示できます。
 パッケージの配布先や依存パッケージ、競合パッケージなどを調べることができます。
-さらに``home``コマンドで提供元のウェブサイトを確認できます。
 
-パッケージによっては名前だけで判別しにくいものもあります。
-もしかしたら求めていたものと違うパッケージの場合もあるので、はじめてインストールするパッケージの場合は、必ず調べるクセをつけておくとよいと思います。
+`brew home`で、指定したパッケージの提供元ウェブサイトやGitHubリポジトリなどを確認できます。
+ブラウザが自動で立ち上がり、パッケージの公式情報を確認できます。
 
-## パッケージを更新したい（``brew upgrade``）
+`brew search`でヒットしたパッケージ名だけでは求めているパッケージかどうか判断できないこともあります。
+もしかしたら、同じような名前の別のパッケージかもしれません。
+はじめてインストールするパッケージの場合は、`brew info`および`brew home`で必ず調べるクセをつけておくとよいと思います。
+
+## パッケージを更新したい（`brew upgrade`）
 
 ```console
 // パッケージリストを更新する
@@ -66,9 +69,14 @@ $ brew outdated
 $ brew upgrade
 ```
 
-``update``コマンドでパッケージ一覧を更新します。
-``outdated``コマンドで更新があるパッケージ一覧を表示できます。
-``upgrade``コマンドで更新があるパッケージをダウンロードできます。
+`brew update`で、Homebrewのパッケージリストを更新できます。
+このコマンドは、HomebrewのリポジトリをGitで更新するだけです。
+パッケージ自体は更新されません。
+
+`brew outdated`で、更新が必要なパッケージを一覧できます。
+
+`brew upgrade`で、更新があるパッケージをすべて更新できます。
+`brew upgrade フォーミュラ名`で、指定したパッケージだけを更新することもできます。
 
 ## インストール済みパッケージを確認したい（`brew list`）
 
@@ -76,7 +84,7 @@ $ brew upgrade
 $ brew list
 ```
 
-`list`コマンドで、インストール済みのフォーミュラ・キャスクを一覧できます。
+`brew list`で、インストール済みのパッケージ名を一覧できます。
 
 ## パッケージを削除したい（`brew uninstall`）
 
@@ -84,7 +92,7 @@ $ brew list
 $ brew uninstall フォーミュラ名
 ```
 
-`uninstall`コマンドで、インストール済みのパッケージを削除できます。
+`brew uninstall`で、インストール済みのパッケージを削除できます。
 
 ## 不要なファイルを削除したい（`brew cleanup`）
 
@@ -96,34 +104,48 @@ $ brew cleanup --dry-run
 $ brew cleanup
 ```
 
-`cleanup`コマンドで、更新済みで不要になった古いバージョンやダウンロードキャッシュを削除できます。
-`--dry-run`オプションを付けると、削除対象を確認するだけで実際には削除しません。
-キャッシュが数百MB〜数GB溜まっていることも多いので、定期的に実行しておくとよいです。
+`brew cleanup`で、不要になったキャッシュなどを削除できます。
+`--dry-run`オプションで、削除対象を事前に確認できます。
 
-## 依存されていないパッケージを確認したい（`brew leaves`）
+パッケージを更新したあと、古いバージョンのパッケージやダウンロードキャッシュが残っていることがあります。
+知らないうちに数百MB〜数GB溜まっていることも多いので、定期的に実行しておくとよいです。
+
+## 自分で依存したパッケージを確認したい（`brew leaves`）
 
 ```console
 $ brew leaves
 ```
 
-`leaves`コマンドで、他のパッケージから依存されていない、自分で明示的にインストールしたパッケージだけを一覧できます。
+`brew leaves`コマンドで、自分で明示的にインストールしたパッケージだけを一覧できます。
 `brew list`は依存関係で自動インストールされたパッケージも含まれるため、区別したいときに使います。
 
 ## 依存関係を確認したい（`brew deps`）
 
 ```console
-$ brew deps フォーミュラ名
+$ brew deps python3
+ca-certificates
+lz4
+mpdecimal
+openssl@3
+readline
+sqlite
+xz
+zstd
 ```
 
-`deps`コマンドで、指定したフォーミュラが依存しているパッケージを確認できます。
+`brew deps`コマンドで、指定したフォーミュラが依存しているパッケージを確認できます。
 
 ## 環境を診断したい（`brew doctor`）
 
 ```console
 $ brew doctor
+Your system is ready to brew.
 ```
 
 `doctor`コマンドで、Homebrewの設定に問題がないか診断できます。
+問題がない場合は
+`Your system is ready to brew.`
+と表示されます。
 インストールがうまくいかないときなど、トラブルシューティングの入口として使います。
 
 ## パスを知りたい（`brew --prefix`）
@@ -159,14 +181,17 @@ cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
 上のサンプルでは、`cmake`でビルドするときにリンクする`qt@5`のパスを追加しています。
 OSの違いを気にせずに同じコマンドを使いまわすことができます。
 
-## フォントを追加したい
+## フォントを追加したい（`homebrew/cask-fonts`）
 
 ```console
 $ brew tap homebrew/cask-fonts
 
 ```
 
-フォント用のタップ（``homebrew/cask-fonts``）を使えるようにしておきます。
+`homebrew/cask-fonts`は、フォント用のタップです。
+フォントを追加したい場合は、
+`brew tap homebrew/cask-fonts`
+でタップしておく必要があります。
 
 :::{seealso}
 
