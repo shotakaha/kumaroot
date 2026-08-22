@@ -96,6 +96,7 @@ command-mise
 command-npm
 command-gem
 command-pip
+command-uv
 command-cmake
 command-spack
 command-tlmgr
