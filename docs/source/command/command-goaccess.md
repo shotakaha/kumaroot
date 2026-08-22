@@ -59,3 +59,15 @@ $ goaccess -c access_log
 ログファイルのフォーマットと一致していると、ログがパースされ、アクセス解析の結果が表示されます。
 選択したフォーマットでない場合、エラーが表示されます。
 `q`でダイアログを一度閉じたあと、別のフォーマットを選択できます。
+
+## 圧縮ログを解析したい（`gzcat`）
+
+```console
+$ gzcat access_log.gz | goaccess --log-format COMMON -o 出力ファイル名.html -
+```
+
+`goaccess`は、`.gz`で圧縮されたログファイルをそのまま読み込めません。
+[](./command-zcat.md)で紹介した`gzcat`で展開しつつ、パイプで`goaccess`に渡します。
+
+このとき、末尾に`-`を付けて標準入力から読み込むことを明示する必要があります。
+`-`を省略すると、`No input data was provided`というエラーになります。
