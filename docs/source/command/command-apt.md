@@ -4,7 +4,9 @@
 $ apt
 ```
 
-Debian系のLinuxでパッケージ管理を行うためのコマンドラインツールです。
+`apt`は、`.deb`形式のパッケージを管理するコマンドです。
+Debian系のLinuxで利用されます。
+
 昔は`apt-get`と`apt-cache`使っていた記憶がありますが、いまは`apt`を使うみたいです。
 
 ## パッケージを検索したい（`apt search`）
@@ -96,6 +98,32 @@ $ dpkg -r ripgrep
 
 `-r`オプションで、パッケージを削除できます。
 設定ファイルは残るので、完全に削除したい場合は`apt purge`（もしくは`dpkg --purge`）を使います。
+
+## aptitudeしたい（`aptitude`）
+
+```console
+$ apt install aptitude
+$ aptitude --version
+aptitude 0.8.13
+```
+
+`aptitude`は、`apt`とは別系統の高機能なパッケージ管理コマンドです。
+デフォルトではインストールされていないので、使いたい場合は別途インストールします。
+
+引数なしで実行すると`ncurses`ベースの画面が起動します。
+矢印キーでパッケージを選んでインストール・削除できます。
+依存関係の解決アルゴリズムも`apt`より賢いと言われています。
+
+```console
+$ aptitude search ripgrep
+p  ripgrep - Recursively searches directories for a regex pattern
+
+$ aptitude install ripgrep
+$ aptitude show ripgrep
+```
+
+`search`、`install`、`show`などのサブコマンドも利用できます。
+サブコマンドは`apt`とほぼ同じ感覚で使えます。
 
 ## オススメのパッケージ
 
