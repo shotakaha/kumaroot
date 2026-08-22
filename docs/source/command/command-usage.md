@@ -93,7 +93,6 @@ command-apt
 command-dnf
 command-asdf
 command-mise
-command-rye
 command-poetry
 command-npm
 command-gem
