@@ -71,6 +71,13 @@ $ zcat -f access_log.*.gz | grep -oE '" [0-9]{3} ' | tr -d '" ' | sort | uniq -c
 $ zcat -f access_log.*.gz | rg -o '" [0-9]{3} ' | tr -d '" ' | sort | uniq -c | sort -rn
 ```
 
+`zcat -f access_log.*.gz`で、複数の月のアクセスログをまとめて展開します。
+`rg -o '" [0-9]{3} '`で、ステータスコードの部分だけを抽出し、`tr -d '" '`で余計な文字を削除します。
+`sort | uniq -c | sort -rn`で、ステータスコードごとに件数を集計して降順に並べます。
+
+`*access_log.*.gz`にすると、HTTPとHTTPSのログをまとめて集計できます。
+`*access_log.2026-*.gz`にすると、2026年のログだけを集計できます。
+
 ```console
 // アクセス数の多いIP TOP10（1ファイル分）
 $ zcat -f access_log.2026-08-01.gz | awk '{print $1}' | sort | uniq -c | sort -rn | head -10
@@ -79,6 +86,13 @@ $ zcat -f access_log.2026-08-01.gz | awk '{print $1}' | sort | uniq -c | sort -r
 ```console
 // アクセスの多いURL TOP10（1ファイル分）
 $ zcat -f access_log.2026-08-01.gz | awk -F'"' '{print $2}' | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
+
+// 静的アセットやbot・不正アクセス系のパスを除外して、ページとして意味のあるURLに絞る
+$ zcat -f access_log.2026-08-01.gz | awk -F'"' '{print $2}' | awk '{print $2}' | \
+    grep -vE '\.(js|css|png|jpe?g|gif|svg|ico|woff2?|ttf|map|xml|txt|json)($|\?)' | \
+    grep -vE '^/(wp-|\.well-known|\.env|xmlrpc\.php|feed$|\?)' | \
+    grep -v '^$' | \
+    sort | uniq -c | sort -rn | head -10
 ```
 
 ```console
@@ -96,6 +110,10 @@ $ for f in access_log.2026-*.gz; do
 
 `zcat -f`で複数の圧縮済みログをまとめて展開しつつ、`awk`・`grep`・`sort`にパイプで渡して集計できます。
 ステータスコードの抽出は`awk '{print $9}'`でも取れますが、リクエスト行やUser-Agentにスペースが含まれていると列がずれるため、`"`とステータスコードの並びを正規表現で狙う方が確実です。
+
+アクセスの多いURLをそのまま集計すると、`.js`や`.css`などの静的アセットや、`/wp-login.php`のような脆弱性スキャン・bot系のアクセスが上位を占めてしまいがちです。
+`grep -v`で拡張子・パスのパターンを除外していくと、実際に読まれているページに近いランキングになります。
+除外パターンはサイトの構成やアクセス傾向によって変わるので、自分のログを見ながら調整するとよいです。
 
 :::{seealso}
 
