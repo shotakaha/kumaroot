@@ -41,7 +41,7 @@ bbb
 `sd`はデフォルトで、1行の中でマッチしたすべての箇所を置換します。
 `sed`と違って`g`フラグは不要です。
 
-## 部分置換したい（`--max-replacements`）
+## 部分置換したい（`sd --max-replacements`）
 
 ```console
 $ echo "aaa" | sd --max-replacements 1 'a' 'b'
@@ -52,7 +52,7 @@ $ echo "aaa" | sd -n 1 'a' 'b'
 `--max-replacements`（`-n`）オプションで、置換する回数の上限を指定できます。
 `-n 1`にすると、最初にマッチした箇所だけを置換します。
 
-## 置換内容を事前確認したい（`--preview`）
+## 置換内容を事前確認したい（`sd --preview`）
 
 ```console
 $ sd --preview '検索パターン' '置換パターン' ファイル名
@@ -70,7 +70,7 @@ $ cat ファイル名 | sd '検索パターン' '置換パターン' > 出力フ
 
 より安全に置換したい場合は、上記のようにパイプで標準出力に出力して、別のファイルに書き込む方法もあります。
 
-## 文字列をそのまま置換したい（`--fixed-strings`）
+## 文字列をそのまま置換したい（`sd --fixed-strings`）
 
 ```console
 $ echo "a.b.c" | sd '.' 'X'
