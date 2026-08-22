@@ -22,21 +22,40 @@ macOSの`zcat`は、`.Z`形式の拡張子を期待するため、`.gz`ファイ
 
 :::
 
+:::{note}
+
+`zcat`や`zless`は、あるブロックサイズごとにストリーミングして標準出力に表示します。
+そのため、`zcat`で大きな圧縮ファイルを展開しても、ディスク容量やメモリを圧迫することはほとんどありません。
+
+:::
+
 ## Apacheログを集計したい
+
+Apacheのアクセスログは、ログローテーションして月ごとにgzip形式で圧縮されていることが多いです。
+これを毎月、展開して集計するのは手間がかかる上にディスク容量も圧迫します。
+`zcat`でストリーミングしつつ集計するのが便利です。
 
 ```console
 // ステータスコード別に集計する（全期間まとめて）
 $ zcat -f access_log.*.gz | grep -oE '" [0-9]{3} ' | tr -d '" ' | sort | uniq -c | sort -rn
+```
 
+```console
 // アクセス数の多いIP TOP10（1ファイル分）
 $ zcat -f access_log.2026-08-01.gz | awk '{print $1}' | sort | uniq -c | sort -rn | head -10
+```
 
+```console
 // アクセスの多いURL TOP10（1ファイル分）
 $ zcat -f access_log.2026-08-01.gz | awk -F'"' '{print $2}' | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
+```
 
+```console
 // 404になっているURLだけ抽出する（全期間まとめて）
 $ zcat -f access_log.*.gz | awk '$9 == 404 {print $7}' | sort | uniq -c | sort -rn | head -20
+```
 
+```console
 // 月別アクセス数の推移
 $ for f in access_log.2026-*.gz; do
     n=$(zcat -f "$f" | wc -l)
