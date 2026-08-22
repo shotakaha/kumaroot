@@ -107,7 +107,7 @@ $ tar --zstd -cvf 圧縮ファイル.tar.zst ファイル1 ファイル2
 `j`（`--bzip2`）でbzip2形式、
 `J`（`--xz`）でxz形式の圧縮ファイルを作成できます。
 
-`--zstd`でzsdt形式、
+`--zstd`でzstd形式、
 `--lzip`でlzip形式、
 `--lzma`でlzma形式の圧縮ファイルを作成できます。
 
