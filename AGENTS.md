@@ -77,6 +77,16 @@ This project uses a **calendar-based semantic versioning** scheme (YYYY.MM.PATCH
 - Current version: see `version` in `pyproject.toml` (or run `task version`)
 - Example version progression: `2026.3.x` → `2026.4.0`（new month）→ `2027.1.0`（new year）
 
+### Pushing Commits and Tags
+
+```bash
+task push          # git push origin HEAD --follow-tags
+task push:tags      # git push origin HEAD --tags
+```
+
+Pushing a `v*` tag triggers `.github/workflows/release.yml`, which creates a GitHub Release
+whose body links to `CHANGELOG.md` (see [Building and Deploying](#building-and-deploying)).
+
 ## Documentation Structure
 
 ### Directory Organization
@@ -386,6 +396,8 @@ For technical reference docs:
 - **Read the Docs (automatic)**: Push to main → RTD builds automatically
 - **Local preview**: `task docs:serve` (live reload), or `cd docs && make html`
 - **PDF generation**: `task docs:pdf` or `make latexpdf` (output: `docs/_build/latex/`)
+- **GitHub Release (automatic)**: Push a `v*` tag (e.g. via `task push:tags` after `task bump:patch`) →
+  `.github/workflows/release.yml` creates a GitHub Release linking to `CHANGELOG.md`
 
 ## Git Workflow
 
