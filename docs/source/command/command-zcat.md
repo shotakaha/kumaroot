@@ -66,6 +66,9 @@ Apacheのアクセスログは、ログローテーションして月ごとにgz
 ```console
 // ステータスコード別に集計する（全期間まとめて）
 $ zcat -f access_log.*.gz | grep -oE '" [0-9]{3} ' | tr -d '" ' | sort | uniq -c | sort -rn
+
+// ripgrepを使う場合（-Eなしで拡張正規表現が使える）
+$ zcat -f access_log.*.gz | rg -o '" [0-9]{3} ' | tr -d '" ' | sort | uniq -c | sort -rn
 ```
 
 ```console
