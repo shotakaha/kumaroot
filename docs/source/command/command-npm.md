@@ -36,6 +36,38 @@ $ npx --version
 
 :::
 
+## グローバル設定したい
+
+```console
+$ npm install -g all-the-package-names
+$ npm install -g npm-check-updates
+$ npm install -g @google/clasp
+```
+
+`-g`オプションでグローバルにインストールしたパッケージは、プロジェクトを問わずコマンドとして使えるようになります。
+CLIツールなど、複数のプロジェクトで共通して使いたいパッケージは、はじめにグローバルへ入れておくと便利です。
+
+```console
+$ npm -g list --depth=0
+```
+
+`-g`オプションと`list`コマンドを組み合わせると、グローバルにインストール済みのパッケージを確認できます。
+
+[all-the-package-names](https://www.npmjs.com/package/all-the-package-names)を追加すると、
+`npm install`時にパッケージ名を補完してくれるようになります。
+
+[npm-check-updates](https://www.npmjs.com/package/npm-check-updates)を追加すると、
+`npm outdated`よりも簡単に、`package.json`ごと最新バージョンへ一括更新できるようになります。
+
+```console
+$ ncu
+$ ncu -u
+$ npm install
+```
+
+[clasp](https://github.com/google/clasp)は、Google Apps Scriptのプロジェクトをローカルで開発するためのCLIツールです。
+パッケージ名は`@google/clasp`です。
+
 ## パッケージ設定したい（`package.json`）
 
 ```json
@@ -221,24 +253,3 @@ $ npm outdated
 
 `outdated`コマンドで、インストール済みのパッケージに新しいバージョンがあるかを確認できます。
 現在のバージョン・`package.json`が許容する最新バージョン・実際の最新バージョンが一覧表示されます。
-
-## オススメのパッケージ
-
-```console
-$ npm -g install all-the-package-names
-$ npm -g install npm-check-updates
-```
-
-[all-the-package-names](https://www.npmjs.com/package/all-the-package-names)を追加すると、
-インストール時にパッケージ名を補完してくれるようになります。
-
-[npm-check-updates](https://www.npmjs.com/package/npm-check-updates)を追加すると、
-`npm outdated`よりも簡単に、`package.json`ごと最新バージョンへ一括更新できるようになります。
-
-```console
-$ ncu
-$ ncu -u
-$ npm install
-```
-
-これらのパッケージは、グローバルに追加しておくとよいです。
