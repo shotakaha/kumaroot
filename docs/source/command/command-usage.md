@@ -151,7 +151,6 @@ command-xh
 command-wget
 command-dig
 command-ping
-command-gping
 command-tcpdump
 command-arp
 command-ssh
