@@ -26,9 +26,16 @@ $ lsd -ltr
 
 :::
 
+:::{seealso}
+
+- [](./command-ls.md)
+- [](./command-exa.md)
+
+:::
+
 ## インストールしたい（`lsd`）
 
-```bash
+```console
 $ brew install lsd
 $ lsd --version
 lsd 1.2.0
@@ -59,10 +66,3 @@ $ lsd -ltra
 
 一番新しいファイルが出力の末尾に表示されるので、
 わざわざコマンドを実行した画面までスクロールする必要がなくなります。
-
-:::{seealso}
-
-- [](./command-exa.md)
-- [](./command-ls.md)
-
-:::
