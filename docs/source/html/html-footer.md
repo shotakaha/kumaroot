@@ -68,25 +68,66 @@ footer {
 ロゴを左、コピーライトを右に寄せつつ、`nav`を間に配置できます。
 `flex-wrap: wrap`を指定しておくと、画面幅が狭いときに自動で縦積みに折り返ります。
 
-## コンテンツ情報したい
+## コンテンツフッターしたい
 
 ```html
-<body>
-    <main>
-        <article>
-            コンテンツ本体
-            <footer>
-                コンテンツのメタ情報（作成日、著者名、など）
-            </footer>
-        </article>
-    </main>
-    <footer>...</footer>
-</body>
+<article>
+    コンテンツ本体
+
+    <footer>
+        <p>
+            <img src="著者アイコンのパス" alt="著者名">
+            著者名です。著者のプロフィールです。
+        </p>
+        <p>公開日: <time datetime="2026-08-23">2026年8月23日</time></p>
+        <p>
+            タグ:
+            <a href="/tags/html">HTML</a>
+            <a href="/tags/css">CSS</a>
+        </p>
+    </footer>
+</article>
 ```
 
-`footer`要素はほとんどのフローコンテンツ要素の子要素として配置できます。
-作成したページのメタ情報を表示したい場合は、
-`article`の子要素として配置するとよいです。
+コンテンツフッターは、記事の末尾に表示するフッターです。
+著者プロフィールや公開日、タグなど、記事本体に付随する情報をまとめて掲載するエリアです。
+
+`article`タグの中に`footer`タグを配置することで、記事のフッターであることを明示できます。
+
+```css
+article > footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+article > footer img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+article > footer p:first-child {
+    display: block flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+article > footer a {
+    display: inline flow-root;
+    padding: 0.25rem 0.75rem;
+    background: #f0f0f0;
+    border-radius: 999px;
+    text-decoration: none;
+}
+```
+
+`border-top`で本文との区切り線を入れ、フォントを小さめ・グレー系にすることで、補足情報であることを視覚的に分かりやすくしています。
+著者アイコンは`border-radius: 50%`で丸くし、`display: block flex`でテキストと横並びにしています。
+タグのリンクは`border-radius: 999px`で丸みの強い「ピル型」のバッジとして表現しています。
 
 ## リファレンス
 
