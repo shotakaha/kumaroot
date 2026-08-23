@@ -147,6 +147,7 @@ command-ssh-keygen
 command-rsync
 command-openssl
 command-gpg
+command-shasum
 command-goaccess
 ```
 
