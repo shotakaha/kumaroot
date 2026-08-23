@@ -155,6 +155,7 @@ command-ping
 command-tcpdump
 command-arp
 command-ssh
+command-mosh
 command-ssh-keygen
 command-rsync
 command-openssl
