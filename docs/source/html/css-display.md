@@ -4,33 +4,9 @@
 display: 外部の表示型 内部の表示型;
 ```
 
-`display`プロパティで要素の表示スタイル（`block` / `inline`）を変更できます。
-
-`display`プロパティは2値構文になっていて、
-1番目の引数は「外部の表示型」で`block`、`inline`から選択します。
-その要素の親要素に対する表示スタイルを設定します。
-
-2番目の引数は「内部の表示型」で`flow`、`flow-root`、`flex`、`grid`から選択します。
-その要素の子要素に対する表示型を設定します。
-
-## これまで（1値型）とこれから（2値型）
-
-```css
-display: block;       /* これまでの書き方 */
-display: block flow;  /* 現在の書き方 */
-
-display: inline-block;
-display: inline flow-root;
-```
-
-`display`プロパティはこれまで1値型構文でした。
-後方互換性のため、従来の記述も使うことができます。
-ただし、いつまで使えるかは分からないので、これからウェブサイトを作る場合は、
-2値構文で定義するとよいです。
-
-`inline-block`（2値構文では`inline flow-root`）は、
-インライン要素として前後の要素と並びつつも、`width`や`height`、上下の`margin`を効かせられる値です。
-アイコンとテキストを横並びにしつつサイズを指定したい場合など、実務でもよく使われます。
+`display`プロパティで要素の表示スタイルを変更できます。
+現在は2値構文が標準で、1番目の引数「外部の表示型」でその要素自体の並び方（`block`か`inline`か）を、
+2番目の引数「内部の表示型」で子要素の並び方（`flow`、`flow-root`、`flex`、`grid`など）を指定します。
 
 :::{note}
 
@@ -38,20 +14,90 @@ display: inline flow-root;
 
 :::
 
-## ブロック表示にしたい（`display: block flow`）
+## 普通の要素にしたい（`block flow` / `inline flow`）
 
 ```css
-code {
+div {
     display: block flow;
-    width: 100%;
-    padding: 1rem;
+}
+
+span {
+    display: inline flow;
 }
 ```
 
-デフォルトでインライン要素である`code`タグをブロック要素に変更し、
-子要素を通常のフローコンテンツにしたサンプルです。
-ブロック表示要素は`width`や`height`を設定できるようになります。
-また、要素の前後で改行されます。
+`block flow`と`inline flow`は、それぞれ`div`や`span`がデフォルトで持っている表示型です。
+特別なレイアウトが必要ない、ごく普通のブロック要素・インライン要素にしたいときはこの組み合わせを使います。
+
+## 浮動要素を内包したい（`block flow-root`）
+
+```css
+.container {
+    display: block flow-root;
+}
+```
+
+```html
+<div class="container">
+    <img style="float: left;" src="画像のパス">
+    <p>floatした画像の隣に回り込む文章。</p>
+</div>
+```
+
+子要素に`float`を使うと、親要素の高さがつぶれてしまうことがあります。
+`block flow-root`を親要素に指定しておくと、floatした子要素も含めて高さを計算し直してくれます。
+昔ながらの`clearfix`テクニックの代わりに使える、現在の標準的な書き方です。
+
+## 横並びでサイズ指定したい（`inline flow-root`）
+
+```css
+.badge {
+    display: inline flow-root;
+    width: 4rem;
+    height: 2rem;
+}
+```
+
+インライン要素はデフォルトでは`width`や`height`、上下の`margin`が効きません。
+`inline flow-root`を指定すると、前後の要素と横並びのまま、サイズや余白を指定できるようになります。
+ボタンやバッジ、アイコン付きラベルなど、テキストの流れの中でサイズを揃えたい部品によく使います。
+
+## 横並びカードにしたい（`block flex`）
+
+```css
+.cards {
+    display: block flex;
+    gap: 1rem;
+}
+```
+
+`block flex`は、子要素をFlexboxで並べるためのコンテナーを作ります。
+カード一覧やヘッダー内のロゴ・ナビゲーションの横並びなど、現在のレイアウトでもっともよく使う組み合わせです。
+
+## グリッドレイアウトにしたい（`block grid`）
+
+```css
+.gallery {
+    display: block grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+```
+
+`block grid`は、子要素を2次元のグリッドで並べるためのコンテナーを作ります。
+ページ全体のレイアウトや、画像ギャラリーのような格子状の表示に向いています。
+
+:::{note}
+
+`inline flex`や`inline grid`もありますが、
+コンテナー自体をテキストの流れに埋め込む機会は少なく、実務ではあまり使いません。
+
+:::
+
+## デフォルトの表示型を知りたい
+
+タグごとにデフォルトの表示型（`block`か`inline`か）が決まっています。
+明示的に`display`を指定しない限り、この表示型が使われます。
 
 ### デフォルトでブロック表示のタグ
 
@@ -64,17 +110,6 @@ code {
 - `figure` / `figcaption`: 図
 - `nav` / `main` / `footer` / `aside` / `header`
 
-## インライン表示したい（`display: inline flow`）
-
-```css
-h1 {
-    display: inline flow;
-}
-```
-
-デフォルトでブロック要素である`h1`タグをインライン要素に変更し、
-子要素をフローコンテンツにしたサンプルです。
-
 ### デフォルトでインライン表示のタグ
 
 - `span`: 汎用的なインライン要素タグ
@@ -86,6 +121,24 @@ h1 {
 - `br`: 改行
 - `code` / `kbd`: コード / キーボード入力
 - `em` / `b` / `i` / `u`: 強調系
+
+## 1値構文で書きたい（後方互換）
+
+```css
+display: block;       /* 1値構文（従来の書き方） */
+display: block flow;  /* 2値構文（現在の書き方） */
+
+display: inline-block;
+display: inline flow-root;
+```
+
+`display`プロパティはこれまで1値型構文でした。
+後方互換性のため、従来の記述も使うことができます。
+ただし、いつまで使えるかは分からないので、これからウェブサイトを作る場合は、
+2値構文で定義するとよいです。
+
+`inline-block`は1値構文における書き方で、2値構文では`inline flow-root`に相当します。
+どちらも同じ表示になりますが、これから書く場合は2値構文のほうがよいです。
 
 ## リファレンス
 
