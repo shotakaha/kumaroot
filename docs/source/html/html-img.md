@@ -55,3 +55,8 @@ img {
 `max-width: 100%`と`height: auto`を組み合わせておくと、
 親要素の幅に収まるように画像が縮小され、かつアスペクト比も保たれます。
 レスポンシブなレイアウトでは、この3行を`img`のデフォルトCSSとして設定しておくとよいです。
+
+## リファレンス
+
+- [img](https://developer.mozilla.org/ja/docs/Web/HTML/Element/img)
+- [Lazy loading](https://developer.mozilla.org/ja/docs/Web/Performance/Lazy_loading)
