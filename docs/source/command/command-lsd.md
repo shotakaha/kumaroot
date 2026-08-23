@@ -5,7 +5,20 @@
     single: Rust Alternatives; lsd
 ```
 
-# ファイル一覧したい（``lsd``）
+# ファイル情報したい（`lsd`）
+
+```console
+$ lsd
+$ lsd -l ファイル名
+$ lsd -a
+$ lsd -ltr
+```
+
+`lsd`は、ディレクトリの中身を一覧表示するコマンドです。
+[ls](./command-ls.md)のRust代替コマンドです。
+オプションは`ls`と同じです。
+
+## インストールしたい（`lsd`）
 
 ```bash
 $ brew install lsd
@@ -13,8 +26,7 @@ $ lsd --version
 lsd 0.23.1
 ```
 
-[ls](./command-ls.md)のRust代替コマンドです。
-オプションが`ls`と同じなので、[exa](./command-exa.md)と比べて使いやすいと思います。
+`lsd`はHomebrewでインストールできます。
 
 ## 最新ファイルを確認したい
 
