@@ -41,7 +41,7 @@
                 </section>
 
                 <section>
-                    <h2>賞見出し2</h2>
+                    <h2>章見出し2</h2>
                     <p>本文</p>
                 </section>
 
@@ -113,12 +113,12 @@
 
 | よくあるHTMLタグ | セマンティクスを意識したタグ |
 |---|---|
-| ``<div id="main">`` | ``<main>`` |
-| ``<div class="sidebar">`` | ``<aside class="related">`` |
-| ``<div class="related_pages">`` | ``<aside class="related_pages">`` |
-| ``<div class="nav">`` | ``<nav>`` |
-| ``<div class="footer">`` | ``<footer>`` |
-| ``<span class="published">`` | ``<time class="published">`` |
+| `<div id="main">` | `<main>` |
+| `<div class="sidebar">` | `<aside class="related">` |
+| `<div class="related_pages">` | `<aside class="related_pages">` |
+| `<div class="nav">` | `<nav>` |
+| `<div class="footer">` | `<footer>` |
+| `<span class="published">` | `<time class="published">` |
 
 :::{note}
 
@@ -128,7 +128,7 @@ LaTeXで文書を作成したり、WordやGoogleドキュメントのアウト�
 
 ## メタデータ・コンテンツ
 
-``<head>``タグ内に記述するタグです。
+`<head>`タグ内に記述するタグです。
 文書の文字エンコーディングやページのタイトル、読み込むスタイルシートなどを設定できます。
 
 - [title](https://developer.mozilla.org/ja/docs/Web/HTML/Element/title)
@@ -138,12 +138,18 @@ LaTeXで文書を作成したり、WordやGoogleドキュメントのアウト�
 
 ## フロー・コンテンツ
 
-``<body>``タグ内に記述できるタグです。
-いろいろあります。
+`<body>`タグ内に記述できるタグの大半が該当する、もっとも範囲の広いカテゴリーです。
+これから紹介する区分・見出し・記述・埋め込みコンテンツなども、ほとんどがフロー・コンテンツに含まれます。
+
+- [p](https://developer.mozilla.org/ja/docs/Web/HTML/Element/p)
+- [div](https://developer.mozilla.org/ja/docs/Web/HTML/Element/div)
+- [ul](https://developer.mozilla.org/ja/docs/Web/HTML/Element/ul) / [ol](https://developer.mozilla.org/ja/docs/Web/HTML/Element/ol)
+- [table](https://developer.mozilla.org/ja/docs/Web/HTML/Element/table)
+- [form](https://developer.mozilla.org/ja/docs/Web/HTML/Element/form)
 
 ## 区分（sectioning）・コンテンツ
 
-``<body>``タグ内に記述するタグです。
+`<body>`タグ内に記述するタグです。
 文書のアウトライン（やセクション）を構成するタグです。
 
 - [nav](https://developer.mozilla.org/ja/docs/Web/HTML/Element/nav)
@@ -154,7 +160,6 @@ LaTeXで文書を作成したり、WordやGoogleドキュメントのアウト�
 ## 見出し（heading）・コンテンツ
 
 セクションの見出しのためのタグです。
-``hgroup``は
 
 - [h1 - h6](https://developer.mozilla.org/ja/docs/Web/HTML/Element/Heading_Elements)
 - [hgroup](https://developer.mozilla.org/ja/docs/Web/HTML/Element/hgroup)（非推奨みたい）
@@ -175,3 +180,6 @@ LaTeXで文書を作成したり、WordやGoogleドキュメントのアウト�
 - [iframe](https://developer.mozilla.org/ja/docs/Web/HTML/Element/iframe)
 
 ## リファレンス
+
+- [セマンティクス](https://developer.mozilla.org/ja/docs/Glossary/Semantics)
+- [コンテンツカテゴリー](https://developer.mozilla.org/ja/docs/Web/HTML/Content_categories)
