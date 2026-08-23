@@ -102,6 +102,7 @@ command-lmstudio
 maxdepth: 1
 ---
 command-brew
+command-port
 command-apt
 command-dnf
 command-asdf
