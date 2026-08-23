@@ -65,17 +65,23 @@ HTTPリクエストヘッダーのフィールド名は`Referer`です。
 - `referrerpolicy="no-referrer"`: リファラーを送信しない
 - `referrerpolicy="origin"`: 参照元ページのオリジンのみに限定してリファラーを送信
 
-## relしたい（`rel`）
+## ページャーしたい（`rel="prev"` / `rel="next"`）
 
 ```html
-<a rel="alternate" href="...">代替ページ</a>
-<a rel="help" href="...">ヘルプページ</a>
-<a rel="license" href=".../license/">MITライセンス</a>
 <a rel="prev" href="...">前のページ</a>
 <a rel="next" href="...">次のページ</a>
 ```
 
 `rel`属性には現在の文書とリンク先の関係を記述します。
+前後のページへのリンクを設定する場合は、`prev`と`next`を指定します。
+
+```html
+<a rel="alternate" href="...">代替ページ</a>
+<a rel="help" href="...">ヘルプページ</a>
+<a rel="license" href=".../license/">MITライセンス</a>
+```
+
+他にも、リンク先の関係を表す値がいくつかあります。
 
 ## CSSしたい（`a`）
 
