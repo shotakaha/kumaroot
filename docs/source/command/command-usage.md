@@ -54,6 +54,7 @@ command-jq
 command-nkf
 command-tldr
 command-zoxide
+command-fzf
 ```
 
 ## エディターしたい
