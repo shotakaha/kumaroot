@@ -112,7 +112,15 @@ $ rsync --progress ファイル名 [ユーザー名@]ホスト名:ディレク�
 
 `--progress`で、転送中の進捗を表示できます。
 
-## サマリーを表示したい（`-i` / `--itemize-changes`）
+## チェックサムしたい（`-c` / `--checksum`）
+
+```console
+$ rsync --checksum ファイル名 [ユーザー名@]ホスト名:ディレクトリ名/
+```
+
+`--checksum`（`-c`）で、転送前にチェックサムを計算して、差分のあるファイルだけ更新できます。
+
+## 更新箇所を確認したい（`-i` / `--itemize-changes`）
 
 ```console
 $ rsync --itemize-changes ファイル名 [ユーザー名@]ホスト名:ディレクトリ名/
