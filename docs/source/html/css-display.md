@@ -7,10 +7,10 @@ display: 外部の表示型 内部の表示型;
 `display`プロパティで要素の表示スタイル（`block` / `inline`）を変更できます。
 
 `display`プロパティは2値構文になっていて、
-1番目の引数は「外部の表示型」で``block``、``inline``から選択します。
+1番目の引数は「外部の表示型」で`block`、`inline`から選択します。
 その要素の親要素に対する表示スタイルを設定します。
 
-2番目の引数は「内部の表示型」で``flow``、``flow-root``、``flex``、``grid``から選択します。
+2番目の引数は「内部の表示型」で`flow`、`flow-root`、`flex`、`grid`から選択します。
 その要素の子要素に対する表示型を設定します。
 
 ## これまで（1値型）とこれから（2値型）
@@ -28,24 +28,28 @@ display: inline flow-root;
 ただし、いつまで使えるかは分からないので、これからウェブサイトを作る場合は、
 2値構文で定義するとよいです。
 
+`inline-block`（2値構文では`inline flow-root`）は、
+インライン要素として前後の要素と並びつつも、`width`や`height`、上下の`margin`を効かせられる値です。
+アイコンとテキストを横並びにしつつサイズを指定したい場合など、実務でもよく使われます。
+
 :::{note}
 
 [CSS Display Module Level3](https://drafts.csswg.org/css-display/)では、[displayプロパティは2値構文](https://developer.mozilla.org/ja/docs/Web/CSS/display/multi-keyword_syntax_of_display)で記述することになっています。
 
 :::
 
-## ブロック表示にしたい（``display: block flow``）
+## ブロック表示にしたい（`display: block flow`）
 
 ```css
 code {
-    display: block flex;
-    width: 100vw;
-    height: 100vw;
+    display: block flow;
+    width: 100%;
+    padding: 1rem;
 }
 ```
 
 デフォルトでインライン要素である`code`タグをブロック要素に変更し、
-子要素をフレックスにしたサンプルです。
+子要素を通常のフローコンテンツにしたサンプルです。
 ブロック表示要素は`width`や`height`を設定できるようになります。
 また、要素の前後で改行されます。
 
@@ -60,7 +64,7 @@ code {
 - `figure` / `figcaption`: 図
 - `nav` / `main` / `footer` / `aside` / `header`
 
-## インライン表示したい（``display: inline flow``）
+## インライン表示したい（`display: inline flow`）
 
 ```css
 h1 {
@@ -85,4 +89,4 @@ h1 {
 
 ## リファレンス
 
-- [display](https://developer.mozilla.org/ja/docs/Web/CSS/display)プロパティを使って、HTMLタグの表示方法を設定できます。
+- [display](https://developer.mozilla.org/ja/docs/Web/CSS/display)
