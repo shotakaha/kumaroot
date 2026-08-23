@@ -22,13 +22,3 @@ kuma
 env
 disclaimer
 ```
-
-```{todo} 古くなってきた内容を更新したい
-
-1. macOSのパッケージ管理に``Homebrew``を使っている
-1. ``Python``の``Pandas``でデータ処理することが多くなった
-1. ``ROOT``は最近使ってない・・・（しかも``ROOT6``はほとんど使ったことがない）
-1. ``Emacs``から``Visual Studio Code`` に乗り換えた
-1. ``Sphinx``も``Markdown``で書くことにした
-1. 日本語LaTeXに``LuaLaTeX``を使いはじめた
-```
