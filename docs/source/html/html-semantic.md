@@ -93,11 +93,11 @@
         </aside>
 
         <footer>
-            <header>ロゴ</header>
+            <div class="footer-logo">ロゴ</div>
             <nav>
                 <!-- メガフッター -->
             </nav>
-            <footer>コピーライト</footer>
+            <div class="footer-copyright">コピーライト</div>
         </footer>
 
     </body>
