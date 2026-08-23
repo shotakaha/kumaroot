@@ -124,32 +124,32 @@ $ pipx --version
 ```
 
 ```console
-$ which poetry
-~/.local/bin/poetry
-
-$ poetry --version
-Poetry (version 2.4.1)
+$ brew info uv
+==> uv: stable 0.12.5 (bottled), HEAD
+Extremely fast Python package installer and resolver, written in Rust
+https://docs.astral.sh/uv/
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/u/uv.rb
+License: Apache-2.0 OR MIT
 ```
 
 ```console
-$ poetry env info
+$ which uv
+/opt/homebrew/bin/uv
 
-Virtualenv
-Python:         3.12.7
-Implementation: CPython
-Path:           ~/repos/github.com/shotakaha/kumaroot/.venv
-Executable:     ~/repos/github.com/shotakaha/kumaroot/.venv/bin/python
-Valid:          True
-
-Base
-Platform:   darwin
-OS:         posix
-Python:     3.12.7
-Path:       ~/.local/share/uv/python/cpython-3.12-macos-aarch64-none
-Executable: ~/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12
+$ uv --version
+uv 0.12.5 (Homebrew 2026-08-14 aarch64-apple-darwin)
 ```
 
-Python環境はプロジェクトごとに[Poetry](https://python-poetry.org/)で管理しています。
+```console
+$ uv python find
+~/repos/github.com/shotakaha/kumaroot/.venv/bin/python3
+
+$ .venv/bin/python --version
+Python 3.12.7
+```
+
+Python環境は[uv](https://docs.astral.sh/uv/)で管理しています。
 
 ## Hugo環境
 
