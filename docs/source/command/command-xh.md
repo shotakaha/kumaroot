@@ -1,4 +1,4 @@
-# ダウンロードしたい（`xh`）
+# HTTPリクエストしたい（`xh`）
 
 ```console
 $ xh https://example.com

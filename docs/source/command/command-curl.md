@@ -1,8 +1,10 @@
-# ダウンロードしたい（`curl`）
+# HTTPリクエストしたい（`curl`）
 
 ```console
 $ curl -o ファイル名 URL
 ```
+
+`curl`は、HTTPリクエストを送信するコマンドです。
 
 ## インストールしたい（`curl`）
 
@@ -16,8 +18,8 @@ Features: alt-svc AsynchDNS GSS-API HSTS HTTP2 HTTPS-proxy IPv6 Kerberos Largefi
 $ brew install curl
 ```
 
-`curl`はmacOSに標準でインストールされています。
-Homebrewで最新版をインストールできます。
+`curl`はHomebrewでインストールできます。
+macOSには標準でインストールされています。
 
 ## ダウンロードしたい（`--remote-name` / `-O`）
 
