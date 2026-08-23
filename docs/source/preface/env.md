@@ -9,37 +9,39 @@ DokuWikiの引っ越し先をあれこれ検討した結果、いちから作り
 
 このドキュメントをビルドしているローカル環境です。
 
-> 2023/05/22時点
+> 2026/08/23時点
 
 ## macOS環境
 
 ```console
-$ neofetch
-                    'c.
-                 ,xNMM.          --------------------------------------
-               .OMMMMo           OS: macOS 13.2.1 22D68 arm64
-               OMMM0,            Host: Mac14,2
-     .;loddo:' loolloddol;.      Kernel: 22.3.0
-   cKMMMMMMMMMMNWMMMMMMMMMM0:    Uptime: 7 days, 4 hours, 58 mins
- .KMMMMMMMMMMMMMMMMMMMMMMMWd.    Packages: 118 (brew)
- XMMMMMMMMMMMMMMMMMMMMMMMX.      Shell: fish 3.6.1
-;MMMMMMMMMMMMMMMMMMMMMMMM:       Resolution: 1440x2560, 1710x1112
-:MMMMMMMMMMMMMMMMMMMMMMMM:       DE: Aqua
-.MMMMMMMMMMMMMMMMMMMMMMMMX.      WM: Quartz Compositor
- kMMMMMMMMMMMMMMMMMMMMMMMMWd.    WM Theme: Orange (Light)
- .XMMMMMMMMMMMMMMMMMMMMMMMMMMk   Terminal: Apple_Terminal
-  .XMMMMMMMMMMMMMMMMMMMMMMMMK.   Terminal Font: SFMono-Regular
-    kMMMMMMMMMMMMMMMMMMMMMMd     CPU: Apple M2
-     ;KMMMMMMMWXXWMMMMMMMk.      GPU: Apple M2
-       .cooc,.    .,coo:.        Memory: 3942MiB / 24576MiB
+$ fastfetch
+                     ..'          shotakaha@orca
+                 ,xNMM.           --------------
+               .OMMMMo            OS: macOS Tahoe 26.5.2 (25F84) arm64
+               lMM"               Host: MacBook Air (M2, 2022)
+     .;loddo:.  .olloddol;.       Kernel: Darwin 25.5.0
+   cKMMMMMMMMMMNWMMMMMMMMMM0:     Uptime: 2 hours, 14 mins
+ .KMMMMMMMMMMMMMMMMMMMMMMMWd.     Packages: 362 (brew), 136 (brew-cask)
+ XMMMMMMMMMMMMMMMMMMMMMMMX.       Shell: fish 4.8.1
+;MMMMMMMMMMMMMMMMMMMMMMMM:        CPU: Apple M2 (4+4) @ 3.50 GHz
+:MMMMMMMMMMMMMMMMMMMMMMMM:        GPU: Apple M2 (10) @ 1.40 GHz [Integrated]
+.MMMMMMMMMMMMMMMMMMMMMMMMX.       Memory: 18.54 GiB / 24.00 GiB (77%)
+ kMMMMMMMMMMMMMMMMMMMMMMMMWd.     Disk (/): 902.21 GiB / 926.35 GiB (97%) - apfs [Read-only]
+ 'XMMMMMMMMMMMMMMMMMMMMMMMMMMk
+  'XMMMMMMMMMMMMMMMMMMMMMMMMK.
+    kMMMMMMMMMMMMMMMMMMMMMMd
+     ;KMMMMMMMWXXWMMMMMMMk.
+       "cooc*"    "*coo'"
 ```
+
+`neofetch`は開発が止まってしまったので、後継の[fastfetch](https://github.com/fastfetch-cli/fastfetch)を使っています。
 
 ## Homebrew環境
 
 ```console
 $ brew --version
-Homebrew 4.0.18
-Homebrew/homebrew-core (git revision ceb6f460128; last commit 2023-02-20)
+Homebrew 6.0.18-160-gc142e82
+Homebrew/homebrew-cask (git revision 34fe3b2409d; last commit 2026-08-23)
 ```
 
 macOS上のツール（ソフトウェアやフォント）は[Homebrew](https://brew.sh/)で管理しています。
@@ -48,64 +50,60 @@ macOS上のツール（ソフトウェアやフォント）は[Homebrew](https:/
 
 ```console
 $ brew info fish
-==> fish: stable 3.6.1 (bottled), HEAD
+==> fish: stable 4.8.1 (bottled), HEAD
 User-friendly command-line shell for UNIX-like operating systems
 https://fishshell.com
-/opt/homebrew/Cellar/fish/3.6.1 (1,487 files, 15.4MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-03-27 at 09:55:26
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/fish.rb
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/f/fish.rb
 License: GPL-2.0-only
 ```
 
 ```console
 $ fish --version
-fish, version 3.6.1
+fish, version 4.8.1
 ```
 
 ## Git環境
 
 ```console
 $ brew info git
-==> git: stable 2.40.1 (bottled), HEAD
+==> git: stable 2.55.0 (bottled), HEAD
 Distributed revision control system
 https://git-scm.com
-/opt/homebrew/Cellar/git/2.40.1 (1,635 files, 48.9MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-04-26 at 09:24:33
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/git.rb
-License: GPL-2.0-only
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/g/git.rb
+License: GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-or-later AND BSD-3-Clause AND MIT
 ```
 
 ```console
 $ git --version
-git version 2.40.1
+git version 2.55.0
 ```
 
 ```console
 $ git lfs --version
-git-lfs/3.3.0 (GitHub; darwin arm64; go 1.19.3)
+git-lfs/3.7.1 (GitHub; darwin arm64; go 1.25.3)
 ```
 
 ## Python環境
 
 ```console
-$ brew info python@3.11
-==> python@3.11: stable 3.11.3 (bottled)
+$ brew info python@3.12
+==> python@3.12: stable 3.12.14 (bottled)
 Interpreted, interactive, object-oriented programming language
 https://www.python.org/
-/opt/homebrew/Cellar/python@3.11/3.11.3 (3,273 files, 64.7MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-04-09 at 15:50:14
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/python@3.11.rb
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/p/python@3.12.rb
 License: Python-2.0
 ```
 
 ```console
 $ brew info pipx
-==> pipx: stable 1.2.0 (bottled), HEAD
+==> pipx: stable 1.16.7 (bottled), HEAD
 Execute binaries from Python packages in isolated environments
-https://pypa.github.io/pipx
-/opt/homebrew/Cellar/pipx/1.2.0 (936 files, 11.7MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-05-27 at 09:53:30
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/pipx.rb
+https://pipx.pypa.io
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/p/pipx.rb
 License: MIT
 ```
 
@@ -114,7 +112,7 @@ $ which python3
 /opt/homebrew/bin/python3
 
 $ python3 --version
-Python 3.11.3
+Python 3.12.7
 ```
 
 ```console
@@ -122,7 +120,7 @@ $ which pipx
 /opt/homebrew/bin/pipx
 
 $ pipx --version
-1.2.0
+1.16.7
 ```
 
 ```console
@@ -130,25 +128,25 @@ $ which poetry
 ~/.local/bin/poetry
 
 $ poetry --version
-Poetry (version 1.5.0)
+Poetry (version 2.4.1)
 ```
 
 ```console
 $ poetry env info
 
 Virtualenv
-Python:         3.11.3
+Python:         3.12.7
 Implementation: CPython
 Path:           ~/repos/github.com/shotakaha/kumaroot/.venv
 Executable:     ~/repos/github.com/shotakaha/kumaroot/.venv/bin/python
 Valid:          True
 
-System
+Base
 Platform:   darwin
 OS:         posix
-Python:     3.11.3
-Path:       /opt/homebrew/opt/python@3.11/Frameworks/Python.framework/Versions/3.11
-Executable: /opt/homebrew/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/bin/python3.11
+Python:     3.12.7
+Path:       ~/.local/share/uv/python/cpython-3.12-macos-aarch64-none
+Executable: ~/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12
 ```
 
 Python環境はプロジェクトごとに[Poetry](https://python-poetry.org/)で管理しています。
@@ -157,61 +155,60 @@ Python環境はプロジェクトごとに[Poetry](https://python-poetry.org/)�
 
 ```console
 $ brew info hugo
-==> hugo: stable 0.111.3 (bottled), HEAD
+==> hugo: stable 0.165.0 (bottled), HEAD
 Configurable static site generator
 https://gohugo.io/
-/opt/homebrew/Cellar/hugo/0.111.3 (48 files, 56.4MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-03-25 at 14:03:17
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/hugo.rb
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/h/hugo.rb
 License: Apache-2.0
 ```
 
 ```console
 $ hugo version
-hugo v0.111.3+extended darwin/arm64 BuildDate=unknown
+hugo v0.165.0+extended+withdeploy darwin/arm64 BuildDate=2026-08-12T14:26:28Z VendorInfo=Homebrew
 ```
 
 ## Node環境
 
 ```console
 $ brew info node
-==> node: stable 20.1.0 (bottled), HEAD
-Platform built on V8 to build network applications
+==> node: stable 26.7.0 (bottled), HEAD
+Open-source, cross-platform JavaScript runtime environment
 https://nodejs.org/
-/opt/homebrew/Cellar/node/20.1.0 (2,260 files, 57.3MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-05-05 at 22:03:03
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/node.rb
+Aliases: node.js, node@26, nodejs, npm
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/n/node.rb
 License: MIT
 ```
 
 ```console
 $ node --version
-v20.1.0
+v26.7.0
 ```
 
 ```console
 $ npm --version
-9.6.4
+11.19.0
 ```
 
 ## ROOT環境
 
 ```console
 $ brew info root
-==> root: stable 6.26.06 (bottled), HEAD
-Object oriented framework for large scale data analysis
-https://root.cern.ch/
-/opt/homebrew/Cellar/root/6.26.06_2 (6,415 files, 534.9MB) *
-  Poured from bottle using the formulae.brew.sh API on 2023-02-25 at 20:40:16
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/root.rb
+==> root: stable 6.40.02 (bottled), HEAD
+Analyzing petabytes of data, scientifically
+https://root.cern
+Old Names: root6
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/r/root.rb
 License: LGPL-2.1-or-later
 ```
 
 ```console
 $ root --version
-ROOT Version: 6.26/06
-Built for macosxarm64 on Jul 28 2022, 18:08:51
-From tags/v6-26-06@v6-26-06
+ROOT Version: 6.40.02
+Built for macosxarm64 on Jun 10 2026, 09:29:53
+From tags/6-40-02@6-40-02
 ```
 
 ## LaTeX環境
@@ -220,67 +217,50 @@ From tags/v6-26-06@v6-26-06
 
 ```console
 $ brew info --cask mactex
-==> mactex: 2023.0314
-https://www.tug.org/mactex/
-/opt/homebrew/Caskroom/mactex/2023.0314 (5.1GB)
-From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/mactex.rb
-==> Name
-MacTeX
-==> Description
+==> mactex (MacTeX): 2026.0324
 Full TeX Live distribution with GUI applications
+https://www.tug.org/mactex/
+Installed (as dependency)
+/opt/homebrew/Caskroom/mactex/2026.0324 (6.9GB)
+From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/m/mactex.rb
 ==> Artifacts
-mactex-20230314.pkg (Pkg)
+mactex-20260324.pkg (Pkg)
 ```
 
 ```console
 $ tlmgr --version
-tlmgr revision 66798 (2023-04-08 02:15:21 +0200)
-tlmgr using installation: /usr/local/texlive/2023
-TeX Live (https://tug.org/texlive) version 2023
+tlmgr revision 79639 (2026-07-10 18:45:34 +0200)
+tlmgr using installation: /usr/local/texlive/2026
+TeX Live (https://tug.org/texlive) version 2026
 ```
 
 ```console
 $ lualatex --version
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)
-Development id: 7581
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)
+Development id: 7724
 ```
 
 ## Docker環境
 
 ```console
-$ brew info --cask docker
-==> docker: 4.19.0,106363 (auto_updates)
+$ brew info --cask docker-desktop
+==> docker-desktop (Docker Desktop, Docker Community Edition, Docker CE): 4.87.0,236836 (auto_updates)
+App to build and share containerised applications and microservices
 https://www.docker.com/products/docker-desktop
-/opt/homebrew/Caskroom/docker/4.17.0,99724 (120B)
-From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/docker.rb
-==> Names
-Docker Desktop
-Docker Community Edition
-Docker CE
-==> Description
-App to build and share containerized applications and microservices
+Installed (on request)
+/opt/homebrew/Caskroom/docker-desktop/4.87.0,236836 (2.3GB)
+From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/d/docker-desktop.rb
 ==> Artifacts
 Docker.app (App)
-Docker.app/Contents/Resources/bin/docker-compose -> /usr/local/bin/docker-compose (Binary)
-Docker.app/Contents/Resources/bin/docker-compose-v1/docker-compose -> /usr/local/bin/docker-compose-v1 (Binary)
-Docker.app/Contents/Resources/bin/docker-credential-desktop -> /usr/local/bin/docker-credential-desktop (Binary)
-Docker.app/Contents/Resources/bin/docker-credential-ecr-login -> /usr/local/bin/docker-credential-ecr-login (Binary)
-Docker.app/Contents/Resources/bin/docker-credential-osxkeychain -> /usr/local/bin/docker-credential-osxkeychain (Binary)
-Docker.app/Contents/Resources/bin/docker-index -> /usr/local/bin/docker-index (Binary)
-Docker.app/Contents/Resources/bin/hub-tool -> /usr/local/bin/hub-tool (Binary)
-Docker.app/Contents/Resources/bin/kubectl -> /usr/local/bin/kubectl.docker (Binary)
-Docker.app/Contents/Resources/etc/docker-compose.bash-completion -> /opt/homebrew/etc/bash_completion.d/docker-compose (Binary)
-Docker.app/Contents/Resources/etc/docker.zsh-completion -> /opt/homebrew/share/zsh/site-functions/_docker (Binary)
-Docker.app/Contents/Resources/etc/docker-compose.zsh-completion -> /opt/homebrew/share/zsh/site-functions/_docker_compose (Binary)
-Docker.app/Contents/Resources/etc/docker.fish-completion -> /opt/homebrew/share/fish/vendor_completions.d/docker.fish (Binary)
-Docker.app/Contents/Resources/etc/docker-compose.fish-completion -> /opt/homebrew/share/fish/vendor_completions.d/docker-compose.fish (Binary)
-Docker.app/Contents/Resources/bin/com.docker.vpnkit -> /usr/local/bin/vpnkit (Binary)
-Docker.app/Contents/Resources/bin/com.docker.cli -> /usr/local/bin/com.docker.cli (Binary)
-Docker.app/Contents/Resources/etc/docker.bash-completion -> /opt/homebrew/etc/bash_completion.d/docker (Binary)
-Docker.app/Contents/Resources/bin/docker -> /usr/local/bin/docker (Binary)
+/Applications/Docker.app/Contents/Resources/bin/docker-credential-osxkeychain -> /usr/local/bin/docker-credential-osxkeychain (Binary)
+/Applications/Docker.app/Contents/Resources/bin/kubectl -> /usr/local/bin/kubectl.docker (Binary)
+/Applications/Docker.app/Contents/Resources/cli-plugins/docker-compose -> /usr/local/cli-plugins/docker-compose (Binary)
+/Applications/Docker.app/Contents/Resources/bin/docker -> /usr/local/bin/docker (Binary)
 ```
 
 ```console
 $ docker --version
-Docker version 23.0.5, build bc4487a
+Docker version 29.7.2, build a7dcaa6
 ```
+
+``Homebrew``のCask名が``docker``から``docker-desktop``に変わりました。
