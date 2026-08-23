@@ -20,6 +20,35 @@
 `figure`の最初か最後の子要素として置く必要があり、途中に挟むことはできません。
 `figcaption`は省略可能で、画像だけを`figure`で囲むこともできます。
 
+## CSSしたい（`figure` / `figcaption`）
+
+```css
+figure {
+    margin: 0;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figcaption {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+```
+
+ブラウザのデフォルトスタイルでは`figure`に左右の`margin`が付いています。
+意図しないインデントにならないよう、`margin: 0`でリセットしておきます。
+
+`figure`の中の`img`には[](./html-img.md)で紹介した設定を適用しておくとよいです。
+
+`figcaption`は本文よりやや小さめの文字サイズ、薄めの色にしておくと、補足情報であることが視覚的にも伝わりやすくなります。
+
+
 ## リファレンス
 
 - [figure](https://developer.mozilla.org/ja/docs/Web/HTML/Element/figure)
