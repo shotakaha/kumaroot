@@ -21,9 +21,10 @@
 <meta charset="utf-8">
 ```
 
-`charset`キーで文書の文字エンコーディングを設定します。
-といっても、`utf-8`以外の値は指定できません。
-この宣言は文書の最初の方に書いておく必要があります。
+`charset`キーで、文書の文字エンコーディングを設定できます。
+`charset`に設定できる値は事実上`utf-8`のみです。
+
+この宣言は省略不可で、文書の最初の方に書いておく必要があります。
 
 ## サイト名したい（`title`）
 
@@ -36,9 +37,11 @@
 <title>ページのタイトル | サイト名</title>
 ```
 
-`title`タグでそのページのタイトルを設定できます。
-このタイトルはブックマークに保存するときや、
-ウェブ検索の結果の見出しとしても利用されます。
+`title`タグで、そのページのタイトルを設定できます。
+子要素に設定できる値は任意の文字列です。
+このタグは省略不可です。
+
+このタイトルはブックマークに保存するときや、ウェブ検索の結果の見出しとしても利用されます。
 トップページは`サイト名`、記事／ページの場合は「`タイトル | サイト名`」のようにするとよいです。
 
 ## サイト説明したい（`description`）
@@ -47,15 +50,25 @@
 <meta name="description" content="サイトの説明">
 ```
 
+`description`キーで、ページの内容を要約する説明文を設定できます。
+`content`に設定できる値は任意の文字列です。
+省略した時は本文から自動生成されます。
+
+検索結果のスニペットとして表示されることがあるため、ページごとに簡潔で具体的な説明を書いておくとよいです。
+
 ## クロール制御したい（`robots`）
 
 ```html
 <meta name="robots" content="index,follow">
 ```
 
-検索エンジンのクローラーに対して、このページをインデックスするか（`index`/`noindex`）、
-ページ内のリンクを辿るか（`follow`/`nofollow`）を指示できます。
-省略した場合のデフォルトは`index,follow`ですが、
+`robots`キーで、検索エンジンのクローラーへの指示を設定できます。
+`content`に設定できる値は
+`index`/`noindex`（インデックスするか）と
+`follow`/`nofollow`（リンクを辿るか）の
+組み合わせです。
+デフォルトは`index,follow`です。
+
 下書きページや検索結果に出したくないページには`noindex`を明示しておくとよいです。
 
 ## ビューポートしたい（`viewport`）
@@ -64,10 +77,16 @@
 <meta name="viewport" content="width=device-width">
 ```
 
-[ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)のサイズを設定できます。
+`viewport`キーで、
+[ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)
+のサイズを設定できます。
+`content`に設定できる値は
+`width`（表示幅）や
+`initial-scale`（初期表示倍率）などのカンマ区切りです。
+省略するとブラウザ標準のレイアウト幅で表示されます。
+
 画面の幅はデバイスによって異なるため、`width=device-width`を設定しておきましょう。
-また、`initial-scale`で読み込んだときの表示倍率を設定できます。
-よく`initial-scale=1`を書いているサンプルがありますが、デフォルトで1倍なので省略してよいと思います。
+よく`initial-scale=1`を書いているサンプルがありますが、`initial-scale`のデフォルトは1倍なので省略してよいと思います。
 
 ## OGPしたい（`og:*`）
 
@@ -82,9 +101,14 @@
 <meta property="og:site_name" content="サイト名" />
 ```
 
-OGP（The Open Graph Protocol）はウェブサイトや記事が、SNSなどシェアされたときに利用されるメタデータです。
+`og:*`キーで、OGP（The Open Graph Protocol）を設定できます。
+ウェブサイトや記事がSNSなどでシェアされたときに利用されるメタデータです。
+`og:type`（ページの種類）、`og:url`（絶対URL）、`og:title`（タイトル）、`og:description`（説明文）、`og:image`（サムネイル画像の絶対URL）、`og:site_name`（サイト名）などがあります。
+
 適切に設定しておくと、シェアされたときにいい感じに表示されます。
-OGPが適切に設定できたかどうかは[OGP確認ツール](https://ogp.buta3.net/)などの外部ツールで確認できます。
+OGPが適切に設定できたかどうかは
+[OGP確認ツール](https://ogp.buta3.net/)
+などの外部ツールで確認できます。
 
 CMSではプラグインが用意されている場合もあり、自分で書く必要はないかもしれませんが、その構成要素は理解しておくとよいと思います。
 また、上記のサンプルは必要最低限の要素を抜粋したものです。
@@ -101,7 +125,10 @@ CMSではプラグインが用意されている場合もあり、自分で書�
 <meta property="og:image:alt" content="画像の代替テキスト">
 ```
 
-画像の設定項目はオプションがあります。
+`og:image:*`キーで、`og:image`に関する詳細情報を設定できます。
+`og:image:url`（`og:image`と同じURL）、`og:image:secure_url`（HTTPS用URL）、`og:image:type`（MIMEタイプ）、`og:image:width`/`og:image:height`（画像サイズ、px）、`og:image:alt`（代替テキスト）があります。
+
+いずれも省略可能なオプション項目です。
 
 ## Twitter Cardしたい
 
@@ -111,7 +138,10 @@ CMSではプラグインが用意されている場合もあり、自分で書�
 <meta name="twitter:creator" content="@ページ作成者のユーザー名" />
 ```
 
-Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)という専用のOGPがあります。
+`twitter:*`キーで、Twitterの[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)を設定できます。
+OGPとは別に用意されている、Twitter専用のメタデータです。
+`twitter:card`（カードの種類）、`twitter:site`（サイトのユーザー名）、`twitter:creator`（ページ作成者のユーザー名）などがあります。
+
 これも追加で設定しておくとよいでしょう。
 
 ## リダイレクトしたい
@@ -120,5 +150,7 @@ Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-c
 <meta http-equiv="refresh" content="秒数;url=リダイレクト先のURL">
 ```
 
-リダイレクトの設定も`meta`タグに書きます。
+`http-equiv="refresh"`キーで、ページのリダイレクトを設定できます。
+`content`に設定できる値は「待機秒数」と「リダイレクト先URL」をセミコロンでつないだ文字列です。
+
 リダイレクトするのに、そのページを読み込むのはもったいないので、この設定もはじめのほうに書いておくとよいです。
