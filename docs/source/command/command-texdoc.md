@@ -1,19 +1,19 @@
-# texdoc
+# ドキュメント検索したい（`texdoc`）
 
-LaTeXのコマンドやパッケージのドキュメントを検索するコマンドです
-
-## ドキュメントを開く
-
-```bash
-texdoc パッケージ名
+```console
+$ texdoc パッケージ名
 ```
 
-## 検索結果を表示する
+`texdoc`は、LaTeXのコマンドやパッケージのドキュメントを検索するコマンドです。
 
-```bash
-texdoc -l パッケージ名
-texdoc --list パッケージ名
+## 検索結果を表示する（`texdoc --list`）
+
+```console
+$ texdoc --list パッケージ名
+$ texdoc -l パッケージ名
 ```
+
+`--list`（`-l`）で、検索結果を表示できます。
 
 試しに{command}`texdoc -l jlreq``した結果は以下のようになりました。
 全部で13個のファイルがヒットしています。
