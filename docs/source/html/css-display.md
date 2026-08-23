@@ -141,10 +141,5 @@ display: inline flow-root;
 ## リファレンス
 
 - [display](https://developer.mozilla.org/ja/docs/Web/CSS/display)
-
-
-:::{note}
-
-[CSS Display Module Level3](https://drafts.csswg.org/css-display/)では、[displayプロパティは2値構文](https://developer.mozilla.org/ja/docs/Web/CSS/display/multi-keyword_syntax_of_display)で記述することになっています。
-
-:::
+- [displayプロパティの2値構文](https://developer.mozilla.org/ja/docs/Web/CSS/display/multi-keyword_syntax_of_display)
+- [CSS Display Module Level 3](https://drafts.csswg.org/css-display/)
