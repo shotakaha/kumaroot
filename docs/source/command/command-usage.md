@@ -43,6 +43,7 @@ maxdepth: 1
 command-bat
 command-find
 command-fd
+command-tree
 command-grep
 command-ripgrep
 command-sed
