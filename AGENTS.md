@@ -352,7 +352,7 @@ For technical reference docs:
 3. Add entry to `docker/docker-examples.md` toctree
 4. Include characteristics section with: メリット (Merits), デメリット (Demerits), 最適な用途 (Best use cases)
 5. Run `task pre-commit` to validate
-6. Commit with conventional format: `fix(docker-<osname>): add <description>`
+6. Commit with conventional format: `feat(docker-<osname>): add <description>` (new page → `feat`; edits to an existing page → `fix`)
 
 ### Adding a New Guide - General Purpose
 
@@ -361,6 +361,7 @@ For technical reference docs:
 3. Follow purpose-based ("したい") organization
 4. Include code examples before explanations
 5. Ensure JTF style compliance
+6. Commit with `feat(<category>-<feature>): add <description>` since this creates a new page
 
 ### Adding a New ROOT/Technical Reference Guide
 
@@ -374,6 +375,7 @@ For technical reference docs:
 8. Ensure all code examples have proper language markers (`cpp`, `python`, `text`)
 9. Use full-width Japanese parentheses（）in Japanese text, not half-width ()
 10. Add blank lines around code blocks and lists
+11. Commit with `feat(<root>-<method>): add <description>` since this creates a new page
 
 ### Adding a New CLI Tool Chain Guide
 
@@ -384,6 +386,7 @@ For technical reference docs:
 5. Prefer basing examples on a real working project's config when one is available
 6. Cross-link sibling pages with plain Markdown links, not in-page anchors
 7. Run `task pre-commit` and `task docs:build` to validate
+8. Commit with `feat(<category>-<tool>): add <description>` since this creates a new page
 
 ### Updating Version Information
 
@@ -413,20 +416,25 @@ For technical reference docs:
 
 **Commit types used in this project:**
 
-- `fix()`: Documentation updates, bug fixes, and corrections (primary type for this documentation project)
+- `feat()`: Creating a brand-new page under `docs/source/` (e.g. `docker/docker-example-fedora.md` did not exist before)
+- `fix()`: Everything else — updates, additions, and corrections to existing pages under `docs/source/` (primary type for this documentation project)
+- `docs()`: Changes to non-content, meta documentation files such as `AGENTS.md`, `CLAUDE.md`, `README.md`
+- `chore()`: Changes to configuration/tooling files that aren't documentation content, e.g. `.pre-commit-config.yaml`, `pyproject.toml`, `Taskfile.yml`, GitHub Actions workflows
 - `refactor()`: Reorganization without functionality change
 - `bump()`: Version bumping (handled by `task bump`)
-- `feat()`: New features (rarely used)
 
 **Examples:**
 
+- `feat(docker-example-fedora): add Fedora container documentation`
+- `feat(html-semantic): add semantics guide`
 - `fix(docker-example-ubuntu): add characteristics section`
 - `fix(docker-example-almalinux): add AlmaLinux container documentation`
 - `fix(docker-example-raspi): add comprehensive version information tables`
-- `fix(Codex): add AGENTS.md developer guidance file`
+- `docs(AGENTS): document feat()/fix()/docs()/chore() split`
+- `chore(pre-commit): update hook versions`
 - `bump: version 2025.11.6 → 2025.11.7`
 
-**Note:** Since this is primarily a documentation project, use `fix()` for all documentation changes (content additions, updates, improvements, new guides, etc.). Reserve `refactor()` for reorganizing existing content structure.
+**Note:** Since this is primarily a documentation project, use `feat()` only when a new page file is created for the first time under `docs/source/`. Use `fix()` for all other changes to existing pages under `docs/source/` (content additions, updates, improvements). Use `docs()` for meta documentation files like `AGENTS.md`, `CLAUDE.md`, and `README.md`. Use `chore()` for configuration/tooling files that aren't documentation content. Reserve `refactor()` for reorganizing existing content structure.
 
 **Branch strategy:**
 
