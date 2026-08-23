@@ -61,6 +61,24 @@ $ curl -LO https://github.com/shotakaha/kumaroot/archive/refs/tags/v2026.8.3.tar
 GitHub Releaseのように、実際のダウンロードURLがリダイレクト先にある場合、`-L`（`--location`）オプションを付けないとファイルを保存できません。
 `-O`と組み合わせて`-LO`のように指定することが多いです。
 
+## インストールスクリプトを実行したい（`-fsSL`）
+
+```console
+// Homebrewのインストールスクリプトを実行
+$ curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | /bin/bash
+
+// uvのインストールスクリプトを実行
+$ curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+`-fsSL`は、取得したスクリプトをそのままシェルに渡して実行するインストーラーの定番パターンです。
+Homebrew、uv、rustup、nvmなど多くのインストールスクリプトで使われています。
+
+`-f`（`--fail`）はHTTPエラー時にサイレント失敗し、エラー内容を出力しません。
+`-s`（`--silent`）は進捗メーターを表示せず、`-S`（`--show-error`）は`-s`と併用時にエラーだけは表示します。
+`-L`（`--location`）はリダイレクトを追跡します。
+オプションの順番は`-fsSL`でも`-fSLs`でも構いません。
+
 ## ヘッダーを取得したい（`--head` / `-I`）
 
 ```console
