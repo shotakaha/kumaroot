@@ -154,3 +154,13 @@ OGPとは別に用意されている、Twitter専用のメタデータです。
 `content`に設定できる値は「待機秒数」と「リダイレクト先URL」をセミコロンでつないだ文字列です。
 
 リダイレクトするのに、そのページを読み込むのはもったいないので、この設定もはじめのほうに書いておくとよいです。
+
+## リファレンス
+
+- [meta](https://developer.mozilla.org/ja/docs/Web/HTML/Element/meta)
+- [title](https://developer.mozilla.org/ja/docs/Web/HTML/Element/title)
+- [ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)
+- [Robots \<meta\> tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)
+- [OGPの公式ページ](https://ogp.me/)
+- [OGP確認ツール](https://ogp.buta3.net/)
+- [Twitter Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)
