@@ -1,15 +1,11 @@
-# ダウンロードしたい（``xh``）
+# ダウンロードしたい（`xh`）
 
 ```console
-$ brew install xh
-$ xh --version
-xh 0.21.0
--native-tls +rustls
+$ xh https://example.com
 ```
 
-```console
-$ xh [メソッド] URL [クエリ]
-```
+`xh`は、HTTPリクエストを送信するコマンドです。
+[curl](./command-curl.md)のRust代替コマンドです。
 
 :::{seealso}
 
@@ -18,3 +14,14 @@ $ xh [メソッド] URL [クエリ]
 - [](./command-wget.md)
 
 :::
+
+## インストールしたい（`xh`）
+
+```console
+$ brew install xh
+$ xh --version
+xh 0.26.2
+-native-tls +rustls
+```
+
+`xh`はHomebrewでインストールできます。
