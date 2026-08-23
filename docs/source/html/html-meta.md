@@ -1,4 +1,4 @@
-# メタ情報したい（``meta``）
+# メタ情報したい（`meta`）
 
 ```html
 <head>
@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="サイトの説明">
 
+    <!-- name属性は自由なキーを設定できる -->
     <meta name="キー" content="値">
 
     <title>サイト名</title>
@@ -15,26 +16,26 @@
 メタ情報は`head`タグの中に記述します。
 `meta`タグを使ってkey-valueペアで設定します。
 
-## 文字エンコーディングしたい（``charset``）
+## 文字エンコーディングしたい（`charset`）
 
 ```html
 <meta charset="utf-8">
 ```
 
 `charset`キーで文書の文字エンコーディングを設定します。
-といっても、``utf-8``以外の値は指定できません。
+といっても、`utf-8`以外の値は指定できません。
 この宣言は文書の最初の方に書いておく必要があります。
 
-## ビューポートしたい（``viewport``）
+## ビューポートしたい（`viewport`）
 
 ```html
 <meta name="viewport" content="width=device-width">
 ```
 
 [ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)のサイズを設定できます。
-画面の幅はデバイスによって異なるため、``width=device-width``を設定しておきましょう。
-また、``initial-scale``で読み込んだときの表示倍率を設定できます。
-よく``initial-scale=1``を書いているサンプルがありますが、デフォルトで1倍なので省略してよいと思います。
+画面の幅はデバイスによって異なるため、`width=device-width`を設定しておきましょう。
+また、`initial-scale`で読み込んだときの表示倍率を設定できます。
+よく`initial-scale=1`を書いているサンプルがありますが、デフォルトで1倍なので省略してよいと思います。
 
 ## サイト名したい（`title`）
 
@@ -52,13 +53,13 @@
 ウェブ検索の結果の見出しとしても利用されます。
 トップページは`サイト名`、記事／ページの場合は「`タイトル | サイト名`」のようにするとよいです。
 
-## サイト説明したい（``description``）
+## サイト説明したい（`description`）
 
 ```html
 <meta name="description" content="サイトの説明">
 ```
 
-## OGPしたい
+## OGPしたい（`og:*`）
 
 ```html
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -79,15 +80,15 @@ CMSではプラグインが用意されている場合もあり、自分で書�
 また、上記のサンプルは必要最低限の要素を抜粋したものです。
 [OGPの公式ページ](https://ogp.me/)を読むと、もっと広く表現できるようです。
 
-## OGP画像したい
+## OGP画像したい（`og:image:*`）
 
 ```html
-<meta propery="og:image:url" content="og:imageと同じ">
-<meta propery="og:image:secure_url" content="HTTPSが要求されたときの画像URL">
-<meta propery="og:image:type" content="画像のMIMEタイプ">
-<meta propery="og:image:width" content="画像の幅（px）">
-<meta propery="og:image:height" content="画像の高さ（px）">
-<meta propery="og:image:alt" content="画像の代替テキスト">
+<meta property="og:image:url" content="og:imageと同じ">
+<meta property="og:image:secure_url" content="HTTPSが要求されたときの画像URL">
+<meta property="og:image:type" content="画像のMIMEタイプ">
+<meta property="og:image:width" content="画像の幅（px）">
+<meta property="og:image:height" content="画像の高さ（px）">
+<meta property="og:image:alt" content="画像の代替テキスト">
 ```
 
 画像の設定項目はオプションがあります。
@@ -109,5 +110,5 @@ Twitterには[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-c
 <meta http-equiv="refresh" content="秒数;url=リダイレクト先のURL">
 ```
 
-リダイレクトの設定も``meta``タグに書きます。
+リダイレクトの設定も`meta`タグに書きます。
 リダイレクトするのに、そのページを読み込むのはもったいないので、この設定もはじめのほうに書いておくとよいです。
