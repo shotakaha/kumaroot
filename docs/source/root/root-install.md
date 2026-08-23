@@ -12,7 +12,6 @@ $ which root
 
 :::{seealso}
 
-2011年ころは、MacPortsを使ってインストールしていました。
 そのときの内容を以下に移動しておきました。
 
 - [](./root-install-macports.md)

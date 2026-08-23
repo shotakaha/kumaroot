@@ -23,6 +23,7 @@ ROOTをインストールして、開発環境を準備する方法を説明し�
 maxdepth: 1
 ---
 root-install
+root-install-macports
 root-install-env
 root-config
 root-pyroot
