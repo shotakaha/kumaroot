@@ -63,12 +63,22 @@ command-zoxide
 maxdepth: 1
 ---
 command-code
-command-vim
 command-emacs
-command-helix
 command-zed
-command-clang-format
+command-vim
+command-helix
+```
+
+## ドキュメントしたい
+
+```{toctree}
+---
+maxdepth: 1
+---
 command-myst
+command-pandoc
+command-texdoc
+command-jsdoc
 ```
 
 ## エージェントしたい
@@ -189,11 +199,9 @@ command-zellij
 command-1password
 command-mkcert
 command-mysql
-command-pandoc
-command-texdoc
 command-fc-list
 command-expect
 command-ansible
-command-jsdoc
 command-wp-cli
+command-clang-format
 ```
