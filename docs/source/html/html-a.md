@@ -1,12 +1,19 @@
 # ハイパーリンクしたい（`a`）
 
 ```html
-<a target="_blank" rel="noopener noreferrer" href="外部サイトのURL">
+<a href="リンク先のURL">リンクテキスト</a>
 ```
 
 `a`タグは、ハイパーリンクを表示するタグです。
 `href`属性にリンク先のURLを指定します。
 内部ページへのリンクは相対パスで指定することもできます。
+
+## 外部リンクしたい（`rel="noopener noreferrer"`）
+
+```html
+<a target="_blank" rel="noopener noreferrer" href="外部サイトのURL">
+```
+
 外部サイトにリンクする際は、上のような属性を追加します。
 
 `rel="noopener"`属性は、新しく開いたページから`window.opener`経由で元のページを操作できないようにします。
@@ -23,10 +30,19 @@ HTTPリクエストヘッダーのフィールド名は`Referer`です。
 
 :::
 
+:::{note}
+
+最近のブラウザでは`target="_blank"`は自動的に`noopener`相当の挙動になるため、
+省略しても`window.opener`経由の操作はできません。
+とはいえ古いブラウザとの互換性や、意図を明確にする意味でも明示しておくのが安全です。
+なお`noreferrer`（リファラーを送らない）はこの自動適用の対象外なので、必要な場合は明示する必要があります。
+
+:::
+
 ## 別タブしたい（`target`）
 
 ```html
-<a target="_blank" rel="noopener noreferrer" href="...">
+<a target="_blank" href="...">
 ```
 
 `target`属性でリンク先のURLを表示する場所を変更できます。
@@ -37,17 +53,7 @@ HTTPリクエストヘッダーのフィールド名は`Referer`です。
 - `target="_parent"`: 親コンテキスト
 - `target="_top"`: 最上位の親コンテキスト
 
-`target="_blank"`を使うときは、`rel="noopener"`もあわせて指定しておきましょう。
-省略すると、開いた先のページから元のページを操作できてしまいます。
-
-:::{note}
-
-最近のブラウザでは`target="_blank"`は自動的に`noopener`相当の挙動になるため、
-省略しても`window.opener`経由の操作はできません。
-とはいえ古いブラウザとの互換性や、意図を明確にする意味でも明示しておくのが安全です。
-なお`noreferrer`（リファラーを送らない）はこの自動適用の対象外なので、必要な場合は明示する必要があります。
-
-:::
+`target="_blank"`を使うときは、上記の「外部リンクしたい」で紹介した`rel="noopener noreferrer"`もあわせて指定しておきましょう。
 
 ## リファラーしたい（`referrerpolicy`）
 
