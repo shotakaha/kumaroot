@@ -5,9 +5,10 @@ DokuWikiの引っ越し先をあれこれ検討した結果、いちから作り
 [Sphinx](https://www.sphinx-doc.org/ja/master/)で文書を作成、
 [Read the Docs](https://kumaroot.readthedocs.io/ja/latest/)で公開することにしました。
 
-## ローカルの開発環境
+## ローカルの執筆環境
 
-このドキュメントをビルドしているローカル環境です。
+このドキュメントを執筆・ビルドするときに使っているローカル環境です。
+各ページのサンプル出力を作るときに使ったツールも含めて、まとめて記録しています。
 
 > 2026/08/23時点
 
@@ -151,23 +152,6 @@ Python 3.12.7
 
 Python環境は[uv](https://docs.astral.sh/uv/)で管理しています。
 
-## Hugo環境
-
-```console
-$ brew info hugo
-==> hugo: stable 0.165.0 (bottled), HEAD
-Configurable static site generator
-https://gohugo.io/
-Installed (on request)
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/h/hugo.rb
-License: Apache-2.0
-```
-
-```console
-$ hugo version
-hugo v0.165.0+extended+withdeploy darwin/arm64 BuildDate=2026-08-12T14:26:28Z VendorInfo=Homebrew
-```
-
 ## Node環境
 
 ```console
@@ -189,6 +173,25 @@ v26.7.0
 ```console
 $ npm --version
 11.19.0
+```
+
+`mystmd`を使うページのビルドに、Node環境を使うことがあります。
+
+## Hugo環境
+
+```console
+$ brew info hugo
+==> hugo: stable 0.165.0 (bottled), HEAD
+Configurable static site generator
+https://gohugo.io/
+Installed (on request)
+From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/h/hugo.rb
+License: Apache-2.0
+```
+
+```console
+$ hugo version
+hugo v0.165.0+extended+withdeploy darwin/arm64 BuildDate=2026-08-12T14:26:28Z VendorInfo=Homebrew
 ```
 
 ## ROOT環境
