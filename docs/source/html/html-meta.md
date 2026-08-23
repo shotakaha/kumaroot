@@ -47,6 +47,17 @@
 <meta name="description" content="サイトの説明">
 ```
 
+## クロール制御したい（`robots`）
+
+```html
+<meta name="robots" content="index,follow">
+```
+
+検索エンジンのクローラーに対して、このページをインデックスするか（`index`/`noindex`）、
+ページ内のリンクを辿るか（`follow`/`nofollow`）を指示できます。
+省略した場合のデフォルトは`index,follow`ですが、
+下書きページや検索結果に出したくないページには`noindex`を明示しておくとよいです。
+
 ## ビューポートしたい（`viewport`）
 
 ```html
