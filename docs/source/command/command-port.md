@@ -16,6 +16,94 @@ $ port uninstall パッケージ名
 
 :::
 
+MacPortsは、2009年にHomebrewが登場するまで、macOS向けのパッケージ管理ツールの定番のひとつとして広く使われていました。
+
+2002年にDarwinPortsという名前で始まったプロジェクトで、2005年にバージョン1.0がリリースされ、
+2006年に現在の名前（MacPorts）になりました。
+現在も開発が継続しており、2025年10月にはバージョン2.11.6、2026年にも2.12系がリリースされています（[MacPorts公式サイト](https://www.macports.org/)）。
+
+最新のmacOS（Tahoe）にも対応しており、Apple SiliconとIntelの両方で使えます。
+
 ## インストールしたい（MacPorts）
 
 [MacPorts公式サイトのインストール手順](https://www.macports.org/install.php)にしたがって、MacPortsをインストールしてください。
+
+## パッケージをインストールしたい（`port install`）
+
+```console
+$ sudo port install パッケージ名
+```
+
+`port install`で、指定したパッケージをインストールできます。
+MacPortsはソースコードからビルドしてインストールする方式のため、パッケージによってはインストールに時間がかかることがあります。
+
+## パッケージを探したい（`port search`）
+
+```console
+$ port search 検索パターン
+
+// 例：ブラウザを検索
+$ port search browser
+```
+
+`port search`で、MacPortsで管理されているパッケージ（ポート）を検索できます。
+
+## パッケージの詳細を調べたい（`port info`）
+
+```console
+$ port info パッケージ名
+```
+
+`port info`で、指定したパッケージの詳細情報を表示できます。
+パッケージの説明や依存パッケージ、提供元ウェブサイトなどを調べることができます。
+
+## パッケージを更新したい（`port upgrade`）
+
+```console
+// ポートツリー（パッケージリスト）を更新する
+$ sudo port selfupdate
+
+// 更新が必要なパッケージを表示する
+$ port outdated
+
+// パッケージを更新する
+$ sudo port upgrade outdated
+```
+
+`sudo port selfupdate`で、MacPortsが参照するポートツリーを最新の状態に更新できます。
+パッケージ自体は更新されません。
+
+`port outdated`で、更新が必要なパッケージを一覧できます。
+
+`sudo port upgrade outdated`で、更新があるパッケージをすべて更新できます。
+`sudo port upgrade パッケージ名`で、指定したパッケージだけを更新することもできます。
+
+## インストール済みパッケージを確認したい（`port installed`）
+
+```console
+$ port installed
+```
+
+`port installed`で、インストール済みのパッケージ名を一覧できます。
+
+## パッケージを削除したい（`port uninstall`）
+
+```console
+$ sudo port uninstall パッケージ名
+```
+
+`port uninstall`で、インストール済みのパッケージを削除できます。
+
+## 不要なファイルを削除したい（`port clean`）
+
+```console
+// 古いバージョンやビルドファイルを削除する
+$ sudo port clean --all パッケージ名
+
+// 使われなくなった依存パッケージをまとめて削除する
+$ sudo port uninstall leaves
+```
+
+`port clean`で、ビルド時に残ったファイルやキャッシュを削除できます。
+
+`port uninstall leaves`で、依存関係だけでインストールされていて、今はどこからも参照されなくなったパッケージ（leaves）をまとめて削除できます。
