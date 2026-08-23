@@ -3,13 +3,12 @@
 ```html
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <title>サイト名</title>
     <meta name="description" content="サイトの説明">
+    <meta name="viewport" content="width=device-width">
 
     <!-- name属性は自由なキーを設定できる -->
     <meta name="キー" content="値">
-
-    <title>サイト名</title>
 </head>
 ```
 
@@ -25,17 +24,6 @@
 `charset`キーで文書の文字エンコーディングを設定します。
 といっても、`utf-8`以外の値は指定できません。
 この宣言は文書の最初の方に書いておく必要があります。
-
-## ビューポートしたい（`viewport`）
-
-```html
-<meta name="viewport" content="width=device-width">
-```
-
-[ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)のサイズを設定できます。
-画面の幅はデバイスによって異なるため、`width=device-width`を設定しておきましょう。
-また、`initial-scale`で読み込んだときの表示倍率を設定できます。
-よく`initial-scale=1`を書いているサンプルがありますが、デフォルトで1倍なので省略してよいと思います。
 
 ## サイト名したい（`title`）
 
@@ -58,6 +46,17 @@
 ```html
 <meta name="description" content="サイトの説明">
 ```
+
+## ビューポートしたい（`viewport`）
+
+```html
+<meta name="viewport" content="width=device-width">
+```
+
+[ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)のサイズを設定できます。
+画面の幅はデバイスによって異なるため、`width=device-width`を設定しておきましょう。
+また、`initial-scale`で読み込んだときの表示倍率を設定できます。
+よく`initial-scale=1`を書いているサンプルがありますが、デフォルトで1倍なので省略してよいと思います。
 
 ## OGPしたい（`og:*`）
 
