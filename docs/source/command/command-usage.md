@@ -55,6 +55,7 @@ command-nkf
 command-tldr
 command-zoxide
 command-fzf
+command-peco
 ```
 
 ## エディターしたい
