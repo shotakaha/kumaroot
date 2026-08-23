@@ -1,7 +1,7 @@
-# ダンロードしたい（`curl`）
+# ダウンロードしたい（`curl`）
 
-```bash
-curl -o <ファイル名> URL
+```console
+$ curl -o ファイル名 URL
 ```
 
 ## インストールしたい（`curl`）
@@ -26,20 +26,37 @@ Homebrewで最新版をインストールできます。
 $ curl -o example.html https://example.com
 ```
 
-`-o ファイル名`オプションで、指定したURLを任意のファイル名で保存できます。
+`--output`（`-o`）で、指定したURLを任意のファイル名で保存できます。
 
 ```console
-# リモートのファイル名を使って保存
+// リモートのファイル名を使って保存
 $ curl -O https://example.com/index.html
+```
 
-# ディレクトリまでの指定だとエラー
+`--remote-name`（`-O`）で、指定したURLをそのままファイル名として利用できます。
+
+```console
+// ディレクトリまでの指定だとエラー
 $ curl -O https://example.com/
 curl: Remote file name has no length
 curl: (23) Failed writing received data to disk/application
 ```
 
-`-O`オプションでURLをそのままファイル名として利用できます。
 HTMLファイルまでのURLパスを指定しないとエラーになります。
+
+## リダイレクトを追跡したい（`-L`）
+
+```console
+# リダイレクト先を追跡してダウンロード
+$ curl -LO https://github.com/shotakaha/kumaroot/archive/refs/tags/v2026.8.3.zip
+$ curl -LO https://github.com/shotakaha/kumaroot/archive/refs/tags/v2026.8.3.tar.gz
+```
+
+`--location`（`-L`）で、リダイレクト先を追跡してダウンロードできます。
+
+`curl`はデフォルトでリダイレクトを追跡しません。
+GitHub Releaseのように、実際のダウンロードURLがリダイレクト先にある場合、`-L`（`--location`）オプションを付けないとファイルを保存できません。
+`-O`と組み合わせて`-LO`のように指定することが多いです。
 
 ## ヘッダーを取得したい（`-I`）
 
