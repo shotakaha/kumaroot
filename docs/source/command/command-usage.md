@@ -22,6 +22,7 @@ command-cd
 command-pwd
 command-ls
 command-lsd
+command-exa
 command-open
 command-mdfind
 command-date
@@ -152,7 +153,7 @@ command-shasum
 command-goaccess
 ```
 
-## Git・バージョン管理したい
+## バージョン管理したい
 
 ```{toctree}
 ---
@@ -164,7 +165,7 @@ command-gitlab
 command-dvc
 ```
 
-## 圧縮・アーカイブしたい
+## 圧縮・展開したい
 
 ```{toctree}
 ---
@@ -195,13 +196,4 @@ command-expect
 command-ansible
 command-jsdoc
 command-wp-cli
-```
-
-## 未分類
-
-```{toctree}
----
-maxdepth: 1
----
-command-exa
 ```
