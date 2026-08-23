@@ -19,14 +19,7 @@ $ brew install curl
 `curl`はmacOSに標準でインストールされています。
 Homebrewで最新版をインストールできます。
 
-## ダウンロードしたい（`-o` / `-O`）
-
-```console
-# ファイル名を指定
-$ curl -o example.html https://example.com
-```
-
-`--output`（`-o`）で、指定したURLを任意のファイル名で保存できます。
+## ダウンロードしたい（`--remote-name` / `-O`）
 
 ```console
 // リモートのファイル名を使って保存
@@ -44,7 +37,15 @@ curl: (23) Failed writing received data to disk/application
 
 HTMLファイルまでのURLパスを指定しないとエラーになります。
 
-## リダイレクトを追跡したい（`-L`）
+## 名前付きダウンロードしたい（`--output` / `-o`）
+
+```console
+$ curl -o example.html https://example.com
+```
+
+`--output`（`-o`）で、指定したファイル名で保存できます。
+
+## リダイレクトを追跡したい（`--location` / `-L`）
 
 ```console
 # リダイレクト先を追跡してダウンロード
@@ -58,10 +59,10 @@ $ curl -LO https://github.com/shotakaha/kumaroot/archive/refs/tags/v2026.8.3.tar
 GitHub Releaseのように、実際のダウンロードURLがリダイレクト先にある場合、`-L`（`--location`）オプションを付けないとファイルを保存できません。
 `-O`と組み合わせて`-LO`のように指定することが多いです。
 
-## ヘッダーを取得したい（`-I`）
+## ヘッダーを取得したい（`--head` / `-I`）
 
 ```console
-$ curl -I https://httpbin.org/status/200
+$ curl --head https://httpbin.org/status/200
 
 HTTP/2 200
 date: Sun, 09 Nov 2025 01:26:20 GMT
@@ -72,7 +73,7 @@ access-control-allow-origin: *
 access-control-allow-credentials: true
 ```
 
-`-I`オプションでヘッダー情報を取得できます。
+`--head`（`-I`）オプションでヘッダー情報を取得できます。
 
 ```console
 $ curl -I https://httpbin.org/status/404
