@@ -22,3 +22,24 @@ $ fzf --version
 ```
 
 `fzf`はHomebrewでインストールできます。
+
+## プレビュー表示したい（`--preview`）
+
+```console
+$ fzf --preview 'cat {}'
+$ fzf --preview 'bat --color=always {}'
+```
+
+`--preview`で、選択中の候補をプレビュー表示できます。
+`{}`は、選択中の候補（ファイル名）に置き換わるプレースホルダーです。
+
+## 複数選択したい（`-m` / `--multi`）
+
+```console
+$ fzf -m
+$ fzf --multi
+```
+
+`--multi`（`-m`）で、複数の候補を選択できるようになります。
+{kbd}`Tab`で選択・選択解除、
+{kbd}`Enter`で選択済みの候補すべてを確定します。
