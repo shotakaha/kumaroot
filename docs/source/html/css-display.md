@@ -5,31 +5,57 @@ display: 外部の表示型 内部の表示型;
 ```
 
 `display`プロパティで要素の表示スタイルを変更できます。
-現在は2値構文が標準で、1番目の引数「外部の表示型」でその要素自体の並び方（`block`か`inline`か）を、
+1番目の引数で「外部の表示型」でその要素自体の並び方（`block`か`inline`か）を、
 2番目の引数「内部の表示型」で子要素の並び方（`flow`、`flow-root`、`flex`、`grid`など）を指定します。
 
-:::{note}
-
-[CSS Display Module Level3](https://drafts.csswg.org/css-display/)では、[displayプロパティは2値構文](https://developer.mozilla.org/ja/docs/Web/CSS/display/multi-keyword_syntax_of_display)で記述することになっています。
-
-:::
-
-## 普通の要素にしたい（`block flow` / `inline flow`）
+## ブロック要素にしたい（`block flow`）
 
 ```css
 div {
     display: block flow;
 }
+```
 
+`block flow`は、ブロック要素の表示型です。
+横幅いっぱいに広がり、縦に積み重なるように表示されます。
+`div`や`section`、`p`などのブロック要素は、デフォルトでこの表示型を持っています。
+
+### デフォルトでブロック表示のタグ
+
+- `div`: 汎用的なブロック要素タグ
+- `h1 ... h6`: 見出し
+- `section`: セクション
+- `p`: 段落
+- `blockquote`: 引用
+- `hr`: 区切り線
+- `figure` / `figcaption`: 図
+- `nav` / `main` / `footer` / `aside` / `header`
+
+## インライン要素にしたい（`inline flow`）
+
+```css
 span {
     display: inline flow;
 }
 ```
 
-`block flow`と`inline flow`は、それぞれ`div`や`span`がデフォルトで持っている表示型です。
-特別なレイアウトが必要ない、ごく普通のブロック要素・インライン要素にしたいときはこの組み合わせを使います。
+`inline flow`は、インライン要素の表示型です。
+横に並び、内容に応じて高さが調整されます。
+`span`や`img`、`a`などのインライン要素は、デフォルトでこの表示型を持っています。
 
-## 浮動要素を内包したい（`block flow-root`）
+### デフォルトでインライン表示のタグ
+
+- `span`: 汎用的なインライン要素タグ
+- `img`: 画像
+- `a`: ハイパーリンク
+- `strong`: 重要なテキスト
+- `q`: 短い引用
+- `sub` / `sup`: 下付き文字 / 上付き文字
+- `br`: 改行
+- `code` / `kbd`: コード / キーボード入力
+- `em` / `b` / `i` / `u`: 強調系
+
+## フロート要素を内包したい（`block flow-root`）
 
 ```css
 .container {
@@ -94,34 +120,6 @@ span {
 
 :::
 
-## デフォルトの表示型を知りたい
-
-タグごとにデフォルトの表示型（`block`か`inline`か）が決まっています。
-明示的に`display`を指定しない限り、この表示型が使われます。
-
-### デフォルトでブロック表示のタグ
-
-- `div`: 汎用的なブロック要素タグ
-- `h1 ... h6`: 見出し
-- `section`: セクション
-- `p`: 段落
-- `blockquote`: 引用
-- `hr`: 区切り線
-- `figure` / `figcaption`: 図
-- `nav` / `main` / `footer` / `aside` / `header`
-
-### デフォルトでインライン表示のタグ
-
-- `span`: 汎用的なインライン要素タグ
-- `img`: 画像
-- `a`: ハイパーリンク
-- `strong`: 重要なテキスト
-- `q`: 短い引用
-- `sub` / `sup`: 下付き文字 / 上付き文字
-- `br`: 改行
-- `code` / `kbd`: コード / キーボード入力
-- `em` / `b` / `i` / `u`: 強調系
-
 ## 1値構文で書きたい（後方互換）
 
 ```css
@@ -143,3 +141,10 @@ display: inline flow-root;
 ## リファレンス
 
 - [display](https://developer.mozilla.org/ja/docs/Web/CSS/display)
+
+
+:::{note}
+
+[CSS Display Module Level3](https://drafts.csswg.org/css-display/)では、[displayプロパティは2値構文](https://developer.mozilla.org/ja/docs/Web/CSS/display/multi-keyword_syntax_of_display)で記述することになっています。
+
+:::
