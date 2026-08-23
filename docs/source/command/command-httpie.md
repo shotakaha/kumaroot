@@ -1,7 +1,15 @@
-# ダウンロードしたい（``httpie``）
+# ダウンロードしたい（`httpie`）
 
 ```console
-$ brew install --cask httpie
+$ http https://example.com
+```
+
+`httpie`は、HTTPリクエストを操作できるHTTPクライアントです。
+
+## インストールしたい（`httpie`）
+
+```console
+$ brew install --cask httpie-desktop
 ```
 
 :::{seealso}
