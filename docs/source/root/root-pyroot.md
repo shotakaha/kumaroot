@@ -1,4 +1,4 @@
-# PyROOTしたい（``import ROOT``）
+# PyROOTしたい（`import ROOT`）
 
 ```python3
 >>> import ROOT
@@ -13,23 +13,23 @@
 `import ROOT`でパッケージを読み込み、
 バージョンやライブラリのパスを確認しています。
 
-## パス設定（``$PYTHONPATH``）
+## パス設定したい（`$PYTHONPATH`）
 
 ```bash
 export ROOTSYS=$(root-config --prefix)
 export PYTHONPATH=$ROOTSYS/lib/root:$PYTHONPATH
 ```
 
-[環境変数の設定](./root-install-env.md)で``PYTHONPATH``も設定されるはずですが、
-使用しているPython環境によっては、パスが認識されない場合があります。
-その場合は、環境変数``$PYTHONPATH``にパスを追加するとよいはずです。
+`ROOTSYS`と`PYTHONPATH`を適切に設定します。
+[環境変数の設定](./root-install-env.md)で設定されるはずですが、使用しているPython環境によっては、このPATHが認識されない場合があります。
+その場合は、`$PYTHONPATH`の値がどうなっているかを確認し、必要に応じてパスを追加してください。
 
 :::{note}
 
-``virtualenv``や``Poetry``などで仮想環境上に構築している場合、
-``jupyter-lab``を``pipx``でインストールした場合、
-VS Code上のJupyter（``ipykernel``）を使っている場合などで、
-うまくimportできない場合は、まず``PYTHONPATH``の設定を確認してみるとよいと思います。
+`virtualenv`や`uv`などで仮想環境上に構築している場合、
+`jupyter-lab`を`pipx`でインストールした場合、
+VS Code上のJupyter（`ipykernel`）を使っている場合などで、
+うまくimportできない場合は、まず`PYTHONPATH`の設定を確認してみるとよいと思います。
 
 :::
 
@@ -52,27 +52,6 @@ $ uv pip install metakernel    # ROOT C++ kernelに必要
 $ uv run root --notebook
 ```
 
-プロジェクトでPyROOTを使う場合は、
-仮想環境からシステムパッケージを参照できるようにするのが簡単です。
 このサンプルは`uv venv`を使ったときのコマンド例です。
-
-## （削除予定）MacPortsしたい
-
-> この段落の内容は古くなっています。
-> 10年くらいMacPortsは使っていないため、近いうちに削除します。
-
-``MacPorts`` でインストールする場合は、Pythonの {command}`variants` を指定します。
-``ROOT6`` では ``+python27`` がデフォルトで **ON** になっています。
-``ROOT5`` では忘れずに指定する必要があります。
-
-また、このとき ``variants`` に指定するバージョンは、自分が使うPythonのバージョンに合わせる必要があります。
-ミスマッチだと、動作せず、クラッシュします。
-
-:::{note}
-
-Python2.7のころには、よりPythonicな書き方で使うことを目指した `rootpy`パッケージがありました。
-Python3にも対応していたと思いますが、数年前に開発停止しているようです。
-
-- [rootpy](https://github.com/rootpy/rootpy/)
-
-:::
+プロジェクトごとに仮想環境を作成する場合、
+`--system-site-packages`オプションで、仮想環境からシステムパッケージを参照できるようにします。
