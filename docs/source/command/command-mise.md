@@ -58,7 +58,40 @@ $ mise config ls
 
 `mise config ls`（`config list`）で、現在有効な設定ファイルと、ランタイムがどちらの設定に由来するかを確認できます。
 
-## 有効／無効にしたい（`mise activate` / `mise deactivate`）
+## ランタイムを再現したい（`mise install`）
+
+```console
+$ cat mise.toml
+[tools]
+python = "3.10"
+node = "18"
+
+$ mise install
+mise node@18.20.8       [1/3] download node-v18.20.8-darwin-arm64.tar.gz
+mise node@18.20.8       [2/3] checksum node-v18.20.8-darwin-arm64.tar.gz
+mise node@18.20.8       [3/3] extract node-v18.20.8-darwin-arm64.tar.gz
+mise python@3.10.21     [1/3] extract cpython-3.10.21+...-install_only_stripped.tar.gz
+mise python@3.10.21   ✓ installed
+mise node@18.20.8     ✓ installed
+```
+
+`mise install`で、`mise.toml`の設定にあるランタイムを一括でインストールできます。
+`mise.toml`を共有すれば、他のマシンやCI環境でも同じランタイム構成を再現できます。
+
+```console
+$ mise install python@3.12
+mise python@3.12.14 ✓ installed
+mise WARN  python installed but not activated — it is not in any config file.
+To install and activate, run:
+  mise use python
+```
+
+`mise install python@3.12`のように、引数を指定すると、そのランタイムだけを`~/.local/share/mise/installs/`にインストールします。
+この場合は`mise.toml`に追記されません。
+
+ランタイムの切り替えは`mise use`で行います。
+
+## ランタイムを有効／無効にしたい（`mise activate` / `mise deactivate`）
 
 :::{note}
 2023年11月に[fishで自動的に有効](https://github.com/jdx/mise/releases/tag/v2023.11.9)にする機能が追加されました。
@@ -127,23 +160,7 @@ python = "3.12"
 `--global`オプションでユーザー設定に追加できます。
 設定は`~/.config/mise/config.toml`に保存されます。
 
-## インストールだけしたい（`mise install`）
-
-```console
-$ mise install python@3.12
-mise python@3.12.14 ✓ installed
-mise WARN  python installed but not activated — it is not in any config file.
-To install and activate, run:
-  mise use python
-```
-
-`install`コマンドは、ランタイムを`~/.local/share/mise/installs/`にインストールするだけで、`mise.toml`には追記しません。
-そのため、インストール直後は有効化されておらず、`which`で探しても見つかりません。
-
-`use`はインストールと`mise.toml`への追記をまとめて行うコマンドなので、通常はこちらを使います。
-`install`は、複数バージョンを事前に用意しておきたい場合などに使います。
-
-## 更新したい（`mise upgrade`）
+## ランタイムを更新したい（`mise upgrade`）
 
 ```console
 $ mise ls
@@ -159,10 +176,19 @@ Tool    Version  Config Source             Requested
 python  3.12.3  ~/.config/mise/config.toml 3.12
 ```
 
-`ls`コマンドでランタイムの更新の有無を確認できます。
-`upgrade`（`up`）コマンドでランタイムを一括で更新できます。
+`mise upgrade`（`up`）コマンドで、指定したランタイムを最新バージョンに更新できます。
+`mise ls --outdated`で、更新可能なランタイムを確認できます。
 
-## ツールの提供元を調べたい（`mise registry`）
+## ランタイムを削除したい（`mise uninstall`）
+
+```console
+$ mise uninstall python@3.12
+mise python@3.12 ✓ removing ~/.local/share/mise/installs/python/3.12
+```
+
+`mise uninstall`コマンドで、指定したランタイムを削除できます。
+
+## ランタイムの提供元を調べたい（`mise registry`）
 
 ```console
 $ mise registry uv
