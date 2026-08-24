@@ -70,26 +70,19 @@ $ mise ls-remote hugo
 ```
 
 `ls-remote`（`list-remote` / `list-all`）コマンドで、インストールできるバージョンを一覧できます。
-プラグインによっては、下記のようなメッセージが表示されるので`y(es)`を入力します。
-
-```console
-$ mise ls-remote pipx
-⚠️  pipx is a community-developed plugin: https://github.com/yozachar/asdf-pipx
-Would you like to install pipx? (y/n)
-```
 
 ## 環境を切り替えたい（`mise use`）
 
 ```console
 // プロジェクト（＝現在のディレクトリ）に追加
 $ mise use python@3.11
-$ cat ./.mise.toml
+$ cat ./mise.toml
 [tools]
 python = "3.11"
 ```
 
 `use`（`u`）コマンドでツールの環境を切り替えることができます。
-設定は`./.mise.toml`に保存されます。
+設定は`./mise.toml`に保存されます。
 
 指定したバージョンのツールが見つからない場合は、`mise install`コマンドが自動実行され、
 `~/.local/share/mise/installs/`の中にインストールされます。
@@ -126,12 +119,12 @@ $ which python
 
 // $KumaROOTで実行した場合
 $ mise use python@3.11  # このリポジトリは3.11を指定する
-mise ~/repos/github.com/shotakaha/kumaroot/.mise.toml tools: python@3.11.8
+mise ~/repos/github.com/shotakaha/kumaroot/mise.toml tools: python@3.11.8
 
 $ mise ls python
-Plugin  Version  Config Source                                    Requested
+Tool    Version  Config Source                                   Requested
 python  3.11.6
-python  3.11.8   ~/repos/github.com/shotakaha/kumaroot/.mise.toml 3.11
+python  3.11.8   ~/repos/github.com/shotakaha/kumaroot/mise.toml 3.11
 python  3.12.2
 
 $ which python
@@ -149,8 +142,8 @@ MyST requires node 16, 18, or 20; you are running node 21.
 // Node20に変更
 $ mise use node@20  # ~/.local/share/mise/installs/node/20.10.0/bin/node
 $ mise ls node
-Plugin  Version  Config Source                                  Requested
-node    20.9.0   ~/repos/gitlab.com/qumasan/haniwers/.mise.toml 20
+Tool    Version  Config Source                               Requested
+node    20.9.0   ~/repos/gitlab.com/qumasan/haniwers/mise.toml 20
 $ myst --version
 v1.1.32
 ```
@@ -181,7 +174,7 @@ python    3.11.10
 
 ```console
 $ mise ls
-Plugin  Version            Config Source              Requested
+Tool    Version            Config Source              Requested
 python  3.12.2 (outdated)  ~/.config/mise/config.toml 3.12
 
 $ mise upgrade
@@ -189,9 +182,9 @@ mise python@3.12.3 ✓ installed
 mise python@3.12.2 ✓ removing ~/.local/share/mise/installs/python/3.12.2
 
 $ mise ls
-Plugin  Version  Config Source             Requested
+Tool    Version  Config Source             Requested
 python  3.12.3  ~/.config/mise/config.toml 3.12
 ```
 
-`ls`コマンドでプラグインの更新の有無を確認できます。
-`upgrade`（`up`）コマンドでプラグイン本体を一括で更新できます。
+`ls`コマンドでツールの更新の有無を確認できます。
+`upgrade`（`up`）コマンドでツールを一括で更新できます。
