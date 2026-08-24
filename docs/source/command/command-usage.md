@@ -172,6 +172,7 @@ command-goaccess
 ---
 maxdepth: 1
 ---
+command-git
 command-tig
 command-glab
 command-gitlab
