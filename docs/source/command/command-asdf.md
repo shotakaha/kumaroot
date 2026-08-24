@@ -1,51 +1,34 @@
-# 環境のバージョン管理したい（``asdf``）
+# ランタイム管理したい（`asdf`）
 
-```bash
+```console
+$ asdf
+```
+
+`asdf`は、開発環境で使うランタイム（実行環境）を切り替えるコマンドです。
+Read the Docsのビルド手順で、Pythonのバージョン指定に使われていたのを見て知りました。
+
+## インストールしたい（`asdf`）
+
+```console
 $ brew install asdf
 ```
 
-開発環境のバージョンを切り替えできるコマンドです。
-Read the Docsのビルド手順で、Pythonのバージョン指定に使われていたので、使い方を調べてみます。
+`asdf`はHomebrewでインストールできます。
 
-## プラグインを確認したい
+## ランタイムを切り替えたい（`asdf global`）
 
-```bash
-$ asdf plugin list all
-initializing plugin repository...Cloning into '~/.asdf/repository'...
-...（省略）...
-1password-cli                 https://github.com/NeoHsu/asdf-1password-cli.git
-R                             https://github.com/asdf-community/asdf-r.git
-...
-bat                           https://gitlab.com/wt0f/asdf-bat.git
-...
-git                           https://gitlab.com/jcaigitlab/asdf-git.git
-...
-gohugo                        https://github.com/nklmilojevic/asdf-hugo.git
-hugo                          https://github.com/NeoHsu/asdf-hugo.git
-...
-poetry                        https://github.com/asdf-community/asdf-poetry.git
-python                        https://github.com/danhper/asdf-python.git
-...
-rust                          https://github.com/code-lever/asdf-rust.git
-rust-analyzer                 https://github.com/Xyven1/asdf-rust-analyzer
-...
+```console
+$ asdf global python 3.12.13
 ```
 
-``asdf``で管理できるツールのプラグインが思ってた以上にたくさんあることが分かりました。
-とりあえず興味のあるものを抜粋してみました。
+`asdf global`で、システム全体のランタイムを指定できます。
+上記は、Read the Docsのビルド手順で実行されているコマンドです。
 
-## プラグインをインストールしたい
+:::{note}
 
-```bash
-asdf plugin add プラグイン名
-```
+`asdf` v0.15以降では`global`/`local`/`shell`コマンドが廃止され、`asdf set -u python 3.12.13`（グローバル）／`asdf set python 3.12.13`（ローカル）に統一されています。
 
-## ツールのバージョンを指定したい
-
-```bash
-$ asdf global プラグイン名 バージョン  # global version
-$ asdf local プラグイン名 バージョン  # local version
-```
+:::
 
 ## リファレンス
 
