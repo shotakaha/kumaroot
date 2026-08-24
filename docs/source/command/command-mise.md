@@ -161,6 +161,34 @@ python  3.12.3  ~/.config/mise/config.toml 3.12
 `ls`コマンドでランタイムの更新の有無を確認できます。
 `upgrade`（`up`）コマンドでランタイムを一括で更新できます。
 
+## ツールの提供元を調べたい（`mise registry`）
+
+```console
+$ mise registry uv
+aqua:astral-sh/uv asdf:asdf-community/asdf-uv pipx:uv
+
+$ mise registry node
+core:node
+
+$ mise registry poetry
+vfox:mise-plugins/vfox-poetry pipx:poetry
+```
+
+`registry`コマンドで、ツール名がどのバックエンド経由でインストールされるかを確認できます。
+複数のバックエンドが表示される場合、先頭が優先的に使われます。
+
+- `core:` — mise本体に組み込み（プラグイン不要）
+- `aqua:` / `npm:` / `cargo:` / `pipx:`など — 各パッケージレジストリ経由（プラグイン不要）
+- `asdf:` / `vfox:` — プラグイン（Gitリポジトリ）経由
+
+`asdf:`や`vfox:`だけが表示されるツールは、`mise use`や`mise install`の際にプラグインが自動でインストールされます。
+
+```console
+$ mise registry --backend aqua
+```
+
+`--backend`オプションで、特定のバックエンドが使われているツールだけに絞り込めます。
+
 ## プラグインのバージョンを一覧したい（`mise ls-remote`）
 
 ```console
