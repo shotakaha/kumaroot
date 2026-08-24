@@ -46,7 +46,7 @@ $ mise config ls
 
 `mise config ls`（`config list`）で、現在有効な設定ファイルと、ツールがどちらの設定に由来するかを確認できます。
 
-## 有効／無効にしたい
+## 有効／無効にしたい（`mise activate` / `mise deactivate`）
 
 :::{note}
 2023年11月に[fishで自動的に有効](https://github.com/jdx/mise/releases/tag/v2023.11.9)にする機能が追加されました。
@@ -60,8 +60,8 @@ $ mise activate fish | source
 $ execx($(mise activate xonsh))
 ```
 
-`activate`コマンドを使って、現在のセッションで`mise`を有効にできます。
-利用するシェルによって、コマンドが異なる点に注意してください。
+`mise activate`で、現在のセッションで`mise`を有効にできます。
+利用するシェルによって、コマンドが異なります。
 `mise`をお試しで使ってみたい場合によいでしょう。
 常用する場合は、シェルの設定ファイルに追記します。
 
@@ -69,7 +69,7 @@ $ execx($(mise activate xonsh))
 $ mise deactivate
 ```
 
-`deactivate`コマンドで無効にできます。
+`mise deactivate`で、セッションを無効にできます。
 
 ## プラグイン名を確認したい（`mise plugins ls-remote`）
 
