@@ -8,6 +8,7 @@ $ mise use python@3.11
 
 `mise`で追加したランタイムは、`~/.local/share/mise/installs/`に配置されます。
 `mise activate`で有効にしたシェルセッションでは、このパスが`PATH`の先頭に追加され、優先的に見つかるようになります。
+また、`mise plugins`で、ランタイムごとの対応をプラグイン形式で追加できます。
 
 :::{note}
 
