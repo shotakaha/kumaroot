@@ -147,7 +147,7 @@ python = "3.12"
 [env]
 ```
 
-`--global`オプションで個人設定全体に追加できます。
+`--global`オプションでユーザー設定に追加できます。
 設定は`~/.config/mise/config.toml`に保存されます。
 
 ## Pythonを使いたい（`mise use python`）
