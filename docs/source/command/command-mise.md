@@ -84,8 +84,7 @@ $ mise plugins ls-remote
 ```console
 $ mise ls-remote プラグイン名
 $ mise ls-remote python
-$ mise ls-remote poetry
-$ mise ls-remote pipx
+$ mise ls-remote uv
 $ mise ls-remote node
 $ mise ls-remote go
 $ mise ls-remote hugo
@@ -157,7 +156,7 @@ $ which python
 
 ```console
 $ which myst
-~/.local/bin/myst    # pipx でインストールした
+~/.local/bin/myst    # uv tool install でインストールした
 $ myst --version  # ~/.local/bin/myst
 MyST requires node 16, 18, or 20; you are running node 21.
 
