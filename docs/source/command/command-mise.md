@@ -161,21 +161,6 @@ python  3.12.3  ~/.config/mise/config.toml 3.12
 `ls`コマンドでランタイムの更新の有無を確認できます。
 `upgrade`（`up`）コマンドでランタイムを一括で更新できます。
 
-## プラグイン名を確認したい（`mise plugins ls-remote`）
-
-```console
-$ mise plugins ls-remote
-```
-
-`plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
-
-```console
-$ mise plugins ls-remote | rg uv
-uv
-```
-
-たくさんのプラグインが表示されるため、`rg`や`grep`で絞り込むとよいです。
-
 ## プラグインのバージョンを一覧したい（`mise ls-remote`）
 
 ```console
@@ -194,6 +179,73 @@ $ mise ls-remote uv | fzf
 
 たくさんのバージョンが表示されるため、
 `peco`や`fzf`にパイプして絞り込むとよいです。
+
+## プラグイン名を確認したい（`mise plugins ls-remote`）
+
+```console
+$ mise plugins ls-remote
+```
+
+`plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
+
+```console
+$ mise plugins ls-remote | rg uv
+uv
+```
+
+たくさんのプラグインが表示されるため、`rg`や`grep`で絞り込むとよいです。
+
+## プラグインを追加したい（`mise plugins install`）
+
+```console
+$ mise plugins install プラグイン名
+$ mise plugins install poetry
+mise plugin:poetry      clone https://github.com/mise-plugins/vfox-poetry.git
+mise plugin:poetry    ✓ https://github.com/mise-plugins/vfox-poetry.git#3dec0d6
+```
+
+`plugins install`（`i` / `a` / `add`）コマンドで、プラグインをインストールできます。
+実体はGitHubリポジトリで、`~/.local/share/mise/plugins/`にcloneされます。
+
+:::{note}
+
+`uv`や`node`のように`aqua`バックエンドで提供されているツールは、プラグインなしで直接インストールできます。
+`mise use`や`mise install`でツールを指定すると、プラグインが必要な場合のみ自動でインストールされるため、`plugins install`を明示的に使う機会は多くありません。
+
+:::
+
+## プラグインを確認したい（`mise plugins ls`）
+
+```console
+$ mise plugins ls
+poetry
+
+$ mise plugins ls --urls
+poetry  https://github.com/mise-plugins/vfox-poetry.git  HEAD 3dec0d6
+```
+
+`plugins ls`（`plugins list`）コマンドで、インストール済みのプラグインを確認できます。
+`--urls`オプションで、プラグインのリポジトリURLと現在のコミットも確認できます。
+
+## プラグインを更新／削除したい（`mise plugins update` / `mise plugins uninstall`）
+
+```console
+$ mise plugins update poetry
+mise plugin:poetry      update git repo
+mise plugin:poetry    ✓ https://github.com/mise-plugins/vfox-poetry.git#3dec0d6
+```
+
+`plugins update`（`up` / `upgrade`）コマンドで、プラグイン自体を最新化できます。
+ランタイムのバージョンではなく、プラグインのコード（Gitリポジトリ）が更新される点に注意してください。
+
+```console
+$ mise plugins uninstall poetry
+mise plugin:poetry      uninstall
+mise plugin:poetry      remove ~/.local/share/mise/plugins/poetry
+mise plugin:poetry    ✓ uninstalled
+```
+
+`plugins uninstall`（`remove` / `rm`）コマンドで、プラグインを削除できます。
 
 ## Pythonを使いたい（`mise use python`）
 
