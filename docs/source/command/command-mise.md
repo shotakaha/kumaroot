@@ -82,40 +82,16 @@ $ mise deactivate
 
 `mise deactivate`で、セッションを無効にできます。
 
-## プラグイン名を確認したい（`mise plugins ls-remote`）
+## ランタイムを確認したい（`mise ls`）
 
 ```console
-$ mise plugins ls-remote
+$ mise ls
+Tool      Version   Config Source                 Requested
+node      23.0.0    ~/.config/mise/config.toml    latest
+python    3.11.10
 ```
 
-`plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
-
-```console
-$ mise plugins ls-remote | rg uv
-uv
-```
-
-たくさんのプラグインが表示されるため、`rg`や`grep`で絞り込むとよいです。
-
-## プラグインのバージョンを一覧したい（`mise ls-remote`）
-
-```console
-$ mise ls-remote プラグイン名
-$ mise ls-remote python
-$ mise ls-remote uv
-$ mise ls-remote node
-$ mise ls-remote go
-$ mise ls-remote hugo
-```
-
-`ls-remote`（`list-remote` / `list-all`）コマンドで、インストールできるバージョンを一覧できます。
-
-```console
-$ mise ls-remote uv | fzf
-```
-
-たくさんのバージョンが表示されるため、
-`peco`や`fzf`にパイプして絞り込むとよいです。
+`ls`（`list`）コマンドで設定されているランタイムと`mise`設定のパスを確認できます。
 
 ## ランタイムを切り替えたい（`mise use`）
 
@@ -150,6 +126,75 @@ python = "3.12"
 `--global`オプションでユーザー設定に追加できます。
 設定は`~/.config/mise/config.toml`に保存されます。
 
+## インストールだけしたい（`mise install`）
+
+```console
+$ mise install python@3.12
+mise python@3.12.14 ✓ installed
+mise WARN  python installed but not activated — it is not in any config file.
+To install and activate, run:
+  mise use python
+```
+
+`install`コマンドは、ランタイムを`~/.local/share/mise/installs/`にインストールするだけで、`mise.toml`には追記しません。
+そのため、インストール直後は有効化されておらず、`which`で探しても見つかりません。
+
+`use`はインストールと`mise.toml`への追記をまとめて行うコマンドなので、通常はこちらを使います。
+`install`は、複数バージョンを事前に用意しておきたい場合などに使います。
+
+## 更新したい（`mise upgrade`）
+
+```console
+$ mise ls
+Tool    Version            Config Source              Requested
+python  3.12.2 (outdated)  ~/.config/mise/config.toml 3.12
+
+$ mise upgrade
+mise python@3.12.3 ✓ installed
+mise python@3.12.2 ✓ removing ~/.local/share/mise/installs/python/3.12.2
+
+$ mise ls
+Tool    Version  Config Source             Requested
+python  3.12.3  ~/.config/mise/config.toml 3.12
+```
+
+`ls`コマンドでランタイムの更新の有無を確認できます。
+`upgrade`（`up`）コマンドでランタイムを一括で更新できます。
+
+## プラグイン名を確認したい（`mise plugins ls-remote`）
+
+```console
+$ mise plugins ls-remote
+```
+
+`plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
+
+```console
+$ mise plugins ls-remote | rg uv
+uv
+```
+
+たくさんのプラグインが表示されるため、`rg`や`grep`で絞り込むとよいです。
+
+## プラグインのバージョンを一覧したい（`mise ls-remote`）
+
+```console
+$ mise ls-remote プラグイン名
+$ mise ls-remote python
+$ mise ls-remote uv
+$ mise ls-remote node
+$ mise ls-remote go
+```
+
+`ls-remote`（`list-remote` / `list-all`）コマンドで、インストールできるバージョンを一覧できます。
+
+```console
+$ mise ls-remote uv | fzf
+```
+
+たくさんのバージョンが表示されるため、
+`peco`や`fzf`にパイプして絞り込むとよいです。
+
 ## Pythonを使いたい（`mise use python`）
 
 ```console
@@ -180,6 +225,19 @@ $ which python
 ~/.local/share/mise/installs/python/3.11/bin/python
 ```
 
+`uv`もmiseで一緒に管理できます。
+
+```console
+$ mise use python@3.11 uv@latest
+$ cat ./mise.toml
+[tools]
+python = "3.11"
+uv = "latest"
+
+$ which uv
+~/.local/share/mise/installs/uv/0.12.5/bin/uv
+```
+
 ## Nodeを使いたい（`mise use node`）
 
 ```console
@@ -195,32 +253,16 @@ $ which node
 `mise use node@バージョン`で、プロジェクトごとにNodeのバージョンを切り替えられます。
 Homebrewなどでインストールしたシステム全体の`node`とは別に管理されるため、プロジェクトごとに異なるバージョンを使い分けたい場合に便利です。
 
-## ランタイムを確認したい（`mise ls`）
+## Goを使いたい（`mise use go`）
 
 ```console
-$ mise ls
-Tool      Version   Config Source                 Requested
-node      23.0.0    ~/.config/mise/config.toml    latest
-python    3.11.10
+$ mise use go@latest
+$ mise ls go
+Tool  Version  Config Source              Requested
+go    1.27.0   ~/repos/example/mise.toml  latest
+
+$ which go
+~/.local/share/mise/installs/go/1.27.0/bin/go
 ```
 
-`ls`（`list`）コマンドで設定されているランタイムと`mise`設定のパスを確認できます。
-
-## 更新したい（`mise upgrade`）
-
-```console
-$ mise ls
-Tool    Version            Config Source              Requested
-python  3.12.2 (outdated)  ~/.config/mise/config.toml 3.12
-
-$ mise upgrade
-mise python@3.12.3 ✓ installed
-mise python@3.12.2 ✓ removing ~/.local/share/mise/installs/python/3.12.2
-
-$ mise ls
-Tool    Version  Config Source             Requested
-python  3.12.3  ~/.config/mise/config.toml 3.12
-```
-
-`ls`コマンドでランタイムの更新の有無を確認できます。
-`upgrade`（`up`）コマンドでランタイムを一括で更新できます。
+`mise use go@latest`で、最新版のGoをインストールして切り替えられます。
