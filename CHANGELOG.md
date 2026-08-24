@@ -1,5 +1,110 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **command-peco**: add page for peco incremental search, register in toctree
+- **command-port**: add new page for port command
+- **command-mosh**: add new page for mosh command
+- **command-fzf**: add new page for fzf command
+
+### Fix
+
+- **command-peco**: add query/filter, multi-select, and exec sections
+- **command-fzf**: fix fuzzy search to fuzzy find
+- **html-footer**: add content footer CSS example
+- **html-footer**: add footer-nav class and mega footer CSS example
+- **html-footer**: rewrite lead paragraph, fold note into prose
+- **html-semantic**: fix invalid header/footer nesting in mega footer sample
+- **html-footer**: add mega footer section, note header/footer nesting restriction
+- **css-margin**: clarify inline margin behavior, add auto centering and reference
+- **css-display**: merge trailing note into reference section
+- **css-display**: split block/inline sections, merge tag lists inline
+- **css-display**: restructure sections by use case, 2-value syntax first
+- **css-display**: fix flow/flex mismatch, add inline-block note, simplify reference
+- **html-a**: split rel section into pager (prev/next) and other values
+- **html-a**: rephrase rel attribute intro sentences
+- **html-a**: extract rel="noopener noreferrer" into its own section
+- **html-a**: note that modern browsers auto-apply noopener
+- **html-a**: add recommended a CSS with external-link icon
+- **html-a**: fix ref/rel typo, clarify noopener, remove unverified SEO claim
+- **html-figure**: add recommended figure/figcaption CSS
+- **html-figure**: add figcaption, clarify figure isn't img-only, add reference
+- **html-img**: add reference links
+- **html-img**: add recommended img CSS (max-width, height auto, display block)
+- **html-img**: clarify alt attribute, add width/height and lazy-loading caveat
+- **html-p**: explain p element content model, fix sentence and backticks
+- **html-meta**: add reference links
+- **html-meta**: unify key/content/default explanation format across sections
+- **html-meta**: add robots meta section
+- **html-meta**: reorder sections by required/recommended/custom
+- **html-meta**: fix property typo, unify backticks, add heading tags
+- **html-doctype**: explain DOCTYPE, add HTML5/HTML4 sections and reference
+- **html-semantic**: 誤字修正とバックティック統一、空節への加筆
+- **root-pyroot**: remove deprecated MacPorts section and unify backtick style
+- **preface-kuma**: mark dead link to Geant4 lecture doc
+- **preface-env**: reframe as writing-tools memo and reorder Node after Python
+- **preface-env**: switch python environment section from Poetry to uv
+- **preface-env**: update local dev environment snapshot to 2026/08/23
+- **preface**: remove completed todo list
+- **root-install-macports**: retitle page and add to toctree, dedupe caution note
+- **root-install-macports**: unify heading style and add port select section
+- **command-port**: reorganize install/variants notes and lead description
+- **command-port**: add variants section after install
+- **command-port**: add install/search/info/upgrade/uninstall/clean sections and history note
+- **command-rsync**: add seealso link to fnb backup tool
+- **command-rsync**: add --checksum section, rename --itemize-changes heading
+- **command-rsync**: split -auvz options into individual sections, add --progress and -i
+- **command-rsync**: restructure default-options section as --no-option exclusion
+- **command-rsync**: expand descriptions for file and directory sync sections
+- **command-rsync**: clarify section headings
+- **command-rsync**: use single backticks consistently
+- **command-mosh**: note UDP-based stability and SSH relationship
+- **command-fzf**: add shell integration section for fish/bash/zsh
+- **command-fzf**: add sections for --preview and --multi options
+- **command-tig**: clarify intro with TUI term expansion
+- **command-tig**: restore removed sections, align format, fix version command typo
+- **command-ping**: merge gping page into ping, remove stale references
+- **command-curl,command-httpie,command-xh**: unify titles to HTTPリクエストしたい
+- **command-wget**: use single backticks, add prompt, reorder seealso
+- **command-xh**: add usage example, split install into own section
+- **command-httpie**: document both CLI formula and GUI cask install options
+- **command-httpie**: add usage example, split install into own section
+- **command-ping**: use single backticks, unify code blocks to console
+- **command-dig**: use single backticks, remove stray blank line
+- **command-texdoc**: restructure page, fix --list short option typo
+- **command-usage**: add documentation section, dedupe pandoc/texdoc/jsdoc entries
+- **command-open**: add section for -R option
+- **command-open**: add xdg-open for Linux, unify code blocks to console
+- **command-usage**: move exa into daily-use section, rename two section titles
+- **command-tree**: add new page for tree command
+- **command-curl**: split -O/-o sections, use long option names, fix --I typo
+- **command-curl**: fix title typo, add -L section, use real release URLs
+- **command-shasum**: add algorithm/check sections and GitHub Release example
+- **command-shasum**: add new page for shasum command
+- **command-exa**: restructure exa page and adjust lsd seealso placement
+- **command-lsd**: note Nerd Fonts requirement for folder icons
+- **command-lsd**: describe icon/color improvements over ls, bump version example
+- **command-lsd**: align -a and -ltr sections with command-ls format
+- **command-lsd**: restructure to match command-ls layout, add install section
+- **command-ls**: add section for -l option
+- **command-ls**: add sections for -G and -F options
+- **command-ls**: restructure with subsections for -a, -ltr, -1 options
+- **command-stat**: add seealso links to ls, lsd, and du
+- **command-stat**: add new page for stat command
+- **command-xargs**: add before/after permission diff examples with find -ls and stat
+- **command-xargs**: use -print0/-0 instead of GNU-only -d in chmod examples
+- **command-xargs**: add sections for -p/--interactive and -r/--no-run-if-empty
+- **command-xargs**: add null-delimiter section for --null/-0
+- **command-find**: add print0 section with byte-level details
+- **command-xargs**: add file-based confirmation flow for bulk delete
+- **command-xargs**: correct intro to describe stdin-to-argument conversion
+- **command-xargs**: note -d/--delimiter is GNU-only, unify backtick style
+- **command-goaccess**: add gzcat section for compressed log files
+- **command-goaccess**: add missing --log-format to intro examples
+- **command-goaccess**: add intro usage, lead with long option names
+
 ## v2026.8.3 (2026-08-22)
 
 ### Feat
