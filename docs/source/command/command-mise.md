@@ -6,7 +6,7 @@ $ mise use python@3.11
 
 `mise`（ミーズ）は、開発環境で使うランタイム（実行環境）を切り替えるコマンドです。
 
-`mise`で追加したツールは、`~/.local/share/mise/installs/`に配置されます。
+`mise`で追加したランタイムは、`~/.local/share/mise/installs/`に配置されます。
 `mise activate`で有効にしたシェルセッションでは、このパスが`PATH`の先頭に追加され、優先的に見つかるようになります。
 
 :::{note}
@@ -49,13 +49,13 @@ PATH                         Tools
 ユーザー設定は`~/.config/mise/config.toml`
 を使います。
 
-同じツールが両方の設定ファイルに書かれている場合は、プロジェクト単位の設定が優先されます。
+同じランタイムが両方の設定ファイルに書かれている場合は、プロジェクト単位の設定が優先されます。
 
 ```console
 $ mise config ls
 ```
 
-`mise config ls`（`config list`）で、現在有効な設定ファイルと、ツールがどちらの設定に由来するかを確認できます。
+`mise config ls`（`config list`）で、現在有効な設定ファイルと、ランタイムがどちらの設定に由来するかを確認できます。
 
 ## 有効／無効にしたい（`mise activate` / `mise deactivate`）
 
@@ -117,7 +117,7 @@ $ mise ls-remote uv | fzf
 たくさんのバージョンが表示されるため、
 `peco`や`fzf`にパイプして絞り込むとよいです。
 
-## 環境を切り替えたい（`mise use`）
+## ランタイムを切り替えたい（`mise use`）
 
 ```console
 // プロジェクト（＝現在のディレクトリ）に追加
@@ -130,10 +130,10 @@ $ cat ./mise.toml
 python = "3.11"
 ```
 
-`use`（`u`）コマンドでツールの環境を切り替えることができます。
+`use`（`u`）コマンドでランタイムのバージョンを切り替えることができます。
 設定は`./mise.toml`に保存されます。
 
-指定したバージョンのツールが見つからない場合は、`mise install`コマンドが自動実行され、
+指定したバージョンのランタイムが見つからない場合は、`mise install`コマンドが自動実行され、
 `~/.local/share/mise/installs/`の中にインストールされます。
 実行ファイルはバージョンごとに分けてインストールされます。
 
@@ -147,7 +147,7 @@ python = "3.12"
 [env]
 ```
 
-`--global`オプションで個人環境全体に追加できます。
+`--global`オプションで個人設定全体に追加できます。
 設定は`~/.config/mise/config.toml`に保存されます。
 
 ## Pythonを使いたい（`mise use python`）
@@ -195,7 +195,7 @@ $ which node
 `mise use node@バージョン`で、プロジェクトごとにNodeのバージョンを切り替えられます。
 Homebrewなどでインストールしたシステム全体の`node`とは別に管理されるため、プロジェクトごとに異なるバージョンを使い分けたい場合に便利です。
 
-## 環境を確認したい（`mise ls`）
+## ランタイムを確認したい（`mise ls`）
 
 ```console
 $ mise ls
@@ -204,7 +204,7 @@ node      23.0.0    ~/.config/mise/config.toml    latest
 python    3.11.10
 ```
 
-`ls`（`list`）コマンドで設定されている環境と`mise`設定のパスを確認できます。
+`ls`（`list`）コマンドで設定されているランタイムと`mise`設定のパスを確認できます。
 
 ## 更新したい（`mise upgrade`）
 
@@ -222,5 +222,5 @@ Tool    Version  Config Source             Requested
 python  3.12.3  ~/.config/mise/config.toml 3.12
 ```
 
-`ls`コマンドでツールの更新の有無を確認できます。
-`upgrade`（`up`）コマンドでツールを一括で更新できます。
+`ls`コマンドでランタイムの更新の有無を確認できます。
+`upgrade`（`up`）コマンドでランタイムを一括で更新できます。
