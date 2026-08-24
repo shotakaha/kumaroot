@@ -1,21 +1,62 @@
 # シェルスクリプトしたい（`bash`）
 
+```console
+$ bash スクリプトファイル.sh
+```
+
+`bash`は、Bourne Shell（`sh`）を拡張したシェルです。
+対話シェルとしても、シェルスクリプトを実行するインタプリタとしても使われます。
+
+:::{note}
+
+`bash`は、長らくLinuxやmacOSの標準シェルとして使われてきました。
+しかし、Ubuntuでは2006年以降、シェルスクリプトが参照する`/bin/sh`が`bash`ではなく`dash`に変更されました。
+2019年リリースのmacOS Catalina以降、新規ユーザーのデフォルトログインシェルが`bash`から`zsh`に変更されました。
+
+:::
+
+## インストールしたい（`bash`）
+
+```console
+$ brew install bash
+$ bash --version
+```
+
+`bash`はHomebrewでインストールできます。
+
+```console
+$ /bin/bash --version
+GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+Copyright (C) 2007 Free Software Foundation, Inc.
+```
+
+macOSに標準でインストールされている`bash`は、バージョン3系で古いです。
+
+## Hello Worldしたい（`echo`）
+
 ```bash
 #!/usr/bin/env bash
 
 echo "Hello World"
 ```
 
-`bash`を使ってシェルスクリプトを作成できます。
-
-## シェバングを書きたい
+## シェバングしたい（`#!/usr/bin/env bash`）
 
 ```bash
 #!/usr/bin/env bash
 ```
 
-シェルスクリプトの最初に、どのシェルを使うかを記述します。
-`#!/bin/bash`と書いてもよいですが、環境によって違うかもしれないので、`/usr/bin/env`で返ってくるシェルを使うようにしています。
+`#!`ではじまる行をシェバング（shebang）と呼びます。
+シェルスクリプトを実行する際には、どのシェルで実行するかを指定する必要があります。
+`/usr/bin/env`で環境変数`PATH`から`bash`を探して実行するように指定するのが一般的です。
+
+```bash
+#!/bin/bash
+```
+
+`#!/bin/bash`のように、シェルの絶対パスを指定することもできます。
+しかし、この方法では、実行環境によってはエラーになる場合があります。
+`#!/usr/bin/env bash`の方が、より移植性の高い書き方です。
 
 ## ファイルの存在を確認したい（`-e` / `-f` / `-d`）
 
