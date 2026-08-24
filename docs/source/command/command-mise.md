@@ -34,7 +34,7 @@ $ cat ./.mise.toml
 python = "3.11"
 ```
 
-`use`コマンドでツールの環境を切り替えることができます。
+`use`（`u`）コマンドでツールの環境を切り替えることができます。
 設定は`./.mise.toml`に保存されます。
 
 指定したバージョンのツールが見つからない場合は、`mise install`コマンドが自動実行され、
@@ -63,16 +63,16 @@ node      23.0.0    ~/.config/mise/config.toml    latest
 python    3.11.10
 ```
 
-`ls`コマンドで設定されている環境と`mise`設定のパスを確認できます。
+`ls`（`list`）コマンドで設定されている環境と`mise`設定のパスを確認できます。
 
-## 更新したい（`mise up` / `mise upgrade`）
+## 更新したい（`mise upgrade`）
 
 ```console
 $ mise ls
 Plugin  Version            Config Source              Requested
 python  3.12.2 (outdated)  ~/.config/mise/config.toml 3.12
 
-$ mise up
+$ mise upgrade
 mise python@3.12.3 ✓ installed
 mise python@3.12.2 ✓ removing ~/.local/share/mise/installs/python/3.12.2
 
@@ -82,7 +82,7 @@ python  3.12.3  ~/.config/mise/config.toml 3.12
 ```
 
 `ls`コマンドでプラグインの更新の有無を確認できます。
-`up`（`upgrade`）コマンドでプラグイン本体を一括で更新できます。
+`upgrade`（`up`）コマンドでプラグイン本体を一括で更新できます。
 
 ## Pythonを使いたい（`mise use python`）
 
@@ -148,7 +148,7 @@ Homebrewを使ってインストールした`node`を`node@21`に更新してし
 $ mise plugins ls-remote
 ```
 
-`plugins ls-remote`コマンドで、利用できるプラグイン名を一覧できます。
+`plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
 
 ## プラグインのバージョンを一覧したい（`mise ls-remote`）
 
@@ -162,7 +162,7 @@ $ mise ls-remote go
 $ mise ls-remote hugo
 ```
 
-`ls-remote プラグイン名`コマンドで、インストールできるバージョンを一覧できます。
+`ls-remote`（`list-remote` / `list-all`）コマンドで、インストールできるバージョンを一覧できます。
 プラグインによっては、下記のようなメッセージが表示されるので`y(es)`を入力します。
 
 ```console
