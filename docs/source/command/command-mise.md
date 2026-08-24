@@ -155,30 +155,17 @@ $ which python
 ## Nodeを使いたい（`mise use node`）
 
 ```console
-$ which myst
-~/.local/bin/myst    # uv tool install でインストールした
-$ myst --version  # ~/.local/bin/myst
-MyST requires node 16, 18, or 20; you are running node 21.
-
-// Node20に変更
-$ mise use node@20  # ~/.local/share/mise/installs/node/20.10.0/bin/node
+$ mise use node@20
 $ mise ls node
-Tool    Version  Config Source                               Requested
-node    20.9.0   ~/repos/gitlab.com/qumasan/haniwers/mise.toml 20
-$ myst --version
-v1.1.32
+Tool  Version  Config Source                Requested
+node  20.20.2  ~/repos/example/mise.toml    20
+
+$ which node
+~/.local/share/mise/installs/node/20.20.2/bin/node
 ```
 
-`mise`を使って、Nodeのバージョンを変更した具体例です。
-
-Homebrewを使ってインストールした`node`を`node@21`に更新してしまったため、`mystmd`（v1.1.31）が動かなくなってしまいました。
-このプロジェクトだけ`node@20`に切り替えて、`mystmd`を動かすことができました。
-
-:::{note}
-
-`mystmd`（v1.1.42）は、Node@21でも動作するようになっていました。
-
-:::
+`mise use node@バージョン`で、プロジェクトごとにNodeのバージョンを切り替えられます。
+Homebrewなどでインストールしたシステム全体の`node`とは別に管理されるため、プロジェクトごとに異なるバージョンを使い分けたい場合に便利です。
 
 ## 環境を確認したい（`mise ls`）
 
