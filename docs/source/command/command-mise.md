@@ -27,6 +27,7 @@ $ mise --version
 ```
 
 `mise`はHomebrewでインストールできます。
+フォーミュラ名は`mise`です。
 
 :::{note}
 
@@ -38,12 +39,12 @@ $ mise --version
 
 ```console
 $ mise config ls
+PATH                         Tools
 ~/.config/mise/config.toml   node
 ./mise.toml                  python
 ```
 
 `mise.toml`で、`mise`の設定を管理できます。
-
 プロジェクト単位の設定は`./mise.toml`、
 ユーザー設定は`~/.config/mise/config.toml`
 を使います。
@@ -89,6 +90,13 @@ $ mise plugins ls-remote
 
 `plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
 
+```console
+$ mise plugins ls-remote | rg uv
+uv
+```
+
+たくさんのプラグインが表示されるため、`rg`や`grep`で絞り込むとよいです。
+
 ## プラグインのバージョンを一覧したい（`mise ls-remote`）
 
 ```console
@@ -102,11 +110,21 @@ $ mise ls-remote hugo
 
 `ls-remote`（`list-remote` / `list-all`）コマンドで、インストールできるバージョンを一覧できます。
 
+```console
+$ mise ls-remote uv | fzf
+```
+
+たくさんのバージョンが表示されるため、
+`peco`や`fzf`にパイプして絞り込むとよいです。
+
 ## 環境を切り替えたい（`mise use`）
 
 ```console
 // プロジェクト（＝現在のディレクトリ）に追加
 $ mise use python@3.11
+python@3.11.16
+mise /tmp/test-mise/mise.toml tools: python@3.11.16
+
 $ cat ./mise.toml
 [tools]
 python = "3.11"
