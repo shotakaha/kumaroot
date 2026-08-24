@@ -24,6 +24,28 @@ $ mise --version
 
 :::
 
+## 設定したい（`mise.toml`）
+
+```console
+$ mise config ls
+~/.config/mise/config.toml   node
+./mise.toml                  python
+```
+
+`mise.toml`で、`mise`の設定を管理できます。
+
+プロジェクト単位の設定は`./mise.toml`、
+ユーザー設定は`~/.config/mise/config.toml`
+を使います。
+
+同じツールが両方の設定ファイルに書かれている場合は、プロジェクト単位の設定が優先されます。
+
+```console
+$ mise config ls
+```
+
+`mise config ls`（`config list`）で、現在有効な設定ファイルと、ツールがどちらの設定に由来するかを確認できます。
+
 ## 有効／無効にしたい
 
 :::{note}
