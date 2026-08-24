@@ -24,6 +24,60 @@ $ mise --version
 
 :::
 
+## 有効／無効にしたい
+
+:::{note}
+2023年11月に[fishで自動的に有効](https://github.com/jdx/mise/releases/tag/v2023.11.9)にする機能が追加されました。
+なので、このコマンドはもう必要ありません。
+:::
+
+```console
+$ eval "$(mise activate bash)"
+$ eval "$(mise activate zsh)"
+$ mise activate fish | source
+$ execx($(mise activate xonsh))
+```
+
+`activate`コマンドを使って、現在のセッションで`mise`を有効にできます。
+利用するシェルによって、コマンドが異なる点に注意してください。
+`mise`をお試しで使ってみたい場合によいでしょう。
+常用する場合は、シェルの設定ファイルに追記します。
+
+```console
+$ mise deactivate
+```
+
+`deactivate`コマンドで無効にできます。
+
+## プラグイン名を確認したい（`mise plugins ls-remote`）
+
+```console
+$ mise plugins ls-remote
+```
+
+`plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
+
+## プラグインのバージョンを一覧したい（`mise ls-remote`）
+
+```console
+$ mise ls-remote プラグイン名
+$ mise ls-remote python
+$ mise ls-remote poetry
+$ mise ls-remote pipx
+$ mise ls-remote node
+$ mise ls-remote go
+$ mise ls-remote hugo
+```
+
+`ls-remote`（`list-remote` / `list-all`）コマンドで、インストールできるバージョンを一覧できます。
+プラグインによっては、下記のようなメッセージが表示されるので`y(es)`を入力します。
+
+```console
+$ mise ls-remote pipx
+⚠️  pipx is a community-developed plugin: https://github.com/yozachar/asdf-pipx
+Would you like to install pipx? (y/n)
+```
+
 ## 環境を切り替えたい（`mise use`）
 
 ```console
@@ -53,36 +107,6 @@ python = "3.12"
 
 `--global`オプションで個人環境全体に追加できます。
 設定は`~/.config/mise/config.toml`に保存されます。
-
-## 環境を確認したい（`mise ls`）
-
-```console
-$ mise ls
-Tool      Version   Config Source                 Requested
-node      23.0.0    ~/.config/mise/config.toml    latest
-python    3.11.10
-```
-
-`ls`（`list`）コマンドで設定されている環境と`mise`設定のパスを確認できます。
-
-## 更新したい（`mise upgrade`）
-
-```console
-$ mise ls
-Plugin  Version            Config Source              Requested
-python  3.12.2 (outdated)  ~/.config/mise/config.toml 3.12
-
-$ mise upgrade
-mise python@3.12.3 ✓ installed
-mise python@3.12.2 ✓ removing ~/.local/share/mise/installs/python/3.12.2
-
-$ mise ls
-Plugin  Version  Config Source             Requested
-python  3.12.3  ~/.config/mise/config.toml 3.12
-```
-
-`ls`コマンドでプラグインの更新の有無を確認できます。
-`upgrade`（`up`）コマンドでプラグイン本体を一括で更新できます。
 
 ## Pythonを使いたい（`mise use python`）
 
@@ -142,56 +166,32 @@ Homebrewを使ってインストールした`node`を`node@21`に更新してし
 
 :::
 
-## プラグイン名を確認したい（`mise plugins ls-remote`）
+## 環境を確認したい（`mise ls`）
 
 ```console
-$ mise plugins ls-remote
+$ mise ls
+Tool      Version   Config Source                 Requested
+node      23.0.0    ~/.config/mise/config.toml    latest
+python    3.11.10
 ```
 
-`plugins ls-remote`（`plugins list-remote` / `plugins list-all`）コマンドで、利用できるプラグイン名を一覧できます。
+`ls`（`list`）コマンドで設定されている環境と`mise`設定のパスを確認できます。
 
-## プラグインのバージョンを一覧したい（`mise ls-remote`）
+## 更新したい（`mise upgrade`）
 
 ```console
-$ mise ls-remote プラグイン名
-$ mise ls-remote python
-$ mise ls-remote poetry
-$ mise ls-remote pipx
-$ mise ls-remote node
-$ mise ls-remote go
-$ mise ls-remote hugo
+$ mise ls
+Plugin  Version            Config Source              Requested
+python  3.12.2 (outdated)  ~/.config/mise/config.toml 3.12
+
+$ mise upgrade
+mise python@3.12.3 ✓ installed
+mise python@3.12.2 ✓ removing ~/.local/share/mise/installs/python/3.12.2
+
+$ mise ls
+Plugin  Version  Config Source             Requested
+python  3.12.3  ~/.config/mise/config.toml 3.12
 ```
 
-`ls-remote`（`list-remote` / `list-all`）コマンドで、インストールできるバージョンを一覧できます。
-プラグインによっては、下記のようなメッセージが表示されるので`y(es)`を入力します。
-
-```console
-$ mise ls-remote pipx
-⚠️  pipx is a community-developed plugin: https://github.com/yozachar/asdf-pipx
-Would you like to install pipx? (y/n)
-```
-
-## 有効／無効にしたい
-
-:::{note}
-2023年11月に[fishで自動的に有効](https://github.com/jdx/mise/releases/tag/v2023.11.9)にする機能が追加されました。
-なので、このコマンドはもう必要ありません。
-:::
-
-```console
-$ eval "$(mise activate bash)"
-$ eval "$(mise activate zsh)"
-$ mise activate fish | source
-$ execx($(mise activate xonsh))
-```
-
-`activate`コマンドを使って、現在のセッションで`mise`を有効にできます。
-利用するシェルによって、コマンドが異なる点に注意してください。
-`mise`をお試しで使ってみたい場合によいでしょう。
-常用する場合は、シェルの設定ファイルに追記します。
-
-```console
-$ mise deactivate
-```
-
-`deactivate`コマンドで無効にできます。
+`ls`コマンドでプラグインの更新の有無を確認できます。
+`upgrade`（`up`）コマンドでプラグイン本体を一括で更新できます。
