@@ -1,12 +1,10 @@
-# 開発環境を切り替えたい（``mise``）
+# ランタイム管理したい（`mise`）
 
 ```console
 $ mise use python@3.11
 ```
 
-`mise`（ミーズ）は開発環境のバージョンを切り替えるためのツールです。
-同様のツールに[anyenv](https://anyenv.github.io/)や[asdf](https://asdf-vm.com/)などがありますが、
-最近は[mise](https://github.com/jdx/mise)を使うのがよさそうです。
+`mise`（ミーズ）は、開発環境で使うランタイム（実行環境）を切り替えるコマンドです。
 
 ## インストールしたい（`mise`）
 
@@ -14,8 +12,8 @@ $ mise use python@3.11
 $ brew install mise
 
 $ mise --version
-2024.3.11 macos-x64 (2024-03-30)    # Intelの場合
-2024.3.11 macos-arm64 (2024-03-30)  # Apple Siliconの場合
+2026.8.11 macos-x64 (2026-08-23)    # Intelの場合
+2026.8.11 macos-arm64 (2026-08-23)  # Apple Siliconの場合
 ```
 
 `mise`はHomebrewでインストールできます。
@@ -39,8 +37,8 @@ python = "3.11"
 `use`コマンドでツールの環境を切り替えることができます。
 設定は`./.mise.toml`に保存されます。
 
-指定したバージョンのツールが見つからない場合は、``mise install``コマンドが自動実行され、
-``~/.local/share/mise/installs/``の中にインストールされます。
+指定したバージョンのツールが見つからない場合は、`mise install`コマンドが自動実行され、
+`~/.local/share/mise/installs/`の中にインストールされます。
 実行ファイルはバージョンごとに分けてインストールされます。
 
 ```console
@@ -56,7 +54,7 @@ python = "3.12"
 `--global`オプションで個人環境全体に追加できます。
 設定は`~/.config/mise/config.toml`に保存されます。
 
-## 環境を確認したい（``ls``）
+## 環境を確認したい（`mise ls`）
 
 ```console
 $ mise ls
@@ -67,7 +65,7 @@ python    3.11.10
 
 `ls`コマンドで設定されている環境と`mise`設定のパスを確認できます。
 
-## 更新したい（``up`` / ``upgrade``）
+## 更新したい（`mise up` / `mise upgrade`）
 
 ```console
 $ mise ls
@@ -83,8 +81,8 @@ Plugin  Version  Config Source             Requested
 python  3.12.3  ~/.config/mise/config.toml 3.12
 ```
 
-``list``コマンドでプラグインの更新の有無を確認できます。
-``upgrade``コマンドでプラグイン本体を一括で更新できます。
+`ls`コマンドでプラグインの更新の有無を確認できます。
+`up`（`upgrade`）コマンドでプラグイン本体を一括で更新できます。
 
 ## Pythonを使いたい（`mise use python`）
 
@@ -133,26 +131,26 @@ $ myst --version
 v1.1.32
 ```
 
-``mise``を使って、Nodeのバージョンを変更した具体例です。
+`mise`を使って、Nodeのバージョンを変更した具体例です。
 
-Homebrewを使ってインストールした``node``を``noode@21``に更新してしまったため、``mystmd``（v1.1.31）が動かなくなってしまいました。
-このプロジェクトだけ``node@20``に切り替えて、``mystmd``を動かすことができました。
+Homebrewを使ってインストールした`node`を`node@21`に更新してしまったため、`mystmd`（v1.1.31）が動かなくなってしまいました。
+このプロジェクトだけ`node@20`に切り替えて、`mystmd`を動かすことができました。
 
 :::{note}
 
-``mystmd``（v1.1.42）は、Node@21でも動作するようになっていました。
+`mystmd`（v1.1.42）は、Node@21でも動作するようになっていました。
 
 :::
 
-## プラグイン名を確認したい（``mise plugins ls-remote``）
+## プラグイン名を確認したい（`mise plugins ls-remote`）
 
 ```console
 $ mise plugins ls-remote
 ```
 
-``plugins ls-remote``コマンドで、利用できるプラグイン名を一覧できます。
+`plugins ls-remote`コマンドで、利用できるプラグイン名を一覧できます。
 
-## プラグインのバージョンを一覧したい（``mise ls-remote``）
+## プラグインのバージョンを一覧したい（`mise ls-remote`）
 
 ```console
 $ mise ls-remote プラグイン名
@@ -164,8 +162,8 @@ $ mise ls-remote go
 $ mise ls-remote hugo
 ```
 
-``ls-remote プラグイン名``コマンドで、インストールできるバージョンを一覧できます。
-プラグインによっては、下記のようなメッセージが表示されるので``y(es)`を入力します。
+`ls-remote プラグイン名`コマンドで、インストールできるバージョンを一覧できます。
+プラグインによっては、下記のようなメッセージが表示されるので`y(es)`を入力します。
 
 ```console
 $ mise ls-remote pipx
@@ -181,19 +179,19 @@ Would you like to install pipx? (y/n)
 :::
 
 ```console
-$ eval "$(rtx activate bash)"
-$ eval "$(rtx activate zsh)"
-$ rtx activate fish | source
-$ execx($(rtx activate xonsh))
+$ eval "$(mise activate bash)"
+$ eval "$(mise activate zsh)"
+$ mise activate fish | source
+$ execx($(mise activate xonsh))
 ```
 
-``activate``コマンドを使って、現在のセッションで``rtx``を有効にできます。
+`activate`コマンドを使って、現在のセッションで`mise`を有効にできます。
 利用するシェルによって、コマンドが異なる点に注意してください。
-``rtx``をお試しで使ってみたい場合によいでしょう。
+`mise`をお試しで使ってみたい場合によいでしょう。
 常用する場合は、シェルの設定ファイルに追記します。
 
 ```console
-$ rtx deactivate
+$ mise deactivate
 ```
 
-``deactivate``コマンドで無効にできます。
+`deactivate`コマンドで無効にできます。
