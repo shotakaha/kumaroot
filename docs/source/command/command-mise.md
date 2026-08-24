@@ -334,16 +334,19 @@ $ which node
 `mise use node@バージョン`で、プロジェクトごとにNodeのバージョンを切り替えられます。
 Homebrewなどでインストールしたシステム全体の`node`とは別に管理されるため、プロジェクトごとに異なるバージョンを使い分けたい場合に便利です。
 
-## Goを使いたい（`mise use go`）
+## Hugoを使いたい（`mise use hugo`）
 
 ```console
-$ mise use go@latest
-$ mise ls go
-Tool  Version  Config Source              Requested
-go    1.27.0   ~/repos/example/mise.toml  latest
+$ mise plugins install hugo
+$ mise use hugo@latest
+$ cat ./mise.toml
+[tools]
+hugo = "latest"
 
-$ which go
-~/.local/share/mise/installs/go/1.27.0/bin/go
+$ which hugo
+~/.local/share/mise/installs/hugo/0.165.0/bin/hugo
 ```
 
-`mise use go@latest`で、最新版のGoをインストールして切り替えられます。
+`hugo`は`asdf`プラグイン経由でインストールされるツールです。
+まず`mise plugins install hugo`でプラグインを追加してから、
+`mise use hugo@latest`します。
