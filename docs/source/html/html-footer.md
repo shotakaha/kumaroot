@@ -156,3 +156,6 @@ article > footer a {
 ## リファレンス
 
 - [footer](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/footer)
+- [address](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/address)
+- [time](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/time)
+- [ARIA: contentinfo ロール](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Reference/Roles/contentinfo_role)
