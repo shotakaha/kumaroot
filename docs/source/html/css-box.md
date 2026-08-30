@@ -1,28 +1,21 @@
 # ボックスモデルしたい（`box-sizing`）
 
 ```css
-.content-box {
-    box-sizing: content-box;  /* 初期値 */
-    width: 300px;
-    padding: 20px;
-    border: 5px solid;
-}
-
-.border-box {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-    width: 300px;
-    padding: 20px;
-    border: 5px solid;
 }
 ```
 
 ボックスモデルとは、すべての要素を「内容・パディング・枠線・マージンの4つの層でできた箱」として扱うCSSの考え方です。
 要素の大きさや余白は、この箱のどの層をどれだけ広げるかで決まります。
 
-`box-sizing`プロパティで、`width`や`height`がどこまでの大きさを指すかを切り替えられます。
-はじめに全要素を`border-box`にそろえておくと、幅や高さの計算がわかりやすくなります。
+`box-sizing`プロパティは、`width`や`height`で指定した数値が「箱のどこからどこまで」を指すかを切り替えます。
+初期値は`content-box`で、いちばん内側の`content`（内容）の幅を基準にします。
+このため、`padding`や`border`を足すと、見た目の幅は指定した数値より大きくなります。
 
-## ボックスモデルを理解したい
+## 4つの層を知りたい
 
 ```text
 +-----------------------------------+
@@ -46,12 +39,24 @@
 - **border** … 枠線
 - **margin** … 枠線の外側、他の要素とのあいだの余白
 
-`width`と`height`が指すのは、初期状態では`content`の層だけです。
-`padding`や`border`は`content`の外側に追加されるため、指定した数値より箱が大きく見えます。
+このうち`margin`は常に箱の外側です。
+`box-sizing`をどう設定しても、`margin`が`width`や`height`に含まれることはありません。
 
-## 幅の計算方法を変えたい（`box-sizing`）
+## 全要素の基準をそろえたい（`border-box`）
 
 ```css
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+```
+
+`border-box`を指定すると、`width`と`height`が指す範囲が`content + padding + border`に変わります。
+`padding`と`border`は箱の内側に収まり、指定した数値がそのまま見た目の幅になります。
+
+```css
+/* どちらも width: 300px */
 .content-box {
     box-sizing: content-box;  /* 初期値 */
     width: 300px;
@@ -65,31 +70,14 @@
     width: 300px;
     padding: 20px;
     border: 5px solid;
-    /* 見た目の幅は 300px（padding と border は内側に含まれる） */
+    /* 見た目の幅は 300px */
 }
 ```
 
-`box-sizing`の初期値は`content-box`で、`width`と`height`は内容部分だけの大きさを指します。
-このため、パディングや枠線を足すと見た目の大きさが指定値より大きくなります。
-
-`border-box`にすると、`width`と`height`はパディングと枠線を含んだ大きさになります。
-「幅300pxの箱」を作りたいときに、指定した数値がそのまま見た目の幅になるので直感的です。
-どちらの場合も`margin`は含まれず、常に箱の外側に付きます。
-
-## すべての要素をborder-boxにしたい
-
-```css
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-```
-
-`box-sizing`は継承されないプロパティなので、全要素にまとめて指定します。
-`*`（すべての要素を選ぶセレクター）と擬似要素に`border-box`を指定するのが定番の書き方です。
-
+`border-box`のほうが「指定した数値＝見た目の幅」で計算しやすいため、
 多くのCSSフレームワークやリセットCSSは、この指定を最初に入れています。
+
+`box-sizing`は継承されないプロパティなので、`*`（すべての要素を選ぶセレクター）と擬似要素にまとめて指定します。
 新しくCSSを書き始めるときは、まずこれを書いておくと余白まわりの計算で悩まなくなります。
 
 :::{seealso}
