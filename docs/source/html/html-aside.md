@@ -23,6 +23,16 @@
 `aside`を置く場所によって、何に対する補足かが変わります。
 `article`の中に置くとその記事への補足、`article`の外（`main`直下や`body`直下）に置くとページやサイト全体への補足になります。
 
+:::{seealso}
+
+- [](./html-main.md)
+- [](./html-article.md)
+- [](./html-section.md)
+- [](./html-header.md)
+- [](./html-footer.md)
+
+:::
+
 ## 関連記事したい
 
 ```html
