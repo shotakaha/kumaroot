@@ -161,25 +161,69 @@ body {
 
 CSS変数（カスタムプロパティ）と組み合わせると、色の定義を1か所にまとめられて管理しやすくなります。
 
-## 印刷したい（`@media print`）
+## A4印刷したい（`@media print`）
 
 ```css
+/* 用紙サイズと余白（@pageルール） */
+@page {
+  size: A4 portrait;
+  margin: 20mm;
+}
+
 @media print {
+  /* 紙に不要な部分を隠す */
   nav,
   footer,
   .no-print {
     display: none;
   }
 
+  /* 本文は黒文字・pt指定に戻す */
   body {
     font-size: 11pt;
+    line-height: 1.6;
     color: #000;
+    background: #fff;
+  }
+
+  /* リンクのURLを併記する */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+  }
+
+  /* 見出しの直後で改ページしない */
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  /* 表や画像を途中で分断しない */
+  table,
+  figure,
+  pre {
+    break-inside: avoid;
+  }
+
+  /* 章の頭で改ページする */
+  .chapter {
+    break-before: page;
   }
 }
 ```
 
 `@media print`の中身は、印刷やPDF保存のときだけ適用されます。
 ナビゲーションやボタンなど紙に不要な部分を隠したり、文字サイズを`pt`（ポイント）で指定し直したりします。
+
+用紙サイズや余白は`@page`ルールで指定します。
+`size: A4 portrait`でA4縦（`landscape`にすると横）、`margin: 20mm`で全周の余白です。
+`@page`は`@media print`の外にも書けます。
+
+改ページの制御には`break-before` / `break-after` / `break-inside`を使います。
+`break-inside: avoid`で表や画像がページをまたがないようにし、`break-before: page`で章の先頭を必ず次のページから始められます。
+（古い書き方の`page-break-*`プロパティも同じ働きをします）
 
 ## アニメーションを控えめにしたい
 
