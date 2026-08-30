@@ -1,8 +1,8 @@
-# フレックスボックスしたい（`display: flex`）
+# フレックスボックスしたい（`display: block flex`）
 
 ```css
 .cards {
-    display: flex;
+    display: block flex;  /* 1値構文では display: flex; */
     gap: 1rem;
 }
 ```
@@ -16,11 +16,14 @@
 ```
 
 フレックスボックス（flexbox）は、子要素を1方向（横または縦）に並べるためのレイアウトのしくみです。
-親要素に`display: flex`を指定すると、その直下の子要素が自動的に横並びになります。
+親要素に`display: block flex`を指定すると、その直下の子要素が自動的に横並びになります。
 
-`display: flex`を指定した親要素を「フレックスコンテナー」、
+`display: block flex`を指定した親要素を「フレックスコンテナー」、
 並べられる子要素を「フレックスアイテム」と呼びます。
 アイテム同士の間隔は`gap`で指定します。
+
+`block flex`は`display`の2値構文で、1番目の`block`が外側の並び方、2番目の`flex`が内側の並び方を表します。
+従来の1値構文では`display: flex`と書き、どちらも同じ表示になります。
 
 :::{note}
 
@@ -34,7 +37,7 @@
 
 ```css
 .box {
-    display: flex;
+    display: block flex;
     justify-content: center;  /* 横方向の位置 */
     align-items: center;      /* 縦方向の位置 */
     height: 200px;
@@ -44,14 +47,14 @@
 `justify-content`で主軸（横方向）の配置、
 `align-items`で交差軸（縦方向）の配置を変更できます。
 
-`display: flex`のデフォルトは、主軸が横方向です。
+フレックスコンテナーのデフォルトは、主軸が横方向です。
 `justify-content: center`で左右中央揃え、`align-items: center`で上下中央揃えにすると、要素をコンテナーのど真ん中に配置できます。
 
 ## 均等に配置したい（`justify-content`）
 
 ```css
 .nav {
-    display: flex;
+    display: block flex;
     justify-content: space-between;
 }
 ```
@@ -68,7 +71,7 @@
 
 ```css
 .cards {
-    display: flex;
+    display: block flex;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -107,7 +110,7 @@
 
 ```css
 .stack {
-    display: flex;
+    display: block flex;
     flex-direction: column;
     gap: 0.5rem;
 }
