@@ -121,4 +121,5 @@ maxdepth: 1
 webdev-rss
 webdev-browser
 css-gutenberg
+css-katex
 ```
