@@ -40,21 +40,33 @@ HTTPリクエストヘッダーのフィールド名は`Referer`です。
 
 :::
 
-## 別タブしたい（`target`）
+## 別タブしたい（`target="_blank"`）
 
 ```html
-<a target="_blank" href="...">
+<a target="_blank" rel="noopener noreferrer" href="...">
 ```
 
 `target`属性でリンク先のURLを表示する場所を変更できます。
-`target="_blank"`属性は、リンクをクリックすると別タブ（or別ウィンドウ）で開くようにします。
+属性値として
+`_self`（現在のページ）、
+`_blank`（新しいタブ）、
+`_parent`（親コンテキスト）、
+`_top`（最上位の親コンテキスト）があります。
+デフォルトは`_self`です。
 
-- `target="_self"`: 現在のページ（デフォルト）
-- `target="_blank"`: 新しいタブ
-- `target="_parent"`: 親コンテキスト
-- `target="_top"`: 最上位の親コンテキスト
+別タブもしくは別ウィンドウで開きたい場合は、`target="_blank"`を指定します。
 
-`target="_blank"`を使うときは、上記の「外部リンクしたい」で紹介した`rel="noopener noreferrer"`もあわせて指定しておきましょう。
+```css
+a[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.9em;
+}
+```
+
+別タブで開くことが一目でわかるように、
+CSSで属性セレクター（`a[target="_blank"]`）を指定して
+矢印（`↗`）などのアイコンを自動表示しておくとよいです。
+擬似要素（`::after`）の`content`には、任意の絵文字やアイコンフォントを指定できます。
 
 ## リファラーしたい（`referrerpolicy`）
 
@@ -94,20 +106,12 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
-a[target="_blank"]::after {
-    content: " ↗";
-}
 ```
 
 ブラウザのデフォルトの下線付きリンクは好みが分かれます。
 `text-decoration: none`で消しつつ、
 `:hover`時だけ下線を表示するのが定番です。
 下線を常に消したままにする場合は、地の文と見分けがつくよう色のコントラストを十分につけましょう。
-
-`a[target="_blank"]`のように属性セレクターを使うと、
-別タブで開くリンクだけにアイコンを自動で付けられます。
-このページの`target`属性の話と組み合わせて使えるテクニックです。
 
 ## リファレンス
 
