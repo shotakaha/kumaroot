@@ -132,7 +132,6 @@ maxdepth: 1
 command-bash
 command-fish
 command-nushell
-command-until
 command-sleep
 command-chmod
 command-stat

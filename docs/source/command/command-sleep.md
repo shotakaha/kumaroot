@@ -10,7 +10,7 @@ $ sleep 5
 
 :::{seealso}
 
-- [](./command-until.md)
+- [](./command-bash.md)
 
 :::
 
@@ -72,7 +72,7 @@ $ curl http://localhost:8080/
 バックグラウンドで起動したプロセスの準備を待つために、固定秒数の`sleep`を挟むことがあります。
 
 ただし待ち時間は環境で変わるため、確実に待つなら
-[条件が成立するまで繰り返したい（`until`）](command-until.md)で
+[シェルスクリプトしたい（`bash`）](command-bash.md)の`until`ループで
 「接続できるまで待つ」と書くほうが安定します。
 
 ## リファレンス
