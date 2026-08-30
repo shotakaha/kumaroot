@@ -52,6 +52,9 @@ html-htaccess
 ## CSSしたい
 
 ```{toctree}
+---
+maxdepth: 1
+---
 css-selectors
 css-cascade
 css-variables
