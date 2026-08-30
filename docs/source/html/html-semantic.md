@@ -77,15 +77,7 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 
 :::
 
-## ナビゲーションしたい
-
-```html
-<!-- div -->
-<div class="nav">
-    <div class="nav-item"><a href="/">ホーム</a></div>
-    <div class="nav-item"><a href="/blog">ブログ</a></div>
-</div>
-```
+## ナビゲーションしたい（`nav`）
 
 ```html
 <!-- セマンティクス -->
@@ -97,17 +89,25 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 </nav>
 ```
 
-主要なリンク集は`nav`で囲み、リンクは`ul`と`li`で並べます。
-詳しくは [ナビゲーションしたい（`nav`）](html-nav.md) を参照してください。
-
-## メインコンテンツしたい
+`nav`タグで、主要なリンク集を記述できます。リンクは`ul`と`li`で並べます。
 
 ```html
 <!-- div -->
-<div id="content">
-    ...
+<div class="nav">
+    <div class="nav-item"><a href="/">ホーム</a></div>
+    <div class="nav-item"><a href="/blog">ブログ</a></div>
 </div>
 ```
+
+これまでは`.nav`クラスを作るのが一般的でした。
+
+:::{seealso}
+
+- [](./html-nav.md)
+
+:::
+
+## メインコンテンツしたい（`main`）
 
 ```html
 <!-- セマンティクス -->
@@ -116,18 +116,24 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 </main>
 ```
 
-そのページの中心的な内容は`main`で囲みます。表示される`main`は1ページに1つです。
-詳しくは [メインコンテンツしたい（`main`）](html-main.md) を参照してください。
-
-## 記事したい
+`main`タグで、そのページの中心的な内容を記述できます。表示される`main`は1ページに1つです。
 
 ```html
 <!-- div -->
-<div class="article">
-    <div class="title">記事のタイトル</div>
-    <div class="body">本文...</div>
+<div id="content">
+    ...
 </div>
 ```
+
+これまでは`#content`や`#main`のIDを付けるのが一般的でした。
+
+:::{seealso}
+
+- [](./html-main.md)
+
+:::
+
+## 記事したい（`article`）
 
 ```html
 <!-- セマンティクス -->
@@ -137,19 +143,26 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 </article>
 ```
 
-それ単体で完結するまとまり（記事、投稿、商品カード）は`article`にします。
+`article`タグで、それ単体で完結するまとまり（記事、投稿、商品カード）を記述できます。
 タイトルは`div`ではなく見出しタグ（`h1`〜`h6`）を使います。
-詳しくは [記事したい（`article`）](html-article.md) を参照してください。
-
-## 章・節したい
 
 ```html
 <!-- div -->
-<div class="section">
-    <div class="heading">機能一覧</div>
-    <p>...</p>
+<div class="article">
+    <div class="title">記事のタイトル</div>
+    <div class="body">本文...</div>
 </div>
 ```
+
+これまでは`.article`クラスを作るのが一般的でした。
+
+:::{seealso}
+
+- [](./html-article.md)
+
+:::
+
+## 章・節したい（`section`）
 
 ```html
 <!-- セマンティクス -->
@@ -159,18 +172,26 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 </section>
 ```
 
-見出しを持つ意味のあるかたまりは`section`にします。
+`section`タグで、見出しを持つ意味のあるかたまりを記述できます。
 見出しを付けられないなら`section`ではなく`div`のままでかまいません。
-詳しくは [章・節したい（`section`）](html-section.md) を参照してください。
-
-## 補足したい
 
 ```html
 <!-- div -->
-<div class="sidebar">
-    <div class="widget">カテゴリ一覧</div>
+<div class="section">
+    <div class="heading">機能一覧</div>
+    <p>...</p>
 </div>
 ```
+
+これまでは`.section`クラスを作るのが一般的でした。
+
+:::{seealso}
+
+- [](./html-section.md)
+
+:::
+
+## 補足したい（`aside`）
 
 ```html
 <!-- セマンティクス -->
@@ -182,17 +203,24 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 </aside>
 ```
 
-本筋から外れた補足（サイドバー、関連記事、余談）は`aside`にします。
-詳しくは [補足したい（`aside`）](html-aside.md) を参照してください。
-
-## フッターしたい
+`aside`タグで、本筋から外れた補足（サイドバー、関連記事、余談）を記述できます。
 
 ```html
 <!-- div -->
-<div class="footer">
-    <div class="copyright">&copy; 2024</div>
+<div class="sidebar">
+    <div class="widget">カテゴリ一覧</div>
 </div>
 ```
+
+これまでは`.sidebar`クラスを作るのが一般的でした。
+
+:::{seealso}
+
+- [](./html-aside.md)
+
+:::
+
+## フッターしたい（`footer`）
 
 ```html
 <!-- セマンティクス -->
@@ -201,8 +229,22 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 </footer>
 ```
 
-まとまりの末尾に置く補足情報（コピーライト、フッターナビ）は`footer`にします。
-詳しくは [フッターしたい（`footer`）](html-footer.md) を参照してください。
+`footer`タグで、まとまりの末尾に置く補足情報（コピーライト、フッターナビ）を記述できます。
+
+```html
+<!-- div -->
+<div class="footer">
+    <div class="copyright">&copy; 2024</div>
+</div>
+```
+
+これまでは`.footer`クラスを作るのが一般的でした。
+
+:::{seealso}
+
+- [](./html-footer.md)
+
+:::
 
 ## div のまま残すもの
 
