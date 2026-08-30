@@ -17,6 +17,7 @@
 maxdepth: 1
 ---
 html-semantic
+html-a11y
 html-header
 html-nav
 html-main
@@ -24,6 +25,7 @@ html-article
 html-section
 html-aside
 html-search
+html-hgroup
 html-footer
 ```
 
