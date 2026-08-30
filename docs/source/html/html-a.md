@@ -8,6 +8,23 @@
 `href`属性にリンク先のURLを指定します。
 内部ページへのリンクは相対パスで指定することもできます。
 
+```css
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+```
+
+デフォルトのハイパーリンク表示は、青色で下線付きです。
+これは好みが分かれます。
+`text-decoration: none`で消しつつ、
+`:hover`時だけ下線を表示するのが定番です。
+下線を常に消したままにする場合は、地の文と見分けがつくよう色のコントラストを十分につけましょう。
+
 ## 外部リンクしたい（`rel="noopener noreferrer"`）
 
 ```html
@@ -94,24 +111,6 @@ CSSで属性セレクター（`a[target="_blank"]`）を指定して
 ```
 
 他にも、リンク先の関係を表す値がいくつかあります。
-
-## CSSしたい（`a`）
-
-```css
-a {
-    color: #0066cc;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-```
-
-ブラウザのデフォルトの下線付きリンクは好みが分かれます。
-`text-decoration: none`で消しつつ、
-`:hover`時だけ下線を表示するのが定番です。
-下線を常に消したままにする場合は、地の文と見分けがつくよう色のコントラストを十分につけましょう。
 
 ## リファレンス
 
