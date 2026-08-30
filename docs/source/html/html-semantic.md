@@ -7,8 +7,9 @@
 </div>
 <div class="main">
     <div class="article">...</div>
-    <div class="sidebar">...</div>
+    <div class="related">...</div>
 </div>
+<div class="sidebar">...</div>
 <div class="footer">...</div>
 ```
 
@@ -19,8 +20,9 @@
 </header>
 <main>
     <article>...</article>
-    <aside class="sidebar">...</aside>
+    <aside class="related">...</aside>
 </main>
+<aside class="sidebar">...</aside>
 <footer>...</footer>
 ```
 
