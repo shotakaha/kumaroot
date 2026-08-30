@@ -17,9 +17,14 @@
 maxdepth: 1
 ---
 html-semantic
-html-main
-html-footer
+html-header
 html-nav
+html-main
+html-article
+html-section
+html-aside
+html-search
+html-footer
 ```
 
 ## HTMLしたい
