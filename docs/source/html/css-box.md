@@ -4,6 +4,17 @@
 * {
     box-sizing: border-box;
 }
+
+.card {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    margin: 16px;
+}
+
+.card img {
+    width: 100%;
+}
 ```
 
 ボックスモデルとは、すべての要素を「内容・パディング・枠線・マージンの4つの層でできた箱」として扱うCSSの考え方です。
