@@ -139,3 +139,6 @@ SNSのタイムラインのように、投稿が時系列で並ぶ画面でも�
 ## リファレンス
 
 - [article](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/article)
+- [section](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/section)
+- [time](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/time)
+- [コンテンツカテゴリー](https://developer.mozilla.org/ja/docs/Web/HTML/Guides/Content_categories)
