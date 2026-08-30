@@ -36,6 +36,8 @@ html-footer
 maxdepth: 1
 ---
 html-doctype
+html-html
+html-body
 html-meta
 html-p
 html-img
