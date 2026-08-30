@@ -1,9 +1,12 @@
 # フォントしたい（`font-family`）
 
 ```css
+html {
+    font-size: 16px;
+}
+
 body {
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-    font-size: 16px;
     line-height: 1.7;
 }
 ```
@@ -32,22 +35,21 @@ body {
 ## 大きさを指定したい（`font-size`）
 
 ```css
-body {
+html {
     font-size: 16px;
 }
 
 h1 {
-    font-size: 2rem;   /* body の 2倍 = 32px */
+    font-size: 2rem;   /* 16px の 2倍 = 32px */
 }
 ```
 
 `font-size`プロパティで、文字の大きさを指定します。
 
-単位は`px`、`rem`、`em`、`%`などが使えます。
+単位は`px`と`rem`をよく使います。
 
 - `px` … 常に固定の大きさ
 - `rem` … ルート要素（`html`）の`font-size`を基準にした倍率
-- `em` … 親要素の`font-size`を基準にした倍率
 
 `rem`を使うと、`html`の`font-size`を変えるだけでページ全体の文字が一括で拡大・縮小できるので、統一感を保ちやすくなります。
 
@@ -68,9 +70,6 @@ strong {
 `normal`（標準）と`bold`（太字）のキーワードのほか、
 `100`から`900`までの数値でも指定できます。`normal`が`400`、`bold`が`700`に相当します。
 
-数値が使えるのは、その書体がその太さのデータを持っている場合だけです。
-持っていない太さを指定すると、いちばん近い太さで表示されます。
-
 ## 行間を広げたい（`line-height`）
 
 ```css
@@ -87,25 +86,9 @@ body {
 本文は`1.5`〜`1.8`くらいにすると読みやすくなります。
 見出しは行が詰まっていてよいので、`1.2`前後にすることが多いです。
 
-## 一括で指定したい（`font`）
-
-```css
-body {
-    /* 太さ 大きさ/行間 書体 */
-    font: 400 16px/1.7 "Helvetica Neue", Arial, sans-serif;
-}
-```
-
-`font`プロパティは、複数のフォント関連プロパティをまとめて指定できる一括指定プロパティです。
-
-`font-size`と`font-family`は省略できず、書く順番も決まっています。
-指定を忘れたプロパティは初期値にリセットされるので、
-慣れないうちは`font-family`や`font-size`を個別に指定するほうが分かりやすいです。
-
 ## リファレンス
 
 - [font-family](https://developer.mozilla.org/ja/docs/Web/CSS/font-family)
 - [font-size](https://developer.mozilla.org/ja/docs/Web/CSS/font-size)
 - [font-weight](https://developer.mozilla.org/ja/docs/Web/CSS/font-weight)
 - [line-height](https://developer.mozilla.org/ja/docs/Web/CSS/line-height)
-- [font](https://developer.mozilla.org/ja/docs/Web/CSS/font)
