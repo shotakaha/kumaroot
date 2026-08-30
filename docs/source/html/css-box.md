@@ -47,7 +47,12 @@
 - **border** … 枠線
 - **margin** … 枠線の外側、他の要素とのあいだの余白
 
-`padding`は [余白したい（`padding`）](css-padding.md)、`margin`は [余白したい（`margin`）](css-margin.md)、`border`は枠線の色や太さを指定するプロパティです。
+:::{seealso}
+
+- [](./css-padding.md)
+- [](./css-margin.md)
+
+:::
 
 ## 幅の計算方法を変えたい（`box-sizing`）
 
