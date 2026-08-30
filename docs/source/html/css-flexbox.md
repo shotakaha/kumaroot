@@ -1,4 +1,4 @@
-# 横並びしたい（`display: flex`）
+# フレックスボックスしたい（`display: flex`）
 
 ```css
 .cards {
