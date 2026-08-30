@@ -31,6 +31,14 @@
 `footer`には著者情報やタグなど末尾に付ける情報を入れます。
 どちらも省略でき、`article`の直下に`h1`と`p`を並べるだけでもかまいません。
 
+:::{seealso}
+
+- [](./html-section.md)
+- [](./html-header.md)
+- [](./html-footer.md)
+
+:::
+
 ## 記事一覧したい
 
 ```html
