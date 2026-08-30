@@ -49,15 +49,7 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 
 :::
 
-## ヘッダーしたい
-
-```html
-<!-- div -->
-<div class="header">
-    <div class="logo">サイト名</div>
-    <div class="nav">...</div>
-</div>
-```
+## ヘッダーしたい（`header`）
 
 ```html
 <!-- セマンティクス -->
@@ -67,8 +59,23 @@ LaTeXやWordのアウトライン機能で見出しを組むのと同じ感覚�
 </header>
 ```
 
-ページ冒頭のロゴやナビゲーションのまとまりは`header`にします。
-詳しくは [ヘッダーしたい（`header`）](html-header.md) を参照してください。
+`header`タグで、サイトのロゴやナビゲーションなど、ページの先頭にまとまる情報を記述できます。
+
+```html
+<!-- div -->
+<div class="header">
+    <div class="logo">サイト名</div>
+    <div class="nav">...</div>
+</div>
+```
+
+これまでは`.header`クラスを作るのが一般的でした。
+
+:::{seealso}
+
+- [](./html-header.md)
+
+:::
 
 ## ナビゲーションしたい
 
