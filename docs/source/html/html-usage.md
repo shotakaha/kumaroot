@@ -37,8 +37,10 @@ maxdepth: 1
 ---
 html-doctype
 html-html
+html-head
 html-body
 html-meta
+html-meta-ogp
 html-p
 html-img
 html-figure
