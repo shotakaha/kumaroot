@@ -96,7 +96,7 @@
 多くのCSSフレームワークやリセットCSSは、この指定を最初に入れています。
 新しくCSSを書き始めるときは、まずこれを書いておくと余白まわりの計算で悩まなくなります。
 
-## 枠線を引きたい（`border`）
+## 枠線をつけたい（`border`）
 
 ```css
 .box {
@@ -104,38 +104,10 @@
 }
 ```
 
-`border`プロパティで、要素の枠線を「太さ・線の種類・色」の順にまとめて指定できます。
-
-線の種類は`solid`（実線）、`dashed`（破線）、`dotted`（点線）などがあります。
-一辺だけ引きたいときは`border-top`、`border-bottom`のように方向を付けます。
-
-```css
-.quote {
-    border-left: 4px solid #0066cc;
-    padding-left: 1rem;
-}
-```
-
-## 角を丸くしたい（`border-radius`）
-
-```css
-.card {
-    border-radius: 8px;
-}
-
-.avatar {
-    border-radius: 50%;  /* 正方形なら円になる */
-}
-```
-
-`border-radius`プロパティで、要素の角を丸くできます。
-値が大きいほど丸みが強くなり、`50%`を指定すると正方形は円、長方形は楕円になります。
-
-枠線がなくても、背景色や画像がある要素なら角丸が見た目に効きます。
+`border`プロパティで、パディングとマージンのあいだの層に枠線を引けます。
+太さ・種類・色の指定や、一辺だけの枠線、角丸（`border-radius`）は [枠線したい（`border`）](css-border.md) を参照してください。
 
 ## リファレンス
 
 - [box-sizing](https://developer.mozilla.org/ja/docs/Web/CSS/box-sizing)
 - [ボックスモデル入門](https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Styling_basics/Box_model)
-- [border](https://developer.mozilla.org/ja/docs/Web/CSS/border)
-- [border-radius](https://developer.mozilla.org/ja/docs/Web/CSS/border-radius)
