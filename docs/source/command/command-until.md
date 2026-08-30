@@ -13,6 +13,7 @@ done
 
 :::{seealso}
 
+- [](./command-sleep.md)
 - [](./command-expect.md)
 
 :::
