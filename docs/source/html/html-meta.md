@@ -3,7 +3,6 @@
 ```html
 <head>
     <meta charset="utf-8">
-    <title>サイト名</title>
     <meta name="description" content="サイトの説明">
     <meta name="viewport" content="width=device-width">
 
@@ -15,6 +14,8 @@
 メタ情報は`head`タグの中に記述します。
 `meta`タグを使ってkey-valueペアで設定します。
 
+`head`タグそのものや、`title`・`link`・`script`については [ヘッド情報したい（`head`）](html-head.md) を参照してください。
+
 ## 文字エンコーディングしたい（`charset`）
 
 ```html
@@ -22,27 +23,9 @@
 ```
 
 `charset`キーで、文書の文字エンコーディングを設定できます。
-`charset`に設定できる値は事実上`utf-8`のみです。
+HTML標準で使えるのは`utf-8`のみです。
 
-この宣言は省略不可で、文書の最初の方に書いておく必要があります。
-
-## サイト名したい（`title`）
-
-```html
-<!--トップページ-->
-<title>サイト名</title>
-
-<!--記事／ページ-->
-<title>記事のタイトル | サイト名</title>
-<title>ページのタイトル | サイト名</title>
-```
-
-`title`タグで、そのページのタイトルを設定できます。
-子要素に設定できる値は任意の文字列です。
-このタグは省略不可です。
-
-このタイトルはブックマークに保存するときや、ウェブ検索の結果の見出しとしても利用されます。
-トップページは`サイト名`、記事／ページの場合は「`タイトル | サイト名`」のようにするとよいです。
+この宣言は省略不可で、`head`の最初の方（`title`より前）に書いておく必要があります。
 
 ## サイト説明したい（`description`）
 
@@ -52,7 +35,7 @@
 
 `description`キーで、ページの内容を要約する説明文を設定できます。
 `content`に設定できる値は任意の文字列です。
-省略した時は本文から自動生成されます。
+省略すると、検索エンジンが本文から抜粋してスニペットを作ります。
 
 検索結果のスニペットとして表示されることがあるため、ページごとに簡潔で具体的な説明を書いておくとよいです。
 
@@ -78,7 +61,7 @@
 ```
 
 `viewport`キーで、
-[ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)
+[ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/meta/name/viewport)
 のサイズを設定できます。
 `content`に設定できる値は
 `width`（表示幅）や
@@ -91,8 +74,6 @@
 ## OGPしたい（`og:*`）
 
 ```html
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-<title>ページのタイトル</title>
 <meta property="og:type" content="ページの種類（website / article）" />
 <meta property="og:url" content="ページのパーマリンク（絶対URL）" />
 <meta property="og:title" content="ページのタイトル" />
@@ -104,6 +85,9 @@
 `og:*`キーで、OGP（The Open Graph Protocol）を設定できます。
 ウェブサイトや記事がSNSなどでシェアされたときに利用されるメタデータです。
 `og:type`（ページの種類）、`og:url`（絶対URL）、`og:title`（タイトル）、`og:description`（説明文）、`og:image`（サムネイル画像の絶対URL）、`og:site_name`（サイト名）などがあります。
+
+昔は`<head prefix="og: http://ogp.me/ns#">`のように`prefix`属性が必要とされましたが、
+いまの主要なSNSは`prefix`なしでも`og:*`を認識するので省略してかまいません。
 
 適切に設定しておくと、シェアされたときにいい感じに表示されます。
 OGPが適切に設定できたかどうかは
@@ -130,7 +114,7 @@ CMSではプラグインが用意されている場合もあり、自分で書�
 
 いずれも省略可能なオプション項目です。
 
-## Twitter Cardしたい
+## X（Twitter）Cardしたい
 
 ```html
 <meta name="twitter:card" content="カードの種類（summary / summary_large_image / app / player）" />
@@ -138,11 +122,11 @@ CMSではプラグインが用意されている場合もあり、自分で書�
 <meta name="twitter:creator" content="@ページ作成者のユーザー名" />
 ```
 
-`twitter:*`キーで、Twitterの[Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)を設定できます。
-OGPとは別に用意されている、Twitter専用のメタデータです。
+`twitter:*`キーで、X（旧Twitter）のCardを設定できます。
 `twitter:card`（カードの種類）、`twitter:site`（サイトのユーザー名）、`twitter:creator`（ページ作成者のユーザー名）などがあります。
 
-これも追加で設定しておくとよいでしょう。
+タイトル・説明・画像は`twitter:*`を書かなければ`og:*`の値が使われます。
+そのため、OGPを設定していれば、追加で書くのは`twitter:card`くらいで足ります。
 
 ## リダイレクトしたい
 
@@ -153,14 +137,25 @@ OGPとは別に用意されている、Twitter専用のメタデータです。
 `http-equiv="refresh"`キーで、ページのリダイレクトを設定できます。
 `content`に設定できる値は「待機秒数」と「リダイレクト先URL」をセミコロンでつないだ文字列です。
 
-リダイレクトするのに、そのページを読み込むのはもったいないので、この設定もはじめのほうに書いておくとよいです。
+:::{warning}
+
+`meta`によるリダイレクトは、利用者の予告なくページが切り替わるためアクセシビリティ上の問題があります。
+サーバー側で301／302リダイレクトを設定できる場合は、そちらを使うほうがよいです。
+
+:::
+
+:::{seealso}
+
+- [](./html-head.md)
+- [](./html-doctype.md)
+
+:::
 
 ## リファレンス
 
-- [meta](https://developer.mozilla.org/ja/docs/Web/HTML/Element/meta)
-- [title](https://developer.mozilla.org/ja/docs/Web/HTML/Element/title)
-- [ビューポート](https://developer.mozilla.org/ja/docs/Web/HTML/Viewport_meta_tag)
+- [meta](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/meta)
+- [meta name="viewport"](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/meta/name/viewport)
 - [Robots \<meta\> tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)
 - [OGPの公式ページ](https://ogp.me/)
 - [OGP確認ツール](https://ogp.buta3.net/)
-- [Twitter Card](https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started)
+- [X Cards: Getting started](https://developer.x.com/en/docs/x-for-websites/cards/guides/getting-started)
