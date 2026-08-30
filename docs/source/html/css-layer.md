@@ -29,6 +29,7 @@
 :::{seealso}
 
 - [](./css-cascade.md)
+- [](./css-import.md)
 
 :::
 
@@ -99,7 +100,6 @@ a { color: red; }
 
 フレームワークのCSSをまるごと低い優先度のレイヤーに入れておけば、
 自分のCSSから詳細度を気にせず上書きできます。
-`@import`については [インポートしたい（`@import`）](css-import.md) を参照してください。
 
 ## レイヤー名の付け方
 
@@ -118,10 +118,3 @@ a { color: red; }
 
 - [@layer](https://developer.mozilla.org/ja/docs/Web/CSS/@layer)
 - [カスケードレイヤー](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_cascade/Cascade_layers)
-
-:::{seealso}
-
-- [](./css-cascade.md)
-- [](./css-import.md)
-
-:::
