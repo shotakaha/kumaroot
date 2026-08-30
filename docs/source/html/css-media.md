@@ -310,3 +310,15 @@ CSS変数（カスタムプロパティ）と組み合わせると、色の定�
 同じ部品をサイドバーとメインの両方に置くような場合、
 画面幅ではなく置かれた場所の幅で見た目を変えられるので、部品を使い回しやすくなります。
 細かい部品はコンテナクエリ、ページ全体のレイアウトはメディアクエリ、と使い分けます。
+
+## リファレンス
+
+- [@media](https://developer.mozilla.org/ja/docs/Web/CSS/@media)
+- [@page](https://developer.mozilla.org/ja/docs/Web/CSS/@page)
+- [@import](https://developer.mozilla.org/ja/docs/Web/CSS/@import)
+- [@container](https://developer.mozilla.org/ja/docs/Web/CSS/@container)
+- [メディアクエリーの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_media_queries/Using_media_queries)
+- [prefers-color-scheme](https://developer.mozilla.org/ja/docs/Web/CSS/@media/prefers-color-scheme)
+- [prefers-reduced-motion](https://developer.mozilla.org/ja/docs/Web/CSS/@media/prefers-reduced-motion)
+- [印刷用ウェブサイトの作成](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_media_queries/Printing)
+- [コンテナークエリーの使用](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_containment/Container_queries)
