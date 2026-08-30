@@ -30,7 +30,7 @@
 
 :::
 
-## 中央に置きたい（`justify-content` / `align-items`）
+## 中央に配置したい（`justify-content` / `align-items`）
 
 ```css
 .box {
@@ -41,14 +41,13 @@
 }
 ```
 
-`justify-content`は並んでいる方向（主軸）の位置、
-`align-items`はそれと直角の方向（交差軸）の位置をそろえます。
+`justify-content`で主軸（横方向）の配置、
+`align-items`で交差軸（縦方向）の配置を変更できます。
 
-`display: flex`の初期状態では主軸が横なので、
-`justify-content: center`で左右中央、`align-items: center`で上下中央になります。
-両方に`center`を指定すると、要素をコンテナーのど真ん中に置けます。
+`display: flex`のデフォルトは、主軸が横方向です。
+`justify-content: center`で左右中央揃え、`align-items: center`で上下中央揃えにすると、要素をコンテナーのど真ん中に配置できます。
 
-## 均等に並べたい（`justify-content`）
+## 均等に配置したい（`justify-content`）
 
 ```css
 .nav {
@@ -57,13 +56,13 @@
 }
 ```
 
-`justify-content`には、アイテムのあいだに余白を配る値もあります。
+`justify-content`で、アイテム間の余白設定を変更できます。
 
-- `space-between` … 両端をコンテナーの端にそろえ、あいだを均等にあける
-- `space-around` … 各アイテムの左右に同じ余白をつける
-- `space-evenly` … アイテムのあいだと両端の余白をすべて同じにする
+`space-between`でコンテナー幅を基準に均等揃え、
+`space-around`で各アイテムの左右に余白をつけて配置、
+`space-evenly`でアイテム間と両端の余白をすべて均等揃えにして配置できます。
 
-ヘッダーで「左にロゴ、右にナビゲーション」を作るときは`space-between`をよく使います。
+「左にロゴ、右にナビゲーション」を作るときは`space-between`をよく使います。
 
 ## 折り返したい（`flex-wrap`）
 
