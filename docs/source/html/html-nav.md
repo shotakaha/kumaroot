@@ -27,4 +27,4 @@ SSGやCMSを利用している場合は
 
 ## リファレンス
 
-- [nav](https://developer.mozilla.org/ja/docs/Web/HTML/Element/nav)
+- [nav](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/nav)
