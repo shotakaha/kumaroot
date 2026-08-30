@@ -1,95 +1,148 @@
-# 構造化データしたい（``JSON+LD``）
+# 構造化データしたい（`JSON-LD`）
 
 ```html
-<script type="application/ld+json">
-    {
-        構造化データ
-    }
-</script>
-```
-
-ウェブサイトのHTMLに[構造化データ](https://developer.mozilla.org/ja/docs/Web/HTML/Microdata)を追加して、検索エンジンに情報を渡すことができます。
-主要な検索エンジンは[Schema.org](https://schema.org/)で定義されているアイテムに対応しています。
-[Schema Validator](https://validator.schema.org/)で設定をチェックできます。
-
-構造化データを記述する方法は``Microdata``、``RDFa``、``JSON-LD``があります。
-MicrodataとRDFaはHTMLタグに直接記述する形式で、
-``JSON+LD``は``script``タグを使って``head``内に記述する形式です。
-CMSのテンプレート機能と組み合わせる場合は、``JSON+LD``形式が有用だと思います。
-
-## 固定ページ（``WebSite``）
-
-```html
-<script type="application/ld+json">
+<head>
+    <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "url": "ウェブサイトのURL",
-        "name": "ウェブサイト名",
-        "description": "ウェブサイトの説明",
-        "image": "OGP画像",
-        "author": "機関名",
+        "url": "https://example.com/",
+        "name": "サイト名"
     }
-</script>
+    </script>
+</head>
 ```
 
-固定ページは[WebSite](https://schema.org/WebSite)を使います。
+構造化データは、ページの内容を検索エンジンが理解できる形で書き添えるしくみです。
+うまく認識されると、検索結果にパンくずや記事の日付、レビューの星などが表示されることがあります（リッチリザルト）。
 
-## 記事ページ
+語彙（どんな種類・項目があるか）は[Schema.org](https://schema.org/)で定義されています。
+書き方には`Microdata`、`RDFa`、`JSON-LD`の3つがあります。
+このうち`JSON-LD`は、HTML本体と分けて`script`タグにまとめて書けるため、CMSやテンプレートと相性がよく、いまの主流です。
+
+`script`タグは`head`内に置くのが一般的ですが、`body`内でもかまいません。
+
+## JSON-LDの書き方
 
 ```html
 <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "url": "記事のURL",
-        "name": "記事のタイトル | ウェブサイト名",
-        "description": "記事の概要",
-        "image": "OGP画像",
-        "author": "機関名",
-        "wordCount": "記事の文字数",
-        "datePublished": "記事の公開日",
-        "dateModified": "記事の最終更新日",
-    }
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "記事のタイトル"
+}
 </script>
 ```
 
-記事ページは[Article](https://schema.org/Article)を使います。
+`<script type="application/ld+json">`の中に、JSON形式でデータを書きます。
 
-## 記事リスト（``ItemList``）
+- `@context` … 常に`"https://schema.org"`。語彙の定義元を指します
+- `@type` … データの種類（`WebSite`、`Article`、`BreadcrumbList`など）
+- それ以降 … その種類ごとに決まった項目
+
+:::{warning}
+
+中身はJSONなので、最後の項目の後ろにカンマを付けると構文エラーになります。
+（JavaScriptのオブジェクトと違い、末尾カンマは許されません）
+
+書いたあとは[リッチリザルトテスト](https://search.google.com/test/rich-results)や
+[スキーマ マークアップ検証ツール](https://validator.schema.org/)で確認します。
+
+:::
+
+## サイト情報を伝えたい（`WebSite`）
 
 ```html
 <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "url": "記事リストのURL",
-        "name": "記事リストのタイトル | ウェブサイト名",
-        "description": "記事リストの内容",
-        "image": "OGP画像",
-        "itemListElement": [
-            {
-                "@type": "Article",
-                "url": "記事のURL",
-                "name": "記事のタイトル",
-                "description": "記事の概要",
-                "image": "OGP画像",
-                "author": "機関名",
-                "wordCount": "記事の文字数",
-                "datePublished": "記事の公開日",
-                "dateModified": "記事の最終更新日",
-            },
-            {
-                ...
-            },
-        ]
-        "itemListOrder": "https://schema.org/ItemListOrderAscending"
-        "numberOfItems": "記事数"
-    }
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://example.com/",
+    "name": "サイト名",
+    "description": "サイトの説明"
+}
 </script>
 ```
 
-記事リストは[ItemList](https://schema.org/ItemList)を使います。
-また、[itemListElement](https://schema.org/itemListElement)の中に、記事（``Article``オブジェクト）を並べます。
-リストの順序は[itemListOrder](https://schema.org/itemListOrder)で指定します。
-テンプレート言語を使ってすでにソート済みの場合は、``Unorderd``がよいかもしれません。
+`WebSite`は、サイト全体を表す種類です。
+トップページに1つ置きます。
+
+`url`と`name`が基本の項目です。
+
+## 記事情報を伝えたい（`Article`）
+
+```html
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "記事のタイトル",
+    "description": "記事の概要",
+    "image": "https://example.com/blog/1/ogp.png",
+    "datePublished": "2026-08-30T09:00:00+09:00",
+    "dateModified": "2026-08-31T12:00:00+09:00",
+    "author": {
+        "@type": "Organization",
+        "name": "組織名"
+    }
+}
+</script>
+```
+
+`Article`は、ブログ記事やニュース記事を表す種類です。
+各記事ページに置きます。
+
+項目には決まった型があります。
+
+- `headline` … 記事のタイトル（文字列）
+- `image` … 画像のURL（文字列）。絶対URLにします
+- `datePublished` / `dateModified` … 日時。`2026-08-30`または`2026-08-30T09:00:00+09:00`の形式（ISO 8601）
+- `author` … `Person`または`Organization`のオブジェクト。名前だけの文字列にはしません
+
+## パンくずを伝えたい（`BreadcrumbList`）
+
+```html
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "ホーム",
+            "item": "https://example.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "ブログ",
+            "item": "https://example.com/blog/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "この記事のタイトル"
+        }
+    ]
+}
+</script>
+```
+
+`BreadcrumbList`は、いまページが階層のどこにいるかを表します。
+うまく認識されると、検索結果のURL部分がパンくず表示になります。
+
+- `itemListElement` … `ListItem`の配列
+- `position` … 1から始まる順番（数値）
+- `item` … そのページのURL。最後の項目（現在ページ）では省略します
+
+画面に表示するパンくずは [ナビゲーションしたい（`nav`）](html-nav.md) を参照してください。
+`BreadcrumbList`はそれを検索エンジン向けに書き添えるものです。
+
+## リファレンス
+
+- [Schema.org](https://schema.org/)
+- [構造化データの仕組みについて - Google 検索セントラル](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
+- [リッチリザルトテスト](https://search.google.com/test/rich-results)
+- [スキーマ マークアップ検証ツール](https://validator.schema.org/)
+- [マイクロデータ - MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Guides/Microdata)
