@@ -85,15 +85,6 @@ CSSで属性セレクター（`a[target="_blank"]`）を指定して
 矢印（`↗`）などのアイコンを自動表示しておくとよいです。
 擬似要素（`::after`）の`content`には、任意の絵文字やアイコンフォントを指定できます。
 
-## リファラーしたい（`referrerpolicy`）
-
-`referrerpolicy`で、リンクをたどるときにリファラーを送信するか設定できます。
-以前は`rel`属性でリファラーを動作を設定していましたが、
-いつの間にか新しい属性ができていました。
-
-- `referrerpolicy="no-referrer"`: リファラーを送信しない
-- `referrerpolicy="origin"`: 参照元ページのオリジンのみに限定してリファラーを送信
-
 ## ページャーしたい（`rel="prev"` / `rel="next"`）
 
 ```html
@@ -111,6 +102,31 @@ CSSで属性セレクター（`a[target="_blank"]`）を指定して
 ```
 
 他にも、リンク先の関係を表す値がいくつかあります。
+
+## URLを印刷したい（`@media print`）
+
+```css
+@media print {
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.9em;
+        word-break: break-all;
+    }
+}
+```
+
+紙に印刷するとハイパーリンクはクリックできません。
+`@media print`でCSSを設定すると、印刷もしくはPDF出力時にURLを展開できます。
+属性セレクター（`a[href^="http"]`）で前方一致マッチさせ、`http`で開始する外部URLだけを対象とするとよいです。
+
+## リファラーしたい（`referrerpolicy`）
+
+`referrerpolicy`で、リンクをたどるときにリファラーを送信するか設定できます。
+以前は`rel`属性でリファラーを動作を設定していましたが、
+いつの間にか新しい属性ができていました。
+
+- `referrerpolicy="no-referrer"`: リファラーを送信しない
+- `referrerpolicy="origin"`: 参照元ページのオリジンのみに限定してリファラーを送信
 
 ## リファレンス
 
