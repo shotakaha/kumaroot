@@ -131,4 +131,4 @@ article > footer a {
 
 ## リファレンス
 
-- [footer](https://developer.mozilla.org/ja/docs/Web/HTML/Element/footer)
+- [footer](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/footer)
