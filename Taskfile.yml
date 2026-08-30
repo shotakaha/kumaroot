@@ -13,7 +13,7 @@ tasks:
   code:
     desc: Start VS Code
     cmds:
-      - uv run code .
+      - code .
 
   # ============================================================================
   # Pre-commit Hooks
