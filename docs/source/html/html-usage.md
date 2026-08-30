@@ -42,12 +42,18 @@ html-htaccess
 
 ```{toctree}
 css-selectors
+css-cascade
 css-variables
 css-nest
+css-layer
+css-color
 css-font
-css-display
+css-box
+css-border
 css-margin
 css-padding
+css-display
+css-flexbox
 css-responsive
 css-media
 ```
