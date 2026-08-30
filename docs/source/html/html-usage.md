@@ -120,5 +120,5 @@ maxdepth: 1
 ---
 webdev-rss
 webdev-browser
-webdev-css-gutenberg
+css-gutenberg
 ```
