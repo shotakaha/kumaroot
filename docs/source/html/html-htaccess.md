@@ -1,220 +1,188 @@
 # アクセス制御したい（`.htaccess`）
 
 ```apache
-# 特定のIPからのアクセスを拒否
-Order Allow,Deny
-Deny from 192.168.1.1
-Allow from all
-
-# WordPress管理画面へのアクセスを限定
-<Files wp-login.php>
-  Order Deny,Allow
-  Deny from all
-  Allow from 許可IPアドレス
-</Files>
-
-# .htaccessファイルへのアクセス禁止
-# 外部（＝ブラウザ経由）のアクセスを禁止
-# 内部（=ssh経由）のアクセスは可能
-<Files .htaccess>
-  Order Allow,Deny
-  Deny from all
-</Files>
-
-# Basic認証
-AuthType Basic
-AuthName "Restricted Area"
-AuthUserFile /path/to/.htpasswd   # .htpasswdのパス
-Require valid-user
-
-# リダイレクトの設定
-Redirect 301 古いURL 新しいURL
+# このディレクトリ全体を、指定したIPアドレスからだけ見られるようにする
+Require ip 192.168.0.0/16
+Require ip 203.0.113.10
 ```
 
-`.htaccess`を使って、ウェブサイトに対するアクセスやレスポンスを制御できます。
-ファイル／ディレクトリに対するアクセス制限やリダイレクト、パスワード認証などを設定できます。
+`.htaccess`は、Apacheのウェブサーバーで「そのディレクトリだけ」に効く設定ファイルです。
+ファイルを置いたディレクトリと、その下のすべてに設定が適用されます。
 
-ディレクトリごとに設置できるため、研究室サーバーの個人スペースなどでにも設置できます。
-`httpd.conf`などのサーバー設定ファイルの編集権限がないケースで活躍します。
+アクセス制限、Basic認証、リダイレクトなどを設定できます。
+`httpd.conf`のようなサーバー本体の設定ファイルを触れない環境（研究室サーバーの個人スペースなど）で役立ちます。
 
-## アクセス制御を有効にしたい（`AllowOverride`）
+:::{seealso}
+
+- [](./webdev-httpd.md)
+
+:::
+
+## `.htaccess`を有効にしたい（`AllowOverride`）
 
 ```console
-// httpd.confのパスを確認
-$ find . -name httpd.conf
+# httpd.conf の場所を探す
+$ find / -name httpd.conf 2>/dev/null
 ```
 
 ```apache
-<Directory "該当のパス">
-  AllowOverride All
-  Require all granted
+# httpd.conf 側の設定
+<Directory "/var/www/html">
+    AllowOverride All
+    Require all granted
 </Directory>
 ```
 
-`.htaccess`を使ってアクセス制御したい場合、
-該当ディレクトリに対して`AllowOverride`ディレクティブが有効になっている必要があります。
+`.htaccess`が効くのは、サーバー本体の`httpd.conf`でそのディレクトリに`AllowOverride`が許可されている場合だけです。
 
-## IPアドレス／ドメイン制御したい（`Require ip` / `Require host`）
+`AllowOverride All`ですべての上書きを許可、`AllowOverride None`で無効になります。
+`.htaccess`を置いたのに設定が反映されないときは、まずここを確認します。
+
+## IPアドレスで許可・拒否したい（`Require ip`）
 
 ```apache
-# IPアドレス／ドメインを指定して許可
-Require ip 許可IPアドレス    # Allow from 許可IPアドレスに相当
-Require host 許可ドメイン名  # Allow from 許可IPドメイン名に相当
+# 許可する
+Require ip 203.0.113.10
+Require ip 192.168.0.0/16
+
+# 拒否する
+Require not ip 198.51.100.20
 ```
 
-`Require`ディレクティブでIPアドレスやドメイン名によるアクセス制限を設定できます。
-繰り返し宣言することで複数のIPアドレス／ドメインを設定できます。
+`Require ip`で、アクセスを許可するIPアドレスを指定します。
+複数行書くと、そのどれかに一致すれば許可されます。
+
+`Require not ip`で、特定のIPアドレスだけを拒否できます。
+
+```apache
+Require all granted    # 全員に許可
+Require all denied     # 全員を拒否
+```
+
+`Require all granted` / `Require all denied`で、一括で許可・拒否できます。
 
 :::{note}
 
-`Require`ディレクティブはApache2.4で新規追加されたディレクティブです。
-Apache 2.4以降では`Require`ディレクティブを使うことが推奨されています。
-Apache 2.2で使われていた`Order`、`Allow`、`Deny`ディレクティブは非推奨です（`mod_access_compat`モジュールで互換性は維持できます）。
+`Require`はApache 2.4で導入されたディレクティブです。
+2.2で使われていた`Order` / `Allow` / `Deny`は非推奨で、書き方も分かりにくいため、
+2.4以降では`Require`を使います。
 
 :::
 
-```apache
-Require ip 許可IPアドレス/サブネットマスク
-Require ip 192.168.1.1/8    # => 192.  0.0.0 - 192.255.255.255
-Require ip 192.168.1.1/16   # => 192.168.0.0 - 192.168.255.255
-Require ip 192.168.1.1/24   # => 192.168.1.0 - 192.168.  1.255
-```
-
-IPアドレスはサブネットマスクを使って範囲指定できます。
-
-:::{note}
-
-サブネットマスクは、
-IPアドレス（IPv4）を**ネットワーク部**と**ホスト部**に分けることで、
-巨大なIPアドレス空間を分割・管理するための仕組みです。
-
-サブネットマスクが
-`255.255.0.0`（`/16`）の場合は、65534個のホスト、
-`255.255.255.0`（`/24`）の場合は、254個のホスト、
-がそのネットワーク内で利用できることを表しています。
-
-:::
+## IPアドレスの範囲を指定したい（CIDR）
 
 ```apache
-# 一括許可／一括拒否
-Require all granted    # Allow from all に相当
-Require all denied     # Deny from all に相当
+Require ip 192.168.0.0/16    # 192.168.0.0 〜 192.168.255.255
+Require ip 192.168.1.0/24    # 192.168.1.0 〜 192.168.1.255
+Require ip 10.0.0.0/8        # 10.0.0.0   〜 10.255.255.255
 ```
 
-`Require all`で一括設定できます。
+IPアドレスの後に`/数字`を付けると、範囲を指定できます（CIDR表記）。
+
+`/数字`は「アドレスの先頭から何ビットを固定するか」で、
+数字が小さいほど広い範囲、大きいほど狭い範囲になります。
+
+範囲を書くときは、`192.168.1.5/24`のような途中のアドレスではなく、
+`192.168.1.0/24`のようにその範囲の先頭アドレスで書きます。
+
+## 特定のファイルだけ制限したい（`<Files>`）
 
 ```apache
-# IPアドレス／ドメインを指定して拒否
-Require not ip 拒否IPアドレス    # Deny from 拒否IPアドレスに相当
-Require not host 拒否ドメイン名  # Deny from 拒否ドメインに相当
+# wp-login.php へのアクセスを、指定IPからだけに限定する
+<Files "wp-login.php">
+    Require ip 203.0.113.10
+</Files>
 ```
 
-`Require not`でブラックリスト形式で指定できます。
+`<Files>`で囲むと、その中の`Require`は指定したファイルだけに効きます。
 
-## 複数条件したい（`RequireAny`）
+WordPressのログイン画面や管理ファイルなど、
+ディレクトリ全体ではなく特定のファイルを守りたいときに使います。
 
-```apache
-# Basic認証の設定
-
-<RequireAny>
-Require ip 許可IPアドレス1/サブネットマスク
-Require valid-user
-</RequireAny>
-```
-
-`RequiredAny`ディレクティブで、複数の条件を設定できます。
-
-上記のサンプルは、WordPressの管理画面へのアクセスを制御しています。
-`Files`ディレクティブを使って`wp-login.php`を指定し、
-指定したIPアドレスからのアクセスを許可しています。
-
-## Basic認証したい（`AuthType Basic`）
+## Basic認証でパスワードをかけたい（`AuthType Basic`）
 
 ```apache
 AuthType Basic
-AuthName "Please enter your ID and password"    # ダイアログに表示する説明
-AuthUserFile /abspath/to/htpasswd  # e.g. /var/www/etc/.htpasswd
-# AuthGroupFile /dev/null    # 省略化
+AuthName "Restricted Area"          # 認証ダイアログに表示される文言
+AuthUserFile /var/www/etc/.htpasswd  # パスワードファイルの絶対パス
 Require valid-user
 ```
 
-`AuthType Basic`ディレクティブを使って、Basic認証によるパスワード保護を設定できます。
+`AuthType Basic`で、アクセス時にIDとパスワードを要求できます。
+`Require valid-user`は「パスワードファイルに登録された誰か」を意味します。
+
+パスワードファイルは`htpasswd`コマンドで作ります。
+
+```console
+# 新規作成（-c は初回のみ）
+$ htpasswd -c /var/www/etc/.htpasswd alice
+
+# 2人目以降は -c を付けない
+$ htpasswd /var/www/etc/.htpasswd bob
+```
+
+パスワードはハッシュ化して保存されます。
+パスワードファイルは、ウェブで公開されるディレクトリの外に置きます。
+
+:::{note}
+
+Basic認証はIDとパスワードをそのまま送るため、HTTP（暗号化なし）では盗聴されます。
+HTTPSが有効なサイトであれば、通信が暗号化されるのでBasic認証で問題ありません。
+
+:::
+
+## 社内は素通し、社外はパスワードにしたい（`<RequireAny>`）
 
 ```apache
-# 複数のアクセス条件
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile /var/www/etc/.htpasswd
+
 <RequireAny>
-  # 指定したIPアドレス範囲を許可
-  Require ip 許可IPアドレス/サブネットマスク
-  # 外部からの場合はBasic認証を要求
-  Require valid-user
+    Require ip 192.168.0.0/16
+    Require valid-user
 </RequireAny>
 ```
 
-複数のアクセス条件を設定する場合は
-`RequireAny`ディレクティブを使います。
-上記のサンプルは、
-IP制限により内部からのアクセスは素通りさせ、
-外部からアクセスにはBasic認証を課す設定です。
+`<RequireAny>`で囲むと、中の条件の**どれか1つ**を満たせばアクセスできます。
 
-:::{note}
-
-HTTPSが有効なウェブサイトであれば、Basic認証でよいそうです。
-
-:::
-
-```console
-// .htpasswdが存在しない場合
-$ htpasswd -c /var/www/etc/.htpasswd ユーザー名
-// パスワードを入力
-// パスワードを入力（確認）
-
-// .htpasswdに追記する場合
-$ htpasswd /var/www/etc/.htpasswd ユーザー名
-```
-
-サーバー内で`htpasswd`コマンドを使って`.htpasswd`ファイルを作成します。
-パスワードファイルは、ウェブで公開されるディレクトリの外に作成し、
-`AuthUserFile`で指定したパスに配置します。
-パスワードはハッシュ化されて、このファイルに保存されます。
-
-:::{note}
-
-パスワード保護の手法として`Basic認証`と`Digest認証`という方式があります。
-HTTPSが有効なサイトでは、通信が暗号化されているので`Basic認証`でOKです。
-
-:::
+上のサンプルは「社内IPからならそのまま、それ以外はBasic認証」という設定です。
+逆に、すべての条件を満たす必要がある場合は`<RequireAll>`を使います。
 
 ## リダイレクトしたい（`Redirect`）
 
 ```apache
-# 301: 恒久的リダイレクト
-Redirect 301 古いURL 新しいURL
+# 301: 恒久的に移動した
+Redirect 301 /old-page.html /new-page.html
 
-# 302: 一時的リダイレクト
-Redirect 302 古いURL 新しいURL
+# 302: 一時的な移動
+Redirect 302 /campaign /
 ```
 
-`Redirect`ディレクティブを使ってURLのリダイレクトを設定できます。
+`Redirect`で、あるURLへのアクセスを別のURLに転送します。
+`301`は「完全に移転した」、`302`は「一時的」で、検索エンジンの扱いが変わります。
 
-## HTTPSリダイレクトしたい（`RewriteRule`）
+## HTTPをHTTPSに転送したい（`RewriteRule`）
 
 ```apache
 <IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 ```
 
-`RewriteRule`ディレクティブを使って、HTTPSリダイレクトを設定できます。
-`RewriteEngine`、`RewriteCond`ディレクティブを合わせて使います。
-また、リダイレクトには`mod_rewrite`モジュールが有効になっている必要があります。
+HTTPでアクセスされたら、同じURLのHTTPSへ301リダイレクトする設定です。
+
+`RewriteCond %{HTTPS} off`で「HTTPSでないとき」を条件にし、
+`RewriteRule`で転送先を組み立てます。
+`mod_rewrite`モジュールが有効である必要があります。
 
 ## リファレンス
 
-- [Access Control - httpd.apache.org](https://httpd.apache.org/docs/2.4/howto/access.html)
-- [認証・承認・アクセス制御 - httpd.apache.org](https://httpd.apache.org/docs/2.4/howto/auth.html)
-- [Apacheチュートリアル: .htaccess](https://httpd.apache.org/docs/2.4/ja/howto/htaccess.html)
+- [.htaccess ファイル](https://httpd.apache.org/docs/2.4/ja/howto/htaccess.html)
+- [アクセス制御](https://httpd.apache.org/docs/2.4/ja/howto/access.html)
+- [認証・承認・アクセス制御](https://httpd.apache.org/docs/2.4/ja/howto/auth.html)
 - [Require](https://httpd.apache.org/docs/2.4/ja/mod/mod_authz_core.html#require)
-- [RequireAll](https://httpd.apache.org/docs/2.4/ja/mod/mod_authz_core.html#requireall)
 - [AllowOverride](https://httpd.apache.org/docs/2.4/ja/mod/core.html#allowoverride)
+- [mod_rewrite](https://httpd.apache.org/docs/2.4/ja/mod/mod_rewrite.html)
