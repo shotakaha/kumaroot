@@ -70,6 +70,7 @@ css-display
 css-flexbox
 css-responsive
 css-media
+css-page
 ```
 
 ## ウェブフォントしたい
