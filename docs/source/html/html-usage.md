@@ -87,6 +87,14 @@ CSSフレームワークを使うと、比較的簡単にウェブをデザイ�
 
 以下は、僕がこれまで使ったことがある順番に並べてみました。
 
+```{toctree}
+---
+maxdepth: 1
+---
+css-katex
+css-gutenberg
+```
+
 - [Materialize](https://materializecss.com/)
 - [Bootstrap](https://getbootstrap.jp/)
 - [MDB - Material Design for Bootstrap v5 & v4](https://mdbootstrap.com/)
@@ -120,6 +128,4 @@ maxdepth: 1
 ---
 webdev-rss
 webdev-browser
-css-gutenberg
-css-katex
 ```
