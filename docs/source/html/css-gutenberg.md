@@ -4,10 +4,10 @@
 <head>
     <!-- 本体（印刷時だけ適用） -->
     <link rel="stylesheet"
-          href="https://unpkg.com/gutenberg-css@0.7" media="print">
+          href="https://unpkg.com/gutenberg-css@0.7.0" media="print">
     <!-- テーマ（任意） -->
     <link rel="stylesheet"
-          href="https://unpkg.com/gutenberg-css@0.7/dist/themes/oldstyle.min.css" media="print">
+          href="https://unpkg.com/gutenberg-css@0.7.0/dist/themes/oldstyle.min.css" media="print">
 </head>
 ```
 
@@ -16,11 +16,18 @@ Gutenbergは、ウェブページを紙に印刷するときの見た目を整�
 自分で`@media print`を書くほどではないけれど、印刷やPDF保存に最低限対応したい、というときに使います。
 読み込むだけで、余白・文字サイズ・改ページなどが印刷向けに調整されます。
 
+:::{note}
+
+Gutenbergは`0.7.0`（2023年3月）以降更新が止まっています。
+機能はシンプルなので使えますが、依存する前にメンテナンス状況を確認してください。
+
+:::
+
 ## 読み込みたい
 
 ```html
 <link rel="stylesheet"
-      href="https://unpkg.com/gutenberg-css@0.7" media="print">
+      href="https://unpkg.com/gutenberg-css@0.7.0" media="print">
 ```
 
 `<link>`に`media="print"`を付けて読み込みます。
@@ -28,7 +35,16 @@ Gutenbergは、ウェブページを紙に印刷するときの見た目を整�
 `media="print"`があると、このCSSは**画面表示には一切適用されず、印刷（と印刷プレビュー）のときだけ**効きます。
 画面のデザインを壊さずに、印刷時の見た目だけを差し替えられます。
 
-テーマ（`oldstyle`など）は追加の`<link>`で読み込みます。省略してもかまいません。
+テーマは本体に続けて、追加の`<link>`で読み込みます。省略してもかまいません。
+
+```html
+<link rel="stylesheet"
+      href="https://unpkg.com/gutenberg-css@0.7.0/dist/themes/oldstyle.min.css" media="print">
+```
+
+- `oldstyle` … 明朝体・セリフ系の古典的な誌面
+- `modern` … サンセリフ中心のすっきりした誌面
+- `book` … 書籍風。左右ページで余白を変える
 
 ## リンク先URLを本文に出したい
 
