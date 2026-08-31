@@ -4,6 +4,31 @@
 
 ### Feat
 
+- **html-a**: add @media print URL expansion section
+- **command-sleep**: flesh out sleep guide, cross-link with until
+- **command-until**: add until control-flow guide
+- **css-katex**: add KaTeX guide (loading, auto-render, delimiters, katex.render)
+- **css-container**: add container query guide (container-type, container-name, cq units)
+- **css-import**: add @import rule guide (conditions, layer, vs link)
+- **css-page**: add @page rule guide (size, margin, :first/:left/:right, named pages)
+- **html-meta-ogp**: add OGP and X Card guide
+- **html-head**: add head element page
+- **html-body**: add body element page
+- **html-html**: add html root element page
+- **html-a11y**: add accessibility guide (alt, button vs link, headings, label, keyboard, aria)
+- **html-hgroup**: add hgroup element page
+- **html-search**: add search element page
+- **html-aside**: add aside element page
+- **html-section**: add section element page
+- **html-article**: add article element page
+- **html-header**: add header element page
+- **css-flexbox**: add flexbox guide; link it from css-display
+- **css-border**: add border guide; move border sections out of css-box
+- **css-box**: add box model guide covering box-sizing, border, border-radius
+- **css-color**: add color guide covering color, background-color, hex/rgb/hsl/named
+- **css-cascade**: add cascade guide covering specificity, source order, !important, inheritance
+- **css-media**: add media query guide with @media, @import, and @container
+- **command-git**: add command-git page with config and reference sections
 - **command-peco**: add page for peco incremental search, register in toctree
 - **command-port**: add new page for port command
 - **command-mosh**: add new page for mosh command
@@ -11,6 +36,108 @@
 
 ### Fix
 
+- **Taskfile**: use bare 'code .' instead of 'uv run code .'
+- **html-a**: move base link CSS to intro, drop empty CSS section
+- **html-a**: add target=_blank icon CSS to 別タブ section, dedupe CSS section
+- **docs**: move in-body internal links to seealso blocks, drop reference sentences
+- **command**: drop command-until, fold until into command-bash; repoint command-sleep links
+- **css-gutenberg**: pin version to 0.7.0, add maintenance note and theme list
+- **css-gutenberg**: rename from webdev-css-gutenberg, expand print-CSS framework guide
+- **webdev-browser**: expand into a browser-support guide (Can I use, Baseline, @supports, feature detection)
+- **webdev-rss**: rewrite as task-oriented Atom feed guide, add feed discovery and validation
+- **html-jsonld**: rewrite with valid JSON, correct types, add BreadcrumbList and references
+- **html-htaccess**: rewrite around Apache 2.4 Require, fix broken CIDR examples and typos
+- **css-layer**: rewrite around layer ordering vs specificity, fix marign/text typos
+- **css-media**: delegate @import and @container details to their own pages
+- **css-media**: delegate @page details to css-page
+- **html-usage**: add maxdepth to the CSS toctree for consistency
+- **html-meta**: move OGP/X Card sections to html-meta-ogp, link via seealso
+- **html-meta**: keep a single seealso to html-head
+- **html-meta**: remove title section, fix description/prefix/redirect accuracy, update links, X rebrand
+- **css-font**: rename sections, move fallback and em details into notes
+- **css-font**: drop font shorthand section, limit units to px/rem, fix rem baseline to html
+- **html-body**: rename sections, add seealso, tighten wording
+- **html-html**: rename font-size/background sections, tighten wording
+- **css-font**: rewrite with working samples for font-family/size/weight/line-height/font
+- **html-semantic**: apply the semantic-first/div-before/seealso pattern to all sections
+- **html-semantic**: rework ヘッダー section - semantic first, div as before, seealso
+- **html-semantic**: condense intro, add a11y seealso
+- **html-semantic**: fold intro sections into flowing prose
+- **html-semantic**: define semantics from its meaning, add the HTML5 history of nav/header/etc
+- **html-semantic**: align opening sample aside classes with scope (related vs sidebar)
+- **html-semantic**: refocus on the semantics philosophy, drop the huge sample, add div-vs-semantic pairs per section
+- **html-nav**: split into use-case sections, add aria-label guidance and seealso
+- **html-footer**: expand reference list with address, time, ARIA contentinfo role
+- **html-footer**: split into サイトフッター/記事フッター, add seealso, fix nav class name
+- **html-aside**: add ARIA complementary/landmark role references
+- **html-aside**: add seealso for main, article, section, header, footer
+- **html-aside**: add 関連記事/用語説明 sections, show inside/outside article scope
+- **html-article**: add seealso for section, header, footer
+- **html-article**: expand reference list with section, time, content categories
+- **html-article**: note header/footer inside article in the intro
+- **html-article**: restructure around use cases (list, comments, cards, timeline)
+- **html-article**: stress why article needs a heading, mirror the div fallback
+- **html-section**: replace comparison table with prose, add hint callout
+- **html-section**: simplify flowchart labels, refine comparison table
+- **html-section**: add div/section/article decision flowchart
+- **html-section**: tighten prose, rename use-case headings
+- **html-section**: add non-article use cases (landing page, list page, sidebar)
+- **html-footer**: update MDN link to current Reference path
+- **html-nav**: update MDN link to current Reference path
+- **html-main**: correct the one-per-page rule, soften article/aside wording, update MDN link
+- **css-flexbox**: explain two-value syntax preference in the intro note
+- **css-flexbox**: switch to two-value display syntax, keep single-value note in the lead
+- **css-display**: move flexbox cross-link into a seealso admonition
+- **css-flexbox**: lead flex-wrap section with the wrap behavior
+- **css-flexbox**: tighten justify-content/align-items wording, unify 配置 phrasing
+- **css-flexbox**: add note on typical use and float/inline-block history
+- **css-flexbox**: rename page title to フレックスボックスしたい
+- **css-box**: lead with content-box/border-box comparison, move diagram after
+- **css-box**: fold box-model diagram into the lead, drop the section
+- **css-box**: restructure around box-sizing, drop redundant sections
+- **css-box**: focus page on box-sizing, move internal links to a single seealso
+- **css-box**: add box-sizing to page title
+- **css-box**: drop border section, link css-border from seealso
+- **css-box**: use seealso admonition for padding/margin cross-links
+- **css-box**: flesh out opening sample with a concrete .card box
+- **css-box**: rewrite lead as definition of box model
+- **css-cascade**: smooth section intros into natural Japanese
+- **css-cascade**: frame !important section as the third cascade rule
+- **css-cascade**: tie sections to cascade rules explicitly, fix typo
+- **css-selectors**: explain descendant combinator with parent/child/grandchild wording
+- **css-selectors**: refine headings, add term labels, warning callouts, and fuller descendant-combinator example
+- **css-selectors**: rewrite as task-oriented guide covering type/class/id, combinators, attribute, pseudo, and specificity
+- **css-responsive**: rewrite around responsive-specific topics, delegate media queries to css-media
+- **css-media**: add reference section with MDN links
+- **css-media**: expand print prose and add note on print-CSS adoption
+- **css-media**: make print section practical with @page A4 portrait and break control
+- **css-media**: add feature names to section headings and clarify orientation values
+- **css-media**: expand min-width/max-width section with 3 breakpoints and HTML example
+- **command-bash**: rewrite control-flow sections with practical use cases
+- **command-bash**: split test/file-check sections and add test command overview
+- **command-bash**: add set -euo pipefail section
+- **command-bash**: expand intro and shebang sections, fix macOS/Ubuntu shell facts
+- **command-bash**: fix shebang, elif syntax, and align headings to したい form
+- **command-asdf**: correct deprecated global/local commands to asdf set
+- **command-mise**: move mise install after mise.toml, explain config reproduction, add uninstall section
+- **command-mise**: replace Go example with Hugo, an asdf plugin-backed tool
+- **command-mise**: mention plugin format in lead paragraph
+- **command-mise**: add mise registry section explaining backend lookup
+- **command-mise**: rewrite plugins install/ls/update/uninstall sections with verified examples
+- **command-mise**: reorganize sections into core/advanced/examples, add install and Go sections
+- **command-mise**: use "ユーザー設定" instead of "個人設定"
+- **command-mise**: unify terminology to "ランタイム" across sections
+- **command-mise**: note formula name, add filtering tips for plugin/version lists
+- **command-mise**: explain how mise coexists with Homebrew packages
+- **command-mise**: simplify Node section, remove mystmd anecdote
+- **command-mise**: replace poetry/pipx example with uv
+- **command-mise**: note activate/deactivate subcommands in section title
+- **command-mise**: add config file overview section after install
+- **command-mise**: correct config filename, ls output column, and drop stale pipx example
+- **command-mise**: reorder sections to follow user workflow
+- **command-mise**: use long-form subcommand names, note short aliases
+- **command-mise**: update stale rtx examples and unify backtick style
+- **command-curl**: add install script section for -fsSL option
 - **command-peco**: add query/filter, multi-select, and exec sections
 - **command-fzf**: fix fuzzy search to fuzzy find
 - **html-footer**: add content footer CSS example
