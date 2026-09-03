@@ -80,7 +80,8 @@ task push:tags      # git push origin HEAD --tags
 ```
 
 Pushing a `v*` tag triggers `.github/workflows/release.yml`, which creates a GitHub Release
-whose body links to `CHANGELOG.md` (see [Building and Deploying](#building-and-deploying)).
+whose body links to `CHANGELOG.md`. For the full bump-and-release sequence see
+[Cutting a Release](#cutting-a-release).
 
 ## Documentation Structure
 
@@ -396,6 +397,34 @@ For technical reference docs:
 - **PDF generation**: `task docs:pdf` or `make latexpdf` (output: `docs/_build/latex/`)
 - **GitHub Release (automatic)**: Push a `v*` tag (e.g. via `task push:tags` after `task bump:patch`) →
   `.github/workflows/release.yml` creates a GitHub Release linking to `CHANGELOG.md`
+
+### Cutting a Release
+
+The full local sequence, from an up-to-date `main` with a clean working tree:
+
+1. **Sync first**: `git pull --ff-only` so the bump lands on top of the latest `main`
+   (the weekly `update_changelog.yml` workflow commits `chore: update changelog [skip ci]` to `main`,
+   so `origin/main` often moves without a local commit)
+2. **Preview**: `task bump:check` — dry-run showing `current → next` version, the tag to create,
+   the detected increment, and the CHANGELOG entries that will be added. Writes nothing.
+3. **Bump**: pick the task that matches the calendar move (see [Version Management Strategy](#version-management-strategy)):
+   - `task bump:patch` — same month, routine (daily default)
+   - `task bump:minor` — first release of a new month
+   - `task bump:major` — first release of a new year
+
+   Each runs `cz bump --check-consistency --changelog --increment <part>`, which updates
+   `pyproject.toml` + `docs/source/conf.py` + `CHANGELOG.md`, makes a `bump: version X → Y` commit,
+   and creates the `vY` tag locally. Pre-commit hooks run on that commit.
+4. **Verify**: `git log --oneline -2` and `git tag -l "vY"` — confirm the bump commit and tag exist.
+5. **Push**: `task push:tags` (`git push origin HEAD --tags`) pushes the `main` commit and the new tag.
+   Pushing the `v*` tag triggers `.github/workflows/release.yml` → GitHub Release whose body links to `CHANGELOG.md`.
+
+**Notes:**
+
+- The bump commit and tag are made **only locally** — nothing is published until step 5.
+- If `bump:check` reports `NoneIncrementExit` or "no eligible commits", there is nothing to release since the last tag.
+- Never hand-edit `CHANGELOG.md` or the version fields; let commitizen own them.
+- `task version` prints the latest tag (`git tag -l | sort -V | tail -n1`).
 
 ## Git Workflow
 
