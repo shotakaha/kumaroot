@@ -132,6 +132,16 @@ tasks:
     cmds:
       - uv run cz bump --check-consistency --changelog --increment major
 
+  bump:month:
+    desc: Bump month version. Alias for bump:minor.
+    cmds:
+      - task bump:minor
+
+  bump:year:
+    desc: Bump year version. Alias for bump:major.
+    cmds:
+      - task bump:major
+
   # ============================================================================
   # Git management tasks - Manage Git
   # ============================================================================
