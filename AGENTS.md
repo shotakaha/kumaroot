@@ -57,6 +57,8 @@ task bump:check          # Preview next version bump (dry-run)
 task bump:patch          # Bump PATCH version with commitizen
 task bump:minor          # Bump MINOR version with commitizen
 task bump:major          # Bump MAJOR version with commitizen
+task bump:month          # Alias for bump:minor (new calendar month)
+task bump:year           # Alias for bump:major (new calendar year)
 ```
 
 **Custom Versioning Scheme:**
@@ -409,8 +411,8 @@ The full local sequence, from an up-to-date `main` with a clean working tree:
    the detected increment, and the CHANGELOG entries that will be added. Writes nothing.
 3. **Bump**: pick the task that matches the calendar move (see [Version Management Strategy](#version-management-strategy)):
    - `task bump:patch` — same month, routine (daily default)
-   - `task bump:minor` — first release of a new month
-   - `task bump:major` — first release of a new year
+   - `task bump:minor` (alias `task bump:month`) — first release of a new month
+   - `task bump:major` (alias `task bump:year`) — first release of a new year
 
    Each runs `cz bump --check-consistency --changelog --increment <part>`, which updates
    `pyproject.toml` + `docs/source/conf.py` + `CHANGELOG.md`, makes a `bump: version X → Y` commit,
