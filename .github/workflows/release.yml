@@ -12,13 +12,38 @@ jobs:
     permissions:
       contents: write
     steps:
-      # GitHub Release を作成（本文は CHANGELOG.md へのリンクのみ）
-      # gh はタグ名しか使わないのでチェックアウト不要
+      # CHANGELOG.md を読むためだけの浅いチェックアウト
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      # CHANGELOG.md から今回のバージョン節だけを切り出す
+      - name: Extract changelog section
+        run: |
+          awk -v tag="$GITHUB_REF_NAME" '
+            /^## / {
+              if (found) exit
+              if (index($0, "## " tag " ") == 1) { found = 1 }
+              else next
+            }
+            found { print }
+          ' CHANGELOG.md > RELEASE_NOTES.md
+
+          if [ ! -s RELEASE_NOTES.md ]; then
+            echo "::warning::No CHANGELOG section for $GITHUB_REF_NAME; falling back to a link."
+            printf 'See [CHANGELOG.md](https://github.com/%s/blob/main/CHANGELOG.md) for details.\n' \
+              "$GITHUB_REPOSITORY" > RELEASE_NOTES.md
+          fi
+
+          echo "----- RELEASE_NOTES.md -----"
+          cat RELEASE_NOTES.md
+
+      # GitHub Release を作成（本文は切り出したバージョン節）
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
             --title "$GITHUB_REF_NAME" \
-            --notes "See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
+            --notes-file RELEASE_NOTES.md
