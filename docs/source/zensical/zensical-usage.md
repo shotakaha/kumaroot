@@ -17,6 +17,7 @@ maxdepth: 1
 ---
 zensical-install
 zensical-config
+zensical-admonition
 zensical-readthedocs
 ```
 
