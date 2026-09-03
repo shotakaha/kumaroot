@@ -6,6 +6,11 @@ on:
     - cron: "0 0 * * 1"  # 毎週月曜日の午前0時（UTC）に実行
   workflow_dispatch: # 手動トリガーを有効にする
 
+# main への push を1本ずつ直列化する
+concurrency:
+  group: update-changelog
+  cancel-in-progress: false
+
 jobs:
   update_changelog:
     runs-on: ubuntu-latest
@@ -43,6 +48,8 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add CHANGELOG.md
             git commit -m "chore: update changelog [skip ci]"
+            # 実行中に main が進んでいても push できるよう追従する
+            git pull --rebase --autostash origin main
             git push origin main
           else
             echo "No changes in CHANGELOG.md Skipping commit."
