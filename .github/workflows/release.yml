@@ -12,17 +12,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      # リポジトリをチェックアウト
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0  # すべての履歴を取得
-          fetch-tags: true  # タグを取得
-
       # GitHub Release を作成（本文は CHANGELOG.md へのリンクのみ）
+      # gh はタグ名しか使わないのでチェックアウト不要
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
             --title "$GITHUB_REF_NAME" \
