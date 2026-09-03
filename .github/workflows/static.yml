@@ -59,7 +59,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          # Upload entire repository
+          # Sphinx の dirhtml ビルド出力のみをアップロード
           path: './docs/build/dirhtml/'
       - name: Deploy to GitHub Pages
         id: deployment
