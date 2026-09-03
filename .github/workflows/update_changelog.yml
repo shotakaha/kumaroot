@@ -20,17 +20,11 @@ jobs:
         with:
           fetch-depth: 0  # すべての履歴を取得
           fetch-tags: true  # タグを取得
-      # uv をインストール
+      # uv をインストール（cz は uvx 経由で実行するため Python は uv が用意する）
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
         with:
           version: "latest"
-
-      # Python をセットアップ
-      - name: Setup Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
 
       # Git ユーザーを設定
       - name: Configure Git
