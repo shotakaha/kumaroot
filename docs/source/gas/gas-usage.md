@@ -93,6 +93,7 @@ gas-groups
 gas-calendar
 gas-request
 gas-doget
+gas-dopost
 gas-trigger
 gas-properties
 gas-quota
