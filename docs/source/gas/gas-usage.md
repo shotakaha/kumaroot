@@ -96,6 +96,7 @@ gas-doget
 gas-dopost
 gas-onopen
 gas-onedit
+gas-onformsubmit
 gas-trigger
 gas-properties
 gas-quota
