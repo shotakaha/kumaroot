@@ -2,153 +2,46 @@
 
 ```js
 function doGet(e) {
-
     // https://script.google.com/macros/s/スクリプトID/exec?name=John へのアクセス
-
-    // クエリから値を取得（?name=John）
-    const name = e.parameter.name;
-
-    // コンテンツを作成
-    const message = "Hello, " + (name ? name : "world") + "!";
-
-    // レスポンスを返す
-    return ContentService.createTextOutput(message).setMimeType(ContentService.MimeType.TEXT);
+    const name = e.parameter.name || "world";
+    return ContentService.createTextOutput(`Hello, ${name}!`);
 }
 ```
 
-`doGet`関数は、GASでGETリクエストを処理するための関数です。
-レスポンスは`ContentService.createTextOutput`などで生成し、ウェブアプリとしてデプロイできます。
-
-上のサンプルでは、あるシートに紐づいた`doGet`関数を定義しています。
-GETリクエストは
-`https://script.google.com/macros/s/スクリプトID/exec?name=John`
-を想定しています。
-クエリが`?name=John`となっているので、
-`e.parameter.name`で`John`という値を取得できます。
-
-また`name`を使って`message`の文字列を作成しています。
-そして`ContentService.createTextOutput`を使ってレスポンスを作成しています。
-今回はただのテキスト情報なので、MIMEタイプをTEXTにしています。
-
-クエリを`?name=Smith`に変更すると、レスポンスも変わることが想像できると思います。
-
-## デプロイしたい
-
-GASのエディターからデプロイできます。
-
-1. `[デプロイ]` > `[新しいデプロイ]`
-2. 種類の選択: `ウェブアプリ`
-3. 説明: `（アプリの説明）`
-4. 次のユーザーとして実行: `[自分]`
-5. アクセスできるユーザー: `[全員]`
-
-## テストしたい
-
-```js
-function testDoGetParameters() {
-    const e = {
-        "parameter": {
-            "name": "John"
-        }
-    };
-    const response = doGet(e);
-    const content = response.getContent();
-    Logger.log(`content: ${content}`);
-}
-
-function testDoGetURL() {
-    const baseUrl = ScriptApp.getService().getUrl();
-    Logger.log(`Base URL: ${baseUrl}`);
-    const query = "?name=John";
-    Logger.log(`Query: ${query}`);
-
-    const url = baseUrl + query;
-
-    const options = {
-        "method": "GET",
-        "followRedirects": true,
-    };
-    const response = UrlFetchApp.fetch(url, options);
-    Logger.log(`response: ${response}`);
-}
-```
-
-[UrlFetchApp](./gas-request.md)で、`doGet`関数の動作確認ができます。
-
-## シート名ごとに処理したい
-
-```js
-function doGet(e) {
-
-    // クエリからシート名を取得
-    const sheetName = e.parameter.sheetName;
-
-    // クエリが見つからない場合
-    if (!sheetName) {
-        const msg = "シート名が指定されていません";
-        return ContentService.createTextOutput(msg).setMimeType(ContentService.MimeType.TEXT);
-    }
-
-    // スプレッドシートを取得
-    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = spreadsheet.getSheetByName(sheetName);
-
-    // シート名が見つからない場合
-    if (!sheet) {
-        const msg = `指定されたシートが存在しません: ${sheetName}`;
-        return ContentService.createTextOutput(msg).setMimeType(ContentService.MimeType.TEXT);
-    }
-
-    // シートの内容をJSON形式に変換する
-    const values = sheet.getDataRange().getValues();
-    const headers = values[0];
-    const rows = values.slice(1);
-    const records = rows.map(row =>
-        Object.fromEntries(headers.map((h, i) => [h, row[i]]))
-    );
-
-    return ContentService.createTextOutput(JSON.stringify(records))
-        .setMimeType(ContentService.MimeType.JSON);
-}
-```
-
-`doGet`関数の実用的なサンプルです。
-ここでは、あるスプレッドシートに複数のシートがある場合を想定しています。
-そして、シートごとに内容をJSON形式で公開し、外部からデータ処理できるようにしたいと考えています。
-
-GASで公開したウェブアプリは
+`doGet`関数は、ウェブアプリとして公開したGASがGETリクエストを受け取ったときに呼ばれる関数です。
+GASのエディターから`ウェブアプリ`としてデプロイすると、
 `https://script.google.com/macros/s/スクリプトID/exec`
 でアクセスできるようになります。
-クエリに`?sheetName=シート名`とすることで、該当するシートのコンテンツにアクセスできます。
 
-## 複数の処理を切り替えたい
+`doGet`関数は、ひとつのプロジェクトにひとつだけ定義できます。
+
+## 引数`e`について
+
+`doGet(e)`の引数`e`には、リクエストの情報が入っています。
+
+| プロパティ | 内容 |
+| --- | --- |
+| `e.parameter` | クエリの値。同じ名前が複数あるときは最後の値 |
+| `e.parameters` | クエリの値。同じ名前が複数あるときは配列 |
+| `e.queryString` | クエリ文字列そのもの（`name=John`） |
+| `e.pathInfo` | `/exec`より後ろのパス |
+| `e.contextPath` | 常に空文字（仕様） |
+
+`?name=John`というクエリでアクセスすると、`e.parameter.name`で`John`を取得できます。
+`?tag=a&tag=b`のように同じ名前を繰り返すときは、`e.parameters.tag`で`["a", "b"]`を取得できます。
+
+## レスポンスについて
+
+レスポンスは`ContentService.createTextOutput`で作成します。
+デフォルトのMIMEタイプは`TEXT`なので、テキストを返すだけなら`setMimeType`は不要です。
 
 ```js
-const actionMap = {
-    "action1": doGetOne,
-    "action2": doGetTwo,
-    "action3": doGetThree,
-};
-
-function doGet(e) {
-    const action = e.parameter.action;
-    return actionMap[action](e);
-}
-
-function doGetOne(e) {
-    return ContentService.createTextOutput("action1です");
-}
-
-function doGetTwo(e) {
-    return ContentService.createTextOutput("action2です");
-}
-
-function doGetThree(e) {
-    return ContentService.createTextOutput("action3です");
-}
+// JSON形式で返すときはMIMEタイプを明示する
+return ContentService.createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
 ```
 
-`doGet`関数は、ひとつのプロジェクトで、ひとつしか定義できない、特殊な関数です。
-しかし、スタンドアロンなプロジェクトから、
-複数のプロジェクトを操作したいこともあります。
-その場合、クエリーを使って分岐させます。
+## リファレンス
+
+- [ウェブアプリ | Apps Script](https://developers.google.com/apps-script/guides/web?hl=ja)
+- [Class ContentService | Apps Script](https://developers.google.com/apps-script/reference/content/content-service?hl=ja)
