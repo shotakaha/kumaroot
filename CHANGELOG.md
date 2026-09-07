@@ -1,5 +1,16 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **zensical-admonition**: add admonition syntax page
+
+### Fix
+
+- **zensical-admonition**: unify section format, drop bogus critical alias
+- **zensical-admonition**: use real MkDocs Material types, note color families
+
 ## v2026.9.0 (2026-09-03)
 
 ### Feat
