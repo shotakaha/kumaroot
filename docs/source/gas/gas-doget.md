@@ -15,7 +15,7 @@ GASのエディターから`ウェブアプリ`としてデプロイすると、
 
 `doGet`関数は、ひとつのプロジェクトにひとつだけ定義できます。
 
-## 引数`e`について
+## 引数したい（`e`）
 
 `doGet(e)`の引数`e`には、リクエストの情報が入っています。
 
@@ -30,7 +30,7 @@ GASのエディターから`ウェブアプリ`としてデプロイすると、
 `?name=John`というクエリでアクセスすると、`e.parameter.name`で`John`を取得できます。
 `?tag=a&tag=b`のように同じ名前を繰り返すときは、`e.parameters.tag`で`["a", "b"]`を取得できます。
 
-## レスポンスについて
+## MIMEタイプしたい（`ContentService`）
 
 レスポンスは`ContentService.createTextOutput`で作成します。
 デフォルトのMIMEタイプは`TEXT`なので、テキストを返すだけなら`setMimeType`は不要です。
