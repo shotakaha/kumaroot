@@ -94,6 +94,7 @@ gas-calendar
 gas-request
 gas-doget
 gas-dopost
+gas-onopen
 gas-trigger
 gas-properties
 gas-quota
