@@ -92,6 +92,7 @@ CSSフレームワークを使うと、比較的簡単にウェブをデザイ�
 maxdepth: 1
 ---
 css-katex
+css-mathjax
 css-gutenberg
 ```
 
