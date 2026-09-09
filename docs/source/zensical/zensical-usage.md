@@ -19,6 +19,7 @@ zensical-install
 zensical-config
 zensical-admonition
 zensical-readthedocs
+zensical-frontmatter
 ```
 
 ## リファレンス
