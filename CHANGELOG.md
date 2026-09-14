@@ -4,12 +4,27 @@
 
 ### Feat
 
+- **zensical-frontmatter**: add page on title and description front matter
+- **css-mathjax**: add MathJax page matching css-katex structure
+- **gas-onformsubmit**: add minimal onFormSubmit page
+- **gas-onedit**: add minimal onEdit page
+- **gas-onopen**: add minimal onOpen page
+- **gas-dopost**: add minimal doPost page
 - **zensical-admonition**: add admonition syntax page
 
 ### Fix
 
+- **zensical-frontmatter**: document icon and status properties, add reference
+- **gas-properties**: cover full read/write API and value-type caveats
+- **gas-quota**: tighten title and wording
+- **gas-quota**: correct quota targets, split by account type, add retry
+- **gas-doget**: use したい-form headings
 - **zensical-admonition**: unify section format, drop bogus critical alias
 - **zensical-admonition**: use real MkDocs Material types, note color families
+
+### Refactor
+
+- **gas-doget**: reduce to minimal doGet with e/response concepts
 
 ## v2026.9.0 (2026-09-03)
 
