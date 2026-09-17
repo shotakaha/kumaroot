@@ -42,6 +42,7 @@
 
 
 body {
+    font-family: var(--font-family);
     background-color: var(--color-main);
 }
 
@@ -67,9 +68,32 @@ body > footer {
 
 上記のサンプルでは、ウェブサイトのテーマとなる3色（``--color-main``、``--color-sub``、``--color-accent``）を定義して、全体の背景やヘッダー（＝ナビゲーション部分を想定）とフッターに配色し、``--color-accent``はリンクの強調色として使っています。
 
+## フォント設定したい
+
+```css
+:root {
+    --font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    --font-family-heading: Georgia, serif;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-family-heading);
+}
+```
+
+CSS変数で、サイト全体のフォントをまとめて管理できます。
+上記のサンプルでは、
+`--font-family`でサイト全体のフォント、
+`--font-family-heading`で見出しのフォントを指定しています。
+
 ## リファレンス
 
 - [カスタムプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/Using_CSS_custom_properties)
 - [var関数](https://developer.mozilla.org/ja/docs/Web/CSS/var)
 - [:root](https://developer.mozilla.org/ja/docs/Web/CSS/:root)
+- [font-family](https://developer.mozilla.org/ja/docs/Web/CSS/font-family)
 - [Can I use: CSS Custom Properties](https://caniuse.com/css-variables)
