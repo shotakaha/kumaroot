@@ -9,9 +9,9 @@
 
 ```html
 <div class="cards">
-    <div class="card">1枚目</div>
-    <div class="card">2枚目</div>
-    <div class="card">3枚目</div>
+    <div>1枚目</div>
+    <div>2枚目</div>
+    <div>3枚目</div>
 </div>
 ```
 
@@ -19,15 +19,19 @@
 親要素に`display: block flex`を指定すると、その直下の子要素が自動的に1次元に並びます。
 デフォルトは横方向（左から右）に並びます。
 
-`display: block flex`を指定した親要素を「フレックスコンテナー」、
-並べられる子要素を「フレックスアイテム」と呼びます。
-アイテム同士の間隔は`gap`で指定します。
+親要素を「フレックスコンテナー」、
+子要素を「フレックスアイテム」と呼びます。
+フレックスコンテナーの子要素は、ブロック要素（`<div>`や`<p>`など）だけでなく、インライン要素（`<span>`や`<a>`など）も自動的にフレックスアイテムになります。
+フレックスアイテムの間隔は`gap`で指定します。
+
+:::{hint}
+
+フレックスアイテムとなるのは、フレックスコンテナーの**直下の子要素**だけです。
+孫要素はフレックスアイテムになりません。
+
+:::
 
 :::{note}
-
-フレックスボックスは、ナビゲーションや記事カードの一覧などを横並びにしたいときによく使います。
-
-以前は、`float`や`inline-block`で横並びを作っていましたが、フレックスボックスの導入で簡単に設定できるようになりました。
 
 ```css
 /* 2値構文 */
@@ -37,9 +41,23 @@ display: block flex;
 display: flex;
 ```
 
-また、これまで`display: flex`と書いていましたが、
-CSS Display Module Level 3の仕様変更により、`display: block flex`のように2値構文で書くことが推奨されています。
-このドキュメントでは、基本的に2値構文のコードサンプルを使いますが、どちらの書き方でも同じ表示になるので、適宜読み替えてください。
+CSS Display Module Level 3の仕様変更により、2値構文で書くことが推奨されているので、このドキュメントでは2値構文（`display: block flex`）で書いています。
+
+これまでの1値構文（`display: flex`）でも同じように解釈されるので、適宜読み替えながら使ってください。
+
+:::
+
+:::{seealso}
+
+フレックスボックスが登場する前は、`float`や`inline-block`を使って横並びを作っていました。
+
+```css
+.card {
+    float: left;
+    display: inline-block;
+    margin-right: 1rem;
+}
+```
 
 :::
 
@@ -56,6 +74,25 @@ CSS Display Module Level 3の仕様変更により、`display: block flex`のよ
 `flex-direction`で、アイテムを並べる向きを変更できます。
 デフォルトは`row`で横方向に並びます。
 `column`で縦方向に並べることができます。
+
+```html
+<!-- index.html -->
+<style>
+    body {
+        display: block flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+</style>
+
+<body>
+    <header>ヘッダー</header>
+    <main>メインコンテンツ</main>
+    <footer>フッター</footer>
+</body>
+```
+
+`body`を縦方向のフレックスコンテナーにしておくと、ヘッダー・メインコンテンツ・フッターを縦に並べることができます。
 
 ## 中央揃えしたい（`justify-content` / `align-items`）
 
@@ -107,9 +144,18 @@ CSS Display Module Level 3の仕様変更により、`display: block flex`のよ
 }
 ```
 
-`flex-wrap: wrap`で、フレックスアイテムを折り返して表示できます。
+```html
+<div class="cards">
+    <div class="card">1枚目</div>
+    <div class="card">2枚目</div>
+    <div class="card">3枚目</div>
+</div>
+```
 
-デフォルト（`nowrap`）では折り返しがなく、幅が足りない場合は縮んで1行に収められます。
+`flex-wrap: wrap`で、フレックスアイテムの内容を折り返して表示できます。
+
+デフォルトは`nowrap`となっていて、折り返しがありません。
+表示幅が足りない場合は、1行に収まるように縮められます。
 カード一覧のように「画面が広ければ横に並べ、狭ければ折り返したい」ときに使います。
 
 ## 幅を自動調整したい（`flex`）
