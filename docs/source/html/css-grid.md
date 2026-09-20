@@ -80,3 +80,12 @@
 `grid-template-areas`で、グリッドコンテナーの行と列に名前を付けて、グリッドアイテムを割り付けることができます。
 
 親要素に`grid-template-areas`を指定し、子要素に`grid-area`を指定することで、グリッドアイテムの位置を決めることができます。
+
+## リファレンス
+
+- [グリッドレイアウトの基本概念](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout)
+- [display](https://developer.mozilla.org/ja/docs/Web/CSS/display)
+- [grid-template-columns](https://developer.mozilla.org/ja/docs/Web/CSS/grid-template-columns)
+- [grid-template-rows](https://developer.mozilla.org/ja/docs/Web/CSS/grid-template-rows)
+- [grid-template-areas](https://developer.mozilla.org/ja/docs/Web/CSS/grid-template-areas)
+- [grid-area](https://developer.mozilla.org/ja/docs/Web/CSS/grid-area)
