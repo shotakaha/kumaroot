@@ -43,6 +43,7 @@ html-meta
 html-meta-ogp
 html-p
 html-img
+html-picture
 html-figure
 html-a
 html-jsonld
