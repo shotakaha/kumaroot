@@ -1,5 +1,25 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **html-picture**: add picture element page
+- **css-grid**: add grid layout page and link from toctree
+- **css-variables**: add color settings section
+- **css-variables**: add font settings section
+- **css-page**: add size example for slide aspect ratios
+
+### Fix
+
+- **html-usage**: link html-picture in toctree
+- **css-grid**: add reference links section
+- **css-flexbox**: move item-scope note before display syntax, tighten wording
+- **css-flexbox**: add flex-direction and float/inline-block examples, clarify item scope
+- **vscode**: remove unused makefile settings, superseded by Taskfile.yml
+- **css-flexbox**: add flex-direction section, reorder flex sizing content
+- **css-variables**: scope example, add fallback section, and reference links
+
 ## v2026.9.1 (2026-09-16)
 
 ### Feat
