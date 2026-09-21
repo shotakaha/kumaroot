@@ -94,17 +94,21 @@ CSS変数で、サイト全体のフォントをまとめて管理できます�
 
 ```css
 :root {
-    --color-primary: #150201;
-    --color-secondary: #00213b;
-    --color-accent: #cee2df;
-    --color-surface: #ffffff;
-    --color-text: #1a1a1a;
-    --color-text-muted: #666666;
+    --color-surface: #fafafa;
+    --color-on-surface: #1a1a1a;
+    --color-primary: #8700cb;
+    --color-on-primary: #fafafa;
+    --color-secondary: #02c930;
+    --color-on-secondary: #fafafa;
+    --color-accent: #fee000;
+    --color-on-accent: #1a1a1a;
+    --color-muted: #8700cb30;
+    --color-on-muted: #1a1a1a;
 }
 
 body {
     background-color: var(--color-surface);
-    color: var(--color-text);
+    color: var(--color-on-surface);
 }
 
 a {
@@ -112,11 +116,13 @@ a {
 }
 
 figcaption {
-    color: var(--color-text-muted);
+    background-color: var(--color-muted);
+    color: var(--color-on-muted);
 }
 
 body > header {
     background-color: var(--color-primary);
+    color: var(--color-on-primary);
 }
 ```
 
@@ -138,17 +144,20 @@ CSS変数で、サイト全体の配色をまとめて管理できます。
 
 | 変数名 | 役割 | 使う場所 |
 | --- | --- | --- |
+| `--color-surface` | ページ全体の背景色 | `body` |
+| `--color-on-surface` | ページ全体の文字色 | `body` |
 | `--color-primary` | ブランドの主色 | ヘッダーやボタンなど |
+| `--color-on-primary` | ブランドの主色に対する文字色 | ヘッダーやボタンなど |
 | `--color-secondary` | 補助色 | ナビゲーションやサイドバーなど |
+| `--color-on-secondary` | 補助色に対する文字色 | ナビゲーションやサイドバーなど |
 | `--color-accent` | アクセント色 | リンクや強調箇所 |
-| `--color-surface` | カードやページ全体の背景色 | ページ全体 |
-| `--color-text` | 基本の文字色 | テキストコンテンツ |
-| `--color-text-muted` | 控えめな文字色 | ヘルプテキストや小さな文字 |
+| `--color-on-accent` | アクセント色に対する文字色 | リンクや強調箇所 |
+| `--color-muted` | 控えめな背景色 | ヘルプテキストや小さな文字 |
+| `--color-on-muted` | 控えめな文字色 | ヘルプテキストや小さな文字 |
 | `--color-border` | 枠線の色 | ボーダーなど |
 | `--color-success` | 成功時の色 | チェックボックスや成功メッセージ |
 | `--color-warning` | 警告時の色 | アラートや警告メッセージ |
 | `--color-error` | エラー時の色 | エラーメッセージ |
-
 
 ## リファレンス
 
