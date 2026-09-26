@@ -20,6 +20,7 @@ zensical-config
 zensical-admonition
 zensical-readthedocs
 zensical-frontmatter
+zensical-katex
 ```
 
 ## リファレンス
