@@ -5,6 +5,7 @@
 extra_javascript = [
     "javascripts/mathjax.js",  # docs/javascripts/mathjax.jsに作成
     "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js",
+    # "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js",  # physicsパッケージ記法を使う場合
 ]
 
 [project.markdown_extensions]
