@@ -14,4 +14,6 @@ quarto-frontmatter
 quarto-create
 quarto-preview
 quarto-render
+quarto-katex
+quarto-mathjax
 ```
