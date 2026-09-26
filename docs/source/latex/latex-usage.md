@@ -156,6 +156,7 @@ maxdepth: 1
 ---
 latex-hepparticles
 latex-physics
+latex-physics-patch
 latex-siunitx
 latex-feynman
 ```
