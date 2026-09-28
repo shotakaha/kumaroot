@@ -197,14 +197,15 @@ PyPIのプロジェクトページに、サイドバーのリンクとして表�
 
 ```toml
 [project.scripts]
-cli-name = "module.path:variable"  # src/module/path.pyのvariable関数
+cli-name = "module.path:app"  # src/module/path.pyのapp関数
 ```
 
 `[project.scripts]`で、コマンド名を設定できます。
-左辺（`cli-name`）がコマンド名、
-右辺（`module.path:variable`）が実行する関数（や変数名）です。
+左辺の`cli-name`がコマンド名、
+右辺が実行する関数です。
 モジュールまでのパスは`.`で区切り、
-モジュール内の関数や変数は`:`で区切ります。
+モジュール内の関数は`:`で区切ります。
+`module.path:app`は、`src/module/path.py`の`app()`関数を指します。
 
 ## ビルド環境したい（`[build-system]`）
 
