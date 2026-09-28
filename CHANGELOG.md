@@ -4,6 +4,10 @@
 
 ### Feat
 
+- **quarto-math**: add KaTeX and MathJax setup pages, link from toctree
+- **zensical-mathjax**: add MathJax setup page and link from toctree
+- **zensical-katex**: add KaTeX setup page and link from toctree
+- **latex-physics-patch**: add physics-patch package page and link from toctree
 - **html-picture**: add picture element page
 - **css-grid**: add grid layout page and link from toctree
 - **css-variables**: add color settings section
@@ -12,6 +16,8 @@
 
 ### Fix
 
+- **zensical-mathjax**: note tex-chtml-full alternative for physics package notation
+- **css-variables**: switch color tokens to surface/on-surface naming pattern
 - **html-usage**: link html-picture in toctree
 - **css-grid**: add reference links section
 - **css-flexbox**: move item-scope note before display syntax, tighten wording
