@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.9.2 (2026-09-29)
 
 ### Feat
 
