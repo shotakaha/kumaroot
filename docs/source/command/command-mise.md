@@ -2,6 +2,7 @@
 
 ```console
 $ mise use python@3.11
+$ mise use node@24
 ```
 
 `mise`（ミーズ）は、開発環境で使うランタイム（実行環境）を切り替えるコマンドです。
@@ -12,8 +13,15 @@ $ mise use python@3.11
 
 :::{note}
 
-Homebrewでインストールしたパッケージを上書きしたり、削除したりするわけではありません。
+Homebrewでインストールしたパッケージ／ランタイムを上書きしたり、削除したりすることはありません。
 `mise`が有効化されていないセッションでは、いつも通りHomebrewのパッケージが使用できます。
+
+:::
+
+:::{hint}
+
+`git`や`ripgrep`など、システム全体で利用するツールは、Homebrewで管理します。
+`python`や`node`、`go`など、プロジェクトごとにバージョン指定が必要なツールは`mise`で管理するのがよいです。
 
 :::
 
@@ -58,6 +66,39 @@ $ mise config ls
 
 `mise config ls`（`config list`）で、現在有効な設定ファイルと、ランタイムがどちらの設定に由来するかを確認できます。
 
+## ランタイムを追加したい（`mise use`）
+
+```console
+// プロジェクト（＝現在のディレクトリ）に追加
+$ mise use python@3.11
+python@3.11.16
+mise /tmp/test-mise/mise.toml tools: python@3.11.16
+
+$ cat ./mise.toml
+[tools]
+python = "3.11"
+```
+
+`mise use`（`u` / `use`）コマンドで、プロジェクト単位のランタイムを追加できます。
+追加したランタイム情報は、`./mise.toml`に保存されます。
+
+指定したバージョンのランタイムが見つからない場合は、`mise install`コマンドが自動実行され、
+`~/.local/share/mise/installs/`の中にインストールされます。
+実行ファイルはバージョンごとに分けてインストールされます。
+
+```console
+// システムに追加
+$ mise use --global python@3.12
+$ cat ~/.config/mise/config.toml
+[tools]
+python = "3.12"
+
+[env]
+```
+
+`--global`オプションでユーザー設定に追加できます。
+設定は`~/.config/mise/config.toml`に保存されます。
+
 ## ランタイムを再現したい（`mise install`）
 
 ```console
@@ -91,11 +132,24 @@ To install and activate, run:
 
 ランタイムの切り替えは`mise use`で行います。
 
+## ランタイムを確認したい（`mise ls`）
+
+```console
+$ mise ls
+Tool      Version   Config Source                 Requested
+node      23.0.0    ~/.config/mise/config.toml    latest
+python    3.11.10
+```
+
+`mise ls`（`ls` / `list`）コマンドで、インストール済みのランタイムを一覧できます。
+`--current`オプションで、現在のプロジェクトで有効なランタイムだけを表示できます。
+`--outdated`オプションで、更新可能なランタイムだけを表示できます。
+
 ## ランタイムを有効／無効にしたい（`mise activate` / `mise deactivate`）
 
 :::{note}
 2023年11月に[fishで自動的に有効](https://github.com/jdx/mise/releases/tag/v2023.11.9)にする機能が追加されました。
-なので、このコマンドはもう必要ありません。
+そのため、このコマンドはもう必要ありません。
 :::
 
 ```console
@@ -115,50 +169,7 @@ $ mise deactivate
 ```
 
 `mise deactivate`で、セッションを無効にできます。
-
-## ランタイムを確認したい（`mise ls`）
-
-```console
-$ mise ls
-Tool      Version   Config Source                 Requested
-node      23.0.0    ~/.config/mise/config.toml    latest
-python    3.11.10
-```
-
-`ls`（`list`）コマンドで設定されているランタイムと`mise`設定のパスを確認できます。
-
-## ランタイムを切り替えたい（`mise use`）
-
-```console
-// プロジェクト（＝現在のディレクトリ）に追加
-$ mise use python@3.11
-python@3.11.16
-mise /tmp/test-mise/mise.toml tools: python@3.11.16
-
-$ cat ./mise.toml
-[tools]
-python = "3.11"
-```
-
-`use`（`u`）コマンドでランタイムのバージョンを切り替えることができます。
-設定は`./mise.toml`に保存されます。
-
-指定したバージョンのランタイムが見つからない場合は、`mise install`コマンドが自動実行され、
-`~/.local/share/mise/installs/`の中にインストールされます。
-実行ファイルはバージョンごとに分けてインストールされます。
-
-```console
-// システムに追加
-$ mise use --global python@3.12
-$ cat ~/.config/mise/config.toml
-[tools]
-python = "3.12"
-
-[env]
-```
-
-`--global`オプションでユーザー設定に追加できます。
-設定は`~/.config/mise/config.toml`に保存されます。
+`mise`の機能を一時的に無効にしたい場合に使用します。
 
 ## ランタイムを更新したい（`mise upgrade`）
 
@@ -187,6 +198,16 @@ mise python@3.12 ✓ removing ~/.local/share/mise/installs/python/3.12
 ```
 
 `mise uninstall`コマンドで、指定したランタイムを削除できます。
+
+## 不要なランタイムを削除したい（`mise prune`）
+
+```console
+$ mise prune --dry-run
+$ mise prune
+```
+
+`mise prune`コマンドで、どの設定ファイルからも参照されていないランタイムを削除できます。
+`--dry-run`オプションで、削除されるランタイムを確認できます。
 
 ## ランタイムの提供元を調べたい（`mise registry`）
 
