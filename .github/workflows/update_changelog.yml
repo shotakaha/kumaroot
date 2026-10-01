@@ -22,7 +22,7 @@ jobs:
           fetch-tags: true  # タグを取得
       # uv をインストール（cz は uvx 経由で実行するため Python は uv が用意する）
       - name: Install uv
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@v10.2.0
         with:
           version: "latest"
 
