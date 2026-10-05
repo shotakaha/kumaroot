@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Fix
+
+- **command-mise**: add use/ls/prune sections, reorder to match workflow
+- **python-pyproject**: use app() as the project.scripts example function
+
 ## v2026.9.2 (2026-09-29)
 
 ### Feat
