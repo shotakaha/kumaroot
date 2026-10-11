@@ -101,18 +101,17 @@ $ zed --completions fish > ~/.config/fish/completions/zed.fish
 }
 ```
 
-`.config/zed/settings.json`でZedの設定を変更できます。
-初回設定時にキーバインド設定などをUIで選択した結果も保存されます。
+設定ファイルは`.config/zed/settings.json`です。
+初回起動時にUIで選んだキーマップなども、ここに保存されます。
 キーマップは`Emacs`に変更しました。
 
 ## コマンドパレットしたい（`Shift-Command-P`）
 
-モダンなエディターと同じように`Shift-Command-P`でコマンドパレットを開くことができます。
+`Shift-Command-P`でコマンドパレットを開きます。
 
 ## Gitしたい（`git:`）
 
-ZedにはGitコマンドが組み込まれています。
-コマンドパレットを起動し、`git:`コマンドを入力するとGitコマンドを実行できます。
+コマンドパレットに`git:`と入力すると、Gitの操作を実行できます。
 
 ```console
 // 状態を確認する
@@ -176,11 +175,11 @@ Zedのエージェント用に設定したAnthropic APIキーは引き継がれ�
 }
 ```
 
-ZedでGitHub Copilotを使えるのは、エディター内の補完（Edit Prediction）です。
-`settings.json`で補完のプロバイダーを`copilot`に設定します。
+ZedのCopilotは、エディター内の補完（Edit Prediction）に使います。
+`settings.json`で、補完のプロバイダーを`copilot`にします。
 
-サインインにコマンドパレットは使いません。
-ステータスバーのCopilotアイコンをクリックし、表示されたデバイスコードをGitHubの認証ページに入力します。
+サインインはステータスバーのCopilotアイコンから行います。
+表示されたデバイスコードを、GitHubの認証ページに入力します。
 
 ```console
 // 補完を手動で表示する
