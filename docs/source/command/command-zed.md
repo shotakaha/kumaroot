@@ -73,8 +73,8 @@ $ zed -e ファイル名
 $ zed --diff ファイル名1 ファイル名2
 ```
 
-`--diff`オプションで、2つのファイルの差分をZed上で比較表示できます。
-ディレクトリを指定すると、配下の変更されたファイルをまとめて比較表示できます。
+`--diff`オプションで、2つのファイルの差分を表示できます。
+ディレクトリを指定すると、変更されたファイルをまとめて比較表示できます。
 
 ## シェル補完したい（`--completions`）
 
@@ -83,7 +83,7 @@ $ zed --completions fish > ~/.config/fish/completions/zed.fish
 ```
 
 `--completions`オプションで、指定したシェル用の補完スクリプトを生成できます。
-`bash`、`elvish`、`fish`、`nushell`、`powershell`、`zsh`に対応しています。
+`bash`、`elvish`、`fish`、`nushell`、`powershell`、`zsh`をサポートしています。
 生成したスクリプトをシェルの補完ディレクトリに保存すると、オプション名をタブ補完できるようになります。
 
 ## 設定したい（`settings.json`）
@@ -101,9 +101,9 @@ $ zed --completions fish > ~/.config/fish/completions/zed.fish
 }
 ```
 
-設定ファイルは`.config/zed/settings.json`です。
-初回起動時にUIで選んだキーマップなども、ここに保存されます。
-キーマップは`Emacs`に変更しました。
+Zedの設定は`.config/zed/settings.json`で変更できます。
+初回起動時に選択したキーマップなども、ここに保存されます。
+上記サンプルではキーマップを`Emacs`に変更しました。
 
 ## コマンドパレットしたい（`Shift-Command-P`）
 
@@ -136,7 +136,6 @@ git: branch
 git: switch
 ```
 
-`git status`に相当するコマンドはありません。
 `git panel: toggle focus`でGitパネルを開くと、変更されたファイルとステージ状態を一覧できます。
 `git: diff`では、プロジェクト全体の差分をまとめて確認できます。
 
@@ -153,8 +152,7 @@ agent: new thread
 agent: open settings
 ```
 
-Zedでは、Claude Codeを外部エージェント（Claude Agent）として使えます。
-Claude専用のコマンドはなく、外部エージェント共通のコマンドを使います。
+Zedでは、Claude Codeを外部エージェント（Claude Agent）として利用できます。
 
 1. `zed: acp registry`を実行し、ACP RegistryからClaude Agentをインストールする
 2. Agentパネルの新規スレッドのメニューから、Claude Agentを選ぶ
@@ -175,7 +173,7 @@ Zedのエージェント用に設定したAnthropic APIキーは引き継がれ�
 }
 ```
 
-ZedのCopilotは、エディター内の補完（Edit Prediction）に使います。
+Zedでは、GitHub Copilotをエディター内の補完（Edit Prediction）として利用できます。
 `settings.json`で、補完のプロバイダーを`copilot`にします。
 
 サインインはステータスバーのCopilotアイコンから行います。
