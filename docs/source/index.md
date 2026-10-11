@@ -63,16 +63,17 @@ docker/docker-usage
 maxdepth: 1
 caption: 文書作成したい
 ---
+emacs/emacs-usage
+vscode/vscode-usage
+zed/zed-usage
 latex/latex-usage
 sphinx/sphinx-usage
-hugo/hugo-usage
-myst/myst-usage
-typst/typst-usage
-mkdocs/mkdocs-usage
-zensical/zensical-usage
-vscode/vscode-usage
-emacs/emacs-usage
 quarto/quarto-usage
+zensical/zensical-usage
+mkdocs/mkdocs-usage
+typst/typst-usage
+myst/myst-usage
+hugo/hugo-usage
 ```
 
 ```{toctree}
