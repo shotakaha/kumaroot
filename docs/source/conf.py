@@ -17,8 +17,6 @@ release = "2026.10.0"
 
 extensions = [
     "myst_parser",
-    "sphinx.ext.autodoc",
-    "sphinx.ext.coverage",
     "sphinx.ext.doctest",
     "sphinx.ext.ifconfig",
     "sphinx.ext.intersphinx",
@@ -205,4 +203,4 @@ latex_show_urls = "footnote"
 # latex_domain_indices = True
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {"python": ("https://docs.python.org/", None)}
+intersphinx_mapping = {"python": ("https://docs.python.org/3/", None)}

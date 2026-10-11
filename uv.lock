@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
@@ -1124,7 +1124,7 @@ wheels = [
 
 [[package]]
 name = "kumaroot"
-version = "2026.9.2"
+version = "2026.10.0"
 source = { virtual = "." }
 dependencies = [
     { name = "myst-parser" },
@@ -1176,7 +1176,7 @@ requires-dist = [
     { name = "sphinx-design", specifier = ">=0.7.0" },
     { name = "sphinx-rtd-theme", specifier = ">=3.1.0" },
     { name = "sphinx-tags", specifier = ">=0.4.0" },
-    { name = "sphinxcontrib-googleanalytics", specifier = ">=0.4" },
+    { name = "sphinxcontrib-googleanalytics", specifier = ">=0.5" },
     { name = "sphinxcontrib-mermaid", specifier = ">=2.0.2" },
     { name = "sphinxext-opengraph", specifier = ">=0.13.0" },
 ]
