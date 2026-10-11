@@ -114,8 +114,36 @@ $ zed --completions fish > ~/.config/fish/completions/zed.fish
 ZedにはGitコマンドが組み込まれています。
 コマンドパレットを起動し、`git:`コマンドを入力するとGitコマンドを実行できます。
 
+```console
+// 状態を確認する
+git panel: toggle focus
+
+// ステージする
+git: stage all
+git: unstage all
+
+// コミットする
+git: commit
+
+// 差分を確認する
+git: diff
+
+// リモートと同期する
+git: pull
+git: push
+
+// ブランチを操作する
+git: branch
+git: switch
+```
+
+`git status`に相当するコマンドはありません。
+`git panel: toggle focus`でGitパネルを開くと、変更されたファイルとステージ状態を一覧できます。
+`git: diff`では、プロジェクト全体の差分をまとめて確認できます。
+
 ## リファレンス
 
 - [Zed](https://zed.dev/)
+- [Git - Zed](https://zed.dev/docs/git)
 - [Getting Started - Zed](https://zed.dev/docs/getting-started)
 - [Configuring Zed](https://zed.dev/docs/configuring-zed)
