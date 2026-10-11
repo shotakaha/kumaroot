@@ -12,6 +12,7 @@
   (menu-bar-mode -1)    ;; メニューバーを非表示
   (tool-bar-mode -1)    ;; ツールバーを非表示
   (scroll-bar-mode -1)  ;; スクロールバーを非表示
+  (fringe-mode 8)       ;; フレームの余白
   (window-divider-mode 1)  ;; 画面分割時に境界を表示
 
   (global-display-line-numbers-mode 1)  ;; 行番号を表示
@@ -29,7 +30,6 @@
   (ring-bell-function 'ignore)   ;; ビープ音を無効化
 
   (frame-resize-pixelwise t)    ;; フレームサイズをピクセル数に統一
-  (fringe-mode 8)       ;; フレームの余白
   (line-spacing 0.2)    ;; 行間の大きさ
   (window-divider-default-right-width 2)    ;; 画面分割時の境界線の太さ
   (window-divider-default-bottom-width 2)   ;; 画面分割時の境界線の太さ
@@ -68,11 +68,9 @@
 `C-c h k`（`describe-key`）のように、ヘルプを使えます。
 
 :::{note}
-
 この「`emacs`」はパッケージ名ではなく、
 `use-package`がビルトイン機能を扱うために用意している特別な識別子です。
 これにより、Emacs本体の設定も他のパッケージと同じ形式で整理できます。
-
 :::
 
 ## UIを消したい
@@ -80,22 +78,23 @@
 ```emacs
 (use-package emacs
   :init
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (fringe-mode 8)
+  (menu-bar-mode -1)    ;; メニューバーを非表示
+  (tool-bar-mode -1)    ;; ツールバーを非表示
+  (scroll-bar-mode -1)  ;; スクロールバーを非表示
+  (fringe-mode 8)       ;; フレームの余白（左右の余白を8ピクセルに設定）
 
   :custom
   (line-spacing 0.2)    ;; 行間を広げる
-  (frame-resize-pixelwise t)    ;;
+  (frame-resize-pixelwise t)    ;; フレームサイズをピクセル数に統一
 )
 ```
 
-メニューバー（`menu-bar-mode`）
-ツールバー（`tool-bar-mode`）
-スクロールバー（`scroll-bar-mode`）は非表示にすることが多いです。
+メニューバー（`menu-bar-mode`）、
+ツールバー（`tool-bar-mode`）、
+スクロールバー（`scroll-bar-mode`）
+は非表示にすることが多いです。
 
-`fringe-mode`でフレーム（＝ウィンドウ）の左右の余白を変更できます。
+`fringe-mode`でフレーム（＝一般的なアプリのウィンドウ相当）の左右の余白を変更できます。
 単位はピクセル数です。
 
 ## 画面分割したい（`window-divider-mode`）
@@ -110,6 +109,9 @@
   (window-divider-default-bottom-width 2)
 )
 ```
+
+`window-divider-mode`で、画面を分割したときのウィンドウの境界線を表示します。
+境界線の太さは、右側（`window-divider-default-right-width`）と下側（`window-divider-default-bottom-width`）を、それぞれピクセル数で指定します。
 
 ## 表示を補助したい
 
@@ -133,3 +135,7 @@
   (fill-column 80)    ;; 行長ガイドを80に設定
 )
 ```
+
+行番号（`display-line-numbers-type`）は、`'relative`にすると、カーソル行からの相対行数で表示します。
+`show-paren-delay`は、対応する括弧を強調するまでの待ち時間（秒）です。`0`にすると、すぐに強調します。
+`fill-column`で指定した列に、縦線（`display-fill-column-indicator-mode`）を表示します。ここではプログラミング用のモード（`prog-mode`）で有効にしています。
