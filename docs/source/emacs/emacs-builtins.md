@@ -55,12 +55,17 @@
   :bind
   (
     ("C-h" . delete-backward-char)    ;; help-commandを上書き
+    ("C-c h" . help-command)          ;; ヘルプの代替キー（C-c h k など）
     ("C-x k" . kill-current-buffer)   ;; kill-bufferを上書き
   )
 )
 ```
 
 `(use-package emacs)`で、Emacsの基本設定（ビルトイン設定）を変更できます。
+
+`C-h`は`delete-backward-char`（直前の文字を削除）に置き換えています。
+元の`C-h`はヘルプのプレフィックスキーなので、代わりに`C-c h`を`help-command`に割り当てています。
+`C-c h k`（`describe-key`）のように、ヘルプを使えます。
 
 :::{note}
 
