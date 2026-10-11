@@ -161,19 +161,8 @@ latex_docclass = {
 
 # latex_toplevel_sectioning = "part"
 
-latex_elements = {
-    "papersize": "a4paper",
-    "pointsize": "12pt",
-    # "extraclassoptions": "tombow",
-    "fontpkg": "",
-    "extrapackages": "",
-    "preamble": "",
-    "polyglossia": "",
-    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
-}
-
 # Loaded before hyperref
-latex_elements["extrapackages"] = r"""
+_extrapackages = r"""
 \usepackage{luatexja}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -182,7 +171,7 @@ latex_elements["extrapackages"] = r"""
 """
 
 # Loaded after hyperref
-latex_elements["preamble"] = r"""
+_preamble = r"""
 \setlength{\footskip}{3\zw}
 \hypersetup{bookmarksnumbered=true}
 \hypersetup{bookmarksopen=true}
@@ -191,10 +180,22 @@ latex_elements["preamble"] = r"""
 \hypersetup{pdfpagemode=UseOutlines}
 """
 
-# latex_elements['preamble'] += '\\usepackage{pxjahyper}\n'
+# _preamble += '\\usepackage{pxjahyper}\n'
 
-# latex_elements['preamble'] += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
-# latex_elements['preamble'] += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
+# _preamble += '\\renewcommand{\\familydefault}{\\sfdefault}\n'
+# _preamble += '\\renewcommand{\\kanjifamilydefault}{\\gtdefault}\n'
+
+latex_elements = {
+    "papersize": "a4paper",
+    "pointsize": "12pt",
+    # "extraclassoptions": "tombow",
+    "fontpkg": "",
+    "extrapackages": _extrapackages,
+    "preamble": _preamble,
+    "polyglossia": "",
+    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
+}
+
 latex_logo = "./_static/quma.jpeg"
 # latex_use_parts = True
 latex_show_pagerefs = True
