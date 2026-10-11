@@ -166,10 +166,40 @@ Claude Agentは、認証と課金をZedのエージェントとは別に管理�
 Zedのエージェント用に設定したAnthropic APIキーは引き継がれません。
 :::
 
+## GitHub Copilotしたい（`editor:`）
+
+```json
+{
+  "edit_predictions": {
+    "provider": "copilot"
+  }
+}
+```
+
+ZedでGitHub Copilotを使えるのは、エディター内の補完（Edit Prediction）です。
+`settings.json`で補完のプロバイダーを`copilot`に設定します。
+
+サインインにコマンドパレットは使いません。
+ステータスバーのCopilotアイコンをクリックし、表示されたデバイスコードをGitHubの認証ページに入力します。
+
+```console
+// 補完を手動で表示する
+editor: show edit prediction
+
+// 次の候補に切り替える
+editor: next edit prediction
+
+// 前の候補に切り替える
+editor: previous edit prediction
+```
+
+表示された補完は`alt-tab`で採用できます。
+
 ## リファレンス
 
 - [Zed](https://zed.dev/)
 - [Git - Zed](https://zed.dev/docs/git)
 - [External Agents - Zed](https://zed.dev/docs/ai/external-agents)
+- [Edit Prediction - Zed](https://zed.dev/docs/ai/edit-prediction)
 - [Getting Started - Zed](https://zed.dev/docs/getting-started)
 - [Configuring Zed](https://zed.dev/docs/configuring-zed)
