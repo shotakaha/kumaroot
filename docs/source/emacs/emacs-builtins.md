@@ -19,10 +19,11 @@
   (show-paren-mode 1)       ;; 対応する括弧を強調
   (global-hl-line-mode 1)   ;; カーソル行をハイライト
 
-  :config  ;; 初期化後に実行
-  (fset 'yes-or-no-p 'y-or-n-p)    ;; yes/no -> y/n
+  ;; :config  ;; 初期化後に実行
+  ;; (fset 'yes-or-no-p 'y-or-n-p)    ;; yes/no -> y/n（Emacs 27以前）
 
   :custom  ;; 変数設定（setqの代わり）
+  (use-short-answers t)          ;; yes/no -> y/n（Emacs 28以降）
   (inhibit-startup-screen t)     ;; スタート画面を表示しない
   (initial-scratch-message nil)  ;; scratchの初期メッセージを削除
   (ring-bell-function 'ignore)   ;; ビープ音を無効化
