@@ -17,12 +17,9 @@ release = "2026.10.0"
 
 extensions = [
     "myst_parser",
-    "sphinx.ext.doctest",
-    "sphinx.ext.ifconfig",
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
-    "sphinx.ext.viewcode",
     "sphinx_copybutton",
     "sphinx_design",
     "sphinx_rtd_theme",
