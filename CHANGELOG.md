@@ -1,9 +1,15 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.10.0 (2026-10-11)
 
 ### Fix
 
+- **command-zed**: revise wording of diff, completions, settings, and agent sections
+- **command-zed**: tighten wording in settings, git, and copilot sections
+- **command-zed**: add GitHub Copilot section
+- **command-zed**: add Claude Code section
+- **command-zed**: add common git commands from the command palette
+- **command-zed**: update version, add -a/-n short options, trim settings.json example
 - **command-mise**: add use/ls/prune sections, reorder to match workflow
 - **python-pyproject**: use app() as the project.scripts example function
 
