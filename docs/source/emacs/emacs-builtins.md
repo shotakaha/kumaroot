@@ -77,7 +77,7 @@
 
 ## UIを消したい
 
-```emacs-lisp
+```emacs
 (use-package emacs
   :init
   (menu-bar-mode -1)
@@ -100,7 +100,7 @@
 
 ## 画面分割したい（`window-divider-mode`）
 
-```emacs-lisp
+```emacs
 (use-package emacs
   :init
   (window-divider-mode 1)
@@ -113,7 +113,7 @@
 
 ## 表示を補助したい
 
-```emacs-lisp
+```emacs
 (use-package emacs
   :init
   (global-display-line-numbers-mode 1)    ;; 行番号
