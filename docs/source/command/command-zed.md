@@ -15,7 +15,7 @@ $ brew install --cask zed
 $ brew upgrade zed
 
 $ zed --version
-Zed 1.16.1 – /Applications/Zed.app
+Zed 1.23.2 – /Applications/Zed.app
 ```
 
 `zed`はHomebrewでインストールできます。
@@ -27,9 +27,11 @@ $ zed <ファイル名/ディレクトリ名>
 
 // 現在のウィンドウに追加
 $ zed --add <ファイル名/ディレクトリ名>
+$ zed -a <ファイル名/ディレクトリ名>
 
 // 新規ウィンドウで開く
 $ zed --new <ファイル名/ディレクトリ名>
+$ zed -n <ファイル名/ディレクトリ名>
 ```
 
 ## 特定の行を開きたい（`path:line:column`）
@@ -87,14 +89,6 @@ $ zed --completions fish > ~/.config/fish/completions/zed.fish
 ## 設定したい（`settings.json`）
 
 ```json
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
   "base_keymap": "Emacs",
   "ui_font_size": 16,
@@ -105,7 +99,6 @@ $ zed --completions fish > ~/.config/fish/completions/zed.fish
     "dark": "One Dark"
   }
 }
-
 ```
 
 `.config/zed/settings.json`でZedの設定を変更できます。
