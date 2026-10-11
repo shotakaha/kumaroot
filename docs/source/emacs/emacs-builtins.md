@@ -19,9 +19,6 @@
   (show-paren-mode 1)       ;; 対応する括弧を強調
   (global-hl-line-mode 1)   ;; カーソル行をハイライト
 
-  ;; カラムの目安（display-fill-columns-indicator-mode)
-  (fill-column 80)    ;; 80列目に縦線を表示
-
   :config  ;; 初期化後に実行
   (fset 'yes-or-no-p 'y-or-n-p)    ;; yes/no -> y/n
 
@@ -39,6 +36,8 @@
   (display-line-numbers-type 'relative)
   (show-paren-delay 0)
   (show-paren-style 'mixed)
+
+  (fill-column 80)    ;; 80列目に縦線を表示（display-fill-column-indicator-mode）
 
   (indent-tabs-mode nil)    ;; タブを使わない（=スペースに置き換える）
   (tab-width 4)             ;; タブ幅
@@ -102,7 +101,7 @@
 
   :custom
   (window-divider-default-right-width 2)
-  (window-divider-default-bottom-width 1)
+  (window-divider-default-bottom-width 2)
 )
 ```
 
@@ -125,6 +124,6 @@
   (show-paren-delay 0)
   (show-paren-style 'mixed)
 
-  (fill-column 80)    // 行長ガイドを80に設定
+  (fill-column 80)    ;; 行長ガイドを80に設定
 )
 ```
