@@ -141,9 +141,35 @@ git: switch
 `git panel: toggle focus`でGitパネルを開くと、変更されたファイルとステージ状態を一覧できます。
 `git: diff`では、プロジェクト全体の差分をまとめて確認できます。
 
+## Claude Codeしたい（`agent:`）
+
+```console
+// ACP Registryを開く（Claude Agentをインストールする）
+zed: acp registry
+
+// スレッドを新規作成する
+agent: new thread
+
+// エージェントの設定を開く
+agent: open settings
+```
+
+Zedでは、Claude Codeを外部エージェント（Claude Agent）として使えます。
+Claude専用のコマンドはなく、外部エージェント共通のコマンドを使います。
+
+1. `zed: acp registry`を実行し、ACP RegistryからClaude Agentをインストールする
+2. Agentパネルの新規スレッドのメニューから、Claude Agentを選ぶ
+3. スレッド内で`/login`を実行し、課金方法を選ぶ
+
+:::{note}
+Claude Agentは、認証と課金をZedのエージェントとは別に管理します。
+Zedのエージェント用に設定したAnthropic APIキーは引き継がれません。
+:::
+
 ## リファレンス
 
 - [Zed](https://zed.dev/)
 - [Git - Zed](https://zed.dev/docs/git)
+- [External Agents - Zed](https://zed.dev/docs/ai/external-agents)
 - [Getting Started - Zed](https://zed.dev/docs/getting-started)
 - [Configuring Zed](https://zed.dev/docs/configuring-zed)
