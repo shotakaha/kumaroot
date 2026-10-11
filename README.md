@@ -157,6 +157,7 @@ task docs:serve      # ライブリロード付きプレビュー
 # あまり使わない
 task docs:build      # 静的HTMLをビルド（docs/build/html/）
 task docs:pdf        # PDFファイルをビルド（docs/build/latex/）
+task docs:clean      # ビルド成果物を削除
 ```
 
 ### バージョン管理
@@ -167,27 +168,31 @@ task docs:pdf        # PDFファイルをビルド（docs/build/latex/）
 
 - `Major (YYYY)` : 年が変わった時に変更（例：2025.x.x → 2026.x.x）
 - `Minor (MM)` : 月が変わった時に変更（例：2026.3.x → 2026.4.x）
-- `Patch` : 各コミット（`feat`または`fix`）ごとに自動更新
+- `Patch` : 各コミット（`feat`／`fix`／`refactor`）ごとに更新
 
 #### バージョンアップのタイミング
 
 ```bash
 $ task bump:check    # プレビュー（変更なし）
 $ task bump:patch    # パッチをバンプ（毎回のコミット後）
-$ task bump:minor    # マイナーをバンプ（月初めに1度）
-$ task bump:major    # メジャーをバンプ（年初めに1度）
+$ task bump:minor    # マイナーをバンプ（月初めに1度）／別名：bump:month
+$ task bump:major    # メジャーをバンプ（年初めに1度）／別名：bump:year
 ```
 
 **使用頻度と説明：**
 
-- **`task bump:patch`**（頻繁）：`fix`または`feat`コミット後に実行
-  - パッチバージョンを自動更新、`CHANGELOG.md`も自動生成
+- **`task bump:patch`**（頻繁）：`feat`／`fix`／`refactor`コミット後に実行
+  - パッチバージョンを更新し、`CHANGELOG.md`も自動生成
 
 - **`task bump:minor`**（月1回）：月が変わった際に実行
   - 例：2026年3月から4月への移行時に実行
 
 - **`task bump:major`**（年1回）：年が変わった際に実行
   - 例：2026年から2027年への移行時に実行
+
+バンプするとローカルにコミットとタグ（`vYYYY.MM.PATCH`）が作成されます。
+`task push:tags`でタグをプッシュすると、GitHub Releaseが自動作成されます。
+リリース手順の詳細は[AGENTS.md](AGENTS.md)の「Cutting a Release」を参照してください。
 
 ### 品質管理
 
@@ -199,14 +204,16 @@ Pre-commitフックをセットアップすることで、コミット前に自�
 $ task pre-commit:setup    # フックをインストール
 $ task pre-commit          # 全ファイルをチェック
 $ task pre-commit:update   # フックを最新に更新
+$ task pre-commit:uninstall  # フックをアンインストール
 ```
 
 Pre-commitフックは以下の検査を実行します：
 
 - Commitizen：コミットメッセージの形式チェック
-- Ruff：Pythonコードの形式チェック
+- Ruff：Pythonコードのフォーマット
 - JSON/TOML/YAML/XMLの妥当性チェック
-- 末尾の空白・マージコンフリクトの検出
+- 末尾の空白・ファイル末尾の改行の修正
+- マージコンフリクト・秘密鍵・大きなファイルの検出
 
 #### 依存パッケージの管理
 
@@ -214,6 +221,7 @@ Pre-commitフックは以下の検査を実行します：
 $ task deps:setup      # Python環境をセットアップ
 $ task deps:outdated   # 更新可能なパッケージを確認
 $ task deps:update     # パッケージを更新（uv.lockも更新）
+$ task deps:audit      # 依存パッケージの脆弱性をチェック
 ```
 
 パッケージを更新した場合は、`uv.lock`をGitにコミットしてください。
@@ -223,8 +231,10 @@ $ task deps:update     # パッケージを更新（uv.lockも更新）
 ```bash
 $ task version   # 現在のバージョンを表示
 $ task status    # Gitの状態を表示
-$ task log       # 最近のコミットを表示（10件）
-$ task push      # mainブランチをプッシュ
+$ task log       # 最近のコミットを表示（20件）
+$ task push      # 現在のブランチをプッシュ（注釈付きタグも含む）
+$ task push:tags # 現在のブランチとすべてのタグをプッシュ
+$ task examples:sync  # jupytextでPythonサンプルとNotebookを同期
 ```
 
 ### コンテンツの標準化と規則
