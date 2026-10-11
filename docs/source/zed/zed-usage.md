@@ -7,4 +7,5 @@ Zedは、軽量で高速なコードエディターです。
 maxdepth: 1
 ---
 zed-install
+zed-git
 ```
