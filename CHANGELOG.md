@@ -1,5 +1,27 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **zed-agent**: add agent page, link from toctree
+- **zed-git**: add git operations page, link from toctree
+- **zed**: add zed section with install page, link from toctree
+
+### Fix
+
+- **emacs-anything**: clarify lineage from anything to helm, ivy, and vertico
+- **emacs-which-key**: update Emacs 30 note and description
+- **emacs-use-package**: update examples for Emacs 30, keep older setup as notes
+- **emacs-builtins**: add descriptions and comments to examples
+- **emacs-builtins**: unify code block language to emacs
+- **emacs-builtins**: add C-c h as an alternative help key
+- **emacs-builtins**: use use-short-answers instead of fset yes-or-no-p
+- **emacs-builtins**: fix fill-column placement and comment syntax
+- **conf**: remove unused doctest, ifconfig, and viewcode extensions
+- **conf**: hoist latex_elements extrapackages/preamble to module-level vars
+- **conf**: remove unused autodoc/coverage, pin intersphinx URL, bump googleanalytics minimum
+
 ## v2026.10.0 (2026-10-11)
 
 ### Fix
