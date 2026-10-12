@@ -154,7 +154,7 @@ MELPAなどに登録されていないパッケージや、開発中のバージ
 `:rev`には、`:newest`（最新のコミット）のほか、タグやコミットを文字列で指定できます。
 
 :::{note}
-Emacs29以前では、リポジドリ指定する場合は`straight.el`パッケージを使います。
+Emacs29以前では、リポジトリ指定する場合は`straight.el`パッケージを使います。
 `straight.el`は`package.el`とは別のパッケージ管理ツールで、`use-package`との連携設定が必要です。
 
 ```emacs
@@ -182,8 +182,10 @@ Emacs29以前では、リポジドリ指定する場合は`straight.el`パッケ
 )
 
 (use-package which-key
-  :config
+  :init
   (which-key-mode)
+  :custom
+  (which-key-idle-delay 0.5)  ;; キーバインド候補が表示されるまでの待機時間（秒）; デフォルトは 1.0 秒
 )
 
 (use-package vertico
