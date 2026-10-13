@@ -1,45 +1,38 @@
 # 設定ファイルしたい（`~/.emacs.d/init.el`）
 
 ```emacs
-;;; init.el --- straight + use-package minimal setup
+;;; init.el --- package.el + use-package setup for Emacs 31 -*- lexical-binding: t -*-
 
 ;; --------------------------------
-;; straight.el bootstrap
+;; package.el + use-package (built-in)
 ;; --------------------------------
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+(setq use-package-always-ensure t)
 
 ;; --------------------------------
-;; straight + use-package
+;; custom-file
 ;; --------------------------------
-(straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
-(setq straight-vc-git-default-clone-depth 1)
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file 'noerror 'no-message)
 
 ;; --------------------------------
 ;; 基本設定
 ;; --------------------------------
 (use-package emacs
+  :ensure nil
   :custom
   (inhibit-startup-screen t)
   (make-backup-files nil)
   (auto-save-default nil)
   (create-lockfiles nil)
+  (tab-always-indent 'complete)
   :init
+  (prefer-coding-system 'utf-8)
   (set-locale-environment "en_US.UTF-8")
-  (show-paren-mode)
+  (show-paren-mode 1)
   :bind
   (("C-h" . delete-backward-char))
 )
@@ -50,12 +43,14 @@
 
 ;; savehist
 (use-package savehist
+  :ensure nil
   :init
   (savehist-mode 1)
 )
 
 ;; recentf
 (use-package recentf
+  :ensure nil
   :init
   (recentf-mode 1)
   :custom
@@ -64,6 +59,15 @@
   ;; :bind -- consultでバインドを設定
   ;; (("C-x C-r" . recentf-open-files))
 )
+
+;; saveplace
+(use-package saveplace
+  :ensure nil
+  :init
+  (save-place-mode 1)
+)
+
+
 
 ;; --------------------------------
 ;; 拡張パッケージ
