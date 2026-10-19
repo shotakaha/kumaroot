@@ -151,3 +151,9 @@ Python環境は、マシンによって異なる場合があります。
 `PIPX_RESOLVED_BACKEND`が`uv`になっている場合は、
 `PIPX_UV_BINARY`の実行パスの`uv`を使ってパッケージを管理していることを意味します。
 ツールがうまく動かない場合の確認作業に役立つかもしれません。
+
+## リファレンス
+
+- [pipx](https://pipx.pypa.io/)
+- [pipx - GitHub](https://github.com/pypa/pipx)
+- [pipx - PyPI](https://pypi.org/project/pipx/)
