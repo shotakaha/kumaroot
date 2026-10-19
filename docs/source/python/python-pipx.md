@@ -7,7 +7,8 @@ $ pipx uninstall パッケージ名
 ```
 
 `pipx`は実行ファイルをローカルな仮想環境にインストールするツールです。
-`Homebrew`でインストールできます。
+最近の`pipx`は、仮想環境の管理に[uv](./python-uv.md)を使っています。
+`uv`がインストールされていない場合は、`pip`が使われます。
 
 :::{caution}
 
@@ -16,16 +17,16 @@ $ pipx uninstall パッケージ名
 
 :::
 
-## 設定したい（`ensurepath`）
+## インストールしたい（`pipx`）
 
 ```console
 $ brew install pipx
-$ brew link pipx
 $ pipx ensurepath
 ```
 
-`pipx`をインストールしたら、初回のみ、パスの設定が必要です。
-`pipx ensurepath`で、シェルによらず、PATHに`$HOME/.local/bin`が追加されます。
+`pipx`はHomebrewでインストールできます。
+インストールした後は一度だけ`pipx ensurepath`を実行し、パスを設定する必要があります。
+利用しているシェルを自動判別し、PATHに`$HOME/.local/bin`が追加されます。
 
 :::{note}
 
@@ -87,7 +88,7 @@ upgraded package mypy from 1.6.1 to 1.7.0 (location: ~/.local/pipx/venvs/mypy)
 upgraded package pyright from 1.1.335 to 1.1.336 (location: ~/.local/pipx/venvs/pyright)
 ```
 
-`upgrade-all`オプションを使って、すべてのパッケージを更新できます。
+`pipx upgrade-all`で、すべてのパッケージを更新できます。
 定期的に実行しておくとよいと思います。
 
 ## 一括で再インストールしたい（`reinstall-all`）
@@ -96,37 +97,11 @@ upgraded package pyright from 1.1.335 to 1.1.336 (location: ~/.local/pipx/venvs/
 $ pipx reinstall-all
 ```
 
+`pipx reinstall-all`コマンドで、すべてのパッケージを再インストールできます。
 Python本体を更新した場合、パッケージの再インストールが必要です。
-`reinstall-all`を使って、すべてのパッケージを再インストールできます。
 
-## インストールしたパッケージ
 
-```console
-$ pipx install commitizen
-$ pipx install jupyter --include-deps
-$ pipx install jupytext
-$ pipx install mystmd
-$ pipx install poetry
-$ pipx install pytest
-$ pipx install ruff
-$ pipx install sphinx
-$ pipx install sphinx-autobuild
-$ pipx install streamlit
-```
-
-:::{note}
-
-このプロジェクトでは現在、上記のCLIツールはいずれも`pipx`ではなく
-[uv tool](./python-uv.md)（`uv tool install`）で管理しています。
-`pipx`と`uv tool`は役割が似ているため、どちらか一方に統一しておくと管理がシンプルになります。
-
-:::
-
-``jupyter``は、いろいろなサブパッケージに分割されているようです。
-必要なサブパッケージがわかっていたら、そちらを直接指定すればよいです。
-とりあえず全部でよい場合は``--include-deps``でインストールできます。
-
-## 環境変数をしりたい（``environment``）
+## 環境変数をしりたい（`environment`）
 
 ```console
 $ pipx environment
@@ -143,10 +118,12 @@ PIPX_GLOBAL_COMPLETION_DIR=
 PIPX_SHARED_LIBS=
 PIPX_DEFAULT_PYTHON=
 PIPX_DEFAULT_BACKEND=
+PIPX_COOLDOWN=
 PIPX_FETCH_MISSING_PYTHON=
 PIPX_FETCH_PYTHON=
 PIPX_DISABLE_SHARED_LIBS_AUTO_UPGRADE=
 PIPX_USE_EMOJI=
+PIPX_MAX_LOGS=
 
 Derived values (computed by pipx):
 
@@ -160,15 +137,17 @@ PIPX_LOG_DIR=~/Library/Logs/pipx
 PIPX_TRASH_DIR=~/.local/pipx/.trash
 PIPX_VENV_CACHEDIR=~/.cache/pipx
 PIPX_STANDALONE_PYTHON_CACHEDIR=~/.local/pipx/py
-PIPX_DEFAULT_PYTHON=/opt/homebrew/opt/python@3.12/libexec/bin/python
+PIPX_DEFAULT_PYTHON=/opt/homebrew/opt/python@3.15/bin/python3.15
 PIPX_RESOLVED_BACKEND=uv
 PIPX_BACKEND_SOURCE=auto-path
-PIPX_UV_BINARY=/opt/homebrew/bin/uv
+PIPX_UV_BINARY=~/.local/share/mise/shims/uv
 UV_CACHE_DIR=
 PIPX_DISABLE_SHARED_LIBS_AUTO_UPGRADE=false
 PIPX_USE_EMOJI=true
 ```
 
-`environment`コマンドで、`pipx`で有効な環境変数を確認できます。
+`pipx environment`コマンドで、`pipx`で有効な環境変数を確認できます。
 Python環境は、マシンによって異なる場合があります。
+`PIPX_RESOLVED_BACKEND`が`uv`になっている場合は、
+`PIPX_UV_BINARY`の実行パスの`uv`を使ってパッケージを管理していることを意味します。
 ツールがうまく動かない場合の確認作業に役立つかもしれません。
