@@ -94,7 +94,7 @@ tasks:
   deps:outdated:
     desc: List outdated dependencies
     cmds:
-      - uv tree --outdated --all-groups
+      - uv tree --outdated --all-groups --depth 1
 
   deps:update:
     desc: Update dependencies
