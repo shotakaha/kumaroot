@@ -10,6 +10,10 @@
 
 ### Fix
 
+- **python-pipx**: add references
+- **python-pipx**: describe uv backend and update environment output
+- **emacs-init**: make Emacs 31 the primary example, keep Emacs 30 and earlier as notes
+- **emacs-init**: switch example from straight to package.el + use-package
 - **emacs-anything**: clarify lineage from anything to helm, ivy, and vertico
 - **emacs-which-key**: update Emacs 30 note and description
 - **emacs-use-package**: update examples for Emacs 30, keep older setup as notes
