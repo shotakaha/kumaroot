@@ -611,16 +611,32 @@ $ uv build --sdist
 ## パッケージを公開したい（`uv publish`）
 
 ```console
-// 実際にはアップロードせず、動作を確認する
-$ uv publish --dry-run
-$ uv publish
+$ PYPI_TOKEN="pypi-<random_token>"
+$ uv publish --token "$PYPI_TOKEN"
 Checking dist/my_package-0.1.0-py3-none-any.whl (12.3KiB)
 Uploading my_package-0.1.0-py3-none-any.whl (12.3KiB)
 Checking dist/my_package-0.1.0.tar.gz (8.1KiB)
 Uploading my_package-0.1.0.tar.gz (8.1KiB)
 ```
 
-`uv publish`で、PyPIにパッケージを公開できます。
+`uv publish`で、PyPI（もしくはTestPyPI）にパッケージを公開できます。
+パッケージを公開するには、PyPI（もしくはTestPyPI）のアカウント認証が必要です。
+`--token`オプションで、トークン認証できます。
+APIトークンはプロジェクトごとに発行できる`pypi-`ではじまるランダムな文字列です。
+
+```console
+$ PYPI_USER="__token__"
+$ PYPI_TOKEN="pypi-<random_token>"
+$ uv publish --username __token__ --password <api_token>
+```
+
+`--username`と`--password`オプションででパスワード認証も可能です。
+`--token`オプションは`--username __token__`と同じ意味です。
+
+```console
+$ uv publish --dry-run
+```
+
 `--dry-run`オプションで、実際にアップロードせずに、公開の流れ（認証やファイルチェック）だけを確認できます。
 はじめて公開する前の動作確認に便利です。
 
@@ -649,6 +665,37 @@ PyPIとTestPyPIには、同じ名前のパッケージは登録できません�
 変更内容に応じてバージョンを更新してください。
 
 :::
+
+```yaml
+publish-pypi:
+  stage: deploy
+  environment:
+    name: pypi
+    url: https://pypi.org/project/my-package/
+  id_tokens:
+    PYPI_ID_TOKEN:
+      aud: pypi
+  script:
+    - ls -la dist/
+    - uv publish --trusted-publishing always dist/*  
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: manual
+```
+
+PyPI（もしくはTestPyPI）の「Trusted Publisher」を設定すると、GitLab CI/CDから安全に公開できます。
+
+::: {hint}
+
+[fnb](https://gitlab.com/qumasan/fnb/-/blob/main/.gitlab-ci.yml)や
+[snapsheets](https://gitlab.com/qumasan/snapsheets/-/blob/main/.gitlab-ci.yml)で、
+実際に`--trusted-publishing always`を使っているパイプラインを公開しています。
+
+どちらのパイプラインも、タグのプッシュをトリガーとして、TestPyPIに自動公開しています。
+TestPyPIに公開したパッケージに問題がないことを確認し、PyPIに手動で公開する流れとしています。
+
+:::
+
 
 ## Pythonを管理したい（`uv python`）
 
