@@ -14,8 +14,8 @@ html_css_files = [
 
 ```python
 html_css_files = [
-    "css/heading.css", # 見出し用
-    "css/font.css",    # フォント用
+    "css/heading.css",  # 見出し用
+    "css/font.css",  # フォント用
 ]
 ```
 

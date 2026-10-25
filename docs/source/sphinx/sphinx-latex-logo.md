@@ -6,5 +6,5 @@
 ```python
 # The name of an image file (relative to this directory)
 # to place at the top of the title page.
-latex_logo = './images/toumin_kuma.png'
+latex_logo = "./images/toumin_kuma.png"
 ```

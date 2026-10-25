@@ -5,18 +5,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # データを準備する
-data = np.random.normal(loc=0, scale=1, size=1000)  # 平均0、標準偏差1の正規分布から1000点を生成
+data = np.random.normal(
+    loc=0, scale=1, size=1000
+)  # 平均0、標準偏差1の正規分布から1000点を生成
 
 # キャンバスを作成
 fig, ax = plt.subplots()
 
 # ヒストグラムを作成
 ax.hist(
-    data,       # データ
-    bins=30,    # ビンの数
+    data,  # データ
+    bins=30,  # ビンの数
     range=(-5, 5),  # 範囲
-    color='blue',   # 色
-    alpha=0.7,      # 透明度
+    color="blue",  # 色
+    alpha=0.7,  # 透明度
 )
 
 # グラフのタイトルと軸ラベルを設定
@@ -47,9 +49,9 @@ ax.hist(
     data,
     bins=30,
     range=(-5, 5),
-    color='blue',
+    color="blue",
     alpha=0.7,
-    weights=np.ones_like(data) / len(data)  # 重みを設定
+    weights=np.ones_like(data) / len(data),  # 重みを設定
 )
 ```
 
@@ -63,7 +65,7 @@ ax.hist(
     data,
     bins=30,
     range=(-5, 5),
-    color='blue',
+    color="blue",
     alpha=0.7,
     log=True,  # Y軸をログ表示
 )
@@ -79,7 +81,7 @@ ax.hist(
     data,
     bins=30,
     range=(-5, 5),
-    color='blue',
+    color="blue",
     alpha=0.7,
     density=True,  # 正規化
 )
@@ -95,7 +97,7 @@ ax.hist(
     data,
     bins=30,
     range=(-5, 5),
-    color='blue',
+    color="blue",
     alpha=0.7,
     cumulative=True,  # 累積
 )
@@ -111,9 +113,9 @@ ax.hist(
     [data1, data2],  # 複数のデータセット
     bins=30,
     range=(-5, 5),
-    color=['blue', 'orange'],
+    color=["blue", "orange"],
     alpha=0.7,
-    histtype='step',  # 重ね書き
+    histtype="step",  # 重ね書き
 )
 ```
 
@@ -129,7 +131,7 @@ ax.hist(
     [data1, data2],  # 複数のデータセット
     bins=30,
     range=(-5, 5),
-    color=['blue', 'orange'],
+    color=["blue", "orange"],
     alpha=0.7,
     stacked=True,  # 積み上げ
 )

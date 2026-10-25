@@ -40,6 +40,7 @@ mock.メソッド名.return_value = [返り値]
 ```python
 from unittest.mock import patch
 
+
 @patch("モジュール名.クラス名")
 def test_テスト関数(モック名):
     """ユニットテストの説明"""

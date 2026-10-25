@@ -1,7 +1,7 @@
 # LaTeXエンジンを設定したい（`latex_engine`）
 
 ```python
-latex_engine = "lualatex"    # LuaLaTeXを使う
+latex_engine = "lualatex"  # LuaLaTeXを使う
 ```
 
 `latex_engine`でLaTeXエンジンを変更できます。

@@ -19,15 +19,10 @@ base = alt.Chart(data).encode(
 
 mark = base.mark_bar()
 
-text = base.mark_text().encode(
-    alt.Text("y")
-)
+text = base.mark_text().encode(alt.Text("y"))
 
 # mark + text
-alt.layer(
-    mark,
-    text
-)
+alt.layer(mark, text)
 ```
 
 ``+``演算子は``alt.layer``のエイリアスです。
@@ -36,9 +31,7 @@ alt.layer(
 ## 2軸グラフしたい
 
 ```python
-base = alt.Chart(data).encode(
-    alt.X("time").title("測定時刻")
-)
+base = alt.Chart(data).encode(alt.X("time").title("測定時刻"))
 
 mark1 = base.mark_bar().encode(
     alt.Y("event_rate").title("イベントレート [Hz]").scale(domain=[0, 5]),

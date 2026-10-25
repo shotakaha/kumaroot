@@ -293,16 +293,14 @@ ChatGPTに聞きながら書くことが多いです。
 import pytest
 from unittest.mock import patch
 
+
 @patch("subprocess.run")
 def test_download(mock_subprocess_run):
-
     """Test download method"""
 
     # テスト用URL
     url = TEST_SHARED_URL
-    sheet = Sheet(
-        url=url,
-        filename="output.csv")
+    sheet = Sheet(url=url, filename="output.csv")
     sheet.download()
 
     mock_subprocess_run.assert_called_with(
@@ -336,6 +334,7 @@ def 関数名(引数):
 ```python
 from unittest.mock import patch
 
+
 @patch("pathlib.Path.write_text")
 def test_関数名(mock_write):
     # test strings
@@ -364,6 +363,7 @@ def test_関数名(mock_write):
 ```python
 import pytest
 
+
 def test_関数名():
     with pytest.raises(例外名):
         関数(...)  # <- 例外を発生させる
@@ -376,8 +376,10 @@ def test_関数名():
 ```python
 @pytest.mark.parametrize(
     "a, b, expected",
-    [ (1, 2, 3),
-      (3, 4, 5),]
+    [
+        (1, 2, 3),
+        (3, 4, 5),
+    ],
 )
 def test_関数名(a, b, expected):
     assert 関数名(a, b) == expected
@@ -392,6 +394,7 @@ def test_関数名(a, b, expected):
 @pytest.fixture
 def sample_data():
     return [1, 2, 3]
+
 
 def test_data_length(sample_data):
     assert len(sample_data) == 3

@@ -30,7 +30,7 @@ platform.sys.executable
 よく使う関数には、以下のようなものがあります。
 
 ```python
-platform.system()          # OS名（'Windows' / 'Linux' / 'Darwin' など）
-platform.machine()         # マシンのアーキテクチャ（'x86_64' / 'arm64' など）
+platform.system()  # OS名（'Windows' / 'Linux' / 'Darwin' など）
+platform.machine()  # マシンのアーキテクチャ（'x86_64' / 'arm64' など）
 platform.python_version()  # Pythonのバージョン文字列（例: '3.12.3'）
 ```

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # データを準備する
-categories = ['A', 'B', 'C', 'D', 'E']  # カテゴリー
+categories = ["A", "B", "C", "D", "E"]  # カテゴリー
 values = [10, 15, 7, 12, 20]  # 各カテゴリーの値
 
 # キャンバスを作成
@@ -14,7 +14,7 @@ fig, ax = plt.subplots()
 # 棒グラフを作成
 bar = ax.bar(
     categories,  # X軸のカテゴリー
-    values         # Y軸の値
+    values,  # Y軸の値
 )
 
 # グラフのタイトルと軸ラベルを設定
@@ -41,7 +41,7 @@ X軸のカテゴリーとY軸の値を配列で指定します。
 ```python
 ax.barh(
     categories,  # Y軸のカテゴリー
-    values         # X軸の値
+    values,  # X軸の値
 )
 ```
 

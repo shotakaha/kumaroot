@@ -8,14 +8,10 @@ import pandas as pd
 data = pd.DataFrame(...)
 
 # ベースとなるチャートを作成する
-base = alt.Chart(data).encode(
-    alt.X("X軸のカラム名")
-)
+base = alt.Chart(data).encode(alt.X("X軸のカラム名"))
 
 # Y軸のカラム名をプロットする
-marks = base.mark_point().encode(
-    alt.Y("Y軸のカラム名")
-)
+marks = base.mark_point().encode(alt.Y("Y軸のカラム名"))
 
 # エラーバーをプロットする
 errors = base.mark_errorbar().encode(
@@ -68,12 +64,7 @@ marks + errors
 ## 気温の変化を記録したい
 
 ```python
-def errorbars(
-    data: pd.DataFrame,
-    x: str,
-    y: str,
-    e: str
-) -> dict[str, alt.Chart]:
+def errorbars(data: pd.DataFrame, x: str, y: str, e: str) -> dict[str, alt.Chart]:
 
     copied = data.copy()
     copied["min"] = copied[y] - copied[e]
@@ -81,10 +72,7 @@ def errorbars(
 
     base = alt.Chart(data).encode(alt.X(x))
     marks = base.mark_point().encode(alt.Y(y))
-    errors = base.mark_errorbar().encode(
-        alt.Y("min"),
-        alt.Y2("max")
-    )
+    errors = base.mark_errorbar().encode(alt.Y("min"), alt.Y2("max"))
     charts = {}
     charts["errorbars"] = marks + errors
     charts["marks"] = marks

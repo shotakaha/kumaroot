@@ -33,20 +33,10 @@ import ROOT
 tree = ROOT.TTree("tree", "Event data")
 
 # 1次元プロット
-tree.Draw(
-    "energy_deposit",
-    "parent_id==0",
-    "HIST",
-    1000,
-    0
-)
+tree.Draw("energy_deposit", "parent_id==0", "HIST", 1000, 0)
 
 # 2次元プロット
-tree.Draw(
-    "energy_deposit:position_x",
-    "parent_id==0",
-    "COLZ"
-)
+tree.Draw("energy_deposit:position_x", "parent_id==0", "COLZ")
 ```
 
 ## 1Dヒストグラムしたい（`TTree::Draw`)

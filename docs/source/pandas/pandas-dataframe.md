@@ -12,12 +12,7 @@ data = pd.DataFrame(
 )
 
 # values: dict[str, list]
-data = pd.DataFrame(
-    {
-        "name": ["Alice", "Bob"],
-        "age": [30, 25]
-    }
-)
+data = pd.DataFrame({"name": ["Alice", "Bob"], "age": [30, 25]})
 
 data.display()
 #   name  age
@@ -44,11 +39,7 @@ data.display()
 ## 2次元配列したい（`pandas.DataFrame`）
 
 ```python
-values: list[list] = [
-    ["name", "age"],
-    ["Alice", 30],
-    ["Bob", 25]
-]
+values: list[list] = [["name", "age"], ["Alice", 30], ["Bob", 25]]
 
 data = pd.DataFrame(values)
 ```
@@ -59,10 +50,12 @@ data = pd.DataFrame(values)
 ```python
 import numpy as np
 
-values: np.ndarray = np.array([
-    ["Alice", 30],
-    ["Bob", 25],
-])
+values: np.ndarray = np.array(
+    [
+        ["Alice", 30],
+        ["Bob", 25],
+    ]
+)
 
 data = pd.DataFrame(
     values,

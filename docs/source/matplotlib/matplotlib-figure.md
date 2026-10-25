@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 
 # キャンバスを作成
 fig = plt.figure(
-  figsize=(6, 4),
-  dpi=150,
-  layout="constrained",
-  facecolor="white",
+    figsize=(6, 4),
+    dpi=150,
+    layout="constrained",
+    facecolor="white",
 )
 
 # グラフを描く
@@ -68,9 +68,9 @@ Figure: キャンバス全体
 # キャンバスを作成
 fig = plt.figure(figsize=(8, 6))
 
-ax1 = fig.add_subplot(2, 3, 1)    # index=1
+ax1 = fig.add_subplot(2, 3, 1)  # index=1
 ax4 = fig.add_subplot(nrows=2, ncols=3, index=4)
-ax6 = fig.add_subplot(pos=236)    # index=6
+ax6 = fig.add_subplot(pos=236)  # index=6
 ```
 
 `add_subplot`メソッドで、キャンバスを分割して複数のグラフを描くことができます。
@@ -121,8 +121,8 @@ fig = plt.figure(figsize=(4, 3))
 ```python
 fig = plt.figure(layout="constrained")  # 自動で重なりを回避（recommended）
 fig = plt.figure(layout="compressed")  # constrainedより詰める
-fig = plt.figure(layout="tight")    # さらに詰める
-fig = plt.figure(layout="none")    # 自動調整なし
+fig = plt.figure(layout="tight")  # さらに詰める
+fig = plt.figure(layout="none")  # 自動調整なし
 ```
 
 `layout`オプションで、キャンバス内のレイアウトをよしなに設定できます。

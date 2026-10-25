@@ -1,10 +1,7 @@
 # .htaccessしたい（``html_static_path``）
 
 ```python
-html_static_path = [
-    "_static",
-    "_static/.htaccess"
-]
+html_static_path = ["_static", "_static/.htaccess"]
 ```
 
 ``.htaccess``を使いたい場合は、``html_static_path``に直接追加してください。

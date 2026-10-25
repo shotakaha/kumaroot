@@ -17,7 +17,7 @@ data.loc[["行1":"行200"], ["列1", "列5"]]
 ```python
 # data : 検出器からの信号の波形データを読み込んだデータフレーム
 name = "signal"
-data[name] = 0 # mV；カラムを追加；初期値を与える
+data[name] = 0  # mV；カラムを追加；初期値を与える
 isT = data.query("height > 100")
 data.loc[isT, name] = data["height"]
 ```

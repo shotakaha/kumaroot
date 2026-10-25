@@ -27,17 +27,17 @@ Python3.12+であれば`typing`モジュールでOK。
 
 ```python
 変数名: 型ヒント = 初期値
-変数名: 型ヒント # 初期値なし
+変数名: 型ヒント  # 初期値なし
 ```
 
 `変数名: 型ヒント`のように、変数名の後に`: 型ヒント`をつけて型ヒントを定義できます。
 
 ```python
-x: int = 42          # int型
-x: float = 42.0      # float型
-x: bool = True       # bool型
-x: str = "test"      # str型
-x: bytes = b"test"   # bytes型
+x: int = 42  # int型
+x: float = 42.0  # float型
+x: bool = True  # bool型
+x: str = "test"  # str型
+x: bytes = b"test"  # bytes型
 ```
 
 Python3.9+であれば、ビルトイン型で型ヒントできます。
@@ -67,6 +67,7 @@ x: set[int] = {2, 3, 5, 7, 11}
 
 ```python
 from typing import List, Set
+
 x: List[str] = ["test"]
 x: Set[int] = {2, 3, 5, 7, 11}
 ```
@@ -177,11 +178,12 @@ x: Any = "test"
 ```python
 # Python3.9まで
 from typing import Union
+
 x: Union[int, str]
 
 # Python3.10以降
 x: int | str
-x: list[int|str] = [3, 5, "test"]
+x: list[int | str] = [3, 5, "test"]
 ```
 
 `typing.Union`を使って、複数の型ヒントを組み合わせて指定できます。
@@ -206,16 +208,15 @@ Python3.10以降ではOR記号（ ``|`` ） を使って直感的に表現でき
 
 ```python
 # 引数なし
-def 関数名() -> 型ヒント:
-    ...
+def 関数名() -> 型ヒント: ...
+
 
 # 引数あり
-def 関数名(引数: 型ヒント) -> 型ヒント:
-    ...
+def 関数名(引数: 型ヒント) -> 型ヒント: ...
+
 
 # 引数とオプション引数あり
-def 関数名(引数: 型ヒント, 引数: 型ヒント = デフォルト値) -> 型ヒント:
-    ...
+def 関数名(引数: 型ヒント, 引数: 型ヒント = デフォルト値) -> 型ヒント: ...
 ```
 
 関数の戻り値に型ヒントを定義できます。
@@ -226,8 +227,8 @@ def 関数名(引数: 型ヒント, 引数: 型ヒント = デフォルト値) -
 ```python
 from __future__ import annotations
 
-def f(foo: A) -> int:
-    ...
+
+def f(foo: A) -> int: ...
 ```
 
 `__future__.annotations`をインポートすると、クラス名を前方参照を利用できます。
@@ -237,6 +238,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     import bar
+
 
 def listify(arg: "bar.BarClass") -> "list[bar.BarClass]":
     return [arg]

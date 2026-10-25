@@ -20,7 +20,10 @@ import pandas as pd
 #    {"x": 値41, "y": 値42, "z": 値43},
 #    ...
 # ]
-samples = [{"x": random.gauss(), "y": random.randint(3, 10), "z": random.uniform(5, 20)} for i in range(100)]
+samples = [
+    {"x": random.gauss(), "y": random.randint(3, 10), "z": random.uniform(5, 20)}
+    for i in range(100)
+]
 data = pd.DataFrame(samples)
 ```
 
@@ -48,7 +51,9 @@ import pandas as pd
 #    [値41, 値42, 値43],
 #    ...,
 # ]
-samples = [[random.gauss(), random.randint(3, 10), random.uniform(5, 20)] for i in range(100)]
+samples = [
+    [random.gauss(), random.randint(3, 10), random.uniform(5, 20)] for i in range(100)
+]
 data = pd.DataFrame(samples, columns=["x", "y", "z"])
 ```
 

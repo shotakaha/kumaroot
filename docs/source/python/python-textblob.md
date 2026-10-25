@@ -11,6 +11,7 @@ $ python -m textblob.download_corpora
 
 ```python
 from textblob import TextBlob
+
 blob = TextBlob("分析したい文字列")
 blob.sentiment.polarity
 blob.sentiment.subjectivity
@@ -49,6 +50,7 @@ def sentiment_polarity(text: str):
         # print(e)
         return np.nan
 
+
 def sentiment_subjectivity(text: str):
     try:
         blob = TextBlob(text)
@@ -56,6 +58,7 @@ def sentiment_subjectivity(text: str):
     except TyperError as e:
         # print(e)
         return np.nan
+
 
 # data: pd.DataFrame
 data["text_polarity"] = data["text"].apply(sentiment_polarity)

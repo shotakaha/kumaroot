@@ -35,6 +35,7 @@ tree->Branch("energy", &energy, "energy/D");
 import ROOT
 import numpy as np
 
+
 def macro():
 
     with ROOT.TFile("output.root", "RECREATE") as f:

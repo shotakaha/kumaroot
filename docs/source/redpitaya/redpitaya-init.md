@@ -2,6 +2,7 @@
 
 ```python
 import rp
+
 rp.rp_Init()
 ```
 

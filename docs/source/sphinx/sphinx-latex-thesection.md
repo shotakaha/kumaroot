@@ -1,7 +1,9 @@
 # 章見出しを変更したい
 
 ```python
-latex_elements["preamble"] += "\\renewcommand{\\thesection}{見出しだよ。第\\arabic{section}章}"
+latex_elements["preamble"] += (
+    "\\renewcommand{\\thesection}{見出しだよ。第\\arabic{section}章}"
+)
 ```
 
 Sphinxで生成したPDFの見出しが「第ONE （1章タイトル）」のようになっています。

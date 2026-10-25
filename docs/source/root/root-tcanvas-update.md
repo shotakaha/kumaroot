@@ -33,6 +33,7 @@ void macro() {
 ```python
 from ROOT import TCanvas, TGraph, gSystem
 
+
 def macro():
     c = TCanvas("c", "Real-time Monitor", 800, 600)
     g = TGraph()

@@ -16,8 +16,8 @@ ax.set_ylabel("Y軸")
 
 # 凡例を追加
 ax.legend(
-    [sc1, sc2],    # 凡例の対象
-    ["データ1", "データ2"]  # 凡例のラベル
+    [sc1, sc2],  # 凡例の対象
+    ["データ1", "データ2"],  # 凡例のラベル
 )
 
 # キャンバスを保存
@@ -100,11 +100,7 @@ canvas = axs.ravel()
 
 # 反復処理でグラフを描く
 for i, ax in enumerate(canvas):
-    data.plot.scatter(
-        x="time",
-        y=f"v{i+1}",
-        ax=ax
-    )
+    data.plot.scatter(x="time", y=f"v{i + 1}", ax=ax)
 
 # キャンバスを保存
 fig.savefig("waveforms.png")
@@ -124,11 +120,7 @@ fig.savefig("waveforms.png")
 ```python
 # iterator: ループ処理の中でアクセスできる
 for i, ax in enumerate(axs.flatten()):
-    data.plot.scatter(
-        x="time",
-        y=f"v{i+1}",
-        ax=ax
-    )
+    data.plot.scatter(x="time", y=f"v{i + 1}", ax=ax)
 ```
 
 `flatten`はイテレーターを返すので、

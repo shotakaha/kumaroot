@@ -3,6 +3,7 @@
 ```python
 import argparse
 
+
 def main() -> None:
 
     # ArgumentParserオブジェクトを作成
@@ -25,6 +26,7 @@ def main() -> None:
         print("デバッグモードで実行します")
 
     return
+
 
 if __name__ == "__main__":
     main()

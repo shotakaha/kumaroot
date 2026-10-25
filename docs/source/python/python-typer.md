@@ -6,6 +6,7 @@ import typer
 
 app = typer.Typer()
 
+
 @app.command()
 def hello(name: str):
     print(f"Hello {name}")
@@ -17,6 +18,7 @@ def goodbye(name: str, formal: bool = False):
         print(f"Goodbye Ms. {name}. Have a good day.")
     else:
         print(f"Bye {name}!")
+
 
 if __name__ == "__main__":
     app()
@@ -80,8 +82,8 @@ $ poetry add typer
 name: str  # 位置引数（required）
 
 # 詳細設定
-name: Annotated[int, typer.Argument(help="名前")]     # 位置引数（required）
-name: Annotated[int, typer.Argument(help="名前")] = 0 # 位置引数（optional）
+name: Annotated[int, typer.Argument(help="名前")]  # 位置引数（required）
+name: Annotated[int, typer.Argument(help="名前")] = 0  # 位置引数（optional）
 ```
 
 コマンドの引数に型ヒントを指定します。
@@ -100,8 +102,8 @@ name: Annotated[int, typer.Argument(help="名前")] = 0 # 位置引数（optiona
 name: int = 0  # オプション引数（optional）
 
 # 詳細設定
-name: Annotated[int, typer.Option(help="名前")] = 0 # オプション引数（optional）
-name: Annotated[int, typer.Option(help="名前")]     # オプション引数（required）
+name: Annotated[int, typer.Option(help="名前")] = 0  # オプション引数（optional）
+name: Annotated[int, typer.Option(help="名前")]  # オプション引数（required）
 ```
 
 デフォルト値を与えると、オプション引数になります。
@@ -148,17 +150,19 @@ import typer
 app = typer.Typer()
 """appという名前でtyper.Typerオブジェクトを作成"""
 
+
 @app.command()
 def vth(
     ch: Annotated[int, typer.Argument(help="チャンネル番号")],
     threshold: Annotated[int, typer.Argument(help="スレッショルド値")],
     max_retry: Annotated[int, typer.Argument(help="リトライ数")] = 3,
-    load_from: Annotated[str, typer.Argument(help="設定ファイル名")] = "daq.toml"
-    ):
+    load_from: Annotated[str, typer.Argument(help="設定ファイル名")] = "daq.toml",
+):
     """
     コマンドの説明
     """
     pass
+
 
 if __name__ == "__main__":
     app()
@@ -185,6 +189,7 @@ from rich import print
 
 ```python
 import typer
+
 
 @app.command()
 def some_command(is_debug: bool = False):

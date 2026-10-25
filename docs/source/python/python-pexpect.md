@@ -150,10 +150,10 @@ import pexpect
 
 # rsyncを開始
 child = pexpect.spawn("rsync -auvz SRC_REMOTE DEST_LOCAL")
-child.expect("password:")     # パスワード認証を確認
-child.sendline("パスワード")    # パスワードを送信
-child.expect(pexpect.EOF)     # 処理が終わることを確認
-result = child.before.decode("utf-8") # 結果を取得
+child.expect("password:")  # パスワード認証を確認
+child.sendline("パスワード")  # パスワードを送信
+child.expect(pexpect.EOF)  # 処理が終わることを確認
+result = child.before.decode("utf-8")  # 結果を取得
 print(result)
 ```
 

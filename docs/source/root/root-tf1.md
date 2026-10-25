@@ -17,7 +17,7 @@ f->Draw();
 import ROOT
 import math
 
-f = ROOT.TF1("f", "sin(x)*cos(x)", 0, 2*math.pi)
+f = ROOT.TF1("f", "sin(x)*cos(x)", 0, 2 * math.pi)
 
 # 関数を描画
 f.Draw()

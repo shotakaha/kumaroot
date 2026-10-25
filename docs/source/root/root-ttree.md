@@ -34,6 +34,7 @@ void macro() {
 ```python
 from ROOT import TTree
 
+
 def macro():
     tree = TTree("events", "event data")
 ```

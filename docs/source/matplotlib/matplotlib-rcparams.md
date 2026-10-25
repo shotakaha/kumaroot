@@ -30,6 +30,7 @@ mpl.rcParams["legend.fontsize"] = 10
 
 ```python
 import matplotlib as mpl
+
 mpl.rcdefaults()
 ```
 
@@ -39,21 +40,27 @@ mpl.rcdefaults()
 
 ```python
 # キャンバス全体の設定
-mpl.rcParams["figure.figsize"] = (6, 4)         # default: (6.4, 4.8) in inches
-mpl.rcParams["figure.dpi"] = 200                # default: 100 | 200 | 300
-mpl.rcParams["figure.layout"] = "constrained"   # default: None | "constrained" | "compressed" | "tight"
-mpl.rcParams["figure.autolayout"] = True        # default: False | True
+mpl.rcParams["figure.figsize"] = (6, 4)  # default: (6.4, 4.8) in inches
+mpl.rcParams["figure.dpi"] = 200  # default: 100 | 200 | 300
+mpl.rcParams["figure.layout"] = (
+    "constrained"  # default: None | "constrained" | "compressed" | "tight"
+)
+mpl.rcParams["figure.autolayout"] = True  # default: False | True
 
 # キャンバスの背景色
-mpl.rcParams["figure.facecolor"] = "lightgray"  # default: "white" | "lightgray" | "none"
-mpl.rcParams["figure.frameon"] = False          # default: True | False
+mpl.rcParams["figure.facecolor"] = (
+    "lightgray"  # default: "white" | "lightgray" | "none"
+)
+mpl.rcParams["figure.frameon"] = False  # default: True | False
 
 # 全体のタイトル設定
 mpl.rcParams["figure.titlelocation"] = "left"  # default: "center" | "left" | "right"
-mpl.rcParams["figure.titlesize"] = 14          # default: "large" | "medium" | "small" | 14
-mpl.rcParams["figure.titleweight"] = "bold"    # default: "normal" | "bold"
-mpl.rcParams["figure.titlepad"] = 6            # default: 6 in points
-mpl.rcParams["figure.titlecolor"] = "blue"     # default: "black" | "blue" | "red" | "green"
+mpl.rcParams["figure.titlesize"] = 14  # default: "large" | "medium" | "small" | 14
+mpl.rcParams["figure.titleweight"] = "bold"  # default: "normal" | "bold"
+mpl.rcParams["figure.titlepad"] = 6  # default: 6 in points
+mpl.rcParams["figure.titlecolor"] = (
+    "blue"  # default: "black" | "blue" | "red" | "green"
+)
 ```
 
 `figure.*`オプションで、キャンバス全体の設定を変更できます。
@@ -92,11 +99,11 @@ mpl.rcParams["axes.unicode_minus"] = False  # default: True | False
 
 ```python
 mpl.rcParams["font.family"] = [
-  "Noto Sans CJK JP",
-  "IPAexGothic",
-  "Yu Gothic",
-  "Hiragino Sans",
-  "sans-serif",
+    "Noto Sans CJK JP",
+    "IPAexGothic",
+    "Yu Gothic",
+    "Hiragino Sans",
+    "sans-serif",
 ]
 ```
 
@@ -135,22 +142,22 @@ mpl.rcParams["image.aspect"] = "equal"  # default: "equal" | "auto"
 
 ```python
 # 軸のタイトル設定
-mpl.rcParams["axes.titlesize"] = 14            # default: "large" | "medium" | "small" | 14
-mpl.rcParams["axes.titleweight"] = "bold"      # default: "normal" | "bold"
-mpl.rcParams["axes.titlecolor"] = "blue"       # default: "black" | "blue" | "red" | "green"
-mpl.rcParams["axes.titlepad"] = 6              # default: 6 in points
+mpl.rcParams["axes.titlesize"] = 14  # default: "large" | "medium" | "small" | 14
+mpl.rcParams["axes.titleweight"] = "bold"  # default: "normal" | "bold"
+mpl.rcParams["axes.titlecolor"] = "blue"  # default: "black" | "blue" | "red" | "green"
+mpl.rcParams["axes.titlepad"] = 6  # default: 6 in points
 
 # 軸のラベル設定
-mpl.rcParams["axes.labelsize"] = 12          # default: "large" | "medium" | "small" | 12
-mpl.rcParams["axes.labelweight"] = "bold"    # default: "normal" | "bold"
-mpl.rcParams["axes.labelcolor"] = "blue"     # default: "black"
-mpl.rcParams["axes.labelpad"] = 4           # default: 4 in points
+mpl.rcParams["axes.labelsize"] = 12  # default: "large" | "medium" | "small" | 12
+mpl.rcParams["axes.labelweight"] = "bold"  # default: "normal" | "bold"
+mpl.rcParams["axes.labelcolor"] = "blue"  # default: "black"
+mpl.rcParams["axes.labelpad"] = 4  # default: 4 in points
 
 # 軸の線や背景の設定
-mpl.rcParams["axes.linewidth"] = 1             # default: 1
-mpl.rcParams["axes.linecolor"] = "black"       # default: "black" | "gray" | "lightgray"
-mpl.rcParams["axes.edgecolor"] = "black"       # default: "black" | "gray" | "lightgray"
-mpl.rcParams["axes.facecolor"] = "lightgray"   # default: "white" | "lightgray" | "none"
+mpl.rcParams["axes.linewidth"] = 1  # default: 1
+mpl.rcParams["axes.linecolor"] = "black"  # default: "black" | "gray" | "lightgray"
+mpl.rcParams["axes.edgecolor"] = "black"  # default: "black" | "gray" | "lightgray"
+mpl.rcParams["axes.facecolor"] = "lightgray"  # default: "white" | "lightgray" | "none"
 ```
 
 `axes.*`オプションで、軸のタイトルやラベル、線や背景の設定を変更できます。
@@ -159,13 +166,13 @@ mpl.rcParams["axes.facecolor"] = "lightgray"   # default: "white" | "lightgray" 
 
 ```python
 # グリッド線の表示
-mpl.rcParams["axes.grid"] = True             # default: False | True
+mpl.rcParams["axes.grid"] = True  # default: False | True
 # グリッド線の詳細
-mpl.rcParams["axes.grid.which"] = "both"      # default: "major" | "minor" | "both"
-mpl.rcParams["axes.grid.axis"] = "x"        # default: "both" | "x" | "y"
-mpl.rcParams["axes.grid.linestyle"] = ":"     # default: "--" | "-" | ":" | "-."
-mpl.rcParams["axes.grid.linewidth"] = 1.0      # default: 0.5 | 1.0
-mpl.rcParams["axes.grid.color"] = "black"      # default: "gray" | "black"
+mpl.rcParams["axes.grid.which"] = "both"  # default: "major" | "minor" | "both"
+mpl.rcParams["axes.grid.axis"] = "x"  # default: "both" | "x" | "y"
+mpl.rcParams["axes.grid.linestyle"] = ":"  # default: "--" | "-" | ":" | "-."
+mpl.rcParams["axes.grid.linewidth"] = 1.0  # default: 0.5 | 1.0
+mpl.rcParams["axes.grid.color"] = "black"  # default: "gray" | "black"
 ```
 
 `axes.grid.*`オプションで、グリッド線の表示を変更できます。
@@ -182,7 +189,9 @@ mpl.rcParams["lines.linestyle"] = "-"  # default: "-" | "--" | "-." | ":"
 mpl.rcParams["lines.markersize"] = 6
 mpl.rcParams["lines.marker"] = "o"  # default: "o" | "s" | "^" | "D" | "x" | "+" | "*"
 mpl.rcParams["lines.markerfacecolor"] = "blue"  # default: "blue" | "red" | "green"
-mpl.rcParams["lines.markeredgecolor"] = "black"  # default: "black | "blue" | "red" | "green"
+mpl.rcParams["lines.markeredgecolor"] = (
+    "black"  # default: "black | "blue" | "red" | "green"
+)
 ```
 
 `lines.*`オプションで、線やマーカーの設定を変更できます。
@@ -202,10 +211,12 @@ mpl.rcParams["lines.markeredgecolor"] = "black"  # default: "black | "blue" | "r
 
 ```python
 # 凡例の設定
-mpl.rcParams["legend.fontsize"] = 10         # default: "large" | "medium" | "small" | 10
-mpl.rcParams["legend.title_fontsize"] = 12   # default: "large" | "medium" | "small" | 12
+mpl.rcParams["legend.fontsize"] = 10  # default: "large" | "medium" | "small" | 10
+mpl.rcParams["legend.title_fontsize"] = 12  # default: "large" | "medium" | "small" | 12
 mpl.rcParams["legend.title_fontweight"] = "bold"  # default: "normal" | "bold"
-mpl.rcParams["legend.title_color"] = "blue"  # default: "black" | "blue" | "red" | "green"
+mpl.rcParams["legend.title_color"] = (
+    "blue"  # default: "black" | "blue" | "red" | "green"
+)
 ```
 
 `legend.*`オプションで、凡例の設定を変更できます。
@@ -217,15 +228,15 @@ import matplotlib as mpl
 
 mpl.rcParams["axes.unicode_minus"] = False
 mpl.rcParams["figure.figsize"] = (3.5, 2.5)  # 2カラムの論文に適したサイズ
-mpl.rcParams["figure.dpi"] = 300             # 論文用の高解像度
+mpl.rcParams["figure.dpi"] = 300  # 論文用の高解像度
 mpl.rcParams["font.family"] = ["Noto Serif CJK JP", "serif"]  # 論文に適したセリフ体
-mpl.rcParams["font.size"] = 10               # 論文に適したフォントサイズ
-mpl.rcParams["axes.titlesize"] = 12          # 論文に適した軸タイトルサイズ
-mpl.rcParams["axes.labelsize"] = 10          # 論文に適した軸ラベルサイズ
-mpl.rcParams["axes.grid"] = False                # 論文ではグリッド線を非表示にすることが多い
-mpl.rcParams["lines.linewidth"] = 1.0           # 論文に適した線の太さ
-mpl.rcParams["lines.markersize"] = 4.0           # 論文に適したマーカーの大きさ
-mpl.rcParams["legend.fontsize"] = 8            # 論文に適した凡例のフォントサイズ
+mpl.rcParams["font.size"] = 10  # 論文に適したフォントサイズ
+mpl.rcParams["axes.titlesize"] = 12  # 論文に適した軸タイトルサイズ
+mpl.rcParams["axes.labelsize"] = 10  # 論文に適した軸ラベルサイズ
+mpl.rcParams["axes.grid"] = False  # 論文ではグリッド線を非表示にすることが多い
+mpl.rcParams["lines.linewidth"] = 1.0  # 論文に適した線の太さ
+mpl.rcParams["lines.markersize"] = 4.0  # 論文に適したマーカーの大きさ
+mpl.rcParams["legend.fontsize"] = 8  # 論文に適した凡例のフォントサイズ
 ```
 
 2カラムの論文に適したサイズや、解像度、フォントなどを設定する例です。
@@ -239,15 +250,18 @@ import matplotlib as mpl
 mpl.rcParams["axes.unicode_minus"] = False
 # mpl.rcParams["figure.figsize"] = (8, 6)  # 4:3スライド
 mpl.rcParams["figure.figsize"] = (8, 4.5)  # 16:9スライド
-mpl.rcParams["figure.dpi"] = 150           # プレゼン用の解像度
-mpl.rcParams["font.family"] = ["Noto Sans CJK JP", "sans-serif"]  # プレゼンに適したサンセリフ体
-mpl.rcParams["font.size"] = 18             # プレゼンに適したフォントサイズ
-mpl.rcParams["axes.titlesize"] = 20        # プレゼンに適した軸タイトルサイズ
-mpl.rcParams["axes.labelsize"] = 18        # プレゼンに適した軸ラベルサイズ
-mpl.rcParams["axes.grid"] = True                # プレゼンではグリッド線を表示することが多い
-mpl.rcParams["lines.linewidth"] = 3.0           # プレゼンに適した線の太さ
-mpl.rcParams["lines.markersize"] = 8.0           # プレゼンに適したマーカーの大きさ
-mpl.rcParams["legend.fontsize"] = 14            # プレゼンに適した凡例のフォントサイズ
+mpl.rcParams["figure.dpi"] = 150  # プレゼン用の解像度
+mpl.rcParams["font.family"] = [
+    "Noto Sans CJK JP",
+    "sans-serif",
+]  # プレゼンに適したサンセリフ体
+mpl.rcParams["font.size"] = 18  # プレゼンに適したフォントサイズ
+mpl.rcParams["axes.titlesize"] = 20  # プレゼンに適した軸タイトルサイズ
+mpl.rcParams["axes.labelsize"] = 18  # プレゼンに適した軸ラベルサイズ
+mpl.rcParams["axes.grid"] = True  # プレゼンではグリッド線を表示することが多い
+mpl.rcParams["lines.linewidth"] = 3.0  # プレゼンに適した線の太さ
+mpl.rcParams["lines.markersize"] = 8.0  # プレゼンに適したマーカーの大きさ
+mpl.rcParams["legend.fontsize"] = 14  # プレゼンに適した凡例のフォントサイズ
 ```
 
 プレゼン資料に適したサイズや、解像度、フォントなどを設定する例です。
@@ -261,12 +275,12 @@ import matplotlib as mpl
 
 mpl.rcParams["axes.unicode_minus"] = False
 mpl.rcParams["figure.figsize"] = (8, 4)  # 少し横長
-mpl.rcParams["figure.dpi"] = 150         # ダッシュボード用の解像度
+mpl.rcParams["figure.dpi"] = 150  # ダッシュボード用の解像度
 mpl.rcParams["font.family"] = ["Noto Sans CJK JP", "sans-serif"]  # サンセリフ体
 mpl.rcParams["font.size"] = 11
-mpl.rcParams["axes.grid"] = True         # グリッド線を表示
-mpl.rcParams["axes.linestyle"] = ":"     # グリッド線を点線
-mpl.rcParams["legend.frameon"] = False   # 凡例の枠線を消す
+mpl.rcParams["axes.grid"] = True  # グリッド線を表示
+mpl.rcParams["axes.linestyle"] = ":"  # グリッド線を点線
+mpl.rcParams["legend.frameon"] = False  # 凡例の枠線を消す
 ```
 
 ダッシュボード用のスタイルの例です。

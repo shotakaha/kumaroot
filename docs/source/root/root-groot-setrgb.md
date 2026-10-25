@@ -82,11 +82,11 @@ gROOT->GetColor(kViolet)->SetRGB(0.50, 0.30, 0.70);    // Purple
 ```python
 from ROOT import gROOT
 
-gROOT.GetColor(kGreen).SetRGB(0.00, 0.70, 0.00)    # Green
-gROOT.GetColor(kOrange).SetRGB(1.00, 0.50, 0.00)    # Orange
-gROOT.GetColor(kAzure).SetRGB(0.15, 0.29, 0.56)    # China Blue
-gROOT.GetColor(kTeal).SetRGB(0.22, 0.37, 0.04)    # Leaf Green
-gROOT.GetColor(kViolet).SetRGB(0.50, 0.30, 0.70)    # Purple
+gROOT.GetColor(kGreen).SetRGB(0.00, 0.70, 0.00)  # Green
+gROOT.GetColor(kOrange).SetRGB(1.00, 0.50, 0.00)  # Orange
+gROOT.GetColor(kAzure).SetRGB(0.15, 0.29, 0.56)  # China Blue
+gROOT.GetColor(kTeal).SetRGB(0.22, 0.37, 0.04)  # Leaf Green
+gROOT.GetColor(kViolet).SetRGB(0.50, 0.30, 0.70)  # Purple
 ```
 
 ## 鮮やかな配色にしたい
@@ -107,11 +107,11 @@ gROOT->GetColor(kMagenta)->SetRGB(0.90, 0.20, 0.80);    // Hot Pink
 ```python
 from ROOT import gROOT
 
-gROOT.GetColor(kRed).SetRGB(0.95, 0.20, 0.20)    # Coral Red
-gROOT.GetColor(kGreen).SetRGB(0.20, 0.80, 0.20)    # Emerald Green
-gROOT.GetColor(kBlue).SetRGB(0.20, 0.40, 0.95)    # Vibrant Blue
-gROOT.GetColor(kYellow).SetRGB(0.95, 0.60, 0.10)    # Gold
-gROOT.GetColor(kMagenta).SetRGB(0.90, 0.20, 0.80)    # Hot Pink
+gROOT.GetColor(kRed).SetRGB(0.95, 0.20, 0.20)  # Coral Red
+gROOT.GetColor(kGreen).SetRGB(0.20, 0.80, 0.20)  # Emerald Green
+gROOT.GetColor(kBlue).SetRGB(0.20, 0.40, 0.95)  # Vibrant Blue
+gROOT.GetColor(kYellow).SetRGB(0.95, 0.60, 0.10)  # Gold
+gROOT.GetColor(kMagenta).SetRGB(0.90, 0.20, 0.80)  # Hot Pink
 ```
 
 ## RGB値の変換方法

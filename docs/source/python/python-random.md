@@ -14,6 +14,7 @@ Pythonの標準モジュールで擬似乱数を生成するには[random](https
 
 ```python
 import random
+
 random.seed(511)
 random.random()
 # -> 0.10846537689444802
@@ -21,6 +22,7 @@ random.random()
 
 ```python
 import numpy as np
+
 rng = np.random.default_rng(511)
 rng.random()
 # -> 0.9463589575041579
@@ -33,12 +35,14 @@ rng.random()
 
 ```python
 import random
+
 random.random()
 # -> 0.24352181317841615
 ```
 
 ```python
 import numpy as np
+
 rng = np.random.default_rng()
 
 rng.random()
@@ -54,12 +58,14 @@ rng.random(5)  # size=5
 
 ```python
 import random
+
 random.uniform(1, 5)
 # -> 3.9737232237549036
 ```
 
 ```python
 import numpy as np
+
 rng = np.random.default_rng()
 
 rng.uniform(1, 5)
@@ -75,12 +81,14 @@ rng.uniform(1, 5, 5)  # size=5
 
 ```python
 import random
+
 random.randint(1, 100)
 # -> 73
 ```
 
 ```python
 import numpy as np
+
 rng = np.random.default_rng()
 
 rng.integers(1, 100)
@@ -106,6 +114,7 @@ random.gauss(mu=100, sigma=10)
 
 ```python
 import numpy as np
+
 rng = np.random.default_rng()
 
 rng.normal()  # loc=0, scale=1
@@ -125,6 +134,7 @@ rng.normal(100, 10, 5)  # size=5
 
 ```python
 import random
+
 seq = ["いち", "に", "さん"]
 random.choice(seq)
 # -> 'さん'
@@ -132,6 +142,7 @@ random.choice(seq)
 
 ```python
 import numpy as np
+
 seq = ["いち", "に", "さん"]
 rng = np.random.default_rng()
 

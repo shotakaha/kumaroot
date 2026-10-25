@@ -9,12 +9,12 @@ data = pd.DataFrame(...)
 
 # 面グラフを描く
 data.plot.area(
-  x = "X軸のカラム名",
-  y = "Y軸のカラム名",
-  stacked = True,  # 積み上げグラフにするかどうか
-  title = "面グラフ",
-  xlabel = "X軸のタイトル",
-  ylabel = "Y軸のタイトル",
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
+    stacked=True,  # 積み上げグラフにするかどうか
+    title="面グラフ",
+    xlabel="X軸のタイトル",
+    ylabel="Y軸のタイトル",
 )
 ```
 

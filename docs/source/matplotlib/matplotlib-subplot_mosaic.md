@@ -23,9 +23,9 @@ panels = [
 # fig: matplotlib.figure.Figure
 # axs: dict[str, matplotlib.axes.Axes]
 fig, axs = plt.subplot_mosaic(
-    mosaic=panels,    # 割付を指定
+    mosaic=panels,  # 割付を指定
     layout="constrained",  # レイアウト調整
-    figsize=(8, 6),   # 縦長のキャンバスを作成
+    figsize=(8, 6),  # 縦長のキャンバスを作成
 )
 
 # 割付した名前を使ってAxesオブジェクトを取り出す
@@ -99,12 +99,7 @@ axs["sub2"].set_ylabel("Y-axis")
 # cbar: カラーバーを描く
 sm = plt.cm.ScalarMappable(cmap="viridis")
 sm.set_array([])  # カラーバーの範囲を設定
-fig.colorbar(
-    sm,
-    cax=axs["cbar"],
-    orientation="vertical",
-    label="Colorbar"
-)
+fig.colorbar(sm, cax=axs["cbar"], orientation="vertical", label="Colorbar")
 
 # キャンバスを保存する
 fig.savefig("subplot_mosaic_paper.png", dpi=300)

@@ -50,7 +50,7 @@ tags = soup.select("CSSセレクタ")
 ## タイトルを取得したい
 
 ```python
-soup.title       # "<title>記事のタイトル</title>"
+soup.title  # "<title>記事のタイトル</title>"
 soup.title.text  # "記事のタイトル"
 soup.title.name  # "title" = タグ名
 ```
@@ -70,6 +70,7 @@ soup.find("a").get("href")
 
 ```python
 import bs4
+
 bs4.__version__
 ```
 

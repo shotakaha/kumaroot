@@ -14,6 +14,7 @@ class Point:
         self.x = x
         self.y = y
 
+
 p1 = Point(1, 2)
 ```
 
@@ -36,9 +37,10 @@ class Point:
     def __repr__(self):
         return f"Point(x={self.x!r}, y={self.y!r})"
 
+
 p1 = Point(1, 2)
-print(p1)   # Point(1, 2)          <- __str__が呼ばれる
-p1          # Point(x=1, y=2)      <- 対話モードでは__repr__が呼ばれる
+print(p1)  # Point(1, 2)          <- __str__が呼ばれる
+p1  # Point(x=1, y=2)      <- 対話モードでは__repr__が呼ばれる
 ```
 
 `__str__`と`__repr__`を実装すると、
@@ -68,12 +70,13 @@ class Point:
     def __lt__(self, other):
         return (self.x, self.y) < (other.x, other.y)
 
+
 p1 = Point(1, 2)
 p2 = Point(1, 2)
 p3 = Point(3, 4)
 
-print(p1 == p2)   # True   <- __eq__が呼ばれる
-print(p1 < p3)     # True   <- __lt__が呼ばれる
+print(p1 == p2)  # True   <- __eq__が呼ばれる
+print(p1 < p3)  # True   <- __lt__が呼ばれる
 ```
 
 比較演算子にも、それぞれ対応する特殊メソッドがあります。
@@ -115,12 +118,13 @@ class Point:
     def __str__(self):
         return f"Point({self.x}, {self.y})"
 
+
 p1 = Point(1, 2)
 p2 = Point(3, 4)
 
-print(p1 + p2)   # Point(4, 6)   <- __add__が呼ばれる
-print(p1 - p2)   # Point(-2, -2) <- __sub__が呼ばれる
-print(p1 * 2)     # Point(2, 4)   <- __mul__が呼ばれる
+print(p1 + p2)  # Point(4, 6)   <- __add__が呼ばれる
+print(p1 - p2)  # Point(-2, -2) <- __sub__が呼ばれる
+print(p1 * 2)  # Point(2, 4)   <- __mul__が呼ばれる
 ```
 
 四則演算にも、それぞれ対応する特殊メソッドがあります。
@@ -144,8 +148,9 @@ class Group:
     def __len__(self):
         return len(self.members)
 
+
 group = Group(["Alice", "Bob", "Carol"])
-print(len(group))   # 3   <- __len__が呼ばれる
+print(len(group))  # 3   <- __len__が呼ばれる
 ```
 
 `__len__`を実装すると、`len()`で自作クラスの「長さ」を取得できるようになります。

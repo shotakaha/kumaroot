@@ -13,7 +13,8 @@ y = np.sin(x)
 fig, ax = plt.subplots()
 xdata = []
 ydata = []
-line, = ax.plot(x, y)  # 初期の線を描画
+(line,) = ax.plot(x, y)  # 初期の線を描画
+
 
 # アニメーションの更新関数
 def update(frame):
@@ -24,15 +25,16 @@ def update(frame):
     ax.relim()  # 軸の範囲を再計算
     ax.autoscale_view()  # 軸の範囲を自動調整
 
-    return line,  # 更新された線を返す
+    return (line,)  # 更新された線を返す
+
 
 # アニメーションを作成
 ani = FuncAnimation(
-    fig,          # アニメーションを描画するFigureオブジェクト
-    update,       # 更新関数
-    frames=100,   # フレーム数
+    fig,  # アニメーションを描画するFigureオブジェクト
+    update,  # 更新関数
+    frames=100,  # フレーム数
     interval=50,  # フレーム間の時間（ミリ秒）
-    blit=True     # 描画の最適化
+    blit=True,  # 描画の最適化
 )
 
 # アニメーションを表示
@@ -54,12 +56,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+
 # データバッファ
 class DataBuffer:
     def __init__(self, maxlen=100):
         self.x = deque(maxlen=maxlen)  # 時間軸のデータを保持
         self.y = deque(maxlen=maxlen)  # 値のデータを保持
-        self.lock = threading.Lock()   # スレッドセーフなロック
+        self.lock = threading.Lock()  # スレッドセーフなロック
 
     # データを追加するメソッド
     def push(self, x, y):
@@ -72,6 +75,7 @@ class DataBuffer:
         with self.lock:
             return self.x, self.y
 
+
 # データ生成スレッド
 def data_generator(buffer: DataBuffer):
     t = 0  # 時間の初期値
@@ -80,6 +84,7 @@ def data_generator(buffer: DataBuffer):
         buffer.push(t, value)
         t += 0.1
         time.sleep(0.1)  # データ生成の間隔
+
 
 def dashboard(buffer: DataBuffer):
 
@@ -91,16 +96,16 @@ def dashboard(buffer: DataBuffer):
 
     # キャンバスを作成
     fig, axs = plt.subplot_mosaic(
-        panels,    # 割付を指定
-        figsize=(8, 4),   # 横長のキャンバスを作成
+        panels,  # 割付を指定
+        figsize=(8, 4),  # 横長のキャンバスを作成
         layout="constrained",  # レイアウト調整
     )
 
     # main: メインのグラフを初期化
-    line, = axs['main'].plot([], [], lw=2, label="Random Data")
-    axs['main'].set_xlim(0, 20)
-    axs['main'].set_ylim(0, 1)
-    axs['main'].legend()
+    (line,) = axs["main"].plot([], [], lw=2, label="Random Data")
+    axs["main"].set_xlim(0, 20)
+    axs["main"].set_ylim(0, 1)
+    axs["main"].legend()
 
     # side: サイドパネルにテキストを表示
     txt = axs["side"].text(
@@ -140,6 +145,7 @@ def dashboard(buffer: DataBuffer):
     )
 
     plt.show()
+
 
 if __name__ == "__main__":
     # データバッファを作成

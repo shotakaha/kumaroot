@@ -162,11 +162,8 @@ ymd = now.strftime("%Y%m%d")
 default_filename = now.strftime("%Y%m%d_%Hh%Mm%Ss.csv")
 csv_path = Path.cwd() / "data" / ymd / default_filename
 
-def read_line(
-    com: serial.Serial,
-    *,
-    encoding: str = "utf-8"
-    ) -> Optional[str]:
+
+def read_line(com: serial.Serial, *, encoding: str = "utf-8") -> Optional[str]:
     """Read one decoded line from the serial port."""
     if com.in_waiting == 0:
         return None
@@ -176,16 +173,18 @@ def read_line(
     line = raw.decode(encoding, errors="ignore").strip()
     return line or None
 
+
 def write_row(
     writer: Any,  # csv.writer()の戻り値は型ヒントとして直接書けないためAny
-    line: str
-    ) -> list:
+    line: str,
+) -> list:
     """Write a CSV row to the file."""
     parts = line.split()
     timestamp = datetime.now().isoformat(timespec="seconds")
     row = [timestamp] + parts + [len(parts)]
     writer.writerow(row)
     return row
+
 
 try:
     with serial.Serial(port=port_name, baudrate=baud, timeout=1) as com:
@@ -255,11 +254,8 @@ import serial
 import threading
 import time
 
-def read_loop(
-    port_name: str,
-    baudrate: int,
-    stop: threading.Event
-    ) -> None:
+
+def read_loop(port_name: str, baudrate: int, stop: threading.Event) -> None:
     """Continuously read lines from a serial port and print them."""
     try:
         with serial.Serial(port_name, baudrate, timeout=1) as com:
@@ -279,10 +275,7 @@ def read_loop(
         print(f"[{port_name}] Closed")
 
 
-def wait_for_interrupt(
-    stop: threading.Event,
-    interval: float = 0.2
-    ) -> None:
+def wait_for_interrupt(stop: threading.Event, interval: float = 0.2) -> None:
     """Block the main thread until Ctrl-C is pressed."""
     try:
         print("Press Ctrl-C to stop.")
@@ -301,7 +294,7 @@ if __name__ == "__main__":
     # デバイスごとのスレッド
     threads = [
         threading.Thread(target=read_loop, args=("/dev/ttyUSB0", 9600, stop_event)),
-        threading.Thread(target=read_loop, args=("/dev/ttyUSB1", 115200, stop_event))
+        threading.Thread(target=read_loop, args=("/dev/ttyUSB1", 115200, stop_event)),
     ]
 
     # スレッドを起動
@@ -311,7 +304,7 @@ if __name__ == "__main__":
     # 中断（Ctrl-C）待ち
     wait_for_interrupt(stop_event)
     for t in threads:
-        t.join()      # サブスレッドの終了を待つ
+        t.join()  # サブスレッドの終了を待つ
 
     print("All readers stopped.")
 ```

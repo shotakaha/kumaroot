@@ -49,9 +49,9 @@ HTTPのリクエストメソッドに対応したメソッドで、リクエス�
 ```python
 r = requests.get("https://httpbin.org/get")
 
-r.text     # str
+r.text  # str
 r.content  # bytes
-r.json()   # 辞書型
+r.json()  # 辞書型
 r.headers  # 辞書（みたいな）型
 r.cookies  # 辞書（みたいな）型
 ```
@@ -96,7 +96,7 @@ r = requests.get("URL", timeout=10)
 params = {
     "key1": "value1",
     "key2": "value2",
-    }
+}
 r = requests.get("URL", params=params)
 
 # クエリ付きのURLを確認
@@ -129,9 +129,9 @@ headers = {"User-Agent": "ツール名/バージョン (ホームページ)"}
 
 ```python
 r = requests.get("https://httpbin.org/status/200")
-r.ok           # True
+r.ok  # True
 r.status_code  # 200
-r.reason       # 'OK'
+r.reason  # 'OK'
 ```
 
 `ok`プロパティで接続に成功したかどうかを確認できます。
@@ -174,7 +174,9 @@ requestsモジュールの例外クラスの親分です。
 ## ユーザーエージェント情報
 
 ```python
-headers = {"User-Agent": "Mozilla/5.0 (OS情報) レンダリングエンジン ブラウザー名/バージョン Safari互換性/バージョン"}
+headers = {
+    "User-Agent": "Mozilla/5.0 (OS情報) レンダリングエンジン ブラウザー名/バージョン Safari互換性/バージョン"
+}
 ```
 
 上記のサンプルは、ユーザーエージェント情報のテンプレートです。
@@ -213,31 +215,40 @@ WebKitベースのブラウザーのSafari互換性の情報を記述します�
 - Google Chrome (v115.0) / WindowsPC
 
 ```python
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"}
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+}
 ```
 
 - Mozilla Firefox (v102.0) / WindowsPC
 
 ```python
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0"}
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0"
+}
 ```
 
 - Safari (v16.0) / macOS13
 
 ```python
-headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15"}
+headers = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15"
+}
 ```
 
 - MS Edge (v114.0) / WindowsPC
 
 ```python
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.79"}
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.79"
+}
 ```
 
 ## モックしたい（`@patch(requests.get)`）
 
 ```python
 from unittest.mock import patch
+
 
 @patch("pathlib.Path.write_text")
 @patch("requests.get")
@@ -249,7 +260,6 @@ def test_requests(mock_get, mock_write):
     # response.text の返り値をモック
     mock_get.return_value.ok = True
     mock_get.return_value.text = text_data
-
 
     関数(引数)
     # 内部で requests.get している関数

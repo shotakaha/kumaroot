@@ -163,9 +163,9 @@ df = ROOT.RDF.FromCSV(
     {
         "Col0": 0x44,  # Double（'D'の ASCII コード）
         "Col1": 0x44,  # Double
-        "Col2": 0x4c,  # Long64_t（'L'の ASCII コード）
-        "Col3": 0x54   # String（'T'の ASCII コード）
-    }
+        "Col2": 0x4C,  # Long64_t（'L'の ASCII コード）
+        "Col3": 0x54,  # String（'T'の ASCII コード）
+    },
 )
 ```
 
@@ -197,7 +197,7 @@ df = ROOT.RDF.FromCSV("physics_data.csv")
 filtered = df.Filter("charge1 * charge2 == -1")
 with_mass = filtered.Define(
     "invariant_mass",
-    "sqrt(pow(E1 + E2, 2) - pow(px1 + px2, 2) - pow(py1 + py2, 2) - pow(pz1 + pz2, 2))"
+    "sqrt(pow(E1 + E2, 2) - pow(px1 + px2, 2) - pow(py1 + py2, 2) - pow(pz1 + pz2, 2))",
 )
 mass_window = with_mass.Filter("invariant_mass > 80 and invariant_mass < 100")
 hist = mass_window.Histo1D(("h", "Mass", 50, 80, 100), "invariant_mass")

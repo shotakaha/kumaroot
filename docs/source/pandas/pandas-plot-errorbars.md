@@ -5,13 +5,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # データを準備する
-data = pd.DataFrame({
-    "x": [1, 2, 3, 4, 5],
-    "y": [2, 3, 5, 7, 11],
-    "xerr": [0.1, 0.2, 0.1, 0.3, 0.2],
-    "yerr": [0.2, 0.3, 0.2, 0.4, 0.3],
-});
-
+data = pd.DataFrame(
+    {
+        "x": [1, 2, 3, 4, 5],
+        "y": [2, 3, 5, 7, 11],
+        "xerr": [0.1, 0.2, 0.1, 0.3, 0.2],
+        "yerr": [0.2, 0.3, 0.2, 0.4, 0.3],
+    }
+)
 # 散布図を描く
 # ax: matplotlib.axes.Axes
 ax = data.plot.scatter(
@@ -25,7 +26,7 @@ ax.errorbar(
     y=data["y"],
     xerr=data["xerr"],
     yerr=data["yerr"],
-    fmt='o',  # マーカーのスタイル
+    fmt="o",  # マーカーのスタイル
     capsize=3,
 )
 

@@ -19,7 +19,7 @@ pd.read_csv("ファイル名")
 
 ```python
 pd.read_csv("ファイル名", sep="\t")  # タブ区切り
-pd.read_csv("ファイル名", sep=" ")   # スペース区切り
+pd.read_csv("ファイル名", sep=" ")  # スペース区切り
 ```
 
 ``sep``（または``delimiter``）オプションで区切り文字を指定して、任意の区切り文字のテキストファイルを読み込むことができます。
@@ -28,7 +28,7 @@ pd.read_csv("ファイル名", sep=" ")   # スペース区切り
 
 ```python
 pd.read_csv("ファイル名", encoding="shift_jis")  # シフトJIS
-pd.read_csv("ファイル名", encoding="utf-16")     # UTF-16
+pd.read_csv("ファイル名", encoding="utf-16")  # UTF-16
 ```
 
 ``encoding``オプションを使って[Pythonの標準的なエンコーディング名](https://docs.python.org/3/library/codecs.html#standard-encodings))を指定できます。
@@ -57,8 +57,10 @@ data["更新日"] = pd.to_datetime(data["更新日"])
 
 ```python
 data["公開日"] = pd.to_datetime(data["公開日"])  # 日付オブジェクトに変換
-data["公開年"] = data["公開日"].dt.year          # アクセサを使って「年」を取得
-data["公開年月"] = data["公開日"].dt.format("%Y-%m") # アクセサを使って任意の文字列に変換
+data["公開年"] = data["公開日"].dt.year  # アクセサを使って「年」を取得
+data["公開年月"] = data["公開日"].dt.format(
+    "%Y-%m"
+)  # アクセサを使って任意の文字列に変換
 ```
 
 日付オブジェクトは[dt](https://pandas.pydata.org/pandas-docs/stable/reference/series.html#api-series-dt)アクセサを使って日付に関する操作ができます。
@@ -68,7 +70,7 @@ data["公開年月"] = data["公開日"].dt.format("%Y-%m") # アクセサを使
 
 ```python
 pd.read_csv("ファイル名", comment="1文字")  # コメント記号は1文字で指定
-pd.read_csv("ファイル名", comment="#")      # '#'がコメント記号
+pd.read_csv("ファイル名", comment="#")  # '#'がコメント記号
 ```
 
 ``comment``オプションを使って、データをスキップできます。

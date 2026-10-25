@@ -2,16 +2,10 @@
 
 ```python
 # デフォルト（欧文）
-latex_docclass = {
-    "howto": "article",
-    "manual": "report"
-    }
+latex_docclass = {"howto": "article", "manual": "report"}
 
 # デフォルト（和文）
-latex_docclass = {
-    "howto": "jsreport",
-    "manual": "jsbook"
-    }
+latex_docclass = {"howto": "jsreport", "manual": "jsbook"}
 ```
 
 `latex_docclass` でドキュメントクラスへのマッピングを変更できます。

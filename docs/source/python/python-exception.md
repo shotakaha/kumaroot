@@ -83,8 +83,7 @@ CLI（やメイン関数）で例外をキャッチして`sys.exit`
 
 ```python
 def func1():
-    """サブ関数: 条件にマッチしない場合 ValueErrorを送出
-    """
+    """サブ関数: 条件にマッチしない場合 ValueErrorを送出"""
     if 条件:
         条件が正しいときの処理
         return
@@ -93,6 +92,7 @@ def func1():
         msg = "値がおかしいよ"
         raise ValueError(msg)
 
+
 def func2():
     ...
     if 条件:
@@ -100,6 +100,7 @@ def func2():
     else:
         msg = "接続失敗"
         raise ConnectionError(msg)
+
 
 def main():
     try:
@@ -117,6 +118,7 @@ def main():
         print(f"Error: {e}")
         print(f"{e.args=}")
         sys.exit()
+
 
 if __name__ == "__main__":
     main()
@@ -193,7 +195,9 @@ except requests.exceptions.RequestException as e:
 # MODULE_NAME.py
 class CustomError(Exception):
     """CustomError: 最小構成（何もしない）"""
+
     pass
+
 
 def CustomFunction(引数):
     if 条件:
@@ -213,17 +217,19 @@ def CustomFunction(引数):
 # exceptions.py
 class CustomError(Exception):
     """CustomError: 自作の例外クラス"""
-    def __init__(self,
-                message: str = "デフォルトのエラーメッセージ",
-                error_code: int | None = None
-        ):
+
+    def __init__(
+        self,
+        message: str = "デフォルトのエラーメッセージ",
+        error_code: int | None = None,
+    ):
         """CustomErrorを初期化
 
         Args:
             message (str): エラーメッセージ
             error_code (int): エラーコード
         """
-        super().__init__(message)    # 親クラスのExceptionクラスの初期化
+        super().__init__(message)  # 親クラスのExceptionクラスの初期化
         self.message = message
         self.error_code = error_code
 
@@ -253,12 +259,14 @@ class CustomError(Exception):
 # exceptions.py
 from dataclasses import dataclass
 
+
 @dataclass
 class CustomError(Exception):
     """CustomError: 自作の例外クラス
 
     dataclassを使って簡略化
     """
+
     message: str = "デフォルトのエラーメッセージ"
     error_code: int | None = None
 
@@ -272,11 +280,13 @@ class CustomError(Exception):
 ```python
 from .exceptions import CustomError
 
+
 def custom_function(引数):
     if 条件:
         正常処理
     else:
         raise CustomError("エラー発生!", 101)
+
 
 try:
     custom_function(...)

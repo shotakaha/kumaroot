@@ -191,7 +191,7 @@ language = "ja"
 myst_html_meta = {
     "description lang=ja": "サイトの説明",
     "keywords": "Sphinx, KumaROOT",
-    "property=og:locale":  "ja_JP"
+    "property=og:locale": "ja_JP",
 }
 ```
 

@@ -2,6 +2,7 @@
 
 ```python
 import webbrowser
+
 webbrowser.open("ウェブサイトのURL")
 ```
 

@@ -51,7 +51,7 @@ np.full((3, 5), 3.14)  # 3x5行列
 任意のサイズのNumPy配列を生成できます。
 
 ```python
-np.empty(shape)    # 初期化してない配列
+np.empty(shape)  # 初期化してない配列
 ```
 
 `np.empty`で任意のサイズの配列を生成できます。
@@ -69,7 +69,7 @@ np.identity(3)
 ```python
 # 対角成分が [v1, v2, v3] の対角行列
 # np.diag([v1, v2, v3])
-np.diag([1., 1., 1.])
+np.diag([1.0, 1.0, 1.0])
 ```
 
 `np.diag`で、任意の対角成分を持つ対角行列を生成できます。

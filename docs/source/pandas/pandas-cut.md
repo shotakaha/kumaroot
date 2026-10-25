@@ -31,7 +31,8 @@ freq, rank = np.histogram(ages, bins=bins)
 # data = pd.DataFrame({"age": ages})
 bins = range(0, 10, 10)
 data["age"].value_counts(bins=bins).reset_index().rename(
-    columns={"index": "rank", "count": "freq"})
+    columns={"index": "rank", "count": "freq"}
+)
 ```
 
 ``pandas.Series.value_counts``で、同じように度数分布を取得できます。

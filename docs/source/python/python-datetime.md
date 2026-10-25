@@ -2,6 +2,7 @@
 
 ```python
 from datetime import datetime
+
 now = datetime.now().astimezone()
 # datetime.datetime(2024, 9, 10, 22, 24, 19, 633527, tzinfo=datetime.timezone(datetime.timedelta(seconds=32400), 'JST'))
 
@@ -29,6 +30,7 @@ Python3.6から`astimezone`を引数なしで呼び出せるようになった�
 
 ```python
 from datetime import datetime
+
 now = datetime.now()
 # 2024-09-10 21:48:43.918516
 
@@ -44,6 +46,7 @@ now = datetime.now().astimezone()
 
 ```python
 from datetime import datetime
+
 now = datetime.now().astimezone()
 now.strftime("%Y-%m-%dT%H:%M:%S.%f%z")
 
@@ -77,6 +80,7 @@ datetime.strptime(date_string, "%Y-%m-%d %H:%M:%S")
 
 ```python
 from datetime import datetime
+
 date_string = "2024-09-10T22:18:34"
 datetime.fromisoformat(date_string)
 # datetime.datetime(2024, 9, 10, 22, 18, 34)
@@ -99,6 +103,7 @@ datetime.fromisoformat(date_string)
 ```python
 import time
 from datetime import datetime
+
 unix_time = time.time()
 # 1725973811.99409
 

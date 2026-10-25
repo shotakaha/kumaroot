@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # データを準備する
-data = [np.random.normal(loc=0, scale=1, size=100) for _ in range(4)]  # 4つのグループのデータを生成
+data = [
+    np.random.normal(loc=0, scale=1, size=100) for _ in range(4)
+]  # 4つのグループのデータを生成
 
 # キャンバスを作成
 fig, ax = plt.subplots()

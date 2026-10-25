@@ -19,7 +19,6 @@ MySTを使っている場合コロンフェンス（``:::``）でディレクテ
 myst_enable_extensions = [
     "colon_fence",
 ]
-
 ```
 
 :::

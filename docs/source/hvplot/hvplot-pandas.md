@@ -2,6 +2,7 @@
 
 ```python
 import hvplot.pandas
+
 data.hvplot.scatter(x="X軸", y="Y軸", by="凡例")
 ```
 

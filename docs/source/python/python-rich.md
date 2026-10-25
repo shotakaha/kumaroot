@@ -2,6 +2,7 @@
 
 ```python
 from rich import print
+
 print("Hello, [bold magenta]Rich[/bold magenta]!")
 ```
 
@@ -56,6 +57,7 @@ $ poetry add rich
 ```python
 import sys
 from rich.console import Console
+
 stdout = Console(file=sys.stdout)
 stderr = Console(file=sys.stderr)
 

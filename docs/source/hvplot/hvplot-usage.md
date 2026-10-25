@@ -1,7 +1,8 @@
 # hvPlotの使い方
 
 ```python
-import hvplot.pandas    # noqa
+import hvplot.pandas  # noqa
+
 data.hvplot.scatter(x="X軸", y="Y軸", by="グループ名")
 ```
 

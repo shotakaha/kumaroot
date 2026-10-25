@@ -12,6 +12,7 @@ data["カラム名"].astype("category")
 
 ```python
 from pandas.api.types import CategoricalDtype
+
 my_category = CategoricalDtype(categories=[カテゴリーの値], ordered=True)
 
 data["カラム名"] = data["カラム名"].astype(my_category)

@@ -39,12 +39,7 @@ Altairと比べて直感的に記述できるため、とても簡単です。
 ## 重みをつけたい（`weights`）
 
 ```python
-data.hvplot.hist(
-    y=...,
-    bins=10,
-    bin_range=(0, 100),
-    weights="重みを使うカラム名"
-)
+data.hvplot.hist(y=..., bins=10, bin_range=(0, 100), weights="重みを使うカラム名")
 ```
 
 `weights`オプションで、各データポイントに重みをつけることができます。
@@ -52,12 +47,7 @@ data.hvplot.hist(
 ## ログ表示したい（`logx` / `logy` / `loglog`）
 
 ```python
-data.hvplot.hist(
-    y=...,
-    bins=10,
-    bin_range=(0, 100),
-    logy=True
-)
+data.hvplot.hist(y=..., bins=10, bin_range=(0, 100), logy=True)
 ```
 
 `logy=True`オプションで、Y軸をログ表示にできます。
@@ -66,12 +56,7 @@ data.hvplot.hist(
 ## 正規化したい（`normed`）
 
 ```python
-data.hvplot.hist(
-    y=...,
-    bins=10,
-    bin_range=(0, 100),
-    normed=True
-)
+data.hvplot.hist(y=..., bins=10, bin_range=(0, 100), normed=True)
 ```
 
 `normed=True`オプションで、ヒストグラムを正規化できます。
@@ -79,12 +64,7 @@ data.hvplot.hist(
 ## 累積したい（`cumulative`）
 
 ```python
-data.hvplot.hist(
-    y=...,
-    bins=10,
-    bin_range=(0, 100),
-    cumulative=True
-)
+data.hvplot.hist(y=..., bins=10, bin_range=(0, 100), cumulative=True)
 ```
 
 `cumulative=True`オプションで、ヒストグラムを累積表示にできます。
@@ -128,7 +108,6 @@ data.hvplot.hist(fontsize={"title": "15pt"})
 ## 軸したい（``xlabel`` / ``ylabel`` / ``clabel``）
 
 ```python
-
 data.hvplot.hist(xlabel="x軸のタイトル")
 data.hvplot.hist(xaxis="bottom")
 data.hvplot.hist(xaxis="top")
@@ -163,9 +142,9 @@ data.hvplot.hist(legend="right")
 ## 対数したい
 
 ```python
-data.hvplot.hist(logx=True)    # 片対数（x軸）
-data.hvplot.hist(logy=True)    # 片対数（y軸）
-data.hvplot.hist(logz=True)    # 片対数（z軸）
+data.hvplot.hist(logx=True)  # 片対数（x軸）
+data.hvplot.hist(logy=True)  # 片対数（y軸）
+data.hvplot.hist(logz=True)  # 片対数（z軸）
 data.hvplot.hist(loglog=True)  # 両対数（x軸とy軸）
 ```
 

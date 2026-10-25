@@ -6,6 +6,7 @@ $ pip3 install pendulum
 
 ```python
 import pendulum
+
 now = pendulum.now()
 # 2024-09-10 22:34:08.405761+09:00
 ```
@@ -24,6 +25,7 @@ now = pendulum.now()
 
 ```python
 import pendulum
+
 now = pendulum.now()
 # DateTime(2024, 9, 10, 22, 34, 8, 405761, tzinfo=Timezone('Asia/Tokyo'))
 
@@ -105,6 +107,7 @@ pendulum.from_format("26/Sep/2022:06:05:11 +0900", "DD/MMM/YYYY:HH:mm:ss ZZ")
 ```python
 import time
 import pendulum
+
 unix_time = time.time()
 # 1725976467.508806
 

@@ -6,6 +6,7 @@ import numpy as np
 from scipy.optimize import curve_fit
 from scipy.special import erfc
 
+
 def erfc_function(x, amp, mu, sigma, offset):
     """相補誤差補正関数
     Args:
@@ -19,6 +20,7 @@ def erfc_function(x, amp, mu, sigma, offset):
     """
     f = amp * erfc((x - mu) / sigma) + offset
     return f
+
 
 def fit(data: pd.DataFrame, x: str, y: str):
     """

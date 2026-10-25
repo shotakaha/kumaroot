@@ -9,7 +9,6 @@ def single_daq_readout():
     # データを保存するための辞書型オブジェクト
     wv = {}
     for ich in channels:
-
         # RAW
         ibuff = rp.i16Buffer(N)
         res = rp.rp_AcqGetOldestDataRaw(ich, N, ibuff.cast())
@@ -26,8 +25,8 @@ def single_daq_readout():
             data_raw[i] = ibuff[i]
             data_volts[i] = fbuff[i]
 
-        wv[f"raw{ich+1}"] = data_raw
-        wv[f"v{ich+1}"] = data_volts
+        wv[f"raw{ich + 1}"] = data_raw
+        wv[f"v{ich + 1}"] = data_volts
 
     # wvの内容
     # wv = {

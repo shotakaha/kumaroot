@@ -9,12 +9,12 @@ import pandas as pd
 # y: Y方向の検出位置
 # adc: 検出された値
 data = pd.DataFrame(
-  [
-    {"x": 1, "y": 2, "adc": 0.5},
-    {"x": 2, "y": 3, "adc": 0.7},
-    {"x": 3, "y": 1, "adc": 0.2},
-    # ... (さらにデータが続く)
-  ]
+    [
+        {"x": 1, "y": 2, "adc": 0.5},
+        {"x": 2, "y": 3, "adc": 0.7},
+        {"x": 3, "y": 1, "adc": 0.2},
+        # ... (さらにデータが続く)
+    ]
 )
 
 # レイアウトを定義する
@@ -31,14 +31,7 @@ fig, axs = plt.subplot_mosaic(
 )
 
 # 散布図: プロファイル
-data.plot.scatter(
-    x="x",
-    y="y",
-    c="adc",
-    ax=axs["profile"],
-    s=10,
-    cmap="viridis"
-)
+data.plot.scatter(x="x", y="y", c="adc", ax=axs["profile"], s=10, cmap="viridis")
 axs["profile"].set_title("Profile")
 axs["profile"].set_xlabel("X")
 axs["profile"].set_ylabel("Y")

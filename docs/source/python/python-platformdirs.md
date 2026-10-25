@@ -2,6 +2,7 @@
 
 ```python
 import platformdirs
+
 platformdirs.user_data_dir("パッケージ名")
 platformdirs.user_cache_dir("パッケージ名")
 platformdirs.user_log_dir("パッケージ名", ensure_exists=True)

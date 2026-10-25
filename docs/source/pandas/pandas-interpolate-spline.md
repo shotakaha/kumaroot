@@ -6,10 +6,7 @@ import numpy as np
 from scipy.interpolate import CubicSpline
 
 # サンプルデータを作成
-points = {
-    "x": [0, 1, 2, 3, 4, 5],
-    "y": [0, np.nan, 2, np.nan, 4, 5]
-}
+points = {"x": [0, 1, 2, 3, 4, 5], "y": [0, np.nan, 2, np.nan, 4, 5]}
 data = pd.DataFrame(points)
 
 # データ点から欠損値を除外
@@ -35,10 +32,7 @@ import numpy as np
 from scipy.interpolate import interp1d
 
 # サンプルデータを作成
-points = {
-    "x": [0, 1, 2, 3, 4, 5],
-    "y": [0, np.nan, 2, np.nan, 4, 5]
-}
+points = {"x": [0, 1, 2, 3, 4, 5], "y": [0, np.nan, 2, np.nan, 4, 5]}
 data = pd.DataFrame(points)
 
 # データ点から欠損値を除外

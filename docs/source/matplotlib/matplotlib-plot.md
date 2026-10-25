@@ -6,15 +6,16 @@ import matplotlib.pyplot as plt
 
 # データを準備する
 x = np.linspace(0, 10, 100)  # 0から10までの100点を生成
-y = np.sin(x)                # Y軸の値
-data = list(zip(x, y))       # データをタプルのリストとして準備
+y = np.sin(x)  # Y軸の値
+data = list(zip(x, y))  # データをタプルのリストとして準備
 
 # キャンバスを作成
 fig, ax = plt.subplots()
 
 # 折れ線グラフを作成
-lines =ax.plot(
-    x, y,  # X軸とY軸の値を指定
+lines = ax.plot(
+    x,
+    y,  # X軸とY軸の値を指定
     label="sin(x)",  # 凡例に使う名前
 )
 

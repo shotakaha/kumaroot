@@ -6,11 +6,7 @@ numfig = True
 # 図表番号を表示するときのカスタム設定
 # フォーマット文字列を辞書型で指定
 # デフォルトの設定を書いた後、カスタム設定で上書き
-numfig_format = {
-    "figure": "Fig. %s",
-    "table": "Table %s",
-    "code-block": "Listing %s"
-}
+numfig_format = {"figure": "Fig. %s", "table": "Table %s", "code-block": "Listing %s"}
 numfig_format["figure"] = "図 %s"
 numfig_format["table"] = "表 %s"
 numfig_format["code-block"] = "コード %s"

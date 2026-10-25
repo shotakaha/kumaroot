@@ -50,6 +50,7 @@ GITLAB_TOKEN=トークン
 
 ```python
 import os
+
 token = os.environ["GITLAB_TOKEN"]
 ```
 
@@ -139,7 +140,7 @@ data = {
     "branch": "main",
     "content": "ファイルの内容",
     "commit_message": "コミットメッセージ",
-    "encoding": "base64"
+    "encoding": "base64",
 }
 # ファイルを追加
 requests.post(url, headers=headers, data=data)
@@ -167,10 +168,7 @@ requests.delete(url, headers=headers, data=data)
 url = f"https://gitlab.com/api/v4/projects/{project_id}/repository/branches"
 
 headers = {"PRIVATE-TOKEN": token}
-data = {
-    "branch": 新しいブランチ名,
-    "ref": ベースとなるブランチ名
-}
+data = {"branch": 新しいブランチ名, "ref": ベースとなるブランチ名}
 request.put(url, headers=headers, data=data)
 ```
 

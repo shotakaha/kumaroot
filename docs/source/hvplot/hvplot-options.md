@@ -6,7 +6,7 @@ errors = data.hvplot.errorbars(...)
 markers = data.hvplot.scatter(...)
 
 # 棒グラフ（orヒストグラム）にエラーバーとデータ点を重ね書き
-charts = (bars * errors * markers)
+charts = bars * errors * markers
 
 charts.opts(
     width=800,
@@ -39,6 +39,7 @@ Y軸（`ylabel`）
 
 ```python
 import hv
+
 hv.help(charts)
 ```
 
@@ -46,11 +47,11 @@ hv.help(charts)
 
 ```python
 charts.opts(
-    width=800,    # グラフの幅
-    height=400,   # グラフの高さ
+    width=800,  # グラフの幅
+    height=400,  # グラフの高さ
     padding=0.1,  # 余白
-    margin=10,    # 余白
-    aspect="equal"    # アスペクト比
+    margin=10,  # 余白
+    aspect="equal",  # アスペクト比
 )
 ```
 
@@ -82,12 +83,12 @@ charts.opts(
     minor_xticks=5,  # X軸の補助目盛り
     minor_yticks=5,  # Y軸の補助目盛り
     minor_grid_line_alpha=0.3,  # 補助グリッドの透明度
-    xrotation=45,    # X軸ラベルの回転角度
-    yrotation=0,     # Y軸ラベルの回転角度
-    xlim=(0, 100),   # X軸の範囲
-    ylim=(0, 50),   # Y軸の範囲
-    logx=False,    # X軸の対数スケール
-    logy=False,    # Y軸の対数スケール
+    xrotation=45,  # X軸ラベルの回転角度
+    yrotation=0,  # Y軸ラベルの回転角度
+    xlim=(0, 100),  # X軸の範囲
+    ylim=(0, 50),  # Y軸の範囲
+    logx=False,  # X軸の対数スケール
+    logy=False,  # Y軸の対数スケール
 )
 ```
 
@@ -95,30 +96,26 @@ charts.opts(
 
 ```python
 charts.opts(
-    show_legent=True,         # 凡例を表示する
+    show_legent=True,  # 凡例を表示する
     legend_position="right",  # 表示位置
-    legend_offset=(10, 10)    # 表示のオフセット
+    legend_offset=(10, 10),  # 表示のオフセット
 )
 ```
 
 ## ツールバーしたい
 
 ```python
-charts.opts(
-    tools=["hover", "pan", "wheel_zoom"],
-    toolbar="above",
-    active_tools=["pan"]
-)
+charts.opts(tools=["hover", "pan", "wheel_zoom"], toolbar="above", active_tools=["pan"])
 ```
 
 ## 色したい
 
 ```python
 charts.opts(
-    color="blue",      # 基本色
-    cmap="viridis",    # カラーマップ
-    alpha=0.8,         # 透明度
-    line_width=2,      # 線の太さ
+    color="blue",  # 基本色
+    cmap="viridis",  # カラーマップ
+    alpha=0.8,  # 透明度
+    line_width=2,  # 線の太さ
     line_color="red",  # 線の色
     fill_color="lightblue",  # 塗りつぶし色
 )
@@ -134,7 +131,7 @@ charts.opts(cmap=["red", "blue", "green"])
 charts.opts(cmap=["#FF0000", "#0000FF", "#00FF00"])
 
 # RGB値
-charts.opts(cmap=[(1,0,0), (0,0,1), (0,1,0)])
+charts.opts(cmap=[(1, 0, 0), (0, 0, 1), (0, 1, 0)])
 ```
 
 `cmap`オプションに色名のリストを指定してカスタマイズできます。
@@ -142,6 +139,7 @@ charts.opts(cmap=[(1,0,0), (0,0,1), (0,1,0)])
 
 ```python
 import matplotlib.pyplot as plt
+
 print(plt.colormaps())
 ```
 

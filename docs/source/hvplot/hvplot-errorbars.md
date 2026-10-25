@@ -13,7 +13,7 @@ errors = data.hvplot.errorbars(
 lines = data.hvplot.line(...)
 
 # プロットを重ねる
-charts = (lines * errors)
+charts = lines * errors
 charts
 ```
 

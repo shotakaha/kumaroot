@@ -2,8 +2,7 @@
 
 ```python
 @デコレーター名
-def 関数名(引数):
-    ...
+def 関数名(引数): ...
 ```
 
 `@デコレーター名`で、関数やクラス本体の処理は変更せずに、補足処理を追加できます。
@@ -56,6 +55,7 @@ def decorator_name(f):
 import time
 from functools import wraps
 
+
 def timer(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
@@ -65,7 +65,9 @@ def timer(f):
         elapsed_time = end_time - start_time
         print(f"{f.__name__} executed in {elapsed_time:.4f} seconds")
         return result
+
     return wrapper
+
 
 @timer
 def some_function(引数):
@@ -85,6 +87,7 @@ def some_function(引数):
 import time
 from functools import wraps
 
+
 def retry(max_retries=3, delay=1):
     def decorator(f):
         @wraps(f)
@@ -96,9 +99,14 @@ def retry(max_retries=3, delay=1):
                 except Exception as e:
                     retries += 1
                     time.sleep(delay)
-            raise Exception(f"Function {f.__name__} failed after {max_retries} retries.")
+            raise Exception(
+                f"Function {f.__name__} failed after {max_retries} retries."
+            )
+
         return wrapper
+
     return decorator
+
 
 @retry()
 def some_function(引数):

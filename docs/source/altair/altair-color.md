@@ -2,9 +2,7 @@
 
 ```python
 alt.Chart(data).mark_bar().encode(
-    alt.X("x"),
-    alt.Y("y"),
-    alt.Color("color").scale(scheme="カラースキーム")
+    alt.X("x"), alt.Y("y"), alt.Color("color").scale(scheme="カラースキーム")
 )
 ```
 

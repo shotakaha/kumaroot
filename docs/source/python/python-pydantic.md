@@ -3,12 +3,14 @@
 ```python
 from pydantic import BaseModel
 
+
 class UserSettings(BaseModel):
     settings: str
     """（必須）設定ファイル名"""
 
     drive: str = ""
     """（オプション）設定ファイルのディレクトリ名（相対パス）"""
+
 
 us = UserSettings(settings="設定ファイル名")
 print(us)
@@ -35,8 +37,9 @@ Pydantic v1.10の過去ドキュメントの[Field Types](https://docs.pydantic.
 ```python
 from pydantic import BaseModel, ConfigDict
 
+
 class UserSettings(BaseModel):
-    model_config = ConfigDic(arbitrary_types_allowed = True)
+    model_config = ConfigDic(arbitrary_types_allowed=True)
 
     settings: str
     drive: str = ""
@@ -46,7 +49,6 @@ class UserSettings(BaseModel):
 us = UserSettings("設定ファイル名")
 us
 # UserSettings(settings='設定ファイル名', drive='', data=Empty DataFrame)
-
 ```
 
 ``model_config``でPydanticのモデル設定を変更できます。
@@ -61,6 +63,7 @@ us
 
 ```python
 from pydantic import BaseModel, ConfigDict
+
 
 class UserSettings(BaseModel):
     model_config = ConfigDict(validate_assignment=True)
@@ -80,6 +83,7 @@ class UserSettings(BaseModel):
 
 ```python
 from pydantic import BaseModel, Field
+
 
 class UserSettings(BaseModel):
     items: list[int] = Field(
@@ -104,8 +108,10 @@ Python3.9以降では組み込みのジェネリック型である`list[int]`が
 ```python
 from pydantic import BaseModel, ValidationError
 
+
 class UserSettings(BaseModel):
     name: str
+
 
 if __name__ == "__main__":
     try:
@@ -142,6 +148,7 @@ class UserSettings(BaseModel):
             )
 
         return field_value
+
 
 us = UserSettings(settings="設定ファイル名", drive=".")
 # => OK
@@ -186,11 +193,12 @@ from pydantic import BaseModel, ConfigDict, PrivateAttr
 
 
 class UserSettings(BaseModel):
-    model_config = ConfigDic(arbitrary_types_allowed = True)
+    model_config = ConfigDic(arbitrary_types_allowed=True)
 
     settings: str
     drive: str = ""
     _data: pd.DataFrame = PrivateAttr()
+
 
 us = UserSettings("設定ファイル名")
 print(us)
@@ -207,6 +215,7 @@ import tomllib
 import datetime
 from pydantic import BaseModel
 
+
 class UserSettings(BaseModel):
     string: str
     integer: int
@@ -219,6 +228,7 @@ class UserSettings(BaseModel):
     table: dict
     inline_table: dict
     array_table: list
+
 
 # 設定ファイルはTOML形式
 # ここではTOMLのシンタックスを模した文字列

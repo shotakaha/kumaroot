@@ -125,6 +125,7 @@ import sys
 from pathlib import Path
 import platformdirs
 
+
 def setup_logger(debug: bool = False):
     logger.remove()
 
@@ -143,8 +144,9 @@ def setup_logger(debug: bool = False):
         format=fmt,
         level="INFO",
         rotation="00:00",
-        retention="7 days"
+        retention="7 days",
     )
+
 
 # 使用方法
 setup_logger(debug=True)

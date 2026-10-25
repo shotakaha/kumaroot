@@ -17,11 +17,11 @@ gStyle->SetHistFillColor(1);      // 塗りつぶしの色
 ```python
 from ROOT import gStyle
 
-gStyle.SetHistLineWidth(2)        # 線幅
-gStyle.SetHistLineColor(1)        # 線の色
-gStyle.SetHistLineStyle(1)        # 線のスタイル
-gStyle.SetHistFillStyle(0)        # 塗りつぶしスタイル
-gStyle.SetHistFillColor(1)        # 塗りつぶしの色
+gStyle.SetHistLineWidth(2)  # 線幅
+gStyle.SetHistLineColor(1)  # 線の色
+gStyle.SetHistLineStyle(1)  # 線のスタイル
+gStyle.SetHistFillStyle(0)  # 塗りつぶしスタイル
+gStyle.SetHistFillColor(1)  # 塗りつぶしの色
 ```
 
 :::{note}

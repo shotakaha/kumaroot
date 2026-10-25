@@ -93,11 +93,7 @@ tomllib.loads(s)
 テーブルの中の配列
 
 ```python
-{"key": [
-    {"k1": "v1"},
-    {"k2": "v2"}
-    ]
-}
+{"key": [{"k1": "v1"}, {"k2": "v2"}]}
 ```
 
 ```{code-cell} ipython3

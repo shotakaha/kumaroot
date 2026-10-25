@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # データを準備する
 labels = ["A", "B", "C", "D"]  # ラベル
-sizes = [15, 30, 45, 10]        # 各セクションのサイズ
+sizes = [15, 30, 45, 10]  # 各セクションのサイズ
 colors = ["red", "green", "blue", "yellow"]  # 色
 
 # キャンバスを作成
@@ -13,7 +13,7 @@ fig, ax = plt.subplots()
 
 # 円グラフを作成
 ax.pie(
-    sizes,       # 各セクションのサイズ
+    sizes,  # 各セクションのサイズ
     labels=labels,  # ラベル
     colors=colors,  # 色
     autopct="%1.1f%%",  # パーセンテージを表示

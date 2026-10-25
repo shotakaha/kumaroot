@@ -20,6 +20,7 @@ except Exceptions as e:
 ```python
 from unittest.mock import patch
 
+
 @patch("pathlib.Path.write_text")
 @patch("httpx.get")
 def test_httpx(mock_get, mock_write):
@@ -30,7 +31,6 @@ def test_httpx(mock_get, mock_write):
     # response.text の返り値をモック
     mock_get.return_value.is_success = True
     mock_get.return_value.text = text_data
-
 
     関数(引数)
     # 内部で requests.get している関数

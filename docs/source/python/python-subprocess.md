@@ -2,6 +2,7 @@
 
 ```python
 import subprocess
+
 subprocess.run(コマンド)
 subprocess.run(["ls", "-l"])
 ```
@@ -78,7 +79,9 @@ subprocess.run("ls -l | grep py", shell=True)
 ## 標準入力したい（`input`）
 
 ```python
-result = subprocess.run(["grep", "py"], input="foo.py\nbar.txt\n", text=True, capture_output=True)
+result = subprocess.run(
+    ["grep", "py"], input="foo.py\nbar.txt\n", text=True, capture_output=True
+)
 result.stdout
 ```
 

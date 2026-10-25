@@ -27,6 +27,7 @@ import japanize_matplotlib
 
 ```python
 import matplotlib as mpl
+
 print(f"matplotlib: {mpl.__version__}")
 ```
 
@@ -44,6 +45,7 @@ import altair as alt
 
 ```python
 from sklearn import datasets
+
 data = datasets.load_iris()
 # data = datasets.load_iris(as_frame=True)
 ```

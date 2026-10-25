@@ -8,7 +8,7 @@ data = pd.DataFrame(...)
 
 # 散布図を描く
 fig = px.scatter(
-    data,    # pd.DataFrame
+    data,  # pd.DataFrame
     x="X軸のカラム名",
     y="Y軸のカラム名",
 )
@@ -31,13 +31,7 @@ fig.show()
 ## マーカーしたい（`marker`）
 
 ```python
-fig = px.scatter(
-    data,
-    x=...,
-    y=...,
-    marker="circle",
-    size=50
-)
+fig = px.scatter(data, x=..., y=..., marker="circle", size=50)
 fig.show()
 ```
 

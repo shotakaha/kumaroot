@@ -68,7 +68,7 @@ Pathオブジェクトは、従来の`open`関数の引数に直接渡すこと�
 ```python
 p = Path("ファイル名")
 p.read_text(encoding="utf-8")  # mode="r"
-p.read_bytes()    # mode="rb"
+p.read_bytes()  # mode="rb"
 ```
 
 `read_text`メソッドで、ファイルからテキストデータを読み込めます。
@@ -180,9 +180,9 @@ Path.cwd()
 ```python
 p = Path("パス")
 
-p.exists()   # パスが存在するか
+p.exists()  # パスが存在するか
 p.is_file()  # ファイルかどうか
-p.is_dir()   # ディレクトリかどうか
+p.is_dir()  # ディレクトリかどうか
 ```
 
 `exists`でパスが存在するかどうかを確認できます。
@@ -196,9 +196,9 @@ from pathlib import Path
 import pandas as pd
 from typing import Literal
 
+
 def resolve_paths(
-    src: Path | Literal["random"],
-    pattern: str = "*.csv"
+    src: Path | Literal["random"], pattern: str = "*.csv"
 ) -> Path | Literal["random"] | list[Path]:
 
     # 1. 特別な値を優先して処理

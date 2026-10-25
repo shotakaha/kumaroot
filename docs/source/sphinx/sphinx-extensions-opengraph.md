@@ -11,11 +11,7 @@ $ pip3 install sphinxext-opengraph
 
 ```python
 # conf.py
-extensions = [
-    ...,
-    "sphinxext.opengraph",
-    ...
-]
+extensions = [..., "sphinxext.opengraph", ...]
 ```
 
 SphinxJPハッカソンに参加して教えてもらった拡張パッケージです。

@@ -22,7 +22,7 @@ alt.Char(data).mark_bar().encode(
 ```python
 alt.Chart(data).mark_bar().encode(
     alt.X("datetime:T").title("アクセス日時"),
-    alt.Y("pagevnew:Q", aggregate="sum").title("アクセス日時（累計）")
+    alt.Y("pagevnew:Q", aggregate="sum").title("アクセス日時（累計）"),
 )
 ```
 

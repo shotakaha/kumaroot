@@ -123,19 +123,22 @@ alt.Chart(data).mark_bar(opacity=opacity).encode(
 ## よく使うやつ
 
 ```python
-def hbar(data: pd.DataFrame, x: str, color: str, title: str, y: str="count()"):
+def hbar(data: pd.DataFrame, x: str, color: str, title: str, y: str = "count()"):
     color = f"{color}:N"
-    base = alt.Chart(data).encode(
-        alt.X(x),
-        alt.Y(y),
-    ).properties(
-        title=title,
+    base = (
+        alt.Chart(data)
+        .encode(
+            alt.X(x),
+            alt.Y(y),
+        )
+        .properties(
+            title=title,
+        )
     )
 
     opacity = 0.5
     mark = base.mark_bar(tooltip=True, opacity=opacity).encode(
-        alt.Y(y),
-        alt.Color(color)
+        alt.Y(y), alt.Color(color)
     )
 
     stack = base.mark_bar(tooltip=True, opacity=opacity).encode(
@@ -144,9 +147,7 @@ def hbar(data: pd.DataFrame, x: str, color: str, title: str, y: str="count()"):
     )
 
     text = base.mark_text(dy=10).encode(
-        alt.Y(y).stack("normalize"),
-        alt.Text(y),
-        alt.Color(color)
+        alt.Y(y).stack("normalize"), alt.Text(y), alt.Color(color)
     )
 
     return mark | stack + text

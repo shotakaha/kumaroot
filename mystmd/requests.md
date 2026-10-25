@@ -95,15 +95,15 @@ urllib.request.urlopen(
 ```python
 requests.get(
     url,
-    params=None,   # dict
-    **kwargs,      # request(kwargs)
-    )
+    params=None,  # dict
+    **kwargs,  # request(kwargs)
+)
 
 requests.request(
-    method,    # str: ["GET", "OPTIONS", "HEAD", "POST", "PUT", "PATCH", "DELETE"]
+    method,  # str: ["GET", "OPTIONS", "HEAD", "POST", "PUT", "PATCH", "DELETE"]
     url,
     **kwargs,  # params, data, headers, cookies, timeout, cert,
-    )
+)
 ```
 
 ```python

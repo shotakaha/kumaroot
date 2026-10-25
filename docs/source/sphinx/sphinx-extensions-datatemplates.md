@@ -10,9 +10,7 @@ $ pip3 install sphinxcontrib.datatemplates
 ```
 
 ```python
-extensions = [
-    "sphinxcontrib.datatemplates"
-    ]
+extensions = ["sphinxcontrib.datatemplates"]
 ```
 
 CSVなどのデータを、Jinjaテンプレート構文で表示できます。

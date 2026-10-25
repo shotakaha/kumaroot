@@ -29,9 +29,9 @@ Sphinxは活発に開発されています。
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'KumaROOT'
-author = 'Shota TAKAHASHI'
-copyright = '2015 - 2022, Shota TAKAHASHI'
-version = '0.5.0'
-release = '0.5.0'
+project = "KumaROOT"
+author = "Shota TAKAHASHI"
+copyright = "2015 - 2022, Shota TAKAHASHI"
+version = "0.5.0"
+release = "0.5.0"
 ```

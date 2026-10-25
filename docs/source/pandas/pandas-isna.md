@@ -1,7 +1,7 @@
 # 欠損値を確認したい（``pandas.DataFrame.isna``）
 
 ```python
-data.isna()        # 欠損値を含む行は True になる
+data.isna()  # 欠損値を含む行は True になる
 data.isna().sum()  # 欠損値の数を数える
 ```
 

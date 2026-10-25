@@ -6,8 +6,8 @@ import numpy as np
 
 # データを準備する
 x = np.linspace(0, 10, 10)  # X軸の値
-y = np.sin(x)                # Y軸の値
-y_error = 0.1 * np.abs(y)    # Y軸のエラー（例：値の10%）
+y = np.sin(x)  # Y軸の値
+y_error = 0.1 * np.abs(y)  # Y軸のエラー（例：値の10%）
 
 # キャンバスを作成
 fig, ax = plt.subplots()
@@ -17,8 +17,8 @@ errors = ax.errorbar(
     x=x,
     y=y,
     yerr=y_error,
-    fmt='o',  # マーカーのスタイル
-    ecolor='red',  # エラーバーの色
+    fmt="o",  # マーカーのスタイル
+    ecolor="red",  # エラーバーの色
     capsize=5,  # エラーバーのキャップのサイズ
 )
 
@@ -51,8 +51,8 @@ ax.errorbar(
     y=y,
     xerr=[0.1 * np.abs(x), 0.2 * np.abs(x)],  # X軸の非対称エラー
     yerr=[0.1 * np.abs(y), 0.2 * np.abs(y)],  # Y軸の非対称エラー
-    fmt='o',
-    ecolor='red',
+    fmt="o",
+    ecolor="red",
     capsize=5,
 )
 ```

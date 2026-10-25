@@ -8,11 +8,11 @@ data = pd.DataFrame(...)
 
 # ヒストグラムを描く
 data.plot.hist(
-  bins=ビン数,
-  range=(ヒストグラムの下限値, ヒストグラムの上限値),
-  title="ヒストグラム",
-  xlabel="X軸のタイトル",
-  ylabel="Y軸のタイトル"
+    bins=ビン数,
+    range=(ヒストグラムの下限値, ヒストグラムの上限値),
+    title="ヒストグラム",
+    xlabel="X軸のタイトル",
+    ylabel="Y軸のタイトル",
 )
 ```
 
@@ -78,20 +78,11 @@ data.plot.hist(
 ## 累積したい（`cumulative`）
 
 ```python
-data.plot.hist(
-    cumulative=True,
-    bins=ビン数,
-    range=(xmin, xmax)
-)
+data.plot.hist(cumulative=True, bins=ビン数, range=(xmin, xmax))
 
 # matplotlibで設定する場合
 fig, ax = plt.subplots()
-ax.hist(
-    data,
-    bins=ビン数,
-    range=(xmin, xmax),
-    cumulative=True
-)
+ax.hist(data, bins=ビン数, range=(xmin, xmax), cumulative=True)
 ```
 
 `cumulative=True`オプションで、累積ヒストグラムを作成できます。
@@ -99,11 +90,7 @@ ax.hist(
 ## 規格化したい（`density`）
 
 ```python
-data.plot.hist(
-    density=True,
-    bins=ビン数,
-    range=(xmin, xmax)
-)
+data.plot.hist(density=True, bins=ビン数, range=(xmin, xmax))
 ```
 
 `density=True`オプションで、ヒストグラムを規格化できます。
@@ -112,11 +99,7 @@ data.plot.hist(
 ## ログ表示したい（`log`）
 
 ```python
-data.plot.hist(
-    log=True,
-    bins=ビン数,
-    range=(xmin, xmax)
-)
+data.plot.hist(log=True, bins=ビン数, range=(xmin, xmax))
 ```
 
 `log=True`オプションで、Y軸をログ表示にできます。
@@ -125,18 +108,11 @@ data.plot.hist(
 ## グループ化したい（`by`）
 
 ```python
-data.plot.hist(
-    by="グループ化したいカラム名",
-    bins=ビン数,
-    range=(xmin, xmax)
-)
+data.plot.hist(by="グループ化したいカラム名", bins=ビン数, range=(xmin, xmax))
 
 # data.groupbyした場合
 grouped = data.groupby("グループ化したいカラム名")
-grouped.plot.hist(
-    bins=ビン数,
-    range=(xmin, xmax)
-)
+grouped.plot.hist(bins=ビン数, range=(xmin, xmax))
 ```
 
 `by`オプションで、指定したカラムの値ごとにグループ化してヒストグラムを作成できます。
@@ -153,10 +129,7 @@ grouped.plot.hist(
 
 ```python
 data.plot.hist(
-    by="グループ化したいカラム名",
-    bins=ビン数,
-    range=(xmin, xmax),
-    stacked=True
+    by="グループ化したいカラム名", bins=ビン数, range=(xmin, xmax), stacked=True
 )
 ```
 
@@ -173,7 +146,7 @@ def hbar(
     xmin: float = 0,
     xmax: float = 100,
     ax: plt.Axes | None = None,
-    **kwargs
+    **kwargs,
 ) -> tuple[plt.Axes, dict]:
     """
     ROOTのTH1風ヒストグラム関数
@@ -195,12 +168,7 @@ def hbar(
     valid = d[(d >= xmin) & (d <= xmax)]
 
     # histogram
-    h = ax.hist(
-      valid,
-      bins=bins,
-      range=(xmin, xmax),
-      **kwargs
-    )
+    h = ax.hist(valid, bins=bins, range=(xmin, xmax), **kwargs)
 
     # statistics: ROOT-like
     total_entries = int(len(d))
@@ -211,15 +179,15 @@ def hbar(
     stddev = float(valid.std()) if valid_entries > 0 else np.nan
 
     stats = {
-      "total_entries": total_entries,
-      "valid_entries": valid_entries,
-      "underflow": underflow,
-      "overflow": overflow,
-      "mean": mean,
-      "rms": stddev,
-      "xmin": xmin,
-      "xmax": xmax,
-      "bins": bins,
+        "total_entries": total_entries,
+        "valid_entries": valid_entries,
+        "underflow": underflow,
+        "overflow": overflow,
+        "mean": mean,
+        "rms": stddev,
+        "xmin": xmin,
+        "xmax": xmax,
+        "bins": bins,
     }
 
     return ax, stats
@@ -248,14 +216,16 @@ ax, stats = hbar(
 print(stats)
 
 # 統計情報を凡例に追加
-ax.legend([
-    f"Entries: {stats['total_entries']}",
-    f"Valid Entries: {stats['valid_entries']}",
-    f"Underflow: {stats['underflow']}",
-    f"Overflow: {stats['overflow']}",
-    f"Mean: {stats['mean']:.2f}",
-    f"RMS: {stats['rms']:.2f}",
-])
+ax.legend(
+    [
+        f"Entries: {stats['total_entries']}",
+        f"Valid Entries: {stats['valid_entries']}",
+        f"Underflow: {stats['underflow']}",
+        f"Overflow: {stats['overflow']}",
+        f"Mean: {stats['mean']:.2f}",
+        f"RMS: {stats['rms']:.2f}",
+    ]
+)
 
 # グラフを表示
 plt.show()

@@ -14,7 +14,7 @@ fig, ax = plt.subplots()
 ax.plot(
     x,
     y,
-    label="sin(x)", # 凡例に使う名前を指定
+    label="sin(x)",  # 凡例に使う名前を指定
 )
 
 # グラフのタイトルと軸ラベルを設定
@@ -24,8 +24,8 @@ ax.set_ylabel("Y軸")
 
 ax.legend(
     loc="upper right",  # 凡例の位置
-    fontsize="small",   # フォントサイズ
-    frameon=True,      # 凡例の枠を表示
+    fontsize="small",  # フォントサイズ
+    frameon=True,  # 凡例の枠を表示
 )  # 凡例を表示
 
 plt.show()

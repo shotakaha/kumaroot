@@ -171,11 +171,7 @@ output_filename = "output.root"
 tree = TTree("data", "Data from CSV")
 
 # CSVファイルを読み込み
-nentries = tree.ReadFile(
-    input_filename,
-    "ch1/I:ch2/I:ch3/I:ch4/I:temp/D",
-    ","
-)
+nentries = tree.ReadFile(input_filename, "ch1/I:ch2/I:ch3/I:ch4/I:temp/D", ",")
 
 print(f"読み込んだイベント数: {nentries}")
 

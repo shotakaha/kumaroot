@@ -45,7 +45,8 @@ $ black --check .
 ## 部分的に除外したい（`fmt: skip` / `fmt: on` / `fmt: off`）
 
 ```python
-skip_line = True # fmt: skip
+skip_line = True  # fmt: skip
+
 
 # fmt: off
 def skip_block():

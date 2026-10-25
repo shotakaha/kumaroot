@@ -3,9 +3,10 @@
 ```python
 from dataclasses import dataclass
 
+
 @dataclass
 class クラス名:
-    変数名: 型          # 位置引数（必須）
+    変数名: 型  # 位置引数（必須）
     変数名: 型 = 初期値  # オプション引数
 ```
 
@@ -25,6 +26,7 @@ C/C++の構造体のように、データ構造を保持するためのクラス
 from pathlib import Path
 from dataclasses import dataclass
 
+
 @dataclass
 class Config:
     read_from: str
@@ -36,10 +38,7 @@ class Config:
 ```
 
 ```python
-c = Config(
-    read_from=".",
-    search_pattern="*.csv"
-)
+c = Config(read_from=".", search_pattern="*.csv")
 fnames = c.get_fnames()
 fnames
 ```
@@ -51,6 +50,7 @@ fnames
 ```python
 from pathlib import Path
 from dataclasses import dataclass
+
 
 @dataclass
 class Config:
@@ -68,10 +68,7 @@ class Config:
 ``__post_init__``でインスタンスを作成したときの挙動を定義できます。
 
 ```python
-c = Config(
-    read_from=".",
-    search_pattern="*.csv"
-)
+c = Config(read_from=".", search_pattern="*.csv")
 
 # すでに get_fnames されているので
 # fnames = c.get_fnames() は必要ない
@@ -86,12 +83,14 @@ from dataclasses import dataclass, asdict
 import pendulum
 import pandas as pd
 
+
 @dataclass
 class Quantity:
     timestamp: pendulum.datetime
     x: float
     y: float
     z: float
+
 
 q = Quantity(
     timestamp="測定時刻",

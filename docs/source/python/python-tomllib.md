@@ -78,9 +78,7 @@ point = { x = 1, y = 2 }
 ```
 
 ```python
-{
-    "point": {"x": 1, "y": 2}
-}
+{"point": {"x": 1, "y": 2}}
 ```
 
 `{ key = value, ... }`のように1行で書くテーブルを、インライン・テーブルと呼びます。
@@ -99,8 +97,8 @@ distance = 20.0
 ```
 
 ```python
-{"record":
-    [
+{
+    "record": [
         {"run_id": 1, "distance": 10.0},
         {"run_id": 2, "distance": 20.0},
     ]

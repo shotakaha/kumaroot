@@ -34,11 +34,7 @@ fig.savefig("ファイル名")
 data.plot(kind="hist")
 
 # 散布図
-data.plot(
-  kind="scatter",
-  x="x軸のカラム名",
-  y="Y軸のカラム名"
-)
+data.plot(kind="scatter", x="x軸のカラム名", y="Y軸のカラム名")
 ```
 
 `kind`オプションでグラフの種類を変更できます。
@@ -54,9 +50,9 @@ data.plot(
 
 ```python
 data.plot(
-  title="グラフのタイトル",
-  xlabel="X軸のタイトル",
-  ylabel="Y軸のタイトル",
+    title="グラフのタイトル",
+    xlabel="X軸のタイトル",
+    ylabel="Y軸のタイトル",
 )
 
 # matplotlibで設定する場合
@@ -77,9 +73,9 @@ ax.set_ylabel("Y軸のタイトル")
 data.plot(subplots=True)
 
 data.plot(
-  subplots=True,
-  figsize=(横サイズ, 縦サイズ),
-  layout=(行数, 列数),
+    subplots=True,
+    figsize=(横サイズ, 縦サイズ),
+    layout=(行数, 列数),
 )
 
 # matplotlibで設定する場合
@@ -108,11 +104,7 @@ data.plot(
 ```python
 data.plot(grid=True)
 
-data.plot(
-  grid=True,
-  xticks=range(0, 1000, 50),
-  yticks=range(-5, 15, 1)
-)
+data.plot(grid=True, xticks=range(0, 1000, 50), yticks=range(-5, 15, 1))
 
 # matplotlibで設定する場合
 ax = data.plot()
@@ -128,10 +120,7 @@ ax.set_yticks(range(-5, 15, 1))
 ## 表示範囲したい（``xlim`` / ``ylim``）
 
 ```python
-data.plot(
-  xlim=(x軸の下限値, x軸の上限値),
-  ylim=(y軸の下限値, y軸の上限値)
-)
+data.plot(xlim=(x軸の下限値, x軸の上限値), ylim=(y軸の下限値, y軸の上限値))
 
 # matplotlibで設定する場合
 ax = data.plot()
@@ -176,8 +165,8 @@ data.plot(
     kind="scatter",
     x="X軸のカラム名",
     y="Y軸のカラム名",
-    ax=axs  # 描画先のAxesオブジェクトを指定する
-    )
+    ax=axs,  # 描画先のAxesオブジェクトを指定する
+)
 ```
 
 `ax`オプションで`matplotlib`の`Axes`オブジェクトを指定できます。

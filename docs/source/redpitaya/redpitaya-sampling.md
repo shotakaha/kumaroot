@@ -2,8 +2,9 @@
 
 ```python
 import rp
+
 sampling_rate = rp.rp_AcqGetSamplingRateHz()
-sampling_interval = 1./sampling_rate
+sampling_interval = 1.0 / sampling_rate
 ```
 
 ``rp_AcqGetSamplingRateHz``で、サンプリングレートを確認できます。

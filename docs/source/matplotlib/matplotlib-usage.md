@@ -71,7 +71,8 @@ ax.scatter(
     x="X軸のカラム名",
     y="Y軸のカラム名",
     c="マーカーの色のカラム名",
-    marker="マーカーの種類")
+    marker="マーカーの種類",
+)
 ax.set_title("散布図のタイトル")
 ax_set_xlabel("X軸のタイトル")
 ax_set_ylabel("Y軸のタイトル")

@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 # データを準備する
 x = np.linspace(0, 10, 100)  # 0から10までの100点を生成
 y = np.linspace(0, 10, 100)  # 0から10までの100点を生成
-X, Y = np.meshgrid(x, y)     # グリッドを作成
-Z = np.sin(X) * np.cos(Y)    # ZはXとYの関数（例：sin(X)*cos(Y)）
+X, Y = np.meshgrid(x, y)  # グリッドを作成
+Z = np.sin(X) * np.cos(Y)  # ZはXとYの関数（例：sin(X)*cos(Y)）
 data = Z  # 2次元配列
 
 # Figureエリアを作成
@@ -16,7 +16,7 @@ fig, ax = plt.subplots()
 
 # ヒートマップ
 hm = ax.imshow(
-    data,    # 2次元配列
+    data,  # 2次元配列
     cmap="viridis",
     vmin=0,
     vmax=1,

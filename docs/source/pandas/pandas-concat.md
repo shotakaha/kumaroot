@@ -11,6 +11,7 @@ pd.concat([data1, data2], ignore_index=True)
 
 ```python3
 from pathlib import Path
+
 read_from = "ディレクトリ名"
 search_pattern = "*.csv"
 fnames = sorted(Path(read_from).glob(search_pattern))

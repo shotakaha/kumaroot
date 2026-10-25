@@ -9,8 +9,8 @@ data = pd.DataFrame(...)
 
 # 散布図を描く
 data.plot.scatter(
-  x="X軸のカラム名",
-  y="Y軸のカラム名",
+    x="X軸のカラム名",
+    y="Y軸のカラム名",
 )
 ```
 

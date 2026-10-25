@@ -14,11 +14,13 @@ $ poetry add japanize_matplotlib
 
 ```python
 import matplotlib
+
 print(f"matplotlib: {matploblib.__version__}")
 ```
 
 ```python
 import matplotlib as mpl
+
 print(f"matplotlib: {mpl.__version__}")
 ```
 

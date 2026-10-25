@@ -2,6 +2,7 @@
 
 ```python
 import re
+
 re.match("正規表現パターン", "対象文字列")
 re.search("正規表現パターン", "対象文字列")
 ```
@@ -13,12 +14,12 @@ re.search("正規表現パターン", "対象文字列")
 ## IPアドレスを検索したい
 
 ```python
-matched = re.search("(\d{1,3}\.){3}\d{1,3}", "対象文字列") # IPv4
+matched = re.search("(\d{1,3}\.){3}\d{1,3}", "対象文字列")  # IPv4
 matched.group()
 ```
 
 ```python
-matched = re.search("([0-9A-Fa-f]{0,4}:){7}[0-9A-Fa-f]{0,4}", "対象文字列") # IPv6
+matched = re.search("([0-9A-Fa-f]{0,4}:){7}[0-9A-Fa-f]{0,4}", "対象文字列")  # IPv6
 matched.group()
 ```
 
@@ -47,8 +48,8 @@ IPv6アドレスをマッチさせたい場合などに、この正規表現を�
 ## リファラーを検索したい
 
 ```python
-matched = re.search('\"[\S\s]+?\"', "対象文字列")
-matched = re.search('(?P<referer>(\"[\S\s]+?\"))', "対象文字列")
+matched = re.search('"[\S\s]+?"', "対象文字列")
+matched = re.search('(?P<referer>("[\S\s]+?"))', "対象文字列")
 matched.group("referer")
 ```
 
@@ -60,7 +61,7 @@ Apacheログに記録されているリファラー（``\"%{Referer}i\"``）や�
 ## Apacheのアクセスログを検索したい
 
 ```python
-regex_string = '(?P<remote_host>(\d{1,3}\.){3}\d{1,3}) (?P<ident>(\S+|-)) (?P<user>(\S+|-)) (?P<time>(\[[\S\s]+?\])) (?P<request_first_line>(\"[\S\s]+?\")) (?P<status>(\d+)) (?P<size>(\d+|-)) (?P<referer>([\S\s]*)) (?P<ua>(\"[\S\s]+?\"))'
+regex_string = '(?P<remote_host>(\d{1,3}\.){3}\d{1,3}) (?P<ident>(\S+|-)) (?P<user>(\S+|-)) (?P<time>(\[[\S\s]+?\])) (?P<request_first_line>("[\S\s]+?")) (?P<status>(\d+)) (?P<size>(\d+|-)) (?P<referer>([\S\s]*)) (?P<ua>("[\S\s]+?"))'
 p = re.compile(regex_string)
 matched = p.match("ログ一行")
 

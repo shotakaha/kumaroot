@@ -20,11 +20,11 @@ data.drop(index="インデックス名")  # インデックス名を指定して
 ## 欠損値を削除したい（``pandas.DataFrame.dropna``）
 
 ```python
-data.dropna()            # 欠損値を含む行を削除する
-data.dropna(how="all")   # すべての値が欠損値である行を削除する
-data.dropna(axis="columns")    # 欠損値を含む列（カラム）を削除する
-data.dropna(thresh=2)    # 欠損値を2個以上含む行を削除する
-data.dropna(subset=["カラム名"])    # カラムを指定して、欠損値を含む行を削除する
+data.dropna()  # 欠損値を含む行を削除する
+data.dropna(how="all")  # すべての値が欠損値である行を削除する
+data.dropna(axis="columns")  # 欠損値を含む列（カラム）を削除する
+data.dropna(thresh=2)  # 欠損値を2個以上含む行を削除する
+data.dropna(subset=["カラム名"])  # カラムを指定して、欠損値を含む行を削除する
 ```
 
 ``pd.DataFrame.drpna``を使って欠損値を含む行を削除できます。

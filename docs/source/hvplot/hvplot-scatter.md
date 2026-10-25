@@ -29,12 +29,7 @@ Y軸は複数のカラム名をリストで指定できます。
 ## マーカーしたい（`marker`）
 
 ```python
-data.hvplot.scatter(
-    x=...,
-    y=...,
-    marker="circle",
-    s=50
-)
+data.hvplot.scatter(x=..., y=..., marker="circle", s=50)
 ```
 
 `marker`オプションで、マーカーの形を指定できます。

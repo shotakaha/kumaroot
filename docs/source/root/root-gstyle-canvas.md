@@ -23,8 +23,8 @@ gStyle.SetCanvasDefW(700)  # 幅：700ピクセル
 gStyle.SetCanvasDefH(500)  # 高さ：500ピクセル
 
 # キャンバスの表示位置を設定
-gStyle.SetCanvasDefX(10)   # X座標：10ピクセル
-gStyle.SetCanvasDefY(10)   # Y座標：10ピクセル
+gStyle.SetCanvasDefX(10)  # X座標：10ピクセル
+gStyle.SetCanvasDefY(10)  # Y座標：10ピクセル
 ```
 
 ## キャンバスのサイズを理解したい

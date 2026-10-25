@@ -8,10 +8,10 @@ data = pd.DataFrame(...)
 
 # ヒストグラムを描く
 fig = px.histogram(
-    data,    # pd.DataFrame
+    data,  # pd.DataFrame
     x="ヒストグラムに使うカラム名",
     nbins=10,  # ビンの数
-    range_x=(0, 100)  # ビンの範囲
+    range_x=(0, 100),  # ビンの範囲
 )
 fig.show()
 ```
