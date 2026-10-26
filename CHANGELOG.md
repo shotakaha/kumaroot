@@ -10,6 +10,9 @@
 
 ### Fix
 
+- **AGENTS**: sync deps:outdated command with Taskfile
+- **Taskfile**: limit deps:outdated tree depth to 1
+- **python-uv**: add token auth and GitLab CI trusted publishing to uv publish
 - **python-pipx**: add references
 - **python-pipx**: describe uv backend and update environment output
 - **emacs-init**: make Emacs 31 the primary example, keep Emacs 30 and earlier as notes
