@@ -1,0 +1,37 @@
+# DockerHub Container Registry
+# PostgreSQL: https://hub.docker.com/_/postgres
+# Adminer: https://hub.docker.com/_/adminer/
+
+# $ docker compose up --detach
+# $ open http://localhost:8080
+# $ docker compose down --volumes
+
+services:
+  # PostgreSQLコンテナ
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-test_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      # 内部ボリューム
+      - db_data:/var/lib/postgresql/data
+      # バインドボリューム
+      # 既存のデータベース（のダンプ）で初期化
+      - ./backups/:/docker-entrypoint-initdb.d/
+
+  # Adminerコンテナ
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+    depends_on:
+      - db
+
+volumes:
+  db_data:
