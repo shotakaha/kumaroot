@@ -18,11 +18,19 @@ $ docker compose up -d
 $ docker compose exec db psql -U postgres
 ```
 
+`docker compose exec`でコンテナー内で操作できます。
+`compose.yaml`で設定したサービス名（`db`）を指定し、`psql`コマンドでデータベースに接続できます。
+`-U`オプションでユーザー名を指定します。
+
 ## コンテナーを終了したい
 
 ```console
 $ docker compose down
+$ docker compose down --volumes
 ```
+
+`docker compose down`でコンテナーを終了できます。
+`--volumes`オプションをつけると named volume も削除されます。
 
 ## ポートを変更したい
 
