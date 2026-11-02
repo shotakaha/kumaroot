@@ -58,8 +58,39 @@ $ mktemp --directory --tmpdir=.
 ```bash
 #!/usr/bin/env bash
 
-# 一時ファイル作成し、ファイル名を取得
-temp_file = $(mktemp)
-# 終了時に削除
-trap 'rm -v "${temp_file}"' EXIT
+set -euo pipefail
+
+# Owner-only permissions
+# Dumps contain user data and password hashes
+umask 077
+
+# Configuration
+SAVEDIR=${HOME}/wp-sqldump/
+DATABASE=$(wp config get DB_NAME)
+YMD=$(date +%Y%m%d)
+EXPIRE_DAYS=+10
+
+# File path
+DUMPFILE=${SAVEDIR}/backup_${DATABASE}_${YMD}.sql.gz
+
+# Ensure save directory exists
+mkdir -p ${SAVEDIR}
+
+# Dump SQL to a temp file
+TMPFILE=$(mktemp ${SAVEDIR}/.dump.XXXXXX.sql.gz)
+trap 'rm -f ${TMPFILE}' EXIT
+mysqldump --single-transaction --routines --triggers ${DATABASE} | gzip > ${TMPFILE}
+# Move temp file to final destination
+mv ${TMPFILE} ${DUMPFILE}
+
+# Remove old dumps
+find ${SAVEDIR} -type f -name "backup_${DATABASE}_*.sql.gz -mtime ${EXPIRE_DAYS} -delete
+
+exit 0
 ```
+
+WordPressのデータベースをバックアップするスクリプトのサンプルです。
+`mysqldump`の出力を`mktemp`で作成した一時ファイルに書き込んでから、`mv`で最終的なファイル名に変更しています。
+
+`mktemp`で作成した一時ファイルを経由することで、バックアップ中の不具合で壊れたダンプが残ることを防げます。
+また、`trap`処理することで、スクリプトが途中で終了しても一時ファイルが残らないようにしています。
