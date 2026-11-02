@@ -4,12 +4,18 @@
 
 ### Feat
 
+- **docker**: make MariaDB and Adminer ports configurable
+- **docker**: make PostgreSQL and Adminer ports configurable
+- **docker**: add PostgreSQL compose example
 - **zed-agent**: add agent page, link from toctree
 - **zed-git**: add git operations page, link from toctree
 - **zed**: add zed section with install page, link from toctree
 
 ### Fix
 
+- **command-mysql**: align code styling and clarify wording
+- **docker**: add Adminer login section to PostgreSQL example
+- **docker**: clarify PostgreSQL exec and down options
 - **AGENTS**: sync deps:outdated command with Taskfile
 - **Taskfile**: limit deps:outdated tree depth to 1
 - **python-uv**: add token auth and GitLab CI trusted publishing to uv publish
