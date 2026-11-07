@@ -1,26 +1,36 @@
 # 外部ツールを準備する（`brew install`）
 
 ```console
-// ビルド用ツール
+// ダウンロードに必要なコマンド
+$ brew install wget
+
+// ビルドに必要なコマンド
 $ brew install cmake
 $ brew install ninja
 
-// 描画用ツール
-$ brew install qt@5  # Qt5を使う場合
+// 描画に必要なツール
+$ brew install --cask xquartz  # OpenGLを使う場合
 $ brew install qt    # Qt6を使う場合
-$ brew install --cask xquartz
+$ brew install qt@5  # Qt5を使う場合
 ```
 
-Geant4のビルドに必要な外部ツールとして
-`CMake`、
-`Xquartz`、
-`Qt`、
-`Nijna`（オプション）をインストールします。
+Geant4のビルド／インストールに必要な外部ツールをあらかじめインストールしておきます。
+すべてHomebrewでインストールできます。
 
-その他、使うことが分かっているツールがあれば、あらかじめインストールしておくとよいです。
-インストールできたら、次に進んでください。
+Geant4は4.10から`cmake`を使ったビルドがデフォルトになりました。
+また、さまざまな可視化ドライバに対応していますが、開発やメンテナンスが停滞しているドライバも多数あります。
+ここ数年（2025年ころ）は、`Qt`と`OpenGL`の組み合わせがベストです。
 
-## ビルドツール（`cmake` / `ninja`）
+## ダウンロードしたい（`wget`）
+
+```console
+$ brew install wget
+```
+
+[wget](../command/command-wget.md)は、HTTP/HTTPS/FTPなどのプロトコルでファイルをダウンロードするコマンドです。
+Geant4のソースコード（圧縮ファイル）をダウンロードするために使います。
+
+## ビルドしたい（`cmake` / `ninja`）
 
 ```console
 $ brew install cmake
@@ -44,23 +54,29 @@ $ brew install ninja
 
 :::
 
-## 描画ツール（`qt@5` / `xquartz`）
+## 描画したい（`xquartz` / `qt` / `qt@5`）
+
+```console
+$ brew install --cask xquartz  # OpenGLを使う場合
+```
+
+`xquartz`はmacOSでX11を使うためのツールです。
+OpenGLを使う場合に必要です。
 
 ```console
 $ brew install qt@5  # Qt5を使う場合
 $ brew install qt    # Qt6を使う場合
-$ brew install --cask xquartz
 ```
 
-`Qt`と`OpenGL`の組み合わせでGeant4のシミュレーション結果を可視化できます。
-X11（XQuartz）はOpenGLの利用に必要です。
+Qtは、クロスプラットフォーム対応のGUIツールキットです。
+Geant4の可視化ドライバとして、Qt5またはQt6を使うことができます。
 
 :::{note}
 
 `brew install qt`でQt6がインストールできます。
 リリースノートによると、
 v11.1.0からQt6がサポートされ、
-v11.4.0からビルド時のデフォルトになったようです。
+v11.4.0からビルド時のデフォルトになっています。
 
 :::
 
@@ -74,13 +90,6 @@ v11.4.0より前のバージョンでは、Qt5を指定するのがよさそう�
 
 :::
 
-:::{note}
-
-Geant4はさまざまな可視化ドライバに対応していますが、
-開発やメンテナンスが停滞しているドライバも多数あります。
-ここ数年（2025年）は、`Qt`と`OpenGL`の組み合わせがベストです。
-
-:::
 
 ## 番外編 : WSL2を準備する
 
