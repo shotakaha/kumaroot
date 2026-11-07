@@ -14,6 +14,7 @@ geant4-install-configure
 geant4-install-ccmake
 geant4-install-build
 geant4-install-clean
+geant4-install-shell
 ```
 
 前提として
