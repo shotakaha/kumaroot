@@ -2,8 +2,8 @@
 
 ```console
 // オプションを指定してcmakeする
-$ cd ~/geant4/v11.2.1
-(~/geant4/v11.2.1/) $ cmake \
+$ cd ~/geant4/v11.X.Y
+(~/geant4/v11.X.Y/) $ cmake \
 -G "Unix Makefiles" \
 -S source \
 -B build \
@@ -19,7 +19,7 @@ Geant4のビルドオプションは
 `-Dオプション名=設定値`で変更できます。
 
 ```console
-(~/geant4/v11.2.1/) $ less build/CMakeCache.txt
+(~/geant4/v11.X.Y/) $ less build/CMakeCache.txt
 ```
 
 `cmake`を実行すると、ビルド用ディレクトリに`CMakeCache.txt`が生成されます。
@@ -39,7 +39,7 @@ $ cmake -G "Ninja"
 
 ```console
 // 絶対パスで指定
-$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/geant4/v11.2.1/install
+$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/geant4/v11.X.Y/install
 
 // 相対パスで指定
 $ cmake -DCMAKE_INSTALL_PREFIX=install
@@ -162,8 +162,8 @@ $ cmake \
 ## ディレクトリ構成
 
 ```console
-$ tree ~/geant4/v11.2.1 -L 2
-geant4/v11.2.1
+$ tree ~/geant4/v11.X.Y -L 2
+geant4/v11.X.Y
 ├── build
 │   ├── BuildProducts
 │   ├── CMakeCPackOptions.cmake
