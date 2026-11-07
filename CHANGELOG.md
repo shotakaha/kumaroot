@@ -1,6 +1,6 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.11.0 (2026-11-07)
 
 ### Feat
 
@@ -13,6 +13,7 @@
 
 ### Fix
 
+- **command-mktemp**: replace script example with WordPress DB backup sample
 - **command-mysql**: align code styling and clarify wording
 - **docker**: add Adminer login section to PostgreSQL example
 - **docker**: clarify PostgreSQL exec and down options
