@@ -35,18 +35,9 @@ geant4-install-shell
       |-- install/   # インストール先のディレクトリ
 ```
 
-また、上記の手順を再利用可能な形に整理した方法も紹介します。
-
-```{toctree}
----
-maxdepth: 2
----
-geant4-install-taskfile
-```
-
 ::: {seealso}
 
-ここで紹介する手順をまとめたリポジトリも作成しました。
+ここで紹介した手順を`Taskfile`を使って整理したリポジトリも作成しました。
 
 - [qumasan/g4setup](https://gitlab.com/qumasan/g4setup)
 
