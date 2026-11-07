@@ -9,7 +9,7 @@ $ mkdir ~/geant4/archives
 
 // バージョンごとのディレクトリを作成する
 $ mkdir ~/geant4/v11.X.Y
-// mkdir ~/geant4/v11.2.1
+// mkdir ~/geant4/v11.4.3
 ```
 
 公式ドキュメントと講習会のインストール手順を参考に、自分なりにアレンジしました。
@@ -23,7 +23,7 @@ $ mkdir ~/geant4/v11.X.Y
 $ tree ~/geant4 -L 1
 geant4
 ├── archives
-└── v11.2.1
+└── v11.4.3
 ```
 
 このようなディレクトリ構成になっていたら、次に進んでください。
