@@ -94,9 +94,10 @@ maxdepth: 1
 geant4-install-brew
 geant4-install-mkdir
 geant4-install-download
-geant4-install-cmake
+geant4-install-configure
 geant4-install-ccmake
 geant4-install-make
+geant4-install-clean
 ```
 
 また、上記の手順を再利用可能な形に整理した方法も紹介します。

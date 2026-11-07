@@ -1,22 +1,11 @@
 # ビルド構成したい（`cmake`）
 
 ```console
-// オプションを指定してcmakeする
-$ cd ~/geant4/v11.X.Y
-(~/geant4/v11.X.Y/) $ cmake \
--G "Unix Makefiles" \
--S source \
--B build \
--DCMAKE_INSTALL_PREFIX=install \
--DCMAKE_PREFIX_PATH=$(brew --prefix qt) \
--DGEANT4_INSTALL_DATA=ON \
--DGEANT4_USE_OPENGL_X11=ON \
--DGEANT4_USE_QT=ON
+$ cd ~/geant4/v11.X.Y/
+$ cmake -G Ninja -S source -B build -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH=(brew --prefix qt) -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON
 ```
 
-`cmake`を使ってビルドに必要なファイルを生成します。
-Geant4のビルドオプションは
-`-Dオプション名=設定値`で変更できます。
+`cmake`でビルド構成を指定します。
 
 ```console
 (~/geant4/v11.X.Y/) $ less build/CMakeCache.txt
@@ -25,109 +14,45 @@ Geant4のビルドオプションは
 `cmake`を実行すると、ビルド用ディレクトリに`CMakeCache.txt`が生成されます。
 このファイルを確認して、オプションが設定できているか確認できます。
 
-## ビルドツールを設定する（`-G`）
+## ビルドシステムしたい（`cmake -G`）
 
 ```console
-$ cmake -G "Unix Makefiles"
-$ cmake -G "Ninja"
+$ cmake -G Ninja
 ```
 
-`-G`オプションでジェネレーター（＝ビルドツール）を変更できます。
-多くの場合、デフォルトは`make`（＝`Unix Makefiles`）です。
+`-G / --generator`オプションでビルドシステムを指定できます。
+デフォルトは`Unix Makefiles`です。
+どちらも同じソースを、同じオプションでビルドした場合の結果（バイナリなど）は同じになりますが、一般に`Ninja`のほうが`Make`より高速にビルドできるらしいです。
 
-## インストール先を設定する（`-DCMAKE_INSTALL_PREFIX`）
+## 分割ビルドしたい（`cmake -S -B`）
 
 ```console
-// 絶対パスで指定
-$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/geant4/v11.X.Y/install
-
-// 相対パスで指定
-$ cmake -DCMAKE_INSTALL_PREFIX=install
+$ cmake -S source -B build
 ```
 
-`CMAKE_INSTALL_PREFIX`オプションで、Geant4本体のインストール先のパスを変更できます。
-絶対パス、もしくは`cmake`を実行したパスからの相対パスを指定できます。
+`-S / --source`オプションでソースコードのディレクトリを指定し、`-B / --build`オプションでビルド用のディレクトリを指定できます。
+`cmake`では、ソースコードとビルド用のディレクトリを分けて管理することが推奨されています。
 
-## ライブラリを追加する（`-DCMAKE_PREFIX_PATH`）
+## ビルドオプションしたい（`cmake -D`）
 
 ```console
-// macOSの設定
-$ cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt
-
-// 汎用的な設定
-$ cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt)
+$ cmake -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH=(brew --prefix qt) -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON
 ```
 
-`CMAKE_PREFIX_PATH`で、ビルドに必要なライブラリのパスを追加できます。
-Qtを使う場合、ローカルにインストールされているQtのパスを指定する必要があります。
+`-D / --define`オプションでビルドオプションを指定できます。
+`-Dオプション名=値`の形式で記述します。
 
-:::{note}
+`-DCMAKE_INSTALL_PREFIX`はインストール先のディレクトリ（`CMAKE_INSTALL_PREFIX`）を指定するオプションです。
+作業ディレクトリ（`~/geant4/v11.X.Y/`）の中に`install`ディレクトリを作成し、そこにインストールするようにしています。
 
-HomebrewでインストールしたQtのパスは、プラットフォームによって違うことがあります。
-`/opt/homebrew/opt/qt`のようなベタ書きではなく、
-`brew --prefix qt`で取得するほうが汎用的です。
+`-DCMAKE_PREFIX_PATH`は依存ライブラリの検索パス（`CMAKE_PREFIX_PATH`）を指定します。
+Qtを使う場合は、`brew --prefix qt`でQtのインストール先を取得し、指定する必要があります。
 
-```console
-// macOS (x86_64)
-$ brew --prefix qt@5
-/usr/local/qt@5
+`-DGEANT4_INSTALL_DATA=ON`はGeant4のデータをインストールするオプション（`GEANT4_INSTALL_DATA`）を有効にしています。
+`-DGEANT4_USE_OPENGL_X11=ON`はOpenGLを使うオプション（`GEANT4_USE_OPENGL_X11`）を有効にしています。
+`-DGEANT4_USE_QT=ON`はQtを使うオプション（`GEANT4_USE_QT`）を有効にしています。
 
-// macOS (M2 Apple)
-$ brew --prefix qt@5
-/opt/homebrew/opt/qt@5
-
-// WSL2 (Ubuntu)
-$ brew --prefix qt@5
-/home/linuxbrew/.linuxbrew/opt/qt@5
-```
-
-:::
-
-## 可視化ドライバーしたい
-
-```console
-$ cmake -DGEANT4_USE_QT=ON -DGEANT4_USE_OPENGL_X11=ON
-```
-
-`GEANT4_USE_QT=ON`オプションでQtを、
-`GEANT4_USE_OPENGL_X11=ON`オプションでOpenGLを有効にします。
-
-:::{note}
-
-QtとOpenGLはそれぞれ役割が異なるため、この2つはセットで有効にする必要があります。
-Qtだけだど描画できず、OpenGLだけだと描画はできますが、ウィンドウ／メニューが貧弱になります。
-
-:::
-
-## オプションを再利用したい（`CMakePresets.json`）
-
-```console
-$ cmake \
--S source \
--B build \
---preset=geant4
-```
-
-必要なオプションを`CMakePresets.json`にまとめることで、オプション設定を再利用できます。
-また、オプション設定時のタイポを防ぐことができます。
-
-```json
-{
-    "name": "geant4",
-    "displayName": "Geant4 Build",
-    "description": "Build Geant4 with OpenGL and Qt",
-    "generator": "Unix Makefiles",
-    "binaryDir": "${sourceDir}/build",
-    "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "GEANT4_INSTALL_DATA": "ON",
-        "GEANT4_USE_OPENGL_X11": "ON",
-        "GEANT4_USE_QT": "ON"
-    }
-}
-```
-
-## ビルドオプションを確認する
+### 利用可能なビルドオプションを確認する
 
 [Geant4 Build Options](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html#geant4buildo)を参考に、
 使いそうなオプションや、知っておくとよさそうなオプション設定のデフォルト値を整理しました。
@@ -158,6 +83,32 @@ $ cmake \
 | GEANT4_USE_SMARTSTACK | ``OFF`` | | G4SmartStackを有効にするフラグ。|
 | GEANT4_USE_FREETYPE | ``OFF`` | | Freetypeフォントを有効にするフラグ。|
 | GEANT4_USE_HDF5 | ``OFF`` | | HDF5形式を有効にするフラグ。|
+
+## プリセットしたい（`CMakePresets.json`）
+
+```console
+$ cmake -S source -B build --preset=geant4
+```
+
+`CMakePresets.json`にビルドオプションをまとめることで、オプション設定を再利用できます。
+ファイルとして残すことで、ビルドオプションの設定を他の人と共有することもできます。
+また、オプション設定時のタイポを防ぐことができます。
+
+```json
+{
+    "name": "geant4",
+    "displayName": "Geant4 Build",
+    "description": "Build Geant4 with OpenGL and Qt",
+    "generator": "Ninja",
+    "binaryDir": "${sourceDir}/build",
+    "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "GEANT4_INSTALL_DATA": "ON",
+        "GEANT4_USE_OPENGL_X11": "ON",
+        "GEANT4_USE_QT": "ON"
+    }
+}
+```
 
 ## ディレクトリ構成
 
