@@ -72,8 +72,8 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
+# 概要（description）はページごとに frontmatter の myst.html_meta で設定する
 myst_html_meta = {
-    "description lang=ja": "KumaROOTです。ちょっとだけROOTを使ったことがある学生や研究者が対象。「逆引き辞典」として使えるようにしたいと思います。",
     "keywords": "ROOT, Python",
 }
 
