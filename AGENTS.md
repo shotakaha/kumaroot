@@ -286,6 +286,22 @@ The repository uses pre-commit hooks for code quality:
 - Admonitions: `:::{note}`, `:::{warning}`, etc.
 - Strikethrough: `~~text~~`
 
+**Page description (`<meta name="description">`):**
+
+- Do not set a site-wide description in `conf.py`; `myst_html_meta` there only holds shared keys (e.g. `keywords`)
+- To set a description for one page, add it to that page's frontmatter:
+
+  ```markdown
+  ---
+  myst:
+    html_meta:
+      "description lang=ja": "ページの概要"
+  ---
+  ```
+
+- Pages without this key get a description auto-generated from the body by `sphinxext-opengraph` (`ogp_enable_meta_description = True`)
+- Do not use a top-level `html_meta` key in frontmatter; it is deprecated (since myst-parser v0.18.1) in favor of the `myst:` key
+
 ## Best Practices for Technical Reference Documentation
 
 ### C++ Header Files
