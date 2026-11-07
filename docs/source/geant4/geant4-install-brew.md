@@ -6,7 +6,8 @@ $ brew install cmake
 $ brew install ninja
 
 // 描画用ツール
-$ brew install qt@5
+$ brew install qt@5  # Qt5を使う場合
+$ brew install qt    # Qt6を使う場合
 $ brew install --cask xquartz
 ```
 
@@ -46,30 +47,30 @@ $ brew install ninja
 ## 描画ツール（`qt@5` / `xquartz`）
 
 ```console
-$ brew install qt@5
+$ brew install qt@5  # Qt5を使う場合
+$ brew install qt    # Qt6を使う場合
 $ brew install --cask xquartz
 ```
 
 `Qt`と`OpenGL`の組み合わせでGeant4のシミュレーション結果を可視化できます。
-X11（XQuartz）はOpenGL、Qt5はQtの利用に必要です。
+X11（XQuartz）はOpenGLの利用に必要です。
 
 :::{note}
 
-`brew install qt`ではQt6がインストールされます。
-v11.1.0からQt6がサポートされたようですが、
-v11.2.1ではうまくビルドできませんでした。
-Qt5に対するサポートもまだ残っているので、
-当面は`brew install qt@5`でQt5を指定するのがよさそうです。
+`brew install qt`でQt6がインストールできます。
+リリースノートによると、
+v11.1.0からQt6がサポートされ、
+v11.4.0からビルド時のデフォルトになったようです。
 
 :::
 
 :::{note}
 
-（未確認事項）
+`brew install qt@5`でQt5がインストールできます。
+`-DGEANT4_USE_QT_QT5=ON`とすれば、v11.4.0以降でもQt5でビルドできるようです。
 
-v11.4.0のリリースノートを読むと、
-CMakeオプションのデフォルトがQt6になったそうです。
-また、Qt5を使う場合は`-DGEANT4_USE_QT_QT5=ON`が必要なようです。
+Qt6はv11.1.0からサポートされているようですが、v11.2.1ではQt6ではビルドに失敗しました。
+v11.4.0より前のバージョンでは、Qt5を指定するのがよさそうです。
 
 :::
 
