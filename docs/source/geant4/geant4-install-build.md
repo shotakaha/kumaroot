@@ -1,59 +1,33 @@
-# ビルドする（``make`` / ``make install``）
+# ビルド＆インストールしたい（`cmake --build` / `cmake --install`）
 
 ```console
-// ビルド用ディレクトリで作業する
+$ cd ~/geant4/v11.X.Y/
+$ cmake --build build --parallel
+```
+
+`cmake --build`でビルドを実行します。
+`--parallel`オプションを指定すると、マルチスレッドでビルドできます。
+
+```console
+$ cmake --install build
+```
+
+`cmake --install`でインストールを実行します。
+
+## ビルド＆インストールしたい（`make` / `make install`）
+
+```console
 $ cd ~/geant4/build
-
-// プロセッサの数を指定する
-(~/geant4/build/) $ make -j8
-# ビルドがはじまる
-# 実行したマシンのスペックによるが、30分以上かかると思う
+$ make -j8
+$ make install
+$ make uninstall
 ```
 
-ビルド用ディレクトリで``make``コマンドを実行します。
-複数のプロセッサを持ったCPUを使っている場合は、``-j 利用するプロセッサー数``オプションを使うことで、
-並列処理により、ビルド時間を短縮できます。
+`make`コマンドで、従来どおりのビルドを実行できます。
+`cmake`でビルド構成を指定した場合は、ビルド用ディレクトリに`Makefile`が生成されます。
+`build`ディレクトリに移動して、`make`コマンドを実行します。
+`-j`オプションを指定すると、マルチスレッドでビルドできます。
 
-``GEANT4_INSTALL_DATA=ON``にした場合は、Geant4用データのダウンロードがはじまるため、
-ネットワークに接続した状態で実行する必要があります。
-
-```console
-// インストールする
-(~/geant4/build/) $ make install
-Install the project...
--- Install configuration: "Release"
--- Installing: ~/geant4/11.2.1/share/Geant4/data/...省略...
--- Installing: ~/geant4/11.2.1/lib/libG4*.dylib
--- Installing: ~/geant4/11.2.1/include/Geant4/...省略...
--- Installing: ~/geant4/11.2.1/bin/geant4.sh
--- Installing: ~/geant4/11.2.1/bin/geant4.csh
--- Installing: ~/geant4/11.2.1/bin/geant4-config
--- Installing: ~/geant4/11.2.1/share/Geant4/examples/...省略...
-```
-
-ビルドできたら``make install``コマンドを実行します。
-``CMAKE_INSTALL_PREFIX``で指定したディレクトリにGeant4がインストール（コピー）されます。
-
-## アンインストールしたい
-
-```console
-// ビルド用ディレクトリで作業する
-// インストール時に使ったMakefileが残っていることが前提
-$ cd ~/geant4/build/
-(~/geant4/build/) $ make uninstall
-```
-
-ビルド時に使った``Makefile``が残っていれば、``make uninstall``でアンインストールできます。
-``Makefile``が残っていない場合は、``CMAKE_INSTALL_PREFIX``で指定したディレクトリを削除します。
-
-:::{note}
-
-デフォルトで``CMAKE_INSTALL_PREFIX=/usr/local/``になっていますが、
-これだと削除しにくいため、必ず設定することをオススメします。
-
-``/usr/local/``にインストールした場合は、もう一度Makefileを作れば、アンストールできると思います（未確認）。
-
-:::
 
 ## ディレクトリ構成
 
