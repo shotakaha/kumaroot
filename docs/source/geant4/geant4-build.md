@@ -1,37 +1,43 @@
-# ビルドしたい（``cmake``）
+# ビルドしたい（`cmake`）
 
 ```console
-// プロジェクト内に移動する
-$ cd $G4WORK/プロジェクト
+// Geant4アプリのプロジェクトルートで作業する
+$ cd $G4PROJECT
 
-// ビルド用ディレクトリを作成する
-(プロジェクト) $ mkdir build
-(プロジェクト)$ cd build
+// 前提とするアプリの構造
+$ ls -1
+app/    # <- CMakeLists.txt, src/*.cc, include/*.hh, *.mac などのソースコード
+README.md
+...
 
-// ビルド準備する
-(プ/build) $ cmake ..
+// ビルド構成
+// -S app: CMakeLists.txtの場所を指定
+// -B build: ビルド用ディレクトリを指定
+// -DCMAKE_INSTALL_PREFIX=$G4PROJECT: アプリのバイナリファイルのインストール先
+(G4PROJECT) $ cmake -S app -B build -DCMAKE_INSTALL_PREFIX=$G4PROJECT
 
 // ビルドする
-(プ/build) $ make -j8   # 必要ならば make install する
+(G4PROJECT) $ cmake --build build --parallel
+
+// インストールする
+(G4PROJECT) $ cmake --install build
 ```
 
-Geant4本体と同じようにアプリケーションも[CMake](https://cmake.org/)でビルド準備します。
-自作アプリケーションも、付属サンプルのように``CMakeLists.txt``が必要です。
+`$G4PROJECT`は、Geant4アプリのプロジェクトルートとします。
+また、アプリのソースコードは`app/`にまとめてあることを前提とします。
 
-ここでも``cmake``の作法（out-of-source）にしたがい、ビルド用ディレクトリで作業します。
-ディレクトリ名は任意ですが、分かりやすく``build``としました。
-ビルド作業はすべてこのディレクトリで行います。
+`cmake`の作法（out-of-source）にしたがい、ビルド用ディレクトリ（`build`）でビルドします。
+`-S app`で`CMakeLists.txt`の場所を指定し、
+`-B build`で指定したビルド用ディレクトリにビルドに必要なファイルを生成します。
+`-DCMAKE_INSTALL_PREFIX`は、インストール先のルートをプロジェクトのルート（`$G4PROJECT`）に指定しています。
+実行ファイルは、その下の`bin`（=`$G4PROJECT/bin`）に入ります。
 
-まずはじめに``CMakeLists.txt``から、``Makefile``などビルドに必要なファイルを生成します。
-ビルド用ディレクトリに対して``CMakeLists.txt``は親ディレクトリにあるので``cmake ..``を実行しています。
+次に`cmake --build`で実行ファイルを生成します。
+`--parallel`を付けると、並列にビルドします。
 
-そして``Makefile``から実行ファイルを生成します。
-``Makefile``はビルド用ディレクトリの中にあるので``make -j8``を実行しています。
-プロセッサ数のオプション（``-jN``）は指定した方がよいです。
-
-実行ファイルは現在のディレクトリ（``build``）に生成されます。
-プロジェクトの中でアプリケーションを実行するのがよいと思うので、ここで完了です。
-もし、システム全体で使いたい場合は``make install``します。
+実行ファイルは`build`の中に生成されます。
+`cmake --install`を実行すると、`$G4PROJECT/bin`にインストールされます。
+インストール先がプロジェクト内なので、システム全体への書き込み権限は不要です。
 
 ```console
 // アプリケーションを実行
@@ -183,4 +189,5 @@ install(TARGETS exampleB1 DESTINATION bin)
 ```
 
 実行ファイルのインストール先の設定です。
-``プロジェクト/bin/exampleB1``にインストールされます。
+``${CMAKE_INSTALL_PREFIX}/bin/exampleB1``にインストールされます。
+ここでは``-DCMAKE_INSTALL_PREFIX=$G4PROJECT``を指定しているので、``$G4PROJECT/bin/exampleB1``になります。
