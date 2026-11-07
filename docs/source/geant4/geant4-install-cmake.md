@@ -8,7 +8,7 @@ $ cd ~/geant4/v11.X.Y
 -S source \
 -B build \
 -DCMAKE_INSTALL_PREFIX=install \
--DCMAKE_PREFIX_PATH=$(brew --prefix qt@5) \
+-DCMAKE_PREFIX_PATH=$(brew --prefix qt) \
 -DGEANT4_INSTALL_DATA=ON \
 -DGEANT4_USE_OPENGL_X11=ON \
 -DGEANT4_USE_QT=ON
@@ -52,10 +52,10 @@ $ cmake -DCMAKE_INSTALL_PREFIX=install
 
 ```console
 // macOSの設定
-$ cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt@5
+$ cmake -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt
 
 // 汎用的な設定
-$ cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt@5)
+$ cmake -DCMAKE_PREFIX_PATH=$(brew --prefix qt)
 ```
 
 `CMAKE_PREFIX_PATH`で、ビルドに必要なライブラリのパスを追加できます。
@@ -64,8 +64,8 @@ Qtを使う場合、ローカルにインストールされているQtのパス�
 :::{note}
 
 HomebrewでインストールしたQtのパスは、プラットフォームによって違うことがあります。
-`/opt/homebrew/opt/qt@5`のようなベタ書きではなく、
-`brew --prefix qt@5`で取得するほうが汎用的です。
+`/opt/homebrew/opt/qt`のようなベタ書きではなく、
+`brew --prefix qt`で取得するほうが汎用的です。
 
 ```console
 // macOS (x86_64)
