@@ -60,7 +60,7 @@ packages = []
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version_provider = "pep621"
+version_provider = "uv"
 tag_format = "v$version"
 version_files = [
     "pyproject.toml:version",
