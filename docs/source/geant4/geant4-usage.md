@@ -20,8 +20,6 @@ maxdepth: 1
 ---
 geant4-versions
 geant4-install
-geant4-spack
-geant4-install-shell
 ```
 
 ## エラー対処
