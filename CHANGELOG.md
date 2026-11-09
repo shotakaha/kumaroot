@@ -1,5 +1,32 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **geant4-install-clean**: add uninstall page
+
+### Fix
+
+- **geant4-build**: build and install with cmake, install to project bin
+- **geant4-install-brew**: add wget, reorganize sections by purpose
+- **geant4-install-cmake**: switch Qt prefix examples from qt@5 to qt
+- **geant4-install-cmake**: replace example version with v11.X.Y placeholder
+- **geant4-install**: add g4setup link and update version to v11.4.3
+- **geant4-install-mkdir**: update example version to v11.4.3
+- **geant4-install-download**: add summary and unify archives workflow
+- **geant4-install-brew**: add Qt6 install and clarify Qt5/Qt6 notes
+
+### Refactor
+
+- **geant4-usage**: remove spack mention from install section
+- **geant4-install**: remove spack page
+- **geant4-install**: remove taskfile page, point to g4setup repository
+- **geant4-install**: rename env page to shell, update toctree
+- **geant4-install**: replace summary with toctree of install steps
+- **geant4-install**: rename make page to build, update toctree
+- **geant4-install**: rename cmake page to configure, update toctree
+
 ## v2026.11.0 (2026-11-07)
 
 ### Feat
