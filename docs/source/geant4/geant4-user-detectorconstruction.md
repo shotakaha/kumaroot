@@ -21,7 +21,7 @@ void Geometry::ConstructSDandField() {
 `G4VUserDetectorConstruction`は、ユーザーが測定器の構造を定義するための抽象クラスです。
 Geant4アプリの測定器は、このクラスを継承した自作クラスで定義します。
 
-## 継承する
+## 測定器のクラスを作りたい（`G4VUserDetectorConstruction`）
 
 自作クラスは、`G4VUserDetectorConstruction`を`public`に継承します。
 
@@ -33,7 +33,7 @@ class Geometry : public G4VUserDetectorConstruction {
 
 `G4VUserDetectorConstruction`の、コンストラクタとデストラクタは、デフォルトのままで構いません。
 
-## Construct()を実装する（必須）
+## 測定器を組み立てたい（`Construct`）
 
 ```cpp
 G4VPhysicalVolume* Construct() override;
@@ -51,7 +51,7 @@ G4VPhysicalVolume* Construct() override;
 最後に、ワールドの物理ボリュームを返します。
 具体的な書き方は、[](./geant4-geometry-construct.md)と[](./geant4-geometry-world.md)を参照してください。
 
-## ConstructSDandField()を実装する（任意）
+## 有感検出器や場を設定したい（`ConstructSDandField`）
 
 ```cpp
 void ConstructSDandField() override;
@@ -66,7 +66,7 @@ Geant4 4.10で、ワーカースレッドからも呼ばれるようになりま
 
 具体的な書き方は、[](./geant4-geometry-constructSDandField.md)を参照してください。
 
-## 親クラスのメンバー関数
+## 親クラスのメソッドを確認したい
 
 親クラス（`G4VUserDetectorConstruction`）の主なメンバー関数は、次のとおりです。
 
@@ -83,7 +83,7 @@ virtual void ConstructSDandField();
 
 親クラスの詳しい説明は、[G4VUserDetectorConstruction](https://geant4.kek.jp/Reference/11.4.0/classG4VUserDetectorConstruction.html)を参照してください。
 
-## 自作クラスの例
+## 自作クラスの例を見たい（`Geometry`）
 
 ```cpp
 // include/Geometry.hh
@@ -140,7 +140,7 @@ class Geometry : public G4VUserDetectorConstruction
 `Construct()`は、この2つを呼んで、ワールドの物理ボリュームを返します。
 検出器の種類が増えたら、`SetupXXXVolume()`を追加します。
 
-## main()関数から変更する
+## main()関数から変更したい
 
 ```cpp
 #include "Geometry.hh"
