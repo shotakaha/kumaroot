@@ -110,7 +110,7 @@ runManager->SetUserInitialization(new B2::ActionInitialization());
 引数がなければ対話モードで、`init_vis.mac`を実行します。GUIが使える場合は、さらに`gui.mac`も実行します。
 引数があれば、それをマクロファイルとして実行するバッチモードになります。
 
-## 検出器の形状を作りたい（`DetectorConstruction`）
+## 検出器したい（`DetectorConstruction`）
 
 `B2a`の検出器は、固定標的と複数の円筒型トラッカーで構成されています。
 

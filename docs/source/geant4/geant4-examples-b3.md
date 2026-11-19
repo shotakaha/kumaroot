@@ -111,7 +111,7 @@ new G4PVPlacement(nullptr,  // no rotation
                   fCheckOverlaps);  // checking overlaps
 ```
 
-## 検出器（結晶のリング）を作りたい
+## 検出器したい（結晶のリング）
 
 検出器は、結晶（`Lu2SiO5`）を円形に並べてリングを作り、そのリングを複数配置して全体を作ります。
 
@@ -172,7 +172,7 @@ SetSensitiveDetector("PatientLV", patient);
 スコアラーの名前（`"edep"`、`"dose"`）は、`crystal/edep`、`patient/dose`のように、器の名前と組み合わせた形で、`EventAction`や`Run`から参照されます。
 B2の`TrackerHit`のような独自のデータ構造を書かなくても、結果を取り出せる点が特徴です。
 
-## 放射線源を作りたい（`PrimaryGeneratorAction`）
+## 放射線源したい（`PrimaryGeneratorAction`）
 
 初期状態では、`chargedgeantino`（1 eV）を入射します。
 `GeneratePrimaries()`の中で、この粒子が`chargedgeantino`のときだけ、フッ素18（`Z = 9`、`A = 18`）のイオンに置き換えています。

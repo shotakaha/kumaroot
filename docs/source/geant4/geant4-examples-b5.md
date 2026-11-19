@@ -110,7 +110,7 @@ void MagneticField::GetFieldValue(const G4double[4], double* bField) const
 `GetFieldValue()`は、引数の`point`（位置と時刻）を受け取り、`bField`に磁場の成分（x、y、z）を入れます。
 位置によって値を変えれば、一様ではない磁場も作れます。
 
-## 入射粒子を変えたい（`/B5/generator/`）
+## 入射粒子したい（`/B5/generator/`）
 
 入射粒子の運動量や角度の広がりは、`PrimaryGeneratorAction`の`G4GenericMessenger`で変えられます。
 
@@ -123,7 +123,7 @@ void MagneticField::GetFieldValue(const G4double[4], double* bField) const
 
 粒子の種類は、Geant4の標準コマンドである`/gun/particle`で変えます。
 
-## 乱数で入射粒子を選びたい（`PrimaryGeneratorAction`）
+## 乱数で入射粒子したい（`PrimaryGeneratorAction`）
 
 `randomizePrimary`が`true`のとき（既定値）、入射粒子を乱数で5種類から選びます。
 

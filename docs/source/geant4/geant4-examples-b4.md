@@ -166,7 +166,7 @@ B4の実行ファイルは、次のオプションを受け取ります。
 
 引数を付けずに実行すると、対話モードになります。
 
-## 形状を作りたい（`DetectorConstruction`）
+## 形状したい（`DetectorConstruction`）
 
 層は、吸収板とギャップを1組にした箱（`layer`）で、それを10枚並べています。
 `B4d`では、`G4PVReplica`で層を繰り返し配置しています。
@@ -214,7 +214,7 @@ new G4Material("liquidArgon", z = 18., a = 39.95 * g / mole, density = 1.390 * g
 物理リストは、`FTFP_BERT`をそのまま使っています。
 `main()`で`new FTFP_BERT`として登録しています。
 
-## 一次粒子したい（`PrimaryGeneratorAction`）
+## 入射粒子したい（`PrimaryGeneratorAction`）
 
 一次粒子は1個で、カロリメータの入射面に垂直に入射します。
 粒子の種類とエネルギーは、マクロ（`/gun/particle`、`/gun/energy`）で変更できます。
