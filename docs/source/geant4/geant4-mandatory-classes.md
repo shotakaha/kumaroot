@@ -1,191 +1,168 @@
-# クラスの自作度
-
-Geant4は**ツールキット**として配布されており、
-Geant4が用意したクラスを継承して、ユーザーが自身の目的に合わせて
-カスタマイズする必要があります。
-
-使いはじめたときは、どのファイルを、
-どうカスタマイズするのかよく分かりませんでしたが、
-ドキュメントや講習会スライドをいくつか読んでみて、
-Geant4の概要が分かってきた気がしたので、整理してみました。
-
-それぞれのファイルをどれくらいカスタマイズする必要があるかの
-【自作度】を★の数で表してみました。
-
-## メイン関数【★★・・・】
-
-:自作度: ★★・・・
+# Geant4の使い方の全体像
 
 ```cpp
+// 疑似コード（main関数の骨組み）
 int main(int argc, char** argv)
 {
-    // RunManagerを作成
-    auto *rm = G4RunManagerFactory::CreateRunManager();
+    auto rm = G4RunManagerFactory::CreateRunManager();
 
-    // 必須ユーザークラスを設定
-    auto geometry = new Geometry{}
-    rm->SetUserInitialization(geometry);
+    // 必須：測定器（継承が必要）
+    rm->SetUserInitialization(new Geometry{});
 
-    auto physics = new FTFP_BERT{};
-    rm->SetUserInitialization(physics);
+    // 必須：物理リスト（既存のものを選べる）
+    rm->SetUserInitialization(new FTFP_BERT{});
 
-    auto actions = new ActionInitialization{};
-    rm->SetUserInitialization(actions);
+    // 実質必須：ユーザーアクション（ここで入射粒子などを登録する）
+    rm->SetUserInitialization(new ActionInitialization{});
 
-    // Geant4のカーネルを初期化
-    rm->Initialize()
+    rm->Initialize();
+    rm->BeamOn(100);
 
-    // シミューレーションを開始
-    G4int n_runs = 10
-    rm->BeamOn(n_runs)
-
-    // あと片付け
     delete rm;
 }
 ```
 
-メイン関数の必要な要素を抜粋しました。
-これに対話モードや、可視化ツールとスコアリングの設定などを追加します。
+Geant4は、シミュレーションの枠組みを提供するツールキットです。
+利用者は、Geant4が用意した基底クラスを継承し、自分の実験に合わせて中身を書きます。
+`main()`関数で、それらを登録してから実行します。
 
-基本的に付属サンプルのメイン関数をコピーして使い始めればよいと思いますが、
-きっと少しずつ手を加えたくなるため、自作度は【★★・・・】としました。
+## ツールキットとは
 
-## DetectorConstruction【★★★★★】
+ツールキットとは、部品と枠組みを用意しておき、利用者が必要な部分だけを書いて組み立てるライブラリのことです。
+Geant4では、次のような役割分担になっています。
 
-:自作度: ★★★★★
+- **Geant4が用意する部分**：粒子の輸送、物理過程の計算、イベントの管理、ヒットの集計など
+- **利用者が用意する部分**：測定器の形状、入射粒子、記録したい量、物理モデルの選択など
 
-測定器のジオメトリを作成するクラスです。
-``G4VUserDetectorConstruction``を継承して作成します。
+利用者が書いたクラスは、Geant4から決まったタイミングで呼ばれます。
+この仕組みを実現しているのが、C++の継承と仮想関数です。
 
-自分の実験に合わせてユーザーが実装する必要があります。
-自作度は【★★★★★】です。
+## 継承と仮想関数
 
-:::{seealso}
+Geant4の使い方を理解するには、次の3つの仕組みを知っておく必要があります。
 
-- [](./geant4-user-detectorconstruction.md)
+```cpp
+// 基底クラス（Geant4が用意する）
+class G4VUserDetectorConstruction {
+  public:
+    virtual G4VPhysicalVolume* Construct() = 0;  // 純粋仮想関数
+    virtual void ConstructSDandField();           // 仮想関数
+};
 
-:::
+// 派生クラス（利用者が書く）
+class Geometry : public G4VUserDetectorConstruction {
+  public:
+    G4VPhysicalVolume* Construct() override;      // 必ず実装する
+};
+```
 
-## PhysicsList【★・・・・】
+- **継承**：`class Geometry : public G4VUserDetectorConstruction`のように、基底クラスの機能を引き継いで、新しいクラスを作ります。
+- **仮想関数**：`virtual`を付けた関数は、派生クラスで上書き（`override`）できます。Geant4は、基底クラスのポインターを通して、この関数を呼びます。
+- **純粋仮想関数**：`= 0`を付けた関数は、基底クラスでは実装しません。派生クラスで必ず実装する必要があります。
 
-:自作度: ★・・・・
+:::{note}
 
-物理の相互作用モデルを設定するクラスです。
-基本的な相互作用モデルは、Geant4チームが用意してくれたクラスを利用できます。
-さらに、それらを組み合わせて定義されたプリセットもいくつか用意されています。
-まずはその中から自分の目的にあったモデルを選べばOKです。
-
-Geant4が用意したモデルを使うところからはじめたらよいため、
-自作度は【★・・・・】にしました。
-
-:::{seealso}
-
-- [](./geant4-user-physicslist.md)
-
-:::
-
-相互作用をモデルをカスタマイズしたい場合は、``G4VModularPhysicsList``を継承したクラスを作成します。
-基本的な相互作用クラスから、利用したい相互作用を選択し、``RegisterPhysics``を使って追加します。
-
-本気で相互作用モデルを実装したい場合は、``G4VPhysicsList``を継承したクラスを作成すればよいと思いますが、これはかなり上級者向けだと思います。
-
-## ActionInitialization【★・・・・】
-
-:自作度: ★・・・・
-
-ユーザーアクションを設定するクラスです。
-``G4VUserActionInitialization``を継承して作成します。
-付属サンプルの使い回しでOKなため【★・・・・】としました。
-
-:::{seealso}
-
-- [](./geant4-user-actioninitialization.md)
+`virtual`と`override`は、組にして使います。
+`override`を付けておくと、関数名や引数を間違えたときに、コンパイラーがエラーを出します。
 
 :::
 
-## PrimaryGeneratorAction【★★★★・】
+:::{note}
 
-:自作度: ★★★★・
-
-入射粒子の初期条件を設定するクラスです。
-``G4VUserPrimaryGeneratorAction``を継承して作成します。
-自分の実験に合わせてユーザーが実装する必要があります。
-
-Geant4が用意した``G4ParticleGun``や``G4GeneralParticleSource``などの
-粒子生成クラスを使うことができるため、
-自作度は【★★★★・】としました。
-
-:::{seealso}
-
-- [](./geant4-user-primarygeneratoraction.md)
+純粋仮想関数を1つでも持つクラスは、抽象クラスと呼ばれます。
+抽象クラスは、そのままでは`new`できません。
+Geant4の基底クラスは、利用者が派生クラスを作って使うことを前提にしています。
 
 :::
 
-## SteppingAction【★・・・・】／SensitiveDetector【★★★★★】
+## 必ず継承するクラス（必須）
 
-:自作度: ★★★★★
+次のクラスを設定しないと、`RunManager`がエラーで止まります。
 
-ステップごとのユーザーアクションを設定するクラスです。
-``G4UserSteppingAction``クラスを継承して作成します。
-必須クラスではないですが、ユーザーの目的にあった物理量を取得するために、作成する必要があります。
+| クラス | 役割 | 純粋仮想関数 | 未設定のときのエラー |
+| --- | --- | --- | --- |
+| `G4VUserDetectorConstruction` | 測定器の形状を作る | `Construct()` | `G4VUserDetectorConstruction is not defined!` |
+| `G4VUserPhysicsList` | 物理過程を設定する | `ConstructParticle()`、`ConstructProcess()` | `G4VUserPhysicsList is not defined!` |
 
-ただし、より便利な``G4VSensitiveDetector``クラスが用意されているため、
-まずはそちらを作成するところからはじめるとよいでしょう。
-自作度は【★★★★★】です。
+物理リストは、自作する代わりに、Geant4が用意したリファレンス物理リスト（`FTFP_BERT`など）を使えます。
+その場合は、継承せずに使えます。
+詳しくは、[](./geant4-user-physicslist.md)を参照してください。
 
-:::{seealso}
+測定器は、必ず自作します。
+詳しくは、[](./geant4-user-detectorconstruction.md)を参照してください。
 
-- [](./geant4-user-steppingaction.md)
-- [](./geant4-sensor-sensitivedetector.md)
+## 実質的に継承が必要なクラス
 
-:::
+次のクラスは、実際のアプリケーションではほぼ必ず作ります。
+入射粒子を生成するには、`G4VUserPrimaryGeneratorAction`が必要です。
 
-## TrackingAction【★・・・・】
+| クラス | 役割 | 純粋仮想関数 | 省略したときの影響 |
+| --- | --- | --- | --- |
+| `G4VUserPrimaryGeneratorAction` | 入射粒子を生成する | `GeneratePrimaries()` | `BeamOn()`で`G4VUserPrimaryGeneratorAction is not defined!`のエラー |
+| `G4VUserActionInitialization` | ユーザーアクションを登録する | `Build()` | 入射粒子とユーザーアクションを登録する場所がなくなる |
 
-:自作度: ★・・・・
+`G4VUserPrimaryGeneratorAction`は、`G4ParticleGun`などを使えば、自分でほとんど書かずに済みます。
+詳しくは、[](./geant4-user-primarygeneratoraction.md)を参照してください。
 
-トラックごとのユーザーアクションを設定するクラスです。
-``G4UserSteppingAction``クラスを継承して作成します。
+:::{note}
 
-最初はなくてもよいクラスなので、自作度は【★・・・・】です。
-
-:::{seealso}
-
-- [](./geant4-user-trackingaction.md)
-
-:::
-
-## EventAction【★・・・・】
-
-:自作度: ★・・・・
-
-イベントごとのユーザーアクションを設定するクラスです。
-``G4UserEventAction``クラスを継承して作成します。
-最初はなくてもよいクラスなので、自作度は【★・・・・】です。
-
-:::{seealso}
-
-- [](./geant4-user-eventaction.md)
+マルチスレッドで実行する場合、入射粒子の生成は、ワーカースレッドごとに作成する必要があります。
+そのため、`G4VUserPrimaryGeneratorAction`は、`G4VUserActionInitialization::Build()`の中で作成します。
 
 :::
 
-## RunAction【★・・・・】
+## 継承しなくても使えるクラス
 
-:自作度: ★・・・・
+次のクラスは、継承しなくても、Geant4が用意したものをそのまま使えます。
 
-ランごとのユーザーアクションを設定するクラスです。
-``G4UserRunAction``クラスを継承して作成します。
-最初はなくてもよいクラスなので、自作度は【★・・・・】です。
+| クラス | 役割 | 利用例 |
+| --- | --- | --- |
+| `FTFP_BERT` | 物理リスト | `new FTFP_BERT{}` |
+| `G4OpticalPhysics` | 光学過程の物理モデル | `physics->RegisterPhysics(new G4OpticalPhysics{})` |
+| `G4ParticleGun` | 粒子を1つずつ入射する | 入射粒子の設定に使う |
+| `G4GeneralParticleSource` | 粒子の位置・方向・エネルギー分布を設定する | 入射粒子の設定に使う |
+| `G4MultiFunctionalDetector` | 検出器の物理量を集計する | `G4PSEnergyDeposit`などを登録する |
 
-:::{seealso}
+## 継承は任意のクラス
 
-- [](./geant4-user-runaction.md)
+次のクラスは、Geant4の仕組みでは、作らなくてもエラーになりません。
+基底クラスの関数は、何もしない実装になっています。
+必要になったときだけ、継承して上書きします。
+
+| クラス | 役割 | 作るタイミング |
+| --- | --- | --- |
+| `G4UserRunAction` | ランの開始と終了で処理する | 結果を集計して表示するとき |
+| `G4UserEventAction` | イベントの開始と終了で処理する | イベントごとの値をまとめるとき |
+| `G4UserTrackingAction` | 飛跡（トラック）の開始と終了で処理する | 飛跡ごとの情報を調べるとき |
+| `G4UserSteppingAction` | ステップごとに処理する | ステップごとの値を調べるとき |
+| `G4VSensitiveDetector` | 検出器でのヒットを記録する | 検出器の情報を記録するとき |
+
+:::{note}
+
+`G4VSensitiveDetector`の`ProcessHits()`は純粋仮想関数です。
+そのため、有感検出器を自作する場合は、`ProcessHits()`を必ず実装します。
+`G4MultiFunctionalDetector`を使えば、自作せずに済むこともあります。
 
 :::
+
+## 自作度の目安
+
+「自作度」は、ユーザーがそのクラスを、どれくらい書き換える必要があるかの目安です。
+
+| クラス | 自作度 | 理由 |
+| --- | --- | --- |
+| `main()`関数 | ★★・・・ | 付属サンプルをコピーして始められる |
+| `G4VUserDetectorConstruction` | ★★★★★ | 実験の形状を書く必要がある |
+| `G4VModularPhysicsList` | ★・・・・ | リファレンス物理リストを選べば十分 |
+| `G4VUserActionInitialization` | ★・・・・ | 付属サンプルを流用しやすい |
+| `G4VUserPrimaryGeneratorAction` | ★★★★・ | `G4ParticleGun`などを使えば、少し書けば済む |
+| `G4VSensitiveDetector` | ★★★★★ | 記録する物理量に合わせて書く必要がある |
+| `G4UserRunAction` / `G4UserEventAction` / `G4UserTrackingAction` | ★・・・・ | 最初は作らなくてよい |
+| `G4UserSteppingAction` | ★・・・・ | 最初は作らなくてよい |
 
 ## Geant4のクラス構造
 
-Geant4は大きく分けて8つのクラスカテゴリーで構成されています。
+Geant4は、大きく分けて次の8つのクラスカテゴリーで構成されています。
 
 1. Run and Event
 2. Tracking and Track
@@ -196,7 +173,20 @@ Geant4は大きく分けて8つのクラスカテゴリーで構成されてい�
 7. Visualization
 8. Interfaces
 
-アプリケーションを作成したり、変更したりする場合に、
-どのカテゴリーのクラスをいじればよいか、あたりをつける目安になると思います。
+アプリケーションを作成したり、変更したりするときに、どのカテゴリーのクラスを変更すればよいかの目安になります。
+詳細は、[Class Categories and Domains](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/classCategory.html)を参照してください。
 
-詳細は[Class Categories and Domains](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/classCategory.html)で確認できます。
+:::{seealso}
+
+- [](./geant4-main.md)
+- [](./geant4-user-detectorconstruction.md)
+- [](./geant4-user-physicslist.md)
+- [](./geant4-user-actioninitialization.md)
+- [](./geant4-user-primarygeneratoraction.md)
+- [](./geant4-user-runaction.md)
+- [](./geant4-user-eventaction.md)
+- [](./geant4-user-trackingaction.md)
+- [](./geant4-user-steppingaction.md)
+- [](./geant4-sensor-sensitivedetector.md)
+
+:::
