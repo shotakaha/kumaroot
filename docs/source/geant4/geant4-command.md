@@ -109,7 +109,8 @@ rm->beamOn(イベント数);
 /gun/number 100
 ```
 
-`/gun/number 粒子数`で、1イベントで入射する粒子の数を変更できます。
+`/gun/number`で、1イベントあたりの入射粒子の数を変更できます。
+引数に粒子数を指定します。
 
 :::{seealso}
 
@@ -127,7 +128,8 @@ gun->SetNumberOfParticles(粒子数);
 /gun/particle e-
 ```
 
-`/gun/particle 粒子名`で、1イベントで入射する粒子の種類を変更できます。
+`/gun/particle`で、1イベントで入射する粒子の種類を変更できます。
+引数は粒子（もしくは反粒子）の名前です。
 
 :::{seealso}
 
@@ -147,7 +149,8 @@ gun->SetParticleDefinition(particle);
 /gun/energy 500. MeV
 ```
 
-入射エネルギーを変更できます。
+`/gun/energy`で、1イベントで入射する粒子のエネルギーを変更できます。
+引数は、エネルギーの値と単位です。
 単位を間違えるとエラーになります。
 
 :::{seealso}
@@ -166,7 +169,8 @@ gun->SetParticleEnergy(energy);
 /gun/position 10. 10. 10. cm
 ```
 
-入射位置を変更できます。
+`/gun/position`で、1イベントで入射する粒子の位置を変更できます。
+引数は、3次元座標（x, y, z）と距離の単位です。
 単位を間違えるとエラーになります。
 
 :::{seealso}
@@ -187,7 +191,8 @@ gun->SetParticlePosition(position);
 /gun/direction 0 1 2  # y-z平面内でz軸から約26.6度（tan = 1/2）
 ```
 
-入射方向を、入射位置からのベクトルで設定できます。
+`/gun/direction`で、1イベントで入射する粒子の方向を変更できます。
+引数は、3次元ベクトル（ex, ey, ez）です。
 単位は不要です。
 
 :::{seealso}
