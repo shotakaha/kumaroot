@@ -1,7 +1,5 @@
 # 物理リストしたい（`G4VModularPhysicsList`）
 
-`G4VModularPhysicsList`の使い方の概要を紹介します。
-
 ```cpp
 // 疑似コード
 auto physics = new FTFP_BERT{};                    // 既存の物理リストを選ぶ
@@ -9,10 +7,10 @@ physics->RegisterPhysics(new G4OpticalPhysics{});  // 物理モデルを追加�
 rm->SetUserInitialization(physics);                // RunManagerに登録する
 ```
 
-物理リストは、シミュレーションで使う物理モデル（粒子の種類と相互作用）をまとめたものです。
-Geant4は、よく使われる組み合わせを**リファレンス物理リスト**として用意しています。
-`G4VModularPhysicsList`は、これらの物理リストの基底クラスです。
-物理モデルを部品として`RegisterPhysics()`で登録し、組み合わせて使います。
+`G4VModularPhysicsList`は、相互作用の種類と物理モデルをまとめたモジュール型の**物理リスト**の基底クラスです。
+よく使われる組み合わせについては、Geant4開発チームが**リファレンス物理リスト**としてプリセットを用意しています。
+ユーザーは基本的にこのプリセットからアプリに必要な物理モデルを追加して使います。
+
 
 :::{note}
 
