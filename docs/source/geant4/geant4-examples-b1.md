@@ -50,23 +50,48 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 
 ```cpp
 //////////////////////////////////////////////////
-// exampleB1.cc
+// exampleB1.cc（一部を省略）
 //////////////////////////////////////////////////
-auto *runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default)
-// Detector construction
-runManager->SetUserInitialization(new DetectorConstruction());
+int main(int argc, char** argv)
+{
+  // 引数がなければ対話モード
+  G4UIExecutive* ui = nullptr;
+  if (argc == 1) {
+    ui = new G4UIExecutive(argc, argv);
+  }
 
-// Physics list
-G4VModularPhysicsList* physicsList = new QBBC;
-physicsList->SetVerboseLevel(1);
-runManager->SetUserInitialization(physicsList);
+  auto runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
 
-// User action initialization
-runManager->SetUserInitialization(new ActionInitialization());
+  // Detector construction
+  runManager->SetUserInitialization(new DetectorConstruction());
 
-G4UIExecutive *ui = new G4UIExecutive(argc, argv);
-G4VisManager *visManager = new G4VisExecutive;
-G4UImanager *uiManager = G4UImanager::GetUIpointer();
+  // Physics list
+  auto physicsList = new QBBC;
+  physicsList->SetVerboseLevel(1);
+  runManager->SetUserInitialization(physicsList);
+
+  // User action initialization
+  runManager->SetUserInitialization(new ActionInitialization());
+
+  // Initialize visualization
+  auto visManager = new G4VisExecutive(argc, argv);
+  visManager->Initialize();
+
+  auto UImanager = G4UImanager::GetUIpointer();
+
+  if (!ui) {
+    // batch mode
+    G4String command = "/control/execute ";
+    G4String fileName = argv[1];
+    UImanager->ApplyCommand(command + fileName);
+  }
+  else {
+    // interactive mode
+    UImanager->ApplyCommand("/control/execute init_vis.mac");
+    ui->SessionStart();
+    delete ui;
+  }
+}
 ```
 
 メインプログラムは`exampleB1.cc`です。
@@ -79,24 +104,25 @@ G4UImanager *uiManager = G4UImanager::GetUIpointer();
 ユーザーアクション（`ActionInitialization`）
 が登録されます。
 その後、
-`G4UIExecutive`や`G4VisManager`など、
-UIや可視化を担当するマネージャーが初期化されます。
+`G4VisExecutive`で可視化が初期化されます。
 これらのマネージャーにより、マクロコマンドの入力や、
 イベント・検出器の表示が可能になります。
 
-このように
-`exampleB1`では、
-シミュレーションを構成する各要素を組み立て、
-実行を開始する準備を行なっています。
+最後に、実行方法を切り替えています。
+引数がなければ、`init_vis.mac`を実行して対話モードを開始します。
+引数があれば、それをマクロファイルとして実行し、バッチモードになります。
+`G4UIExecutive`は、対話モードのときだけ作成されます。
 
 ## 検出器したい（`DetectorConstruction`）
 
 検出器の形状や材料は`DetectorConstruction`クラスで定義します。
 `basic/B1`では、
-シミュレーション空間全体を表すWorldボリュームを作成し、
-その内部に検出器となる単純な箱形状のボリュームを配置しています。
+シミュレーション空間全体を表すWorldボリューム（箱形状、空気）を作成し、
+その内部にEnvelopeボリューム（箱形状、水）を配置しています。
+さらにEnvelopeの中に、`Shape1`（円錐形状、`G4_A-150_TISSUE`）と`Shape2`（台形形状、`G4_BONE_COMPACT_ICRU`）の2つのボリュームを配置しています。
 
 また、エネルギー損失を記録するための`Scoring Volume`もここで設定しています。
+`Scoring Volume`は`Shape2`です。
 
 :::{note}
 
@@ -115,7 +141,7 @@ Sensitive Detectorを使ったヒット情報の扱いは、
 
 `basic/B1`の入射粒子は、
 `PrimaryGeneratorAction`で`G4ParticleGun`を使って定義されています。
-初期状態では、電子を6 MeVで +Z方向に入射しています。
+初期状態では、ガンマ線を6 MeVで +Z方向に入射しています。
 
 入射粒子の設定はマクロで変更できます。
 粒子の種類やエネルギー、イベント数などをマクロファイルで指定できるため、再ビルドせずに条件を切り替えて試すことができます。
@@ -128,7 +154,7 @@ B1
 ├── CMakeLists.txt
 ├── GNUmakefile
 ├── History
-├── README
+├── README.md
 ├── exampleB1.cc
 ├── include
 │   ├── ActionInitialization.hh
@@ -149,8 +175,7 @@ B1
 ├── exampleB1.in
 ├── exampleB1.out
 ├── run1.mac
-├── run2.mac
-└── tsg_offscreen.mac
+└── run2.mac
 ```
 
 B1のディレクトリ構造は上のようになっています。
