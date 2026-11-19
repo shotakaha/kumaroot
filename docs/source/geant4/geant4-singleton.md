@@ -4,7 +4,9 @@
 Geant4の主要クラスでは、このシングルトン・パターンが採用されており、
 ユーザーはプログラムのどこからでも同じインスタンスにアクセスできます。
 
-## G4RunManager
+ここでは、ユーザーのコードから直接使うことが多いシングルトンだけを紹介します。
+
+## 全体を制御したい（`G4RunManager`）
 
 ```cpp
 auto rm = G4RunManager::GetRunManager();
@@ -22,7 +24,7 @@ auto rm = G4RunManager::GetRunManager();
 
 :::
 
-## G4NistManager
+## 材質したい（`G4NistManager`）
 
 ```cpp
 auto nm = G4NistManager::Instance();
@@ -39,7 +41,7 @@ auto nm = G4NistManager::Instance();
 
 :::
 
-## G4MaterialTable
+## Materialしたい（`G4MaterialTable`）
 
 ```cpp
 auto table = G4Material::GetMaterialTable();
@@ -64,7 +66,7 @@ for (auto* material: *table) {
 
 :::
 
-## G4ParticleTable
+## Particleしたい（`G4ParticleTable`）
 
 ```cpp
 auto pt = G4ParticleTable::GetParticleTable();
@@ -73,24 +75,36 @@ auto pt = G4ParticleTable::GetParticleTable();
 `G4ParticleTable`は、Geant4内の粒子が定義されたテーブルです。
 このテーブルから粒子の情報を検索できます。
 
-## G4ProcessTable
+## PhysicalVolumeしたい（`G4PhysicalVolumeStore`）
 
 ```cpp
-auto pt = G4ProcessTable::GetProcessTable();
+auto pvs = G4PhysicalVolumeStore::GetInstance();
 ```
 
-`G4ProcessTable`で物理プロセスを一覧できます。
+`G4PhysicalVolumeStore`はすべての物理ボリュームを管理するインスタンスです。
+物理ボリュームを定義すると、自動でこのインスタンスに追加されます。
+登録された物理ボリュームを検索できます。
 
-## G4SDManager
+## LogicalVolumeしたい（`G4LogicalVolumeStore`）
+
+```cpp
+auto lvs = G4LogicalVolumeStore::GetInstance();
+```
+
+`G4LogicalVolumeStore`はすべての論理ボリュームを管理するインスタンスです。
+論理ボリュームを定義すると、自動でこのインスタンスに追加されます。
+登録された論理ボリュームを検索できます。
+
+## SensitiveDetectorしたい（`G4SDManager`）
 
 ```cpp
 auto sm = G4SDManager::GetSDMpointer();
 ```
 
 `G4SDManager`はGeant4のSensitive Detectorを管理するシングルトンです。
-このマネージャーを通じて、Sensitive Detectorの登録や取得、ヒットの管理を行うことができます。
+このマネージャーを通じて、Sensitive Detectorの登録や取得を行うことができます。
 
-## G4UIManager
+## UIコマンドしたい（`G4UIManager`）
 
 ```cpp
 auto um = G4UIManager::GetUIpointer();
@@ -101,83 +115,7 @@ um->ApplyCommand("/run/beamOn 100");
 `G4UIManager`はGeant4のUIコマンドを管理するシングルトンです。
 マクロファイルの実行やUIコマンドの発行に使います。
 
-## G4GeometryManager
-
-```cpp
-auto gm = G4GeometryManager::GetInstance();
-```
-
-`G4GeometryManager`はすべてのジオメトリを管理するインスタンスです。
-
-## G4PhysicalVolumeStore
-
-```cpp
-auto pvs = G4PhysicalVolumeStore::GetInstance();
-```
-
-`G4PhysicalVolumeStore`はすべての物理ボリュームを管理するインスタンスです。
-物理ボリュームを定義すると、自動でこのインスタンスに追加されます。
-登録された物理ボリュームを検索できます。
-
-## G4LogicalVolumeStore
-
-```cpp
-auto lvs = G4LogicalVolumeStore::GetInstance();
-```
-
-`G4LogicalVolumeStore`はすべての論理ボリュームを管理するインスタンスです。
-論理ボリュームを定義すると、自動でこのインスタンスに追加されます。
-登録された論理ボリュームを検索できます。
-
-## G4SolidStore
-
-```cpp
-auto ss = G4SolidStore::GetInstance();
-```
-
-`G4SolidStore`はすべてのソリッド（形状）を管理するインスタンスです。
-ソリッドを定義すると、自動でこのインスタンスに追加されます。
-登録されたソリッドを検索できます。
-
----
-
-## G4ProductionCutsTable
-
-```cpp
-auto pct = G4ProductionCutsTable::GetProductionCutsTable();
-```
-
-`G4ProductionCutsTable`はすべての領域（`G4Region`）に設定されたカット値を統括管理するインスタンスです。
-このテーブルには、各粒子をトラッキングする際のエネルギーしきい値などが含まれています。
-
-## G4TransportationManager
-
-```cpp
-auto tm = G4TransportationManager::GetTransportationManager();
-```
-
-`G4TransportationManager`はナビゲーションとフィールドの統合管理を行うシングルトンです。
-トラッキング時の空間移動処理や電磁場の適用に関係します。
-
-## G4LossTableManager
-
-```cpp
-auto ltm = G4LossTableManager::Instance();
-```
-
-`G4LossTableManager`は、電磁過程（とくにエネルギー損失）に関する情報を一括して管理するためのインスタンスです。
-`G4EmProcessOptions` などと連携して使用します。
-
-## G4FieldManagerStore
-
-```cpp
-auto fms = G4FieldManagerStore::GetInstance();
-```
-
-`G4FieldManagerStore`は、複数の電磁場管理オブジェクト（`G4FieldManager`）を保持するストアです。
-それぞれの論理ボリュームに設定されたフィールド管理を一元的に扱います。
-
-## G4AnalysisManager
+## ファイル出力したい（`G4AnalysisManager`）
 
 ```cpp
 auto am = G4AnalysisManager::Instance();
@@ -194,7 +132,7 @@ ROOT、CSV、XMLなど複数の形式に出力できます。
 
 :::
 
-## SingletonManager
+## 統一したい（`SingletonManager`）
 
 ```cpp
 // SingletonManager.hh
