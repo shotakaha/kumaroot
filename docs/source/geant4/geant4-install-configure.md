@@ -52,6 +52,33 @@ Qtを使う場合は、`brew --prefix qt`でQtのインストール先を取得�
 `-DGEANT4_USE_OPENGL_X11=ON`はOpenGLを使うオプション（`GEANT4_USE_OPENGL_X11`）を有効にしています。
 `-DGEANT4_USE_QT=ON`はQtを使うオプション（`GEANT4_USE_QT`）を有効にしています。
 
+## 依存ライブラリを追加したい（`CMAKE_PREFIX_PATH`）
+
+```console
+$ cmake -DCMAKE_PREFIX_PATH=/path/to/dependencies;/path/to/other/dependencies
+```
+
+`CMAKE_PREFIX_PATH`は依存ライブラリの検索パスを指定するオプションです。
+複数のパスを指定する場合は、`;`（セミコロン）で区切ります。
+
+## マルチスレッドしたい（`GEANT4_USE_MULTITHREADING`）
+
+```console
+$ cmake -DGEANT4_USE_MULTITHREADING=ON
+```
+
+`GEANT4_USE_MULTITHREADING`はマルチスレッドを有効にするオプションです。
+デフォルトで有効（`ON`）になっています。
+
+## 付属サンプルしたい（`GEANT4_INSTALL_EXAMPLES`）
+
+```console
+$ cmake -DGEANT4_INSTALL_EXAMPLES=ON
+```
+
+`GEANT4_INSTALL_EXAMPLES`は付属サンプルを有効にするオプションです。
+デフォルトで有効（`ON`）になっています。
+
 ### 利用可能なビルドオプションを確認する
 
 [Geant4 Build Options](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html#geant4buildo)を参考に、
