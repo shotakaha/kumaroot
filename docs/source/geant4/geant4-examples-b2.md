@@ -6,21 +6,76 @@
 外部磁場を与え、粒子が曲がる様子を観察できます。
 `Sensitive Detector`と`Hit`の扱いを学ぶことができます。
 
-## ビルドしたい（`cmake`）
+`examples/basic/B2/`の中には、`B2a`と`B2b`のディレクトリがあります。
+どちらも同じ装置をシミュレーションしますが、チェンバーの作り方が違います。
+`B2a`は単純な円筒としてチェンバーを配置し、`B2b`はパラメータ化されたボリューム（`G4PVParameterised`）として配置します。
+
+`B2a`と`B2b`は、それぞれ独立したプロジェクトです。
+使いたいほうだけをコピーして、ビルドします。
+
+## ビルドしたい（`B2a`）
 
 ```console
-$ cd examples/basic/B2/B2a
-(B2a) $ mkdir build
-(B2a) $ cd build
-(B2a/build) $ cmake ..
-(B2a/build) $ make -j8
-(B2a/build) $ ./exampleB2a
+// サンプルと作業ディレクトリを設定する（パスは自分の環境に合わせる）
+$ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B2/B2a
+$ export G4WORK=~/repos/sandbox/g4work
+
+// 作業ディレクトリにコピーして移動する
+$ mkdir -p $G4WORK
+$ cp -R $G4EXAMPLE $G4WORK/
+$ cd $G4WORK/B2a
+
+// ビルドする
+$ cmake -S . -B build
+$ cmake --build build --parallel
+
+// 実行する
+$ cd build
+$ ./exampleB2a run1.mac    # バッチモード
+$ ./exampleB2a             # 対話モード
+
+// クリーンする
+$ cd $G4WORK/B2a
+$ cmake --build build --target clean    # ビルドした実行ファイルなどを削除する
+$ rm -r build                           # ビルド用ディレクトリごと削除する
 ```
 
-`examples/basic/B2/`の中には
-`B2a`と`B2b`のディレクトリがあります。
-シミュレーションできることは同じなので、どちらをビルドしてもOKです。
-マクロファイルが用意されているので、適当に実行して遊んでみます。
+`cmake`でビルドし、`exampleB2a`という実行ファイルを作成します。
+手順の詳しい説明は、[付属サンプルの遊び方](geant4-examples)を参照してください。
+
+実行ファイルは、`build/`の中に作成されます。
+`B2a`の`CMakeLists.txt`は、マクロファイル（`run1.mac`など）を`build/`にコピーするので、`build/`で実行できます。
+`./exampleB2a`を実行するときにマクロファイルを指定するとバッチモード、指定しないと対話モードになります。
+
+## ビルドしたい（`B2b`）
+
+```console
+// サンプルと作業ディレクトリを設定する（パスは自分の環境に合わせる）
+$ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B2/B2b
+$ export G4WORK=~/repos/sandbox/g4work
+
+// 作業ディレクトリにコピーして移動する
+$ mkdir -p $G4WORK
+$ cp -R $G4EXAMPLE $G4WORK/
+$ cd $G4WORK/B2b
+
+// ビルドする
+$ cmake -S . -B build
+$ cmake --build build --parallel
+
+// 実行する
+$ cd build
+$ ./exampleB2b run1.mac    # バッチモード
+$ ./exampleB2b             # 対話モード
+
+// クリーンする
+$ cd $G4WORK/B2b
+$ cmake --build build --target clean    # ビルドした実行ファイルなどを削除する
+$ rm -r build                           # ビルド用ディレクトリごと削除する
+```
+
+実行ファイルは`exampleB2b`です。
+手順は`B2a`と同じです。`B2b`の`run1.mac`は、`B2a`と同じ内容です。
 
 ## メイン（`exampleB2a.cc`）
 
