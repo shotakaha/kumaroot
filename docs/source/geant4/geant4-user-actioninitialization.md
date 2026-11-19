@@ -52,10 +52,9 @@ virtual void BuildForMaster() const {}
 
 ## ActionInitialization
 
-ユーザーアクションの初期化には
-`G4VUserActionInitialization`を継承したクラスを自作します。
-このクラスの中で、`Build`を必ず定義します。
-`BuildForMaster`は、マルチスレッド環境で`RunAction`を設定する場合に定義します（デフォルトでは何もしません）。
+ユーザーアクションの初期化は、`G4VUserActionInitialization`を継承したクラスで行います。
+`Build`は必ず定義します。
+`BuildForMaster`は、マルチスレッドで`RunAction`を設定する場合に定義します（デフォルトでは何もしません）。
 
 ## ActionInitialization::Build
 
@@ -82,12 +81,8 @@ void ActionInitialization::Build() const {
 }
 ```
 
-`Build()`にはワーカースレッド用のユーザーアクションを登録します。
-ここでは主に、
-入射粒子の設定（`PrimaryGeneratorAction`）、
-ラン処理の設定（`RunAction`）、
-イベント処理の設定（`EventAction`）などを
-`SetUserAction(...)`を使って設定します。
+`Build()`では、ワーカースレッド用のユーザーアクションを登録します。
+主に、入射粒子（`PrimaryGeneratorAction`）、ラン処理（`RunAction`）、イベント処理（`EventAction`）などを`SetUserAction(...)`で設定します。
 
 :::{seealso}
 
@@ -111,14 +106,14 @@ void ActionInitialization::BuildForMaster() const {
 }
 ```
 
-`BuildForMaster()`はマルチスレッド環境のマスタースレッド専用の初期化関数です。
+`BuildForMaster()`は、マルチスレッド環境でマスタースレッドだけが呼び出す初期化関数です。
 シーケンシャルモードでは呼び出されません。
-通常はRunActionのみをここで設定し、ラン単位での集計処理のほか、
-ファイル操作などを設定します。
+通常は`RunAction`のみを設定します。マスター側の`RunAction`では、ワーカーの結果の集計や出力などを担当させます。
 
 :::{note}
 
-`RunAction`の設定は、`Build`と`BuildForMaster`の両方に必要です。
+マルチスレッドでは`RunAction`を`Build`と`BuildForMaster`の両方で設定します。
+マスター用とワーカー用は別のインスタンスになります。
 
 :::
 
@@ -151,8 +146,8 @@ int main(int argc, char** argv)
 }
 ```
 
-メイン関数でユーザーアクションを設定する最小構成です。
-`SetUserInitialization`を使って、ユーザーアクション一式（`ActionInitialization`）をRunManagerに登録しています。
+`main`関数での最小構成です。
+`SetUserInitialization`に`ActionInitialization`を渡して、ユーザーアクション一式をRunManagerに登録します。
 
 :::{seealso}
 
@@ -164,7 +159,7 @@ int main(int argc, char** argv)
 
 ## ユーザー定義クラス（`ActionInitialization`）
 
-コピペして利用できるテンプレートを作成しました。
+そのまま流用できるテンプレートを示します。
 
 ### ヘッダーファイル（`include/ActionInitialization.hh`）
 
@@ -198,8 +193,8 @@ class ActionInitialization : public G4VUserActionInitialization
 
 :::{note}
 
-デフォルトコンストラクター／デストラクターを使う場合は、省略可能です。
-ここではデフォルトであることを忘れないために明示してあります。
+デフォルトのコンストラクター／デストラクターは省略できます。
+ここでは、デフォルトを使っていることが分かるように明示しています。
 
 :::
 
