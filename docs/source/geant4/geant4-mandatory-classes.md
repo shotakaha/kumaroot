@@ -23,23 +23,23 @@ int main(int argc, char** argv)
 ```
 
 Geant4は、シミュレーションの枠組みを提供するツールキットです。
-利用者は、Geant4が用意した基底クラスを継承し、自分の実験に合わせて中身を書きます。
-`main()`関数で、それらを登録してから実行します。
+ユーザーは、Geant4が用意した基底クラスを継承し、自分の実験に合わせて中身のパーツを自作する必要があります。
+自作したパーツを`main()`関数で登録してから実行します。
 
-## ツールキットとは
+Geant4には、
+粒子の輸送（particle transportation）、
+物理過程の計算（physics process）、
+イベントの管理（event management）、
+ヒットの集計（hit collection）などの「Geant4が提供する共通基盤」のクラスと、
+測定器の形状（detector geometry）、
+入射粒子の生成（primary particle generation）、
+ユーザーアクション（user action）などの「ユーザーが実装する部分」のクラスがあります。
 
-ツールキットとは、部品と枠組みを用意しておき、利用者が必要な部分だけを書いて組み立てるライブラリのことです。
-Geant4では、次のような役割分担になっています。
-
-- **Geant4が用意する部分**：粒子の輸送、物理過程の計算、イベントの管理、ヒットの集計など
-- **利用者が用意する部分**：測定器の形状、入射粒子、記録したい量、物理モデルの選択など
-
-利用者が書いたクラスは、Geant4から決まったタイミングで呼ばれます。
-この仕組みを実現しているのが、C++の継承と仮想関数です。
+C++のクラスの継承と仮想関数を使うことで、Geant4はユーザーが自作したクラスを、決まったタイミングで呼び出すことができます。
 
 ## Geant4のクラス構造
 
-Geant4は、大きく分けて次の8つのクラスカテゴリーで構成されています。
+Geant4は大きく分けて次の8つのクラスカテゴリーで構成されています。
 
 1. Run and Event
 2. Tracking and Track
@@ -50,7 +50,7 @@ Geant4は、大きく分けて次の8つのクラスカテゴリーで構成さ�
 7. Visualization
 8. Interfaces
 
-アプリケーションを作成したり、変更したりするときに、どのカテゴリーのクラスを変更すればよいかの目安になります。
+アプリを作成したり変更したりするときに、どのカテゴリーのクラスを変更すればよいかの目安になります。
 詳細は、[Class Categories and Domains](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/classCategory.html)を参照してください。
 
 :::{seealso}
@@ -80,7 +80,7 @@ class G4VUserDetectorConstruction {
     virtual void ConstructSDandField();           // 仮想関数
 };
 
-// 派生クラス（利用者が書く）
+// 派生クラス（ユーザーが書く）
 class Geometry : public G4VUserDetectorConstruction {
   public:
     G4VPhysicalVolume* Construct() override;      // 必ず実装する
@@ -92,7 +92,7 @@ class Geometry : public G4VUserDetectorConstruction {
 - **純粋仮想関数**：`= 0`を付けた関数は、基底クラスでは実装しません。派生クラスで必ず実装する必要があります。
 
 `G4VUserDetectorConstruction`で見ると、次のようになります。
-`Construct()`は純粋仮想関数なので、利用者の`Geometry`が実装します。
+`Construct()`は純粋仮想関数なので、ユーザーの`Geometry`が実装します。
 `ConstructSDandField()`は仮想関数で、既定では何もしません。有感検出器や場が必要なときだけ実装します。
 
 クラスの関係は、次の図のとおりです。
@@ -113,9 +113,9 @@ classDiagram
 
 :::
 
-Geant4の`RunManager`は、利用者の`Geometry`を基底クラスのポインターで保持しています。
+Geant4の`RunManager`は、ユーザーの`Geometry`を基底クラスのポインターで保持しています。
 初期化のときは、基底クラスのポインターを通して`Construct()`を呼び出します。
-すると、利用者の`Geometry::Construct()`が実行されます。
+この呼び出しで、ユーザーの`Geometry::Construct()`が実行されます。
 
 :::{mermaid}
 
@@ -148,7 +148,7 @@ sequenceDiagram
 
 純粋仮想関数を1つでも持つクラスは、抽象クラスと呼ばれます。
 抽象クラスは、そのままでは`new`できません。
-Geant4の基底クラスは、利用者が派生クラスを作って使うことを前提にしています。
+Geant4の基底クラスは、ユーザーが派生クラスを作って使うことを前提にしています。
 
 :::
 
@@ -161,8 +161,7 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 | `G4VUserDetectorConstruction` | 測定器の形状を作る | `Construct()` | `G4VUserDetectorConstruction is not defined!` |
 | `G4VUserPhysicsList` | 物理過程を設定する | `ConstructParticle()`、`ConstructProcess()` | `G4VUserPhysicsList is not defined!` |
 
-物理リストは、自作する代わりに、Geant4が用意したリファレンス物理リスト（`FTFP_BERT`など）を使えます。
-その場合は、継承せずに使えます。
+物理リストは、自作せずに、Geant4が用意したリファレンス物理リスト（`FTFP_BERT`など）を使えます。
 詳しくは、[](./geant4-user-physicslist.md)を参照してください。
 
 測定器は、必ず自作します。
@@ -170,13 +169,13 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 
 ## 継承が実質的に必要なクラス
 
-次のクラスは、実際のアプリケーションではほぼ必ず作ります。
+次のクラスは、実際のアプリではほぼ必ず作ります。
 入射粒子を生成するには、`G4VUserPrimaryGeneratorAction`が必要です。
 
 | クラス | 役割 | 純粋仮想関数 | 省略したときの影響 |
 | --- | --- | --- | --- |
 | `G4VUserPrimaryGeneratorAction` | 入射粒子を生成する | `GeneratePrimaries()` | `BeamOn()`で`G4VUserPrimaryGeneratorAction is not defined!`のエラー |
-| `G4VUserActionInitialization` | ユーザーアクションを登録する | `Build()` | 入射粒子とユーザーアクションを登録する場所がなくなる |
+| `G4VUserActionInitialization` | ユーザーアクションを登録する | `Build()` | ユーザーアクションを登録する標準の場所がなくなる |
 
 `G4VUserPrimaryGeneratorAction`は、`G4ParticleGun`などを使えば、自分でほとんど書かずに済みます。
 詳しくは、[](./geant4-user-primarygeneratoraction.md)を参照してください。
@@ -202,7 +201,7 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 
 ## 継承が任意のクラス
 
-次のクラスは、Geant4の仕組みでは、作らなくてもエラーになりません。
+次のクラスは、作らなくてもエラーになりません。
 基底クラスの関数は、何もしない実装になっています。
 必要になったときだけ、継承して上書きします。
 
@@ -212,15 +211,10 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 | `G4UserEventAction` | イベントの開始と終了で処理する | イベントごとの値をまとめるとき |
 | `G4UserTrackingAction` | 飛跡（トラック）の開始と終了で処理する | 飛跡ごとの情報を調べるとき |
 | `G4UserSteppingAction` | ステップごとに処理する | ステップごとの値を調べるとき |
-| `G4VSensitiveDetector` | 検出器でのヒットを記録する | 検出器の情報を記録するとき |
 
-:::{note}
-
-`G4VSensitiveDetector`の`ProcessHits()`は純粋仮想関数です。
-そのため、有感検出器を自作する場合は、`ProcessHits()`を必ず実装します。
+有感検出器（`G4VSensitiveDetector`）は、検出器でのヒットを記録するときだけ作ります。
+`ProcessHits()`は純粋仮想関数なので、作る場合は必ず実装します。
 `G4MultiFunctionalDetector`を使えば、自作せずに済むこともあります。
-
-:::
 
 ## 自作度の目安
 
