@@ -1,37 +1,114 @@
 # ユーザーアクションしたい（`G4VUserActionInitialization`）
 
-`G4VUserActionInitialization`は、ユーザーアクション（`RunAction`、`EventAction`など）をまとめて初期化するための抽象基底クラスです。
-マルチスレッド環境に対応する枠組みとしてv9.6で導入されました。
+```cpp
+// 疑似コード
+class ActionInitialization : public G4VUserActionInitialization {
+  public:
+    void Build() const override;           // 必須：ワーカースレッド用
+    void BuildForMaster() const override;  // 任意：マスタースレッド用
+};
+
+void ActionInitialization::Build() const {
+    // ワーカースレッドごとに、ユーザーアクションを登録する
+    SetUserAction(new PrimaryGeneratorAction{});
+    SetUserAction(new RunAction{});
+    SetUserAction(new EventAction{});
+}
+
+void ActionInitialization::BuildForMaster() const {
+    // マスタースレッドでは、RunActionだけを登録する
+    SetUserAction(new RunAction{});
+}
+```
+
+`G4VUserActionInitialization`は、ユーザーアクション（`RunAction`、`EventAction`など）をまとめて初期化するための基底クラスです。
+マルチスレッド環境に対応する枠組みとして、v9.6で導入されました。
 
 :::{note}
 
-v9.6以前は`SetUserAction`をmain関数などで、
-個別に直接呼び出して、ユーザーアクションを初期化していました。
+v9.6以前は、main関数などで`SetUserAction`を個別に直接呼び出して、ユーザーアクションを初期化していました。
 
 :::
 
-## 親クラス（`public G4VUserActionInitialization`）
-
-- [G4VUserActionInitialization](https://geant4.kek.jp/Reference/11.2.0/classG4VUserActionInitialization.html)
+## 初期化クラスを作りたい（`ActionInitialization`）
 
 ```cpp
-class G4VUserActionInitialization {
-  public:
-    G4VUserActionInitialization() = default;
-    virtual ~G4VUserActionInitialization() = default;
-
-  public:
-    virtual void Build() const = 0;
-    virtual void BuildForMaster() const {};
+class ActionInitialization : public G4VUserActionInitialization {
+  // ...
 };
 ```
 
-親クラス（`G4VUserActionInitialization`）の主要なメンバー関数を抜粋しました。
-コンストラクターとデストラクターは、親クラスの設定を引き継げばOKです。
-`Build()`は、ユーザーアクションを設定するための純粋仮想関数で、必ずオーバーライドが必要です。
-`BuildForMaster()`は、マルチスレッド環境で実行する場合に、
-マスタースレッドで呼び出される関数です。
-通常は、ここで`RunAction`のみを設定します。
+`G4VUserActionInitialization`を継承したクラスを作成します。
+クラス名は`ActionInitialization`など、わかりやすい名前にします。
+コンストラクターとデストラクターは、デフォルトのままで構いません。
+
+`Build()`は必ず実装します。
+`BuildForMaster()`は、マルチスレッドで`RunAction`を登録する場合に実装します。
+どちらも`const`な仮想関数なので、派生クラスでオーバーライドするときも`const`を付けます。
+
+:::{note}
+
+親クラスのデストラクターに`virtual`が付いているのは、`RunManager`が基底クラスのポインターで削除するためです。
+`virtual`がないと、派生クラスのデストラクターが呼ばれません。
+
+:::
+
+## ワーカースレッド用のユーザーアクションを登録したい（`Build`）
+
+```cpp
+void ActionInitialization::Build() const {
+    // 入射粒子の設定（必須）
+    SetUserAction(new PrimaryGeneratorAction{});
+
+    // 各アクションの設定（必要に応じて追加）
+    SetUserAction(new RunAction{});       // ラン処理
+    SetUserAction(new EventAction{});     // イベント処理
+    SetUserAction(new TrackingAction{});  // トラッキング処理
+    SetUserAction(new SteppingAction{});  // ステップ処理
+    SetUserAction(new StackingAction{});  // スタッキング処理
+}
+```
+
+`Build()`では、ワーカースレッドごとに使うユーザーアクションを登録します。
+入射粒子（`PrimaryGeneratorAction`）は必ず登録します。
+ラン処理（`RunAction`）やイベント処理（`EventAction`）などは、必要なものだけ`SetUserAction(...)`で登録します。
+
+マルチスレッドでは、`Build()`がワーカースレッドの数だけ呼ばれます。
+そのため、各スレッドに独立したオブジェクトが作られます。
+
+:::{seealso}
+
+詳しくは
+
+- [](./geant4-user-primarygeneratoraction.md)
+- [](./geant4-user-runaction.md)
+- [](./geant4-user-eventaction.md)
+- [](./geant4-user-trackingaction.md)
+- [](./geant4-user-steppingaction.md)
+
+に整理しました。
+
+:::
+
+## マスタースレッド用のRunActionを登録したい（`BuildForMaster`）
+
+```cpp
+void ActionInitialization::BuildForMaster() const {
+    // マスタースレッド用のRunActionを登録する
+    SetUserAction(new RunAction{});
+}
+```
+
+`BuildForMaster()`は、マルチスレッド環境でマスタースレッドだけが呼び出す関数です。
+シーケンシャルモードでは呼び出されません。
+通常は`RunAction`のみを登録します。マスター側の`RunAction`では、ワーカーの結果の集計や出力などを担当させます。
+
+:::{note}
+
+マルチスレッドでは、`RunAction`を`Build()`と`BuildForMaster()`の両方で登録します。
+マスター用とワーカー用は、別のインスタンスになります。
+
+:::
 
 :::{note}
 
@@ -50,118 +127,31 @@ virtual void BuildForMaster() const {}
 
 :::
 
-## ActionInitialization
+## 親クラスのメソッドを確認したい
 
-ユーザーアクションの初期化は、`G4VUserActionInitialization`を継承したクラスで行います。
-`Build`は必ず定義します。
-`BuildForMaster`は、マルチスレッドで`RunAction`を設定する場合に定義します（デフォルトでは何もしません）。
-
-## ActionInitialization::Build
+親クラス（`G4VUserActionInitialization`）の主要なメンバー関数は、次のとおりです。
 
 ```cpp
-void ActionInitialization::Build() const {
-    // 入射粒子の設定（必須）
-    SetUserAction(new PrimaryGeneratorAction{});
+class G4VUserActionInitialization {
+  public:
+    G4VUserActionInitialization() = default;
+    virtual ~G4VUserActionInitialization() = default;
 
-    // 各アクションの設定（必要に応じて追加）
-    // ラン処理
-    SetUserAction(new RunAction{});
-
-    // イベント処理
-    SetUserAction(new EventAction{});
-
-    // トラッキング処理
-    SetUserAction(new TrackingAction{});
-
-    // ステップ処理
-    SetUserAction(new SteppingAction{});
-
-    // スタッキング処理
-    SetUserAction(new StackingAction{});
-}
+  public:
+    virtual void Build() const = 0;
+    virtual void BuildForMaster() const {};
+};
 ```
 
-`Build()`では、ワーカースレッド用のユーザーアクションを登録します。
-主に、入射粒子（`PrimaryGeneratorAction`）、ラン処理（`RunAction`）、イベント処理（`EventAction`）などを`SetUserAction(...)`で設定します。
+- `Build()`は純粋仮想関数です。自作クラスで必ず`override`します。
+- `BuildForMaster()`は仮想関数で、既定では何もしません。マルチスレッドで`RunAction`を登録するときだけ`override`します。
+- コンストラクターとデストラクターは、親クラスの設定をそのまま引き継げばOKです。
 
-:::{seealso}
+親クラスの詳しい説明は、[G4VUserActionInitialization](https://geant4.kek.jp/Reference/11.2.0/classG4VUserActionInitialization.html)を参照してください。
 
-詳しくは
-
-- [](./geant4-user-primarygeneratoraction.md)
-- [](./geant4-user-runaction.md)
-- [](./geant4-user-eventaction.md)
-- [](./geant4-user-trackingaction.md)
-- [](./geant4-user-steppingaction.md)
-
-に整理しました。
-:::
-
-## ActionInitialization::BuildForMaster
-
-```cpp
-void ActionInitialization::BuildForMaster() const {
-    // マスタースレッド用のRunActionを登録
-    SetUserAction(new RunAction{});
-}
-```
-
-`BuildForMaster()`は、マルチスレッド環境でマスタースレッドだけが呼び出す初期化関数です。
-シーケンシャルモードでは呼び出されません。
-通常は`RunAction`のみを設定します。マスター側の`RunAction`では、ワーカーの結果の集計や出力などを担当させます。
-
-:::{note}
-
-マルチスレッドでは`RunAction`を`Build`と`BuildForMaster`の両方で設定します。
-マスター用とワーカー用は別のインスタンスになります。
-
-:::
-
-## メイン関数（`main`）
-
-```cpp
-// プロジェクト名.cc（ここではToyMC.cc）
-
-// ユーザー定義クラス
-#include "ActionInitialization.hh"
-
-// Geant4のクラス
-#include "G4RunManagerFactory.hh"
-
-int main(int argc, char** argv)
-{
-    auto rm = G4RunManagerFactory::CreateRunManager();
-
-    // ジオメトリの設定（省略）
-    // 物理モデルの設定（省略）
-
-    // ユーザーアクションの設定
-    rm->SetUserInitialization(new ActionInitialization{});
-
-    // 実験開始（省略）
-    rm->Initialize();
-    rm->BeamOn(10);
-    delete rm;
-    return 0;
-}
-```
-
-`main`関数での最小構成です。
-`SetUserInitialization`に`ActionInitialization`を渡して、ユーザーアクション一式をRunManagerに登録します。
-
-:::{seealso}
-
-詳しくは
-[](./geant4-main.md)
-に整理しました。
-
-:::
-
-## ユーザー定義クラス（`ActionInitialization`）
+## 自作クラスの例を見たい（`ActionInitialization`）
 
 そのまま流用できるテンプレートを示します。
-
-### ヘッダーファイル（`include/ActionInitialization.hh`）
 
 ```cpp
 // include/ActionInitialization.hh
@@ -193,12 +183,13 @@ class ActionInitialization : public G4VUserActionInitialization
 
 :::{note}
 
+`#ifndef`から`#endif`は、インクルードガードです。
+同じヘッダーを複数回読み込んでも、クラスが二重に定義されないようにします。
+
 デフォルトのコンストラクター／デストラクターは省略できます。
 ここでは、デフォルトを使っていることが分かるように明示しています。
 
 :::
-
-### ソースファイル（`src/ActionInitialization.cc`）
 
 ```cpp
 // src/ActionInitialization.cc
@@ -235,3 +226,53 @@ void ActionInitialization::Build() const
 
 }  // namespace ToyMC
 ```
+
+## main()関数に登録したい
+
+```cpp
+// プロジェクト名.cc（ここではToyMC.cc）
+
+// ユーザー定義クラス
+#include "ActionInitialization.hh"
+
+// Geant4のクラス
+#include "G4RunManagerFactory.hh"
+
+int main(int argc, char** argv)
+{
+    auto rm = G4RunManagerFactory::CreateRunManager();
+
+    // ジオメトリの設定（省略）
+    // 物理モデルの設定（省略）
+
+    // ユーザーアクションの設定
+    rm->SetUserInitialization(new ToyMC::ActionInitialization{});
+
+    // 実験開始（省略）
+    rm->Initialize();
+    rm->BeamOn(10);
+    delete rm;
+    return 0;
+}
+```
+
+`SetUserInitialization()`に`ActionInitialization`を渡して、ユーザーアクション一式をRunManagerに登録します。
+`G4RunManagerFactory::CreateRunManager()`は、ビルド設定に応じてマルチスレッドまたはシーケンシャルのRunManagerを作成します。
+どちらの場合も、`main()`関数の書き方は変わりません。
+
+:::{note}
+
+`new`で作成したオブジェクトを`SetUserInitialization()`に渡すと、所有権は`RunManager`に移ります。
+そのため、`main()`関数で`delete`する必要はありません。
+
+:::
+
+:::{seealso}
+
+詳しくは
+
+- [](./geant4-main.md)
+
+に整理しました。
+
+:::
