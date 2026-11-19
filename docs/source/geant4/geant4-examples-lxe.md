@@ -50,7 +50,7 @@ GDMLは使わないので、GDML無効のGeant4でも、この手順でビルド
 検出器は、次の部品で構成されています。
 
 - **LXe本体**：液体キセノンの直方体。既定の寸法は、17.8 cm × 17.8 cm × 22.6 cmです。
-- **PMT**：LXe本体の周りに並べる光電子増倍管。既定では、`nx`、`ny`、`nz`で決まる数を配置します。既定値は、それぞれ2、2、3です。
+- **PMT**：LXe本体の周りに並べる光電子増倍管。配置する数は`nx`、`ny`、`nz`で決まります。既定値は、順に2、2、3です。
 - **ハウジング**：LXe本体を囲む容器。厚さは、既定で0.0635 cmです。
 - **球**：LXe本体の中に置ける反射用の球。既定で有効になっています。
 - **WLSスラブとファイバー**：波長変換（WLS）に使う部品。既定では無効です。
@@ -83,7 +83,7 @@ LXeMainVolume(G4RotationMatrix* pRot,
 | `/LXe/detector/nx`、`ny`、`nz` | PMTの数（各方向） |
 | `/LXe/detector/volumes/sphere` | 反射用の球の有無 |
 | `/LXe/detector/reflectivity` | ハウジングの反射率 |
-| `/LXe/detector/volumes/wls`、`lxe` | WLSの部品と、LXe本体の有無 |
+| `/LXe/detector/volumes/wls`、`lxe` | WLSスラブの有無と、LXe本体の有無 |
 | `/LXe/detector/nfibers` | WLSファイバーの本数 |
 | `/LXe/detector/defaults` | すべての値を既定値に戻す |
 
@@ -122,8 +122,7 @@ void LXeDetectorConstruction::SetDimensions(G4ThreeVector dims)
 /run/beamOn 200
 ```
 
-`cerenkov.mac`では、`/LXe/detector/MainScintYield 0`で発光量を0にしています。
-これにより、発光を止めてチェレンコフ光だけを観察できます。
+`cerenkov.mac`では、`/LXe/detector/MainScintYield 0`で発光量を0にして、チェレンコフ光だけを観察しています。
 
 ## 物性（シンチレーション）を設定したい
 
@@ -144,7 +143,7 @@ WLSファイバーの発光量は、`/LXe/detector/WLSScintYield`で変えられ
 ## PMTでの検出を理解したい
 
 PMTの光電面（フォトカソード）には、光学表面（`G4OpticalSurface`）を付けています。
-光電面の体積は光子を通さないので、光子は境界面で止められます。
+光電面の体積は光子を透過させないので、光子は境界面で止まります。
 このとき、境界面の過程（`G4OpBoundaryProcess`）の状態が`Detection`になります。
 
 `LXeSteppingAction`は、この状態を見つけると、`LXePMTSD`の`ProcessHits_boundary()`を呼びます。
@@ -190,7 +189,7 @@ Number of absorbed photons per event :	 3013 +- 31.61
 Total energy deposition in scintillator per event:	 513.7 +- 5.299 keV.
 ```
 
-511 keVのガンマ線がシンチレータで落としたエネルギーは、約514 keVと表示されています。
+表示されたエネルギー付与は約514 keVで、入射したガンマ線の511 keVに近い値です。
 
 `cerenkov.mac`（200 MeVのμ⁺、10000イベント）を実行すると、次のような集計が表示されます（一例です）。
 発光量を0にしているので、シンチレーション光子は0になり、チェレンコフ光子だけが現れます。
@@ -205,7 +204,7 @@ Number of photons absorbed at boundary per event:	 6.509 +- 0.04497
 Total energy deposition in scintillator per event:	 6732 +- 40.36 keV.
 ```
 
-`photon.mac`（光学光子、7.07 eV、10イベント）は、光子の輸送を確認するための最小のマクロです。
+`photon.mac`（光学光子、7.07 eV、10イベント）は、光子の輸送を確認するための簡単なマクロです。
 1イベントあたり、約0.3回のヒットと約0.7回の吸収が表示されます（一例です）。
 
 ## WLSを使いたい
