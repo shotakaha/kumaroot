@@ -23,8 +23,6 @@ Geant4アプリの測定器は、このクラスを継承した自作クラス�
 
 ## 測定器クラスを作りたい（`G4VUserDetectorConstruction`）
 
-自作クラスは、`G4VUserDetectorConstruction`を`public`に継承します。
-
 ```cpp
 class Geometry : public G4VUserDetectorConstruction {
   // ...
@@ -48,7 +46,6 @@ class G4VUserDetectorConstruction {
         virtual G4VPhysicalVolume* Construct() = 0;
         virtual void ConstructSDandField();
     };
-    ```  
 }
 ```
 
