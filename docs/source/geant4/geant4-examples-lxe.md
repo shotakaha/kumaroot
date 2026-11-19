@@ -108,8 +108,8 @@ void LXeDetectorConstruction::SetDimensions(G4ThreeVector dims)
 | ファイル | 内容 |
 | --- | --- |
 | `LXe.mac` | 511 keVのガンマ線を200イベント撃つ。既定の形状を使う |
-| `cerenkov.mac` | 200 MeVのμ⁺を撃ち、1ステップだけ進ませる。チェレンコフ光だけを見る |
-| `photon.mac` | 光学光子を撃つ。既定の形状を使う |
+| `cerenkov.mac` | 200 MeVのμ⁺を10000イベント撃ち、1ステップだけ進ませる。発光を止めて、チェレンコフ光だけを見る |
+| `photon.mac` | 7.07 eVの光学光子を10イベント撃つ。光子の輸送を確認する |
 | `wls.mac` | WLSファイバーを15本配置し、511 keVの電子を撃つ |
 
 `LXe.mac`は、次のような流れです（抜粋）。
@@ -191,6 +191,22 @@ Total energy deposition in scintillator per event:	 513.7 +- 5.299 keV.
 ```
 
 511 keVのガンマ線がシンチレータで落としたエネルギーは、約514 keVと表示されています。
+
+`cerenkov.mac`（200 MeVのμ⁺、10000イベント）を実行すると、次のような集計が表示されます（一例です）。
+発光量を0にしているので、シンチレーション光子は0になり、チェレンコフ光子だけが現れます。
+
+```text
+The run was 10000 events.
+Number of hits per event:	 13.51 +- 0.0979
+Number of scintillation photons per event :	 0 +- 0
+Number of Cerenkov photons per event:	 53.54 +- 0.3473
+Number of absorbed photons per event :	 33.52 +- 0.2223
+Number of photons absorbed at boundary per event:	 6.509 +- 0.04497
+Total energy deposition in scintillator per event:	 6732 +- 40.36 keV.
+```
+
+`photon.mac`（光学光子、7.07 eV、10イベント）は、光子の輸送を確認するための最小のマクロです。
+1イベントあたり、約0.3回のヒットと約0.7回の吸収が表示されます（一例です）。
 
 ## WLSを使いたい
 
