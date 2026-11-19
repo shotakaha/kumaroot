@@ -104,15 +104,15 @@ auto sm = G4SDManager::GetSDMpointer();
 `G4SDManager`はGeant4のSensitive Detectorを管理するシングルトンです。
 このマネージャーを通じて、Sensitive Detectorの登録や取得を行うことができます。
 
-## UIコマンドしたい（`G4UIManager`）
+## UIコマンドしたい（`G4UImanager`）
 
 ```cpp
-auto um = G4UIManager::GetUIpointer();
+auto um = G4UImanager::GetUIpointer();
 um->ApplyCommand("/run/initialize");
 um->ApplyCommand("/run/beamOn 100");
 ```
 
-`G4UIManager`はGeant4のUIコマンドを管理するシングルトンです。
+`G4UImanager`はGeant4のUIコマンドを管理するシングルトンです。
 マクロファイルの実行やUIコマンドの発行に使います。
 
 ## ファイル出力したい（`G4AnalysisManager`）
@@ -144,6 +144,7 @@ ROOT、CSV、XMLなど複数の形式に出力できます。
 #include "G4ParticleTable.hh"
 #include "G4Material.hh"
 #include "G4AnalysisManager.hh"
+#include "G4UImanager.hh"
 
 class SingletonManager {
 public:
@@ -177,6 +178,11 @@ public:
         return G4AnalysisManager::Instance();
     }
 
+    // UI Manager
+    static G4UImanager* UIManager() {
+        return G4UImanager::GetUIpointer();
+    }
+
     // ここに必要なシングルトンを追加可能
 };
 ```
@@ -195,6 +201,7 @@ void Example() {
     auto pt = SingletonManager::ParticleTable();
     auto mt = SingletonManager::MaterialTable();
     auto am = SingletonManager::AnalysisManager();
+    auto um = SingletonManager::UIManager();
 
     // 例えば NIST から材料を取得
     G4Material* water = nm->FindOrBuildMaterial("G4_WATER");
@@ -202,3 +209,70 @@ void Example() {
 ```
 
 `SingletonManager.hh`を読み込み、必要なシングルトンを生成＆取得します。
+
+## アプリの中で使いたい（`SingletonManager`）
+
+```cpp
+// main.cc
+#include "G4RunManager.hh"
+#include "SingletonManager.hh"
+
+int main()
+{
+    // 1. RunManagerを最初に作る
+    auto runManager = new G4RunManager();
+
+    // 2. どこからでも、同じRunManagerを取得できる
+    auto rm = SingletonManager::RunManager();
+
+    // 3. 最後に削除する
+    delete runManager;
+    return 0;
+}
+```
+
+`SingletonManager`は、関数だけを持つクラスです。
+オブジェクトを作らずに、`SingletonManager::RunManager()`のように呼び出します。
+
+`RunManager`は、`main()`の最初で作ります。
+作る前に取得すると、`nullptr`が返ることがあります。
+取得したポインターは、`delete`しないでください。Geant4が管理しています。
+
+取得したシングルトンは、次のように、使う場所で呼び出します。
+
+```cpp
+// DetectorConstruction.cc
+#include "SingletonManager.hh"
+
+G4VPhysicalVolume* DetectorConstruction::Construct()
+{
+    auto nm = SingletonManager::NistManager();
+    G4Material* water = nm->FindOrBuildMaterial("G4_WATER");
+    // ... 形状の構築（省略）
+}
+```
+
+```cpp
+// RunAction.cc
+#include "SingletonManager.hh"
+
+void RunAction::EndOfRunAction(const G4Run*)
+{
+    auto am = SingletonManager::AnalysisManager();
+    // ... 結果の出力（省略）
+}
+```
+
+使う場所の目安は次のとおりです。
+
+- 形状の材料を決めるとき：`NistManager()`、`MaterialTable()`
+- 粒子の情報を調べるとき：`ParticleTable()`
+- 結果をファイルに出力するとき：`AnalysisManager()`
+- 有感検出器を登録するとき：`SDManager()`
+- マクロやUIコマンドを実行するとき：`UIManager()`
+
+:::{note}
+
+マルチスレッドでは、ワーカースレッドから呼ぶ場合の扱いを、別途確認してください。
+
+:::
