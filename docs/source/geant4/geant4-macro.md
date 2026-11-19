@@ -1,7 +1,7 @@
 # マクロしたい（``/control/execute``）
 
 [前のページ](./geant4-command.md)で紹介したコマンド操作を、
-ひとつファイルにまとめてマクロを作成できます。
+ひとつのファイルにまとめてマクロを作成できます。
 
 ```cfg
 /control/execute ファイル名
@@ -31,7 +31,9 @@ Geant4では、慣習的にマクロの拡張子に``.mac``を使っています
 ```
 
 ほとんどのコマンドで出力時の表示レベル（``verbose level``）を設定できます。
-レベルは``[0, 1, 2]``から選択でき、``0``が非表示です。
+設定できるレベルはコマンドによって異なります。
+``0``が非表示で、数字が大きいほど詳しく表示されます。
+各コマンドで指定できる値は、アプリケーションの対話モードで``help``コマンドを使うと確認できます。
 
 初期のデバッグ時には
 ``/tracking/verbose 1``、
@@ -39,7 +41,7 @@ Geant4では、慣習的にマクロの拡張子に``.mac``を使っています
 
 :::{hint}
 
-入射粒子のエネルギーを大きして、トラック数が多くなると、
+入射粒子のエネルギーを大きくして、トラック数が多くなると、
 ターミナル出力が使わない情報でいっぱいになってしまいます。
 そのときは非表示にしたほうがいいかもしれません。
 
@@ -58,17 +60,18 @@ Geant4では、慣習的にマクロの拡張子に``.mac``を使っています
 ```
 
 コマンドの一部をエイリアス化して、あとから値を代入できます。
+``{エイリアス名}``の形で使い、値は``/control/alias``で先に定義しておく必要があります。
 詳細は``AnaEx03``のマクロを参照してください。
 
 ## コマンド履歴したい（``/control/saveHistory``）
 
 ```cfg
 /control/saveHistory ファイル名
-/control/saveHistory [G4history.macro]
+/control/saveHistory [G4history.macro]  # [] 内は省略可能
 ```
 
 実行したコマンドのリストをファイルに保存できます。
-デフォルトのファイル名は``G4history.macro``です。
+ファイル名を省略すると、デフォルトの``G4history.macro``に保存されます。
 
 ## データを保存したい（``/analysis/``）
 
@@ -106,21 +109,30 @@ Geant4では、慣習的にマクロの拡張子に``.mac``を使っています
 
 :::
 
-## 起動時にマクロしたい（``G4UIManager``）
+## 起動時にマクロしたい（``G4UImanager``）
 
 ```cpp
 int main(int argc, char** argv)
 {
     // 第一引数がマクロの場合
-    G4String fileName = argv[1];
-    G4String command = "/control/execute ";
-    G4UImanager* um = G4UImanager::GetUIpointer();
-    um->ApplyCommand(command+fileName);
+    if (argc > 1) {
+        G4String fileName = argv[1];
+        G4String command = "/control/execute ";
+        G4UImanager* um = G4UImanager::GetUIpointer();
+        um->ApplyCommand(command+fileName);
+    }
 }
 ```
 
 ``main()``関数で``G4UImanager``を設定すると
 アプリケーション起動時に、マクロを読み込むことができます。
+引数がないときは、マクロを読み込まずに終了します。
+
+:::{seealso}
+
+起動時に読み込むマクロの作成例は、[](./geant4-macro-setup.md)を参照してください。
+
+:::
 
 :::{hint}
 
