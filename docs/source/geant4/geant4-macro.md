@@ -75,7 +75,7 @@ Geant4では、慣習的にマクロの拡張子として``.mac``を使います
 
 ```cfg
 /analysis/setDefaultFileType "csv"
-/analysis/open ファイル名
+/analysis/openFile ファイル名
 
 # 入射粒子の設定
 /gun/particle mu-
