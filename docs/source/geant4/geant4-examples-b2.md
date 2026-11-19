@@ -79,6 +79,32 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 
 ## メイン（`exampleB2a.cc`）
 
+```cpp
+//////////////////////////////////////////////////
+// exampleB2a.cc（一部を省略）
+//////////////////////////////////////////////////
+auto runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
+
+// Detector construction
+runManager->SetUserInitialization(new B2a::DetectorConstruction());
+
+// Physics list
+auto physicsList = new FTFP_BERT;
+physicsList->RegisterPhysics(new G4StepLimiterPhysics());
+runManager->SetUserInitialization(physicsList);
+
+// User action initialization
+runManager->SetUserInitialization(new B2::ActionInitialization());
+```
+
+メインプログラムは`exampleB2a.cc`です。
+`G4RunManagerFactory`でランマネージャーを作成し、検出器（`B2a::DetectorConstruction`）、物理リスト、ユーザーアクション（`B2::ActionInitialization`）を登録しています。
+物理リストには、`FTFP_BERT`に`G4StepLimiterPhysics`を追加しています。
+
+実行方法の切り替えは`B1`と同じです。
+引数がなければ対話モードで、`init_vis.mac`を実行します。GUIが使える場合は、さらに`gui.mac`も実行します。
+引数があれば、それをマクロファイルとして実行するバッチモードになります。
+
 ## 検出器したい（`DetectorConstruction`）
 
 `B2a`の検出器は、固定標的と複数の円筒型トラッカーで構成されています。
@@ -90,22 +116,43 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 
 ## 物理リストしたい（`FTFP_BERT`）
 
-`basic/B1`では、Geant4標準のモジュール型物理リストにある`FTFP_BERT`モデルを使っています。
+`basic/B2`では、Geant4標準のモジュール型物理リストにある`FTFP_BERT`モデルを使っています。
 `FTFP_BERT`は、高エネルギー側で`FTFP`、低エネルギー側で`BERT`に自動で切り替わるようになっている物理モデルです。
+
+さらに`G4StepLimiterPhysics`を追加しています。
+これは、トラッカー領域のステップ長の上限（`/B2/det/stepMax`）を有効にするために必要です。
 
 ## 入射粒子したい（`PrimaryGeneratorAction`）
 
 入射粒子は`PrimaryGeneratorAction`で`G4ParticleGun`を使って生成されます。
-この粒子はマクロで変更できます。
+初期状態では、陽子を3 GeVで +Z方向に入射しています。
+この粒子の種類やエネルギーは、マクロ（`/gun/particle`や`/gun/energy`）で変更できます。
 
 ## 一様磁場したい（`G4GlobalMagFieldMessenger`）
 
 `B2a`サンプルでは、飛跡検出器全体に一様な磁場を設定できます。
-磁場は`G4GlobalMagFieldMessenger`で定義され、値を非ゼロにすると、全体に磁場が作用し、荷電粒子の飛跡が曲がるようになります。
+磁場は`G4GlobalMagFieldMessenger`で定義されます。
+
+```cpp
+// B2a::DetectorConstruction::ConstructSDandField()
+G4ThreeVector fieldValue = G4ThreeVector();
+fMagFieldMessenger = new G4GlobalMagFieldMessenger(fieldValue);
+fMagFieldMessenger->SetVerboseLevel(1);
+```
+
+```cfg
+# run1.mac
+/globalField/verbose 1
+/globalField/setValue 0.2 0 0 tesla
+```
+
+ソースでは、磁場の値をゼロ（`G4ThreeVector()`）にして`G4GlobalMagFieldMessenger`を作成しています。
+このクラスが`/globalField/`以下のコマンドを提供するので、マクロの`/globalField/setValue`で磁場を設定できます。
+値を非ゼロにすると一様な磁場が自動的に作られ、荷電粒子の飛跡が曲がるようになります。
 
 ## ``run1.mac``
 
-``run1.mac``では4つの条件で粒子を入射しているようです。
+``run1.mac``では5つの条件で粒子を入射しています。
 
 ```cfg
 # 入射粒子: デフォルト値（種類: 陽子、エネルギー: 3 GeV、方向: (0, 0, 1)）
@@ -146,79 +193,12 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 /run/beamOn 3
 ```
 
-
-
-## 外部磁場はどうなってるの？
-
 ```cfg
-# run1.mac
-/globalField/verbose 1
-/globalField/setValue 0.2 0 0 tesla
-```
-
-マクロで外部磁場の強さを変更しています。
-どうやってるんだろう？
-
-
-## ビルド時のログ
-
-```console
-$ cd examples/basic/B2/B2a
-(B2a) $ mkdir build
-
-(B2a) $ cd build
-
-(B2a/build) $ cmake ..
--- The C compiler identification is AppleClang 15.0.0.15000309
--- The CXX compiler identification is AppleClang 15.0.0.15000309
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Found EXPAT: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libexpat.tbd (found suitable version "2.5.0", minimum required is "2.5.0")
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
--- Found Threads: TRUE
--- Found OpenGL: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/OpenGL.framework
--- Found X11: /opt/homebrew/include
--- Looking for XOpenDisplay in /opt/homebrew/lib/libX11.dylib;/opt/homebrew/lib/libXext.dylib
--- Looking for XOpenDisplay in /opt/homebrew/lib/libX11.dylib;/opt/homebrew/lib/libXext.dylib - found
--- Looking for gethostbyname
--- Looking for gethostbyname - found
--- Looking for connect
--- Looking for connect - found
--- Looking for remove
--- Looking for remove - found
--- Looking for shmat
--- Looking for shmat - found
--- Looking for IceConnectionNumber in ICE
--- Looking for IceConnectionNumber in ICE - not found
--- Found XQuartzGL: /usr/X11R6/include
--- Found Geant4: /Users/shotakaha/geant4/11.2.1/lib/cmake/Geant4/Geant4Config.cmake (found version "11.2.1")
--- Configuring done (1.2s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/shotakaha/repos/sandbox/g4work/examples/basic/B2/B2a/build3
-
-(B2a/build) $ make -j8
-[ 10%] Building CXX object CMakeFiles/exampleB2a.dir/exampleB2a.cc.o
-[ 20%] Building CXX object CMakeFiles/exampleB2a.dir/src/DetectorConstruction.cc.o
-[ 40%] Building CXX object CMakeFiles/exampleB2a.dir/src/EventAction.cc.o
-[ 40%] Building CXX object CMakeFiles/exampleB2a.dir/src/DetectorMessenger.cc.o
-[ 50%] Building CXX object CMakeFiles/exampleB2a.dir/src/TrackerHit.cc.o
-[ 60%] Building CXX object CMakeFiles/exampleB2a.dir/src/RunAction.cc.o
-[ 70%] Building CXX object CMakeFiles/exampleB2a.dir/src/ActionInitialization.cc.o
-[ 80%] Building CXX object CMakeFiles/exampleB2a.dir/src/PrimaryGeneratorAction.cc.o
-[ 90%] Building CXX object CMakeFiles/exampleB2a.dir/src/TrackerSD.cc.o
-[100%] Linking CXX executable exampleB2a
-[100%] Built target exampleB2a
-
-(B2a/build) $ ./exampleB2a
+# 入射粒子: ミューオン（mu-）、エネルギー: 300 MeVに変更
+# 表示レベル: 変更なし
+/gun/particle mu-
+/gun/energy 300 MeV
+/run/beamOn 3
 ```
 
 ## リファレンス
