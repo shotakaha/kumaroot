@@ -73,7 +73,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 
 ## B3aとB3bの違い
 
-`B3a`と`B3b`は、検出器のヒットを集計する方法だけが違います。
+`B3a`と`B3b`は、スコア（測定結果）を集計する方法だけが違います。
 
 | 項目 | `B3a` | `B3b` |
 | --- | --- | --- |
@@ -113,7 +113,7 @@ new G4PVPlacement(nullptr,  // no rotation
 
 ## 検出器（結晶のリング）を作りたい
 
-検出器は、結晶（`Lu2SiO5`）を円形に並べてリングを作り、そのリングを複数枚重ねて作ります。
+検出器は、結晶（`Lu2SiO5`）を円形に並べてリングを作り、そのリングを複数配置して全体を作ります。
 
 ## 材質を元素から作りたい（`G4Material`）
 
@@ -202,6 +202,7 @@ fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
 
 入射粒子は、マクロで変えられます。
 `run2.mac`では、`/gun/particle ion`と`/gun/ion 6 11`で、炭素11（`Z = 6`、`A = 11`）のイオンを入射しています。
+粒子が`chargedgeantino`ではなくなるので、この場合はフッ素18への置き換えは行われません。
 
 ## 物理リストしたい（`PhysicsList`）
 
@@ -230,7 +231,7 @@ fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
 /run/beamOn 20
 ```
 
-`run2.mac`は、炭素11のイオンを40000イベント入射します。
+`run2.mac`は、まず既定の粒子（フッ素18）を40000イベント入射し、次に炭素11のイオンを40000イベント入射します。
 
 ```cfg
 /run/initialize
