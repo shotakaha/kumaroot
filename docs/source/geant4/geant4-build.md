@@ -1,24 +1,33 @@
 # ビルドしたい（`cmake`）
 
-ここでは、自分で作ったGeant4アプリケーション（シミュレーションコード）を`cmake`でビルドして実行する、汎用的な手順をまとめます。
-Geant4本体のビルドは[インストール](geant4-install)のページを参照してください。
-
-## 前提
-
-- Geant4がインストール済みで、環境変数を読み込んであること（[環境変数したい](geant4-install-shell)）
-- エラーが出た場合は[エラー対処](geant4-errors)を参照
-
 ```console
-// Geant4アプリのプロジェクトルートを環境変数に設定する（パスは自分の環境に合わせる）
+// 環境を準備する
 $ export G4PROJECT=~/repos/my-geant4-app
-
-// Geant4の環境変数を読み込む（インストール先に合わせる）
 $ source ~/geant4/v11.4.0/install/bin/geant4.sh
+
+// ビルドする
+$ cd $G4PROJECT
+$ cmake -S app -B build -DCMAKE_INSTALL_PREFIX=$G4PROJECT
+$ cmake --build build --parallel
+$ cmake --install build
+
+// 実行する（マクロがある app/ で実行する）
+$ cd app
+$ $G4PROJECT/bin/myGeant4App             # 対話モード
+$ $G4PROJECT/bin/myGeant4App run1.mac    # バッチモード
 ```
 
-## プロジェクトの構造
+自分で作ったGeant4アプリを`cmake`でビルドして実行する汎用的な手順です。
+Geant4本体のビルドは[インストール](geant4-install)のページを参照してください。
+ビルドでエラーが出た場合は、[エラー対処](geant4-errors)を参照してください。
 
-このページでは、次の構造のプロジェクトを前提とします。
+## 前提：環境変数
+
+- Geant4がインストール済みで、環境変数を読み込んであること（[環境変数したい](geant4-install-shell)）
+- `$G4PROJECT`は、Geant4アプリのプロジェクトルートです（パスは自分の環境に合わせてください）
+- `geant4.sh`のパスは、Geant4のインストール先に合わせてください
+
+## 前提：アプリの構造
 
 ```console
 $ cd $G4PROJECT
@@ -37,22 +46,25 @@ vis.mac
 init_vis.mac
 ```
 
+ここで紹介する手順は、Geant4アプリが上の構造になっていることを前提とします。
 `CMakeLists.txt`の書き方は、後の「CMakeLists.txtしたい」の節で説明します。
 
 ## ビルドしたい
 
-`cmake`の作法（out-of-source）にしたがい、ビルド用ディレクトリ（`build/`）でビルドします。
-
 ```console
+$ cd $G4PROJECT
+
 // ビルドの設定を生成する
-(G4PROJECT) $ cmake -S app -B build -DCMAKE_INSTALL_PREFIX=$G4PROJECT
+$ cmake -S app -B build -DCMAKE_INSTALL_PREFIX=$G4PROJECT
 
 // ビルドする
-(G4PROJECT) $ cmake --build build --parallel
+$ cmake --build build --parallel
 
 // インストールする
-(G4PROJECT) $ cmake --install build
+$ cmake --install build
 ```
+
+`cmake`の作法（out-of-source）にしたがい、ビルド用ディレクトリ（`build/`）でビルドします。
 
 - `-S app`：`CMakeLists.txt`の場所を指定します。
 - `-B build`：ビルド用ディレクトリを指定します。ビルドに必要なファイルはここに生成されます。
@@ -71,11 +83,14 @@ init_vis.mac
 ## 実行したい
 
 ```console
+// マクロがある app/ に移動する
+$ cd $G4PROJECT/app
+
 // 対話モード（引数なし）
-(build) $ ./myGeant4App
+$ $G4PROJECT/bin/myGeant4App
 
 // バッチモード（マクロを引数に指定）
-(build) $ ./myGeant4App run1.mac
+$ $G4PROJECT/bin/myGeant4App run1.mac
 ```
 
 実行方法（対話モードかバッチモードか）は、`main()`関数で決まります。
@@ -92,8 +107,7 @@ init_vis.mac
 :::{note}
 
 `cmake --install`を実行すると`bin/`には実行ファイルだけが入り、マクロは入りません。
-そのため、`bin/`から実行すると、マクロが見つからず起動に失敗します。
-マクロがあるディレクトリで実行してください。
+そのため、`bin/`や`build/`などマクロが無いディレクトリで実行すると、マクロが見つからず起動に失敗します。
 
 :::
 
@@ -106,13 +120,6 @@ init_vis.mac
 
 ## CMakeLists.txtしたい
 
-ここでは、最小構成の各部分の役割を確認します。
-自分のアプリで必要な部分だけ残してください。
-
-### 最小構成
-
-まず、最低限必要な部分は次の4つです。
-
 ```cmake
 cmake_minimum_required(VERSION 3.16...3.27)
 project(myGeant4App)
@@ -129,75 +136,27 @@ target_link_libraries(myGeant4App PRIVATE ${Geant4_LIBRARIES})
 install(TARGETS myGeant4App DESTINATION bin)
 ```
 
-:::{note}
-
+`app/CMakeLists.txt`の最小構成です。
 `myGeant4App`は、自分のアプリの名前に置き換えてください。
-`myGeant4App.cc`は、`main()`関数があるファイルの名前です。
-プロジェクト名、ファイル名、実行ファイル名は同じにしておくと分かりやすいです。
+プロジェクト名、`main()`関数があるファイル名、実行ファイル名は同じにしておくと分かりやすいです。
 
-:::
+### 各行の説明
 
-### 各部分の説明
-
-**プロジェクト全体の設定**
-
-```cmake
-cmake_minimum_required(VERSION 3.16...3.27)
-project(myGeant4App)
-```
-
-`cmake_minimum_required`は、必要なCMakeの最低バージョンを指定します。
-`3.16...3.27`は「最低3.16で、3.27までのCMakeの新しい動作を使ってよい」という意味で、上限を超えるとエラーになるわけではありません。
-
-**Geant4の検索**
-
-```cmake
-find_package(Geant4 REQUIRED ui_all vis_all)
-```
-
-Geant4の設定を取得します。
-`ui_all`と`vis_all`は、対話モードと可視化を有効にするオプションです。
-バッチモードだけで十分な場合は、`find_package(Geant4 REQUIRED)`にできます。
-
-**ソースとヘッダーの取得**
-
-```cmake
-file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
-file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
-```
-
-`src/`と`include/`にあるファイルを一覧にします。
-ヘッダーを含めているのは、IDEで表示させるためです。
-新しいファイルを追加したときは、`cmake`を再実行してください。
-
-**実行ファイルの作成**
-
-```cmake
-add_executable(myGeant4App myGeant4App.cc ${sources} ${headers})
-target_include_directories(myGeant4App PRIVATE include)
-target_link_libraries(myGeant4App PRIVATE ${Geant4_LIBRARIES})
-```
-
+- `cmake_minimum_required`：必要なCMakeの最低バージョンを指定します。
+  `3.16...3.27`は「最低3.16で、3.27までのCMakeの新しい動作を使ってよい」という意味で、上限を超えるとエラーになるわけではありません。
+- `project`：プロジェクト名を指定します。
+- `find_package(Geant4 REQUIRED ui_all vis_all)`：Geant4の設定を取得します。
+  `ui_all`と`vis_all`は、対話モードと可視化を有効にするオプションです。
+  バッチモードだけで十分な場合は、`find_package(Geant4 REQUIRED)`にできます。
+- `file(GLOB ...)`：`src/`と`include/`にあるファイルを一覧にします。
+  ヘッダーを含めているのは、IDEで表示させるためです。
 - `add_executable`：実行ファイルに含めるソースを指定します。
 - `target_include_directories`：`include/`をヘッダーの検索パスに追加します。
 - `target_link_libraries`：Geant4のライブラリをリンクします。
-
-Geant4以外の外部ライブラリを使う場合は、`target_link_libraries`に追加してください。
-
-**インストール**
-
-```cmake
-install(TARGETS myGeant4App DESTINATION bin)
-```
-
-実行ファイルを`${CMAKE_INSTALL_PREFIX}/bin/`にインストールします。
-`-DCMAKE_INSTALL_PREFIX=$G4PROJECT`を指定しているので、`$G4PROJECT/bin/myGeant4App`になります。
-
-:::{note}
-
-マクロファイルは、この設定ではインストールされません（[マクロの場所](#マクロの場所)を参照）。
-
-:::
+  Geant4以外の外部ライブラリを使う場合は、ここに追加します。
+- `install(TARGETS ...)`：実行ファイルを`${CMAKE_INSTALL_PREFIX}/bin/`にインストールします。
+  `-DCMAKE_INSTALL_PREFIX=$G4PROJECT`を指定しているので、`$G4PROJECT/bin/myGeant4App`になります。
+  マクロファイルはインストールされません（[マクロの場所](#マクロの場所)を参照）。
 
 ## 関連ページ
 
