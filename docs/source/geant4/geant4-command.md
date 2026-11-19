@@ -60,6 +60,13 @@ exit
 
 ```cfg
 /vis/open OGL
+
+# /vis/open OGL          Qtウィンドウ（デフォルト）
+# /vis/open RayTracer    静止画（高品質レンダリング）
+# /vis/open VRML2FILE    ブラウザで表示するファイル
+# /vis/open gMocrenFile  放射線治療などの表示
+# /vis/open HepRepFile   描画要素のピッキング
+# /vis/open ATree        構造の点検（テキスト表示）
 ```
 
 `/vis/open`で可視化ドライバーを変更できます。
