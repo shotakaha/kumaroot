@@ -4,40 +4,63 @@
 G4String material_name = "G4_AIR";
 ```
 
-`G4String`は、Geant4で使用される文字列クラスです。
-C++標準の`std::string`を継承しており、
-`std::string`型や`std::string_view`型の引数としてもそのまま利用できます。
+`G4String`は、Geant4で文字列を扱うための型です。
+C++の標準の文字列型`std::string`の機能を、そのまま持っています。
+そのため、`std::string`を受け取る関数にも`G4String`をそのまま渡せます。
 
-また、文字列操作用の補助機能として
-`G4StrUtil`という名前空間ベースのユーティリティ関数群も提供されています。
-v11.0以降では、`G4String`の旧来のメンバー関数を使用せず、`G4StrUtil`の関数を使用することが推奨されています。
+文字列の変換や検索には、`G4StrUtil`という機能を使います。
+Geant4 11.0から使えるようになり、古いメンバー関数（例：`toLower()`）の代わりに使うことが推奨されています。
 
 :::{note}
 
-[G4Stringのクラスリファレンス](https://geant4.kek.jp/Reference/11.2.0/classG4String.html)を確認すると、
-ほとんどのメンバー関数が
-`[Deprecated function]`とマークされています。
-
-これからGeant4アプリケーションを新規開発する場合は、
-`std::string`を利用するのがよいかもしれません。
+`G4String`の古いメンバー関数の多くは、非推奨（`deprecated`）になっています。
+新しく書くときは、この後の`G4StrUtil`の関数を使いましょう。
 
 :::
 
-## C文字列に変換したい（``c_str``）
+## C文字列に変換したい（`c_str`）
 
 ```cpp
 G4String material_name = "G4_AIR";
-printf("Material Name: %s", material_name.c_str())
-// Material Name: G4_AIR
+printf("Material Name: %s\n", material_name.c_str());
+// 出力: Material Name: G4_AIR
 ```
 
-`G4String`は、内部的に`std::string`として扱えるよう暗黙の型変換が定義されています。
-C言語形式の`%s`指定子でフォーマット指定する場合は、
-`c_str()`で明示的にC文字列へ変換する必要があります。
+`printf`の`%s`は、C言語の文字列（`const char*`）しか受け取れません。
+`c_str()`は、`G4String`の中身をC言語の文字列として取り出します。
 
+Geant4のコードでは、`printf`よりも`G4cout`を使うことが多いです。
+`G4cout`なら、`c_str()`は不要です。
 
+```cpp
+G4String material_name = "G4_AIR";
+G4cout << "Material Name: " << material_name << G4endl;
+// 出力: Material Name: G4_AIR
+```
+
+## 文字列を大文字にしたい（`G4StrUtil::to_upper_copy`）
+
+```cpp
+G4String name = "g4_air";
+G4String upper = G4StrUtil::to_upper_copy(name);
+G4cout << upper << G4endl;  // 出力: G4_AIR
+```
+
+`G4StrUtil::to_upper_copy()`は、大文字にしたコピーを返します。
+元の`name`は変わりません。
+
+## 文字列に含まれるか調べたい（`G4StrUtil::contains`）
+
+```cpp
+G4String material_name = "G4_WATER";
+if (G4StrUtil::contains(material_name, "WATER")) {
+  G4cout << "水を使っています" << G4endl;
+}
+```
+
+`G4StrUtil::contains()`は、文字列の中に別の文字列が含まれていれば`true`を返します。
 
 ## リファレンス
 
-- [G4String](https://geant4.kek.jp/Reference/11.2.0/classG4String.html)
-- [G4StrUtil](https://geant4.kek.jp/Reference/11.2.0/namespaceG4StrUtil.html)
+- [G4String](https://geant4.kek.jp/Reference/11.4.0/classG4String.html)
+- [G4StrUtil](https://geant4.kek.jp/Reference/11.4.0/namespaceG4StrUtil.html)
