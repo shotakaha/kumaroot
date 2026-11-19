@@ -61,6 +61,18 @@ SensitiveDetectorを設定していない体積では、`ProcessHits()`は呼ば
 
 :::
 
+## SensitiveDetectorを使う利点
+
+SensitiveDetectorを使うと、ヒットの記録を次の点で簡単にできます。
+
+- **体積の判定をGeant4に任せられる**：`G4UserSteppingAction`で自分が体積を判定しなくても、SensitiveDetectorを設定した体積のステップだけで`ProcessHits()`が呼ばれます。
+- **ヒットをイベントごとに整理できる**：ヒットは`G4VHitsCollection`にまとめられ、イベントの終わりに`G4HCofThisEvent`から取り出せます。
+- **マルチスレッドに対応しやすい**：ワーカースレッドごとにSensitiveDetectorが作られ、ヒットもスレッドごとに集められます。自分でスレッドの扱いを書く必要はありません。
+- **ほかの機能と連携できる**：スコアリング（`G4MultiFunctionalDetector`）や、ヒットの可視化と組み合わせられます。
+
+一方で、ヒットのクラスを作る手間が増えます。
+記録する情報が少なく、1つの体積の合計値だけで済むなら、`G4UserSteppingAction`で数える方が簡単な場合もあります。
+
 :::{seealso}
 
 ここでは個別の論理ボリュームにSensitiveDetectorを設定する方法を紹介しましたが、多くのサンプルでは、ジオメトリ用クラスの``ConstructSDandField``の中で
