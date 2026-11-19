@@ -53,7 +53,7 @@ class ActionInitialization : public G4VUserActionInitialization {
 
 :::
 
-## ワーカースレッド用のユーザーアクションを登録したい（`Build`）
+## ワーカースレッドしたい（`Build`）
 
 ```cpp
 void ActionInitialization::Build() const {
@@ -90,7 +90,7 @@ void ActionInitialization::Build() const {
 
 :::
 
-## マスタースレッド用のRunActionを登録したい（`BuildForMaster`）
+## マスタースレッドしたい（`BuildForMaster`）
 
 ```cpp
 void ActionInitialization::BuildForMaster() const {
