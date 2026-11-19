@@ -48,14 +48,14 @@ exit
 対話モードから抜け出すコマンドです。
 コマンドの頭に`/`は不要です。
 
-## Qtウィンドウしたい（``/vis/open``）
+## 可視化ドライバーを指定したい（``/vis/open``）
 
 ```cfg
 /vis/open OGL
 ```
 
 可視化ドライバーを指定します。
-``OGL``を指定すると、Qtウィンドウが使えるようになります。
+Qtを有効にしてビルドしている場合、``OGL``を指定すると、Qtウィンドウが使えます。
 
 ## ランを開始したい（``/run/beamOn``）
 
@@ -66,7 +66,7 @@ exit
 ```
 
 ``/run/beamOn イベント数``で指定したイベント数のランを開始します。
-ランを開始すると``/run/initialize``でインターロックがかかり、測定器にアクセスできなくなります。
+ランを開始する前に、``/run/initialize``で初期化しておく必要があります。
 
 :::{seealso}
 
@@ -91,7 +91,7 @@ rm->beamOn(イベント数);
 :::{seealso}
 
 ```cpp
-G4ParticleGun *gun = new G4ParticleGun(粒子数);
+gun->SetNumberOfParticles(粒子数);
 ```
 
 :::
@@ -130,7 +130,7 @@ gun->SetParticleDefinition(particle);
 :::{seealso}
 
 ```cpp
-G4double energy = 500. * MeV
+G4double energy = 500. * MeV;
 gun->SetParticleEnergy(energy);
 ```
 
@@ -159,9 +159,9 @@ gun->SetParticlePosition(position);
 
 ```cfg
 /gun/direction ex ey ez
-/gun/direction 0 0 1  // z軸方向
-/gun/direction 0 1 1  // y-z平面:45度
-/gun/direction 0 1 2  // y-z平面：30度ちょい
+/gun/direction 0 0 1  # z軸方向
+/gun/direction 0 1 1  # y-z平面内でz軸から45度
+/gun/direction 0 1 2  # y-z平面内でz軸から約26.6度（tan = 1/2）
 ```
 
 入射方向を、入射位置からのベクトルで設定できます。
@@ -183,7 +183,7 @@ gun->SetParticleMomentumDirection(direction);
 ```
 
 ``/particle/list``で利用可能な粒子名を確認できます。
-素粒子物理学、原子核物理学で扱う粒子・反粒子がすべて揃っています。
+素粒子物理学、原子核物理学で主に使う粒子と反粒子が含まれています。
 
 以下は、素粒子物理学で使いそうな粒子名を抜粋してみました。
 
@@ -196,14 +196,14 @@ proton, anti_proton,
 pi+, pi-, pi0,
 
 // レプトン
-e+ e-,
-mu+, mu-
+e+, e-,
+mu+, mu-,
 tau+, tau-,
 
-// ニュートリオ
+// ニュートリノ
 nu_e, anti_nu_e,
 nu_mu, anti_nu_mu,
-nu_tau anti_nu_tau,
+nu_tau, anti_nu_tau,
 
 // 仮想粒子（たぶん）
 geantino,
@@ -250,7 +250,7 @@ Index : 1     used in the geometry : Yes
 「粒子が停止したこと」を判定するために、運動エネルギーを使って閾値を設定する手法もありますが、Geant4では **運動エネルギーがゼロになるまできちんと計算** する手法をとっています。
 
 この手法だと、停止点の位置情報や、エネルギー損失の誤差をなくすことができます。
-一方で、二次粒子（＝二次、三次、四次、・・・）が発生した場合に計算量が膨らみます。
+一方で、一次粒子から生成される二次粒子や、さらにその後に生成される粒子が発生した場合に計算量が膨らみます。
 そこで、二次粒子生成の閾値を設定することで、計算量の増大を回避しています。
 
 :::
