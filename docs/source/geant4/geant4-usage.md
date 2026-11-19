@@ -76,6 +76,7 @@ geant4-examples-b5
 geant4-examples-anaex03
 geant4-examples-opnovice
 geant4-examples-opnovice2
+geant4-examples-lxe
 ```
 
 ## 実験したい
