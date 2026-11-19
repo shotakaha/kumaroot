@@ -146,6 +146,19 @@ Sensitive Detectorを使ったヒット情報の扱いは、
 入射粒子の設定はマクロで変更できます。
 粒子の種類やエネルギー、イベント数などをマクロファイルで指定できるため、再ビルドせずに条件を切り替えて試すことができます。
 
+入射位置は、Envelopeの中で`G4UniformRand()`を使ってランダムに決めています。
+Envelopeの寸法は`G4LogicalVolumeStore`から取得するので、`PrimaryGeneratorAction`は`DetectorConstruction`に依存しません。
+
+```cpp
+// B1::PrimaryGeneratorAction::GeneratePrimaries()（一部）
+G4double size = 0.8;
+G4double x0 = size * envSizeXY * (G4UniformRand() - 0.5);
+G4double y0 = size * envSizeXY * (G4UniformRand() - 0.5);
+G4double z0 = -0.5 * envSizeZ;
+
+fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
+```
+
 ## ディレクトリ構造
 
 ```console
@@ -185,6 +198,44 @@ B1のディレクトリ構造は上のようになっています。
 ``exampleB1.in``もマクロファイルです。
 これを読み込んだときの出力が``exampleB1.out``です。
 
+## ステップごとにエネルギー損失を集計したい（`SteppingAction`）
+
+`SteppingAction::UserSteppingAction()`は、ステップごとに呼ばれます。
+そのステップがScoring Volume（`Shape2`）の中かどうかを確かめ、中ならそのステップのエネルギー損失を`EventAction`に渡します。
+
+```cpp
+// B1::SteppingAction::UserSteppingAction()（一部）
+// get volume of the current step
+G4LogicalVolume* volume =
+  step->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
+
+// check if we are in scoring volume
+if (volume != fScoringVolume) return;
+
+// collect energy deposited in this step
+G4double edepStep = step->GetTotalEnergyDeposit();
+fEventAction->AddEdep(edepStep);
+```
+
+## ランごとに線量を集計したい（`RunAction`）
+
+`EventAction`は、イベントごとのエネルギー損失を`RunAction::AddEdep()`に渡します。
+`RunAction`では、エネルギー損失の合計と二乗和を`G4AccumulableManager`に登録しておき、ランの終わりに`Merge()`で集計します。
+
+線量は、合計のエネルギー損失をScoring Volumeの質量で割って求めます。
+
+```cpp
+// B1::RunAction::EndOfRunAction()（一部）
+G4double mass = detConstruction->GetScoringVolume()->GetMass();
+G4double dose = edep / mass;
+G4double rmsDose = rms / mass;
+
+G4cout << " Absorbed dose per run in scoring volume = edep/mass = " << G4BestUnit(dose, "Dose")
+       << "; rms = " << G4BestUnit(rmsDose, "Dose") << G4endl;
+```
+
+`G4BestUnit(dose, "Dose")`は、値の大きさに合わせて単位を選びます。
+`RunAction`のコンストラクタでは、`milliGy`や`microGy`などの単位を`G4UnitDefinition`で追加しています。
 
 ## リファレンス
 
