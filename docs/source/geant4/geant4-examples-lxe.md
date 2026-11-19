@@ -227,5 +227,5 @@ WLSの物性（吸収、発光、発光時刻）は、`LXeDetectorConstruction`�
 
 LXeで検出器の構成と光子の検出を理解したら、次のサンプルに進むとよいです。
 
-- `extended/optical/wls`：波長変換ファイバーを、より詳しく扱います。
+- [wls](geant4-examples-wls)：波長変換ファイバーを使った、光子の輸送を扱います。
 - [OpNovice2](geant4-examples-opnovice2)：物性や表面の設定を、マクロで細かく扱います。
