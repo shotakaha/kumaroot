@@ -30,12 +30,12 @@ void Build(G4Box* solid, G4Material* material)
 }
 ```
 
-ヒット情報を取得したい論理ボリュームを``SensitiveDetector``に設定します。
-``SensitiveDetector``は、``G4VSensitiveDetector``クラスを継承してユーザーが作成します。
+ヒット情報を取得したい論理ボリュームに``SensitiveDetector``を設定します。
+``SensitiveDetector``は、``G4VSensitiveDetector``クラスを継承して自分で作成します。
 また、``G4SDManager``にも追加する必要があります。
 
-SDに設定した論理ボリュームの中をステップが通るたびに``ProcessHits(G4Step* aStep, G4TouchableHistory* rOhist)``が呼ばれます。
-そのメソッドの中で、ヒット情報を取捨選択します。
+SensitiveDetectorを設定した論理ボリュームの中をステップが通るたびに``ProcessHits(G4Step* aStep, G4TouchableHistory* rOhist)``が呼ばれます。
+このメソッドで、記録するヒットを選びます。
 
 具体的な設定は
 [](./geant4-scoring-sensitivedetector.md)と
@@ -75,8 +75,8 @@ SensitiveDetectorを使うと、ヒットの記録を次の点で簡単にでき
 
 :::{seealso}
 
-ここでは個別の論理ボリュームにSensitiveDetectorを設定する方法を紹介しましたが、多くのサンプルでは、ジオメトリ用クラスの``ConstructSDandField``の中で
-``SetSensitiveDetector``しています。
+ここでは個別の論理ボリュームにSensitiveDetectorを設定する方法を紹介しましたが、多くのサンプルでは、ジオメトリ用クラスの``ConstructSDandField``の中で``SetSensitiveDetector``を呼んでいます。
+マルチスレッドでは、この関数がワーカースレッドごとに呼ばれるため、スレッドごとにSensitiveDetectorを作れます。
 詳しくは次のページを参照してください。
 
 - [](./geant4-sensitivedetector.md)
