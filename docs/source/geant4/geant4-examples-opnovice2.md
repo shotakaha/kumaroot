@@ -189,5 +189,5 @@ Average number of scintillation photons created per event: 3e+03
 
 OpNovice2で、物性や表面の設定を詳しく扱えるようになったら、次のサンプルに進むとよいです。
 
-- `extended/optical/LXe`：液体キセノンの検出器と、光電子増倍管（PMT）での光子の検出を扱います。
+- [LXe](geant4-examples-lxe)：液体キセノンの検出器と、光電子増倍管（PMT）での光子の検出を扱います。
 - `extended/optical/wls`：波長変換ファイバーを扱います。
