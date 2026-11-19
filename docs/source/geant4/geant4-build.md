@@ -28,16 +28,15 @@ README.md
 ...
 
 $ ls -1 app
-CMakeLists.txt  # ビルドの設定
-exampleB1.cc    # main関数
-include/        # ヘッダーファイル（*.hh）
-src/            # ソースファイル（*.cc）
-run1.mac        # マクロファイル（*.mac）
+CMakeLists.txt       # ビルドの設定
+myGeant4App.cc       # main関数
+include/             # ヘッダーファイル（*.hh）
+src/                 # ソースファイル（*.cc）
+run1.mac             # マクロファイル（*.mac）
 vis.mac
 init_vis.mac
 ```
 
-`app/`の中身は、Geant4のサンプル（`examples/basic/B1`）と同じ構成です。
 `CMakeLists.txt`の書き方は、後の「CMakeLists.txtしたい」の節で説明します。
 
 ## ビルドしたい
@@ -73,15 +72,14 @@ init_vis.mac
 
 ```console
 // 対話モード（引数なし）
-(build) $ ./exampleB1
+(build) $ ./myGeant4App
 
 // バッチモード（マクロを引数に指定）
-(build) $ ./exampleB1 run1.mac
+(build) $ ./myGeant4App run1.mac
 ```
 
 実行方法（対話モードかバッチモードか）は、`main()`関数で決まります。
-`exampleB1.cc`では、引数がなければ対話モード、引数があればそれをマクロとして実行する、という実装になっています。
-自分のアプリでも同じ仕組みにしたい場合は、`main()`を同じように書きます。
+引数がなければ対話モード、引数があればそれをマクロとして実行する、という実装にすると、上のように使い分けられます。
 
 ### マクロの場所
 
@@ -89,12 +87,12 @@ init_vis.mac
 そのため、マクロがあるディレクトリで実行するのが確実です。
 
 - バッチモードの`run1.mac`は、カレントディレクトリに無いとエラーになります。
-- 対話モードは、起動時にカレントディレクトリの`init_vis.mac`を読み込みます。`init_vis.mac`の中で`vis.mac`を読み込む構成のため、これらもカレントディレクトリに必要です。
+- 対話モードで`init_vis.mac`を読み込む構成にした場合は、そのファイルもカレントディレクトリに必要です。
 
 :::{note}
 
 `cmake --install`を実行すると`bin/`には実行ファイルだけが入り、マクロは入りません。
-そのため、`bin/`から実行すると`init_vis.mac`が見つからず、起動に失敗します。
+そのため、`bin/`から実行すると、マクロが見つからず起動に失敗します。
 マクロがあるディレクトリで実行してください。
 
 :::
@@ -108,7 +106,7 @@ init_vis.mac
 
 ## CMakeLists.txtしたい
 
-ここでは、Geant4のサンプル`exampleB1`の`CMakeLists.txt`を例に、各部分の役割を確認します。
+ここでは、最小構成の各部分の役割を確認します。
 自分のアプリで必要な部分だけ残してください。
 
 ### 最小構成
@@ -117,24 +115,25 @@ init_vis.mac
 
 ```cmake
 cmake_minimum_required(VERSION 3.16...3.27)
-project(MyApp)
+project(myGeant4App)
 
 find_package(Geant4 REQUIRED ui_all vis_all)
 
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 
-add_executable(MyApp MyApp.cc ${sources} ${headers})
-target_include_directories(MyApp PRIVATE include)
-target_link_libraries(MyApp PRIVATE ${Geant4_LIBRARIES})
+add_executable(myGeant4App myGeant4App.cc ${sources} ${headers})
+target_include_directories(myGeant4App PRIVATE include)
+target_link_libraries(myGeant4App PRIVATE ${Geant4_LIBRARIES})
 
-install(TARGETS MyApp DESTINATION bin)
+install(TARGETS myGeant4App DESTINATION bin)
 ```
 
 :::{note}
 
-`MyApp`は、自分のアプリの名前に置き換えてください。
-`MyApp.cc`は、`main()`関数があるファイルの名前です。
+`myGeant4App`は、自分のアプリの名前に置き換えてください。
+`myGeant4App.cc`は、`main()`関数があるファイルの名前です。
+プロジェクト名、ファイル名、実行ファイル名は同じにしておくと分かりやすいです。
 
 :::
 
@@ -144,7 +143,7 @@ install(TARGETS MyApp DESTINATION bin)
 
 ```cmake
 cmake_minimum_required(VERSION 3.16...3.27)
-project(B1)
+project(myGeant4App)
 ```
 
 `cmake_minimum_required`は、必要なCMakeの最低バージョンを指定します。
@@ -174,9 +173,9 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 **実行ファイルの作成**
 
 ```cmake
-add_executable(MyApp MyApp.cc ${sources} ${headers})
-target_include_directories(MyApp PRIVATE include)
-target_link_libraries(MyApp PRIVATE ${Geant4_LIBRARIES})
+add_executable(myGeant4App myGeant4App.cc ${sources} ${headers})
+target_include_directories(myGeant4App PRIVATE include)
+target_link_libraries(myGeant4App PRIVATE ${Geant4_LIBRARIES})
 ```
 
 - `add_executable`：実行ファイルに含めるソースを指定します。
@@ -188,11 +187,11 @@ Geant4以外の外部ライブラリを使う場合は、`target_link_libraries`
 **インストール**
 
 ```cmake
-install(TARGETS MyApp DESTINATION bin)
+install(TARGETS myGeant4App DESTINATION bin)
 ```
 
 実行ファイルを`${CMAKE_INSTALL_PREFIX}/bin/`にインストールします。
-`-DCMAKE_INSTALL_PREFIX=$G4PROJECT`を指定しているので、`$G4PROJECT/bin/MyApp`になります。
+`-DCMAKE_INSTALL_PREFIX=$G4PROJECT`を指定しているので、`$G4PROJECT/bin/myGeant4App`になります。
 
 :::{note}
 
@@ -200,26 +199,8 @@ install(TARGETS MyApp DESTINATION bin)
 
 :::
 
-### サンプル（`exampleB1`）特有の設定
-
-Geant4 11.4.0の`exampleB1/CMakeLists.txt`には、最小構成に含まれない設定が次のようにあります。
-自分のアプリでは、基本的に不要です。
-
-- **`configure_file`の`foreach`**：`exampleB1`のマクロを`build/`にコピーする設定です。
-  サンプルの実行に合わせた設定なので、自分のアプリでは不要です。
-  ファイルが存在しないとエラーになります。
-- **`target_include_directories(... PRIVATE include)`**：最小構成にも含めていますが、サンプルでは明示されています。
-
-:::{note}
-
-`exampleB1`の`CMakeLists.txt`には`install()`の設定はありません。
-この手順で`install`を使えるのは、上の最小構成で`install(TARGETS ...)`を追加しているためです。
-古いバージョンのサンプルには、`WITH_GEANT4_UIVIS`オプションや`include(${Geant4_USE_FILE})`、`add_custom_target`があるものもあります。
-
-:::
-
 ## 関連ページ
 
-- [付属サンプルの遊び方（`examples`）](geant4-examples)：サンプルをコピーして始める
+- [付属サンプルの遊び方（`examples`）](geant4-examples)：Geant4付属のサンプルをコピーして始める
 - [CMake Toolsしたい](geant4-cmake-tools)：VS Codeでの設定
 - [エラー対処](geant4-errors)：ビルド時のエラー
