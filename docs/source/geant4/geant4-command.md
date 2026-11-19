@@ -1,5 +1,38 @@
 # 対話モードしたい
 
+```cpp
+#include "G4RunManagerFactory.hh"
+#include "G4UIExecutive.hh"
+#include "G4UImanager.hh"
+#include "G4VisExecutive.hh"
+
+int main(int argc, char** argv)
+{
+    // 対話モードのセッションを作成
+    auto ui = new G4UIExecutive(argc, argv);
+
+    auto rm = G4RunManagerFactory::CreateRunManager();
+    // ユーザー初期化クラス（ジオメトリ、物理リスト、アクション）の設定は省略
+
+    // 可視化の設定
+    auto vis = new G4VisExecutive(argc, argv);
+    vis->Initialize();
+
+    // 初期化マクロを実行してから、対話モードを開始
+    auto UImanager = G4UImanager::GetUIpointer();
+    UImanager->ApplyCommand("/control/execute init_vis.mac");
+    ui->SessionStart();
+
+    delete ui;
+    delete vis;
+    delete rm;
+    return 0;
+}
+```
+
+対話モードを起動するための最小構成です。
+`main()`関数の全体は[](./geant4-main.md)を参照してください。
+
 対話モードを起動して、アプリケーションを対話的にコマンド操作できます。
 Qtを有効にしてビルドした場合、Qtウィンドウ上でコマンド操作できます。
 
