@@ -18,7 +18,7 @@ void Geometry::ConstructSDandField() {
 }
 ```
 
-`G4VUserDetectorConstruction`は、ユーザーが測定器の構造を定義するための抽象クラスです。
+`G4VUserDetectorConstruction`は、ユーザーが測定器の構造を定義するための基底クラスです。
 Geant4アプリの測定器は、このクラスを継承した自作クラスで定義します。
 
 継承したクラスでは、ワールドと測定器の形状および配置を定義します。
