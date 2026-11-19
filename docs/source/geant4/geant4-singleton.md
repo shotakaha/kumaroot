@@ -36,7 +36,7 @@ auto nm = G4NistManager::Instance();
 :::{seealso}
 
 詳しくは
-[](./geant4-material-nistmanager.md)
+[](./geant4-material-nmmanager.md)
 に整理しました。
 
 :::
@@ -217,57 +217,99 @@ void Example() {
 #include "G4RunManager.hh"
 #include "SingletonManager.hh"
 
+#include "ActionInitialization.hh"
+#include "DetectorConstruction.hh"
+#include "PhysicsList.hh"
+
 int main()
 {
-    // 1. RunManagerを最初に作る
-    auto runManager = new G4RunManager();
+    auto rm = new G4RunManager();
+    rm->SetUserInitialization(new DetectorConstruction());
+    rm->SetUserInitialization(new PhysicsList());
+    rm->SetUserInitialization(new ActionInitialization());
+    rm->Initialize();
 
-    // 2. どこからでも、同じRunManagerを取得できる
-    auto rm = SingletonManager::RunManager();
+    // マクロは、SingletonManager経由で実行する
+    SingletonManager::UIManager()->ApplyCommand("/control/execute run.mac");
 
-    // 3. 最後に削除する
-    delete runManager;
+    delete rm;
     return 0;
 }
 ```
 
-`SingletonManager`は、関数だけを持つクラスです。
-オブジェクトを作らずに、`SingletonManager::RunManager()`のように呼び出します。
+`main()`では、`RunManager`を作って初期化します。
+作るのは`new`で行い、`SingletonManager`は取得に使います。
+`RunManager`は、`main()`の中で作った`rm`をそのまま使えば十分です。
+`SingletonManager`の`RunManager()`は、`main()`以外で取得したいときに使います。
 
-`RunManager`は、`main()`の最初で作ります。
-作る前に取得すると、`nullptr`が返ることがあります。
+`RunManager`を作る前に取得すると、`nullptr`が返ることがあります。
 取得したポインターは、`delete`しないでください。Geant4が管理しています。
 
-取得したシングルトンは、次のように、使う場所で呼び出します。
+次は、形状を作る`DetectorConstruction`での使い方です。
 
 ```cpp
 // DetectorConstruction.cc
 #include "SingletonManager.hh"
 
+#include "G4Box.hh"
+#include "G4LogicalVolume.hh"
+#include "G4PVPlacement.hh"
+#include "G4SystemOfUnits.hh"
+
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
     auto nm = SingletonManager::NistManager();
     G4Material* water = nm->FindOrBuildMaterial("G4_WATER");
-    // ... 形状の構築（省略）
+
+    auto solidWorld = new G4Box("World", 1. * m, 1. * m, 1. * m);
+    auto logicWorld = new G4LogicalVolume(solidWorld, water, "World");
+    return new G4PVPlacement(nullptr, G4ThreeVector(), logicWorld, "World", nullptr, false, 0, true);
 }
 ```
+
+`FindOrBuildMaterial`は、登録済みの材料があればそれを返します。
+なければ、NISTのデータから材料を作ります。
+材料名は、`G4_WATER`のように`G4_`で始まる名前で指定します。
+
+次は、結果を保存する`RunAction`での使い方です。
 
 ```cpp
 // RunAction.cc
 #include "SingletonManager.hh"
 
+#include "G4Run.hh"
+#include "G4SystemOfUnits.hh"
+
+RunAction::RunAction()
+{
+    auto am = SingletonManager::AnalysisManager();
+    am->SetDefaultFileType("root");
+    am->CreateH1("Edep", "Energy deposit", 100, 0., 10. * MeV);
+}
+
+void RunAction::BeginOfRunAction(const G4Run*)
+{
+    SingletonManager::AnalysisManager()->OpenFile("output");
+}
+
 void RunAction::EndOfRunAction(const G4Run*)
 {
     auto am = SingletonManager::AnalysisManager();
-    // ... 結果の出力（省略）
+    am->Write();
+    am->CloseFile();
 }
 ```
 
+ヒストグラムは、コンストラクターで作ります。
+ファイルは、ランの開始時に開き、ランの終了時に書き出して閉じます。
+ヒストグラムへの値の記録は、`EventAction`や`SteppingAction`などで`FillH1()`を呼んで行います。
+
 使う場所の目安は次のとおりです。
 
-- 形状の材料を決めるとき：`NistManager()`、`MaterialTable()`
+- 材料を取得するとき：`NistManager()`
+- 登録済みの材料を一覧するとき：`MaterialTable()`
 - 粒子の情報を調べるとき：`ParticleTable()`
-- 結果をファイルに出力するとき：`AnalysisManager()`
+- 結果を保存するとき：`AnalysisManager()`
 - 有感検出器を登録するとき：`SDManager()`
 - マクロやUIコマンドを実行するとき：`UIManager()`
 
