@@ -1,7 +1,7 @@
 # OpNovice2したい（`examples/extended/optical/OpNovice2`）
 
 OpNovice2は、OpNoviceの発展版です。
-光学光子の生成と輸送を、マクロで細かく設定しながら調べられます。
+光学光子の生成と輸送を、マクロで設定を変えながら調べられます。
 水槽（`Tank`）と周りの空間（`World`）の物性、水槽の表面の物性を、マクロのコマンドで変えられます。
 光子が境界面で受けた過程は、ヒストグラムに記録されます。
 
@@ -94,7 +94,7 @@ Tankの材質は`/opnovice2/boxMaterial`で、Worldの材質は`/opnovice2/world
 | 表面 | `/opnovice2/surfaceProperty NAME EN1 V1 EN2 V2 ...` | `/opnovice2/surfaceConstProperty NAME VALUE` |
 
 - エネルギーは、MeV単位で書きます。`0.000002`は2 eVです。
-- 値は、Geant4の内部単位で書きます。
+- 値は、Geant4の内部単位で指定します。
 - エネルギー依存の物性には、エネルギーと値の組を複数並べて書けます。
 
 例えば、次のコマンドは、水槽の屈折率を2 eVで1.3、5 eVで1.32、8 eVで1.34にします。
@@ -105,10 +105,10 @@ Tankの材質は`/opnovice2/boxMaterial`で、Worldの材質は`/opnovice2/world
 
 ## 境界面を設定したい
 
-水槽の表面は、`G4OpticalSurface`を`G4LogicalBorderSurface`で、水槽とWorldの境界に置いています。
+水槽の表面は、水槽とWorldの境界に`G4LogicalBorderSurface`を置き、`G4OpticalSurface`を設定しています。
 
 ```cpp
-// DetectorConstruction::Construct()（一部）
+// DetectorConstruction::DetectorConstruction()とConstruct()（一部）
 fSurface = new G4OpticalSurface("Surface");
 fSurface->SetType(dielectric_dielectric);
 fSurface->SetFinish(ground);
@@ -122,8 +122,8 @@ auto surface = new G4LogicalBorderSurface("Surface", fTank, world_PV, fSurface);
 - `/opnovice2/surfaceModel`：モデル（`glisur`、`unified`、`LUT`、`DAVIS`）
 - `/opnovice2/surfaceType`：種類（`dielectric_metal`、`dielectric_dielectric`、`dielectric_LUT`、`dielectric_LUTDAVIS`）
 - `/opnovice2/surfaceFinish`：仕上げ（`polished`、`ground`、`Rough_LUT`、`Polished_LUT`など）
-- `/opnovice2/surfaceSigmaAlpha`：粗さ（ground仕上げなどで使う）
-- `/opnovice2/stepping/killOnSecondSurface`：2つ目の表面に入った光子を殺す。表面での散乱だけを見たいときに使う
+- `/opnovice2/surfaceSigmaAlpha`：表面の粗さ（`ground`仕上げと組み合わせて使う）
+- `/opnovice2/stepping/killOnSecondSurface`：2つ目の表面に入った光子の追跡を止める。表面での散乱だけを見たいときに使う
 
 `boundary.mac`は、これらのコマンドを組み合わせて、表面の設定を変えながら光子を撃ちます。
 設定ごとに`/analysis/setFileName`でファイル名を変えているので、結果を比べられます。
@@ -144,11 +144,11 @@ OpNovice2には、あらかじめ26個のヒストグラムが用意されてい
 | 11〜19 | 表面で散乱・屈折した光子の運動量の向き |
 | 20〜26 | 屈折、反射、全反射、吸収、透過などの割合 |
 
-番号11から26は、表面の+X側から入った光子だけを記録します。
-表面での最初の相互作用だけを記録します。
+番号11から26は、+X側の表面で散乱された光子を記録します。
+記録するのは、表面での最初の相互作用だけです。
 
 ヒストグラムは、`/analysis/h1/set`で、ビン数と範囲を指定して有効にします。
-単位は、エネルギーがeV、時間がnsに固定されています。
+単位は、エネルギーがeV、時間がnsで固定です。
 
 ```cfg
 /analysis/h1/set 1 100 0 10    # チェレンコフ光のスペクトル。0〜10 eVを100ビン
@@ -170,7 +170,7 @@ Average number of Cerenkov photons created per event: 44
 Average number of scintillation photons created per event: 3e+03
 ```
 
-チェレンコフ光のエネルギーは、`/tracking/verbose 1`以上にすると、光子ごとの群速度も表示されます。
+`/tracking/verbose 1`以上にすると、光子の群速度も表示されます。
 
 ## 物理過程を調整したい
 
@@ -182,7 +182,7 @@ Average number of scintillation photons created per event: 3e+03
 - `/process/optical/scintillation/setFiniteRiseTime`：発光の立ち上がり時間を有効にする
 - `/process/optical/wls/setTimeProfile`：WLSの発光時刻の分布（`delta`など）
 
-`scint_by_particle.mac`は、粒子ごとに発光の量や時定数を変えて、電子・陽子・α粒子などを撃ち分けます。
+`scint_by_particle.mac`は、粒子ごとに発光の量や時定数を変えて、電子、陽子、α粒子、重陽子、イオンを撃ち分けます。
 `wls.mac`は、WLSの吸収長（`WLSABSLENGTH`）、発光の成分（`WLSCOMPONENT`）、1回の波長変換で出る光子数（`WLSMEANNUMBERPHOTONS`）などを設定しています。
 
 ## 次に読むサンプル
