@@ -21,6 +21,18 @@ void Geometry::ConstructSDandField() {
 `G4VUserDetectorConstruction`は、ユーザーが測定器の構造を定義するための抽象クラスです。
 Geant4アプリの測定器は、このクラスを継承した自作クラスで定義します。
 
+継承したクラスでは、ワールドと測定器の形状および配置を定義します。
+有感検出器や場も設定できます。
+大きさや材質などのパラメーターは、`main()`関数から変更できます。
+
+`Construct()`はワールドや測定器の形状を作る関数で、必ず実装が必要な関数です。
+`ConstructSDandField()`は有感検出器や場を設定する関数で、必要なときだけ実装します。
+
+`Construct()`は、`/run/reinitializeGeometry`を実行すると再び呼ばれます。
+そのため、`Construct()`の中で毎回`new`して古いオブジェクトを残すことは避けてください。
+また、`Construct()`の中で有感検出器や場を作ることも避けてください。
+マルチスレッド環境では、有感検出器を作業スレッドごとに作る必要があります。
+
 ## 測定器クラスを作りたい（`G4VUserDetectorConstruction`）
 
 ```cpp
