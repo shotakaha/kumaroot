@@ -16,8 +16,17 @@ void PrimaryGenerator::GeneratePrimaries(G4Event* aEvent) {
 ```
 
 `G4VUserPrimaryGeneratorAction`は、一次粒子（入射粒子）を生成するクラスです。
-自作クラスで`GeneratePrimaries()`を実装すると、イベントごとに入射粒子を生成できます。
-ほとんどのアプリでは作成する必要があるため、実質的に必須のクラスです。
+ほとんどのアプリで必要になるため、実質的に必須のクラスです。
+
+このクラスを継承すると、イベントごとに入射粒子の種類、位置、方向、エネルギーを設定できます。
+`G4ParticleGun`などを使えば、短いコードで入射粒子を生成できます。
+
+`GeneratePrimaries()`は、イベントごとに呼ばれる純粋仮想関数です。
+この関数の中で、入射粒子の種類、位置、方向、エネルギーを設定し、`GeneratePrimaryVertex()`を呼ぶことで、そのイベントに一次粒子が追加されます。
+
+`G4ParticleGun`は、コンストラクターで1回だけ作成し、デストラクターで`delete`します。
+粒子の定義（`G4ParticleDefinition`）は、Geant4が管理します。
+そのため、ユーザーが`delete`してはいけません。
 
 ## 一次粒子を生成するクラスを作りたい（`G4VUserPrimaryGeneratorAction`）
 
@@ -71,11 +80,21 @@ void PrimaryGenerator::GeneratePrimaries(G4Event* aEvent)
 
 上の例では、`G4ParticleGun`を使ってミューオン（`mu-`）を1 GeVで入射しています。
 `G4ParticleGun`は、Geant4標準の粒子生成クラスのひとつです。
+運動量やエネルギーを設定する場合は、必ず単位をつけてください。
+`1 GeV`のつもりで`1`と書いてしまうと、Geant4の内部単位（MeV）として扱われ、意図しないエネルギーになります。
 
 :::{note}
 
 `G4ParticleTable::GetParticleTable()`は、粒子の一覧を管理するクラスを返します。
 `FindParticle("mu-")`で、名前から粒子の定義を取得します。
+粒子の名前を間違えると`nullptr`が返るので、必ず確認してください。
+
+:::
+
+:::{caution}
+
+`GeneratePrimaries()`の中で`new`を使ってはいけません。
+この関数はイベントごとに呼ばれるため、`new`すると解放されずにメモリーリークの原因になります。
 
 :::
 
