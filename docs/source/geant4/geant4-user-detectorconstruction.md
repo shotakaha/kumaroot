@@ -28,11 +28,6 @@ Geant4アプリの測定器は、このクラスを継承した自作クラス�
 `Construct()`はワールドや測定器の形状を作る関数で、必ず実装が必要な関数です。
 `ConstructSDandField()`は有感検出器や場を設定する関数で、必要なときだけ実装します。
 
-`Construct()`は、`/run/reinitializeGeometry`を実行すると再び呼ばれます。
-そのため、`Construct()`の中で毎回`new`して古いオブジェクトを残すことは避けてください。
-また、`Construct()`の中で有感検出器や場を作ることも避けてください。
-マルチスレッド環境では、有感検出器を作業スレッドごとに作る必要があります。
-
 ## 測定器クラスを作りたい（`G4VUserDetectorConstruction`）
 
 ```cpp
@@ -92,6 +87,17 @@ G4VPhysicalVolume* Construct() override;
 
 最後に、ワールドの物理ボリュームを返します。
 具体的な書き方は、[](./geant4-geometry-construct.md)と[](./geant4-geometry-world.md)を参照してください。
+
+
+:::{caution}
+
+`Construct()`は、`/run/reinitializeGeometry`を実行すると再び呼ばれます。
+そのため、`Construct()`の中で毎回`new`して古いオブジェクトを残すことは避けてください。
+また、`Construct()`の中で有感検出器や場を作ることも避けてください。
+マルチスレッド環境では、有感検出器を作業スレッドごとに作る必要があります。
+
+:::
+
 
 ## 有感検出器や場を設定したい（`ConstructSDandField`）
 
