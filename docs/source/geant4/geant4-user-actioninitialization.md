@@ -54,7 +54,8 @@ virtual void BuildForMaster() const {}
 
 ユーザーアクションの初期化には
 `G4VUserActionInitialization`を継承したクラスを自作します。
-このクラスの中で、`Build`と`BuildForMaster`を定義する必要があります。
+このクラスの中で、`Build`を必ず定義します。
+`BuildForMaster`は、マルチスレッド環境で`RunAction`を設定する場合に定義します（デフォルトでは何もしません）。
 
 ## ActionInitialization::Build
 
@@ -81,8 +82,7 @@ void ActionInitialization::Build() const {
 }
 ```
 
-`Build()`
-にはワーカースレッド用のユーザーアクションを登録します。
+`Build()`にはワーカースレッド用のユーザーアクションを登録します。
 ここでは主に、
 入射粒子の設定（`PrimaryGeneratorAction`）、
 ラン処理の設定（`RunAction`）、
@@ -93,16 +93,16 @@ void ActionInitialization::Build() const {
 
 詳しくは
 
-- [](./geant4-primarygeneratoraction.md)
-- [](./geant4-runaction.md)
-- [](./geant4-eventaction.md)
-- [](./geant4-trackingaction.md)
-- [](./geant4-steppingaction.md)
+- [](./geant4-user-primarygeneratoraction.md)
+- [](./geant4-user-runaction.md)
+- [](./geant4-user-eventaction.md)
+- [](./geant4-user-trackingaction.md)
+- [](./geant4-user-steppingaction.md)
 
 に整理しました。
 :::
 
-## ActionInitialization:BuildForMaster
+## ActionInitialization::BuildForMaster
 
 ```cpp
 void ActionInitialization::BuildForMaster() const {
@@ -145,7 +145,7 @@ int main(int argc, char** argv)
 
     // 実験開始（省略）
     rm->Initialize();
-    rm->BeamOn();
+    rm->BeamOn(10);
     delete rm;
     return 0;
 }
@@ -184,14 +184,14 @@ class ActionInitialization : public G4VUserActionInitialization
 {
   public:
     ActionInitialization() = default;
-    ~ActionInitialization() = default;
+    ~ActionInitialization() override = default;
 
   public:
     void BuildForMaster() const override;
     void Build() const override;
 };
 
-};  // namespace ToyMC
+}  // namespace ToyMC
 
 #endif  // ACTION_INITIALIZATION_HH
 ```
@@ -222,11 +222,9 @@ class ActionInitialization : public G4VUserActionInitialization
 namespace ToyMC
 {
 
-//////////////////////////////////////////////////
 void ActionInitialization::BuildForMaster() const {
     SetUserAction(new RunAction{});
 }
-//////////////////////////////////////////////////
 
 void ActionInitialization::Build() const
 {
