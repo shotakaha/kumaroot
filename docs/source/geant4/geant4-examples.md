@@ -109,7 +109,7 @@ Geant4以外のライブラリが必要なサンプルもあります。
 | `geometry` | 形状に関する個別の例 | `transforms` |
 | `hadronic` | ハドロン物理のシミュレーション（ヒストグラム付き） | `Hadr01`、`Hadr04` |
 | `medical` | 医療物理への応用 | `DICOM` |
-| `optical` | 光学プロセスのシミュレーション | `OpNovice`、`LXe`、`wls` |
+| `optical` | 光学プロセスのシミュレーション | [OpNovice](geant4-examples-opnovice)、`LXe`、`wls` |
 | `parallel` | MPIを使ったイベントレベルの並列化 | `MPI` |
 | `parameterisations` | 高速シャワーのパラメータ化（`gflash`）、機械学習の推論 | `gflash`、`Par04` |
 | `persistency` | 形状（GDMLかASCII）とシミュレーション出力の保存 | `gdml` |
