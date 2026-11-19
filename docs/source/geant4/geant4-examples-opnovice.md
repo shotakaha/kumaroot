@@ -1,9 +1,9 @@
 # OpNoviceしたい（`examples/extended/optical/OpNovice`）
 
 OpNoviceは、光学光子（optical photon）の生成と輸送を示す入門サンプルです。
-水の入った水槽の中で、電子・陽電子が荷電粒子としてチェレンコフ光を出し、シンチレーション光も生成されます。
-光子は吸収、レイリー散乱、ミー散乱、境界面での反射・屈折を受けます。
-これらの過程は、`G4OpticalPhysics`、`G4MaterialPropertiesTable`、`G4OpticalSurface`を使って設定しています。
+水を満たした水槽に陽電子（`e+`）を撃ち込み、チェレンコフ光とシンチレーション光を生成します。
+生成された光子は、吸収、レイリー散乱、ミー散乱、境界面での反射・屈折を受けます。
+これらの過程は、`G4OpticalPhysics`、`G4MaterialPropertiesTable`、`G4OpticalSurface`で設定しています。
 
 ## ビルドしたい
 
@@ -58,14 +58,14 @@ GDMLを使わない場合は、作業用ディレクトリのコピーに次の�
 インストール先のサンプルは変更しません。
 
 まず、Geant4がGDML無効かどうかを確認します。
-GDMLのヘッダが無ければ、`0`と表示されます。
+GDMLのヘッダがなければ、`0`と表示されます。
 
 ```console
 // GDMLのヘッダの数を数える（0ならGDML無効）
 $ ls ~/geant4/v11.X.Y/install/include/Geant4 | grep -c -i gdml
 ```
 
-次の内容を`opnovice-no-gdml.patch`という名前で保存します。
+次の内容を、`$G4WORK`に`opnovice-no-gdml.patch`という名前で保存します。
 
 ```diff
 --- a/CMakeLists.txt
@@ -134,9 +134,9 @@ $ ls ~/geant4/v11.X.Y/install/include/Geant4 | grep -c -i gdml
 
 パッチは、次の3つの変更を行います。
 
-- `CMakeLists.txt`：`GEANT4_USE_GDML`の定義をコメントアウトする
+- `CMakeLists.txt`：`add_compile_definitions(GEANT4_USE_GDML)`をコメントアウトする
 - `OpNoviceDetectorConstruction.cc`：`G4GDMLParser`の`#include`と、GDMLの書き出し部分を`#ifdef GEANT4_USE_GDML`で囲む
-- `OpNoviceDetectorMessenger.cc`：GDML版の形状（`OpNoviceGDMLDetectorConstruction`）を参照する部分を削除する
+- `OpNoviceDetectorMessenger.cc`：GDML版の形状（`OpNoviceGDMLDetectorConstruction`）を扱う`else`節を削除する
 
 パッチを当て、GDML無効を指定してビルドします。
 
@@ -167,12 +167,12 @@ GDML無効でビルドすると、`-g`オプションは使えません。
 
 | ファイル | 内容 |
 | --- | --- |
-| `OpNovice.in` | 陽電子（`e+`）を500 keVで、10イベント撃ち、チェレンコフ光の上限を変えて1000イベント撃つ |
+| `OpNovice.in` | 陽電子（`e+`）を500 keVで10イベント撃ったあと、チェレンコフ光の最大数を変えて1000イベント撃つ |
 | `optPhoton.mac` | 光学光子を3 eVで撃ち、偏光を指定する |
 | `vis.mac` | 可視化の設定。対話モードで自動的に読み込まれる |
 | `gui.mac` | GUIメニューの設定。GUIセッションのときだけ読み込まれる |
 
-`OpNovice.in`では、物理過程の詳細な出力を有効にしたあと、次のように設定しています。
+`OpNovice.in`では、チェレンコフ光の設定を途中で変えています。
 
 ```cfg
 /gun/particle e+
@@ -184,12 +184,12 @@ GDML無効でビルドすると、`-g`オプションは使えません。
 /run/beamOn 1000
 ```
 
-`/process/optical/cerenkov/`のコマンドは、`G4OpticalPhysics`が用意しているメッセンジャーで設定します。
+`/process/optical/`のコマンドは、光学物理のメッセンジャーが用意しています。
 詳しくは、[光学物理](geant4-physics-opticalphysics)を参照してください。
 
 ## 物理リストを確認したい（`G4OpticalPhysics`）
 
-物理リストは、`FTFP_BERT`をベースに、電磁過程だけを`G4EmStandardPhysics_option4`に置き換えています。
+物理リストは、`FTFP_BERT`をベースに、電磁過程を`G4EmStandardPhysics_option4`に置き換えています。
 光学過程は、`G4OpticalPhysics`を追加して有効にします。
 
 ```cpp
@@ -209,13 +209,6 @@ runManager->SetUserInitialization(physicsList);
 - `G4OpRayleigh`：光子をレイリー散乱させる
 - `G4OpMieHG`：光子をミー散乱（Henyey-Greenstein）させる
 - `G4OpBoundaryProcess`：境界面で、反射・屈折・吸収などを行う
-
-:::{note}
-
-光学光子は、物性（`G4MaterialPropertiesTable`）を定義していない物質の中では、吸収も散乱もされずに、そのまま進みます。
-この動作は、光子が消えたように見えるので、まず物性の定義を確認するとよいです。
-
-:::
 
 ## 物性を設定したい（`G4MaterialPropertiesTable`）
 
@@ -251,8 +244,8 @@ water->SetMaterialPropertiesTable(myMPT1);
 - `AddConstProperty()`：エネルギーによらない定数を追加します。
 - 第4引数（`createNewKey`）と第5引数（`spline`）は、既定では`false`です。
 
-水には、ほかに`Birks`定数も設定しています。
-`water->GetIonisation()->SetBirksConstant(0.126 * mm / MeV)`で、シンチレーション光のクエンチングを補正します。
+水には、ほかにBirks定数も設定しています。
+`water->GetIonisation()->SetBirksConstant(0.126 * mm / MeV)`で、シンチレーション光の発光量の飽和（クエンチング）を補正します。
 
 物性の詳しい説明は、[G4MaterialPropertiesTable](geant4-material-propertiestable)を参照してください。
 
@@ -277,7 +270,7 @@ new G4LogicalSkinSurface("AirSurface", bubbleAir_log, opAirSurface);
 ```
 
 - `G4LogicalBorderSurface`：2つの物理体積の間の境界です。
-- `G4LogicalSkinSurface`：1つの論理体積の表面全体に適用します。気泡のように、ほかの体積に囲まれた論理体積の表面に使います。
+- `G4LogicalSkinSurface`：1つの論理体積の表面全体に適用します。ここでは、気泡（`Bubble`）の表面に使っています。
 - 気泡の表面には、反射率（`REFLECTIVITY`）と検出効率（`EFFICIENCY`）を設定しています。
 
 ```cpp
@@ -304,20 +297,20 @@ GDML無効のGeant4では、`-g`を指定するとエラーになります。
 
 形状の寸法は、次のとおりです。
 
-| 体積 | 形状 | 寸法 | 材質 |
-| --- | --- | --- | --- |
-| World | `G4Box` | 一辺の半分が15 m | Air |
-| expHall | `G4Box` | 一辺の半分が10 m | Air |
-| Tank | `G4Box` | 水槽 | Water |
-| Bubble | `G4Box` | 気泡。水槽の中の(0, 2.5 m, 0)に置く | Air |
+| 体積 | 形状 | 寸法（各軸の半分の長さ） | 材質 | 配置 |
+| --- | --- | --- | --- | --- |
+| World | `G4Box` | 15 m | Air | 原点 |
+| expHall | `G4Box` | 10 m | Air | Worldの中の原点 |
+| Tank | `G4Box` | 5 m | Water | expHallの中の原点 |
+| Bubble | `G4Box` | 0.5 m | Air | Tankの中の(0, 2.5 m, 0) |
 
 ## 光子数を数えたい（`StackingAction`、`EventAction`）
 
 光子の数は、`OpNoviceStackingAction`と`OpNoviceEventAction`で数えます。
 
-- `OpNoviceStackingAction::ClassifyNewTrack()`：生成された光学光子のうち、二次粒子であるものを、生成過程（`Cerenkov`か`Scintillation`）ごとに数えます。
-- `OpNoviceStackingAction::NewStage()`：イベントの終わりに、数えた値をランに加えます。
-- `OpNoviceSteppingAction`：光子の各ステップで、レイリー散乱、吸収、ミー散乱、境界面の過程が起きたかを判定します。
+- `OpNoviceStackingAction::ClassifyNewTrack()`：生成された光学光子のうち、二次粒子を、生成過程（`Cerenkov`または`Scintillation`）ごとに数えます。
+- `OpNoviceStackingAction::NewStage()`：数えた値を、ランに加えます。
+- `OpNoviceSteppingAction`：光子のステップごとに、レイリー散乱、吸収、ミー散乱、境界面の過程のどれが起きたかを判定します。
 - `OpNoviceEventAction`：イベントごとの値を、ランに加えます。
 
 `OpNoviceRun`は、これらの値を集計して、ランの終わりに表示します。
