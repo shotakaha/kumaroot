@@ -75,6 +75,8 @@ Qtを有効にしてビルドしている場合、`OGL`を指定するとQtウ�
 ## ランを開始したい（`/run/beamOn`）
 
 ```cfg
+/run/initialize
+
 /run/beamOn イベント数
 /run/beamOn 1
 /run/beamOn 100
@@ -86,6 +88,10 @@ Qtを有効にしてビルドしている場合、`OGL`を指定するとQtウ�
 :::{caution}
 
 ランを開始する前に、`/run/initialize`で初期化しておく必要があります。
+
+:::
+
+:::{seealso}
 
 ```cpp
 auto rm = G4RunManagerFactory::CreateRunManager();
