@@ -50,6 +50,117 @@ $ ./OpNovice [-g gdmlfile] [-m macro] [-u UIsession] [-t nThreads] [-r seed]
 
 :::
 
+## GDML無効のGeant4でビルドしたい
+
+付属のサンプルは、GDML有効のGeant4を前提に書かれています。
+GDML無効のGeant4で上の手順をそのまま実行すると、`G4GDMLParser.hh`が見つからずにビルドが失敗します。
+GDMLを使わない場合は、作業用ディレクトリのコピーに次のパッチを当ててからビルドします。
+インストール先のサンプルは変更しません。
+
+まず、Geant4がGDML無効かどうかを確認します。
+GDMLのヘッダが無ければ、`0`と表示されます。
+
+```console
+// GDMLのヘッダの数を数える（0ならGDML無効）
+$ ls ~/geant4/v11.X.Y/install/include/Geant4 | grep -c -i gdml
+```
+
+次の内容を`opnovice-no-gdml.patch`という名前で保存します。
+
+```diff
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -3,7 +3,7 @@
+ cmake_minimum_required(VERSION 3.16...3.27)
+ project(OpNovice)
+ #add_definitions(-DGEANT4_USE_GDML)
+-add_compile_definitions(GEANT4_USE_GDML)
++#add_compile_definitions(GEANT4_USE_GDML)
+ #make using gdml the default
+ OPTION( GEANT4_USE_GDML "Use gdml Option" ON)
+ # printout the value of GEANT4_USE_GDML
+--- a/src/OpNoviceDetectorConstruction.cc
++++ b/src/OpNoviceDetectorConstruction.cc
+@@ -32,7 +32,9 @@
+
+ #include "G4Box.hh"
+ #include "G4Element.hh"
+-#include "G4GDMLParser.hh"
++#ifdef GEANT4_USE_GDML
++#  include "G4GDMLParser.hh"
++#endif
+ #include "G4LogicalBorderSurface.hh"
+ #include "G4LogicalSkinSurface.hh"
+ #include "G4LogicalVolume.hh"
+@@ -272,10 +274,12 @@
+   }
+   opAirSurface->SetMaterialPropertiesTable(myST2);
+
++#ifdef GEANT4_USE_GDML
+   if (fDumpGdml) {
+     auto parser = new G4GDMLParser();
+     parser->Write(fDumpGdmlFileName, world_phys);
+   }
++#endif
+
+   ////////////////////////////////////////////////////////////////////////////
+   // test user-defined properties
+--- a/src/OpNoviceDetectorMessenger.cc
++++ b/src/OpNoviceDetectorMessenger.cc
+@@ -29,8 +29,8 @@
+ #include "OpNoviceDetectorMessenger.hh"
+
+ #include "OpNoviceDetectorConstruction.hh"
+-#include "OpNoviceGDMLDetectorConstruction.hh"
+
++
+ #include "G4UIcmdWithABool.hh"
+ #include "G4UIcmdWithAString.hh"
+ #include "G4UIdirectory.hh"
+@@ -79,12 +79,6 @@
+     if (command == fVerboseCmd) dc1->SetVerbose(fVerboseCmd->GetNewBoolValue(newValue));
+     if (command == fDumpGdmlCmd) dc1->SetDumpGdml(fDumpGdmlCmd->GetNewBoolValue(newValue));
+     if (command == fDumpGdmlFileNameCmd) dc1->SetDumpGdmlFile(newValue);
+-  }
+-  else {
+-    auto dc2 = dynamic_cast<OpNoviceGDMLDetectorConstruction*>(fOpNoviceDetCon);
+-    if (command == fVerboseCmd) dc2->SetVerbose(fVerboseCmd->GetNewBoolValue(newValue));
+-    if (command == fDumpGdmlCmd) dc2->SetDumpGdml(fDumpGdmlCmd->GetNewBoolValue(newValue));
+-    if (command == fDumpGdmlFileNameCmd) dc2->SetDumpGdmlFile(newValue);
+   }
+ }
+ //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+```
+
+パッチは、次の3つの変更を行います。
+
+- `CMakeLists.txt`：`GEANT4_USE_GDML`の定義をコメントアウトする
+- `OpNoviceDetectorConstruction.cc`：`G4GDMLParser`の`#include`と、GDMLの書き出し部分を`#ifdef GEANT4_USE_GDML`で囲む
+- `OpNoviceDetectorMessenger.cc`：GDML版の形状（`OpNoviceGDMLDetectorConstruction`）を参照する部分を削除する
+
+パッチを当て、GDML無効を指定してビルドします。
+
+```console
+// 作業用ディレクトリのコピーに、パッチを当てる
+$ cd $G4WORK/OpNovice
+$ patch -p1 < ../opnovice-no-gdml.patch
+
+// GDML無効を指定してビルドする
+$ cmake -S . -B build -DGEANT4_USE_GDML=OFF
+$ cmake --build build --parallel
+
+// 実行する
+$ cd build
+$ ./OpNovice -m OpNovice.in
+```
+
+:::{note}
+
+GDML無効でビルドすると、`-g`オプションは使えません。
+`/OpNovice/DetectorConstruction/dumpGdml`のコマンドは残りますが、GDMLファイルは書き出されません。
+
+:::
+
 ## マクロの流れを確認したい
 
 付属のマクロは、次の4つです。
