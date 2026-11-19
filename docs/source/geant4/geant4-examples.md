@@ -28,7 +28,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 Geant4には、使い方を示すサンプルが付属しています。
 インストール先の`share/Geant4/examples`に入っていて、`basic`、`extended`、`advanced`の3つに分類されています。
 
-サンプルは、一括ではなく1つずつ使います。
+サンプルは、基本的に1つずつ使います（一括ビルドは、後の「一括ビルドしたい」の節を参照）。
 `G4EXAMPLE`に使いたいサンプルのディレクトリ、`G4WORK`に作業用ディレクトリを指定し、サンプルだけをコピーしてからビルドします。
 インストール先のソースを変更せずに、自由に編集できます。
 作業用ディレクトリの名前は任意ですが、ここでは`g4work`としました。
@@ -68,7 +68,7 @@ $ rm -r $G4WORK/B1
 `cmake --build build --target clean`は、実行ファイルなどのビルドの生成物だけを削除し、ビルドの設定（`cmake`で生成したファイル）は残します。
 コピーしたサンプルを編集した場合は、`$G4WORK/B1`を削除すると編集内容も消えるので注意してください。
 
-## basic（初級者向け）
+## basicしたい（初級者向け）
 
 `basic`は、Geant4の基本要素を学べるサンプルです。
 まずはここから、ビルドして動かしてみるのがよいです。
@@ -89,7 +89,7 @@ Geant4 10.0で、`novice`が`basic`と`extended`にリファクタリングさ�
 
 :::
 
-## extended（中級者向け）
+## extendedしたい（中級者向け）
 
 `extended`は、特定の分野での使い方を示すサンプルです。
 分野ごとにカテゴリ（ディレクトリ）に分かれていて、カテゴリの中に複数のサンプルがあります。
@@ -119,7 +119,7 @@ Geant4以外のライブラリが必要なサンプルもあります。
 | `runAndEvent` | 一次粒子とヒットの情報の関連づけ、ユーザー情報クラスの使い方 | `RE01` |
 | `visualization` | 可視化機能とグラフィックスのカスタマイズ | `userVisAction` |
 
-## advanced（上級者向け）
+## advancedしたい（上級者向け）
 
 `advanced`は、実際のシミュレーション研究に使われている、完成したアプリケーションです。
 Geant4の配布物に含まれていますが、保守と更新は各サンプルの作者の責任です。
@@ -163,6 +163,32 @@ Geant4 11.4.0では、次の36個が含まれています。
 `xray_TESdetector`、
 `xray_fluorescence`、
 `xray_telescope`
+
+## 一括ビルドしたい
+
+```console
+// basic/ のサンプルをまとめてビルドする（ビルド用ディレクトリは作業用ディレクトリの下に作る）
+$ cmake -S ~/geant4/v11.X.Y/install/share/Geant4/examples -B $G4WORK/build-examples
+$ cmake --build $G4WORK/build-examples --target basic --parallel
+
+// 特定のサンプルだけをビルドする
+$ cmake --build $G4WORK/build-examples --target exampleB1
+
+// すべてのサンプルをビルドする（時間がかかる）
+$ cmake --build $G4WORK/build-examples --parallel
+```
+
+`examples/`の直下にある`CMakeLists.txt`は、`basic`、`extended`、`advanced`をまとめて登録しています。
+そのため、`-S`に`examples/`を指定すると、すべてのサンプルを1つのビルドとして扱えます。
+`basic`には、`basic`のサンプルをまとめてビルドする`basic`というターゲットが用意されています。
+
+:::{note}
+
+`extended`と`advanced`には、Geant4以外のライブラリ（`ROOT`など）や、Geant4のオプション機能（`GDML`など）が必要なサンプルがあります。
+`advanced`の`CMakeLists.txt`は、必要な機能が無いサンプルを自動的に除外しますが、すべてをビルドするには時間がかかります。
+通常は、使いたいサンプルだけを選んでビルドするのがよいです。
+
+:::
 
 ## 目的に合わせて選びたい
 
