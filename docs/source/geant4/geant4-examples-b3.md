@@ -114,7 +114,63 @@ new G4PVPlacement(nullptr,  // no rotation
 ## 検出器（結晶のリング）を作りたい
 
 検出器は、結晶（`Lu2SiO5`）を円形に並べてリングを作り、そのリングを複数枚重ねて作ります。
-結晶は`G4NistManager`のデータベースにないので、`DetectorConstruction`の中で元素から定義しています。
+
+## 材質を元素から作りたい（`G4Material`）
+
+結晶の材質（`Lu2SiO5`）は、`G4NistManager`のデータベースにないので、元素を組み合わせて定義しています。
+
+```cpp
+// B3::DetectorConstruction::DefineMaterials()（一部）
+G4NistManager* man = G4NistManager::Instance();
+
+G4bool isotopes = false;
+
+G4Element* O = man->FindOrBuildElement("O", isotopes);
+G4Element* Si = man->FindOrBuildElement("Si", isotopes);
+G4Element* Lu = man->FindOrBuildElement("Lu", isotopes);
+
+auto LSO = new G4Material("Lu2SiO5", 7.4 * g / cm3, 3);
+LSO->AddElement(Lu, 2);
+LSO->AddElement(Si, 1);
+LSO->AddElement(O, 5);
+```
+
+- `FindOrBuildElement`で元素を取得します。
+- `G4Material`の第3引数は、構成する元素の数です。
+- `AddElement`で、元素とその個数を指定します。`Lu2SiO5`なら、Lu、Si、Oをそれぞれ2、1、5個ずつ加えます。
+
+既製の材質（`G4_WATER`など）で足りる場合は、`FindOrBuildMaterial`で取得するだけで済みます。
+元素から作るのは、データベースにない化合物を扱うときです。
+
+## スコアリングしたい（`G4MultiFunctionalDetector`）
+
+B2では、`TrackerSD`という独自のSensitive Detectorクラスを書いて、ヒットを記録しました。
+B3では、そのようなクラスを書かずに、既製のスコアラー（`G4PS...`）を組み合わせて測ります。
+
+```cpp
+// B3::DetectorConstruction::ConstructSDandField()（一部）
+// 結晶：エネルギー付与を測る
+auto cryst = new G4MultiFunctionalDetector("crystal");
+G4SDManager::GetSDMpointer()->AddNewDetector(cryst);
+G4VPrimitiveScorer* primitiv1 = new G4PSEnergyDeposit("edep");
+cryst->RegisterPrimitive(primitiv1);
+SetSensitiveDetector("CrystalLV", cryst);
+
+// 患者：線量を測る
+auto patient = new G4MultiFunctionalDetector("patient");
+G4SDManager::GetSDMpointer()->AddNewDetector(patient);
+G4VPrimitiveScorer* primitiv2 = new G4PSDoseDeposit("dose");
+patient->RegisterPrimitive(primitiv2);
+SetSensitiveDetector("PatientLV", patient);
+```
+
+- `G4MultiFunctionalDetector`：1つの論理ボリュームに対して、複数の測定項目（スコアラー）をまとめて登録する器です。
+- `G4PSEnergyDeposit`：ステップごとのエネルギー付与を集計します。結晶に使っています。
+- `G4PSDoseDeposit`：線量を集計します。患者に使っています。
+- `SetSensitiveDetector`で、論理ボリュームと結果の器を結びつけます。
+
+スコアラーの名前（`"edep"`、`"dose"`）は、`crystal/edep`、`patient/dose`のように、器の名前と組み合わせた形で、`EventAction`や`Run`から参照されます。
+B2の`TrackerHit`のような独自のデータ構造を書かなくても、結果を取り出せる点が特徴です。
 
 ## 放射線源を作りたい（`PrimaryGeneratorAction`）
 
