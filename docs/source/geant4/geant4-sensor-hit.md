@@ -1,7 +1,6 @@
 # ヒット情報を定義したい（``G4VHit``）
 
-有感検出器でのヒット情報を格納するためには
-``G4VHit``クラスを継承したクラスを作成します。
+有感検出器でヒット情報を格納するには、``G4VHit``クラスを継承したクラスを作成します。
 
 ## 全体の流れ
 
@@ -130,7 +129,7 @@ G4ThreadLocal G4Allocator<ToyMC::SensorHit>* ToyMC::SensorHitAllocator = nullptr
 ここでは、その汗と涙と努力の結晶をまとめてみました。
 
 サンプルコードは``examples/basic/B2/B2a/include/TrackerHit.hh``を参考に改変しました。
-有感検出器でヒットを取得するクラスを``SensorHit``クラスと名づけました。
+有感検出器でヒットを取得するクラスを、``SensorHit``と名づけました。
 このクラスの役割は次のとおりです。
 
 1. コンストラクター／デストラクターは親クラスを引き継ぐ
@@ -150,7 +149,7 @@ public:
   ~SensorHit() override = default;
 ```
 
-``SensorHit``クラスの初期化／削除するときに実行されるコンストラクターとデストラクターは、親クラス（``G4VHit``）を引き継いでおきます。
+コンストラクターとデストラクターは、親クラス（``G4VHit``）のものをそのまま使います。
 ユーザーがカスタマイズする必要はありません。
 
 ## 型エイリアス: ``SensorHitsCollection``
@@ -162,7 +161,7 @@ using SensorHitsCollection = G4THitsCollection<SensorHit>;
 ``SensorHitsCollection``という名前の型エイリアスを定義しています。
 
 ``G4THitsCollection``は、``G4VHitsCollection``を継承したテンプレートクラスです。
-内部に``std::vector<SensorHit*>``を持ち、``SensorHit``へのポインターを要素として持つ配列とイメージしておけばよいと思います。
+内部に``std::vector<SensorHit*>``を持っているので、``SensorHit``へのポインターを要素に持つ配列と考えると分かりやすいと思います。
 
 ```cpp
 // SensorHitsCollection の作成（SensitiveDetector の中で行う）
@@ -182,7 +181,7 @@ hits_collection->insert(hit);
 extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
 ```
 
-``SensorHitAllocator``という名前で、スレッド別にメモリ領域を割り当てるアロケーターを定義しています。
+``SensorHitAllocator``は、スレッドごとにメモリ領域を割り当てるアロケーターです。
 実体は、``SensorHit.cc``で定義します。
 詳細は[](./geant4-sensor-hit-allocator.md)に整理しました。
 
@@ -214,8 +213,8 @@ public:
 ## ``Fill(G4Step* aStep)``関数
 
 ``Fill``は僕が追加したカスタム関数です。
-``G4Step``を引数として渡し、``Fill``の中でprivate変数に値を直接代入するという設計です。
-これにより、private変数ごとのゲッター／セッターを作成する必要がなくなります。
+``G4Step``を引数として渡し、``Fill``の中でprivate変数に値を直接代入する設計です。
+こうすると、private変数ごとのゲッター／セッターを作る必要がなくなります。
 
 ## 有感検出器とヒット用クラス
 
