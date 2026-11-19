@@ -248,6 +248,64 @@ new G4Material("liquidArgon", z = 18., a = 39.95 * g / mole, density = 1.390 * g
 /run/beamOn 10000
 ```
 
+## ステップごとにエネルギー損失を振り分けたい（`SteppingAction`）
+
+ステップごとに、今いるボリュームを調べて、吸収板かギャップかで振り分けます。
+飛跡長は、荷電粒子のステップだけ数えます。
+
+```cpp
+// B4a::SteppingAction::UserSteppingAction()（一部）
+auto volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+auto edep = step->GetTotalEnergyDeposit();
+
+G4double stepLength = 0.;
+if (step->GetTrack()->GetDefinition()->GetPDGCharge() != 0.) {
+  stepLength = step->GetStepLength();
+}
+
+if (volume == fDetConstruction->GetAbsorberPV()) {
+  fEventAction->AddAbs(edep, stepLength);
+}
+```
+
+## 今いる層の番号を知りたい（`GetReplicaNumber`）
+
+`G4PVReplica`で並べた層は、`GetReplicaNumber()`で番号を取り出せます。
+層ごとのヒットと、全体のヒットを、同時に更新しています。
+
+```cpp
+// B4c::CalorimeterSD::ProcessHits()（一部）
+auto layerNumber = touchable->GetReplicaNumber(1);
+auto hit = (*fHitsCollection)[layerNumber];
+
+// 全体のヒットは、最後に追加されたもの
+auto hitTotal = (*fHitsCollection)[fHitsCollection->entries() - 1];
+
+hit->Add(edep, stepLength);
+hitTotal->Add(edep, stepLength);
+```
+
+## ヒストグラムとntupleに値を入れたい（`FillH1`、`AddNtupleRow`）
+
+イベントの終わりに、集計した値をヒストグラムとntupleに入れます。
+番号は、`RunAction`で`CreateH1`や`CreateNtupleDColumn`を呼んだ順に対応しています。
+
+```cpp
+// B4a::EventAction::EndOfEventAction()（一部）
+auto analysisManager = G4AnalysisManager::Instance();
+
+analysisManager->FillH1(0, fEnergyAbs);
+analysisManager->FillH1(1, fEnergyGap);
+analysisManager->FillH1(2, fTrackLAbs);
+analysisManager->FillH1(3, fTrackLGap);
+
+analysisManager->FillNtupleDColumn(0, fEnergyAbs);
+analysisManager->FillNtupleDColumn(1, fEnergyGap);
+analysisManager->FillNtupleDColumn(2, fTrackLAbs);
+analysisManager->FillNtupleDColumn(3, fTrackLGap);
+analysisManager->AddNtupleRow();
+```
+
 ## スコアリングしたい（`B4d`）
 
 `B4d`では、吸収板とギャップに、`G4MultiFunctionalDetector`を登録しています。
