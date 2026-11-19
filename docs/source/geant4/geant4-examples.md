@@ -18,6 +18,11 @@ $ cmake --build build --parallel
 $ cd build
 $ ./exampleB1 run1.mac    # バッチモード
 $ ./exampleB1             # 対話モード
+
+// クリーンする
+$ cd $G4WORK/B1
+$ cmake --build build --target clean    # ビルドした実行ファイルなどを削除する
+$ rm -r build                           # ビルド用ディレクトリごと削除する
 ```
 
 Geant4には、使い方を示すサンプルが付属しています。
@@ -44,6 +49,24 @@ Geant4の環境変数は、あらかじめ読み込んでおいてください�
 このページの内容は、Geant4 11.4.0を確認したものです。
 
 :::
+
+## クリーンしたい
+
+```console
+// ビルドした実行ファイルなどだけを削除する（ビルドの設定は残す）
+$ cd $G4WORK/B1
+$ cmake --build build --target clean
+
+// ビルド用ディレクトリごと削除する（最初からやり直す）
+$ rm -r build
+
+// コピーしたサンプルを削除する
+$ rm -r $G4WORK/B1
+```
+
+ビルド用ディレクトリ（`build/`）にビルドの生成物がまとまっているので、`build/`を削除すれば、ビルド前の状態に戻ります。
+`cmake --build build --target clean`は、実行ファイルなどのビルドの生成物だけを削除し、ビルドの設定（`cmake`で生成したファイル）は残します。
+コピーしたサンプルを編集した場合は、`$G4WORK/B1`を削除すると編集内容も消えるので注意してください。
 
 ## basic（初級者向け）
 
