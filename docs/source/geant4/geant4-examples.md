@@ -1,22 +1,21 @@
 # 付属サンプルの遊び方（``examples``）
 
 ```console
-// サンプルの場所を設定する（バージョンは自分の環境に合わせる）
-$ export G4EXAMPLES=~/geant4/v11.X.Y/install/share/Geant4/examples
+// 使いたいサンプルと作業ディレクトリを設定する（パスは自分の環境に合わせる）
+$ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B1
+$ export G4WORK=~/repos/sandbox/g4work
 
-// サンプルの分類を確認する
-$ ls -1 $G4EXAMPLES
-advanced/
-basic/
-extended/
-...
+// 作業ディレクトリにコピーして移動する
+$ mkdir -p $G4WORK
+$ cp -R $G4EXAMPLE $G4WORK/
+$ cd $G4WORK/B1
 
-// サンプルを1つずつビルドする（例：basic/B1）
-$ cmake -S $G4EXAMPLES/basic/B1 -B build/B1
-$ cmake --build build/B1 --parallel
+// ビルドする
+$ cmake -S . -B build
+$ cmake --build build --parallel
 
 // 実行する
-$ cd build/B1
+$ cd build
 $ ./exampleB1 run1.mac    # バッチモード
 $ ./exampleB1             # 対話モード
 ```
@@ -24,21 +23,18 @@ $ ./exampleB1             # 対話モード
 Geant4には、使い方を示すサンプルが付属しています。
 インストール先の`share/Geant4/examples`に入っていて、`basic`、`extended`、`advanced`の3つに分類されています。
 
-サンプルは、一括ではなく1つずつビルドします。
-`-S`にサンプルのディレクトリ、`-B`にビルド用ディレクトリを指定すれば、サンプルをコピーしなくても、インストール先のソースを変更せずにビルドできます。
+サンプルは、一括ではなく1つずつ使います。
+`G4EXAMPLE`に使いたいサンプルのディレクトリ、`G4WORK`に作業用ディレクトリを指定し、サンプルだけをコピーしてからビルドします。
+インストール先のソースを変更せずに、自由に編集できます。
+作業用ディレクトリの名前は任意ですが、ここでは`g4work`としました。
+
 Geant4の環境変数は、あらかじめ読み込んでおいてください（[環境変数したい](geant4-install-shell)）。
 ビルド・実行の汎用的な手順は[ビルドしたい](geant4-build)も参照してください。
-
-サンプルを改造したい場合は、使いたいサンプルのディレクトリだけを作業用ディレクトリにコピーします。
-
-```console
-$ cp -R $G4EXAMPLES/basic/B1 ~/repos/sandbox/g4work/
-```
 
 :::{note}
 
 サンプルごとの`README.md`に、そのサンプルの説明と実行方法（`HOW TO RUN`）があります。
-ビルド後にマクロを`build/B1/`にコピーする設定になっているかなどは、サンプルによって違うので確認してください。
+マクロを`build/`にコピーする設定になっているかなどは、サンプルによって違うので確認してください。
 
 :::
 
