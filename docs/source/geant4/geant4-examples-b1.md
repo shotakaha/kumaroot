@@ -11,18 +11,40 @@
 ## ビルドしたい（`cmake`）
 
 ```console
-$ cd B1
-(B1) $ mkdir build
-(B1) $ cd build
-(B1/build) $ cmake ..
-(B1/build) $ make
-(B1/build) $ ./exampleB1 run1.mac
-(B1/build) $ ./exampleB1 run2.mac
+// サンプルと作業ディレクトリを設定する（パスは自分の環境に合わせる）
+$ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B1
+$ export G4WORK=~/repos/sandbox/g4work
+
+// 作業ディレクトリにコピーして移動する
+$ mkdir -p $G4WORK
+$ cp -R $G4EXAMPLE $G4WORK/
+$ cd $G4WORK/B1
+
+// ビルドする
+$ cmake -S . -B build
+$ cmake --build build --parallel
+
+// 実行する
+$ cd build
+$ ./exampleB1 run1.mac    # バッチモード
+$ ./exampleB1 run2.mac    # バッチモード（イベント数が多い）
+$ ./exampleB1             # 対話モード
+
+// クリーンする
+$ cd $G4WORK/B1
+$ cmake --build build --target clean    # ビルドした実行ファイルなどを削除する
+$ rm -r build                           # ビルド用ディレクトリごと削除する
 ```
 
 `cmake`でビルドし、`exampleB1`という実行ファイルを作成します。
-まず、`examples/basic/B1/`の下にビルド用ディレクトリ（`build`）を作成し、その中で``cmake ..`と`make`を実行します。
-`./exampleB1`を実行するときにマクロファイル（`run1.mac`など）を指定します。
+手順の詳しい説明は、[付属サンプルの遊び方](geant4-examples)を参照してください。
+
+実行ファイルは、`build/`の中に作成されます。
+`B1`の`CMakeLists.txt`は、マクロファイル（`run1.mac`など）を`build/`にコピーするので、`build/`で実行できます。
+`./exampleB1`を実行するときにマクロファイルを指定するとバッチモード、指定しないと対話モードになります。
+
+- `run1.mac`：ガンマ線（6 MeV）を5イベント、続けて陽子（210 MeV）を1イベント入射します
+- `run2.mac`：ガンマ線（6 MeV）と陽子（210 MeV）を、それぞれ10000イベント入射します
 
 ## メイン（`exampleB1.cc`）
 
