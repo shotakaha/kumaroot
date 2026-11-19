@@ -16,6 +16,15 @@ G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator = nullptr;
 **メモリプール型のアロケーター** であり、
 `G4Step`や`G4Track`の処理などGeant4内部でも利用されています。
 
+アロケーターとは、メモリの確保と返却を担当する仕組みです。
+通常の`new`は、オブジェクトを作るたびにメモリを確保し、削除のたびに返却します。
+大量のオブジェクトを繰り返し作る場面では、この処理が遅くなることがあります。
+
+`G4Allocator<T>`は、この問題を**メモリプール方式**で解決するGeant4の機能です。
+まとまった大きさのメモリ（ページ）をあらかじめ確保しておき、オブジェクト1つ分ずつ切り出して渡します。
+削除されたメモリは捨てずにプールに戻し、再利用します。
+`G4Track`や`G4Event`など、Geant4の内部のクラスでも利用されています。
+
 ユーザーが明示的に利用する場面は、
 前述した[ユーザー定義のヒットクラス](./geant4-sensor-hit.md)です。
 対象のユーザー定義クラスで
@@ -24,9 +33,9 @@ G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator = nullptr;
 
 :::{note}
 
-通常の`new`および`delete`演算子は、動的にメモリを確保・解放するためオーバーヘッドが生じます。
-Geant4のイベント処理では、オブジェクトを大量に生成・削除するため、このオーバーヘッドが大きくなります。
-`G4Allocator`であらかじめ確保したメモリブロックを使い回すことで、このオーバーヘッドを大幅に軽減します。
+通常の`new`および`delete`演算子は、動的にメモリを確保・解放するため、その分の処理時間がかかります。
+Geant4のイベント処理では、オブジェクトを大量に生成・削除することがあるため、この処理時間が無視できなくなる場合があります。
+`G4Allocator`であらかじめ確保したメモリを使い回すことで、この処理時間を減らせます。
 
 :::
 
@@ -40,7 +49,7 @@ SensorHitAllocator->MallocSingle();
 ```
 
 `MallocSingle`は、`G4Allocator`が管理しているメモリプールから、T型（ここでは`SensorHit`型）オブジェクト1つ分のメモリを割り当てる関数です。
-これはC++標準の`malloc`に相当します。
+C++標準の`malloc`に近い役割ですが、確保の仕組みはプールからの切り出しです。
 
 通常は、以下のように
 `new`演算子（`operator new`）をオーバーロードして使います。
@@ -158,17 +167,17 @@ void SensorHit::operator delete(void *hit)
 `SensorHitAllocator->FreeSingle(...)`でメモリプールに返却し、
 再利用できる状態にします。
 
-## 割り当てサイズをしりたい（`GetAllocatedSize`）
+## 割り当てサイズを確認したい（`GetAllocatedSize`）
 
 ```cpp
 // 割り当てられた合計サイズ
-G4int size = SensorHitAllocator->GetAllocatedSize();
+std::size_t size = SensorHitAllocator->GetAllocatedSize();
 
 // 現在のページのサイズ
-G4int page_size = SensorHitAllocator->GetPageSize();
+std::size_t page_size = SensorHitAllocator->GetPageSize();
 
 // 割り当てられたページ数
-G4int n_pages = SensorHitAllocator->GetNoPages();
+int n_pages = SensorHitAllocator->GetNoPages();
 ```
 
 `GetAllocatedSize`で、割り当てられたメモリの合計サイズを確認できます。
