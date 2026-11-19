@@ -1,4 +1,4 @@
-# メイン関数したい（``main()``）
+# メイン関数したい（`main()`）
 
 ```cpp
 // ユーザー定義クラスを読み込む
@@ -7,15 +7,24 @@
 
 // Geant4のクラスを読み込む
 #include "G4RunManagerFactory.hh"
+#include "G4UIExecutive.hh"
+#include "G4UImanager.hh"
+#include "G4VisExecutive.hh"
 #include "FTFP_BERT.hh"    // 標準の物理モデルのひとつ
 
 int main(int argc, char** argv)
 {
+    // 引数がなければ対話モード
+    G4UIExecutive* ui = nullptr;
+    if (argc == 1) {
+        ui = new G4UIExecutive(argc, argv);
+    }
+
     auto rm = G4RunManagerFactory::CreateRunManager();
 
     // ジオメトリの設定
     auto geometry = new Geometry{};
-    rm->SetUserInitialization(detector);
+    rm->SetUserInitialization(geometry);
 
     // 物理モデルの設定
     auto physics = new FTFP_BERT{};
@@ -25,19 +34,35 @@ int main(int argc, char** argv)
     auto actions = new ActionInitialization{};
     rm->SetUserInitialization(actions);
 
-    // 実験開始
-    rm->Initialize();
-    G4int n_events = 100;
-    rm->BeamOn(n_events);
+    // 可視化の設定
+    auto vis = new G4VisExecutive(argc, argv);
+    vis->Initialize();
 
-    // 実験終了
+    auto UImanager = G4UImanager::GetUIpointer();
+    if (!ui) {
+        // バッチモード: 引数で指定したマクロを実行する
+        UImanager->ApplyCommand("/control/execute " + G4String(argv[1]));
+    }
+    else {
+        // 対話モード: 初期化マクロを実行してから、セッションを開始する
+        UImanager->ApplyCommand("/control/execute init_vis.mac");
+        ui->SessionStart();
+        delete ui;
+    }
+
+    delete vis;
     delete rm;
     return 0;
 }
 ```
 
-Geant4でシミュレーションを実行する場合の、
-バッチモード用の必要最低限の`main()`関数の構成例です。
+Geant4でシミュレーションを実行する`main()`関数の構成例です。
+引数がなければ対話モード、引数があれば指定したマクロを実行するバッチモードになります。
+この切り替えは、ユーザーが`main()`関数に書く必要があります。
+
+対話モードとバッチモードで、設定は同じです。
+そのため、`main()`は1つにまとめ、`argc`で分岐しています。
+Geant4の付属サンプル（`B1`など）も、この書き方です。
 
 このサンプルでは、次の3つの要素を設定しています。
 
@@ -57,62 +82,96 @@ Geant4でシミュレーションを実行する場合の、
 
 :::
 
-## クラスが呼ばれる順番
+## 引数したい（`argc`と`argv`）
 
 ```cpp
+int main(int argc, char** argv)
 {
+    G4UIExecutive* ui = nullptr;
+    if (argc == 1) {
+        ui = new G4UIExecutive(argc, argv);
+    }
+
+    auto vis = new G4VisExecutive(argc, argv);
+    vis->Initialize();
+    // ...
+}
+```
+
+`argc`は引数の数で、プログラム名も含みます。
+`argv[0]`はプログラム名、`argv[1]`は最初の引数です。
+
+たとえば`./myGeant4App run1.mac`と実行すると、`argc`は`2`、`argv[1]`は`"run1.mac"`になります。
+引数がないとき（`argc == 1`）だけ、`G4UIExecutive`を作成して対話モードにしています。
+
+`G4UIExecutive`と`G4VisExecutive`には、`argc`と`argv`をそのまま渡しています。
+Geant4が引数を解釈するためです。
+引数の扱いは、アプリケーションごとに変えられます。
+たとえば、付属サンプルの`B4`は、`-m`オプションでマクロを指定します。
+
+## バッチ処理したい（マクロを引数で実行）
+
+```cpp
+if (!ui) {
+    // バッチモード: 引数で指定したマクロを実行する
+    UImanager->ApplyCommand("/control/execute " + G4String(argv[1]));
+}
+```
+
+バッチモードでは、`argv[1]`のマクロを`/control/execute`で実行します。
+マクロは、実行するときのカレントディレクトリからの相対パスで探されます。
+マクロがあるディレクトリで実行するか、絶対パスで指定してください。
+
+このサンプルは`rm->Initialize()`を呼びません。
+そのため、バッチモードで使うマクロには`/run/initialize`が必要です。
+
+```cfg
+/run/initialize
+/run/beamOn 100
+```
+
+:::{note}
+
+マクロが見つからないときは、エラーが表示されます。
+ただし、終了コードは`0`のままです。
+スクリプトで失敗を検出する場合は、出力も確認してください。
+
+:::
+
+## クラスが呼ばれる順番を確認したい
+
+以下は、仮想的な例です。
+実際の順番は、Geant4のバージョンやアプリケーションの構成によって変わります。
+
+```cpp
+// 疑似コード
 G4RunManagerFactory::CreateRunManager();
 new Geometry{};
 new FTFP_BERT{};
 new ActionInitialization{};
-ActionInitialization::BuildForMaster();
 
-// G4RunManager::Initializeを実行すると、測定器がセットアップがされる
-G4RunManager::Initialize();
-Geometry::Construct() {
-    SetupVolumes()
-};
-Geometry::ConstructSDandField() {
-    new TrackerSD{"/TrackerSD", "TrackerHitsCollection"}
-    new TrackerSD{"/ShieldSD", "ShieldHitsCollection"}
-};
+// rm->Initialize() で、検出器をセットアップする
+Geometry::Construct();
+Geometry::ConstructSDandField();
 
-// G4RunManager::BeamOn()を実行すると、入射粒子がセットアップされる
-G4RunManager::BeamOn()
+// rm->BeamOn() で、入射粒子をセットアップし、イベントを実行する
 ActionInitialization::Build();
 new PrimaryGenerator{};
-PrimaryGenerator::GeneratePrimaries() {
-    SetupGunMuons();
-};
+PrimaryGenerator::GeneratePrimaries();
+
 // 有感検出器での処理
 TrackerSD::Initialize();
-TrackerSD::ProcessHits() {
-    TrackerHit::operator new
-    TrackerHit::TrackerHit()
-    TrackerHit::Fill()
-    TrackerHit::Print()
-}
-TrackerSD::ProcessHits() { ... }
-TrackerSD::ProcessHits() { ... }
-TrackerSD::EndOfEvent()
-{
-    "File opened: mc_data/kamaboko_00000_2024-07-30T13h05m.csv"
-    TrackerHit::ToCsvString();
-    TrackerHit::ToCsvString();
-    TrackerHit::ToCsvString();
-    "File closed: mc_data/kamaboko_00000_2024-07-30T13h05m.csv"
-    TrackerHit::operator delete
-}
-delete G4RunManager();
-delete Geometry();
-delete FTFP_BERT();
-delete ActionInitialization();
+TrackerSD::ProcessHits();   // ステップごとに呼ばれる
+TrackerSD::EndOfEvent();
+
+delete rm;
+delete geometry;
+delete physics;
+delete actions;
 ```
 
-クラスが呼ばれる順番を確認しました。
-``G4RunManager::Initialize``すると測定器がセットアップされることを確認しました。
-``G4RunManager::BeamOn``すると入射粒子がセットアップされることを確認しました。
-有感検出器（ここでは``TrackerSD``）のヒット処理の流れを確認しました。
+流れを理解するための例として読んでください。
+`GeneratePrimaries()`は、イベントごとに呼ばれます。
 
 ## リファレンス
 
