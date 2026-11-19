@@ -3,7 +3,13 @@
 [前のページ](./geant4-command.md)で紹介したコマンド操作を、
 ひとつのファイルにまとめてマクロを作成できます。
 
+このページのコマンドには、次の区分を付けています。
+
+- **[標準]**: Geant4 本体が提供するコマンド
+- **[カスタム]**: 例題アプリケーションなどで、利用者が独自に追加したコマンド
+
 ```cfg
+# [標準]
 /control/execute ファイル名
 /control/execute マクロ名.mac
 ```
@@ -17,7 +23,7 @@ Geant4では、慣習的にマクロの拡張子として``.mac``を使います
 ## 表示レベルを変更したい（``/*/verbose``）
 
 ```cfg
-# verbose levelの設定
+# [標準] verbose levelの設定
 # 0: 非表示
 /run/verbose 1       # RunManager
 /control/verbose 1
@@ -35,7 +41,9 @@ Geant4では、慣習的にマクロの拡張子として``.mac``を使います
 指定できる値は、対話モードで``help``コマンドを使うと確認できます。
 
 デバッグの初期段階では、
-``/tracking/verbose 1``や``/hits/verbose 2``を設定しておくと便利です。
+``/tracking/verbose 1``（[標準]）や``/hits/verbose 2``（[カスタム]）を設定しておくと便利です。
+``/hits/verbose``は、例題アプリケーション（B2 など）が独自に定義するコマンドです。
+アプリケーションによっては使えないため、使えない場合は``/tracking/verbose``だけを設定してください。
 
 :::{hint}
 
@@ -48,12 +56,15 @@ Geant4では、慣習的にマクロの拡張子として``.mac``を使います
 ## エイリアスしたい（``/control/alias``）
 
 ```cfg
+# [標準]
 /control/alias エイリアス名 "値"
 
 # AnaEx03.in
+# [標準] /analysis/setDefaultFileType のエイリアス置き換え
 /analysis/setDefaultFileType {defaultFileType}
 
 # AnaEx03-csv.in
+# [カスタム] defaultFileType は AnaEx03 が使う名前
 /control/alias defaultFileType "csv"
 ```
 
@@ -64,6 +75,7 @@ Geant4では、慣習的にマクロの拡張子として``.mac``を使います
 ## コマンド履歴したい（``/control/saveHistory``）
 
 ```cfg
+# [標準]
 /control/saveHistory ファイル名
 /control/saveHistory [G4history.macro]  # [] 内は省略可能
 ```
@@ -74,10 +86,11 @@ Geant4では、慣習的にマクロの拡張子として``.mac``を使います
 ## データを保存したい（``/analysis/``）
 
 ```cfg
+# [標準] G4AnalysisManager を有効にしたときに使える
 /analysis/setDefaultFileType "csv"
 /analysis/openFile ファイル名
 
-# 入射粒子の設定
+# 入射粒子の設定（[標準] G4ParticleGun）
 /gun/particle mu-
 
 # Run1: 10 events
