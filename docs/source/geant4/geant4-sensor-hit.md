@@ -1,7 +1,15 @@
-# ヒット情報したい（``G4VHit``）
+# ヒット情報を定義したい（``G4VHit``）
 
 有感検出器でのヒット情報を格納するためには
 ``G4VHit``クラスを継承したクラスを作成します。
+
+## 全体の流れ
+
+ヒット情報は、次の流れで使われます。
+
+1. ``SensitiveDetector::ProcessHits()``で、``SensorHit``のオブジェクトを作る（``new``）
+2. ``SensorHitsCollection``（ヒット配列）に追加する（``insert()``）
+3. ``SensitiveDetector::EndOfEvent()``で、``G4HCofThisEvent``からヒット配列を取り出して、ヒットを読む
 
 ## 親クラス
 
@@ -9,7 +17,7 @@
 
 ```cpp
 G4VHit() = default;
-virtual G4VHit() = default;
+virtual ~G4VHit() = default;
 virtual void Draw() {};
 virtual void Print() {};
 ```
@@ -25,8 +33,12 @@ virtual void Print() {};
 #ifndef SensorHit_h
 #define SensorHit_h 1
 
-#include "G4VHit.hh"
+#include "G4Allocator.hh"
 #include "G4Step.hh"
+#include "G4THitsCollection.hh"
+#include "G4ThreeVector.hh"
+#include "G4VHit.hh"
+#include "G4Threading.hh"
 
 namespace ToyMC
 {
@@ -36,7 +48,7 @@ class SensorHit : public G4VHit
   public:
     // 1. コンストラクターなどを定義
     SensorHit() = default;
-    ~SensorHit() = default;
+    ~SensorHit() override = default;
 
     // 2. new / delete を実装
     inline void* operator new(size_t);
@@ -47,7 +59,7 @@ class SensorHit : public G4VHit
     void Print() override;
 
     // 4. カスタム関数
-    void Fill(G4Step *aStep);
+    void Fill(G4Step* aStep);
     G4String ToCsvString() const;
     G4String ToLtsvString() const;
 
@@ -63,7 +75,6 @@ class SensorHit : public G4VHit
     G4double fGlobalTime{0.};
     G4double fStepLength{0.};
     G4double fTrackLength{0.};
-
 };
 
 // __________________________________________________
@@ -71,12 +82,13 @@ class SensorHit : public G4VHit
 using SensorHitsCollection = G4THitsCollection<SensorHit>;
 
 // __________________________________________________
-// スレッドローカルなメモリアロケーターの定義
+// スレッドローカルなメモリアロケーターの宣言
 // マルチスレッド環境で、スレッドごとにメモリを確保
-extern G4ThreadLocal G4Allocator<SensorHit> *SensorHitAllocator;
+// 実体は SensorHit.cc で定義する
+extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
 
 // __________________________________________________
-inline void *SensorHit::operator new(size_t)
+inline void* SensorHit::operator new(size_t)
 {
     // new演算子:
     // コンストラクターの前に実行される特殊関数
@@ -85,20 +97,31 @@ inline void *SensorHit::operator new(size_t)
     if (!SensorHitAllocator) {
         SensorHitAllocator = new G4Allocator<SensorHit>;
     }
-    return (void *)SensorHitAllocator->MallocSingle();
+    return (void*)SensorHitAllocator->MallocSingle();
 }
 
 // __________________________________________________
-inline void SensorHit::operator delete(void *hit)
+inline void SensorHit::operator delete(void* hit)
 {
     // delete演算子
     // デストラクターの後に実行される特殊関数
     // new演算子で割り当てたメモリを解放する
-    SensorHitAllocator->FreeSingle((SensorHit *)hit);
+    SensorHitAllocator->FreeSingle((SensorHit*)hit);
 }
 
-}; // namespace ToyMC
+}  // namespace ToyMC
 #endif
+```
+
+``SensorHit.cc``には、スレッドローカルなアロケーターの実体を定義します。
+
+```cpp
+// SensorHit.cc
+#include "SensorHit.hh"
+
+G4ThreadLocal G4Allocator<ToyMC::SensorHit>* ToyMC::SensorHitAllocator = nullptr;
+
+// Draw()、Print()、Fill()などの定義は、このファイルに書きます（省略）
 ```
 
 測定器のヒット情報は``G4VHit``クラスを継承してユーザーが定義する必要があります。
@@ -106,7 +129,7 @@ inline void SensorHit::operator delete(void *hit)
 しかし、初心者向けの解説を見つけることができず、このクラスの役割を理解するのにかなり苦戦しました。
 ここでは、その汗と涙と努力の結晶をまとめてみました。
 
-サンプルコードは``examples/basic/B2a/TrackerHit.hh``を参考に改変しました。
+サンプルコードは``examples/basic/B2/B2a/include/TrackerHit.hh``を参考に改変しました。
 有感検出器でヒットを取得するクラスを``SensorHit``クラスと名づけました。
 このクラスの役割は次のとおりです。
 
@@ -115,7 +138,7 @@ inline void SensorHit::operator delete(void *hit)
 3. スレッドローカルなメモリ割り当てを定義する（``SensorHitAllocator``）
 4. 最適なメモリ管理のため``new``演算子／``delete``演算子を定義する
 5. ``Draw()``／``Print()``をoverrideして定義する
-6. ``Fill(G4Step *aStep)``と必要なprivate変数を定義する
+6. ``Fill(G4Step* aStep)``と必要なprivate変数を定義する
 
 たくさんの役割／処理が登場するので、順番に紹介します。
 
@@ -124,7 +147,7 @@ inline void SensorHit::operator delete(void *hit)
 ```cpp
 public:
   SensorHit() = default;
-  ~SensorHit() = default;
+  ~SensorHit() override = default;
 ```
 
 ``SensorHit``クラスの初期化／削除するときに実行されるコンストラクターとデストラクターは、親クラス（``G4VHit``）を引き継いでおきます。
@@ -138,12 +161,16 @@ using SensorHitsCollection = G4THitsCollection<SensorHit>;
 
 ``SensorHitsCollection``という名前の型エイリアスを定義しています。
 
-``G4THitsCollection``は、親をたどると``std:vector``型をベースにしたテンプレートクラスです。
-なので``SensorHit``型を要素に持つ``std:vector``配列とイメージしておけばよいと思います。
+``G4THitsCollection``は、``G4VHitsCollection``を継承したテンプレートクラスです。
+内部に``std::vector<SensorHit*>``を持ち、``SensorHit``へのポインターを要素として持つ配列とイメージしておけばよいと思います。
 
 ```cpp
-// Sensor.cc
-auto fHitsCollection = new SensorHitsCollection{}
+// SensorHitsCollection の作成（SensitiveDetector の中で行う）
+// 引数は、検出器の名前とヒット配列の名前
+auto hits_collection = new SensorHitsCollection("SensorSD", "SensorHitsCollection");
+
+// ProcessHits() の中で、ヒットを配列に追加する
+hits_collection->insert(hit);
 ```
 
 有感検出器のヒット情報（``SensorHit``）を格納する配列（``SensorHitsCollection``）として使います。
@@ -152,10 +179,11 @@ auto fHitsCollection = new SensorHitsCollection{}
 ## G4ThreadLocalとG4Allocator
 
 ```cpp
-extern G4ThreadLocal G4Allocator<SensorHit> *SensorHitAllocator;
+extern G4ThreadLocal G4Allocator<SensorHit>* SensorHitAllocator;
 ```
 
 ``SensorHitAllocator``という名前で、スレッド別にメモリ領域を割り当てるアロケーターを定義しています。
+実体は、``SensorHit.cc``で定義します。
 詳細は[](./geant4-sensor-hit-allocator.md)に整理しました。
 
 ## ``new``演算子と``delete``演算子
@@ -166,32 +194,28 @@ public:
   inline void operator delete(void* hit);
 ```
 
-クラスのインスタンスを作成するときにコンストラクターが呼ばれます。
-コンストラクターの中では「メモリを確保する」処理と「メンバー変数を初期化する」処理が実行されます。
-``new``演算子は「メモリを確保する」処理のために実行される特殊関数です。
+これらは、メモリ割り当てを効率よく行うための、特殊な関数です。
+初めて読むときは、この節を飛ばしても、ヒット情報の仕組みは理解できます。
+
+``new``演算子は、コンストラクターより前に実行されます。
 ここで``SensorHitAllocator``を使って、``SensorHit``クラスに必要なメモリ領域を割り当てます。
 
-クラスのインスタンスを削除するときにデストラクターが呼ばれます。
-デストラクターの中では「リソースを解放する」処理と「メモリを解放する」処理が実行されます。
-``delete``演算子は「メモリを解放する」処理のために実行される特殊関数です。
-前述の``new``演算子で割り当てたメモリ領域を解放します。
+``delete``演算子は、デストラクターの後に実行されます。
+割り当てたメモリ領域を解放します。
 
 ## ``Draw()``と``Print()``関数
 
 ``Draw``と``Print``は仮想関数です。
-必要であればこれらををoverrideして定義します。
+必要であればこれらを``override``して定義します。
 
 - [](./geant4-sensor-hit-print.md)
 - [](./geant4-sensor-hit-draw.md)
 
-## ``Fill(G4Step *aStep)``関数
+## ``Fill(G4Step* aStep)``関数
 
 ``Fill``は僕が追加したカスタム関数です。
-``G4Step``を引数と渡し、``Fill``の中でprivate変数に値を直接代入するという設計です。
+``G4Step``を引数として渡し、``Fill``の中でprivate変数に値を直接代入するという設計です。
 これにより、private変数ごとのゲッター／セッターを作成する必要がなくなります。
-
-```{toctree}
-```
 
 ## 有感検出器とヒット用クラス
 
@@ -213,20 +237,21 @@ public:
 
 :::
 
-## イベントのヒットしたい（``G4HCofThisEvent``）
+## イベントのヒットを取得したい（``G4HCofThisEvent``）
 
 ```cpp
 // SensitiveDetector: public G4VSensitiveDetector
+// EndOfEvent(G4HCofThisEvent*) を override する
 
-void SensitiveDetector::EndOfEvent(G4HCofThisEvent *aHC) {
-
+void SensitiveDetector::EndOfEvent(G4HCofThisEvent* aHC)
+{
     // HitsCollectionの数を取得する
     G4int nHC = aHC->GetNumberOfCollections();
 
-    for (G4int i=0; i<nHC; i++) {
+    for (G4int i = 0; i < nHC; i++) {
         auto hc = aHC->GetHC(i);
         G4int nHit = hc->GetSize();
-        for (G4int j=0; j<nHit; j++) {
+        for (G4int j = 0; j < nHit; j++) {
             auto hit = hc->GetHit(j);
         }
     }
@@ -234,17 +259,16 @@ void SensitiveDetector::EndOfEvent(G4HCofThisEvent *aHC) {
 ```
 
 ``G4Event``を処理する際に、たくさんの``G4VHit``（の派生クラスの）オブジェクトが生成されます。
-これらのヒット情報は、配列コンテナー（``G4HitsCollection``と、そのテンプレートクラス``G4THitsCollection``）に集めることができます。
+これらのヒット情報は、配列コンテナー（``G4VHitsCollection``と、そのテンプレートクラス``G4THitsCollection``）に集めることができます。
 
 ``G4Event``は``G4HCofThisEvent``というヒット配列を持っています。
-イベントごとのヒット情報は、このオブジェクト（のポインター）を介してアクセスてきます。
+イベントごとのヒット情報は、このオブジェクト（のポインター）を介してアクセスできます。
 
 ## リファレンス
 
-- ``examples/basic/B2/B2a/TrackerHit.hh``
+- ``examples/basic/B2/B2a/include/TrackerHit.hh``
 - [G4VHit](https://geant4.kek.jp/Reference/11.2.0/classG4VHit.html)
 - [G4VHitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4VHitsCollection.html)
-- [G4HitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4HitsCollection.html)
 - [G4THitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4THitsCollection.html)
 - [Hits - Book for Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/hit.html)
 - [Hits and Digitisation - Book for Toolkit Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForToolkitDeveloper/html/OOAnalysisDesign/Hit/hit.html)
