@@ -68,7 +68,7 @@ Geant4は、大きく分けて次の8つのクラスカテゴリーで構成さ�
 
 :::
 
-## 継承と仮想関数
+## クラスの継承と仮想関数・純粋仮想関数
 
 Geant4の使い方を理解するには、次の3つの仕組みを知っておく必要があります。
 
@@ -90,6 +90,52 @@ class Geometry : public G4VUserDetectorConstruction {
 - **継承**：`class Geometry : public G4VUserDetectorConstruction`のように、基底クラスの機能を引き継いで、新しいクラスを作ります。
 - **仮想関数**：`virtual`を付けた関数は、派生クラスで上書き（`override`）できます。Geant4は、基底クラスのポインターを通して、この関数を呼びます。
 - **純粋仮想関数**：`= 0`を付けた関数は、基底クラスでは実装しません。派生クラスで必ず実装する必要があります。
+
+`G4VUserDetectorConstruction`で見ると、次のようになります。
+`Construct()`は純粋仮想関数なので、利用者の`Geometry`が実装します。
+`ConstructSDandField()`は仮想関数で、既定では何もしません。有感検出器や場が必要なときだけ実装します。
+
+クラスの関係は、次の図のとおりです。
+
+:::{mermaid}
+
+classDiagram
+    class G4VUserDetectorConstruction {
+        <<abstract>>
+        +Construct()* G4VPhysicalVolume
+        +ConstructSDandField() void
+    }
+    class Geometry {
+        +Construct() G4VPhysicalVolume
+        +ConstructSDandField() void
+    }
+    G4VUserDetectorConstruction <|-- Geometry
+
+:::
+
+Geant4の`RunManager`は、利用者の`Geometry`を基底クラスのポインターで保持しています。
+初期化のときは、基底クラスのポインターを通して`Construct()`を呼び出します。
+すると、利用者の`Geometry::Construct()`が実行されます。
+
+:::{mermaid}
+
+sequenceDiagram
+    participant RM as G4RunManager
+    participant Base as G4VUserDetectorConstruction*
+    participant Geo as Geometry
+
+    RM ->> Base: Construct()
+    Base ->> Geo: Geometry::Construct()（仮想関数として呼ばれる）
+    Geo -->> RM: ワールドの物理ボリューム
+
+:::
+
+:::{note}
+
+`Geometry`が`Construct()`を実装していないと、`Geometry`は抽象クラスのままです。
+その場合、`new Geometry{}`はコンパイルエラーになります。
+
+:::
 
 :::{note}
 
