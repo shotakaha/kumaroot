@@ -82,6 +82,34 @@ valueCmd.SetParameterName("field", true);
 valueCmd.SetDefaultValue("1.");
 ```
 
+## 磁場を定義したい（`G4MagneticField`）
+
+磁場は、`G4MagneticField`を継承して、位置ごとの磁場の値を返すクラスとして作ります。
+`B5`の磁場は、y方向の一様な磁場です。
+
+```cpp
+// B5::MagneticField（一部）
+class MagneticField : public G4MagneticField
+{
+  public:
+    void GetFieldValue(const G4double point[4], double* bField) const override;
+
+  private:
+    G4double fBy = 1.0 * CLHEP::tesla;
+};
+
+// B5::MagneticField::GetFieldValue()
+void MagneticField::GetFieldValue(const G4double[4], double* bField) const
+{
+  bField[0] = 0.;    // Bx
+  bField[1] = fBy;   // By
+  bField[2] = 0.;    // Bz
+}
+```
+
+`GetFieldValue()`は、引数の`point`（位置と時刻）を受け取り、`bField`に磁場の成分（x、y、z）を入れます。
+位置によって値を変えれば、一様ではない磁場も作れます。
+
 ## 入射粒子を変えたい（`/B5/generator/`）
 
 入射粒子の運動量や角度の広がりは、`PrimaryGeneratorAction`の`G4GenericMessenger`で変えられます。
@@ -94,6 +122,62 @@ valueCmd.SetDefaultValue("1.");
 | `/B5/generator/randomizePrimary`（`true`/`false`） | 入射位置をランダムにするかどうか |
 
 粒子の種類は、Geant4の標準コマンドである`/gun/particle`で変えます。
+
+## 乱数で入射粒子を選びたい（`PrimaryGeneratorAction`）
+
+`randomizePrimary`が`true`のとき（既定値）、入射粒子を乱数で5種類から選びます。
+
+```cpp
+// B5::PrimaryGeneratorAction::GeneratePrimaries()（一部）
+G4ParticleDefinition* particle;
+if (fRandomizePrimary) {
+  auto i = (int)(5. * G4UniformRand());
+  switch (i) {
+    case 0:
+      particle = fPositron;
+      break;
+    case 1:
+      particle = fMuon;
+      break;
+    case 2:
+      particle = fPion;
+      break;
+    case 3:
+      particle = fKaon;
+      break;
+    default:
+      particle = fProton;
+      break;
+  }
+  fParticleGun->SetParticleDefinition(particle);
+}
+else {
+  particle = fParticleGun->GetParticleDefinition();
+}
+```
+
+`G4UniformRand()`は0以上1未満の一様乱数です。
+`5. * G4UniformRand()`を整数にすると、0から4までの番号が等しい確率で得られます。
+
+## 運動量のばらつきを入れたい（運動エネルギーの計算）
+
+運動量と角度に、乱数でばらつきを加えます。
+`G4ParticleGun`は運動エネルギーで粒子を指定するので、運動量から運動エネルギーを求めてから設定しています。
+
+```cpp
+// B5::PrimaryGeneratorAction::GeneratePrimaries()（一部）
+auto pp = fMomentum + (G4UniformRand() - 0.5) * fSigmaMomentum;
+auto mass = particle->GetPDGMass();
+auto ekin = std::sqrt(pp * pp + mass * mass) - mass;
+fParticleGun->SetParticleEnergy(ekin);
+
+auto angle = (G4UniformRand() - 0.5) * fSigmaAngle;
+fParticleGun->SetParticleMomentumDirection(G4ThreeVector(std::sin(angle), 0., std::cos(angle)));
+```
+
+- `(G4UniformRand() - 0.5) * fSigmaMomentum`で、運動量を中心の値の前後にばらつかせます。
+- 運動エネルギーは、相対論の関係式`E = sqrt(p² + m²) - m`で求めます。ここで`m`は粒子の質量です。
+- 角度も同じ考え方で、ビームの向きをばらつかせています。
 
 ## 検出器の種類ごとにSensitive Detectorを割り当てたい
 
@@ -116,6 +200,69 @@ fHadCalScintiLogical->SetSensitiveDetector(hadCalorimeter);
 
 ホドスコープ、ドリフトチェンバー、2つのカロリメーターで、それぞれ別のクラスを使っています。
 ヒットのクラス（`HodoscopeHit`、`DriftChamberHit`など）も、検出器ごとに作っています。
+
+## 同じ板への複数のヒットをまとめたい（`HodoscopeSD`）
+
+ホドスコープは、同じ板に粒子が何回入っても、ヒットを1つにまとめます。
+板の番号（コピー番号）で既存のヒットを探し、あれば時刻の早いほうを残します。
+エネルギーは、この処理では加算しません。
+
+```cpp
+// B5::HodoscopeSD::ProcessHits()（一部）
+auto edep = step->GetTotalEnergyDeposit();
+if (edep == 0.) return true;
+
+auto preStepPoint = step->GetPreStepPoint();
+auto copyNo = preStepPoint->GetTouchable()->GetVolume()->GetCopyNo();
+auto hitTime = preStepPoint->GetGlobalTime();
+
+// この板にすでにヒットがあるか探す
+auto ix = -1;
+for (std::size_t i = 0; i < fHitsCollection->entries(); ++i) {
+  if ((*fHitsCollection)[i]->GetID() == copyNo) {
+    ix = i;
+    break;
+  }
+}
+
+if (ix >= 0) {
+  // あれば、時刻の早いほうを残す
+  if ((*fHitsCollection)[ix]->GetTime() > hitTime) {
+    (*fHitsCollection)[ix]->SetTime(hitTime);
+  }
+}
+else {
+  // なければ、新しいヒットを作る
+  // （位置、回転、論理ボリュームなどを設定して、fHitsCollection->insert(hit)）
+}
+```
+
+## ヒットの位置をローカル座標に変換したい（`DriftChamberSD`）
+
+ドリフトチェンバーのヒットは、ワールド座標とローカル座標の両方で位置を記録します。
+ローカル座標は、そのボリュームの中での位置です。
+
+```cpp
+// B5::DriftChamberSD::ProcessHits()（一部）
+auto preStepPoint = step->GetPreStepPoint();
+
+auto touchable = preStepPoint->GetTouchable();
+auto motherPhysical = touchable->GetVolume(1);  // 母ボリューム
+auto copyNo = motherPhysical->GetCopyNo();
+
+auto worldPos = preStepPoint->GetPosition();
+auto localPos = touchable->GetHistory()->GetTopTransform().TransformPoint(worldPos);
+
+auto hit = new DriftChamberHit(copyNo);
+hit->SetWorldPos(worldPos);
+hit->SetLocalPos(localPos);
+hit->SetTime(preStepPoint->GetGlobalTime());
+fHitsCollection->insert(hit);
+```
+
+- `GetTopTransform()`は、そのボリュームの座標変換を返します。
+- `TransformPoint(worldPos)`で、ワールド座標の位置をローカル座標に変換しています。
+- `GetVolume(1)`は、1つ上の階層（母ボリューム）を指します。このコードでは、その母ボリュームのコピー番号を、ヒットに記録しています。
 
 ## 電磁カロリメーターのセルを配置したい（`G4PVParameterised`）
 
