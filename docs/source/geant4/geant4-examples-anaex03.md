@@ -155,6 +155,33 @@ analysisManager->CreateNtupleDColumn("Eabs");  // column Id = 0
 analysisManager->CreateNtupleDColumn("Egap");  // column Id = 1
 ```
 
+## ヒストグラムに値を入れたい（`GetH1`）
+
+イベントの値は、`EventAction`からヒストグラムに入れます。
+マクロで削除されたヒストグラムは存在しないので、`GetH1()`で存在を確かめてから`FillH1()`を呼びます。
+
+```cpp
+// AnaEx03::EventAction::EndOfEventAction()（一部）
+analysisManager->FillH1(0, fEnergyAbs);
+if (analysisManager->GetH1(1) != nullptr) {
+  // histogram may not exist for all runs
+  analysisManager->FillH1(1, fEnergyGap);
+}
+```
+
+## 特定のntupleに値を入れたい（`FillNtupleDColumn`）
+
+ntupleが複数あるときは、最初の引数でntupleの番号を、2番目の引数で列の番号を指定します。
+`AddNtupleRow()`に番号を渡すと、そのntupleに1行を確定させます。
+
+```cpp
+// AnaEx03::EventAction::EndOfEventAction()（一部）
+// 1つ目のntuple（id = 0）に書き込む
+analysisManager->FillNtupleDColumn(0, 0, fEnergyAbs);  // 列 0
+analysisManager->FillNtupleDColumn(0, 1, fEnergyGap);  // 列 1
+analysisManager->AddNtupleRow(0);
+```
+
 ## 統計を表示したい（`/AnaEx03/runAction/printStatistic`）
 
 `RunAction`は、`G4GenericMessenger`で、マクロから呼べるコマンドを用意しています。
@@ -166,6 +193,33 @@ fMessenger = new G4GenericMessenger(this, "/AnaEx03/runAction/", "Run action com
 
 auto& printStatisticCmd = fMessenger->DeclareMethod("printStatistic", &RunAction::PrintStatistic, /* ... */);
 printStatisticCmd.SetToBeBroadcasted(false);
+```
+
+## 単位付きで統計を表示したい（`G4BestUnit`）
+
+`PrintStatistic()`は、各ヒストグラムの平均値と標準偏差を表示します。
+単位の種類は、ヒストグラムの名前の先頭文字で決めています（`E`ならエネルギー、`L`なら長さ）。
+`G4BestUnit()`を使うと、値の大きさに合わせて、適切な単位で表示されます。
+
+```cpp
+// AnaEx03::RunAction::PrintStatistic()（一部）
+for (G4int i = 0; i < analysisManager->GetNofH1s(); ++i) {
+  auto h1 = analysisManager->GetH1(i);
+  // skip if histogram was deleted
+  if (h1 == nullptr) continue;
+
+  G4String name = analysisManager->GetH1Name(i);
+  G4String unitCategory;
+  if (name[0U] == 'E') {
+    unitCategory = "Energy";
+  }
+  if (name[0U] == 'L') {
+    unitCategory = "Length";
+  }
+
+  G4cout << name << ": mean = " << G4BestUnit(h1->mean(), unitCategory)
+         << " rms = " << G4BestUnit(h1->rms(), unitCategory) << G4endl;
+}
 ```
 
 ## リファレンス
