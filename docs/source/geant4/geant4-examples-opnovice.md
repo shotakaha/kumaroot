@@ -359,6 +359,6 @@ Average number of optical boundary interactions per event: 191 +- 28.9
 
 OpNoviceで光学過程の基本をつかんだら、次のサンプルに進むとよいです。
 
-- `extended/optical/OpNovice2`：物性のテーブルや、チェレンコフ光とシンチレーション光の検証を、より詳しく扱います。
+- [OpNovice2](geant4-examples-opnovice2)：物性のテーブルや、チェレンコフ光とシンチレーション光の検証を、より詳しく扱います。
 - `extended/optical/LXe`：液体キセノンの検出器と、光電子増倍管（PMT）での光子の検出を扱います。
 - `extended/optical/wls`：波長変換ファイバーを扱います。
