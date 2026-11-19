@@ -1,53 +1,85 @@
-# 相互作用したい（`G4VModularPhysicsList`）
+# 物理リストしたい（`G4VModularPhysicsList`）
 
-`G4VModularPhysicsList`は、シミュレーションで使用する物理モデルを
-モジュール形式で構成できるようにするための基底クラスです。
-v4.8.0で導入されました。
+`G4VModularPhysicsList`の使い方の概要を紹介します。
 
-この枠組みにより、ユーザーはGeant4が提供する**Reference Physics List**を
-選んで柔軟に物理モデルを構築できます。
+```cpp
+// 疑似コード
+auto physics = new FTFP_BERT{};                    // 既存の物理リストを選ぶ
+physics->RegisterPhysics(new G4OpticalPhysics{});  // 物理モデルを追加する
+rm->SetUserInitialization(physics);                // RunManagerに登録する
+```
+
+物理リストは、シミュレーションで使う物理モデル（粒子の種類と相互作用）をまとめたものです。
+Geant4は、よく使われる組み合わせを**リファレンス物理リスト**として用意しています。
+`G4VModularPhysicsList`は、これらの物理リストの基底クラスです。
+物理モデルを部品として`RegisterPhysics()`で登録し、組み合わせて使います。
 
 :::{note}
 
-v4.8.0以前は
-`G4VUserPhysicList`を継承して、ユーザー自身がすべての粒子と
-物理過程を定義する必要があったそうです。
-
-この方法はコードの可読性・保守性に乏しく、
-物理モデルの再利用も困難だったため、
-モジュール形式の`G4VModularPhysicsList`が導入されたようです。
+モジュール型の物理リストは、Geant4 4.7.1のリリースノートに導入が記載されています。
 
 :::
 
-## 親クラス（`G4VModularPhysicsList`）
+## 物理リストのクラスを作りたい（`G4VModularPhysicsList`）
+
+自作の物理リストは、`G4VModularPhysicsList`を継承して作ります。
+ただし、よく使う組み合わせは、既存のリファレンス物理リストを選ぶほうが簡単です。
 
 ```cpp
-class G4VModularPhysicsList {
+// 抜粋・簡略化
+class G4VModularPhysicsList : public G4VUserPhysicsList {
   public:
     G4VModularPhysicsList();
-    virtual ~G4VModularPhysicsList() override;
+    ~G4VModularPhysicsList() override;
 
-  public:
-    virtual void ConstructParticle() override;
-    virtual void ConstructProcess() override;
+    void ConstructParticle() override;
+    void ConstructProcess() override;
     void RegisterPhysics(G4VPhysicsConstructor*);
-}
+};
 ```
 
-親クラス（`G4VModularPhyisicsList`）の主要なメンバー関数を抜粋しました。
+- `ConstructParticle()`：粒子の種類を生成します。
+- `ConstructProcess()`：各粒子に、物理過程を登録します。
+- `RegisterPhysics()`：物理モデル（`G4VPhysicsConstructor`）を登録します。
 
-`RegisterPhysics`で、
-Geant4が提供している物理モデルや、
-他のリファレンス物理モデル（`G4VPhysicsConstructor`を継承した自作クラス）を簡単に追加できます。
+`ConstructParticle()`と`ConstructProcess()`は、`G4VModularPhysicsList`が実装しています。
+そのため、自作クラスで書き換える必要はありません。
+登録した物理モデルの内容に従って、粒子と物理過程が作られます。
 
-モデルの名前と内容は[Guide for Physics Lists](https://geant4-userdoc.web.cern.ch/UsersGuides/PhysicsListGuide/html/index.html)で確認できます。
-モデル名は、利用している相互作用モデルを使った命名規則になっています。
+:::{note}
 
-## メイン関数（`main`）
+`G4VUserPhysicsList`は、粒子と物理過程を、ユーザーがすべて自分で実装する基底クラスです。
+`G4VModularPhysicsList`は、その派生クラスです。
+物理モデルを部品として登録できるため、組み合わせを変えやすくなります。
+
+:::
+
+## 既存の物理リストを選びたい（`FTFP_BERT`）
+
+```cpp
+auto physics = new FTFP_BERT{};
+```
+
+`FTFP_BERT`は、`G4VModularPhysicsList`を継承した、リファレンス物理リストの1つです。
+高エネルギー領域は`FTFP`、低エネルギー領域は`BERT`のハドロンモデルを使います。
+具体的な内容は、[](./geant4-physics-ftfp_bert.md)を参照してください。
+
+## 物理モデルを追加したい（`RegisterPhysics`）
+
+```cpp
+physics->RegisterPhysics(new G4OpticalPhysics{});
+```
+
+`RegisterPhysics()`は、物理モデルを物理リストに追加します。
+`G4OpticalPhysics`は、光学光子に関する物理過程をまとめたものです。
+具体的な内容は、[](./geant4-physics-opticalphysics.md)を参照してください。
+
+物理モデルの名前と内容は、[Guide for Physics Lists](https://geant4-userdoc.web.cern.ch/UsersGuides/PhysicsListGuide/html/index.html)で確認できます。
+
+## 物理リストを登録したい（`SetUserInitialization`）
 
 ```cpp
 // プロジェクト名.cc（ここではToyMC.cc）
-
 
 // Geant4のクラス
 #include "FTFP_BERT.hh"
@@ -59,39 +91,36 @@ int main(int argc, char** argv)
     auto rm = G4RunManagerFactory::CreateRunManager();
 
     // ジオメトリの設定（省略）
-    // 物理モデルの設定
 
+    // 物理モデルの設定
     auto physics = new FTFP_BERT{};
     physics->RegisterPhysics(new G4OpticalPhysics{});
     rm->SetUserInitialization(physics);
 
     // ユーザーアクションの設定（省略）
 
-    // 実験開始（省略）
     rm->Initialize();
-    rm->BeamOn();
-    delete rm;
+    rm->BeamOn(100);
+
     return 0;
 }
 ```
 
-メイン関数で物理モデルを設定する最小構成です。
-FTFPモデル（`FTFP_BERT`）に
-光学モデル（`G4OpticalPhysics`）を追加し、
-`SetUserInitialization`を使ってRunManagerに登録しています。
+`main()`関数で物理リストを作成し、`SetUserInitialization()`で`RunManager`に登録します。
+`RunManager`に登録する前に、`RegisterPhysics()`で物理モデルを追加しておきます。
 
-:::{seealso}
+:::{note}
 
-使用した物理モデルは
-
-- [](./geant4-physics-ftfp_bert.md)
-- [](./geant4-physics-opticalphysics.md)
-
-に整理しました。
+`RunManager`に登録した物理リストは、`RunManager`が終了するときに`delete`されます。
+そのため、`main()`関数で`delete physics;`と書く必要はありません。
 
 :::
 
-また、`G4VUserPhysicsConstructor`を継承して、完全自作の相互作用モジュールを作ることができます。
+:::{seealso}
+
+完全に自作の相互作用モジュールを作る場合は、`G4VPhysicsConstructor`を継承します。
 
 - [](./geant4-physics-constructparticle.md)
 - [](./geant4-physics-constructprocess.md)
+
+:::
