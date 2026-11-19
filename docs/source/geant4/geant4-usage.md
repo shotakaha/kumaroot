@@ -60,14 +60,14 @@ geant4-units
 geant4-constants
 ```
 
-## 例題したい
+## アプリしたい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
-geant4-examples
 geant4-build
+geant4-examples
 geant4-examples-b1
 geant4-examples-b2
 geant4-examples-b3
