@@ -1,4 +1,4 @@
-# Geant4の使い方の全体像
+# クラスを使いこなしたい
 
 ```cpp
 // 疑似コード（main関数の骨組み）
@@ -36,6 +36,37 @@ Geant4では、次のような役割分担になっています。
 
 利用者が書いたクラスは、Geant4から決まったタイミングで呼ばれます。
 この仕組みを実現しているのが、C++の継承と仮想関数です。
+
+## Geant4のクラス構造
+
+Geant4は、大きく分けて次の8つのクラスカテゴリーで構成されています。
+
+1. Run and Event
+2. Tracking and Track
+3. Geometry and Magnetic Field
+4. Particle Definition and Matter
+5. Physics
+6. Hits and Digitization
+7. Visualization
+8. Interfaces
+
+アプリケーションを作成したり、変更したりするときに、どのカテゴリーのクラスを変更すればよいかの目安になります。
+詳細は、[Class Categories and Domains](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/classCategory.html)を参照してください。
+
+:::{seealso}
+
+- [](./geant4-main.md)
+- [](./geant4-user-detectorconstruction.md)
+- [](./geant4-user-physicslist.md)
+- [](./geant4-user-actioninitialization.md)
+- [](./geant4-user-primarygeneratoraction.md)
+- [](./geant4-user-runaction.md)
+- [](./geant4-user-eventaction.md)
+- [](./geant4-user-trackingaction.md)
+- [](./geant4-user-steppingaction.md)
+- [](./geant4-sensor-sensitivedetector.md)
+
+:::
 
 ## 継承と仮想関数
 
@@ -75,7 +106,7 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 
 :::
 
-## 必ず継承するクラス（必須）
+## 継承が必要なクラス
 
 次のクラスを設定しないと、`RunManager`がエラーで止まります。
 
@@ -91,7 +122,7 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 測定器は、必ず自作します。
 詳しくは、[](./geant4-user-detectorconstruction.md)を参照してください。
 
-## 実質的に継承が必要なクラス
+## 継承が実質的に必要なクラス
 
 次のクラスは、実際のアプリケーションではほぼ必ず作ります。
 入射粒子を生成するには、`G4VUserPrimaryGeneratorAction`が必要です。
@@ -111,7 +142,7 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 
 :::
 
-## 継承しなくても使えるクラス
+## 継承なしで使えるクラス
 
 次のクラスは、継承しなくても、Geant4が用意したものをそのまま使えます。
 
@@ -123,7 +154,7 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 | `G4GeneralParticleSource` | 粒子の位置・方向・エネルギー分布を設定する | 入射粒子の設定に使う |
 | `G4MultiFunctionalDetector` | 検出器の物理量を集計する | `G4PSEnergyDeposit`などを登録する |
 
-## 継承は任意のクラス
+## 継承が任意のクラス
 
 次のクラスは、Geant4の仕組みでは、作らなくてもエラーになりません。
 基底クラスの関数は、何もしない実装になっています。
@@ -159,34 +190,3 @@ Geant4の基底クラスは、利用者が派生クラスを作って使うこ�
 | `G4VSensitiveDetector` | ★★★★★ | 記録する物理量に合わせて書く必要がある |
 | `G4UserRunAction` / `G4UserEventAction` / `G4UserTrackingAction` | ★・・・・ | 最初は作らなくてよい |
 | `G4UserSteppingAction` | ★・・・・ | 最初は作らなくてよい |
-
-## Geant4のクラス構造
-
-Geant4は、大きく分けて次の8つのクラスカテゴリーで構成されています。
-
-1. Run and Event
-2. Tracking and Track
-3. Geometry and Magnetic Field
-4. Particle Definition and Matter
-5. Physics
-6. Hits and Digitization
-7. Visualization
-8. Interfaces
-
-アプリケーションを作成したり、変更したりするときに、どのカテゴリーのクラスを変更すればよいかの目安になります。
-詳細は、[Class Categories and Domains](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/classCategory.html)を参照してください。
-
-:::{seealso}
-
-- [](./geant4-main.md)
-- [](./geant4-user-detectorconstruction.md)
-- [](./geant4-user-physicslist.md)
-- [](./geant4-user-actioninitialization.md)
-- [](./geant4-user-primarygeneratoraction.md)
-- [](./geant4-user-runaction.md)
-- [](./geant4-user-eventaction.md)
-- [](./geant4-user-trackingaction.md)
-- [](./geant4-user-steppingaction.md)
-- [](./geant4-sensor-sensitivedetector.md)
-
-:::
