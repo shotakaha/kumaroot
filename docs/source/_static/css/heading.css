@@ -41,3 +41,21 @@
     color: #555;
     border-bottom: 1px solid #ccc;
 }
+
+/* 見出し内のインラインコード: テーマの赤文字・白枠を打ち消し、見出しの色に合わせる */
+.rst-content h1 code.literal,
+.rst-content h2 code.literal,
+.rst-content h3 code.literal,
+.rst-content h4 code.literal {
+    color: inherit;
+    background: rgba(0, 0, 0, 0.08);
+    border: none;
+    border-radius: 3px;
+    padding: 0 0.3em;
+    font-size: 0.95em;
+}
+
+/* h1 は背景が濃いので、コードの背景も明るめにする */
+.rst-content h1 code.literal {
+    background: rgba(255, 255, 255, 0.2);
+}
