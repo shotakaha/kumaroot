@@ -7,26 +7,26 @@
 
 :::
 
-| | リリース年 | エンジン名 | ベースのエンジン | フォーマット | できごと |
-|---|---|---|---|---|---|
-| TeX | 1978 | TeX78 | - | - | D. Knuthが組版システムを開発 |
-| TeX改良版 | 1982 | TeX82 | TeX78 | PlainTeX | TeX78を改良 |
-| LaTeX | 1984 | TeX82 | - | LaTeX | L. LamportがTeXのマクロパッケージを開発 |
-| BibTeX | 1985 | - | - | - | O. Patashnikが文献生成ツールを開発 |
-| LaTeX2.09 | 1985 | TeX82 | - | LaTeX2.09 | LaTeXを改良したフォーマットを公開 |
-| MakeIndex | 1986 | - | - | - | 索引生成ツールを開発 |
-| pTeX | 1991 | pTeX | TeX82 | pLaTeX | TeX82を拡張したエンジン。日本語組版（縦書き、禁則処理、和文フォントなど）に対応 |
-| eTeX | 1994 | eTeX | TeX82 | - | TeX82を拡張したエンジン。レジスタを増加。プリミティブを追加。 |
-| LaTeX2e | 1994 | TeX82 | - | LaTeX2e | LaTeX2eをリリース。LaTeX2.09の後継バージョン |
-| dvipdfm | 1997 | - | - | - | DVIをPDFに変換するツール。PostScriptを介さずに直接PDFを生成 |
-| pdfTeX | 1997 | pdfTeX | TeX82 | pdfLaTeX | Han The ThanhがpdfTeXをリリース。PostScriptを介さずにPDFを直接生成できるようになる。 |
-| dvipdfmx | 2002 | - | - | - | CJK対応したdvipdfm |
-| xindy | 2004 | - | - | - | MakeIndexの後継となる索引生成ツール。Unicodeに対応 |
-| XeTeX | 2005 | XeTeX | eTeX | XeLaTeX | XeTeXのリリース。eTeXを拡張したエンジン。Unicode対応。OpenTypeフォント対応。|
-| LuaTeX | 2007 | LuaTeX | pdfTeX | LuaLaTeX | LuaLaTeXのリリース。pdfTeXを拡張したエンジン。Unicode対応。Lua対応。 |
-| ConTeXt | 2008 | ConTeXt | LuaTeX | ConTeXt | |
-| Biber | 2009 | - | - | - | 文献生成ツール。BibTeXの代替ツール。BibLaTeXパッケージと一緒に利用する。|
-| LuaHBTeX | 2015 | LuaHBTeX | LuaTeX | LuaLaTeX | LuaTeXを拡張したエンジン。|
+| エンジン名 | リリース年 | ベースのエンジン | フォーマット | できごと |
+|---|---|---|---|---|
+| TeX78 | 1978 | - | - | D. Knuthが組版システムを開発 |
+| TeX82 | 1982 | TeX78 | PlainTeX | TeX78を改良 |
+| LaTeX | 1984 | - | LaTeX | L. LamportがTeX82のマクロパッケージを開発 |
+| BibTeX | 1985 | - | - | O. Patashnikが文献生成ツールを開発 |
+| LaTeX2.09 | 1985 | - | LaTeX2.09 | LaTeXを改良したフォーマットを公開 |
+| MakeIndex | 1986 | - | - | 索引生成ツールを開発 |
+| pTeX | 1991 | TeX82 | pLaTeX | TeX82を拡張したエンジン。日本語組版（縦書き、禁則処理、和文フォントなど）に対応 |
+| eTeX | 1994 | TeX82 | - | TeX82を拡張したエンジン。レジスタを増加。プリミティブを追加。 |
+| LaTeX2e | 1994 | - | LaTeX2e | LaTeX2eをリリース。LaTeX2.09の後継バージョン |
+| dvipdfm | 1997 | - | - | DVIをPDFに変換するツール。PostScriptを介さずに直接PDFを生成 |
+| pdfTeX | 1997 | TeX82 + e-TeX | pdfLaTeX | Han The ThanhがpdfTeXをリリース。PostScriptを介さずにPDFを直接生成できるようになる。 |
+| dvipdfmx | 2002 | - | - | CJK対応したdvipdfm |
+| xindy | 2004 | - | - | MakeIndexの後継となる索引生成ツール。Unicodeに対応 |
+| XeTeX | 2005 | eTeX | XeLaTeX | XeTeXのリリース。eTeXを拡張したエンジン。Unicode対応。OpenTypeフォント対応。|
+| LuaTeX | 2007 | pdfTeX | LuaLaTeX | LuaLaTeXのリリース。pdfTeXを拡張したエンジン。Unicode対応。Lua対応。 |
+| ConTeXt MkIV | 2007 | LuaTeX | ConTeXt | |
+| Biber | 2009 | - | - | 文献生成ツール。BibTeXの代替ツール。BibLaTeXパッケージと一緒に利用する。|
+| LuaHBTeX | 2015 | LuaTeX | LuaLaTeX | LuaTeXを拡張したエンジン。|
 
 TeXの系譜を整理してみました。
 美文書LaTeXに書かれていたTeXエンジンの変遷や、
