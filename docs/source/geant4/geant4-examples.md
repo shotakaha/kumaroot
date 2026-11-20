@@ -5,13 +5,13 @@
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B1
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B1/app）にコピーして移動する
+$ mkdir -p $G4WORK/B1
+$ cp -R $G4EXAMPLE $G4WORK/B1/app
 $ cd $G4WORK/B1
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -30,7 +30,8 @@ Geant4には、使い方を示すサンプルが付属しています。
 
 サンプルは、基本的に1つずつ使います（一括ビルドは、後の「一括ビルドしたい」の節を参照）。
 `G4EXAMPLE`に使いたいサンプルのディレクトリ、`G4WORK`に作業用ディレクトリを指定し、サンプルだけをコピーしてからビルドします。
-インストール先のソースを変更せずに、自由に編集できます。
+ソースは`B1/app`、ビルド用ディレクトリは`B1/build`に分けます（out-of-sourceビルド）。
+インストール先のソースを変更せずに、`app`の中を自由に編集できます。
 作業用ディレクトリの名前は任意ですが、ここでは`g4work`としました。
 
 Geant4の環境変数は、あらかじめ読み込んでおいてください（[環境変数したい](geant4-install-shell)）。
