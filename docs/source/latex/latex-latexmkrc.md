@@ -3,7 +3,7 @@
 :::{literalinclude} ../_static/latex/templates/lualatex-jlreq/latexmkrc
 :::
 
-[latexmk](./latex-latexmk.md) のオプションは、すべて{file}``latexmkrc``に書いておくことができます。
+[latexmk](./latex-latexmk.md) の多くのオプションは、{file}``latexmkrc``に書いておくことができます。
 LaTeX文書は繰り返しコンパイルすることが多いです。
 毎回指定するのは面倒なので、一番はじめに作成しておきましょう。
 
@@ -14,7 +14,6 @@ LaTeX文書は繰り返しコンパイルすることが多いです。
 ```
 
 ``@default_files``で設定した複数の文書を一括でタイプセットできます。
-ただし、ライブプレビューの設定とは一緒に使えません。
 
 ## ライブプレビューしたい（``preview_continuous_mode``）
 
@@ -22,8 +21,8 @@ LaTeX文書は繰り返しコンパイルすることが多いです。
 ## latexmkrc
 $preview_continuous_mode = 1;
 $pvc_timeout = 1;
-$pvc_timeout_mins = 10;  # 30min; default
-$sleep_time = 60; # in sec
+$pvc_timeout_mins = 30;  # 30min; default
+$sleep_time = 60; # in sec; default: 2
 ```
 
 {file}`latexmkrc`で設定する場合は``$preview_continuous_mode = 1``に設定します。
