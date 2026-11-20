@@ -15,8 +15,9 @@ vars:
   G4_ENV_SH: '{{.G4_PREFIX}}/bin/geant4.sh'
   G4_EXAMPLES: '{{.G4_PREFIX}}/share/Geant4/examples'
 
-  # Example name
+  # Example names
   EXAMPLE_B1: B1
+  EXAMPLE_B2A: B2a
 
 tasks:
   default:
@@ -86,3 +87,35 @@ tasks:
     desc: Clean B1 build
     cmds:
       - rm -rf {{.EXAMPLE_B1}}/build
+
+  # --- B2a ------------------------------------------------------------
+  b2a:copy:
+    desc: Copy B2a example to B2a/app
+    preconditions:
+      - test -d {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2A}}
+    cmds:
+      - cp -R {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2A}} {{.EXAMPLE_B2A}}/app
+    status:
+      - test -f {{.EXAMPLE_B2A}}/app/exampleB2a.cc
+
+  b2a:build:
+    desc: Build B2a example (B2a/app -> B2a/build)
+    deps: [b2a:copy]
+    dir: '{{.EXAMPLE_B2A}}'
+    preconditions:
+      - test -f {{.G4_ENV_SH}}
+    cmds:
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S app -B build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build build -j
+
+  b2a:run:
+    desc: Run B2a example (app/run1.mac)
+    deps: [b2a:build]
+    dir: '{{.EXAMPLE_B2A}}'
+    cmds:
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB2a app/run1.mac
+
+  b2a:clean:
+    desc: Clean B2a build
+    cmds:
+      - rm -rf {{.EXAMPLE_B2A}}/build
