@@ -10,8 +10,8 @@ $ brew install ninja
 
 // 描画に必要なツール
 $ brew install --cask xquartz  # OpenGLを使う場合
-$ brew install qt    # Qt6を使う場合（v11.4.0以降のデフォルト）
-$ brew install qt@5  # Qt5を使う場合（非推奨）
+$ brew install qt    # Qt6を使う場合
+$ brew install qt@5  # Qt5を使う場合
 ```
 
 Geant4のビルド／インストールに必要な外部ツールをあらかじめインストールしておきます。
@@ -48,8 +48,7 @@ $ brew install ninja
 
 :::{note}
 
-`ninja`でも`make`でも、
-同じソースを、同じオプションでビルドした場合の結果（バイナリなど）は同じになります。
+`ninja`でも`make`でも、同じソースを、同じオプションでビルドした場合の結果（バイナリなど）は同じになります。
 一般に`ninja`のほうが`make`より高速にビルドできるらしいです。
 
 :::
@@ -64,8 +63,8 @@ $ brew install --cask xquartz  # OpenGLを使う場合
 OpenGLを使う場合に必要です。
 
 ```console
-$ brew install qt@5  # Qt5を使う場合
 $ brew install qt    # Qt6を使う場合
+$ brew install qt@5  # Qt5を使う場合
 ```
 
 Qtは、クロスプラットフォーム対応のGUIツールキットです。
@@ -73,28 +72,23 @@ Geant4の可視化ドライバとして、Qt5またはQt6を使うことがで�
 
 :::{note}
 
-`brew install qt`でQt6がインストールできます。
-リリースノートによると、
-v11.1.0からQt6がサポートされ、
-v11.4.0からビルド時のデフォルトになっています。
+Geant4のバージョンによって、デフォルトで使われるQtが異なります。
+
+- Qt6：v11.4.0以降のデフォルトです。Qt5を使う場合は、`-DGEANT4_USE_QT_QT5=ON`を指定します。
+- Qt5：v11.4.0より前のデフォルトです。Qt6を使う場合は、`-DGEANT4_USE_QT_QT6=ON`を指定します。
 
 :::
-
-:::{note}
-
-`brew install qt@5`でQt5がインストールできます。
-Homebrewでは非推奨になっており、2027年5月19日に無効化される予定です。
-`-DGEANT4_USE_QT_QT5=ON`とすれば、v11.4.0以降でもQt5でビルドできます。
-
-Qt6はv11.1.0からサポートされているようですが、v11.2.1ではQt6ではビルドに失敗しました。
-v11.4.0より前（v11.3を含む）はデフォルトがQt5です。Qt6を使う場合は`-DGEANT4_USE_QT_QT6=ON`を指定します。
-
-:::
-
 
 ## 番外編 : WSL2を準備する
 
 WindowsにGeant4をインストールする場合、WSL2環境を利用します。
+
+:::{caution}
+
+公式のインストールガイド（v11.4）では、WSLでのビルドと利用は公式にサポートされていません。
+問題が起きた場合は、Geant4の公式フォーラム（Discourse）で相談できます。
+
+:::
 
 ```console
 $ apt install build-essential
@@ -104,4 +98,4 @@ $ brew install qt@5
 
 WSL2の場合、`build-essential`でgccなどをインストールします。
 また、`cmake`と`qt@5`の追加インストールが必要です。
-描画バックエンドは`Wayland`に対応しているため、X11（XQuartz）の追加インストールは不要です。
+描画バックエンドにWaylandを使う場合は、X11系のドライバにXWaylandが必要です。
