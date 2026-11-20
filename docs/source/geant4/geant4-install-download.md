@@ -10,15 +10,14 @@ $ unzip archives/geant4-v11.4.3.zip
 $ mv geant4-v11.4.3 v11.4.3/source
 ```
 
-`wget`コマンドでGeant4のソースコードをダウンロードし、`unzip`コマンドで展開します。
-ダウンロードしたソースコード本体（圧縮ファイル）は`~/geant4/archives/`に保存し、展開したソースコード一式は`~/geant4/v11.4.3/source`にリネームします。
+`wget`コマンドでGeant4のソースコードをダウンロードします。
+ダウンロードしたソースコード本体（圧縮ファイル）は`~/geant4/archives/`に保存します。
 
-利用可能なGeant4のバージョンは
-[Geant4公式サイト](https://geant4.web.cern.ch/download/all)
-で確認できます。
-より古いバージョンが必要な場合は
-[Geant4のGitHubリポジトリ](https://github.com/Geant4/geant4/releases)
-で確認できます。
+`unzip`コマンドで圧縮ファイルを展開します。
+展開したソースコード一式は`~/geant4/v11.4.3/source`にリネームします。
+
+利用可能なGeant4のバージョンは[Geant4公式サイト](https://geant4.web.cern.ch/download/all)で確認できます。
+より古いバージョンが必要な場合は[Geant4のGitHubリポジトリ](https://github.com/Geant4/geant4/releases)で確認できます。
 
 ## ダウンロードしたい（`wget`）
 
@@ -37,8 +36,8 @@ $ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.X.Y/geant4-v11.X.Y.zip
 :::{note}
 
 ブラウザを使ってダウンロードした場合は、通常`~/Downloads/`に保存されます。
-`mv`コマンド、もしくはファインダーを使ってドラッグ＆ドロップして、
-作業用ディレクトリ（`~/geant4/archives/`）に移動させてください。
+ドラッグ＆ドロップして、作業用ディレクトリ（`~/geant4/archives/`）に移動させてください。
+`mv`コマンド、もしくはファインダーを使います。
 
 ```console
 // ブラウザからダウンロードしたGeant4一式を移動する
@@ -68,13 +67,13 @@ $ cd ~/geant4/
 (~/geant4/) $ mv geant4-v11.X.Y v11.X.Y/source
 ```
 
-ダウンロードしたZIP形式のファイルは`~/geant4/archives/`に移動し、
+ダウンロードしたZIP形式のファイルは`~/geant4/archives/`に移動します。
 展開したソース一式（＝ディレクトリ）は`~/geant4/v11.X.Y/source`にリネームします。
 
 :::{note}
 
-Geant4のソースコードはウェブ上にあるため、
-パソコンのディスク容量が節約したい場合、アーカイブ用は削除しても問題ありません。
+Geant4のソースコードはウェブ上にあります。
+パソコンのディスク容量を節約したい場合は、アーカイブ用を削除しても問題ありません。
 
 :::
 
@@ -84,9 +83,9 @@ Geant4のソースコードはウェブ上にあるため、
 $ tree ~/geant4 -L 1
 geant4/
 ├── archives/
-│   ├── geant4-v11.4.3.zip  // ダウンロードしたファイル
+│   ├── geant4-v11.4.3.zip  // ダウンロードしたファイル
 ├── v11.4.3/
-│   ├── source/      // 展開したソースコード一式
+│   ├── source/      // 展開したソースコード一式
 ```
 
 このようなディレクトリ構成になっていたら、次に進んでください。
