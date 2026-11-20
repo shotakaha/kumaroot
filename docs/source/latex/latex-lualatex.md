@@ -2,14 +2,13 @@
 
 ```console
 $ lualatex --version
-This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)
-Development id: 7611
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)
+Development id: 7724
 
 $ lualatex ファイル名.tex
 ```
 
-`lualatex`コマンドで、`LuaTeX`エンジン
-（実際はその後継の`LuaHBTeX`エンジン）を
+`lualatex`コマンドで、`LuaTeX`の最新版である`LuaHBTeX`エンジンを
 使ってPDFファイルを生成できます。
 
 ```console
@@ -20,7 +19,7 @@ $ latexmk -lualatex ファイル名.tex
 
 ## .latexmkrc
 
-```unixconfig
+```text
 $pdf_mode = 4;
 ```
 
@@ -58,27 +57,27 @@ $pdf_mode = 4;
 ## 参考文献したい
 
 ```console
-// 参考文献リストに必要な補助ファイルを生成
+# 参考文献リストに必要な補助ファイルを生成
 $ lualatex ファイル名.tex
-// -> main.aux
-// -> main.bcf
-// -> main.log
-// -> main.pdf
-// -> main.run.xml
-// -> main.toc
+# -> main.aux
+# -> main.bcf
+# -> main.log
+# -> main.pdf
+# -> main.run.xml
+# -> main.toc
 
-// 参考文献リストを生成
+# 参考文献リストを生成
 $ biber ファイル名
-// -> main.aux
-// -> main.bcf
-// -> main.log
-// -> main.pdf
-// -> main.run.xml
-// -> main.toc
-// -> main.bbl  <-- new
-// -> main.blg  <-- new
+# -> main.aux
+# -> main.bcf
+# -> main.log
+# -> main.pdf
+# -> main.run.xml
+# -> main.toc
+# -> main.bbl  <-- new
+# -> main.blg  <-- new
 
-// 参照を正しく出力
+# 参照を正しく出力
 $ lualatex ファイル名.tex
 $ lualatex ファイル名.tex
 ```
@@ -96,7 +95,7 @@ LaTeXとBiberで文献情報をやりとりする中間ファイルとして必�
 
 :::{literalinclude} ../_static/latex/templates/lualatex-jlreq/latexmkrc
 ---
-language: bash
+language: perl
 ---
 :::
 
