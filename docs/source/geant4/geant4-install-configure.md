@@ -2,8 +2,30 @@
 
 ```console
 $ cd ~/geant4/v11.X.Y/
-$ cmake -G Ninja -S source -B build -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH=(brew --prefix qt) -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON
+// 1行でまとめて指定する
+$ cmake -G Ninja -S source -B build -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH=$(brew --prefix qt) -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON
 ```
+
+同じ内容を、ステップに分けて指定することもできます。
+ビルドディレクトリのキャッシュ（`CMakeCache.txt`）に値が追記されるため、結果は1行で指定した場合と同じです。
+
+```console
+// ステップ1：ビルドシステムとソース／ビルドディレクトリを指定する
+$ cmake -G Ninja -S source -B build
+
+// ステップ2：インストール先を指定する
+$ cmake -S source -B build -DCMAKE_INSTALL_PREFIX=install
+
+// ステップ3：Qt・OpenGL・データセットを指定する
+$ cmake -S source -B build -DCMAKE_PREFIX_PATH=$(brew --prefix qt) -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON
+```
+
+:::{note}
+
+ステップ2以降も`-S source`を付けてください。
+付けないと、カレントディレクトリがソースとして扱われ、`CMakeLists.txt`が見つからずに失敗します。
+
+:::
 
 `cmake`でビルド構成を指定します。
 
