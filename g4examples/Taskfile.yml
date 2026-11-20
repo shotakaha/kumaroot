@@ -7,7 +7,7 @@ vars:
 
   # 使用する Geant4 のバージョン
   # 上書き: `task b1:build G4_VERSION=11.3.2` または環境変数 G4_VERSION
-  G4_VERSION: '{{env "G4_VERSION" | default "11.4.0"}}'
+  G4_VERSION: '{{env "G4_VERSION" | default "11.4.3"}}'
   G4_ROOT: '{{env "G4_ROOT" | default "/Users/shotakaha/geant4"}}'
 
   # インストール先（バージョンから導出）
