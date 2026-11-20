@@ -20,6 +20,7 @@
 [luatexja](./latex-luatexja.md)と
 [fontspec](./latex-fontspec.md)も読み込まれるため、
 和文フォントと欧文フォントを統一的に設定できます。
+上の例のフォントは、事前にインストールしておく必要があります。
 
 ## 本文フォントしたい（`\setmainjfont`）
 
@@ -29,9 +30,12 @@
 \setmainjfont{フォント名}
 ```
 
-`\setmainjfont{}`で和文の本文フォントを変更できます。
-明朝体のフォントを設定することが多いです。
-シリーズ（ウェイト）は軽めにするとよいです。
+`\setmainjfont{}`で和文の本文フォント（明朝体）を変更できます。
+太字や細字は、オプションで指定できます。
+
+```latex
+\setmainjfont[BoldFont=フォント名（太字）]{フォント名}
+```
 
 ## 見出しフォントしたい（`\setsansjfont`）
 
@@ -41,10 +45,8 @@
 \setsansjfont{フォント名}
 ```
 
-`\setsansjfont{}`で和文の見出しフォントを変更できます。
-ゴシック体のフォントを設定することが多いです。
-シリーズ（ウェイト）は重めにするとよいです。
-[\section{}](./latex-section.md)などで表示されるフォントです。
+`\setsansjfont{}`で和文のゴシック体（`\gtfamily`）を変更できます。
+`\section{}`などの見出しにこのフォントが使われるかどうかは、文書クラスによって異なります。
 
 ## 等幅フォントしたい（`\setmonojfont`）
 
@@ -54,18 +56,14 @@
 \setmonojfont{フォント名}
 ```
 
-`\setmonojfont{}`で和文の等幅フォントを変更できます。
-モノスペース体のフォントを設定することが多いです。
-シリーズ（ウェイト）は軽めがよいと思います。
+`\setmonojfont{}`で、`verbatim`環境や`\verb`で使われる和文フォント（`\jttdefault`）を変更できます。
 `verbatim`環境や[minted環境](./latex-minted.md)で表示されるフォントです。
 
 ## 依存パッケージ
 
 ```console
-$ kpsewhich luatexja-fontspec.sty | xargs cat | rg RequirePackage
+$ kpsewhich luatexja-fontspec.sty | xargs cat | grep RequirePackage
 \RequirePackage{l3keys2e,luatexja}
-\RequirePackage{fontspec}[2019/03/15]% v2.7c
-    \RequirePackage{luatexja-fontspec-29e} % v2.9e
-    \RequirePackage{luatexja-fontspec-29c} % v2.9c
-  \RequirePackage{luatexja-fontspec-27c} % v2.7c
+\RequirePackage{fontspec}[2024-05-10]% v2.9e
+\RequirePackage{luatexja-fontspec-29e} % v2.9e
 ```
