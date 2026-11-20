@@ -15,10 +15,12 @@ vars:
   G4_ENV_SH: '{{.G4_PREFIX}}/bin/geant4.sh'
   G4_EXAMPLES: '{{.G4_PREFIX}}/share/Geant4/examples'
 
-  # Example names
-  EXAMPLE_B1: B1
-  EXAMPLE_B2A: B2a
-  EXAMPLE_B2B: B2b
+  # geant4.sh must be sourced from bin/ (it cannot self-locate otherwise).
+  # Prefix a command with this to run it with the Geant4 environment.
+  G4_SOURCE: 'cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null &&'
+
+  # Example path under examples/basic, e.g. B1 or B2/B2b
+  EXAMPLE: B1
 
 tasks:
   default:
@@ -26,14 +28,17 @@ tasks:
     cmds:
       - task --list
       - echo ""
-      - 'echo "Next steps:"'
-      - 'echo "  1. Check the Geant4 environment:  task g4:env"'
-      - 'echo "  2. Build the B1 example:          task b1:build"'
-      - 'echo "  3. Run the B1 example:            task b1:run"'
+      - 'echo "Usage:"'
+      - 'echo "  task example:build EXAMPLE=B2/B2b       # copy, configure, and build"'
+      - 'echo "  task example:run EXAMPLE=B2/B2b         # run app/run1.mac"'
+      - 'echo "  task example:run EXAMPLE=B1 ARGS=app/run2.mac"'
+      - 'echo "  task example:clean EXAMPLE=B1           # remove build/"'
       - echo ""
-      - 'echo "Options:"'
-      - 'echo "  Use another version:  task b1:build G4_VERSION=11.3.2"'
-      - 'echo "  Installed versions:   task g4:versions"'
+      - 'echo "Other:"'
+      - 'echo "  task b1:build                           # shortcuts: b1, b2a, b2b"'
+      - 'echo "  task g4:env                             # check the Geant4 environment"'
+      - 'echo "  task g4:versions                       # installed Geant4 versions"'
+      - 'echo "  task build G4_VERSION=11.3.2           # override the version"'
     silent: true
 
   hello:
@@ -54,101 +59,101 @@ tasks:
     preconditions:
       - test -f {{.G4_ENV_SH}}
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && geant4-config --version
+      - '{{.G4_SOURCE}} geant4-config --version'
     silent: true
 
-  # --- B1 -------------------------------------------------------------
-  b1:copy:
-    desc: Copy B1 example to B1/app
+  # --- Generic example tasks (pass EXAMPLE=<path under basic>) --------
+  # Each example lives in <name>/app (source) and <name>/build (out-of-source).
+  example:copy:
+    desc: Copy EXAMPLE to <name>/app
     preconditions:
-      - test -d {{.G4_EXAMPLES}}/basic/{{.EXAMPLE_B1}}
+      - test -d {{.G4_EXAMPLES}}/basic/{{.EXAMPLE}}
     cmds:
-      - cp -R {{.G4_EXAMPLES}}/basic/{{.EXAMPLE_B1}} {{.EXAMPLE_B1}}/app
+      - mkdir -p {{base .EXAMPLE}}
+      - cp -R {{.G4_EXAMPLES}}/basic/{{.EXAMPLE}} {{base .EXAMPLE}}/app
     status:
-      - test -f {{.EXAMPLE_B1}}/app/exampleB1.cc
+      - test -f {{base .EXAMPLE}}/app/example{{base .EXAMPLE}}.cc
 
-  b1:build:
-    desc: Build B1 example (B1/app -> B1/build)
-    deps: [b1:copy]
-    dir: '{{.EXAMPLE_B1}}'
+  example:build:
+    desc: Configure and build EXAMPLE (copies it first if missing)
+    deps: [example:copy]
     preconditions:
       - test -f {{.G4_ENV_SH}}
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S app -B build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build build -j
+      - 'cd {{base .EXAMPLE}} && {{.G4_SOURCE}} cmake -S app -B build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4'
+      - 'cd {{base .EXAMPLE}} && {{.G4_SOURCE}} cmake --build build -j'
+
+  example:run:
+    desc: Run EXAMPLE (ARGS defaults to app/run1.mac)
+    deps: [example:build]
+    cmds:
+      - 'cd {{base .EXAMPLE}} && {{.G4_SOURCE}} ./build/example{{base .EXAMPLE}} {{.ARGS | default "app/run1.mac"}}'
+
+  example:clean:
+    desc: Remove EXAMPLE build/
+    cmds:
+      - rm -rf {{base .EXAMPLE}}/build
+
+  # --- Shortcuts ------------------------------------------------------
+  b1:build:
+    desc: Build B1
+    cmds:
+      - task: example:build
+        vars:
+          EXAMPLE: B1
 
   b1:run:
-    desc: Run B1 example (app/run1.mac)
-    deps: [b1:build]
-    dir: '{{.EXAMPLE_B1}}'
+    desc: Run B1 (app/run1.mac)
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB1 app/run1.mac
+      - task: example:run
+        vars:
+          EXAMPLE: B1
 
   b1:clean:
     desc: Clean B1 build
     cmds:
-      - rm -rf {{.EXAMPLE_B1}}/build
-
-  # --- B2a ------------------------------------------------------------
-  b2a:copy:
-    desc: Copy B2a example to B2a/app
-    preconditions:
-      - test -d {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2A}}
-    cmds:
-      - cp -R {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2A}} {{.EXAMPLE_B2A}}/app
-    status:
-      - test -f {{.EXAMPLE_B2A}}/app/exampleB2a.cc
+      - task: example:clean
+        vars:
+          EXAMPLE: B1
 
   b2a:build:
-    desc: Build B2a example (B2a/app -> B2a/build)
-    deps: [b2a:copy]
-    dir: '{{.EXAMPLE_B2A}}'
-    preconditions:
-      - test -f {{.G4_ENV_SH}}
+    desc: Build B2a
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S app -B build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build build -j
+      - task: example:build
+        vars:
+          EXAMPLE: B2/B2a
 
   b2a:run:
-    desc: Run B2a example (app/run1.mac)
-    deps: [b2a:build]
-    dir: '{{.EXAMPLE_B2A}}'
+    desc: Run B2a (app/run1.mac)
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB2a app/run1.mac
+      - task: example:run
+        vars:
+          EXAMPLE: B2/B2a
 
   b2a:clean:
     desc: Clean B2a build
     cmds:
-      - rm -rf {{.EXAMPLE_B2A}}/build
-
-  # --- B2b ------------------------------------------------------------
-  b2b:copy:
-    desc: Copy B2b example to B2b/app
-    preconditions:
-      - test -d {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2B}}
-    cmds:
-      - cp -R {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2B}} {{.EXAMPLE_B2B}}/app
-    status:
-      - test -f {{.EXAMPLE_B2B}}/app/exampleB2b.cc
+      - task: example:clean
+        vars:
+          EXAMPLE: B2/B2a
 
   b2b:build:
-    desc: Build B2b example (B2b/app -> B2b/build)
-    deps: [b2b:copy]
-    dir: '{{.EXAMPLE_B2B}}'
-    preconditions:
-      - test -f {{.G4_ENV_SH}}
+    desc: Build B2b
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S app -B build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build build -j
+      - task: example:build
+        vars:
+          EXAMPLE: B2/B2b
 
   b2b:run:
-    desc: Run B2b example (app/run1.mac)
-    deps: [b2b:build]
-    dir: '{{.EXAMPLE_B2B}}'
+    desc: Run B2b (app/run1.mac)
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB2b app/run1.mac
+      - task: example:run
+        vars:
+          EXAMPLE: B2/B2b
 
   b2b:clean:
     desc: Clean B2b build
     cmds:
-      - rm -rf {{.EXAMPLE_B2B}}/build
+      - task: example:clean
+        vars:
+          EXAMPLE: B2/B2b
