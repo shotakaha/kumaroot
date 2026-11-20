@@ -1,17 +1,45 @@
-# ラン番号をしりたい（``G4Run::GetRunID``）
+# ラン番号をしりたい（`G4Run::GetRunID`）
 
 ```cpp
-// G4Run *aRun;
+// void MyRunAction::EndOfRunAction(const G4Run* aRun) の中
 G4int run_id = aRun->GetRunID();
 ```
 
 ## G4Stepからラン番号をしりたい
 
 ```cpp
-G4RunManager* rm = G4RunManager::GetRunManager();
-G4Run* run = rm->GetCurrentRun();
+#include "G4Run.hh"
+#include "G4RunManager.hh"
+
+const G4Run* run = G4RunManager::GetRunManager()->GetCurrentRun();
 G4int run_id = run->GetRunID();
 ```
 
-``G4Step``オブジェクトから、現在の``G4Run``には直接アクセスできません。
-しかたがないので、``G4RunManager``オブジェクトから直接``G4Run``にアクセスしランIDを取得します。
+`G4Step`からは、現在の`G4Run`に直接アクセスできません。
+そのため、`G4RunManager`を経由して`G4Run`を取得し、ランIDを取り出します。
+
+## G4Trackからラン番号をしりたい
+
+```cpp
+#include "G4Run.hh"
+#include "G4RunManager.hh"
+
+const G4Run* run = G4RunManager::GetRunManager()->GetCurrentRun();
+G4int run_id = run->GetRunID();
+```
+
+`G4Track`からも、現在の`G4Run`に直接アクセスできません。
+`G4Step`の場合と同じく、`G4RunManager`を経由して取得します。
+
+## G4Eventからラン番号をしりたい
+
+```cpp
+#include "G4Run.hh"
+#include "G4RunManager.hh"
+
+const G4Run* run = G4RunManager::GetRunManager()->GetCurrentRun();
+G4int run_id = run->GetRunID();
+```
+
+`G4Event`からも、`G4Run`に直接アクセスできません。
+同じく`G4RunManager`を経由して取得します。
