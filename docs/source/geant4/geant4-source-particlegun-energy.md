@@ -1,9 +1,16 @@
-# 入射エネルギーしたい（``SetParticleEnergy``）
+# 入射エネルギーしたい（`SetParticleEnergy`）
 
 ```cpp
+#include "G4SystemOfUnits.hh"
+
 G4double energy = 400 * MeV;
-gun->SetParticleEnergy(energy);
+fParticleGun->SetParticleEnergy(energy);
 ```
 
-``SetParticleEnergy``で入射粒子のエネルギーを変更できます。
-運動量をすでに設定していた場合は0に変更されるようです。
+```cfg
+/gun/energy 400 MeV
+```
+
+`SetParticleEnergy`で入射粒子の運動エネルギーを変更できます。
+マクロの`/gun/energy`も同じ設定です。
+運動量をすでに設定していた場合は0にリセットされ、警告メッセージが出力されます。
