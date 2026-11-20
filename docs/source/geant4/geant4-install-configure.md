@@ -78,6 +78,56 @@ $ cmake -DGEANT4_INSTALL_EXAMPLES=ON
 
 `GEANT4_INSTALL_EXAMPLES`は付属サンプルを有効にするオプションです。
 デフォルトで有効（`ON`）になっています。
+サンプルコードは`share/Geant4/examples`にダウンロードされます。
+具体的な使い方は「[](geant4-examples)」を参照してください。
+
+## Qtしたい（`GEANT4_USE_QT`）
+
+```console
+$ brew install qt
+$ cmake -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt)
+```
+
+`GEANT4_USE_QT`はQtを有効にするオプションです。
+デフォルトは無効（`OFF`）になっています。
+このオプションを有効にする場合、Qtをインストールして、`CMAKE_PREFIX_PATH`にQtのインストール先を指定する必要があります。
+
+## OpenGLしたい（`GEANT4_USE_OPENGL_X11`）
+
+```console
+$ cmake -DGEANT4_USE_OPENGL_X11=ON
+```
+
+`GEANT4_USE_OPENGL_X11`はOpenGLを有効にするオプションです。
+デフォルトで無効（`OFF`）になっています。
+
+## VTKしたい（`GEANT4_USE_VTK`）
+
+```console
+$ cmake -DGEANT4_USE_VTK=ON
+```
+
+`GEANT4_USE_VTK`はVTKを有効にするオプションです。
+デフォルトで無効（`OFF`）になっています。
+
+## GDMLしたい（`GEANT4_USE_GDML`）
+
+```console
+$ cmake -DGEANT4_USE_GDML=ON
+```
+
+`GEANT4_USE_GDML`はGDMLを有効にするオプションです。
+デフォルトで無効（`OFF`）になっています。
+
+## HDF5したい（`GEANT4_USE_HDF5`）
+
+```console
+$ cmake -DGEANT4_USE_HDF5=ON
+```
+
+`GEANT4_USE_HDF5`はHDF5を有効にするオプションです。
+デフォルトで無効（`OFF`）になっています。
+
 
 ### 利用可能なビルドオプションを確認する
 
