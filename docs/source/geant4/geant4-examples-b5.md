@@ -13,13 +13,13 @@ B5の題材は、複合的なビームテストです。
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B5
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B5/app）にコピーして移動する
+$ mkdir -p $G4WORK/B5
+$ cp -R $G4EXAMPLE $G4WORK/B5/app
 $ cd $G4WORK/B5
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -34,6 +34,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 `cmake`でビルドし、`exampleB5`という実行ファイルを作成します。
+ソースは`B5/app`に、ビルド用ディレクトリは`B5/build`に分けます（out-of-sourceビルド）。
 手順の詳しい説明は、[付属サンプルの遊び方](geant4-examples)を参照してください。
 
 ## 検出器の構成を確認したい
