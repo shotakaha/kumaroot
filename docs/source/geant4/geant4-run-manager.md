@@ -23,7 +23,7 @@ auto rm = G4RunManagerFactory::CreateRunManager();
 :::{note}
 
 以前は``G4RunManager``クラスを使っていました。
-Geant4.11でマルチスレッド対応が追加されたため、
+マルチスレッドとシングルスレッドを切り替えやすくするため、
 [G4RunManagerFactory](https://geant4.kek.jp/Reference/11.2.0/classG4RunManagerFactory.html)を通じて、インスタンスを作成するのがよいみたいです。
 
 :::
@@ -31,16 +31,15 @@ Geant4.11でマルチスレッド対応が追加されたため、
 ## 実験を開始したい（`G4RunManager::Initialize`）
 
 ```cpp
-auto rm = new G4RunManager();
+auto* rm = G4RunManagerFactory::CreateRunManager();
 rm->SetUserInitialization(new MyGeometry{});
 rm->SetUserInitialization(new MyPhysics{});
 rm->SetUserInitialization(new MyAction{});
 rm->Initialize();
 ```
 
-ユーザーは、メインとなるファイルの中で`G4RunManager`クラスを
-明示的に`new`で生成し、各種の設定をした後に、`Initialize()`や`BeamOn()`を呼び出します。
-また、シミューレーション実行中は、測定器の構造や相互作用などが
+ユーザーは、メインとなるファイルの中で`G4RunManagerFactory`を使ってランマネージャーを生成し、各種の設定をした後に、`Initialize()`や`BeamOn()`を呼び出します。
+また、シミュレーション実行中は、測定器の構造や相互作用などが
 途中で変更されないように管理してくれます。
 
 ## 粒子を入射したい（``G4RunManager::BeamOn``）
@@ -77,7 +76,7 @@ auto* rm = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Serial);
 
 :::{hint}
 
-Geant4.11からマルチスレッドに対応しましたが、
+Geant4はマルチスレッドに対応していますが、
 マルチスレッド処理できることと、
 その出力結果が正しいかどうかは別物です。
 
@@ -103,21 +102,18 @@ rm->SetNumberOfThreads(8);
 デフォルトでマルチスレッドモードになります。
 ``SetNumberOfThreads``でスレッド数を変更できます。
 
-:::
-
 このクラスは、Geant4本体をビルドした環境に応じたランマネージャーを作成します。
-具体的には、マルチスレッド機能が有効な場合は``G4MTRunManager``、
-無効な場合は``G4RunManager``のインスタンスを作成します。
-
-:::
-
-
+具体的には、マルチスレッド機能が有効な場合は``G4TaskRunManager``（``G4RunManagerType::Tasking``）、
+無効な場合は``G4RunManager``（``G4RunManagerType::Serial``）のインスタンスを作成します。
 
 ## ランマネージャーを取得したい（``GetRunManager``）
 
 ```cpp
 auto* rm = G4RunManager::GetRunManager();
-auto* rm = G4RunManagerFactory::GetMasterRunManager();
+```
+
+```cpp
+auto* master = G4RunManagerFactory::GetMasterRunManager();
 ```
 
 作成済みのランマネージャーへのポインターを取得できます。
