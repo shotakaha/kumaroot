@@ -8,13 +8,14 @@ LuaLaTeXでは必要ありません。
 :::
 
 ```latex
-%\RequirePackage{plautopatch}
+\RequirePackage{plautopatch}
 \documentclass{jsarticle}
 ```
 
-(u)pLaTeXを使う場合は、ファイルの一番先頭で読み込んでおくとよいパッケージです。
+(u)pLaTeXを使う場合は、`\documentclass`より前で読み込んでおくとよいパッケージです。
+クラスファイルなどが互換性のないパッケージを読み込む可能性があるため、先に読み込んでおきます。
 (u)pLaTeXと互換性がないパッケージを読み込んでしまった場合に、
 その衝突を解消できるパッケージを自動で読み込んでくれます。
 
-パッケージの衝突があった場合は、
-自動追加されたパッケージの一覧を実行結果で確認できます。
+自動で追加されたパッケージがある場合は、`\end{document}`の時点で、
+「List of packages loaded by 'plautopatch'」として一覧が表示されます。
