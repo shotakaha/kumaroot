@@ -51,7 +51,7 @@ fParticleGun->SetParticleDefinition(particle);
 粒子名（`"e+"`）またはPDGコード（`-11`）で指定できます。
 陽電子のPDGコードは、電子（`11`）の符号を反転した`-11`です。
 
-## ミューオンにしたい（レプトン）
+## ミューオンにしたい
 
 ```cpp
 G4ParticleDefinition* particle = table->FindParticle("mu-");   // 粒子名
@@ -62,7 +62,7 @@ fParticleGun->SetParticleDefinition(particle);
 粒子名（`"mu-"`）またはPDGコード（`13`）で指定できます。
 ミューオンは、レプトンに分類されます。
 
-## ニュートリノにしたい（レプトン）
+## ニュートリノにしたい
 
 ```cpp
 G4ParticleDefinition* particle = table->FindParticle("nu_e");   // 粒子名
@@ -74,7 +74,7 @@ fParticleGun->SetParticleDefinition(particle);
 ここでは電子ニュートリノを例にしています。
 ニュートリノも、レプトンに分類されます。
 
-## ガンマ線にしたい（ボソン）
+## ガンマ線にしたい
 
 ```cpp
 G4ParticleDefinition* particle = table->FindParticle("gamma");   // 粒子名
@@ -85,7 +85,7 @@ fParticleGun->SetParticleDefinition(particle);
 粒子名（`"gamma"`）またはPDGコード（`22`）で指定できます。
 ガンマ線（光子）は、ボソンに分類されます。
 
-## 陽子にしたい（バリオン）
+## 陽子にしたい
 
 ```cpp
 G4ParticleDefinition* particle = table->FindParticle("proton");   // 粒子名
@@ -96,7 +96,7 @@ fParticleGun->SetParticleDefinition(particle);
 粒子名（`"proton"`）またはPDGコード（`2212`）で指定できます。
 陽子は、バリオン（重粒子）に分類されます。
 
-## π⁺にしたい（メソン）
+## パイ中間子にしたい
 
 ```cpp
 G4ParticleDefinition* particle = table->FindParticle("pi+");   // 粒子名
