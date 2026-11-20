@@ -52,6 +52,11 @@ Qtを使う場合は、`brew --prefix qt`でQtのインストール先を取得�
 `-DGEANT4_USE_OPENGL_X11=ON`はOpenGLを使うオプション（`GEANT4_USE_OPENGL_X11`）を有効にしています。
 `-DGEANT4_USE_QT=ON`はQtを使うオプション（`GEANT4_USE_QT`）を有効にしています。
 
+:::{seealso}
+
+- [](geant4-install-configure-options)
+
+:::
 
 
 ## プリセットしたい（`CMakePresets.json`）

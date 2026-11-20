@@ -4,7 +4,7 @@
 $ cmake -DCMAKE_INSTALL_PREFIX=install -DCMAKE_PREFIX_PATH=(brew --prefix qt) -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON
 ```
 
-`cmake -D`でビルド構成オプションを指定できます。
+`cmake -D`（`cmake --define`）オプションでビルド構成オプションを指定できます。
 Geant4にはたくさんのビルド構成オプションがあります。
 その中から有効（`ON`）にしておくとよいオプションをいくつか紹介します。
 
