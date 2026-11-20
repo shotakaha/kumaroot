@@ -22,10 +22,9 @@ SI基本単位系はもちろん、`\micro`や`\nano`などのSI接頭辞、`\oh
 \AtBeginDocument{\RenewCommandCopy\qty\SI}
 ```
 
-`\qty`コマンドは、[physicsパッケージ](./latex-physics.md)と干渉します。
-
-`physics`パッケージの`\qty`は`\pqty`コマンドで代用（というかこちらのほうが個人的に推奨）できるため、
-`siunitx`を優先するように置き換えます。
+`\qty`コマンドは、[physicsパッケージ](./latex-physics.md)と名前が衝突します。
+`physics`を使う文書では、`\qty`は使わず、`\pqty`や`\mqty`などの明示的なコマンドを使います。
+`\qty`は`siunitx`の物理量のコマンドとして使います。
 [physics-patch](./latex-physics-patch.md)を使う場合は、`\usepackage[siintegrate]{physics-patch}`で、括弧と単位の両方に`\qty`を使えます。
 
 ## 物理量したい（`\qty`）
