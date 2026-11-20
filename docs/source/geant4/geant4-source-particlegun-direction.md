@@ -1,17 +1,23 @@
-# 入射方向したい（``SetParticleMomentumDirection``）
+# 入射方向したい（`SetParticleMomentumDirection`）
 
 ```cpp
 G4ThreeVector direction = G4ThreeVector(0., -1., 0.);
-gun->SetParticleMomentumDirection(direction);
+fParticleGun->SetParticleMomentumDirection(direction);
 ```
 
-``SetParticleMomentumDirection``で入射方向を変更できます。
-方向は（x, y, z）の単位ベクトルで指定します。
-上のサンプルは鉛直下向きに入射しています。
+```cfg
+/gun/direction 0 -1 0
+```
+
+`SetParticleMomentumDirection`で入射方向を変更できます。
+方向は（x, y, z）で指定します。大きさは問わず、内部で単位ベクトルに正規化されます。
+上のサンプルは−y方向に入射しています。
+マクロの`/gun/direction`も同じ方向を設定します。
 
 :::{note}
 
-Geant4の世界には重力がないと思うので、横から打っても、上から打っても同じだと思います。
+重力場を設定していなければ、Geant4では標準では重力は考慮されません。
+そのため、横から打っても、上から打っても同じ結果になります。
 ただ、ミューオンを上から入射したほうが、見た目的に宇宙線っぽくなります。
 
 :::
@@ -19,14 +25,16 @@ Geant4の世界には重力がないと思うので、横から打っても、�
 ## ランダムに入射したい
 
 ```cpp
+#include "G4RandomDirection.hh"
+
 G4ThreeVector direction = G4RandomDirection();
-gun->SetParticleMomentumDirection(direction);
+fParticleGun->SetParticleMomentumDirection(direction);
 ```
 
-``G4RandomDirection``でランダムな単位ベクトルを取得できます。
+`G4RandomDirection`で、どの向きも同じ確率の（等方的な）単位ベクトルを取得できます。
 
 :::{seealso}
 
-[](./geant4-random-direction.md)
+[G4RandomDirection](geant4-random-direction)
 
 :::
