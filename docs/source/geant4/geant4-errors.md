@@ -1,6 +1,6 @@
 # エラー対処
 
-## No "FindGeant4.cmake"
+## Geant4の設定ファイルが見つからない（FindGeant4.cmake）
 
 アプリケーションをはじめてビルドしたときにエラーが発生しました。
 これは、Geant4関連の変数が設定されていないため、CMakeが``find_package``できないために生じるエラーです。
@@ -60,7 +60,7 @@ CMakeでクリーン＆リビルドするとエラーになります。
 
 :::
 
-## C compiler - broken
+## Cコンパイラが動かない（macOSのSDKバージョン不一致）
 
 macOSのコマンドラインツールのバージョンが変わってしまったために発生したエラーのようです。
 エラーメッセージを読んで、``CMAKE_OSX_SYSROOT``に設定されているSDKのバージョンと、現在のシステムに存在するSDKのバージョンを確認したら異なっていました。
@@ -146,7 +146,7 @@ Call Stack (most recent call first):
 
 :::
 
-## No LC_RPATH's found
+## 実行時にdylibが見つからない（no LC_RPATH's found）
 
 ``make install``したパスにある実行ファイルを起動したら、``no LC_RPATH's found``という実行時エラーが発生しました。
 これはアプリに必要な``.dylib``（ダイナミックライブラリ）のパス設定ができておらず、実行時にライブラリへのリンクがうまくいかないのが原因です。
@@ -230,7 +230,7 @@ export DYLD_LIBRARY_PATH=$HOME/geant4/11.2.1/lib:$DYLD_LIBRARY_PATH
 set -x DYLD_LIBRARY_PATH $HOME/geant4/11.2.1/lib $DYLD_LIBRARY_PATH
 ```
 
-## No "Qt5CoreConfig.cmake"
+## Qt5が見つからない（Qt5CoreConfig.cmake）
 
 例題のアプリをビルドしたときに`Qt5CoreConfig.cmake`が見つからないというエラーが発生しました。
 `Qt5CoreConfig.cmake`のパスを確認し、`CMAKE_PREFIX_PATH`オプションに指定すると解決できます。
