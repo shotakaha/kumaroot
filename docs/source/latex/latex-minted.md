@@ -8,7 +8,7 @@
 \setminted{
     style=default,
     fontfamily=tt,
-    fontseries=upright,
+    fontshape=upright,
     frame=leftline,
     linenos=true,
     bgcolor=black!10,
@@ -56,22 +56,23 @@ if __name__ == "__main__":
 \usemintedstyle{github-dark}
 ```
 
-## ページ設定したい（`\setminted`）
+## 全体の設定したい（`\setminted`）
 
 ```latex
 % プリアンブル
 \setminted{
     style=default,
     fontfamily=tt,        % (font-family): [tt | courier | helvetica]
-    fontseries=upright,   % (series-name): [auto]
+    fontshape=upright,    % (font shape): [auto]
     frame=leftline,       % [none | leftline | topline | bottomline | lines | single]
     linenos=true,         % (boolean): [false | true]
 }
 ```
 
-`\setminted`でページ全体の`minted`の設定を変更できます。
+`\setminted`で文書全体の`minted`の設定を変更できます。
 コードブロック内の欧文コメントが斜体で表示されるのが嫌なので、
-`fontseries=upright`で立体（upright）に変更しています。
+`fontshape=upright`で字形を立体（upright）に指定しています。
+コメントの斜体はスタイル側で指定されているため、変わらない場合は`style`を変更してください。
 
 ## 背景色したい（`bgcolor`）
 
@@ -105,4 +106,4 @@ if __name__ == "__main__":
 `showspaces`オプションで、コード内の半角スペースを空白記号で表示できます。
 PythonやMakefileなど、空白（やインデント）が意味をもつ言語で、曖昧さを避けたい場合に有効です。
 ただし、すべてのコードブロックで空白が表示されると、かえってみにくくなります。
-個別の環境オプションでポイント起用するとよいと思います。
+個別の環境オプションでピンポイントで使用するとよいと思います。
