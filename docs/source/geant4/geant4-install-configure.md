@@ -145,12 +145,12 @@ geant4/v11.X.Y
 │   ├── Geant4PackageCache.cmake
 │   ├── InstallTreeFiles
 │   ├── LICENSE.txt
-│   ├── Makefile
 │   ├── Modules
 │   ├── README.txt
 │   ├── UseGeant4.cmake
 │   ├── UseGeant4_internal.cmake
 │   ├── _source_extras
+│   ├── build.ninja
 │   ├── cmake_install.cmake
 │   ├── cmake_uninstall.cmake
 │   ├── cmake_uninstall.cmake.in
