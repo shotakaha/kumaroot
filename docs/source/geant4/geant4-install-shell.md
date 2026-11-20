@@ -44,7 +44,7 @@ $ geant4-config --version
 
 :::{caution}
 
-残念ながらFish用の設定スクリプトはありません。
+Geant4の設定スクリプト（`geant4.sh`）は、Fishに対応していません。
 
 :::
 
