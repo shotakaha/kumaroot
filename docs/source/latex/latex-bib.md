@@ -45,7 +45,7 @@ BibLaTeX形式は新しい形式です。
 BibTeX形式に比べてより多くのフィールドがサポートされています。
 また、フィールドの追加・変更も可能で、カスタム拡張性が高くなっています。
 
-BibLaTeX形式は、BibTeX形式と互換性があるので、
+多くのBibTeX形式のファイルは、BibLaTeX形式としてそのまま使えるので、
 新しいプロジェクトではBibLaTeX形式を採用するとよいと思います。
 
 :::{note}
@@ -67,14 +67,16 @@ BibLaTeXは、BibTeX形式に最適化された古いスタイルファイルと
 | `manual` | 操作マニュアル |
 | `masterthesis` | 修士論文 |
 | `phdthesis` | 博士論文 |
-| `misc` | 分類が難しい論文 |
+| `misc` | ほかのどの種類にも当てはまらない文献 |
 | `unpublished` | 未発表の論文 |
 
 利用可能な文献の種類の一部をリストしました。
 自分で考えると迷うこともあるので、
-公開されている文献に関しては、文献管理ツール自動分類してもらうと楽ちんです。
+公開されている文献に関しては、文献管理ツールに自動で分類してもらうと楽です。
 
 ## 文献のフィールド
+
+BibLaTeX固有のフィールドは、説明の末尾に「（BibLaTeX）」と書いています。
 
 | フィールド名 | 説明 |
 |---|---|
@@ -108,23 +110,30 @@ BibLaTeXは、BibTeX形式に最適化された古いスタイルファイルと
 | `url` | 文献のURL |
 | `eprint` | プレプリントの識別子 |
 | `language` | 文献の言語 |
+| `date` | 発行日（BibLaTeX） |
+| `urldate` | URLの最終アクセス日（BibLaTeX） |
+| `langid` | 文献の言語（BibLaTeX） |
+| `journaltitle` | 学術雑誌の名前（BibLaTeX。BibTeXの`journal`に相当） |
+| `eventtitle` | 会議やイベントの名称（BibLaTeX） |
+| `location` | 会議やイベントの開催地（BibLaTeX） |
 
 ## 学術雑誌したい（`article`）
 
 ```bibtex
 @article{引用キー,
-  // 必須
   author = {著者名},
   title = {タイトル},
   journal = {ジャーナル名},
   year = {発行年},
-  // オプション
   volume = {巻号},
   number = {号数},
   pages = {ページ範囲},
   doi = {DOI番号},
 }
 ```
+
+BibTeXの`article`では、`author`、`title`、`journal`、`year`が必須です。
+ほかのフィールドは任意です。
 
 ## プロシーディングスしたい（`inproceedings`）
 
