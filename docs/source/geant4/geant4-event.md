@@ -1,14 +1,34 @@
 # イベント操作したい（`G4Event`）
 
 ```cpp
-void MyEventAction::EndOfEventAction(const G4Event* event) {
-    G4int eventID = event->GetEventID();
-    auto hce = event->GetHCofThisEvent();
+#include "G4BestUnit.hh"
+#include "G4Event.hh"
+#include "G4HCofThisEvent.hh"
+#include "G4SDManager.hh"
 
-    if (hce) {
-        auto hitsCollection = static_cast<MyHitsCollection*>(hce->GetHC(hitsCollectionID));
-        // ヒット情報の解析など
+void MyEventAction::EndOfEventAction(const G4Event* event)
+{
+    // イベント番号
+    G4int eventID = event->GetEventID();
+
+    // コレクションのIDは、初回だけ取得してメンバー変数に保存する
+    if (fHitsCollectionID < 0) {
+        fHitsCollectionID = G4SDManager::GetSDMpointer()->GetCollectionID("AbsorberHitsCollection");
     }
+
+    auto* hce = event->GetHCofThisEvent();
+    if (!hce) return;
+    auto* hitsCollection = static_cast<MyHitsCollection*>(hce->GetHC(fHitsCollectionID));
+    if (!hitsCollection) return;
+
+    // ヒットごとのエネルギー付与を合計する
+    G4double totalEdep = 0.;
+    for (std::size_t i = 0; i < hitsCollection->entries(); ++i) {
+        totalEdep += (*hitsCollection)[i]->GetEdep();
+    }
+
+    G4cout << "Event " << eventID << ": total energy deposit = "
+           << G4BestUnit(totalEdep, "Energy") << G4endl;
 }
 ```
 
@@ -16,9 +36,11 @@ void MyEventAction::EndOfEventAction(const G4Event* event) {
 ユーザーが`G4Event`を直接インスタンス化することはありません。
 
 このクラスは、ユーザーアクション設定の
-[UserEventAction](./geant4-user-eventaction.md)において、
+[UserEventAction](geant4-user-eventaction)において、
 とくにイベントの終了時（`EndOfEventAction`）に、
 イベント番号やヒット情報を取得する際に使用します。
+`MyEventAction`や`MyHitsCollection`は、ユーザーが定義したクラスです。
+`fHitsCollectionID`は、コンストラクタで`-1`に初期化しておきます。
 
 ```{toctree}
 ---
@@ -34,4 +56,4 @@ geant4-event-manager
 
 ## リファレンス
 
-- [G4Event](https://geant4.kek.jp/Reference/11.2.0/classG4Event.html)
+- [G4Event](https://geant4.kek.jp/Reference/11.4.0/classG4Event.html)
