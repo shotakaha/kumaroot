@@ -24,9 +24,30 @@ geant4/geant4-usage
 ```{toctree}
 ---
 maxdepth: 1
-caption: データ解析・可視化したい
+caption: 開発環境したい
+---
+command/command-usage
+git/git-usage
+docker/docker-usage
+windows/windows-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: プログラミングしたい
 ---
 python/python-usage
+rust/rust-usage
+gas/gas-usage
+html/html-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: データ解析・可視化したい
+---
 numpy/numpy-usage
 pandas/pandas-usage
 polars/polars-usage
@@ -40,40 +61,26 @@ streamlit/streamlit-usage
 ```{toctree}
 ---
 maxdepth: 1
-caption: プログラミング言語したい
----
-rust/rust-usage
-gas/gas-usage
-html/html-usage
-arduino/arduino-usage
-```
-
-```{toctree}
----
-maxdepth: 1
-caption: コマンドライン・開発環境したい
----
-command/command-usage
-git/git-usage
-docker/docker-usage
-```
-
-```{toctree}
----
-maxdepth: 1
 caption: 文書作成したい
+---
+latex/latex-usage
+typst/typst-usage
+myst/myst-usage
+quarto/quarto-usage
+sphinx/sphinx-usage
+mkdocs/mkdocs-usage
+zensical/zensical-usage
+hugo/hugo-usage
+```
+
+```{toctree}
+---
+maxdepth: 1
+caption: エディターしたい
 ---
 emacs/emacs-usage
 vscode/vscode-usage
 zed/zed-usage
-latex/latex-usage
-sphinx/sphinx-usage
-quarto/quarto-usage
-zensical/zensical-usage
-mkdocs/mkdocs-usage
-typst/typst-usage
-myst/myst-usage
-hugo/hugo-usage
 ```
 
 ```{toctree}
@@ -81,9 +88,9 @@ hugo/hugo-usage
 maxdepth: 1
 caption: ハードウェアしたい
 ---
+arduino/arduino-usage
 raspi/raspi-usage
 redpitaya/redpitaya-usage
-windows/windows-usage
 ```
 
 ```{toctree}
