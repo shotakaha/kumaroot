@@ -10,10 +10,10 @@
 
 ```console
 // ステップ1：使うバージョンのインストール先を変数に入れる（v11.4.3の例）
-$ export GEANT4_INSTALLED_DIRECTORY=~/geant4/v11.4.3/install
+$ export G4_INSTALLED=~/geant4/v11.4.3/install
 
 // ステップ2：アプリのビルド時に、CMake設定ディレクトリを指定する
-$ cmake -S . -B build -DGeant4_DIR=$GEANT4_INSTALLED_DIRECTORY/lib/cmake/Geant4
+$ cmake -S . -B build -DGeant4_DIR=$G4_INSTALLED/lib/cmake/Geant4
 ```
 
 アプリの`CMakeLists.txt`には、`find_package(Geant4 REQUIRED)`を書いてください。
@@ -21,7 +21,7 @@ $ cmake -S . -B build -DGeant4_DIR=$GEANT4_INSTALLED_DIRECTORY/lib/cmake/Geant4
 
 :::{note}
 
-`lib/cmake/Geant4`が見つからない場合は、`ls $GEANT4_INSTALLED_DIRECTORY`で`install`の中身を確認してください。
+`lib/cmake/Geant4`が見つからない場合は、`ls $G4_INSTALLED`で`install`の中身を確認してください。
 
 :::
 
@@ -55,8 +55,8 @@ $ direnv allow
 詳しくは[](geant4-install-shell)を参照してください。
 
 ```console
-$ export GEANT4_INSTALLED_DIRECTORY=~/geant4/v11.4.3/install
-$ source $GEANT4_INSTALLED_DIRECTORY/bin/geant4.sh
+$ export G4_INSTALLED=~/geant4/v11.4.3/install
+$ source $G4_INSTALLED/bin/geant4.sh
 ```
 
 :::{note}
