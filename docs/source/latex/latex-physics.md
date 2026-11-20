@@ -149,6 +149,10 @@ $\langle \phi | H | \psi \rangle$のような行列要素を、ブラケット�
 `\mqty`は括弧の種類を引数で選べる汎用コマンドです。
 丸括弧だけでよい場合は`\pmqty`を使うと簡潔に書けます。
 
+`physics`パッケージでは、同じコマンドに長い形式（`\matrixquantity`）と短い形式（`\mqty`）があります。
+`\matrixquantity`は`\mqty`の正式な名前で、`\mqty`はその短縮形です。
+`\pmqty`は`\mqty()`と同じ意味で、長い形式はありません。
+
 ## 評価したい（`\evaluated`）
 
 ```latex
