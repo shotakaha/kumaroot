@@ -35,13 +35,13 @@ $ cmake -DCMAKE_PREFIX_PATH=/path/to/dependencies;/path/to/other/dependencies
 `CMAKE_PREFIX_PATH`は依存ライブラリの検索パスを指定するオプションです。
 複数のパスを指定する場合は、`;`（セミコロン）で区切ります。
 
-## マルチスレッド対応したい（`GEANT4_USE_MULTITHREADING`）
+## マルチスレッド対応したい（`GEANT4_BUILD_MULTITHREADED`）
 
 ```console
-$ cmake -DGEANT4_USE_MULTITHREADING=ON
+$ cmake -DGEANT4_BUILD_MULTITHREADED=ON
 ```
 
-`GEANT4_USE_MULTITHREADING`はマルチスレッドを有効にするオプションです。
+`GEANT4_BUILD_MULTITHREADED`はマルチスレッドを有効にするオプションです。
 デフォルトで有効（`ON`）になっています。
 
 ## データセットしたい（`GEANT4_INSTALL_DATA`）
@@ -51,7 +51,8 @@ $ cmake -DGEANT4_INSTALL_DATA=ON
 ```
 
 `GEANT4_INSTALL_DATA`は、Geant4のシミュレーションに必要はデータセットのダウンロードを有効にするオプションです。
-デフォルトで有効（`ON`）になっています。
+デフォルトは無効（`OFF`）になっています。
+このドキュメントでは、データセットをインストールするために`ON`を指定しています。
 データセットは`CMAKE_INSTALL_DATADIR`でダウンロードされます。
 デフォルトは`share/Geant4/data`になっています。
 
@@ -76,6 +77,11 @@ $ cmake -DGEANT4_USE_QT=ON -DCMAKE_PREFIX_PATH=$(brew --prefix qt)
 `GEANT4_USE_QT`はQtを有効にするオプションです。
 デフォルトは無効（`OFF`）になっています。
 このオプションを有効にする場合、Qtをインストールして、`CMAKE_PREFIX_PATH`にQtのインストール先を指定する必要があります。
+
+Qtのバージョンは、Geant4のバージョンによってデフォルトが異なります。
+
+- v11.4より前（v11.3を含む）：デフォルトはQt5です。Qt6を使う場合は、`-DGEANT4_USE_QT_QT6=ON`を指定します。Qt6はビルドできない場合があるため、注意してください。
+- v11.4以降：デフォルトはQt6です。Qt5を使う場合は、`-DGEANT4_USE_QT_QT5=ON`を指定します。
 
 ## OpenGLしたい（`GEANT4_USE_OPENGL_X11`）
 
@@ -122,12 +128,12 @@ $ cmake -DGEANT4_USE_HDF5=ON
 | オプション名 | デフォルト値 | 推奨値 | 説明 |
 |---|---|---|---|
 | CMAKE_INSTALL_PREFIX |  ``/usr/local/`` | ``$HOME/geant4/バージョン番号/install`` | Geant4をインストールするパス |
-| CMAKE_PREFIX_PATH | | ``$(brew --prefix qt@5)`` | Geant4のビルドに必要な外部パッケージのパス。``;``（セミコロン）で複数のパスを指定できる |
+| CMAKE_PREFIX_PATH | | ``$(brew --prefix qt)`` | Geant4のビルドに必要な外部パッケージのパス。``;``（セミコロン）で複数のパスを指定できる |
 | CMAKE_INSTALL_BINDIR | ``bin`` | | 実行ファイルがインストールされるパス |
 | CMAKE_INSTALL_INCLUDEDIR | ``include`` | | ヘッダーファイルがインストールされるパス |
 | CMAKE_INSTALL_LIBDIR | ``lib(+?SUFFIX))`` | | ライブラリがルがインストールされるパス |
 | CMAKE_INSTALL_DATAROOTDIRR | ``share`` | | 読み取り専用のデータセットがルがインストールされるパス |
-| GEANT4_INSTALL_DATA |  ``ON`` | ``ON`` | インストール時にGeant4のデータセットのダウンロードを有効にするフラグ |
+| GEANT4_INSTALL_DATA |  ``OFF`` | ``ON`` | インストール時にGeant4のデータセットのダウンロードを有効にするフラグ |
 | GEANT4_INSTALL_DATADIR | ``CMAKE_INSTALL_DATAROOTDIR`` | | データセットをインストールするパス |
 | GEANT4_INSTALL_EXAMPLES | ``ON`` | | サンプルプロジェクトを有効にするフラグ |
 | GEANT4_INSTALL_PACKAGE_CACHE | ``ON`` | | サンプルプロジェクトを有効にするフラグ |
@@ -137,8 +143,9 @@ $ cmake -DGEANT4_USE_HDF5=ON
 | GEANT4_USE_GDML | ``OFF`` | | GDMLを有効にするフラグ |
 | GEANT4_USE_INVENTOR_QT | ``OFF`` | | OpenInventorQtを有効にするフラグ |
 | GEANT4_USE_OPENGL_X11 | ``OFF`` | ``ON`` | X11（XQuartz） OpenGLを有効にするフラグ |
-| GEANT4_USE_QT | ``OFF`` | ``ON`` | Qt5を有効にするフラグ |
-| GEANT4_USE_QT6 | ``OFF`` | | Qt6を有効にするフラグ |
+| GEANT4_USE_QT | ``OFF`` | ``ON`` | Qtを有効にするフラグ |
+| GEANT4_USE_QT_QT5 | ``OFF`` | | v11.4以降。Qt5を使うフラグ（`GEANT4_USE_QT`がONのときのみ有効） |
+| GEANT4_USE_QT_QT6 | ``OFF``（v11.4以降は``ON``） | | v11.4より前。Qt6を使うフラグ（`GEANT4_USE_QT`がONのときのみ有効） |
 | GEANT4_USE_RAYTRACER_X11 | ``OFF`` | | RayTracerを有効にするフラグ |
 | GEANT4_USE_VTK | ``OFF`` | | VTKを有効にするフラグ。|
 | GEANT4_USE_XM | ``OFF`` | | Motifを有効にするフラグ。|
