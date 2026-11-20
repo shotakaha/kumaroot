@@ -12,7 +12,7 @@
 本文中で文献を参照する\cite{参照キー}。
 
 % 本文の末尾
-\printbibliography[title={参考文献}]
+\printbibliography[title={文献リスト}]
 
 \end{document}
 ```
@@ -25,14 +25,14 @@
 
 `\cite`コマンドで、本文中で文献を参照し、`\printbibliography`で出力します。
 `title`オプションで、見出しを変更できます。
-デフォルトは「Bibliography」になっています。
+デフォルトは`\bibname`で、`jsarticle`などの日本語クラスでは「参考文献」になります。
 
 :::{note}
 
 `Biber`は、従来のBibTeXの代替として設計されたツールです。
 `BibTeX`形式のファイルをそのまま読み込んだり、
 ソートやフィルタリング機能が利用できたり、
-Unicodeが完全サポートされていたりと
+Unicodeに対応していたりと
 より簡単＆柔軟な利用が可能になっています。
 
 :::
