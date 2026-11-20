@@ -45,6 +45,19 @@
 `ipaex`オプションでIPAexフォントを設定できます。
 IPAexフォントは別途インストールが必要な場合があります。
 
+## 游フォントしたい（`yu-win` / `yu-win10` / `yu-osx`）
+
+```latex
+% プリアンブル
+\usepackage[yu-osx]{luatexja-preset}     % macOS（OS X Mavericks 付属の游フォント）
+\usepackage[yu-win10]{luatexja-preset}   % Windows 10 付属の游フォント
+\usepackage[yu-win]{luatexja-preset}     % Windows 8.1 付属の游フォント
+```
+
+`yu-osx`、`yu-win`、`yu-win10`オプションで游明朝・游ゴシックを設定できます。
+游フォントはOSに付属しているフォントのため、対応するOSでは別途インストールは不要です。
+ただし、この環境のmacOSでは游フォントが見当たらなかったため、`yu-osx`を使うには別途フォントを用意する必要があります。
+
 ## ヒラギノしたい（`hiragino-pro` / `hiragino-pron`）
 
 ```latex
