@@ -45,20 +45,24 @@ XeLaTeXやLuaLaTeXといったいわゆる**モダンLaTeX**を
 :::{mermaid}
 
 graph TD
-    O[TeX] -->|レジスタ拡張| A[e-TeX]
-    O --> |機能強化| B[LaTeX]
-    A --> B
-    A -->|日本語化| D[pTeX]
-    B -->|日本語化| C[pLaTeX]
-    D --> C
-    D -->|Unicode対応| E[upTeX]
-    C -->|Unicode対応| F[upLaTeX]
-    E --> F
-    A --> G[モダンLaTeX]
-    G --> H[LuaLaTeX]
-    G --> J[pdfLaTeX]
-    G --> I[XeLaTeX]
-    J --> |Lua| H
-    H --> |HarfBuzz| K[LuaHBTeX]
+    subgraph Legacy["Legacy TeX"]
+        O[TeX] -->|マクロパッケージ| B[LaTeX]
+        O -->|レジスタ拡張| A[e-TeX]
+        O -->|日本語化| D[pTeX]
+        B -->|日本語化| C[pLaTeX]
+        D --> C
+        D -->|Unicode対応| E[upTeX]
+        C -->|Unicode対応| F[upLaTeX]
+        E --> F
+    end
+    subgraph Modern["Modern TeX"]
+        G[pdfTeX] --> J[pdfLaTeX]
+        G --> LT[LuaTeX]
+        LT --> H[LuaLaTeX]
+        LT -->|HarfBuzz| K[LuaHBTeX]
+        X[XeTeX] --> I[XeLaTeX]
+    end
+    A --> G
+    A --> X
 
 :::
