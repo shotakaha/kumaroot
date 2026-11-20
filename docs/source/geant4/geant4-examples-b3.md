@@ -18,13 +18,13 @@ B3の題材はPET（陽電子放出断層撮影）です。
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B3/B3a
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B3a/app）にコピーして移動する
+$ mkdir -p $G4WORK/B3a
+$ cp -R $G4EXAMPLE $G4WORK/B3a/app
 $ cd $G4WORK/B3a
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -39,6 +39,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 `cmake`でビルドし、`exampleB3a`という実行ファイルを作成します。
+ソースは`B3a/app`に、ビルド用ディレクトリは`B3a/build`に分けます（out-of-sourceビルド）。
 手順の詳しい説明は、[付属サンプルの遊び方](geant4-examples)を参照してください。
 
 ## ビルドしたい（`B3b`）
@@ -48,13 +49,13 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B3/B3b
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B3b/app）にコピーして移動する
+$ mkdir -p $G4WORK/B3b
+$ cp -R $G4EXAMPLE $G4WORK/B3b/app
 $ cd $G4WORK/B3b
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -69,7 +70,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 実行ファイルは`exampleB3b`です。
-手順は`B3a`と同じです。
+手順は`B3a`と同じです。ソースは`B3b/app`、ビルド用ディレクトリは`B3b/build`に分けます。
 
 ## B3aとB3bの違い
 
