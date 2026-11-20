@@ -93,17 +93,23 @@ $ cmake -S source -B build --preset=geant4
 
 ```json
 {
-    "name": "geant4",
-    "displayName": "Geant4 Build",
-    "description": "Build Geant4 with OpenGL and Qt",
-    "generator": "Ninja",
-    "binaryDir": "${sourceDir}/build",
-    "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "GEANT4_INSTALL_DATA": "ON",
-        "GEANT4_USE_OPENGL_X11": "ON",
-        "GEANT4_USE_QT": "ON"
-    }
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "geant4",
+            "displayName": "Geant4 Build",
+            "description": "Build Geant4 with OpenGL and Qt",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/../build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/../install",
+                "GEANT4_INSTALL_DATA": "ON",
+                "GEANT4_USE_OPENGL_X11": "ON",
+                "GEANT4_USE_QT": "ON"
+            }
+        }
+    ]
 }
 ```
 
