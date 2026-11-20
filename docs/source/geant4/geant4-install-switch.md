@@ -1,66 +1,35 @@
-# アプリごとにバージョンを切り替えたい（`switch`）
-
-複数のバージョンをインストールしていても、どれか1つを全体の設定にはしません。
-アプリごとに、使うバージョンを指定します。
-
-## CMakeで指定したい（`Geant4_DIR`）
-
-アプリのビルド時に、使うバージョンを`Geant4_DIR`で指定する方法です。
-環境変数を汚さず、アプリのビルド設定にバージョンが残るため、おすすめです。
+# バージョンを切り替えたい（`switch`）
 
 ```console
-// ステップ1：使うバージョンのインストール先を変数に入れる
-$ export G4_INSTALLED=~/geant4/v11.X.Y/install
+$ source ~/geant4/v11.3.2/install/bin/geant4.sh
+$ geant4-config --version
+11.3.2
 
-// ステップ2：アプリのビルド時に、CMake設定ディレクトリを指定する
-$ cmake -S . -B build -DGeant4_DIR=$G4_INSTALLED/lib/cmake/Geant4
+$ source ~/geant4/v11.4.3/install/bin/geant4.sh
+$ geant4-config --version
+11.4.3
 ```
 
-アプリの`CMakeLists.txt`には、`find_package(Geant4 REQUIRED)`を書いてください。
-`find_package`は、`Geant4_DIR`で指定されたバージョンを見つけます。
+Geant4のバージョンを切り替えてアプリを作成することは多くないと思いますが、いちおう切り替え方を紹介します。
+利用したいバージョンの設定スクリプトを読み込ませればOKです。
 
-:::{note}
+## プロジェクトで設定したい
 
-`lib/cmake/Geant4`が見つからない場合は、`ls $G4_INSTALLED`で`install`の中身を確認してください。
+```console
+$ cmake -S app -B build -DGeant4_DIR=$HOME/geant4/v11.X.Y/install/lib/cmake/Geant4
+```
+
+`Geant4_DIR`は、Geant4のCMake設定ディレクトリを変更できるオプションです。
+ビルドに使いたいバージョンの`lib/cmake/Geant4`を指定します。
+
+:::{caution}
+
+プロジェクトの`CMakeLists.txt`に`find_package(Geant4 REQUIRED)`が必要です。
 
 :::
 
-## direnvで自動的に切り替えたい
-
-アプリのディレクトリに入ったときだけ、設定を自動で読み込む方法です。
-Fishでも使えます。
-
-```console
-// ステップ1：direnvをインストールする
-$ brew install direnv
-
-// ステップ2：アプリのディレクトリに設定ファイルを作る
-$ cd ~/repos/my-geant4-app/
-$ echo 'source ~/geant4/v11.X.Y/install/bin/geant4.sh' > .envrc
-
-// ステップ3：設定ファイルを許可する
-$ direnv allow
-```
-
 :::{note}
 
-`direnv`をシェルで使うための初期設定は、`direnv`の公式ドキュメントに従ってください。
-別のバージョンを使うアプリでは、そのアプリのディレクトリに別の`.envrc`を置きます。
-
-:::
-
-## 手動で切り替えたい
-
-シェルで直接読み込む方法です。
-詳しくは[](geant4-install-shell)を参照してください。
-
-```console
-$ export G4_INSTALLED=~/geant4/v11.X.Y/install
-$ source $G4_INSTALLED/bin/geant4.sh
-```
-
-:::{note}
-
-別のバージョンに切り替えるときは、新しいシェルを開いてから読み込んでください。
+`-D`の値の中では`~`が展開されない場合があるため、`$HOME`を使っています。
 
 :::
