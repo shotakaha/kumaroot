@@ -7,7 +7,7 @@
 
 ```console
 $ latexmk [オプション] ファイル名  # .texはあってもなくてもよい
-$ latexmk  # ファイル名がなくてもよい（ときもある）
+$ latexmk  # カレントディレクトリに.texが1つだけあれば、ファイル名を省略できる
 ```
 
 `latexmk`はLaTeX版Makefileのようなもので、
@@ -40,6 +40,9 @@ $ latexmk -shell-escape
 ```console
 $ latexmk -f -interaction=nonstopmode
 ```
+
+`-f`オプションは、エラーがあっても処理を続けます。
+`-interaction=nonstopmode`は、LaTeXがエラーで対話的に停止するのを防ぎます。
 
 ```{eval-rst}
 .. index::
@@ -93,5 +96,5 @@ $ texdoc latexmk
 ```bash
 $ latexmk -v
 $ latexmk --version
-Latexmk, John Collins, 17 Mar. 2022. Version 4.77
+Latexmk, John Collins, 8 November 2026. Version 4.89
 ```
