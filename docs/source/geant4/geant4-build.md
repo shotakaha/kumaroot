@@ -160,6 +160,6 @@ install(TARGETS myGeant4App DESTINATION bin)
 
 ## 関連ページ
 
-- [付属サンプルの遊び方（`examples`）](geant4-examples)：Geant4付属のサンプルをコピーして始める
+- [](geant4-examples)：Geant4付属のサンプルをコピーして始める
 - [CMake Toolsしたい](geant4-cmake-tools)：VS Codeでの設定
 - [エラー対処](geant4-errors)：ビルド時のエラー
