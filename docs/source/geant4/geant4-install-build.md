@@ -4,7 +4,7 @@
 // ステップ1：バージョンごとの作業ディレクトリに移動する
 $ cd ~/geant4/v11.4.3/
 
-// ステップ2：ビルドする（--parallelでマルチスレッドにする）
+// ステップ2：ビルドする（--parallelで並列処理する）
 $ cmake --build build --parallel
 
 // ステップ3：インストールする
@@ -12,7 +12,7 @@ $ cmake --install build
 ```
 
 `cmake --build`でビルドを実行します。
-`--parallel`オプションを指定すると、マルチスレッドでビルドできます。
+`--parallel`オプションを指定すると、並列処理でビルドできます。
 
 `cmake --install`でインストールを実行します。
 インストール先は、構成時に指定した`CMAKE_INSTALL_PREFIX`（`install/`）です。
