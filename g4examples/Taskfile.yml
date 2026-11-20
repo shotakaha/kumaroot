@@ -5,11 +5,17 @@ version: '3'
 vars:
   GREETING: Hello, world!
 
-  # Geant4 インストール先（環境変数 G4_PREFIX で上書き可能）
-  G4_PREFIX: '{{env "G4_PREFIX" | default "/Users/shotakaha/geant4/v11.4.0/install"}}'
+  # 使用する Geant4 のバージョン
+  # 上書き: `task b1:build G4_VERSION=11.3.2` または環境変数 G4_VERSION
+  G4_VERSION: '{{env "G4_VERSION" | default "11.4.0"}}'
+  G4_ROOT: '{{env "G4_ROOT" | default "/Users/shotakaha/geant4"}}'
+
+  # インストール先（バージョンから導出）
+  G4_PREFIX: '{{.G4_ROOT}}/v{{.G4_VERSION}}/install'
+  G4_ENV_SH: '{{.G4_PREFIX}}/bin/geant4.sh'
   G4_EXAMPLES: '{{.G4_PREFIX}}/share/Geant4/examples'
 
-  # サンプル名（例: task b1:build）
+  # サンプル名
   EXAMPLE_B1: B1
 
 tasks:
@@ -25,9 +31,26 @@ tasks:
       - echo "{{.GREETING}}"
     silent: true
 
+  # --- Geant4 環境 ----------------------------------------------------
+  g4:versions:
+    desc: インストール済みの Geant4 バージョンを一覧表示
+    cmds:
+      - ls -d {{.G4_ROOT}}/v*/install 2>/dev/null | sed -E 's#.*/v(.*)/install#\1#'
+    silent: true
+
+  g4:env:
+    desc: Geant4 の環境変数を読み込み（geant4.sh を source）してバージョンを確認
+    preconditions:
+      - test -f {{.G4_ENV_SH}}
+    cmds:
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && geant4-config --version
+    silent: true
+
   # --- B1 -------------------------------------------------------------
   b1:copy:
     desc: Geant4 の B1 サンプルを g4examples/B1 にコピー
+    preconditions:
+      - test -d {{.G4_EXAMPLES}}/basic/{{.EXAMPLE_B1}}
     cmds:
       - cp -R {{.G4_EXAMPLES}}/basic/{{.EXAMPLE_B1}} {{.EXAMPLE_B1}}
     status:
@@ -36,16 +59,18 @@ tasks:
   b1:build:
     desc: B1 サンプルをビルド（未コピーならコピーしてから実行）
     deps: [b1:copy]
+    preconditions:
+      - test -f {{.G4_ENV_SH}}
     cmds:
-      - cmake -S {{.EXAMPLE_B1}} -B {{.EXAMPLE_B1}}/build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
-      - cmake --build {{.EXAMPLE_B1}}/build -j
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S {{.EXAMPLE_B1}} -B {{.EXAMPLE_B1}}/build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build {{.EXAMPLE_B1}}/build -j
 
   b1:run:
     desc: B1 サンプルを batch モードで実行（run1.mac）
     deps: [b1:build]
     dir: '{{.EXAMPLE_B1}}'
     cmds:
-      - ./build/exampleB1 run1.mac
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB1 run1.mac
 
   b1:clean:
     desc: B1 のビルド成果物を削除
