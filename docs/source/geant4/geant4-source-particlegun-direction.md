@@ -35,6 +35,6 @@ fParticleGun->SetParticleMomentumDirection(direction);
 
 :::{seealso}
 
-[G4RandomDirection](geant4-random-direction)
+[](geant4-random-direction)
 
 :::

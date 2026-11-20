@@ -5,40 +5,36 @@
 auto nm = G4NistManager::Instance();
 auto water = nm->FindOrBuildMaterial("G4_WATER");
 
-// プロパティを設定（水のpre-defined値を使用）
+// プロパティを設定（水の事前定義値を使用）
 auto mpt = new G4MaterialPropertiesTable{};
-mpt->AddProperty("RINDEX", water);  // pre-defined値（マテリアルのポインタを渡す）
-mpt->AddProperty("ABSLENGTH", ...);
-mpt->AddProperty("RAYLEIGH", ...);
-mpt->AddProperty("MIEHG", ...);
+mpt->AddProperty("RINDEX", "Water");  // 事前定義値（素材名の文字列を渡す）
+// mpt->AddProperty("ABSLENGTH", ...);  // 必要に応じて追加
+// mpt->AddProperty("RAYLEIGH", ...);
+// mpt->AddProperty("MIEHG", ...);
 
-// 水に屈折率を設定
+// 水に光学特性を設定
 water->SetMaterialPropertiesTable(mpt);
 ```
 
 `G4MaterialPropertiesTable`でマテリアルの光学特性を設定できます。
-[光学物理](./geant4-physics-opticalphysics.md)の物理モジュールを利用する場合は必須です。
+[](geant4-physics-opticalphysics)の物理モジュールを利用する場合は必須です。
 
 OpticalPhysicsの物理プロセスを使う場合、
-素材の屈折率（``RINDEX``）や
-吸収長（``ABSLENGTH``）などの性質をユーザーが設定する必要があります。
+素材の屈折率（`RINDEX`）や
+吸収長（`ABSLENGTH`）などの性質をユーザーが設定する必要があります。
 それぞれの物理プロセスで必要なパラメーターの設定は
 [Configuration - Book For Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html#configuration)を参照してください。
 
-なお、Geant v11.0 から
-``Air``（空気）、
-``Water``（水）、
-``PMMA``（アクリル樹脂／ポリメタクリル酸メチル）、
-``Fused Silica``（石英ガラス）
-に対して屈折率のpre-defined値が追加されています。
+Geant4には、次の素材の屈折率の事前定義値があります。
+素材名は、`Air`（空気）、`Water`（水）、`PMMA`（アクリル樹脂／ポリメタクリル酸メチル）、`Fused Silica`（石英ガラス）です。
 
 ## チェレンコフ光したい
 
 ```cpp
 // AddProperty("キー名", std::vector配列, std::vector配列)
-// AddProperty("キー名", 配列, 配列, 配列の数)
-mpt->AddProperty("RINDEX", photon_energy, refractive_index, n_entries);
-mpt->AddProperty("ABSLENGTH", photon_energy, absorption, n_entries);
+// photon_energy, refractive_index, absorption は std::vector<G4double>（下のシンチレーションの例を参照）
+mpt->AddProperty("RINDEX", photon_energy, refractive_index);
+mpt->AddProperty("ABSLENGTH", photon_energy, absorption);
 ```
 
 チェレンコフ光の生成には屈折率（`RINDEX`）の設定が必須です。
@@ -54,9 +50,9 @@ mpt->AddProperty("ABSLENGTH", photon_energy, absorption, n_entries);
 
 `G4MaterialPropertiesTable`の設定だけでは不十分で、
 物理リストに`G4Cerenkov`プロセスを登録する必要があります。
-詳細は[](./geant4-physics-opticalphysics.md)を参照してください。
+詳細は[](geant4-physics-opticalphysics)を参照してください。
 
-また、以下のようなメソッドで光子の生成量やトラッキング順序を制御できます。
+また、次のメソッドで光子の生成量やトラッキング順序を制御できます。
 
 ```cpp
 auto cerenkovProcess = new G4Cerenkov{};
@@ -64,8 +60,8 @@ cerenkovProcess->SetMaxNumPhotonsPerStep(100);   // 1ステップあたりの光
 cerenkovProcess->SetTrackSecondariesFirst(true); // 光子を親粒子より先にトラッキング
 ```
 
-`SetMaxNumPhotonsPerStep`を設定しないと、
-荷電粒子の数が多い場合にシミュレーションが極端に遅くなることがあります。
+`SetMaxNumPhotonsPerStep`の上限は、デフォルトでは`G4OpticalParameters`から設定されます。
+変更したい場合に、このメソッドを使います。
 
 ## シンチレーション光したい
 
@@ -101,7 +97,7 @@ property->AddConstProperty("SCINTILLATIONYIELD2", 0.0);
 material->SetMaterialPropertiesTable(property);
 ```
 
-``examples/extended/optical/LXe/``のサンプルを参照しました。
+`examples/extended/optical/LXe/`のサンプルを参考にしています。
 屈折率と吸収長の他に、シンチレーション光のプロパティ（光量や時定数）をいくつか設定しています。
 
 `SCINTILLATIONYIELD`は「1 MeVあたりの光子数」で指定します。
@@ -129,7 +125,7 @@ material->SetMaterialPropertiesTable(property);
 
 :::
 
-- [](./geant4-physics-scintillation.md)
+- [](geant4-physics-scintillation)
 
 ## OpticalSurfaceしたい
 
@@ -143,6 +139,8 @@ auto surfaceProperty = new G4MaterialPropertiesTable{};
 // surfaceProperty->AddProperty(...); // 表面の光学特性を設定
 surface->SetMaterialPropertiesTable(surfaceProperty);
 ```
+
+作成した`G4OpticalSurface`は、`G4LogicalBorderSurface`に登録して、2つの物理ボリュームの境界に適用します。
 
 ## リファレンス
 

@@ -22,4 +22,4 @@ fParticleGun->SetParticlePosition(position);
 :::
 
 このサンプルはコンストラクタで設定しているため、全イベントで同じ位置から入射します。
-イベントごとに位置を変えたい場合は、`GeneratePrimaries`の中で`SetParticlePosition`を呼び出します（[ランダムに入射したい](geant4-source-particlegun)）。
+イベントごとに位置を変えたい場合は、`GeneratePrimaries`の中で`SetParticlePosition`を呼び出します（[](geant4-source-particlegun)）。
