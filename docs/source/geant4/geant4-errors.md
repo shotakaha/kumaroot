@@ -338,6 +338,7 @@ make: *** [all] Error 2
 
 ### 対処方法
 
-GDMLを使わないなら、作業用コピーにパッチを当ててからビルドします。
-手順は[OpNoviceのGDML無効ビルド](geant4-examples-opnovice)を参照してください。
-GDMLを使いたい場合は、Geant4をGDML有効（`-DGEANT4_USE_GDML=ON`）で再インストールする必要があります。
+Geant4をGDML有効（`-DGEANT4_USE_GDML=ON`）で再インストールしてから、ビルドし直します。
+
+個別に対応する場合は、作業用コピーにパッチを当てる方法もあります（手順は[OpNoviceのGDML無効ビルド](geant4-examples-opnovice)を参照）。
+ただし、おすすめはしません。
