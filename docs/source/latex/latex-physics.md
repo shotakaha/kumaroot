@@ -148,3 +148,39 @@ $\langle \phi | H | \psi \rangle$のような行列要素を、ブラケット�
 
 `\mqty`は括弧の種類を引数で選べる汎用コマンドです。
 丸括弧だけでよい場合は`\pmqty`を使うと簡潔に書けます。
+
+## 評価したい（`\evaluated`）
+
+```latex
+\evaluated{\partialderivative{f}{x}}_{x=0}  % 偏微分の値
+```
+
+`\evaluated`で、微分の結果を特定の点で評価した値を書けます。
+短い形の`\eval`でも書けます。
+
+## 誤差したい（`\order`）
+
+```latex
+\order{x^2}  % O(x^2)
+```
+
+`\order`で、近似の誤差の大きさを表す記号（ランダウの記号）を書けます。
+
+## 汎関数微分したい（`\functionalderivative`）
+
+```latex
+\functionalderivative{F}{\phi(x)}
+```
+
+`\functionalderivative`で、汎関数微分を書けます。
+短い形の`\fdv`でも書けます。
+
+## 実部・虚部したい（`\real` / `\imaginary`）
+
+```latex
+\real{z}       % 実部
+\imaginary{z}  % 虚部
+```
+
+`\real`で実部、`\imaginary`で虚部を書けます。
+短い形の`\Re`と`\Im`でも書けます。
