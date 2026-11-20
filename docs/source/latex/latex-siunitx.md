@@ -26,6 +26,7 @@ SI基本単位系はもちろん、`\micro`や`\nano`などのSI接頭辞、`\oh
 
 `physics`パッケージの`\qty`は`\pqty`コマンドで代用（というかこちらのほうが個人的に推奨）できるため、
 `siunitx`を優先するように置き換えます。
+[physics-patch](./latex-physics-patch.md)を使う場合は、`\usepackage[siintegrate]{physics-patch}`で、括弧と単位の両方に`\qty`を使えます。
 
 ## 物理量したい（`\qty`）
 
@@ -183,7 +184,7 @@ $1.6 \text{cm} \times 2.3 \text{cm} \times 3.4 \text{cm}$
 また、任意のべき乗を指定できるマクロもあります。
 
 英語で物理量を説明するのに合わせて設計されているようで、
-単位の前につけるか、後につけるか、マクロ名が変化します。
+単位の前につける`\square`・`\cubic`と、単位の後につける`\squared`・`\cubed`があります。
 
 ## 表組したい（`S[table-format]`）
 
@@ -225,10 +226,10 @@ $1.6 \text{cm} \times 2.3 \text{cm} \times 3.4 \text{cm}$
 `\qtyrange{最小}{最大}{単位}`でエネルギー範囲や質量範囲などを表現できます。
 単位のない数値だけの範囲には`\numrange`が使えます。
 
-## 複数の値を並べたい（`\SIlist`）
+## 複数の値を並べたい（`\qtylist`）
 
 ```latex
-\SIlist{10;20;30}{\GeV}
+\qtylist{10;20;30}{\GeV}
 ```
 
 セミコロン区切りで複数の値を渡すと、単位を重複させずに列挙してくれます。
@@ -252,7 +253,8 @@ $1.6 \text{cm} \times 2.3 \text{cm} \times 3.4 \text{cm}$
 \qty{3.14159}{\meter}
 ```
 
-`\sisetup`で有効数字の丸め方などをまとめて設定できます。
+`\sisetup`で、丸めの方法などをまとめて設定できます。
+`round-mode=places`は小数点以下の桁数、`round-mode=figures`は有効数字の桁数で丸めます。
 文書全体やプリアンブルで一度指定しておけば、以降の`\qty`や`\num`すべてに反映されます。
 
 ## 単位を定義したい（`\DeclareSIUnit`）
