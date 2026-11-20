@@ -1,9 +1,9 @@
-# G4Types（Geant4の基本型）
+# G4型したい（`G4Types.hh`）
 
 Geant4の基本型は、`G4Types.hh`で定義されています。
 プラットフォームごとの型の実装の違いを吸収するため、C++の基本型に`G4`の接頭辞を付けたエイリアスを使います。
 
-## 定義されている型
+## 型を確認したい
 
 | エイリアス | 元の型 |
 |---|---|
@@ -16,7 +16,7 @@ Geant4の基本型は、`G4Types.hh`で定義されています。
 
 Windowsで使うDLLのエクスポート・インポート用マクロ（`G4DLLEXPORT`、`G4DLLIMPORT`）も、`G4Types.hh`で定義されています。
 
-## 使い方
+## 使いたい
 
 ```cpp
 #include "G4Types.hh"
@@ -37,7 +37,7 @@ G4double energy = 1.0 * GeV;  // doubleに相当
 
 :::
 
-## 関連ヘッダー
+## 関連ヘッダーを確認したい
 
 - `G4Types.hh`：基本型とDLLマクロ
 - `G4String.hh`：`G4String`
