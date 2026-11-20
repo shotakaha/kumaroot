@@ -24,6 +24,12 @@ $pdf_mode = 0;
 $latex = "ptex2pdf -l -u %O %S";
 ```
 
+- `$pdf_mode = 0`: latexmkのPDF生成機能を使わず、`$latex`で指定したコマンドにPDFの作成を任せます。
+- `$latex = "ptex2pdf -l %O %S"`: `pLaTeX`で、`ptex2pdf`に`-l`を渡します。
+- `$latex = "ptex2pdf -l -u %O %S"`: `upLaTeX`で、`ptex2pdf`に`-l -u`を渡します。
+- `%O`: latexmkに指定したオプションに置き換わります。
+- `%S`: ソースファイル名に置き換わります。
+
 ## ドキュメントクラス
 
 ```latex
