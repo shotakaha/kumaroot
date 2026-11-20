@@ -26,13 +26,13 @@
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B2/B2a
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B2a/app）にコピーして移動する
+$ mkdir -p $G4WORK/B2a
+$ cp -R $G4EXAMPLE $G4WORK/B2a/app
 $ cd $G4WORK/B2a
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -47,6 +47,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 `cmake`でビルドし、`exampleB2a`という実行ファイルを作成します。
+ソースは`B2a/app`に、ビルド用ディレクトリは`B2a/build`に分けます（out-of-sourceビルド）。
 手順の詳しい説明は、[付属サンプルの遊び方](geant4-examples)を参照してください。
 
 実行ファイルは、`build/`の中に作成されます。
@@ -60,13 +61,13 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B2/B2b
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B2b/app）にコピーして移動する
+$ mkdir -p $G4WORK/B2b
+$ cp -R $G4EXAMPLE $G4WORK/B2b/app
 $ cd $G4WORK/B2b
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -81,7 +82,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 実行ファイルは`exampleB2b`です。
-手順は`B2a`と同じです。`B2b`の`run1.mac`は、`B2a`と同じ内容です。
+手順は`B2a`と同じです。ソースは`B2b/app`、ビルド用ディレクトリは`B2b/build`に分けます。`B2b`の`run1.mac`は、`B2a`と同じ内容です。
 
 ## 全体の組み立てしたい（`exampleB2a.cc`）
 
