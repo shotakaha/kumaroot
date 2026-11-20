@@ -57,29 +57,30 @@ tasks:
 
   # --- B1 -------------------------------------------------------------
   b1:copy:
-    desc: Copy B1 example
+    desc: Copy B1 example to B1/app
     preconditions:
       - test -d {{.G4_EXAMPLES}}/basic/{{.EXAMPLE_B1}}
     cmds:
-      - cp -R {{.G4_EXAMPLES}}/basic/{{.EXAMPLE_B1}} {{.EXAMPLE_B1}}
+      - cp -R {{.G4_EXAMPLES}}/basic/{{.EXAMPLE_B1}} {{.EXAMPLE_B1}}/app
     status:
-      - test -f {{.EXAMPLE_B1}}/exampleB1.cc
+      - test -f {{.EXAMPLE_B1}}/app/exampleB1.cc
 
   b1:build:
-    desc: Build B1 example
+    desc: Build B1 example (B1/app -> B1/build)
     deps: [b1:copy]
+    dir: '{{.EXAMPLE_B1}}'
     preconditions:
       - test -f {{.G4_ENV_SH}}
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S {{.EXAMPLE_B1}} -B {{.EXAMPLE_B1}}/build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build {{.EXAMPLE_B1}}/build -j
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S app -B build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build build -j
 
   b1:run:
-    desc: Run B1 example (run1.mac)
+    desc: Run B1 example (app/run1.mac)
     deps: [b1:build]
     dir: '{{.EXAMPLE_B1}}'
     cmds:
-      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB1 run1.mac
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB1 app/run1.mac
 
   b1:clean:
     desc: Clean B1 build
