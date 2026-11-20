@@ -31,8 +31,10 @@ if __name__ == "__main__":
 
 :::{note}
 
-`minted v3`になって`pygments`を直接インストールする必要がなくなりました。
-また、文書をビルドする際の`-shell-escape`も不要になりました。
+`minted v3`では、Python 3.8以上と`latexminted`が必要です。
+`pip install latexminted`でインストールすると、`pygments`も依存として一緒にインストールされます。
+`minted v2`のように`pygments`を単独で用意する必要はありません。
+TeX Live 2024以降では、文書をビルドする際の`-shell-escape`も不要です。
 `minted v2`からの変更点の詳細はドキュメントを確認してください（`$ texdoc minted`）
 
 :::
