@@ -1,18 +1,61 @@
-/* h1 */
-h1 {
-    border-top: 6px double #333;
-    border-bottom: 6px double #333;
-    padding: 1rem 2rem;
+/* 見出し共通: 複数行でも背景が行ごとに途切れないようにする */
+.rst-content h1,
+.rst-content h2,
+.rst-content h3,
+.rst-content h4 {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    border-radius: 4px;
 }
 
-/* h2 */
-h2 {
-    border-bottom: 3px solid #333;
-    padding: 1rem 2rem;
+/* h1: 濃い背景に白文字 */
+.rst-content h1 {
+    font-size: 2rem;
+    line-height: 1.4;
+    padding: 0.6rem 1rem;
+    color: #fff;
+    background: #333;
 }
 
-/* h3 */
-h3 {
-    border-bottom: 3px dashed #333;
-    padding: 1rem 2rem;
+/* h2: 薄いオレンジ背景 + 左のアクセントバー */
+.rst-content h2 {
+    line-height: 1.5;
+    padding: 0.4rem 0.8rem;
+    color: #333;
+    background: #e6e6e6;
+    border-left: 6px solid #666;
+}
+
+/* h3: 薄いグレー背景 */
+.rst-content h3 {
+    line-height: 1.5;
+    padding: 0.2rem 0.6rem;
+    color: #333;
+    background: #f2f2f2;
+}
+
+/* h4: 下線のみ */
+.rst-content h4 {
+    line-height: 1.5;
+    padding: 0 0.4rem;
+    color: #555;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 見出し内のインラインコード: テーマの赤文字・白枠を打ち消し、見出しの色に合わせる */
+.rst-content h1 code.literal,
+.rst-content h2 code.literal,
+.rst-content h3 code.literal,
+.rst-content h4 code.literal {
+    color: inherit;
+    background: rgba(0, 0, 0, 0.08);
+    border: none;
+    border-radius: 3px;
+    padding: 0 0.3em;
+    font-size: 0.95em;
+}
+
+/* h1 は背景が濃いので、コードの背景も明るめにする */
+.rst-content h1 code.literal {
+    background: rgba(255, 255, 255, 0.2);
 }

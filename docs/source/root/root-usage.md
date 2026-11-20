@@ -113,7 +113,7 @@ maxdepth: 1
 ---
 root-trandom
 root-trandom-uniform
-root-trandom-gauss
+root-trandom-gaus
 root-trandom-poisson
 root-trandom-binomial
 root-trandom-landau
