@@ -1,16 +1,32 @@
-# トラック操作したい（``G4Track``）
+# トラック操作したい（`G4Track`）
 
-``G4Track``はトラック情報を管理するクラスです。
+```cpp
+// void UserSteppingAction(const G4Step* aStep) の中
+
+// ステップからトラックを取得する
+const G4Track* track = aStep->GetTrack();
+
+// トラックのID
+auto track_id = track->GetTrackID();
+
+// 生成位置（トラックが生成されたときの位置）
+auto vertex = track->GetVertexPosition();
+
+// 現在のステップ数
+auto step_number = track->GetCurrentStepNumber();
+```
+
+`G4Track`はトラック情報を管理するクラスです。
 ユーザーアクション設定の
-[UserTrackingAction](./geant4-user-trackingaction.md)や
-[UserSteppingAction](./geant4-user-steppingaction.md)から
+[UserTrackingAction](geant4-user-trackingaction)や
+[UserSteppingAction](geant4-user-steppingaction)から
 情報を取得したいときに使います。
 
 :::{note}
 
 トラックは、粒子が進んできた情報を含んでいて、
-トラックが生成されたときの情報と、
-最新のステップの状態を取得できます。
+トラックが生成されたときの情報（生成位置など）と、
+最新のステップの状態（現在のステップ数など）を取得できます。
 
 :::
 
@@ -36,4 +52,4 @@ geant4-track-process
 
 ## リファレンス
 
-- [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
+- [G4Track](https://geant4.kek.jp/Reference/11.4.0/classG4Track.html)
