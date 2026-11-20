@@ -18,11 +18,16 @@
 | pTeX | 1991 | TeX82 | pLaTeX | TeX82を拡張したエンジン。日本語組版（縦書き、禁則処理、和文フォントなど）に対応 |
 | eTeX | 1994 | TeX82 | - | TeX82を拡張したエンジン。レジスタを増加。プリミティブを追加。 |
 | LaTeX2e | 1994 | - | LaTeX2e | LaTeX2eをリリース。LaTeX2.09の後継バージョン |
+| teTeX | 1994 | - | - | Thomas Esserが保守したUnix向けTeX配布。2006年5月に保守終了し、TeX Liveへの移行が推奨された |
+| TeX Live | 1996 | teTeX | - | 1996年5月にCD-ROM版を初公開。現在の標準的なTeX配布 |
 | dvipdfm | 1997 | - | - | DVIをPDFに変換するツール。PostScriptを介さずに直接PDFを生成 |
 | pdfTeX | 1997 | TeX82 + e-TeX | pdfLaTeX | Han The ThanhがpdfTeXをリリース。PostScriptを介さずにPDFを直接生成できるようになる。 |
+| MiKTeX | 1997ころ | - | - | Christian SchenkがWindows向けに開発したTeX配布。初版の年は未確認 |
+| W32TeX | 不明 | - | - | 日本語向けのWindows TeX配布。2021年のTeX Live 2021ベース版が最終版。初版の年は未確認 |
 | dvipdfmx | 2002 | - | - | CJK対応したdvipdfm |
 | xindy | 2004 | - | - | MakeIndexの後継となる索引生成ツール。Unicodeに対応 |
 | XeTeX | 2005 | eTeX | XeLaTeX | XeTeXのリリース。eTeXを拡張したエンジン。Unicode対応。OpenTypeフォント対応。|
+| MacTeX | 2005 | teTeX | - | 2005年に初版（teTeXベース）。2007年からTeX Liveベース |
 | LuaTeX | 2007 | pdfTeX | LuaLaTeX | LuaLaTeXのリリース。pdfTeXを拡張したエンジン。Unicode対応。Lua対応。 |
 | ConTeXt MkIV | 2007 | LuaTeX | ConTeXt | |
 | Biber | 2009 | - | - | 文献生成ツール。BibTeXの代替ツール。BibLaTeXパッケージと一緒に利用する。|
