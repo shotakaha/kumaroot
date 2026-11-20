@@ -1,8 +1,8 @@
 # 環境変数したい（`geant4.sh`）
 
 ```console
-// 使うバージョンのインストール先を変数に入れる（v11.4.3の例）
-$ export G4_INSTALLED=~/geant4/v11.4.3/install
+// 使うバージョンのインストール先を変数に入れる
+$ export G4_INSTALLED=~/geant4/v11.X.Y/install
 
 // 設定スクリプトを読み込む
 $ source $G4_INSTALLED/bin/geant4.sh
@@ -46,7 +46,7 @@ Fishで作業している場合は、Geant4を使うときだけZshに切り替�
 (fish) $ zsh
 
 // ステップ2：使うバージョンのインストール先を変数に入れる
-(zsh) $ export G4_INSTALLED=~/geant4/v11.4.3/install
+(zsh) $ export G4_INSTALLED=~/geant4/v11.X.Y/install
 
 // ステップ3：設定スクリプトを読み込む
 (zsh) $ source $G4_INSTALLED/bin/geant4.sh

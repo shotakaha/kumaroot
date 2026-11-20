@@ -9,8 +9,8 @@
 環境変数を汚さず、アプリのビルド設定にバージョンが残るため、おすすめです。
 
 ```console
-// ステップ1：使うバージョンのインストール先を変数に入れる（v11.4.3の例）
-$ export G4_INSTALLED=~/geant4/v11.4.3/install
+// ステップ1：使うバージョンのインストール先を変数に入れる
+$ export G4_INSTALLED=~/geant4/v11.X.Y/install
 
 // ステップ2：アプリのビルド時に、CMake設定ディレクトリを指定する
 $ cmake -S . -B build -DGeant4_DIR=$G4_INSTALLED/lib/cmake/Geant4
@@ -36,7 +36,7 @@ $ brew install direnv
 
 // ステップ2：アプリのディレクトリに設定ファイルを作る
 $ cd ~/repos/my-geant4-app/
-$ echo 'source ~/geant4/v11.4.3/install/bin/geant4.sh' > .envrc
+$ echo 'source ~/geant4/v11.X.Y/install/bin/geant4.sh' > .envrc
 
 // ステップ3：設定ファイルを許可する
 $ direnv allow
@@ -55,7 +55,7 @@ $ direnv allow
 詳しくは[](geant4-install-shell)を参照してください。
 
 ```console
-$ export G4_INSTALLED=~/geant4/v11.4.3/install
+$ export G4_INSTALLED=~/geant4/v11.X.Y/install
 $ source $G4_INSTALLED/bin/geant4.sh
 ```
 
