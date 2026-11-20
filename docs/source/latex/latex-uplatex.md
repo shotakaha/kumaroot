@@ -8,18 +8,20 @@ $ ptex2pdf -l ファイル名     # pLaTeX
 $ ptex2pdf -l -u ファイル名  # upLaTeX
 ```
 
-`ptex2pdf`で、`(u)pLateX`を使ってPDFを出力できます。
+`ptex2pdf`で、`(u)pLaTeX`を使ってPDFを出力できます。
 `upLaTeX`エンジンの場合は、`-l -u`オプション、
 `pLaTeX`エンジンの場合は、`-l`オプションをつけて実行します。
 
 ## .latexmkrc
 
-```unixconfig
+```text
 # platex
-$latex = "ptex2pdf -l %O"
+$pdf_mode = 0;
+$latex = "ptex2pdf -l %O %S";
 
 # uplatex
-$latex = "ptex2pdf -l -u %O"
+$pdf_mode = 0;
+$latex = "ptex2pdf -l -u %O %S";
 ```
 
 ## ドキュメントクラス
@@ -29,7 +31,7 @@ $latex = "ptex2pdf -l -u %O"
 \documentclass[dvipdfmx]{jsarticle}
 ```
 
-`pLateX`の場合、ドキュメントクラスは`jsarticle`を使います。
+`pLaTeX`の場合、ドキュメントクラスは`jsarticle`を使います。
 ドライバーは`dvipdfmx`を指定します。
 
 ```latex
