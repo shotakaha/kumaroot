@@ -4,6 +4,7 @@
 % コンテンツを上揃え[t]
 \documentclass[t, aspectratio=169]{beamer}
 \usepackage[no-math, deluxe]{luatexja-preset}
+\usetheme{metropolis}
 \renewcommand{\kanjifamilydefault}{\gtdefault}
 \renewcommand{\emph}[1]{{\upshape\bfseries #1}}
 
@@ -93,7 +94,7 @@
 ```
 
 `beamer`では`frame`環境が1枚のスライドに相当します。
-この環境の墓で、`itemize`や`enumerate`、`equation`などの環境を
+この環境の中で、`itemize`や`enumerate`、`equation`などの環境を
 使ってコンテンツを記述します。
 
 ## 表紙したい（`titlepage`）
@@ -167,8 +168,8 @@
 :::{note}
 
 [enumitemパッケージ](./latex-enumitem.md)は読み込まない方がよさそうです。
-`beamer`内部で`paralist`パッケージを使っているみたいなので、
-箇条書きのカスタマイズにはそちらを使う方がいいかもです。
+`beamer`は、`paralist`パッケージが読み込まれているときに互換用のパッチを当てる仕組みを持っています。
+箇条書きのカスタマイズが必要な場合は、`enumitem`ではなく`beamer`の標準の箇条書きを使うほうが安全です。
 
 :::
 
@@ -287,9 +288,19 @@ $ mdfind beameroutertheme | rg .sty
 パスを確認できます。
 以下に、設定できる名前の一覧を書き出してみました。
 
+### モダンなテーマにしたい（`metropolis`）
+
+```latex
+\usetheme{metropolis}
+```
+
+`metropolis`は、シンプルでモダンな見た目のテーマです。
+TeX Liveに同梱されている外部パッケージ（`beamertheme-metropolis`）で、`beamer`の標準テーマではありません。
+`\usetheme{metropolis}`だけで利用できます。
+
 ### テーマ名の一覧（`\usetheme`）
 
-27種類あります。
+主なテーマを載せています。ほかにも`bars`、`boxes`、`classic`、`lined`、`plain`などがあります。
 
 | テーマ名 | 基本色 | サイドバー | ヘッダー |
 |---|---|---|---|
@@ -337,7 +348,7 @@ $ mdfind beameroutertheme | rg .sty
 10. monarca
 11. orchid
 12. rose
-13. gull
+13. seagull
 14. seahorse
 15. sidebartab
 16. spruce
