@@ -7,7 +7,7 @@ $ wget https://gitlab.cern.ch/geant4/geant4/-/archive/v11.4.3/geant4-v11.4.3.zip
 
 $ cd ~/geant4/
 $ unzip archives/geant4-v11.4.3.zip
-$ mv -n archives/geant4-v11.4.3 v11.4.3/source
+$ mv geant4-v11.4.3 v11.4.3/source
 ```
 
 `wget`コマンドでGeant4のソースコードをダウンロードし、`unzip`コマンドで展開します。
