@@ -7,6 +7,8 @@
 
 ### エラーの内容
 
+:::{dropdown} 全文を表示
+
 ```console
 $ cmake ..
 -- The C compiler identification is AppleClang 15.0.0.15000309
@@ -40,6 +42,8 @@ CMake Error at CMakeLists.txt:14 (find_package):
 -- Configuring incomplete, errors occurred!
 ```
 
+:::
+
 ### 対処方法
 
 ```console
@@ -59,7 +63,7 @@ CMakeでクリーン＆リビルドするとエラーになります。
 ## C compiler - broken
 
 macOSのコマンドラインツールのバージョンが変わってしまったために発生したエラーのようです。
-エラーメッセージを読んで、``CMAKE_OSX_SYSROOT``に設定されているSDKツールのバージョンと、現在のシステムに存在するSDKのバージョンを確認したら異なっていました。
+エラーメッセージを読んで、``CMAKE_OSX_SYSROOT``に設定されているSDKのバージョンと、現在のシステムに存在するSDKのバージョンを確認したら異なっていました。
 
 ```diff
 - /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk   # Geant4インストール時に指定されたバージョン（自動）
@@ -69,6 +73,8 @@ macOSのコマンドラインツールのバージョンが変わってしまっ
 OSの更新か、Xcodeの更新のどちらかのタイミングだと思うのですが、原因の切り分けはできていません。
 
 ### エラーの内容
+
+:::{dropdown} 全文を表示
 
 ```console
 $ cd ~/repos/sandbox/g4work/examples/basic/B1/
@@ -119,6 +125,8 @@ Call Stack (most recent call first):
 
 -- Configuring incomplete, errors occurred!
 ```
+
+:::
 
 :::{note}
 
@@ -188,7 +196,7 @@ dyld[63969]: Library not loaded: @rpath/libG4Tree.dylib
 #----------------------------------------------------------------------------
 
 # 他の設定の前に追加
-set(CMAKE_MAXOSX_RPATH TRUE)
+set(CMAKE_MACOSX_RPATH TRUE)
 
 # ライブラリのパスを設定（ほぼ直パス）
 set(G4LIB "$ENV{HOME}/geant4/11.2.1/lib")
@@ -214,7 +222,7 @@ export DYLD_LIBRARY_PATH=$HOME/geant4/11.2.1/lib:$DYLD_LIBRARY_PATH
 
 いくつものGeant4プロジェクトを抱えている（もしくはテストしている）場合は、
 ユーザーの環境変数を設定したほうがよいかもしれません。
-上記の設定はZshとはBashで有効です。
+上記の設定はZshとBashで有効です。
 
 試していませんが、Fishの場合は以下で設定できるはずです。
 
@@ -228,6 +236,8 @@ set -x DYLD_LIBRARY_PATH $HOME/geant4/11.2.1/lib $DYLD_LIBRARY_PATH
 `Qt5CoreConfig.cmake`のパスを確認し、`CMAKE_PREFIX_PATH`オプションに指定すると解決できます。
 
 ### エラーの内容
+
+:::{dropdown} 全文を表示
 
 ```console
 CMake Error at /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:78 (find_package):
@@ -250,10 +260,12 @@ Call Stack (most recent call first):
   CMakeLists.txt:13 (find_package)
 ```
 
+:::
+
 ### 対処方法
 
 ```console
-$ locage Qt5CoreConfig.cmake
+$ locate Qt5CoreConfig.cmake
 /opt/homebrew/Cellar/qt@5/5.15.16_2/lib/cmake/Qt5Core/Qt5CoreConfig.cmake
 
 $ cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/Cellar/qt@5/5.15.16_2
