@@ -14,9 +14,6 @@
 
 % 参考文献.bibを読み込む
 \bibliography{参考文献}
-
-% 本文の末尾
-\printbibliography
 ```
 
 `BibTeX`を使って参考文献を生成する方法です。
@@ -33,9 +30,9 @@
 
 ```console
 $ kpsewhich plain.bst
-/usr/local/texlive/2024/texmf-dist/bibtex/bst/base/plain.bst
+/path/to/texmf-dist/bibtex/bst/base/plain.bst
 
-$ cat /usr/local/texlive/2024/texmf-dist/bibtex/bst/base/plain.bst
+$ cat /path/to/texmf-dist/bibtex/bst/base/plain.bst
 ```
 
 [kpsewhich](./latex-kpsewhich.md)で`スタイル名.bst`を検索してパスを確認できます。
@@ -51,6 +48,5 @@ $ cat /usr/local/texlive/2024/texmf-dist/bibtex/bst/base/plain.bst
 
 `\bibliographystyle`コマンドは
 [biblatexパッケージ](./latex-biblatex.md)と一緒には使えませんでした。
-
 
 :::
