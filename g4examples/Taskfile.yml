@@ -20,9 +20,18 @@ vars:
 
 tasks:
   default:
-    desc: List tasks
+    desc: List tasks and usage
     cmds:
       - task --list
+      - echo ""
+      - 'echo "Next steps:"'
+      - 'echo "  1. Check the Geant4 environment:  task g4:env"'
+      - 'echo "  2. Build the B1 example:          task b1:build"'
+      - 'echo "  3. Run the B1 example:            task b1:run"'
+      - echo ""
+      - 'echo "Options:"'
+      - 'echo "  Use another version:  task b1:build G4_VERSION=11.3.2"'
+      - 'echo "  Installed versions:   task g4:versions"'
     silent: true
 
   hello:
