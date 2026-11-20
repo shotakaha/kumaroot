@@ -29,6 +29,84 @@ fParticleGun->SetParticleDefinition(particle);
 PDGコードの一覧は、下のリファレンスを参照してください。
 該当する粒子がないと`nullptr`を返すため、渡す前に確認します。
 
+## 電子にしたい
+
+```cpp
+G4ParticleDefinition* particle = table->FindParticle("e-");   // 粒子名
+// G4ParticleDefinition* particle = table->FindParticle(11);  // PDGコード
+fParticleGun->SetParticleDefinition(particle);
+```
+
+粒子名（`"e-"`）またはPDGコード（`11`）で指定できます。
+どちらか一方を使います。
+
+## 陽電子にしたい
+
+```cpp
+G4ParticleDefinition* particle = table->FindParticle("e+");   // 粒子名
+// G4ParticleDefinition* particle = table->FindParticle(-11);  // PDGコード
+fParticleGun->SetParticleDefinition(particle);
+```
+
+粒子名（`"e+"`）またはPDGコード（`-11`）で指定できます。
+陽電子のPDGコードは、電子（`11`）の符号を反転した`-11`です。
+
+## ミューオンにしたい（レプトン）
+
+```cpp
+G4ParticleDefinition* particle = table->FindParticle("mu-");   // 粒子名
+// G4ParticleDefinition* particle = table->FindParticle(13);   // PDGコード
+fParticleGun->SetParticleDefinition(particle);
+```
+
+粒子名（`"mu-"`）またはPDGコード（`13`）で指定できます。
+ミューオンは、レプトンに分類されます。
+
+## ニュートリノにしたい（レプトン）
+
+```cpp
+G4ParticleDefinition* particle = table->FindParticle("nu_e");   // 粒子名
+// G4ParticleDefinition* particle = table->FindParticle(12);     // PDGコード
+fParticleGun->SetParticleDefinition(particle);
+```
+
+粒子名（`"nu_e"`）またはPDGコード（`12`）で指定できます。
+ここでは電子ニュートリノを例にしています。
+ニュートリノも、レプトンに分類されます。
+
+## ガンマ線にしたい（ボソン）
+
+```cpp
+G4ParticleDefinition* particle = table->FindParticle("gamma");   // 粒子名
+// G4ParticleDefinition* particle = table->FindParticle(22);       // PDGコード
+fParticleGun->SetParticleDefinition(particle);
+```
+
+粒子名（`"gamma"`）またはPDGコード（`22`）で指定できます。
+ガンマ線（光子）は、ボソンに分類されます。
+
+## 陽子にしたい（バリオン）
+
+```cpp
+G4ParticleDefinition* particle = table->FindParticle("proton");   // 粒子名
+// G4ParticleDefinition* particle = table->FindParticle(2212);    // PDGコード
+fParticleGun->SetParticleDefinition(particle);
+```
+
+粒子名（`"proton"`）またはPDGコード（`2212`）で指定できます。
+陽子は、バリオン（重粒子）に分類されます。
+
+## π⁺にしたい（メソン）
+
+```cpp
+G4ParticleDefinition* particle = table->FindParticle("pi+");   // 粒子名
+// G4ParticleDefinition* particle = table->FindParticle(211);   // PDGコード
+fParticleGun->SetParticleDefinition(particle);
+```
+
+粒子名（`"pi+"`）またはPDGコード（`211`）で指定できます。
+π⁺は、メソンに分類されます。
+
 ## リファレンス
 
 - [G4ParticleTable](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleTable.html)
