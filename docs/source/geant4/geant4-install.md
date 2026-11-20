@@ -11,6 +11,7 @@ geant4-install-brew
 geant4-install-mkdir
 geant4-install-download
 geant4-install-configure
+geant4-install-configure-options
 geant4-install-ccmake
 geant4-install-build
 geant4-install-clean
