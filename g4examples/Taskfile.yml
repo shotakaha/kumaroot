@@ -18,6 +18,7 @@ vars:
   # Example names
   EXAMPLE_B1: B1
   EXAMPLE_B2A: B2a
+  EXAMPLE_B2B: B2b
 
 tasks:
   default:
@@ -119,3 +120,35 @@ tasks:
     desc: Clean B2a build
     cmds:
       - rm -rf {{.EXAMPLE_B2A}}/build
+
+  # --- B2b ------------------------------------------------------------
+  b2b:copy:
+    desc: Copy B2b example to B2b/app
+    preconditions:
+      - test -d {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2B}}
+    cmds:
+      - cp -R {{.G4_EXAMPLES}}/basic/B2/{{.EXAMPLE_B2B}} {{.EXAMPLE_B2B}}/app
+    status:
+      - test -f {{.EXAMPLE_B2B}}/app/exampleB2b.cc
+
+  b2b:build:
+    desc: Build B2b example (B2b/app -> B2b/build)
+    deps: [b2b:copy]
+    dir: '{{.EXAMPLE_B2B}}'
+    preconditions:
+      - test -f {{.G4_ENV_SH}}
+    cmds:
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake -S app -B build -DGeant4_DIR={{.G4_PREFIX}}/lib/cmake/Geant4
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && cmake --build build -j
+
+  b2b:run:
+    desc: Run B2b example (app/run1.mac)
+    deps: [b2b:build]
+    dir: '{{.EXAMPLE_B2B}}'
+    cmds:
+      - cd {{.G4_PREFIX}}/bin && . ./geant4.sh && cd - >/dev/null && ./build/exampleB2b app/run1.mac
+
+  b2b:clean:
+    desc: Clean B2b build
+    cmds:
+      - rm -rf {{.EXAMPLE_B2B}}/build
