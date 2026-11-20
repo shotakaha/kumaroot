@@ -19,13 +19,13 @@ B4の題材は電磁カロリメータです。
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B4/B4a
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B4a/app）にコピーして移動する
+$ mkdir -p $G4WORK/B4a
+$ cp -R $G4EXAMPLE $G4WORK/B4a/app
 $ cd $G4WORK/B4a
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -40,6 +40,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 `cmake`でビルドし、`exampleB4a`という実行ファイルを作成します。
+ソースは`B4a/app`に、ビルド用ディレクトリは`B4a/build`に分けます（out-of-sourceビルド）。
 手順の詳しい説明は、[付属サンプルの遊び方](geant4-examples)を参照してください。
 
 :::{note}
@@ -56,13 +57,13 @@ B4の実行ファイルは、マクロを位置引数ではなく、`-m`オプ�
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B4/B4b
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B4b/app）にコピーして移動する
+$ mkdir -p $G4WORK/B4b
+$ cp -R $G4EXAMPLE $G4WORK/B4b/app
 $ cd $G4WORK/B4b
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -77,7 +78,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 実行ファイルは`exampleB4b`です。
-手順は`B4a`と同じです。
+手順は`B4a`と同じです。ソースは`B4b/app`、ビルド用ディレクトリは`B4b/build`に分けます。
 
 ## ビルドしたい（`B4c`）
 
@@ -86,13 +87,13 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B4/B4c
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B4c/app）にコピーして移動する
+$ mkdir -p $G4WORK/B4c
+$ cp -R $G4EXAMPLE $G4WORK/B4c/app
 $ cd $G4WORK/B4c
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -107,7 +108,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 実行ファイルは`exampleB4c`です。
-手順は`B4a`と同じです。
+手順は`B4a`と同じです。ソースは`B4c/app`、ビルド用ディレクトリは`B4c/build`に分けます。
 
 ## ビルドしたい（`B4d`）
 
@@ -116,13 +117,13 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 $ export G4EXAMPLE=~/geant4/v11.X.Y/install/share/Geant4/examples/basic/B4/B4d
 $ export G4WORK=~/repos/sandbox/g4work
 
-// 作業ディレクトリにコピーして移動する
-$ mkdir -p $G4WORK
-$ cp -R $G4EXAMPLE $G4WORK/
+// 作業ディレクトリ（B4d/app）にコピーして移動する
+$ mkdir -p $G4WORK/B4d
+$ cp -R $G4EXAMPLE $G4WORK/B4d/app
 $ cd $G4WORK/B4d
 
-// ビルドする
-$ cmake -S . -B build
+// ビルドする（ソースは app/、ビルド用ディレクトリは build/）
+$ cmake -S app -B build
 $ cmake --build build --parallel
 
 // 実行する
@@ -137,7 +138,7 @@ $ rm -r build                           # ビルド用ディレクトリごと�
 ```
 
 実行ファイルは`exampleB4d`です。
-手順は`B4a`と同じです。
+手順は`B4a`と同じです。ソースは`B4d/app`、ビルド用ディレクトリは`B4d/build`に分けます。
 `B4d`の出力ファイル（ROOT形式など）と、そのプロットの方法は、後の「スコアリングしたい（`B4d`）」を参照してください。
 
 ## 4つのバリアントの違い
