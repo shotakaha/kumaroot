@@ -10,8 +10,8 @@ $ brew install ninja
 
 // 描画に必要なツール
 $ brew install --cask xquartz  # OpenGLを使う場合
-$ brew install qt    # Qt6を使う場合
-$ brew install qt@5  # Qt5を使う場合
+$ brew install qt    # Qt6を使う場合（v11.4.0以降のデフォルト）
+$ brew install qt@5  # Qt5を使う場合（非推奨）
 ```
 
 Geant4のビルド／インストールに必要な外部ツールをあらかじめインストールしておきます。
@@ -83,10 +83,11 @@ v11.4.0からビルド時のデフォルトになっています。
 :::{note}
 
 `brew install qt@5`でQt5がインストールできます。
-`-DGEANT4_USE_QT_QT5=ON`とすれば、v11.4.0以降でもQt5でビルドできるようです。
+Homebrewでは非推奨になっており、2027年5月19日に無効化される予定です。
+`-DGEANT4_USE_QT_QT5=ON`とすれば、v11.4.0以降でもQt5でビルドできます。
 
 Qt6はv11.1.0からサポートされているようですが、v11.2.1ではQt6ではビルドに失敗しました。
-v11.4.0より前のバージョンでは、Qt5を指定するのがよさそうです。
+v11.4.0より前（v11.3を含む）はデフォルトがQt5です。Qt6を使う場合は`-DGEANT4_USE_QT_QT6=ON`を指定します。
 
 :::
 
