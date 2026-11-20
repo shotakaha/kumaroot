@@ -40,6 +40,7 @@ maxdepth: 1
 ---
 geant4-overview
 geant4-cpp-geant4
+geant4-types
 geant4-drivers
 geant4-document
 geant4-class-reference
