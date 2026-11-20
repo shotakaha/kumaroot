@@ -21,11 +21,12 @@ arduino-loop
 ## タイミングしたい
 
 ```{toctree}
+arduino-millis
+```
+
 - arduino-delay
 - arduino-delayMicroseconds
 - arduino-micros
-arduino-millis
-```
 
 ## デジタル入出力したい
 
@@ -42,12 +43,13 @@ arduino-millis
 ---
 maxdepth: 1
 ---
-- arduino-serial-begin
-- arduino-serial-available
-- arduino-serial-read
+arduino-serial-read
 arduino-serial-print
 arduino-json-serialize
 ```
+
+- arduino-serial-begin
+- arduino-serial-available
 
 ## SPI通信したい
 
@@ -76,11 +78,12 @@ arduino-queue
 
 ```{toctree}
 arduino-wifi-begin
+```
+
 - arduino-wifi-mode
 - arduino-wifi-connect
 - arduino-wifi-status
 - arduino-wifi-localip
-```
 
 ## Bluetooth通信したい
 
@@ -105,9 +108,9 @@ arduino-littlefs
 arduino-littlefs-open
 arduino-littlefs-read
 arduino-littlefs-print
+```
 
 - arduino-littlefs-rename
 - arduino-littlefs-remove
 - arduino-littlefs-mkdir
 - arduino-littlefs-rmdir
-```
