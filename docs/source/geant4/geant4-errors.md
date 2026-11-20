@@ -304,3 +304,40 @@ $ cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/Cellar/qt@5/5.15.16_2
 `Qt5CoreConfig.cmake`のパスを確認します。
 現在の環境では`/opt/homebrew/Cellar/qt@5/5.15.16_2`の中にありました。
 このパスを`CMAKE_PREFIX_PATH`オプションに指定したら解決できました。
+
+## GDMLのヘッダが見つからない（G4GDMLParser.hh）
+
+GDML無効でインストールしたGeant4で、付属のOpNoviceをそのままビルドすると発生しました。
+`G4GDMLParser.hh`を`#include`している箇所が、ヘッダを見つけられずに失敗します。
+
+```console
+fatal error: 'G4GDMLParser.hh' file not found
+   35 | #include "G4GDMLParser.hh"
+```
+
+:::{dropdown} 全文を表示
+
+```console
+$ cmake --build build --parallel
+[ 46%] Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceGDMLDetectorConstruction.cc.o
+[ 53%] Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o
+/Users/shotakaha/repos/sandbox/g4work/OpNovice-gdmlcheck/src/OpNoviceDetectorConstruction.cc:35:10: fatal error: 'G4GDMLParser.hh' file not found
+   35 | #include "G4GDMLParser.hh"
+      |          ^~~~~~~~~~~~~~~~~
+/Users/shotakaha/repos/sandbox/g4work/OpNovice-gdmlcheck/src/OpNoviceGDMLDetectorConstruction.cc:33:10: fatal error: 'G4GDMLParser.hh' file not found
+   33 | #include "G4GDMLParser.hh"
+      |          ^~~~~~~~~~~~~~~~~
+1 error generated.
+make[2]: *** [CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o] Error 1
+make[2]: *** [CMakeFiles/OpNovice.dir/src/OpNoviceGDMLDetectorConstruction.cc.o] Error 1
+make[1]: *** [CMakeFiles/OpNovice.dir/all] Error 2
+make: *** [all] Error 2
+```
+
+:::
+
+### 対処方法
+
+GDMLを使わないなら、作業用コピーにパッチを当ててからビルドします。
+手順は[OpNoviceのGDML無効ビルド](geant4-examples-opnovice)を参照してください。
+GDMLを使いたい場合は、Geant4をGDML有効（`-DGEANT4_USE_GDML=ON`）で再インストールする必要があります。
