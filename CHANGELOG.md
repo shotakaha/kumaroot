@@ -1,5 +1,171 @@
 # CHANGELOG.md
 
+## v2026.11.2 (2026-11-22)
+
+### Feat
+
+- **latex-history**: TeX配布（teTeX、TeX Live、MiKTeX、W32TeX、MacTeX）を表に追加
+- **latex-physics**: 評価・誤差・汎関数微分・実部虚部の節を追加
+- **latex-hepparticles**: 粒子・反粒子・共鳴状態・超対称性粒子の節を追加
+- **geant4-install-switch**: add per-app Geant4 version switching guide
+- **geant4-examples-wls**: add WLS example page
+- **geant4-examples-lxe**: add LXe example page
+- **geant4-examples-opnovice2**: add OpNovice2 example page
+- **geant4-examples-opnovice**: add OpNovice example page
+
+### Fix
+
+- **README**: 冒頭の説明にROOT以外の扱う分野を追加
+- **index**: 目次のキャプションを再編し、項目を組み替え
+- **latex-renewcommand**: 誤字の修正と既存・未定義コマンドの説明、使用例を追加
+- **latex-newcommand**: 引数番号の誤り、\hruleの表記、\renewcommandの注意を修正
+- **latex-fancyhdr**: graphicxの誤字、ロゴの高さ、\thispagestyleの説明、\zhの説明を修正
+- **latex-kanji**: 年号・字数の誤りを修正し、ISO-2022-JPを1993年に分離
+- **latex-kanji**: 誤字（83JIS、Adobe-Japan1）を修正
+- **latex-history**: 表の列名を名称・ベース・概要に変更
+- **latex-history**: 表の列構成とエンジン名、ベースの記載を修正
+- **latex-history**: 関係図をLegacy/Modernに分け、派生関係を修正
+- **latex-history**: 表の列数とタイポを修正
+- **latex-japanese**: 警告ブロックをMyST記法に修正し、関連ページへのリンクと文体を調整
+- **latex-providespackage**: newenvironmentの終了引数と配置場所、TDSの説明を修正
+- **latex-beamer**: モダンなテーマ(metropolis)を追加し、誤字とenumitem・テーマ一覧の説明を修正
+- **latex-siunitx**: physicsと衝突する\qtyの扱いを明示的なコマンドの案内に修正
+- **latex-siunitx**: round-modeの説明、\SIlistの名前、physics-patchとの案内を修正
+- **latex-physics-patch**: 既定をデフォルトに統一
+- **latex-physics-patch**: オプションを見出し形式に変更
+- **latex-physics-patch**: 作者と派生の関係、\qtyの設定、オプションを修正
+- **latex-physics**: 行列の長い形式と短い形式の説明を追記
+- **latex-physics**: \qtyの説明を同名コマンドの衝突として修正
+- **latex-hepparticles**: 表記の説明を追加し、見出しの表記を統一
+- **latex-bibtex**: biblatexのコマンドを除去し、パス例の年を汎用化
+- **latex-biblatex**: 既定の見出しの説明と title の例を修正
+- **latex-bibliography**: 引数の説明・見出し・文献キーの例・\citeの注意を修正
+- **latex-bib**: articleの例のコメント行を削除し、フィールド表と説明を修正
+- **latex-fontenc**: エンコーディングの説明を正確にし、表記を統一
+- **latex-inputenc**: UTF-8既定の説明を出典に合わせ、表記を統一
+- **latex-plautopatch**: 例のコメントアウトを外し、読み込み位置と一覧の説明を修正
+- **latex-uplatex**: .latexmkrcの各設定の説明を追記
+- **latex-uplatex**: latexmkrcの設定に%Sと$pdf_mode=0を追加し、誤字を修正
+- **latex-lualatex**: バージョン例を更新し、説明とコメント記号を修正
+- **latex-latexmk, latex-latexmkrc**: 二重バッククォートを単一に統一
+- **latex-latexmkrc**: @default_filesと-pvcの併用制限を理由付きで記述
+- **latex-latexmkrc**: pvc設定のテンプレートの誤りとコメントの既定値を修正
+- **latex-latexmk**: -shell-escapeが必要なパッケージの説明を修正
+- **latex-latexmk**: バージョン例の更新と-f/nonstopmodeの説明・ファイル名省略の条件を修正
+- **latex-minted**: minted v3のインストール要件を修正
+- **latex-minted**: fontseriesをfontshapeに修正し、見出しと誤字を直す
+- **latex-font-family**: 表に和文命令を追加し、誤字と見出しを修正
+- **_static/css/heading.css**: 見出しの装飾を複数行対応・グレースケールに整える (#190)
+- **latex-luatexja-fontspec**: 説明と依存パッケージの出力例を修正
+- **latex-luatexja-preset**: 游フォントのプリセット節を追加
+- **latex-luatexja-preset**: プリセットの説明とサンプルを修正
+- **_static/css/heading.css**: 見出しの配色をグレースケールに統一
+- **_static/css/heading.css**: 見出し内のインラインコードの装飾を見出しに合わせる
+- **_static/css/heading.css**: 見出しの装飾を背景ハイライト案に変更し、複数行に対応
+- **toctree**: fix broken toctree references in arduino-usage and root-usage
+- **geant4-run-events**: fix method name, merge sample, explain processed vs requested counts
+- **geant4-run-runid**: fix compile errors, add G4Track and G4Event sections
+- **geant4-run**: add EndOfRunAction sample, use empty link text, update reference version
+- **geant4-event**: improve sample with cached collection ID and hit loop, use empty link text, update reference version
+- **geant4-track**: add code sample, use empty link text, update reference version
+- **geant4-step**: fix sample, clarify PostStepPoint, use empty link text, update reference version
+- **geant4-physics-opticalphysics**: fix sample, parameter setter names, and macro list
+- **geant4**: empty internal link text so Sphinx fills it, fix material properties sample
+- **geant4-visattributes**: fix method and command names, use geometry colour, reorder sections
+- **geant4-vismanager**: add Initialize, fix sample and wording, add UI session example
+- **geant4-source-particlegun-position**: fix sample, add macro example, document units and per-event position
+- **geant4-source-particlegun-direction**: fix sample, add macro example, correct normalization note
+- **geant4-source-particlegun-momentum**: fix sample, add macro example, document energy cases
+- **geant4-source-particlegun-energy**: fix sample, add macro example, clarify kinetic energy
+- **geant4-source-particlegun-definition**: clarify particle lookup and fix sample
+- **geant4-source-particlegun**: fix random position sample and wording
+- **geant4-source-geantino**: fix sample code and wording
+- **geant4-run-manager**: correct default run manager types and fix code and markup
+- **geant4-errors**: fix typos and collapse long error logs in dropdowns
+- **geant4-install-configure**: show build.ninja instead of Makefile in tree
+- **geant4-install**: clarify layout, add verification steps, and correct wording
+- **geant4-install**: update prerequisites, archive names and toctree
+- **geant4-install-configure-options**: split Qt options by version and correct option names
+- **geant4-install-brew**: clarify Qt5/Qt6 default by Geant4 version
+- **geant4-install-clean**: use v11.4.3 paths and split removal steps
+- **geant4-install-build**: use v11.4.3 layout and remove make steps
+- **geant4-install-ccmake**: use -S/-B paths and correct configure/generate steps
+- **geant4-install-shell**: use GEANT4_INSTALLED_DIRECTORY and remove examples steps
+- **geant4-install-configure**: fix CMakePresets binaryDir and install prefix
+- **geant4-install-configure**: add -S source to step-wise cmake and show one-line form
+- **geant4-install-download**: correct mv path after unzip
+- **geant4-examples-b5**: use app/build layout for build steps
+- **geant4-examples-b4**: use app/build layout for B4a to B4d
+- **geant4-examples-b3**: use app/build layout for B3a and B3b
+- **geant4-examples-b2**: use app/build layout for B2a and B2b
+- **geant4-examples-b1**: use app/build layout for build steps
+- **geant4-examples**: use app/build layout for single example build
+- **geant4-install-configure**: link to options page and clarify cmake --define
+- **geant4-install-configure**: move build options to a separate page
+- **geant4-examples**: retitle page and auto-title its link in geant4-build
+- **geant4-install-configure**: document Qt, OpenGL, VTK, GDML, and HDF5 options
+- **geant4-install-configure**: document CMAKE_PREFIX_PATH, multithreading, and examples options
+- **geant4-user-actioninitialization**: rename section headings for Build and BuildForMaster
+- **geant4-user-actioninitialization**: restructure to match detectorconstruction
+- **geant4-user-actioninitialization**: polish wording and clarify RunAction setup
+- **geant4-user-actioninitialization**: fix links, BeamOn example, and BuildForMaster notes
+- **geant4-command**: describe gun commands and their arguments
+- **geant4-command**: show run/initialize in beamOn example
+- **geant4-command**: reword beamOn section and use caution admonition
+- **geant4-command**: list usable visualization drivers for /vis/open
+- **geant4-command**: reword exit and vis/open sections
+- **geant4-command**: rewrite interactive mode intro for beginners
+- **geant4-command**: use single backticks for inline code
+- **geant4-command**: correct headings, commands, and examples
+- **geant4-command**: add minimal interactive main.cc example
+- **geant4-macro**: mark standard and custom commands
+- **geant4-macro**: correct analysis command to openFile
+- **geant4-macro**: polish wording in macro guide
+- **geant4-macro**: clarify verbose levels, alias usage, and startup macro example
+- **geant4-singleton**: make app usage examples practical and rename variables
+- **geant4-singleton**: add usage section and UIManager, correct G4UImanager name
+- **geant4-singleton**: clarify SingletonManager is a custom wrapper
+- **geant4-singleton**: keep user-facing singletons and use task-based headings
+- **geant4-sensor-allocator**: explain allocator concept and correct API types
+- **geant4-sensor-hit**: polish wording
+- **geant4-sensor-hit**: fix code, class names, and new/delete explanation
+- **geant4-logicalvolume-sensitivedetector**: polish wording and explain ConstructSDandField in MT
+- **geant4-logicalvolume-sensitivedetector**: describe benefits of using SensitiveDetector
+- **geant4-logicalvolume-sensitivedetector**: fix sample code and explain when SensitiveDetector is needed
+- **geant4-examples-wls**: polish wording and sentence structure
+- **geant4-examples**: link WLS page from optical row and LXe
+- **geant4-examples-lxe**: polish wording and clarify energy deposition
+- **geant4-examples-lxe**: add cerenkov and photon macro results
+- **geant4-examples**: link LXe page from optical row and OpNovice2
+- **geant4-examples-opnovice2**: polish wording and correct tracking verbose note
+- **geant4-examples**: link OpNovice2 page and cross-link from OpNovice
+- **geant4-examples-opnovice**: polish wording and fix geometry table
+- **geant4-examples-opnovice**: add build steps for GDML-disabled Geant4
+- **geant4-examples**: link OpNovice page from optical row
+- **geant4-constants**: correct constant values and units, fix conversion sample
+- **geant4-units**: correct unit names, fix code examples, and describe G4BestUnit and G4UnitDefinition
+- **geant4-string**: simplify G4String page and describe G4StrUtil examples
+- **geant4-examples-anaex03**: rewrite build steps and describe output formats
+- **geant4-examples-b5**: add build steps and describe the detector, commands, and outputs
+- **geant4-examples-b4**: split build steps into B4a-B4d and correct run options
+- **geant4-examples-b3**: correct run2.mac description and proofread
+- **geant4-examples-b3**: split build steps into B3a and B3b and correct code
+- **geant4-examples-b2**: correct physics list, run1.mac, and fill missing sections
+- **geant4-examples-b2**: split build steps into B2a and B2b sections
+- **geant4-examples-b1**: correct particle, detector, directory, and main code
+- **geant4-examples-b1**: align build steps with geant4-examples
+- **geant4-examples**: rename headings and add batch build section
+- **geant4-examples**: add clean steps after build and run
+- **geant4-examples**: copy a single example to a work directory before building
+- **geant4-examples**: rewrite as overview of bundled examples
+- **geant4-build**: put commands first and run from app directory
+- **geant4-build**: rewrite as generic procedure for user apps (#189)
+- **geant4-usage**: rename section heading and reorder build before examples
+
+### Refactor
+
+- **g4examples**: generalize example tasks with EXAMPLE variable
+
 ## v2026.11.1 (2026-11-19)
 
 ### Feat
