@@ -68,6 +68,23 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 自作クラスには、継承元の役割を表す名前を付けるのが一般的です。
 サンプルでもこの形が使われています。
 
+検出器まわりのクラスでは、対象の名前に役割の語を付けることもあります。
+
+```cpp
+class EmCalorimeterHit : public G4VHit
+{
+  // ...
+};
+
+class EmCalorimeterSD : public G4VSensitiveDetector
+{
+  // ...
+};
+```
+
+- `Hit`: 検出器で記録する1回分のヒット（検出情報）を表します。
+- `SD`: Sensitive Detector（有感検出器）の略です。
+
 ## 変数名の接頭辞
 
 ```cpp
