@@ -80,11 +80,48 @@ $ cd ~/geant4/v11.X.Y/source
 $ grep -rn "option(GEANT4_USE_QT" cmake/Modules
 cmake/Modules/G4InterfaceOptions.cmake:62:option(GEANT4_USE_QT "Build Geant4 with Qt support" OFF)
 cmake/Modules/G4InterfaceOptions.cmake:71:cmake_dependent_option(GEANT4_USE_QT_QT5 "Require Qt5 when building Qt support" OFF "GEANT4_USE_QT" OFF)
+
+$ rg -F "option(GEANT4_USE_QT" cmake/Modules/
+cmake/Modules/G4InterfaceOptions.cmake
+62:option(GEANT4_USE_QT "Build Geant4 with Qt support" OFF)
+71:cmake_dependent_option(GEANT4_USE_QT_QT5 "Require Qt5 when building Qt support" OFF "GEANT4_USE_QT" OFF)
 ```
 
-`GEANT4_USE_QT`のようなオプションが、どのファイルで定義されているかは`grep`で探せます。
-多くの設定は`cmake/Modules/`の中の`.cmake`ファイルにまとまっています。
-検索対象に`cmake/Modules/`を指定するとよいです。
+オプションなどの設定は、`cmake/Modules/`の中の`.cmake`ファイルにまとめられています。
+`grep`や`rg`などの検索コマンドで、オプション名を検索すれば、どのファイルでどのように定義されているかを確認できます。
+
+:::{hint}
+
+`GEANT4_USE_QT`だけで検索すると、多くの箇所がヒットしてしまいます。
+`option(GEANT4_USE_QT`のように検索文字列を工夫するか、`peco`などにパイプして絞り込み検索するとよいです。
+
+:::
+
+:::{caution}
+
+`rg`（ripgrep）はデフォルトで検索文字列を正規表現として認識します。
+`option(GEANT4_USE_QT`のように括弧を含む文字列は、エスケープ処理するか、`-F`（`--fixed-strings`）オプションを付けて検索してください。
+
+```console
+$ rg "option(GEANT4_USE_QT" cmake/Modules/
+rg: regex parse error:
+    (?:option(GEANT4_USE_QT)
+    ^
+error: unclosed group
+
+$ rg "option\(GEANT4_USE_QT" cmake/Modules/
+cmake/Modules/G4InterfaceOptions.cmake
+62:option(GEANT4_USE_QT "Build Geant4 with Qt support" OFF)
+71:cmake_dependent_option(GEANT4_USE_QT_QT5 "Require Qt5 when building Qt support" OFF "GEANT4_USE_QT" OFF)
+
+$ rg -F "option(GEANT4_USE_QT" cmake/Modules/
+cmake/Modules/G4InterfaceOptions.cmake
+62:option(GEANT4_USE_QT "Build Geant4 with Qt support" OFF)
+71:cmake_dependent_option(GEANT4_USE_QT_QT5 "Require Qt5 when building Qt support" OFF "GEANT4_USE_QT" OFF)
+```
+
+:::
+
 
 ## エラーの原因を探したい
 
