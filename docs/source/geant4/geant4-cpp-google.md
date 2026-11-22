@@ -88,3 +88,30 @@ Geant4本体のような大規模フレームワークでコンパイル時間�
 前方宣言が積極的に使われています。
 
 :::
+
+## 名前空間（`namespace`）
+
+```cpp
+// EventAction.hh
+namespace B1
+{
+
+class EventAction : public G4UserEventAction
+{
+  public:
+    void BeginOfEventAction(const G4Event* event) override;
+    void EndOfEventAction(const G4Event* event) override;
+};
+
+}  // namespace B1
+```
+
+名前空間は、同じ名前のクラスや関数が衝突するのを防ぐための仕組みです。
+ユーザーアプリでは、名前空間で囲んでおくのが一般的です。
+附属サンプルも、サンプルごとに`B1`、`B5`などの名前空間を使っています。
+
+Googleスタイルガイドでは、次のルールが推奨されています。
+
+- ヘッダーファイルで`using namespace`を書かないようにします。そのヘッダーを読んだすべての人に、名前空間が持ち込まれてしまうためです。
+- `.cc`ファイルでは、名前のない名前空間（`namespace { ... }`）で、そのファイルだけの補助関数やクラスを隠すとよいです。
+- 名前空間を閉じる`}`の後ろには、`// namespace B1`のようなコメントを付けます。
