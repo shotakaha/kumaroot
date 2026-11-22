@@ -109,7 +109,7 @@ Geant4の変数名では、接頭辞で役割を示す慣習が広く使われ�
 | `f`（field） | クラスのメンバー変数 | `fVerbose`, `fParticleChange` |
 | `fp`（field pointer） | メンバーのポインター | `fpCommand`, `fpWorld` |
 | `a` / `an`（不定冠詞） | 関数の引数 | `aTrack`, `anEvent`, `aValue` |
-| `k`（constant） | 定数・`enum` の値 | `kInfinity`, `kMinimumStep` |
+| `k`（constant） | 定数・`enum` の値 | `kNumberOfChambers`, `kAlive` |
 
 ### ローカル変数
 
@@ -130,8 +130,8 @@ const G4Track* theTrack = ...;
 ## 定数
 
 ```cpp
-constexpr G4double kMinimumStep = 0.01 * CLHEP::mm;  // 本体ソースでの例
-enum State { kAlive, kDead, kStopButAlive };         // 書き方の例
+constexpr G4int kNumberOfChambers = 5;       // 附属サンプル B5 を参考にした例
+enum State { kAlive, kDead, kStopButAlive }; // 書き方の例
 ```
 
 `const` な値や `enum` の値には、`k` を付けるのが基本です。
