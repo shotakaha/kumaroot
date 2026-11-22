@@ -153,6 +153,8 @@ Geant4 では、標準の型の代わりに `G4*` の型エイリアスを使う
 ## 出力（`G4cout` / `G4cerr` / `G4endl`）
 
 ```cpp
+#include "G4ios.hh"  // G4cout などの宣言
+
 G4cout << "標準出力" << G4endl;
 G4cerr << "標準エラー出力" << G4endl;
 G4debug << "デバッグ用出力" << G4endl;
@@ -164,6 +166,7 @@ Geant4 では、`std::cout` や `std::cerr` の代わりに、専用のストリ
 - `G4cout` と `G4cerr` は、Geant4 の出力システムを通ります。
 - `G4debug` はデバッグ用の出力先です。表示の強調は、実行環境（UI）によって異なります。
 - `G4endl` は `std::endl` と同じ意味です。
+- `G4cout` などは `G4ios.hh` で宣言されています。`globals.hh` を include していれば、`G4ios.hh` も読み込まれるので、追加の include は不要です。
 
 ## マネージャーのシングルトン
 
