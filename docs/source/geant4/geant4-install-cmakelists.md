@@ -22,29 +22,24 @@ Geant4本体のビルドは、ソースに指定したディレクトリにあ�
 Geant4のビルドは、次の順番で`CMakeLists.txt`や`.cmake`ファイルをたどります。
 
 ```text
-source/CMakeLists.txt                      # 最上位（50行程度と短い）
+CMakeLists.txt                      # 最上位（50行程度と短い）
   └─ include(G4CMakeMain)
        └─ cmake/Modules/G4CMakeMain.cmake  # 全体の流れを決める
-            ├─ 設定・オプションの読み込み
-            ├─ 依存パッケージ（CLHEP、Qt、OpenGLなど）の検索
-            ├─ データセットの確認・ダウンロード
-            ├─ add_subdirectory(source)      # ここからライブラリを作る
-            │    └─ source/source/CMakeLists.txt
+            ├─ include(G4CMakeSettings)    # 設定・オプションの読み込み
+            ├─ include(G4BuildSettings)    # 依存パッケージ（CLHEP、Qt、OpenGLなど）の検索
+            ├─ ...省略  
+            ├─ include(G4InstallData)      # データセットの確認・ダウンロード
+            ├─ add_subdirectory(source)    # サブディレクトリ（source）を追加
+            │    └─ source/CMakeLists.txt  # このファイルを起点
             │         └─ カテゴリごとのCMakeLists.txt
             │              └─ sources.cmake（ソースファイルの一覧）
             └─ インストール用ファイルの生成（Geant4Config.cmakeなど）
 ```
 
-最上位の`CMakeLists.txt`は短く、中身の多くを`cmake/Modules/`の中のファイルに任せています。
-そのため、読むべき場所は`G4CMakeMain.cmake`から順にたどるのが分かりやすいです。
-
-:::{note}
-
-`source/`の下にさらに`source/`があります。
-最上位の`source/CMakeLists.txt`は、`source/source/`の中にあるカテゴリ（`geometry`、`processes`など）を順番に読み込みます。
-ディレクトリ名が同じで混乱しやすいので注意してください。
-
-:::
+トップレベルの`CMakeLists.txt`は短く、`G4MakeMain`を読み込むことが書かれています。
+ビルドの流れの中心は`cmake/Modules/G4CMakeMain.cmake`に書かれています。
+このファイルを確認すると、`cmake/Modules/`の中の`.cmake`ファイルを読み込んで事前準備をしたあと、
+`source/CMakeLists.txt`を読み込み、カテゴリ／モジュールごとの`sources.cmake`を読み込む流れになっています。
 
 ## 実行ログしたい
 
@@ -123,9 +118,16 @@ cmake/Modules/G4InterfaceOptions.cmake
 :::
 
 
-## エラーの原因を探したい
+## エラー調査したい
 
-ビルドが失敗したときは、エラーメッセージの文言で`grep`すると、関係するファイルを見つけやすいです。
+```console
+$ less ~/geant4/v11.X.Y/build/CMakeFiles/CMakeConfigureLog.yaml
+$ less ~/geant4/v11.X.Y/build/CMakeCache.txt
+```
+
+エラーが出た場合はエラーログを確認してください。
+ログは`build/CMakeFiles/CMakeConfigureLog.yaml`に残っています。
+`CMakeCache.txt`には、設定されたオプションの値が保存されているので、意図した値になっているかを確認できます。
 
 ```console
 $ cd ~/geant4/v11.X.Y/source
@@ -133,14 +135,7 @@ $ cd ~/geant4/v11.X.Y/source
 $ grep -rn "FATAL_ERROR" cmake/Modules | grep -i "qt"
 ```
 
-詳しい情報は、`build`ディレクトリに残っているログで確認できます。
-
-```console
-$ less ~/geant4/v11.X.Y/build/CMakeFiles/CMakeConfigureLog.yaml
-$ less ~/geant4/v11.X.Y/build/CMakeCache.txt
-```
-
-`CMakeCache.txt`では、オプションが意図した値になっているかを確認できます。
+また、エラーメッセージの文字列を検索して、関係するファイルを見つけることができます。
 `cmake`を再実行しても直らないときは、`build`ディレクトリを消してから、もう一度`cmake`を実行してください。
 
 :::{seealso}
