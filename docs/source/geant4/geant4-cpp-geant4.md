@@ -15,6 +15,25 @@ Geant4にはユーザー向けの公式なコーディングガイドは見当�
 
 :::
 
+## 書式（`.clang-format`）
+
+```yaml
+IndentWidth: 2
+ColumnLimit: 100
+PointerAlignment: Left
+BreakBeforeBraces: Custom
+```
+
+附属サンプルと本体は、リポジトリ直下の `.clang-format` に沿って整形されています。
+主な設定は次のとおりです。
+
+- `IndentWidth`: インデントは半角スペース2つ
+- `ColumnLimit`: 1行は最大100文字
+- `PointerAlignment`: ポインターの `*` は型の側に寄せる（例: `G4Step* aStep`）
+- `BreakBeforeBraces`: クラス・関数・制御文の `{` は次の行に書く
+
+自分のアプリを書くときも、`clang-format` を使って同じ書式にそろえると、サンプルとの行き来が楽になります。
+
 ## 命名の基本
 
 ```cpp
@@ -184,25 +203,6 @@ RunManager などの主要なマネージャーは、シングルトンとして
 
 RunManager は、`main()` の中で生成します。
 生成には `G4RunManagerFactory::CreateRunManager()` を使うのが、附属サンプルでの一般的な書き方です。
-
-## 書式
-
-```yaml
-IndentWidth: 2
-ColumnLimit: 100
-PointerAlignment: Left
-BreakBeforeBraces: Custom
-```
-
-附属サンプルと本体は、リポジトリ直下の `.clang-format` に沿って整形されています。
-主な設定は次のとおりです。
-
-- インデントは半角スペース2つ
-- 1行は最大100文字
-- ポインターの `*` は型の側に寄せる（例: `G4Step* aStep`）
-- クラス・関数・制御文の `{` は次の行に書く
-
-自分のアプリを書くときも、`clang-format` を使って同じ書式にそろえると、サンプルとの行き来が楽になります。
 
 ## リファレンス
 
