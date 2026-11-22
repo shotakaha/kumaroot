@@ -14,7 +14,6 @@ geant4-install-configure
 geant4-install-configure-options
 geant4-install-cmakelists
 geant4-install-build
-geant4-install-clean
 geant4-install-shell
 geant4-install-switch
 ```

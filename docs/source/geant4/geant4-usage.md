@@ -19,6 +19,7 @@ maxdepth: 1
 ---
 geant4-versions
 geant4-install
+geant4-uninstall
 ```
 
 ## エラー対処
