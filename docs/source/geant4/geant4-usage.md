@@ -21,7 +21,7 @@ geant4-versions
 geant4-install
 geant4-uninstall
 geant4-install-shell
-geant4-install-switch
+geant4-switch
 ```
 
 ## エラー対処
