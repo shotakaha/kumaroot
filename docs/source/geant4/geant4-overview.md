@@ -1,17 +1,17 @@
 # シミュレーションの流れ
 
-Geant4のシミュレーションの全体の流れを、1枚のシーケンス図にまとめました。
-まずは図で全体をつかみ、そのあとで各要素の役割を説明します。
+Geant4のシミュレーションの全体の流れを1枚のシーケンス図にまとめました。
 
 :::{hint}
 
-このシーケンス図は、Geant4をはじめるときに一番欲しかった情報かもしれないです。
+このシーケンス図はGeant4をはじめるときに一番欲しかった情報かもしれないです。
 
 :::
 
 ## シーケンス図
 
-上から下へ時間が進みます。実線の矢印は「呼び出し」を表します。
+時間は上から下へ進みます。
+実線の矢印は「呼び出し」を表します。
 `opt`で囲んだ部分は任意で、必要になったときだけ実装します。
 `main()`での準備と、マクロ（`/run/initialize`、`/run/beamOn`）による実行は、どちらも同じ処理を呼び出します。
 
@@ -21,9 +21,9 @@ sequenceDiagram
     autonumber
     participant Main as main()
     participant RM as G4RunManager
-    participant EvM as G4EventManager
-    participant TrM as G4TrackingManager
-    participant StM as G4SteppingManager
+    participant EM as G4EventManager
+    participant TM as G4TrackingManager
+    participant SM as G4SteppingManager
     participant DC as DetectorConstruction
     participant PL as PhysicsList
     participant AI as ActionInitialization
@@ -55,27 +55,27 @@ sequenceDiagram
     RM ->> RA: BeginOfRunAction()
     loop 各イベント
         RM ->> PG: GeneratePrimaries()
-        RM ->> EvM: ProcessOneEvent()
-        EvM ->> EA: BeginOfEventAction()
+        RM ->> EM: ProcessOneEvent()
+        EM ->> EA: BeginOfEventAction()
         loop 各トラック（粒子ごと）
-            EvM ->> TrM: ProcessOneTrack()
+            EM ->> TM: ProcessOneTrack()
             opt TrackingActionを使う場合
-                TrM ->> TA: PreUserTrackingAction()
+                TM ->> TA: PreUserTrackingAction()
             end
             loop 各ステップ
-                TrM ->> StM: Stepping()
+                TM ->> SM: Stepping()
                 opt SDが付いた体積の中
-                    StM ->> SD: ProcessHits()
+                    SM ->> SD: ProcessHits()
                 end
                 opt SteppingActionを使う場合
-                    StM ->> SA: UserSteppingAction()
+                    SM ->> SA: UserSteppingAction()
                 end
             end
             opt TrackingActionを使う場合
-                TrM ->> TA: PostUserTrackingAction()
+                TM ->> TA: PostUserTrackingAction()
             end
         end
-        EvM ->> EA: EndOfEventAction()
+        EM ->> EA: EndOfEventAction()
     end
     RM ->> RA: EndOfRunAction()
 
