@@ -29,12 +29,12 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 };
 ```
 
-| 対象 | 書き方 | 例 |
-|---|---|---|
-| ファイル名 | `PascalCase`。クラス名と一致させる | `DetectorConstruction.hh` / `.cc` |
-| クラス名 | `PascalCase` | `G4Track`, `G4RunManager` |
-| 関数名 | `PascalCase`。セッターは `Set*`、ゲッターは `Get*` | `SetTrackID`, `GetEventManager` |
-| 変数名 | `camelCase`に、役割を示す接頭辞を付ける | `fNumberOfChambers` |
+| 対象 | 書き方 | 説明 | 例 |
+|---|---|---|---|
+| ファイル名 | `PascalCase` | クラス名と一致させる | `DetectorConstruction.hh` / `.cc` |
+| クラス名 | `PascalCase` | 接頭辞で役割がわかる（下の節を参照） | `G4Track`, `G4RunManager` |
+| 関数名 | `PascalCase` | セッターは `Set*`、ゲッターは `Get*` | `SetTrackID`, `GetEventManager` |
+| 変数名 | `camelCase` | 役割を示す接頭辞を付ける（下の表を参照） | `fNumberOfChambers` |
 
 ファイル名は、ヘッダーが `include/クラス名.hh`、ソースが `src/クラス名.cc` という形で対応しています。
 
