@@ -71,10 +71,14 @@ Googleスタイルガイドでは、次の順番でインクルードを並べ�
 4. 他のライブラリ（Geant4など）
 5. プロジェクト内のヘッダー
 
-Geant4の附属サンプル（B1の`exampleB1.cc`）では、先に自作のヘッダー（`ActionInitialization.hh`など）を並べ、その後に Geant4 のヘッダー（`G4RunManagerFactory.hh`など）を並べています。
-Googleの順番とは違いますが、自作のヘッダーを先に書く形もサンプルでよく見られます。
+`clang-format`のGoogleプリセット（`BasedOnStyle: Google`）を使うと、この順番に自動で整えられます。
+`cpplint`の`build/include_order`で、順番を検査することもできます。
 
-Google の順番に従うか、附属サンプルのように自作のヘッダーを先に書くか、どちらかをプロジェクト内で統一します。
+Geant4本体では、Geant4標準クラスのヘッダーが最初にくるように`IncludeCategories`が設定されています。
+自作アプリの場合、Googleの順番か、Geant4の順番か、ユーザーが好みのスタイルを選んで構いません。
+Geant4の順番にしたい場合は、自分で`IncludeCategories`を設定する必要があります。
+Googleの順番にしたい場合は、`BasedOnStyle: Google`の1行で十分です。
+おすすめはGoogleスタイルです。
 
 ## 前方宣言
 
