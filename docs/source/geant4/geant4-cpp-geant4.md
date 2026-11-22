@@ -24,7 +24,7 @@ PointerAlignment: Left
 BreakBeforeBraces: Custom
 ```
 
-附属サンプルと本体は、リポジトリ直下の `.clang-format` に沿って整形されています。
+本体のソース（`source/`）は`.clang-format` の設定に沿って整形されています。
 主な設定は次のとおりです。
 
 - `IndentWidth`: インデントは半角スペース2つ
