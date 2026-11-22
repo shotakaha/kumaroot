@@ -1,38 +1,19 @@
 # シミュレーションの流れ
 
-Geant4のシミュレーションは、
-検出器の構築、
-物理プロセスの設定、
-初期粒子の生成、
-シミュレーションの実行、
-そして検出器応答の取得という要素で構成されています。
+Geant4のシミュレーションの全体の流れを、1枚のシーケンス図にまとめました。
+まずは図で全体をつかみ、そのあとで各要素の役割を説明します。
 
-これらの処理を効率的に管理するため、
-シミュレーション進行を担当する4種類のManagerクラスが用意されており、
-それぞれが隣接するクラスに処理を依頼したり、結果を受け取ったりする体制になっています。
+:::{hint}
 
-1. [G4RunManager](./geant4-run-manager.md):
-**G4Run**を管理するクラス。
-G4**Event**Managerにイベント処理ををお願いする。
-2. [G4EventManager](./geant4-event-manager.md):
-**G4Event**を管理するクラス。
-G4**Tracking**Managerにトラッキング処理をお願いする。
-イベント処理が終了したらG4**Run**Managerに報告する。
-3. ``G4TrackingManager``:
-**G4Track**を管理するクラス。
-G4**Stepping**Managerにステッピング処理をお願いする。
-トッラッキング処理が終了したらG4**Event**Managerに報告する。
-4. ``G4SteppingManager``:
-**G4Step**を管理するクラス。
-ステッピング処理を実行する。
-ステッピング処理が終了したらG4**Tracking**Managerに報告する。
+このシーケンス図は、Geant4をはじめるときに一番欲しかった情報かもしれないです。
 
-この中で、ユーザーが直接指示するのは``G4RunManager``だけでOKです。
+:::
 
-## メイン関数のシーケンス図
+## シーケンス図
 
-`main`関数で`G4RunManager`がどのように処理を進めるかを確認し、
-シーケンス図に整理しました。
+上から下へ時間が進みます。実線の矢印は「呼び出し」を表します。
+`opt`で囲んだ部分は任意で、必要になったときだけ実装します。
+`main()`での準備と、マクロ（`/run/initialize`、`/run/beamOn`）による実行は、どちらも同じ処理を呼び出します。
 
 :::{mermaid}
 
@@ -40,78 +21,128 @@ sequenceDiagram
     autonumber
     participant Main as main()
     participant RM as G4RunManager
-    participant Geo as Geometry
-    participant Phys as Physics
+    participant EvM as G4EventManager
+    participant TrM as G4TrackingManager
+    participant StM as G4SteppingManager
+    participant DC as DetectorConstruction
+    participant PL as PhysicsList
     participant AI as ActionInitialization
-    participant PG as PrimaryGenerator
+    participant PG as PrimaryGeneratorAction
     participant RA as RunAction
     participant EA as EventAction
     participant TA as TrackingAction
     participant SA as SteppingAction
-    participant Hit as SensorHit
-    participant Gun as ParticleGun
+    participant SD as SensitiveDetector
 
+    Note over Main,AI: ① main()で準備する
     Main ->> RM: new G4RunManager()
-    RM ->> Geo: Geometry()
-    RM ->> Phys: Physics()
-    RM ->> AI: ActionInitialization()
-    AI ->> PG: Build()
-    AI ->> RA: Build()
-    AI ->> EA: Build()
-    AI ->> TA: Build()
-    AI ->> SA: Build()
+    Main ->> DC: new DetectorConstruction()
+    Main ->> RM: SetUserInitialization(DC)
+    Main ->> PL: new PhysicsList()
+    Main ->> RM: SetUserInitialization(PL)
+    Main ->> AI: new ActionInitialization()
+    Main ->> RM: SetUserInitialization(AI)
 
-    RM ->> RM: Initialize()
-    RM ->> Geo: Construct()
-    Geo ->> Geo: SetupVolumes()
-    RM ->> Geo: ConstructSDandField()
-    Geo ->> Hit: SetSensitiveDetector()
-
-    RM ->> RM: BeamOn()
-    RM ->> RA: BeginOfRunAction()
-    RM ->> PG: GeneratePrimaries()
-    PG ->> Gun: ParticleGun{}
-    Gun ->> Gun: SetParticleDefinition()
-    Gun ->> Gun: SetParticleMomentumDirection()
-    Gun ->> Gun: SetParticleEnergy()
-    Gun ->> Gun: SetParticlePosition()
-    PG ->> PG: GeneratePrimaryVertex()
-
-    RM ->> EA: BeginOfEventAction()
-    RM ->> TA: PreUserTrackingAction()
-
-    loop StepLoop
-        alt Step in Sensitive Detector
-            RM ->> Hit: ProcessHits()
-            RM ->> SA: UserSteppingAction()
-        else Step not in Sensitive Detector
-            RM ->> SA: UserSteppingAction()
-        end
+    Note over RM,SD: ② Initialize()で検出器と物理を構築する
+    RM ->> PL: ConstructParticle() / ConstructProcess()
+    RM ->> DC: Construct()
+    RM ->> DC: ConstructSDandField()
+    opt 有感検出器（SD）を使う場合
+        DC ->> SD: SetSensitiveDetector()
     end
 
-    RM ->> TA: PostUserTrackingAction()
-    RM ->> EA: EndOfEventAction()
+    Note over RM,SA: ③ BeamOn()で実行する
+    RM ->> RA: BeginOfRunAction()
+    loop 各イベント
+        RM ->> PG: GeneratePrimaries()
+        RM ->> EvM: ProcessOneEvent()
+        EvM ->> EA: BeginOfEventAction()
+        loop 各トラック（粒子ごと）
+            EvM ->> TrM: ProcessOneTrack()
+            opt TrackingActionを使う場合
+                TrM ->> TA: PreUserTrackingAction()
+            end
+            loop 各ステップ
+                TrM ->> StM: Stepping()
+                opt SDが付いた体積の中
+                    StM ->> SD: ProcessHits()
+                end
+                opt SteppingActionを使う場合
+                    StM ->> SA: UserSteppingAction()
+                end
+            end
+            opt TrackingActionを使う場合
+                TrM ->> TA: PostUserTrackingAction()
+            end
+        end
+        EvM ->> EA: EndOfEventAction()
+    end
     RM ->> RA: EndOfRunAction()
 
+    Note over Main,RM: ④ 終了する
     Main ->> RM: delete RunManager
-    RM ->> Geo: ~Geometry()
-    RM ->> AI: ~ActionInitialization()
-    RM ->> PG: ~PrimaryGenerator()
-    RM ->> SA: ~SteppingAction()
-    RM ->> TA: ~TrackingAction()
-    RM ->> EA: ~EventAction()
-    RM ->> RA: ~RunAction()
+    RM ->> RM: 登録したユーザークラスも削除
 
 :::
 
-必須クラスの他に、各種ユーザーアクションや有感検出器を設定し、
-それらがどのタイミングで処理されるのかを確認しました。
-それぞれのタイミングを把握することで、Geant4の理解度が格段にあがり、
-どのファイルに実装すればよいかも目星がつくようになりました。
+## 図の解説
 
-:::{hint}
+### 4つのManagerクラス
 
-このシーケンス図は、Geant4をはじめるときに一番欲しかった情報かもしれないです。
+シミュレーションの進行は、次の4種類のManagerクラスが担当します。
+それぞれが下位のManagerに処理を依頼し、処理が終わると呼び出し元に戻ります。
+
+1. [G4RunManager](./geant4-run-manager.md):
+   **G4Run**を管理するクラス。
+   G4**Event**Managerにイベントの処理をお願いする。
+2. [G4EventManager](./geant4-event-manager.md):
+   **G4Event**を管理するクラス。
+   G4**Tracking**Managerに粒子ごとの追跡（トラッキング）をお願いする。
+3. ``G4TrackingManager``:
+   **G4Track**を管理するクラス。
+   G4**Stepping**Managerに1ステップずつの処理をお願いする。
+4. ``G4SteppingManager``:
+   **G4Step**を管理するクラス。
+   1ステップ分の処理を実行する。
+
+この中で、ユーザーが直接指示するのは``G4RunManager``だけでOKです。
+残りの3つは、Geant4の内部で自動的に呼び出されます。
+
+### 必須クラスと任意クラス
+
+次の3つは必ず用意します。
+
+- **DetectorConstruction**: 検出器の形状と材質を作る
+- **PhysicsList**: どの物理プロセスを使うかを決める
+- **ActionInitialization**: 各種ユーザーアクションを登録する
+
+ActionInitializationの中で、次のクラスも登録します。
+これらは、粒子の生成に必要な**PrimaryGeneratorAction**と、
+必要になったときだけ追加する任意クラスです。
+
+- **RunAction**: Run（シミュレーションの1回の実行）の開始と終了で処理する
+- **EventAction**: Event（1個の初期粒子の処理）の開始と終了で処理する
+- **TrackingAction**: Track（粒子1個の追跡）の開始と終了で処理する
+- **SteppingAction**: Step（1ステップ）ごとに処理する
+- **SensitiveDetector（SD）**: 検出器の体積に入った粒子から、検出情報（ヒット）を取り出す
+
+どのクラスをどのファイルに実装すればよいかは、図の呼び出しタイミングを見ると分かります。
+たとえば、1ステップごとに情報を集めたい場合はSteppingActionに書きます。
+
+### 呼び出しのタイミング
+
+- **①main()**: RunManagerを作り、必須クラスを渡します。
+- **②Initialize()**: 検出器と物理プロセスを組み立てます。
+  `main()`から直接呼ぶ場合と、マクロ`/run/initialize`から呼ぶ場合があります。
+- **③BeamOn()**: 指定した回数だけ、イベント → トラック → ステップの順に処理を繰り返します。
+  `main()`から直接呼ぶ場合と、マクロ`/run/beamOn`から呼ぶ場合があります。
+- **④終了**: RunManagerを削除します。
+  登録したユーザークラスは、RunManagerが削除するので、自分で`delete`する必要はありません。
+
+:::{note}
+
+マルチスレッド（MT）で実行する場合、ActionInitializationには`Build()`と`BuildForMaster()`の2つがあります。
+RunActionの登録先がこの2つで異なります。詳しくは[ActionInitialization](./geant4-user-actioninitialization.md)を参照してください。
 
 :::
 
