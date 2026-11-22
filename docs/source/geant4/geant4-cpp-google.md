@@ -14,7 +14,7 @@ C/C++の書き方については[Googleが作ったC++のスタイルガイド](
 
 :::
 
-## インクルードガード
+## インクルードガード（`#ifndef` / `#endif`）
 
 ```cpp
 #ifndef Geometry_h
