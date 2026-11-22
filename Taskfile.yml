@@ -171,3 +171,11 @@ tasks:
     desc: Push commits and tags to remote
     cmds:
       - git push origin HEAD --tags
+
+  push:main:
+    desc: Push commits and tags to remote (main branch only)
+    preconditions:
+      - sh: test "$(git branch --show-current)" = "main"
+        msg: "Aborted push:main: not on the main branch"
+    cmds:
+      - git push origin HEAD --follow-tags
