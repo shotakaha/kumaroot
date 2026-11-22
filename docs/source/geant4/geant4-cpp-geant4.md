@@ -17,6 +17,18 @@ Geant4にはユーザー向けの公式なコーディングガイドは見当�
 
 ## 命名の基本
 
+```cpp
+class DetectorConstruction : public G4VUserDetectorConstruction
+{
+  public:
+    void SetNumberOfChambers(G4int aValue);
+    G4int GetNumberOfChambers() const;
+
+  private:
+    G4int fNumberOfChambers = 5;
+};
+```
+
 | 対象 | 書き方 | 例 |
 |---|---|---|
 | ファイル名 | `PascalCase`。クラス名と一致させる | `DetectorConstruction.hh` / `.cc` |
@@ -27,6 +39,12 @@ Geant4にはユーザー向けの公式なコーディングガイドは見当�
 ファイル名は、ヘッダーが `include/クラス名.hh`、ソースが `src/クラス名.cc` という形で対応しています。
 
 ## クラス名の接頭辞
+
+```cpp
+#include "G4Track.hh"                      // G4*: Geant4の標準クラス
+#include "G4VUserDetectorConstruction.hh"  // G4V*: 継承して実装する
+#include "G4UserRunAction.hh"              // G4User*: 必要なものだけ継承
+```
 
 クラス名の接頭辞を見ると役割がわかります。
 
@@ -40,9 +58,6 @@ Geant4にはユーザー向けの公式なコーディングガイドは見当�
 
 ### 自作クラスの名前
 
-自作クラスには、継承元の役割を表す名前を付けるのが一般的です。
-サンプルでもこの形が使われています。
-
 ```cpp
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -50,17 +65,10 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 };
 ```
 
+自作クラスには、継承元の役割を表す名前を付けるのが一般的です。
+サンプルでもこの形が使われています。
+
 ## 変数名の接頭辞
-
-Geant4の変数名では、接頭辞で役割を示す慣習が広く使われています。
-最初に覚えておくと読みやすくなるものを、表にまとめます。
-
-| 役割 | 接頭辞 | 例 |
-|---|---|---|
-| クラスのメンバー変数 | `f`（field） | `fVerbose`, `fParticleChange` |
-| メンバーのポインター | `fp`（field pointer） | `fpCommand`, `fpWorld` |
-| 関数の引数 | `a` / `an`（不定冠詞） | `aTrack`, `anEvent`, `aValue` |
-| 定数・`enum` の値 | `k`（constant） | `kInfinity`, `kMinimumStep` |
 
 ```cpp
 class MyDetector
@@ -76,16 +84,26 @@ void MyDetector::SetNumberOfChambers(G4int aValue)
 }
 ```
 
-### ローカル変数
+Geant4の変数名では、接頭辞で役割を示す慣習が広く使われています。
+最初に覚えておくと読みやすくなるものを、表にまとめます。
 
-ローカル変数には、`aStep` や `theTrack` のように冠詞を付けた名前がよく見られます。
-ソースを読むときは、「`a` は引数や一時的な値」「`the` は保持している値」くらいのニュアンスで読むと十分です。
-ただし、この使い分けは厳密な規則ではありません。
+| 接頭辞 | 役割 | 例 |
+|---|---|---|
+| `f`（field） | クラスのメンバー変数 | `fVerbose`, `fParticleChange` |
+| `fp`（field pointer） | メンバーのポインター | `fpCommand`, `fpWorld` |
+| `a` / `an`（不定冠詞） | 関数の引数 | `aTrack`, `anEvent`, `aValue` |
+| `k`（constant） | 定数・`enum` の値 | `kInfinity`, `kMinimumStep` |
+
+### ローカル変数
 
 ```cpp
 const G4Step* aStep = ...;
 const G4Track* theTrack = ...;
 ```
+
+ローカル変数には、`aStep` や `theTrack` のように冠詞を付けた名前がよく見られます。
+ソースを読むときは、「`a` は引数や一時的な値」「`the` は保持している値」くらいのニュアンスで読むと十分です。
+ただし、この使い分けは厳密な規則ではありません。
 
 ### 古いコードの書き方
 
@@ -94,24 +112,14 @@ const G4Track* theTrack = ...;
 
 ## 定数
 
-`const` な値や `enum` の値には、`k` を付けるのが基本です。
-
 ```cpp
 constexpr G4double kMinimumStep = 0.01 * CLHEP::mm;  // 本体ソースでの例
 enum State { kAlive, kDead, kStopButAlive };         // 書き方の例
 ```
 
-:::{note}
-
-`k` の由来は諸説あるようですが、確かな根拠は見つかっていません。
-慣習として広まったと考えられています。
-
-:::
+`const` な値や `enum` の値には、`k` を付けるのが基本です。
 
 ## 型
-
-Geant4 では、標準の型の代わりに `G4*` の型エイリアスを使うのが基本です。
-プラットフォームによる型の違いを吸収するために設けられています。
 
 ```cpp
 G4String name = "Geant4";     // std::stringに相当
@@ -119,13 +127,13 @@ G4int numberOfParticles = 1;  // intに相当
 G4double energy = 1.0 * GeV;  // doubleに相当
 ```
 
+Geant4 では、標準の型の代わりに `G4*` の型エイリアスを使うのが基本です。
+プラットフォームによる型の違いを吸収するために設けられています。
+
 ヘッダーは `G4Types.hh` と `globals.hh` のどちらも本体内で使われています。
 サンプルでは `globals.hh` を見かけることが多いので、読むときはどちらが出てきても問題ありません。
 
 ## 出力（`G4cout` / `G4cerr` / `G4endl`）
-
-Geant4 では、`std::cout` や `std::cerr` の代わりに、専用のストリームを使います。
-本体のソースでも `G4cout` を使う箇所が圧倒的に多いです。
 
 ```cpp
 G4cout << "標準出力" << G4endl;
@@ -133,20 +141,23 @@ G4cerr << "標準エラー出力" << G4endl;
 G4debug << "デバッグ用出力" << G4endl;
 ```
 
+Geant4 では、`std::cout` や `std::cerr` の代わりに、専用のストリームを使います。
+本体のソースでも `G4cout` を使う箇所が圧倒的に多いです。
+
 - `G4cout` と `G4cerr` は、Geant4 の出力システムを通ります。
 - `G4debug` はデバッグ用の出力先です。表示の強調は、実行環境（UI）によって異なります。
 - `G4endl` は `std::endl` と同じ意味です。
 
 ## マネージャーのシングルトン
 
-RunManager などの主要なマネージャーは、シングルトンとして設計されています。
-どこからでも同じ方法で同じオブジェクトを参照できます。
-
 ```cpp
 auto em = G4EventManager::GetEventManager();
 auto sm = G4SDManager::GetSDMpointer();
 auto nm = G4NistManager::Instance();
 ```
+
+RunManager などの主要なマネージャーは、シングルトンとして設計されています。
+どこからでも同じ方法で同じオブジェクトを参照できます。
 
 取得用の関数名は、クラスごとに異なります（`Instance()`、`GetXxxManager()`、`GetSDMpointer()` など）。
 クラスごとに違うと覚えておき、ヘッダーを見て確認するのが確実です。
@@ -155,6 +166,13 @@ RunManager は、`main()` の中で生成します。
 生成には `G4RunManagerFactory::CreateRunManager()` を使うのが、附属サンプルでの一般的な書き方です。
 
 ## 書式
+
+```yaml
+IndentWidth: 2
+ColumnLimit: 100
+PointerAlignment: Left
+BreakBeforeBraces: Custom
+```
 
 附属サンプルと本体は、リポジトリ直下の `.clang-format` に沿って整形されています。
 主な設定は次のとおりです。
