@@ -34,6 +34,29 @@ BreakBeforeBraces: Custom
 
 自分のアプリを書くときも、`clang-format` を使って同じ書式にそろえると、サンプルとの行き来が楽になります。
 
+### インクルードの順番
+
+本体の `.clang-format` は、Geant4 のヘッダーのグループが最優先になるように、`IncludeCategories` を設定しています。
+
+```yaml
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:    '^"G4.*\.hh"'
+    Priority: 1
+  - Regex:    '^"(Randomize|globals)\.hh"'
+    Priority: 1
+  - Regex:    '^"[[:alnum:]\/\-_.]+"'
+    Priority: 2
+  - Regex:    '^<[a-z_]+>'
+    Priority: 3
+  - Regex:    '^<[[:alnum:]\/.]+>'
+    Priority: 2
+```
+
+本体のコードは、自分に対応するヘッダーが最初に来て、標準ライブラリは Geant4 のヘッダーの後ろに置かれることが多いです。
+附属サンプル B1 では、自作のヘッダーを Geant4 のヘッダーより先に書いています。
+ユーザーアプリでの順番の決め方は、[C++のコーディングガイドライン](geant4-cpp-google)を参照してください。
+
 ## 命名の基本
 
 ```cpp
