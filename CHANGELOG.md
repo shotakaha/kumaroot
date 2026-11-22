@@ -1,5 +1,44 @@
 # CHANGELOG.md
 
+## v2026.11.3 (2026-11-23)
+
+### Feat
+
+- **geant4-install-cmakelists**: ビルドの流れの図と説明を修正
+- **geant4-install-cmakelists**: grepとrgの検索例を併記
+- **geant4-install-cmakelists**: CMakeListsの眺め方ページを追加
+
+### Fix
+
+- **geant4-cpp-google**: インクルードの順番の説明をGeant4本体の節と整理
+- **geant4-cpp-geant4**: インクルードの順番の節を追加
+- **geant4-cpp-google**: Geant4での使われ方とユーザーアプリでの取り入れ方を各節に追加
+- **geant4-cpp-google**: インクルードの順番・所有権・出力引数の節を追加
+- **geant4-cpp-google**: インクルードガードの見出しに対応するマクロを追記
+- **geant4-cpp-google**: 変わりうる利用件数の記述を削除
+- **geant4-cpp-google**: 名前空間の節を追加
+- **geant4-cpp-google**: ソース調査に基づきGoogleスタイルの解説を整理
+- **geant4-cpp-geant4**: 書式の説明をsource/の.clang-formatに合わせて修正
+- **geant4-cpp-geant4**: 書式の節を冒頭に移動
+- **geant4-cpp-geant4**: 出力の節にG4ios.hhのincludeと注記を追加
+- **geant4-cpp-geant4**: 定数の例をサンプルB5に合わせて変更
+- **geant4-cpp-geant4**: 自作クラスの名前にSD・Hitの例を追加
+- **geant4-cpp-geant4**: クラス接頭辞の例をG4Trackから利用頻度の高いG4Stepに変更
+- **geant4-cpp-geant4**: 命名の基本の表に説明列を追加
+- **geant4-cpp-geant4**: 見出し直下にコード例を配置し、表の列順と注記を整理
+- **geant4-cpp-geant4**: ソース調査に基づき初学者向けに記述を整理
+- **geant4-versions**: パッチ版の番号と説明文を更新
+- **geant4-versions**: 最新パッチ版の列を追加
+- **geant4-uninstall**: 見出しにコマンド名を追加
+- **geant4-install-cmakelists**: 図と説明の誤記を修正
+
+### Refactor
+
+- **geant4-shell**: rename install-shell page to geant4-shell
+- **geant4-usage**: rename switch page to geant4-switch
+- **geant4-usage**: move shell and switch pages to geant4-usage
+- **geant4-usage**: move clean page to geant4-uninstall
+
 ## v2026.11.2 (2026-11-22)
 
 ### Feat
