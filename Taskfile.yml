@@ -176,6 +176,9 @@ tasks:
     desc: Push commits and tags to remote (main branch only)
     preconditions:
       - sh: test "$(git branch --show-current)" = "main"
-        msg: "Aborted push:main: not on the main branch"
+        msg: |
+          Aborted push:main: not on the main branch.
+          1. Run 'git switch main', then try again.
+          2. Or use 'task push' to push the current branch.
     cmds:
       - git push origin HEAD --follow-tags
