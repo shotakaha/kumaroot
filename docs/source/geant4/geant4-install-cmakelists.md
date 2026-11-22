@@ -26,7 +26,8 @@ CMakeLists.txt                      # 最上位（50行程度と短い）
   └─ include(G4CMakeMain)
        └─ cmake/Modules/G4CMakeMain.cmake  # 全体の流れを決める
             ├─ include(G4CMakeSettings)    # 設定・オプションの読み込み
-            ├─ include(G4BuildSettings)    # 依存パッケージ（CLHEP、Qt、OpenGLなど）の検索
+            ├─ include(G4BuildSettings)    # コンパイラ・ビルドの設定
+            ├─ include(G4OptionalComponents) # 依存パッケージ（CLHEP、XercesCなど）の検索
             ├─ ...省略  
             ├─ include(G4InstallData)      # データセットの確認・ダウンロード
             ├─ add_subdirectory(source)    # サブディレクトリ（source）を追加
@@ -36,7 +37,7 @@ CMakeLists.txt                      # 最上位（50行程度と短い）
             └─ インストール用ファイルの生成（Geant4Config.cmakeなど）
 ```
 
-トップレベルの`CMakeLists.txt`は短く、`G4MakeMain`を読み込むことが書かれています。
+トップレベルの`CMakeLists.txt`は短く、`G4CMakeMain`を読み込むことが書かれています。
 ビルドの流れの中心は`cmake/Modules/G4CMakeMain.cmake`に書かれています。
 このファイルを確認すると、`cmake/Modules/`の中の`.cmake`ファイルを読み込んで事前準備をしたあと、
 `source/CMakeLists.txt`を読み込み、カテゴリ／モジュールごとの`sources.cmake`を読み込む流れになっています。
