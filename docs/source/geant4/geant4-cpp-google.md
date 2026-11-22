@@ -49,6 +49,27 @@ Geant4本体のヘッダーにも、`#pragma once`を使っているものがあ
 
 :::
 
+## インクルードの順番
+
+```cpp
+#include "DetectorConstruction.hh"  // 1. 自分に対応するヘッダー
+
+#include <vector>                   // 2. C++標準ライブラリ
+
+#include "G4LogicalVolume.hh"       // 3. 他のライブラリ（Geant4）
+
+#include "MaterialUtils.hh"         // 4. プロジェクト内のヘッダー（例）
+```
+
+Googleスタイルガイドでは、次の順番で並べることを勧めています。
+各グループの中はアルファベット順にし、グループの間には空行を入れます。
+
+1. 自分に対応するヘッダー（`foo.cc`なら`foo.hh`）
+2. C言語の標準ライブラリ
+3. C++の標準ライブラリ
+4. 他のライブラリ（Geant4など）
+5. プロジェクト内のヘッダー
+
 ## 前方宣言
 
 ```cpp
@@ -115,3 +136,45 @@ Googleスタイルガイドでは、次のルールが推奨されています�
 - ヘッダーファイルで`using namespace`を書かないようにします。そのヘッダーを読んだすべての人に、名前空間が持ち込まれてしまうためです。
 - `.cc`ファイルでは、名前のない名前空間（`namespace { ... }`）で、そのファイルだけの補助関数やクラスを隠すとよいです。
 - 名前空間を閉じる`}`の後ろには、`// namespace B1`のようなコメントを付けます。
+
+## 所有権とスマートポインタ
+
+```cpp
+#include <memory>
+
+// 所有者が1つだけなら std::unique_ptr
+auto detector = std::make_unique<DetectorConstruction>();
+
+// 所有しない参照は、生のポインタで表す
+G4LogicalVolume* logicalVolume = detector->GetScoringVolume();
+```
+
+Googleスタイルガイドでは、所有者が1つなら`std::unique_ptr`を使い、複数で共有するときだけ`std::shared_ptr`を使うよう勧めています。
+生のポインタ（`T*`）は、所有しないことを表すのに使います。
+
+:::{note}
+
+Geant4 の API には、生のポインタを受け取って後始末を任せる形が多くあります。
+附属サンプルでも、`new`で作ったオブジェクトを渡しています（例: `SetUserAction(new PrimaryGeneratorAction)`）。
+この場合、所有権は Geant4 側に移るので、自分で`delete`しないでください。
+
+:::
+
+## 出力引数
+
+```cpp
+// 入力は値か const 参照で受け取る
+G4double ComputeEnergy(const G4ThreeVector& position);
+
+// 出力（書き戻す）引数はポインタで受け取る
+void GetPosition(const G4Track* track, G4ThreeVector* position);
+
+// 呼び出し側では & を付けて、値が変わることを示す
+G4ThreeVector position;
+GetPosition(track, &position);
+```
+
+Googleスタイルガイドでは、関数の中で値を書き換える引数は、参照ではなくポインタにするよう勧めています。
+呼び出し側に`&`が付くので、値が変わることが読み手にも分かります。
+
+ソースを読むときは、引数が`const`参照なら入力、`const`でない参照やポインタなら出力の可能性がある、と見分けられます。
