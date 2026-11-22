@@ -20,7 +20,7 @@ maxdepth: 1
 geant4-versions
 geant4-install
 geant4-uninstall
-geant4-install-shell
+geant4-shell
 geant4-switch
 ```
 
