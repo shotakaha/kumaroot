@@ -41,7 +41,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 ## クラス名の接頭辞
 
 ```cpp
-#include "G4Track.hh"                      // G4*: Geant4の標準クラス
+#include "G4Step.hh"                       // G4*: Geant4の標準クラス
 #include "G4VUserDetectorConstruction.hh"  // G4V*: 継承して実装する
 #include "G4UserRunAction.hh"              // G4User*: 必要なものだけ継承
 ```
