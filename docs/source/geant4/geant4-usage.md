@@ -20,6 +20,8 @@ maxdepth: 1
 geant4-versions
 geant4-install
 geant4-uninstall
+geant4-install-shell
+geant4-install-switch
 ```
 
 ## エラー対処
