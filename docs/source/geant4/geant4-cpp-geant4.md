@@ -1,153 +1,131 @@
-# Geant4のコーディングガイドライン
+# Geant4のコーディングスタイル
 
-Geant4にはユーザー向けの明確なコーディングのガイドラインは存在しません。
-Geant4は開発の歴史が長く、すでに広く利用されているツールキットであることから、
-それぞれのアプリケーション側のコーディングスタイルを尊重し、
-Geant4側から強制はしないというスタンスのようです。
+Geant4にはユーザー向けの公式なコーディングガイドは見当たりません。
+長く開発されてきたツールキットで、利用者のコードスタイルを強制しない方針のようです。
 
-とはいえ、附属サンプルコードやリファレンスガイドを読んでいると「暗黙の慣習」のようなものを感じます。
-このページでは、Geant4を使っていて感じる「慣習のようなもの」を整理してみました。
-（C++一般の慣習なのか、Geant4固有の慣習なのか、は区別できていません）。
+ただし、附属サンプル（`examples/`）や本体のソースを読むと、命名や書き方に一定の傾向があります。
+このページでは、初学者がGeant4のソースやサンプルを読むとき、そして自分のアプリを書くときに役立つ「大きな方向性」を整理します。
+細かな例外や歴史的経緯は省いています。
 
 :::{note}
 
-20年以上にわたる開発の歴史のためか、命名規則にはばらつきがあり、
-内部のソースコードや附属サンプルでもスタイルが一貫してないと感じる箇所もありました。
-結局のところ、多くのサンプルを読みながら「雰囲気」に慣れていくのが一番の近道かもしれません。
+確認したソースは Geant4 v11.4.3 です。
+20年以上の開発史があるため、古いコードや一部のサンプルには、ここで述べない書き方も含まれます。
+まずは附属サンプルを何本か読み、雰囲気をつかむのが近道です。
 
 :::
 
-## ファイル名の命名規則
+## 命名の基本
 
-Geant4のファイル名は`PascalCase`が使われています。
-また、クラス名とファイル名は一致しており、
-ヘッダーファイルは`include/クラス名.hh`、
-ソースファイルは`src/クラス名.cc`が使われています。
+| 対象 | 書き方 | 例 |
+|---|---|---|
+| ファイル名 | `PascalCase`。クラス名と一致させる | `DetectorConstruction.hh` / `.cc` |
+| クラス名 | `PascalCase` | `G4Track`, `G4RunManager` |
+| 関数名 | `PascalCase`。セッターは `Set*`、ゲッターは `Get*` | `SetTrackID`, `GetEventManager` |
+| 変数名 | `camelCase`に、役割を示す接頭辞を付ける | `fNumberOfChambers` |
 
-## クラス名の命名規則
+ファイル名は、ヘッダーが `include/クラス名.hh`、ソースが `src/クラス名.cc` という形で対応しています。
 
-Geant4のクラス名には`PascalCase`が使われています。
+## クラス名の接頭辞
 
-`G4*`からはじまるクラス名は、Geant4が提供する標準クラスです。
-その中でも、`G4V*`からはじまるクラスは、純粋仮想関数をもつ抽象基底クラスであり、
-ユーザーが継承して実装すること前提となっています。
-とくに
-`G4VUser*`および`G4User*`クラスは、ユーザーによる拡張や設定を行うためのフック用クラスです。
+クラス名の接頭辞を見ると役割がわかります。
 
-### G4VUserクラスとG4Userクラスの違い
+- **`G4*`**: Geant4 が提供する標準クラスです。
+- **`G4V*`**: 抽象基底クラスです。ユーザーが継承して実装する前提です。
+  - 例: `G4VUserDetectorConstruction`、`G4VUserPrimaryGeneratorAction`
+- **`G4User*`**: 必要に応じて継承して、動作を変えるクラスです。
+  - 例: `G4UserRunAction`、`G4UserEventAction`
 
-`G4VUser*`クラスは、ユーザーが必ず継承して実装すべき抽象クラスで、
-`G4User`クラスは、必要に応じて継承・オーバーライド可能な具象クラスです。
+`G4VUser*` は「必ず継承して実装するもの」、`G4User*` は「必要なものだけ継承するもの」と覚えておくと便利です。
 
-### ユーザー定義クラスの命名規則（の慣習）
+### 自作クラスの名前
+
+自作クラスには、継承元の役割を表す名前を付けるのが一般的です。
+サンプルでもこの形が使われています。
 
 ```cpp
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
-    // 自作クラスの実装
+  // ...
 };
 ```
 
-ユーザー定義クラスについては、
-上記ように継承元のクラス名を明示的にクラス名に残すことで、
-クラスの役割を明確にする命名が一般的です。
+## 変数名の接頭辞
 
-## 関数名の命名規則
+Geant4の変数名では、接頭辞で役割を示す慣習が広く使われています。
+最初に覚えておくと読みやすくなるものを、表にまとめます。
 
-関数名は`PascalCase`が使われています。
-セッターには``Set*``、
-ゲッターには``Get*``という接頭辞に使われています。
+| 役割 | 接頭辞 | 例 |
+|---|---|---|
+| クラスのメンバー変数 | `f`（field） | `fVerbose`, `fParticleChange` |
+| メンバーのポインター | `fp`（field pointer） | `fpCommand`, `fpWorld` |
+| 関数の引数 | `a` / `an`（不定冠詞） | `aTrack`, `anEvent`, `aValue` |
+| 定数・`enum` の値 | `k`（constant） | `kInfinity`, `kMinimumStep` |
 
-## 変数名の命名規則
+```cpp
+class MyDetector
+{
+  private:
+    G4int fNumberOfChambers = 5;
+    G4LogicalVolume* fpChamber = nullptr;
+};
 
-Geant4の変数名には、基本的に`camelCase`が使われています。
-また、ゆるめのシステム・ハンガリアン記法が一部で採用されており、
-変数の種類や役割が名前からわかるようになっています。
+void MyDetector::SetNumberOfChambers(G4int aValue)
+{
+  fNumberOfChambers = aValue;
+}
+```
 
 ### ローカル変数
 
-ローカル変数には、`aStep`や`theTrack`のように、
-接頭辞として不定冠詞や定冠詞が使われることがあります。
-`a`（`an`）（不定冠詞）は任意のインスタンス、
-`the`（定冠詞）は特定のインスタンスを指します。
+ローカル変数には、`aStep` や `theTrack` のように冠詞を付けた名前がよく見られます。
+ソースを読むときは、「`a` は引数や一時的な値」「`the` は保持している値」くらいのニュアンスで読むと十分です。
+ただし、この使い分けは厳密な規則ではありません。
 
 ```cpp
 const G4Step* aStep = ...;
 const G4Track* theTrack = ...;
 ```
 
-### メンバー変数
+### 古いコードの書き方
 
-クラスのメンバー変数には、接頭辞として`f*`（fieldの略）が使われます。
+古いコードには、`m*` で始まるメンバー変数や、接頭辞のない変数も見られます。
+新しく書くときは、上の表に沿うのが無難です。
 
-```cpp
-G4int fNumberOfChambers = 5;
-G4LogicalVolume *fLogicalChamber = nullptr;
-```
+## 定数
 
-### ポインター変数
-
-ポインター型の変数には、接頭辞として
-`p*`（pointerの略）や
-`fp*`（field pointerの略）が使われることがあります。
+`const` な値や `enum` の値には、`k` を付けるのが基本です。
 
 ```cpp
-G4Material *pMaterial;
-G4VPhysicalVolume *fpWorld;
-```
-
-### 引数
-
-関数の引数には、`aValue`や`anEvent`のように、接頭辞として不定冠詞の`a`や`an`が使われる傾向があります。
-参照型では`&aValue`、
-ポインター型では`&apValue`のように使われます。
-
-```cpp
-// G4Trackのメソッドを抜粋
-G4Track::SetTrackID(const G4int aValue)
-G4Track::SetPosition(const G4ThreeVector &aValue)
-G4Track::SetTouchableHandle(const G4TouchableHandle &apValue)
-```
-
-### 定数
-
-定数（`const`な変数）や`enum`定数には、接頭辞として`k*`（constantの意味）が使われます。
-
-```cpp
-const G4double kMaxStepLength = 10.0 * mm;
-enum State { kAlive, kDead, kStopButAlive };
+constexpr G4double kMinimumStep = 0.01 * CLHEP::mm;  // 本体ソースでの例
+enum State { kAlive, kDead, kStopButAlive };         // 書き方の例
 ```
 
 :::{note}
 
-定数の接頭辞を`k*`とする由来は諸説あるようです。
-数学分野で$k$を定数として扱う習慣に由来するという説、
-constantの頭文字を音的にもじったという説、
-などがありますが、いずれも決定的な根拠があるわけではなく、
-慣習的に広まったと考えられています。
+`k` の由来は諸説あるようですが、確かな根拠は見つかっていません。
+慣習として広まったと考えられています。
 
 :::
 
-## 型エイリアス
+## 型
 
-Geant4では`G4*型`の型エイリアスを使うことが推奨されています。
-これらのエイリアスは、
-プラットフォームごとの型実装の違いを吸収するために設けられています。
+Geant4 では、標準の型の代わりに `G4*` の型エイリアスを使うのが基本です。
+プラットフォームによる型の違いを吸収するために設けられています。
 
 ```cpp
-// #include "globals.hh" // 非推奨（古い一括ヘッダー）
-#include "G4Types.hh"    // v10.6以降の推奨ヘッダー
-
 G4String name = "Geant4";     // std::stringに相当
-G4int numberOfParticles = 1;  // int に相当
-G4double energy = 1.0 * GeV;  // double に相当
-// 他にもある
+G4int numberOfParticles = 1;  // intに相当
+G4double energy = 1.0 * GeV;  // doubleに相当
 ```
 
-## 入出力ストリーム（`G4cout` / `G4cerr` / `G4debug` / `G4endl`）
+ヘッダーは `G4Types.hh` と `globals.hh` のどちらも本体内で使われています。
+サンプルでは `globals.hh` を見かけることが多いので、読むときはどちらが出てきても問題ありません。
 
-Geant4では、C++標準の`std::cout`や`std::cerr`の代わりに、
-専用の出力ストリームを使うことが推奨されています。
+## 出力（`G4cout` / `G4cerr` / `G4endl`）
+
+Geant4 では、`std::cout` や `std::cerr` の代わりに、専用のストリームを使います。
+本体のソースでも `G4cout` を使う箇所が圧倒的に多いです。
 
 ```cpp
 G4cout << "標準出力" << G4endl;
@@ -155,32 +133,41 @@ G4cerr << "標準エラー出力" << G4endl;
 G4debug << "デバッグ用出力" << G4endl;
 ```
 
-これらはGeant4の出力システムと統合されており、
-UIやログのふるまいと一貫性を保つことができます。
-とくに、`G4debug`はQt上で赤色でハイライト表示されるため、デバッグ時の視認性が高く、オススメです。
+- `G4cout` と `G4cerr` は、Geant4 の出力システムを通ります。
+- `G4debug` はデバッグ用の出力先です。表示の強調は、実行環境（UI）によって異なります。
+- `G4endl` は `std::endl` と同じ意味です。
 
-## シングルトン
+## マネージャーのシングルトン
+
+RunManager などの主要なマネージャーは、シングルトンとして設計されています。
+どこからでも同じ方法で同じオブジェクトを参照できます。
 
 ```cpp
-auto rm = G4RunManagerFactory::CreateRunManager();
 auto em = G4EventManager::GetEventManager();
 auto sm = G4SDManager::GetSDMpointer();
 auto nm = G4NistManager::Instance();
-auto am = G4AnalysisManager::Instance();
 ```
 
-RunManagerをはじめとするマネージャークラスは、シングルトンで設計されています。
-コードのどこからでも、同じ方法で同じオブジェクトを参照できるようになっています。
+取得用の関数名は、クラスごとに異なります（`Instance()`、`GetXxxManager()`、`GetSDMpointer()` など）。
+クラスごとに違うと覚えておき、ヘッダーを見て確認するのが確実です。
 
-:::{note}
+RunManager は、`main()` の中で生成します。
+生成には `G4RunManagerFactory::CreateRunManager()` を使うのが、附属サンプルでの一般的な書き方です。
 
-マネージャークラスごとにシングルトンへのアクセス方法が異なるので注意してください。
-関数名がブレているのは歴史的経緯なのではと推測しています。
+## 書式
 
-:::
+附属サンプルと本体は、リポジトリ直下の `.clang-format` に沿って整形されています。
+主な設定は次のとおりです。
+
+- インデントは半角スペース2つ
+- 1行は最大100文字
+- ポインターの `*` は型の側に寄せる（例: `G4Step* aStep`）
+- クラス・関数・制御文の `{` は次の行に書く
+
+自分のアプリを書くときも、`clang-format` を使って同じ書式にそろえると、サンプルとの行き来が楽になります。
 
 ## リファレンス
 
-- [Geant4 Coding Guidelines](https://geant4-internal.web.cern.ch/collaboration/coding_guidelines)
-- [Geant4 Coding-style Guidelines Motivations](https://geant4-internal.web.cern.ch/collaboration/coding_style_guidelines_motivations)
+- [Geant4 Coding Guidelines](https://geant4-internal.web.cern.ch/collaboration/coding_guidelines)（開発者向け）
+- [Geant4 Coding-style Guidelines Motivations](https://geant4-internal.web.cern.ch/collaboration/coding_style_guidelines_motivations)（開発者向け）
 - [G4cout, G4cerr and G4debug](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/mainProgram.html#g4cout-g4cerr-and-g4debug)
