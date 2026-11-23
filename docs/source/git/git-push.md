@@ -1,35 +1,35 @@
-# ローカルの更新をリモートに送りたい（`git push`）
+# プッシュしたい（`git push`）
 
 ```console
 $ git push [オプション] [リモート名 [ブランチ名]]
+$ git push              # 現在のブランチを紐づけられたリモートにプッシュ
+$ git push origin       # 現在のブランチをoriginにプッシュ
+$ git push origin --tags  # タグをすべてoriginにプッシュ
+
+// ブランチを指定してプッシュする場合
+$ git push origin main  # mainブランチをoriginにプッシュ
+$ git push origin feature-branch  # feature-branchをoriginにプッシュ
 ```
 
-`git push`コマンドでローカルの変更（コミット）をリモートに反映できます。
+`git push`コマンドで、ローカルの変更（コミット）をリモートに反映（プッシュ）できます。
+リモートリポジトリの名前は慣習的に`origin`が使われます。
 現在のブランチに送り先（`upstream`）が設定されていない場合は、`--set-upstream`を指定するよう促すメッセージが表示されて失敗します。
 
-:::{note}
-
-`origin`は、リモートリポジトリにつけられた名前です。
-`git clone`でリポジトリを取得したときに、取得元のURLに自動でつけられます。
-名前は変更できますが、慣習的に`origin`が使われます。
-リモートの一覧は`git remote -v`で確認できます（詳しくは`git-remote.md`を参照）。
-
-:::
-
-## 新規ブランチしたい
+## ブランチをプッシュしたい（`--set-upstream`）
 
 ```console
 $ git push origin 作業ブランチ名
  * [new branch]      作業ブランチ名 -> 作業ブランチ名
 ```
 
-ローカルで作成したブランチを、リモート（`origin`）に新しく作成できます。
-初めてプッシュするときは、次の`--set-upstream`も合わせて指定すると便利です。
-
-## ブランチを紐づけたい（`--set-upstream`）
+`git push origin 作業ブランチ名`で、ローカルの作業ブランチをリモート（`origin`）に追加できます。
+`[作業ブランチ名]`を省略すると、現在のブランチがプッシュされます。
 
 ```console
 $ git push -u origin 作業ブランチ名
+ * [new branch]      作業ブランチ名 -> 作業ブランチ名
+$ git push --set-upstream origin 作業ブランチ名
+ * [new branch]      作業ブランチ名 -> 作業ブランチ名
 
 $ git branch -a
 * 作業ブランチ名
@@ -39,10 +39,12 @@ $ git branch -a
   remotes/origin/main
 ```
 
-`-u`（`--set-upstream`）オプションを付けると、ローカルのブランチとリモート（`origin`）のブランチを紐づけられます。
-紐づけたあとは、`git push`だけでプッシュできます。
+`-u / --set-upstream`オプションを付けると、ローカルの作業ブランチとリモート（`origin`）のブランチを紐づけられます。
+ローカルで作成したブランチをはじめてリモートにプッシュするときに必要です。
+一旦紐付けると、次回以降は`git push`だけでプッシュできます。
 
-## タグしたい（`--tags`）
+
+## タグをプッシュしたい（`--tags`）
 
 ```console
 $ git push origin --tags
@@ -57,7 +59,8 @@ $ git push origin --delete 作業ブランチ名
 ```
 
 `--delete`オプションを使って、リモート（`origin`）のブランチを削除できます。
-ローカルのブランチは残ります。ローカルも削除したいときは`git branch -d`を使います。
+ローカルのブランチは残ります。
+ローカルも削除したいときは`git branch -d`を使います。
 
 ## 既存のGitリポジトリを追加したい
 
@@ -75,7 +78,7 @@ $ git push -u origin main
 デフォルトのブランチ名は`main`に変更しておくとよいでしょう。
 最後に、現在の作業ブランチ（`main`）をリモート（`origin`）にプッシュすればOKです。
 
-これで、作成をはじめてしまったプロジェクトでもGitHub/GitLabで管理できるようになりました。
+これで、ローカルで作成をはじめてしまったプロジェクトでもGitHub/GitLabで管理できるようになりました。
 卒論や修論をLaTeXで書いている場合、ソースファイルをこのように管理しておいてもよいと思います
 （執筆中はプライベートリポジトリを活用しましょう）。
 
