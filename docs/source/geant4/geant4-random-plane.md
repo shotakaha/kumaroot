@@ -1,4 +1,4 @@
-# 位置をランダムにした（``G4PlaneVectorRandom``）
+# 位置をランダムにしたい（``G4PlaneVectorRandom``）
 
 ```cpp
 #include "G4RandomTools.hh"

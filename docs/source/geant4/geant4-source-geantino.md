@@ -1,4 +1,4 @@
-# geantinoしたい
+# geantinoしたい（`geantino`）
 
 ```cfg
 /gun/particle geantino

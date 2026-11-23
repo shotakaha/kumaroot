@@ -1,4 +1,4 @@
-# CMake Toolsしたい
+# CMake Toolsしたい（`settings.json`）
 
 ```json
 // .vscode/settings.json

@@ -1,4 +1,4 @@
-# Geometry::Construct
+# ジオメトリを構築したい（`Geometry::Construct`）
 
 ```cpp
 G4VPhysicsVolume* Construct()

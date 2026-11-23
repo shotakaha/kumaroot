@@ -1,4 +1,4 @@
-# CMakeListsしたい
+# CMakeListsしたい（`CMakeLists.txt`）
 
 ```console
 $ cd ~/geant4/v11.X.Y/

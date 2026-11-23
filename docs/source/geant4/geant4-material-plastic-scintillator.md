@@ -1,4 +1,4 @@
-# プラスチックシンチレータを作りたい
+# プラスチックシンチレータを作りたい（`G4_PLASTIC_SC_VINYLTOLUENE`）
 
 ```cpp
 G4Material* MakeEJ200() {

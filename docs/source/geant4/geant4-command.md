@@ -1,4 +1,4 @@
-# 対話モードしたい
+# 対話モードしたい（`G4UIExecutive`）
 
 ```cpp
 #include "G4RunManagerFactory.hh"

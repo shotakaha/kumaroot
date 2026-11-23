@@ -1,4 +1,4 @@
-# Geometry::ConstructSDandField
+# SensitiveDetectorと電磁場を設定したい（`Geometry::ConstructSDandField`）
 
 ```cpp
 void Geometry::ConstructSDandField()

@@ -1,4 +1,4 @@
-# ConstructParticle
+# 粒子を構築したい（`ConstructParticle`）
 
 ```cpp
 void PhysicsList::ConstructParticle()

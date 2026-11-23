@@ -1,4 +1,4 @@
-# 宇宙線ミューオンしたい
+# 宇宙線ミューオンしたい（`G4ParticleGun`）
 
 ```cpp
 PrimaryGeneratorAction::GeneratePrimaries(G4Event *aEvent)

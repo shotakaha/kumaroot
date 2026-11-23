@@ -1,4 +1,4 @@
-# 形状を作成する（``G4VSolid``）
+# 形状を作りたい（``G4VSolid``）
 
 ```cpp
 G4Box("name", half_x, half_y, half_z);

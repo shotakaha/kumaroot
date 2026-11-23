@@ -1,4 +1,4 @@
-# ホウケイ酸ガラスを作りたい
+# ホウケイ酸ガラスを作りたい（`G4Material`）
 
 ```cpp
 G4NistManager *nm = G4NistManager::Instance();
