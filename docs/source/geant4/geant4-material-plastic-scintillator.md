@@ -97,9 +97,9 @@ G4Material* MakeEJ200() {
     mpt->AddConstProperty("RESOLUTIONSCALE", 1.0);
     // シンチレーション光の減衰時間
     // -> Decay Time (ns) を参照
-    mpt->AddConstProperty("FASTTIMECONSTANT", 2.1 * ns);
+    mpt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 2.1 * ns);
     // 発光成分の比率：fast / (fast+slow)
-    mpt->AddConstProperty("YIELDRATIO", 1.0);
+    mpt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
 
     // テーブルを材料に登録
     material->SetMaterialPropertiesTable(mpt);
