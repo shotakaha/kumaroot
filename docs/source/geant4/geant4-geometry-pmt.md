@@ -40,6 +40,16 @@ G4LogicalVolume* BuildPmtWindow(
     auto nm = G4NistManager::Instance();
     auto material = nm->FindOrBuildMaterial(materialName);
 
+    // 光学特性を設定する（屈折率と吸収長）
+    std::vector<G4double> photonEnergies{2.0 * eV, 3.5 * eV};
+    std::vector<G4double> rIndex{1.49, 1.49};          // アクリルの屈折率（約1.49）
+    std::vector<G4double> absLength{1. * m, 1. * m};   // 窓の中での吸収長
+
+    auto mpt = new G4MaterialPropertiesTable();
+    mpt->AddProperty("RINDEX", photonEnergies, rIndex);
+    mpt->AddProperty("ABSLENGTH", photonEnergies, absLength);
+    material->SetMaterialPropertiesTable(mpt);
+
     // 論理ボリュームを定義
     auto logical = new G4LogicalVolume(
         solid,         // G4VSolid
@@ -57,6 +67,17 @@ G4LogicalVolume* BuildPmtWindow(
 `BuildPmtWindow`は、PMTの入射窓の論理ボリュームを1つ作成する関数です。
 名前・素材・半径・厚みは引数で変えられます。
 デフォルトは3インチ管の入射窓です。
+
+入射窓は光子を透過させる必要があるため、`G4MaterialPropertiesTable`を使ってユーザーが設定を追加する必要があります。
+光子のエネルギー（`photonEnergies`）に対する屈折率（`RINDEX`）と吸収長（`ABSLENGTH`）の指定が必要です。
+
+:::{hint}
+
+このサンプルコードでは、入射窓の材質にアクリル（`G4_PLEXIGLASS`）を使い、屈折率を1.49、吸収長を1mに設定しています。
+実際の入射窓の材質のデータシートを参考に屈折率と吸収長を設定してください。
+とくに`RINDEX`を設定しないと、入射した光子は入射窓の境界で消えてしまいます。
+
+:::
 
 この関数を`Construct()`の中で **1回だけ** 呼ぶようにします。
 複数のPMTを並べる場合は、この論理ボリュームを使い回します。
