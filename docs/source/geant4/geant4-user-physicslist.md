@@ -60,7 +60,7 @@ auto physics = new FTFP_BERT{};
 
 `FTFP_BERT`は、`G4VModularPhysicsList`を継承した、リファレンス物理リストの1つです。
 高エネルギー領域は`FTFP`、低エネルギー領域は`BERT`のハドロンモデルを使います。
-具体的な内容は、[](./geant4-physics-ftfp_bert.md)を参照してください。
+具体的な内容は、[](./geant4-physics-ftfp-bert.md)を参照してください。
 
 ## 物理モデルを追加したい（`RegisterPhysics`）
 

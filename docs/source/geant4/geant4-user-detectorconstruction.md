@@ -112,7 +112,7 @@ void ConstructSDandField() override;
 そのため、有感検出器や場は、この関数の中で作成します。
 Geant4 4.10で、ワーカースレッドからも呼ばれるようになりました。
 
-具体的な書き方は、[](./geant4-geometry-constructSDandField.md)を参照してください。
+具体的な書き方は、[](./geant4-geometry-constructsdandfield.md)を参照してください。
 
 ## 親クラスのメソッドを確認したい
 

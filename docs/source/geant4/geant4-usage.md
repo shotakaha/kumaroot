@@ -161,7 +161,7 @@ maxdepth: 2
 geant4-geometry
 geant4-geometry-solid
 geant4-geometry-construct
-geant4-geometry-constructSDandField
+geant4-geometry-constructsdandfield
 geant4-logicalvolume
 geant4-physicalvolume
 geant4-touchable

@@ -282,7 +282,7 @@ Pages under `docs/source/geant4/` (e.g. `geant4-usage.md`, `geant4-run-manager.m
   - Cross-reference sibling pages with plain links without extension or anchor: `[G4Step](geant4-step)`
   - Admonitions use the `:::{name}` colon-fence form with blank lines around the content
 - **Reference links**: point to the Geant4 Doxygen reference for the version the docs target (currently 11.2.0, `https://geant4.kek.jp/Reference/11.2.0/...`). When the version changes, update these links in one pass
-- **Known inconsistencies in existing pages**: about 40 pages have no `したい` in the H1, some filenames use underscores or capitals (`geant4-physics-ftfp_bert.md`, `geant4-geometry-constructSDandField.md`), and several pages are not in any toctree. Do not copy these patterns into new pages
+- **Known inconsistencies in existing pages**: about 40 pages have no `したい` in the H1. Do not copy this pattern into new pages
 
 ### Code Examples
 

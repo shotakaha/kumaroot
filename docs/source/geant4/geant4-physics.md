@@ -5,7 +5,7 @@
 Geant4の開発チームが「モジュール型物理リスト（`G4VModularPhysicsList`）」を用意しているので、その中から選択して指定するのが推奨されています。
 
 ```{toctree}
-geant4-physics-ftfp_bert
+geant4-physics-ftfp-bert
 geant4-physics-constructparticle
 geant4-physics-constructprocess
 geant4-physics-opticalphysics

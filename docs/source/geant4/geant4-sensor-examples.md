@@ -2,7 +2,7 @@
 
 ```{toctree}
 geant4-sensor-hit-fill
-geant4-sensor-hit-to_csv_string
-geant4-sensor-hit-to_ltsv_string
+geant4-sensor-hit-to-csv-string
+geant4-sensor-hit-to-ltsv-string
 geant4-sensor-processhits
 ```
