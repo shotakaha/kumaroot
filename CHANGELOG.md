@@ -1,5 +1,20 @@
 # CHANGELOG.md
 
+## Unreleased
+
+### Feat
+
+- **geant4-ios**: G4coutDestination によるログ出力の節を追加
+- **geant4-ios**: G4ios.hh の出力ページを追加
+
+### Fix
+
+- **geant4**: 型とユーザー向けの見出し・目次を整理
+- **geant4-overview**: 解説を散文中心に書き直し、表と箇条書きを減らす
+- **geant4-overview**: 内部処理のポイントを先に、自作アプリのポイントを後に再構成
+- **geant4-overview**: 参加者名を略称に統一し、図の表記を整理
+- **geant4-overview**: シーケンス図を先頭に移し、解説を整理
+
 ## v2026.11.3 (2026-11-23)
 
 ### Feat
