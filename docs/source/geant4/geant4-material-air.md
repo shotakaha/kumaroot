@@ -8,7 +8,7 @@ G4Material *air = nm->FindOrBuildMaterial("G4_AIR");
 `G4_AIR`でNISTデータにある空気を生成できます。
 炭素C（0.000124）、窒素N（0.755268）、酸素O（0.231781）、アルゴンAr（0.012827）が含まれています。
 
-## 元素から空気を作りたい（`FindOrBuildElement`）
+## 空気を作りたい（`FindOrBuildElement`）
 
 ```cpp
 G4NistManager *nm = G4NistManager::Instance();
@@ -29,7 +29,7 @@ air->AddElement(O, 30.*perCent);
 NISTの元素から`G4Element`を取得し、窒素Nと酸素Oだけで組成を指定します。
 密度は`G4_AIR`（1.205 mg/cm3）より大きい値にしています。
 
-## 元素を作って空気を作りたい（`G4Element`）
+## 空気を作りたい（`G4Element`）
 
 ```cpp
 G4double a, z, density;
