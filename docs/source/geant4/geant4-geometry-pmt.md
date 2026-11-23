@@ -1,17 +1,16 @@
 # PMTを作りたい（`BuildPmtWindow`）
 
-PMT（光電子増倍管）は、PMT全体を作る必要はありません。
-光子を検出するのは**感光面**だけなので、入射窓と感光面だけを作り、感光面をSensitiveDetectorにするのが一般的な方法です。
-附属サンプルでも、この方法が使われています（下の「参考にした附属サンプル」の表を参照）。
+光電子増倍管（PMT）を使って光子検出するGeant4アプリを作るケースは多いと思います。
+附属サンプルを参考にすると、PMT全体を作るのではなく、入射窓（PmtWindow）と感光面（PmtPhotocathode）の2つの論理ボリュームを作るのが簡単なようです。
 
-実装は次の流れで進めます。
+次の6ステップでPMTを実装できます。
 
-1. **入射窓（PMT）を作る**: 論理ボリューム。`BuildPmtWindow`で作り、1回だけ作ります。
-2. **感光面を作る**: 論理ボリューム。`BuildPmtPhotocathode`で作り、光学表面（`EFFICIENCY`）を付けます。
-3. **感光面を入射窓の中に置く**: 物理ボリューム。`SetupPmt`で、入射窓の中に感光面を配置します。
-4. **PMTを並べる**: 物理ボリューム（コピー番号つき）。`SetupPmtArray`で、`SetupPmt`を並べた数だけ呼びます。
-5. **SensitiveDetectorを作って感光面に登録する**: `PmtSD`を作り、`ConstructSDandField()`で登録します。
-6. **光学物理で検出を通知する**: `SetBoundaryInvokeSD(true)`を設定します。
+1. **入射窓（PmtWindow）** を論理ボリュームとして作る（`BuildPmtWindow`）
+2. **感光面（PmtPhotocathode）** を論理ボリュームとして作る（`BuildPmtPhotocathode`）
+3. **感光面** を **入射窓の中** に物理ボリュームとして配置する（`SetupPmt`）
+4. **複数のPMT** コピー番号つきの物理ボリュームとして配置する（`SetupPmtArray`）
+5. **感光面** をSensitiveDetectorとして登録する（`ConstructSDandField()`）
+6. **光学物理（G4OpticalPhysics）** で光子検出する（`SetBoundaryInvokeSD(true)`）
 
 ## 入射窓を作りたい（`BuildPmtWindow`）
 
@@ -55,9 +54,12 @@ G4LogicalVolume* BuildPmtWindow(
 }
 ```
 
-PMTの入射窓の論理ボリュームを作ります。
-名前・素材・半径・厚みは引数で変えられます。既定値は3インチ管の入射窓です。
-この関数は、`Construct()`の中で**1回だけ**呼びます。PMTを並べるときは、この論理ボリュームを何回も使い回します。
+`BuildPmtWindow`は、PMTの入射窓の論理ボリュームを1つ作成する関数です。
+名前・素材・半径・厚みは引数で変えられます。
+デフォルトは3インチ管の入射窓です。
+
+この関数を`Construct()`の中で **1回だけ** 呼ぶようにします。
+複数のPMTを並べる場合は、この論理ボリュームを使い回します。
 
 ## 感光面を作りたい（`BuildPmtPhotocathode`）
 
@@ -113,10 +115,28 @@ G4LogicalVolume* BuildPmtPhotocathode(
 }
 ```
 
-感光面は、入射窓と同じ半径の薄い円板です。
-光が当たったときに、光子を検出するかどうかを`EFFICIENCY`で決めます。
-ここでは検出効率を1.0にしていますが、実際のPMTの量子効率（QE）は波長によって変わります。
-波長ごとの値は[量子効率](geant4-qe)を参照してください。
+`BuildPmtPhotocathode`は、PMTの感光面の論理ボリュームを1つ作成する関数です。
+感光面は入射窓と同じ半径の薄い円板としています。
+
+感光面に光が当たったときの光子検出のふるまいは、`G4MaterialPropertiesTable`を使ってユーザーが設定する必要があります。
+光子のエネルギー（`photonEnergies`）に対する検出効率（`EFFICIENCY`）と複素屈折率（`REALRINDEX` / `IMAGINARYRINDEX`）を指定します。
+上記のサンプルは適当な値となっていますが、実際にはPMTの量子効率（QE）や光学特性に合わせて設定する必要があります。
+
+:::{note}
+
+量子効率や光学特性は、感光面の材質のデータシートの値を参考にしてアプリ開発をはじめることが多いです。
+シミュレーションの精度をあげるために、別途測定し、実測値を使う場合もあります。
+
+:::
+
+
+:::{seealso}
+
+- [](./geant4-qe.md)
+- [](./geant4-material-propertiestable.md)
+
+:::
+
 
 ## 感光面を入射窓に配置したい（`SetupPmt`）
 
