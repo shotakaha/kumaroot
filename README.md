@@ -239,6 +239,8 @@ $ task status    # Gitの状態を表示
 $ task log       # 最近のコミットを表示（20件）
 $ task push      # 現在のブランチをプッシュ（注釈付きタグも含む）
 $ task push:tags # 現在のブランチとすべてのタグをプッシュ
+$ task push:main # mainブランチのときだけプッシュ（別ブランチなら中止）
+$ task zed       # Zedでプロジェクトを開く
 $ task examples:sync  # jupytextでPythonサンプルとNotebookを同期
 ```
 
