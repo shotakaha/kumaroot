@@ -1,42 +1,65 @@
-# 水を作りたい（``G4_WATER``）
+# 水を作りたい（`G4_WATER`）
 
 ```cpp
-G4NistManager *nm = G4NistManager::Instance()
-G4Material *water = nm->FindOrBuildMaterial("G4_WATER")
+G4NistManager *nm = G4NistManager::Instance();
+G4Material *water = nm->FindOrBuildMaterial("G4_WATER");
 ```
 
-``G4_WATER``でNISTデータにある水を生成できます。
+`G4_WATER`でNISTデータにある水（H2O、密度1.0 g/cm3、液体）を生成できます。
 
-## 水蒸気したい（``GA_WATER_VAPOR``）
+## 水を作りたい（`FindOrBuildElement`）
 
 ```cpp
-G4NistManager *nm = G4NistManager::Instance()
-G4Material *vapor = nm->FindOrBuildMaterial("G4_WATER_VAPOR")
+G4NistManager *nm = G4NistManager::Instance();
+
+// 元素を取得（NISTの元素名を指定）
+G4Element *H = nm->FindOrBuildElement("G4_H");
+G4Element *O = nm->FindOrBuildElement("G4_O");
+
+// 密度を設定
+G4double density = 1.0 * g/cm3;
+G4Material *water = new G4Material("Water", density, 2, kStateLiquid);
+
+// 原子数比を設定（H2O）
+water->AddElement(H, 2);
+water->AddElement(O, 1);
 ```
 
-``G4_WATER_VAPOR``で水蒸気を生成できます。
-密度が ``0.000756182*g/cm3``に設定された水です。
+NISTの元素から`G4Element`を取得し、原子数比で組成を指定します。
+`G4_WATER`と同じ組成（H2O）と密度（1.0 g/cm3）です。
 
-## カスタマイズしたい
+## 水を作りたい（`G4Element`）
 
 ```cpp
-G4double a, z, density;
-G4int nelements;
+G4double z, a;
+G4double density = 1.0 * g/cm3;
 
 G4Element *H = new G4Element("Hydrogen", "H", z=1, a=1.00794*g/mole);
 G4Element *O = new G4Element("Oxygen", "O", z=8, a=15.9994*g/mole);
-G4Material *fWater = new G4Material("Water", density=1.0*g/cm3, nelements=2);
-Water->AddElement(H, 2);
-Water->AddElement(O, 1);
+
+G4Material *water = new G4Material("Water", density, 2, kStateLiquid);
+water->AddElement(H, 2);
+water->AddElement(O, 1);
 ```
 
-``G4Element``と``G4Material``を使ってカスタマイズした水を生成できます。
+`G4Element`で元素の原子番号（`z`）と質量数（`a`）を指定して作ります。
+元素の性質はNISTの値で足りるので、通常は前の方法を使ってください。
 質量数や密度は適切な文献を参照してください。
 
-## 光学特性したい
+## 水蒸気を作りたい（`G4_WATER_VAPOR`）
 
 ```cpp
-// Optical Photonのエネルギー
+G4NistManager *nm = G4NistManager::Instance();
+G4Material *vapor = nm->FindOrBuildMaterial("G4_WATER_VAPOR");
+```
+
+`G4_WATER_VAPOR`で水蒸気を生成できます。
+密度が`0.000756182 g/cm3`に設定された水です。
+
+## 水の光学特性を設定したい（`G4MaterialPropertiesTable`）
+
+```cpp
+// Optical Photonのエネルギー（昇順）
 std::vector<G4double> photon_energy{
     2.034*eV, 2.068*eV, 2.103*eV, 2.139*eV,
     2.177*eV, 2.216*eV, 2.256*eV, 2.298*eV,
@@ -49,7 +72,7 @@ std::vector<G4double> photon_energy{
     4.275*eV, 4.427*eV, 4.591*eV
     };
 
-// エネルギーごとの反射率
+// エネルギーごとの屈折率
 std::vector<G4double> refractive_index{
     1.3435, 1.344,  1.3445, 1.345,  1.3455,
     1.346,  1.3465, 1.347,  1.3475, 1.348,
@@ -74,16 +97,22 @@ G4MaterialPropertiesTable *mpt = new G4MaterialPropertiesTable();
 mpt->AddProperty("RINDEX", photon_energy, refractive_index);
 mpt->AddProperty("ABSLENGTH", photon_energy, absorption_length);
 
-fWater->SetMaterialPropertiesTable(mpt)
+water->SetMaterialPropertiesTable(mpt);
 ```
 
-[G4MaterialPropetiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)で、材料の特性を追加できます。
+[G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)で、材料の特性を追加できます。
 G4Material自体は材料の特性を持たないため、自分で追加する必要があります。
-光子の波長（を変換したエネルギー）ごとの屈折率と吸収長は、文献値を参考にしたり、自分で測定したりして定義します。
+`G4_WATER`にも同じ方法で光学特性を設定できます。
+光子のエネルギーは昇順で与えてください。
+光子のエネルギーごとの屈折率と吸収長は、文献値を参考にしたり、自分で測定したりして定義します。
 
 :::{seealso}
 
 - [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
 - [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+- [G4Element](https://geant4.kek.jp/Reference/11.2.0/classG4Element.html)
+- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)
+- [geant4-material-element](geant4-material-element)
+- [geant4-material-propertiestable](geant4-material-propertiestable)
 
 :::
