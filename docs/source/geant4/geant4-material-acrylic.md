@@ -7,8 +7,7 @@ auto *acrylic = nm->FindOrBuildMaterial("G4_PLEXIGLASS");
 
 `G4_PLEXIGLASS`でアクリル材（アクリル樹脂）を生成できます。
 
-アクリル樹脂の化学組成はPMMA（ポリメタクリル酸メチル）ですが、
-Geant4では工業名の「プレキシガラス」で登録されています。
+アクリル樹脂の化学組成はPMMA（ポリメタクリル酸メチル）ですが、Geant4では工業名の「プレキシガラス」で登録されています。
 
 :::{note}
 
@@ -16,22 +15,22 @@ Geant4では工業名の「プレキシガラス」で登録されています�
 
 :::
 
-## カスタマイズしたい
+## 元素からアクリルを作りたい（`G4Element`）
 
 ```cpp
-// 名称: ポリメタクリル酸メチル樹脂（polymethyl methacrylate)
+// 名称: ポリメタクリル酸メチル樹脂（polymethyl methacrylate）
 // 略称: PMMA
 // 化学式: (C5 H8 O2)n
-auto* nm = G4NistManager::Instance();
+auto *nm = G4NistManager::Instance();
 
-// 元素を取得
-auto* H = nm->FindOrBuildElement("G4_H");
-auto* C = nm->FindOrBuildElement("G4_C");
-auto* O = nm->FindOrBuildElement("G4_O");
+// 元素を取得（NISTの元素名を指定）
+auto *H = nm->FindOrBuildElement("G4_H");
+auto *C = nm->FindOrBuildElement("G4_C");
+auto *O = nm->FindOrBuildElement("G4_O");
 
 // 密度を設定
 G4double density = 1.19 * g/cm3;
-auto* pmma = new G4Material("PMMA", density, 3);
+auto *pmma = new G4Material("PMMA", density, 3);
 
 // 原子数比を設定
 pmma->AddElement(C, 5);
@@ -40,9 +39,11 @@ pmma->AddElement(O, 2);
 ```
 
 プレキシガラスという呼び方を知らなかったころに、自分で作ってみたサンプルです。
-PMMAの化学式は`(C5 H8 O2)n`で、密度は`1.19 g/cm3`として作成しています。
+元素記号で`G4Element`を取得し、原子数比で組成を指定します。
+`G4_PLEXIGLASS`と同じ組成（C5H8O2）と密度（1.19 g/cm3）です。
 
-## 光学特性したい
+
+## アクリルの光学特性を設定したい（`G4MaterialPropertiesTable`）
 
 ```cpp
 #include "G4PhysicalConstants.hh"
@@ -59,7 +60,7 @@ std::vector<G4double> wavelengths = {
     350.*nm, 340.*nm, 330.*nm, 320.*nm, 310.*nm,
     300.*nm, 290.*nm, 280.*nm, 270.*nm, 260.*nm,
     200.*nm,
-}
+};
 
 // 吸収長
 std::vector<G4double> absorption_lengths = {
@@ -68,7 +69,7 @@ std::vector<G4double> absorption_lengths = {
     15.7*cm, 13.6*cm, 11.58*cm, 9.81*cm, 7.71*cm,
     3.48*cm, 1.10*cm, 3.94*mm, 1.46*mm, 0.867*mm,
     0.867*mm,
-}
+};
 
 // 波長をエネルギー [eV] に変換
 std::vector<G4double> photon_energies;
@@ -79,33 +80,41 @@ for (const auto& length : wavelengths) {
     photon_energies.push_back((CLHEP::twopi * CLHEP::hbarc) / length);
 }
 
-// 光学特性を定義
-auto* mpt = new G4MaterialPropertiesTable();
+// 屈折率（波長によらず1.49）
+std::vector<G4double> refractive_indices(photon_energies.size(), 1.49);
 
-// 波長によらない屈折率を設定
-mpt->AddConstProperty("RINDEX", 1.49);
+// 光学特性を定義
+auto *mpt = new G4MaterialPropertiesTable();
+
+// 屈折率を設定
+mpt->AddProperty(
+    "RINDEX",
+    photon_energies.data(),
+    refractive_indices.data(),
+    photon_energies.size());
+
 // 波長に依存する吸収長を設定
 mpt->AddProperty(
     "ABSLENGTH",
     photon_energies.data(),
     absorption_lengths.data(),
-    wavelengths.size(),
-);
+    photon_energies.size());
 
 // 光学特性を追加
 pmma->SetMaterialPropertiesTable(mpt);
 ```
 
-アクリル材の光学特性を設定するサンプルです。
-波長に依らない特性は`AddConstProperty`、
-波長に依存する特性は`AddProperty`で設定できます。
+光学特性は`G4MaterialPropertiesTable`に登録して、材質に設定します。
+`G4_PLEXIGLASS`で取得したアクリル材にも、同じ方法で設定できます。
 
 屈折率は波長によらず1.49、
 吸収長は波長ごとに値が変わるようにしました。
+光子のエネルギーは波長の逆数に比例するため、波長を降順で並べると、エネルギーは昇順になります。
 
 :::{seealso}
 
 - [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
 - [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)
 
 :::
