@@ -43,3 +43,9 @@ G4int run_id = run->GetRunID();
 
 `G4Event`からも、`G4Run`に直接アクセスできません。
 同じく`G4RunManager`を経由して取得します。
+
+:::{seealso}
+
+- [G4Run](https://geant4.kek.jp/Reference/11.2.0/classG4Run.html)
+
+:::

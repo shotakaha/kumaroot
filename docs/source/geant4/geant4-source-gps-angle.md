@@ -5,3 +5,9 @@
 | ``/gps/ang/type`` | 分布の種類 | iso | 分布の種類を設定（iso / cos / planar / beam1d / beam2d / focused / user） |
 | ``/gps/ang/mintheta`` | $\theta$ 単位 | 0 rad | 最小値を設定 |
 | ``/gps/ang/maxtheta`` | $\theta$ 単位 | $\pi$ rad | 最小値を設定 |
+
+:::{seealso}
+
+- [G4GeneralParticleSource](https://geant4.kek.jp/Reference/11.2.0/classG4GeneralParticleSource.html)
+
+:::

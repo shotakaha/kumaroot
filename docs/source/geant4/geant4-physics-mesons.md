@@ -9,3 +9,9 @@ void PhysicsList::ConstructMesons()
     G4PionZero::Definition();
 }
 ```
+
+:::{seealso}
+
+- [G4VUserPhysicsList](https://geant4.kek.jp/Reference/11.2.0/classG4VUserPhysicsList.html)
+
+:::

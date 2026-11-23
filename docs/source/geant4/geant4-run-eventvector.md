@@ -8,3 +8,9 @@ auto events = aRun->GetEventVector();
 ランの含まれるすべての``G4Event``を取得できます。
 返り値は``std::vector<const G4Event>``型ですが、
 型名が長いので`auto`でもらうのがよいと思います。
+
+:::{seealso}
+
+- [G4Run](https://geant4.kek.jp/Reference/11.2.0/classG4Run.html)
+
+:::

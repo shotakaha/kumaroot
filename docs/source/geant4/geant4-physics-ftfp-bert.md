@@ -40,3 +40,9 @@ int main()
 Geant4 v10.0以前は`QGSP_BERT`、以降は`FTFP_BERT`が
 Geant4の標準的なモデルとして採用されています。
 まずは、`FTFP_BERT`を採用しておけばよいはずです。
+
+:::{seealso}
+
+- [FTFP__BERT](https://geant4.kek.jp/Reference/11.2.0/classFTFP__BERT.html)
+
+:::

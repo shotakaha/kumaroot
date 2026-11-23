@@ -8,3 +8,9 @@ G4ThreeVector momentum_direction = aTrack->GetMomentumDirection();
 
 ``GetMomentumDirection``で運動量の単位ベクトル成分、
 ``GetMomentum``で運動量の合計を取得できます。
+
+:::{seealso}
+
+- [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
+
+:::

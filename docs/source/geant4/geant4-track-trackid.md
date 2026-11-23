@@ -21,3 +21,9 @@ if (parent_id == 0) {
 
 ``GetParentID``で親トラックの番号を取得できます。
 初期粒子は親を持たないため、親IDは0です。
+
+:::{seealso}
+
+- [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
+
+:::

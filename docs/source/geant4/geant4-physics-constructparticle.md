@@ -14,3 +14,9 @@ void PhysicsList::ConstructParticle()
 - [](./geant4-physics-leptons.md)
 - [](./geant4-physics-mesons.md)
 - [](./geant4-physics-baryons.md)
+
+:::{seealso}
+
+- [G4VUserPhysicsList](https://geant4.kek.jp/Reference/11.2.0/classG4VUserPhysicsList.html)
+
+:::

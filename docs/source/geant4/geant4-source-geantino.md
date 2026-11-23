@@ -48,3 +48,9 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 `chargedgeantino`は電荷（+1 e）を持つため、磁場中で軌跡が曲がります。
 一方、`geantino`は電荷が0なので曲がりません。
 同じ設定で両方を実行すると、違いを比べられます。
+
+:::{seealso}
+
+- [G4ParticleGun](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleGun.html)
+
+:::

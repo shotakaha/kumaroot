@@ -8,3 +8,9 @@
 | ``/gps/pos/halfx`` | X 単位 | 0 cm | X方向の幅 |
 | ``/gps/pos/halfy`` | Y 単位 | 0 cm | X方向の幅 |
 | ``/gps/pos/halfz`` | Z 単位 | 0 cm | X方向の幅 |
+
+:::{seealso}
+
+- [G4GeneralParticleSource](https://geant4.kek.jp/Reference/11.2.0/classG4GeneralParticleSource.html)
+
+:::

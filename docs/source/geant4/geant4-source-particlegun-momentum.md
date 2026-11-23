@@ -19,3 +19,9 @@ fParticleGun->SetParticleMomentum(400 * MeV);
 - 粒子の種類を設定済みの場合、質量を考慮した運動エネルギー（`sqrt(p²+m²)−m`）が設定されます。
 - 粒子の種類が未設定の場合、質量は0とみなされ、運動量の値がそのままエネルギーとして設定されます。
 - 運動エネルギーをすでに設定していた場合は、警告メッセージが出力されて、運動量で上書きされます。
+
+:::{seealso}
+
+- [G4ParticleGun](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleGun.html)
+
+:::

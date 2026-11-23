@@ -10,3 +10,10 @@ G4StepPoint *post_step = aStep->GetPostStepPoint();
 ``GetPreStepPoint`` で始点、
 ``GetPostStepPoint`` で終点の
 ``G4StepPoint``オブジェクトを取得できます。
+
+:::{seealso}
+
+- [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)
+- [G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)
+
+:::

@@ -73,3 +73,9 @@ G4SDParticleFilter *neutral_filter = new G4SDNeutralFilter("neutralFilter");
 そのほかにも電荷フィルター（``G4SDChargedFilter``と``G4SDNeutralFilter``）、
 運動エネルギーフィルター（``G4SDKineticEnergyFilter``）、
 粒子＆運動ネルギーフィルター（``G4SDParticleWithEnergyFilter``）があります。
+
+:::{seealso}
+
+- [G4MultiFunctionalDetector](https://geant4.kek.jp/Reference/11.2.0/classG4MultiFunctionalDetector.html)
+
+:::

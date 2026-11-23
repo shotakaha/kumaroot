@@ -8,3 +8,9 @@ auto aNextTouch = aTrack->GetTouchableHandle();
 
 ``GetTouchableHandle``で、現在のトラックの物理ボリュームにアクセスできるようになります。
 具体的な使い方は[](./geant4-touchable.md)に整理しました。
+
+:::{seealso}
+
+- [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
+
+:::

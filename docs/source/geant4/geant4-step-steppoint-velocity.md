@@ -36,3 +36,9 @@ G4double gamma = pre_step->GetGamma();
 \gamma = \frac{1}{\sqrt{1 - \beta^{2}}}
 
 :::
+
+:::{seealso}
+
+- [G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)
+
+:::

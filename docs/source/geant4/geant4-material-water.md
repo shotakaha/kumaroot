@@ -80,3 +80,10 @@ fWater->SetMaterialPropertiesTable(mpt)
 [G4MaterialPropetiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)で、材料の特性を追加できます。
 G4Material自体は材料の特性を持たないため、自分で追加する必要があります。
 光子の波長（を変換したエネルギー）ごとの屈折率と吸収長は、文献値を参考にしたり、自分で測定したりして定義します。
+
+:::{seealso}
+
+- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+
+:::

@@ -15,3 +15,9 @@ if (n_events == 0) {
 `GetNumberOfEventToBeProcessed()`は、`BeamOn`で要求されたイベント数です。
 
 イベント数がわかると、イベントがないランをスキップできます。
+
+:::{seealso}
+
+- [G4Run](https://geant4.kek.jp/Reference/11.2.0/classG4Run.html)
+
+:::

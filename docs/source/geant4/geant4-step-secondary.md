@@ -6,3 +6,9 @@ G4int n2nd = aStep->GetNumberOfSecondariesInCurrentStep();
 ```
 
 現在のステップで発生した二次粒子の数を取得します。
+
+:::{seealso}
+
+- [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)
+
+:::

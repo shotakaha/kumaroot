@@ -86,3 +86,9 @@ y & = \sin\theta \sin\phi \\
 z & = \cos\theta
 
 :::
+
+:::{seealso}
+
+- [G4ParticleGun](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleGun.html)
+
+:::

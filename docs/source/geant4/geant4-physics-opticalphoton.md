@@ -61,3 +61,9 @@ G4bool OpticalSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 トラック情報から`G4OpticalPhoton`であることを確認し、
 光学光子1つずつの基本情報と生成元のプロセスを取得しています。
 受光面に到達したあとの計算は不要なので、`fStopAndKill`で吸収されたものとみなしています。
+
+:::{seealso}
+
+- [G4OpticalPhoton](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalPhoton.html)
+
+:::

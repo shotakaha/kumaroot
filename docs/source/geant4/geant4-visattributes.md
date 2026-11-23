@@ -20,3 +20,9 @@ logicVolume->SetVisAttributes(attributes);
 マクロでは`/vis/geometry/set/*`コマンドで設定できます。
 
 `logicVolume`は、色を設定したい`G4LogicalVolume`です。
+
+:::{seealso}
+
+- [G4VisAttributes](https://geant4.kek.jp/Reference/11.2.0/classG4VisAttributes.html)
+
+:::

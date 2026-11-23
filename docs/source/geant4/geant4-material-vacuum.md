@@ -23,3 +23,10 @@ G4Material *vacuum = new G4Material(
 
 真空は「非常に密度が低いガス」として作ります。
 ここの値はGeant4講習会の資料に掲載されていたものを使っています。
+
+:::{seealso}
+
+- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+
+:::

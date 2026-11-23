@@ -7,3 +7,9 @@ G4ThreeVector position = aTrack->GetPosition();
 
 トラックの座標を取得できます。
 座標の原点はワールドボリュームの中心です。
+
+:::{seealso}
+
+- [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
+
+:::

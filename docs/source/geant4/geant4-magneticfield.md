@@ -24,3 +24,9 @@ pLogicalVolume->SetFieldManager(field_manager, true);  // 子ボリュームに�
 ```
 
 論理ボリュームに対して磁場を与えることができます。
+
+:::{seealso}
+
+- [G4UniformMagField](https://geant4.kek.jp/Reference/11.2.0/classG4UniformMagField.html)
+
+:::

@@ -36,3 +36,9 @@ G4Material *plateGlass = nm->FindOrBuildMaterial("G4_GLASS_PLATE");
 
 ``G4_Pyrex_Glass``、``G4_GLASS_PLATE``でガラス材を生成できます。
 構成元素と密度が異なるので、用途にあったほうを選択してください。
+
+:::{seealso}
+
+- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
+
+:::

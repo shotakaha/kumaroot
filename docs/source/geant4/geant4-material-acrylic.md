@@ -102,3 +102,10 @@ pmma->SetMaterialPropertiesTable(mpt);
 
 屈折率は波長によらず1.49、
 吸収長は波長ごとに値が変わるようにしました。
+
+:::{seealso}
+
+- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+
+:::

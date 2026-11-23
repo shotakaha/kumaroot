@@ -29,3 +29,10 @@ Air->AddElement(O, 30.*perCent);
 この空気の組成はユーザーガイドの[Define a Mixture by Fractional Mass](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/materialDef.html#define-a-mixture-by-fractional-mass)から取ってきたもののようです。
 
 :::
+
+:::{seealso}
+
+- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+
+:::

@@ -10,3 +10,9 @@ G4debug << "mass= " << G4BestUnit(mass, "Mass") << G4endl;
 ``GetMass``で論理ボリュームの質量を取得できます。
 論理ボリュームには形状と材料（＝密度）を与えているため、
 質量が計算できます。
+
+:::{seealso}
+
+- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)
+
+:::
