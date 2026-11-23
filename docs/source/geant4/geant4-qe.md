@@ -123,8 +123,9 @@ inline G4MaterialPropertiesTable* MakeEfficiencyProperties(const PmtQETable& tab
 
 :::{hint}
 
-`EFFICIENCY`は光子が光電面で検出される確率として使われます。
-`G4OpBoundaryProcess`では、光子が光電面に入射したときに、`G4BooleanRand(fEfficiency)`で判定します。
+`EFFICIENCY`は、光学表面で吸収された光子が検出される確率として使われます。
+光電面では、この値を量子効率に近似できます。
+`G4OpBoundaryProcess`では、反射されずに吸収された光子に対して`G4BooleanRand(fEfficiency)`で判定します。
 trueとなった光子が`Detection`として扱われます。
 
 :::
