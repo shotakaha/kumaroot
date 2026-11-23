@@ -156,16 +156,17 @@ wlsFiber->SetMaterialPropertiesTable(mptWLS);
 
 ```cpp
 // photon_energy は昇順の std::vector<G4double>
-// 光電面の量子効率（例）
-std::vector<G4double> quantum_efficiency = { 0.10, 0.25, 0.20 };
+// 光電面の検出効率（例）
+std::vector<G4double> efficiency = { 0.10, 0.25, 0.20 };
 
+auto photocathodeSurface = new G4OpticalSurface{"Photocathode"};
 auto mptPMT = new G4MaterialPropertiesTable{};
-mptPMT->AddProperty("EFFICIENCY", photon_energy, quantum_efficiency);
-
-photocathodeMaterial->SetMaterialPropertiesTable(mptPMT);
+mptPMT->AddProperty("EFFICIENCY", photon_energy, efficiency);
+photocathodeSurface->SetMaterialPropertiesTable(mptPMT);
 ```
 
-`EFFICIENCY`は、光電面に到達した光子が検出される確率です。
+`EFFICIENCY`は、光学表面で吸収された光子が検出される確率です。
+光電面では、この値を量子効率に近似できます。
 値の作り方と、光電面への適用方法は[](geant4-qe)を参照してください。
 
 ## 光学表面したい（`G4OpticalSurface`）
