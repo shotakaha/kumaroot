@@ -48,7 +48,7 @@ G4LogicalVolume* BuildTank(
 `G4Tubs`で円柱を作成しています。
 円柱の軸はZ軸方向で、引数は半径と高さの半分を指定します。
 
-初期値はスーパーカミオカンデを参考に、材質を水（`G4_Water`）として、サイズを直径39.3m、高さ41.4mとしました。
+初期値はスーパーカミオカンデを参考に、材質を水（`G4_WATER`）として、サイズを直径39.3m、高さ41.4mとしました。
 
 ## 水タンクを配置したい
 
@@ -88,3 +88,22 @@ G4VPhysicalVolume* SetupTank(
 
 ワールドの中心に配置したかったので`G4ThreeVector`は原点のままにしています。
 引数`parent`には、`SetupWorld`が返した実験室の物理ボリュームを渡します。
+
+## Construct で組み立てたい
+
+```cpp
+G4VPhysicalVolume* Construct()
+{
+    // 実験室（World）を配置する
+    auto world = SetupWorld();
+
+    // 水タンクを実験室の中に配置する
+    SetupTank(world);
+
+    return world;
+}
+```
+
+`Construct()`の中で、`SetupWorld()`で実験室を配置したあと、その物理ボリュームを親として`SetupTank()`を呼び出します。
+タンクは実験室の中に置かれ、最後に実験室の物理ボリュームを返します。
+ジオメトリの組み立て方は[](geant4-geometry-construct)にまとめています。
