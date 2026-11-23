@@ -290,6 +290,11 @@ Pages under `docs/source/geant4/` (e.g. `geant4-usage.md`, `geant4-run-manager.m
   - **Recipe pages** that combine several classes (`geant4-calorimeter`, `geant4-hodoscope`, `geant4-sensor-photon`, `geant4-qe`): the H1 names the goal, and the closing `seealso` lists the classes used
   - **Example pages** and **error pages**: follow their own structures above
 - **Scope of the title and code rules**: pages whose identifier is a user-defined function (e.g. `BuildWorld`) do not have a Geant4 class to link. Document them with the Geant4 classes they call
+- **Geometry pages** (`geant4-geometry-*`): name functions by the volume they return
+  - `Build*` returns a `G4LogicalVolume*` (e.g. `BuildWorld`, `BuildWaterTank`)
+  - `Setup*` returns a `G4VPhysicalVolume*` and places a logical volume (e.g. `SetupWorld`)
+  - Arguments are `const G4String&` or `G4double` with default values, in the order name → material → size. Use camelCase, following the Geant4 examples (`worldSizeXY`, `envSizeZ`)
+  - Spell out unused arguments explicitly as `nullptr`, `false`, or `0` with a `//` comment. Do not omit them
 
 ### Code Examples
 
