@@ -80,3 +80,9 @@ std::vector<G4double> WavelengthToEnergy(const std::vector<G4double>& wavelength
 E = h\nu = \frac{hc}{\lambda}
 
 :::
+
+:::{seealso}
+
+- [CLHEP PhysicalConstants.h（CLHEP 2.2.0.4）](https://proj-clhep.web.cern.ch/proj-clhep/doc/CLHEP_2_2_0_4/html/PhysicalConstants_8h.html)
+
+:::
