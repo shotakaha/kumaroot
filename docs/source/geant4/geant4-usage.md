@@ -58,6 +58,7 @@ geant4-cpp-google
 ---
 maxdepth: 1
 ---
+geant4-ios
 geant4-types
 geant4-string
 geant4-units
