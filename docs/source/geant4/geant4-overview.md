@@ -1,18 +1,16 @@
 # シミュレーションの流れ
 
-Geant4のシミュレーションの全体の流れを1枚のシーケンス図にまとめました。
+Geant4のシミュレーションの全体の流れを、1枚のシーケンス図にまとめました。
 
 :::{hint}
 
-このシーケンス図はGeant4をはじめるときに一番欲しかった情報かもしれないです。
+このシーケンス図は、Geant4をはじめるときに一番欲しかった情報かもしれません。
 
 :::
 
 ## シーケンス図
 
-時間は上から下へ進みます。
-実線の矢印は「呼び出し」を表します。
-`opt`で囲んだ部分は任意で、必要になったときだけ実装します。
+時間は上から下へ進みます。実線の矢印は呼び出しを表し、`opt`で囲んだ部分は任意です。
 
 :::{mermaid}
 
@@ -84,78 +82,43 @@ sequenceDiagram
 
 :::
 
-## シーケンス図から分かる内部処理のポイント
+## シーケンス図の解説
 
-### 用語
+この図は、準備、構築、実行、終了の順に進みます。
+`main()`では、`RunManager`を作り、検出器や物理プロセスなどを渡します。
+`Initialize()`で検出器と物理プロセスを組み立てたあと`BeamOn()`で実行します。
 
-シミュレーションは、次の4つの単位が入れ子になって進みます。
+シミュレーションの実行は入れ子構造になっています。
+`BeamOn()`1回分が**Run**で、その中に初期粒子1個分の処理である**Event**が並びます。
+Eventの中には粒子1個の追跡である**Track**が並び、Trackの中には1ステップ分の**Step**が並びます。
 
-| 用語 | 意味 |
-|---|---|
-| Run | `BeamOn()`1回分の実行単位 |
-| Event | 初期粒子1個の処理単位 |
-| Track | 1個の粒子の追跡単位（二次粒子も含む） |
-| Step | 粒子が1ステップ進む単位 |
+この入れ子構造に対して、Managerクラスが分担されています。
+**RunManager**がEventの処理をEventManagerに任せ、**EventManager**がTrackの処理をTrackingManagerに任せ、**TrackingManager**がStepの処理を**SteppingManager**に任せます。
+ユーザーが直接操作するのはRunManagerだけで、残りはGeant4が自動的に呼び出してくれます。
 
-### Managerが処理を分担する
+## 自作アプリ開発のポイント
 
-4つのManagerクラスが、それぞれの単位を担当します。
+自作アプリ開発では、まず5つのクラスを用意します。
+`main()`、`DetectorConstruction`、`PhysicsList`、`ActionInitialization`、`PrimaryGeneratorAction`です。
 
-- **G4RunManager**: Runを管理し、Eventの処理を依頼する
-- **G4EventManager**: Eventを管理し、Trackの処理を依頼する
-- **G4TrackingManager**: Trackを管理し、Stepの処理を依頼する
-- **G4SteppingManager**: 1ステップの処理を実行する
+`main()`は`RunManager`を作って必須クラスを渡すだけです。
+検出器の形状と材質は`DetectorConstructionのConstruct()`で、使う物理プロセスは`PhysicsList`の`ConstructProcess()`で決めます。
+初期粒子は`PrimaryGeneratorAction`の`GeneratePrimaries()`で作ります。
+`ActionInitialization`は、これらと任意クラスを登録する場所です。
 
-ユーザーが直接呼ぶのは**G4RunManagerだけ**です。残りのManagerは、Geant4の内部で自動的に呼ばれます。
+任意クラスは、必要になったときだけ追加します。
+`RunAction`、`EventAction`、`TrackingAction`、`SteppingAction`は`ActionInitialization`に登録します。
+登録がない場合、図の`opt`の部分は呼ばれません。
+たとえば、1ステップごとに情報を集めたいなら`SteppingAction`に書きます。
 
-### 処理は4段階で進む
+`SensitiveDetector`は、`DetectorConstruction`の`ConstructSDandField()`で登録します。
+検出器のボリュームに入った粒子からヒット情報を取り出す役割の任意クラスです。
 
-1. **①main()で準備**: RunManagerを作り、必須クラスを渡す
-2. **②Initialize()で構築**: 検出器と物理プロセスを組み立てる
-3. **③BeamOn()で実行**: Run → Event → Track → Step の順に入れ子で繰り返す
-4. **④終了**: RunManagerを削除する。登録したユーザークラスも一緒に削除される
-
-### 任意のアクションは決まったタイミングで呼ばれる
-
-RunAction、EventAction、TrackingAction、SteppingActionは、図の対応する位置で自動的に呼ばれます。
-実装しなければ呼ばれません（図の`opt`の部分）。
-
-## 自作アプリで押さえるポイント
-
-### 必須クラス
-
-次の5つは、自作アプリで必ず用意します。
-
-| クラス | 役割 | 主に書く場所 |
-|---|---|---|
-| main() | RunManagerを作り、必須クラスを渡す | `main.cc` |
-| DetectorConstruction | 検出器の形状と材質を作る | `Construct()` |
-| PhysicsList | 使う物理プロセスを決める | `ConstructParticle()`、`ConstructProcess()` |
-| ActionInitialization | 各アクションを登録する | `Build()`、`BuildForMaster()` |
-| PrimaryGeneratorAction | 初期粒子を作る | `GeneratePrimaries()` |
-
-### 任意クラス
-
-必要になったときだけ追加します。たとえば、1ステップごとに情報を集めたいならSteppingActionに書きます。
-
-| クラス | 役割 | 登録場所 |
-|---|---|---|
-| RunAction | Runの開始と終了で処理する | ActionInitialization |
-| EventAction | Eventの開始と終了で処理する | ActionInitialization |
-| TrackingAction | Trackの開始と終了で処理する | ActionInitialization |
-| SteppingAction | Stepごとに処理する | ActionInitialization |
-| SensitiveDetector | 検出器の体積から検出情報（ヒット）を取り出す | DetectorConstruction の `ConstructSDandField()` |
-
-### main()とマクロ
-
-`Initialize()`と`BeamOn()`は、`main()`から直接呼ぶこともできます。
-マクロ（`/run/initialize`、`/run/beamOn`）から呼ぶこともできます。
+`Initialize()`と`BeamOn()`は`main()`から呼ぶこともできますし、マクロ（`/run/initialize`、`/run/beamOn`）から呼ぶこともできます。
 附属サンプルはマクロで呼んでいます。
 
-### マルチスレッド
-
-マルチスレッド（MT）で実行する場合、ActionInitializationには`Build()`と`BuildForMaster()`の2つがあります。
-RunActionの登録先がこの2つで異なります。詳しくは[ActionInitialization](./geant4-user-actioninitialization.md)を参照してください。
+マルチスレッドで実行する場合は、`ActionInitialization`の`Build()`と`BuildForMaster()`で登録先が変わるものがあります。
+詳しくは[ActionInitialization](./geant4-user-actioninitialization.md)を参照してください。
 
 ## リファレンス
 
