@@ -43,7 +43,6 @@ maxdepth: 1
 ---
 geant4-overview
 geant4-cpp-geant4
-geant4-types
 geant4-drivers
 geant4-document
 geant4-class-reference
@@ -53,12 +52,13 @@ geant4-cpp
 geant4-cpp-google
 ```
 
-## 文字列したい
+## 基本クラスしたい
 
 ```{toctree}
 ---
 maxdepth: 1
 ---
+geant4-types
 geant4-string
 geant4-units
 geant4-constants
