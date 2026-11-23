@@ -79,11 +79,24 @@ This project uses a **calendar-based semantic versioning** scheme (YYYY.MM.PATCH
 ```bash
 task push          # git push origin HEAD --follow-tags
 task push:tags      # git push origin HEAD --tags
+task push:main      # Same as push, but aborts unless the current branch is main
 ```
 
 Pushing a `v*` tag triggers `.github/workflows/release.yml`, which creates a GitHub Release
 whose body links to `CHANGELOG.md`. For the full bump-and-release sequence see
 [Cutting a Release](#cutting-a-release).
+
+### Editor, Status, and Examples
+
+```bash
+task code           # Open VS Code at the project root
+task zed            # Open Zed at the project root
+task status         # Show Git status
+task log            # Show the latest 20 commits
+task examples:sync  # Sync Python examples with jupytext (py -> ipynb -> md)
+```
+
+`task examples:sync` is the sync step described in [Sample Code Management](#sample-code-management).
 
 ## Documentation Structure
 
@@ -114,6 +127,7 @@ docs/source/
 ├── polars/           # Polars data processing
 ├── preface/          # Project preface and introduction
 ├── python/           # General Python library guides
+├── quarto/           # Quarto publishing system
 ├── raspi/            # Raspberry Pi platform
 ├── redpitaya/        # Red Pitaya FPGA platform
 ├── root/             # ROOT data analysis framework
@@ -124,9 +138,17 @@ docs/source/
 ├── typst/            # Typst document preparation
 ├── vscode/           # Visual Studio Code editor
 ├── windows/          # Windows OS topics
+├── zed/              # Zed editor
 ├── zensical/         # Zensical project
 └── conf.py           # Sphinx configuration
 ```
+
+Other directories at the repository root:
+
+- `changelogs/` — yearly changelog archives (`2022.md` to `2024.md`)
+- `g4examples/` — Geant4 example copies and their `Taskfile.yml` (see [`g4examples/README.md`](./g4examples/README.md))
+- `mystmd/`, `notebooks/` — generated Markdown and notebooks from `docs/examples/python/` (see [Python Examples](#python-examples-jupytext-with-jupyter-notebooks))
+- `scripts/` — standalone Python scripts (`*.py`)
 
 ### File Naming Convention
 
@@ -217,6 +239,8 @@ Subsection titles should be purpose-driven using "〇〇したい" format (e.g.,
 #### CLI Tool Chains (tsc, rollup, clasp, etc.)
 
 This pattern applies to command-line tools that form a build/deploy chain (e.g. `docs/source/gas/gas-typescript.md`, `docs/source/gas/gas-rollup.md`), where readers need to go from "install" to "run the command that matters" quickly, then read reference/config details afterward.
+
+This pattern does not apply to the general-purpose command pages in `docs/source/command/` (`find`, `grep`, `uv`, `npm`, etc.). Those are single tools rather than chains, so they use their own layout: a minimal `console` example under the title, a short description with `seealso` links to related commands, usage sections (`## 〇〇したい（`-x`）`), and an optional `## リファレンス` list of external links.
 
 **Basic Structure**:
 
@@ -411,6 +435,9 @@ For technical reference docs:
 ### Building and Deploying
 
 - **Read the Docs (automatic)**: Push to main → RTD builds automatically
+- **GitHub Pages (automatic)**: `.github/workflows/static.yml` builds with `make dirhtml` and deploys on every push to main (also runnable manually)
+- **PR check (automatic)**: `.github/workflows/pr_test.yml` runs `make dirhtml` on pull requests targeting main, which catches a broken Sphinx build before merge
+- **Weekly changelog (automatic)**: `.github/workflows/update_changelog.yml` runs every Monday (UTC) and commits an updated `CHANGELOG.md` to main
 - **Local preview**: `task docs:serve` (live reload), or `cd docs && make html`
 - **PDF generation**: `task docs:pdf` or `make latexpdf` (output: `docs/_build/latex/`)
 - **GitHub Release (automatic)**: Push a `v*` tag (e.g. via `task push:tags` after `task bump:patch`) →
