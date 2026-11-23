@@ -1,15 +1,15 @@
 # PMTを作りたい（`BuildPmtWindow`）
 
 光電子増倍管（PMT）を使って光子検出するGeant4アプリを作るケースは多いと思います。
-附属サンプルを参考にすると、PMT全体を作るのではなく、入射窓（PmtWindow）と感光面（PmtPhotocathode）の2つの論理ボリュームを作るのが簡単なようです。
+附属サンプルを参考にすると、PMT全体を作るのではなく、入射窓（PmtWindow）と光電面（PmtPhotocathode）の2つの論理ボリュームを作るのが簡単なようです。
 
 次の6ステップでPMTを実装できます。
 
 1. **入射窓（PmtWindow）** を論理ボリュームとして作る（`BuildPmtWindow`）
-2. **感光面（PmtPhotocathode）** を論理ボリュームとして作る（`BuildPmtPhotocathode`）
-3. **感光面** を **入射窓の中** に物理ボリュームとして配置する（`SetupPmt`）
+2. **光電面（PmtPhotocathode）** を論理ボリュームとして作る（`BuildPmtPhotocathode`）
+3. **光電面** を **入射窓の中** に物理ボリュームとして配置する（`SetupPmt`）
 4. **複数のPMT** コピー番号つきの物理ボリュームとして配置する（`SetupPmtArray`）
-5. **感光面** をSensitiveDetectorとして登録する（`ConstructSDandField()`）
+5. **光電面** をSensitiveDetectorとして登録する（`ConstructSDandField()`）
 6. **光学物理（G4OpticalPhysics）** で光子検出する（`SetBoundaryInvokeSD(true)`）
 
 ## 入射窓を作りたい（`BuildPmtWindow`）
@@ -61,7 +61,7 @@ G4LogicalVolume* BuildPmtWindow(
 この関数を`Construct()`の中で **1回だけ** 呼ぶようにします。
 複数のPMTを並べる場合は、この論理ボリュームを使い回します。
 
-## 感光面を作りたい（`BuildPmtPhotocathode`）
+## 光電面を作りたい（`BuildPmtPhotocathode`）
 
 ```cpp
 G4LogicalVolume* BuildPmtPhotocathode(
@@ -115,16 +115,16 @@ G4LogicalVolume* BuildPmtPhotocathode(
 }
 ```
 
-`BuildPmtPhotocathode`は、PMTの感光面の論理ボリュームを1つ作成する関数です。
-感光面は入射窓と同じ半径の薄い円板としています。
+`BuildPmtPhotocathode`は、PMTの光電面の論理ボリュームを1つ作成する関数です。
+光電面は入射窓と同じ半径の薄い円板としています。
 
-感光面に光が当たったときの光子検出のふるまいは、`G4MaterialPropertiesTable`を使ってユーザーが設定する必要があります。
+光電面に光が当たったときの光子検出のふるまいは、`G4MaterialPropertiesTable`を使ってユーザーが設定する必要があります。
 光子のエネルギー（`photonEnergies`）に対する検出効率（`EFFICIENCY`）と複素屈折率（`REALRINDEX` / `IMAGINARYRINDEX`）を指定します。
 上記のサンプルは適当な値となっていますが、実際にはPMTの量子効率（QE）や光学特性に合わせて設定する必要があります。
 
 :::{note}
 
-量子効率や光学特性は、感光面の材質のデータシートの値を参考にしてアプリ開発をはじめることが多いです。
+量子効率や光学特性は、光電面の材質のデータシートの値を参考にしてアプリ開発をはじめることが多いです。
 シミュレーションの精度をあげるために、別途測定し、実測値を使う場合もあります。
 
 :::
@@ -138,7 +138,7 @@ G4LogicalVolume* BuildPmtPhotocathode(
 :::
 
 
-## 感光面を入射窓に配置したい（`SetupPmt`）
+## 光電面を入射窓に配置したい（`SetupPmt`）
 
 ```cpp
 G4VPhysicalVolume* SetupPmt(
@@ -163,7 +163,7 @@ G4VPhysicalVolume* SetupPmt(
         true                                // 重なりチェック
     );
 
-    // 感光面を入射窓の裏側（-z側）に配置する
+    // 光電面を入射窓の裏側（-z側）に配置する
     // 厚みは BuildPmtWindow / BuildPmtPhotocathode の既定値と同じにしている
     G4double windowHalfZ = 0.5 * 1.0 * mm;
     G4double photoHalfZ = 0.5 * 0.01 * mm;
@@ -183,8 +183,8 @@ G4VPhysicalVolume* SetupPmt(
 }
 ```
 
-`SetupPmt`は、入射窓を親ボリュームに置き、その中に感光面を置きます。
-感光面は入射窓の論理ボリュームの子になるので、光子は入射窓を通ってから感光面に届きます。
+`SetupPmt`は、入射窓を親ボリュームに置き、その中に光電面を置きます。
+光電面は入射窓の論理ボリュームの子になるので、光子は入射窓を通ってから光電面に届きます。
 
 ## PMTを並べたい（`SetupPmtArray`）
 
@@ -232,7 +232,7 @@ G4VPhysicalVolume* Construct()
 ## 光子を数えたい（`PmtSD`）
 
 SensitiveDetectorは、`G4VSensitiveDetector`を継承して作ります。
-`ProcessHits()`は、感光面で光子が検出されたときに呼ばれます。
+`ProcessHits()`は、光電面で光子が検出されたときに呼ばれます。
 
 ```cpp
 // PmtSD.hh
@@ -266,18 +266,18 @@ PmtSD::PmtSD(const G4String& name)
 
 G4bool PmtSD::ProcessHits(G4Step*, G4TouchableHistory*)
 {
-    // 感光面で検出された光子を1つ数える
+    // 光電面で検出された光子を1つ数える
     fNumPhotons++;
     return true;
 }
 ```
 
-`ProcessHits()`には、感光面で検出された光子だけが届きます。
+`ProcessHits()`には、光電面で検出された光子だけが届きます。
 光子の判定やトラックの停止は、光学物理（境界プロセス）が行うので、このクラスでは書きません。
 
 ## 検出を通知する設定（`G4OpticalParameters`）
 
-感光面での検出を`ProcessHits()`に通知するには、光学物理の設定で`SetBoundaryInvokeSD(true)`を指定します。
+光電面での検出を`ProcessHits()`に通知するには、光学物理の設定で`SetBoundaryInvokeSD(true)`を指定します。
 `main()`の中で、物理リストを登録する前に設定します。
 
 ```cpp
@@ -286,8 +286,8 @@ auto opticalParams = G4OpticalParameters::Instance();
 opticalParams->SetBoundaryInvokeSD(true);
 ```
 
-光子が感光面で検出されると、境界プロセスが`Detection`の状態を返し、感光面のSensitiveDetectorを呼び出します。
-光子は感光面で吸収されるので、トラックを止める処理は不要です。
+光子が光電面で検出されると、境界プロセスが`Detection`の状態を返し、光電面のSensitiveDetectorを呼び出します。
+光子は光電面で吸収されるので、トラックを止める処理は不要です。
 光学物理の詳細は[光学物理したい](geant4-physics-opticalphysics)を参照してください。
 
 ## SensitiveDetectorを登録したい（`ConstructSDandField`）
@@ -300,7 +300,7 @@ void DetectorConstruction::ConstructSDandField()
     auto pmtSD = new PmtSD("PmtSD");
     G4SDManager::GetSDMpointer()->AddNewDetector(pmtSD);
 
-    // 感光面の論理ボリュームに登録する（名前は BuildPmtPhotocathode の既定値）
+    // 光電面の論理ボリュームに登録する（名前は BuildPmtPhotocathode の既定値）
     SetSensitiveDetector("Photocathode", pmtSD);
 }
 ```
@@ -311,19 +311,19 @@ void DetectorConstruction::ConstructSDandField()
 
 ## 参考にした附属サンプル
 
-| サンプル | 感光面の作り方 | SensitiveDetector | 検出の通知 |
+| サンプル | 光電面の作り方 | SensitiveDetector | 検出の通知 |
 |---|---|---|---|
 | `extended/optical/LXe` | 薄い円板（`photocath_log`）を`pmt_log`の子に配置。`EFFICIENCY`の光学表面 | `ConstructSDandField()`で登録 | `SteppingAction`で`ProcessHits_boundary`を手動で呼び出し |
 | `extended/optical/wls` | 薄い検出面（`PhotonDet_LV`）。`EFFICIENCY`の光学表面 | `ConstructSDandField()`で登録 | `SetBoundaryInvokeSD(true)`で自動通知 |
 | `advanced/underground_physics`（DMX） | 薄い殻（`phcath_log`）を`pmt_log`の子に配置。`EFFICIENCY`の光学表面 | `ConstructSDandField()`で登録 | — |
-| `advanced/air_shower` | 窓（`PMT_log`）そのものをSensitiveDetectorにする（感光面は作らない） | `ConstructSDandField()`で登録 | `ProcessHits()`で光子を数え、トラックを停止 |
+| `advanced/air_shower` | 窓（`PMT_log`）そのものをSensitiveDetectorにする（光電面は作らない） | `ConstructSDandField()`で登録 | `ProcessHits()`で光子を数え、トラックを停止 |
 
-感光面を別に作る方法（LXe、wls、DMX）が、検出効率（`EFFICIENCY`）を使う標準的な方法です。
+光電面を別に作る方法（LXe、wls、DMX）が、検出効率（`EFFICIENCY`）を使う標準的な方法です。
 窓をそのままSensitiveDetectorにする方法（air_shower）は、より簡単な方法です。
 
 :::{note}
 
-感光面の論理ボリュームは、`G4LogicalVolumeStore`で名前から探すこともできます。
+光電面の論理ボリュームは、`G4LogicalVolumeStore`で名前から探すこともできます。
 ただし、名前が重複すると`SetSensitiveDetector`がエラーになるので、名前は一意にしてください。
 
 :::
