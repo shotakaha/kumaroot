@@ -1,8 +1,57 @@
-# プラスチックシンチレータを作りたい（`G4_PLASTIC_SC_VINYLTOLUENE`）
+# プラスチックシンチレーターを作りたい（`G4_PLASTIC_SC_VINYLTOLUENE`）
+
+```cpp
+G4NistManager *nm = G4NistManager::Instance();
+G4Material *plastic = nm->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
+```
+
+`G4_PLASTIC_SC_VINYLTOLUENE`でNISTデータにあるプラスチックシンチレーター（ポリビニルトルエン、PVT）を生成できます。
+密度は1.032 g/cm3で、組成はC9H10として定義されています。
+ただし、NISTの組成は純粋なPVTではなく、未知の混合物を基にしている点に注意してください。
+
+## プラスチックシンチレーターを作りたい（`FindOrBuildElement`）
+
+```cpp
+G4NistManager *nm = G4NistManager::Instance();
+
+// 元素を取得（NISTの元素名を指定）
+G4Element *C = nm->FindOrBuildElement("G4_C");
+G4Element *H = nm->FindOrBuildElement("G4_H");
+
+// 密度を設定
+G4double density = 1.032 * g/cm3;
+G4Material *plastic = new G4Material("PlasticScintillator", density, 2);
+
+// 原子数比を設定（C9H10）
+plastic->AddElement(C, 9);
+plastic->AddElement(H, 10);
+```
+
+NISTの元素から`G4Element`を取得し、原子数比で組成を指定します。
+`G4_PLASTIC_SC_VINYLTOLUENE`と同じ組成（C9H10）と密度（1.032 g/cm3）です。
+
+## プラスチックシンチレーターを作りたい（`G4Element`）
+
+```cpp
+G4double z, a;
+G4double density = 1.032 * g/cm3;
+
+G4Element *C = new G4Element("Carbon", "C", z=6, a=12.011*g/mole);
+G4Element *H = new G4Element("Hydrogen", "H", z=1, a=1.008*g/mole);
+
+G4Material *plastic = new G4Material("PlasticScintillator", density, 2);
+plastic->AddElement(C, 9);
+plastic->AddElement(H, 10);
+```
+
+`G4Element`で元素の原子番号（`z`）と質量数（`a`）を指定して作ります。
+元素の性質はNISTの値で足りるので、通常は前の方法を使ってください。
+
+## EJ200を作りたい（`MakeEJ200`）
 
 ```cpp
 G4Material* MakeEJ200() {
-    // Eljen Technologies社のEJ-200
+    // Eljen Technology社のEJ-200
 
     // シンチレーターのベース材
     auto nm = G4NistManager::Instance();
@@ -44,7 +93,7 @@ G4Material* MakeEJ200() {
     // 単位エネルギーあたりの発光量
     // -> Scintillation Efficiency (photons/1MeV e-) を参照
     mpt->AddConstProperty("SCINTILLATIONYIELD", 10000. / MeV);
-    // 発光量の統の的揺らぎ（＝エネルギー分解能）
+    // 発光量の統計的揺らぎ（＝エネルギー分解能）
     mpt->AddConstProperty("RESOLUTIONSCALE", 1.0);
     // シンチレーション光の減衰時間
     // -> Decay Time (ns) を参照
@@ -59,7 +108,17 @@ G4Material* MakeEJ200() {
 }
 ```
 
-[Elijen Technologies社のEJ-200](https://eljentechnology.com/products/plastic-scintillators/ej-200-ej-204-ej-208-ej-212)のデータシートを参考にプラスチックシンチレーターを作成しました。
+[Eljen Technology社のEJ-200](https://eljentechnology.com/products/plastic-scintillators/ej-200-ej-204-ej-208-ej-212)のデータシートを参考にプラスチックシンチレーターを作成しました。
+
+:::{seealso}
+
+- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+- [G4Element](https://geant4.kek.jp/Reference/11.2.0/classG4Element.html)
+- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)
+- [geant4-material-element](geant4-material-element)
+
+:::
 
 ## シンチレーターバーを作りたい
 
@@ -69,7 +128,7 @@ G4LogicalVolume *DefineDetectorVolume(const G4String &name){
     // 材料を作成
     auto* material = MakeEJ200();
 
-    // 形状を定義する（OSECHI: 幅5cm x 長さ10cm x 厚み1cm
+    // 形状を定義する（OSECHI: 幅5cm x 長さ10cm x 厚み1cm）
     G4double halfX = 2.5 * cm;  // 半幅
     G4double halfY = 5.0 * cm;  // 半長
     G4double halfZ = 0.5 * cm;  // 半厚
@@ -136,8 +195,8 @@ SensitiveDetectorに設定しました。
 
 ## プラスチックシンチレーター
 
-プラスチックシンチレーターは、有機蛍光体（シンチレータ）を高分子樹脂に溶解・重合して作られた固体シンチレーターです。
-ベース材料としてボリビニルトルエン（PVT）やポリメチルメタアクリレート（PMMA、アクリル樹脂）が使われることが多く、蛍光体としては、
+プラスチックシンチレーターは、有機蛍光体（シンチレーター）を高分子樹脂に溶解・重合して作られた固体シンチレーターです。
+ベース材料としてポリビニルトルエン（PVT）やポリメチルメタアクリレート（PMMA、アクリル樹脂）が使われることが多く、蛍光体としては、
 一次蛍光材にPPO（2,5-Diphenyloxazole）、
 二次蛍光材にPOPOP（1,4-Bis(5-phenyloxazol-2-yl)benzene）が添加されるのが一般的です。
 
@@ -150,7 +209,7 @@ SensitiveDetectorに設定しました。
 
 ## 市販のプラスチックシンチレーター
 
-市販されているプラスチックシンチレーターのひとつに[Ejen Technology社のEJ-200](https://eljentechnology.com/products/plastic-scintillators/ej-200-ej-204-ej-208-ej-212)があります。
+市販されているプラスチックシンチレーターのひとつに[Eljen Technology社のEJ-200](https://eljentechnology.com/products/plastic-scintillators/ej-200-ej-204-ej-208-ej-212)があります。
 EJ-200は、
 ベース材にポリビニルトルエン（PVT）を使用し、
 一次蛍光材としてPPO、
@@ -193,9 +252,8 @@ $kB$はquenching係数で、光子が消光（quench）する確率を表しま�
 
 これらの値は、実験データに合わせて調整が必要なパラメーターです。
 Geant4では、
-$S$（シンチレーション効率）は`SCINTILLATIONYIELD`、
-$kB$（quenching係数）は`BIRKSCONSTANT`
-の定数名を使って、G4MaterialPropertiesTableに光学特性として設定できます。
+$S$（シンチレーション効率）は`SCINTILLATIONYIELD`として`G4MaterialPropertiesTable`に設定します。
+$kB$（quenching係数）は`G4IonisParamMat`の`SetBirksConstant()`を使い、`material->GetIonisation()->SetBirksConstant(...)`で材質に設定します。
 
 ## リファレンス
 
