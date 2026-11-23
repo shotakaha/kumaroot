@@ -28,13 +28,13 @@ OpticalPhysicsの物理プロセスを使う場合、
 Geant4には、次の素材の屈折率の事前定義値があります。
 素材名は、`Air`（空気）、`Water`（水）、`PMMA`（アクリル樹脂／ポリメタクリル酸メチル）、`Fused Silica`（石英ガラス）です。
 
-## チェレンコフ光したい
+## チェレンコフ光したい（`RINDEX`）
 
 ```cpp
 // AddProperty("キー名", std::vector配列, std::vector配列)
-// photon_energy, refractive_index, absorption は std::vector<G4double>（下のシンチレーションの例を参照）
+// photon_energy, refractive_index, absorption_length は std::vector<G4double>（下のシンチレーションの例を参照）
 mpt->AddProperty("RINDEX", photon_energy, refractive_index);
-mpt->AddProperty("ABSLENGTH", photon_energy, absorption);
+mpt->AddProperty("ABSLENGTH", photon_energy, absorption_length);
 ```
 
 チェレンコフ光の生成には屈折率（`RINDEX`）の設定が必須です。
@@ -63,7 +63,7 @@ cerenkovProcess->SetTrackSecondariesFirst(true); // 光子を親粒子より先�
 `SetMaxNumPhotonsPerStep`の上限は、デフォルトでは`G4OpticalParameters`から設定されます。
 変更したい場合に、このメソッドを使います。
 
-## シンチレーション光したい
+## シンチレーション光したい（`SCINTILLATIONYIELD`）
 
 ```cpp
 auto material = new G4Material{
@@ -120,14 +120,15 @@ material->SetMaterialPropertiesTable(property);
 
 重粒子（陽子やアルファ線）ではエネルギー損失に対して発光量が非線形になる
 （Birksの消光則）ため、
-`G4EmSaturation`と`AddSaturation`で補正することがあります。
-省略すると重粒子の発光量が過大評価されることがあります。
+`G4Scintillation::AddSaturation`で補正することがあります。
+`G4OpticalPhysics`を使うと、`G4EmSaturation`が自動で設定されます。
+`G4OpticalPhysics`を使わない場合は、補正を省略すると重粒子の発光量が過大評価されることがあります。
 
 :::
 
 - [](geant4-physics-scintillation)
 
-## OpticalSurfaceしたい
+## 光学表面したい（`G4OpticalSurface`）
 
 ```cpp
 auto surface = new G4OpticalSurface{"Surface"};
@@ -139,6 +140,8 @@ auto surfaceProperty = new G4MaterialPropertiesTable{};
 // surfaceProperty->AddProperty(...); // 表面の光学特性を設定
 surface->SetMaterialPropertiesTable(surfaceProperty);
 ```
+
+`ground`（粗い表面）と`unified`モデルを使う場合は、`surfaceProperty`に反射率などの表面の光学特性を設定してください。
 
 作成した`G4OpticalSurface`は、`G4LogicalBorderSurface`に登録して、2つの物理ボリュームの境界に適用します。
 
