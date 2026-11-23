@@ -128,6 +128,46 @@ material->SetMaterialPropertiesTable(property);
 
 - [](geant4-physics-scintillation)
 
+## 波長変換したい（`WLSCOMPONENT`）
+
+```cpp
+// photon_energy は昇順の std::vector<G4double>
+// 吸収長、発光スペクトル（波長変換の相対強度）
+std::vector<G4double> wls_absorption_length = { 1.0 * m, 0.5 * m, 0.1 * m };
+std::vector<G4double> wls_emission = { 0.1, 1.0, 0.1 };
+
+auto mptWLS = new G4MaterialPropertiesTable{};
+mptWLS->AddProperty("WLSABSLENGTH", photon_energy, wls_absorption_length);
+mptWLS->AddProperty("WLSCOMPONENT", photon_energy, wls_emission);
+// 吸収してから再発光するまでの時間
+mptWLS->AddConstProperty("WLSTIMECONSTANT", 0.5 * ns);
+
+wlsFiber->SetMaterialPropertiesTable(mptWLS);
+```
+
+`WLSABSLENGTH`は、波長変換する光子を吸収するまでの長さ、
+`WLSCOMPONENT`は、吸収した光子を再発光する波長の分布です。
+`WLSTIMECONSTANT`は、再発光までの時間です。
+
+波長変換は`G4OpWLS`プロセスで行われるため、物理リストで有効にする必要があります。
+具体例は[](geant4-examples-wls)を参照してください。
+
+## 検出効率したい（`EFFICIENCY`）
+
+```cpp
+// photon_energy は昇順の std::vector<G4double>
+// 光電面の量子効率（例）
+std::vector<G4double> quantum_efficiency = { 0.10, 0.25, 0.20 };
+
+auto mptPMT = new G4MaterialPropertiesTable{};
+mptPMT->AddProperty("EFFICIENCY", photon_energy, quantum_efficiency);
+
+photocathodeMaterial->SetMaterialPropertiesTable(mptPMT);
+```
+
+`EFFICIENCY`は、光電面に到達した光子が検出される確率です。
+値の作り方と、光電面への適用方法は[](geant4-qe)を参照してください。
+
 ## 光学表面したい（`G4OpticalSurface`）
 
 ```cpp
@@ -144,6 +184,22 @@ surface->SetMaterialPropertiesTable(surfaceProperty);
 `ground`（粗い表面）と`unified`モデルを使う場合は、`surfaceProperty`に反射率などの表面の光学特性を設定してください。
 
 作成した`G4OpticalSurface`は、`G4LogicalBorderSurface`に登録して、2つの物理ボリュームの境界に適用します。
+
+## 反射率したい（`REFLECTIVITY`）
+
+```cpp
+// photon_energy は昇順の std::vector<G4double>
+// 表面の反射率（例）
+std::vector<G4double> reflectivity = { 0.90, 0.90, 0.90 };
+
+auto surfaceProperty = new G4MaterialPropertiesTable{};
+surfaceProperty->AddProperty("REFLECTIVITY", photon_energy, reflectivity);
+surface->SetMaterialPropertiesTable(surfaceProperty);
+```
+
+`REFLECTIVITY`は、光子が光学表面で反射する割合を波長ごとに指定します。
+ミラーや反射面など、反射率を指定したい表面で使います。
+上の`surfaceProperty`に登録して、`G4OpticalSurface`に設定します。
 
 ## リファレンス
 
