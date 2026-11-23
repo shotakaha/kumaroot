@@ -5,82 +5,12 @@
 
 次の6ステップでPMTを実装できます。
 
-1. **入射窓（PmtWindow）** を論理ボリュームとして作る（`BuildPmtWindow`）
-2. **光電面（PmtPhotocathode）** を論理ボリュームとして作る（`BuildPmtPhotocathode`）
-3. **光電面** を **入射窓の中** に物理ボリュームとして配置する（`SetupPmt`）
-4. **複数のPMT** コピー番号つきの物理ボリュームとして配置する（`SetupPmtArray`）
+1. **光電面（PmtPhotocathode）** を論理ボリュームとして作る（`BuildPmtPhotocathode`）
+2. **入射窓（PmtWindow）** を論理ボリュームとして作り、その中に光電面を置く（`BuildPmtWindow`）
+3. **PMT** を親ボリュームに物理ボリュームとして配置する（`SetupPmt`）
+4. **複数のPMT** をコピー番号つきで並べる（`SetupPmtArray`）
 5. **光電面** をSensitiveDetectorとして登録する（`ConstructSDandField()`）
-6. **光学物理（G4OpticalPhysics）** で光子検出する（`SetBoundaryInvokeSD(true)`）
-
-## 入射窓を作りたい（`BuildPmtWindow`）
-
-```cpp
-G4LogicalVolume* BuildPmtWindow(
-    const G4String& logicalName = "PMTWindow",
-    const G4String& materialName = "G4_PLEXIGLASS",
-    G4double radius = 3.81 * cm,  // 3in.管
-    G4double thickness = 1.0 * mm)
-{
-    // 形状を定義（PMTの入射窓を、平たい円柱で作成）
-    G4double rMin = 0. * cm;          // 内径
-    G4double rMax = radius;           // 外径
-    G4double halfZ = 0.5 * thickness; // 高さ（厚み）の半分
-    G4double sPhi = 0. * deg;         // 開始角度
-    G4double dPhi = 360. * deg;       // 回転角
-    auto solid = new G4Tubs(
-        logicalName + "Solid",  // solid 名
-        rMin,
-        rMax,
-        halfZ,
-        sPhi,
-        dPhi
-    );
-
-    // 材料を定義（入射窓はプレキシガラス（アクリル））
-    auto nm = G4NistManager::Instance();
-    auto material = nm->FindOrBuildMaterial(materialName);
-
-    // 光学特性を設定する（屈折率と吸収長）
-    std::vector<G4double> photonEnergies{2.0 * eV, 3.5 * eV};
-    std::vector<G4double> rIndex{1.49, 1.49};          // アクリルの屈折率（約1.49）
-    std::vector<G4double> absLength{1. * m, 1. * m};   // 窓の中での吸収長
-
-    auto mpt = new G4MaterialPropertiesTable();
-    mpt->AddProperty("RINDEX", photonEnergies, rIndex);
-    mpt->AddProperty("ABSLENGTH", photonEnergies, absLength);
-    material->SetMaterialPropertiesTable(mpt);
-
-    // 論理ボリュームを定義
-    auto logical = new G4LogicalVolume(
-        solid,         // G4VSolid
-        material,      // G4Material
-        logicalName,   // 名前
-        nullptr,       // G4FieldManager（未使用）
-        nullptr,       // G4VSensitiveDetector（未使用）
-        nullptr        // G4UserLimits（未使用）
-    );
-
-    return logical;
-}
-```
-
-`BuildPmtWindow`は、PMTの入射窓の論理ボリュームを1つ作成する関数です。
-名前・素材・半径・厚みは引数で変えられます。
-デフォルトは3インチ管の入射窓です。
-
-入射窓は光子を透過させる必要があるため、`G4MaterialPropertiesTable`を使ってユーザーが設定を追加する必要があります。
-光子のエネルギー（`photonEnergies`）に対する屈折率（`RINDEX`）と吸収長（`ABSLENGTH`）の指定が必要です。
-
-:::{hint}
-
-このサンプルコードでは、入射窓の材質にアクリル（`G4_PLEXIGLASS`）を使い、屈折率を1.49、吸収長を1mに設定しています。
-実際の入射窓の材質のデータシートを参考に屈折率と吸収長を設定してください。
-とくに`RINDEX`を設定しないと、入射した光子は入射窓の境界で消えてしまいます。
-
-:::
-
-この関数を`Construct()`の中で **1回だけ** 呼ぶようにします。
-複数のPMTを並べる場合は、この論理ボリュームを使い回します。
+6. **光学物理（G4OpticalPhysics）** で光子検出を通知する（`SetBoundaryInvokeSD(true)`）
 
 ## 光電面を作りたい（`BuildPmtPhotocathode`）
 
@@ -117,7 +47,7 @@ G4LogicalVolume* BuildPmtPhotocathode(
 
     // 光学表面を定義（検出効率 EFFICIENCY を与える）
     std::vector<G4double> photonEnergies{2.0 * eV, 3.5 * eV};
-    std::vector<G4double> efficiency{1.0, 1.0};  // 吸収された光子は検出される
+    std::vector<G4double> efficiency{1.0, 1.0};        // 吸収された光子は検出される
     std::vector<G4double> realIndex{1.92, 1.92};       // 金属の複素屈折率（LXeの例）
     std::vector<G4double> imagIndex{1.69, 1.69};
 
@@ -145,16 +75,14 @@ G4LogicalVolume* BuildPmtPhotocathode(
 これらの値は、光電面の材質のデータシートの値を参考にしてアプリ開発をはじめることが多いです。
 シミュレーションの精度をあげる必要が生じた場合には、別途測定し、実測値を使う場合もあります。
 
-
 :::{caution}
 
 上記のサンプルコードは、附属サンプル（`LXe`や`DMX`）を参考にした設定例です。
-光電面の表面（`G4OpticalSurface`）を金属（`dielectric_metal`）としており、光子を吸収する簡易的なモデルとなっています。
-本来のPMTの光電面は透過型の金属薄膜で、入射した光に対して光電子を放出します。
-そのため光電面の表面は`dielectric_dielectric`にする必要があります。
+光電面の表面（`G4OpticalSurface`）を金属（`dielectric_metal`）とし、光子を吸収する簡易的なモデルにしています。
+実際の光電面は、入射窓の内側に付いた薄い半透明の膜です。光はこの膜を通って、光電子を放出します。
+この膜の透過を正確に扱うには、表面の設定を`dielectric_dielectric`に変える必要があります。
 
 :::
-
 
 :::{seealso}
 
@@ -163,14 +91,102 @@ G4LogicalVolume* BuildPmtPhotocathode(
 
 :::
 
+## 入射窓を組み立てたい（`BuildPmtWindow`）
 
-## 光電面を入射窓に配置したい（`SetupPmt`）
+```cpp
+G4LogicalVolume* BuildPmtWindow(
+    const G4String& logicalName = "PMTWindow",
+    const G4String& materialName = "G4_PLEXIGLASS",
+    G4double radius = 3.81 * cm,  // 3in.管
+    G4double thickness = 1.0 * mm)
+{
+    // 形状を定義（入射窓は平たい円柱）
+    G4double rMin = 0. * cm;          // 内径
+    G4double rMax = radius;           // 外径
+    G4double halfZ = 0.5 * thickness; // 高さ（厚み）の半分
+    G4double sPhi = 0. * deg;         // 開始角度
+    G4double dPhi = 360. * deg;       // 回転角
+    auto solid = new G4Tubs(
+        logicalName + "Solid",  // solid 名
+        rMin,
+        rMax,
+        halfZ,
+        sPhi,
+        dPhi
+    );
+
+    // 材料を定義（入射窓はプレキシガラス（アクリル））
+    auto nm = G4NistManager::Instance();
+    auto material = nm->FindOrBuildMaterial(materialName);
+
+    // 光学特性を設定する（屈折率と吸収長）
+    std::vector<G4double> photonEnergies{2.0 * eV, 3.5 * eV};
+    std::vector<G4double> rIndex{1.49, 1.49};          // アクリルの屈折率（約1.49）
+    std::vector<G4double> absLength{1. * m, 1. * m};   // 窓の中での吸収長
+
+    auto mpt = new G4MaterialPropertiesTable();
+    mpt->AddProperty("RINDEX", photonEnergies, rIndex);
+    mpt->AddProperty("ABSLENGTH", photonEnergies, absLength);
+    material->SetMaterialPropertiesTable(mpt);
+
+    // 入射窓の論理ボリュームを定義
+    auto window = new G4LogicalVolume(
+        solid,         // G4VSolid
+        material,      // G4Material
+        logicalName,   // 名前
+        nullptr,       // G4FieldManager（未使用）
+        nullptr,       // G4VSensitiveDetector（未使用）
+        nullptr        // G4UserLimits（未使用）
+    );
+
+    // 光電面を窓の裏側（-z側）に配置する
+    auto photocathode = BuildPmtPhotocathode(radius);
+    auto photoSolid = static_cast<G4Tubs*>(photocathode->GetSolid());
+    G4double photoHalfZ = photoSolid->GetZHalfLength();
+    G4ThreeVector backPosition{0., 0., -(halfZ - photoHalfZ)};
+
+    new G4PVPlacement(
+        nullptr,        // 回転なし
+        backPosition,   // 窓の中の位置
+        photocathode,   // 配置する論理ボリューム
+        "Photocathode", // 物理ボリュームの名前
+        window,         // 親（窓の論理ボリューム）
+        false,          // pMany（未使用）
+        0,              // コピー番号
+        true            // 重なりチェック
+    );
+
+    return window;
+}
+```
+
+`BuildPmtWindow`は、PMTの入射窓の論理ボリュームを1つ作成する関数です。
+名前・素材・半径・厚みは引数で変えられます。
+デフォルトは3インチ管の入射窓です。
+
+最初に光電面を作るのは、窓の中に配置するためです。
+光電面の厚みは、論理ボリュームの形状から取得するので、窓と光電面の大きさは常に一致します。
+
+入射窓は光子を透過させる必要があるため、`G4MaterialPropertiesTable`を使ってユーザーが設定を追加する必要があります。
+光子のエネルギー（`photonEnergies`）に対する屈折率（`RINDEX`）と吸収長（`ABSLENGTH`）の指定が必要です。
+
+:::{hint}
+
+このサンプルコードでは、入射窓の材質にアクリル（`G4_PLEXIGLASS`）を使い、屈折率を1.49、吸収長を1mに設定しています。
+実際の入射窓の材質のデータシートを参考に屈折率と吸収長を設定してください。
+とくに`RINDEX`を設定しないと、入射した光子は入射窓の境界で消えてしまいます。
+
+:::
+
+この関数を`Construct()`の中で **1回だけ** 呼ぶようにします。
+複数のPMTを並べる場合は、この論理ボリュームを使い回します。
+
+## PMTを配置したい（`SetupPmt`）
 
 ```cpp
 G4VPhysicalVolume* SetupPmt(
     G4VPhysicalVolume* parent,
-    G4LogicalVolume* window,        // BuildPmtWindow()の戻り値
-    G4LogicalVolume* photocathode,  // BuildPmtPhotocathode()の戻り値
+    G4LogicalVolume* pmt,  // BuildPmtWindow()の戻り値
     G4int copyNo,
     const G4ThreeVector& position = G4ThreeVector(),
     const G4String& physicalName = "PMT")
@@ -178,47 +194,27 @@ G4VPhysicalVolume* SetupPmt(
     // 回転なしで配置する
     G4RotationMatrix rotation;
 
-    // 入射窓（PMT）を親ボリュームに配置する
-    auto pmt = new G4PVPlacement(
+    return new G4PVPlacement(
         G4Transform3D(rotation, position),  // 回転と位置
         physicalName,                       // 物理ボリュームの名前
-        window,                             // 配置する論理ボリューム
+        pmt,                                // 配置する論理ボリューム
         parent,                             // 親ボリューム
         false,                              // pMany（未使用）
         copyNo,                             // コピー番号
         true                                // 重なりチェック
     );
-
-    // 光電面を入射窓の裏側（-z側）に配置する
-    // 厚みは BuildPmtWindow / BuildPmtPhotocathode の既定値と同じにしている
-    G4double windowHalfZ = 0.5 * 1.0 * mm;
-    G4double photoHalfZ = 0.5 * 0.01 * mm;
-    G4ThreeVector backPosition{0., 0., -(windowHalfZ - photoHalfZ)};
-    new G4PVPlacement(
-        nullptr,        // 回転なし
-        backPosition,   // 入射窓の中の位置
-        photocathode,   // 配置する論理ボリューム
-        "Photocathode", // 物理ボリュームの名前
-        window,         // 親（入射窓の論理ボリューム）
-        false,          // pMany（未使用）
-        0,              // コピー番号
-        true            // 重なりチェック
-    );
-
-    return pmt;
 }
 ```
 
-`SetupPmt`は、入射窓を親ボリュームに置き、その中に光電面を置きます。
-光電面は入射窓の論理ボリュームの子になるので、光子は入射窓を通ってから光電面に届きます。
+`SetupPmt`は、`BuildPmtWindow`が返したPMTを親ボリュームに置きます。
+光電面は窓の子になっているので、一緒に配置されます。
 
 ## PMTを並べたい（`SetupPmtArray`）
 
 ```cpp
 G4VPhysicalVolume* SetupPmtArray(
     G4VPhysicalVolume* parent,
-    G4LogicalVolume* window,        // BuildPmtWindow()の戻り値
-    G4LogicalVolume* photocathode,  // BuildPmtPhotocathode()の戻り値
+    G4LogicalVolume* pmt,  // BuildPmtWindow()の戻り値
     G4int firstCopyNo = 101,
     G4int count = 5,
     G4double spacing = 10. * cm)
@@ -228,7 +224,7 @@ G4VPhysicalVolume* SetupPmtArray(
         G4int copyNo = firstCopyNo + i;
         G4double x = (i - 0.5 * (count - 1)) * spacing;
         G4ThreeVector position{x, 0., 0.};
-        SetupPmt(parent, window, photocathode, copyNo, position);
+        SetupPmt(parent, pmt, copyNo, position);
     }
 
     // 親ボリュームを返す（Setup系の戻り値は物理ボリューム）
@@ -243,11 +239,10 @@ G4VPhysicalVolume* Construct()
     auto world = SetupWorld();
 
     // 論理ボリュームは1回だけ作る
-    auto window = BuildPmtWindow();
-    auto photocathode = BuildPmtPhotocathode();
+    auto pmt = BuildPmtWindow();
 
     // PMTを5本並べる
-    return SetupPmtArray(world, window, photocathode);
+    return SetupPmtArray(world, pmt);
 }
 ```
 
