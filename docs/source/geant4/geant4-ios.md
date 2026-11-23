@@ -69,6 +69,57 @@ G4debug << "Track ID: " << track->GetTrackID() << G4endl;
 
 `ignoreThreadsExcept`は、画面に直接出力する場合にだけ効きます。
 
+## ログ出力したい（`G4coutDestination`）
+
+```cpp
+#include "G4coutDestination.hh"
+#include <fstream>
+
+class FileLogger : public G4coutDestination
+{
+public:
+  FileLogger(const char* fileName) : fOut(fileName) {}
+
+  G4int ReceiveG4cout(const G4String& msg) override
+  {
+    fOut << "[OUT] " << msg << std::flush;
+    return 0;
+  }
+
+  G4int ReceiveG4cerr(const G4String& msg) override
+  {
+    fOut << "[ERR] " << msg << std::flush;
+    return 0;
+  }
+
+  G4int ReceiveG4debug(const G4String& msg) override
+  {
+    fOut << "[DBG] " << msg << std::flush;
+    return 0;
+  }
+
+private:
+  std::ofstream fOut;
+};
+
+int main()
+{
+  FileLogger logger("run.log");
+  G4iosSetDestination(&logger);  // 出力先を差し替える
+
+  // ... シミュレーションの実行 ...
+
+  G4iosSetDestination(nullptr);  // 元に戻す（std::cout / std::cerr へ出力）
+  return 0;
+}
+```
+
+`G4cout`などの出力先は、`G4coutDestination`を継承したクラスで置き換えられます。
+出力を独自の形式でファイルに残したいときに使います。
+
+`run.log`には、`G4cout`の出力は`[OUT]`、`G4cerr`の出力は`[ERR]`の付いた行として書かれます。
+ログを閉じる前に、必ず`nullptr`に戻してください。
+
 ## リファレンス
 
 - [Geant4 User's Guide: Main program（G4cout、G4cerr、G4debug）](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/mainProgram.html#g4cout-g4cerr-and-g4debug)
