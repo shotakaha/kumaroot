@@ -268,12 +268,12 @@ Pages under `docs/source/geant4/` (e.g. `geant4-usage.md`, `geant4-run-manager.m
 - **Hierarchy**: `geant4-usage.md` (one H2 per goal, each holding a `{toctree}`) → category hub (e.g. `geant4-source.md`, `geant4-step.md`) → leaf page. One leaf per class, method, or concrete object (e.g. `geant4-source-particlegun-energy.md`)
 - **Hub pages**: H1 `<Topic>したい`, a short intro, then a `{toctree}` with `maxdepth: 1`. Every new hub must be registered in an H2 of `geant4-usage.md`; otherwise Sphinx reports it as an orphan
 - **Leaf page structure**:
-  1. **Title**: `<目的>したい（`identifier`）` with full-width parentheses and one pair of backticks around the identifier (e.g. `入射エネルギーしたい（`SetParticleEnergy`）`)
-  2. **Code first**: a `cpp` block directly under the title, before any explanation
+  1. **Title**: `<目的>したい（`identifier`）` with full-width parentheses and one pair of backticks around the identifier (e.g. `入射エネルギーしたい（`SetParticleEnergy`）`). Use the class or method name as the identifier; for a particle name or a file, use that name (e.g. `geantinoしたい（`geantino`）`). The verb may be `しりたい`、`作りたい`、`切り替えたい` when it fits the goal
+  2. **Code first**: the first block directly under the title, before any explanation. Use `cpp` for C++ classes, `console` for shell steps, and `cfg` for macro commands
   3. **Explanation**: 1–3 sentences
   4. **Admonitions** as needed: `:::{note}`, `:::{hint}`, `:::{caution}`
   5. **Use-case sections**: H2 per use case, `〇〇したい（`Method`）`, each with a code block and short explanation
-  6. **Closing**: a `:::{seealso}` list of Doxygen links, or an H2 `## リファレンス`
+  6. **Closing**: a `:::{seealso}` list of Doxygen links, or an H2 `## リファレンス`. Add it only when the page documents a Geant4 class or method. Do not link a URL you have not opened: for example, `G4PhysicalConstants_8hh.html` returns 404 for 11.2.0
 - **Example pages** (`geant4-examples-b1.md` etc.): H1 with a figure → intro → `## ビルドしたい（cmake）` (`console`) → `## メイン（exampleB1.cc）` → one H2 per user class → `## ディレクトリ構造` → `## リファレンス`
 - **Error pages** (`geant4-errors.md`): H2 names the symptom, then `### エラーの内容` (use `{dropdown}` for long logs), then `### 対処方法`
 - **Markup rules**:
@@ -282,7 +282,14 @@ Pages under `docs/source/geant4/` (e.g. `geant4-usage.md`, `geant4-run-manager.m
   - Cross-reference sibling pages with plain links without extension or anchor: `[G4Step](geant4-step)`
   - Admonitions use the `:::{name}` colon-fence form with blank lines around the content
 - **Reference links**: point to the Geant4 Doxygen reference for the version the docs target (currently 11.2.0, `https://geant4.kek.jp/Reference/11.2.0/...`). When the version changes, update these links in one pass
-- **Known inconsistencies in existing pages**: about 40 pages have no `したい` in the H1. Do not copy this pattern into new pages
+- **Exceptions by page type**: the leaf structure above does not apply to these pages, and they are not inconsistencies:
+  - **Hub pages** (`geant4-usage`, `geant4-event`, `geant4-track`, `geant4-material`, etc.): a short intro and a `{toctree}`. No code block is required
+  - **Concept pages** (`geant4-overview`, `geant4-cpp`, `geant4-singleton`, `geant4-versions`, etc.): the H1 names the topic, and prose may come first
+  - **Install and environment pages** (`geant4-install-*`, `geant4-build`, `geant4-shell`, `geant4-switch`, etc.): `console` steps come first. Doxygen links are not required
+  - **Macro pages** (`geant4-macro*`): a `cfg` block comes first
+  - **Recipe pages** that combine several classes (`geant4-calorimeter`, `geant4-hodoscope`, `geant4-sensor-photon`, `geant4-qe`): the H1 names the goal, and the closing `seealso` lists the classes used
+  - **Example pages** and **error pages**: follow their own structures above
+- **Scope of the title and code rules**: pages whose identifier is a user-defined function (e.g. `BuildWorld`) do not have a Geant4 class to link. Document them with the Geant4 classes they call
 
 ### Code Examples
 
