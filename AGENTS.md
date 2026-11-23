@@ -260,6 +260,30 @@ This pattern does not apply to the general-purpose command pages in `docs/source
 - Verify config file examples actually run (watch for missing commas, wrong plugin import names, etc.) rather than trusting hand-written samples
 - Base config examples on a real working project when one is available, not just official docs, since defaults and plugin option quirks (e.g. `@rollup/plugin-typescript`'s `outDir`/`declaration` options) are easy to get subtly wrong from memory
 
+#### Geant4 (Geant4の使い方)
+
+Pages under `docs/source/geant4/` (e.g. `geant4-usage.md`, `geant4-run-manager.md`, `geant4-step-steppoint-position.md`) document Geant4 C++ classes and methods. Readers arrive with a goal ("ランマネージャーを取得したい"), so pages are organized by use case, with code first.
+
+- **Directory**: flat, `docs/source/geant4/`. Names are `geant4-<topic>[-<subtopic>].md` in lowercase with hyphens only (no underscores, no capitals)
+- **Hierarchy**: `geant4-usage.md` (one H2 per goal, each holding a `{toctree}`) → category hub (e.g. `geant4-source.md`, `geant4-step.md`) → leaf page. One leaf per class, method, or concrete object (e.g. `geant4-source-particlegun-energy.md`)
+- **Hub pages**: H1 `<Topic>したい`, a short intro, then a `{toctree}` with `maxdepth: 1`. Every new hub must be registered in an H2 of `geant4-usage.md`; otherwise Sphinx reports it as an orphan
+- **Leaf page structure**:
+  1. **Title**: `<目的>したい（`identifier`）` with full-width parentheses and one pair of backticks around the identifier (e.g. `入射エネルギーしたい（`SetParticleEnergy`）`)
+  2. **Code first**: a `cpp` block directly under the title, before any explanation
+  3. **Explanation**: 1–3 sentences
+  4. **Admonitions** as needed: `:::{note}`, `:::{hint}`, `:::{caution}`
+  5. **Use-case sections**: H2 per use case, `〇〇したい（`Method`）`, each with a code block and short explanation
+  6. **Closing**: a `:::{seealso}` list of Doxygen links, or an H2 `## リファレンス`
+- **Example pages** (`geant4-examples-b1.md` etc.): H1 with a figure → intro → `## ビルドしたい（cmake）` (`console`) → `## メイン（exampleB1.cc）` → one H2 per user class → `## ディレクトリ構造` → `## リファレンス`
+- **Error pages** (`geant4-errors.md`): H2 names the symptom, then `### エラーの内容` (use `{dropdown}` for long logs), then `### 対処方法`
+- **Markup rules**:
+  - No front matter, tags, or `literalinclude`; all code is inline fenced blocks
+  - Code fence languages: `cpp`, `console` (use `//` for comments, since `#` at line start reads as a prompt), `cfg` (Geant4 macros), `cmake`, `text`
+  - Cross-reference sibling pages with plain links without extension or anchor: `[G4Step](geant4-step)`
+  - Admonitions use the `:::{name}` colon-fence form with blank lines around the content
+- **Reference links**: point to the Geant4 Doxygen reference for the version the docs target (currently 11.2.0, `https://geant4.kek.jp/Reference/11.2.0/...`). When the version changes, update these links in one pass
+- **Known inconsistencies in existing pages**: about 40 pages have no `したい` in the H1, some filenames use underscores or capitals (`geant4-physics-ftfp_bert.md`, `geant4-geometry-constructSDandField.md`), and several pages are not in any toctree. Do not copy these patterns into new pages
+
 ### Code Examples
 
 - Lead with practical code (YAML, config) before explanations
@@ -425,6 +449,15 @@ For technical reference docs:
 6. Cross-link sibling pages with plain Markdown links, not in-page anchors
 7. Run `task pre-commit` and `task docs:build` to validate
 8. Commit per [Commit types used in this project](#git-workflow) (new page → `feat`)
+
+### Adding a New Geant4 Guide
+
+1. Create `geant4/geant4-<topic>-<item>.md` following the Geant4 pattern in Documentation Style Guidelines
+2. Write the leaf page code-first: H1 `<目的>したい（`identifier`）`, `cpp` block, short explanation, then use-case H2s
+3. Register the page in its parent hub's `{toctree}`. For a new category, add a hub page and an H2 with a `{toctree}` to `geant4-usage.md`
+4. Link sibling pages with plain Markdown links and end with a `seealso` or `## リファレンス` list of Doxygen links
+5. Run `task pre-commit` and `task docs:build`, and confirm there are no orphan-page warnings
+6. Commit per [Commit types used in this project](#git-workflow) (new page → `feat`, e.g. `feat(geant4-<topic>): add <item> page`)
 
 ### Updating Version Information
 
