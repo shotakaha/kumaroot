@@ -1,18 +1,6 @@
 # 量子効率を設定したい（`EFFICIENCY`）
 
-光電子増倍管（PMT）の光電面は、入射した光子を光電子に変換する確率（量子効率，QE）を持ちます。
-Geant4では、この確率を光学表面の`EFFICIENCY`として与えます。
-
-附属サンプル（`LXe`、`DMX`、`wls`）は、`EFFICIENCY`を`{1., 1.}`のような定数で設定しています。
-ここでは、メーカーのデータシートのように多数の点で与えられたQE曲線を、`EFFICIENCY`に渡す方法を説明します。
-
-データシートのQEは、波長`nm`に対する値で示されることが多いです。
-そのため、データシートの値をそのまま入力し、Geant4に渡す前に波長からエネルギーへ変換します。
-
 ## QEのテーブルを用意したい（`PmtQETable`）
-
-波長（`wavelength`）と、その波長でのQEを対にして持つ構造体を作ります。
-データシートの値をそのまま書き写せるように、波長の単位は`nm`です。
 
 ```cpp
 #include <vector>
@@ -77,9 +65,6 @@ inline const PmtQETable kDefaultPmtQE = {
 
 ## 波長をエネルギーに変換したい（`WavelengthToEnergy`）
 
-Geant4の`EFFICIENCY`はエネルギーで指定するため、波長`nm`からエネルギーに変換します。
-Geant4の単位系で計算すると、戻り値はそのまま`eV`などの単位で使えます。
-
 ```cpp
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
@@ -91,11 +76,10 @@ inline G4double WavelengthToEnergy(G4double wavelengthNm)
 }
 ```
 
-## EFFICIENCYのテーブルを作りたい（`MakeEfficiencyProperties`）
+Geant4の`EFFICIENCY`はエネルギーで指定するため、波長`nm`からエネルギーに変換します。
+Geant4の単位系で計算すると、戻り値はそのまま`eV`などの単位で使えます。
 
-波長をエネルギーに変換して、`EFFICIENCY`を持つ`G4MaterialPropertiesTable`を作ります。
-`EFFICIENCY`はエネルギーの昇順で登録する必要があるため、変換後に順序を逆にします。
-データシートは波長の昇順に並んでいることが多いので、変換すると並びが逆になります。
+## EFFICIENCYのテーブルを作りたい（`MakeEfficiencyProperties`）
 
 ```cpp
 #include "G4MaterialPropertiesTable.hh"
@@ -118,10 +102,10 @@ inline G4MaterialPropertiesTable* MakeEfficiencyProperties(const PmtQETable& tab
 }
 ```
 
-## 光電面の光学表面にQEを設定したい（`AttachPhotocathodeSurface`）
+`EFFICIENCY`はエネルギーの昇順で登録する必要があるため、変換後に順序を逆にします。
+データシートは波長の昇順に並んでいることが多いので、変換すると並びが逆になります。
 
-`MakeEfficiencyProperties()`の結果を、光電面の`G4OpticalSurface`に登録します。
-関数にしておくと、アプリが変わっても同じ関数を呼べます。
+## 光電面の光学表面にQEを設定したい（`AttachPhotocathodeSurface`）
 
 ```cpp
 #include "G4LogicalSkinSurface.hh"
@@ -142,6 +126,9 @@ G4LogicalSkinSurface* AttachPhotocathodeSurface(
     return new G4LogicalSkinSurface(name, photocathode, surface);
 }
 ```
+
+`MakeEfficiencyProperties()`の結果を、光電面の`G4OpticalSurface`に登録します。
+関数にしておくと、アプリが変わっても同じ関数を呼べます。
 
 `BuildPmtPhotocathode()`を使うアプリでは、光電面の論理ボリュームを作った後に呼び出します。
 
