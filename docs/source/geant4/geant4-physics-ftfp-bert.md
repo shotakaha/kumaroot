@@ -1,7 +1,5 @@
 # 高エネルギー物理したい（`FTFP_BERT`）
 
-迷ったら、まず`FTFP_BERT`を使えばよいです。
-
 ```cpp
 #include "G4RunManagerFactory.hh"
 #include "FTFP_BERT.hh"
@@ -14,11 +12,11 @@ int main()
 }
 ```
 
-`FTFP_BERT`はGeant4の標準的な物理リストで、LHC実験などの高エネルギー物理学分野で広く使われています。
+`FTFP_BERT`はGeant4の標準的な物理リストです。
+LHC実験などの高エネルギー物理学分野で広く使われています。
+自作アプリの開発では、まず最初に使うとよい物理リストです。
 
 ## 標準的な物理リストの中身を見たい
-
-`FTFP_BERT`のコンストラクタは、次のモジュールを順に登録しています。
 
 ```cpp
 FTFP_BERT::FTFP_BERT(G4int ver)
@@ -35,6 +33,8 @@ FTFP_BERT::FTFP_BERT(G4int ver)
 }
 ```
 
+`FTFP_BERT`のコンストラクタは、次のモジュールを順に登録しています。
+
 - `G4EmStandardPhysics`：標準的な電磁相互作用
 - `G4EmExtraPhysics`：シンクロトロン放射などの追加の電磁相互作用
 - `G4DecayPhysics`：粒子の崩壊
@@ -49,21 +49,20 @@ FTFP_BERT::FTFP_BERT(G4int ver)
 
 ## 高精度輸送したい（`FTFP_BERT_HP`）
 
-中性子の輸送を高精度にしたいときは、`FTFP_BERT_HP`を使います。
-
 ```cpp
 #include "FTFP_BERT_HP.hh"
 
 auto* physics = new FTFP_BERT_HP{};
 ```
 
+`FTFP_BERT_HP`は、`FTFP_BERT`に中性子の高精度輸送（HP）を追加した物理リストです。
+
 20 MeV未満の中性子を、評価済み核データを使って高精度に扱います。
 遮蔽計算など、中性子の振る舞いが重要な場合に向いています。
-高精度の分、計算時間が増え、中性子の核データファイル（環境変数`G4NEUTRONHPDATA`で指定）が必要です。
+高精度になる分、計算時間が増加します。
+また、中性子の核データファイル（環境変数`G4NEUTRONHPDATA`で指定）が必要です。
 
 ## 超高エネルギーしたい（`QGSP_BERT`）
-
-高エネルギー側に、FTFPモデルの代わりにQGS（Quark-Gluon String）モデルを使うのが`QGSP_BERT`です。
 
 ```cpp
 #include "QGSP_BERT.hh"
@@ -71,6 +70,7 @@ auto* physics = new FTFP_BERT_HP{};
 auto* physics = new QGSP_BERT{};
 ```
 
+`QGSP_BERT`は、`FTFP_BERT`の高エネルギー側をQGS（Quark-Gluon String）モデルに置き換えた物理リストです。
 超高エネルギーの粒子（宇宙線など）を扱う場合に使います。
 Geant4 v10.0以前は`QGSP_BERT`が標準的な物理リストでした。
 現在は`FTFP_BERT`が標準で、`QGSP_BERT`は用途に応じて選ぶものになっています。
