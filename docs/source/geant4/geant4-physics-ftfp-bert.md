@@ -19,17 +19,18 @@ LHC実験などの高エネルギー物理学分野で広く使われていま�
 ## 標準的な物理リストの中身を見たい
 
 ```cpp
+// FTFP_BERT.cc（一部を省略）
 FTFP_BERT::FTFP_BERT(G4int ver)
 {
-  defaultCutValue = 0.7*CLHEP::mm;
-  RegisterPhysics( new G4EmStandardPhysics(ver));
-  RegisterPhysics( new G4EmExtraPhysics(ver) );
-  RegisterPhysics( new G4DecayPhysics(ver) );
-  RegisterPhysics( new G4HadronElasticPhysics(ver) );
-  RegisterPhysics( new G4HadronPhysicsFTFP_BERT(ver));
-  RegisterPhysics( new G4StoppingPhysics(ver) );
-  RegisterPhysics( new G4IonPhysics(ver));
-  RegisterPhysics( new G4NeutronTrackingCut(ver));
+  defaultCutValue = 0.7*CLHEP::mm;                      // デフォルトのカット値
+  RegisterPhysics( new G4EmStandardPhysics(ver));       // 標準的な電磁相互作用
+  RegisterPhysics( new G4EmExtraPhysics(ver) );         // 追加の電磁相互作用（シンクロトロン放射など）
+  RegisterPhysics( new G4DecayPhysics(ver) );           // 粒子の崩壊
+  RegisterPhysics( new G4HadronElasticPhysics(ver) );   // ハドロンの弾性散乱
+  RegisterPhysics( new G4HadronPhysicsFTFP_BERT(ver));  // ハドロンの非弾性相互作用（FTFP + BERT）
+  RegisterPhysics( new G4StoppingPhysics(ver) );        // 停止した負のハドロン
+  RegisterPhysics( new G4IonPhysics(ver));              // イオンの物理過程
+  RegisterPhysics( new G4NeutronTrackingCut(ver));      // 中性子の追跡の打ち切り
 }
 ```
 
