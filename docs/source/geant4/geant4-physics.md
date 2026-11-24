@@ -6,6 +6,7 @@ Geant4の開発チームが「モジュール型物理リスト（`G4VModularPhy
 
 ```{toctree}
 geant4-physics-ftfp-bert
+geant4-physics-qbbc
 geant4-physics-constructparticle
 geant4-physics-constructprocess
 geant4-physics-opticalphysics

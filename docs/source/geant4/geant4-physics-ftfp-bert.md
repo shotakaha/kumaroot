@@ -86,7 +86,7 @@ auto* physics = new QBBC{};
 
 | 物理リスト | 特徴 |
 | --- | --- |
-| `QBBC` | 汎用的な物理リスト。附属サンプル B1 で使用 |
+| [](./geant4-physics-qbbc.md) | 汎用的な物理リスト。附属サンプル B1 で使用 |
 | `Shielding` | 遮蔽計算向け。中性子の高精度輸送を含む |
 | `FTFP_INCLXX` | 核内カスケードに INCL++ モデルを使用 |
 | `QGSP_BIC_HP` | 中性子の高精度輸送と Binary カスケードを使用 |

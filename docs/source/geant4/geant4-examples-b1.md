@@ -137,6 +137,7 @@ Sensitive Detectorを使ったヒット情報の扱いは、
 
 `basic/B1`では、Geant4標準のモジュール型物理リストにある`QBBC`モデルを使っています。
 `QBBC`は、電磁相互作用、ハドロン相互作用、崩壊過程などを含んだ汎用的で安全な物理リストです。
+詳しくは[](./geant4-physics-qbbc.md)を参照してください。
 
 ## 入射粒子したい（`PrimaryGeneratorAction`）
 
