@@ -38,20 +38,11 @@ int main()
 - `G4OpBoundaryProcess`：境界での反射・屈折・全反射
 - `G4OpWLS`、`G4OpWLS2`：波長変換（WLS）
 
-## 光学光子とプロセスの関係
-
-Geant4では、粒子によって「光」のクラスが分かれています。
-
-- `G4Gamma`は、ガンマ線を表す粒子クラスです。光電効果、コンプトン散乱、対生成などのプロセスが割り当てられます。
-- `G4OpticalPhoton`は、光学光子（eV領域の紫外線・可視光・赤外線など）を表す粒子クラスです。反射、屈折、吸収、波長変換などの光学プロセスが割り当てられます。
-
-相互作用を扱うのは、粒子クラスではなくプロセスです。
-粒子クラスは、質量や電荷などの粒子の定義だけを持ちます。
-
 :::{note}
 
-光学プロセスを動かすには、物質に`G4MaterialPropertiesTable`で屈折率（`RINDEX`）などを設定する必要があります。
-設定がない物質では、光学光子は追跡されません。
+Geant4には`G4Gamma`と`G4OpticalPhoton`の2種類の「光」の粒子クラスがあります。
+`G4Gamma`は「ガンマ線」を表すクラスで、光電効果やコンプトン散乱、対生成などのプロセスが割り当てられます。
+`G4OpticalPhoton`は「光学光子」を表すクラスで、反射や屈折、吸収、波長変換などの光学プロセスが割り当てられます。
 
 :::
 
@@ -98,13 +89,10 @@ void ConfigureOpticalParameters() {
 }
 ```
 
-`G4OpticalParameters::Instance()`はシングルトンです。
-どこからでもグローバルに設定できます。
+`G4OpticalParameters`は、光学プロセスのパラメータを管理するためのシングルトンです。
+`G4OpticalPhysics`を登録した後、`rm->Initialize()`の前に、`G4OpticalParameters::Instance()`で取得したインスタンスに対してパラメータを設定します。
 
 ## マクロで設定したい（`/process/optical/`）
-
-`G4OpticalParameters`の設定は、マクロでも変更できます。
-次のコマンドは、`/run/initialize`より前（PreInit状態）で実行してください。
 
 ```cfg
 /process/optical/verbose 1
@@ -122,7 +110,11 @@ void ConfigureOpticalParameters() {
 /process/optical/processActivation QuasiScintillation true
 ```
 
-`processActivation`で、光学物理に含まれる各プロセスの有効・無効を切り替えられます。
+`/process/optical/`コマンドを使って、マクロから光学プロセスのパラメータ（`G4OpticalParameters`）を変更できます。
+`/process/optical/verbose`で、光学プロセスの詳細なログを出力できます。
+`/process/optical/processActivation`で、光学物理に含まれる各プロセスの有効・無効を切り替えられます。
+これらのコマンドは`/run/initialize`より前に実行する必要があります。
+
 
 ## リファレンス
 
