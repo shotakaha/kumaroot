@@ -10,13 +10,14 @@ int main()
 {
     auto* rm = G4RunManagerFactory::CreateRunManager();
 
-    // ベースとなる物理モジュールを指定する
+    // ベースとなる物理リストを指定する
     auto* physics = new FTFP_BERT{};
-    // 光学物理を追加する
+    // 物理モジュール（G4OpticalPhysics）を追加する
     physics->RegisterPhysics(new G4OpticalPhysics{});
     // ランマネージャーに登録する
     rm->SetUserInitialization(physics);
-    // 光学物理のグローバル設定
+
+    // 光学物理のグローバル設定（定義は後述）
     ConfigureOpticalParameters();
 
     // ランマネージャーを初期化する
@@ -24,30 +25,35 @@ int main()
 }
 ```
 
-`G4OpticalPhysics`は、光学光子（`G4OpticalPhoton`）の相互作用を扱うための物理モジュールです。
-`FTFP_BERT`のような物理モジュールには、光学物理のプロセスは含まれていないため、`RegisterPhysics`を使って、ユーザーが追加することで、光学物理のプロセスを有効にできます。
+`G4OpticalPhysics`は、光学光子（`G4OpticalPhoton`）とその相互作用を登録する物理モジュールです。
+`FTFP_BERT`のような物理リストに、`RegisterPhysics`で追加して有効にします。
+
+`G4OpticalPhysics`は、次の物理プロセスを登録します。
+
+- `G4Cerenkov`：チェレンコフ光の発生
+- `G4Scintillation`：シンチレーション光の発生
+- `G4OpAbsorption`：光の吸収
+- `G4OpRayleigh`：レイリー散乱
+- `G4OpMieHG`：ミー散乱（Henyey-Greenstein 位相関数）
+- `G4OpBoundaryProcess`：境界での反射・屈折・全反射
+- `G4OpWLS`、`G4OpWLS2`：波長変換（WLS）
+
+## 光学光子とプロセスの関係
+
+Geant4では、粒子によって「光」のクラスが分かれています。
+
+- `G4Gamma`は、ガンマ線を表す粒子クラスです。光電効果、コンプトン散乱、対生成などのプロセスが割り当てられます。
+- `G4OpticalPhoton`は、光学光子（eV領域の紫外線・可視光・赤外線など）を表す粒子クラスです。反射、屈折、吸収、波長変換などの光学プロセスが割り当てられます。
+
+相互作用を扱うのは、粒子クラスではなくプロセスです。
+粒子クラスは、質量や電荷などの粒子の定義だけを持ちます。
 
 :::{note}
 
-Geant4では、粒子によって「光」のクラスが分かれています。
-`G4Gamma`はガンマ線を表す粒子クラスで、光電効果、コンプトン散乱、対生成などの相互作用を扱います。
-`G4OpticalPhoton`は光学光子（eV領域の紫外線・可視光・赤外線など）を表す粒子クラスで、反射、屈折、吸収、波長変換などの相互作用を扱います。
-また、`G4MaterialPropertiesTable`を使って光学特性を設定することが必須です。
+光学プロセスを動かすには、物質に`G4MaterialPropertiesTable`で屈折率（`RINDEX`）などを設定する必要があります。
+設定がない物質では、光学光子は追跡されません。
 
 :::
-
-## 光学物理のプロセス
-
-- 光の発生
-    - チェレンコフ光（`G4Cerenkov`）
-    - シンチレーション光（`G4Scintillation`）
-- 媒質中での輸送
-    - 吸収（`G4OpAbsorption`）
-    - レイリー散乱（`G4OpRayleigh`）
-    - ミー散乱（`G4OpMieHG`）
-    - 波長変換（`G4OpWLS` / `G4OpWLS2`）
-- 境界での散乱
-  - 反射・屈折・全反射（`G4OpBoundary`）
 
 :::{seealso}
 
@@ -59,7 +65,7 @@ Geant4では、粒子によって「光」のクラスが分かれています�
 
 :::
 
-## 光学物理を調整したい（`G4OpticalParameters`）
+## パラメータを調整したい（`G4OpticalParameters`）
 
 ```cpp
 #include "G4OpticalParameters.hh"
@@ -70,7 +76,6 @@ void ConfigureOpticalParameters() {
     // - RegisterPhysics(new G4OpticalPhysics{}) の後
     // - rm->Initialize() の前
 
-    // OpticalPhysicsのパラメーター設定
     auto* params = G4OpticalParameters::Instance();
 
     // G4Cerenkovの設定
@@ -93,10 +98,13 @@ void ConfigureOpticalParameters() {
 }
 ```
 
-`G4OpticalParameters`を使って、光学物理のパラメーターを変更できます。
-`G4OpticalParameters::Instance()`はシングルトンになっているため、どこからでもグローバルに設定できます。
+`G4OpticalParameters::Instance()`はシングルトンです。
+どこからでもグローバルに設定できます。
 
 ## マクロで設定したい（`/process/optical/`）
+
+`G4OpticalParameters`の設定は、マクロでも変更できます。
+次のコマンドは、`/run/initialize`より前（PreInit状態）で実行してください。
 
 ```cfg
 /process/optical/verbose 1
@@ -114,11 +122,9 @@ void ConfigureOpticalParameters() {
 /process/optical/processActivation QuasiScintillation true
 ```
 
-`G4OpticalParameters`の設定はマクロでも変更できます。
-`processActivation`で、OpticalPhysicsで有効にする物理プロセスを選択できます。
-デフォルトでは、上のプロセスすべてが有効になっています。
+`processActivation`で、光学物理に含まれる各プロセスの有効・無効を切り替えられます。
 
 ## リファレンス
 
-- [G4OpticalPhysics](https://geant4.kek.jp/Reference/11.4.0/classG4OpticalPhysics.html)
-- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.4.0/classG4OpticalParameters.html)
+- [G4OpticalPhysics](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalPhysics.html)
+- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalParameters.html)
