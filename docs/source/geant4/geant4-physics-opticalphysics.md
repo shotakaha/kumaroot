@@ -28,6 +28,8 @@ int main()
 `G4OpticalPhysics`は、光学光子（`G4OpticalPhoton`）とその相互作用を登録する物理モジュールです。
 `FTFP_BERT`のような物理リストに、`RegisterPhysics`で追加して有効にします。
 
+## 含まれる物理プロセス
+
 `G4OpticalPhysics`は、次の物理プロセスを登録します。
 
 - `G4Cerenkov`：チェレンコフ光の発生
@@ -43,6 +45,13 @@ int main()
 Geant4には`G4Gamma`と`G4OpticalPhoton`の2種類の「光」の粒子クラスがあります。
 `G4Gamma`は「ガンマ線」を表すクラスで、光電効果やコンプトン散乱、対生成などのプロセスが割り当てられます。
 `G4OpticalPhoton`は「光学光子」を表すクラスで、反射や屈折、吸収、波長変換などの光学プロセスが割り当てられます。
+
+:::
+
+:::{note}
+
+光学プロセスを動かすには、物質に`G4MaterialPropertiesTable`で屈折率（`RINDEX`）などを設定する必要があります。
+設定がない物質では、光学光子は追跡されません。
 
 :::
 
@@ -106,15 +115,13 @@ void ConfigureOpticalParameters() {
 /process/optical/processActivation OpBoundary true
 /process/optical/processActivation OpWLS true
 /process/optical/processActivation OpWLS2 true
-/process/optical/processActivation QuasiCerenkov true
-/process/optical/processActivation QuasiScintillation true
 ```
 
 `/process/optical/`コマンドを使って、マクロから光学プロセスのパラメータ（`G4OpticalParameters`）を変更できます。
 `/process/optical/verbose`で、光学プロセスの詳細なログを出力できます。
-`/process/optical/processActivation`で、光学物理に含まれる各プロセスの有効・無効を切り替えられます。
-これらのコマンドは`/run/initialize`より前に実行する必要があります。
-
+`processActivation`で、光学物理に含まれる各プロセスの有効・無効を切り替えられます。
+`processActivation`は`/run/initialize`より前（PreInit）でだけ使えます。
+`cerenkov/`や`scintillation/`などのパラメータ設定コマンドは、PreInitとIdleのどちらでも使えます。
 
 ## リファレンス
 
