@@ -38,14 +38,25 @@ params->SetCerenkovMaxBetaChange(10.0);
 1ステップでの速さβの変化量を、パーセントで指定します。
 `0`にするとこの制限は無効になります。
 
-## 光子の処理順を変えたい（`SetCerenkovTrackSecondariesFirst`）
+## チェレンコフ光の生成を止めたい（`SetCerenkovStackPhotons`）
+
+```cpp
+params->SetCerenkovStackPhotons(false);
+```
+
+`false`にすると、チェレンコフ光子は1つも生成されません。
+荷電粒子の軌跡やエネルギー損失だけを調べたいときに使います。
+デフォルトは`true`です。
+
+## 親粒子の追跡順を変えたい（`SetCerenkovTrackSecondariesFirst`）
 
 ```cpp
 params->SetCerenkovTrackSecondariesFirst(true);
-params->SetCerenkovStackPhotons(true);
 ```
 
-`TrackSecondariesFirst`と`StackPhotons`は、どちらもデフォルトで`true`です。
+`true`のとき、光子を生成したステップで親粒子を一時停止し、生成された光子を先に追跡します。
+`false`にすると、親粒子は停止せず、光子は並行して扱われます。
+デフォルトは`true`です。
 
 ## 屈折率を設定したい（`RINDEX`）
 
@@ -57,8 +68,8 @@ mpt->AddProperty("RINDEX", photonEnergy, refractiveIndex);
 material->SetMaterialPropertiesTable(mpt);
 ```
 
-`RINDEX`は、光子エネルギーに依存する屈折率です。
-チェレンコフ光は、この値が設定された物質でのみ発生します。
+`RINDEX`は光子エネルギーに依存する屈折率です。
+チェレンコフ光はこの値が設定された物質でのみ発生します。
 
 :::{seealso}
 
