@@ -281,7 +281,8 @@ Pages under `docs/source/geant4/` (e.g. `geant4-usage.md`, `geant4-run-manager.m
   - Code fence languages: `cpp`, `console` (use `//` for comments, since `#` at line start reads as a prompt), `cfg` (Geant4 macros), `cmake`, `text`
   - Cross-reference sibling pages with plain links without extension or anchor: `[G4Step](geant4-step)`
   - Admonitions use the `:::{name}` colon-fence form with blank lines around the content
-- **Reference links**: point to the Geant4 Doxygen reference for the version the docs target (currently 11.2.0, `https://geant4.kek.jp/Reference/11.2.0/...`). When the version changes, update these links in one pass
+- **Reference links**: point to the Geant4 Doxygen reference for the version the docs target (currently 11.4.0, `https://geant4.kek.jp/Reference/11.4.0/...`). The KEK mirror does not yet host 11.4.3, so keep 11.4.0 until it does. When the version changes, update these links in one pass
+- **Code sample verification**: check code samples against Geant4 **11.4.3**. The local source is at `/Users/shotakaha/geant4/v11.4.3/source` (outside this repo). Look up class and method signatures and default values there, not only in the Doxygen reference
 - **Exceptions by page type**: the leaf structure above does not apply to these pages, and they are not inconsistencies:
   - **Hub pages** (`geant4-usage`, `geant4-event`, `geant4-track`, `geant4-material`, etc.): a short intro and a `{toctree}`. No code block is required
   - **Concept pages** (`geant4-overview`, `geant4-cpp`, `geant4-singleton`, `geant4-versions`, etc.): the H1 names the topic, and prose may come first
