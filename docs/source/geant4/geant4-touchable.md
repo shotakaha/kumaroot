@@ -17,6 +17,6 @@ G4int copy_number = aTouch->GetCopyNumber();
 
 ## リファレンス
 
-- [G4TouchableHistory](https://geant4.kek.jp/Reference/11.2.0/classG4TouchableHistory.html)
-- [G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)
+- [G4TouchableHistory](https://geant4.kek.jp/Reference/11.4.0/classG4TouchableHistory.html)
+- [G4StepPoint](https://geant4.kek.jp/Reference/11.4.0/classG4StepPoint.html)
 - [Touchables: Uniquely Identifying a Volume - Book For Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomTouch.html)

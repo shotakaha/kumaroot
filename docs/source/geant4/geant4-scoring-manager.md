@@ -145,6 +145,6 @@ if( aStep->GetTrack()->GetParticleDefinition()->GetPDGCharge() != 0 )
 
 :::{seealso}
 
-- [G4ScoringManager](https://geant4.kek.jp/Reference/11.2.0/classG4ScoringManager.html)
+- [G4ScoringManager](https://geant4.kek.jp/Reference/11.4.0/classG4ScoringManager.html)
 
 :::

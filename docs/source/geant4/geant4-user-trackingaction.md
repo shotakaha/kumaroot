@@ -2,7 +2,7 @@
 
 ## 親クラス
 
-- [G4UserTrackingAction](https://geant4.kek.jp/Reference/11.2.0/classG4UserTrackingAction.html)
+- [G4UserTrackingAction](https://geant4.kek.jp/Reference/11.4.0/classG4UserTrackingAction.html)
 
 ```cpp
 G4UserTrackingAction();

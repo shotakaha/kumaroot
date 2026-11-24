@@ -159,7 +159,7 @@ for (G4int i = 0; i < procVec->entries(); ++i) {
 
 - [](geant4-physics-opticalphysics)
 - [](geant4-material-propertiestable)
-- [G4Cerenkov](https://geant4.kek.jp/Reference/11.2.0/classG4Cerenkov.html)
-- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalParameters.html)
+- [G4Cerenkov](https://geant4.kek.jp/Reference/11.4.0/classG4Cerenkov.html)
+- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.4.0/classG4OpticalParameters.html)
 
 :::

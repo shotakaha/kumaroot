@@ -65,8 +65,8 @@ G4Random::setTheSeeds(seeds);
 
 :::{seealso}
 
-- [CLHEP::HepRandom](https://geant4.kek.jp/Reference/11.2.0/classCLHEP_1_1HepRandom.html)
-- [CLHEP::HepRandomEngine](https://geant4.kek.jp/Reference/11.2.0/classCLHEP_1_1HepRandomEngine.html)
+- [CLHEP::HepRandom](https://geant4.kek.jp/Reference/11.4.0/classCLHEP_1_1HepRandom.html)
+- [CLHEP::HepRandomEngine](https://geant4.kek.jp/Reference/11.4.0/classCLHEP_1_1HepRandomEngine.html)
 - [The HEPRandom module in CLHEP](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Fundamentals/global.html#the-heprandom-module-in-clhep)
 - [CLHEP Document](https://proj-clhep.web.cern.ch/proj-clhep/)
 

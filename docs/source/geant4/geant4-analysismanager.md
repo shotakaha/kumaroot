@@ -366,7 +366,7 @@ am->FinishNtuple();
 ``std::map``、
 ``std::vector``などを使います。
 
-[G4VAnalysisManager](https://geant4.kek.jp/Reference/11.2.0/classG4VAnalysisManager.html)を使って、ファイルに出力できます。
+[G4VAnalysisManager](https://geant4.kek.jp/Reference/11.4.0/classG4VAnalysisManager.html)を使って、ファイルに出力できます。
 Geant4は独自のデータベース形式を持たない代わりに、
 ユーザー自身がいろいろなフォーマットに出力できるようになっています。
 
@@ -528,6 +528,6 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 ## リファレンス
 
-- [G4AnalysisManager](https://geant4.kek.jp/Reference/11.2.0/classG4VAnalysisManager.html)
-- [G4UserRunAction](https://geant4.kek.jp/Reference/11.2.0/classG4UserRunAction.html)
+- [G4AnalysisManager](https://geant4.kek.jp/Reference/11.4.0/classG4VAnalysisManager.html)
+- [G4UserRunAction](https://geant4.kek.jp/Reference/11.4.0/classG4UserRunAction.html)
 - [examples/extended/analysis/AnaEx03](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleAnaEx03.html)

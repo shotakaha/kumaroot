@@ -20,6 +20,6 @@ Qtウィンドウに表示されるジオメトリの可視化状態を設定で
 
 ## リファレンス
 
-- [G4VisAttributes](https://geant4.kek.jp/Reference/11.2.0/classG4VisAttributes.html)
-- [G4Colour](https://geant4.kek.jp/Reference/11.2.0/classG4Colour.html)
+- [G4VisAttributes](https://geant4.kek.jp/Reference/11.4.0/classG4VisAttributes.html)
+- [G4Colour](https://geant4.kek.jp/Reference/11.4.0/classG4Colour.html)
 - [原色大辞典](https://www.colordic.org/)

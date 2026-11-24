@@ -24,7 +24,7 @@ auto rm = G4RunManagerFactory::CreateRunManager();
 
 以前は``G4RunManager``クラスを使っていました。
 マルチスレッドとシングルスレッドを切り替えやすくするため、
-[G4RunManagerFactory](https://geant4.kek.jp/Reference/11.2.0/classG4RunManagerFactory.html)を通じて、インスタンスを作成するのがよいみたいです。
+[G4RunManagerFactory](https://geant4.kek.jp/Reference/11.4.0/classG4RunManagerFactory.html)を通じて、インスタンスを作成するのがよいみたいです。
 
 :::
 
@@ -120,7 +120,7 @@ auto* master = G4RunManagerFactory::GetMasterRunManager();
 
 :::{seealso}
 
-- [G4RunManagerFactory - Geant4 Doxygen](https://geant4.kek.jp/Reference/11.2.0/classG4RunManagerFactory.html)
-- [G4RunManager - Geant4 Doxygen](https://geant4.kek.jp/Reference/11.2.0/classG4RunManager.html)
+- [G4RunManagerFactory - Geant4 Doxygen](https://geant4.kek.jp/Reference/11.4.0/classG4RunManagerFactory.html)
+- [G4RunManager - Geant4 Doxygen](https://geant4.kek.jp/Reference/11.4.0/classG4RunManager.html)
 
 :::

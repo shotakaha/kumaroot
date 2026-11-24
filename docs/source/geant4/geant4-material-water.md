@@ -100,7 +100,7 @@ mpt->AddProperty("ABSLENGTH", photon_energy, absorption_length);
 water->SetMaterialPropertiesTable(mpt);
 ```
 
-[G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)で、材料の特性を追加できます。
+[G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.4.0/classG4MaterialPropertiesTable.html)で、材料の特性を追加できます。
 G4Material自体は材料の特性を持たないため、自分で追加する必要があります。
 `G4_WATER`にも同じ方法で光学特性を設定できます。
 光子のエネルギーは昇順で与えてください。
@@ -108,10 +108,10 @@ G4Material自体は材料の特性を持たないため、自分で追加する�
 
 :::{seealso}
 
-- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
-- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
-- [G4Element](https://geant4.kek.jp/Reference/11.2.0/classG4Element.html)
-- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)
+- [G4Material](https://geant4.kek.jp/Reference/11.4.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.4.0/classG4NistManager.html)
+- [G4Element](https://geant4.kek.jp/Reference/11.4.0/classG4Element.html)
+- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.4.0/classG4MaterialPropertiesTable.html)
 - [geant4-material-element](geant4-material-element)
 - [geant4-material-propertiestable](geant4-material-propertiestable)
 

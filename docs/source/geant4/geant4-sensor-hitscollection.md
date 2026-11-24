@@ -16,7 +16,7 @@ G4THitsCollection<SensorHit> hit_collection;
 
 ## 親クラス
 
-- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4VHitsCollection.html)
+- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.4.0/classG4VHitsCollection.html)
 
 ```cpp
 G4VHitsCollection() = default;
@@ -34,7 +34,7 @@ virtual size_t GetSize() const {return 0;};
 
 ## テンプレートクラス
 
-- [G4THitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4THitsCollection.html)
+- [G4THitsCollection](https://geant4.kek.jp/Reference/11.4.0/classG4THitsCollection.html)
 
 ```cpp
 G4THitsCollection();

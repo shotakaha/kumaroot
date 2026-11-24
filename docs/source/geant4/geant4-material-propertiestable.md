@@ -204,6 +204,6 @@ surface->SetMaterialPropertiesTable(surfaceProperty);
 
 ## リファレンス
 
-- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)
+- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.4.0/classG4MaterialPropertiesTable.html)
 - [Material Properties Table](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html)
 - [RefractiveIndex Database](https://refractiveindex.info/)

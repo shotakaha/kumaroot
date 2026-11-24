@@ -109,5 +109,5 @@ fParticleGun->SetParticleDefinition(particle);
 
 ## リファレンス
 
-- [G4ParticleTable](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleTable.html)
+- [G4ParticleTable](https://geant4.kek.jp/Reference/11.4.0/classG4ParticleTable.html)
 - [PDG Identifiers - Particle Data Group](https://pdg.lbl.gov/2024/pdgid/PDGIdentifiers.html)

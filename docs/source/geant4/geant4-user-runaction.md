@@ -5,7 +5,7 @@
 
 ## 親クラス
 
-- [G4UserRunAction](https://geant4.kek.jp/Reference/11.2.0/classG4UserRunAction.html)
+- [G4UserRunAction](https://geant4.kek.jp/Reference/11.4.0/classG4UserRunAction.html)
 
 ```cpp
 G4UserRunAction();

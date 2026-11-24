@@ -64,6 +64,6 @@ G4bool OpticalSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 :::{seealso}
 
-- [G4OpticalPhoton](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalPhoton.html)
+- [G4OpticalPhoton](https://geant4.kek.jp/Reference/11.4.0/classG4OpticalPhoton.html)
 
 :::

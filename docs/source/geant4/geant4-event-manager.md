@@ -23,4 +23,4 @@ const G4Event *event = em->GetConstCurrentEvent();
 
 ## リファレンス
 
-- [G4Event](https://geant4.kek.jp/Reference/11.2.0/classG4EventManager.html)
+- [G4Event](https://geant4.kek.jp/Reference/11.4.0/classG4EventManager.html)

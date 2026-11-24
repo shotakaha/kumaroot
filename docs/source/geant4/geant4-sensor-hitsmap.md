@@ -15,5 +15,5 @@ auto hitsMap = new G4THitsMap<G4double>(detName, colName);
 
 ## リファレンス
 
-- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4VHitsCollection.html)
-- [G4THitsMap](https://geant4.kek.jp/Reference/11.2.0/classG4THitsMap.html)
+- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.4.0/classG4VHitsCollection.html)
+- [G4THitsMap](https://geant4.kek.jp/Reference/11.4.0/classG4THitsMap.html)

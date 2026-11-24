@@ -32,9 +32,9 @@ hit->Print();
 
 :::{seealso}
 
-- [G4HCofThisEvent](https://geant4.kek.jp/Reference/11.2.0/classG4HCofThisEvent.html)
-- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4VHitsCollection.html)
-- [G4DCofThisEvent](https://geant4.kek.jp/Reference/11.2.0/classG4DCofThisEvent.html)
-- [G4VDigiCollection](https://geant4.kek.jp/Reference/11.2.0/classG4VDigiCollection.html)
+- [G4HCofThisEvent](https://geant4.kek.jp/Reference/11.4.0/classG4HCofThisEvent.html)
+- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.4.0/classG4VHitsCollection.html)
+- [G4DCofThisEvent](https://geant4.kek.jp/Reference/11.4.0/classG4DCofThisEvent.html)
+- [G4VDigiCollection](https://geant4.kek.jp/Reference/11.4.0/classG4VDigiCollection.html)
 
 :::

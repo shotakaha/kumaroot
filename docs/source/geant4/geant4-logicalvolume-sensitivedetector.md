@@ -85,5 +85,5 @@ SensitiveDetectorを使うと、ヒットの記録を次の点で簡単にでき
 
 ## リファレンス
 
-- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)
-- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
+- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.4.0/classG4LogicalVolume.html)
+- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.4.0/classG4VSensitiveDetector.html)

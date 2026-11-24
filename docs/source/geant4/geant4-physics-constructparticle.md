@@ -17,6 +17,6 @@ void PhysicsList::ConstructParticle()
 
 :::{seealso}
 
-- [G4VUserPhysicsList](https://geant4.kek.jp/Reference/11.2.0/classG4VUserPhysicsList.html)
+- [G4VUserPhysicsList](https://geant4.kek.jp/Reference/11.4.0/classG4VUserPhysicsList.html)
 
 :::

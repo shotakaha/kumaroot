@@ -79,6 +79,6 @@ G4debug << "[Track]    ProperTime=" << G4BestUnit{track_time, "Time"} >> G4endl;
 
 :::{seealso}
 
-- [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)
+- [G4Step](https://geant4.kek.jp/Reference/11.4.0/classG4Step.html)
 
 :::

@@ -22,4 +22,4 @@ HCofThisEventに出し入れするときに使います。
 
 ## リファレンス
 
-- [G4HCofThisEvent](https://geant4.kek.jp/Reference/11.2.0/classG4HCofThisEvent.html)
+- [G4HCofThisEvent](https://geant4.kek.jp/Reference/11.4.0/classG4HCofThisEvent.html)

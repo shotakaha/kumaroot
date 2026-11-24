@@ -46,6 +46,6 @@ if (aTrack->GetDefinition() == G4Electron::ElectronDefinition())
 
 ## リファレンス
 
-- [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
-- [G4ParticleDefinition](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleDefinition.html)
+- [G4Track](https://geant4.kek.jp/Reference/11.4.0/classG4Track.html)
+- [G4ParticleDefinition](https://geant4.kek.jp/Reference/11.4.0/classG4ParticleDefinition.html)
 - [Monte Carlo Particle Numbering Scheme - PGD(2024)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-monte-carlo-numbering.pdf)

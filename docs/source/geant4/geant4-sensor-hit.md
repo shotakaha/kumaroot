@@ -12,7 +12,7 @@
 
 ## 親クラス
 
-- [G4VHit](https://geant4.kek.jp/Reference/11.2.0/classG4VHit.html)
+- [G4VHit](https://geant4.kek.jp/Reference/11.4.0/classG4VHit.html)
 
 ```cpp
 G4VHit() = default;
@@ -266,8 +266,8 @@ void SensitiveDetector::EndOfEvent(G4HCofThisEvent* aHC)
 ## リファレンス
 
 - ``examples/basic/B2/B2a/include/TrackerHit.hh``
-- [G4VHit](https://geant4.kek.jp/Reference/11.2.0/classG4VHit.html)
-- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4VHitsCollection.html)
-- [G4THitsCollection](https://geant4.kek.jp/Reference/11.2.0/classG4THitsCollection.html)
+- [G4VHit](https://geant4.kek.jp/Reference/11.4.0/classG4VHit.html)
+- [G4VHitsCollection](https://geant4.kek.jp/Reference/11.4.0/classG4VHitsCollection.html)
+- [G4THitsCollection](https://geant4.kek.jp/Reference/11.4.0/classG4THitsCollection.html)
 - [Hits - Book for Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/hit.html)
 - [Hits and Digitisation - Book for Toolkit Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForToolkitDeveloper/html/OOAnalysisDesign/Hit/hit.html)

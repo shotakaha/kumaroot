@@ -25,7 +25,7 @@ geant4-physicalvolume-pvreplica
 
 :::{seealso}
 
-- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4VPhysicalVolume.html)
-- [G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)
+- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.4.0/classG4VPhysicalVolume.html)
+- [G4StepPoint](https://geant4.kek.jp/Reference/11.4.0/classG4StepPoint.html)
 
 :::

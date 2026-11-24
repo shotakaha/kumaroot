@@ -12,7 +12,7 @@ auto physical_volume = new G4PVPlacement{
 };
 ```
 
-[G4PVPlacement](https://geant4.kek.jp/Reference/11.2.0/classG4PVPlacement.html)は``G4VPhysicalVolume``を具象化したクラスです。
+[G4PVPlacement](https://geant4.kek.jp/Reference/11.4.0/classG4PVPlacement.html)は``G4VPhysicalVolume``を具象化したクラスです。
 論理物体（logical volume）を物理物体（physical volume）として配置できます。
 
 ## 物理ボリュームを確認したい
@@ -55,7 +55,7 @@ for (int i = 0; i < n_detectors; i++) {
 
 :::{seealso}
 
-- [G4PVPlacement](https://geant4.kek.jp/Reference/11.2.0/classG4PVPlacement.html)
-- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4VPhysicalVolume.html)
+- [G4PVPlacement](https://geant4.kek.jp/Reference/11.4.0/classG4PVPlacement.html)
+- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.4.0/classG4VPhysicalVolume.html)
 
 :::

@@ -12,7 +12,7 @@ auto physical_volume = new G4PVReplica{
 };
 ```
 
-[G4PVReplica](https://geant4.kek.jp/Reference/11.2.0/classG4PVReplica.html)で、繰り返し構造を持つ、複数の論理物体を一度に配置できます。
+[G4PVReplica](https://geant4.kek.jp/Reference/11.4.0/classG4PVReplica.html)で、繰り返し構造を持つ、複数の論理物体を一度に配置できます。
 論理物体の数が多い場合は、メモリ節約になるそうです。
 
 ## 物理ボリュームを確認したい
@@ -37,7 +37,7 @@ kPhi   // φ方向（極軸方向）
 
 :::{seealso}
 
-- [G4PVReplica](https://geant4.kek.jp/Reference/11.2.0/classG4PVReplica.html)
-- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4VPhysicalVolume.html)
+- [G4PVReplica](https://geant4.kek.jp/Reference/11.4.0/classG4PVReplica.html)
+- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.4.0/classG4VPhysicalVolume.html)
 
 :::

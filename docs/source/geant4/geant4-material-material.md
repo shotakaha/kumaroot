@@ -27,7 +27,7 @@ water2->AddElement(O, 0.888102);  // 酸素の質量割合
 
 :::{seealso}
 
-- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
-- [G4Element](https://geant4.kek.jp/Reference/11.2.0/classG4Element.html)
+- [G4Material](https://geant4.kek.jp/Reference/11.4.0/classG4Material.html)
+- [G4Element](https://geant4.kek.jp/Reference/11.4.0/classG4Element.html)
 
 :::

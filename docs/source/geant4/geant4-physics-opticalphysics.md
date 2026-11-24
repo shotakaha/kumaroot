@@ -125,5 +125,5 @@ void ConfigureOpticalParameters() {
 
 ## リファレンス
 
-- [G4OpticalPhysics](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalPhysics.html)
-- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalParameters.html)
+- [G4OpticalPhysics](https://geant4.kek.jp/Reference/11.4.0/classG4OpticalPhysics.html)
+- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.4.0/classG4OpticalParameters.html)

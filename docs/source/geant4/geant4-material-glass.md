@@ -101,9 +101,9 @@ glass->AddMaterial(Al2O3, 2.4*perCent);
 
 :::{seealso}
 
-- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
-- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
-- [G4Element](https://geant4.kek.jp/Reference/11.2.0/classG4Element.html)
+- [G4Material](https://geant4.kek.jp/Reference/11.4.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.4.0/classG4NistManager.html)
+- [G4Element](https://geant4.kek.jp/Reference/11.4.0/classG4Element.html)
 - [geant4-material-element](geant4-material-element)
 
 :::

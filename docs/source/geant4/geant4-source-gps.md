@@ -30,5 +30,5 @@ geant4-source-gps-angle
 
 ## リファレンス
 
-- [G4GeneralParticleSource](https://geant4.kek.jp/Reference/11.2.0/classG4GeneralParticleSource.html)
+- [G4GeneralParticleSource](https://geant4.kek.jp/Reference/11.4.0/classG4GeneralParticleSource.html)
 - [Geant4 General Particle Source - Book For Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/GettingStarted/generalParticleSource.html)

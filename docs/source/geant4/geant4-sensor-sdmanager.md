@@ -65,5 +65,5 @@ IDをしりたいヒット配列の"名前"もしくはオブジェクトを引�
 
 ## リファレンス
 
-- [G4SDManager](https://geant4.kek.jp/Reference/11.2.0/classG4SDManager.html)
-- [G4HCtable](https://geant4.kek.jp/Reference/11.2.0/classG4HCtable.html)
+- [G4SDManager](https://geant4.kek.jp/Reference/11.4.0/classG4SDManager.html)
+- [G4HCtable](https://geant4.kek.jp/Reference/11.4.0/classG4HCtable.html)

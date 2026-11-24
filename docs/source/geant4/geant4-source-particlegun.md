@@ -67,4 +67,4 @@ fParticleGun->GeneratePrimaryVertex(aEvent);
 
 ## リファレンス
 
-- [G4ParticleGun](https://geant4.kek.jp/Reference/11.2.0/classG4ParticleGun.html)
+- [G4ParticleGun](https://geant4.kek.jp/Reference/11.4.0/classG4ParticleGun.html)

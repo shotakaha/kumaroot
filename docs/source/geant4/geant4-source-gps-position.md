@@ -11,6 +11,6 @@
 
 :::{seealso}
 
-- [G4GeneralParticleSource](https://geant4.kek.jp/Reference/11.2.0/classG4GeneralParticleSource.html)
+- [G4GeneralParticleSource](https://geant4.kek.jp/Reference/11.4.0/classG4GeneralParticleSource.html)
 
 :::

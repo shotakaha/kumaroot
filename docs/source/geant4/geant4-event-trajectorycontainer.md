@@ -7,7 +7,7 @@ G4TrajectoryContainer *tjc = aEvent->GetTrajectoryContainer();
 
 :::{seealso}
 
-- [G4TrajectoryContainer](https://geant4.kek.jp/Reference/11.2.0/classG4TrajectoryContainer.html)
-- [G4VTrajectory](https://geant4.kek.jp/Reference/11.2.0/classG4VTrajectory.html)
+- [G4TrajectoryContainer](https://geant4.kek.jp/Reference/11.4.0/classG4TrajectoryContainer.html)
+- [G4VTrajectory](https://geant4.kek.jp/Reference/11.4.0/classG4VTrajectory.html)
 
 :::

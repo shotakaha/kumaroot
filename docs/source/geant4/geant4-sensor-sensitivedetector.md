@@ -14,7 +14,7 @@ Geant4のイベント処理の枠組みに統合されており、測定に関�
 
 ## 親クラス（`public G4VSensitiveDetector`）
 
-- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
+- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.4.0/classG4VSensitiveDetector.html)
 
 ```cpp
 class G4VSensitiveDetector {
@@ -278,7 +278,7 @@ void Geometry::ConstructSDandField()
 
 ## リファレンス
 
-- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.2.0/classG4VSensitiveDetector.html)
-- [G4VUserDetectorConstruction](https://geant4.kek.jp/Reference/11.2.0/classG4VUserDetectorConstruction.html)
+- [G4VSensitiveDetector](https://geant4.kek.jp/Reference/11.4.0/classG4VSensitiveDetector.html)
+- [G4VUserDetectorConstruction](https://geant4.kek.jp/Reference/11.4.0/classG4VUserDetectorConstruction.html)
 - [Hits - Book for Application Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/hit.html)
 - [Geometry - Book for Toolkit Developers](https://geant4-userdoc.web.cern.ch/UsersGuides/ForToolkitDeveloper/html/OOAnalysisDesign/Geometry/geometry.html)

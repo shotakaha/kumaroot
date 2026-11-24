@@ -21,9 +21,9 @@ auto next_volume = post_step->GetPhysicalVolume();
 
 :::{seealso}
 
-- [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)
-- [G4StepPoint](https://geant4.kek.jp/Reference/11.2.0/classG4StepPoint.html)
-- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4VPhysicalVolume.html)
-- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)
+- [G4Step](https://geant4.kek.jp/Reference/11.4.0/classG4Step.html)
+- [G4StepPoint](https://geant4.kek.jp/Reference/11.4.0/classG4StepPoint.html)
+- [G4VPhysicalVolume](https://geant4.kek.jp/Reference/11.4.0/classG4VPhysicalVolume.html)
+- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.4.0/classG4LogicalVolume.html)
 
 :::

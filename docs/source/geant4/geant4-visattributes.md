@@ -23,6 +23,6 @@ logicVolume->SetVisAttributes(attributes);
 
 :::{seealso}
 
-- [G4VisAttributes](https://geant4.kek.jp/Reference/11.2.0/classG4VisAttributes.html)
+- [G4VisAttributes](https://geant4.kek.jp/Reference/11.4.0/classG4VisAttributes.html)
 
 :::

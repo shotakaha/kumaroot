@@ -122,6 +122,6 @@ namespace プロジェクト名
 
 :::{seealso}
 
-- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.4.0/classG4NistManager.html)
 
 :::

@@ -114,7 +114,7 @@ Geant4 11.4.0 の附属サンプルでの使用状況は次のとおりです。
 
 :::{seealso}
 
-- [FTFP__BERT](https://geant4.kek.jp/Reference/11.2.0/classFTFP__BERT.html)
+- [FTFP__BERT](https://geant4.kek.jp/Reference/11.4.0/classFTFP__BERT.html)
 - [](./geant4-physics-opticalphysics.md)
 - [](./geant4-user-physicslist.md)
 

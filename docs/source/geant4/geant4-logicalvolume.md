@@ -52,4 +52,4 @@ geant4-logicalvolume-store
 
 ## リファレンス
 
-- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.2.0/classG4LogicalVolume.html)
+- [G4LogicalVolume](https://geant4.kek.jp/Reference/11.4.0/classG4LogicalVolume.html)

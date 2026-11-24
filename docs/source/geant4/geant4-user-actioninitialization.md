@@ -165,7 +165,7 @@ class G4VUserActionInitialization {
 - `BuildForMaster()`は仮想関数で、既定では何もしません。マルチスレッドで`RunAction`を登録するときだけ`override`します。
 - コンストラクターとデストラクターは、親クラスの設定をそのまま引き継げばOKです。
 
-親クラスの詳しい説明は、[G4VUserActionInitialization](https://geant4.kek.jp/Reference/11.2.0/classG4VUserActionInitialization.html)を参照してください。
+親クラスの詳しい説明は、[G4VUserActionInitialization](https://geant4.kek.jp/Reference/11.4.0/classG4VUserActionInitialization.html)を参照してください。
 
 ## 自作クラスの例を見たい（`ActionInitialization`）
 

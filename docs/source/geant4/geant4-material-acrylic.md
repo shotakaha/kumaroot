@@ -111,9 +111,9 @@ pmma->SetMaterialPropertiesTable(mpt);
 
 :::{seealso}
 
-- [G4Material](https://geant4.kek.jp/Reference/11.2.0/classG4Material.html)
-- [G4NistManager](https://geant4.kek.jp/Reference/11.2.0/classG4NistManager.html)
-- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.2.0/classG4MaterialPropertiesTable.html)
+- [G4Material](https://geant4.kek.jp/Reference/11.4.0/classG4Material.html)
+- [G4NistManager](https://geant4.kek.jp/Reference/11.4.0/classG4NistManager.html)
+- [G4MaterialPropertiesTable](https://geant4.kek.jp/Reference/11.4.0/classG4MaterialPropertiesTable.html)
 - [geant4-constants](geant4-constants)
 - [geant4-material-propertiestable](geant4-material-propertiestable)
 

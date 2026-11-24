@@ -48,7 +48,7 @@ position /= 2.;
 
 :::{seealso}
 
-- [G4Step](https://geant4.kek.jp/Reference/11.2.0/classG4Step.html)
-- [G4ThreeVector](https://geant4.kek.jp/Reference/11.2.0/classCLHEP_1_1Hep3Vector.html)
+- [G4Step](https://geant4.kek.jp/Reference/11.4.0/classG4Step.html)
+- [G4ThreeVector](https://geant4.kek.jp/Reference/11.4.0/classCLHEP_1_1Hep3Vector.html)
 
 :::

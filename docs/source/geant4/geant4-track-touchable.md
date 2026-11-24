@@ -11,6 +11,6 @@ auto aNextTouch = aTrack->GetTouchableHandle();
 
 :::{seealso}
 
-- [G4Track](https://geant4.kek.jp/Reference/11.2.0/classG4Track.html)
+- [G4Track](https://geant4.kek.jp/Reference/11.4.0/classG4Track.html)
 
 :::

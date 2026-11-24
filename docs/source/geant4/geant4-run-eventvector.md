@@ -11,6 +11,6 @@ auto events = aRun->GetEventVector();
 
 :::{seealso}
 
-- [G4Run](https://geant4.kek.jp/Reference/11.2.0/classG4Run.html)
+- [G4Run](https://geant4.kek.jp/Reference/11.4.0/classG4Run.html)
 
 :::
