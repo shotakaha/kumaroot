@@ -1,103 +1,154 @@
 # チェレンコフ放射したい（`G4Cerenkov`）
 
 ```cpp
-#include "G4Cerenkov.hh"
+#include "G4OpticalParameters.hh"
 
-auto params = G4OpticalParameters::Instance();
-// 1ステップで生成されるチェレンコフの最大数
-params->SetMaxNumPhotonsPerStep(100);
-// 1ステップ内で許容されるβの変化の最大値
-params->SetMaxBetaChangePerStep(10.0);
-// 光子トラッキングのタイミング（true: 即座、false: 後回し）
+auto* params = G4OpticalParameters::Instance();
+// 1ステップあたりの最大光子数（デフォルト: 100）
+params->SetCerenkovMaxPhotonsPerStep(100);
+// 1ステップあたりのβの最大変化量[%]（デフォルト: 10.0、0で制限なし）
+params->SetCerenkovMaxBetaChange(10.0);
+// 二次粒子のトラッキング順序（デフォルト: true）
 params->SetCerenkovTrackSecondariesFirst(true);
-// スタック追加のタイミング（true: 即座（推奨））
+// 光子をスタックに積むか（デフォルト: true）
 params->SetCerenkovStackPhotons(true);
-// デバッグ出力の詳細レベル
-params->SetCerenkovVerbosity(0);
+// 詳細レベル（デフォルト: 1）
+params->SetCerenkovVerboseLevel(1);
 ```
 
-チェレンコフ放射の主要なパラメーターとデフォルト値です。
-`SetMaxNumPhotonsPerStep`で、1ステップで生成されるチェレンコフ光子の最大数を設定できます。
-非常に多くの光子が生成される場合は、この値を調整しないとシミュレーションが遅くなります。
+`G4OpticalPhysics`が登録するチェレンコフ過程（`G4Cerenkov`）です。
+屈折率（`RINDEX`）が設定された物質中で荷電粒子の速さが光速を超えるときに発生します。
 
-`SetMaxBetaChangePerStep`で、1ステップ内で許容されるβの変化率を設定できます。
-ステップ内のβの変化率が大きい（例：急な減速など）と、チェレンコフ光子の生成数が不正確になるため調整が必要です。
-デフォルトの`10`は「制限なし」に近い値です。
-精度が必要な場合は0.01〜0.1程度にするとよいそうです。
-
-`SetTrackSecondariesFirst`で、光子トラッキングのタイミングを設定できます。
-`SetCerenkovStackPhotons`で、生成された光子をイベントに追加するタイミングを設定できます。
-どちらも`true`が推奨されています。
-
-物質に屈折率（``RINDEX``）が設定されているボリュームで生成されます。
-
-## 設定値を確認したい
+## 発生数を制限したい（`SetCerenkovMaxPhotonsPerStep`）
 
 ```cpp
-G4OpticalParameters::Instance()->GetCerenkovMaxPhotonsPerStep(); // 100
-G4OpticalParameters::Instance()->GetCerenkovMaxBetaChange();     // 10.0
-G4OpticalParameters::Instance()->GetCerenkovTrackSecondariesFirst(); // true
+params->SetCerenkovMaxPhotonsPerStep(100);
 ```
 
-## プロパティしたい
+1ステップで生成する光子の最大数です。
+発生する光子数が多すぎると計算時間が増えるため、必要に応じて上限値を下げてください。
+デフォルトは100です。
 
-| プロパティ名 | 種類 | 説明 | 単位 |
-|---|---|---|---|
-| ``RINDEX`` | Energy-dependent | 屈折率 | なし |
+## βの変化を制限したい（`SetCerenkovMaxBetaChange`）
+
+```cpp
+params->SetCerenkovMaxBetaChange(10.0);
+```
+
+1ステップでの速さβの変化量を、パーセントで指定します。
+`0`にするとこの制限は無効になります。
+
+## 光子の処理順を変えたい（`SetCerenkovTrackSecondariesFirst`）
+
+```cpp
+params->SetCerenkovTrackSecondariesFirst(true);
+params->SetCerenkovStackPhotons(true);
+```
+
+`TrackSecondariesFirst`と`StackPhotons`は、どちらもデフォルトで`true`です。
+
+## 屈折率を設定したい（`RINDEX`）
+
+```cpp
+#include "G4MaterialPropertiesTable.hh"
+
+auto* mpt = new G4MaterialPropertiesTable();
+mpt->AddProperty("RINDEX", photonEnergy, refractiveIndex);
+material->SetMaterialPropertiesTable(mpt);
+```
+
+`RINDEX`は、光子エネルギーに依存する屈折率です。
+チェレンコフ光は、この値が設定された物質でのみ発生します。
 
 :::{seealso}
 
-- [](./geant4-material-propertiestable.md)
+- [](geant4-material-propertiestable)
 
 :::
 
-## マクロで設定したい（``/process/optical/cerenkov/``）
+## 設定値を確認したい（`GetCerenkovMaxPhotonsPerStep`）
+
+```cpp
+G4int    maxPhotons = params->GetCerenkovMaxPhotonsPerStep(); // 100
+G4double maxBeta    = params->GetCerenkovMaxBetaChange();     // 10.0
+G4bool   secFirst   = params->GetCerenkovTrackSecondariesFirst(); // true
+```
+
+## マクロで設定したい（`/process/optical/cerenkov/`）
 
 ```cfg
 /process/optical/cerenkov/setMaxPhotons 100
 /process/optical/cerenkov/setMaxBetaChange 10.0
 /process/optical/cerenkov/setStackPhotons true
 /process/optical/cerenkov/setTrackSecondariesFirst true
-/process/optical/cerenkov/verbose 1  # initialisation
+/process/optical/cerenkov/verbose 1
 ```
 
-チェレンコフ放射の設定はマクロでもできます。
-上の値は、それぞれの設定のデフォルト値です。
+これらのコマンドは、`/run/initialize`の前（PreInit）と後（Idle）のどちらでも使えます。
+値は、コードの`SetCerenkov...`と同じ意味です。
 
-## チェレンコフ光を記録したい
+## チェレンコフ放射を止めたい（`processActivation`）
+
+```cfg
+/process/optical/processActivation Cerenkov false
+```
+
+`processActivation`は`/run/initialize`の前（PreInit）でだけ使えます。
+
+## チェレンコフ光を記録したい（`GetCreatorProcess`）
 
 ```cpp
-G4bool MyProcessHits(G4Step* step, G4TouchableHistory*) {
-    // トラックを取得
+#include "G4OpticalPhoton.hh"
+#include "G4VProcess.hh"
+
+G4bool MyProcessHits(G4Step* step, G4TouchableHistory*)
+{
     G4Track* track = step->GetTrack();
 
-    // チェレンコフ光だけを記録
-    if (track->GetDefinition() != G4OpticalPhoton::Definition())
-    {
+    // 光学光子だけを対象にする
+    if (track->GetDefinition() != G4OpticalPhoton::Definition()) {
         return false;
     }
 
-    // チェレンコフ光の生成プロセス名を確認
-    if (track->GetCreatorProcess() &&
-        track->GetCreatorProcess()->GetProcessName() != "Cerenkov")
-    {
+    // 生成プロセスが"Cerenkov"でなければ除外する（一次粒子は生成プロセスが nullptr）
+    const G4VProcess* process = track->GetCreatorProcess();
+    if (!process || process->GetProcessName() != "Cerenkov") {
         return false;
     }
 
     // ...記録したい情報を取得...
+    return true;
+}
 ```
 
-トラックの粒子の種類と生成プロセスを確認して、チェレンコフ光かどうかは判別できます。
-`G4VSensitiveDetector::ProcessHits`を継承した`MyProcessHits`の中に書くのがよいと思います。
+`G4VSensitiveDetector::ProcessHits`の中で使います。
+生成プロセスが`nullptr`の光子は一次粒子なので、必ず判定してください。
 
-:::{note}
-
-`G4OpticalPhoton`は、エネルギーの小さな光子（1.5eV〜6.2eV）を指します。
-
-:::
-
-## チェレンコフ光を数えたい（``GetNumPhotons``）
+## チェレンコフ光を数えたい（`GetNumPhotons`）
 
 ```cpp
-G4int n_photons = cerenkov->GetNumPhotons();
+#include "G4Cerenkov.hh"
+
+// 親粒子のポストステップ過程から"Cerenkov"を探す
+G4ProcessVector* procVec = step->GetTrack()->GetDefinition()
+                               ->GetProcessManager()
+                               ->GetPostStepProcessVector(typeDoIt);
+for (G4int i = 0; i < procVec->entries(); ++i) {
+    if ((*procVec)[i]->GetProcessName() == "Cerenkov") {
+        auto* cerenkov = static_cast<G4Cerenkov*>((*procVec)[i]);
+        G4int nPhotons = cerenkov->GetNumPhotons();
+    }
+}
 ```
+
+`GetNumPhotons`は、直前のステップで生成した光子数です。累積値ではありません。
+`SteppingAction`などのステップごとの処理で呼んでください。
+
+:::{seealso}
+
+- [](geant4-physics-opticalphysics)
+- [](geant4-material-propertiestable)
+- [G4Cerenkov](https://geant4.kek.jp/Reference/11.2.0/classG4Cerenkov.html)
+- [G4OpticalParameters](https://geant4.kek.jp/Reference/11.2.0/classG4OpticalParameters.html)
+
+:::
