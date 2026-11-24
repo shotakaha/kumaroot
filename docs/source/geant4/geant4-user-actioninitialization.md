@@ -24,9 +24,27 @@ void ActionInitialization::BuildForMaster() const {
 `G4VUserActionInitialization`は、ユーザーアクション（`RunAction`、`EventAction`など）をまとめて初期化するための基底クラスです。
 マルチスレッド環境に対応する枠組みとして、v9.6で導入されました。
 
-:::{note}
+:::{seealso}
 
-v9.6以前は、main関数などで`SetUserAction`を個別に直接呼び出して、ユーザーアクションを初期化していました。
+v9.6以前は、main関数RunManagerが`SetUserAction`を個別に直接呼び出して、ユーザーアクションを初期化していました。
+v9.6.4のサンプル`examples/basic/B1/exampleB1.cc`にもその名残がありました。
+
+```cpp
+// v9.6.4: examples/basic/B1/exampleB1.cc（抜粋）
+G4RunManager* runManager = new G4RunManager;
+
+runManager->SetUserInitialization(new B1DetectorConstruction());
+G4VModularPhysicsList* physicsList = new QBBC;
+runManager->SetUserInitialization(physicsList);
+
+// main関数で、ユーザーアクションを直接登録する
+runManager->SetUserAction(new B1PrimaryGeneratorAction());
+runManager->SetUserAction(new B1SteppingAction());
+runManager->SetUserAction(new B1EventAction());
+runManager->SetUserAction(new B1RunAction());
+
+runManager->Initialize();
+```
 
 :::
 
