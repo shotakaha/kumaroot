@@ -17,7 +17,7 @@ auto am = G4AnalysisManager::Instance();
 
 :::
 
-## ファイル名を変更したい（``SetFileName``）
+## ファイル名を変更したい（`SetFileName`）
 
 ```cpp
 auto am = G4AnalysisManager::Instance();
@@ -27,9 +27,9 @@ am->SetFileName("ファイル名");
 ```
 
 ファイル名は拡張子をつけて設定できます。
-拡張子がない場合は、``SetDefaultFileType``で指定した形式の拡張子が追加されます。
+拡張子がない場合は、`SetDefaultFileType`で指定した形式の拡張子が追加されます。
 
-## ファイル形式を変更したい（``SetDefaultFileType``）
+## ファイル形式を変更したい（`SetDefaultFileType`）
 
 ```cpp
 auto am = G4AnalysisManager::Instance();
@@ -54,7 +54,7 @@ AnalysisManagerを使った付属サンプルのほとんどがROOTファイル�
 
 :::
 
-## サブディレクトリを作成したい（``SetHistoDirectoryName`` / ``SetNtupleDirectoryName``）
+## サブディレクトリを作成したい（`SetHistoDirectoryName` / `SetNtupleDirectoryName`）
 
 ```cpp
 am->SetHistoDirectoryName("histo");
@@ -64,7 +64,7 @@ am->SetNtupleDirectoryName("ntuple");
 CSV形式のファイルを保存するディレクトリを設定できます。
 ディレクトリはあらかじめ作成しておく必要があります。
 
-## ヒストグラムを作成したい（``CreateH1`` / ``CreateH2`` / ``CreateH3``）
+## ヒストグラムを作成したい（`CreateH1` / `CreateH2` / `CreateH3`）
 
 ```cpp
 auto am = G4AnalysisManager::Instance();
@@ -84,9 +84,9 @@ am->CreateH2("name3", "title", xbins, xmin, xmax, ybins, ymin, ymax);  // h2 Id 
 am->CreateH2("name4", "title", xbins, xmin, xmax, ybins, ymin, ymax);  // h2 Id = 1
 ```
 
-``CreateH1``、``CreateH2``、``CreateH3``でヒストグラムを準備できます。
+`CreateH1`、`CreateH2`、`CreateH3`でヒストグラムを準備できます。
 
-## ヒストグラムのIDを取得したい（``GetH1Id`` / ``GetH2Id`` / ``GetH3Id``）
+## ヒストグラムのIDを取得したい（`GetH1Id` / `GetH2Id` / `GetH3Id`）
 
 ```cpp
 // ヒストグラムのIDを取得
@@ -97,9 +97,9 @@ G4int id4 = am->GetH2Id("name4");
 ```
 
 ヒストグラムを作成したときの名前を使って、ヒストグラムのIDを取得できます。
-``EventAction``クラスで、ヒストグラムに値をフィルするときに利用できます。
+`EventAction`クラスで、ヒストグラムに値をフィルするときに利用できます。
 
-## ヒストグラムにフィルしたい（``FillH1`` / ``FillH2`` / ``FillH3``）
+## ヒストグラムにフィルしたい（`FillH1` / `FillH2` / `FillH3`）
 
 ```cpp
 am->FillH1(id, value, weight);
@@ -109,7 +109,7 @@ am->FillH3(id, xvalue, yvalue, zvalue, weight);
 
 ヒストグラムIDを指定して値をフィルできます。
 
-## ヒストグラムを確認したい（``GetH1`` / ``GetH2`` / ``GetH3``）
+## ヒストグラムを確認したい（`GetH1` / `GetH2` / `GetH3`）
 
 ```cpp
 auto h1 = am->GetH1(id);
@@ -134,10 +134,10 @@ for ( G4int i=0; i<nH1s; ++i) {
 }
 ```
 
-``GetNofH1s``でヒストグラムの数が取得できます。
+`GetNofH1s`でヒストグラムの数が取得できます。
 その数だけループして確認できます。
 
-## Ntupleを作成したい（``CreateNtuple`` / ``CreateNtupleDColumn`` / ``FinishNtuple``）
+## Ntupleを作成したい（`CreateNtuple` / `CreateNtupleDColumn` / `FinishNtuple`）
 
 ```cpp
 am->CreateNtuple("Ntuple1", "title1");  // ntuple Id = 0
@@ -151,10 +151,10 @@ am->CreateNtupleDColumn("name4");  // column Id = 1
 am->FinishNtuple();
 ```
 
-``CreateNtuple``でNtupleを作成します。
-``CreateNtupleDColumn``や
-``CreateNtupleIColumn``でカラムを定義します。
-``FinishNtuple``でNtupleを閉じます。
+`CreateNtuple`でNtupleを作成します。
+`CreateNtupleDColumn`や
+`CreateNtupleIColumn`でカラムを定義します。
+`FinishNtuple`でNtupleを閉じます。
 
 これを繰り返すことで複数のNtupleを作成できます。
 
@@ -358,26 +358,26 @@ void ActionInitialization::Build() const {
 
 ## AnalysisManagerを使いたくない
 
-``G4AnalysisManager``を使わなくてもファイルに出力できます。
+`G4AnalysisManager`を使わなくてもファイルに出力できます。
 その場合、C++の標準ライブラリを使い、
 ユーザーのお好みで
-``std::tuple``、
-``std::map``、
-``std::vector``などを使います。
+`std::tuple`、
+`std::map`、
+`std::vector`などを使います。
 
 [G4VAnalysisManager](https://geant4.kek.jp/Reference/11.4.0/classG4VAnalysisManager.html)を使って、ファイルに出力できます。
 Geant4は独自のデータベース形式を持たない代わりに、
 ユーザー自身がいろいろなフォーマットに出力できるようになっています。
 
-ファイル操作（設定／開く／閉じる）はランごとに実行すればよいため、``RunAction``の中で動作を定義します。
+ファイル操作（設定／開く／閉じる）はランごとに実行すればよいため、`RunAction`の中で動作を定義します。
 ユーザーが編集する必要があるユーザーフック関数は以下の3箇所です。
 
-1. ``RunAction::RunAction``:
-``RunAction``クラスのコンストラクターで、ファイル名や出力形式を設定します。
+1. `RunAction::RunAction`:
+`RunAction`クラスのコンストラクターで、ファイル名や出力形式を設定します。
 また、データを保存する「箱の形」を用意します。
-2. ``RunAction::BeginOfRunAction``:
+2. `RunAction::BeginOfRunAction`:
 ラン開始時にファイルを開きます。
-3. ``RunAction::EndOfRunAction``:
+3. `RunAction::EndOfRunAction`:
 ラン終了時にデータを保存し、ファイルを閉じます。
 
 以下は、付属サンプルB4dとB5から該当箇所を抜粋して、説明を追加してみました。
@@ -521,7 +521,7 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 :::{hint}
 
 データ取得はイベントごとやステップごとに値を取得するため、
-``EventAction``クラスや``SteppingAction``クラスで定義します。
+`EventAction`クラスや`SteppingAction`クラスで定義します。
 
 :::
 
