@@ -16,7 +16,6 @@ G4debug << "\t[Step::GetStepLength] StepLength=" << G4BestUnit{step_length, "Len
 
 :::
 
-
 ## 荷電粒子だけ飛跡長を数えたい（`GetPDGCharge`）
 
 ```cpp
