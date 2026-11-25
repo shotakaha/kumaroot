@@ -1,14 +1,13 @@
-# 解析マネージャーしたい（`G4VAnalysisManager`）
+# Analysis Manager したい（`G4AnalysisManager`）
 
 ```cpp
 auto am = G4AnalysisManager::Instance();
 ```
 
-`G4AnalysisManager`は、Geant4のシミュレーションで得られた結果を管理するインスタンスです。
+`G4AnalysisManager`は、Geant4のシミュレーション結果を管理するクラスです。インスタンスです。
+`G4AnalysisManager::Instance`でシングルトンを取得できます。
+マルチスレッド環境にも対応しています。
 このクラスのおかげでROOT形式、CSV形式、XML形式への出力が標準機能として利用できます。
-
-`G4AnalysisManager::Instance`は、
-シングルトンとして設計されており、マルチスレッド環境にも対応しています。
 
 :::{note}
 
@@ -61,7 +60,7 @@ class RunAction : public G4UserRunAction {
 ### 初期化したい（`RunAction::RunAction`）
 
 ```cpp
-void MyRunAction::RunAction() {
+void RunAction::RunAction() {
   auto am = G4AnalysisManager::Instance();
 
   // ログ詳細レベル（0-4）
@@ -71,7 +70,7 @@ void MyRunAction::RunAction() {
   // 出力形式（"root", "csv", "xml"）
   am->SetDefaultFileType("root");
   // ヒストグラム用ディレクトリ
-  am->SetHistDirectoryName("hist");
+  am->SetHistoDirectoryName("hist");
   am->CreateH1("h1", "Edep in detector", 100, 0., 10.);
 
   // Ntuple用ディレクトリ
@@ -97,17 +96,17 @@ RunActionクラスのコンストラクターの中で初期化します。
 ### ラン開始時の処理（`RunAction::BeginOfRunAction`）
 
 ```cpp
-void MyRunAction::BeginOfRunAction(const G4Run* aRun) {
+void RunAction::BeginOfRunAction(const G4Run* aRun) {
   fStartTime = std::time(nullptr);
-  fRunId = run->GetRunID();
+  fRunId = aRun->GetRunID();
 
   // 出力ファイルを開く
   auto am = G4AnalysisManager::Instance();
   am->OpenFile();  // 出力ファイルを開く
 
     //
-  fSeedFileName = "seed_run" + std::to_string(runId) + ".rndm";
-  CLHEP::HepRandom::saveEngineStatus(seedFileName);
+  fSeedFileName = "seed_run" + std::to_string(fRunId) + ".rndm";
+  CLHEP::HepRandom::saveEngineStatus(fSeedFileName);
 
 }
 ```
@@ -118,7 +117,7 @@ void MyRunAction::BeginOfRunAction(const G4Run* aRun) {
 ### ラン終了時の処理（`RunAction::EndOfRunAction`）
 
 ```cpp
-void MyRunAction::EndOfRunAction(const G4Run* aRun) {
+void RunAction::EndOfRunAction(const G4Run* aRun) {
   G4int nEvents = aRun->GetNumberOfEvents();
   G4double endTime = std::time(nullptr);
   auto am = G4AnalysisManager::Instance();
@@ -136,7 +135,7 @@ void MyRunAction::EndOfRunAction(const G4Run* aRun) {
   am->AddNtupleRow();
 
   am->Write();
-  am->CloseFile()
+  am->CloseFile();
 }
 ```
 
@@ -189,7 +188,7 @@ class EventAction : public G4UserEventAction {
 
 ```cpp
 void EventAction::BeginOfEventAction(const G4Event* aEvent) {
-  fEventId = event->GetEventID();
+  fEventId = aEvent->GetEventID();
   fEnergyDeposit = 0;  // 初期化
 }
 ```
@@ -219,7 +218,7 @@ void ActionInitialization::Build() const {
 ## ファイル名を変更したい（``SetFileName``）
 
 ```cpp
-auto am = G4AnalysisManager::Instance()
+auto am = G4AnalysisManager::Instance();
 am->SetFileName("ファイル名.root");  // ROOT形式
 am->SetFileName("ファイル名.csv");   // CSV形式
 am->SetFileName("ファイル名");
@@ -231,7 +230,7 @@ am->SetFileName("ファイル名");
 ## ファイル形式を変更したい（``SetDefaultFileType``）
 
 ```cpp
-auto am = G4AnalysisManager::Instance()
+auto am = G4AnalysisManager::Instance();
 am->SetDefaultFileType("csv");  // CSV形式
 am->SetDefaultFileType("root");  // ROOT形式
 ```
@@ -266,7 +265,7 @@ CSV形式のファイルを保存するディレクトリを設定できます�
 ## ヒストグラムを作成したい（``CreateH1`` / ``CreateH2`` / ``CreateH3``）
 
 ```cpp
-auto am = G4AnalysisManager::Instance()
+auto am = G4AnalysisManager::Instance();
 // 1Dヒストグラム
 am->CreateH1(
     "name1",  // オブジェクト名
@@ -322,7 +321,7 @@ G4double rms = h1->rms();
 取得したヒストグラムを使って、平均値などを取得できます。
 
 ```cpp
-G4int nH1s = am->GetNofH1s;
+G4int nH1s = am->GetNofH1s();
 for ( G4int i=0; i<nH1s; ++i) {
     auto h1 = am->GetH1(i);
     if (h1 == nullptr) continue;
@@ -333,7 +332,7 @@ for ( G4int i=0; i<nH1s; ++i) {
 }
 ```
 
-``GetNofH1``でヒストグラムの数が取得できます。
+``GetNofH1s``でヒストグラムの数が取得できます。
 その数だけループして確認できます。
 
 ## Ntupleを作成したい（``CreateNtuple`` / ``CreateNtupleDColumn`` / ``FinishNtuple``）
@@ -378,7 +377,7 @@ Geant4は独自のデータベース形式を持たない代わりに、
 また、データを保存する「箱の形」を用意します。
 2. ``RunAction::BeginOfRunAction``:
 ラン開始時にファイルを開きます。
-3. ``RunAction::BeginOfRunAction``:
+3. ``RunAction::EndOfRunAction``:
 ラン終了時にデータを保存し、ファイルを閉じます。
 
 以下は、付属サンプルB4dとB5から該当箇所を抜粋して、説明を追加してみました。
@@ -403,7 +402,7 @@ class RunAction : public G4UserRunAction
     private:
       // （オプション）
       // EventAction* fEventAction = nullptr;
-}
+};
 ```
 
 ```cpp
@@ -438,12 +437,12 @@ RunAction::RunAction()
     // 1Dヒストグラムを作成する
     // am->CreateH1("name", "title", nbins, xmin, xmax);
     am->CreateH1("Chamber1", "Drift Chamber 1 # Hits", 50, 0., 50); // h1 Id = 0
-    am->CreateH1("Chamber2", "Drift Chamber 2 # Hits", 50, 0., 50); // h1 Id = 2
+    am->CreateH1("Chamber2", "Drift Chamber 2 # Hits", 50, 0., 50); // h1 Id = 1
 
     // 2Dヒストグラムを作成する
     // am->CreateH2("name", "title", nxbins, xmin, xmax, nybins, ymin, ymax);
-    am->CreateH2("Chamber1 XY", "Drift Chamber 1 X vx Y", 50, -1000., 1000., 50, -300., 300.);  // h2 Id = 0
-    am->CreateH2("Chamber2 XY", "Drift Chamber 2 X vx Y", 50, -1000., 1000., 50, -300., 300.);  // h2 Id = 1
+    am->CreateH2("Chamber1 XY", "Drift Chamber 1 X vs Y", 50, -1000., 1000., 50, -300., 300.);  // h2 Id = 0
+    am->CreateH2("Chamber2 XY", "Drift Chamber 2 X vs Y", 50, -1500., 1500., 50, -300., 300.);  // h2 Id = 1
 
     // Ntupleを作成する
     // am->CreateNtuple("name", "title);
@@ -457,8 +456,8 @@ RunAction::RunAction()
     am->CreateNtupleDColumn("Time1");     // column Id = 4
     am->CreateNtupleDColumn("Time2");     // column Id = 5
     // am->CreateNtupleDColumn("name", vector);
-    am->CreateNtupleDcolumn("ECEnergyVector", fEventAction->GetEmCalEdep());  // column Id = 6
-    am->CreateNtupleDcolumn("HCEnergyVector", fEventAction->GetHadCalEdep());  // column Id = 7
+    am->CreateNtupleDColumn("ECEnergyVector", fEventAction->GetEmCalEdep());  // column Id = 6
+    am->CreateNtupleDColumn("HCEnergyVector", fEventAction->GetHadCalEdep());  // column Id = 7
     am->FinishNtuple();
 
     // Ntupleのファイル名を設定する
@@ -476,11 +475,11 @@ RunAction::RunAction()
 void RunAction::BeginOfRunAction(const G4Run* aRun)
 {
     // ラン番号を表示する
-    G4cout << "Run started: " << run->GetRunID() << G4endl;
+    G4cout << "Run started: " << aRun->GetRunID() << G4endl;
 
     // AnalysisManagerのインスタンスを取得する
     // AMがシングルトンなので、作成済みのインスタンスが取得できる
-    auto am = G4AnalysisManager::Instance()
+    auto am = G4AnalysisManager::Instance();
 
     // 前のランの結果をリセットする
     // 付属サンプルB5は、ラン終了時に自動リセットせず、
@@ -504,7 +503,7 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 {
     // AnalysisManagerのインスタンスを取得する
     // AMがシングルトンなので、作成済みのインスタンスが取得できる
-    auto am = G4AnalysisManager::Instance()
+    auto am = G4AnalysisManager::Instance();
 
     // 取得したデータをファイルに出力する
     am->Write();
@@ -528,6 +527,6 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 ## リファレンス
 
-- [G4AnalysisManager](https://geant4.kek.jp/Reference/11.4.0/classG4VAnalysisManager.html)
+- [G4VAnalysisManager](https://geant4.kek.jp/Reference/11.4.0/classG4VAnalysisManager.html)
 - [G4UserRunAction](https://geant4.kek.jp/Reference/11.4.0/classG4UserRunAction.html)
 - [examples/extended/analysis/AnaEx03](https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleAnaEx03.html)
