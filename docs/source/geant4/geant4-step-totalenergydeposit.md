@@ -1,17 +1,17 @@
-# ステップのエネルギー損失をしりたい（``G4Step::GetTotalEnergyDeposit``）
+# ステップのエネルギー損失をしりたい（`G4Step::GetTotalEnergyDeposit`）
 
 ```cpp
 // エネルギー損失
 G4double energy_deposit = aStep->GetTotalEnergyDeposit();
-
-// イオン化によらないエネルギー損失
-G4double energy_deposit = aStep->GetNonIonizingEnergyDeposit();
+G4debug << G4BestUnit{energy_deposit, "Energy"} << G4endl;
 ```
 
-現在のステップで落としたエネルギーの総量を取得できます。
+`GetTotalEnergyDeposit`で、現在のステップのエネルギー損失の総量を取得できます。
+カロリメーターのような検出器の`ProcessHits`で、ヒットのエネルギーを記録する場合に使います。
 
 :::{seealso}
 
-- [G4Step](https://geant4.kek.jp/Reference/11.4.0/classG4Step.html)
+- [](./geant4-sensor-processhits.md)
+- [](./geant4-step.md)
 
 :::
