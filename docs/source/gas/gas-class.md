@@ -258,6 +258,33 @@ class PrivateFrame {
 一方、`PrivateFrame`の`data`は`readonly`なので、`replace`のようにクラスの中でも再代入できません。
 さらに`PrivateFrame`では`private`のため、`frame.data`に外からアクセスすること自体もできません。
 
+## protectedしたい（`protected`）
+
+```ts
+class ProtectedFrame {
+  protected readonly data: Record<string, unknown[]>;
+
+  constructor(data: Record<string, unknown[]>) {
+    this.data = data;
+  }
+}
+
+class ChildFrame extends ProtectedFrame {
+  get firstHeader(): string | undefined {
+    return Object.keys(this.data)[0];  // OK：継承先のクラスからはアクセスできる
+  }
+}
+
+const columns = { name: ["Alice", "Bob"], age: [25, 30] };
+const frame = new ChildFrame(columns);
+frame.firstHeader;  // -> "name"
+frame.data;         // エラー：protectedなので外から読めない
+```
+
+`protected`を付けたプロパティやメソッドは、そのクラスの中と、継承先のクラスの中からアクセスできます。
+一方、`private`と違って、継承先のクラスからは使えます。
+クラスの外からは、`private`と同じくアクセスできません。
+
 ## staticしたい（`static`）
 
 ```ts
