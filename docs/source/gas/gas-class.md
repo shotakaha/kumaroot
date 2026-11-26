@@ -254,6 +254,10 @@ class PrivateFrame {
 配列の中身（例：`this.data.name.push(...)`）は変えられるので、
 完全に変更できないようにしたい場合は、コピーを返すなどの工夫が必要です。
 
+`PublicFrame`の`data`には`readonly`が付いていないので、外から`frame.data = otherColumns`と再代入できます。
+一方、`PrivateFrame`の`data`は`readonly`なので、`replace`のようにクラスの中でも再代入できません。
+さらに`PrivateFrame`では`private`のため、`frame.data`に外からアクセスすること自体もできません。
+
 ## staticしたい（`static`）
 
 ```ts
