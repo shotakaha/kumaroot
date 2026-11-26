@@ -15,26 +15,26 @@ GASエディターで直接`.gs`（`.js`）ファイルを編集していると�
 
 :::{note}
 
-オブジェクトを使った名前空間の作成は、モジュール（`import`や`require`）が標準化される以前のJavaScriptで一般的な方法だったようです。
-GASエディターにはモジュールシステムがないため、今でも同じ発想が有効です。
+オブジェクトによる名前空間は、JavaScriptにモジュール（`import`など）が用意される前によく使われていた方法です。
+GASエディターにはモジュールの仕組みがないため、今でも同じ考え方が使えます。
 
 :::
 
 ```js
 // ns1.gs
 const ns1 = {
-    sameFnName: function (arg) {
-        Logger.log("これは ns1 の関数");
-    }
+  sameFnName: function (arg) {
+    Logger.log("これは ns1 の関数");
+  }
 };
 ```
 
 ```js
 // ns2.gs
 const ns2 = {
-    sameFnName: function (arg) {
-        Logger.log("これは ns2 の関数");
-    }
+  sameFnName: function (arg) {
+    Logger.log("これは ns2 の関数");
+  }
 };
 ```
 
@@ -42,16 +42,16 @@ const ns2 = {
 // ns3.gs
 const ns3 = {};
 ns3["sameFnName"] = function (arg) {
-    Logger.log("これは ns3 の関数");
+  Logger.log("これは ns3 の関数");
 };
 ```
 
 ```js
 // main.gs
 function main() {
-    ns1.sameFnName();  // -> これは ns1 の関数
-    ns2.sameFnName();  // -> これは ns2 の関数
-    ns3.sameFnName();  // -> これは ns3 の関数
+  ns1.sameFnName();  // -> これは ns1 の関数
+  ns2.sameFnName();  // -> これは ns2 の関数
+  ns3.sameFnName();  // -> これは ns3 の関数
 }
 ```
 
@@ -72,8 +72,9 @@ GASエディターでは、`ns1.gs`・`ns2.gs`・`ns3.gs`・`main.gs`のよう�
 
 :::{caution}
 
-GASはV8エンジン対応でモダンなJSを使えるようになりましたが、ES6のモジュールシステムはサポートされてないらしいです。
-いろいろがんばればモジュールシステムを使うこともできるようですが、ここでは深追いしません。
+GASはV8エンジンで多くのモダンなJavaScript構文を使えます。
+ただし、GASエディターにはES モジュール（`import`/`export`）の仕組みがありません。
+このページでは、モジュールを使う方法は扱いません。
 
 :::
 
@@ -95,7 +96,7 @@ TypeScriptには`namespace`という専用の構文もあります。
 実際にこの構文で書かれていますが、
 これは型定義パッケージ側の実装の都合によるものです。
 自分のプロジェクトのコードでモジュールを分けたい場合は、
-`namespace`ではなく`export`/`import`を使うほうが今風です。
+`namespace`ではなく`export`/`import`を使うのが一般的です。
 
 :::
 
