@@ -1,14 +1,14 @@
 # クラスしたい（`class`）
 
 ```ts
-// PublicClass の定義は下に記載
+// PublicFrame の定義は下に記載
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PublicClass(columns);
+const frame = new PublicFrame(columns);
 frame.headers;  // -> ["name", "age"]
 frame.length;   // -> 2
 ```
 
-`new PublicClass(...)`で、クラスのインスタンスを作成できます。
+`new PublicFrame(...)`で、クラスのインスタンスを作成できます。
 `class`でクラスを定義し、下の節で修飾子を1つずつ足しながら、クラスを育てていきます。
 
 :::{note}
@@ -20,22 +20,22 @@ frame.length;   // -> 2
 ## publicしたい（`public`）
 
 ```ts
-class PublicClass {
+class PublicFrame {
   data: Record<string, unknown[]>;
 
   constructor(data: Record<string, unknown[]>) {
     this.data = data;
   }
 
-  select(headers: string[]): PublicClass {
+  select(headers: string[]): PublicFrame {
     const result: Record<string, unknown[]> = {};
     for (const h of headers) {
       if (!(h in this.data)) {
-        throw new Error(`PublicClass.select: column "${h}" does not exist`);
+        throw new Error(`PublicFrame.select: column "${h}" does not exist`);
       }
       result[h] = [...this.data[h]];
     }
-    return new PublicClass(result);
+    return new PublicFrame(result);
   }
 
   get headers(): string[] {
@@ -47,13 +47,13 @@ class PublicClass {
   }
 
   get [Symbol.toStringTag](): string {
-    return "PublicClass";
+    return "PublicFrame";
   }
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PublicClass(columns);
-const names = frame.select(["name"]);  // 指定した列だけを持つ新しいPublicClass
+const frame = new PublicFrame(columns);
+const names = frame.select(["name"]);  // 指定した列だけを持つ新しいPublicFrame
 frame.headers;                         // -> ["name", "age"]
 frame.length;                          // -> 2
 ```
@@ -66,7 +66,7 @@ frame.length;                          // -> 2
 ## 初期化したい（`constructor`）
 
 ```ts
-class PublicClass {
+class PublicFrame {
   data: Record<string, unknown[]>;
 
   constructor(data: Record<string, unknown[]>) {
@@ -75,7 +75,7 @@ class PublicClass {
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PublicClass(columns);
+const frame = new PublicFrame(columns);
 ```
 
 `constructor`は、クラスのインスタンスを初期化するときに呼ばれる関数です。
@@ -84,24 +84,24 @@ const frame = new PublicClass(columns);
 ## メソッドしたい
 
 ```ts
-class PublicClass {
+class PublicFrame {
   // ...
-  select(headers: string[]): PublicClass {
+  select(headers: string[]): PublicFrame {
     const result: Record<string, unknown[]> = {};
     for (const h of headers) {
       if (!(h in this.data)) {
-        throw new Error(`PublicClass.select: column "${h}" does not exist`);
+        throw new Error(`PublicFrame.select: column "${h}" does not exist`);
       }
       result[h] = [...this.data[h]];
     }
-    return new PublicClass(result);
+    return new PublicFrame(result);
   }
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PublicClass(columns);
-const names = frame.select(["name"]);  // 指定した列だけを持つ新しいPublicClass
-frame.select(["missing"]);             // -> Error: PublicClass.select: column "missing" does not exist
+const frame = new PublicFrame(columns);
+const names = frame.select(["name"]);  // 指定した列だけを持つ新しいPublicFrame
+frame.select(["missing"]);             // -> Error: PublicFrame.select: column "missing" does not exist
 ```
 
 インスタンスメソッド（`select`）の中では、`this`でインスタンス自身のプロパティにアクセスできます。
@@ -115,12 +115,12 @@ frame.select(["missing"]);             // -> Error: PublicClass.select: column "
 ## メンバー変数したい
 
 ```ts
-class PublicClass {
+class PublicFrame {
   data: Record<string, unknown[]>;  // メンバー変数（プロパティ）
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PublicClass(columns);
+const frame = new PublicFrame(columns);
 frame.data;       // -> { name: ["Alice", "Bob"], age: [25, 30] }
 frame.data = {};  // OK：publicなので外から書き換えられてしまう
 ```
@@ -132,7 +132,7 @@ frame.data = {};  // OK：publicなので外から書き換えられてしまう
 ## getterしたい（`get`）
 
 ```ts
-class PublicClass {
+class PublicFrame {
   // ...
   get headers(): string[] {
     return Object.keys(this.data);
@@ -144,7 +144,7 @@ class PublicClass {
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PublicClass(columns);
+const frame = new PublicFrame(columns);
 frame.headers;  // -> ["name", "age"]（メソッドだが () は不要）
 frame.length;   // -> 2
 ```
@@ -156,16 +156,16 @@ frame.length;   // -> 2
 ## toStringTagしたい（`Symbol.toStringTag`）
 
 ```ts
-class PublicClass {
+class PublicFrame {
   // ...
   get [Symbol.toStringTag](): string {
-    return "PublicClass";
+    return "PublicFrame";
   }
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PublicClass(columns);
-Object.prototype.toString.call(frame);  // -> "[object PublicClass]"
+const frame = new PublicFrame(columns);
+Object.prototype.toString.call(frame);  // -> "[object PublicFrame]"
 ```
 
 `Symbol.toStringTag`というキーを持つgetterを定義すると、
@@ -183,7 +183,7 @@ GASではライブラリーをまたぐと`instanceof`では型を正しく判�
 ## privateしたい（`private`）
 
 ```ts
-class PrivateClass {
+class PrivateFrame {
   private readonly data: Record<string, unknown[]>;
 
   constructor(data: Record<string, unknown[]>) {
@@ -194,15 +194,15 @@ class PrivateClass {
     return name in this.data;
   }
 
-  select(headers: string[]): PrivateClass {
+  select(headers: string[]): PrivateFrame {
     const result: Record<string, unknown[]> = {};
     for (const h of headers) {
       if (!this.hasColumn(h)) {
-        throw new Error(`PrivateClass.select: column "${h}" does not exist`);
+        throw new Error(`PrivateFrame.select: column "${h}" does not exist`);
       }
       result[h] = [...this.data[h]];
     }
-    return new PrivateClass(result);
+    return new PrivateFrame(result);
   }
 
   get headers(): string[] {
@@ -215,7 +215,7 @@ class PrivateClass {
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = new PrivateClass(columns);
+const frame = new PrivateFrame(columns);
 frame.headers;            // -> ["name", "age"]
 frame.data;               // エラー：privateなので外から読めない
 frame.hasColumn("name");  // エラー：privateメソッドも外から呼べない
@@ -236,7 +236,7 @@ TypeScriptの`private`はコンパイル時のチェックであり、実行時�
 ## readonlyしたい（`readonly`）
 
 ```ts
-class PrivateClass {
+class PrivateFrame {
   private readonly data: Record<string, unknown[]>;
 
   constructor(data: Record<string, unknown[]>) {
@@ -257,19 +257,19 @@ class PrivateClass {
 ## staticしたい（`static`）
 
 ```ts
-class StaticClass {
+class StaticFrame {
   private readonly data: Record<string, unknown[]>;
 
   private constructor(data: Record<string, unknown[]>) {
     this.data = data;
   }
 
-  static fromColumns(columns: Record<string, unknown[]>): StaticClass {
+  static fromColumns(columns: Record<string, unknown[]>): StaticFrame {
     const lengths = new Set(Object.values(columns).map((col) => col.length));
     if (lengths.size > 1) {
-      throw new Error("StaticClass.fromColumns: all columns must have the same length");
+      throw new Error("StaticFrame.fromColumns: all columns must have the same length");
     }
-    return new StaticClass(columns);
+    return new StaticFrame(columns);
   }
 
   get headers(): string[] {
@@ -282,10 +282,10 @@ class StaticClass {
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = StaticClass.fromColumns(columns);        // OK
+const frame = StaticFrame.fromColumns(columns);        // OK
 frame.headers;                                          // -> ["name", "age"]
-const frame2 = new StaticClass(columns);                // エラー：コンストラクターがprivate
-StaticClass.fromColumns({ name: ["Alice"], age: [25, 30] });  // エラー：列の長さが違う
+const frame2 = new StaticFrame(columns);                // エラー：コンストラクターがprivate
+StaticFrame.fromColumns({ name: ["Alice"], age: [25, 30] });  // エラー：列の長さが違う
 ```
 
 `static`を付けたメソッドは、インスタンスではなくクラスに属します。
