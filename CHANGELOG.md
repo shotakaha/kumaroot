@@ -1,14 +1,80 @@
 # CHANGELOG.md
 
-## Unreleased
+## v2026.11.4 (2026-11-27)
 
 ### Feat
 
+- **geant4-physics-qbbc**: add QBBC physics list page
 - **geant4-ios**: G4coutDestination によるログ出力の節を追加
 - **geant4-ios**: G4ios.hh の出力ページを追加
 
 ### Fix
 
+- **gas-namespace**: remove hedged wording and align sample indentation
+- **gas-class**: restructure for beginners and align examples
+- **gas-class**: add protected section with subclass example
+- **gas-class**: explain readonly reassignment for PublicFrame and PrivateFrame
+- **gas-class**: rename example classes to *Frame
+- **gas-class**: validate column lengths in StaticClass.fromColumns
+- **gas-class**: correct toStringTag note for GAS library boundaries
+- **gas-class**: rewrite as one complete class per access modifier
+- **gas-class**: restructure sections around goal-based headings
+- **geant4-analysismanager**: correct class name and sample code errors
+- **geant4-step-length**: remove extra blank line
+- **geant4-step-length**: add charged-particle track length usage and fix seealso
+- **geant4-step-totalenergydeposit**: simplify example and add ProcessHits usage
+- **geant4**: point Doxygen reference links to Geant4 11.4.0
+- **geant4-physics-scintillation**: align API names and defaults with Geant4 11.4.3
+- **geant4-physics-cerenkov**: split StackPhotons and TrackSecondariesFirst into separate sections
+- **geant4-physics-opticalphysics**: remove invalid Quasi* activation and clarify macro timing
+- **geant4-physics-cerenkov**: align API names and defaults with Geant4 11.4.3
+- **geant4-physics-opticalphysics**: refine G4Gamma/G4OpticalPhoton note and parameter descriptions
+- **geant4-physics-opticalphysics**: code-first structure and align terminology with list/module/process
+- **geant4-physics**: reorganize toctree into list/module/process/custom sections
+- **geant4-physics-ftfp-bert**: annotate FTFP_BERT constructor excerpt
+- **geant4-physics-ftfp-bert**: refine intro and section descriptions
+- **geant4-physics-ftfp-bert**: code-first structure and model-specific sections
+- **geant4-user-actioninitialization**: show SetUserAction sample from v9.6.4 in seealso
+- **geant4-qe**: correct EFFICIENCY hint
+- **geant4-material-propertiestable**: correct EFFICIENCY section
+- **geant4-material-propertiestable**: add WLS, efficiency and reflectivity sections
+- **geant4-material**: use Geant4 11.2 scintillation constant names in EJ200 example
+- **geant4-material-propertiestable**: rewrite optical properties page in KumaROOT style
+- **geant4-material**: rewrite water page in KumaROOT style
+- **geant4-material**: rewrite vacuum page in KumaROOT style
+- **geant4-material**: rewrite plastic scintillator page in KumaROOT style
+- **geant4-material**: rewrite petroleum page in KumaROOT style
+- **geant4-material**: rewrite glass page in KumaROOT style
+- **geant4-material**: rewrite ethanol page in KumaROOT style
+- **geant4-material**: simplify air section headings
+- **geant4-material**: rewrite air page in KumaROOT style
+- **geant4-material**: use wavelength-to-energy helper for acrylic optical properties
+- **geant4-material**: rewrite acrylic page in KumaROOT style
+- **geant4-calorimeter**: rewrite calorimeter page in KumaROOT style
+- **geant4-hodoscope**: rewrite hodoscope page in KumaROOT style
+- **geant4**: store QE wavelengths in descending order
+- **geant4**: take QE in wavelength [nm] and convert to energy for EFFICIENCY
+- **geant4**: rewrite QE page to set EFFICIENCY from a multi-point table
+- **geant4**: build the PMT window with its photocathode inside
+- **geant4**: set RINDEX and ABSLENGTH on the PMT window material
+- **geant4**: use 光電面 instead of 感光面 in PMT page
+- **geant4**: rewrite PMT page lead in plain Japanese
+- **geant4**: rewrite PMT page around photocathode sensitive detector
+- **geant4**: use G4_WATER name and add Construct example to tank page
+- **geant4**: update Construct page to place World and tank
+- **geant4**: align BuildTank page with geometry conventions
+- **geant4**: align BuildWorld page with Geant4 examples
+- **geant4**: add CLHEP reference to constants page
+- **geant4**: fill in thin leaf pages
+- **geant4**: add seealso references to leaf pages
+- **geant4**: rename pages to kebab-case
+- **geant4**: register orphan pages in toctree
+- **geant4**: normalize page titles
+- **git-remote**: reorganize sections and add all/remove examples
+- **git-pull**: add command syntax and examples
+- **git-fetch**: add command syntax and examples
+- **git-push**: reorganize sections and add command examples
+- **git-push**: restructure headings and add push options
 - **geant4**: 型とユーザー向けの見出し・目次を整理
 - **geant4-overview**: 解説を散文中心に書き直し、表と箇条書きを減らす
 - **geant4-overview**: 内部処理のポイントを先に、自作アプリのポイントを後に再構成
