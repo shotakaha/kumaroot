@@ -8,12 +8,26 @@ frame.headers;  // -> ["name", "age"]
 frame.length;   // -> 2
 ```
 
-`new PublicFrame(...)`で、クラスのインスタンスを作成できます。
-`class`でクラスを定義し、下の節で修飾子を1つずつ足しながら、クラスを育てていきます。
+`class`は、データ（プロパティ）と処理（メソッド）をひとまとめにする仕組みです。
+`class`が設計図で、`new`で作った実物がインスタンスです。
+上の`new PublicFrame(...)`は、`PublicFrame`クラスのインスタンスを作っています。
+
+GASでシートを読むと、`getValues()`は列名のない2次元配列になります。
+列名で扱えるように、データと処理をまとめたものがクラスです。
+
+このページでは、次の順に説明します。
+`public` → `readonly` → `private` → `protected` → `static` → `prototype`
 
 :::{note}
 
-このページのサンプルは、[gaslamp](https://gaslamp.readthedocs.io/en/latest/)の開発で得た経験をもとにしています。
+このページのコードはTypeScriptです。GASのエディターにそのまま貼っても動きません。
+[`tsc`](./gas-typescript.md)でJavaScriptに変換してから、[`clasp`](./gas-clasp.md)でGASに送ります。
+
+:::
+
+:::{note}
+
+このページのサンプルは、[gaslamp](https://gaslamp.readthedocs.io/en/latest/)（GASでデータフレームを扱うライブラリー）の開発で得た経験をもとにしています。
 
 :::
 
@@ -23,30 +37,23 @@ frame.length;   // -> 2
 class PublicFrame {
   data: Record<string, unknown[]>;
 
-  constructor(data: Record<string, unknown[]>) {
+  constructor(data: Record<string, unknown[]>) {  // 詳しくは「初期化したい」
     this.data = data;
   }
 
-  select(headers: string[]): PublicFrame {
-    const result: Record<string, unknown[]> = {};
-    for (const h of headers) {
-      if (!(h in this.data)) {
-        throw new Error(`PublicFrame.select: column "${h}" does not exist`);
-      }
-      result[h] = [...this.data[h]];
-    }
-    return new PublicFrame(result);
+  select(headers: string[]): PublicFrame {       // 詳しくは「メソッドしたい」
+    // ...
   }
 
-  get headers(): string[] {
+  get headers(): string[] {                      // 詳しくは「getterしたい」
     return Object.keys(this.data);
   }
 
-  get length(): number {
+  get length(): number {                         // 詳しくは「getterしたい」
     return Object.values(this.data)[0]?.length ?? 0;
   }
 
-  get [Symbol.toStringTag](): string {
+  get [Symbol.toStringTag](): string {           // 詳しくは「toStringTagしたい」
     return "PublicFrame";
   }
 }
@@ -58,16 +65,17 @@ frame.headers;                         // -> ["name", "age"]
 frame.length;                          // -> 2
 ```
 
-`public`で、publicなプロパティやメソッドを持つクラスを定義できます。
-デフォルトで`public`なので、省略できます。
-クラスの外から、データもメソッドもプロパティも自由に使えます。
-以降の節では、このクラスの一部を抜き出して説明します。
+`public`は、プロパティやメソッドを外から使えるようにするキーワードです。
+何も付けなければ`public`になるので、省略できます。
+このクラスは、データもメソッドもプロパティも、クラスの外から自由に使えます。
+
+この後の「初期化したい」から「toStringTagしたい」までは、このクラスの一部を抜き出して説明します。
 
 ## 初期化したい（`constructor`）
 
 ```ts
 class PublicFrame {
-  data: Record<string, unknown[]>;
+  data: Record<string, unknown[]>;  // 詳しくは「メンバー変数したい」
 
   constructor(data: Record<string, unknown[]>) {
     this.data = data;
@@ -104,13 +112,20 @@ const names = frame.select(["name"]);  // 指定した列だけを持つ新し�
 frame.select(["missing"]);             // -> Error: PublicFrame.select: column "missing" does not exist
 ```
 
-インスタンスメソッド（`select`）の中では、`this`でインスタンス自身のプロパティにアクセスできます。
-既存のインスタンスを直接書き換えるのではなく、
-`select`の結果として**新しいインスタンスを返す**ようにしておくと、
-元のデータを保持したまま加工を連鎖させやすくなります（イミュータブルな設計）。
-列の配列も`[...this.data[h]]`でコピーしておくと、新しいインスタンスと元のインスタンスが配列を共有しません。
+メソッドは、クラスの中に書いた関数です。
+`this`で、インスタンス自身のプロパティにアクセスできます。
+存在しない列名を指定したときは、`throw`でエラーを投げて、早めに気づけるようにしています。
 
-存在しない列名を指定したときは、`throw`でエラーを投げて早めに気づけるようにしています。
+:::{hint}
+
+`select`は、元のインスタンスを書き換えず、**新しいインスタンスを返す**ようにしています。
+このような設計を**イミュータブル**（変更できない）な設計と呼びます。
+元のデータを保持したまま、加工を連鎖させやすくなります。
+
+また、列の配列も`[...this.data[h]]`でコピーしています。
+コピーしないと、新しいインスタンスと元のインスタンスが配列を共有してしまうためです。
+
+:::
 
 ## メンバー変数したい
 
@@ -127,7 +142,7 @@ frame.data = {};  // OK：publicなので外から書き換えられてしまう
 
 メンバー変数は、インスタンスのプロパティとしてアクセスできます。
 `public`のままだと、外から値を読むだけでなく、書き換えることもできてしまいます。
-この問題は、次の`readonly`や`private`の節で防ぎます。
+この問題は、この後の`readonly`や`private`の節で防ぎます。
 
 ## getterしたい（`get`）
 
@@ -170,15 +185,43 @@ Object.prototype.toString.call(frame);  // -> "[object PublicFrame]"
 
 `Symbol.toStringTag`というキーを持つgetterを定義すると、
 `Object.prototype.toString.call()`の結果にその文字列が使われます。
+`Symbol`は、プロパティのキーとして使える特別な値です。
+`Symbol.toStringTag`は、JavaScriptが決めている特別なキーです。
+`Object.prototype.toString.call()`は、値の型名を調べるための標準的な関数です。
+
 `instanceof`ではクラスの判定が難しい場合（別のモジュールから読み込んだ場合など）でも、
 この文字列でクラスを判定できます。
 
 :::{note}
 
-GASではライブラリーをまたぐと`instanceof`では型を正しく判定できないことがあります。
+GASのライブラリーをまたぐと、`instanceof`では型を正しく判定できないことがあります。
 そのため`Object.prototype.toString.call()`で型の名前を確認する方法を使います。
 
 :::
+
+## readonlyしたい（`readonly`）
+
+```ts
+class PublicFrame {
+  readonly data: Record<string, unknown[]>;
+
+  constructor(data: Record<string, unknown[]>) {
+    this.data = data;  // OK：コンストラクターでは代入できる
+  }
+}
+
+const columns = { name: ["Alice", "Bob"], age: [25, 30] };
+const otherColumns = { name: ["Carol"], age: [40] };
+const frame = new PublicFrame(columns);
+frame.data = otherColumns;  // エラー：readonlyなので再代入できない
+```
+
+`readonly`を付けたプロパティは、コンストラクター以外で再代入できなくなります。
+前の「メンバー変数したい」の例では`frame.data = {}`が書けましたが、`readonly`を付けると書けなくなります。
+
+ただし、`readonly`が禁止するのは「別の値を代入すること」だけです。
+配列の中身（例：`frame.data.name.push(...)`）は変えられるので、
+完全に変更できないようにしたい場合は、コピーを返すなどの工夫が必要です。
 
 ## privateしたい（`private`）
 
@@ -225,6 +268,8 @@ frame.hasColumn("name");  // エラー：privateメソッドも外から呼べ�
 内部で保持しているデータや、外から呼ばれたくない補助メソッドに使います。
 上の例では、`hasColumn`を`select`の中だけで使っています。
 
+`readonly`と組み合わせた`private readonly`にすると、外からのアクセスも再代入も防げます。
+
 :::{hint}
 
 TypeScriptの`private`はコンパイル時のチェックであり、実行時には強制されません。
@@ -232,31 +277,6 @@ TypeScriptの`private`はコンパイル時のチェックであり、実行時�
 `#data`のようなJavaScript標準の[プライベートフィールド](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_properties)を使います。
 
 :::
-
-## readonlyしたい（`readonly`）
-
-```ts
-class PrivateFrame {
-  private readonly data: Record<string, unknown[]>;
-
-  constructor(data: Record<string, unknown[]>) {
-    this.data = data;  // OK：コンストラクターでは代入できる
-  }
-
-  replace(data: Record<string, unknown[]>): void {
-    this.data = data;  // エラー：readonlyなので再代入できない
-  }
-}
-```
-
-`readonly`を付けたプロパティは、コンストラクター以外で再代入できなくなります。
-ただし、`readonly`が禁止するのは「別の値を代入すること」だけです。
-配列の中身（例：`this.data.name.push(...)`）は変えられるので、
-完全に変更できないようにしたい場合は、コピーを返すなどの工夫が必要です。
-
-`PublicFrame`の`data`には`readonly`が付いていないので、外から`frame.data = otherColumns`と再代入できます。
-一方、`PrivateFrame`の`data`は`readonly`なので、`replace`のようにクラスの中でも再代入できません。
-さらに`PrivateFrame`では`private`のため、`frame.data`に外からアクセスすること自体もできません。
 
 ## protectedしたい（`protected`）
 
@@ -282,7 +302,8 @@ frame.data;         // エラー：protectedなので外から読めない
 ```
 
 `protected`を付けたプロパティやメソッドは、そのクラスの中と、継承先のクラスの中からアクセスできます。
-一方、`private`と違って、継承先のクラスからは使えます。
+継承先のクラスは、`extends`で既存のクラスを引き継いで作ります。
+`private`と違って、継承先のクラスからは使えます。
 クラスの外からは、`private`と同じくアクセスできません。
 
 ## staticしたい（`static`）
@@ -313,13 +334,16 @@ class StaticFrame {
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
+const invalidColumns = { name: ["Alice"], age: [25, 30] };
 const frame = StaticFrame.fromColumns(columns);        // OK
 frame.headers;                                          // -> ["name", "age"]
 const frame2 = new StaticFrame(columns);                // エラー：コンストラクターがprivate
-StaticFrame.fromColumns({ name: ["Alice"], age: [25, 30] });  // エラー：列の長さが違う
+StaticFrame.fromColumns(invalidColumns);                // エラー：列の長さが違う
 ```
 
 `static`を付けたメソッドは、インスタンスではなくクラスに属します。
+そのため、`StaticFrame.fromColumns(...)`のように、`new`を使わずにクラス名から呼び出せます。
+
 `constructor`に`private`（もしくは`protected`）を付けると、
 クラスの外から`new クラス名(...)`で直接インスタンス化できなくなります。
 代わりに`static`な**ファクトリーメソッド**（ここでは`fromColumns`）を用意して、
