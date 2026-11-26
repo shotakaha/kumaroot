@@ -63,7 +63,7 @@ frame.length;                          // -> 2
 クラスの外から、データもメソッドもプロパティも自由に使えます。
 以降の節では、このクラスの一部を抜き出して説明します。
 
-### 初期化したい（`constructor`）
+## 初期化したい（`constructor`）
 
 ```ts
 class PublicClass {
@@ -81,7 +81,7 @@ const frame = new PublicClass(columns);
 `constructor`は、クラスのインスタンスを初期化するときに呼ばれる関数です。
 `this.data = data;`のように、渡された値をインスタンスのプロパティに保存するのが典型的な使い方です。
 
-### メソッドしたい
+## メソッドしたい
 
 ```ts
 class PublicClass {
@@ -112,7 +112,7 @@ frame.select(["missing"]);             // -> Error: PublicClass.select: column "
 
 存在しない列名を指定したときは、`throw`でエラーを投げて早めに気づけるようにしています。
 
-### メンバー変数したい
+## メンバー変数したい
 
 ```ts
 class PublicClass {
@@ -129,7 +129,7 @@ frame.data = {};  // OK：publicなので外から書き換えられてしまう
 `public`のままだと、外から値を読むだけでなく、書き換えることもできてしまいます。
 この問題は、次の`readonly`や`private`の節で防ぎます。
 
-### getterしたい（`get`）
+## getterしたい（`get`）
 
 ```ts
 class PublicClass {
@@ -153,7 +153,7 @@ frame.length;   // -> 2
 「保持しているデータから毎回計算して返す値」を、
 あたかも普通のプロパティであるかのように見せたいときに使います。
 
-### toStringTagしたい（`Symbol.toStringTag`）
+## toStringTagしたい（`Symbol.toStringTag`）
 
 ```ts
 class PublicClass {
@@ -175,8 +175,8 @@ Object.prototype.toString.call(frame);  // -> "[object PublicClass]"
 
 :::{note}
 
-このgetterはライブラリーの内部で使う目的の機能です。
-通常は`instanceof`で十分なので、型判定が必要な場合にだけ使います。
+GASではライブラリーをまたぐと`instanceof`では型を正しく判定できないことがあります。
+そのため`Object.prototype.toString.call()`で型の名前を確認する方法を使います。
 
 :::
 
@@ -233,7 +233,7 @@ TypeScriptの`private`はコンパイル時のチェックであり、実行時�
 
 :::
 
-### readonlyしたい（`readonly`）
+## readonlyしたい（`readonly`）
 
 ```ts
 class PrivateClass {
