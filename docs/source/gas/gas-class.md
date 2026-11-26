@@ -265,6 +265,10 @@ class StaticClass {
   }
 
   static fromColumns(columns: Record<string, unknown[]>): StaticClass {
+    const lengths = new Set(Object.values(columns).map((col) => col.length));
+    if (lengths.size > 1) {
+      throw new Error("StaticClass.fromColumns: all columns must have the same length");
+    }
     return new StaticClass(columns);
   }
 
@@ -278,9 +282,10 @@ class StaticClass {
 }
 
 const columns = { name: ["Alice", "Bob"], age: [25, 30] };
-const frame = StaticClass.fromColumns(columns);  // OK
-frame.headers;                                    // -> ["name", "age"]
-const frame2 = new StaticClass(columns);          // エラー：コンストラクターがprivate
+const frame = StaticClass.fromColumns(columns);        // OK
+frame.headers;                                          // -> ["name", "age"]
+const frame2 = new StaticClass(columns);                // エラー：コンストラクターがprivate
+StaticClass.fromColumns({ name: ["Alice"], age: [25, 30] });  // エラー：列の長さが違う
 ```
 
 `static`を付けたメソッドは、インスタンスではなくクラスに属します。
@@ -292,6 +297,11 @@ const frame2 = new StaticClass(columns);          // エラー：コンストラ
 
 入力の形式ごとに`fromArrays`・`fromRows`・`fromColumns`のような複数のファクトリーメソッドを用意すると、
 それぞれの名前で「何を渡せばよいか」が分かりやすくなります。
+
+また、ファクトリーメソッドを追加するだけで、新しい入力形式に簡単に対応できます。
+さらに、ファクトリーメソッドの中で入力値をチェックすれば、
+インスタンスを作る前に不正な入力を見つけて、エラーにできます。
+上の例では、列の長さがそろっていない入力を`throw`で弾いています。
 
 ## prototypeしたい（`prototype`）
 
